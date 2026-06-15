@@ -338,9 +338,17 @@
     .linkCard span{display:block;color:var(--muted);line-height:1.35;font-size:.92rem}
     .linkCard em{display:inline-flex;margin-top:10px;font-style:normal}
     .sourceCardActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    footer{margin-top:34px;color:rgba(11,18,32,.48);font-size:.86rem;line-height:1.42}
+    .siteFooter{margin-top:72px}
+    .footerCard{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:32px;padding:36px 44px;border:1px solid rgba(11,18,32,.08);border-radius:24px;background:rgba(255,255,255,.64);box-shadow:0 14px 38px rgba(20,38,42,.055)}
+    .footerLogo{display:block;width:150px;height:auto}
+    .footerCopy{color:var(--muted);font-size:.98rem;line-height:1.5}
+    .footerCopy p{margin:0}
+    .footerCopy strong{color:var(--accent-dark);font-weight:500}
+    .footerContact{color:var(--accent-dark);font-weight:500;text-decoration:none;padding:8px 0}
+    .footerContact:hover{color:var(--accent)}
+    .footerMeta{margin:14px 4px 0;color:rgba(11,18,32,.48);font-size:.82rem;line-height:1.42}
     @media (max-width:980px){.hero{grid-template-columns:1fr}.quick{grid-template-columns:repeat(3,1fr)}.cards,.linkGrid,.linkModel,.usedSourceGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.filters,.filters.more,.teamFormGrid{grid-template-columns:1fr 1fr}.filterSearch{grid-column:1/-1}.agendaBoard{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media (max-width:640px){body{padding-top:26px}.topbar{padding:0 8px;gap:6px;align-items:flex-start}.topbar .tabs{top:14px;left:8px;gap:2px;padding:4px}.topbar .tab{padding:7px 8px;font-size:.76rem}.actions{gap:0}.mini{padding:7px 8px;font-size:.76rem}.hero{padding-top:10px}.quick{grid-template-columns:1fr}.cards,.linkGrid,.linkModel,.usedSourceGrid{grid-template-columns:1fr}.filterBar{padding:10px}.filters,.filters.more,.teamFormGrid{grid-template-columns:1fr}.filterSearch{grid-column:auto}.filterReset{justify-content:center}.weekTop{grid-template-columns:1fr}.weekMeta{justify-content:flex-start}.weekBody{padding:14px}.weekTop{padding:16px}.agendaBoard{grid-template-columns:1fr}.agendaDay{min-height:auto}.heroTitle{white-space:normal}.sectionHead{align-items:flex-start;flex-direction:column}.sectionToolbar{align-items:flex-start}.sectionToolbar .weekNav{justify-content:flex-start;width:100%}.ideaToolbar,.ideaToolbar.viewOnly{justify-content:flex-start}.ideaToolbar .viewBar{width:100%;justify-content:flex-start}}
+    @media (max-width:640px){body{padding-top:26px}.topbar{padding:0 8px;gap:6px;align-items:flex-start}.topbar .tabs{top:14px;left:8px;gap:2px;padding:4px}.topbar .tab{padding:7px 8px;font-size:.76rem}.actions{gap:0}.mini{padding:7px 8px;font-size:.76rem}.hero{padding-top:10px}.quick{grid-template-columns:1fr}.cards,.linkGrid,.linkModel,.usedSourceGrid{grid-template-columns:1fr}.filterBar{padding:10px}.filters,.filters.more,.teamFormGrid{grid-template-columns:1fr}.filterSearch{grid-column:auto}.filterReset{justify-content:center}.weekTop{grid-template-columns:1fr}.weekMeta{justify-content:flex-start}.weekBody{padding:14px}.weekTop{padding:16px}.agendaBoard{grid-template-columns:1fr}.agendaDay{min-height:auto}.heroTitle{white-space:normal}.sectionHead{align-items:flex-start;flex-direction:column}.sectionToolbar{align-items:flex-start}.sectionToolbar .weekNav{justify-content:flex-start;width:100%}.ideaToolbar,.ideaToolbar.viewOnly{justify-content:flex-start}.ideaToolbar .viewBar{width:100%;justify-content:flex-start}.siteFooter{margin-top:48px}.footerCard{grid-template-columns:1fr;justify-items:start;gap:18px;padding:28px 24px}.footerLogo{width:132px}.footerContact{padding:0}}
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.weekNav,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
 </head>
@@ -527,8 +535,16 @@
       <div id="usedSourceCards" class="usedSourceGrid sourceView active"></div>
     </section>
 
-    <footer>
-      Bijgewerkt op <span id="generatedDate"></span>. Gebruik dit overzicht als vertrekpunt en check details altijd nog even voordat jullie iets vastleggen.
+    <footer class="siteFooter">
+      <div class="footerCard">
+        <img class="footerLogo" src="assets/youz-parnassia-logo.png" alt="Youz, onderdeel van Parnassia Groep">
+        <div class="footerCopy">
+          <p>Ontwikkeld voor <strong>BCJN Nijmegen</strong></p>
+          <p>Onderdeel van Youz | Parnassia Groep</p>
+        </div>
+        <a class="footerContact" href="https://youz.nl/contact" target="_blank" rel="noopener">Contact</a>
+      </div>
+      <p class="footerMeta">Bijgewerkt op <span id="generatedDate"></span>. Gebruik dit overzicht als vertrekpunt en check details altijd nog even voordat jullie iets vastleggen.</p>
     </footer>
   </main>
 
