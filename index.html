@@ -231,10 +231,17 @@
     .card p{margin:0;color:rgba(11,18,32,.70);line-height:1.43}
     .card .fine{color:var(--muted);font-size:.86rem}
     .cardFooter{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
-    .filters{display:grid;grid-template-columns:1.5fr repeat(4,minmax(130px,1fr));gap:8px;margin:12px 0 14px}
-    .filters.more{grid-template-columns:minmax(190px,1.35fr) repeat(5,minmax(0,1fr)) minmax(156px,1.18fr)}
-    .filters input,.filters select{width:100%;min-width:0;min-height:40px;border:1px solid rgba(11,18,32,.08);background:rgba(255,255,255,.72);border-radius:999px;padding:8px 13px;color:var(--ink);font-size:.9rem}
+    .filterBar{margin:12px 0 18px;padding:12px 14px;border:1px solid rgba(255,255,255,.82);border-radius:24px;background:rgba(255,255,255,.68);box-shadow:0 12px 30px rgba(20,38,42,.07)}
+    .filters{display:grid;grid-template-columns:1.5fr repeat(4,minmax(130px,1fr));gap:8px;margin:0;align-items:center}
+    .filters.more{grid-template-columns:minmax(220px,1.65fr) repeat(5,minmax(88px,.72fr)) minmax(142px,1fr) auto}
+    .filterSearch{position:relative;min-width:0}
+    .filterSearch::before{content:"";position:absolute;left:15px;top:50%;width:16px;height:16px;transform:translateY(-50%);pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%235f6973' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-4-4'/%3E%3C/svg%3E") center/contain no-repeat}
+    .filters input,.filters select{width:100%;min-width:0;min-height:40px;border:1px solid rgba(11,18,32,.07);background:rgba(255,255,255,.66);border-radius:999px;padding:8px 13px;color:var(--ink);font-size:.86rem}
+    .filterSearch input{padding-left:42px}
     .filters select{padding-right:30px}
+    .filterReset{display:inline-flex;align-items:center;gap:7px;min-height:40px;border:0;background:transparent;color:var(--accent);padding:8px 4px 8px 8px;font:inherit;font-size:.84rem;font-weight:500;white-space:nowrap;cursor:pointer}
+    .filterReset::before{content:"↶";font-size:1.15rem;font-weight:400}
+    .filterReset:hover{color:var(--accent-dark)}
     .teamHead{margin-top:28px}
     .ideaToolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:16px 0 12px;flex-wrap:wrap}
     .ideaToolbar.viewOnly{justify-content:flex-end;margin-top:0}
@@ -319,8 +326,8 @@
     .linkCard em{display:inline-flex;margin-top:10px;font-style:normal}
     .sourceCardActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
     footer{margin-top:34px;color:rgba(11,18,32,.48);font-size:.86rem;line-height:1.42}
-    @media (max-width:980px){.hero{grid-template-columns:1fr}.quick{grid-template-columns:repeat(3,1fr)}.cards,.linkGrid,.linkModel,.usedSourceGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.filters,.filters.more,.teamFormGrid{grid-template-columns:1fr 1fr}.agendaBoard{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media (max-width:640px){body{padding-top:26px}.topbar{top:14px;padding:0 8px;gap:6px;align-items:flex-start}.topbar .tabs{gap:2px;padding:4px}.topbar .tab{padding:7px 8px;font-size:.76rem}.actions{padding:4px;gap:2px}.adminLogin{display:none}.mini{padding:7px 8px;font-size:.82rem}.hero{padding-top:10px}.quick{grid-template-columns:1fr}.cards,.linkGrid,.linkModel,.usedSourceGrid{grid-template-columns:1fr}.filters,.filters.more,.teamFormGrid{grid-template-columns:1fr}.weekTop{grid-template-columns:1fr}.weekMeta{justify-content:flex-start}.weekBody{padding:14px}.weekTop{padding:16px}.agendaBoard{grid-template-columns:1fr}.agendaDay{min-height:auto}.heroTitle{white-space:normal}.sectionHead{align-items:flex-start;flex-direction:column}.sectionToolbar{align-items:flex-start}.sectionToolbar .weekNav{justify-content:flex-start;width:100%}.ideaToolbar,.ideaToolbar.viewOnly{justify-content:flex-start}.ideaToolbar .viewBar{width:100%;justify-content:flex-start}}
+    @media (max-width:980px){.hero{grid-template-columns:1fr}.quick{grid-template-columns:repeat(3,1fr)}.cards,.linkGrid,.linkModel,.usedSourceGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.filters,.filters.more,.teamFormGrid{grid-template-columns:1fr 1fr}.filterSearch{grid-column:1/-1}.agendaBoard{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:640px){body{padding-top:26px}.topbar{top:14px;padding:0 8px;gap:6px;align-items:flex-start}.topbar .tabs{gap:2px;padding:4px}.topbar .tab{padding:7px 8px;font-size:.76rem}.actions{padding:4px;gap:2px}.adminLogin{display:none}.mini{padding:7px 8px;font-size:.82rem}.hero{padding-top:10px}.quick{grid-template-columns:1fr}.cards,.linkGrid,.linkModel,.usedSourceGrid{grid-template-columns:1fr}.filterBar{padding:10px}.filters,.filters.more,.teamFormGrid{grid-template-columns:1fr}.filterSearch{grid-column:auto}.filterReset{justify-content:center}.weekTop{grid-template-columns:1fr}.weekMeta{justify-content:flex-start}.weekBody{padding:14px}.weekTop{padding:16px}.agendaBoard{grid-template-columns:1fr}.agendaDay{min-height:auto}.heroTitle{white-space:normal}.sectionHead{align-items:flex-start;flex-direction:column}.sectionToolbar{align-items:flex-start}.sectionToolbar .weekNav{justify-content:flex-start;width:100%}.ideaToolbar,.ideaToolbar.viewOnly{justify-content:flex-start}.ideaToolbar .viewBar{width:100%;justify-content:flex-start}}
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.weekNav,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
 </head>
@@ -333,7 +340,6 @@
     </nav>
     <div class="actions">
       <a class="mini adminLogin" href="website-bestanden/beheer.html">Beheer</a>
-      <button class="mini" id="resetBtn" type="button">Filters wissen</button>
     </div>
   </header>
 
@@ -401,14 +407,17 @@
           </div>
         </div>
       </div>
-      <div class="filters more">
-        <input id="ideaSearch" type="search" placeholder="Zoek activiteit, materiaal of trefwoord…">
-        <select id="ideaDomain"><option value="all">Thema</option></select>
-        <select id="ideaType"><option value="all">Bron</option></select>
-        <select id="ideaLocation"><option value="all">Locatie</option></select>
-        <select id="ideaDistance"><option value="all">Afstand</option></select>
-        <select id="ideaCost"><option value="all">Kosten</option></select>
-        <select id="ideaStimulus"><option value="all">Prikkelbelasting</option></select>
+      <div class="filterBar">
+        <div class="filters more">
+          <div class="filterSearch"><input id="ideaSearch" type="search" placeholder="Zoek activiteit, materiaal of thema…"></div>
+          <select id="ideaDomain"><option value="all">Thema</option></select>
+          <select id="ideaType"><option value="all">Bron</option></select>
+          <select id="ideaLocation"><option value="all">Locatie</option></select>
+          <select id="ideaDistance"><option value="all">Afstand</option></select>
+          <select id="ideaCost"><option value="all">Kosten</option></select>
+          <select id="ideaStimulus"><option value="all">Prikkelbelasting</option></select>
+          <button class="filterReset" id="resetBtn" type="button">Filters wissen</button>
+        </div>
       </div>
       <div id="ideaList" class="tableWrap ideaView" hidden></div>
       <div id="ideaCards" class="cards ideaView active"></div>
