@@ -290,6 +290,7 @@
     .formButton.primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px rgba(79,142,158,.18)}
     .formButton.largeAction{padding:12px 18px;font-size:.98rem;white-space:nowrap}
     .teamFormStatus{font-size:.9rem;color:var(--muted);line-height:1.4;text-align:right;margin-left:auto}
+    .teamFormStatus:empty{display:none}
     .teamFormStatus.ok{color:#426e5d}
     .teamFormStatus.warn{color:#7a6424}
     .empty{padding:20px;border:1px dashed rgba(11,18,32,.14);border-radius:18px;background:rgba(255,255,255,.40);color:var(--muted);text-align:center}
@@ -362,7 +363,7 @@
           </div>
           <div class="teamActionBar">
             <button class="formButton primary" type="submit">Bron insturen</button>
-            <div id="linkAddStatus" class="teamFormStatus" role="status" aria-live="polite">De bron wordt bij de dagelijkse controle automatisch beoordeeld. Complete evenementen kunnen direct in de UIT-agenda verschijnen.</div>
+            <div id="linkAddStatus" class="teamFormStatus" role="status" aria-live="polite"></div>
           </div>
         </form>
       </div>
