@@ -204,7 +204,8 @@
       background:rgba(255,255,255,.58);border:1px solid var(--theme-line);
       color:var(--theme-ink);font-size:.76rem;font-weight:500;line-height:1
     }
-    .agendaLegendSwatch{width:9px;height:9px;border-radius:999px;background:var(--theme-ink);box-shadow:0 0 0 3px var(--theme-tint-strong)}
+    .agendaLegendItem .domainIcon{width:18px;height:18px;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
+    .agendaLegendItem .domainIcon svg{width:11px;height:11px}
     .agendaItem.multiDayItem:hover,
     .agendaItem.multiDayItem:focus-visible{background:linear-gradient(180deg,rgba(168,225,221,.48),rgba(244,251,248,.88))}
     .agendaMore{padding:5px 8px;color:var(--muted);font-size:.74rem;line-height:1.3}
@@ -860,7 +861,7 @@
     'Actie & Amusement'
   ];
   function agendaThemeLegend(){
-    return `<div class="agendaThemeLegend" aria-label="Legenda themakleuren">${AGENDA_THEME_LEGEND.map(domain => `<span class="agendaLegendItem ${domainThemeClass(domain)}"><span class="agendaLegendSwatch" aria-hidden="true"></span>${escapeHtml(domain)}</span>`).join('')}</div>`;
+    return `<div class="agendaThemeLegend" aria-label="Legenda themakleuren">${AGENDA_THEME_LEGEND.map(domain => `<span class="agendaLegendItem ${domainThemeClass(domain)}"><span class="domainIcon" aria-hidden="true">${domainIcon(domain)}</span>${escapeHtml(domain)}</span>`).join('')}</div>`;
   }
   function weekGroupMetaPill(week){
     const absent = Array.isArray(week.absentGroups) ? week.absentGroups : [];
