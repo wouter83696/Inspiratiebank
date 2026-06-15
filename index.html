@@ -239,9 +239,9 @@
     .viewBtn.active{background:#fff;color:var(--accent);box-shadow:0 8px 24px rgba(11,18,32,.07)}
     .viewIcon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px}
     .viewIcon svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-    .ideaView[hidden],.teamView[hidden]{display:none !important}
-    .tableWrap.ideaView.active,.tableWrap.teamView.active{display:block}
-    .cards.ideaView.active,.cards.teamView.active{display:grid}
+    .ideaView[hidden],.teamView[hidden],.sourceView[hidden]{display:none !important}
+    .tableWrap.ideaView.active,.tableWrap.teamView.active,.tableWrap.sourceView.active{display:block}
+    .cards.ideaView.active,.cards.teamView.active,.usedSourceGrid.sourceView.active{display:grid}
     .ideaTitle{display:flex;align-items:flex-start;gap:10px}
     .ideaTitleText{display:block}
     .domainIcon{
@@ -464,9 +464,19 @@
     </section>
 
     <section id="tab-websites" class="tabPanel" role="tabpanel">
-	      <div class="sectionHead"><div><h2>Bronnen</h2><p>Hier vind je de websites en agenda’s die voor de UIT-agenda en inspiratiebank worden gebruikt. Open een bron om actuele informatie te controleren of om zelf verder te zoeken naar passend aanbod.</p></div></div>
-      <div class="sectionHead"><div><h2>Alle bronnen</h2><p>Bronnen met een vermelding bij de UIT-agenda leveren momenteel één of meer zichtbare agenda-items.</p></div></div>
-      <div id="usedSourceCards" class="usedSourceGrid"></div>
+	      <div class="sectionHead">
+        <div><h2>Bronnen</h2><p>Hier vind je de websites en agenda’s die voor de UIT-agenda en inspiratiebank worden gebruikt. Open een bron om actuele informatie te controleren of om zelf verder te zoeken naar passend aanbod.</p></div>
+        <div class="viewSwitch" aria-label="Weergave bronnen">
+          <button class="viewBtn active" type="button" data-view-group="sources" data-view="tiles" aria-label="Tegelweergave" title="Tegelweergave">
+            <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><rect x="3" y="3" width="5" height="5" rx="1"></rect><rect x="12" y="3" width="5" height="5" rx="1"></rect><rect x="3" y="12" width="5" height="5" rx="1"></rect><rect x="12" y="12" width="5" height="5" rx="1"></rect></svg></span>
+          </button>
+          <button class="viewBtn" type="button" data-view-group="sources" data-view="list" aria-label="Lijstweergave" title="Lijstweergave">
+            <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><circle cx="4" cy="5" r="1"></circle><circle cx="4" cy="10" r="1"></circle><circle cx="4" cy="15" r="1"></circle><path d="M8 5h9"></path><path d="M8 10h9"></path><path d="M8 15h9"></path></svg></span>
+          </button>
+        </div>
+      </div>
+      <div id="usedSourceList" class="tableWrap sourceView" hidden></div>
+      <div id="usedSourceCards" class="usedSourceGrid sourceView active"></div>
     </section>
 
     <footer>
@@ -1673,10 +1683,24 @@
       </div>
     </article>`;
   }
+  function sourceRow(source){
+    const link = source.link || {};
+    const hasUrl = link.url && link.url !== '#';
+    return `<tr>
+      <td><span class="name">${escapeHtml(source.name)}</span></td>
+      <td><span class="small">${escapeHtml(link.note || 'Bron voor actuele activiteiten en agenda-informatie.')}</span></td>
+      <td>${pill(link.category || 'Bron','soft')}</td>
+      <td><span class="small">${source.count ? escapeHtml(`${source.count} item${source.count === 1 ? '' : 's'}`) : '-'}</span></td>
+      <td>${hasUrl ? `<a class="siteButton secondary" href="${escapeHtml(link.url)}" target="_blank" rel="noopener">Open bron</a>` : '<span class="small">-</span>'}</td>
+    </tr>`;
+  }
   function renderUsedSources(){
     const sources = allSources();
     $('#usedSourceCards').innerHTML = sources.length
       ? sources.map(sourceCard).join('')
+      : '<div class="empty">Er zijn op dit moment nog geen bronnen zichtbaar.</div>';
+    $('#usedSourceList').innerHTML = sources.length
+      ? `<table><thead><tr><th>Bron</th><th>Beschrijving</th><th>Soort</th><th>UIT-agenda</th><th>Website</th></tr></thead><tbody>${sources.map(sourceRow).join('')}</tbody></table>`
       : '<div class="empty">Er zijn op dit moment nog geen bronnen zichtbaar.</div>';
   }
   function matches(item, query, filters){
@@ -1739,6 +1763,18 @@
     $('#ideaCards').hidden = listOn;
     $('#ideaList').hidden = !listOn;
   }
+  function setSourceView(view){
+    const listOn = view === 'list';
+    $$('[data-view-group="sources"]').forEach(btn => {
+      const active = btn.dataset.view === view;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    $('#usedSourceList').classList.toggle('active', listOn);
+    $('#usedSourceCards').classList.toggle('active', !listOn);
+    $('#usedSourceCards').hidden = listOn;
+    $('#usedSourceList').hidden = !listOn;
+  }
 	  function resetFilters(){
 	    ['ideaSearch','ideaDomain','ideaType','ideaLocation','ideaDistance','ideaCost','ideaStimulus'].forEach(id => {
 	      const el = $('#'+id);
@@ -1758,10 +1794,11 @@
 	  async function init(){
 	    await loadCentralStorage();
 	    $('#generatedDate').textContent = DATA.generated;
-	    renderWeekPanels(); renderFlexibleOffers(); renderLinks(); refreshCollections(); setIdeaView('tiles');
+	    renderWeekPanels(); renderFlexibleOffers(); renderLinks(); refreshCollections(); setIdeaView('tiles'); setSourceView('tiles');
     $$('.tab').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
     ['ideaSearch','ideaDomain','ideaType','ideaLocation','ideaDistance','ideaCost','ideaStimulus'].forEach(id=>$('#'+id).addEventListener('input',renderIdeas));
     $$('[data-view-group="ideas"]').forEach(btn=>btn.addEventListener('click',()=>setIdeaView(btn.dataset.view)));
+    $$('[data-view-group="sources"]').forEach(btn=>btn.addEventListener('click',()=>setSourceView(btn.dataset.view)));
     $('#teamIdeaForm').addEventListener('submit', handleTeamIdeaSubmit);
     $('#linkAddForm').addEventListener('submit', handleLinkAddSubmit);
     document.addEventListener('click', event => {
