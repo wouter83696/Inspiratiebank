@@ -70,9 +70,12 @@
       padding:5px;
     }
     .actions{display:flex;align-items:center;gap:4px;padding:0;pointer-events:auto}
-    .mini{border:0;background:transparent;border-radius:999px;color:var(--muted);padding:8px 11px;cursor:pointer}
-    .mini:hover{background:rgba(11,18,32,.055);color:var(--ink)}
-    .adminLogin{text-decoration:none;opacity:.68}
+    .mini{border:0;background:transparent;border-radius:0;color:var(--muted);padding:8px 11px;cursor:pointer}
+    .actions .tab,.actions .mini{position:relative;border-radius:0;background:transparent !important;box-shadow:none !important;color:var(--muted);transition:color .18s var(--ease)}
+    .actions .tab::after,.actions .mini::after{content:"";position:absolute;left:50%;right:50%;bottom:3px;height:1px;background:rgba(79,142,158,.72);transition:left .18s var(--ease),right .18s var(--ease)}
+    .actions .tab:hover,.actions .mini:hover,.actions .tab.active{background:transparent;color:var(--accent-dark)}
+    .actions .tab:hover::after,.actions .mini:hover::after,.actions .tab.active::after{left:11px;right:11px}
+    .adminLogin{text-decoration:none;opacity:.72}
     .adminLogin:hover{opacity:1}
     .hero{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:stretch;padding:12px 0 18px}
     .heroMain,.quickCard,.panel,.weekPanel,.card{
