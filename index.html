@@ -313,7 +313,7 @@
     <nav class="tabs" role="tablist" aria-label="Hoofdnavigatie">
       <button class="tab" id="agendaTab" role="tab" aria-selected="false" data-tab="weken">UIT-agenda</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="inspiratie">Inspiratiebank</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="websites">Links</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="websites">Bronnen</button>
     </nav>
     <div class="actions">
       <a class="mini adminLogin" href="website-bestanden/beheer.html">Beheer</a>
@@ -341,11 +341,29 @@
 
     <section id="tab-weken" class="tabPanel active" role="tabpanel">
       <div class="sectionHead"><div><h2>UIT-agenda</h2><p>Kies hier concrete uitjes buiten de deur die direct te bekijken of te plannen zijn: dichtbij, in de regio of als bijzondere daguitstap. De afstand wordt steeds gerekend vanaf postcode 6545 AL.</p></div></div>
+      <div class="ideaToolbar">
+        <a class="formButton primary largeAction" href="#sourceAdditions">Bron toevoegen</a>
+      </div>
       <div class="notice"><strong>Let op:</strong> check vóór je iets plant altijd datum, kosten, reservering, vervoer, groepsgrootte, waterkwaliteit bij natuurwater en prikkelbelasting.</div>
       <div id="weekNav" class="weekNav"></div>
       <div id="weekPanels" class="weekStack"></div>
       <div class="sectionHead"><div><h2>Tijdelijk aanbod in deze periode</h2><p>Hier staan alleen activiteiten, routes en exposities die speciaal in deze zomerperiode beschikbaar zijn. Regulier geopende locaties vind je in de inspiratiebank.</p></div></div>
       <div id="flexibleOffersWrap" class="tableWrap"></div>
+      <div class="sectionHead teamHead"><div><h2>Agendabron insturen</h2><p>Ken je een tijdelijk evenement of een actuele agenda die nog ontbreekt? Stuur de officiële pagina in. De website controleert deze bron dagelijks en kan complete evenementen automatisch aan de zesweekse UIT-agenda toevoegen.</p></div></div>
+      <div id="sourceAdditions" class="teamFormBox linkAddBox">
+        <form id="linkAddForm" class="teamForm">
+          <div class="teamFormGrid">
+            <label class="teamField wide">
+              <span>Officiële evenement- of agendalink</span>
+              <input id="linkUrlInput" type="text" inputmode="url" placeholder="https://voorbeeld.nl/evenement/..." required>
+            </label>
+          </div>
+          <div class="teamActionBar">
+            <button class="formButton primary" type="submit">Bron insturen</button>
+            <div id="linkAddStatus" class="teamFormStatus" role="status" aria-live="polite">De bron wordt bij de dagelijkse controle automatisch beoordeeld. Complete evenementen kunnen direct in de UIT-agenda verschijnen.</div>
+          </div>
+        </form>
+      </div>
     </section>
 
     <section id="tab-inspiratie" class="tabPanel" role="tabpanel">
@@ -440,25 +458,8 @@
     </section>
 
     <section id="tab-websites" class="tabPanel" role="tabpanel">
-	      <div class="sectionHead"><div><h2>Links</h2><p>Gebruik deze bronnen om actuele informatie te controleren. Ken je een tijdelijk evenement of uitje? Stuur bij voorkeur de officiële evenementpagina in. De link wordt dagelijks automatisch gecontroleerd en komt bij voldoende betrouwbare datum- en locatiegegevens direct in de zesweekse UIT-agenda. Bij twijfel blijft hij klaarstaan voor beheer.</p></div></div>
-      <div class="ideaToolbar">
-        <a class="formButton primary largeAction" href="#sourceAdditions">Bron toevoegen</a>
-      </div>
-      <div id="sourceAdditions" class="teamFormBox linkAddBox">
-        <form id="linkAddForm" class="teamForm">
-          <div class="teamFormGrid">
-            <label class="teamField wide">
-              <span>Officiële evenement- of agendalink</span>
-              <input id="linkUrlInput" type="text" inputmode="url" placeholder="https://voorbeeld.nl/evenement/..." required>
-            </label>
-          </div>
-          <div class="teamActionBar">
-	            <button class="formButton primary" type="submit">Bron insturen</button>
-	            <div id="linkAddStatus" class="teamFormStatus" role="status" aria-live="polite">De bron wordt bij de dagelijkse controle automatisch beoordeeld. Complete evenementen kunnen direct in de UIT-agenda verschijnen.</div>
-          </div>
-        </form>
-      </div>
-      <div class="sectionHead"><div><h2>Gebruikte bronnen</h2><p>Controleer via deze bronnen de actuele informatie van uitjes die in de UIT-agenda staan.</p></div></div>
+	      <div class="sectionHead"><div><h2>Bronnen</h2><p>Hier vind je de websites en agenda’s die voor de UIT-agenda en inspiratiebank worden gebruikt. Open een bron om actuele informatie te controleren of om zelf verder te zoeken naar passend aanbod.</p></div></div>
+      <div class="sectionHead"><div><h2>Alle bronnen</h2><p>Bronnen met een vermelding bij de UIT-agenda leveren momenteel één of meer zichtbare agenda-items.</p></div></div>
       <div id="usedSourceCards" class="usedSourceGrid"></div>
     </section>
 
@@ -1617,9 +1618,19 @@
       category: 'Gebruikte bron'
     };
   }
-  function usedSources(){
+  function allSources(){
     const sourceMap = new Map();
-	    allExternalItems().forEach(item => {
+    allLinks().forEach(link => {
+      const key = normalize(link.name);
+      if(!key) return;
+      sourceMap.set(key, {
+        name: link.name,
+        count: 0,
+        fallbackUrl: link.url || '',
+        link
+      });
+    });
+	  allExternalItems().forEach(item => {
       const label = String(item.source || item.title || 'Bron').trim();
       const key = normalize(label);
       if(!sourceMap.has(key)){
@@ -1634,7 +1645,7 @@
     return [...sourceMap.values()]
       .map(source => ({
         ...source,
-        link: findLinkForSource(source.name, source.fallbackUrl)
+        link: source.link || findLinkForSource(source.name, source.fallbackUrl)
       }))
       .sort((a,b) => a.name.localeCompare(b.name, 'nl'));
   }
@@ -1649,19 +1660,19 @@
     const hasUrl = link.url && link.url !== '#';
     return `<article class="linkCard" id="${escapeHtml(sourceAnchorId(source.name))}">
       <strong>${escapeHtml(source.name)}</strong>
-      <span>${escapeHtml(link.note || 'Bron die nu in de UIT-agenda terugkomt.')}</span>
-      <em class="pill soft">${escapeHtml(`${source.count} item${source.count === 1 ? '' : 's'} in UIT-agenda`)}</em>
+      <span>${escapeHtml(link.note || 'Bron voor actuele activiteiten en agenda-informatie.')}</span>
+      ${source.count ? `<em class="pill soft">${escapeHtml(`${source.count} item${source.count === 1 ? '' : 's'} in UIT-agenda`)}</em>` : ''}
       <div class="sourceCardActions">
-        ${pill(link.category || 'Gebruikte bron','soft')}
+        ${pill(link.category || 'Bron','soft')}
         ${hasUrl ? `<a class="siteButton secondary" href="${escapeHtml(link.url)}" target="_blank" rel="noopener">Open bron</a>` : ''}
       </div>
     </article>`;
   }
   function renderUsedSources(){
-    const sources = usedSources();
+    const sources = allSources();
     $('#usedSourceCards').innerHTML = sources.length
       ? sources.map(sourceCard).join('')
-      : '<div class="empty">Er zijn op dit moment nog geen gebruikte bronnen zichtbaar.</div>';
+      : '<div class="empty">Er zijn op dit moment nog geen bronnen zichtbaar.</div>';
   }
   function matches(item, query, filters){
     const text = JSON.stringify(item);
