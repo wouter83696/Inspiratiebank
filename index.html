@@ -123,6 +123,7 @@
     .sectionHead{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin:24px 0 12px}
     .sectionHead h2{margin:0;font-weight:400;letter-spacing:-.03em;color:var(--accent-dark);font-size:clamp(1.6rem,3vw,2.55rem)}
     .sectionHead p{margin:6px 0 0;color:var(--muted);line-height:1.45}
+    .agendaUpdated{flex:0 0 auto;color:rgba(11,18,32,.52);font-size:.86rem;line-height:1.35;margin-bottom:4px}
     .notice{background:rgba(248,236,194,.58);border:1px solid rgba(186,151,56,.14);border-radius:18px;padding:13px 15px;color:#6b5927;line-height:1.48}
     .weekNav{display:flex;justify-content:flex-end;margin:0}
     .weekSelect{width:220px}
@@ -182,20 +183,19 @@
       border-color:rgba(79,142,158,.14)
     }
     .agendaItem{
-      display:block;padding:10px 11px;border-radius:14px;
+      display:block;padding:10px 11px;border-radius:14px;overflow:hidden;
       background:linear-gradient(180deg,rgba(168,225,221,.28),rgba(255,255,255,.82));
       border:1px solid rgba(79,142,158,.14);text-decoration:none;color:inherit;
     }
     .agendaItem:hover{background:#fff}
     .agendaItem.themeCreative,.agendaItem.themeCulture,.agendaItem.themeNature,.agendaItem.themeSocial,.agendaItem.themeSport,.agendaItem.themeAction,.agendaItem.themeDefault{
-      background:linear-gradient(180deg,var(--theme-tint-strong),rgba(255,255,255,.88));
+      background:linear-gradient(180deg,var(--theme-tint),rgba(255,255,255,.92));
       border-color:var(--theme-line);
-      box-shadow:inset 3px 0 0 var(--theme-ink);
     }
     .agendaItem.themeCreative:hover,.agendaItem.themeCulture:hover,.agendaItem.themeNature:hover,.agendaItem.themeSocial:hover,.agendaItem.themeSport:hover,.agendaItem.themeAction:hover,.agendaItem.themeDefault:hover{
-      background:linear-gradient(180deg,var(--theme-tint-strong),#fff);
+      background:linear-gradient(180deg,var(--theme-tint-strong),#fff 72%);
     }
-    .agendaItem .domainIcon{width:23px;height:23px}
+    .agendaItem .domainIcon{width:23px;height:23px;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
     .agendaItem .domainIcon svg{width:13px;height:13px}
     .agendaThemeLegend{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0 12px}
     .agendaLegendItem{
@@ -208,6 +208,7 @@
     .agendaItem.multiDayItem:focus-visible{background:linear-gradient(180deg,rgba(168,225,221,.48),rgba(244,251,248,.88))}
     .agendaMore{padding:5px 8px;color:var(--muted);font-size:.74rem;line-height:1.3}
     .agendaItemTitle{display:flex;align-items:flex-start;gap:8px;color:var(--accent-dark);font-size:.88rem;font-weight:500;line-height:1.25}
+    .agendaItemTitle .ideaTitleText{min-width:0}
     .agendaItemMeta{display:block;margin-top:4px;color:var(--muted);font-size:.78rem;line-height:1.35}
     .agendaEmpty{margin-top:auto;padding:10px 11px;border-radius:14px;background:rgba(11,18,32,.04);color:var(--muted);font-size:.82rem;line-height:1.35}
     .agendaHint{display:block;margin-top:8px;color:var(--ink);font-size:.82rem}
@@ -357,17 +358,19 @@
     .linkCard span{display:block;color:var(--muted);line-height:1.35;font-size:.92rem}
     .linkCard em{display:inline-flex;margin-top:10px;font-style:normal}
     .sourceCardActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .siteFooter{margin-top:72px}
-    .footerCard{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:32px;padding:36px 44px;border:1px solid rgba(11,18,32,.08);border-radius:24px;background:rgba(255,255,255,.64);box-shadow:0 14px 38px rgba(20,38,42,.055)}
+    .siteFooter{
+      margin:72px calc(50% - 50vw) 0;padding:38px max(clamp(14px,3vw,28px),calc((100vw - var(--max))/2 + clamp(14px,3vw,28px)));
+      background:rgba(255,255,255,.58);border-top:1px solid rgba(11,18,32,.07);box-shadow:0 -14px 34px rgba(20,38,42,.035)
+    }
+    .footerCard{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:32px}
     .footerLogo{display:block;width:150px;height:auto}
     .footerCopy{color:var(--muted);font-size:.98rem;line-height:1.5}
     .footerCopy p{margin:0}
     .footerCopy strong{color:var(--accent-dark);font-weight:500}
     .footerContact{color:var(--accent-dark);font-weight:500;text-decoration:none;padding:8px 0}
     .footerContact:hover{color:var(--accent)}
-    .footerMeta{margin:14px 4px 0;color:rgba(11,18,32,.48);font-size:.82rem;line-height:1.42}
     @media (max-width:980px){.hero{grid-template-columns:1fr}.quick{grid-template-columns:repeat(3,1fr)}.cards,.linkGrid,.linkModel,.usedSourceGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.filters,.filters.more,.teamFormGrid{grid-template-columns:1fr 1fr}.filterSearch{grid-column:1/-1}.agendaBoard{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media (max-width:640px){body{padding-top:26px}.topbar{padding:0 8px;gap:6px;align-items:flex-start}.topbar .tabs{top:14px;left:8px;gap:2px;padding:4px}.topbar .tab{padding:7px 8px;font-size:.76rem}.actions{gap:0}.mini{padding:7px 8px;font-size:.76rem}.hero{padding-top:10px}.quick{grid-template-columns:1fr}.cards,.linkGrid,.linkModel,.usedSourceGrid{grid-template-columns:1fr}.filterBar{padding:10px}.filters,.teamFormGrid{grid-template-columns:1fr}.filters.more{grid-template-columns:minmax(0,1fr) auto;gap:8px}.filterSearch{grid-column:auto}.filterToggle{display:inline-flex}.filters.more.expanded .filterToggle{background:rgba(168,225,221,.30);border-color:rgba(79,142,158,.14)}.filters.more:not(.expanded)>select,.filters.more:not(.expanded)>.customSelect,.filters.more:not(.expanded)>.filterReset{display:none}.filters.more>select,.filters.more>.customSelect,.filters.more>.filterReset{grid-column:1/-1}.filterReset{justify-content:center}.weekTop{grid-template-columns:1fr}.weekMeta{justify-content:flex-start}.weekBody{padding:14px}.weekTop{padding:16px}.agendaBoard{grid-template-columns:1fr}.agendaDay{min-height:auto}.heroTitle{white-space:normal}.sectionHead{align-items:flex-start;flex-direction:column}.sectionToolbar{align-items:flex-start}.sectionToolbar .weekNav{justify-content:flex-start;width:100%}.agendaToolbar{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:10px}.agendaToolbar .largeAction{padding:10px 14px;font-size:.86rem}.agendaToolbar .weekNav{width:100%;min-width:0}.agendaToolbar .weekNav .customSelect{width:100%}.agendaToolbar .weekNav .customSelectButton{min-height:42px;padding:9px 13px}.ideaToolbar,.ideaToolbar.viewOnly{justify-content:flex-start}.ideaToolbar .viewBar{width:100%;justify-content:flex-start}.siteFooter{margin-top:48px}.footerCard{grid-template-columns:1fr;justify-items:start;gap:18px;padding:28px 24px}.footerLogo{width:132px}.footerContact{padding:0}}
+    @media (max-width:640px){body{padding-top:26px}.topbar{padding:0 8px;gap:6px;align-items:flex-start}.topbar .tabs{top:14px;left:8px;gap:2px;padding:4px}.topbar .tab{padding:7px 8px;font-size:.76rem}.actions{gap:0}.mini{padding:7px 8px;font-size:.76rem}.hero{padding-top:10px}.quick{grid-template-columns:1fr}.cards,.linkGrid,.linkModel,.usedSourceGrid{grid-template-columns:1fr}.filterBar{padding:10px}.filters,.teamFormGrid{grid-template-columns:1fr}.filters.more{grid-template-columns:minmax(0,1fr) auto;gap:8px}.filterSearch{grid-column:auto}.filterToggle{display:inline-flex}.filters.more.expanded .filterToggle{background:rgba(168,225,221,.30);border-color:rgba(79,142,158,.14)}.filters.more:not(.expanded)>select,.filters.more:not(.expanded)>.customSelect,.filters.more:not(.expanded)>.filterReset{display:none}.filters.more>select,.filters.more>.customSelect,.filters.more>.filterReset{grid-column:1/-1}.filterReset{justify-content:center}.weekTop{grid-template-columns:1fr}.weekMeta{justify-content:flex-start}.weekBody{padding:14px}.weekTop{padding:16px}.agendaBoard{grid-template-columns:1fr}.agendaDay{min-height:auto}.heroTitle{white-space:normal}.sectionHead{align-items:flex-start;flex-direction:column}.agendaUpdated{margin-bottom:0}.sectionToolbar{align-items:flex-start}.sectionToolbar .weekNav{justify-content:flex-start;width:100%}.agendaToolbar{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:10px}.agendaToolbar .largeAction{padding:10px 14px;font-size:.86rem}.agendaToolbar .weekNav{width:100%;min-width:0}.agendaToolbar .weekNav .customSelect{width:100%}.agendaToolbar .weekNav .customSelectButton{min-height:42px;padding:9px 13px}.ideaToolbar,.ideaToolbar.viewOnly{justify-content:flex-start}.ideaToolbar .viewBar{width:100%;justify-content:flex-start}.siteFooter{margin-top:48px;padding-top:30px;padding-bottom:30px}.footerCard{grid-template-columns:1fr;justify-items:start;gap:18px}.footerLogo{width:132px}.footerContact{padding:0}}
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.weekNav,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
 </head>
@@ -413,13 +416,14 @@
     <section id="tab-weken" class="tabPanel active" role="tabpanel">
       <div class="sectionHead">
         <div><h2>UIT-agenda</h2><p>Kies hier concrete uitjes buiten de deur die direct te bekijken of te plannen zijn: dichtbij, in de regio of als bijzondere daguitstap. De afstand wordt steeds gerekend vanaf postcode 6545 AL.</p></div>
+        <div class="agendaUpdated">Bijgewerkt op <span id="agendaUpdatedDate"></span></div>
       </div>
       <div class="sectionToolbar agendaToolbar">
         <a class="formButton primary largeAction" href="#sourceAdditions">Bron toevoegen</a>
         <div id="weekNav" class="weekNav"></div>
       </div>
-      <div id="agendaThemeLegend"></div>
       <div class="notice"><strong>Let op:</strong> check vóór je iets plant altijd datum, kosten, reservering, vervoer, groepsgrootte en prikkelbelasting.</div>
+      <div id="agendaThemeLegend"></div>
       <div id="weekPanels" class="weekStack"></div>
       <div class="sectionHead"><div><h2>Tijdelijk aanbod in deze periode</h2><p>Hier staan alleen activiteiten, routes en exposities die speciaal in deze zomerperiode beschikbaar zijn. Regulier geopende locaties vind je in de inspiratiebank.</p></div></div>
       <div id="flexibleOffersWrap" class="tableWrap"></div>
@@ -566,9 +570,8 @@
           <p>Ontwikkeld voor <strong>BCJN Nijmegen</strong></p>
           <p>Onderdeel van Youz | Parnassia Groep</p>
         </div>
-        <a class="footerContact" href="https://youz.nl/contact" target="_blank" rel="noopener">Contact</a>
+        <a class="footerContact" href="mailto:w.gerretsen@leokannerhuis.nl">w.gerretsen@leokannerhuis.nl</a>
       </div>
-      <p class="footerMeta">Bijgewerkt op <span id="generatedDate"></span>. Gebruik dit overzicht als vertrekpunt en check details altijd nog even voordat jullie iets vastleggen.</p>
     </footer>
   </main>
 
@@ -1973,7 +1976,7 @@
 	  }
 	  async function init(){
 	    await loadCentralStorage();
-	    $('#generatedDate').textContent = DATA.generated;
+	    $('#agendaUpdatedDate').textContent = DATA.generated;
 	    renderWeekPanels(); renderFlexibleOffers(); renderLinks(); refreshCollections(); setIdeaView('tiles'); setSourceView('tiles');
     $$('.tab').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
     document.addEventListener('click', event => {
