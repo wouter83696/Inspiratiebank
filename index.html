@@ -106,7 +106,7 @@
     .tab:hover{transform:translateY(-1px)}
     .tab.active{background:#fff;color:var(--accent);box-shadow:none}
     .tabPanel{display:none;animation:in .25s var(--ease)}
-    .tabPanel.active{display:block}
+    .tabPanel.active{display:block;scroll-margin-top:92px}
     @keyframes in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
     .sectionHead{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin:24px 0 12px}
     .sectionHead h2{margin:0;font-weight:400;letter-spacing:-.03em;color:var(--accent-dark);font-size:clamp(1.6rem,3vw,2.55rem)}
@@ -308,7 +308,7 @@
 <body>
   <header class="topbar">
     <nav class="tabs" role="tablist" aria-label="Hoofdnavigatie">
-      <button class="tab active" role="tab" aria-selected="true" data-tab="weken">UIT-agenda 29–34</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="weken">UIT-agenda 29–34</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="inspiratie">Inspiratiebank</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="websites">Links</button>
     </nav>
@@ -1660,6 +1660,8 @@
   function setTab(name){
     $$('.tab').forEach(b=>{ const on=b.dataset.tab===name; b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
     $$('.tabPanel').forEach(p=>p.classList.toggle('active',p.id === 'tab-'+name));
+    const panel = $('#tab-'+name);
+    if(panel) window.requestAnimationFrame(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}));
   }
   function setIdeaView(view){
     const listOn = view === 'list';
