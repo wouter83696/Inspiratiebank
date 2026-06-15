@@ -337,6 +337,54 @@ const SOURCE_CONFIG = [
 const USER_AGENT =
   "ZomerprogrammaUpdater/1.0 (+https://github.com/; contact via repository owner)";
 
+function mondayOf(date) {
+  const next = new Date(date);
+  const day = next.getUTCDay() || 7;
+  next.setUTCDate(next.getUTCDate() - day + 1);
+  next.setUTCHours(0, 0, 0, 0);
+  return next;
+}
+
+function addDays(date, amount) {
+  const next = new Date(date);
+  next.setUTCDate(next.getUTCDate() + amount);
+  return next;
+}
+
+function rollingWindowStart(today = new Date()) {
+  const summerStart = new Date("2026-07-13T00:00:00.000Z");
+  const firstShift = new Date("2026-07-20T00:00:00.000Z");
+  return today < firstShift ? summerStart : mondayOf(today);
+}
+
+function activeSourceConfig(today = new Date()) {
+  const start = rollingWindowStart(today);
+  const end = addDays(start, 41);
+  const base = SOURCE_CONFIG
+    .filter((source) => !source.id.startsWith("land-van-cuijk-"))
+    .map((source) => source.id === "beuningen-samen-jongeren"
+      ? {...source, url:`https://beuningensamen.nl/agenda?date_from=${String(start.getUTCDate()).padStart(2, "0")}-${String(start.getUTCMonth() + 1).padStart(2, "0")}-${start.getUTCFullYear()}&leeftijd_beuningensamen%5B%5D=1886`}
+      : source);
+  const months = new Map();
+  for (const date of [start, end]) {
+    const key = `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}`;
+    months.set(key, {year:date.getUTCFullYear(), month:date.getUTCMonth() + 1});
+  }
+  for (let cursor = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), 1)); cursor <= end; cursor.setUTCMonth(cursor.getUTCMonth() + 1)) {
+    const key = `${cursor.getUTCFullYear()}-${String(cursor.getUTCMonth() + 1).padStart(2, "0")}`;
+    months.set(key, {year:cursor.getUTCFullYear(), month:cursor.getUTCMonth() + 1});
+  }
+  const agendaSources = [...months.values()].map(({year, month}) => ({
+    id:`land-van-cuijk-${year}-${String(month).padStart(2, "0")}`,
+    name:`Land van Cuijk Uitagenda ${String(month).padStart(2, "0")}-${year}`,
+    url:`https://www.landvancuijk.nl/agenda/${year}/${String(month).padStart(2, "0")}/`,
+    region:"Land van Cuijk",
+    mode:"agenda-events",
+    note:"Concrete kandidaten uit de actuele zesweekse vooruitblik.",
+  }));
+  return [...base, ...agendaSources];
+}
+
 function todayDutch(date = new Date()) {
   return new Intl.DateTimeFormat("nl-NL", {
     day: "numeric",
@@ -803,7 +851,7 @@ async function main() {
   const nextSources = [];
   const nextItems = [];
 
-  for (const source of SOURCE_CONFIG) {
+  for (const source of activeSourceConfig()) {
     const result = await checkSource(
       source,
       previousSources.get(source.id),

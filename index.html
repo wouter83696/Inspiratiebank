@@ -293,6 +293,7 @@
     .usedSourceGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 18px}
     .linkModel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 16px}
     .linkAddBox{margin:14px 0 18px}
+    #sourceAdditions{scroll-margin-top:100px}
     .linkCard{display:block;text-decoration:none;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.76);border-radius:18px;padding:15px;transition:.18s var(--ease)}
     .linkCard:hover{transform:translateY(-2px);background:#fff;text-decoration:none}
     .linkCard strong{display:block;color:var(--accent-dark);font-weight:500;margin-bottom:4px}
@@ -308,7 +309,7 @@
 <body>
   <header class="topbar">
     <nav class="tabs" role="tablist" aria-label="Hoofdnavigatie">
-      <button class="tab" role="tab" aria-selected="false" data-tab="weken">UIT-agenda 29–34</button>
+      <button class="tab" id="agendaTab" role="tab" aria-selected="false" data-tab="weken">UIT-agenda</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="inspiratie">Inspiratiebank</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="websites">Links</button>
     </nav>
@@ -330,7 +331,7 @@
         </div>
       </div>
       <aside class="quick" aria-label="Samenvatting">
-        <div class="quickCard"><b id="weekCount">6</b><span>weken in beeld<br>week 29 t/m 34</span></div>
+        <div class="quickCard"><b id="weekCount">6</b><span>weken vooruit<br><span id="weekRange">wordt geladen</span></span></div>
         <div class="quickCard"><b id="offerCount">0</b><span>uitjes om te bekijken<br>uit regio en omstreken</span></div>
         <div class="quickCard"><b id="ideaCount">0</b><span>ideeën in de inspiratiebank<br>eigen en extern</span></div>
       </aside>
@@ -437,18 +438,21 @@
     </section>
 
     <section id="tab-websites" class="tabPanel" role="tabpanel">
-	      <div class="sectionHead"><div><h2>Links</h2><p>Gebruik deze bronnen om verder te zoeken of om actuele details nog even te controleren voordat jullie iets vastleggen. Nieuwe links die jullie insturen komen eerst langs beheer, zodat de lijst overzichtelijk blijft.</p></div></div>
-      <div class="teamFormBox linkAddBox">
+	      <div class="sectionHead"><div><h2>Links</h2><p>Gebruik deze bronnen om actuele informatie te controleren. Ken je een tijdelijk evenement of uitje? Stuur bij voorkeur de officiële evenementpagina in. De link wordt dagelijks automatisch gecontroleerd en komt bij voldoende betrouwbare datum- en locatiegegevens direct in de zesweekse UIT-agenda. Bij twijfel blijft hij klaarstaan voor beheer.</p></div></div>
+      <div class="ideaToolbar">
+        <a class="formButton primary largeAction" href="#sourceAdditions">Bron toevoegen</a>
+      </div>
+      <div id="sourceAdditions" class="teamFormBox linkAddBox">
         <form id="linkAddForm" class="teamForm">
           <div class="teamFormGrid">
             <label class="teamField wide">
-              <span>Link toevoegen</span>
-              <input id="linkUrlInput" type="text" inputmode="url" placeholder="Plak hier het volledige webadres" required>
+              <span>Officiële evenement- of agendalink</span>
+              <input id="linkUrlInput" type="text" inputmode="url" placeholder="https://voorbeeld.nl/evenement/..." required>
             </label>
           </div>
           <div class="teamActionBar">
-	            <button class="formButton primary" type="submit">Link insturen</button>
-	            <div id="linkAddStatus" class="teamFormStatus" role="status" aria-live="polite">De link verschijnt na goedkeuring bij de passende bronnen.</div>
+	            <button class="formButton primary" type="submit">Bron insturen</button>
+	            <div id="linkAddStatus" class="teamFormStatus" role="status" aria-live="polite">De bron wordt bij de dagelijkse controle automatisch beoordeeld. Complete evenementen kunnen direct in de UIT-agenda verschijnen.</div>
           </div>
         </form>
       </div>
@@ -474,7 +478,7 @@
   const splitWeeks = (w='') => String(w).split(',').map(x=>x.trim()).filter(Boolean);
   const unique = (arr) => [...new Set(arr.filter(Boolean))].sort((a,b)=>String(a).localeCompare(String(b),'nl'));
   const escapeHtml = (str='') => String(str).replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
-  const weekName = id => { const w = DATA.weeks.find(x=>x.id===id); return w ? 'Week '+w.week : id; };
+  const weekName = id => { const w = ACTIVE_WEEKS.find(x=>x.id===id); return w ? 'Week '+w.week : id; };
   const isConcrete = item => !/doorlopend|wekelijks|bij mooi weer|check programma|actuele/i.test(String(item.date + ' ' + item.time));
   const IDEA_TYPE_OPTIONS = ['Eigen aanbod','Bestaand extern aanbod','Zoekbron / agenda','Collega-aanvulling'];
   const IDEA_LOCATION_OPTIONS = ['Op groep / terrein','Buiten de deur','Binnen + buiten','Online / voorbereiding'];
@@ -619,14 +623,46 @@
 	    {title:'Dagelijkse broncheck', text:'Nieuwe vondsten uit de broncheck mogen alvast zichtbaar zijn met “Nog even checken”, zodat de agenda blijft groeien zonder op beheer te wachten.', pill:'broncheck'}
   ];
 
-  const WEEK_START = {
-    w29:'2026-07-13',
-    w30:'2026-07-20',
-    w31:'2026-07-27',
-    w32:'2026-08-03',
-    w33:'2026-08-10',
-    w34:'2026-08-17'
-  };
+  function mondayOf(date){
+    const value = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    value.setDate(value.getDate() - ((value.getDay() + 6) % 7));
+    return value;
+  }
+  function isoWeekMeta(date){
+    const value = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    value.setUTCDate(value.getUTCDate() + 4 - (value.getUTCDay() || 7));
+    const yearStart = new Date(Date.UTC(value.getUTCFullYear(), 0, 1));
+    return {year:value.getUTCFullYear(), week:Math.ceil((((value - yearStart) / 86400000) + 1) / 7)};
+  }
+  function rollingWindowStart(today=new Date()){
+    const summerStart = new Date(2026, 6, 13);
+    const firstShift = new Date(2026, 6, 20);
+    return today < firstShift ? summerStart : mondayOf(today);
+  }
+  function rollingWeeks(today=new Date()){
+    const start = rollingWindowStart(today);
+    return Array.from({length:6}, (_, index) => {
+      const monday = addDays(start, index * 7);
+      const sunday = addDays(monday, 6);
+      const meta = isoWeekMeta(monday);
+      const legacyId = meta.year === 2026 ? `w${meta.week}` : `w${meta.year}-${String(meta.week).padStart(2,'0')}`;
+      const saved = DATA.weeks.find(item => Number(item.week) === meta.week && /2026/.test(item.dates || ''));
+      return {
+        id:legacyId,
+        week:String(meta.week),
+        year:meta.year,
+        startIso:formatIsoDate(monday),
+        dates:`${formatAgendaDate(monday)} t/m ${formatAgendaDate(sunday)} ${sunday.getFullYear()}`,
+        status:saved?.status || 'Vooruitblik',
+        note:saved?.note || 'Nieuwe activiteiten worden automatisch toegevoegd zodra betrouwbare datumgegevens beschikbaar zijn.',
+        planning:saved?.planning || 'Doorlopende vooruitblik van zes weken.',
+        presentGroups:saved?.presentGroups || [],
+        absentGroups:saved?.absentGroups || []
+      };
+    });
+  }
+  let ACTIVE_WEEKS = [];
+  let WEEK_START = {};
 
   const EVENT_DATES = {
     'Nimma Sportzomer – Goffert Waterfestival':{start:'2026-07-15'},
@@ -639,6 +675,8 @@
 
   const DAY_LABELS = ['Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag','Zondag'];
   const MONTH_LABELS = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+  ACTIVE_WEEKS = rollingWeeks();
+  WEEK_START = Object.fromEntries(ACTIVE_WEEKS.map(week => [week.id, week.startIso]));
   function formatDateTimeNl(iso){
     if(!iso) return '';
     const date = new Date(iso);
@@ -1072,7 +1110,11 @@
     return [...baseItems, ...allTeamIdeas().map(teamIdeaToInspiration)];
   }
 	  function updateCounters(){
-	    $('#weekCount').textContent = DATA.weeks.length;
+	    $('#weekCount').textContent = ACTIVE_WEEKS.length;
+	    const firstWeek = ACTIVE_WEEKS[0];
+	    const lastWeek = ACTIVE_WEEKS[ACTIVE_WEEKS.length - 1];
+	    $('#weekRange').textContent = `week ${firstWeek.week} t/m ${lastWeek.week}`;
+	    $('#agendaTab').textContent = `UIT-agenda ${firstWeek.week}–${lastWeek.week}`;
 	    $('#offerCount').textContent = allExternalItems().length;
 	    $('#ideaCount').textContent = allInspirationItems().length;
 	  }
@@ -1236,8 +1278,8 @@
 	      id:`pending-link-${Date.now()}`,
 	      name:linkNameFromUrl($('#linkUrlInput').value),
 	      url:$('#linkUrlInput').value,
-	      category:'Ingestuurde link',
-	      note:'Ingestuurd door een collega en nog te beoordelen.',
+	      category:'Ingestuurde agendabron',
+	      note:'Ingestuurd voor automatische controle op een tijdelijk agenda-item.',
 	      status:'pending',
 	      createdAt:new Date().toISOString()
 	    });
@@ -1260,7 +1302,7 @@
 	    }
 	    form.reset();
 	    renderLinks();
-	    setLinkAddStatus(`${item.name} staat klaar voor beheer. Na goedkeuring verschijnt de link bij Links.`, 'ok');
+	    setLinkAddStatus(`${item.name} is ontvangen en wordt bij de volgende dagelijkse broncheck automatisch gecontroleerd.`, 'ok');
 	  }
 
   function parseIsoDate(iso){
@@ -1411,10 +1453,12 @@
       </article>`;
     }).join('');
   }
-	  function byWeek(weekId){ return allExternalItems().filter(item => splitWeeks(item.week).includes(weekId)); }
+	  function byWeek(weekId){
+	    return allExternalItems().filter(item => weekDays(weekId).some(day => itemOccursOnDay(item, day.iso)));
+	  }
   function orderedWeekIds(values=[]){
     const set = new Set(values);
-    return DATA.weeks.map(week => week.id).filter(id => set.has(id));
+    return ACTIVE_WEEKS.map(week => week.id).filter(id => set.has(id));
   }
   function weekAvailabilityLabel(item){
     return orderedWeekIds(splitWeeks(item.week)).map(id => weekName(id)).join(', ');
@@ -1424,6 +1468,7 @@
       .filter(isConcrete)
       .filter(isFlexiblePeriodOffer)
       .filter(item => item.seasonLimited === true)
+      .filter(item => ACTIVE_WEEKS.some(week => weekDays(week.id).some(day => itemOccursOnDay(item, day.iso))))
       .filter(item => !(isMultiDayFestival(item) && eventSpanDays(item) > 0));
     const merged = new Map();
     flexible.forEach(item => {
@@ -1492,8 +1537,8 @@
   }
 
   function renderWeekPanels(){
-    $('#weekNav').innerHTML = DATA.weeks.map(w=>`<a class="weekJump" href="#${w.id}">Week ${escapeHtml(w.week)}</a>`).join('');
-    $('#weekPanels').innerHTML = DATA.weeks.map((w,i)=>{
+    $('#weekNav').innerHTML = ACTIVE_WEEKS.map(w=>`<a class="weekJump" href="#${w.id}">Week ${escapeHtml(w.week)}</a>`).join('');
+    $('#weekPanels').innerHTML = ACTIVE_WEEKS.map((w,i)=>{
       const all = byWeek(w.id);
       const concrete = sortWeekItems(all.filter(isConcrete));
 	    const agendaHtml = renderAgendaBoard(w.id, concrete);
