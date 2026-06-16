@@ -448,6 +448,45 @@ function compareIsoDescending(a, b) {
   return bTime - aTime;
 }
 
+function normalizeForKey(value = "") {
+  return String(value || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function pendingItemKey(item = {}) {
+  return [
+    normalizeForKey(item.title),
+    normalizeForKey(item.dateLabel),
+    normalizeForKey(item.timeLabel),
+    normalizeForKey(item.place),
+    normalizeForKey(item.sourceUrl),
+  ].join("|");
+}
+
+function dedupePendingItems(items) {
+  const byKey = new Map();
+
+  for (const item of items) {
+    const key = pendingItemKey(item);
+    const current = byKey.get(key);
+    if (!current) {
+      byKey.set(key, item);
+      continue;
+    }
+
+    const preferItem =
+      (current.status === "missing" && item.status !== "missing") ||
+      (current.status !== "new" && item.status === "new");
+    if (preferItem) byKey.set(key, item);
+  }
+
+  return [...byKey.values()];
+}
+
 function buildSourceReview(pendingReview) {
   const pendingItems = (pendingReview.items || [])
     .filter((item) => item.reviewStatus === "pending" && item.status !== "missing");
@@ -863,7 +902,9 @@ async function main() {
     nextItems.push(...result.items);
   }
 
-  nextItems.sort((a, b) => {
+  const dedupedItems = dedupePendingItems(nextItems);
+
+  dedupedItems.sort((a, b) => {
     if (a.status !== b.status) {
       return a.status.localeCompare(b.status, "nl");
     }
@@ -873,14 +914,14 @@ async function main() {
   const summary = {
     sourcesChecked: nextSources.length,
     sourcesWithChanges: nextSources.filter((source) => source.pageChanged).length,
-    newItems: nextSources.reduce((total, source) => total + (source.newItemCount || 0), 0),
+    newItems: dedupedItems.filter((item) => item.status === "new").length,
   };
 
   const nextPendingReview = {
     generatedAt: checkedAt,
     summary,
     sources: nextSources,
-    items: nextItems,
+    items: dedupedItems,
   };
 
   mainData.generated = todayDutch(new Date());

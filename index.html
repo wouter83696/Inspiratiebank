@@ -4,12 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#F4F7F5">
+  <meta name="description" content="Inspiratiebank met activiteiten, UIT-agenda, bronnen en ideeen voor BCJN Nijmegen.">
   <title>Inspiratiebank</title>
   <script>
     if(window.location.pathname.endsWith('/index.html')){
       window.history.replaceState(null, '', window.location.pathname.replace(/index\.html$/, '') + window.location.search + window.location.hash);
     }
   </script>
+  <link rel="canonical" href="https://wouter83696.github.io/Inspiratiebank/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -48,7 +50,7 @@
       color:var(--ink);
       font-family:"IBM Plex Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
       background:
-        radial-gradient(circle at 8% -4%, rgba(251,232,178,.28), transparent 22%),
+        radial-gradient(circle at 8% -4%, rgba(251,232,178,.10), transparent 20%),
         radial-gradient(circle at 34% 10%, rgba(214,236,242,.28), transparent 29%),
         radial-gradient(circle at 46% 102%, rgba(168,225,221,.18), transparent 28%),
         radial-gradient(circle at 96% 2%, rgba(234,230,247,.42), transparent 26%),
@@ -286,6 +288,7 @@
     .ideaThemeCard .domainIcon,.ideaThemeRow .domainIcon{background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
     .domainThemePill{background:var(--theme-tint-strong);color:var(--theme-ink)}
     .card h3{margin:0;color:var(--accent-dark);font-size:1.08rem;line-height:1.18;font-weight:500}
+    .ideaThemeCard h3{margin-top:4px}
     .card p{margin:0;color:rgba(11,18,32,.70);line-height:1.43}
     .card .fine{color:var(--muted);font-size:.86rem}
     .cardPills{display:grid;gap:6px;justify-items:start}
@@ -839,6 +842,7 @@
 	  const HIDDEN_AGENDA_KEY = 'zomerprogramma_hidden_agenda_items_v1';
 	  const DELETED_AGENDA_KEY = 'zomerprogramma_deleted_agenda_items_v1';
 	  const VERIFIED_AGENDA_KEY = 'zomerprogramma_verified_agenda_items_v1';
+	  const BLOCKED_AGENDA_RULES_KEY = 'zomerprogramma_blocked_agenda_rules_v1';
 	  const REPORTS_KEY = 'zomerprogramma_item_reports_v1';
 	  const CONFIG = window.BCJN_CONFIG || {};
 	  const CENTRAL_STORAGE_ENDPOINT = CONFIG.storageEndpoint || '';
@@ -862,6 +866,7 @@
 	      hiddenAgendaItemIds:Array.isArray(value.hiddenAgendaItemIds) ? value.hiddenAgendaItemIds : [],
 	      deletedAgendaItemIds:Array.isArray(value.deletedAgendaItemIds) ? value.deletedAgendaItemIds : [],
 	      verifiedAgendaItemIds:Array.isArray(value.verifiedAgendaItemIds) ? value.verifiedAgendaItemIds : [],
+	      blockedAgendaRules:Array.isArray(value.blockedAgendaRules) ? value.blockedAgendaRules : [],
 	      reports:Array.isArray(value.reports) ? value.reports : []
 	    };
 	  }
@@ -962,8 +967,8 @@
     {title:'Externe mogelijkheden', text:'Gebruik de bredere bronpool om activiteiten uit Nijmegen, Arnhem en omgeving te verkennen. Alleen de concrete opties komen terug in de UIT-agenda.', pill:'bronpool'},
     {title:'UIT-agenda', text:'Kies uitjes met een datum, plek en link als jullie snel willen bekijken wat planbaar is.', pill:'uit-agenda'},
     {title:'Inspiratiebank', text:'Zoek breder in eigen activiteiten, websites, plekken en ideeën zonder vaste datum.', pill:'inspiratiebank'},
-    {title:'Samen aanvullen', text:'Nieuwe inzendingen kunnen na beoordeling tussen de andere inspiratie-items komen te staan, zodat iedereen vanuit één lijst werkt.', pill:'inzendingen'},
-	    {title:'Dagelijkse broncheck', text:'Nieuwe vondsten uit de broncheck mogen alvast zichtbaar zijn met “Nog even checken”, zodat de agenda blijft groeien zonder op beheer te wachten.', pill:'broncheck'}
+	    {title:'Samen aanvullen', text:'Nieuwe inzendingen kunnen na beoordeling tussen de andere inspiratie-items komen te staan, zodat iedereen vanuit één lijst werkt.', pill:'inzendingen'},
+	    {title:'Dagelijkse broncheck', text:'Nieuwe vondsten uit de broncheck kunnen automatisch worden klaargezet en daarna in beheer worden opgeschoond.', pill:'broncheck'}
   ];
 
   function mondayOf(date){
@@ -1396,6 +1401,59 @@
 	  function agendaContentKey(item={}){
 	    return `${normalize(item.title || '')}|${normalize(item.date || item.dateLabel || '')}|${normalize(item.where || item.place || '')}|${normalize(item.url || item.sourceUrl || '')}`;
 	  }
+	  function sourceHost(value=''){
+	    try{
+	      return normalize(new URL(value).hostname.replace(/^www\./,''));
+	    }catch(error){
+	      return '';
+	    }
+	  }
+	  function agendaSourceValue(item={}){
+	    return sourceHost(item.url || item.sourceUrl || '') || normalize(item.source || '');
+	  }
+	  function normalizeAgendaBlockRule(rule={}, index=0){
+	    const type = ['source','title','keyword'].includes(rule.type) ? rule.type : 'keyword';
+	    const rawValue = String(rule.value || rule.label || '').trim();
+	    const value = type === 'source' ? normalize(rawValue.replace(/^www\./,'')) : normalize(rawValue);
+	    return {
+	      id:String(rule.id || `rule-${type}-${value || index}`),
+	      type,
+	      value,
+	      label:String(rule.label || rawValue).trim() || value
+	    };
+	  }
+	  function loadBlockedAgendaRules(){
+	    const values = centralStorageActive()
+	      ? centralStorage.blockedAgendaRules
+	      : (() => {
+	          if(typeof localStorage === 'undefined') return [];
+	          try{ return JSON.parse(localStorage.getItem(BLOCKED_AGENDA_RULES_KEY) || '[]'); }catch(error){ return []; }
+	        })();
+	    return values.map(normalizeAgendaBlockRule).filter(rule => rule.value);
+	  }
+	  function agendaItemBlockedBy(item={}, rules=loadBlockedAgendaRules()){
+	    const sourceValue = agendaSourceValue(item);
+	    const titleValue = normalize(item.title || '');
+	    const haystack = normalize([item.title, item.source, item.where, item.domain, item.fit, item.url].filter(Boolean).join(' '));
+	    return rules.find(rule => {
+	      if(rule.type === 'source') return sourceValue === rule.value || normalize(item.source || '') === rule.value;
+	      if(rule.type === 'title') return titleValue === rule.value;
+	      return haystack.includes(rule.value);
+	    }) || null;
+	  }
+	  function dedupeAgendaItems(items=[]){
+	    const seen = new Set();
+	    return items.filter(item => {
+	      const keys = [
+	        agendaContentKey(item),
+	        `${normalize(item.url)}|${normalize(item.date)}|${normalize(item.time)}`,
+	        `${normalize(item.title)}|${normalize(item.date)}|${normalize(item.where)}`
+	      ].filter(key => key.replace(/[|]/g,''));
+	      if(keys.some(key => seen.has(key))) return false;
+	      keys.forEach(key => seen.add(key));
+	      return true;
+	    });
+	  }
 	  function normalizeAgendaOffer(item={}, index=0){
 	    const title = String(item.title || '').trim();
 	    return {
@@ -1423,10 +1481,10 @@
 	    };
 	  }
 	  function loadAutoAgendaItems(){
-	    if(centralStorageActive()) return centralStorage.autoAgendaItems.map(normalizeAgendaOffer).filter(item => item.title);
+	    if(centralStorageActive()) return dedupeAgendaItems(centralStorage.autoAgendaItems.map(normalizeAgendaOffer).filter(item => item.title));
 	    if(typeof localStorage === 'undefined') return [];
 	    try{
-	      return JSON.parse(localStorage.getItem(AUTO_AGENDA_KEY) || '[]').map(normalizeAgendaOffer).filter(item => item.title);
+	      return dedupeAgendaItems(JSON.parse(localStorage.getItem(AUTO_AGENDA_KEY) || '[]').map(normalizeAgendaOffer).filter(item => item.title));
 	    }catch(error){
 	      return [];
 	    }
@@ -1462,24 +1520,25 @@
 	    const hidden = loadHiddenAgendaItemIds();
 	    const deleted = loadDeletedAgendaItemIds();
 	    const verified = loadVerifiedAgendaItemIds();
+	    const blockedRules = loadBlockedAgendaRules();
 	    const base = DATA.external.map((item, index) => ({...item, id:item.id || `base-${index}`, reviewStatus:item.reviewStatus || 'verified'}));
 	    const automatic = loadAutoAgendaItems();
 	    const merged = [];
 	    const seen = new Set();
-	    [...base, ...automatic].forEach((item, index) => {
+	    dedupeAgendaItems([...base, ...automatic]).forEach((item, index) => {
 	      const normalized = normalizeAgendaOffer(item, index);
 	      const key = agendaItemKey(normalized);
 	      const contentKey = agendaContentKey(normalized);
-	      if(!normalized.title || hidden.has(normalized.id) || hidden.has(key) || deleted.has(normalized.id) || deleted.has(key) || deleted.has(contentKey) || seen.has(key)) return;
+	      if(!normalized.title || hidden.has(normalized.id) || hidden.has(key) || deleted.has(normalized.id) || deleted.has(key) || deleted.has(contentKey) || agendaItemBlockedBy(normalized, blockedRules) || seen.has(key) || seen.has(contentKey)) return;
 	      seen.add(key);
+	      seen.add(contentKey);
 	      if(verified.has(normalized.id) || verified.has(key)) normalized.reviewStatus = 'verified';
 	      merged.push(normalized);
 	    });
 	    return merged;
 	  }
   function agendaReviewPill(item){
-	    if(String(item.reviewStatus || '').toLowerCase() === 'verified') return '';
-	    return pill('Nog even checken','warn');
+	    return '';
 	  }
   function activityStatusIcon(item={}){
     const status = String(item.reviewStatus || '').toLowerCase();
