@@ -1,4 +1,4 @@
-Supabase instellen voor BCJN - Zomer 2026
+Supabase instellen voor Inspiratiebank - Zomer 2026
 
 1. Maak een Supabase-project aan.
 2. Open SQL Editor in Supabase.

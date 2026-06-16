@@ -1,4 +1,4 @@
-BCJN - Zomer 2026
+Inspiratiebank - Zomer 2026
 
 Dit is de online versie van de website. Gebruik dus deze map als definitieve versie:
 
@@ -7,8 +7,9 @@ Dit is de online versie van de website. Gebruik dus deze map als definitieve ver
 Online zetten
 - Zet de inhoud van online-versie op je hosting.
 - De hoofdpagina is index.html.
-- Laat de map website-bestanden ernaast staan; die hoort bij de website.
-- De beheerpagina staat op website-bestanden/beheer.html.
+- Laat de mappen website-bestanden en beheer ernaast staan; die horen bij de website.
+- De beheerpagina staat op beheer/.
+- website-bestanden/beheer.html stuurt oude beheerlinks automatisch door naar beheer/.
 
 Online opslag
 - Gebruik Supabase als gedeelde online opslag.
@@ -23,7 +24,7 @@ Voor gebruikers
 - Automatisch gevonden UIT-agenda-items mogen zichtbaar zijn met "Nog even checken".
 
 Voor beheer
-- Open website-bestanden/beheer.html.
+- Open beheer/.
 - Wachtwoord: 6545.
 - Je kunt inspiratie-items verbergen of verwijderen.
 - Je kunt ingestuurde links goedkeuren of afwijzen.
