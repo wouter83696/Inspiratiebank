@@ -133,13 +133,14 @@
     .heroCopy .lead + .lead{margin-top:10px}
     .tabHero{
       position:relative;overflow:hidden;isolation:isolate;
-      min-height:clamp(230px,32vw,390px);
-      margin:26px 0 0;padding:clamp(58px,10vw,122px) clamp(26px,5vw,70px) clamp(42px,7vw,90px);
-      border:1px solid rgba(255,255,255,.70);border-radius:clamp(26px,4vw,42px);
+      min-height:clamp(340px,38vw,460px);
+      margin:-72px calc(50% - 50vw) 0;
+      padding:clamp(132px,14vw,168px) max(clamp(14px,3vw,28px),calc((100vw - var(--max)) / 2 + clamp(14px,3vw,28px))) clamp(78px,9vw,112px);
+      border:0;border-radius:0;
       background:
         linear-gradient(115deg,rgba(255,255,255,.90),rgba(255,255,255,.64) 44%,rgba(221,239,232,.42)),
         var(--paper);
-      box-shadow:0 24px 70px rgba(20,38,42,.075);
+      box-shadow:none;
     }
     .tabHero::before{
       content:"";position:absolute;inset:8% -12% -22% 18%;z-index:-2;opacity:.82;
@@ -178,7 +179,7 @@
     .tabHeroKicker{position:relative;z-index:1;display:block;margin:0 0 12px;color:var(--accent-dark);font-size:.88rem;font-weight:500;letter-spacing:.04em}
     .tabHeroTitle{position:relative;z-index:1;margin:0;color:var(--accent-dark);font-size:5.8rem;font-weight:400;line-height:.9;letter-spacing:0}
     .tabHeroLine{position:relative;z-index:1;margin:18px 0 0;color:var(--accent);font-size:1.5rem;line-height:1.2;font-weight:400}
-    .tabHero + .filterBar{position:relative;z-index:2;margin-top:-28px}
+    .tabHero + .filterBar{position:relative;z-index:2;margin-top:-40px}
     .quick{display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:10px}
     .quickCard{display:flex;align-items:center;gap:14px;padding:17px;box-shadow:0 10px 30px rgba(20,38,42,.06)}
     .quickIcon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 46px;width:46px;height:46px;border-radius:50%;background:rgba(168,225,221,.28);color:var(--accent-dark)}
@@ -733,15 +734,18 @@
     @media (max-width:640px){.sectionToolbar .formButton.secondary.largeAction.downloadAction{width:100%;min-height:42px;padding:9px 13px}}
     @media (max-width:640px){
       .tabHero{
-        min-height:260px;margin:18px 0 0;padding:74px 22px 58px;border-radius:28px;
-        box-shadow:0 18px 48px rgba(20,38,42,.06)
+        min-height:360px;
+        margin:-90px calc(50% - 50vw) 0;
+        padding:154px max(28px,calc((100vw - var(--max)) / 2 + 28px)) 78px;
+        border:0;border-radius:0;
+        box-shadow:none;
       }
-      .tabHero::before{inset:18% -46% -26% 4%;opacity:.78}
-      .tabHero::after{opacity:.34}
-      .tabHeroKicker{font-size:.82rem;margin-bottom:9px}
-      .tabHeroTitle{font-size:3.15rem;line-height:.92}
-      .tabHeroLine{margin-top:14px;font-size:1.12rem}
-      .tabHero + .filterBar{margin-top:-22px}
+      .tabHero::before{inset:6% -30% -18% 8%;opacity:.82}
+      .tabHero::after{opacity:.42}
+      .tabHeroKicker{font-size:.82rem;margin-bottom:8px}
+      .tabHeroTitle{font-size:3rem;line-height:.94}
+      .tabHeroLine{margin-top:12px;font-size:1.08rem}
+      .tabHero + .filterBar{margin-top:-46px}
       .hero{display:flex;flex-direction:column;gap:14px;padding-top:44px}
       .quick{order:1;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:1fr;gap:8px}
       .heroMain{order:0;padding:24px 22px}
