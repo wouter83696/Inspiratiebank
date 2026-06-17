@@ -33,7 +33,9 @@ function defaultStorage() {
     pendingLinks: [],
     autoAgendaItems: [],
     hiddenAgendaItemIds: [],
+    deletedAgendaItemIds: [],
     verifiedAgendaItemIds: [],
+    blockedAgendaRules: [],
   };
 }
 
@@ -48,7 +50,9 @@ function normalizeStorage(value = {}) {
     pendingLinks: Array.isArray(value.pendingLinks) ? value.pendingLinks : [],
     autoAgendaItems: Array.isArray(value.autoAgendaItems) ? value.autoAgendaItems : [],
     hiddenAgendaItemIds: Array.isArray(value.hiddenAgendaItemIds) ? value.hiddenAgendaItemIds : [],
+    deletedAgendaItemIds: Array.isArray(value.deletedAgendaItemIds) ? value.deletedAgendaItemIds : [],
     verifiedAgendaItemIds: Array.isArray(value.verifiedAgendaItemIds) ? value.verifiedAgendaItemIds : [],
+    blockedAgendaRules: Array.isArray(value.blockedAgendaRules) ? value.blockedAgendaRules : [],
   };
 }
 
@@ -57,6 +61,92 @@ function normalize(value = "") {
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
+}
+
+function normalizeUrl(value = "") {
+  const url = String(value || "").trim();
+  if (!url) return "";
+  if (/^https?:\/\//i.test(url)) return url;
+  return `https://${url}`;
+}
+
+function sourceHost(value = "") {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+  if (!/^https?:\/\//i.test(raw) && !/[.]/.test(raw)) return "";
+  try {
+    return normalize(new URL(normalizeUrl(raw)).hostname.replace(/^www\./i, ""));
+  } catch (error) {
+    return "";
+  }
+}
+
+function normalizedAgendaTitle(value = "") {
+  return normalize(value)
+    .replace(/[–—-]/g, " ")
+    .replace(/\b(2026|uitagenda|agenda|evenement|activiteit)\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function agendaContentKey(item = {}) {
+  return `${normalize(item.title || "")}|${normalize(item.date || item.dateLabel || "")}|${normalize(item.where || item.place || "")}|${normalize(item.url || item.sourceUrl || "")}`;
+}
+
+function agendaItemKey(item = {}) {
+  return String(item.id || agendaContentKey(item));
+}
+
+function agendaDuplicateKeys(item = {}) {
+  const title = normalizedAgendaTitle(item.title || "");
+  const date = normalize(item.date || item.dateLabel || "");
+  const time = normalize(item.time || item.timeLabel || "").replace(/\s+/g, " ");
+  const place = normalize(item.where || item.place || item.location || "");
+  const host = sourceHost(item.url || item.sourceUrl || "");
+  return [
+    agendaContentKey(item),
+    title && date && place ? `${title}|${date}|${place}` : "",
+    title && date && time ? `${title}|${date}|${time}` : "",
+    title && place && host ? `${title}|${place}|${host}` : "",
+  ].filter(Boolean);
+}
+
+function normalizeAgendaBlockRule(rule = {}, index = 0) {
+  const type = ["source", "title", "keyword"].includes(rule.type) ? rule.type : "keyword";
+  const rawValue = String(rule.value || rule.label || "").trim();
+  const value = type === "source" ? (sourceHost(rawValue) || normalize(rawValue.replace(/^www\./i, ""))) : normalize(rawValue);
+  return {
+    id: String(rule.id || `rule-${type}-${value || index}`),
+    type,
+    value,
+    label: String(rule.label || rawValue).trim() || value,
+  };
+}
+
+function agendaSourceValue(item = {}) {
+  return sourceHost(item.url || item.sourceUrl || "") || normalize(item.source || "");
+}
+
+function agendaItemBlockedBy(item = {}, rules = []) {
+  const sourceValue = agendaSourceValue(item);
+  const titleValue = normalize(item.title || "");
+  const hostValue = sourceHost(item.url || item.sourceUrl || "");
+  const haystack = normalize([item.title, item.source, item.where, item.domain, item.fit, item.url].filter(Boolean).join(" "));
+  return rules.find((rule) => {
+    if (rule.type === "source") return sourceValue === rule.value || hostValue === rule.value || normalize(item.source || "") === rule.value;
+    if (rule.type === "title") return titleValue === rule.value;
+    return haystack.includes(rule.value);
+  }) || null;
+}
+
+function dedupeAgendaItems(items = []) {
+  const seen = new Set();
+  return items.filter((item) => {
+    const keys = agendaDuplicateKeys(item);
+    if (keys.some((key) => seen.has(key))) return false;
+    keys.forEach((key) => seen.add(key));
+    return true;
+  });
 }
 
 function safePublicUrl(value = "") {
@@ -359,6 +449,8 @@ async function main() {
 
   const storage = await loadCentralStorage();
   const submittedCandidates = await processPendingLinks(storage);
+  const blockedRules = (storage.blockedAgendaRules || []).map(normalizeAgendaBlockRule).filter((rule) => rule.value);
+  const deleted = new Set(storage.deletedAgendaItemIds || []);
   const previous = new Map(storage.autoAgendaItems.map((item) => [item.id, item]));
   let addedOrUpdated = 0;
 
@@ -374,10 +466,12 @@ async function main() {
     addedOrUpdated += 1;
   }
 
-  storage.autoAgendaItems = [...previous.values()]
+  storage.autoAgendaItems = dedupeAgendaItems([...previous.values()])
     .filter((item) => {
       const date = parseDutchDate(item.date || item.dateLabel || "");
-      return date && weekForDate(date);
+      const key = agendaItemKey(item);
+      const contentKey = agendaContentKey(item);
+      return date && weekForDate(date) && !deleted.has(item.id) && !deleted.has(key) && !deleted.has(contentKey) && !agendaItemBlockedBy(item, blockedRules);
     })
     .sort((a, b) =>
     String(a.week || "").localeCompare(String(b.week || ""), "nl") ||

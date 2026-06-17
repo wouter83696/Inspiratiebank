@@ -496,18 +496,18 @@
             </div>
           </div>
           <div class="agendaControlBar">
-            <label>Niet meer accepteren als titel, bron of plek dit bevat
-              <input id="agendaBlockInput" type="search" placeholder="Bijvoorbeeld: bierfestival, braderie, bronnaam...">
+            <label>Niet meer accepteren als titel, bron, plek of website dit bevat
+              <input id="agendaBlockInput" type="search" placeholder="Bijvoorbeeld: bierfestival, braderie, landvancuijk.nl...">
             </label>
             <button class="button small warn" id="addAgendaBlockRuleBtn" type="button">Regel toevoegen</button>
           </div>
           <div class="agendaAdminToolbar">
             <div class="viewSwitch" aria-label="Weergave UIT-agenda beheer">
               <button class="viewBtn active" type="button" data-agenda-view="week" aria-pressed="true" title="Weekweergave">
-                <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path><path d="M8 5v14"></path><path d="M16 5v14"></path></svg></span>
+                <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><rect x="3" y="3" width="5" height="5" rx="1"></rect><rect x="12" y="3" width="5" height="5" rx="1"></rect><rect x="3" y="12" width="5" height="5" rx="1"></rect><rect x="12" y="12" width="5" height="5" rx="1"></rect></svg></span>
               </button>
               <button class="viewBtn" type="button" data-agenda-view="list" aria-pressed="false" title="Lijstweergave">
-                <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 6h12"></path><path d="M8 12h12"></path><path d="M8 18h12"></path><path d="M4 6h.01"></path><path d="M4 12h.01"></path><path d="M4 18h.01"></path></svg></span>
+                <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><circle cx="4" cy="5" r="1"></circle><circle cx="4" cy="10" r="1"></circle><circle cx="4" cy="15" r="1"></circle><path d="M8 5h9"></path><path d="M8 10h9"></path><path d="M8 15h9"></path></svg></span>
               </button>
             </div>
             <div class="agendaAdminTools">
@@ -988,6 +988,36 @@
     if(/^https?:\/\//i.test(url)) return url;
     return `https://${url}`;
   }
+  function sourceHost(value=''){
+    const raw = String(value || '').trim();
+    if(!raw) return '';
+    if(!/^https?:\/\//i.test(raw) && !/[.]/.test(raw)) return '';
+    try{
+      return normalize(new URL(normalizeUrl(raw)).hostname.replace(/^www\./i,''));
+    }catch(error){
+      return '';
+    }
+  }
+  function normalizedAgendaTitle(value=''){
+    return normalize(value)
+      .replace(/[–—-]/g,' ')
+      .replace(/\b(2026|uitagenda|agenda|evenement|activiteit)\b/g,' ')
+      .replace(/\s+/g,' ')
+      .trim();
+  }
+  function agendaDuplicateKeys(item={}){
+    const title = normalizedAgendaTitle(item.title || '');
+    const date = normalize(item.date || item.dateLabel || '');
+    const time = normalize(item.time || item.timeLabel || '').replace(/\s+/g,' ');
+    const place = normalize(item.where || item.place || item.location || '');
+    const host = sourceHost(item.url || item.sourceUrl || '');
+    return [
+      agendaContentKey(item),
+      title && date && place ? `${title}|${date}|${place}` : '',
+      title && date && time ? `${title}|${date}|${time}` : '',
+      title && place && host ? `${title}|${place}|${host}` : ''
+    ].filter(Boolean);
+  }
 	  function normalizeLink(link={}){
 	    return {
 	      id:String(link.id || `link-${Date.now()}-${Math.random().toString(36).slice(2,8)}`),
@@ -1147,20 +1177,13 @@
 	  function agendaContentKey(item={}){
 	    return `${normalize(item.title)}|${normalize(item.date)}|${normalize(item.where)}|${normalize(item.url)}`;
 	  }
-	  function sourceHost(value=''){
-	    try{
-	      return normalize(new URL(value).hostname.replace(/^www\./,''));
-	    }catch(error){
-	      return '';
-	    }
-	  }
 	  function agendaSourceValue(item={}){
 	    return sourceHost(item.url) || normalize(item.source || '');
 	  }
 	  function normalizeAgendaBlockRule(rule={}, index=0){
 	    const type = ['source','title','keyword'].includes(rule.type) ? rule.type : 'keyword';
 	    const rawValue = String(rule.value || rule.label || '').trim();
-	    const value = type === 'source' ? normalize(rawValue.replace(/^www\./,'')) : normalize(rawValue);
+	    const value = type === 'source' ? (sourceHost(rawValue) || normalize(rawValue.replace(/^www\./i,''))) : normalize(rawValue);
 	    return {
 	      id:String(rule.id || `rule-${type}-${value || index}`),
 	      type,
@@ -1186,9 +1209,10 @@
 	  function agendaItemBlockedBy(item={}, rules=agendaBlockRules()){
 	    const sourceValue = agendaSourceValue(item);
 	    const titleValue = normalize(item.title || '');
+	    const hostValue = sourceHost(item.url || item.sourceUrl || '');
 	    const haystack = normalize([item.title, item.source, item.where, item.domain, item.fit, item.url].filter(Boolean).join(' '));
 	    return rules.find(rule => {
-	      if(rule.type === 'source') return sourceValue === rule.value || normalize(item.source || '') === rule.value;
+	      if(rule.type === 'source') return sourceValue === rule.value || hostValue === rule.value || normalize(item.source || '') === rule.value;
 	      if(rule.type === 'title') return titleValue === rule.value;
 	      return haystack.includes(rule.value);
 	    }) || null;
@@ -1196,11 +1220,7 @@
 	  function dedupeAgendaItems(items=[]){
 	    const seen = new Set();
 	    return items.filter(item => {
-	      const keys = [
-	        agendaContentKey(item),
-	        `${normalize(item.url)}|${normalize(item.date)}|${normalize(item.time)}`,
-	        `${normalize(item.title)}|${normalize(item.date)}|${normalize(item.where)}`
-	      ].filter(key => key.replace(/[|]/g,''));
+	      const keys = agendaDuplicateKeys(item);
 	      if(keys.some(key => seen.has(key))) return false;
 	      keys.forEach(key => seen.add(key));
 	      return true;
@@ -2288,17 +2308,30 @@
 	  function findAgendaItem(id){
 	    return agendaReviewItems().find(offer => offer.id === id || agendaItemKey(offer) === id);
 	  }
-	  async function addAgendaBlockRule(type, rawValue, label){
+	  function agendaBlockRuleFromInput(type='keyword', rawValue=''){
 	    const value = String(rawValue || '').trim();
+	    const host = sourceHost(value);
+	    if(type === 'keyword' && host){
+	      return {
+	        type:'source',
+	        value:host,
+	        label:`Website: ${host}`
+	      };
+	    }
+	    return {type, value, label:value};
+	  }
+	  async function addAgendaBlockRule(type, rawValue, label){
+	    const inferred = agendaBlockRuleFromInput(type, rawValue);
+	    const value = inferred.value;
 	    if(!value){
 	      setStatus('#adminStatus', 'Vul eerst in wat standaard geweigerd moet worden.', 'warn');
 	      return;
 	    }
 	    const rule = normalizeAgendaBlockRule({
-	      id:`rule-${type}-${normalize(value)}-${Date.now()}`,
-	      type,
+	      id:`rule-${inferred.type}-${normalize(value)}-${Date.now()}`,
+	      type:inferred.type,
 	      value,
-	      label:label || value,
+	      label:label || inferred.label || value,
 	      createdAt:new Date().toISOString()
 	    });
 	    const rules = agendaBlockRules();
@@ -2316,7 +2349,7 @@
 	    }
 	    $('#agendaBlockInput').value = '';
 	    renderAgendaReview();
-	    setStatus('#adminStatus', 'Nieuwe weigerregel opgeslagen. Passende nieuwe vondsten worden voortaan niet getoond.', 'ok');
+	    setStatus('#adminStatus', rule.type === 'source' ? 'Website-weigerregel opgeslagen. Nieuwe vondsten van deze site worden voortaan niet getoond.' : 'Nieuwe weigerregel opgeslagen. Passende nieuwe vondsten worden voortaan niet getoond.', 'ok');
 	  }
 	  async function blockAgendaItem(id, type, rawValue){
 	    const item = findAgendaItem(id);
