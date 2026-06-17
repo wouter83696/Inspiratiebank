@@ -134,9 +134,9 @@
     .tabHero{
       --hero-bg-image:url("website-bestanden/hero-achtergronden/inspiratiebank.svg");
       position:relative;overflow:hidden;isolation:isolate;
-      min-height:clamp(430px,45vw,560px);
-      margin:-164px calc(50% - 50vw) 0;
-      padding:clamp(244px,21vw,286px) max(clamp(14px,3vw,28px),calc((100vw - var(--max)) / 2 + clamp(14px,3vw,28px))) clamp(134px,12vw,168px);
+      min-height:clamp(318px,32vw,408px);
+      margin:-142px calc(50% - 50vw) 0;
+      padding:clamp(184px,16vw,220px) max(clamp(14px,3vw,28px),calc((100vw - var(--max)) / 2 + clamp(14px,3vw,28px))) clamp(74px,7vw,98px);
       border:0;border-radius:0;
       background:
         var(--hero-bg-image) center top/cover no-repeat,
@@ -146,15 +146,15 @@
     }
     .tabHero::before,.tabHero::after{content:none}
     .tabHero.agendaHero{--hero-bg-image:url("website-bestanden/hero-achtergronden/uit-agenda.svg")}
-    .tabHeroKicker{position:relative;z-index:1;display:block;margin:0 0 12px;color:var(--accent-dark);font-size:.88rem;font-weight:500;letter-spacing:.04em}
-    .tabHeroTitle{position:relative;z-index:1;margin:0;color:var(--accent-dark);font-family:"IBM Plex Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:5.8rem;font-weight:400;line-height:.9;letter-spacing:-.055em}
-    .tabHeroLine{position:relative;z-index:1;margin:18px 0 0;color:var(--accent);font-size:1.5rem;line-height:1.2;font-weight:400}
-    .tabHeroActions{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:38px}
+    .tabHeroKicker{position:relative;z-index:1;display:block;margin:0 0 8px;color:var(--accent-dark);font-size:.86rem;font-weight:500;letter-spacing:.04em}
+    .tabHeroTitle{position:relative;z-index:1;margin:0;color:var(--accent-dark);font-family:"IBM Plex Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:5rem;font-weight:400;line-height:.9;letter-spacing:-.055em}
+    .tabHeroLine{position:relative;z-index:1;margin:10px 0 0;color:var(--accent);font-size:1.28rem;line-height:1.2;font-weight:400}
+    .tabHeroActions{position:relative;z-index:1;display:inline-flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:22px}
     .tabHeroButton{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:12px 20px;border-radius:999px;border:1px solid rgba(79,142,158,.16);background:rgba(255,255,255,.74);box-shadow:0 12px 30px rgba(20,38,42,.08);color:var(--accent-dark);font-weight:500;text-decoration:none;cursor:pointer;backdrop-filter:blur(16px)}
     .tabHeroButton.primary{background:var(--accent);color:#fff;border-color:rgba(79,142,158,.20);box-shadow:0 14px 32px rgba(79,142,158,.22)}
     .tabHeroButton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .tabHeroButton:hover{transform:translateY(-1px)}
-    .tabHero + .filterBar{position:relative;z-index:2;margin-top:-32px}
+    .tabHero + .filterBar{position:relative;z-index:2;margin-top:-24px}
     .quick{display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:10px}
     .quickCard{display:flex;align-items:center;gap:14px;padding:17px;box-shadow:0 10px 30px rgba(20,38,42,.06)}
     .quickIcon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 46px;width:46px;height:46px;border-radius:50%;background:rgba(168,225,221,.28);color:var(--accent-dark)}
@@ -268,9 +268,9 @@
     }
     .agendaItem .domainIcon{width:19px;height:19px;background:color-mix(in srgb,var(--theme-tint-strong) 82%,transparent);border-color:color-mix(in srgb,var(--theme-line) 78%,transparent);color:var(--theme-ink);opacity:.95}
     .agendaItem .domainIcon svg{width:10px;height:10px}
-    .agendaLegendBar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:8px 0 12px}
-    .agendaThemeLegend{display:flex;flex-wrap:wrap;gap:7px;margin:0}
-    #inspirationThemeLegend{margin:20px 0 16px}
+    .agendaLegendBar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 0 10px}
+    .agendaThemeLegend{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+    #inspirationThemeLegend{margin:12px 0 12px}
     .agendaLegendItem{
       appearance:none;font:inherit;text-align:left;
       display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 8px;
@@ -460,14 +460,14 @@
     .ideaModalActions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:16px}
     .ideaModalClose{min-width:120px}
     .ideaModalActions .primary{min-width:120px}
-    .filterBar{margin:12px 0 18px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+    .filterBar{margin:10px 0 12px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
     .filters{display:grid;grid-template-columns:1.5fr repeat(4,minmax(130px,1fr));gap:8px;margin:0;align-items:center}
     .filters.more{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:12px;row-gap:0;transition:row-gap .24s var(--ease)}
     .filterSearch{position:relative;min-width:0}
-    .filterToggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:124px;min-height:48px;border:1px solid rgba(255,255,255,.78);border-radius:20px;background:rgba(255,255,255,.78);color:var(--accent-dark);padding:10px 18px;font:inherit;font-size:.9rem;font-weight:500;white-space:nowrap;cursor:pointer;box-shadow:0 10px 24px rgba(20,38,42,.07);backdrop-filter:blur(18px);transition:background .22s var(--ease),border-color .22s var(--ease),box-shadow .22s var(--ease)}
+    .filterToggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:112px;min-height:46px;border:1px solid rgba(255,255,255,.78);border-radius:18px;background:rgba(255,255,255,.78);color:var(--accent-dark);padding:9px 15px;font:inherit;font-size:.88rem;font-weight:500;white-space:nowrap;cursor:pointer;box-shadow:0 10px 24px rgba(20,38,42,.07);backdrop-filter:blur(18px);transition:background .22s var(--ease),border-color .22s var(--ease),box-shadow .22s var(--ease)}
     .filterToggle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .filterSearch::before{content:"";position:absolute;left:15px;top:50%;width:16px;height:16px;transform:translateY(-50%);pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%235f6973' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-4-4'/%3E%3C/svg%3E") center/contain no-repeat}
-    .filters input,.filters select{width:100%;min-width:0;min-height:48px;border:1px solid rgba(255,255,255,.78);background:rgba(255,255,255,.78);border-radius:20px;padding:10px 16px;color:var(--ink);font-size:.9rem;box-shadow:0 10px 24px rgba(20,38,42,.07);backdrop-filter:blur(18px)}
+    .filters input,.filters select{width:100%;min-width:0;min-height:46px;border:1px solid rgba(255,255,255,.78);background:rgba(255,255,255,.78);border-radius:18px;padding:9px 15px;color:var(--ink);font-size:.88rem;box-shadow:0 10px 24px rgba(20,38,42,.07);backdrop-filter:blur(18px)}
     .filterSearch input{padding-left:42px}
     .filters select{padding-right:30px}
     .agendaSearchFilters{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;column-gap:12px;row-gap:0;transition:row-gap .24s var(--ease)}
@@ -502,15 +502,15 @@
     .filterReset svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .filterReset:hover{color:var(--accent-dark)}
     .filterOptions{
-      grid-column:1 / -1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px;
+      grid-column:1 / -1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:8px;
       max-height:0;opacity:0;overflow:hidden;visibility:hidden;pointer-events:none;transform:translateY(-8px);
-      padding:0 10px;border:1px solid rgba(255,255,255,.66);border-radius:24px;background:rgba(255,255,255,.50);
+      padding:0 8px;border:1px solid rgba(255,255,255,.66);border-radius:22px;background:rgba(255,255,255,.50);
       box-shadow:0 16px 38px rgba(20,38,42,.065);backdrop-filter:blur(18px);
       transition:max-height .34s var(--ease),opacity .24s var(--ease),transform .34s var(--ease),padding .34s var(--ease),visibility 0s linear .34s;
     }
     .filters.more.expanded .filterOptions,
     .agendaSearchFilters.more.expanded .filterOptions{
-      max-height:92px;opacity:1;overflow:visible;visibility:visible;pointer-events:auto;transform:translateY(0);padding:10px;
+      max-height:84px;opacity:1;overflow:visible;visibility:visible;pointer-events:auto;transform:translateY(0);padding:8px;
       transition:max-height .38s var(--ease),opacity .24s var(--ease) .06s,transform .38s var(--ease),padding .38s var(--ease),visibility 0s;
     }
     .filters.more>select,
@@ -537,18 +537,18 @@
       transition:max-height .38s var(--ease),opacity .24s var(--ease) .06s,transform .38s var(--ease),visibility 0s;
       grid-column:auto
     }
-    #ideaFilters .filterSearch{grid-column:1 / 9}
-    #ideaFilters .filterToggle{grid-column:9 / 11}
-    #ideaFilters .mobileViewBar{grid-column:11 / 13}
+    #ideaFilters .filterSearch{grid-column:1 / 10}
+    #ideaFilters .filterToggle{grid-column:10 / 11;justify-self:end}
+    #ideaFilters .mobileViewBar{grid-column:11 / 13;justify-self:start}
     #ideaFilters .filterOptions .customSelect[data-select-id="ideaDomain"]{grid-column:1 / 3}
     #ideaFilters .filterOptions .customSelect[data-select-id="ideaLocation"]{grid-column:3 / 5}
     #ideaFilters .filterOptions .customSelect[data-select-id="ideaDistance"]{grid-column:5 / 7}
     #ideaFilters .filterOptions .customSelect[data-select-id="ideaCost"]{grid-column:7 / 9}
     #ideaFilters .filterOptions .customSelect[data-select-id="ideaStimulus"]{grid-column:9 / 11}
     #ideaFilters .filterOptions .filterReset{grid-column:11 / 13}
-    #agendaFilters .filterSearch{grid-column:1 / 9}
-    #agendaFilters .filterToggle{grid-column:9 / 11}
-    #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:11 / 13;max-height:76px;opacity:1;overflow:visible;visibility:visible;pointer-events:auto;transform:none}
+    #agendaFilters .filterSearch{grid-column:1 / 10}
+    #agendaFilters .filterToggle{grid-column:10 / 11;justify-self:end}
+    #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:11 / 13;justify-self:start;max-height:76px;opacity:1;overflow:visible;visibility:visible;pointer-events:auto;transform:none}
     #agendaFilters .filterOptions .customSelect[data-select-id="agendaDomain"]{grid-column:1 / 5}
     #agendaFilters .filterOptions .customSelect[data-select-id="agendaDistance"]{grid-column:5 / 7}
     #agendaFilters .filterOptions .customSelect[data-select-id="agendaCost"]{grid-column:7 / 9}
@@ -763,21 +763,21 @@
     @media (max-width:640px){.sectionToolbar .formButton.secondary.largeAction.downloadAction{width:100%;min-height:42px;padding:9px 13px}}
     @media (max-width:640px){
       .tabHero{
-        min-height:488px;
-        margin:-160px calc(50% - 50vw) 0;
-        padding:246px max(28px,calc((100vw - var(--max)) / 2 + 28px)) 126px;
+        min-height:388px;
+        margin:-138px calc(50% - 50vw) 0;
+        padding:204px max(28px,calc((100vw - var(--max)) / 2 + 28px)) 82px;
         border:0;border-radius:0;
         box-shadow:none;
       }
       .tabHero::before{inset:6% -30% -18% 8%;opacity:.82}
       .tabHero::after{opacity:.42}
-      .tabHeroKicker{font-size:.82rem;margin-bottom:8px}
-      .tabHeroTitle{font-size:3rem;line-height:.94}
-      .tabHeroLine{margin-top:12px;font-size:1.08rem}
-      .tabHeroActions{margin-top:34px;gap:10px}
-      .tabHeroButton{min-height:44px;padding:10px 15px;font-size:.86rem}
-      .tabHeroButton svg{width:17px;height:17px}
-      .tabHero + .filterBar{margin-top:-34px}
+      .tabHeroKicker{font-size:.8rem;margin-bottom:6px}
+      .tabHeroTitle{font-size:2.62rem;line-height:.94}
+      .tabHeroLine{margin-top:8px;font-size:1rem}
+      .tabHeroActions{margin-top:22px;gap:7px}
+      .tabHeroButton{min-height:42px;padding:9px 13px;font-size:.82rem}
+      .tabHeroButton svg{width:16px;height:16px}
+      .tabHero + .filterBar{margin-top:-24px}
       .hero{display:flex;flex-direction:column;gap:14px;padding-top:44px}
       .quick{order:1;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:1fr;gap:8px}
       .heroMain{order:0;padding:24px 22px}
@@ -802,7 +802,7 @@
       .agendaActionIcon{width:19px;height:19px;flex-basis:19px}
       .agendaActionIcon svg{width:18px;height:18px}
       .agendaToolbar .formButton,.agendaToolbar .largeAction{width:100%;min-height:42px;padding:10px 12px;font-size:.84rem}
-      .agendaSearchFilters.more{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+      .agendaSearchFilters.more{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px}
       .agendaSearchFilters.more .filterSearch{grid-column:1;min-width:0}
       .agendaSearchFilters.more .filterToggle{grid-column:2;justify-self:end;min-width:0}
       .agendaSearchFilters.more .agendaSearchStatus{grid-column:1/-1}
@@ -814,10 +814,10 @@
         mask-image:linear-gradient(to right,#000 calc(100% - 84px),transparent calc(100% - 22px),transparent)
       }
       .agendaThemeLegend::-webkit-scrollbar{display:none}
-      .agendaLegendItem{flex:0 0 auto;justify-content:flex-start;min-height:36px;padding:7px 9px;scroll-snap-align:start;white-space:nowrap}
+      .agendaLegendItem{flex:0 0 auto;justify-content:flex-start;min-height:32px;padding:6px 8px;scroll-snap-align:start;white-space:nowrap}
       .inspirationToolbar .viewBar{display:none}
       .mobileViewBar{display:flex;justify-content:flex-end;margin:0}
-      .filters.more{grid-template-columns:minmax(0,1fr) auto auto;align-items:center}
+      .filters.more{grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:6px}
       .filters.more .filterSearch{grid-column:1;min-width:0}
       .filters.more .filterToggle{grid-column:auto;justify-self:start;min-width:0}
       .filters.more .mobileViewBar{grid-column:auto}
@@ -843,21 +843,28 @@
       #agendaFilters .filterToggle{grid-column:2}
       #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:1 / -1}
       #ideaFilters.filters.more,
-      #agendaFilters.agendaSearchFilters.more{grid-template-columns:minmax(0,1fr) auto;align-items:center}
+      #agendaFilters.agendaSearchFilters.more{grid-template-columns:minmax(0,1fr) auto auto;align-items:center;column-gap:6px;row-gap:8px}
       #ideaFilters .filterSearch,
-      #agendaFilters .filterSearch{grid-column:1 / -1;min-width:0}
+      #agendaFilters .filterSearch{grid-column:1;grid-row:1;min-width:0}
       #ideaFilters .filterToggle,
-      #agendaFilters .filterToggle{grid-column:1;justify-self:start;min-width:0;max-width:100%;padding:10px 16px}
-      #ideaFilters .mobileViewBar{grid-column:2;justify-self:end;min-width:0}
-      #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:2;justify-self:end;min-width:124px;max-width:148px}
+      #agendaFilters .filterToggle{grid-column:2;grid-row:1;justify-self:stretch;min-width:44px;width:44px;height:44px;max-width:44px;padding:0;border-radius:16px}
+      #ideaFilters .filterToggle span{display:none}
+      #agendaFilters .filterToggle{font-size:0}
+      #agendaFilters .filterToggle svg{margin:0}
+      #ideaFilters .mobileViewBar{grid-column:3;grid-row:1;justify-self:end;min-width:0}
+      #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:3;grid-row:1;justify-self:end;min-width:94px;max-width:112px}
       #ideaFilters .filterOptions,
-      #agendaFilters .filterOptions{grid-column:1 / -1;grid-template-columns:1fr;width:100%;box-sizing:border-box}
+      #agendaFilters .filterOptions{grid-column:1 / -1;grid-row:2;grid-template-columns:1fr;width:100%;box-sizing:border-box}
       #ideaFilters .filterOptions .customSelect,
       #ideaFilters .filterOptions .filterReset,
       #agendaFilters .filterOptions .customSelect,
       #agendaFilters .filterOptions .filterReset,
       #agendaFilters .filterOptions .agendaSearchStatus{grid-column:1 / -1;width:100%}
-      #inspirationThemeLegend{display:block;position:relative;width:100%;margin:12px 0 18px;overflow:hidden}
+      #ideaFilters .filterOptions .customSelectButton,
+      #agendaFilters .filterOptions .customSelectButton{min-height:44px}
+      #ideaFilters .filterOptions .filterReset,
+      #agendaFilters .filterOptions .filterReset{justify-content:flex-start;min-height:42px;padding:8px 10px}
+      #inspirationThemeLegend{display:block;position:relative;width:100%;margin:8px 0 12px;overflow:hidden}
       #inspirationThemeLegend .agendaThemeLegend{
         display:flex;flex-wrap:nowrap;gap:6px;width:100%;overflow-x:auto;overflow-y:hidden;padding:0 78px 2px 0;
         -webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none;
@@ -865,7 +872,7 @@
         mask-image:linear-gradient(to right,#000 calc(100% - 84px),transparent calc(100% - 22px),transparent)
       }
       #inspirationThemeLegend .agendaThemeLegend::-webkit-scrollbar{display:none}
-      #inspirationThemeLegend .agendaLegendItem{flex:0 0 auto;min-width:0;min-height:34px;padding:7px 9px;scroll-snap-align:start;white-space:nowrap}
+      #inspirationThemeLegend .agendaLegendItem{flex:0 0 auto;min-width:0;min-height:32px;padding:6px 8px;scroll-snap-align:start;white-space:nowrap}
       .cards{gap:10px;width:100%;min-width:0}
       .card{width:100%;min-width:0;min-height:0;padding:13px 14px;gap:8px;border-radius:18px;overflow:hidden}
       .card h3{font-size:1rem;line-height:1.16}
