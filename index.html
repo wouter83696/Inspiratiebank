@@ -132,62 +132,20 @@
     .lead{font-size:clamp(.96rem,1.25vw,1.06rem);line-height:1.42;color:rgba(11,18,32,.68);max-width:920px;margin:0}
     .heroCopy .lead + .lead{margin-top:10px}
     .tabHero{
+      --hero-bg-image:url("website-bestanden/hero-achtergronden/inspiratiebank.svg");
       position:relative;overflow:hidden;isolation:isolate;
       min-height:clamp(430px,45vw,560px);
       margin:-164px calc(50% - 50vw) 0;
       padding:clamp(244px,21vw,286px) max(clamp(14px,3vw,28px),calc((100vw - var(--max)) / 2 + clamp(14px,3vw,28px))) clamp(134px,12vw,168px);
       border:0;border-radius:0;
       background:
-        radial-gradient(ellipse at 96% 8%,rgba(214,236,242,.42) 0 16%,transparent 38%),
-        radial-gradient(ellipse at 88% 70%,rgba(79,142,158,.22) 0 23%,transparent 51%),
+        var(--hero-bg-image) center top/cover no-repeat,
         linear-gradient(105deg,rgba(255,255,255,.95) 0 45%,rgba(240,248,247,.72) 66%,rgba(194,229,226,.44)),
         var(--paper);
       box-shadow:none;
     }
-    .tabHero::before{
-      content:"";position:absolute;inset:6% -6% -20% 30%;z-index:-2;opacity:.92;
-      background:
-        radial-gradient(ellipse 62% 25% at 74% 68%,rgba(79,142,158,.30) 0 45%,transparent 46%),
-        radial-gradient(ellipse 52% 22% at 56% 67%,rgba(168,225,221,.54) 0 46%,transparent 47%),
-        radial-gradient(ellipse 38% 18% at 43% 56%,rgba(234,230,247,.42) 0 45%,transparent 47%),
-        radial-gradient(ellipse 34% 19% at 66% 47%,rgba(248,236,194,.48) 0 44%,transparent 46%),
-        linear-gradient(164deg,transparent 0 42%,rgba(255,255,255,.22) 42.2% 42.8%,transparent 43%);
-      filter:blur(1px);
-      transform:skewY(-5deg);
-    }
-    .tabHero::after{
-      content:"";position:absolute;inset:0;z-index:-1;opacity:.72;
-      background:
-        radial-gradient(circle at 49% 15%,rgba(127,207,201,.56) 0 7px,transparent 8px),
-        radial-gradient(circle at 58% 36%,rgba(182,171,220,.58) 0 6px,transparent 7px),
-        radial-gradient(circle at 53% 40%,rgba(245,217,138,.62) 0 5px,transparent 6px),
-        radial-gradient(circle at 74% 63%,rgba(12,160,178,.60) 0 5px,transparent 6px),
-        radial-gradient(circle at 83% 56%,rgba(255,255,255,.86) 0 4px,transparent 5px),
-        linear-gradient(148deg,transparent 0 45%,rgba(255,255,255,.40) 45.15% 45.55%,transparent 45.7%),
-        linear-gradient(160deg,transparent 0 58%,rgba(79,142,158,.18) 58.15% 58.45%,transparent 58.7%),
-        repeating-linear-gradient(104deg,transparent 0 54px,rgba(255,255,255,.13) 55px,transparent 56px);
-      mask-image:linear-gradient(to right,transparent, #000 15%, #000 92%, transparent);
-    }
-    .tabHero.agendaHero::before{
-      inset:4% -8% -22% 24%;
-      background:
-        linear-gradient(170deg,transparent 0 18%,rgba(214,236,242,.58) 34%,transparent 56%),
-        linear-gradient(166deg,transparent 0 28%,rgba(168,225,221,.50) 44%,transparent 66%),
-        linear-gradient(160deg,transparent 0 40%,rgba(79,142,158,.20) 58%,transparent 76%),
-        radial-gradient(ellipse 44% 18% at 78% 74%,rgba(248,236,194,.32) 0 44%,transparent 46%);
-      transform:skewY(-3deg);
-    }
-    .tabHero.agendaHero::after{
-      opacity:.78;
-      background:
-        radial-gradient(circle at 54% 28%,rgba(127,207,201,.54) 0 6px,transparent 7px),
-        radial-gradient(circle at 66% 34%,rgba(255,130,112,.58) 0 5px,transparent 6px),
-        radial-gradient(circle at 45% 48%,rgba(245,217,138,.56) 0 5px,transparent 6px),
-        radial-gradient(circle at 64% 52%,rgba(182,171,220,.55) 0 5px,transparent 6px),
-        linear-gradient(172deg,transparent 0 42%,rgba(255,255,255,.52) 42.2% 42.7%,transparent 42.9%),
-        linear-gradient(176deg,transparent 0 53%,rgba(79,142,158,.18) 53.2% 53.55%,transparent 53.8%),
-        repeating-linear-gradient(168deg,transparent 0 42px,rgba(255,255,255,.15) 43px,transparent 44px);
-    }
+    .tabHero::before,.tabHero::after{content:none}
+    .tabHero.agendaHero{--hero-bg-image:url("website-bestanden/hero-achtergronden/uit-agenda.svg")}
     .tabHeroKicker{position:relative;z-index:1;display:block;margin:0 0 12px;color:var(--accent-dark);font-size:.88rem;font-weight:500;letter-spacing:.04em}
     .tabHeroTitle{position:relative;z-index:1;margin:0;color:var(--accent-dark);font-family:Georgia,"Times New Roman",serif;font-size:5.8rem;font-weight:400;line-height:.9;letter-spacing:0}
     .tabHeroLine{position:relative;z-index:1;margin:18px 0 0;color:var(--accent);font-size:1.5rem;line-height:1.2;font-weight:400}
