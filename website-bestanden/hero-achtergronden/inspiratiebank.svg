@@ -19,13 +19,19 @@
     <filter id="soften">
       <feGaussianBlur stdDeviation="0.7"/>
     </filter>
+    <style>
+      #warm-arc{transform:translateY(44px)}
+      @media (max-width: 640px){
+        #warm-arc{transform:translateY(82px)}
+      }
+    </style>
   </defs>
   <rect width="1600" height="620" fill="url(#base)"/>
   <path d="M900 -90c140 120 292 78 438 92 104 10 190 52 262 142v476H0V510c164-62 265-54 362-18 129 47 242 45 338-37 123-105 230-103 367-47 151 62 319 46 533-76v288H0V0h900z" fill="#dceff4" opacity="0.34"/>
   <path d="M560 438c145-123 279-152 406-91 163 78 326 88 634-68v341H0V547c197-83 351-23 560-109z" fill="url(#tealWave)" filter="url(#soften)"/>
   <path d="M650 392c110-96 224-118 342-62 140 66 284 65 438-22 64-36 116-57 170-63v375H0V530c165-31 305-44 430-92 82-31 145-16 220-46z" fill="url(#mintWave)" opacity="0.86"/>
   <path d="M760 332c87-74 167-87 248-43 120 66 239 74 382 8 82-38 146-48 210-26v349H0v-55c160-53 286-58 400-20 116 39 207 11 308-80 18-16 35-31 52-45z" fill="#eae6f7" opacity="0.34"/>
-  <path d="M914 246c92-78 180-74 257-1 91 86 200 108 429 35v340H0v-23c169-39 303-34 419-5 148 37 251-34 344-170 41-60 90-118 151-176z" fill="#f8ecc2" opacity="0.32"/>
+  <path id="warm-arc" d="M914 246c92-78 180-74 257-1 91 86 200 108 429 35v340H0v-23c169-39 303-34 419-5 148 37 251-34 344-170 41-60 90-118 151-176z" fill="#f8ecc2" opacity="0.32"/>
   <path d="M705 486c217-163 391-172 555-79 98 56 211 63 340 22" fill="none" stroke="#fff" stroke-opacity="0.62" stroke-width="1.4"/>
   <path d="M785 383c181-112 326-119 472-29 95 59 206 72 343 31" fill="none" stroke="#fff" stroke-opacity="0.52" stroke-width="1.2"/>
   <path d="M690 290c164 96 325 114 479 28 132-73 269-80 431-18" fill="none" stroke="#ffffff" stroke-opacity="0.42" stroke-width="1.1"/>
