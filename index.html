@@ -134,9 +134,9 @@
     .tabHero{
       --hero-bg-image:url("website-bestanden/hero-achtergronden/inspiratiebank.svg");
       position:relative;overflow:hidden;isolation:isolate;
-      min-height:clamp(318px,32vw,408px);
+      min-height:clamp(350px,35vw,448px);
       margin:-142px calc(50% - 50vw) 0;
-      padding:clamp(184px,16vw,220px) max(clamp(14px,3vw,28px),calc((100vw - var(--max)) / 2 + clamp(14px,3vw,28px))) clamp(74px,7vw,98px);
+      padding:clamp(184px,16vw,220px) max(clamp(14px,3vw,28px),calc((100vw - var(--max)) / 2 + clamp(14px,3vw,28px))) clamp(94px,8.5vw,124px);
       border:0;border-radius:0;
       background:
         var(--hero-bg-image) center top/cover no-repeat,
@@ -154,6 +154,11 @@
     .tabHeroButton.primary{background:var(--accent);color:#fff;border-color:rgba(79,142,158,.20);box-shadow:0 14px 32px rgba(79,142,158,.22)}
     .tabHeroButton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .tabHeroButton:hover{transform:translateY(-1px)}
+    .tabHeroStats{position:relative;z-index:1;display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:28px;color:var(--accent-dark);font-size:.92rem;font-weight:500;line-height:1.2}
+    .tabHeroStat{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+    .tabHeroStat svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;opacity:.95}
+    .tabHeroStat strong{font-weight:650;color:var(--accent-dark)}
+    .tabHeroStatDivider{color:rgba(49,95,107,.52)}
     .tabHero + .filterBar{position:relative;z-index:2;margin-top:-24px}
     .quick{display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:10px}
     .quickCard{display:flex;align-items:center;gap:14px;padding:17px;box-shadow:0 10px 30px rgba(20,38,42,.06)}
@@ -765,9 +770,9 @@
     @media (max-width:640px){.sectionToolbar .formButton.secondary.largeAction.downloadAction{width:100%;min-height:42px;padding:9px 13px}}
     @media (max-width:640px){
       .tabHero{
-        min-height:388px;
+        min-height:430px;
         margin:-138px calc(50% - 50vw) 0;
-        padding:204px max(28px,calc((100vw - var(--max)) / 2 + 28px)) 82px;
+        padding:204px max(28px,calc((100vw - var(--max)) / 2 + 28px)) 100px;
         border:0;border-radius:0;
         box-shadow:none;
       }
@@ -779,6 +784,9 @@
       .tabHeroActions{margin-top:44px;gap:7px}
       .tabHeroButton{min-height:42px;padding:9px 13px;font-size:.82rem}
       .tabHeroButton svg{width:16px;height:16px}
+      .tabHeroStats{margin-top:22px;gap:8px 10px;font-size:.78rem}
+      .tabHeroStat{gap:5px}
+      .tabHeroStat svg{width:15px;height:15px}
       .tabHero + .filterBar{margin-top:-24px}
       .hero{display:flex;flex-direction:column;gap:14px;padding-top:44px}
       .quick{order:1;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:1fr;gap:8px}
@@ -972,6 +980,25 @@
             <span>Activiteit toevoegen</span>
           </a>
         </div>
+        <div class="tabHeroStats" aria-label="Statistieken">
+          <span class="tabHeroStat">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M8.5 14.5a6 6 0 1 1 7 0c-.8.6-1.5 1.6-1.5 2.5h-4c0-.9-.7-1.9-1.5-2.5Z"></path></svg>
+            <strong data-hero-stat="ideas">0</strong>
+            <span>ideeën</span>
+          </span>
+          <span class="tabHeroStatDivider" aria-hidden="true">•</span>
+          <span class="tabHeroStat">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+            <strong data-hero-stat="offers">0</strong>
+            <span>uitjes</span>
+          </span>
+          <span class="tabHeroStatDivider" aria-hidden="true">•</span>
+          <span class="tabHeroStat">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg>
+            <strong data-hero-stat="weeks">0</strong>
+            <span>weken vooruit</span>
+          </span>
+        </div>
       </section>
       <div class="filterBar">
         <div class="filters agendaSearchFilters more" id="agendaFilters">
@@ -1050,6 +1077,25 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
             <span>Inspiratie toevoegen</span>
           </a>
+        </div>
+        <div class="tabHeroStats" aria-label="Statistieken">
+          <span class="tabHeroStat">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M8.5 14.5a6 6 0 1 1 7 0c-.8.6-1.5 1.6-1.5 2.5h-4c0-.9-.7-1.9-1.5-2.5Z"></path></svg>
+            <strong data-hero-stat="ideas">0</strong>
+            <span>ideeën</span>
+          </span>
+          <span class="tabHeroStatDivider" aria-hidden="true">•</span>
+          <span class="tabHeroStat">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+            <strong data-hero-stat="offers">0</strong>
+            <span>uitjes</span>
+          </span>
+          <span class="tabHeroStatDivider" aria-hidden="true">•</span>
+          <span class="tabHeroStat">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg>
+            <strong data-hero-stat="weeks">0</strong>
+            <span>weken vooruit</span>
+          </span>
         </div>
       </section>
       <div class="filterBar">
@@ -2218,16 +2264,25 @@
     return [...baseItems, ...allTeamIdeas().map(teamIdeaToInspiration)];
   }
 	  function updateCounters(){
+	    const setHeroStat = (name, value) => {
+	      $$(`[data-hero-stat="${name}"]`).forEach(el => { el.textContent = value; });
+	    };
 	    const weekCount = $('#weekCount');
-	    if(weekCount) weekCount.textContent = ACTIVE_WEEKS.length;
+	    const weekTotal = ACTIVE_WEEKS.length;
+	    if(weekCount) weekCount.textContent = weekTotal;
+	    setHeroStat('weeks', weekTotal);
 	    const firstWeek = ACTIVE_WEEKS[0];
 	    const lastWeek = ACTIVE_WEEKS[ACTIVE_WEEKS.length - 1];
 	    const weekRange = $('#weekRange');
 	    if(weekRange && firstWeek && lastWeek) weekRange.textContent = `week ${firstWeek.week} t/m ${lastWeek.week}`;
 	    const offerCount = $('#offerCount');
-	    if(offerCount) offerCount.textContent = allExternalItems().length;
+	    const offerTotal = allExternalItems().length;
+	    if(offerCount) offerCount.textContent = offerTotal;
+	    setHeroStat('offers', offerTotal);
 	    const ideaCount = $('#ideaCount');
-	    if(ideaCount) ideaCount.textContent = allInspirationItems().length;
+	    const ideaTotal = allInspirationItems().length;
+	    if(ideaCount) ideaCount.textContent = ideaTotal;
+	    setHeroStat('ideas', ideaTotal);
 	  }
   function setTeamIdeaStatus(message, kind=''){
     const status = $('#teamIdeaStatus');
