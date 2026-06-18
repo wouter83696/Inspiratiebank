@@ -21,7 +21,7 @@
     </filter>
     <style>
       @media (max-width: 640px){
-        #mint-dot{transform:translate(340px,-72px)}
+        #mint-dot{display:none}
       }
     </style>
   </defs>
