@@ -23,7 +23,7 @@
       #warm-arc{transform:translateY(44px)}
       @media (max-width: 640px){
         #warm-arc{transform:translateY(82px)}
-        #mint-dot{display:none}
+        #mint-dot{transform:translate(340px,-72px)}
       }
     </style>
   </defs>
