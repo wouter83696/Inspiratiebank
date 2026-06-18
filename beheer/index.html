@@ -514,6 +514,17 @@
     .ideaThemeRow:hover td{background:var(--theme-tint)}
     .ideaThemeRow.hiddenItem td{background:rgba(11,18,32,.035);opacity:.72}
     .ideaThemeCard .domainIcon,.ideaThemeRow .domainIcon{background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
+    .adminIdeaPhotoPreview{display:inline-grid;gap:5px;justify-items:start;min-width:58px}
+    .adminIdeaPhotoThumb{
+      position:relative;display:block;width:54px;height:38px;overflow:hidden;border-radius:10px;
+      border:1px solid rgba(79,142,158,.14);background:rgba(232,242,242,.62);box-shadow:0 8px 18px rgba(20,38,42,.07)
+    }
+    .adminIdeaPhotoThumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .adminIdeaPhotoIcon{
+      display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:10px;
+      background:rgba(248,236,194,.72);color:#7a6424;border:1px solid rgba(186,151,56,.18)
+    }
+    .adminIdeaPhotoIcon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .domainThemePill{background:var(--theme-tint-strong);color:var(--theme-ink)}
     .card h3{margin:0;color:var(--accent-dark);font-size:1.08rem;line-height:1.18;font-weight:500}
     .card p{margin:0;color:rgba(11,18,32,.70);line-height:1.43}
@@ -523,7 +534,15 @@
     .ideaAdminCardActions{margin-top:2px;justify-content:flex-start}
     .ideaAdminCardActions .ideaActions{width:100%;justify-content:flex-start}
     .ideaActions{display:flex;gap:8px;flex-wrap:nowrap;align-items:center;justify-content:flex-start}
-    .ideaActions .editIdeaAction{background:rgba(214,236,242,.72);border-color:rgba(79,142,158,.20);color:#315f6d}
+    .ideaActions .button.iconAction{
+      flex:0 0 30px;width:30px;height:30px;padding:0;border-radius:10px;box-shadow:none;
+      border:1px solid rgba(79,142,158,.14);background:rgba(255,255,255,.72);color:var(--accent-dark)
+    }
+    .ideaActions .button.iconAction svg{width:15px;height:15px}
+    .ideaActions .button.iconAction.editIdeaAction{background:rgba(214,236,242,.82);border-color:rgba(79,142,158,.20);color:#315f6d}
+    .ideaActions .button.iconAction.visibilityIdeaAction{background:rgba(221,239,232,.82);border-color:rgba(72,132,100,.18);color:#4f7663}
+    .ideaActions .button.iconAction.warn{background:rgba(248,236,194,.82);border-color:rgba(186,151,56,.20);color:#7a6424}
+    .ideaActions .button.iconAction.hot{background:rgba(246,223,231,.82);border-color:rgba(198,98,133,.18);color:#8d4a63}
     .small{font-size:.84rem;color:var(--muted);line-height:1.36}
     .empty{padding:18px;border:1px dashed rgba(11,18,32,.14);border-radius:18px;background:rgba(255,255,255,.40);color:var(--muted);text-align:center}
     .tableWrap{overflow-x:auto;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.48)}
@@ -2110,6 +2129,15 @@
     const title = image.suggested ? 'Foto automatisch voorgesteld op basis van titel, bron of URL' : image.pending ? 'Foto aanwezig, nog niet goedgekeurd' : 'Foto beschikbaar';
     return `<span class="pill ${image.pending ? 'warn' : image.suggested ? 'soft' : 'ok'}" title="${escapeHtml(title)}">${actionIcon('image')}${escapeHtml(label)}</span>`;
   }
+  function adminIdeaPhotoPreview(item={}){
+    const image = adminIdeaImage(item);
+    if(!image){
+      return `<span class="adminIdeaPhotoPreview" title="Geen foto"><span class="adminIdeaPhotoIcon">${actionIcon('image')}</span><span class="small">Nee</span></span>`;
+    }
+    const label = image.suggested ? 'Voorstel' : image.pending ? 'Wacht' : 'Ja';
+    const title = image.suggested ? 'Foto automatisch voorgesteld' : image.pending ? 'Foto wacht op goedkeuring' : 'Foto beschikbaar';
+    return `<span class="adminIdeaPhotoPreview" title="${escapeHtml(title)}"><span class="adminIdeaPhotoThumb"><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || item.title || 'Activiteit')}" loading="lazy"></span><span class="small">${escapeHtml(label)}</span></span>`;
+  }
   function adminIdeaQualityChecks(item={}){
     const image = adminIdeaImage(item);
     const distance = normalizeIdeaDistance(item.distanceBand, item);
@@ -2142,8 +2170,8 @@
     const statusLabel = item.hidden ? 'Maak zichtbaar' : 'Verberg tijdelijk';
     const statusIcon = item.hidden ? actionIcon('eyeOff') : actionIcon('eye');
     const hideAction = item.kind === 'basis'
-      ? `<button class="button iconAction ${item.hidden ? '' : 'warn'}" data-title-action="${item.hidden ? 'show' : 'hide'}" data-key="${escapeHtml(item.key)}" type="button" aria-label="${escapeHtml(statusLabel)}" title="${escapeHtml(statusLabel)}">${statusIcon}</button>`
-      : `<button class="button iconAction ${item.hidden ? '' : 'warn'}" data-team-action="${item.hidden ? 'show' : 'hide'}" data-key="${escapeHtml(item.key)}" type="button" aria-label="${escapeHtml(statusLabel)}" title="${escapeHtml(statusLabel)}">${statusIcon}</button>`;
+      ? `<button class="button iconAction visibilityIdeaAction ${item.hidden ? '' : 'warn'}" data-title-action="${item.hidden ? 'show' : 'hide'}" data-key="${escapeHtml(item.key)}" type="button" aria-label="${escapeHtml(statusLabel)}" title="${escapeHtml(statusLabel)}">${statusIcon}</button>`
+      : `<button class="button iconAction visibilityIdeaAction ${item.hidden ? '' : 'warn'}" data-team-action="${item.hidden ? 'show' : 'hide'}" data-key="${escapeHtml(item.key)}" type="button" aria-label="${escapeHtml(statusLabel)}" title="${escapeHtml(statusLabel)}">${statusIcon}</button>`;
     const editAction = `<button class="button iconAction editIdeaAction" data-edit-idea="${escapeHtml(item.key)}" data-kind="${escapeHtml(item.kind)}" type="button" aria-label="Wijzig" title="Wijzig">${actionIcon('edit')}</button>`;
     const deleteAction = `<button class="button iconAction hot" data-delete-idea="${escapeHtml(item.key)}" data-kind="${escapeHtml(item.kind)}" data-title="${escapeHtml(item.title)}" type="button" aria-label="Verwijder" title="Verwijder">${actionIcon('trash')}</button>`;
     return `<div class="ideaActions">${editAction}${hideAction}${deleteAction}</div>`;
@@ -2182,6 +2210,7 @@
       <td>${titleWithIcon(item.title, item.domain, 'adminIdeaTitle')}<div class="small">${escapeHtml(item.duration || '')} • groep ${escapeHtml(item.group || '')}${item.hidden ? ' • Verborgen' : ''}</div><div class="small">${escapeHtml(source)}</div></td>
       <td>${escapeHtml(domainDisplayLabel(item.domain))}</td>
       <td>${escapeHtml(locationLabel)}<div class="small">${escapeHtml(distanceLabel)} • Bus: ${escapeHtml(item.bus || 'Nee')}</div></td>
+      <td>${adminIdeaPhotoPreview(item)}</td>
       <td>${item.cost ? `<span class="pill soft">${escapeHtml(costLabel)}</span>` : '<span class="small">-</span>'}</td>
       <td>${item.stimulus ? `<span class="pill soft">${escapeHtml(stimulusLabel || item.stimulus)}</span>` : '<span class="small">-</span>'}</td>
       <td><div class="small">${escapeHtml(item.rules || item.materials || item.description || '-')}</div></td>
@@ -2197,7 +2226,7 @@
     $('#ideaCount').textContent = `${items.length} item${items.length === 1 ? '' : 's'}`;
     const empty = `<div class="empty">${escapeHtml(adminIdeaEmptyMessage(query, filters))}</div>`;
     $('#adminIdeaList').innerHTML = items.length
-      ? `<table><thead><tr><th>Activiteit</th><th>Categorie</th><th>Locatie</th><th>Kosten</th><th>Prikkel</th><th>Praktisch</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${items.map(adminIdeaRow).join('')}</tbody></table>`
+      ? `<table><thead><tr><th>Activiteit</th><th>Categorie</th><th>Locatie</th><th>Foto</th><th>Kosten</th><th>Prikkel</th><th>Praktisch</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${items.map(adminIdeaRow).join('')}</tbody></table>`
       : empty;
     $('#adminIdeaCards').innerHTML = items.length ? items.map(adminIdeaCard).join('') : empty;
   }
