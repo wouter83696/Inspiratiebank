@@ -512,6 +512,9 @@
     .filterReset{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;border:0;border-radius:16px;background:transparent;color:var(--accent);padding:9px 10px;font:inherit;font-size:.88rem;font-weight:500;white-space:nowrap;cursor:pointer}
     .filterReset svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .filterReset:hover{color:var(--accent-dark)}
+    .filterShuffle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;border:1px solid rgba(79,142,158,.14);border-radius:16px;background:rgba(255,255,255,.72);color:var(--accent-dark);padding:8px 11px;font:inherit;font-size:.84rem;font-weight:500;white-space:nowrap;cursor:pointer;box-shadow:0 8px 20px rgba(20,38,42,.045);backdrop-filter:blur(18px)}
+    .filterShuffle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .filterShuffle:hover{background:#fff}
     .filterOptions{
       grid-column:1 / -1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:8px;
       max-height:0;opacity:0;overflow:hidden;visibility:hidden;pointer-events:none;transform:translateY(-8px);
@@ -556,7 +559,8 @@
     #ideaFilters .filterOptions .customSelect[data-select-id="ideaDistance"]{grid-column:5 / 7}
     #ideaFilters .filterOptions .customSelect[data-select-id="ideaCost"]{grid-column:7 / 9}
     #ideaFilters .filterOptions .customSelect[data-select-id="ideaStimulus"]{grid-column:9 / 11}
-    #ideaFilters .filterOptions .filterReset{grid-column:11 / 13}
+    #ideaFilters .filterOptions .filterShuffle{grid-column:11 / 12}
+    #ideaFilters .filterOptions .filterReset{grid-column:12 / 13}
     #agendaFilters .filterSearch{grid-column:1 / 10}
     #agendaFilters .filterToggle{grid-column:10 / 11;justify-self:end}
     #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:11 / 13;justify-self:start;max-height:76px;opacity:1;overflow:visible;visibility:visible;pointer-events:auto;transform:none}
@@ -853,6 +857,7 @@
       #agendaFilters.expanded .filterOptions{max-height:430px;padding:9px}
       #ideaFilters .filterOptions .customSelect,
       #ideaFilters .filterOptions .filterReset,
+      #ideaFilters .filterOptions .filterShuffle,
       #agendaFilters .filterOptions .customSelect,
       #agendaFilters .filterOptions .filterReset,
       #agendaFilters .filterOptions .agendaSearchStatus{grid-column:1 / -1}
@@ -874,12 +879,14 @@
       #agendaFilters .filterOptions{grid-column:1 / -1;grid-row:2;display:grid !important;grid-template-columns:minmax(0,1fr) !important;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden}
       #ideaFilters .filterOptions .customSelect,
       #ideaFilters .filterOptions .filterReset,
+      #ideaFilters .filterOptions .filterShuffle,
       #agendaFilters .filterOptions .customSelect,
       #agendaFilters .filterOptions .filterReset,
       #agendaFilters .filterOptions .agendaSearchStatus{grid-column:1 / -1;width:100%;max-width:100%;min-width:0}
       #ideaFilters .filterOptions .customSelect[data-select-id],
       #agendaFilters .filterOptions .customSelect[data-select-id],
       #ideaFilters .filterOptions .filterReset,
+      #ideaFilters .filterOptions .filterShuffle,
       #agendaFilters .filterOptions .filterReset,
       #agendaFilters .filterOptions .agendaSearchStatus{grid-column:1 / -1 !important;justify-self:stretch;width:100%;min-width:0;max-width:100%}
       #ideaFilters .filterOptions .customSelectButton,
@@ -1118,6 +1125,10 @@
             <select id="ideaDistance"><option value="all">Afstand</option></select>
             <select id="ideaCost"><option value="all">Kosten</option></select>
             <select id="ideaStimulus"><option value="all">Prikkelbelasting</option></select>
+            <button class="filterShuffle" id="mixIdeasBtn" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5"></path><path d="M4 20 21 3"></path><path d="M21 16v5h-5"></path><path d="M15 15l6 6"></path><path d="M4 4l5 5"></path></svg>
+              <span>Mix aanbod</span>
+            </button>
             <button class="filterReset" id="resetBtn" type="button">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg>
               <span>Filters wissen</span>
@@ -2260,6 +2271,62 @@
     const baseItems = DATA.inspiration.filter(item => !hiddenTitles.has(inspirationKey(item)) && !deleted.has(inspirationKey(item)));
     return [...baseItems, ...allTeamIdeas().map(teamIdeaToInspiration)];
   }
+  let ideaMixSeed = Number(localStorage.getItem('zomerprogramma_idea_mix_seed_v1') || '0');
+  function stableHash(value=''){
+    let hash = 2166136261;
+    const text = String(value);
+    for(let i=0;i<text.length;i+=1){
+      hash ^= text.charCodeAt(i);
+      hash = Math.imul(hash, 16777619);
+    }
+    return hash >>> 0;
+  }
+  function ideaMixJitter(item){
+    const day = new Date().toISOString().slice(0,10);
+    return stableHash(`${day}|${ideaMixSeed}|${ideaDomKey(item)}`) / 4294967295;
+  }
+  function ideaStrengthScore(item={}){
+    let score = 0;
+    if(item.teamIdeaId) score += 32;
+    if(item.url) score += 10;
+    if(item.source) score += 4;
+    if(item.fit && String(item.fit).length > 45) score += 5;
+    if(item.materials && String(item.materials).length > 20) score += 3;
+    if(/gratis|laag/i.test(String(item.cost || ''))) score += 3;
+    if(/laag/i.test(String(item.stimulus || ''))) score += 2;
+    return score;
+  }
+  function sortIdeasAlphabetically(items=[]){
+    return [...items].sort((a,b) => String(a.domain || '').localeCompare(String(b.domain || ''), 'nl') || String(a.title || '').localeCompare(String(b.title || ''), 'nl'));
+  }
+  function smartMixedIdeas(items=[]){
+    const groups = new Map();
+    for(const item of items){
+      const key = domainDisplayLabel(item.domain || 'Overig');
+      if(!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(item);
+    }
+    [...groups.values()].forEach(group => group.sort((a,b) => (ideaStrengthScore(b) + ideaMixJitter(b)) - (ideaStrengthScore(a) + ideaMixJitter(a))));
+    const result = [];
+    const recent = [];
+    while(groups.size){
+      const candidates = [...groups.entries()]
+        .filter(([key]) => !(recent[0] === key && recent[1] === key))
+        .sort((a,b) => {
+          const [keyA, groupA] = a;
+          const [keyB, groupB] = b;
+          const scoreA = ideaStrengthScore(groupA[0]) + ideaMixJitter(groupA[0]) + Math.min(groupA.length, 5) * .18 - (recent.includes(keyA) ? 1.2 : 0);
+          const scoreB = ideaStrengthScore(groupB[0]) + ideaMixJitter(groupB[0]) + Math.min(groupB.length, 5) * .18 - (recent.includes(keyB) ? 1.2 : 0);
+          return scoreB - scoreA;
+        });
+      const [key, group] = candidates[0] || [...groups.entries()][0];
+      result.push(group.shift());
+      recent.unshift(key);
+      recent.length = Math.min(recent.length, 2);
+      if(!group.length) groups.delete(key);
+    }
+    return result;
+  }
 	  function updateCounters(){
 	    const setHeroStat = (name, value) => {
 	      $$(`[data-hero-stat="${name}"]`).forEach(el => { el.textContent = value; });
@@ -3319,9 +3386,8 @@
   function filteredInspirationItems(){
     const q = $('#ideaSearch').value;
     const filters = {domain:$('#ideaDomain').value, locationType:$('#ideaLocation').value, distanceBand:$('#ideaDistance').value, cost:$('#ideaCost').value, stimulus:$('#ideaStimulus').value};
-    return allInspirationItems()
-      .filter(x=>matches(x,q,filters))
-      .sort((a,b) => String(a.domain || '').localeCompare(String(b.domain || ''), 'nl') || String(a.title || '').localeCompare(String(b.title || ''), 'nl'));
+    const items = allInspirationItems().filter(x=>matches(x,q,filters));
+    return filters.domain && filters.domain !== 'all' ? sortIdeasAlphabetically(items) : smartMixedIdeas(items);
   }
   function updateInspirationThemeChips(){
     const active = domainDisplayLabel($('#ideaDomain')?.value || 'all');
@@ -3537,6 +3603,12 @@
     $('#linkAddForm').addEventListener('submit', handleLinkAddSubmit);
     const randomIdeaBtn = $('#randomIdeaBtn');
     if(randomIdeaBtn) randomIdeaBtn.addEventListener('click', showRandomIdea);
+    const mixIdeasBtn = $('#mixIdeasBtn');
+    if(mixIdeasBtn) mixIdeasBtn.addEventListener('click', () => {
+      ideaMixSeed += 1;
+      localStorage.setItem('zomerprogramma_idea_mix_seed_v1', String(ideaMixSeed));
+      renderIdeas();
+    });
     const downloadCalendarBtn = $('#downloadCalendarBtn');
     if(downloadCalendarBtn) downloadCalendarBtn.addEventListener('click', downloadAgendaCalendar);
     const ongoingToggle = $('#ongoingToggle');
