@@ -157,7 +157,7 @@
     .tabHeroButton:hover{transform:translateY(-1px)}
     .tabHeroStats{
       position:absolute;z-index:1;right:var(--hero-edge);
-      top:clamp(152px,13.8vw,190px);display:grid;gap:24px;color:var(--accent-dark);font-size:.84rem;font-weight:500;line-height:1.08
+      top:calc(clamp(152px,13.8vw,190px) + 14px);display:grid;gap:24px;color:var(--accent-dark);font-size:.84rem;font-weight:500;line-height:1.08
     }
     .tabHeroStat{display:grid;grid-template-columns:38px auto;grid-template-rows:auto auto;align-items:start;column-gap:14px;white-space:nowrap}
     .tabHeroStat svg{grid-row:1 / 3;width:32px;height:32px;margin-top:-1px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;opacity:.96}
@@ -789,7 +789,7 @@
       .tabHeroButton{height:42px;min-height:42px;padding:0 13px;font-size:.82rem}
       .tabHeroButton svg{width:16px;height:16px}
       .tabHeroStats{order:5;position:relative;right:auto;top:auto;display:inline-flex;margin-top:18px;gap:8px 10px;font-size:.76rem}
-      .tabHeroStatDivider{display:inline}
+      .tabHeroStatDivider{display:none}
       .tabHeroStat{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
       .tabHeroStat svg{width:18px;height:18px;margin-top:0}
       .tabHeroStat strong{display:inline;font-size:inherit;font-weight:700;line-height:inherit}
