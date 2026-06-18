@@ -488,6 +488,18 @@
     .adminImageSuggestionText strong{color:var(--accent-dark);font-size:.92rem;font-weight:600}
     .adminImageSuggestionText span{color:var(--muted);font-size:.84rem;line-height:1.35}
     .adminImageSuggestionText .button{justify-self:start}
+    .teamFileField{position:relative}
+    .teamFileField input[type="file"]{position:absolute;width:1px;height:1px;padding:0;margin:-1px;border:0;opacity:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%)}
+    .teamFileControl{display:flex;align-items:center;gap:10px;min-height:42px;padding:8px 12px;border:1px solid rgba(79,142,158,.10);border-radius:14px;background:rgba(255,255,255,.68);cursor:pointer}
+    .teamFileButton{display:inline-flex;align-items:center;gap:7px;color:var(--accent-dark);font-size:.86rem;font-weight:500}
+    .teamFileButton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .teamFileName{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:.82rem}
+    .teamFieldHint{font-size:.78rem;line-height:1.35;color:rgba(11,18,32,.55)}
+    .distanceEstimateStatus{display:block;color:var(--muted);font-size:.8rem;line-height:1.35}
+    .qualityPills{display:flex;flex-wrap:wrap;gap:4px;min-width:150px}
+    .qualityPill{display:inline-flex;align-items:center;gap:3px;border-radius:999px;padding:4px 7px;background:rgba(11,18,32,.055);color:rgba(11,18,32,.55);font-size:.72rem;font-weight:500;line-height:1}
+    .qualityPill.ok{background:rgba(221,239,232,.92);color:#426e5d}
+    .qualityPill.warn{background:rgba(248,236,194,.78);color:#7a6424}
     .adminCheckField{display:flex !important;align-items:center;gap:9px}
     .adminCheckField input{width:auto;min-width:18px;height:18px}
     .adminIdeaDescription{display:block;margin-top:5px;color:rgba(11,18,32,.70);font-size:.86rem;line-height:1.38}
@@ -513,7 +525,7 @@
     .empty{padding:18px;border:1px dashed rgba(11,18,32,.14);border-radius:18px;background:rgba(255,255,255,.40);color:var(--muted);text-align:center}
     .tableWrap{overflow-x:auto;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.48)}
     table{width:100%;border-collapse:separate;border-spacing:0;min-width:760px}
-    .adminIdeaTable{min-width:980px}
+    .adminIdeaTable{min-width:1120px}
     .adminIdeaTable th:last-child,.adminIdeaTable td:last-child{width:112px}
     th,td{text-align:left;vertical-align:top;border-bottom:1px solid rgba(11,18,32,.07);padding:11px 12px;font-size:.92rem;line-height:1.35}
     th{color:rgba(11,18,32,.56);font-weight:500;background:rgba(255,255,255,.55)}
@@ -791,6 +803,15 @@
                   <option value="50+ km (ver weg / dagtrips)">50+ km</option>
                 </select>
               </label>
+              <label class="teamField wide">
+                <span>Adres of plaats</span>
+                <input id="adminEditIdeaAddress" type="text" placeholder="Bijv. Zijpendaalseweg 24A, Arnhem">
+                <small id="adminEditIdeaDistanceStatus" class="distanceEstimateStatus"></small>
+              </label>
+              <label class="teamField">
+                <span>Geschatte afstand in km</span>
+                <input id="adminEditIdeaDistanceKm" type="number" min="0" step="0.1" placeholder="Wordt automatisch geschat">
+              </label>
               <label class="teamField">
                 <span>Kosten</span>
                 <select id="adminEditIdeaCost">
@@ -831,6 +852,18 @@
               <label class="teamField wide">
                 <span>Afbeelding voor tegel (optioneel)</span>
                 <textarea id="adminEditIdeaImage" placeholder="Bijv. website-bestanden/afbeeldingen/activiteiten/voorbeeld.jpg"></textarea>
+              </label>
+              <label class="teamField wide teamFileField">
+                <span>Foto uploaden vanuit beheer</span>
+                <input id="adminEditIdeaImageUpload" type="file" accept="image/*">
+                <span class="teamFileControl">
+                  <span class="teamFileButton">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="m21 15-4.5-4.5L9 18"></path><path d="m14 14-2-2-5 6"></path></svg>
+                    Foto kiezen
+                  </span>
+                  <span id="adminEditIdeaImageUploadName" class="teamFileName">Geen bestand geselecteerd</span>
+                </span>
+                <small class="teamFieldHint">Na uploaden staat de foto meteen als goedgekeurd in dit item.</small>
               </label>
               <div id="adminEditIdeaImagePreview" class="adminImagePreview" aria-hidden="true"></div>
               <div id="adminEditIdeaImageSuggestion" class="adminImageSuggestion" aria-live="polite"></div>
@@ -1035,6 +1068,43 @@
   const IDEA_DISTANCE_OPTIONS = INSPIRATION_DISTANCE_OPTIONS;
   const IDEA_COST_OPTIONS = ['Gratis','€','€€','€€€'];
   const IDEA_STIMULUS_OPTIONS = ['Laag','Middel','Hoog'];
+  const IDEA_IMAGE_MAX_BYTES = 1500000;
+  const BASE_POSTCODE_COORDS = {label:'6545 AL', lat:51.815, lng:5.792};
+  const PLACE_DISTANCE_COORDS = [
+    ['nederlands watermuseum', 51.987, 5.895],
+    ['watermuseum', 51.987, 5.895],
+    ['burgers zoo', 52.009, 5.900],
+    ['openluchtmuseum', 52.010, 5.904],
+    ['focus filmtheater', 51.982, 5.908],
+    ['kroller', 52.096, 5.817],
+    ['kröller', 52.096, 5.817],
+    ['otterlo', 52.100, 5.772],
+    ['rhenen', 51.959, 5.568],
+    ['overloon', 51.571, 5.947],
+    ['volkel', 51.642, 5.655],
+    ['arnhem', 51.985, 5.898],
+    ['gennep', 51.699, 5.973],
+    ['cuijk', 51.731, 5.879],
+    ['grave', 51.759, 5.738],
+    ['millingen', 51.863, 6.049],
+    ['groesbeek', 51.776, 5.936],
+    ['berg en dal', 51.821, 5.916],
+    ['mook', 51.752, 5.882],
+    ['malden', 51.783, 5.853],
+    ['overasselt', 51.759, 5.787],
+    ['bemmel', 51.892, 5.899],
+    ['elst', 51.919, 5.842],
+    ['huissen', 51.935, 5.934],
+    ['beuningen', 51.860, 5.766],
+    ['wijchen', 51.809, 5.725],
+    ['weurt', 51.856, 5.816],
+    ['ooij', 51.855, 5.939],
+    ['ubbergen', 51.837, 5.900],
+    ['lent', 51.861, 5.866],
+    ['dukenburg', 51.812, 5.790],
+    ['goffert', 51.824, 5.838],
+    ['nijmegen', 51.842, 5.853]
+  ];
 
 	  function normalizeCentralStorage(value={}){
 	    return {
@@ -1260,6 +1330,36 @@
     if(km <= 50) return '25–50 km (uitstap)';
     return '50+ km (ver weg / dagtrips)';
   }
+  function haversineKm(a, b){
+    const toRad = value => value * Math.PI / 180;
+    const earthKm = 6371;
+    const dLat = toRad(b.lat - a.lat);
+    const dLng = toRad(b.lng - a.lng);
+    const lat1 = toRad(a.lat);
+    const lat2 = toRad(b.lat);
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+    return earthKm * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+  }
+  function estimateDistanceFromAddress(value=''){
+    const text = normalize(value);
+    if(!text) return null;
+    if(text.includes('op groep') || text.includes('op terrein') || text.includes('online')) return {km:0, label:'Op terrein', matched:'op terrein'};
+    const match = PLACE_DISTANCE_COORDS.find(([keyword]) => text.includes(normalize(keyword)));
+    if(!match) return null;
+    const [matched, lat, lng] = match;
+    const km = Math.round(haversineKm(BASE_POSTCODE_COORDS, {lat, lng}) * 10) / 10;
+    return {km, label:distanceLabelForKm(km), matched};
+  }
+  function syncDistanceSelectFromKm(){
+    const input = $('#adminEditIdeaDistanceKm');
+    const select = $('#adminEditIdeaDistance');
+    if(!input || !select) return;
+    const km = Number(String(input.value || '').replace(',', '.'));
+    const label = distanceLabelForKm(km);
+    if(label){
+      setEditSelect('#adminEditIdeaDistance', label);
+    }
+  }
   function parseDistanceKm(item={}){
     const raw = String(item.distanceKm || '').replace(',', '.');
     const match = raw.match(/(\d+(?:\.\d+)?)/);
@@ -1274,7 +1374,7 @@
     if(v.includes('in de regio') || v.includes('10-30') || v.includes('10-25')) return context === 'agenda' ? '10–25 km (regio)' : '10–25 km';
     if(v.includes('dichtbij') || v.includes('0-10')) return context === 'agenda' ? '0–10 km (dichtbij)' : '0–10 km';
     if(v.includes('op terrein') || v === '0 km') return 'Op terrein';
-    const location = normalize(`${item.locationType || ''} ${item.where || ''} ${item.title || ''} ${item.source || ''}`);
+    const location = normalize(`${item.locationType || ''} ${item.address || ''} ${item.where || ''} ${item.title || ''} ${item.source || ''}`);
     if(location.includes('op groep') || location.includes('op terrein') || location.includes('online')) return 'Op terrein';
     if(/otterlo|rhenen|overloon|volkel|hemelrijk|hoge veluwe|kroller/.test(location)) return context === 'agenda' ? '25+ km' : '25–50 km (uitstap)';
     if(/arnhem|cuijk|grave|gennep|beers|beugen|millingen|groesbeek|berg en dal|ewijk|mook|malden|overasselt|bemmel|elst|huissen|gendt/.test(location)) return context === 'agenda' ? '10–25 km (regio)' : '10–25 km';
@@ -1301,6 +1401,8 @@
       domain:item.domain || 'Ontmoeten, Spel & Vaardigheden',
       type:item.type || 'Inzending',
       distanceBand:item.distanceBand || 'Op terrein',
+      distanceKm:String(item.distanceKm || '').trim(),
+      address:String(item.address || item.where || item.place || item.location || '').trim(),
       note:String(item.note || item.materials || item.fit || '').trim(),
       source:item.source || `Ingebracht door ${by}`
     };
@@ -1692,6 +1794,8 @@
       type:normalizeIdeaType(item.type || 'Eigen aanbod'),
       locationType:normalizeIdeaLocation(item.locationType || ''),
       distanceBand:normalizeIdeaDistance(item.distanceBand || '', item),
+      distanceKm:String(item.distanceKm || '').trim(),
+      address:String(item.address || item.where || '').trim(),
       cost:normalizeIdeaCost(item.cost || ''),
       stimulus:normalizeIdeaStimulus(item.stimulus || ''),
       source:item.source || item.type || '',
@@ -1711,6 +1815,8 @@
       type:normalizeIdeaType('Inzending'),
       locationType:normalizeIdeaLocation(item.locationType || ''),
       distanceBand:normalizeIdeaDistance(item.distanceBand || '', item),
+      distanceKm:String(item.distanceKm || '').trim(),
+      address:String(item.address || item.where || '').trim(),
       cost:normalizeIdeaCost(item.cost || ''),
       stimulus:normalizeIdeaStimulus(item.stimulus || ''),
       source:item.source,
@@ -1730,6 +1836,8 @@
       type:normalizeIdeaType('Inzending'),
       locationType:normalizeIdeaLocation(item.locationType || ''),
       distanceBand:normalizeIdeaDistance(item.distanceBand || '', item),
+      distanceKm:String(item.distanceKm || '').trim(),
+      address:String(item.address || item.where || '').trim(),
       cost:normalizeIdeaCost(item.cost || ''),
       stimulus:normalizeIdeaStimulus(item.stimulus || ''),
       source:item.source || `Ingebracht door ${item.by}`,
@@ -1745,7 +1853,7 @@
   }
   function ideaMatches(item, query){
     if(!query) return true;
-    return normalize(`${item.title} ${item.description || ''} ${item.rules || ''} ${item.domain} ${item.type} ${item.locationType} ${item.distanceBand} ${item.cost} ${item.stimulus} ${item.source}`).includes(normalize(query));
+    return normalize(`${item.title} ${item.description || ''} ${item.rules || ''} ${item.domain} ${item.type} ${item.locationType} ${item.distanceBand} ${item.distanceKm || ''} ${item.address || ''} ${item.cost} ${item.stimulus} ${item.source}`).includes(normalize(query));
   }
   function fieldMatches(item, key, value){
     if(!value || value === 'all') return true;
@@ -1813,6 +1921,16 @@
       && fieldMatches(item, 'distanceBand', filters.distanceBand)
       && fieldMatches(item, 'cost', filters.cost)
       && fieldMatches(item, 'stimulus', filters.stimulus);
+  }
+  function adminIdeaEmptyMessage(query='', filters={}){
+    const activeFilters = Object.values(filters).filter(value => value && value !== 'all').length;
+    if(!query && !activeFilters) return 'Er staan nog geen inspiratie-items in beheer.';
+    const hints = [];
+    if(filters.distanceBand && filters.distanceBand !== 'all') hints.push('zet afstand ruimer');
+    if(filters.cost && filters.cost !== 'all') hints.push('zet kosten ruimer');
+    if(filters.stimulus && filters.stimulus !== 'all') hints.push('probeer een andere prikkelbelasting');
+    if(query) hints.push('maak je zoekterm korter');
+    return `Geen items gevonden. Probeer ${hints.slice(0,2).join(' of ') || 'minder filters'}.`;
   }
   function fillIdeaFilter(selector, values, label, formatter=value => value){
     const select = $(selector);
@@ -1994,6 +2112,28 @@
     const title = image.suggested ? 'Foto automatisch voorgesteld op basis van titel, bron of URL' : image.pending ? 'Foto aanwezig, nog niet goedgekeurd' : 'Foto beschikbaar';
     return `<span class="pill ${image.pending ? 'warn' : image.suggested ? 'soft' : 'ok'}" title="${escapeHtml(title)}">${actionIcon('image')}${escapeHtml(label)}</span>`;
   }
+  function adminIdeaQualityChecks(item={}){
+    const image = adminIdeaImage(item);
+    const distance = normalizeIdeaDistance(item.distanceBand, item);
+    const hasDistance = Boolean(item.distanceKm || item.address || distance);
+    const hasPractical = Boolean(String(item.rules || item.materials || item.description || '').trim());
+    const dateValue = item.date || item.week || item.dateLabel || item.period || '';
+    return [
+      {label:'Foto', ok:Boolean(image && !image.pending && !image.suggested), warn:Boolean(image?.suggested)},
+      {label:'Afstand', ok:hasDistance},
+      {label:'Website', ok:Boolean(item.url)},
+      {label:'Praktisch', ok:hasPractical},
+      {label:'Datum', ok:Boolean(dateValue), optional:!dateValue && !/agenda|extern/i.test(`${item.type || ''} ${item.kind || ''}`)}
+    ];
+  }
+  function adminIdeaQualityCell(item={}){
+    const checks = adminIdeaQualityChecks(item);
+    return `<div class="qualityPills">${checks.map(check => {
+      const className = check.ok ? 'ok' : check.warn || !check.optional ? 'warn' : '';
+      const label = check.optional && !check.ok ? `${check.label}: n.v.t.` : check.label;
+      return `<span class="qualityPill ${className}">${escapeHtml(label)}</span>`;
+    }).join('')}</div>`;
+  }
   function adminIdeaActions(item){
     const statusLabel = item.hidden ? 'Maak zichtbaar' : 'Verberg tijdelijk';
     const statusIcon = item.hidden ? actionIcon('eyeOff') : actionIcon('eye');
@@ -2011,6 +2151,7 @@
     return `<article class="card ideaThemeCard ${domainThemeClass(item.domain)} ${item.hidden ? 'hiddenItem' : ''}">
       <div class="cardPills"><span class="pill domainThemePill">${escapeHtml(domainDisplayLabel(item.domain))}</span> ${item.hidden ? '<span class="pill warn">Verborgen</span>' : '<span class="pill ok">Zichtbaar</span>'}</div>
       <h3>${titleWithIcon(item.title, item.domain)}</h3>
+      ${adminIdeaQualityCell(item)}
       ${description}
       <p>${escapeHtml(meta || item.source || item.kind)}</p>
       ${practical || `<p class="fine">${escapeHtml(item.source || item.kind)}</p>`}
@@ -2028,6 +2169,7 @@
       <td>${item.cost ? `<span class="pill soft">${escapeHtml(item.cost)}</span>` : '<span class="small">-</span>'}</td>
       <td>${item.stimulus ? `<span class="pill soft">${escapeHtml(item.stimulus)}</span>` : '<span class="small">-</span>'}</td>
       <td>${adminIdeaPhotoCell(item)}</td>
+      <td>${adminIdeaQualityCell(item)}</td>
       <td><div class="small">${escapeHtml(item.rules || item.material || '-')}</div></td>
       <td>${website}</td>
       <td>${adminIdeaActions(item)}</td>
@@ -2039,10 +2181,10 @@
     const filters = ideaFilterValues();
     const items = sortAdminIdeas(allAdminIdeas().filter(item => ideaMatches(item, query)).filter(item => passesIdeaFilters(item, filters)));
     $('#ideaCount').textContent = `${items.length} item${items.length === 1 ? '' : 's'}`;
-    const empty = '<div class="empty">Geen items gevonden met deze selectie.</div>';
+    const empty = `<div class="empty">${escapeHtml(adminIdeaEmptyMessage(query, filters))}</div>`;
     $('#adminIdeaCards').innerHTML = items.length ? items.map(adminIdeaCard).join('') : empty;
     $('#adminIdeaList').innerHTML = items.length
-      ? `<table class="adminIdeaTable"><thead><tr><th>Activiteit</th><th>Categorie</th><th>Locatie</th><th>Kosten</th><th>Prikkel</th><th>Foto</th><th>Praktisch</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${items.map(adminIdeaRow).join('')}</tbody></table>`
+      ? `<table class="adminIdeaTable"><thead><tr><th>Activiteit</th><th>Categorie</th><th>Locatie</th><th>Kosten</th><th>Prikkel</th><th>Foto</th><th>Check</th><th>Praktisch</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${items.map(adminIdeaRow).join('')}</tbody></table>`
       : empty;
   }
   function setAdminIdeaView(view){
@@ -3029,6 +3171,7 @@
     const panel = $('#adminIdeaEditPanel');
     const form = $('#adminIdeaEditForm');
     if(form) form.reset();
+    if($('#adminEditIdeaImageUploadName')) $('#adminEditIdeaImageUploadName').textContent = 'Geen bestand geselecteerd';
     syncAdminIdeaImagePreview();
     syncAdminIdeaImageSuggestion();
     if(panel) panel.hidden = true;
@@ -3048,6 +3191,51 @@
     preview.classList.add('active');
     preview.setAttribute('aria-hidden', 'false');
     preview.innerHTML = `<img src="${escapeHtml(previewSrc)}" alt="">`;
+  }
+  function readAdminIdeaImageFile(file){
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => resolve(reader.result));
+      reader.addEventListener('error', reject);
+      reader.readAsDataURL(file);
+    });
+  }
+  function syncAdminDistanceFromAddress(){
+    const address = $('#adminEditIdeaAddress');
+    const status = $('#adminEditIdeaDistanceStatus');
+    if(!address || !status) return;
+    const estimate = estimateDistanceFromAddress(address.value);
+    if(!estimate){
+      status.textContent = address.value.trim()
+        ? 'Geen automatische schatting gevonden. Kies de afstand handmatig.'
+        : '';
+      return;
+    }
+    $('#adminEditIdeaDistanceKm').value = estimate.km ? String(estimate.km) : '0';
+    setEditSelect('#adminEditIdeaDistance', estimate.label);
+    status.textContent = estimate.km
+      ? `Geschat: ${estimate.km} km vanaf ${BASE_POSTCODE_COORDS.label} op basis van "${estimate.matched}".`
+      : `Geschat als op terrein.`;
+  }
+  async function handleAdminIdeaImageUpload(event){
+    const file = event.target.files?.[0] || null;
+    $('#adminEditIdeaImageUploadName').textContent = file ? file.name : 'Geen bestand geselecteerd';
+    if(!file) return;
+    if(file.size > IDEA_IMAGE_MAX_BYTES){
+      setStatus('#adminIdeaEditStatus', 'Kies een foto kleiner dan 1,5 MB.', 'warn');
+      event.target.value = '';
+      $('#adminEditIdeaImageUploadName').textContent = 'Geen bestand geselecteerd';
+      return;
+    }
+    try{
+      $('#adminEditIdeaImage').value = await readAdminIdeaImageFile(file);
+      $('#adminEditIdeaImageApproved').checked = true;
+      syncAdminIdeaImagePreview();
+      syncAdminIdeaImageSuggestion();
+      setStatus('#adminIdeaEditStatus', 'Foto toegevoegd en als goedgekeurd gemarkeerd. Sla het item nog op.', 'ok');
+    }catch(error){
+      setStatus('#adminIdeaEditStatus', 'De foto kon niet worden gelezen. Probeer een andere afbeelding.', 'warn');
+    }
   }
   function adminIdeaDraftForImage(){
     if(!editingAdminIdea) return {};
@@ -3101,6 +3289,12 @@
     $('#adminEditIdeaDuration').value = item.duration || '';
     $('#adminEditIdeaGroup').value = item.group || '';
     $('#adminEditIdeaUrl').value = item.url || '';
+    $('#adminEditIdeaAddress').value = item.address || item.where || '';
+    $('#adminEditIdeaDistanceKm').value = item.distanceKm || '';
+    $('#adminEditIdeaDistanceStatus').textContent = '';
+    $('#adminEditIdeaImageUpload').value = '';
+    $('#adminEditIdeaImageUploadName').textContent = 'Geen bestand geselecteerd';
+    if($('#adminEditIdeaAddress').value && !$('#adminEditIdeaDistanceKm').value) syncAdminDistanceFromAddress();
     const image = item.image ? adminIdeaImage(item) : null;
     $('#adminEditIdeaImage').value = image ? (image.publicSrc || image.src || '') : '';
     $('#adminEditIdeaImageApproved').checked = image ? image.approved : false;
@@ -3126,6 +3320,8 @@
       type:original.type || 'Inzending',
       locationType:$('#adminEditIdeaLocation').value,
       distanceBand:$('#adminEditIdeaDistance').value,
+      distanceKm:$('#adminEditIdeaDistanceKm').value.trim(),
+      address:$('#adminEditIdeaAddress').value.trim(),
       cost:$('#adminEditIdeaCost').value,
       stimulus:$('#adminEditIdeaStimulus').value,
       bus:$('#adminEditIdeaBus').value,
@@ -3268,6 +3464,9 @@
     ['#adminEditIdeaTitle','#adminEditIdeaBy','#adminEditIdeaUrl'].forEach(selector => {
       $(selector)?.addEventListener('input', syncAdminIdeaImageSuggestion);
     });
+    $('#adminEditIdeaAddress').addEventListener('input', syncAdminDistanceFromAddress);
+    $('#adminEditIdeaDistanceKm').addEventListener('input', syncDistanceSelectFromKm);
+    $('#adminEditIdeaImageUpload').addEventListener('change', handleAdminIdeaImageUpload);
     ['#adminEditIdeaDomain','#adminEditIdeaLocation','#adminEditIdeaDistance','#adminEditIdeaCost','#adminEditIdeaStimulus','#adminEditIdeaBus']
       .forEach(selector => enhanceCustomSelect($(selector)));
     $('#exportBtn').addEventListener('click', exportAdminData);

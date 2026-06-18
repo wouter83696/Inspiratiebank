@@ -1824,7 +1824,7 @@
     if(v.includes('in de regio') || v.includes('10-30') || v.includes('10-25')) return context === 'agenda' ? '10–25 km (regio)' : '10–25 km';
     if(v.includes('dichtbij') || v.includes('0-10')) return context === 'agenda' ? '0–10 km (dichtbij)' : '0–10 km';
     if(v.includes('op terrein') || v === '0 km') return 'Op terrein';
-    const location = normalize(`${item.locationType || ''} ${item.where || ''} ${item.title || ''} ${item.source || ''}`);
+    const location = normalize(`${item.locationType || ''} ${item.address || ''} ${item.where || ''} ${item.title || ''} ${item.source || ''}`);
     if(location.includes('op groep') || location.includes('op terrein') || location.includes('online')) return 'Op terrein';
     if(/otterlo|rhenen|overloon|volkel|hemelrijk|hoge veluwe|kroller/.test(location)) return context === 'agenda' ? '25+ km' : '25–50 km (uitstap)';
     if(/arnhem|cuijk|grave|gennep|beers|beugen|millingen|groesbeek|berg en dal|ewijk|mook|malden|overasselt|bemmel|elst|huissen|gendt/.test(location)) return context === 'agenda' ? '10–25 km (regio)' : '10–25 km';
@@ -1850,6 +1850,8 @@
       type: normalizeIdeaType(item.type || 'Inzending'),
       locationType: normalizeIdeaLocation(item.locationType || 'Op groep'),
       distanceBand: normalizeIdeaDistance(item.distanceBand, item),
+      distanceKm: String(item.distanceKm || '').trim(),
+      address: String(item.address || item.where || item.place || item.location || '').trim(),
       duration: item.duration || 'Op maat',
       group: item.group || 'Op maat',
       cost: normalizeIdeaCost(item.cost || '€'),
@@ -2331,6 +2333,8 @@
       type:item.type || 'Inzending',
       locationType:item.locationType,
       distanceBand:item.distanceBand,
+      distanceKm:item.distanceKm || '',
+      address:item.address || '',
       duration:item.duration,
       group:item.group,
       cost:item.cost,
@@ -2875,7 +2879,7 @@
 	      <div class="agendaGroup">
 	        ${visibleEntries.map(entry => agendaItem(entry.item, entry.compact)).join('')}
 	        ${hiddenCount ? `<button class="agendaMore" type="button" data-expand-agenda-day="${escapeHtml(dayKey)}" aria-expanded="false">+ ${hiddenCount} meer optie${hiddenCount === 1 ? '' : 's'}</button>` : expanded && totalCount > AGENDA_DAY_VISIBLE_LIMIT ? `<button class="agendaMore" type="button" data-collapse-agenda-day="${escapeHtml(dayKey)}" aria-expanded="true">Minder tonen</button>` : ''}
-	        ${!items.length && !periods.length ? `<div class="agendaEmpty">Geen items</div>` : ''}
+	        ${!items.length && !periods.length ? `<div class="agendaEmpty">${escapeHtml(agendaEmptyMessage())}</div>` : ''}
 	      </div>
 	    </div>
       </article>`;
@@ -2989,7 +2993,7 @@
     if(count) count.textContent = `${items.length} optie${items.length === 1 ? '' : 's'}`;
     $('#flexibleOffersWrap').innerHTML = items.length
       ? `<table><thead><tr><th>Aanbod</th><th>Beschikbaar in</th><th>Categorie</th><th>Locatie en afstand</th><th>Kosten</th><th>Prikkel</th><th>Passendheid / let op</th><th>Website</th></tr></thead><tbody>${items.map(flexibleExternalRow).join('')}</tbody></table>`
-      : `<div class="empty">${hasActiveAgendaFilters(filters) ? 'Geen tijdelijk aanbod gevonden met deze filters.' : 'Er is nog geen tijdelijk aanbod voor deze periode zichtbaar.'}</div>`;
+      : `<div class="empty">${escapeHtml(hasActiveAgendaFilters(filters) ? agendaEmptyMessage(filters) : 'Er is nog geen tijdelijk aanbod voor deze periode zichtbaar.')}</div>`;
   }
   function weekNavControls(currentId){
     const index = ACTIVE_WEEKS.findIndex(week => week.id === currentId);
@@ -3306,6 +3310,15 @@
     return Boolean(filters.query)
       || ['domain','distanceBand','cost','stimulus'].some(key => filters[key] && filters[key] !== 'all');
   }
+  function agendaEmptyMessage(filters=agendaSearchState()){
+    if(!hasActiveAgendaFilters(filters)) return 'Geen items';
+    const hints = [];
+    if(filters.distanceBand && filters.distanceBand !== 'all') hints.push('zet afstand ruimer');
+    if(filters.cost && filters.cost !== 'all') hints.push('zet kosten ruimer');
+    if(filters.stimulus && filters.stimulus !== 'all') hints.push('probeer een andere prikkelbelasting');
+    if(filters.query) hints.push('maak je zoekterm korter');
+    return `Geen resultaat. Probeer ${hints.slice(0,2).join(' of ') || 'minder filters'}.`;
+  }
   function renderAgenda(){
     renderWeekPanels();
     renderFlexibleOffers();
@@ -3316,6 +3329,18 @@
     const filters = {domain:$('#ideaDomain').value, locationType:$('#ideaLocation').value, distanceBand:$('#ideaDistance').value, cost:$('#ideaCost').value, stimulus:$('#ideaStimulus').value};
     const items = allInspirationItems().filter(x=>matches(x,q,filters));
     return filters.domain && filters.domain !== 'all' ? sortIdeasAlphabetically(items) : smartMixedIdeas(items);
+  }
+  function inspirationEmptyMessage(){
+    const filters = {domain:$('#ideaDomain').value, locationType:$('#ideaLocation').value, distanceBand:$('#ideaDistance').value, cost:$('#ideaCost').value, stimulus:$('#ideaStimulus').value};
+    const activeFilters = Object.values(filters).filter(value => value && value !== 'all').length;
+    const hasQuery = Boolean($('#ideaSearch').value.trim());
+    if(!activeFilters && !hasQuery) return 'Er staan nog geen ideeën klaar.';
+    const hints = [];
+    if(filters.distanceBand && filters.distanceBand !== 'all') hints.push('zet afstand ruimer');
+    if(filters.cost && filters.cost !== 'all') hints.push('zet kosten ruimer');
+    if(filters.stimulus && filters.stimulus !== 'all') hints.push('probeer ook een andere prikkelbelasting');
+    if(hasQuery) hints.push('maak je zoekterm korter');
+    return `Geen ideeën gevonden. Probeer ${hints.slice(0,2).join(' of ') || 'minder filters'}.`;
   }
   function updateInspirationThemeChips(){
     const active = domainDisplayLabel($('#ideaDomain')?.value || 'all');
@@ -3340,7 +3365,7 @@
   function renderIdeas(){
     const items = filteredInspirationItems();
     updateInspirationThemeChips();
-    const empty = '<div class="empty">Met deze filters zie je nu geen ideeën.</div>';
+    const empty = `<div class="empty">${escapeHtml(inspirationEmptyMessage())}</div>`;
     $('#ideaCards').innerHTML = items.length ? items.map(cardIdea).join('') : empty;
     $('#ideaList').innerHTML = items.length
       ? `<table><thead><tr><th>Activiteit</th><th>Categorie</th><th>Locatie</th><th>Kosten</th><th>Prikkel</th><th>Praktisch</th><th>Website</th></tr></thead><tbody>${items.map(ideaRow).join('')}</tbody></table>`
