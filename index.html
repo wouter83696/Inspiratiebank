@@ -524,8 +524,8 @@
     .choiceIcon.stimulusLow{background:rgba(221,239,232,.88);color:#426e5d}
     .choiceIcon.stimulusMedium{background:rgba(248,236,194,.92);color:#80610b}
     .choiceIcon.stimulusHigh{background:rgba(246,223,231,.90);color:#84435a}
-    .filterReset{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;border:0;border-radius:16px;background:transparent;color:var(--accent);padding:9px 10px;font:inherit;font-size:.88rem;font-weight:500;white-space:nowrap;cursor:pointer}
-    .filterReset svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .filterReset{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:44px;border:0;border-radius:16px;background:transparent;color:var(--accent);padding:9px 9px;font:inherit;font-size:.86rem;font-weight:500;white-space:nowrap;cursor:pointer}
+    .filterReset svg{display:block;flex:0 0 15px;width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .filterReset:hover{color:var(--accent-dark)}
     .filterShuffle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;border:1px solid rgba(79,142,158,.14);border-radius:16px;background:rgba(255,255,255,.72);color:var(--accent-dark);padding:8px 11px;font:inherit;font-size:.84rem;font-weight:500;white-space:nowrap;cursor:pointer;box-shadow:0 8px 20px rgba(20,38,42,.045);backdrop-filter:blur(18px)}
     .filterShuffle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -585,6 +585,14 @@
     #agendaFilters .filterOptions .customSelect[data-select-id="agendaStimulus"]{grid-column:9 / 11}
     #agendaFilters .filterOptions .filterReset{grid-column:11 / 12}
     #agendaFilters .filterOptions .agendaSearchStatus{grid-column:12 / 13;align-self:center}
+    @media (min-width:641px){
+      #ideaFilters .filterOptions{grid-template-columns:repeat(5,minmax(118px,1fr)) auto auto;align-items:center}
+      #ideaFilters .filterOptions .customSelect[data-select-id],
+      #ideaFilters .filterOptions .filterShuffle,
+      #ideaFilters .filterOptions .filterReset{grid-column:auto}
+      #ideaFilters .filterOptions .filterShuffle{min-width:max-content;padding-left:10px;padding-right:10px}
+      #ideaFilters .filterOptions .filterReset{min-width:max-content;justify-self:start}
+    }
     .teamHead{margin-top:28px}
     #longerOffers{scroll-margin-top:100px}
     .ideaToolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:16px 0 12px;flex-wrap:wrap}
