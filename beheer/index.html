@@ -503,6 +503,11 @@
     .adminCheckField{display:flex !important;align-items:center;gap:9px}
     .adminCheckField input{width:auto;min-width:18px;height:18px}
     .adminIdeaDescription{display:block;margin-top:5px;color:rgba(11,18,32,.70);font-size:.86rem;line-height:1.38}
+    .adminIdeaTable .adminIdeaDescription,.adminIdeaTable .adminIdeaPractical{
+      display:-webkit-box;max-width:260px;overflow:hidden;
+      -webkit-line-clamp:3;-webkit-box-orient:vertical;
+    }
+    .adminIdeaTable .adminIdeaPractical{-webkit-line-clamp:2}
     .card .adminIdeaDescription{margin-top:-2px;font-size:.9rem}
     .rowActions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
     .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
@@ -526,7 +531,8 @@
     .tableWrap{overflow-x:auto;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.48)}
     table{width:100%;border-collapse:separate;border-spacing:0;min-width:760px}
     .adminIdeaTable{min-width:1120px}
-    .adminIdeaTable th:last-child,.adminIdeaTable td:last-child{width:112px}
+    .adminIdeaTable th:last-child,.adminIdeaTable td:last-child{width:96px;padding-right:24px}
+    .adminIdeaTable td:last-child .ideaActions{justify-content:center}
     th,td{text-align:left;vertical-align:top;border-bottom:1px solid rgba(11,18,32,.07);padding:11px 12px;font-size:.92rem;line-height:1.35}
     th{color:rgba(11,18,32,.56);font-weight:500;background:rgba(255,255,255,.55)}
     tr:last-child td{border-bottom:0}
@@ -2170,7 +2176,7 @@
       <td>${item.stimulus ? `<span class="pill soft">${escapeHtml(item.stimulus)}</span>` : '<span class="small">-</span>'}</td>
       <td>${adminIdeaPhotoCell(item)}</td>
       <td>${adminIdeaQualityCell(item)}</td>
-      <td><div class="small">${escapeHtml(item.rules || item.material || '-')}</div></td>
+      <td><div class="small adminIdeaPractical">${escapeHtml(item.rules || item.material || '-')}</div></td>
       <td>${website}</td>
       <td>${adminIdeaActions(item)}</td>
     </tr>`;
