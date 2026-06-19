@@ -4,14 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#FAFCFB">
-  <meta name="description" content="Inspiratiebank met activiteiten, UIT-agenda, bronnen en ideeen voor BCJN Nijmegen.">
+  <meta name="description" content="Een verzameling ideeën, uitjes en activiteiten om inspiratie op te doen, plannen te maken en samen te ontdekken.">
+  <meta property="og:locale" content="nl_NL">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Inspiratiebank">
+  <meta property="og:description" content="Een verzameling ideeën, uitjes en activiteiten om inspiratie op te doen, plannen te maken en samen te ontdekken.">
+  <meta property="og:url" content="https://inspiratiebank.uitgesproken.me/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Inspiratiebank">
+  <meta name="twitter:description" content="Een verzameling ideeën, uitjes en activiteiten om inspiratie op te doen, plannen te maken en samen te ontdekken.">
   <title>Inspiratiebank</title>
   <script>
     if(window.location.pathname.endsWith('/index.html')){
       window.history.replaceState(null, '', window.location.pathname.replace(/index\.html$/, '') + window.location.search + window.location.hash);
     }
   </script>
-  <link rel="canonical" href="https://wouter83696.github.io/Inspiratiebank/">
+  <link rel="canonical" href="https://inspiratiebank.uitgesproken.me/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="website-bestanden/hero-achtergronden/inspiratiebank.svg" as="image" type="image/svg+xml">
@@ -1339,10 +1347,7 @@
               <small id="teamIdeaAddressStatus" class="teamFieldHint" role="status" aria-live="polite"></small>
               <input id="teamIdeaLatInput" type="hidden" name="lat">
               <input id="teamIdeaLonInput" type="hidden" name="lon">
-            </label>
-            <label class="teamField">
-              <span>Afstand</span>
-              <select id="teamIdeaDistanceInput" name="distanceBand"></select>
+              <input id="teamIdeaDistanceInput" type="hidden" name="distanceBand" value="Op locatie">
             </label>
             <label class="teamField">
               <span>Kosten</span>
@@ -1354,7 +1359,7 @@
             </label>
             <label class="teamField">
               <span>Duur</span>
-              <input id="teamIdeaDurationInput" name="duration" type="text" placeholder="Bijv. 60-120 min">
+              <select id="teamIdeaDurationInput" name="duration"></select>
             </label>
             <label class="teamField">
               <span>Groepsgrootte</span>
@@ -1575,6 +1580,7 @@
   const IDEA_DISTANCE_OPTIONS = INSPIRATION_DISTANCE_OPTIONS;
   const IDEA_COST_OPTIONS = ['Gratis','€','€€','€€€'];
   const IDEA_STIMULUS_OPTIONS = ['Laag','Middel','Hoog'];
+  const IDEA_DURATION_OPTIONS = ['30 min','45 min','60 min','60–90 min','60–120 min','2–3 uur','Halve dag','Hele dag','Op maat'];
   const cssKind = value => {
     const v = String(value || '').toLowerCase();
     if(v.includes('hoog')) return 'hot';
@@ -2940,14 +2946,14 @@
   function setupTeamForm(){
     fillSelectOptions('#teamIdeaDomainInput', unique(allInspirationItems().map(x=>x.domain)), domainDisplayLabel);
     fillSelectOptions('#teamIdeaLocationInput', IDEA_LOCATION_OPTIONS);
-    fillSelectOptions('#teamIdeaDistanceInput', IDEA_DISTANCE_OPTIONS);
     fillSelectOptions('#teamIdeaCostInput', IDEA_COST_OPTIONS);
     fillSelectOptions('#teamIdeaStimulusInput', IDEA_STIMULUS_OPTIONS);
+    fillSelectOptions('#teamIdeaDurationInput', IDEA_DURATION_OPTIONS);
     enhanceCustomSelect($('#teamIdeaDomainInput'));
     enhanceCustomSelect($('#teamIdeaLocationInput'));
-    enhanceCustomSelect($('#teamIdeaDistanceInput'));
     enhanceCustomSelect($('#teamIdeaCostInput'));
     enhanceCustomSelect($('#teamIdeaStimulusInput'));
+    enhanceCustomSelect($('#teamIdeaDurationInput'));
     syncTeamIdeaImageName();
   }
   function refreshCollections(){
@@ -3102,7 +3108,6 @@
     refreshCollections();
     syncCustomSelect($('#teamIdeaDomainInput'));
     syncCustomSelect($('#teamIdeaLocationInput'));
-    syncCustomSelect($('#teamIdeaDistanceInput'));
     syncCustomSelect($('#teamIdeaCostInput'));
     syncCustomSelect($('#teamIdeaStimulusInput'));
     syncTeamIdeaImageName();

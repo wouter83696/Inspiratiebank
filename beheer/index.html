@@ -1185,16 +1185,7 @@
                 <small id="adminEditIdeaDistanceStatus" class="distanceEstimateStatus"></small>
                 <input id="adminEditIdeaLat" type="hidden">
                 <input id="adminEditIdeaLon" type="hidden">
-              </label>
-              <label class="teamField">
-                <span>Afstand vanaf 6545 AL</span>
-                <select id="adminEditIdeaDistance">
-                  <option value="Op locatie">Op locatie</option>
-                  <option value="0–10 km">0–10 km</option>
-                  <option value="10–25 km">10–25 km</option>
-                  <option value="25–50 km (uitstap)">25–50 km</option>
-                  <option value="50+ km (ver weg / dagtrips)">50+ km</option>
-                </select>
+                <input id="adminEditIdeaDistance" type="hidden" value="Op locatie">
               </label>
               <label class="teamField">
                 <span>Geschatte afstand in km</span>
@@ -1219,7 +1210,17 @@
               </label>
               <label class="teamField">
                 <span>Duur</span>
-                <input id="adminEditIdeaDuration" type="text" placeholder="Bijv. 60-120 min">
+                <select id="adminEditIdeaDuration">
+                  <option value="30 min">30 min</option>
+                  <option value="45 min">45 min</option>
+                  <option value="60 min">60 min</option>
+                  <option value="60–90 min">60–90 min</option>
+                  <option value="60–120 min">60–120 min</option>
+                  <option value="2–3 uur">2–3 uur</option>
+                  <option value="Halve dag">Halve dag</option>
+                  <option value="Hele dag">Hele dag</option>
+                  <option value="Op maat">Op maat</option>
+                </select>
               </label>
               <label class="teamField">
                 <span>Groepsgrootte</span>
@@ -1418,6 +1419,7 @@
   const IDEA_DISTANCE_OPTIONS = INSPIRATION_DISTANCE_OPTIONS;
   const IDEA_COST_OPTIONS = ['Gratis','€','€€','€€€'];
   const IDEA_STIMULUS_OPTIONS = ['Laag','Middel','Hoog'];
+  const IDEA_DURATION_OPTIONS = ['30 min','45 min','60 min','60–90 min','60–120 min','2–3 uur','Halve dag','Hele dag','Op maat'];
   const IDEA_IMAGE_MAX_BYTES = 1500000;
   const BASE_POSTCODE_COORDS = {label:'6545 AL', lat:51.815, lng:5.792};
   const PLACE_DISTANCE_COORDS = [
@@ -3666,6 +3668,10 @@
     const el = $(selector);
     if(!el) return;
     const normalized = String(value || '').trim();
+    if(!('options' in el)){
+      el.value = normalized;
+      return;
+    }
     const option = [...el.options].find(item => item.value === normalized) || [...el.options].find(item => normalize(item.value) === normalize(normalized));
     if(option) el.value = option.value;
     else if(el.options.length) el.value = el.options[0].value;
@@ -3712,7 +3718,7 @@
     const estimate = estimateDistanceFromAddress(address.value);
     if(!estimate){
       status.textContent = address.value.trim()
-        ? 'Geen automatische schatting gevonden. Kies de afstand handmatig.'
+        ? 'Geen automatische schatting gevonden. Controleer eventueel de geschatte afstand in km.'
         : '';
       return;
     }
@@ -3890,8 +3896,8 @@
     setEditSelect('#adminEditIdeaDistance', item.distanceBand || 'Op locatie');
     setEditSelect('#adminEditIdeaCost', item.cost || 'Gratis');
     setEditSelect('#adminEditIdeaStimulus', item.stimulus || 'Middel');
+    setEditSelect('#adminEditIdeaDuration', item.duration || 'Op maat');
     $('#adminEditIdeaBy').value = item.by || item.source || '';
-    $('#adminEditIdeaDuration').value = item.duration || '';
     $('#adminEditIdeaGroup').value = item.group || '';
     $('#adminEditIdeaUrl').value = item.url || '';
     $('#adminEditIdeaPostcode').value = cleanPostcode(item.postcode || '');
@@ -4121,7 +4127,7 @@
     });
     $('#adminEditIdeaDistanceKm').addEventListener('input', syncDistanceSelectFromKm);
     $('#adminEditIdeaImageUpload').addEventListener('change', handleAdminIdeaImageUpload);
-    ['#adminEditIdeaDomain','#adminEditIdeaLocation','#adminEditIdeaDistance','#adminEditIdeaCost','#adminEditIdeaStimulus']
+    ['#adminEditIdeaDomain','#adminEditIdeaLocation','#adminEditIdeaCost','#adminEditIdeaStimulus','#adminEditIdeaDuration']
       .forEach(selector => enhanceCustomSelect($(selector)));
     $('#exportBtn').addEventListener('click', exportAdminData);
     $('#importBtn').addEventListener('click', () => $('#importFile').click());
