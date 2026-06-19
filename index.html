@@ -522,6 +522,7 @@
       #locationModal .ideaModalActions .primary{grid-column:auto;order:0}
       .ideaModalActions span:empty{display:none}
       .locationForm{gap:10px;margin-top:12px}
+      .locationFieldsRow{grid-template-columns:minmax(0,1fr) minmax(120px,.44fr);gap:8px}
       .locationField input,.locationField select{min-height:44px;border-radius:13px;font-size:16px}
       .locationToggle{padding:9px 10px;border-radius:13px}
       .locationHint{font-size:.82rem;line-height:1.35}
@@ -864,6 +865,7 @@
     .teamFormStatus.ok{color:#426e5d}
     .teamFormStatus.warn{color:#7a6424}
     .locationForm{display:grid;gap:12px;margin-top:16px}
+    .locationFieldsRow{display:grid;grid-template-columns:minmax(0,1fr) minmax(132px,.42fr);gap:10px;align-items:end}
     .locationField{display:grid;gap:6px}
     .locationField>span,.locationField>label{font-size:.82rem;font-weight:600;color:var(--accent-dark)}
     .locationField input,.locationField select{
@@ -1449,19 +1451,21 @@
       </div>
       <p id="locationModalText" class="ideaModalText">Vul een postcode in en kies hoe ruim je wilt kijken. De inspiratie blijft vrij, maar wordt makkelijker dichtbij te maken.</p>
       <form id="locationForm" class="locationForm">
-        <div class="locationField">
-          <label for="locationPostcodeInput">Postcode</label>
-          <input id="locationPostcodeInput" type="text" inputmode="text" autocomplete="postal-code" placeholder="Bijv. 6603 AB">
-        </div>
-        <div class="locationField">
-          <label for="locationRadiusInput">Afstand</label>
-          <select id="locationRadiusInput">
-            <option value="3">Binnen 3 km</option>
-            <option value="5">Binnen 5 km</option>
-            <option value="10">Binnen 10 km</option>
-            <option value="25">Binnen 25 km</option>
-            <option value="50">Binnen 50 km</option>
-          </select>
+        <div class="locationFieldsRow">
+          <div class="locationField">
+            <label for="locationPostcodeInput">Postcode</label>
+            <input id="locationPostcodeInput" type="text" inputmode="text" autocomplete="postal-code" placeholder="Bijv. 6603 AB">
+          </div>
+          <div class="locationField">
+            <label for="locationRadiusInput">Afstand</label>
+            <select id="locationRadiusInput">
+              <option value="3">Binnen 3 km</option>
+              <option value="5">Binnen 5 km</option>
+              <option value="10">Binnen 10 km</option>
+              <option value="25">Binnen 25 km</option>
+              <option value="50">Binnen 50 km</option>
+            </select>
+          </div>
         </div>
         <p id="locationStatus" class="locationHint" role="status" aria-live="polite"></p>
         <div class="ideaModalActions locationActionsSplit">
@@ -1581,7 +1585,9 @@
 	  const BLOCKED_AGENDA_RULES_KEY = 'zomerprogramma_blocked_agenda_rules_v1';
 	  const REPORTS_KEY = 'zomerprogramma_item_reports_v1';
 	  const USER_LOCATION_KEY = 'zomerprogramma_user_location_v1';
+	  const USER_LOCATION_RADIUS_KEY = 'zomerprogramma_user_location_radius_v1';
 	  const DEFAULT_LOCATION = {label:'Nijmegen', lat:51.8240, lon:5.8040, isDefault:true};
+	  const DEFAULT_LOCATION_RADIUS_KM = 10;
 	  const SUPPORTED_REGION_RADIUS_KM = 70;
 	  const KNOWN_PLACE_COORDS = {
 	    nijmegen:[51.8126,5.8372], dukenburg:[51.8130,5.7840], lent:[51.8610,5.8660], wijchen:[51.8090,5.7250],
@@ -1600,6 +1606,7 @@
 	  const SUPABASE_STATE_ID = CONFIG.supabaseStateId || 'bcjn-zomer-2026';
 	  let centralStorage = null;
 	  let userLocation = loadUserLocation();
+	  let userLocationRadiusKm = loadUserLocationRadius();
 
 	  function normalizeCentralStorage(value={}){
 	    return {
@@ -1845,7 +1852,7 @@
       ? `<button class="agendaLegendItem themeDefault active" type="button" data-theme-filter="all" aria-pressed="true">Alles</button>`
       : '';
     const locationItem = includeLocation
-      ? `<button class="agendaLegendItem locationLegendItem" id="locationSettingsBtn" type="button" title="Startpunt wijzigen"><span class="locationIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><span id="locationSettingsLabel">Nijmegen</span></button>`
+      ? `<button class="agendaLegendItem locationLegendItem" id="locationSettingsBtn" type="button" title="Locatie en afstand wijzigen"><span class="locationIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><span id="locationSettingsLabel">Nijmegen</span> <span class="locationRadius" id="locationRadiusLabel">10 km</span></button>`
       : '';
     const items = AGENDA_THEME_LEGEND.map(domain => {
       const label = domainDisplayLabel(domain);
@@ -1977,6 +1984,20 @@
     }catch(error){}
     return {...DEFAULT_LOCATION};
   }
+  function loadUserLocationRadius(){
+    if(typeof localStorage === 'undefined') return DEFAULT_LOCATION_RADIUS_KM;
+    const saved = Number(localStorage.getItem(USER_LOCATION_RADIUS_KEY));
+    return [3,5,10,25,50].includes(saved) ? saved : DEFAULT_LOCATION_RADIUS_KM;
+  }
+  function saveUserLocationRadius(value){
+    const next = Number(value);
+    userLocationRadiusKm = [3,5,10,25,50].includes(next) ? next : DEFAULT_LOCATION_RADIUS_KM;
+    if(typeof localStorage !== 'undefined'){
+      if(userLocationRadiusKm === DEFAULT_LOCATION_RADIUS_KM) localStorage.removeItem(USER_LOCATION_RADIUS_KEY);
+      else localStorage.setItem(USER_LOCATION_RADIUS_KEY, String(userLocationRadiusKm));
+    }
+    syncLocationUi();
+  }
   function saveUserLocation(location){
     userLocation = location && Number.isFinite(location.lat) && Number.isFinite(location.lon)
       ? {...location, postcode:cleanPostcode(location.postcode || ''), isDefault:false}
@@ -1991,18 +2012,22 @@
   }
   function syncLocationUi(){
     const label = $('#locationSettingsLabel');
+    const radiusLabel = $('#locationRadiusLabel');
     const button = $('#locationSettingsBtn');
     const input = $('#locationPostcodeInput');
+    const radiusInput = $('#locationRadiusInput');
     const status = $('#locationStatus');
     const text = userLocation?.isDefault
       ? 'Nijmegen'
       : cleanPostcode(userLocation.postcode || userLocation.label || 'Postcode');
     if(label) label.textContent = text;
+    if(radiusLabel) radiusLabel.textContent = `${userLocationRadiusKm} km`;
     if(button) button.classList.toggle('locationSet', !userLocation?.isDefault);
     if(input) input.value = userLocation?.isDefault ? '' : cleanPostcode(userLocation.postcode || '');
+    if(radiusInput) radiusInput.value = String(userLocationRadiusKm);
     if(status){
       status.classList.remove('warn');
-      status.textContent = userLocation?.isDefault ? 'Standaard: regio Nijmegen.' : 'Je postcode is lokaal bewaard op dit apparaat.';
+      status.textContent = userLocation?.isDefault ? 'Standaard: Nijmegen binnen 10 km.' : 'Je postcode en afstand zijn lokaal bewaard op dit apparaat.';
     }
   }
   function openLocationModal(){
@@ -3960,13 +3985,18 @@
       if(event.target.closest('#locationSettingsBtn')) openLocationModal();
     });
     $('#locationResetBtn').addEventListener('click', () => {
+      saveUserLocationRadius(DEFAULT_LOCATION_RADIUS_KM);
       saveUserLocation(null);
       closeLocationModal();
+    });
+    $('#locationRadiusInput')?.addEventListener('change', event => {
+      saveUserLocationRadius(event.target.value);
     });
     $('#locationForm').addEventListener('submit', async event => {
       event.preventDefault();
       const status = $('#locationStatus');
       const input = $('#locationPostcodeInput');
+      const radiusInput = $('#locationRadiusInput');
       const postcode = cleanPostcode(input?.value || '');
       if(status) status.textContent = 'Postcode opzoeken...';
       try{
@@ -3979,6 +4009,7 @@
           }
           return;
         }
+        saveUserLocationRadius(radiusInput?.value);
         saveUserLocation(location);
         closeLocationModal();
       }catch(error){
