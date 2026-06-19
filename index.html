@@ -1053,7 +1053,7 @@
 <body>
   <header class="topbar">
     <nav class="tabs" role="navigation" aria-label="Hoofdnavigatie">
-      <button class="tab" data-tab="inspiratie" type="button" aria-selected="false">Inspiratiebank</button>
+      <button class="tab active" data-tab="inspiratie" type="button" aria-selected="true">Inspiratiebank</button>
       <button class="tab" data-tab="weken" type="button">UIT-agenda</button>
     </nav>
   </header>
@@ -3516,7 +3516,7 @@
     window.addEventListener('hashchange', () => {
       const nextTab = tabFromHash();
       if(nextTab) setTab(nextTab);
-      else clearTopTabSelection();
+      else setTab('inspiratie', {scroll:false});
       if(window.location.hash === '#longerOffers') setOngoingOpen(true, {scroll:false});
     });
     $$('.tab').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
