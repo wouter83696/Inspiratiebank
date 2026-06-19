@@ -278,7 +278,7 @@
     #inspirationThemeLegend{margin:10px 0 14px}
     .agendaLegendItem{
       appearance:none;font:inherit;text-align:left;
-      display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 8px;
+      display:inline-flex;align-items:center;gap:6px;min-height:32px;border-radius:999px;padding:6px 9px;
       background:rgba(255,255,255,.52);border:1px solid color-mix(in srgb,var(--theme-line) 52%,transparent);
       color:color-mix(in srgb,var(--theme-ink) 74%,var(--accent-dark));font-size:.76rem;font-weight:500;line-height:1.12;white-space:normal
     }
@@ -498,6 +498,10 @@
     .ideaModalClose{min-width:120px}
     .ideaModalActions .primary{min-width:120px}
     .filterBar{margin:10px 0 12px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+    .locationLegendItem{background:rgba(221,239,232,.72);border-color:rgba(79,142,158,.14);color:var(--accent-dark)}
+    .locationLegendItem .locationIcon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:18px;color:var(--accent-dark)}
+    .locationLegendItem .locationIcon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+    .locationLegendItem:hover{background:rgba(221,239,232,.92);border-color:rgba(79,142,158,.22)}
     .filters{display:grid;grid-template-columns:1.5fr repeat(4,minmax(130px,1fr));gap:8px;margin:0;align-items:center}
     .filters.more{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:12px;row-gap:0;transition:row-gap .24s var(--ease)}
     .filterSearch{position:relative;min-width:0}
@@ -824,6 +828,15 @@
     .teamFormStatus:empty{display:none}
     .teamFormStatus.ok{color:#426e5d}
     .teamFormStatus.warn{color:#7a6424}
+    .locationForm{display:grid;gap:12px;margin-top:16px}
+    .locationField{display:grid;gap:6px}
+    .locationField span{font-size:.82rem;font-weight:600;color:var(--accent-dark)}
+    .locationField input{
+      width:100%;min-height:46px;border:1px solid rgba(11,18,32,.10);border-radius:14px;
+      background:rgba(255,255,255,.76);padding:10px 12px;color:var(--ink)
+    }
+    .locationField input::placeholder{color:rgba(11,18,32,.38)}
+    .locationHint{margin:0;color:rgba(11,18,32,.58);font-size:.86rem;line-height:1.4}
     .empty{padding:20px;border:1px dashed rgba(11,18,32,.14);border-radius:18px;background:rgba(255,255,255,.40);color:var(--muted);text-align:center}
     .sourceAdditionsBlock{margin:14px 0 18px;scroll-margin-top:100px}
     .sourceAdditionsBlock .sectionHead{margin:0 0 16px}
@@ -1155,7 +1168,7 @@
 
     <section id="tab-inspiratie" class="tabPanel active" role="tabpanel">
       <section class="tabHero inspirationHero" aria-labelledby="inspirationHeroTitle">
-        <span class="tabHeroKicker">BCJN</span>
+        <span class="tabHeroKicker">Nijmegen</span>
         <h1 class="tabHeroTitle" id="inspirationHeroTitle">Inspiratiebank</h1>
         <p class="tabHeroLine">Ontdek iets nieuws</p>
         <div class="tabHeroActions">
@@ -1362,6 +1375,35 @@
       </div>
     </div>
   </div>
+  <div id="locationModal" class="ideaModal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="locationModalTitle" aria-describedby="locationModalText">
+    <div class="ideaModalCard">
+      <div class="ideaModalTop">
+        <div class="ideaModalBadge" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path>
+            <circle cx="12" cy="10" r="2.5"></circle>
+          </svg>
+        </div>
+        <div>
+          <p class="ideaModalKicker">Afstand</p>
+          <h2 id="locationModalTitle" class="ideaModalTitle">Vanaf jouw postcode</h2>
+        </div>
+      </div>
+      <p id="locationModalText" class="ideaModalText">Zonder postcode gebruiken we Nijmegen als startpunt. Met postcode worden afstanden en tegels persoonlijker.</p>
+      <form id="locationForm" class="locationForm">
+        <label class="locationField">
+          <span>Postcode</span>
+          <input id="locationPostcodeInput" type="text" inputmode="text" autocomplete="postal-code" placeholder="Bijv. 6603 AB">
+        </label>
+        <p id="locationStatus" class="locationHint" role="status" aria-live="polite"></p>
+        <div class="ideaModalActions">
+          <button id="locationResetBtn" class="formButton secondary" type="button">Nijmegen gebruiken</button>
+          <button id="locationModalCancel" class="formButton secondary ideaModalClose" type="button">Sluiten</button>
+          <button class="formButton primary" type="submit">Afstand toepassen</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <script src="website-bestanden/config.js"></script>
   <script>
@@ -1471,11 +1513,25 @@
 	  const VERIFIED_AGENDA_KEY = 'zomerprogramma_verified_agenda_items_v1';
 	  const BLOCKED_AGENDA_RULES_KEY = 'zomerprogramma_blocked_agenda_rules_v1';
 	  const REPORTS_KEY = 'zomerprogramma_item_reports_v1';
+	  const USER_LOCATION_KEY = 'zomerprogramma_user_location_v1';
+	  const DEFAULT_LOCATION = {label:'Nijmegen', lat:51.8240, lon:5.8040, isDefault:true};
+	  const KNOWN_PLACE_COORDS = {
+	    nijmegen:[51.8126,5.8372], dukenburg:[51.8130,5.7840], lent:[51.8610,5.8660], wijchen:[51.8090,5.7250],
+	    beuningen:[51.8590,5.7660], weurt:[51.8560,5.8180], ooij:[51.8540,5.9380], ubbergen:[51.8360,5.9010],
+	    malden:[51.7830,5.8530], groesbeek:[51.7760,5.9360], 'berg en dal':[51.8200,5.9160], 'heilig landstichting':[51.8190,5.8830],
+	    mook:[51.7520,5.8810], overasselt:[51.7600,5.7880], arnhem:[51.9851,5.8987], elst:[51.9190,5.8440],
+	    bemmel:[51.8910,5.8980], huissen:[51.9350,5.9360], gendt:[51.8770,5.9700], cuijk:[51.7300,5.8790],
+	    grave:[51.7590,5.7380], gennep:[51.6990,5.9730], beers:[51.7250,5.8260], beugen:[51.6720,5.9350],
+	    millingen:[51.8650,6.0480], ewijk:[51.8720,5.7350], overloon:[51.5710,5.9470], otterlo:[52.1000,5.7730],
+	    rhenen:[51.9590,5.5680], volkel:[51.6420,5.6540], oeffelt:[51.6950,5.9380], boxmeer:[51.6460,5.9470],
+	    vierlingsbeek:[51.5950,6.0100], ottersum:[51.7040,5.9830], oploo:[51.6080,5.8720]
+	  };
 	  const CONFIG = window.BCJN_CONFIG || {};
 	  const CENTRAL_STORAGE_ENDPOINT = CONFIG.storageEndpoint || '';
 	  const SUPABASE_TABLE = CONFIG.supabaseTable || 'bcjn_state';
 	  const SUPABASE_STATE_ID = CONFIG.supabaseStateId || 'bcjn-zomer-2026';
 	  let centralStorage = null;
+	  let userLocation = loadUserLocation();
 
 	  function normalizeCentralStorage(value={}){
 	    return {
@@ -1716,9 +1772,12 @@
     'Sport & Bewegen',
     'Actie & Amusement'
   ];
-  function agendaThemeLegend({interactive=false}={}){
+  function agendaThemeLegend({interactive=false, includeLocation=false}={}){
     const allItem = interactive
       ? `<button class="agendaLegendItem themeDefault active" type="button" data-theme-filter="all" aria-pressed="true">Alles</button>`
+      : '';
+    const locationItem = includeLocation
+      ? `<button class="agendaLegendItem locationLegendItem" id="locationSettingsBtn" type="button" title="Startpunt wijzigen"><span class="locationIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><span id="locationSettingsLabel">Nijmegen</span></button>`
       : '';
     const items = AGENDA_THEME_LEGEND.map(domain => {
       const label = domainDisplayLabel(domain);
@@ -1728,13 +1787,14 @@
       }
       return `<span class="agendaLegendItem ${domainThemeClass(domain)}">${content}</span>`;
     }).join('');
-    return `<div class="agendaThemeLegend" aria-label="Legenda themakleuren">${allItem}${items}</div>`;
+    return `<div class="agendaThemeLegend" aria-label="Legenda themakleuren">${locationItem}${allItem}${items}</div>`;
   }
   function renderThemeLegends(){
     const agendaLegend = $('#agendaThemeLegend');
     if(agendaLegend) agendaLegend.innerHTML = agendaThemeLegend({interactive:true});
     const inspirationLegend = $('#inspirationThemeLegend');
-    if(inspirationLegend) inspirationLegend.innerHTML = agendaThemeLegend({interactive:true});
+    if(inspirationLegend) inspirationLegend.innerHTML = agendaThemeLegend({interactive:true, includeLocation:true});
+    syncLocationUi();
     [agendaLegend, inspirationLegend].forEach(legend => {
       const scroller = legend?.querySelector('.agendaThemeLegend');
       if(scroller) scroller.scrollLeft = 0;
@@ -1836,6 +1896,111 @@
     if(v.includes('50+') || v.includes('ver weg') || v.includes('dagtrip')) return '50+ km';
     return raw.replace(/\s*\([^)]*\)\s*/g, '').trim();
   }
+  function cleanPostcode(value=''){
+    return String(value || '').toUpperCase().replace(/\s+/g,'').replace(/^(\d{4})([A-Z]{2})$/, '$1 $2');
+  }
+  function loadUserLocation(){
+    if(typeof localStorage === 'undefined') return {...DEFAULT_LOCATION};
+    try{
+      const saved = JSON.parse(localStorage.getItem(USER_LOCATION_KEY) || 'null');
+      if(saved && Number.isFinite(saved.lat) && Number.isFinite(saved.lon)){
+        return {...saved, postcode:cleanPostcode(saved.postcode || ''), isDefault:false};
+      }
+    }catch(error){}
+    return {...DEFAULT_LOCATION};
+  }
+  function saveUserLocation(location){
+    userLocation = location && Number.isFinite(location.lat) && Number.isFinite(location.lon)
+      ? {...location, postcode:cleanPostcode(location.postcode || ''), isDefault:false}
+      : {...DEFAULT_LOCATION};
+    if(typeof localStorage !== 'undefined'){
+      if(userLocation.isDefault) localStorage.removeItem(USER_LOCATION_KEY);
+      else localStorage.setItem(USER_LOCATION_KEY, JSON.stringify(userLocation));
+    }
+    syncLocationUi();
+    renderIdeas();
+    renderAgenda();
+  }
+  function syncLocationUi(){
+    const label = $('#locationSettingsLabel');
+    const button = $('#locationSettingsBtn');
+    const input = $('#locationPostcodeInput');
+    const status = $('#locationStatus');
+    const text = userLocation?.isDefault
+      ? 'Nijmegen'
+      : cleanPostcode(userLocation.postcode || userLocation.label || 'Postcode');
+    if(label) label.textContent = text;
+    if(button) button.classList.toggle('locationSet', !userLocation?.isDefault);
+    if(input) input.value = userLocation?.isDefault ? '' : cleanPostcode(userLocation.postcode || '');
+    if(status) status.textContent = userLocation?.isDefault ? 'We gebruiken de vaste startlocatie in Nijmegen als standaard.' : 'Je postcode is lokaal bewaard op dit apparaat.';
+  }
+  function openLocationModal(){
+    const modal = $('#locationModal');
+    if(!modal) return;
+    syncLocationUi();
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    window.requestAnimationFrame(() => $('#locationPostcodeInput')?.focus());
+  }
+  function closeLocationModal(){
+    const modal = $('#locationModal');
+    if(!modal || modal.hidden) return;
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  function parsePdokPoint(value=''){
+    const match = String(value || '').match(/POINT\(([-\d.]+)\s+([-\d.]+)\)/i);
+    return match ? {lon:Number(match[1]), lat:Number(match[2])} : null;
+  }
+  async function geocodePostcode(postcode){
+    const clean = cleanPostcode(postcode);
+    if(!/^\d{4}\s?[A-Z]{2}$/.test(clean)) throw new Error('Vul een volledige postcode in, bijvoorbeeld 6603 AB.');
+    const url = `https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?q=${encodeURIComponent(clean)}&fq=type:postcode&rows=1`;
+    const response = await fetch(url, {headers:{Accept:'application/json'}});
+    if(!response.ok) throw new Error('De postcode kon nu niet worden opgezocht.');
+    const data = await response.json();
+    const doc = data?.response?.docs?.[0];
+    const point = parsePdokPoint(doc?.centroide_ll);
+    if(!point || !Number.isFinite(point.lat) || !Number.isFinite(point.lon)) throw new Error('Deze postcode is niet gevonden.');
+    return {label:clean, postcode:clean, lat:point.lat, lon:point.lon};
+  }
+  function haversineKm(a, b){
+    if(!a || !b) return NaN;
+    const toRad = deg => deg * Math.PI / 180;
+    const radius = 6371;
+    const dLat = toRad(b.lat - a.lat);
+    const dLon = toRad(b.lon - a.lon);
+    const lat1 = toRad(a.lat);
+    const lat2 = toRad(b.lat);
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
+    return 2 * radius * Math.asin(Math.sqrt(h));
+  }
+  function itemCoordinate(item={}){
+    const lat = Number(item.lat ?? item.latitude);
+    const lon = Number(item.lon ?? item.lng ?? item.longitude);
+    if(Number.isFinite(lat) && Number.isFinite(lon)) return {lat, lon};
+    const text = normalize(`${item.address || ''} ${item.where || ''} ${item.place || ''} ${item.location || ''} ${item.title || ''} ${item.source || ''}`);
+    const match = Object.entries(KNOWN_PLACE_COORDS)
+      .sort((a,b) => b[0].length - a[0].length)
+      .find(([place]) => text.includes(place));
+    return match ? {lat:match[1][0], lon:match[1][1]} : null;
+  }
+  function itemDistanceKm(item={}){
+    const explicit = parseDistanceKm(item);
+    if(Number.isFinite(explicit) && explicit > 0 && userLocation?.isDefault) return explicit;
+    const coord = itemCoordinate(item);
+    return coord ? haversineKm(userLocation || DEFAULT_LOCATION, coord) : explicit;
+  }
+  function personalDistanceLabel(item={}, context='inspiration'){
+    const locationType = normalize(`${item.locationType || ''} ${item.address || ''} ${item.where || ''}`);
+    if(locationType.includes('op groep') || locationType.includes('op terrein') || locationType.includes('online')) return 'Op terrein';
+    const km = itemDistanceKm(item);
+    if(!Number.isFinite(km)) return normalizeIdeaDistance(item.distanceBand, item, context);
+    if(km < .8) return '1 km';
+    return `${Math.round(km)} km`;
+  }
   function stimulusPill(value=''){
     const label = normalizeIdeaStimulus(value);
     const lines = label === 'Hoog' ? 3 : label === 'Middel' ? 2 : 1;
@@ -1869,6 +2034,10 @@
   }
   function normalizeIdeaDistance(value='', item={}, context='inspiration'){
     const v = normalize(value);
+    const location = normalize(`${item.locationType || ''} ${item.address || ''} ${item.where || ''} ${item.title || ''} ${item.source || ''}`);
+    if(location.includes('op groep') || location.includes('op terrein') || location.includes('online')) return 'Op terrein';
+    const measuredKm = itemDistanceKm(item);
+    if(Number.isFinite(measuredKm)) return distanceLabelForKm(Math.max(measuredKm, 1), context);
     const kmLabel = distanceLabelForKm(parseDistanceKm(item), context);
     if(kmLabel) return kmLabel;
     if(v.includes('50+') || v.includes('ver weg')) return context === 'agenda' ? '25+ km' : '50+ km (ver weg / dagtrips)';
@@ -1876,8 +2045,6 @@
     if(v.includes('in de regio') || v.includes('10-30') || v.includes('10-25')) return context === 'agenda' ? '10–25 km (regio)' : '10–25 km';
     if(v.includes('dichtbij') || v.includes('0-10')) return context === 'agenda' ? '0–10 km (dichtbij)' : '0–10 km';
     if(v.includes('op terrein') || v === '0 km') return 'Op terrein';
-    const location = normalize(`${item.locationType || ''} ${item.address || ''} ${item.where || ''} ${item.title || ''} ${item.source || ''}`);
-    if(location.includes('op groep') || location.includes('op terrein') || location.includes('online')) return 'Op terrein';
     if(/otterlo|rhenen|overloon|volkel|hemelrijk|hoge veluwe|kroller/.test(location)) return context === 'agenda' ? '25+ km' : '25–50 km (uitstap)';
     if(/arnhem|cuijk|grave|gennep|beers|beugen|millingen|groesbeek|berg en dal|ewijk|mook|malden|overasselt|bemmel|elst|huissen|gendt/.test(location)) return context === 'agenda' ? '10–25 km (regio)' : '10–25 km';
     if(/nijmegen|dukenburg|lent|wijchen|beuningen|weurt|ooij|ubbergen/.test(location)) return context === 'agenda' ? '0–10 km (dichtbij)' : '0–10 km';
@@ -2435,7 +2602,18 @@
   function sortIdeasAlphabetically(items=[]){
     return [...items].sort((a,b) => String(a.domain || '').localeCompare(String(b.domain || ''), 'nl') || String(a.title || '').localeCompare(String(b.title || ''), 'nl'));
   }
+  function sortByPersonalDistance(items=[]){
+    return [...items].sort((a,b) => {
+      const distA = itemDistanceKm(a);
+      const distB = itemDistanceKm(b);
+      const safeA = Number.isFinite(distA) ? distA : 9999;
+      const safeB = Number.isFinite(distB) ? distB : 9999;
+      if(Math.abs(safeA - safeB) > .8) return safeA - safeB;
+      return String(a.title || '').localeCompare(String(b.title || ''), 'nl');
+    });
+  }
   function smartMixedIdeas(items=[]){
+    if(!userLocation?.isDefault) return sortByPersonalDistance(items);
     const groups = new Map();
     for(const item of items){
       const key = domainDisplayLabel(item.domain || 'Overig');
@@ -3092,7 +3270,7 @@
 
   function ideaRow(item){
     const locationLabel = normalizeIdeaLocation(item.locationType);
-    const distanceLabel = normalizeIdeaDistance(item.distanceBand, item);
+    const distanceLabel = personalDistanceLabel(item);
     const costLabel = normalizeIdeaCost(item.cost);
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(label => pill(label, 'soft')).join(' ');
@@ -3152,7 +3330,7 @@
 
   function cardIdea(item){
     const locationLabel = normalizeIdeaLocation(item.locationType);
-    const distanceLabel = normalizeIdeaDistance(item.distanceBand, item);
+    const distanceLabel = personalDistanceLabel(item);
     const costLabel = normalizeIdeaCost(item.cost);
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(label => pill(label, 'soft')).join(' ');
@@ -3552,6 +3730,7 @@
 	  async function init(){
 	    await loadCentralStorage();
 	    setupAgendaFilters(); renderAgenda(); refreshCollections(); setIdeaView('tiles');
+    syncLocationUi();
     warmHeroBackgrounds();
     setOngoingOpen(true, {scroll:false});
     const initialTab = tabFromHash();
@@ -3578,6 +3757,10 @@
           closeTeamIdeaModal();
           return;
         }
+        if(!$('#locationModal').hidden){
+          closeLocationModal();
+          return;
+        }
         clearAgendaDayFocus();
         closeCustomSelects();
         closeReportMenus();
@@ -3592,6 +3775,31 @@
     });
     $('#confirmModalCancel').addEventListener('click', () => closeConfirmDialog(false));
     $('#confirmModalConfirm').addEventListener('click', () => closeConfirmDialog(true));
+    $('#locationModal').addEventListener('click', event => {
+      if(event.target.id === 'locationModal') closeLocationModal();
+    });
+    $('#locationModalCancel').addEventListener('click', closeLocationModal);
+    document.addEventListener('click', event => {
+      if(event.target.closest('#locationSettingsBtn')) openLocationModal();
+    });
+    $('#locationResetBtn').addEventListener('click', () => {
+      saveUserLocation(null);
+      closeLocationModal();
+    });
+    $('#locationForm').addEventListener('submit', async event => {
+      event.preventDefault();
+      const status = $('#locationStatus');
+      const input = $('#locationPostcodeInput');
+      const postcode = cleanPostcode(input?.value || '');
+      if(status) status.textContent = 'Postcode opzoeken...';
+      try{
+        const location = await geocodePostcode(postcode);
+        saveUserLocation(location);
+        closeLocationModal();
+      }catch(error){
+        if(status) status.textContent = error.message || 'De postcode kon niet worden gebruikt.';
+      }
+    });
     document.addEventListener('toggle', event => {
       const reportMenu = event.target.closest && event.target.closest('[data-report-menu]');
       if(reportMenu && reportMenu.open) closeReportMenus(reportMenu);
