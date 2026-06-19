@@ -840,6 +840,11 @@
               <span class="adminNavText">UIT-agenda</span>
               <span class="adminNavHint">week</span>
             </button>
+            <button class="adminNavButton adminNavSub" type="button" data-admin-target="agenda" data-admin-scroll="agendaRulesPanel" title="Uitsluitingen">
+              <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M7 12h10"></path><path d="M10 17h4"></path></svg></span>
+              <span class="adminNavText">Uitsluitingen</span>
+              <span class="adminNavHint">regels</span>
+            </button>
             <button class="adminNavButton adminNavSub" type="button" data-admin-target="sources" title="Bronnen">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1"></path><path d="M14 11a5 5 0 0 0-7.1 0l-2 2a5 5 0 0 0 7.1 7.1l1.1-1.1"></path></svg></span>
               <span class="adminNavText">Bronnen</span>
@@ -917,8 +922,8 @@
         <section class="panel tintedPanel toneAgenda agendaRulesPanel" id="agendaRulesPanel">
           <div class="agendaRulesHead">
             <div>
-              <strong>Niet meenemen</strong>
-              <span>Nieuwe agenda-items met deze woorden, bronnen of titels worden overgeslagen.</span>
+              <strong>Uitsluitingen</strong>
+              <span>Nieuwe agenda-items met deze woorden, bronnen of titels worden automatisch overgeslagen.</span>
             </div>
             <span id="agendaRuleCount" class="pill">0 regels</span>
           </div>
@@ -3645,18 +3650,28 @@
     syncAdminIdeaImagePreview();
     syncAdminIdeaImageSuggestion();
   }
+  function adminScrollTargetFromHash(){
+    const hash = String(window.location.hash || '').replace('#','');
+    return hash === 'agendaRulesPanel' ? hash : '';
+  }
   function setAdminWorkspace(target='meldkamer', options={}){
     const next = ['meldkamer','agenda','inspiration','sources','backup'].includes(target) ? target : 'meldkamer';
+    const scrollTarget = options.scrollTarget || '';
     document.querySelectorAll('[data-admin-workspace]').forEach(panel => {
       panel.hidden = panel.dataset.adminWorkspace !== next;
     });
     document.querySelectorAll('[data-admin-target]').forEach(button => {
-      const active = button.dataset.adminTarget === next;
+      const active = scrollTarget
+        ? button.dataset.adminScroll === scrollTarget
+        : button.dataset.adminTarget === next && !button.dataset.adminScroll;
       button.classList.toggle('active', active);
       button.setAttribute('aria-current', active ? 'page' : 'false');
     });
-    if(options.hash) history.replaceState(null, '', `#${next}`);
-    if(options.scroll !== false) document.querySelector('[data-admin-workspace]:not([hidden])')?.scrollIntoView({behavior:'smooth', block:'start'});
+    if(options.hash) history.replaceState(null, '', `#${scrollTarget || next}`);
+    if(options.scroll !== false){
+      const scrollNode = scrollTarget ? document.getElementById(scrollTarget) : document.querySelector('[data-admin-workspace]:not([hidden])');
+      scrollNode?.scrollIntoView({behavior:'smooth', block:'start'});
+    }
   }
   function isAdminSidebarCollapsed(){
     return localStorage.getItem(ADMIN_SIDEBAR_COLLAPSED_KEY) === '1';
@@ -3805,7 +3820,7 @@
 	    $('#adminApp').hidden = false;
 	    applyAdminSidebarState();
 	    sessionStorage.setItem(ADMIN_SESSION_KEY, '1');
-	    setAdminWorkspace(adminWorkspaceFromHash(), {scroll:false});
+	    setAdminWorkspace(adminWorkspaceFromHash(), {scroll:false, scrollTarget:adminScrollTargetFromHash()});
 	    renderAdminThemeLegend();
 	    setupIdeaFilters();
 	    renderIdeas();
@@ -3851,10 +3866,10 @@
       if(event.target.closest('a')) $('#adminMenu').open = false;
     });
     document.querySelectorAll('[data-admin-target]').forEach(button => {
-      button.addEventListener('click', () => setAdminWorkspace(button.dataset.adminTarget, {hash:true}));
+      button.addEventListener('click', () => setAdminWorkspace(button.dataset.adminTarget, {hash:true, scrollTarget:button.dataset.adminScroll || ''}));
     });
     window.addEventListener('hashchange', () => {
-      if($('#adminApp') && !$('#adminApp').hidden) setAdminWorkspace(adminWorkspaceFromHash(), {scroll:false});
+      if($('#adminApp') && !$('#adminApp').hidden) setAdminWorkspace(adminWorkspaceFromHash(), {scroll:false, scrollTarget:adminScrollTargetFromHash()});
     });
     document.querySelectorAll('[data-admin-view]').forEach(btn => btn.addEventListener('click', () => setAdminIdeaView(btn.dataset.adminView)));
     document.querySelectorAll('[data-agenda-view]').forEach(btn => btn.addEventListener('click', () => {
