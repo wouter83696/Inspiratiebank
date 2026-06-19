@@ -150,7 +150,7 @@
     .tabHero::before,.tabHero::after{content:none}
     .tabHero.agendaHero{--hero-bg-image:url("website-bestanden/hero-achtergronden/uit-agenda.svg")}
     .tabHeroKicker{position:relative;z-index:1;display:block;margin:0 0 10px;color:var(--accent-dark);font-size:.78rem;font-weight:600;letter-spacing:.05em;line-height:1}
-    .tabHeroTitle{position:relative;z-index:1;margin:0 0 0 -.045em;color:var(--accent-dark);font-family:"IBM Plex Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:5rem;font-weight:400;line-height:.9;letter-spacing:-.055em}
+    .tabHeroTitle{position:relative;z-index:1;margin:0 0 0 -.025em;color:var(--accent-dark);font-family:"IBM Plex Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:5rem;font-weight:400;line-height:.9;letter-spacing:-.025em}
     .tabHeroLine{position:relative;z-index:1;margin:10px 0 0;color:var(--accent);font-size:1.28rem;line-height:1.2;font-weight:400}
     .tabHeroActions{position:relative;z-index:1;display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:26px}
     .tabHeroButton{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:48px;min-height:48px;padding:0 18px;border-radius:999px;border:1px solid rgba(79,142,158,.12);background:rgba(255,255,255,.48);box-shadow:0 6px 16px rgba(20,38,42,.04);color:rgba(49,95,107,.88);font-weight:500;line-height:1;text-decoration:none;white-space:nowrap;cursor:pointer;backdrop-filter:blur(16px)}
@@ -526,18 +526,18 @@
       .locationField input,.locationField select{min-height:44px;border-radius:13px;font-size:16px}
       .locationToggle{padding:9px 10px;border-radius:13px}
       .locationHint{font-size:.82rem;line-height:1.35}
-      #locationModal .ideaModalCard{max-height:calc(100dvh - 20px - env(safe-area-inset-bottom));padding:15px 16px 16px}
+      #locationModal .ideaModalCard{max-height:calc(100dvh - 20px - env(safe-area-inset-bottom));overflow:visible;padding:15px 16px 16px}
       #locationModal .ideaModalText{margin-left:0;max-width:none;font-size:.9rem;line-height:1.38}
       #locationModal .locationForm{margin-left:0;max-width:none}
     }
     .filterBar{margin:10px 0 12px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
-    .locationLegendItem{background:rgba(255,255,255,.74);border-color:rgba(79,142,158,.30);box-shadow:inset 0 0 0 1px rgba(79,142,158,.12),0 8px 18px rgba(20,38,42,.045);color:var(--accent-dark)}
-    .locationLegendItem.locationSet{background:rgba(255,255,255,.82);border-color:rgba(79,142,158,.42);box-shadow:inset 0 0 0 1px rgba(79,142,158,.18),0 8px 18px rgba(20,38,42,.05)}
+    .locationLegendItem{background:rgba(255,255,255,.48);border-color:rgba(79,142,158,.12);box-shadow:0 6px 16px rgba(20,38,42,.04);color:rgba(49,95,107,.88);backdrop-filter:blur(16px)}
+    .locationLegendItem.locationSet{background:rgba(255,255,255,.58);border-color:rgba(79,142,158,.14);box-shadow:0 6px 16px rgba(20,38,42,.045)}
     .locationLegendItem .locationIcon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:18px;color:var(--accent-dark)}
     .locationLegendItem .locationIcon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .locationLegendItem .locationRadius{display:inline-flex;align-items:center;gap:6px;color:rgba(49,95,107,.74)}
     .locationLegendItem .locationRadius::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:rgba(79,142,158,.42)}
-    .locationLegendItem:hover{background:rgba(221,239,232,.92);border-color:rgba(79,142,158,.36)}
+    .locationLegendItem:hover{background:rgba(255,255,255,.72);border-color:rgba(79,142,158,.16)}
     .filters{display:grid;grid-template-columns:1.5fr repeat(4,minmax(130px,1fr));gap:8px;margin:0;align-items:center}
     .filters.more{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:12px;row-gap:0;transition:row-gap .24s var(--ease)}
     .filterSearch{position:relative;min-width:0}
@@ -566,6 +566,7 @@
     .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::before{content:"";flex:0 0 16px;width:16px;height:16px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%233b6470' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='3'/%3E%3Cpath d='M8 2v4M16 2v4M3 10h18'/%3E%3C/svg%3E") center/contain no-repeat}
     .customSelect.open .customSelectButton::after{transform:rotate(180deg)}
     .customSelectMenu{position:absolute;left:0;top:calc(100% + 7px);z-index:40;display:none;width:max-content;min-width:100%;max-width:min(310px,calc(100vw - 30px));max-height:280px;overflow:auto;padding:6px;border:1px solid rgba(11,18,32,.08);border-radius:16px;background:rgba(255,255,255,.98);box-shadow:0 18px 44px rgba(20,38,42,.17)}
+    .customSelect.openUp .customSelectMenu{top:auto;bottom:calc(100% + 7px)}
     .customSelect.open .customSelectMenu{display:grid;gap:2px}
     .customSelectOption{border:0;border-radius:11px;background:transparent;color:var(--ink);padding:9px 11px;font:inherit;font-size:.86rem;text-align:left;white-space:nowrap;cursor:pointer}
     .customSelectOption:hover,.customSelectOption.active{background:rgba(79,142,158,.10);color:var(--accent-dark)}
@@ -745,7 +746,7 @@
     .teamFormGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
     .teamField{display:grid;gap:7px;min-width:0}
     .teamField.wide{grid-column:1 / -1}
-    .teamAddressPair{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,.42fr);gap:12px;align-items:end}
+    .teamAddressPair{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,.42fr);gap:12px;align-items:end}
     .teamField span{font-size:.88rem;color:var(--accent-dark);font-weight:500}
     .teamField input,.teamField select,.teamField textarea{
       width:100%;min-width:0;max-width:100%;border:1px solid rgba(11,18,32,.08);background:rgba(255,255,255,.76);
@@ -884,6 +885,7 @@
       background:rgba(250,253,252,.98);box-shadow:0 18px 42px rgba(20,38,42,.16);
       backdrop-filter:blur(18px)
     }
+    .locationField .customSelect.openUp .customSelectMenu{top:auto;bottom:calc(100% + 8px)}
     .locationField .customSelectOption{
       min-height:42px;border-radius:13px;padding:10px 12px;color:var(--accent-dark);font-size:1rem
     }
@@ -1231,7 +1233,6 @@
 
     <section id="tab-inspiratie" class="tabPanel active" role="tabpanel">
       <section class="tabHero inspirationHero" aria-labelledby="inspirationHeroTitle">
-        <span class="tabHeroKicker">Nijmegen</span>
         <h1 class="tabHeroTitle" id="inspirationHeroTitle">Inspiratiebank</h1>
         <p class="tabHeroLine">Ontdek iets nieuws</p>
         <div class="tabHeroActions">
@@ -1317,7 +1318,7 @@
               <span>Categorie</span>
               <select id="teamIdeaDomainInput" name="domain" data-theme-select="true"></select>
             </label>
-            <label class="teamField">
+            <label class="teamField wide">
               <span>Locatie</span>
               <select id="teamIdeaLocationInput" name="locationType"></select>
             </label>
@@ -3702,6 +3703,17 @@
       control.classList.toggle('open', willOpen);
       button.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
       control.classList.remove('openUp');
+      if(willOpen){
+        const buttonRect = button.getBoundingClientRect();
+        const menuHeight = Math.min(menu.scrollHeight || 0, 280);
+        const modalCard = control.closest('.ideaModalCard');
+        const clipsToCard = modalCard && getComputedStyle(modalCard).overflow !== 'visible';
+        const modalBottom = clipsToCard ? modalCard.getBoundingClientRect().bottom : window.innerHeight;
+        const lowerBoundary = Math.min(window.innerHeight, modalBottom);
+        const spaceBelow = lowerBoundary - buttonRect.bottom;
+        const spaceAbove = buttonRect.top;
+        control.classList.toggle('openUp', spaceBelow < menuHeight + 18 && spaceAbove > spaceBelow);
+      }
     });
   }
   function fillSelect(id, values, label, labeler=value => value){
