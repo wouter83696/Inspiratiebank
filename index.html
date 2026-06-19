@@ -43,7 +43,7 @@
       --focus:0 0 0 4px rgba(127,207,201,.38);
     }
     *{box-sizing:border-box}
-    html{background:var(--bg);scroll-behavior:smooth;overflow-x:hidden}
+    html{background:var(--bg);scroll-behavior:auto;overflow-x:hidden}
     body{
       margin:0;
       padding-top:36px;
@@ -618,7 +618,7 @@
       #ideaFilters .filterOptions .filterShuffle{min-width:max-content;padding-left:10px;padding-right:10px}
       #ideaFilters .filterOptions .filterReset{min-width:max-content;justify-self:start}
     }
-    .teamHead{margin-top:28px}
+    .teamHead{margin-top:28px;scroll-margin-top:22px}
     #longerOffers{scroll-margin-top:100px}
     .ideaToolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:16px 0 12px;flex-wrap:wrap}
     .ideaToolbar.viewOnly{justify-content:flex-end;margin-top:0}
@@ -722,7 +722,7 @@
       opacity:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);
     }
     .teamFileControl{
-      display:flex;align-items:center;gap:10px;min-height:50px;width:100%;box-sizing:border-box;
+      display:flex;align-items:center;gap:10px;min-height:50px;width:100%;min-width:0;max-width:100%;box-sizing:border-box;overflow:hidden;
       border:1px solid rgba(11,18,32,.08);border-radius:15px;background:#fff;
       padding:8px;color:var(--ink);cursor:pointer;
       transition:border-color .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease)
@@ -732,7 +732,7 @@
       border-color:rgba(79,142,158,.28);box-shadow:0 0 0 3px rgba(168,225,221,.2)
     }
     .teamFileButton{
-      display:inline-flex;align-items:center;gap:8px;min-height:34px;padding:7px 12px;
+      display:inline-flex;align-items:center;gap:8px;flex:0 0 auto;min-height:34px;padding:7px 12px;
       border:1px solid rgba(79,142,158,.12);border-radius:11px;background:#fff;
       color:var(--accent-dark);font-size:.92rem;font-weight:600;white-space:nowrap
     }
@@ -741,9 +741,10 @@
       stroke-linecap:round;stroke-linejoin:round
     }
     .teamFileName{
-      min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+      flex:1 1 auto;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
       color:rgba(11,18,32,.46);font-size:.92rem;font-weight:500
     }
+    .teamFileName:empty{display:none}
     .teamFieldHint{font-size:.78rem;line-height:1.35;color:rgba(11,18,32,.55)}
     .teamActionBar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
     .teamActionButtons{display:flex;gap:10px;flex-wrap:wrap}
@@ -1040,6 +1041,8 @@
       .ongoingAccordion td:nth-child(8)::before{content:"Website"}
       .ongoingAccordion td.websiteCell{text-align:left}
       .ongoingAccordion .siteButton{max-width:100%;min-height:34px;padding:8px 12px;font-size:.84rem}
+      .teamFileControl{align-items:flex-start;flex-direction:column}
+      .teamFileName{width:100%}
       .teamForm .teamActionBar{justify-content:center}
       .teamForm .teamActionBar .formButton.primary{justify-content:center}
       .teamForm .teamFormStatus{flex-basis:100%;margin-left:0;text-align:center}
@@ -1220,8 +1223,8 @@
       <div id="inspirationThemeLegend"></div>
       <div id="ideaList" class="tableWrap ideaView" hidden></div>
       <div id="ideaCards" class="cards ideaView active"></div>
-      <div class="sectionHead teamHead"><div><h2>Delen</h2><p>Heb je een idee, uitje of link dat ook anderen kan inspireren? Voeg het hier toe. Na beoordeling kan het tussen de andere inspiratie-items komen te staan.</p></div></div>
-      <div id="teamAdditions" class="teamFormBox">
+      <div id="teamAdditions" class="sectionHead teamHead"><div><h2>Delen</h2><p>Heb je een idee, uitje of link dat ook anderen kan inspireren? Voeg het hier toe. Na beoordeling kan het tussen de andere inspiratie-items komen te staan.</p></div></div>
+      <div class="teamFormBox">
         <form id="teamIdeaForm" class="teamForm">
           <div class="teamFormGrid">
             <label class="teamField wide">
@@ -1280,7 +1283,7 @@
                   <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="m21 15-4.5-4.5L9 18"></path><path d="m14 14-2-2-5 6"></path></svg>
                   Afbeelding toevoegen
                 </span>
-                <span id="teamIdeaImageName" class="teamFileName">Geen bestand geselecteerd</span>
+                <span id="teamIdeaImageName" class="teamFileName"></span>
               </span>
               <small class="teamFieldHint">De foto wordt eerst beoordeeld en verschijnt pas daarna op een inspiratietegel.</small>
             </label>
@@ -2551,7 +2554,7 @@
     const input = $('#teamIdeaImageInput');
     const name = $('#teamIdeaImageName');
     if(!input || !name) return;
-    name.textContent = input.files && input.files[0] ? input.files[0].name : 'Geen bestand geselecteerd';
+    name.textContent = input.files && input.files[0] ? input.files[0].name : '';
   }
   function setupTeamForm(){
     fillSelectOptions('#teamIdeaDomainInput', unique(allInspirationItems().map(x=>x.domain)), domainDisplayLabel);
@@ -3326,7 +3329,34 @@
   }
   function scrollToSection(id){
     const target = document.getElementById(id);
-    if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    if(!target) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
+    const offset = isMobile ? 92 : 104;
+    const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
+    animatePageScroll(top, reduceMotion ? 0 : (isMobile ? 420 : 520));
+  }
+  function scrollToTop(){
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const distance = window.scrollY;
+    const duration = distance > 1200 ? 0 : 360;
+    animatePageScroll(0, reduceMotion ? 0 : duration);
+  }
+  function animatePageScroll(targetTop, duration=420){
+    const startTop = window.scrollY;
+    const distance = targetTop - startTop;
+    if(!duration || Math.abs(distance) < 4){
+      window.scrollTo(0, targetTop);
+      return;
+    }
+    const start = performance.now();
+    const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const step = now => {
+      const progress = Math.min(1, (now - start) / duration);
+      window.scrollTo(0, startTop + distance * ease(progress));
+      if(progress < 1) window.requestAnimationFrame(step);
+    };
+    window.requestAnimationFrame(step);
   }
   function setupFilters(){
     const items = allInspirationItems();
@@ -3580,6 +3610,13 @@
     $('#linkAddForm').addEventListener('submit', handleLinkAddSubmit);
     const randomIdeaBtn = $('#randomIdeaBtn');
     if(randomIdeaBtn) randomIdeaBtn.addEventListener('click', showRandomIdea);
+    $$('a[href="#teamAdditions"],a[href="#sourceAdditions"],a[href="#weekPanels"]').forEach(link => {
+      link.addEventListener('click', event => {
+        const id = link.getAttribute('href').slice(1);
+        event.preventDefault();
+        scrollToSection(id);
+      });
+    });
     const mixIdeasBtn = $('#mixIdeasBtn');
     if(mixIdeasBtn) mixIdeasBtn.addEventListener('click', () => {
       ideaMixSeed += 1;
@@ -3663,10 +3700,7 @@
 	      };
 	      window.addEventListener('scroll', syncBackToTop, {passive:true});
 	      window.addEventListener('resize', syncBackToTop);
-	      backToTopBtn.addEventListener('click', () => {
-	        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	        window.scrollTo({top:0, behavior:reduceMotion ? 'auto' : 'smooth'});
-	      });
+	      backToTopBtn.addEventListener('click', scrollToTop);
 	      syncBackToTop();
 	    }
 	    const refreshMinutes = Number(CONFIG.refreshMinutes || 5);
