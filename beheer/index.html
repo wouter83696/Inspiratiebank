@@ -359,10 +359,14 @@
     .domainIcon svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .agendaThemeLegend{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 12px}
     .agendaLegendItem{
+      appearance:none;font:inherit;text-align:left;
       display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 8px;
       background:rgba(255,255,255,.58);border:1px solid var(--theme-line);
-      color:var(--theme-ink);font-size:.76rem;font-weight:500;line-height:1
+      color:var(--theme-ink);font-size:.76rem;font-weight:500;line-height:1;white-space:nowrap
     }
+    button.agendaLegendItem{cursor:pointer;transition:background .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease)}
+    button.agendaLegendItem:hover{background:rgba(255,255,255,.76);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-line) 64%,transparent);transform:translateY(-1px)}
+    button.agendaLegendItem.active{background:var(--theme-tint);box-shadow:inset 0 0 0 1px var(--theme-line);color:var(--theme-ink)}
     .adminIdeaToolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:16px 0 12px;flex-wrap:wrap}
     .viewBar{display:flex;justify-content:flex-end;align-items:center;margin:0}
     .viewSwitch{display:inline-flex;align-items:center;gap:1px;margin:0;padding:3px;border:1px solid rgba(255,255,255,.76);border-radius:14px;background:rgba(255,255,255,.52);box-shadow:0 5px 14px rgba(20,38,42,.04)}
@@ -758,7 +762,61 @@
       .adminSidebarFoot .mini,#adminApp.adminSidebarCollapsed .adminSidebarFoot .mini{grid-template-columns:30px minmax(0,1fr);width:100%;margin:0;padding:7px 8px}
       .adminWorkspaceShell,#adminApp.adminSidebarCollapsed .adminWorkspaceShell{margin-left:0;padding:0;max-width:none}
     }
-    @media (max-width:640px){.filterBar{padding:10px}.filters.more{grid-template-columns:minmax(0,1fr) auto;gap:8px}.filterSearch{grid-column:auto}.filterToggle{display:inline-flex}.filters.more.expanded .filterToggle{background:rgba(168,225,221,.30);border-color:rgba(79,142,158,.14)}.filters.more:not(.expanded)>select,.filters.more:not(.expanded)>.customSelect,.filters.more:not(.expanded)>.filterReset{display:none}.filters.more>select,.filters.more>.customSelect,.filters.more>.filterReset{grid-column:1/-1}.filterReset{justify-content:center}.agendaControlBar{grid-template-columns:1fr}.agendaReviewWeekHead{padding:18px 16px;gap:16px}.agendaReviewWeekTitle{gap:14px}.agendaReviewWeekBadge{width:56px;height:56px;font-size:1.42rem}.agendaReviewWeekHead h3{font-size:1.55rem}.agendaReviewBoard{grid-template-columns:1fr;overflow:visible;margin:0}.agendaReviewDay{min-height:auto;padding:16px 12px 14px;gap:14px;border-right:0;border-bottom:1px solid rgba(11,18,32,.055)}.agendaReviewCard{min-height:132px}.agendaReviewDetails{grid-template-columns:1fr}.agendaReviewList{max-height:none;overflow:visible}.agendaReviewActions .button,.agendaReviewCardActions .button{flex:1 1 auto}}
+    @media (max-width:640px){.filterBar{padding:10px}.filters.more{grid-template-columns:minmax(0,1fr) auto;gap:8px}.filterSearch{grid-column:auto}.filterToggle{display:inline-flex}.filters.more.expanded .filterToggle{background:rgba(168,225,221,.30);border-color:rgba(79,142,158,.14)}.filters.more:not(.expanded)>select,.filters.more:not(.expanded)>.customSelect,.filters.more:not(.expanded)>.filterReset{display:none}.filters.more>select,.filters.more>.customSelect,.filters.more>.filterReset{grid-column:1/-1}.filterReset{justify-content:center}#adminThemeLegend,.agendaAdminThemeLegend{margin-left:-14px;margin-right:-14px;overflow:hidden}.agendaThemeLegend{flex-wrap:nowrap;overflow-x:auto;padding:0 14px 3px;scrollbar-width:none}.agendaThemeLegend::-webkit-scrollbar{display:none}.agendaControlBar{grid-template-columns:1fr}.agendaReviewWeekHead{padding:18px 16px;gap:16px}.agendaReviewWeekTitle{gap:14px}.agendaReviewWeekBadge{width:56px;height:56px;font-size:1.42rem}.agendaReviewWeekHead h3{font-size:1.55rem}.agendaReviewBoard{grid-template-columns:1fr;overflow:visible;margin:0}.agendaReviewDay{min-height:auto;padding:16px 12px 14px;gap:14px;border-right:0;border-bottom:1px solid rgba(11,18,32,.055)}.agendaReviewCard{min-height:132px}.agendaReviewDetails{grid-template-columns:1fr}.agendaReviewList{max-height:none;overflow:visible}.agendaReviewActions .button,.agendaReviewCardActions .button{flex:1 1 auto}}
+    @media (max-width:640px){
+      body.adminMode .shell{padding:0 10px 44px}
+      .adminLayout{gap:10px;margin-top:0}
+      .adminSidebar,#adminApp.adminSidebarCollapsed .adminSidebar{
+        position:sticky;top:0;z-index:75;margin:0 -10px 6px;padding:9px 10px 10px;border-radius:0 0 20px 20px;
+        border-left:0;border-right:0;border-top:0
+      }
+      .adminSidebarBrand,#adminApp.adminSidebarCollapsed .adminSidebarBrand{padding:0 2px 6px}
+      .adminSidebarSub{display:none}
+      .adminSidebarGroup,#adminApp.adminSidebarCollapsed .adminSidebarGroup{
+        display:flex;grid-template-columns:none;gap:6px;overflow-x:auto;padding:2px 0 4px;scrollbar-width:none
+      }
+      .adminSidebarGroup::-webkit-scrollbar{display:none}
+      .adminNavButton,#adminApp.adminSidebarCollapsed .adminNavButton{
+        flex:0 0 auto;grid-template-columns:26px auto;width:auto;margin:0;padding:7px 9px;border-radius:12px;gap:7px
+      }
+      .adminNavSub,#adminApp.adminSidebarCollapsed .adminNavSub{margin:0;width:auto}
+      .adminNavIcon,#adminApp.adminSidebarCollapsed .adminNavIcon{width:26px;height:26px;border-radius:9px}
+      .adminNavText,#adminApp.adminSidebarCollapsed .adminNavText{display:block;font-size:.82rem}
+      .adminNavHint,#adminApp.adminSidebarCollapsed .adminNavHint{display:none}
+      .adminSidebarFoot,#adminApp.adminSidebarCollapsed .adminSidebarFoot{display:flex;gap:6px;padding-top:6px;border-top:1px solid rgba(11,18,32,.055)}
+      .adminSidebarFoot .mini,#adminApp.adminSidebarCollapsed .adminSidebarFoot .mini{
+        grid-template-columns:24px auto;width:auto;margin:0;padding:6px 8px;min-height:30px;font-size:.78rem
+      }
+      .adminWorkspaceShell,#adminApp.adminSidebarCollapsed .adminWorkspaceShell{padding:8px 0 44px}
+      .workspaceHeader{display:block;margin:8px 0 10px;padding:0 2px}
+      .workspaceHeader h2{font-size:1.38rem}
+      .workspaceHeader p{font-size:.9rem;line-height:1.4}
+      .panel{padding:14px;border-radius:20px;margin-top:10px}
+      .panelHead{align-items:flex-start;flex-direction:column;gap:10px}
+      .adminIdeaToolbar{margin:10px 0 8px}
+      .viewBar{width:100%;justify-content:flex-start}
+      #adminIdeaList.tableWrap{overflow:visible;border:0;background:transparent;border-radius:0}
+      #adminIdeaList table,#adminIdeaList tbody,#adminIdeaList tr,#adminIdeaList td{display:block;width:100%;min-width:0}
+      #adminIdeaList thead{display:none}
+      #adminIdeaList tbody{display:grid;gap:10px}
+      #adminIdeaList tr{
+        padding:13px;border:1px solid color-mix(in srgb,var(--theme-line) 58%,#EAECEF);
+        border-radius:18px;background:rgba(255,255,255,.72);box-shadow:0 10px 24px rgba(20,38,42,.045)
+      }
+      #adminIdeaList tr.ideaThemeRow{background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.74)}
+      #adminIdeaList td{
+        display:grid;grid-template-columns:78px minmax(0,1fr);gap:8px;align-items:start;padding:7px 0;border:0;font-size:.88rem
+      }
+      #adminIdeaList td::before{content:attr(data-label);color:rgba(11,18,32,.48);font-size:.72rem;font-weight:600;letter-spacing:.01em}
+      #adminIdeaList td:first-child{display:block;padding-top:0}
+      #adminIdeaList td:first-child::before{display:none}
+      #adminIdeaList td:last-child{
+        position:static;min-width:0;background:transparent;box-shadow:none;padding-bottom:0
+      }
+      #adminIdeaList .ideaActions{justify-content:flex-start}
+      #adminIdeaList .siteButton{max-width:100%}
+      #adminIdeaList .adminIdeaPhotoPreview{min-width:0}
+    }
   </style>
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css">
 </head>
@@ -2239,7 +2297,23 @@
     return `<span class="${className}"><span class="domainIcon" aria-hidden="true">${domainIcon(domain)}</span><span class="adminIdeaTitleText">${escapeHtml(title)}</span></span>`;
   }
   function renderAdminThemeLegend(){
-    $('#adminThemeLegend').innerHTML = `<div class="agendaThemeLegend" aria-label="Legenda themakleuren">${ADMIN_THEME_LEGEND.map(domain => `<span class="agendaLegendItem ${domainThemeClass(domain)}"><span class="domainIcon" aria-hidden="true">${domainIcon(domain)}</span>${escapeHtml(domainDisplayLabel(domain))}</span>`).join('')}</div>`;
+    const allItem = `<button class="agendaLegendItem themeDefault active" type="button" data-admin-theme-filter="all" aria-pressed="true">Alles</button>`;
+    const items = ADMIN_THEME_LEGEND.map(domain => {
+      const label = domainDisplayLabel(domain);
+      return `<button class="agendaLegendItem ${domainThemeClass(domain)}" type="button" data-admin-theme-filter="${escapeHtml(label)}" aria-pressed="false"><span class="domainIcon" aria-hidden="true">${domainIcon(domain)}</span>${escapeHtml(label)}</button>`;
+    }).join('');
+    $('#adminThemeLegend').innerHTML = `<div class="agendaThemeLegend" aria-label="Filter op categorie">${allItem}${items}</div>`;
+  }
+  function updateAdminThemeChips(){
+    const select = $('#ideaDomainFilter');
+    const active = domainDisplayLabel(select?.value || 'all');
+    $$('#adminThemeLegend [data-admin-theme-filter]').forEach(button => {
+      const selected = active === 'all'
+        ? button.dataset.adminThemeFilter === 'all'
+        : normalize(button.dataset.adminThemeFilter) === normalize(active);
+      button.classList.toggle('active', selected);
+      button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+    });
   }
   function adminThemeOrder(domain){
     const label = domainDisplayLabel(domain);
@@ -2542,13 +2616,13 @@
     const source = item.source || item.kind;
     const website = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.source || 'Open')}</a>` : '<span class="small">-</span>';
     return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)} ${item.hidden ? 'hiddenItem' : ''}" data-idea-key="${escapeHtml(item.key)}">
-      <td>${titleWithIcon(item.title, item.domain, 'adminIdeaTitle')}<div class="small">${escapeHtml(item.duration || '')} • groep ${escapeHtml(item.group || '')}${item.hidden ? ' • Verborgen' : ''}</div><div class="small">${escapeHtml(source)}</div></td>
-      <td>${escapeHtml(domainDisplayLabel(item.domain))}</td>
-      <td>${adminIdeaPhotoPreview(item)}</td>
-      <td><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel || item.stimulus)}</div><div class="small">Bus: ${escapeHtml(item.bus || 'Nee')}</div></td>
-      <td><div class="small">${escapeHtml(item.rules || item.materials || item.description || '-')}</div></td>
-      <td>${website}</td>
-      <td>${adminIdeaActions(item)}</td>
+      <td data-label="Activiteit">${titleWithIcon(item.title, item.domain, 'adminIdeaTitle')}<div class="small">${escapeHtml(item.duration || '')} • groep ${escapeHtml(item.group || '')}${item.hidden ? ' • Verborgen' : ''}</div><div class="small">${escapeHtml(source)}</div></td>
+      <td data-label="Categorie">${escapeHtml(domainDisplayLabel(item.domain))}</td>
+      <td data-label="Foto">${adminIdeaPhotoPreview(item)}</td>
+      <td data-label="Badges"><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel || item.stimulus)}</div><div class="small">Bus: ${escapeHtml(item.bus || 'Nee')}</div></td>
+      <td data-label="Praktisch"><div class="small">${escapeHtml(item.rules || item.materials || item.description || '-')}</div></td>
+      <td data-label="Website">${website}</td>
+      <td data-label="Beheer">${adminIdeaActions(item)}</td>
     </tr>`;
   }
   function renderIdeas(){
@@ -2556,6 +2630,7 @@
     const query = $('#ideaSearch').value;
     const filters = ideaFilterValues();
     const items = sortAdminIdeas(allAdminIdeas().filter(item => ideaMatches(item, query)).filter(item => passesIdeaFilters(item, filters)));
+    updateAdminThemeChips();
     $('#ideaCount').textContent = `${items.length} item${items.length === 1 ? '' : 's'}`;
     const empty = `<div class="empty">${escapeHtml(adminIdeaEmptyMessage(query, filters))}</div>`;
     $('#adminIdeaList').innerHTML = items.length
@@ -2674,7 +2749,23 @@
 	    return status || note ? `<p>${status}${escapeHtml(note)}</p>` : '';
 	  }
 	  function agendaThemeLegendHtml(){
-	    return `<div class="agendaThemeLegend" aria-label="Legenda themakleuren">${ADMIN_THEME_LEGEND.map(domain => `<span class="agendaLegendItem ${domainThemeClass(domain)}"><span class="domainIcon" aria-hidden="true">${domainIcon(domain)}</span>${escapeHtml(domainDisplayLabel(domain))}</span>`).join('')}</div>`;
+	    const allItem = `<button class="agendaLegendItem themeDefault active" type="button" data-admin-agenda-theme-filter="all" aria-pressed="true">Alles</button>`;
+	    const items = ADMIN_THEME_LEGEND.map(domain => {
+	      const label = domainDisplayLabel(domain);
+	      return `<button class="agendaLegendItem ${domainThemeClass(domain)}" type="button" data-admin-agenda-theme-filter="${escapeHtml(label)}" aria-pressed="false"><span class="domainIcon" aria-hidden="true">${domainIcon(domain)}</span>${escapeHtml(label)}</button>`;
+	    }).join('');
+	    return `<div class="agendaThemeLegend" aria-label="Filter op categorie">${allItem}${items}</div>`;
+	  }
+	  function updateAgendaAdminThemeChips(){
+	    const select = $('#agendaAdminDomainFilter');
+	    const active = domainDisplayLabel(select?.value || 'all');
+	    $$('#agendaAdminThemeLegend [data-admin-agenda-theme-filter]').forEach(button => {
+	      const selected = active === 'all'
+	        ? button.dataset.adminAgendaThemeFilter === 'all'
+	        : normalize(button.dataset.adminAgendaThemeFilter) === normalize(active);
+	      button.classList.toggle('active', selected);
+	      button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+	    });
 	  }
 	  function agendaDisplayHost(value=''){
 	    try{
@@ -2739,6 +2830,7 @@
 	    fillIdeaFilter('#agendaAdminStimulusFilter', IDEA_STIMULUS_OPTIONS, 'Prikkelbelasting');
 	    ['#agendaAdminStatusFilter','#agendaAdminKindFilter','#agendaAdminDistanceFilter','#agendaAdminCostFilter','#agendaAdminStimulusFilter'].forEach(selector => enhanceCustomSelect($(selector)));
 	    $('#agendaAdminThemeLegend').innerHTML = agendaThemeLegendHtml();
+	    updateAgendaAdminThemeChips();
 	  }
 	  function setAgendaAdminView(view='week'){
 	    agendaAdminView = view === 'list' ? 'list' : 'week';
@@ -2910,6 +3002,7 @@
 	    const verified = verifiedAgendaIds();
 	    const rules = agendaBlockRules();
 	    const filters = agendaAdminFilters();
+	    updateAgendaAdminThemeChips();
 	    const allItems = agendaReviewItems()
 	      .filter(item => !deleted.has(item.id) && !deleted.has(agendaItemKey(item)) && !deleted.has(agendaContentKey(item)))
 	      .sort((a, b) => {
@@ -3862,6 +3955,17 @@
       const expanded = filters.classList.toggle('expanded');
       $('#adminFilterToggle').setAttribute('aria-expanded', expanded ? 'true' : 'false');
     });
+    $('#adminThemeLegend').addEventListener('click', event => {
+      const chip = event.target.closest('[data-admin-theme-filter]');
+      if(!chip) return;
+      const select = $('#ideaDomainFilter');
+      const current = domainDisplayLabel(select.value);
+      const next = normalize(current) === normalize(chip.dataset.adminThemeFilter) ? 'all' : chip.dataset.adminThemeFilter;
+      const matching = [...select.options].find(option => normalize(domainDisplayLabel(option.value)) === normalize(next));
+      select.value = matching ? matching.value : 'all';
+      syncCustomSelect(select);
+      renderIdeas();
+    });
     $('#adminMenu').addEventListener('click', event => {
       if(event.target.closest('a')) $('#adminMenu').open = false;
     });
@@ -3878,6 +3982,17 @@
     }));
     ['#agendaAdminSearch','#agendaAdminWeekSelect','#agendaAdminKindFilter','#agendaAdminDomainFilter','#agendaAdminDistanceFilter','#agendaAdminCostFilter','#agendaAdminStimulusFilter','#agendaAdminStatusFilter']
       .forEach(selector => $(selector).addEventListener(selector === '#agendaAdminSearch' ? 'input' : 'change', renderAgendaReview));
+    $('#agendaAdminThemeLegend').addEventListener('click', event => {
+      const chip = event.target.closest('[data-admin-agenda-theme-filter]');
+      if(!chip) return;
+      const select = $('#agendaAdminDomainFilter');
+      const current = domainDisplayLabel(select.value);
+      const next = normalize(current) === normalize(chip.dataset.adminAgendaThemeFilter) ? 'all' : chip.dataset.adminAgendaThemeFilter;
+      const matching = [...select.options].find(option => normalize(domainDisplayLabel(option.value)) === normalize(next));
+      select.value = matching ? matching.value : 'all';
+      syncCustomSelect(select);
+      renderAgendaReview();
+    });
     $('#agendaAdminResetBtn').addEventListener('click', () => {
       $('#agendaAdminSearch').value = '';
       $('#agendaAdminWeekSelect').value = 'all';
