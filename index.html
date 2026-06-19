@@ -3044,13 +3044,12 @@
     const distanceLabel = normalizeIdeaDistance(item.distanceBand, item);
     const costLabel = normalizeIdeaCost(item.cost);
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
+    const placePills = compactPlacePills(locationLabel, distanceLabel).map(label => pill(label, 'soft')).join(' ');
     const sourceLink = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.source || 'Bekijk website')}</a>` : '<span class="small">-</span>';
     return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)}" data-idea-key="${escapeHtml(ideaDomKey(item))}">
       <td>${titleWithIcon(item.title, item.domain, 'nameWithIcon')}<div class="small">${escapeHtml(item.duration || '')} • groep ${escapeHtml(item.group || '')}</div></td>
       <td>${escapeHtml(domainDisplayLabel(item.domain))}</td>
-      <td>${escapeHtml(locationLabel)}<div class="small">${escapeHtml(distanceLabel)} • Bus: ${escapeHtml(item.bus || 'Nee')}</div></td>
-      <td>${costPill(costLabel)}</td>
-      <td>${pill(stimulusLabel || 'Nog bepalen', cssKind(stimulusLabel))}</td>
+      <td><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div><div class="small">Bus: ${escapeHtml(item.bus || 'Nee')}</div></td>
       <td><div class="small">${escapeHtml(audienceText(item.materials || item.fit || ''))}</div></td>
       <td><div class="ideaActions">${sourceLink}${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}</div></td>
     </tr>`;
@@ -3369,7 +3368,7 @@
     const empty = `<div class="empty">${escapeHtml(inspirationEmptyMessage())}</div>`;
     $('#ideaCards').innerHTML = items.length ? items.map(cardIdea).join('') : empty;
     $('#ideaList').innerHTML = items.length
-      ? `<table><thead><tr><th>Activiteit</th><th>Categorie</th><th>Locatie</th><th>Kosten</th><th>Prikkel</th><th>Praktisch</th><th>Website</th></tr></thead><tbody>${items.map(ideaRow).join('')}</tbody></table>`
+      ? `<table><thead><tr><th>Activiteit</th><th>Categorie</th><th>Badges</th><th>Praktisch</th><th>Website</th></tr></thead><tbody>${items.map(ideaRow).join('')}</tbody></table>`
       : empty;
   }
   function showRandomIdea(){

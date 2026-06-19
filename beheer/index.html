@@ -581,7 +581,7 @@
     .empty{padding:18px;border:1px dashed rgba(11,18,32,.14);border-radius:18px;background:rgba(255,255,255,.40);color:var(--muted);text-align:center}
     .tableWrap{overflow-x:auto;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.48)}
     table{width:100%;border-collapse:separate;border-spacing:0;min-width:760px}
-    #adminIdeaList table{min-width:1080px}
+    #adminIdeaList table{min-width:980px}
     th,td{text-align:left;vertical-align:top;border-bottom:1px solid rgba(11,18,32,.07);padding:11px 12px;font-size:.92rem;line-height:1.35}
     th{color:rgba(11,18,32,.56);font-weight:500;background:rgba(255,255,255,.55)}
     tr:last-child td{border-bottom:0}
@@ -2303,15 +2303,14 @@
     const distanceLabel = normalizeIdeaDistance(item.distanceBand, item);
     const costLabel = normalizeIdeaCost(item.cost);
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
+    const placePills = compactPlacePills(locationLabel, distanceLabel).map(label => pill(label, 'soft')).join(' ');
     const source = item.source || item.kind;
     const website = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.source || 'Open')}</a>` : '<span class="small">-</span>';
     return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)} ${item.hidden ? 'hiddenItem' : ''}" data-idea-key="${escapeHtml(item.key)}">
       <td>${titleWithIcon(item.title, item.domain, 'adminIdeaTitle')}<div class="small">${escapeHtml(item.duration || '')} • groep ${escapeHtml(item.group || '')}${item.hidden ? ' • Verborgen' : ''}</div><div class="small">${escapeHtml(source)}</div></td>
       <td>${escapeHtml(domainDisplayLabel(item.domain))}</td>
-      <td>${escapeHtml(locationLabel)}<div class="small">${escapeHtml(distanceLabel)} • Bus: ${escapeHtml(item.bus || 'Nee')}</div></td>
       <td>${adminIdeaPhotoPreview(item)}</td>
-      <td>${costPill(costLabel)}</td>
-      <td>${stimulusPill(stimulusLabel || item.stimulus)}</td>
+      <td><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel || item.stimulus)}</div><div class="small">Bus: ${escapeHtml(item.bus || 'Nee')}</div></td>
       <td><div class="small">${escapeHtml(item.rules || item.materials || item.description || '-')}</div></td>
       <td>${website}</td>
       <td>${adminIdeaActions(item)}</td>
@@ -2325,7 +2324,7 @@
     $('#ideaCount').textContent = `${items.length} item${items.length === 1 ? '' : 's'}`;
     const empty = `<div class="empty">${escapeHtml(adminIdeaEmptyMessage(query, filters))}</div>`;
     $('#adminIdeaList').innerHTML = items.length
-      ? `<table><thead><tr><th>Activiteit</th><th>Categorie</th><th>Locatie</th><th>Foto</th><th>Kosten</th><th>Prikkel</th><th>Praktisch</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${items.map(adminIdeaRow).join('')}</tbody></table>`
+      ? `<table><thead><tr><th>Activiteit</th><th>Categorie</th><th>Foto</th><th>Badges</th><th>Praktisch</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${items.map(adminIdeaRow).join('')}</tbody></table>`
       : empty;
     $('#adminIdeaCards').innerHTML = items.length ? items.map(adminIdeaCard).join('') : empty;
   }
