@@ -14,6 +14,8 @@
   <link rel="canonical" href="https://wouter83696.github.io/Inspiratiebank/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="website-bestanden/hero-achtergronden/inspiratiebank.svg" as="image" type="image/svg+xml">
+  <link rel="preload" href="website-bestanden/hero-achtergronden/uit-agenda.svg" as="image" type="image/svg+xml">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -191,10 +193,8 @@
     .tab{border:0;background:transparent;color:var(--muted);border-radius:999px;padding:8px 11px;white-space:nowrap;cursor:pointer;transition:.18s var(--ease)}
     .tab:hover{background:rgba(168,225,221,.20);color:var(--accent-dark)}
     .tab.active{background:rgba(168,225,221,.42);color:var(--accent-dark);box-shadow:inset 0 0 0 1px rgba(79,142,158,.08)}
-    .tabPanel{display:none;opacity:0;transform:translateY(10px);transition:opacity .34s var(--ease),transform .34s var(--ease)}
-    .tabPanel.active{display:block;opacity:1;transform:none;scroll-margin-top:92px}
-    .tabPanel.isExiting{display:block;opacity:.08;transform:translateY(-12px)}
-    .tabPanel.active.isEntering{opacity:.08;transform:translateY(14px)}
+    .tabPanel{display:none;animation:in .25s var(--ease)}
+    .tabPanel.active{display:block;scroll-margin-top:92px}
     @keyframes in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
     .sectionHead{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin:24px 0 12px}
     .sectionHead.updatedHead{display:block;position:relative}
@@ -3360,6 +3360,16 @@
     };
     window.requestAnimationFrame(step);
   }
+  function warmHeroBackgrounds(){
+    [
+      'website-bestanden/hero-achtergronden/inspiratiebank.svg',
+      'website-bestanden/hero-achtergronden/uit-agenda.svg'
+    ].forEach(src => {
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = src;
+    });
+  }
   function setupFilters(){
     const items = allInspirationItems();
     fillSelect('#ideaDomain', unique(items.map(x=>x.domain)), 'Categorie', domainDisplayLabel);
@@ -3473,33 +3483,11 @@
     const name = String(window.location.hash || '').replace(/^#tab-/,'');
     return ['weken','inspiratie'].includes(name) ? name : '';
   }
-  let tabTransitionTimer = null;
   function setTab(name, options={}){
     $$('.tab').forEach(b=>{ const on=b.dataset.tab===name; b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
-    const nextPanel = $('#tab-'+name);
-    const currentPanel = $('.tabPanel.active');
-    if(!nextPanel || currentPanel === nextPanel) return;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches || options.scroll === false;
-    if(tabTransitionTimer){
-      window.clearTimeout(tabTransitionTimer);
-      tabTransitionTimer = null;
-    }
-    const activate = () => {
-      $$('.tabPanel').forEach(p => {
-        p.classList.remove('active','isExiting','isEntering');
-      });
-      nextPanel.classList.add('active','isEntering');
-      window.requestAnimationFrame(() => {
-        window.requestAnimationFrame(() => nextPanel.classList.remove('isEntering'));
-      });
-      if(options.scroll !== false) window.requestAnimationFrame(()=>scrollToSection(nextPanel.id));
-    };
-    if(!currentPanel || reduceMotion){
-      activate();
-      return;
-    }
-    currentPanel.classList.add('isExiting');
-    tabTransitionTimer = window.setTimeout(activate, 220);
+    $$('.tabPanel').forEach(p=>p.classList.toggle('active',p.id === 'tab-'+name));
+    const panel = $('#tab-'+name);
+    if(panel && options.scroll !== false) window.requestAnimationFrame(()=>scrollToSection(panel.id));
   }
   function setAgendaDayFocus(dayEl){
     const board = dayEl?.closest('.agendaBoard');
@@ -3564,6 +3552,7 @@
 	  async function init(){
 	    await loadCentralStorage();
 	    setupAgendaFilters(); renderAgenda(); refreshCollections(); setIdeaView('tiles');
+    warmHeroBackgrounds();
     setOngoingOpen(true, {scroll:false});
     const initialTab = tabFromHash();
     if(initialTab) setTab(initialTab, {scroll:false});
