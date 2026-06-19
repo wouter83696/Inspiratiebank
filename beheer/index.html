@@ -565,7 +565,12 @@
     .ideaThemeCard .pill{padding:6px 8px}
     .cardFooter{margin-top:auto;display:flex;gap:8px;flex-wrap:nowrap;align-items:center}
     .cardFooter .siteButton{min-width:0;max-width:calc(100% - 38px);overflow:hidden;text-overflow:ellipsis}
-    .ideaAdminCardActions{margin-top:2px;justify-content:flex-start}
+    .ideaAdminCardBottom{margin-top:auto;display:grid;gap:10px;padding-top:2px}
+    .ideaAdminCardBottom .cardFooter{margin-top:0}
+    .ideaAdminCardActions{
+      margin-top:0;padding-top:10px;border-top:1px solid rgba(11,18,32,.055);
+      justify-content:flex-start;min-height:41px;align-items:center
+    }
     .ideaAdminCardActions .ideaActions{width:100%;justify-content:flex-start}
     .ideaActions{display:flex;gap:8px;flex-wrap:nowrap;align-items:center;justify-content:flex-start}
     .ideaActions .button.iconAction{
@@ -2300,8 +2305,10 @@
       ${source ? `<div class="small">${escapeHtml(source)}</div>` : ''}
       <p>${escapeHtml(description)}</p>
       <p class="fine"><strong>Praktisch:</strong>${escapeHtml(practical)}</p>
-      ${website ? `<div class="cardFooter">${website}</div>` : ''}
-      <div class="agendaReviewCardActions ideaAdminCardActions">${adminIdeaActions(item)}</div>
+      <div class="ideaAdminCardBottom">
+        ${website ? `<div class="cardFooter">${website}</div>` : ''}
+        <div class="agendaReviewCardActions ideaAdminCardActions">${adminIdeaActions(item)}</div>
+      </div>
     </article>`;
   }
   function adminIdeaRow(item){
