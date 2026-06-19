@@ -1217,14 +1217,6 @@
                 </select>
               </label>
               <label class="teamField">
-                <span>Bus nodig?</span>
-                <select id="adminEditIdeaBus">
-                  <option value="Nee">Nee</option>
-                  <option value="Soms">Soms</option>
-                  <option value="Ja">Ja</option>
-                </select>
-              </label>
-              <label class="teamField">
                 <span>Duur</span>
                 <input id="adminEditIdeaDuration" type="text" placeholder="Bijv. 60-120 min">
               </label>
@@ -1758,9 +1750,7 @@
   }
   function cardMetaLine(item={}){
     const groupValue = String(item.group || 'Op maat').trim();
-    const busValue = String(item.bus || 'Nee').trim();
-    const autoLabel = /soms/i.test(busValue) ? 'soms' : /^ja$/i.test(busValue) ? 'nodig' : 'nee';
-    return `<span class="cardMetaLine"><strong>Duur:</strong> ${escapeHtml(item.duration || 'Op maat')} • <strong>Personen:</strong> ${escapeHtml(groupValue)} • <strong>Auto:</strong> ${escapeHtml(autoLabel)}</span>`;
+    return `<span class="cardMetaLine"><strong>Duur:</strong> ${escapeHtml(item.duration || 'Op maat')} • <strong>Personen:</strong> ${escapeHtml(groupValue)}</span>`;
   }
   function distanceLabelForKm(km, context='inspiration'){
     if(!Number.isFinite(km)) return '';
@@ -2660,7 +2650,7 @@
       <td data-label="Activiteit">${titleWithIcon(item.title, item.domain, 'adminIdeaTitle')}<div class="small">${escapeHtml(item.duration || '')} • groep ${escapeHtml(item.group || '')}${item.hidden ? ' • Verborgen' : ''}</div><div class="small">${escapeHtml(source)}</div></td>
       <td data-label="Categorie">${escapeHtml(domainDisplayLabel(item.domain))}</td>
       <td data-label="Foto">${adminIdeaPhotoPreview(item)}</td>
-      <td data-label="Badges"><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel || item.stimulus)}</div><div class="small">Bus: ${escapeHtml(item.bus || 'Nee')}</div></td>
+      <td data-label="Badges"><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel || item.stimulus)}</div></td>
       <td data-label="Praktisch"><div class="small">${escapeHtml(item.rules || item.materials || item.description || '-')}</div></td>
       <td data-label="Website">${website}</td>
       <td data-label="Beheer">${adminIdeaActions(item)}</td>
@@ -3896,7 +3886,6 @@
     setEditSelect('#adminEditIdeaDistance', item.distanceBand || 'Op locatie');
     setEditSelect('#adminEditIdeaCost', item.cost || 'Gratis');
     setEditSelect('#adminEditIdeaStimulus', item.stimulus || 'Middel');
-    setEditSelect('#adminEditIdeaBus', item.bus || 'Nee');
     $('#adminEditIdeaBy').value = item.by || item.source || '';
     $('#adminEditIdeaDuration').value = item.duration || '';
     $('#adminEditIdeaGroup').value = item.group || '';
@@ -3945,7 +3934,7 @@
       lon:$('#adminEditIdeaLon').value.trim(),
       cost:$('#adminEditIdeaCost').value,
       stimulus:$('#adminEditIdeaStimulus').value,
-      bus:$('#adminEditIdeaBus').value,
+      bus:original.bus || 'Niet bepaald',
       duration:$('#adminEditIdeaDuration').value.trim() || 'Op maat',
       group:$('#adminEditIdeaGroup').value.trim() || 'Op maat',
       fit:$('#adminEditIdeaDescription').value.trim(),
@@ -4129,7 +4118,7 @@
     });
     $('#adminEditIdeaDistanceKm').addEventListener('input', syncDistanceSelectFromKm);
     $('#adminEditIdeaImageUpload').addEventListener('change', handleAdminIdeaImageUpload);
-    ['#adminEditIdeaDomain','#adminEditIdeaLocation','#adminEditIdeaDistance','#adminEditIdeaCost','#adminEditIdeaStimulus','#adminEditIdeaBus']
+    ['#adminEditIdeaDomain','#adminEditIdeaLocation','#adminEditIdeaDistance','#adminEditIdeaCost','#adminEditIdeaStimulus']
       .forEach(selector => enhanceCustomSelect($(selector)));
     $('#exportBtn').addEventListener('click', exportAdminData);
     $('#importBtn').addEventListener('click', () => $('#importFile').click());

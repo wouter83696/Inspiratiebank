@@ -1353,14 +1353,6 @@
               <select id="teamIdeaStimulusInput" name="stimulus" data-choice-select="stimulus"></select>
             </label>
             <label class="teamField">
-              <span>Bus nodig?</span>
-              <select id="teamIdeaBusInput" name="bus">
-                <option value="Nee">Nee</option>
-                <option value="Soms">Soms</option>
-                <option value="Ja">Ja</option>
-              </select>
-            </label>
-            <label class="teamField">
               <span>Duur</span>
               <input id="teamIdeaDurationInput" name="duration" type="text" placeholder="Bijv. 60-120 min">
             </label>
@@ -2173,9 +2165,7 @@
   }
   function cardMetaLine(item={}){
     const groupValue = String(item.group || 'Op maat').trim();
-    const busValue = String(item.bus || 'Nee').trim();
-    const autoLabel = /soms/i.test(busValue) ? 'soms' : /^ja$/i.test(busValue) ? 'nodig' : 'nee';
-    return `<span class="cardMetaLine"><strong>Duur:</strong> ${escapeHtml(item.duration || 'Op maat')} • <strong>Personen:</strong> ${escapeHtml(groupValue)} • <strong>Auto:</strong> ${escapeHtml(autoLabel)}</span>`;
+    return `<span class="cardMetaLine"><strong>Duur:</strong> ${escapeHtml(item.duration || 'Op maat')} • <strong>Personen:</strong> ${escapeHtml(groupValue)}</span>`;
   }
   function distanceLabelForKm(km, context='inspiration'){
     if(!Number.isFinite(km)) return '';
@@ -2958,8 +2948,6 @@
     enhanceCustomSelect($('#teamIdeaDistanceInput'));
     enhanceCustomSelect($('#teamIdeaCostInput'));
     enhanceCustomSelect($('#teamIdeaStimulusInput'));
-    enhanceCustomSelect($('#teamIdeaBusInput'));
-    if($('#teamIdeaBusInput') && !$('#teamIdeaBusInput').value) $('#teamIdeaBusInput').value = 'Nee';
     syncTeamIdeaImageName();
   }
   function refreshCollections(){
@@ -3087,7 +3075,7 @@
       group:$('#teamIdeaGroupInput').value.trim() || 'Op maat',
       cost:$('#teamIdeaCostInput').value,
       stimulus:$('#teamIdeaStimulusInput').value,
-      bus:$('#teamIdeaBusInput').value,
+      bus:'Niet bepaald',
       fit:$('#teamIdeaFitInput').value.trim(),
       note:$('#teamIdeaNoteInput').value.trim(),
       url:$('#teamIdeaUrlInput').value.trim(),
@@ -3113,7 +3101,6 @@
     }
     form.reset();
     refreshCollections();
-    $('#teamIdeaBusInput').value = 'Nee';
     syncCustomSelect($('#teamIdeaDomainInput'));
     syncCustomSelect($('#teamIdeaLocationInput'));
     syncCustomSelect($('#teamIdeaDistanceInput'));
@@ -3415,7 +3402,7 @@
     return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)}">
 	      <td><span class="name">${escapeHtml(item.title)}</span><div>${agendaReviewPill(item)}</div><div class="small">${escapeHtml(item.date)} • ${escapeHtml(item.time)}</div></td>
       <td>${escapeHtml(domainDisplayLabel(item.domain))}</td>
-      <td>${escapeHtml(item.where)}<div class="small">${escapeHtml(distanceLabel)}${item.distanceKm ? ` • ${escapeHtml(item.distanceKm)}` : ''} • Bus: ${escapeHtml(item.bus)}</div></td>
+      <td>${escapeHtml(item.where)}<div class="small">${escapeHtml(distanceLabel)}${item.distanceKm ? ` • ${escapeHtml(item.distanceKm)}` : ''}</div></td>
       <td>${costPill(item.cost)}</td>
       <td>${pill(item.stimulus, cssKind(item.stimulus))}</td>
       <td><div class="small">${escapeHtml(audienceText(item.fit))}</div></td>
@@ -3428,7 +3415,7 @@
 	      <td><span class="name">${escapeHtml(item.title)}</span><div>${agendaReviewPill(item)}</div><div class="small">${escapeHtml(item.date)} • ${escapeHtml(item.time)}</div></td>
       <td>${escapeHtml(weekAvailabilityLabel(item))}</td>
       <td>${escapeHtml(domainDisplayLabel(item.domain))}</td>
-      <td>${escapeHtml(item.where)}<div class="small">${escapeHtml(distanceLabel)}${item.distanceKm ? ` • ${escapeHtml(item.distanceKm)}` : ''} • Bus: ${escapeHtml(item.bus)}</div></td>
+      <td>${escapeHtml(item.where)}<div class="small">${escapeHtml(distanceLabel)}${item.distanceKm ? ` • ${escapeHtml(item.distanceKm)}` : ''}</div></td>
       <td>${costPill(item.cost)}</td>
       <td>${pill(item.stimulus, cssKind(item.stimulus))}</td>
       <td><div class="small">${escapeHtml(audienceText(item.fit))}</div></td>
@@ -3499,7 +3486,7 @@
     return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)}" data-idea-key="${escapeHtml(ideaDomKey(item))}">
       <td>${titleWithIcon(item.title, item.domain, 'nameWithIcon')}<div class="small">${escapeHtml(item.duration || '')} • groep ${escapeHtml(item.group || '')}</div></td>
       <td>${escapeHtml(domainDisplayLabel(item.domain))}</td>
-      <td><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div><div class="small">Bus: ${escapeHtml(item.bus || 'Nee')}</div></td>
+      <td><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div></td>
       <td><div class="small">${escapeHtml(audienceText(item.materials || item.fit || ''))}</div></td>
       <td><div class="ideaActions">${sourceLink}${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}</div></td>
     </tr>`;
