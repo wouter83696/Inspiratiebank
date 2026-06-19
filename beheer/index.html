@@ -1183,8 +1183,6 @@
                 <input id="adminEditIdeaAddress" type="text" placeholder="Bijv. Zijpendaalseweg 24A, Arnhem">
                 <small id="adminEditIdeaAddressStatus" class="distanceEstimateStatus" role="status" aria-live="polite"></small>
                 <small id="adminEditIdeaDistanceStatus" class="distanceEstimateStatus"></small>
-                <input id="adminEditIdeaLat" type="hidden">
-                <input id="adminEditIdeaLon" type="hidden">
               </label>
               <label class="teamField">
                 <span>Afstand vanaf 6545 AL</span>
@@ -1847,8 +1845,6 @@
       address:String(item.address || item.where || item.place || item.location || '').trim(),
       postcode:cleanPostcode(item.postcode || ''),
       houseNumber:String(item.houseNumber || item.huisnummer || '').trim(),
-      lat:String(item.lat || '').trim(),
-      lon:String(item.lon || item.lng || '').trim(),
       note:String(item.note || item.materials || item.fit || '').trim(),
       source:item.source || `Ingebracht door ${by}`
     };
@@ -3735,15 +3731,11 @@
     const addressInput = $('#adminEditIdeaAddress');
     const addressStatus = $('#adminEditIdeaAddressStatus');
     const distanceStatus = $('#adminEditIdeaDistanceStatus');
-    const latInput = $('#adminEditIdeaLat');
-    const lonInput = $('#adminEditIdeaLon');
     if(!postcodeInput || !houseNumberInput || !addressInput) return;
     const postcode = postcodeInput.value.trim();
     const houseNumber = houseNumberInput.value.trim();
     if(!postcode || !houseNumber){
       if(addressStatus) addressStatus.textContent = '';
-      if(latInput) latInput.value = '';
-      if(lonInput) lonInput.value = '';
       return;
     }
     if(addressStatus) addressStatus.textContent = 'Adres opzoeken...';
@@ -3751,8 +3743,6 @@
       const result = await lookupAddressByPostcode(postcode, houseNumber);
       postcodeInput.value = result.postcode;
       addressInput.value = result.address;
-      if(latInput) latInput.value = Number.isFinite(result.lat) ? String(result.lat) : '';
-      if(lonInput) lonInput.value = Number.isFinite(result.lon) ? String(result.lon) : '';
       if(Number.isFinite(result.lat) && Number.isFinite(result.lon)){
         const km = Math.round(haversineKm(BASE_POSTCODE_COORDS, {lat:result.lat, lng:result.lon}) * 10) / 10;
         $('#adminEditIdeaDistanceKm').value = String(km);
@@ -3763,8 +3753,6 @@
       }
       if(addressStatus) addressStatus.textContent = 'Adres aangevuld.';
     }catch(error){
-      if(latInput) latInput.value = '';
-      if(lonInput) lonInput.value = '';
       if(addressStatus) addressStatus.textContent = error.message || 'Adres automatisch aanvullen lukte niet. Vul het adres handmatig in.';
     }
   }
@@ -3905,8 +3893,6 @@
     $('#adminEditIdeaPostcode').value = cleanPostcode(item.postcode || '');
     $('#adminEditIdeaHouseNumber').value = item.houseNumber || item.huisnummer || '';
     $('#adminEditIdeaAddress').value = item.address || item.where || '';
-    $('#adminEditIdeaLat').value = item.lat || '';
-    $('#adminEditIdeaLon').value = item.lon || item.lng || '';
     $('#adminEditIdeaAddressStatus').textContent = '';
     $('#adminEditIdeaDistanceKm').value = item.distanceKm || '';
     $('#adminEditIdeaDistanceStatus').textContent = '';
@@ -3942,8 +3928,6 @@
       address:$('#adminEditIdeaAddress').value.trim(),
       postcode:cleanPostcode($('#adminEditIdeaPostcode').value),
       houseNumber:$('#adminEditIdeaHouseNumber').value.trim(),
-      lat:$('#adminEditIdeaLat').value.trim(),
-      lon:$('#adminEditIdeaLon').value.trim(),
       cost:$('#adminEditIdeaCost').value,
       stimulus:$('#adminEditIdeaStimulus').value,
       bus:$('#adminEditIdeaBus').value,
@@ -4123,8 +4107,6 @@
       if(input) input.addEventListener('blur', syncAdminAddressFromPostcode);
     });
     $('#adminEditIdeaAddress').addEventListener('input', () => {
-      $('#adminEditIdeaLat').value = '';
-      $('#adminEditIdeaLon').value = '';
       $('#adminEditIdeaAddressStatus').textContent = '';
       syncAdminDistanceFromAddress();
     });

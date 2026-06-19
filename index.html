@@ -1278,8 +1278,6 @@
               <span>Adres</span>
               <input id="teamIdeaAddressInput" name="address" type="text" autocomplete="street-address" placeholder="Wordt automatisch aangevuld of vul handmatig in">
               <small id="teamIdeaAddressStatus" class="teamFieldHint" role="status" aria-live="polite"></small>
-              <input id="teamIdeaLatInput" type="hidden" name="lat">
-              <input id="teamIdeaLonInput" type="hidden" name="lon">
             </label>
             <label class="teamField">
               <span>Afstand</span>
@@ -2162,8 +2160,6 @@
       address: String(item.address || item.where || item.place || item.location || '').trim(),
       postcode: cleanPostcode(item.postcode || ''),
       houseNumber: String(item.houseNumber || item.huisnummer || '').trim(),
-      lat: String(item.lat || '').trim(),
-      lon: String(item.lon || item.lng || '').trim(),
       duration: item.duration || 'Op maat',
       group: item.group || 'Op maat',
       cost: normalizeIdeaCost(item.cost || '€'),
@@ -2829,20 +2825,23 @@
     if(!input || !name) return;
     name.textContent = input.files && input.files[0] ? input.files[0].name : '';
   }
+  function setTeamIdeaAddressDistance(km){
+    const form = $('#teamIdeaForm');
+    if(!form) return;
+    if(Number.isFinite(km)) form.dataset.addressDistanceKm = String(Math.round(km * 10) / 10);
+    else delete form.dataset.addressDistanceKm;
+  }
   async function syncTeamIdeaAddressFromPostcode(){
     const postcodeInput = $('#teamIdeaPostcodeInput');
     const houseNumberInput = $('#teamIdeaHouseNumberInput');
     const addressInput = $('#teamIdeaAddressInput');
     const status = $('#teamIdeaAddressStatus');
-    const latInput = $('#teamIdeaLatInput');
-    const lonInput = $('#teamIdeaLonInput');
     if(!postcodeInput || !houseNumberInput || !addressInput) return;
     const postcode = postcodeInput.value.trim();
     const houseNumber = houseNumberInput.value.trim();
     if(!postcode || !houseNumber){
       if(status) status.textContent = '';
-      if(latInput) latInput.value = '';
-      if(lonInput) lonInput.value = '';
+      setTeamIdeaAddressDistance(null);
       return;
     }
     if(status) status.textContent = 'Adres opzoeken...';
@@ -2850,20 +2849,19 @@
       const result = await lookupAddressByPostcode(postcode, houseNumber);
       postcodeInput.value = result.postcode;
       addressInput.value = result.address;
-      if(latInput) latInput.value = Number.isFinite(result.lat) ? String(result.lat) : '';
-      if(lonInput) lonInput.value = Number.isFinite(result.lon) ? String(result.lon) : '';
       const km = itemDistanceKm({lat:result.lat, lon:result.lon});
       if(Number.isFinite(km)){
+        setTeamIdeaAddressDistance(km);
         const distance = distanceLabelForKm(km);
         $('#teamIdeaDistanceInput').value = distance;
         syncCustomSelect($('#teamIdeaDistanceInput'));
         if(status) status.textContent = `Adres aangevuld. Afstand wordt geschat op ${Math.round(km * 10) / 10} km.`;
       }else if(status){
+        setTeamIdeaAddressDistance(null);
         status.textContent = 'Adres aangevuld.';
       }
     }catch(error){
-      if(latInput) latInput.value = '';
-      if(lonInput) lonInput.value = '';
+      setTeamIdeaAddressDistance(null);
       if(status) status.textContent = error.message || 'Adres automatisch aanvullen lukte niet. Je kunt het adres handmatig invullen.';
     }
   }
@@ -2997,14 +2995,10 @@
       type:'Inzending',
       locationType:$('#teamIdeaLocationInput').value,
       distanceBand:$('#teamIdeaDistanceInput').value,
-      distanceKm:Number.isFinite(Number($('#teamIdeaLatInput').value)) && Number.isFinite(Number($('#teamIdeaLonInput').value))
-        ? String(Math.round(itemDistanceKm({lat:$('#teamIdeaLatInput').value, lon:$('#teamIdeaLonInput').value}) * 10) / 10)
-        : '',
+      distanceKm:form.dataset.addressDistanceKm || '',
       address:$('#teamIdeaAddressInput').value.trim(),
       postcode:cleanPostcode($('#teamIdeaPostcodeInput').value),
       houseNumber:$('#teamIdeaHouseNumberInput').value.trim(),
-      lat:$('#teamIdeaLatInput').value.trim(),
-      lon:$('#teamIdeaLonInput').value.trim(),
       duration:$('#teamIdeaDurationInput').value.trim() || 'Op maat',
       group:$('#teamIdeaGroupInput').value.trim() || 'Op maat',
       cost:$('#teamIdeaCostInput').value,
@@ -3043,8 +3037,7 @@
     syncCustomSelect($('#teamIdeaStimulusInput'));
     syncTeamIdeaImageName();
     $('#teamIdeaAddressStatus').textContent = '';
-    $('#teamIdeaLatInput').value = '';
-    $('#teamIdeaLonInput').value = '';
+    setTeamIdeaAddressDistance(null);
     setTeamIdeaStatus('Dankjewel. Je idee en eventuele foto worden eerst beoordeeld voordat ze zichtbaar worden in de inspiratiebank.', 'ok');
     openTeamIdeaModal(item);
   }
@@ -3919,9 +3912,8 @@
       if(input) input.addEventListener('blur', syncTeamIdeaAddressFromPostcode);
     });
     $('#teamIdeaAddressInput')?.addEventListener('input', () => {
-      $('#teamIdeaLatInput').value = '';
-      $('#teamIdeaLonInput').value = '';
       $('#teamIdeaAddressStatus').textContent = '';
+      setTeamIdeaAddressDistance(null);
     });
     $('#confirmModal').addEventListener('click', event => {
       if(event.target.id === 'confirmModal') closeConfirmDialog(false);
