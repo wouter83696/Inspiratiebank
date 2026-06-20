@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="website-bestanden/hero-achtergronden/inspiratiebank.svg" as="image" type="image/svg+xml">
   <link rel="preload" href="website-bestanden/hero-achtergronden/uit-agenda.svg" as="image" type="image/svg+xml">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,450&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#FAFCFB;
@@ -59,7 +59,7 @@
       padding-top:36px;
       overflow-x:hidden;
       color:var(--ink);
-      font-family:"IBM Plex Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
       background:
         radial-gradient(circle at 8% -4%, rgba(251,232,178,.07), transparent 20%),
         radial-gradient(circle at 34% 10%, rgba(214,236,242,.20), transparent 29%),
@@ -158,7 +158,7 @@
     .tabHero::before,.tabHero::after{content:none}
     .tabHero.agendaHero{--hero-bg-image:url("website-bestanden/hero-achtergronden/uit-agenda.svg")}
     .tabHeroKicker{position:relative;z-index:1;display:block;margin:0 0 10px;color:var(--accent-dark);font-size:.78rem;font-weight:600;letter-spacing:.05em;line-height:1}
-    .tabHeroTitle{position:relative;z-index:1;margin:0 0 0 -.025em;color:var(--accent-dark);font-family:"Fraunces",Georgia,serif;font-size:5.55rem;font-weight:450;line-height:.9;letter-spacing:0}
+    .tabHeroTitle{position:relative;z-index:1;margin:0 0 0 -.025em;color:var(--accent-dark);font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:5.35rem;font-weight:500;line-height:.92;letter-spacing:-.045em}
     .tabHeroLine{position:relative;z-index:1;margin:10px 0 0;color:var(--accent);font-size:1.28rem;line-height:1.2;font-weight:400}
     .tabHeroActions{position:relative;z-index:1;display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:26px}
     .tabHeroButton{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:48px;min-height:48px;padding:0 18px;border-radius:999px;border:1px solid rgba(79,142,158,.12);background:rgba(255,255,255,.48);box-shadow:0 6px 16px rgba(20,38,42,.04);color:rgba(49,95,107,.88);font-weight:500;line-height:1;text-decoration:none;white-space:nowrap;cursor:pointer;backdrop-filter:blur(16px)}
@@ -380,8 +380,8 @@
     .themeSport{--theme-tint:rgba(0,132,168,.055);--theme-tint-strong:rgba(0,132,168,.14);--theme-line:rgba(0,132,168,.18);--theme-ink:#08677f;--agenda-tint:#edf8fb;--agenda-line:rgba(0,132,168,.22)}
     .themeAction{--theme-tint:rgba(238,126,27,.065);--theme-tint-strong:rgba(238,126,27,.16);--theme-line:rgba(199,92,11,.18);--theme-ink:#9a4f0f;--agenda-tint:#fff3e8;--agenda-line:rgba(199,92,11,.23)}
     .themeDefault{--theme-tint:rgba(0,185,86,.045);--theme-tint-strong:rgba(0,185,86,.11);--theme-line:rgba(0,155,72,.11);--theme-ink:#087b43;--agenda-tint:#eff9f3;--agenda-line:rgba(0,155,72,.18)}
-    .ideaThemeCard{min-width:0;background:#fff;border-color:#EAECEF;box-shadow:0 10px 26px rgba(20,38,42,.045)}
-    .ideaThemeCard:hover{background:#fff;border-color:color-mix(in srgb,var(--theme-line) 70%,#EAECEF);box-shadow:0 16px 34px rgba(20,38,42,.075)}
+    .ideaThemeCard{min-width:0;background:rgba(250,250,248,.92);border-color:color-mix(in srgb,var(--theme-line) 55%,#EAECEF);box-shadow:0 10px 26px rgba(20,38,42,.045)}
+    .ideaThemeCard:hover{background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.86);border-color:var(--theme-line);box-shadow:0 16px 34px rgba(20,38,42,.075)}
     .ideaImageFrame{
       position:relative;overflow:hidden;margin:-16px -16px 4px;border-radius:18px 18px 0 0;
       aspect-ratio:16 / 8.8;background:linear-gradient(var(--theme-tint),rgba(255,255,255,.58));
@@ -392,7 +392,7 @@
     .ideaThemeRow:hover td{background:var(--theme-tint)}
     .ideaThemeCard .domainIcon,.ideaThemeRow .domainIcon{background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
     .domainThemePill{background:var(--theme-tint-strong);color:var(--theme-ink)}
-    .categoryPill{background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink);min-width:0;max-width:42%}
+    .categoryPill{background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
     .categoryPillText{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .categoryPill .domainIcon{width:14px;height:14px;border:0;background:transparent;color:currentColor}
     .categoryPill .domainIcon svg{width:13px;height:13px;stroke-width:2}
@@ -1174,7 +1174,6 @@
   <main class="shell">
     <section id="tab-weken" class="tabPanel" role="tabpanel">
       <section class="tabHero agendaHero" aria-labelledby="agendaHeroTitle">
-        <span class="tabHeroKicker">BCJN</span>
         <h1 class="tabHeroTitle" id="agendaHeroTitle">UIT-agenda</h1>
         <p class="tabHeroLine">Bekijk wat er te doen is</p>
         <div class="tabHeroActions">
@@ -3579,8 +3578,8 @@
     const image = approvedIdeaImage(item);
     return `<article class="card ideaThemeCard ${domainThemeClass(item.domain)}" data-idea-key="${escapeHtml(ideaDomKey(item))}">
       ${image ? ideaImageMarkup(image) : ''}
-      <div class="cardLabels">${categoryPill(item.domain)} ${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div>
-      <h3>${escapeHtml(item.title)}</h3>
+      <div class="cardLabels">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div>
+      <h3>${titleWithIcon(item.title, item.domain)}</h3>
       ${cardMetaLine(item)}
       <p>${escapeHtml(audienceText(item.fit))}</p>
       <p class="fine"><strong>Praktisch:</strong>${escapeHtml(audienceText(item.materials || 'Nog bepalen'))}</p>
