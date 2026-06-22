@@ -1229,6 +1229,27 @@
       #sourceAdditions .teamActionBar .formButton.primary{justify-content:center}
       #sourceAdditions .teamFormStatus{text-align:left}
     }
+    @media (max-width:760px){
+      .ongoingAccordion tbody{display:grid;gap:0}
+      .ongoingAccordion tr{display:flex;flex-direction:column;gap:8px;padding:14px 18px;border:0;border-radius:0;background:transparent;box-shadow:none}
+      .ongoingAccordion tr + tr{border-top:1px solid rgba(11,18,32,.06)}
+      .ongoingAccordion td{display:block;border:0;padding:0}
+      .ongoingAccordion td::before{display:none !important}
+      .ongoingAccordion td.ongoingCategoryCell,
+      .ongoingAccordion td.ongoingCostCell,
+      .ongoingAccordion td.ongoingStimulusCell,
+      .ongoingAccordion td.ongoingWeeksCell{display:none !important}
+      .ongoingAccordion .ongoingLocationCell > .cardPillGroup,
+      .ongoingAccordion .ongoingLocationCell > span,
+      .ongoingAccordion .ongoingLocationCell > .small{display:none !important}
+      .ongoingAccordion .ongoingMobileLabels{display:flex !important;align-items:center;gap:5px;flex-wrap:nowrap;overflow:hidden;margin:0}
+      .ongoingAccordion .ongoingTitleCell{order:2}
+      .ongoingAccordion .ongoingLocationCell{order:1}
+      .ongoingAccordion .ongoingFitCell{order:4}
+      .ongoingAccordion td.websiteCell{order:5;text-align:left;margin-top:2px}
+      .ongoingAccordion .ongoingMetaLine{display:block !important;width:100%;margin:0;padding:5px 8px 5px 5px;border-radius:9px;background:rgba(232,242,242,.42);border:1px solid rgba(79,142,158,.06);color:rgba(11,18,32,.70);font-size:.78rem;line-height:1.28}
+      .ongoingAccordion .ongoingTitleCell .small{display:none}
+    }
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
   <link rel="stylesheet" href="website-bestanden/agenda-shared.css">
