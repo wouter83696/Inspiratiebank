@@ -145,9 +145,9 @@
     .tabHero{
       --hero-bg-image:url("website-bestanden/hero-achtergronden/inspiratiebank.svg");
       position:relative;overflow:hidden;isolation:isolate;
-      min-height:clamp(306px,28.8vw,360px);
+      min-height:clamp(318px,29.4vw,372px);
       margin:-142px calc(50% - 50vw) 0;
-      padding:clamp(154px,13.4vw,184px) var(--hero-edge) clamp(44px,4.8vw,60px);
+      padding:clamp(164px,14.2vw,198px) var(--hero-edge) clamp(54px,5.2vw,72px);
       border:0;border-radius:0;
       background:
         var(--hero-bg-image) center top/cover no-repeat,
@@ -178,15 +178,15 @@
     .tabHeroStat strong{display:block;font-size:1.34rem;font-weight:500;line-height:.98;color:inherit}
     .tabHeroStat span:not(.tabHeroStatDivider):not(.tabHeroStat){display:block;margin-top:2px;color:rgba(11,18,32,.58)}
     .tabHeroStatDivider{display:none;color:rgba(49,95,107,.52)}
-    .tabHero + .filterBar{position:relative;z-index:2;margin-top:-24px}
+    .tabHero + .filterBar{--hero-search-height:40px;position:relative;z-index:2;margin-top:calc(var(--hero-search-height) / -2)}
     @media (min-width:641px){
       .tabHero.agendaHero{background-position:center 62%,center,center}
-      .tabHeroTitle,.tabHeroLine,.tabHeroActions{transform:translateY(10px)}
+      .tabHeroTitle,.tabHeroLine,.tabHeroActions{transform:translateY(4px)}
       .tabHeroKicker{transform:translateY(0)}
       .tabHeroLine{margin-top:15px}
       .tabHeroActions{margin-top:36px}
-      .tabHeroStats{transform:translateY(-12px)}
-      .tabHero + .filterBar{margin-top:-30px}
+      .tabHeroStats{transform:translateY(-8px)}
+      .tabHero + .filterBar{margin-top:calc(var(--hero-search-height) / -2)}
     }
     .quick{display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:10px}
     .quickCard{display:flex;align-items:center;gap:14px;padding:17px;box-shadow:0 10px 30px rgba(20,38,42,.06)}
