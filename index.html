@@ -220,7 +220,8 @@
     .weekTop{display:block;padding:28px 28px 22px;border-bottom:0;background:rgba(255,255,255,.70)}
     .weekTitle{display:flex;gap:16px;align-items:flex-start}
     .weekTitle > div{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
-    .weekBadge{width:52px;height:52px;margin-top:2px;border-radius:13px;background:linear-gradient(145deg,rgba(168,225,221,.90),rgba(216,242,238,.76));display:flex;align-items:center;justify-content:center;color:#07345e;font-weight:600;font-size:1.42rem;line-height:1;text-align:center;flex:0 0 auto}
+    .weekBadge{width:52px;height:52px;margin-top:2px;border-radius:13px;background:linear-gradient(145deg,rgba(168,225,221,.90),rgba(216,242,238,.76));display:grid;place-items:center;color:#07345e;font-weight:600;font-size:1.42rem;line-height:1;text-align:center;flex:0 0 auto}
+    .weekBadgeNumber{display:grid;place-items:center;width:100%;height:100%;line-height:1;text-align:center;transform:translateY(-1px)}
     .weekHeadingRow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
     .weekTop h3{margin:0;color:#07345e;font-weight:600;font-size:clamp(1.72rem,2.55vw,2.28rem);line-height:1.1;letter-spacing:-.025em}
     .weekTop .dates{color:#123968;margin-top:9px;font-size:1.04rem}
@@ -353,11 +354,13 @@
     }
     .ongoingIcon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s var(--ease)}
     .ongoingAccordion.open .ongoingIcon svg{transform:rotate(90deg)}
-    .ongoingAccordionText strong{display:block;font-size:1.08rem;font-weight:600}
+    .ongoingAccordionText strong{display:block;font-size:1.12rem;font-weight:600}
     .ongoingAccordionText span{display:block;margin-top:2px;color:var(--muted);font-size:.84rem}
     .ongoingAccordionBody{border-top:1px solid rgba(11,18,32,.06);background:rgba(253,254,253,.88)}
     .ongoingAccordionBody[hidden]{display:none}
     .ongoingAccordion .tableWrap{border:0;border-radius:0;background:rgba(253,254,253,.88)}
+    .ongoingTitleCell .name{font-size:1rem;line-height:1.18}
+    .ongoingLocationCell .cardPillGroup{margin-bottom:4px}
     table{width:100%;border-collapse:separate;border-spacing:0;min-width:760px}
     #ideaList table{min-width:1040px}
     #ideaList th:nth-child(1),#ideaList td:nth-child(1){width:26%}
@@ -1113,7 +1116,8 @@
       #agendaFilters .customSelect[data-select-id="agendaWeekFilter"] .customSelectLabel{max-width:74px}
       .weekTop{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 14px;padding:16px 14px}
       .weekTitle{display:contents}
-      .weekBadge{grid-column:1;grid-row:1;justify-self:center;align-self:start;display:flex;align-items:center;justify-content:center;width:50px;height:50px;margin-top:2px;padding:0;font-size:1.24rem;line-height:1;border-radius:13px;text-align:center}
+      .weekBadge{grid-column:1;grid-row:1;justify-self:center;align-self:start;display:grid;place-items:center;width:50px;height:50px;margin-top:2px;padding:0;font-size:1.24rem;line-height:1;border-radius:13px;text-align:center}
+      .weekBadgeNumber{width:100%;height:100%;display:grid;place-items:center;transform:translateY(-1px)}
       .weekTitle > div{grid-column:2;grid-row:1;min-width:0}
       .weekHeadingRow{display:flex;align-items:center;gap:8px;flex-direction:row;flex-wrap:wrap}
       .weekTop h3{font-size:1.36rem}
@@ -1179,19 +1183,35 @@
       .ongoingAccordion thead{display:none}
       .ongoingAccordion tbody{display:grid;gap:10px}
       .ongoingAccordion tr{
-        display:grid;grid-template-columns:1fr;gap:7px;padding:12px 13px;
+        display:grid;grid-template-columns:1fr auto auto;gap:8px 7px;padding:13px 14px;
         border:1px solid rgba(79,142,158,.08);border-radius:16px;background:rgba(255,255,255,.70)
       }
       .ongoingAccordion td{display:block;border:0;padding:0;color:rgba(11,18,32,.70);font-size:.88rem;line-height:1.32}
       .ongoingAccordion td::before{display:block;margin-bottom:2px;color:var(--accent-dark);font-size:.72rem;font-weight:600}
-      .ongoingAccordion td:nth-child(1)::before{content:"Aanbod"}
+      .ongoingAccordion td:nth-child(1)::before{content:none}
       .ongoingAccordion td:nth-child(2)::before{content:"Beschikbaar"}
-      .ongoingAccordion td:nth-child(3)::before{content:"Categorie"}
+      .ongoingAccordion td:nth-child(3)::before,
+      .ongoingAccordion td:nth-child(5)::before,
+      .ongoingAccordion td:nth-child(6)::before{content:none}
       .ongoingAccordion td:nth-child(4)::before{content:"Locatie"}
-      .ongoingAccordion td:nth-child(5)::before{content:"Kosten"}
-      .ongoingAccordion td:nth-child(6)::before{content:"Prikkel"}
       .ongoingAccordion td:nth-child(7)::before{content:"Let op"}
       .ongoingAccordion td:nth-child(8)::before{content:"Website"}
+      .ongoingTitleCell{grid-column:1/-1;grid-row:1}
+      .ongoingTitleCell .name{font-size:1rem;line-height:1.16}
+      .ongoingWeeksCell,.ongoingLocationCell,.ongoingFitCell,.ongoingAccordion td.websiteCell{grid-column:1/-1}
+      .ongoingWeeksCell{grid-row:3}
+      .ongoingLocationCell{grid-row:4}
+      .ongoingFitCell{grid-row:5}
+      .ongoingAccordion td.websiteCell{grid-row:6}
+      .ongoingCategoryCell,.ongoingCostCell,.ongoingStimulusCell{grid-row:2;align-self:center}
+      .ongoingCategoryCell{grid-column:1;justify-self:start}
+      .ongoingCostCell{grid-column:2}
+      .ongoingStimulusCell{grid-column:3}
+      .ongoingCategoryCell .categoryPill{width:28px;height:24px;min-width:28px;padding:5px;justify-content:center}
+      .ongoingCategoryCell .categoryPillText{display:none}
+      .ongoingCategoryCell .domainIcon{width:14px;height:14px}
+      .ongoingLocationCell .small{margin-top:3px}
+      .ongoingFitCell{padding-top:2px}
       .ongoingAccordion td.websiteCell{text-align:left}
       .ongoingAccordion .siteButton{max-width:100%;min-height:34px;padding:8px 12px;font-size:.84rem}
       .teamFileControl{align-items:flex-start;flex-direction:column}
@@ -3450,6 +3470,14 @@
   function weekAvailabilityLabel(item){
     return orderedWeekIds(splitWeeks(item.week)).map(id => weekName(id)).join(', ');
   }
+  function compactWeekAvailabilityLabel(item){
+    const ids = orderedWeekIds(splitWeeks(item.week));
+    if(!ids.length) return weekAvailabilityLabel(item);
+    const weekNumbers = ids.map(id => ACTIVE_WEEKS.find(week => week.id === id)?.week).filter(Boolean);
+    const allConsecutive = ids.every((id, index) => ACTIVE_WEEKS.findIndex(week => week.id === id) === ACTIVE_WEEKS.findIndex(week => week.id === ids[0]) + index);
+    if(weekNumbers.length > 2 && allConsecutive) return `Week ${weekNumbers[0]} t/m ${weekNumbers[weekNumbers.length - 1]}`;
+    return weekNumbers.map(number => `Week ${number}`).join(', ');
+  }
   function sharedFlexibleOffers(){
     const flexible = allExternalItems()
       .filter(isConcrete)
@@ -3488,14 +3516,18 @@
   }
   function flexibleExternalRow(item){
 	    const distanceLabel = normalizeIdeaDistance(item.distanceBand, item, 'agenda');
+    const locationLabel = normalizeIdeaLocation(item.locationType);
+    const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
+    const costLabel = normalizeIdeaCost(item.cost);
+    const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)}">
-	      <td><span class="name">${escapeHtml(item.title)}</span><div>${agendaReviewPill(item)}</div><div class="small">${escapeHtml(item.date)} • ${escapeHtml(item.time)}</div></td>
-      <td>${escapeHtml(weekAvailabilityLabel(item))}</td>
-      <td>${escapeHtml(domainDisplayLabel(item.domain))}</td>
-      <td>${escapeHtml(item.where)}<div class="small">${escapeHtml(distanceLabel)}${item.distanceKm ? ` • ${escapeHtml(item.distanceKm)}` : ''}</div></td>
-      <td>${costPill(item.cost)}</td>
-      <td>${pill(item.stimulus, cssKind(item.stimulus))}</td>
-      <td><div class="small">${escapeHtml(audienceText(item.fit))}</div></td>
+	      <td class="ongoingTitleCell"><span class="name">${escapeHtml(item.title)}</span><div>${agendaReviewPill(item)}</div><div class="small">${escapeHtml(item.date)} • ${escapeHtml(item.time)}</div></td>
+      <td class="ongoingWeeksCell">${escapeHtml(compactWeekAvailabilityLabel(item))}</td>
+      <td class="ongoingCategoryCell">${categoryPill(item.domain)}</td>
+      <td class="ongoingLocationCell"><div class="cardPillGroup">${placePills}</div><span>${escapeHtml(item.where)}</span>${item.distanceKm ? `<div class="small">${escapeHtml(item.distanceKm)}</div>` : ''}</td>
+      <td class="ongoingCostCell">${costPill(costLabel)}</td>
+      <td class="ongoingStimulusCell">${stimulusPill(stimulusLabel)}</td>
+      <td class="ongoingFitCell"><div class="small">${escapeHtml(audienceText(item.fit))}</div></td>
       <td class="websiteCell"><a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open website</a></td>
     </tr>`;
   }
@@ -3584,7 +3616,7 @@
       return `<article class="weekPanel" id="${escapeHtml(w.id)}">
         <div class="weekTop">
           <div class="weekTitle">
-            <div class="weekBadge">${escapeHtml(w.week)}</div>
+            <div class="weekBadge"><span class="weekBadgeNumber">${escapeHtml(w.week)}</span></div>
             <div>
               <div class="weekHeadingRow">
                 <h3>${escapeHtml(publicWeekDates(w))}</h3>
