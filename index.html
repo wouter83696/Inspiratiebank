@@ -361,6 +361,8 @@
     .ongoingAccordion .tableWrap{border:0;border-radius:0;background:rgba(253,254,253,.88)}
     .ongoingTitleCell .name{font-size:1rem;line-height:1.18}
     .ongoingLocationCell .cardPillGroup{margin-bottom:4px}
+    .ongoingMobileLabels{display:none}
+    .ongoingMetaLine{display:none}
     table{width:100%;border-collapse:separate;border-spacing:0;min-width:760px}
     #ideaList table{min-width:1040px}
     #ideaList th:nth-child(1),#ideaList td:nth-child(1){width:26%}
@@ -1181,13 +1183,14 @@
       .ongoingAccordion .tableWrap{overflow:visible}
       .ongoingAccordion table{display:block;min-width:0;width:100%}
       .ongoingAccordion thead{display:none}
-      .ongoingAccordion tbody{display:grid;gap:10px}
+      .ongoingAccordion tbody{display:grid;gap:12px}
       .ongoingAccordion tr{
-        display:grid;grid-template-columns:1fr auto auto;gap:8px 7px;padding:13px 14px;
-        border:1px solid rgba(79,142,158,.08);border-radius:16px;background:rgba(255,255,255,.70)
+        display:flex;flex-direction:column;gap:8px;padding:13px 14px;
+        border:1px solid color-mix(in srgb,var(--theme-line) 55%,#EAECEF);border-radius:18px;
+        background:rgba(250,250,248,.92);box-shadow:0 10px 26px rgba(20,38,42,.045)
       }
-      .ongoingAccordion td{display:block;border:0;padding:0;color:rgba(11,18,32,.70);font-size:.88rem;line-height:1.32}
-      .ongoingAccordion td::before{display:block;margin-bottom:2px;color:var(--accent-dark);font-size:.72rem;font-weight:600}
+      .ongoingAccordion td{display:block;border:0;padding:0;color:rgba(11,18,32,.70);font-size:.9rem;line-height:1.38}
+      .ongoingAccordion td::before{display:none}
       .ongoingAccordion td:nth-child(1)::before{content:none}
       .ongoingAccordion td:nth-child(2)::before{content:"Beschikbaar"}
       .ongoingAccordion td:nth-child(3)::before,
@@ -1196,23 +1199,22 @@
       .ongoingAccordion td:nth-child(4)::before{content:"Locatie"}
       .ongoingAccordion td:nth-child(7)::before{content:"Let op"}
       .ongoingAccordion td:nth-child(8)::before{content:"Website"}
-      .ongoingTitleCell{grid-column:1/-1;grid-row:1}
-      .ongoingTitleCell .name{font-size:1rem;line-height:1.16}
+      .ongoingTitleCell{order:2}
+      .ongoingTitleCell .name{display:block;font-size:1rem;line-height:1.16}
+      .ongoingTitleCell .nameWithIcon{display:flex;align-items:center;gap:10px;color:var(--accent-dark);font-size:1rem;line-height:1.16}
+      .ongoingTitleCell .nameWithIcon .domainIcon{width:28px;height:28px;margin-top:0;flex:0 0 28px}
       .ongoingWeeksCell,.ongoingLocationCell,.ongoingFitCell,.ongoingAccordion td.websiteCell{grid-column:1/-1}
-      .ongoingWeeksCell{grid-row:3}
-      .ongoingLocationCell{grid-row:4}
-      .ongoingFitCell{grid-row:5}
-      .ongoingAccordion td.websiteCell{grid-row:6}
-      .ongoingCategoryCell,.ongoingCostCell,.ongoingStimulusCell{grid-row:2;align-self:center}
-      .ongoingCategoryCell{grid-column:1;justify-self:start}
-      .ongoingCostCell{grid-column:2}
-      .ongoingStimulusCell{grid-column:3}
-      .ongoingCategoryCell .categoryPill{width:28px;height:24px;min-width:28px;padding:5px;justify-content:center}
-      .ongoingCategoryCell .categoryPillText{display:none}
-      .ongoingCategoryCell .domainIcon{width:14px;height:14px}
-      .ongoingLocationCell .small{margin-top:3px}
-      .ongoingFitCell{padding-top:2px}
-      .ongoingAccordion td.websiteCell{text-align:left}
+      .ongoingWeeksCell{order:3}
+      .ongoingLocationCell{order:1}
+      .ongoingFitCell{order:4;color:rgba(11,18,32,.66)}
+      .ongoingAccordion td.websiteCell{order:5}
+      .ongoingCategoryCell,.ongoingCostCell,.ongoingStimulusCell{display:none}
+      .ongoingMobileLabels{display:flex;align-items:center;gap:5px;flex-wrap:nowrap;min-width:0;max-width:100%;overflow:hidden;margin-bottom:4px}
+      .ongoingMetaLine{display:block;width:100%;margin:0;padding:6px 10px;border-radius:10px;background:rgba(232,242,242,.42);border:1px solid rgba(79,142,158,.06);color:rgba(11,18,32,.70);font-size:.8rem;line-height:1.3}
+      .ongoingMetaLine strong{color:var(--accent-dark);font-weight:600}
+      .ongoingLocationCell > span,.ongoingLocationCell > .small,.ongoingWeeksCell{display:none}
+      .ongoingFitCell .small{font-size:.9rem;line-height:1.38;color:rgba(11,18,32,.66)}
+      .ongoingAccordion td.websiteCell{text-align:left;margin-top:2px}
       .ongoingAccordion .siteButton{max-width:100%;min-height:34px;padding:8px 12px;font-size:.84rem}
       .teamFileControl{align-items:flex-start;flex-direction:column}
       .teamFileName{width:100%}
@@ -3520,14 +3522,16 @@
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
     const costLabel = normalizeIdeaCost(item.cost);
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
+    const mobileLabels = `<div class="ongoingMobileLabels">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div>`;
+    const metaLine = `<div class="ongoingMetaLine"><strong>Beschikbaar:</strong> ${escapeHtml(compactWeekAvailabilityLabel(item))}${item.where ? ` • ${escapeHtml(item.where)}` : ''}</div>`;
     return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)}">
-	      <td class="ongoingTitleCell"><span class="name">${escapeHtml(item.title)}</span><div>${agendaReviewPill(item)}</div><div class="small">${escapeHtml(item.date)} • ${escapeHtml(item.time)}</div></td>
+	      <td class="ongoingTitleCell"><span class="name">${titleWithIcon(item.title, item.domain, 'nameWithIcon')}</span><div>${agendaReviewPill(item)}</div><div class="small">${escapeHtml(item.date)} • ${escapeHtml(item.time)}</div></td>
       <td class="ongoingWeeksCell">${escapeHtml(compactWeekAvailabilityLabel(item))}</td>
       <td class="ongoingCategoryCell">${categoryPill(item.domain)}</td>
-      <td class="ongoingLocationCell"><div class="cardPillGroup">${placePills}</div><span>${escapeHtml(item.where)}</span>${item.distanceKm ? `<div class="small">${escapeHtml(item.distanceKm)}</div>` : ''}</td>
+      <td class="ongoingLocationCell">${mobileLabels}<div class="cardPillGroup">${placePills}</div><span>${escapeHtml(item.where)}</span>${item.distanceKm ? `<div class="small">${escapeHtml(item.distanceKm)}</div>` : ''}</td>
       <td class="ongoingCostCell">${costPill(costLabel)}</td>
       <td class="ongoingStimulusCell">${stimulusPill(stimulusLabel)}</td>
-      <td class="ongoingFitCell"><div class="small">${escapeHtml(audienceText(item.fit))}</div></td>
+      <td class="ongoingFitCell">${metaLine}<div class="small">${escapeHtml(audienceText(item.fit))}</div></td>
       <td class="websiteCell"><a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open website</a></td>
     </tr>`;
   }
