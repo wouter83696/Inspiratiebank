@@ -975,16 +975,16 @@
       .tabHeroButton.primary{padding:0 13px;font-size:clamp(.76rem,3.4vw,.82rem)}
       .tabHeroButton svg{width:16px;height:16px}
       .tabHeroStats{
-        order:5;position:relative;right:auto;top:auto;display:flex;align-items:center;flex-wrap:nowrap;
-        width:calc(100% + 8px);max-width:calc(100% + 8px);margin-top:clamp(10px,1.8svh,14px);gap:8px;
-        padding:6px 7px 6px 4px;border-radius:10px;background:rgba(232,242,242,.16);
-        border:1px solid rgba(79,142,158,.025);box-shadow:0 2px 8px rgba(20,38,42,.012);
-        backdrop-filter:blur(8px);font-size:clamp(.7rem,2.95vw,.78rem);color:rgba(11,18,32,.56)
+        order:5;position:relative;right:auto;top:auto;display:flex;align-items:center;justify-content:center;flex-wrap:nowrap;
+        width:100%;max-width:100%;min-height:40px;margin-top:clamp(10px,1.8svh,14px);gap:clamp(14px,4.2vw,20px);
+        padding:7px 8px;border-radius:10px;background:rgba(232,242,242,.18);
+        border:1px solid rgba(79,142,158,.03);box-shadow:0 2px 8px rgba(20,38,42,.012);
+        backdrop-filter:blur(8px);font-size:clamp(.68rem,2.78vw,.76rem);color:rgba(11,18,32,.58)
       }
       .tabHeroStat svg{color:inherit;opacity:.82}
       .tabHeroStatDivider{display:none}
-      .tabHeroStat{display:inline-flex;align-items:center;justify-content:flex-start;gap:5px;min-width:0;flex:1 1 0;white-space:nowrap;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none}
-      .tabHeroStat svg{width:16px;height:16px;margin-top:0;flex:0 0 16px}
+      .tabHeroStat{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-width:0;flex:0 0 auto;white-space:nowrap;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none}
+      .tabHeroStat svg{width:15px;height:15px;margin-top:0;flex:0 0 15px}
       .tabHeroStat strong{display:inline;font-size:inherit;font-weight:650;line-height:inherit;color:inherit}
       .tabHeroStat span:not(.tabHeroStatDivider):not(.tabHeroStat){display:inline;margin-top:0;color:inherit;font-weight:500}
       .tabHero + .filterBar{margin-top:calc(var(--mobile-search-row-height) / -2 - 4px);margin-bottom:4px}
