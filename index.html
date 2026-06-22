@@ -1247,7 +1247,7 @@
       .ongoingAccordion .ongoingLocationCell{order:1}
       .ongoingAccordion .ongoingFitCell{order:4}
       .ongoingAccordion td.websiteCell{order:5;text-align:left;margin-top:2px}
-      .ongoingAccordion .ongoingMetaLine{display:block !important;width:100%;margin:0;padding:5px 8px 5px 5px;border-radius:9px;background:rgba(232,242,242,.42);border:1px solid rgba(79,142,158,.06);color:rgba(11,18,32,.70);font-size:.78rem;line-height:1.28}
+      .ongoingAccordion .ongoingMetaLine{display:block !important;width:100%;margin:0 0 7px;padding:5px 8px 5px 5px;border-radius:9px;background:rgba(232,242,242,.42);border:1px solid rgba(79,142,158,.06);color:rgba(11,18,32,.70);font-size:.78rem;line-height:1.28}
       .ongoingAccordion .ongoingTitleCell .small{display:none}
     }
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
@@ -3548,7 +3548,7 @@
     const costLabel = normalizeIdeaCost(item.cost);
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const mobileLabels = `<div class="ongoingMobileLabels">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div>`;
-    const metaLine = `<div class="ongoingMetaLine"><strong>Beschikbaar:</strong> ${escapeHtml(compactWeekAvailabilityLabel(item))}${item.where ? ` • ${escapeHtml(item.where)}` : ''}</div>`;
+    const metaLine = `<div class="ongoingMetaLine"><strong>Beschikbaar:</strong> ${escapeHtml(compactWeekAvailabilityLabel(item))}</div>`;
     return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)}">
 	      <td class="ongoingTitleCell"><span class="name">${titleWithIcon(item.title, item.domain, 'nameWithIcon')}</span><div>${agendaReviewPill(item)}</div><div class="small">${escapeHtml(item.date)} • ${escapeHtml(item.time)}</div></td>
       <td class="ongoingWeeksCell">${escapeHtml(compactWeekAvailabilityLabel(item))}</td>
