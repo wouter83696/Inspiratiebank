@@ -22,6 +22,21 @@ const MONTHS = {
   december: 11,
 };
 
+const SHORT_MONTHS = {
+  jan: 0,
+  feb: 1,
+  mrt: 2,
+  apr: 3,
+  mei: 4,
+  jun: 5,
+  jul: 6,
+  aug: 7,
+  sep: 8,
+  okt: 9,
+  nov: 10,
+  dec: 11,
+};
+
 function defaultStorage() {
   return {
     version: 1,
@@ -152,7 +167,7 @@ function dedupeAgendaItems(items = []) {
 function safePublicUrl(value = "") {
   try {
     const url = new URL(value);
-    if (url.protocol !== "https:") return null;
+    if (!["http:", "https:"].includes(url.protocol)) return null;
     const host = url.hostname.toLowerCase();
     if (host === "localhost" || host.endsWith(".local") || /^(127\.|10\.|192\.168\.|169\.254\.)/.test(host)) return null;
     return url;
@@ -196,16 +211,60 @@ function dutchTimeLabel(date) {
   }).format(date);
 }
 
-async function eventFromSubmittedLink(link) {
-  const url = safePublicUrl(link.url);
-  if (!url) return null;
-  const response = await fetch(url, {
-    redirect: "follow",
-    signal: AbortSignal.timeout(12000),
-    headers: { "user-agent": "BCJN-AgendaChecker/1.0", accept: "text/html,application/xhtml+xml" },
-  });
-  if (!response.ok) return null;
-  const html = (await response.text()).slice(0, 2_000_000);
+function decodeHtml(value = "") {
+  return String(value || "")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#039;|&apos;/gi, "'")
+    .replace(/&euro;|&acirc;&sbquo;&not;/gi, "€")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function stripHtml(value = "") {
+  return decodeHtml(String(value || "").replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, " "));
+}
+
+function parseShortDutchDate(value = "") {
+  const match = normalize(value).match(/(\d{1,2})\s+(jan|feb|mrt|apr|mei|jun|jul|aug|sep|okt|nov|dec)\s+'?(\d{2,4})/);
+  if (!match) return null;
+  const day = Number(match[1]);
+  const month = SHORT_MONTHS[match[2]];
+  const rawYear = Number(match[3]);
+  const year = rawYear < 100 ? 2000 + rawYear : rawYear;
+  const date = new Date(Date.UTC(year, month, day));
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function submittedEventItem({link, url, title, date, time = "", note = "", where = ""}) {
+  const week = weekForDate(date);
+  if (!title || !week) return null;
+  const id = `submitted-${crypto.createHash("sha256").update(`${url}|${date.toISOString()}|${title}`).digest("hex").slice(0, 18)}`;
+  return {
+    id,
+    title,
+    week,
+    date:dutchDateLabel(date),
+    time:time || "check tijd",
+    domain:guessDomain({title, note, source:link.name || url.hostname}),
+    where:where || link.place || "Nijmegen",
+    locationType:"Op pad",
+    cost:guessCost({title, note}),
+    stimulus:guessStimulus({title, note}),
+    fit:buildFitText({note:note || "Automatisch gecontroleerd via een ingestuurde evenementenpagina."}),
+    source:link.name || url.hostname,
+    url:url.toString(),
+    tags:["ingestuurde bron", "automatisch gecontroleerd"],
+    reviewStatus:"auto",
+    createdAt:new Date().toISOString(),
+  };
+}
+
+function eventsFromJsonLd({html, link, url}) {
+  const items = [];
   const scripts = [...html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
   for (const match of scripts) {
     try {
@@ -214,33 +273,55 @@ async function eventFromSubmittedLink(link) {
         const start = new Date(event.startDate || "");
         const title = String(event.name || "").trim();
         const where = locationName(event.location);
-        const week = Number.isNaN(start.getTime()) ? "" : weekForDate(start);
-        if (!title || !where || !week) continue;
-        const id = `submitted-${crypto.createHash("sha256").update(`${url}|${event.startDate}|${title}`).digest("hex").slice(0, 18)}`;
-        return {
-          id,
+        if (Number.isNaN(start.getTime()) || !where) continue;
+        const item = submittedEventItem({
+          link,
+          url,
           title,
-          week,
-          date:dutchDateLabel(start),
+          date:start,
           time:dutchTimeLabel(start),
-          domain:guessDomain({title, note:event.description || "", source:link.name || url.hostname}),
+          note:event.description || "",
           where,
-          locationType:"Op pad",
-          cost:guessCost({title, note:event.description || ""}),
-          stimulus:guessStimulus({title, note:event.description || ""}),
-          fit:buildFitText({note:event.description || "Automatisch gecontroleerd via een ingestuurde officiële evenementenpagina."}),
-          source:link.name || url.hostname,
-          url:url.toString(),
-          tags:["ingestuurde bron", "automatisch gecontroleerd"],
-          reviewStatus:"auto",
-          createdAt:new Date().toISOString(),
-        };
+        });
+        if (item) items.push(item);
       }
     } catch (error) {
-      // Ongeldige JSON-LD wordt overgeslagen; de link blijft dan in beheer staan.
+      // Ongeldige JSON-LD wordt overgeslagen; HTML-patronen kunnen nog bruikbaar zijn.
     }
   }
-  return null;
+  return items;
+}
+
+function eventsFromEventBoxes({html, link, url}) {
+  const boxes = [...html.matchAll(/<article\b[^>]*class=["'][^"']*\beventBox\b[^"']*["'][^>]*>([\s\S]*?)<\/article>/gi)];
+  return boxes.map((match) => {
+    const block = match[1];
+    const title = stripHtml(block.match(/<h3[^>]*>([\s\S]*?)<\/h3>/i)?.[1] || "");
+    const dateText = stripHtml(block.match(/class=["'][^"']*\bactivDate\b[^"']*["'][^>]*>([\s\S]*?)<\/li>/i)?.[1] || "");
+    const date = parseShortDutchDate(dateText);
+    const dataList = block.match(/<ul[^>]*class=["'][^"']*\bactiviteitenData\b[^"']*["'][^>]*>([\s\S]*?)<\/ul>/i)?.[1] || "";
+    const dataItems = [...dataList.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)].map(item => stripHtml(item[1])).filter(Boolean);
+    const time = dataItems.find(item => /\d{1,2}[:.]\d{2}/.test(item) || /\d{1,2}:\d{2}\s*[/-]\s*\d{1,2}:\d{2}/.test(item)) || "";
+    const paragraphs = [...block.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)].map(item => stripHtml(item[1])).filter(Boolean);
+    const note = paragraphs.join(" ");
+    return submittedEventItem({link, url, title, date, time, note, where:"Moenen & Mariken, Nijmegen"});
+  }).filter(Boolean);
+}
+
+async function eventsFromSubmittedLink(link) {
+  const url = safePublicUrl(link.url);
+  if (!url) return [];
+  const response = await fetch(url, {
+    redirect: "follow",
+    signal: AbortSignal.timeout(12000),
+    headers: { "user-agent": "BCJN-AgendaChecker/1.0", accept: "text/html,application/xhtml+xml" },
+  });
+  if (!response.ok) return [];
+  const html = (await response.text()).slice(0, 2_000_000);
+  return [
+    ...eventsFromJsonLd({html, link, url}),
+    ...eventsFromEventBoxes({html, link, url}),
+  ];
 }
 
 async function processPendingLinks(storage) {
@@ -248,14 +329,26 @@ async function processPendingLinks(storage) {
   const accepted = [];
   for (const link of storage.pendingLinks) {
     try {
-      const event = await eventFromSubmittedLink(link);
-      if (event) accepted.push(event);
+      const events = await eventsFromSubmittedLink(link);
+      if (events.length) accepted.push(...events);
       else remaining.push({...link, note:"Automatische controle vond geen complete datum, titel en locatie. Handmatige controle nodig."});
     } catch (error) {
       remaining.push({...link, note:"De pagina kon automatisch niet betrouwbaar worden uitgelezen. Handmatige controle nodig."});
     }
   }
   storage.pendingLinks = remaining;
+  return accepted;
+}
+
+async function processApprovedCustomLinks(storage) {
+  const accepted = [];
+  for (const link of storage.customLinks || []) {
+    try {
+      accepted.push(...await eventsFromSubmittedLink(link));
+    } catch (error) {
+      // Goedgekeurde bronlinks blijven in beheer staan; fouten blokkeren de rest niet.
+    }
+  }
   return accepted;
 }
 
@@ -446,7 +539,10 @@ async function main() {
     .filter(Boolean);
 
   const storage = await loadCentralStorage();
-  const submittedCandidates = await processPendingLinks(storage);
+  const submittedCandidates = [
+    ...await processPendingLinks(storage),
+    ...await processApprovedCustomLinks(storage),
+  ];
   const blockedRules = (storage.blockedAgendaRules || []).map(normalizeAgendaBlockRule).filter((rule) => rule.value);
   const deleted = new Set(storage.deletedAgendaItemIds || []);
   const previous = new Map(storage.autoAgendaItems.map((item) => [item.id, item]));
