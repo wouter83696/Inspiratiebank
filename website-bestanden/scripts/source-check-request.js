@@ -108,11 +108,12 @@ async function finish() {
   const status = process.env.CHECK_STATUS || "success";
   const success = status === "success";
   const storage = await loadStorage();
-  storage.agendaSourceCheckCompletedAt = new Date().toISOString();
+  const completedAt = new Date().toISOString();
+  storage.agendaSourceCheckCompletedAt = completedAt;
   storage.agendaSourceCheckStatus = success ? "done" : "error";
   storage.agendaSourceCheckMessage = success
-    ? "Broncheck afgerond. Ververs beheer over enkele minuten voor de nieuwste status."
-    : "Broncheck kon niet volledig worden afgerond. Probeer later opnieuw of kijk bij beheer.";
+    ? `Broncheck afgerond op ${completedAt}.`
+    : `Broncheck niet volledig afgerond op ${completedAt}.`;
   await saveStorage(storage);
   console.log(storage.agendaSourceCheckMessage);
 }

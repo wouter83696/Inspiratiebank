@@ -1750,6 +1750,14 @@
     } else if(requestState.status === 'running'){
       titleText = 'Broncheck loopt nu';
       detailText = 'De bronnen worden gecontroleerd. Ververs beheer straks om de nieuwe status te zien.';
+    } else if(requestState.status === 'done' && requestState.completedAt){
+      titleText = `Broncheck klaar: ${formatAdminDateTime(requestState.completedAt)}`;
+      detailText = sourceAgendaCheckedAt()
+        ? `Agenda-data laatst bijgewerkt op ${formatAdminDateTime(sourceAgendaCheckedAt())}.`
+        : 'De aangevraagde broncheck is afgerond.';
+    } else if(requestState.status === 'error' && requestState.completedAt){
+      titleText = `Broncheck niet gelukt: ${formatAdminDateTime(requestState.completedAt)}`;
+      detailText = 'Probeer later opnieuw of controleer de broncheck via GitHub Actions.';
     } else if(!checkedAt){
       titleText = 'Nog geen agenda-check opgeslagen';
       detailText = 'Gebruik Controleer nu om de bronnen opnieuw te laten controleren.';
