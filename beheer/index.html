@@ -589,6 +589,13 @@
     .adminIdeaTitle{display:flex;align-items:flex-start;gap:10px;color:var(--accent-dark);font-weight:500;margin-bottom:4px}
     .adminIdeaTitleText{display:block;min-width:0}
     .adminIdeaTitle .domainIcon{margin-top:.06em}
+    #adminIdeaList .adminIdeaTitle{
+      display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;align-items:start;
+      line-height:1.24;margin-bottom:5px
+    }
+    #adminIdeaList .adminIdeaTitle .domainIcon{width:20px;height:20px;margin-top:.08em}
+    #adminIdeaList .adminIdeaTitle .domainIcon svg{width:12px;height:12px}
+    #adminIdeaList .adminIdeaTitleText{line-height:1.24;overflow-wrap:anywhere;hyphens:auto}
     .row .domainIcon{display:inline-flex;width:24px;height:24px;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
     .row .domainIcon svg{width:13px;height:13px}
     .adminIdeaMeta{display:block;color:var(--muted);font-size:.86rem;line-height:1.35}
@@ -651,7 +658,7 @@
     .adminIdeaPhotoThumb img{width:100%;height:100%;object-fit:cover;display:block}
     .adminIdeaPhotoIcon{
       display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:10px;
-      background:rgba(248,236,194,.72);color:#7a6424;border:1px solid rgba(186,151,56,.18)
+      background:rgba(246,223,231,.88);color:#8d4a63;border:1px solid rgba(198,98,133,.20)
     }
     .adminIdeaPhotoIcon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .domainThemePill{background:var(--theme-tint-strong);color:var(--theme-ink)}
