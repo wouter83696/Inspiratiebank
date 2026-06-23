@@ -3,8 +3,8 @@ name: Dagelijkse BCJN-broncheck
 on:
   workflow_dispatch:
   schedule:
-    - cron: "30 6,13 * * 1-5"
-    - cron: "5,15,25,35,45,55 6-16 * * 1-5"
+    - cron: "31 6,13 * * 1-5"
+    - cron: "*/10 * * * *"
 
 permissions:
   contents: write
@@ -31,6 +31,7 @@ jobs:
       - name: Bepalen of broncheck nodig is
         id: check_request
         env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
           GITHUB_EVENT_SCHEDULE: ${{ github.event.schedule }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}

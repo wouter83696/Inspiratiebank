@@ -264,9 +264,9 @@
     .adminStack{display:grid;gap:14px}
     .agendaCheckNotice{
       display:flex;align-items:center;justify-content:space-between;gap:16px;
-      padding:14px 16px;border:1px solid rgba(79,142,158,.12);border-radius:18px;
-      background:rgba(232,242,242,.96);
-      box-shadow:0 12px 28px rgba(20,38,42,.045);
+      padding:14px 16px;border:1px solid var(--line);border-radius:18px;
+      background:#fff;
+      box-shadow:0 18px 42px rgba(20,38,42,.055);
     }
     .agendaCheckNoticeText{display:grid;gap:3px;min-width:0}
     .agendaCheckActions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}
@@ -1755,30 +1755,30 @@
       const requestedTime = new Date(requestState.requestedAt || '').getTime();
       const queuedMinutes = Number.isFinite(requestedTime) ? Math.floor((Date.now() - requestedTime) / 60000) : 0;
       if(queuedMinutes >= 15){
-        titleText = 'Broncheck wacht nog';
-        detailText = `Aangevraagd om ${formatAdminDateTime(requestState.requestedAt)}. De automatische GitHub-check heeft dit verzoek nog niet opgepakt; hij probeert iedere 10 minuten opnieuw.`;
+        titleText = 'Controle staat nog klaar';
+        detailText = `Aangevraagd om ${formatAdminDateTime(requestState.requestedAt)}. De agenda is nog niet opnieuw gecontroleerd. Je kunt later verversen of opnieuw op Controleer nu klikken.`;
       } else {
-        titleText = 'Broncheck aangevraagd';
-        detailText = 'De site pakt dit automatisch op. Meestal zie je binnen 15 tot 20 minuten nieuwe checkdata.';
+        titleText = 'Controle aangevraagd';
+        detailText = 'De agenda staat klaar om opnieuw gecontroleerd te worden. Meestal zie je binnen 15 tot 20 minuten een update.';
       }
     } else if(requestState.status === 'running'){
       const startedTime = new Date(requestState.startedAt || '').getTime();
       const runningMinutes = Number.isFinite(startedTime) ? Math.floor((Date.now() - startedTime) / 60000) : 0;
-      titleText = runningMinutes >= 15 ? 'Broncheck loopt langer dan normaal' : 'Broncheck loopt nu';
+      titleText = runningMinutes >= 15 ? 'Controle duurt langer dan normaal' : 'Agenda wordt gecontroleerd';
       detailText = runningMinutes >= 15
-        ? `Gestart om ${formatAdminDateTime(requestState.startedAt)}. Ververs beheer straks opnieuw; als dit blijft staan is de GitHub-check waarschijnlijk vastgelopen.`
-        : 'De bronnen worden gecontroleerd. Ververs beheer straks om de nieuwe status te zien.';
+        ? `Gestart om ${formatAdminDateTime(requestState.startedAt)}. Ververs beheer later nog eens of vraag de controle opnieuw aan.`
+        : 'De bronnen worden nu nagekeken. Ververs beheer straks om de nieuwste status te zien.';
     } else if(requestState.status === 'done' && requestState.completedAt){
-      titleText = `Broncheck klaar: ${formatAdminDateTime(requestState.completedAt)}`;
+      titleText = `Agenda gecontroleerd: ${formatAdminDateTime(requestState.completedAt)}`;
       detailText = sourceAgendaCheckedAt()
-        ? `Agenda-data laatst bijgewerkt op ${formatAdminDateTime(sourceAgendaCheckedAt())}.`
-        : 'De aangevraagde broncheck is afgerond.';
+        ? `Laatste bijgewerkte agenda: ${formatAdminDateTime(sourceAgendaCheckedAt())}.`
+        : 'De aangevraagde controle is afgerond.';
     } else if(requestState.status === 'error' && requestState.completedAt){
-      titleText = `Broncheck niet gelukt: ${formatAdminDateTime(requestState.completedAt)}`;
-      detailText = 'Probeer later opnieuw of controleer de broncheck via GitHub Actions.';
+      titleText = `Controle niet gelukt: ${formatAdminDateTime(requestState.completedAt)}`;
+      detailText = 'Probeer het later opnieuw. Als je de agenda zelf hebt nagekeken, kun je hem handmatig als gecheckt markeren.';
     } else if(!checkedAt){
       titleText = 'Nog geen agenda-check opgeslagen';
-      detailText = 'Gebruik Controleer nu om de bronnen opnieuw te laten controleren.';
+      detailText = 'Klik op Controleer nu om de bronnen opnieuw te laten nakijken.';
     } else {
       const manual = storedAgendaCheckedAt();
       const manualTime = new Date(manual || '').getTime();
@@ -1786,7 +1786,7 @@
       titleText = `Laatst gecheckt: ${formatAdminDateTime(checkedAt)}`;
       detailText = Number.isFinite(manualTime) && manualTime >= (Number.isFinite(sourceTime) ? sourceTime : 0)
         ? 'Handmatig gemarkeerd in beheer.'
-        : 'Gebaseerd op de laatste broncontrole in de agenda-data.';
+        : 'Gebaseerd op de laatste agenda-update.';
     }
     titles.forEach(title => { title.textContent = titleText; });
     texts.forEach(text => { text.textContent = detailText; });
@@ -1798,22 +1798,24 @@
   }
   async function requestAgendaSourceCheck(){
     if(!centralStorageActive()){
-      setStatus('#adminStatus', 'Online opslag is niet beschikbaar; de broncheck kan nu niet worden aangevraagd.', 'warn');
+      setStatus('#adminStatus', 'Agenda-check aanvragen lukt nu niet. Probeer het later opnieuw.', 'warn');
       return;
     }
     const requestedAt = new Date().toISOString();
     centralStorage.agendaSourceCheckRequestedAt = requestedAt;
+    centralStorage.agendaSourceCheckStartedAt = '';
+    centralStorage.agendaSourceCheckCompletedAt = '';
     centralStorage.agendaSourceCheckStatus = 'queued';
-    centralStorage.agendaSourceCheckMessage = 'Broncheck aangevraagd vanuit beheer.';
+    centralStorage.agendaSourceCheckMessage = 'Agenda-check aangevraagd vanuit beheer.';
     renderAgendaCheckStatus();
     if(!(await saveCentralStorage())){
-      setStatus('#adminStatus', 'Broncheck aanvragen lukte niet in de online opslag.', 'warn');
+      setStatus('#adminStatus', 'Agenda-check aanvragen lukte niet. Probeer het later opnieuw.', 'warn');
       await loadCentralStorage();
       renderAgendaCheckStatus();
       return;
     }
     renderAgendaCheckStatus();
-    setStatus('#adminStatus', 'Broncheck aangevraagd. De automatische check probeert dit iedere 10 minuten op te pakken.', 'ok');
+    setStatus('#adminStatus', 'Agenda-check aangevraagd. Meestal zie je binnen 15 tot 20 minuten een update.', 'ok');
   }
   async function markAgendaCheckedNow(){
     const checkedAt = new Date().toISOString();

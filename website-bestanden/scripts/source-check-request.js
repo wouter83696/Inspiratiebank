@@ -34,7 +34,7 @@ function timeOf(value = "") {
 }
 
 async function supabaseFetch(pathname, options = {}) {
-  if (!url || !key) throw new Error("Supabase is niet ingesteld voor broncheckverzoeken.");
+  if (!url || !key) throw new Error("Online opslag is niet ingesteld voor agenda-checks.");
   const base = url.replace(/\/+$/, "");
   const response = await fetch(`${base}/rest/v1/${pathname}`, {
     ...options,
@@ -69,8 +69,8 @@ async function saveStorage(storage) {
 }
 
 async function decide() {
-  if (eventName === "workflow_dispatch" || schedule === "30 6,13 * * 1-5") {
-    writeOutput({ should_run: "true", reason: eventName === "workflow_dispatch" ? "handmatig in GitHub" : "vaste planning" });
+  if (eventName === "workflow_dispatch" || schedule === "31 6,13 * * 1-5") {
+    writeOutput({ should_run: "true", reason: eventName === "workflow_dispatch" ? "handmatig gestart" : "vaste planning" });
     return;
   }
 
@@ -91,16 +91,16 @@ async function decide() {
   const hasPendingRequest = requestedTime > completedTime && (requestedTime > startedTime || runningStale);
 
   if (!hasPendingRequest) {
-    console.log("Geen open broncheckverzoek.");
+    console.log("Geen open agenda-checkverzoek.");
     writeOutput({ should_run: "false", reason: "geen verzoek" });
     return;
   }
 
   storage.agendaSourceCheckStartedAt = new Date().toISOString();
   storage.agendaSourceCheckStatus = "running";
-  storage.agendaSourceCheckMessage = "Broncheck wordt uitgevoerd.";
+  storage.agendaSourceCheckMessage = "Agenda-check wordt uitgevoerd.";
   await saveStorage(storage);
-  console.log(`Broncheckverzoek gestart: ${requestedAt}`);
+  console.log(`Agenda-checkverzoek gestart: ${requestedAt}`);
   writeOutput({ should_run: "true", reason: "siteverzoek", requested_at: requestedAt });
 }
 
@@ -112,8 +112,8 @@ async function finish() {
   storage.agendaSourceCheckCompletedAt = completedAt;
   storage.agendaSourceCheckStatus = success ? "done" : "error";
   storage.agendaSourceCheckMessage = success
-    ? `Broncheck afgerond op ${completedAt}.`
-    : `Broncheck niet volledig afgerond op ${completedAt}.`;
+    ? `Agenda-check afgerond op ${completedAt}.`
+    : `Agenda-check niet volledig afgerond op ${completedAt}.`;
   await saveStorage(storage);
   console.log(storage.agendaSourceCheckMessage);
 }
