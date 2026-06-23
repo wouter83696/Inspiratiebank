@@ -1804,6 +1804,7 @@
   const pill = (text, kind='soft') => `<span class="pill ${kind}">${escapeHtml(text)}</span>`;
   const categoryPill = domain => `<span class="pill categoryPill ${domainThemeClass(domain)}"><span class="domainIcon" aria-hidden="true">${domainIcon(domain)}</span><span class="categoryPillText">${escapeHtml(domainDisplayLabel(domain))}</span></span>`;
 	  const COLLEAGUE_STORAGE_KEY = 'zomerprogramma_colleague_ideas_v1';
+	  const COLLEAGUE_APPROVED_KEY = 'zomerprogramma_approved_colleague_ideas_v1';
 	  const COLLEAGUE_HIDDEN_KEY = 'zomerprogramma_hidden_colleague_ideas_v1';
 	  const ADMIN_HIDDEN_INSPIRATION_KEY = 'zomerprogramma_hidden_inspiration_titles_v1';
 	  const ADMIN_DELETED_INSPIRATION_KEY = 'zomerprogramma_deleted_inspiration_keys_v1';
@@ -1846,6 +1847,7 @@
 	      version:1,
 	      updatedAt:value.updatedAt || null,
 	      colleagueIdeas:Array.isArray(value.colleagueIdeas) ? value.colleagueIdeas : [],
+	      approvedColleagueIdeaIds:Array.isArray(value.approvedColleagueIdeaIds) ? value.approvedColleagueIdeaIds : [],
 	      hiddenColleagueIdeaIds:Array.isArray(value.hiddenColleagueIdeaIds) ? value.hiddenColleagueIdeaIds : [],
 	      hiddenInspirationTitles:Array.isArray(value.hiddenInspirationTitles) ? value.hiddenInspirationTitles : [],
 	      deletedInspirationKeys:Array.isArray(value.deletedInspirationKeys) ? value.deletedInspirationKeys : [],
@@ -2482,6 +2484,15 @@
       return [];
     }
   }
+  function loadApprovedTeamIdeaIds(){
+    if(centralStorageActive()) return new Set(centralStorage.approvedColleagueIdeaIds.map(String));
+    if(typeof localStorage === 'undefined') return new Set();
+    try{
+      return new Set(JSON.parse(localStorage.getItem(COLLEAGUE_APPROVED_KEY) || '[]').map(String));
+    }catch(error){
+      return new Set();
+    }
+  }
   function loadHiddenTeamIdeaIds(){
     if(centralStorageActive()) return new Set(centralStorage.hiddenColleagueIdeaIds);
     if(typeof localStorage === 'undefined') return new Set();
@@ -2921,8 +2932,10 @@
   }
   function allTeamIdeas(){
     const hiddenIds = loadHiddenTeamIdeaIds();
+    const approvedIds = loadApprovedTeamIdeaIds();
     const deleted = loadDeletedInspirationKeys();
-    return [...loadStoredTeamIdeas(), ...baseTeamIdeas()].filter(item => !hiddenIds.has(item.id) && !deleted.has(item.id) && !deleted.has(normalize(item.title)));
+    const stored = loadStoredTeamIdeas().filter(item => approvedIds.has(item.id));
+    return [...stored, ...baseTeamIdeas()].filter(item => !hiddenIds.has(item.id) && !deleted.has(item.id) && !deleted.has(normalize(item.title)));
   }
   function teamIdeaToInspiration(item){
     const approvedImage = approvedIdeaImage(item);

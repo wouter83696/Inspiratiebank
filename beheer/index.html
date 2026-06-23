@@ -713,6 +713,7 @@
     }
     .ideaActions .button.iconAction svg{width:15px;height:15px}
     .ideaActions .button.iconAction.editIdeaAction{background:rgba(255,255,255,.86);border-color:rgba(79,142,158,.16);color:#315f6d}
+    .ideaActions .button.iconAction.approveIdeaAction{background:rgba(255,255,255,.88);border-color:rgba(72,132,100,.18);color:#426e5d}
     .ideaActions .button.iconAction.visibilityIdeaAction{background:rgba(255,255,255,.86);border-color:rgba(72,132,100,.14);color:#4f7663}
     .ideaActions .button.iconAction.warn{background:rgba(255,255,255,.86);border-color:rgba(186,151,56,.16);color:#7a6424}
     .ideaActions .button.iconAction.hot{background:rgba(255,255,255,.86);border-color:rgba(198,98,133,.16);color:#8d4a63}
@@ -1391,6 +1392,7 @@
   const ADMIN_PASSWORD = '6545';
   const ADMIN_SESSION_KEY = 'bcjn_zomer_beheer_open_v1';
 	  const COLLEAGUE_STORAGE_KEY = 'zomerprogramma_colleague_ideas_v1';
+	  const COLLEAGUE_APPROVED_KEY = 'zomerprogramma_approved_colleague_ideas_v1';
 	  const COLLEAGUE_HIDDEN_KEY = 'zomerprogramma_hidden_colleague_ideas_v1';
 	  const ADMIN_HIDDEN_INSPIRATION_KEY = 'zomerprogramma_hidden_inspiration_titles_v1';
 	  const ADMIN_DELETED_INSPIRATION_KEY = 'zomerprogramma_deleted_inspiration_keys_v1';
@@ -1521,6 +1523,7 @@
 	      version:1,
 	      updatedAt:value.updatedAt || null,
 	      colleagueIdeas:Array.isArray(value.colleagueIdeas) ? value.colleagueIdeas : [],
+	      approvedColleagueIdeaIds:Array.isArray(value.approvedColleagueIdeaIds) ? value.approvedColleagueIdeaIds : [],
 	      hiddenColleagueIdeaIds:Array.isArray(value.hiddenColleagueIdeaIds) ? value.hiddenColleagueIdeaIds : [],
 	      hiddenInspirationTitles:Array.isArray(value.hiddenInspirationTitles) ? value.hiddenInspirationTitles : [],
 	      deletedInspirationKeys:Array.isArray(value.deletedInspirationKeys) ? value.deletedInspirationKeys : [],
@@ -1593,6 +1596,7 @@
   function centralFieldForKey(key){
     return {
 	      [COLLEAGUE_STORAGE_KEY]:'colleagueIdeas',
+	      [COLLEAGUE_APPROVED_KEY]:'approvedColleagueIdeaIds',
 	      [COLLEAGUE_HIDDEN_KEY]:'hiddenColleagueIdeaIds',
 	      [ADMIN_HIDDEN_INSPIRATION_KEY]:'hiddenInspirationTitles',
 	      [ADMIN_DELETED_INSPIRATION_KEY]:'deletedInspirationKeys',
@@ -2097,6 +2101,9 @@
   function storedTeamIdeas(){
     return loadArray(COLLEAGUE_STORAGE_KEY).map(normalizeTeamIdea).filter(item => item.title);
   }
+  function approvedTeamIds(){
+    return new Set(loadArray(COLLEAGUE_APPROVED_KEY).map(String));
+  }
   function hiddenTitles(){
     return new Set(loadArray(ADMIN_HIDDEN_INSPIRATION_KEY).map(normalize));
   }
@@ -2105,6 +2112,19 @@
   }
   function hiddenTeamIds(){
     return new Set(loadArray(COLLEAGUE_HIDDEN_KEY));
+  }
+  async function approveTeamIdea(id){
+    const key = String(id || '');
+    if(!key) return;
+    const approved = approvedTeamIds();
+    approved.add(key);
+    saveArray(COLLEAGUE_APPROVED_KEY, [...approved]);
+    if(!(await saveCentralStorage())){
+      setStatus('#adminStatus', 'Goedkeuren lukte niet in de online opslag.', 'warn');
+      return;
+    }
+    renderIdeas();
+    setStatus('#adminStatus', 'Toegevoegde inspiratie goedgekeurd. Ververs de gewone pagina om hem daar te zien.', 'ok');
   }
 	  function customLinks(){
 	    return loadArray(ADMIN_LINKS_KEY)
@@ -2470,6 +2490,7 @@
       imageStatus:item.imageStatus || (item.imageApproved ? 'approved' : ''),
       hidden:teamHidden.has(item.id)
     })).filter(item => !deleted.has(item.key) && !deleted.has(normalize(item.title)));
+    const approved = approvedTeamIds();
     const userIdeas = storedTeamIdeas().map(item => ({
       key:item.id,
       kind:'collega-toegevoegd',
@@ -2489,6 +2510,7 @@
       image:item.image || '',
       imageAlt:item.imageAlt || item.title || '',
       imageStatus:item.imageStatus || (item.imageApproved ? 'approved' : ''),
+      approved:approved.has(item.id),
       hidden:teamHidden.has(item.id)
     })).filter(item => !deleted.has(item.key) && !deleted.has(normalize(item.title)));
     return [...userIdeas, ...seedIdeas, ...baseIdeas].sort((a,b) => a.title.localeCompare(b.title, 'nl'));
@@ -2810,12 +2832,15 @@
   function adminIdeaActions(item){
     const statusLabel = item.hidden ? 'Maak zichtbaar' : 'Verberg tijdelijk';
     const statusIcon = item.hidden ? actionIcon('eyeOff') : actionIcon('eye');
+    const approveAction = item.kind === 'collega-toegevoegd' && !item.approved
+      ? `<button class="button iconAction approveIdeaAction" data-approve-idea="${escapeHtml(item.key)}" type="button" aria-label="Goedkeuren" title="Goedkeuren">${actionIcon('check')}</button>`
+      : '';
     const hideAction = item.kind === 'basis'
       ? `<button class="button iconAction visibilityIdeaAction ${item.hidden ? '' : 'warn'}" data-title-action="${item.hidden ? 'show' : 'hide'}" data-key="${escapeHtml(item.key)}" type="button" aria-label="${escapeHtml(statusLabel)}" title="${escapeHtml(statusLabel)}">${statusIcon}</button>`
       : `<button class="button iconAction visibilityIdeaAction ${item.hidden ? '' : 'warn'}" data-team-action="${item.hidden ? 'show' : 'hide'}" data-key="${escapeHtml(item.key)}" type="button" aria-label="${escapeHtml(statusLabel)}" title="${escapeHtml(statusLabel)}">${statusIcon}</button>`;
     const editAction = `<button class="button iconAction editIdeaAction" data-edit-idea="${escapeHtml(item.key)}" data-kind="${escapeHtml(item.kind)}" type="button" aria-label="Wijzig" title="Wijzig">${actionIcon('edit')}</button>`;
     const deleteAction = `<button class="button iconAction hot" data-delete-idea="${escapeHtml(item.key)}" data-kind="${escapeHtml(item.kind)}" data-title="${escapeHtml(item.title)}" type="button" aria-label="Verwijder" title="Verwijder">${actionIcon('trash')}</button>`;
-    return `<div class="ideaActions">${editAction}${hideAction}${deleteAction}</div>`;
+    return `<div class="ideaActions">${approveAction}${editAction}${hideAction}${deleteAction}</div>`;
   }
   function adminIdeaCard(item){
     const image = adminIdeaImage(item);
@@ -2833,7 +2858,7 @@
     const website = item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.source || 'Bekijk website')}</a>` : '';
     return `<article class="card ideaThemeCard ${domainThemeClass(item.domain)} ${item.hidden ? 'hiddenItem' : ''}">
       ${imageMarkup}
-      <div class="cardPills"><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)} ${item.hidden ? '<span class="pill warn">Verborgen</span>' : ''}</div></div>
+      <div class="cardPills"><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)} ${item.kind === 'collega-toegevoegd' && !item.approved ? '<span class="pill warn">Wacht op goedkeuring</span>' : ''}${item.hidden ? '<span class="pill warn">Verborgen</span>' : ''}</div></div>
       ${cardMetaLine(item)}
       <h3>${titleWithIcon(item.title, item.domain)}</h3>
       ${source ? `<div class="small">${escapeHtml(source)}</div>` : ''}
@@ -2852,7 +2877,8 @@
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(label => pill(label, 'soft')).join(' ');
     const source = item.source || item.kind;
-    const activityMeta = [item.group || '', item.duration || '', item.hidden ? 'Verborgen' : ''].filter(Boolean).join(' • ');
+    const approvalMeta = item.kind === 'collega-toegevoegd' && !item.approved ? 'Wacht op goedkeuring' : '';
+    const activityMeta = [item.group || '', item.duration || '', approvalMeta, item.hidden ? 'Verborgen' : ''].filter(Boolean).join(' • ');
     const website = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.source || 'Open')}</a>` : '<span class="small">-</span>';
     return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)} ${item.hidden ? 'hiddenItem' : ''}" data-idea-key="${escapeHtml(item.key)}">
       <td data-label="Activiteit">${titleWithIcon(item.title, item.domain, 'adminIdeaTitle')}${activityMeta ? `<div class="small adminIdeaMetaLine">${escapeHtml(activityMeta)}</div>` : ''}${source ? `<div class="small adminIdeaMetaLine">${escapeHtml(source)}</div>` : ''}</td>
@@ -2924,6 +2950,7 @@
 	  }
   function renderSubmittedIdeas(){
     const hidden = hiddenTeamIds();
+    const approved = approvedTeamIds();
     const deleted = deletedIdeaKeys();
     const items = storedTeamIdeas()
       .map(item => ({
@@ -2933,13 +2960,14 @@
         domain:item.domain,
         source:item.source || `Ingebracht door ${item.by}`,
         rules:item.materials || item.note || '',
+        approved:approved.has(item.id),
         hidden:hidden.has(item.id)
       }))
       .filter(item => !deleted.has(item.key) && !deleted.has(normalize(item.title)));
     $('#submittedIdeaCount').textContent = `${items.length} item${items.length === 1 ? '' : 's'}`;
     $('#submittedIdeaList').innerHTML = items.length ? items.map(item => `<article class="row ${item.hidden ? 'hiddenItem' : ''}">
       <div><strong>${titleWithIcon(item.title, item.domain)}</strong><span>${escapeHtml([item.source, item.rules].filter(Boolean).join(' · '))}</span></div>
-      <div class="rowActions">${item.hidden ? '<span class="pill warn">Verborgen</span>' : '<span class="pill ok">Zichtbaar</span>'}${adminIdeaActions(item)}</div>
+      <div class="rowActions">${item.hidden ? '<span class="pill warn">Verborgen</span>' : item.approved ? '<span class="pill ok">Zichtbaar</span>' : '<span class="pill warn">Wacht op goedkeuring</span>'}${adminIdeaActions(item)}</div>
     </article>`).join('') : '<div class="empty">Er wachten geen toegevoegde inspiratie-items.</div>';
   }
   function renderReports(){
@@ -4184,6 +4212,11 @@
     const stored = storedTeamIdeas().filter(item => item.id !== next.id && item.id !== original.key);
     if(original.kind === 'collega-toegevoegd'){
       stored.unshift(next);
+      if(next.id !== original.key){
+        const approved = approvedTeamIds();
+        if(approved.delete(original.key)) approved.add(next.id);
+        saveArray(COLLEAGUE_APPROVED_KEY, [...approved]);
+      }
     }else{
       stored.unshift(next);
       if(original.kind === 'basis'){
@@ -4371,6 +4404,8 @@
       if(titleButton) updateTitleVisibility(titleButton.dataset.key, titleButton.dataset.titleAction);
       const teamButton = event.target.closest('[data-team-action]');
       if(teamButton) updateTeamVisibility(teamButton.dataset.key, teamButton.dataset.teamAction);
+      const approveIdeaButton = event.target.closest('[data-approve-idea]');
+      if(approveIdeaButton) approveTeamIdea(approveIdeaButton.dataset.approveIdea);
       const editIdeaButton = event.target.closest('[data-edit-idea]');
       if(editIdeaButton) startAdminIdeaEdit(editIdeaButton.dataset.kind, editIdeaButton.dataset.editIdea);
       const deleteIdeaButton = event.target.closest('[data-delete-idea]');
