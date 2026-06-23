@@ -322,6 +322,7 @@
     .button:hover{transform:translateY(-1px);filter:brightness(.98)}
     .button:disabled{cursor:default;opacity:.62;box-shadow:none;transform:none;filter:none}
     .button.primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px rgba(79,142,158,.18)}
+    .button.white{background:rgba(255,255,255,.86);color:rgba(11,18,32,.68);box-shadow:0 8px 18px rgba(20,38,42,.04);border:1px solid rgba(79,142,158,.08)}
     .button.warn{background:rgba(248,236,194,.78);color:#7a6424}
     .button.hot{background:rgba(246,223,231,.82);color:#84435a}
     .button.small{padding:8px 10px;font-size:.84rem}
@@ -946,6 +947,16 @@
                 <p>Begin hier: meldingen, nieuwe bronlinks en toegevoegde inspiratie staan naast elkaar zodat je snel ziet wat aandacht nodig heeft.</p>
               </div>
             </div>
+            <section class="agendaCheckNotice" aria-labelledby="dashboardAgendaCheckTitle">
+              <div class="agendaCheckNoticeText">
+                <span class="agendaCheckEyebrow">Agenda-check</span>
+                <strong id="dashboardAgendaCheckTitle" data-agenda-check-title>Laatste check laden...</strong>
+                <span class="agendaCheckDetail" data-agenda-check-text>We halen de status uit de beheerdata.</span>
+              </div>
+              <div class="agendaCheckActions">
+                <a class="button small primary" href="https://github.com/wouter83696/Inspiratiebank/actions/workflows/dagelijkse-broncheck.yml" target="_blank" rel="noopener">Controleer nu</a>
+              </div>
+            </section>
             <div class="adminTopGrid">
         <section class="panel tintedPanel toneReports" id="reportsPanel">
           <div class="panelHead">
@@ -993,12 +1004,12 @@
         <section class="agendaCheckNotice" aria-labelledby="agendaCheckStatusTitle">
           <div class="agendaCheckNoticeText">
             <span class="agendaCheckEyebrow">Agenda-check</span>
-            <strong id="agendaCheckStatusTitle">Laatste check laden...</strong>
-            <span class="agendaCheckDetail" id="agendaCheckStatusText">We halen de status uit de beheerdata.</span>
+            <strong id="agendaCheckStatusTitle" data-agenda-check-title>Laatste check laden...</strong>
+            <span class="agendaCheckDetail" id="agendaCheckStatusText" data-agenda-check-text>We halen de status uit de beheerdata.</span>
           </div>
           <div class="agendaCheckActions">
             <a class="button small primary" href="https://github.com/wouter83696/Inspiratiebank/actions/workflows/dagelijkse-broncheck.yml" target="_blank" rel="noopener">Controleer nu</a>
-            <button class="button small" id="markAgendaCheckedBtn" type="button">Als gecheckt markeren</button>
+            <button class="button small white" id="markAgendaCheckedBtn" type="button">Als gecheckt markeren</button>
           </div>
         </section>
         <section class="panel tintedPanel toneAgenda agendaRulesPanel" id="agendaRulesPanel">
@@ -1697,22 +1708,26 @@
     return date.toLocaleString('nl-NL', {dateStyle:'medium', timeStyle:'short'});
   }
   function renderAgendaCheckStatus(){
-    const title = $('#agendaCheckStatusTitle');
-    const text = $('#agendaCheckStatusText');
-    if(!title || !text) return;
+    const titles = $$('[data-agenda-check-title]');
+    const texts = $$('[data-agenda-check-text]');
+    if(!titles.length || !texts.length) return;
     const checkedAt = latestAgendaCheckedAt();
+    let titleText = '';
+    let detailText = '';
     if(!checkedAt){
-      title.textContent = 'Nog geen agenda-check opgeslagen';
-      text.textContent = 'Gebruik de knop zodra je de UIT-agenda handmatig hebt nagelopen.';
-      return;
+      titleText = 'Nog geen agenda-check opgeslagen';
+      detailText = 'Gebruik de knop zodra je de UIT-agenda handmatig hebt nagelopen.';
+    } else {
+      const manual = storedAgendaCheckedAt();
+      const manualTime = new Date(manual || '').getTime();
+      const sourceTime = new Date(sourceAgendaCheckedAt() || '').getTime();
+      titleText = `Laatst gecheckt: ${formatAdminDateTime(checkedAt)}`;
+      detailText = Number.isFinite(manualTime) && manualTime >= (Number.isFinite(sourceTime) ? sourceTime : 0)
+        ? 'Handmatig gemarkeerd in beheer.'
+        : 'Gebaseerd op de laatste broncontrole in de agenda-data.';
     }
-    const manual = storedAgendaCheckedAt();
-    const manualTime = new Date(manual || '').getTime();
-    const sourceTime = new Date(sourceAgendaCheckedAt() || '').getTime();
-    title.textContent = `Laatst gecheckt: ${formatAdminDateTime(checkedAt)}`;
-    text.textContent = Number.isFinite(manualTime) && manualTime >= (Number.isFinite(sourceTime) ? sourceTime : 0)
-      ? 'Handmatig gemarkeerd in beheer.'
-      : 'Gebaseerd op de laatste broncontrole in de agenda-data.';
+    titles.forEach(title => { title.textContent = titleText; });
+    texts.forEach(text => { text.textContent = detailText; });
   }
   async function markAgendaCheckedNow(){
     const checkedAt = new Date().toISOString();
