@@ -117,12 +117,10 @@ function agendaDuplicateKeys(item = {}) {
   const date = normalize(item.date || item.dateLabel || "");
   const time = normalize(item.time || item.timeLabel || "").replace(/\s+/g, " ");
   const place = normalize(item.where || item.place || item.location || "");
-  const host = sourceHost(item.url || item.sourceUrl || "");
   return [
     agendaContentKey(item),
     title && date && place ? `${title}|${date}|${place}` : "",
     title && date && time ? `${title}|${date}|${time}` : "",
-    title && place && host ? `${title}|${place}|${host}` : "",
   ].filter(Boolean);
 }
 
