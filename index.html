@@ -3444,6 +3444,9 @@
     if(eventSpanDays(item) > 0) return true;
     return /dagelijks|wisselende voorstellingen|start wanneer je wilt|diverse tijden|di t\/m zo|ma t\/m zo|maandag t\/m zondag/.test(dateTimeLabel);
   }
+  function isOngoingOffer(item={}){
+    return item.seasonLimited === true || isFlexiblePeriodOffer(item);
+  }
 	function showPeriodInAgenda(item){
 	  const span = eventSpanDays(item);
 	  return span > 0 && span <= 21;
@@ -3606,8 +3609,7 @@
   function sharedFlexibleOffers(){
     const flexible = allExternalItems()
       .filter(isConcrete)
-      .filter(isFlexiblePeriodOffer)
-      .filter(item => item.seasonLimited === true)
+      .filter(isOngoingOffer)
       .filter(item => ACTIVE_WEEKS.some(week => weekDays(week.id).some(day => itemOccursOnDay(item, day.iso))))
       .filter(item => !(isMultiDayFestival(item) && eventSpanDays(item) > 0));
     const merged = new Map();

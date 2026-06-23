@@ -2103,6 +2103,12 @@
 	      source:String(item.source || 'Broncheck').trim(),
 	      url:normalizeUrl(item.url || item.sourceUrl || ''),
 	      daysOfWeek:Array.isArray(item.daysOfWeek) ? item.daysOfWeek : undefined,
+	      pinToAgenda:Boolean(item.pinToAgenda),
+	      seasonLimited:Boolean(item.seasonLimited),
+	      cost:String(item.cost || '').trim(),
+	      stimulus:String(item.stimulus || '').trim(),
+	      distanceBand:String(item.distanceBand || '').trim(),
+	      locationType:String(item.locationType || '').trim(),
 	      reviewStatus:String(item.reviewStatus || 'auto'),
 	      fit:String(item.fit || item.note || '').trim()
 	    };
@@ -2906,6 +2912,9 @@
 	    const label = normalize(`${item.date || ''} ${item.time || ''}`);
 	    return agendaDateSpanDays(item) > 0 || /dagelijks|wisselende|zelf|start wanneer|diverse tijden|op reservering|check/.test(label);
 	  }
+	  function isAgendaOngoingOffer(item={}){
+	    return item.seasonLimited === true || isAgendaFlexiblePeriod(item);
+	  }
 	  function showAgendaPeriodInWeek(item={}){
 	    const span = agendaDateSpanDays(item);
 	    return span > 0 && span <= 21;
@@ -3033,8 +3042,9 @@
 	    if(state.isHidden) return '<span class="pill warn">Verborgen</span>';
 	    if(item.agendaKind !== 'auto' && state.isVerified) return '<span class="pill ok">Vast gecheckt</span>';
 	    const typePill = item.agendaKind === 'auto' ? '<span class="pill warn">Automatisch</span>' : '<span class="pill soft">Vast</span>';
+	    const ongoingPill = isAgendaOngoingOffer(item) ? '<span class="pill soft">Doorlopend</span>' : '';
 	    const status = state.isVerified ? '<span class="pill ok">Gecheckt</span>' : '<span class="pill new">Nieuw</span>';
-	    return `${typePill}${status}`;
+	    return `${typePill}${ongoingPill}${status}`;
 	  }
 	  function renderAgendaListItem(item, state){
 	    const sourceLabel = agendaDisplayHost(item.url) || item.source || 'Bron onbekend';
@@ -3048,7 +3058,7 @@
 	          <span><b>Datum</b>${escapeHtml(dateText)}</span>
 	          <span><b>Plek</b>${escapeHtml(item.where || 'Plek nog checken')}</span>
 	          <span><b>Bron</b>${escapeHtml(sourceLabel)}</span>
-	          <span><b>Soort</b>${escapeHtml(isAgendaFlexiblePeriod(item) ? 'Meerdaags / flexibel' : 'Dagactiviteit')}</span>
+	          <span><b>Soort</b>${escapeHtml(isAgendaOngoingOffer(item) ? 'Doorlopend aanbod' : 'Dagactiviteit')}</span>
 	        </div>
 	        ${item.fit ? `<p class="agendaReviewNote">${escapeHtml(item.fit)}</p>` : ''}
 	      </div>
