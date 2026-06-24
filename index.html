@@ -2565,6 +2565,48 @@
       return '';
     }
   }
+  const LOW_VALUE_SUBMISSION_WORDS = new Set(['asdf','bla','blah','hoi','hallo','lol','nvt','n v t','test','testing','xxx','xxxx']);
+  function compactSubmissionText(value=''){
+    return normalize(value).replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
+  }
+  function hasUsefulPublicUrl(value=''){
+    const raw = String(value || '').trim();
+    if(!raw) return false;
+    try{
+      const url = new URL(normalizeUrl(raw));
+      const host = normalize(url.hostname.replace(/^www\./i,''));
+      if(!/^https?:$/.test(url.protocol)) return false;
+      if(!host.includes('.')) return false;
+      if(host === 'localhost' || host.endsWith('.local')) return false;
+      if(['example.com','example.nl','test.nl','test.com','invalid.invalid'].includes(host)) return false;
+      return true;
+    }catch(error){
+      return false;
+    }
+  }
+  function looksLikeLowValueText(value=''){
+    const text = compactSubmissionText(value);
+    const squashed = text.replace(/\s+/g,'');
+    if(!text) return true;
+    if(LOW_VALUE_SUBMISSION_WORDS.has(text) || LOW_VALUE_SUBMISSION_WORDS.has(squashed)) return true;
+    if(squashed.length < 3) return true;
+    if(/(.)\1{4,}/.test(squashed)) return true;
+    if(/^(?:abc|abcd|qwerty|azerty|123|1234|12345)+$/.test(squashed)) return true;
+    return false;
+  }
+  function teamIdeaLooksUseful(item={}){
+    const title = compactSubmissionText(item.title || '');
+    const by = compactSubmissionText(item.by || '');
+    const detail = compactSubmissionText([item.fit, item.note, item.address].filter(Boolean).join(' '));
+    if(title.length < 4 || by.length < 2) return false;
+    if(looksLikeLowValueText(item.title) || looksLikeLowValueText(item.by)) return false;
+    if(!hasUsefulPublicUrl(item.url) && detail.length < 8) return false;
+    if(detail && looksLikeLowValueText(detail) && !hasUsefulPublicUrl(item.url)) return false;
+    return true;
+  }
+  function sourceLinkLooksUseful(link={}){
+    return hasUsefulPublicUrl(link.url);
+  }
   function normalizedAgendaTitle(value=''){
     return normalize(value)
       .replace(/[–—-]/g,' ')
@@ -2867,13 +2909,30 @@
     showReportToast.timer = window.setTimeout(() => toast.classList.remove('show'), 2600);
   }
   async function saveItemReport({kind, key, title, reason}){
+    const safeKind = normalize(kind || '');
+    const safeKey = String(key || '').trim();
+    const safeReason = String(reason || '').trim();
+    if(!['agenda','inspiratiebank'].includes(safeKind) || !safeKey || !safeReason){
+      showReportToast('Deze melding is te onduidelijk om te bewaren.');
+      return false;
+    }
     const reports = loadReports();
+    const duplicate = reports.find(report =>
+      report.status !== 'resolved' &&
+      normalize(report.kind || '') === safeKind &&
+      String(report.key || '').trim() === safeKey &&
+      String(report.reason || '').trim() === safeReason
+    );
+    if(duplicate){
+      showReportToast('Deze melding staat al open voor beheer.');
+      return false;
+    }
     reports.unshift({
       id:`report-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,
-      kind,
-      key,
+      kind:safeKind,
+      key:safeKey,
       title,
-      reason,
+      reason:safeReason,
       status:'open',
       createdAt:new Date().toISOString()
     });
@@ -3333,6 +3392,10 @@
       setTeamIdeaStatus('Kies ook een categorie.', 'warn');
       return;
     }
+    if(!teamIdeaLooksUseful(item)){
+      setTeamIdeaStatus('Vul iets concreets in: een duidelijke activiteit en kort waarom, waar of wanneer dit bruikbaar is.', 'warn');
+      return;
+    }
     const stored = loadStoredTeamIdeas();
     stored.unshift(item);
     if(!saveStoredTeamIdeas(stored) || !(await saveCentralStorage())){
@@ -3367,6 +3430,10 @@
 	    });
     if(!item.url){
 	      setLinkAddStatus('Plak eerst een volledig webadres.', 'warn');
+      return;
+	    }
+	    if(!sourceLinkLooksUseful(item)){
+	      setLinkAddStatus('Gebruik een echte openbare website, bijvoorbeeld een activiteiten- of agendapagina.', 'warn');
       return;
 	    }
 	    const key = `${normalize(item.name)}|${item.url}`;

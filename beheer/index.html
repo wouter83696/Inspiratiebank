@@ -2963,7 +2963,7 @@
         approved:approved.has(item.id),
         hidden:hidden.has(item.id)
       }))
-      .filter(item => !deleted.has(item.key) && !deleted.has(normalize(item.title)));
+      .filter(item => !item.approved && !deleted.has(item.key) && !deleted.has(normalize(item.title)));
     $('#submittedIdeaCount').textContent = `${items.length} item${items.length === 1 ? '' : 's'}`;
     $('#submittedIdeaList').innerHTML = items.length ? items.map(item => `<article class="row ${item.hidden ? 'hiddenItem' : ''}">
       <div><strong>${titleWithIcon(item.title, item.domain)}</strong><span>${escapeHtml([item.source, item.rules].filter(Boolean).join(' · '))}</span></div>
