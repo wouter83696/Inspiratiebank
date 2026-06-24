@@ -2636,6 +2636,11 @@
 	    return 'Nieuwe link';
 	  }
 	}
+  function sourceButtonLabel(item={}){
+    const source = String(item.source || '').trim();
+    if(source && !/^ingebracht door\b/i.test(source) && normalize(source) !== 'inzending') return source;
+    return item.url ? linkNameFromUrl(item.url) : 'Bekijk website';
+  }
 	  function normalizeCustomLink(link={}){
 	    return {
 	      id:String(link.id || `link-${Date.now()}-${Math.random().toString(36).slice(2,8)}`),
@@ -3014,7 +3019,7 @@
       stimulus:item.stimulus,
       materials:item.note || item.materials || '',
       fit:item.fit || item.note || 'Toegevoegd door iemand uit de omgeving.',
-      source:item.by ? `Ingebracht door: ${item.by}` : 'Inzending',
+      source:item.url ? '' : 'Inzending',
       url:item.url || '',
       image:approvedImage && item.imageStatus === 'approved' ? approvedImage.src : '',
       imageAlt:approvedImage && item.imageStatus === 'approved' ? approvedImage.alt : '',
@@ -3803,7 +3808,7 @@
     const costLabel = normalizeIdeaCost(item.cost);
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
-    const sourceLink = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.source || 'Bekijk website')}</a>` : '<span class="small">-</span>';
+    const sourceLink = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(sourceButtonLabel(item))}</a>` : '<span class="small">-</span>';
     return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)}" data-idea-key="${escapeHtml(ideaDomKey(item))}">
       <td>${titleWithIcon(item.title, item.domain, 'nameWithIcon')}<div class="small ideaListMeta">${escapeHtml(item.group || '')} • ${escapeHtml(item.duration || '')}</div></td>
       <td>${categoryPill(item.domain)}</td>
@@ -3867,7 +3872,7 @@
       ${cardMetaLine(item)}
       <p>${escapeHtml(audienceText(item.fit))}</p>
       <p class="fine"><strong>Praktisch:</strong>${escapeHtml(audienceText(item.materials || 'Nog bepalen'))}</p>
-      <div class="cardFooter">${item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.source || 'Bekijk website')}</a>` : ''}${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}</div>
+      <div class="cardFooter">${item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(sourceButtonLabel(item))}</a>` : ''}${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}</div>
     </article>`;
   }
   function matches(item, query, filters){
