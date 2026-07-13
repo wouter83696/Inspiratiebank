@@ -4575,29 +4575,29 @@
   ],
   "generated": "13 juli 2026",
   "sourceCheck": {
-    "lastCheckedAt": "2026-07-13T09:54:39.947Z",
+    "lastCheckedAt": "2026-07-13T16:04:30.068Z",
     "reviewFile": "website-bestanden/data/offers_pending_review.json",
     "sourcesChecked": 40,
-    "sourcesWithChanges": 34,
-    "newCandidateCount": 3
+    "sourcesWithChanges": 27,
+    "newCandidateCount": 1
   },
   "teamIdeas": [],
   "sourceReview": {
-    "generatedAt": "2026-07-13T09:54:39.947Z",
+    "generatedAt": "2026-07-13T16:04:30.068Z",
     "pendingCount": 191,
-    "newCount": 3,
-    "changedSourceCount": 34,
+    "newCount": 1,
+    "changedSourceCount": 27,
     "changedSources": [
       {
-        "id": "land-van-cuijk-2026-07",
-        "name": "Land van Cuijk Uitagenda 07-2026",
-        "url": "https://www.landvancuijk.nl/agenda/2026/07/",
+        "id": "land-van-cuijk-2026-08",
+        "name": "Land van Cuijk Uitagenda 08-2026",
+        "url": "https://www.landvancuijk.nl/agenda/2026/08/",
         "region": "Land van Cuijk",
         "mode": "agenda-events",
-        "newItemCount": 3,
-        "itemCount": 110,
+        "newItemCount": 1,
+        "itemCount": 52,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "beuningen-samen-jongeren",
@@ -4608,18 +4608,7 @@
         "newItemCount": 0,
         "itemCount": 24,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
-      },
-      {
-        "id": "debastei-agenda",
-        "name": "De Bastei agenda",
-        "url": "https://www.debastei.nl/nl/agenda",
-        "region": "Nijmegen",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "de-wijchense-berg",
@@ -4630,7 +4619,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "escape-boot-nijmegen",
@@ -4641,7 +4630,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "focus-arnhem-agenda",
@@ -4652,7 +4641,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "gamestate-arnhem",
@@ -4663,7 +4652,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "beuningen-events",
@@ -4674,7 +4663,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "gemeente-nijmegen-events",
@@ -4685,7 +4674,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "grip-boulderhal",
@@ -4696,51 +4685,18 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
-        "id": "intonijmegen-festivalwijzer",
-        "name": "Into Nijmegen festivalwijzer",
-        "url": "https://www.intonijmegen.com/zien-en-doen/cultuur-nijmegen/festival/festivalwijzer-nijmegen",
-        "region": "Nijmegen",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
-      },
-      {
-        "id": "into-nijmegen-agenda",
-        "name": "Into Nijmegen Uitagenda",
-        "url": "https://www.intonijmegen.com/agenda/agenda-overzicht",
-        "region": "Nijmegen",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
-      },
-      {
-        "id": "intonijmegen-weektips",
-        "name": "Into Nijmegen weektips",
-        "url": "https://www.intonijmegen.com/blijf-op-de-hoogte/nieuws/weektips",
-        "region": "Nijmegen",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
-      },
-      {
-        "id": "land-van-cuijk-2026-08",
-        "name": "Land van Cuijk Uitagenda 08-2026",
-        "url": "https://www.landvancuijk.nl/agenda/2026/08/",
+        "id": "land-van-cuijk-2026-07",
+        "name": "Land van Cuijk Uitagenda 07-2026",
+        "url": "https://www.landvancuijk.nl/agenda/2026/07/",
         "region": "Land van Cuijk",
         "mode": "agenda-events",
         "newItemCount": 0,
-        "itemCount": 52,
+        "itemCount": 110,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "lux-programma",
@@ -4751,7 +4707,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "museumpark-orientalis-agenda",
@@ -4762,18 +4718,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
-      },
-      {
-        "id": "musis-stadstheater-agenda",
-        "name": "Musis & Stadstheater agenda",
-        "url": "https://www.musisenstadstheater.nl/nl/agenda",
-        "region": "Arnhem",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "natuurmonumenten-agenda",
@@ -4784,7 +4729,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "nijmegen-outdoor",
@@ -4795,7 +4740,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "nimma-sportzomer",
@@ -4806,18 +4751,7 @@
         "newItemCount": 0,
         "itemCount": 6,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
-      },
-      {
-        "id": "ouwehands-dierenpark",
-        "name": "Ouwehands Dierenpark",
-        "url": "https://www.ouwehand.nl/",
-        "region": "Verder weg (30-50 km)",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "planet-awesome",
@@ -4828,7 +4762,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "pretpark-tivoli",
@@ -4839,18 +4773,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
-      },
-      {
-        "id": "rox-escape-nijmegen",
-        "name": "ROX Escape Nijmegen",
-        "url": "https://roxescape.nl/",
-        "region": "Dichtbij (0-10 km)",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "rozet-agenda",
@@ -4861,7 +4784,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "staatsbosbeheer-activiteiten",
@@ -4872,7 +4795,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "visit-arnhem-events",
@@ -4883,7 +4806,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "visit-arnhem-zomertips",
@@ -4894,7 +4817,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "visit-nijmegen-events",
@@ -4905,7 +4828,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "visit-nijmegen-zomertips",
@@ -4916,7 +4839,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "vue-nijmegen",
@@ -4927,7 +4850,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "watermuseum-activiteiten",
@@ -4938,7 +4861,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "you-jump-nijmegen",
@@ -4949,7 +4872,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       },
       {
         "id": "zooparc-overloon",
@@ -4960,27 +4883,13 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-13T09:54:39.947Z"
+        "lastCheckedAt": "2026-07-13T16:04:30.068Z"
       }
     ],
     "previewItems": [
       {
-        "title": "38ste Westerbeekse Oogstdag!",
-        "source": "Land van Cuijk Uitagenda 07-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Sint%20Anthonis/2026-07-19/38ste-westerbeekse-oogstdag/",
-        "region": "Land van Cuijk",
-        "place": "Westerbeek",
-        "dateLabel": "zondag 19 juli 2026",
-        "timeLabel": "10.00 uur",
-        "note": "Een dag vol historische en ambachtelijke belevingen",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-07-13T09:54:39.947Z",
-        "lastSeenAt": "2026-07-13T09:54:39.947Z"
-      },
-      {
         "title": "Muziektheater Rosalia’s Rust",
-        "source": "Land van Cuijk Uitagenda 07-2026",
+        "source": "Land van Cuijk Uitagenda 08-2026",
         "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-10-22/muziektheater-rosalias-rust/",
         "region": "Land van Cuijk",
         "place": "Sambeek",
@@ -4989,22 +4898,8 @@
         "note": "Muziektheater harmonie Semper Unitas in samenwerking met toneelvereniging VEST",
         "status": "new",
         "reviewStatus": "pending",
-        "firstSeenAt": "2026-07-13T09:54:39.947Z",
-        "lastSeenAt": "2026-07-13T09:54:39.947Z"
-      },
-      {
-        "title": "Wanroijse rommelmarkt",
-        "source": "Land van Cuijk Uitagenda 07-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Sint%20Anthonis/2026-07-26/wanroijse-rommelmarkt/",
-        "region": "Land van Cuijk",
-        "place": "Wanroij",
-        "dateLabel": "zondag 26 juli 2026",
-        "timeLabel": "10.00 uur",
-        "note": "Al 55 jaar een begrip in de regio: de grote Wanroijse rommelmarkt",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-07-13T09:54:39.947Z",
-        "lastSeenAt": "2026-07-13T09:54:39.947Z"
+        "firstSeenAt": "2026-07-13T16:04:30.068Z",
+        "lastSeenAt": "2026-07-13T16:04:30.068Z"
       }
     ]
   }
