@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-07-17T14:57:40.207Z",
+  "generatedAt": "2026-07-20T09:42:00.612Z",
   "summary": {
     "sourcesChecked": 40,
-    "sourcesWithChanges": 29,
-    "newItems": 1
+    "sourcesWithChanges": 31,
+    "newItems": 12
   },
   "sources": [
     {
@@ -14,9 +14,9 @@
       "mode": "links",
       "note": "Concrete zomeractiviteiten die vaak goed passen in het weekoverzicht.",
       "status": "ok",
-      "fingerprint": "fe7728779fd3174afbbaf88a7bfe91e662772da03f99d1a35158c20a4c486e96",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "0fa14623ec0404fdf7f8ca1376eb598746aa8e3d0ed1bfec7db6643f1d34668a",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 6,
       "newItemCount": 0
@@ -29,9 +29,9 @@
       "mode": "fingerprint",
       "note": "Dagelijkse paginacontrole op wijzigingen in de openbare uitagenda.",
       "status": "ok",
-      "fingerprint": "b883789bf039a0cee528ea129dddabebed4884c09b3edaf094a8e07c855835b8",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "cf2fef89ffaa5c6285f478e6c7328bb83f5f3d21dec9f84290a68320f47918a1",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -44,10 +44,10 @@
       "mode": "fingerprint",
       "note": "Dagelijkse paginacontrole op wijzigingen in de openbare agenda.",
       "status": "ok",
-      "fingerprint": "8fc960e8650d811fc9a53c809d18fbc91cd67a2a213a6663a7a527cf71c2c49a",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T08:34:57.653Z",
-      "pageChanged": false,
+      "fingerprint": "4e27b744395e12957e62cbf0822a266d094f5e4f8038d750b2ebf2500f4bf377",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
+      "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
     },
@@ -59,9 +59,9 @@
       "mode": "fingerprint",
       "note": "Controle op veranderingen in de gemeentelijke evenementenkalender.",
       "status": "ok",
-      "fingerprint": "42ecef83edb5b650defaec805ee9d6da53e3827ac3d0c11c1491b304783f6734",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "a16f8406d86c25e77dd75e9b605d5c3eabbc8f02f4236ceb4fb5245c575383d2",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -69,17 +69,17 @@
     {
       "id": "beuningen-samen-jongeren",
       "name": "Beuningen Samen agenda jongeren",
-      "url": "https://beuningensamen.nl/agenda?date_from=13-07-2026&leeftijd_beuningensamen%5B%5D=1886",
+      "url": "https://beuningensamen.nl/agenda?date_from=20-07-2026&leeftijd_beuningensamen%5B%5D=1886",
       "region": "Beuningen",
       "mode": "agenda-beuningen",
       "note": "Concrete jongerenactiviteiten en laagdrempelige lokale agenda-items vanaf week 30 via Beuningen Samen.",
       "status": "ok",
-      "fingerprint": "8a4edae0abdcd1823a06fec1c43e1b81ebd6ffabba2f365fe1ef386f48eae1b7",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "d8ae73938f3596f821f50b6912e6a5430ac400b1f60d170cecffc8c54c2f06f1",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 26,
-      "newItemCount": 0
+      "newItemCount": 5
     },
     {
       "id": "beuningen-events",
@@ -89,9 +89,9 @@
       "mode": "fingerprint",
       "note": "Controle op veranderingen in de gemeentelijke verwijspagina richting Beuningen Samen.",
       "status": "ok",
-      "fingerprint": "01a85ec6c7098b99e8ab3b53496af3a31ecd1830d7cac4d1bdb086dfae453b90",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "b19c7be7750600877aac571065eb191348cc038eb9e656946d9070613d1e147d",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -104,9 +104,9 @@
       "mode": "fingerprint",
       "note": "Controle op veranderingen in de openbare UITagenda voor Arnhem en omgeving.",
       "status": "ok",
-      "fingerprint": "c1a781efab6cdb0ae099cbbe30e450d6cc2ba0ba85799ea6e95e250368612f68",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "f337c74bd66ece8dc88a1d1aac07949f4da4720a4923c5d15fec42cda97325f9",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -119,9 +119,9 @@
       "mode": "fingerprint",
       "note": "Controle op zomertips, festivals, musea, routes en daguitjes in de regio.",
       "status": "ok",
-      "fingerprint": "5a9e1dc71c945edb786a9ee45f00719664b088907ef669eeeb2b3a5a46a61bdd",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "724a82c9c77c9a898a6d6fd7a4d94f6c13c341076cb92570b7128bb943e340b7",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -134,9 +134,9 @@
       "mode": "fingerprint",
       "note": "Controle op zomertips, routes, festivals en daguitjes rondom Arnhem.",
       "status": "ok",
-      "fingerprint": "4f95f5ff65747429eb79aefe61327369652ad325a6aaa04f272dbc6499f7873c",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "685bc98ffabe88e097e5c4471cfc88a9074ac7f87060f29bd66ebd89dd3f0a8b",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -149,10 +149,10 @@
       "mode": "fingerprint",
       "note": "Controle op actuele weektips en nieuwe aanraders in Nijmegen.",
       "status": "ok",
-      "fingerprint": "5757147ec088e813be9dd41eee4eb4680dc1811f36e29a4bde7f6cb2afafef71",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T08:34:57.653Z",
-      "pageChanged": false,
+      "fingerprint": "0109b36c9554dbcbb05050e8883f84100ca31beb53a2ea29a7e4e7d5cdf1ef25",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
+      "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
     },
@@ -165,7 +165,7 @@
       "note": "Controle op festivals en prikkelende opties in Nijmegen.",
       "status": "ok",
       "fingerprint": "9be17a39f0cc9ed5cb747376b3d38075499ed6654336d957349081636733320e",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
       "lastChangedAt": "2026-07-17T08:34:57.653Z",
       "pageChanged": false,
       "itemCount": 0,
@@ -179,9 +179,9 @@
       "mode": "fingerprint",
       "note": "Controle op film, cultuur, expo en programmawijzigingen bij LUX.",
       "status": "ok",
-      "fingerprint": "2d678a07517ded4789fdbf1686b4d8f7c15adc2593a706c51617d3c6d6756fc2",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "6d790166116139d69f2f30ecdc9b058bb780e059d4d15f67b17f2fe2fde8b18e",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -194,9 +194,9 @@
       "mode": "fingerprint",
       "note": "Controle op films, specials en openluchtfilm-aanbod in Arnhem.",
       "status": "ok",
-      "fingerprint": "4fc72a33744206dbb117675da464a03d585cb62aabe57eceea71c7d9dcd704b9",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "2dac2fcb682cb64432d5de1f3d73fbec313d739972915b14ab90e1e21720b5f5",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -209,9 +209,9 @@
       "mode": "fingerprint",
       "note": "Controle op exposities, bijeenkomsten en activiteiten bij Rozet.",
       "status": "ok",
-      "fingerprint": "5c0550797ccf8afeaa5bb80421431286a3249044d15fec945072ac944ad6adec",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "6dafdc3ce06f69ab8e8b833ace042061963ea3ca9212be8979aba21a7f369c75",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -224,10 +224,10 @@
       "mode": "fingerprint",
       "note": "Controle op podium, muziek en voorstellingen in Arnhem.",
       "status": "ok",
-      "fingerprint": "9ae0022f49f8842ac2fdde37d2078c6e48f63d8305dce2ba3460172c507a76c9",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T08:34:57.653Z",
-      "pageChanged": false,
+      "fingerprint": "6b04ae79696f14609b3635b43e3e7316ac725c5aa70d1759f196a5727711093b",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
+      "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
     },
@@ -239,9 +239,9 @@
       "mode": "fingerprint",
       "note": "Controle op excursies, routes en natuuractiviteiten.",
       "status": "ok",
-      "fingerprint": "7cd66565a84dcebb98d2051f85f086df6bada7e57315eb35058a046e89b52905",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "aeed4a3c910102b09301f1dd82c20e97ab71ac144c8cf40db9eddfa01daf94c0",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -254,9 +254,9 @@
       "mode": "fingerprint",
       "note": "Controle op natuuractiviteiten en excursies.",
       "status": "ok",
-      "fingerprint": "1064ac0616e7aa319b6bee24c30dc08447dd3f19294af9ddad7a221795fdeb01",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "209bd3b871c7480fbfe1e1aab75a257e9cb8329cc2990ea38ea55998a2106426",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -270,7 +270,7 @@
       "note": "Controle op extra activiteiten naast het museumbezoek.",
       "status": "ok",
       "fingerprint": "1161a9a01dc22ed41d74c7f25901282d320704e151c0e77827f489e342eb85ec",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
       "lastChangedAt": "2026-06-29T11:32:24.775Z",
       "pageChanged": false,
       "itemCount": 0,
@@ -284,9 +284,9 @@
       "mode": "fingerprint",
       "note": "Controle op activiteiten in het museumpark.",
       "status": "ok",
-      "fingerprint": "942ca1c1a4d581e81a6ec3a1037a3b6db0a098c67867a88f0e4d8d7edc15c47b",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "0ccaa09274b908183b63fcd90dae2c4c68f1eab45922d4737fb0302633cc0bd0",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -300,9 +300,9 @@
       "note": "Controle op activiteiten rond natuur, geschiedenis en de Waal.",
       "status": "ok",
       "fingerprint": "8093dc909f8a06e5a202d18afb5b45dc071fae42d03734beb0c5646150e5bcdb",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
       "lastChangedAt": "2026-07-17T14:57:40.207Z",
-      "pageChanged": true,
+      "pageChanged": false,
       "itemCount": 0,
       "newItemCount": 0
     },
@@ -313,13 +313,14 @@
       "region": "Arnhem",
       "mode": "fingerprint",
       "note": "Controle op wateractiviteiten, routes en extra museumaanbod.",
-      "status": "ok",
+      "status": "error",
       "fingerprint": "e3c9c004c7e988730aef29b1d9a3037180f97879d854713fa37658ec129550c7",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
       "lastChangedAt": "2026-07-17T14:57:40.207Z",
-      "pageChanged": true,
+      "pageChanged": false,
       "itemCount": 0,
-      "newItemCount": 0
+      "newItemCount": 0,
+      "error": "fetch failed"
     },
     {
       "id": "planet-awesome",
@@ -329,9 +330,9 @@
       "mode": "fingerprint",
       "note": "Controle op activiteiten, openingstijden en acties voor karten, lasergamen, bowling, arcade en glowgolf.",
       "status": "ok",
-      "fingerprint": "558103083f43dcac6f8dac6e13c0dce68b9ed39be73952e5b3b6b63d74104654",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "a40b2e8b8e0f85df79e5401c0399375629b034a35ab6205a449b0a860f28a6b9",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -345,7 +346,7 @@
       "note": "Controle op bowlen, Prison Island en openingstijden.",
       "status": "ok",
       "fingerprint": "b92ec0137fb7f47157ae198fcd878f5e27c872b4de966628fff25340a7665617",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
       "lastChangedAt": "2026-07-15T08:42:31.107Z",
       "pageChanged": false,
       "itemCount": 0,
@@ -360,7 +361,7 @@
       "note": "Controle op filmprogramma, Pathe Games en X-Cube.",
       "status": "error",
       "fingerprint": null,
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
       "lastChangedAt": null,
       "pageChanged": false,
       "itemCount": 0,
@@ -375,9 +376,9 @@
       "mode": "fingerprint",
       "note": "Controle op het actuele filmprogramma in Nijmegen.",
       "status": "ok",
-      "fingerprint": "f7fa2fd7a9753da643f7afbf066a76b74e9440278fef8c4b8754575968bcb83e",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "77b047bd280bc47b57c778ac5aadc901e9667ecd69c1fed9275648baaa1f2b91",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -391,7 +392,7 @@
       "note": "Controle op paintball, airsoft, klimpark en andere outdooractiviteiten.",
       "status": "error",
       "fingerprint": "232bd05e18fa299efe339d7cd3a65d79164cc877b0f54d9b9f7e761e4640704b",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
       "lastChangedAt": "2026-06-23T08:06:48.886Z",
       "pageChanged": false,
       "itemCount": 0,
@@ -405,13 +406,14 @@
       "region": "Dichtbij (0-10 km)",
       "mode": "fingerprint",
       "note": "Controle op openingstijden, introducties en boulderaanbod.",
-      "status": "ok",
+      "status": "error",
       "fingerprint": "9b6d19d1d2b6a5ba9329ff50368bdc4007dddf6288972331e4aae3b0b1e55a3f",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
       "lastChangedAt": "2026-07-17T14:57:40.207Z",
-      "pageChanged": true,
+      "pageChanged": false,
       "itemCount": 0,
-      "newItemCount": 0
+      "newItemCount": 0,
+      "error": "HTTP 500 voor https://gripnijmegen.nl/boulderhal/"
     },
     {
       "id": "gamestate-arnhem",
@@ -421,9 +423,9 @@
       "mode": "fingerprint",
       "note": "Controle op arcadeaanbod, openingstijden en acties.",
       "status": "ok",
-      "fingerprint": "935e3a90172f8548b6f1a8f9fbdf02608731caa149bebebd1553edb02735748f",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "2c7b652f13afd1c7dcb92a37b66346bbfa07aafd5b4b4b230f3774d4594c7700",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -436,9 +438,9 @@
       "mode": "fingerprint",
       "note": "Controle op zomerse openingstijden en attractie-informatie.",
       "status": "ok",
-      "fingerprint": "47e7eb250d09017d2f8c97033d02de3b0e5664bf3c6713cf478670c83d44e538",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "aaa9d72fb4ec8ff1247ac462283496d24aeede2300cd8bb3df906ce8e74366e7",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -451,9 +453,9 @@
       "mode": "fingerprint",
       "note": "Controle op skiën, snowboarden, tuben en andere outdooractiviteiten.",
       "status": "ok",
-      "fingerprint": "ccc4c541af15a1e050d0989276e24d623d7f4257a6cc31081afb8de27ce60a7e",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "6525eafe8d49c7653c28da97cbdce49f45017c4b4783fd9267535a1cddd322a9",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -466,9 +468,9 @@
       "mode": "fingerprint",
       "note": "Controle op jumpactiviteiten, openingstijden en reserveringsmogelijkheden.",
       "status": "ok",
-      "fingerprint": "97f963bc522aeb2528b34f1843268842189e577d7bd4d2306a1cf84aa02d4764",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "724b7ca7292ae380a57868a8edf2dc10ad80fd95e7ac270f214800ca6612df99",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -481,9 +483,9 @@
       "mode": "fingerprint",
       "note": "Controle op escaperooms, Escape Arena en reserveringsmogelijkheden.",
       "status": "ok",
-      "fingerprint": "cbba0da37ace531a78ff3067df7244d9ad6c2d455af4a915ee8c2d59b2949265",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "cd6e8ef7c02cd86ac7bf4b65c541603aa0da628bb9288af2f656d5ad90aea237",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -496,10 +498,10 @@
       "mode": "fingerprint",
       "note": "Controle op het actuele escaperoomaanbod op NYMA.",
       "status": "ok",
-      "fingerprint": "eda626aa0d5ab7a1c85941937e70f507e7dcb81b94ba38190bff8c2ec03c4808",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-13T09:54:39.947Z",
-      "pageChanged": false,
+      "fingerprint": "aa637e24f5a401953ba14f83abf5bb96fb178dbc1fa4bc33ce528badfec1596c",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
+      "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
     },
@@ -511,10 +513,10 @@
       "mode": "fingerprint",
       "note": "Controle op stadsspellen en actieve groepsuitjes.",
       "status": "ok",
-      "fingerprint": "da25d1ee45ffa0ba07d365f05de93e9f889854bad8d3a65e4321864362d9783b",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T08:34:57.653Z",
-      "pageChanged": false,
+      "fingerprint": "f41b00f3618f04516460765a897322e2cda6d9f61ee7853d58a347ec53fffa91",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
+      "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
     },
@@ -526,9 +528,9 @@
       "mode": "fingerprint",
       "note": "Controle op suppen, watersport en reserveringsmogelijkheden.",
       "status": "ok",
-      "fingerprint": "2345c87d2036fda5c36d529df3b32dc9c8435d9971d7c0517ebd0e0931c097fd",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "e42535bc3acb93c77bc9db01945cebc9e17924f7b970c9f6415d2f329ce39bfd",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -541,9 +543,9 @@
       "mode": "fingerprint",
       "note": "Controle op openingstijden en bijzonder programma voor een bewust uitje wat verder weg.",
       "status": "ok",
-      "fingerprint": "2da553aef4c7de29cac41ab94b9b9eb92c1d6f49e8b600032d2e43b3bc79603d",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "e7d060795eaeec08c04e6232905974f6c88079f669cd790bcf12e5e66b83dd83",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -557,7 +559,7 @@
       "note": "Controle op strand, attracties, activiteiten en zomerse openingstijden.",
       "status": "error",
       "fingerprint": "b14271db6b198d4f6d734a788d4ac0bfacc6dc4976973b2e4203784d0b677618",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
       "lastChangedAt": "2026-07-07T10:06:26.965Z",
       "pageChanged": false,
       "itemCount": 0,
@@ -572,9 +574,9 @@
       "mode": "fingerprint",
       "note": "Controle op openingstijden en activiteiten voor een uitje wat verder weg.",
       "status": "ok",
-      "fingerprint": "5298c1627701c13fd18a4493376dfe47d0951e1e070487f3bf4c27fdcede573a",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "b3c821386ef9a375102bf2318051ecf4a40c87f8f7c7897106229b3fda9c5042",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 0,
       "newItemCount": 0
@@ -587,12 +589,12 @@
       "mode": "agenda-events",
       "note": "Concrete kandidaten uit de actuele zesweekse vooruitblik.",
       "status": "ok",
-      "fingerprint": "7c21795b8b45e3feef1e22baca788b9e7725f450b3fcb4be72c3d53fc0144be4",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "e07756c452496b8d8e5a39eff193405e5ab49e93da0ae3350ab822ae59ddd92e",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
-      "itemCount": 110,
-      "newItemCount": 1
+      "itemCount": 116,
+      "newItemCount": 6
     },
     {
       "id": "land-van-cuijk-2026-08",
@@ -602,12 +604,12 @@
       "mode": "agenda-events",
       "note": "Concrete kandidaten uit de actuele zesweekse vooruitblik.",
       "status": "ok",
-      "fingerprint": "adff5d5b4f30955799a3ac5935c4a10adfd297108c3aa1b9fb3460f4982c7cb3",
-      "lastCheckedAt": "2026-07-17T14:57:40.207Z",
-      "lastChangedAt": "2026-07-17T14:57:40.207Z",
+      "fingerprint": "46f9d4a791b6abff54fb46fd08c0b6760fb48b43e75c2ff964e66a059ba5aa91",
+      "lastCheckedAt": "2026-07-20T09:42:00.612Z",
+      "lastChangedAt": "2026-07-20T09:42:00.612Z",
       "pageChanged": true,
       "itemCount": 53,
-      "newItemCount": 0
+      "newItemCount": 1
     }
   ],
   "items": [
@@ -625,7 +627,7 @@
       "note": "Voor iedere rijder en sportliefhebber iets bijzonders",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-38ste-westerbeekse-oogstdag-zondag-19-juli-2026-westerbeek",
@@ -641,7 +643,7 @@
       "note": "Een dag vol historische en ambachtelijke belevingen",
       "status": "known",
       "firstSeenAt": "2026-07-13T09:54:39.947Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-50e-daags-na-de-tour-maandag-27-juli-2026-boxmeer",
@@ -657,7 +659,7 @@
       "note": "De dag na de finish van de Tour de France in Parijs is Boxmeer al sinds 1978 het paradijs voor de vele liefhebbers van wielrennen",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-avond-4-daagse-ottersum-donderdag-2-juli-2026-ottersum",
@@ -673,7 +675,7 @@
       "note": "Vier dagen lang kan er door jong en oud weer gewandeld worden in en rond de prachtige omgeving van Ottersum",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-avond-4-daagse-ottersum-vrijdag-3-juli-2026-ottersum",
@@ -689,7 +691,7 @@
       "note": "Vier dagen lang kan er door jong en oud weer gewandeld worden in en rond de prachtige omgeving van Ottersum",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-avond-4-daagse-ottersum-woensdag-1-juli-2026-ottersum",
@@ -705,23 +707,7 @@
       "note": "Vier dagen lang kan er door jong en oud weer gewandeld worden in en rond de prachtige omgeving van Ottersum",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
-    },
-    {
-      "id": "beuningen-samen-jongeren-bakkie-in-de-buurt-maandag-13-juli-2026-jeugd-activiteiten-centrum-hotspot",
-      "title": "Bakkie in de buurt.",
-      "sourceId": "beuningen-samen-jongeren",
-      "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/144684/2026-07-13/bakkie-in-de-buurt",
-      "region": "Beuningen",
-      "place": "Jeugd Activiteiten Centrum Hotspot",
-      "dateLabel": "maandag 13 juli 2026",
-      "timeLabel": "van 14:00 tot 16:00 uur (2-wekelijks)",
-      "reviewStatus": "pending",
-      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-      "status": "known",
-      "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-bakkie-in-de-buurt-maandag-27-juli-2026-jeugd-activiteiten-centrum-hotspot",
@@ -737,7 +723,7 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-ballonfestival-grave-vrijdag-14-augustus-2026-grave",
@@ -753,7 +739,7 @@
       "note": "Ballonfestival Grave: 14 en 15 augustus een avond vol kleur, plezier en sfeer",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-ballonfestival-grave-zaterdag-15-augustus-2026-grave",
@@ -769,7 +755,7 @@
       "note": "Ballonfestival Grave: 14 en 15 augustus een avond vol kleur, plezier en sfeer",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "nimma-sportzomer-balsport-en-spel",
@@ -782,7 +768,7 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-11T13:13:20.801Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-basiscursus-intuitief-communiceren-met-dieren-zaterdag-22-augustus-2026-oeffelt",
@@ -798,7 +784,7 @@
       "note": "2-daagse cursus Intuïtief communiceren met dieren",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-beer-bites-festival-zaterdag-4-juli-2026-boxmeer",
@@ -814,7 +800,7 @@
       "note": "Beer & Bites festival is terug in Boxmeer",
       "status": "known",
       "firstSeenAt": "2026-06-23T13:31:54.625Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-beks-bierfestivalleke-zaterdag-11-juli-2026-vierlingsbeek",
@@ -830,7 +816,7 @@
       "note": "Zomers bierproeven in de tuin van Gryphus in Vierlingsbeek",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "nimma-sportzomer-beweeg-mee-op-staddijk",
@@ -843,7 +829,7 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-11T13:13:20.801Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "nimma-sportzomer-beweegfestival",
@@ -856,23 +842,7 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-11T13:13:20.801Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
-    },
-    {
-      "id": "beuningen-samen-jongeren-bijeenkomst-beuningse-4daagse-wandelaars-vrijdag-17-juli-2026-gemeentehuis-beuni",
-      "title": "Bijeenkomst Beuningse 4Daagse-wandelaars",
-      "sourceId": "beuningen-samen-jongeren",
-      "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/143988/2026-07-17/bijeenkomst-beuningse-4daagse-wandelaars",
-      "region": "Beuningen",
-      "place": "Gemeentehuis Beuningen",
-      "dateLabel": "vrijdag 17 juli 2026",
-      "timeLabel": "van 19:00 tot 20:00 uur",
-      "reviewStatus": "pending",
-      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-      "status": "known",
-      "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-braderie-gennep-zondag-30-augustus-2026-gennep",
@@ -888,7 +858,7 @@
       "note": "Op zondag 30 augustus vindt in hartje Gennep weer de gezellige Braderie plaats",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-clean-pete-geheimen-vrijdag-10-juli-2026-boxmeer",
@@ -904,7 +874,7 @@
       "note": "Geheimen in het buitentheater",
       "status": "known",
       "firstSeenAt": "2026-06-23T13:31:54.625Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-cocktails-jewellery-zaterdag-11-juli-2026-stevensbeek",
@@ -920,7 +890,7 @@
       "note": "Geniet van heerlijke cocktails, mooie sieraden en good vibes",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-cuijks-kadeconcert-donderdag-23-juli-2026-cuijk",
@@ -936,7 +906,7 @@
       "note": "Ook dit jaar weer feest met het Vierdaagse Orkest op de Kade",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-cultureel-festival-schijt-aan-de-grens-zaterdag-29-augustus-2026-overloon",
@@ -952,7 +922,7 @@
       "note": "Cultureel festival Schijt aan de Grens",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-cultureel-festival-schijt-aan-de-grens-zondag-30-augustus-2026-overloon",
@@ -968,7 +938,7 @@
       "note": "Cultureel festival Schijt aan de Grens",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-dagreis-gelderland-met-broei-bloei-land-van-cuijk-zaterdag-1-augustus-2026-cuijk",
@@ -984,7 +954,7 @@
       "note": "Groei & Bloei organiseert haar jaarlijkse dagreis. Dit keer naar Gelderland",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-dancing-bos-terug-naar-de-jaren-70-80-vrijdag-10-juli-2026-sint-anthonis",
@@ -1000,7 +970,7 @@
       "note": "Dancing Bos herleeft in Sint Anthonis",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-de-gelaarsde-kat-zondag-12-juli-2026-oploo",
@@ -1016,7 +986,7 @@
       "note": "Kindervoorstelling door theatergroep Mariahout",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-de-stilte-schreeuwt-zondag-5-juli-2026-boxmeer",
@@ -1032,7 +1002,7 @@
       "note": "Documentaire van Stichting Artsen Collectief",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-dikke-banden-race-sint-anthonis-zondag-12-juli-2026-sint-anthonis",
@@ -1048,7 +1018,7 @@
       "note": "Dikke Banden Race voor 5 t/m 11 jarigen tijdens 15e Ronde van Sint Tunnis",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-doop-land-van-cuijk-ballon-donderdag-9-juli-2026-mill",
@@ -1064,7 +1034,7 @@
       "note": "Op donderdag 9 juli wordt de nieuwe Land van Cuijk Ballon onthuld én gedoopt",
       "status": "known",
       "firstSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-doorkomst-nijmeegse-vierdaagse-woensdag-22-juli-2026-julianaplein",
@@ -1080,7 +1050,7 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-doortocht-4-daagse-donderdag-23-juli-2026-gennep",
@@ -1096,7 +1066,7 @@
       "note": "De 3e dag van de Vierdaagse komen de 40 en 50 km wandelaars door de gem Gennep",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-doortocht-dag-van-cuijk-vrijdag-24-juli-2026-cuijk",
@@ -1112,7 +1082,7 @@
       "note": "De doortocht van de Nijmeegse Vierdaagse",
       "status": "known",
       "firstSeenAt": "2026-07-08T09:07:20.048Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-dorpsfeest-sambeek-2026-maandag-31-augustus-2026-sambeek",
@@ -1128,7 +1098,7 @@
       "note": "Een bruisend vierdaags dorpsfeest vol sport, muziek en diverse activiteiten",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-dorpsfeest-sambeek-2026-vrijdag-28-augustus-2026-sambeek",
@@ -1144,7 +1114,7 @@
       "note": "Een bruisend vierdaags dorpsfeest vol sport, muziek en diverse activiteiten",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-dorpsfeest-sambeek-2026-zaterdag-29-augustus-2026-sambeek",
@@ -1160,7 +1130,7 @@
       "note": "Een bruisend vierdaags dorpsfeest vol sport, muziek en diverse activiteiten",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-dorpsfeest-sambeek-2026-zondag-30-augustus-2026-sambeek",
@@ -1176,7 +1146,7 @@
       "note": "Een bruisend vierdaags dorpsfeest vol sport, muziek en diverse activiteiten",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-excursie-de-oude-pottenbakkerij-milsbeek-zaterdag-4-juli-2026-middelaar",
@@ -1192,23 +1162,24 @@
       "note": "LGOG Maas en Niers bezoekt de Oude Pottenbakkerij in Milsbeek",
       "status": "known",
       "firstSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
-      "id": "beuningen-samen-jongeren-expositie-casper-ter-heerdt-de-nieuwe-gang-zaterdag-18-juli-2026-de-nieuwe-gang",
+      "id": "beuningen-samen-jongeren-expositie-casper-ter-heerdt-de-nieuwe-gang-zaterdag-1-augustus-2026-de-nieuwe-ga",
       "title": "Expositie Casper ter Heerdt - De Nieuwe Gang",
       "sourceId": "beuningen-samen-jongeren",
       "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/146600/2026-07-18/expositie-casper-ter-heerdt-de-nieuwe-gang",
+      "sourceUrl": "https://beuningensamen.nl/agenda/146600/2026-08-01/expositie-casper-ter-heerdt-de-nieuwe-gang",
       "region": "Beuningen",
       "place": "De Nieuwe Gang",
-      "dateLabel": "zaterdag 18 juli 2026",
+      "dateLabel": "zaterdag 1 augustus 2026",
       "timeLabel": "van 13:00 tot 17:00 uur",
       "reviewStatus": "pending",
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
-      "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "firstSeenAt": "2026-06-15T09:08:09.762Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastMissingAt": "2026-07-17T14:57:40.207Z"
     },
     {
       "id": "beuningen-samen-jongeren-expositie-casper-ter-heerdt-de-nieuwe-gang-zaterdag-25-juli-2026-de-nieuwe-gang",
@@ -1224,23 +1195,24 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
-      "id": "beuningen-samen-jongeren-expositie-casper-ter-heerdt-de-nieuwe-gang-zondag-19-juli-2026-de-nieuwe-gang",
+      "id": "beuningen-samen-jongeren-expositie-casper-ter-heerdt-de-nieuwe-gang-zondag-2-augustus-2026-de-nieuwe-gang",
       "title": "Expositie Casper ter Heerdt - De Nieuwe Gang",
       "sourceId": "beuningen-samen-jongeren",
       "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/146600/2026-07-19/expositie-casper-ter-heerdt-de-nieuwe-gang",
+      "sourceUrl": "https://beuningensamen.nl/agenda/146600/2026-08-02/expositie-casper-ter-heerdt-de-nieuwe-gang",
       "region": "Beuningen",
       "place": "De Nieuwe Gang",
-      "dateLabel": "zondag 19 juli 2026",
+      "dateLabel": "zondag 2 augustus 2026",
       "timeLabel": "van 13:00 tot 17:00 uur",
       "reviewStatus": "pending",
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
-      "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "firstSeenAt": "2026-06-15T09:08:09.762Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastMissingAt": "2026-07-17T14:57:40.207Z"
     },
     {
       "id": "beuningen-samen-jongeren-expositie-casper-ter-heerdt-de-nieuwe-gang-zondag-26-juli-2026-de-nieuwe-gang",
@@ -1256,7 +1228,7 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-familieopstellingen-begeleid-door-peggy-wismans-en-kjell-emonts-vrijdag-10-juli-",
@@ -1272,7 +1244,7 @@
       "note": "Een dag vol inzicht en thuiskomen in jezelf",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-feestavond-met-dj-antoine-nl-zaterdag-4-juli-2026-grave",
@@ -1288,7 +1260,7 @@
       "note": "Zaterdag 4 juli dans je mee met DJ Antoine NL op Bekaf in Grave",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-fiets4daagse-land-van-cuijk-dinsdag-25-augustus-2026-beers",
@@ -1304,7 +1276,7 @@
       "note": "Fiets 4 dagen lang door de prachtige omgeving van het Land van Cuijk",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-fiets4daagse-land-van-cuijk-donderdag-27-augustus-2026-beers",
@@ -1320,7 +1292,7 @@
       "note": "Fiets 4 dagen lang door de prachtige omgeving van het Land van Cuijk",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-fiets4daagse-land-van-cuijk-vrijdag-28-augustus-2026-beers",
@@ -1336,7 +1308,7 @@
       "note": "Fiets 4 dagen lang door de prachtige omgeving van het Land van Cuijk",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-fiets4daagse-land-van-cuijk-woensdag-26-augustus-2026-beers",
@@ -1352,7 +1324,7 @@
       "note": "Fiets 4 dagen lang door de prachtige omgeving van het Land van Cuijk",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-filmcafe-grave-openluchtfilm-zaterdag-29-augustus-2026-grave",
@@ -1368,7 +1340,7 @@
       "note": "Op de Markt in Grave",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-a-sad-and-beautiful-world-maandag-27-juli-2026-velp",
@@ -1384,7 +1356,7 @@
       "note": "Romantisch drama over moeilijke beslissingen, met humor, veerkracht en liefde",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-a-sad-and-beautiful-world-vrijdag-24-juli-2026-velp",
@@ -1400,7 +1372,7 @@
       "note": "Romantisch drama over moeilijke beslissingen, met humor, veerkracht en liefde",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-boomers-maandag-6-juli-2026-velp",
@@ -1416,7 +1388,7 @@
       "note": "Babyboomer Bob belandt in een crisis wanneer alles hem boven het hoofd groeit",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-iron-maiden-burning-ambition-vrijdag-3-juli-2026-velp",
@@ -1432,7 +1404,7 @@
       "note": "Een unieke documentaire die vijf decennia Iron Maiden beslaat",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-jimpa-maandag-13-juli-2026-velp",
@@ -1448,7 +1420,7 @@
       "note": "Een gevoelig drama over ouderschap en familiebanden tussen drie generaties",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-jimpa-vrijdag-10-juli-2026-velp",
@@ -1464,7 +1436,7 @@
       "note": "Een gevoelig drama over ouderschap en familiebanden tussen drie generaties",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-l-affaire-bojarski-woensdag-15-juli-2026-velp",
@@ -1480,7 +1452,7 @@
       "note": "Film noir, gebaseerd op het leven van Jan Bojarski, de grootste valsemunter ooit",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-l-affaire-bojarski-zaterdag-11-juli-2026-velp",
@@ -1496,7 +1468,7 @@
       "note": "Film noir, gebaseerd op het leven van Jan Bojarski, de grootste valsemunter ooit",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-mama-ku-van-jakarta-tot-de-molukken-woensdag-22-juli-2026-velp",
@@ -1512,7 +1484,7 @@
       "note": "Een intieme verkenning van moeder-dochterrelaties binnen de Indonesische cultuur",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-mama-ku-van-jakarta-tot-de-molukken-zaterdag-18-juli-2026-velp",
@@ -1528,7 +1500,7 @@
       "note": "Een intieme verkenning van moeder-dochterrelaties binnen de Indonesische cultuur",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-rika-vorel-woensdag-1-juli-2026-velp",
@@ -1544,7 +1516,7 @@
       "note": "De Graafse regisseur Bertus Klaassen lanceert zijn eerste speelfilm",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-rika-vorel-woensdag-8-juli-2026-velp",
@@ -1560,7 +1532,7 @@
       "note": "De Graafse regisseur Bertus Klaassen lanceert zijn eerste speelfilm",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-solomamma-zaterdag-4-juli-2026-velp",
@@ -1576,7 +1548,7 @@
       "note": "Prachtig drama over contact met de spermadonor en dat brengt veel teweeg",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-treat-her-like-a-lady-woensdag-29-juli-2026-velp",
@@ -1592,7 +1564,7 @@
       "note": "Een alleenstaande moeder die met creativiteit en humor vecht voor haar kinderen",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-treat-her-like-a-lady-zaterdag-25-juli-2026-velp",
@@ -1608,7 +1580,7 @@
       "note": "Een alleenstaande moeder die met creativiteit en humor vecht voor haar kinderen",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-tuner-maandag-20-juli-2026-velp",
@@ -1624,7 +1596,7 @@
       "note": "Niki is een muzikant met een gehooraandoening die in de criminele wereld belandt",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-filmcafe-grave-tuner-vrijdag-17-juli-2026-velp",
@@ -1640,7 +1612,7 @@
       "note": "Niki is een muzikant met een gehooraandoening die in de criminele wereld belandt",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-filmhuis-en-fanfare-vrijdag-21-augustus-2026-boxmeer",
@@ -1656,7 +1628,7 @@
       "note": "Buitenfilm! Gratis toegang (met ticket",
       "status": "known",
       "firstSeenAt": "2026-06-23T13:31:54.625Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-flamenco-bij-volle-maan-woensdag-29-juli-2026-overloon",
@@ -1672,7 +1644,7 @@
       "note": "Zangeres Monica Coronado (Barcelona) en gipsy flamencogitarist Manito",
       "status": "known",
       "firstSeenAt": "2026-07-08T09:07:20.048Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-funrun-mill-2026-zondag-23-augustus-2026-mill",
@@ -1688,7 +1660,7 @@
       "note": "Sportieve beleving voor jong en oud in het dorpshart",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-gennepse-fietsdag-zondag-5-juli-2026-gennep",
@@ -1704,7 +1676,7 @@
       "note": "Fiets ook mee tijdens de Gennepse Fietsdag en zie onze regio van een andere kant",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-gennepse-zomer-beppie-kraft-bij-de-kroon-zaterdag-18-juli-2026-gennep",
@@ -1720,7 +1692,7 @@
       "note": "Gennepse Zomer in Gennep - Limburgse avond met Beppie Kraft",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-gennepse-zomer-vierdaagse-ontbijt-bij-de-kroon-donderdag-23-juli-2026-gennep",
@@ -1736,7 +1708,7 @@
       "note": "Ontbijten bij de Kroon terwijl de wandelaars voorbij trekken",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-gennepse-zomer-bij-de-kroon-de-platenbus-zaterdag-22-augustus-2026-gennep",
@@ -1752,7 +1724,7 @@
       "note": "Borrelen en dansen op de Mark met muziek van de Platenbus Vinyl DJ",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-gerard-alderliefste-friends-zaterdag-15-augustus-2026-oploo",
@@ -1768,7 +1740,7 @@
       "note": "Muziektheater met \"Vivre",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "nimma-sportzomer-goffert-waterfestival",
@@ -1781,7 +1753,7 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-11T13:13:20.801Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-happen-tappen-foodtruckfestival-vrijdag-24-juli-2026-grave",
@@ -1797,7 +1769,7 @@
       "note": "Driedaags foodtruckfestival voor jong & oud op de Loswal in Grave",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-happen-tappen-foodtruckfestival-zaterdag-25-juli-2026-grave",
@@ -1813,7 +1785,7 @@
       "note": "Driedaags foodtruckfestival voor jong & oud op de Loswal in Grave",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-happen-tappen-foodtruckfestival-zondag-26-juli-2026-grave",
@@ -1829,7 +1801,7 @@
       "note": "Driedaags foodtruckfestival voor jong & oud op de Loswal in Grave",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-huldiging-dsv-1-en-activia-mc1-zondag-12-juli-2026-sint-anthonis",
@@ -1845,23 +1817,7 @@
       "note": "Feestelijke huldiging van DSV 1 en Activia MC1 voor hun indrukwekkende sportieve prestaties",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
-    },
-    {
-      "id": "beuningen-samen-jongeren-informatiepunt-digitale-overheid-ido-vrijdag-17-juli-2026-bibliotheek-gelderland",
-      "title": "Informatiepunt Digitale overheid. IDO",
-      "sourceId": "beuningen-samen-jongeren",
-      "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/110088/2026-07-17/informatiepunt-digitale-overheid-ido-3",
-      "region": "Beuningen",
-      "place": "Bibliotheek Gelderland Zuid, vestiging Beuningen",
-      "dateLabel": "vrijdag 17 juli 2026",
-      "timeLabel": "van 10:00 tot 12:00 uur (wekelijks)",
-      "reviewStatus": "pending",
-      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-      "status": "known",
-      "firstSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-informatiepunt-digitale-overheid-ido-vrijdag-24-juli-2026-bibliotheek-gelderland",
@@ -1877,23 +1833,7 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
-    },
-    {
-      "id": "beuningen-samen-jongeren-inloop-spreekuur-vip-beuningen-vrijdag-17-juli-2026-stichting-perspectief",
-      "title": "Inloop spreekuur VIP Beuningen",
-      "sourceId": "beuningen-samen-jongeren",
-      "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/109354/2026-07-17/inloop-spreekuur-vip-beuningen",
-      "region": "Beuningen",
-      "place": "Stichting Perspectief",
-      "dateLabel": "vrijdag 17 juli 2026",
-      "timeLabel": "van 11:00 tot 13:00 uur (wekelijks)",
-      "reviewStatus": "pending",
-      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-      "status": "known",
-      "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-inloop-spreekuur-vip-beuningen-vrijdag-24-juli-2026-stichting-perspectief",
@@ -1909,7 +1849,24 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-inloop-spreekuur-vip-beuningen-vrijdag-31-juli-2026-stichting-perspectief",
+      "title": "Inloop spreekuur VIP Beuningen",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/109354/2026-07-31/inloop-spreekuur-vip-beuningen",
+      "region": "Beuningen",
+      "place": "Stichting Perspectief",
+      "dateLabel": "vrijdag 31 juli 2026",
+      "timeLabel": "van 11:00 tot 13:00 uur (wekelijks)",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "known",
+      "firstSeenAt": "2026-06-12T02:42:04.076Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastMissingAt": "2026-07-17T14:57:40.207Z"
     },
     {
       "id": "land-van-cuijk-2026-07-interactieve-kruidentuindagen-zaterdag-11-juli-2026-langenboom",
@@ -1925,7 +1882,7 @@
       "note": "Je smartphone is jouw informatiebron tijdens het bezoek door onze kruidentuin",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-jan-klaassen-en-de-avonturen-met-professor-prik-zaterdag-22-augustus-2026-oploo",
@@ -1941,7 +1898,7 @@
       "note": "Poppenkastvoorstelling",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-jannick-van-der-laan-fluiten-met-ambitie-woensdag-8-juli-2026-heijen",
@@ -1957,7 +1914,7 @@
       "note": "lezing van (voetbal)scheidsrechter Jannick van der Laan: Fluiten met ambitie",
       "status": "known",
       "firstSeenAt": "2026-06-29T11:32:24.775Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "nimma-sportzomer-jong-geleerd-oud-gedaan",
@@ -1970,23 +1927,7 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-11T13:13:20.801Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
-    },
-    {
-      "id": "beuningen-samen-jongeren-jongerenactiviteiten-vrijdagavond-vrijdag-17-juli-2026-jeugd-activiteiten-centru",
-      "title": "Jongerenactiviteiten vrijdagavond",
-      "sourceId": "beuningen-samen-jongeren",
-      "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/111398/2026-07-17/jongerenactiviteiten-vrijdagavond",
-      "region": "Beuningen",
-      "place": "Jeugd Activiteiten Centrum Hotspot",
-      "dateLabel": "vrijdag 17 juli 2026",
-      "timeLabel": "van 18:00 tot 22:00 uur (wekelijks)",
-      "reviewStatus": "pending",
-      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-      "status": "known",
-      "firstSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-jongerenactiviteiten-vrijdagavond-vrijdag-24-juli-2026-jeugd-activiteiten-centru",
@@ -2002,23 +1943,7 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
-    },
-    {
-      "id": "beuningen-samen-jongeren-jongerenactiviteiten-woensdagavond-woensdag-15-juli-2026-jeugd-activiteiten-cent",
-      "title": "Jongerenactiviteiten woensdagavond",
-      "sourceId": "beuningen-samen-jongeren",
-      "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/111399/2026-07-15/jongerenactiviteiten-woensdagavond-2",
-      "region": "Beuningen",
-      "place": "Jeugd Activiteiten Centrum Hotspot",
-      "dateLabel": "woensdag 15 juli 2026",
-      "timeLabel": "van 17:00 tot 21:00 uur (wekelijks)",
-      "reviewStatus": "pending",
-      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-      "status": "known",
-      "firstSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-jongerenactiviteiten-woensdagavond-woensdag-22-juli-2026-jeugd-activiteiten-cent",
@@ -2034,7 +1959,7 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-joyim-friends-zondag-5-juli-2026-oploo",
@@ -2050,7 +1975,7 @@
       "note": "Muzikale belevenis met Zanggroep Joyim en popkoor The Inspiration",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-kasteel-heijen-open-tijdens-eerste-gennepse-fietsdag-zondag-5-juli-2026-heijen",
@@ -2066,7 +1991,7 @@
       "note": "Kasteel Heijen open tijdens Gennepse Fietsdag",
       "status": "known",
       "firstSeenAt": "2026-06-23T13:31:54.625Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-kermis-beugen-maandag-6-juli-2026-beugen",
@@ -2082,7 +2007,7 @@
       "note": "Dorpsfeest voor jong en oud",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-kermis-beugen-vrijdag-3-juli-2026-beugen",
@@ -2098,7 +2023,7 @@
       "note": "Dorpsfeest voor jong en oud",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-kermis-beugen-zaterdag-4-juli-2026-beugen",
@@ -2114,7 +2039,7 @@
       "note": "Dorpsfeest voor jong en oud",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-kermis-beugen-zondag-5-juli-2026-beugen",
@@ -2130,7 +2055,7 @@
       "note": "Dorpsfeest voor jong en oud",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-kermis-langenboom-dinsdag-11-augustus-2026-langenboom",
@@ -2146,7 +2071,7 @@
       "note": "Kermis is plezier voor jong en oud",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-kermis-langenboom-maandag-10-augustus-2026-langenboom",
@@ -2162,7 +2087,7 @@
       "note": "Kermis is plezier voor jong en oud",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-kermis-langenboom-zaterdag-8-augustus-2026-langenboom",
@@ -2178,7 +2103,7 @@
       "note": "Kermis is plezier voor jong en oud",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-kermis-langenboom-zondag-9-augustus-2026-langenboom",
@@ -2194,7 +2119,7 @@
       "note": "Kermis is plezier voor jong en oud",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-kermis-wilbertoord-dinsdag-7-juli-2026-wilbertoord",
@@ -2210,7 +2135,7 @@
       "note": "Bezoek, ontmoet en beleef. Kermis is plezier voor jong en oud",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-kermis-wilbertoord-maandag-6-juli-2026-wilbertoord",
@@ -2226,7 +2151,7 @@
       "note": "Bezoek, ontmoet en beleef. Kermis is plezier voor jong en oud",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-kermis-wilbertoord-zaterdag-4-juli-2026-wilbertoord",
@@ -2242,7 +2167,7 @@
       "note": "Bezoek, ontmoet en beleef. Kermis is plezier voor jong en oud",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-kermis-wilbertoord-zondag-5-juli-2026-wilbertoord",
@@ -2258,7 +2183,7 @@
       "note": "Bezoek, ontmoet en beleef. Kermis is plezier voor jong en oud",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-kloostermarkt-met-workshops-lezingen-en-rondleidingen-zondag-5-juli-2026-sint-ag",
@@ -2274,7 +2199,7 @@
       "note": "Voor jong en oud om kennis te maken met de rijkdom van het kloosterleven",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-kofferbakverkoop-zondag-19-juli-2026-beugen",
@@ -2290,7 +2215,7 @@
       "note": "4x per jaar organiseert het Beugens Gilde een kofferbakverkoop in Beugen",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-kofferbakverkoop-zondag-30-augustus-2026-beugen",
@@ -2306,7 +2231,7 @@
       "note": "4x per jaar organiseert het Beugens Gilde een kofferbakverkoop in Beugen",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-koos-barten-veiligheidsadviseur-bij-wk-qatar-vertelt-maandag-13-juli-2026-heijen",
@@ -2322,7 +2247,7 @@
       "note": "Koos Barten, één van de 20 internationale experts geeft lezing over WK Qatar",
       "status": "known",
       "firstSeenAt": "2026-07-03T15:33:52.676Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-kunst-van-het-geloven-expositie-hedendaagse-kunst-in-7-kerken-en-kapellen-zaterd",
@@ -2338,7 +2263,7 @@
       "note": "Zaterdag 29 augustus voor de 10-de keer de tweejaarlijkse kunstmanifestatie",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-kunst-van-het-geloven-expositie-hedendaagse-kunst-in-7-kerken-en-kapellen-zondag",
@@ -2354,7 +2279,7 @@
       "note": "Zaterdag 29 augustus voor de 10-de keer de tweejaarlijkse kunstmanifestatie",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-louis-viert-vakantie-creatief-zomerprogramma-donderdag-20-augustus-2026-boxmeer",
@@ -2370,7 +2295,7 @@
       "note": "Een creatief avontuur voor jonge makers, ontdek nieuwe kunsttechnieken",
       "status": "known",
       "firstSeenAt": "2026-06-24T09:57:46.956Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-louis-viert-vakantie-creatief-zomerprogramma-woensdag-19-augustus-2026-boxmeer",
@@ -2386,7 +2311,7 @@
       "note": "Een creatief avontuur voor jonge makers, ontdek nieuwe kunsttechnieken",
       "status": "known",
       "firstSeenAt": "2026-06-24T09:57:46.956Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-louis-viert-vakantie-creatief-zomerprogramma-zaterdag-22-augustus-2026-boxmeer",
@@ -2402,7 +2327,7 @@
       "note": "Een creatief avontuur voor jonge makers, ontdek nieuwe kunsttechnieken",
       "status": "known",
       "firstSeenAt": "2026-06-24T09:57:46.956Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-maas-en-vilt-mars-oeffelt-zondag-5-juli-2026-oeffelt",
@@ -2418,7 +2343,7 @@
       "note": "Deze tocht door het gebied rondom Oeffelt en Gennep biedt prachtige landschappen",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-maasheggenmarkt-2026-zondag-16-augustus-2026-vortum-mullem",
@@ -2434,7 +2359,7 @@
       "note": "Kleinschalige markt, met deelnemers uit de Maasheggen en diverse oldtimers",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-mini-concert-in-kerk-milsbeek-zondag-5-juli-2026-ottersum",
@@ -2450,7 +2375,7 @@
       "note": "Mini-Concert door zangvereniging Caecilia uit Ottersum in de kerk in Milsbeek",
       "status": "known",
       "firstSeenAt": "2026-06-30T10:07:11.503Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-natuurpuzzeltocht-voor-kinderen-rond-kampeerboerderij-de-tienmorgen-zondag-12-ju",
@@ -2466,7 +2391,7 @@
       "note": "De natuur en het boerenleven komen hier samen en er valt veel te ontdekken",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "nimma-sportzomer-nk-wielrennen",
@@ -2479,7 +2404,7 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-11T13:13:20.801Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z",
       "lastMissingAt": "2026-06-29T16:45:35.738Z"
     },
     {
@@ -2496,7 +2421,24 @@
       "note": "Oberkrainer rockband pop- en rockhits met een Tiroler-polkasausje",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-ontdek-de-nieuwe-praotcast-dinsdag-4-augustus-2026-online-activiteit",
+      "title": "Ontdek de nieuwe Praotcast!",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/122300/2026-08-04/ontdek-de-nieuwe-praotcast",
+      "region": "Beuningen",
+      "place": "Online activiteit",
+      "dateLabel": "dinsdag 4 augustus 2026",
+      "timeLabel": "van 00:00 tot 23:00 uur (maandelijks)",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "known",
+      "firstSeenAt": "2026-06-12T02:42:04.076Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastMissingAt": "2026-07-17T14:57:40.207Z"
     },
     {
       "id": "land-van-cuijk-2026-07-op-weg-naar-je-diner-zaterdag-25-juli-2026-grave",
@@ -2512,7 +2454,7 @@
       "note": "Fietstocht langs boerderijen, langs de ingrediënten van jouw diner aan het einde",
       "status": "known",
       "firstSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-open-tuindag-nostalgische-ecotuin-de-buitenkamer-zondag-16-augustus-2026-gassel",
@@ -2528,7 +2470,7 @@
       "note": "Kom genieten van onze tuin vol bloemen, vlinders, vogels en eetbare planten",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-openstelling-gemaal-van-sasse-in-grave-zondag-30-augustus-2026-grave",
@@ -2544,7 +2486,7 @@
       "note": "Bezoek gemaal Van Sasse en duik in de geschiedenis van waterschap Aa en Maas",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-parkinsonisme-cafe-land-van-cuijk-donderdag-2-juli-2026-beugen",
@@ -2560,7 +2502,7 @@
       "note": "Parkinson Café Land van Cuijk is een laagdrempelige ontmoetingsplek voor mensen met de ziekte van Parkinson(ismen",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-pianoconcerten-van-wereldklasse-in-protestantse-kerk-gennep-dinsdag-28-juli-2026",
@@ -2576,7 +2518,7 @@
       "note": "Protestantse kerk Gennep, pianoconcert",
       "status": "known",
       "firstSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-pianoconcerten-van-wereldklasse-in-protestantse-kerk-gennep-donderdag-30-juli-20",
@@ -2592,7 +2534,7 @@
       "note": "Derde dag pianofestival: Jakub Capala",
       "status": "known",
       "firstSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-pianoconcerten-van-wereldklasse-in-protestantse-kerk-gennep-woensdag-29-juli-202",
@@ -2608,7 +2550,7 @@
       "note": "Tweede dag pianocencert: Hyunju Kim",
       "status": "known",
       "firstSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-pleinfeest-ottersum-vrijdag-3-juli-2026-ottersum",
@@ -2624,7 +2566,7 @@
       "note": "Pleinfeest Ottersum is het grootste festival van het kopje van Noord-Limburg en vindt jaarlijks begin juli plaats op het Sint Jozefplein in Ottersum",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-pleinfeest-ottersum-zaterdag-4-juli-2026-ottersum",
@@ -2640,7 +2582,7 @@
       "note": "Pleinfeest Ottersum is het grootste festival van het kopje van Noord-Limburg en vindt jaarlijks begin juli plaats op het Sint Jozefplein in Ottersum",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-pleinfeest-ottersum-zondag-5-juli-2026-ottersum",
@@ -2656,7 +2598,7 @@
       "note": "Pleinfeest Ottersum is het grootste festival van het kopje van Noord-Limburg en vindt jaarlijks begin juli plaats op het Sint Jozefplein in Ottersum",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-ponykamp-oeffelt-dinsdag-14-juli-2026-oeffelt",
@@ -2672,7 +2614,7 @@
       "note": "Leuke dag(en) tussen en op de pony's voor iedereen van 5 t/m 15 jaar",
       "status": "known",
       "firstSeenAt": "2026-06-26T09:58:30.105Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-ponykamp-oeffelt-donderdag-16-juli-2026-oeffelt",
@@ -2688,7 +2630,7 @@
       "note": "Leuke dag(en) tussen en op de pony's voor iedereen van 5 t/m 15 jaar",
       "status": "known",
       "firstSeenAt": "2026-06-26T09:58:30.105Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-ponykamp-oeffelt-maandag-13-juli-2026-oeffelt",
@@ -2704,7 +2646,7 @@
       "note": "Leuke dag(en) tussen en op de pony's voor iedereen van 5 t/m 15 jaar",
       "status": "known",
       "firstSeenAt": "2026-06-26T09:58:30.105Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-ponykamp-oeffelt-vrijdag-17-juli-2026-oeffelt",
@@ -2720,7 +2662,7 @@
       "note": "Leuke dag(en) tussen en op de pony's voor iedereen van 5 t/m 15 jaar",
       "status": "known",
       "firstSeenAt": "2026-06-26T09:58:30.105Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-ponykamp-oeffelt-woensdag-15-juli-2026-oeffelt",
@@ -2736,7 +2678,7 @@
       "note": "Leuke dag(en) tussen en op de pony's voor iedereen van 5 t/m 15 jaar",
       "status": "known",
       "firstSeenAt": "2026-06-26T09:58:30.105Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-ponykamp-oeffelt-dinsdag-11-augustus-2026-oeffelt",
@@ -2752,7 +2694,7 @@
       "note": "Super leuke ponykampen voor iedereen van 5 t/m 15 jaar",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-ponykamp-oeffelt-donderdag-13-augustus-2026-oeffelt",
@@ -2768,7 +2710,7 @@
       "note": "Super leuke ponykampen voor iedereen van 5 t/m 15 jaar",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-ponykamp-oeffelt-maandag-10-augustus-2026-oeffelt",
@@ -2784,7 +2726,7 @@
       "note": "Super leuke ponykampen voor iedereen van 5 t/m 15 jaar",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-ponykamp-oeffelt-woensdag-12-augustus-2026-oeffelt",
@@ -2800,7 +2742,7 @@
       "note": "Super leuke ponykampen voor iedereen van 5 t/m 15 jaar",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-ponykamp-oeffelt-zondag-9-augustus-2026-oeffelt",
@@ -2816,7 +2758,7 @@
       "note": "Super leuke ponykampen voor iedereen van 5 t/m 15 jaar",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-proeflokaal-bierfestival-2026-zondag-30-augustus-2026-cuijk",
@@ -2832,7 +2774,7 @@
       "note": "De achtste editie van bierfestival PROEFlokaal op het Marktplein in Cuijk",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-rooie-loper-concert-zaterdag-18-juli-2026-cuijk",
@@ -2848,7 +2790,7 @@
       "note": "Première van de concerttour van het Vierdaagse Orkest",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-sint-tunnisse-brinkfeesten-vrijdag-10-juli-2026-sint-anthonis",
@@ -2864,7 +2806,7 @@
       "note": "Drie dagen vertier en sportiviteit",
       "status": "known",
       "firstSeenAt": "2026-07-06T11:12:24.131Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-sint-tunnisse-brinkfeesten-zaterdag-11-juli-2026-sint-anthonis",
@@ -2880,7 +2822,7 @@
       "note": "Drie dagen vertier en sportiviteit",
       "status": "known",
       "firstSeenAt": "2026-07-06T11:12:24.131Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-sint-tunnisse-brinkfeesten-zondag-12-juli-2026-sint-anthonis",
@@ -2896,7 +2838,7 @@
       "note": "Drie dagen vertier en sportiviteit",
       "status": "known",
       "firstSeenAt": "2026-07-06T11:12:24.131Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-sint-tunnisse-dorpsbarbecue-zondag-12-juli-2026-sint-anthonis",
@@ -2912,7 +2854,7 @@
       "note": "Grootse dorpsbarbecue met muziek van DJ Henri Pennings",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-slokop-festival-2026-zaterdag-25-juli-2026-landhorst",
@@ -2928,7 +2870,7 @@
       "note": "Gemoedelijk kleinschalig Rock festival met originele muziek",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-smartlappenfestival-grave-zondag-5-juli-2026-grave",
@@ -2944,7 +2886,7 @@
       "note": "Zondag 5 juli zingt Grave mee tijdens het Smartlappenfestival",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-snarenplukkers-festival-zaterdag-11-juli-2026-oeffelt",
@@ -2960,7 +2902,7 @@
       "note": "Geniet op het terras van gratis livemuziek, drankjes en lekker eten",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-snarenplukkers-in-wild-verband-met-theo-sieben-zaterdag-11-juli-2026-oeffelt",
@@ -2976,7 +2918,7 @@
       "note": "Gitarist Theo Sieben is bekend van de tributeband Her Majesty",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-steve-gifford-britse-singer-songwriter-zaterdag-4-juli-2026-cuijk",
@@ -2992,7 +2934,7 @@
       "note": "Gratis toegang. Kom luisteren naar de mooiste muziek van Steve Gifford",
       "status": "known",
       "firstSeenAt": "2026-07-01T10:30:13.541Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-summersunday-bij-blooming-ven-zelderheide-zondag-26-juli-2026-ven-zelderheide",
@@ -3008,7 +2950,7 @@
       "note": "De perfecte ingrediënten voor een heerlijke zomermiddag in de vakantie",
       "status": "known",
       "firstSeenAt": "2026-06-30T10:07:11.503Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-summersunday-bij-blooming-ven-zelderheide-zondag-16-augustus-2026-ven-zelderheid",
@@ -3024,7 +2966,7 @@
       "note": "De perfecte ingrediënten voor een heerlijke zomermiddag in de vakantie",
       "status": "known",
       "firstSeenAt": "2026-06-30T10:07:11.503Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-summersunday-bij-blooming-ven-zelderheide-zondag-2-augustus-2026-ven-zelderheide",
@@ -3040,7 +2982,7 @@
       "note": "De perfecte ingrediënten voor een heerlijke zomermiddag in de vakantie",
       "status": "known",
       "firstSeenAt": "2026-06-30T10:07:11.503Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-summersunday-bij-blooming-ven-zelderheide-zondag-23-augustus-2026-ven-zelderheid",
@@ -3056,7 +2998,7 @@
       "note": "De perfecte ingrediënten voor een heerlijke zomermiddag in de vakantie",
       "status": "known",
       "firstSeenAt": "2026-06-30T10:07:11.503Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-summersunday-bij-blooming-ven-zelderheide-zondag-9-augustus-2026-ven-zelderheide",
@@ -3072,7 +3014,7 @@
       "note": "De perfecte ingrediënten voor een heerlijke zomermiddag in de vakantie",
       "status": "known",
       "firstSeenAt": "2026-06-30T10:07:11.503Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-trainingsdagen-voor-gevorderde-ruiters-vanaf-12-jaar-dinsdag-21-juli-2026-oeffel",
@@ -3088,7 +3030,7 @@
       "note": "Wie graag meer willen leren en zich willen verbeteren in het paardrijden",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-trainingsdagen-voor-gevorderde-ruiters-vanaf-12-jaar-donderdag-23-juli-2026-oeff",
@@ -3104,7 +3046,7 @@
       "note": "Wie graag meer willen leren en zich willen verbeteren in het paardrijden",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-trainingsdagen-voor-gevorderde-ruiters-vanaf-12-jaar-maandag-20-juli-2026-oeffel",
@@ -3120,7 +3062,7 @@
       "note": "Wie graag meer willen leren en zich willen verbeteren in het paardrijden",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-trainingsdagen-voor-gevorderde-ruiters-vanaf-12-jaar-vrijdag-24-juli-2026-oeffel",
@@ -3136,7 +3078,7 @@
       "note": "Wie graag meer willen leren en zich willen verbeteren in het paardrijden",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-trainingsdagen-voor-gevorderde-ruiters-vanaf-12-jaar-woensdag-22-juli-2026-oeffe",
@@ -3152,7 +3094,7 @@
       "note": "Wie graag meer willen leren en zich willen verbeteren in het paardrijden",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-uit-op-zondag-met-goei-volluk-voor-senioren-cuijk-e-o-zondag-5-juli-2026-cuijk",
@@ -3168,7 +3110,7 @@
       "note": "Smartlappenkoor Goei Volluk in Het Doehuis Cuijk. Kom ook",
       "status": "known",
       "firstSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-uit-op-zondag-met-ger-keijzers-zondag-2-augustus-2026-cuijk",
@@ -3184,7 +3126,7 @@
       "note": "Ger, de troubadour van Cuijk, zingt gezellig voor u in het 'Kuuks' dialect",
       "status": "known",
       "firstSeenAt": "2026-07-15T08:42:31.107Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-unisono-sluit-seizoen-af-met-zomeravondconcert-dinsdag-7-juli-2026-escharen",
@@ -3200,7 +3142,7 @@
       "note": "Zomeravondconcert Koor Unisono Escharen",
       "status": "known",
       "firstSeenAt": "2026-07-01T10:30:13.541Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-verhalenvertellers-ontdek-het-mysterie-van-landgoed-de-barendonk-dinsdag-14-juli",
@@ -3216,7 +3158,7 @@
       "note": "Een rondleiding over de historie van het Landgoed en de omgeving",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-verhalenvertellers-ontdek-het-mysterie-van-landgoed-de-barendonk-dinsdag-28-juli",
@@ -3232,7 +3174,7 @@
       "note": "Een rondleiding over de historie van het Landgoed en de omgeving",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-verhalenvertellers-ontdek-het-mysterie-van-landgoed-de-barendonk-dinsdag-7-juli-",
@@ -3248,7 +3190,7 @@
       "note": "Een rondleiding over de historie van het Landgoed en de omgeving",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-verhalenvertellers-ontdek-het-mysterie-van-landgoed-de-barendonk-dinsdag-11-augu",
@@ -3264,7 +3206,7 @@
       "note": "Een rondleiding over de historie van het Landgoed en de omgeving",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-verhalenvertellers-rondleiding-kasteel-aldendriel-woensdag-8-juli-2026-mill",
@@ -3280,7 +3222,7 @@
       "note": "Kom genieten van de rust, geschiedenis, het groen en ontdek Kasteel Aldendriel",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-verhalenvertellers-rondleiding-kasteel-aldendriel-woensdag-12-augustus-2026-mill",
@@ -3296,39 +3238,24 @@
       "note": "Kom genieten van de rust, geschiedenis, het groen en ontdek Kasteel Aldendriel",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
-      "id": "beuningen-samen-jongeren-vierdaagseviering-zondag-19-juli-2026-sint-andreas-kerk-weurt",
-      "title": "Vierdaagseviering",
-      "sourceId": "beuningen-samen-jongeren",
-      "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/148394/2026-07-19/vierdaagseviering",
-      "region": "Beuningen",
-      "place": "Sint-Andreas Kerk Weurt⛪",
-      "dateLabel": "zondag 19 juli 2026",
-      "timeLabel": "van 10:00 tot 11:00 uur",
-      "reviewStatus": "pending",
-      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-      "status": "known",
-      "firstSeenAt": "2026-07-16T08:41:02.596Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
-    },
-    {
-      "id": "beuningen-samen-jongeren-wandel-mee-met-het-wandelcafe-beuningen-zondag-19-juli-2026-het-dijkmagazijn",
+      "id": "beuningen-samen-jongeren-wandel-mee-met-het-wandelcafe-beuningen-zondag-2-augustus-2026-het-dijkmagazijn",
       "title": "Wandel mee met het Wandelcafé Beuningen",
       "sourceId": "beuningen-samen-jongeren",
       "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/144433/2026-07-19/wandel-mee-met-het-wandelcafe-beuningen-2",
+      "sourceUrl": "https://beuningensamen.nl/agenda/144433/2026-08-02/wandel-mee-met-het-wandelcafe-beuningen-2",
       "region": "Beuningen",
       "place": "Het Dijkmagazijn",
-      "dateLabel": "zondag 19 juli 2026",
+      "dateLabel": "zondag 2 augustus 2026",
       "timeLabel": "van 10:00 tot 12:30 uur (wekelijks)",
       "reviewStatus": "pending",
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
-      "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "firstSeenAt": "2026-06-12T02:42:04.076Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastMissingAt": "2026-07-17T14:57:40.207Z"
     },
     {
       "id": "beuningen-samen-jongeren-wandel-mee-met-het-wandelcafe-beuningen-zondag-26-juli-2026-het-dijkmagazijn",
@@ -3344,23 +3271,7 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
-    },
-    {
-      "id": "beuningen-samen-jongeren-wandelen-in-de-mooie-natuur-donderdag-16-juli-2026-ontmoetingscentrum-de-paulus",
-      "title": "Wandelen in de mooie natuur",
-      "sourceId": "beuningen-samen-jongeren",
-      "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/117582/2026-07-16/wandelen-in-de-mooie-natuur",
-      "region": "Beuningen",
-      "place": "Ontmoetingscentrum de Paulus",
-      "dateLabel": "donderdag 16 juli 2026",
-      "timeLabel": "van 18:15 tot 19:30 uur (wekelijks)",
-      "reviewStatus": "pending",
-      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-      "status": "known",
-      "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-wandelen-in-de-mooie-natuur-donderdag-23-juli-2026-ontmoetingscentrum-de-paulus",
@@ -3376,7 +3287,24 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-wandelen-in-de-mooie-natuur-donderdag-30-juli-2026-ontmoetingscentrum-de-paulus",
+      "title": "Wandelen in de mooie natuur",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/117582/2026-07-30/wandelen-in-de-mooie-natuur",
+      "region": "Beuningen",
+      "place": "Ontmoetingscentrum de Paulus",
+      "dateLabel": "donderdag 30 juli 2026",
+      "timeLabel": "van 18:15 tot 19:30 uur (wekelijks)",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "known",
+      "firstSeenAt": "2026-06-12T02:42:04.076Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastMissingAt": "2026-07-17T14:57:40.207Z"
     },
     {
       "id": "land-van-cuijk-2026-07-wanroijse-rommelmarkt-zondag-26-juli-2026-wanroij",
@@ -3392,7 +3320,7 @@
       "note": "Al 55 jaar een begrip in de regio: de grote Wanroijse rommelmarkt",
       "status": "known",
       "firstSeenAt": "2026-07-13T09:54:39.947Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-weijer-concert-boxmeer-zondag-19-juli-2026-boxmeer",
@@ -3408,7 +3336,7 @@
       "note": "Gezellige middag samen met het Vierdaagse Orkest bij De Weijer in Boxmeer",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-wijnproeverij-verbindingsboerderij-de-koolberg-zaterdag-29-augustus-2026-westerb",
@@ -3424,23 +3352,7 @@
       "note": "Sfeervolle, laagdrempelige wijnproeverij in Verbindingsboerderij De Koolberg",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
-    },
-    {
-      "id": "beuningen-samen-jongeren-woord-en-communieviering-zondag-19-juli-2026-sint-corneliuskerk",
-      "title": "Woord- en Communieviering",
-      "sourceId": "beuningen-samen-jongeren",
-      "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/148396/2026-07-19/woord-en-communieviering",
-      "region": "Beuningen",
-      "place": "Sint Corneliuskerk⛪",
-      "dateLabel": "zondag 19 juli 2026",
-      "timeLabel": "van 10:00 tot 11:00 uur",
-      "reviewStatus": "pending",
-      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-      "status": "known",
-      "firstSeenAt": "2026-07-16T08:41:02.596Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-workshop-pluk-je-eigen-veldboeket-zaterdag-11-juli-2026-molenhoek",
@@ -3456,7 +3368,7 @@
       "note": "Geniet van onze kleurrijke tuin met een ontspannen bloemenworkshop",
       "status": "known",
       "firstSeenAt": "2026-06-29T11:32:24.775Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-yoga-zomer-retraite-woensdag-15-juli-2026-sint-agatha",
@@ -3472,23 +3384,7 @@
       "note": "Yoga Retraite van 15 t/m 17 juli",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
-    },
-    {
-      "id": "beuningen-samen-jongeren-zelfbescherming-train-ninjutsu-in-nijmegen-dinsdag-14-juli-2026-ploegstraat-16",
-      "title": "Zelfbescherming? Train Ninjutsu in Nijmegen",
-      "sourceId": "beuningen-samen-jongeren",
-      "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/130238/2026-07-14/zelfbescherming-train-ninjutsu-in-nijmegen-2",
-      "region": "Beuningen",
-      "place": "Ploegstraat 16",
-      "dateLabel": "dinsdag 14 juli 2026",
-      "timeLabel": "van 20:00 tot 21:30 uur (wekelijks)",
-      "reviewStatus": "pending",
-      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-      "status": "known",
-      "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-zelfbescherming-train-ninjutsu-in-nijmegen-dinsdag-21-juli-2026-ploegstraat-16",
@@ -3504,7 +3400,41 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-zelfbescherming-train-ninjutsu-in-nijmegen-dinsdag-28-juli-2026-ploegstraat-16",
+      "title": "Zelfbescherming? Train Ninjutsu in Nijmegen",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/130238/2026-07-28/zelfbescherming-train-ninjutsu-in-nijmegen-2",
+      "region": "Beuningen",
+      "place": "Ploegstraat 16",
+      "dateLabel": "dinsdag 28 juli 2026",
+      "timeLabel": "van 20:00 tot 21:30 uur (wekelijks)",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "known",
+      "firstSeenAt": "2026-06-12T02:42:04.076Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-zelfbescherming-train-ninjutsu-in-nijmegen-dinsdag-4-augustus-2026-ploegstraat-1",
+      "title": "Zelfbescherming? Train Ninjutsu in Nijmegen",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/130238/2026-08-04/zelfbescherming-train-ninjutsu-in-nijmegen-2",
+      "region": "Beuningen",
+      "place": "Ploegstraat 16",
+      "dateLabel": "dinsdag 4 augustus 2026",
+      "timeLabel": "van 20:00 tot 21:30 uur (wekelijks)",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "known",
+      "firstSeenAt": "2026-06-12T02:42:04.076Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastMissingAt": "2026-07-17T14:57:40.207Z"
     },
     {
       "id": "land-van-cuijk-2026-07-zie-de-zon-zakken-op-de-brink-zaterdag-11-juli-2026-sint-anthonis",
@@ -3520,7 +3450,7 @@
       "note": "Een GRATIS outdoor avond op onze prachtige Brink",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-zomeravond-live-zaterdag-4-juli-2026-wanroij",
@@ -3536,7 +3466,7 @@
       "note": "Openluchtconcert van Muziekvereniging 'St. Jan' Wanroij",
       "status": "known",
       "firstSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-zomeravondconcerten-klassieke-muziek-dinsdag-28-juli-2026-grave",
@@ -3552,7 +3482,7 @@
       "note": "Concert internationaal Muziekzomer Campus Cleve en Euregio Rijn-Pianofestival",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-zomeravondconcerten-klassieke-muziek-woensdag-29-juli-2026-grave",
@@ -3568,7 +3498,7 @@
       "note": "Concert internationaal Muziekzomer Campus Cleve en Euregio Rijn-Pianofestival",
       "status": "known",
       "firstSeenAt": "2026-07-07T10:06:26.965Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-zomerconcert-zondag-5-juli-2026-langenboom",
@@ -3584,7 +3514,7 @@
       "note": "Het zomerconcert wordt verzorgd door slagwerkgroep Dynamic en het harmonieorkest van Muziekvereniging Amicitia, én De Maashorst Bend",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-zomerconcert-amicitia-zondag-5-juli-2026-langenboom",
@@ -3600,7 +3530,7 @@
       "note": "Optredens Harmonieorkest Amicitia, Slagwerkgroep Dynamic en De Maashorst Bend",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-zomerfestivelp-dorpsfeest-velp-vrijdag-28-augustus-2026-velp",
@@ -3616,7 +3546,7 @@
       "note": "ZomerFestiVelp, dorpsfeest, feestweekend Velp",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-zomerfestivelp-dorpsfeest-velp-zaterdag-29-augustus-2026-velp",
@@ -3632,7 +3562,7 @@
       "note": "ZomerFestiVelp, dorpsfeest, feestweekend Velp",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-zomerfestivelp-dorpsfeest-velp-zondag-30-augustus-2026-velp",
@@ -3648,23 +3578,7 @@
       "note": "ZomerFestiVelp, dorpsfeest, feestweekend Velp",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
-    },
-    {
-      "id": "beuningen-samen-jongeren-zumba-in-de-leghe-polder-in-beuningen-dinsdag-14-juli-2026-sociaal-cultureel-cen",
-      "title": "Zumba in de Lèghe Polder in Beuningen",
-      "sourceId": "beuningen-samen-jongeren",
-      "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/136828/2026-07-14/zumba-in-de-leghe-polder-in-beuningen",
-      "region": "Beuningen",
-      "place": "Sociaal Cultureel Centrum De Lèghe Polder",
-      "dateLabel": "dinsdag 14 juli 2026",
-      "timeLabel": "van 20:00 tot 21:00 uur (wekelijks)",
-      "reviewStatus": "pending",
-      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-      "status": "known",
-      "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-zumba-in-de-leghe-polder-in-beuningen-dinsdag-21-juli-2026-sociaal-cultureel-cen",
@@ -3680,7 +3594,41 @@
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "known",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-zumba-in-de-leghe-polder-in-beuningen-dinsdag-28-juli-2026-sociaal-cultureel-cen",
+      "title": "Zumba in de Lèghe Polder in Beuningen",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/136828/2026-07-28/zumba-in-de-leghe-polder-in-beuningen",
+      "region": "Beuningen",
+      "place": "Sociaal Cultureel Centrum De Lèghe Polder",
+      "dateLabel": "dinsdag 28 juli 2026",
+      "timeLabel": "van 20:00 tot 21:00 uur (wekelijks)",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "known",
+      "firstSeenAt": "2026-06-16T14:49:36.620Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-bakkie-in-de-buurt-maandag-13-juli-2026-jeugd-activiteiten-centrum-hotspot",
+      "title": "Bakkie in de buurt.",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/144684/2026-07-13/bakkie-in-de-buurt",
+      "region": "Beuningen",
+      "place": "Jeugd Activiteiten Centrum Hotspot",
+      "dateLabel": "maandag 13 juli 2026",
+      "timeLabel": "van 14:00 tot 16:00 uur (2-wekelijks)",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "missing",
+      "firstSeenAt": "2026-06-16T14:49:36.620Z",
+      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-bakkie-in-de-buurt-maandag-10-augustus-2026-jeugd-activiteiten-centrum-hotspot",
@@ -3697,7 +3645,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-bakkie-in-de-buurt-maandag-24-augustus-2026-jeugd-activiteiten-centrum-hotspot",
@@ -3714,7 +3662,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-beer-bites-festival-2026-zaterdag-4-juli-2026-boxmeer",
@@ -3731,7 +3679,24 @@
       "status": "missing",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
       "lastSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-bijeenkomst-beuningse-4daagse-wandelaars-vrijdag-17-juli-2026-gemeentehuis-beuni",
+      "title": "Bijeenkomst Beuningse 4Daagse-wandelaars",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/143988/2026-07-17/bijeenkomst-beuningse-4daagse-wandelaars",
+      "region": "Beuningen",
+      "place": "Gemeentehuis Beuningen",
+      "dateLabel": "vrijdag 17 juli 2026",
+      "timeLabel": "van 19:00 tot 20:00 uur",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "missing",
+      "firstSeenAt": "2026-06-16T14:49:36.620Z",
+      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-clean-pete-in-het-buitentheater-vrijdag-10-juli-2026-boxmeer",
@@ -3748,7 +3713,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
       "lastSeenAt": "2026-06-23T08:06:48.886Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-cursus-geldzaken-met-budgetbuddy-woensdag-26-augustus-2026-julianaplein",
@@ -3765,7 +3730,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-de-zon-zien-zakken-op-de-brink-zaterdag-11-juli-2026-sint-anthonis",
@@ -3782,41 +3747,41 @@
       "status": "missing",
       "firstSeenAt": "2026-07-06T11:12:24.131Z",
       "lastSeenAt": "2026-07-06T16:37:21.104Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
-      "id": "beuningen-samen-jongeren-expositie-casper-ter-heerdt-de-nieuwe-gang-zaterdag-1-augustus-2026-de-nieuwe-ga",
+      "id": "beuningen-samen-jongeren-expositie-casper-ter-heerdt-de-nieuwe-gang-zaterdag-18-juli-2026-de-nieuwe-gang",
       "title": "Expositie Casper ter Heerdt - De Nieuwe Gang",
       "sourceId": "beuningen-samen-jongeren",
       "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/146600/2026-08-01/expositie-casper-ter-heerdt-de-nieuwe-gang",
+      "sourceUrl": "https://beuningensamen.nl/agenda/146600/2026-07-18/expositie-casper-ter-heerdt-de-nieuwe-gang",
       "region": "Beuningen",
       "place": "De Nieuwe Gang",
-      "dateLabel": "zaterdag 1 augustus 2026",
+      "dateLabel": "zaterdag 18 juli 2026",
       "timeLabel": "van 13:00 tot 17:00 uur",
       "reviewStatus": "pending",
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "missing",
-      "firstSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "firstSeenAt": "2026-06-16T14:49:36.620Z",
+      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
-      "id": "beuningen-samen-jongeren-expositie-casper-ter-heerdt-de-nieuwe-gang-zondag-2-augustus-2026-de-nieuwe-gang",
+      "id": "beuningen-samen-jongeren-expositie-casper-ter-heerdt-de-nieuwe-gang-zondag-19-juli-2026-de-nieuwe-gang",
       "title": "Expositie Casper ter Heerdt - De Nieuwe Gang",
       "sourceId": "beuningen-samen-jongeren",
       "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/146600/2026-08-02/expositie-casper-ter-heerdt-de-nieuwe-gang",
+      "sourceUrl": "https://beuningensamen.nl/agenda/146600/2026-07-19/expositie-casper-ter-heerdt-de-nieuwe-gang",
       "region": "Beuningen",
       "place": "De Nieuwe Gang",
-      "dateLabel": "zondag 2 augustus 2026",
+      "dateLabel": "zondag 19 juli 2026",
       "timeLabel": "van 13:00 tot 17:00 uur",
       "reviewStatus": "pending",
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "missing",
-      "firstSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "firstSeenAt": "2026-06-16T14:49:36.620Z",
+      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-het-taalcafe-donderdag-16-juli-2026-sociaal-cultureel-centrum-de-leghe-polder",
@@ -3833,7 +3798,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
       "lastSeenAt": "2026-06-24T09:57:46.956Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-het-taalcafe-donderdag-23-juli-2026-sociaal-cultureel-centrum-de-leghe-polder",
@@ -3850,7 +3815,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-24T09:57:46.956Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-het-taalcafe-donderdag-30-juli-2026-sociaal-cultureel-centrum-de-leghe-polder",
@@ -3867,7 +3832,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-het-taalcafe-donderdag-13-augustus-2026-sociaal-cultureel-centrum-de-leghe-polde",
@@ -3884,7 +3849,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-het-taalcafe-donderdag-20-augustus-2026-sociaal-cultureel-centrum-de-leghe-polde",
@@ -3901,7 +3866,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-het-taalcafe-donderdag-6-augustus-2026-sociaal-cultureel-centrum-de-leghe-polder",
@@ -3918,7 +3883,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-het-taalcafe-donderdag-27-augustus-2026-sociaal-cultureel-centrum-de-leghe-polde",
@@ -3935,24 +3900,41 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
-      "id": "beuningen-samen-jongeren-inloop-spreekuur-vip-beuningen-vrijdag-31-juli-2026-stichting-perspectief",
+      "id": "beuningen-samen-jongeren-informatiepunt-digitale-overheid-ido-vrijdag-17-juli-2026-bibliotheek-gelderland",
+      "title": "Informatiepunt Digitale overheid. IDO",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/110088/2026-07-17/informatiepunt-digitale-overheid-ido-3",
+      "region": "Beuningen",
+      "place": "Bibliotheek Gelderland Zuid, vestiging Beuningen",
+      "dateLabel": "vrijdag 17 juli 2026",
+      "timeLabel": "van 10:00 tot 12:00 uur (wekelijks)",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "missing",
+      "firstSeenAt": "2026-06-23T08:06:48.886Z",
+      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-inloop-spreekuur-vip-beuningen-vrijdag-17-juli-2026-stichting-perspectief",
       "title": "Inloop spreekuur VIP Beuningen",
       "sourceId": "beuningen-samen-jongeren",
       "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/109354/2026-07-31/inloop-spreekuur-vip-beuningen",
+      "sourceUrl": "https://beuningensamen.nl/agenda/109354/2026-07-17/inloop-spreekuur-vip-beuningen",
       "region": "Beuningen",
       "place": "Stichting Perspectief",
-      "dateLabel": "vrijdag 31 juli 2026",
+      "dateLabel": "vrijdag 17 juli 2026",
       "timeLabel": "van 11:00 tot 13:00 uur (wekelijks)",
       "reviewStatus": "pending",
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "missing",
-      "firstSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "firstSeenAt": "2026-06-16T14:49:36.620Z",
+      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-inloop-spreekuur-vip-beuningen-vrijdag-14-augustus-2026-stichting-perspectief",
@@ -3969,7 +3951,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-inloop-spreekuur-vip-beuningen-vrijdag-21-augustus-2026-stichting-perspectief",
@@ -3986,7 +3968,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-inloop-spreekuur-vip-beuningen-vrijdag-7-augustus-2026-stichting-perspectief",
@@ -4003,7 +3985,41 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-jongerenactiviteiten-vrijdagavond-vrijdag-17-juli-2026-jeugd-activiteiten-centru",
+      "title": "Jongerenactiviteiten vrijdagavond",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/111398/2026-07-17/jongerenactiviteiten-vrijdagavond",
+      "region": "Beuningen",
+      "place": "Jeugd Activiteiten Centrum Hotspot",
+      "dateLabel": "vrijdag 17 juli 2026",
+      "timeLabel": "van 18:00 tot 22:00 uur (wekelijks)",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "missing",
+      "firstSeenAt": "2026-06-23T08:06:48.886Z",
+      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-jongerenactiviteiten-woensdagavond-woensdag-15-juli-2026-jeugd-activiteiten-cent",
+      "title": "Jongerenactiviteiten woensdagavond",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/111399/2026-07-15/jongerenactiviteiten-woensdagavond-2",
+      "region": "Beuningen",
+      "place": "Jeugd Activiteiten Centrum Hotspot",
+      "dateLabel": "woensdag 15 juli 2026",
+      "timeLabel": "van 17:00 tot 21:00 uur (wekelijks)",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "missing",
+      "firstSeenAt": "2026-06-23T08:06:48.886Z",
+      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-muziektheater-rosalia-s-rust-zaterdag-24-oktober-2026-haps",
@@ -4020,7 +4036,7 @@
       "status": "missing",
       "firstSeenAt": "2026-07-09T16:11:57.711Z",
       "lastSeenAt": "2026-07-09T16:11:57.711Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-online-18-18-tips-voor-als-jij-of-je-kind-18-jaar-wordt-dinsdag-14-juli-2026-onl",
@@ -4037,7 +4053,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
       "lastSeenAt": "2026-07-01T16:06:27.483Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-online-18-18-tips-voor-als-jij-of-je-kind-18-jaar-wordt-donderdag-16-juli-2026-o",
@@ -4054,7 +4070,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
       "lastSeenAt": "2026-07-01T16:06:27.483Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-online-18-18-tips-voor-als-jij-of-je-kind-18-jaar-wordt-maandag-13-juli-2026-onl",
@@ -4071,7 +4087,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
       "lastSeenAt": "2026-07-01T16:06:27.483Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-online-18-18-tips-voor-als-jij-of-je-kind-18-jaar-wordt-woensdag-15-juli-2026-on",
@@ -4088,7 +4104,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
       "lastSeenAt": "2026-07-01T16:06:27.483Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-online-18-18-tips-voor-als-jij-of-je-kind-18-jaar-wordt-dinsdag-28-juli-2026-onl",
@@ -4105,7 +4121,7 @@
       "status": "missing",
       "firstSeenAt": "2026-07-02T09:43:24.981Z",
       "lastSeenAt": "2026-07-02T09:43:24.981Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-online-18-18-tips-voor-als-jij-of-je-kind-18-jaar-wordt-maandag-27-juli-2026-onl",
@@ -4122,24 +4138,7 @@
       "status": "missing",
       "firstSeenAt": "2026-07-02T09:43:24.981Z",
       "lastSeenAt": "2026-07-02T09:43:24.981Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
-    },
-    {
-      "id": "beuningen-samen-jongeren-ontdek-de-nieuwe-praotcast-dinsdag-4-augustus-2026-online-activiteit",
-      "title": "Ontdek de nieuwe Praotcast!",
-      "sourceId": "beuningen-samen-jongeren",
-      "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/122300/2026-08-04/ontdek-de-nieuwe-praotcast",
-      "region": "Beuningen",
-      "place": "Online activiteit",
-      "dateLabel": "dinsdag 4 augustus 2026",
-      "timeLabel": "van 00:00 tot 23:00 uur (maandelijks)",
-      "reviewStatus": "pending",
-      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-      "status": "missing",
-      "firstSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-sint-tunnisse-kermis-vrijdag-10-juli-2026-sint-anthonis",
@@ -4156,7 +4155,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
       "lastSeenAt": "2026-07-03T15:33:52.676Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-sint-tunnisse-kermis-zaterdag-11-juli-2026-sint-anthonis",
@@ -4173,7 +4172,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
       "lastSeenAt": "2026-07-03T15:33:52.676Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-07-sint-tunnisse-kermis-zondag-12-juli-2026-sint-anthonis",
@@ -4190,7 +4189,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
       "lastSeenAt": "2026-07-03T15:33:52.676Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "land-van-cuijk-2026-08-verhalenvertellers-ontdek-het-mysterie-van-landgoed-de-barendonk-dinsdag-4-augus",
@@ -4207,24 +4206,41 @@
       "status": "missing",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
       "lastSeenAt": "2026-07-09T16:11:57.711Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
-      "id": "beuningen-samen-jongeren-wandel-mee-met-het-wandelcafe-beuningen-zondag-2-augustus-2026-het-dijkmagazijn",
+      "id": "beuningen-samen-jongeren-vierdaagseviering-zondag-19-juli-2026-sint-andreas-kerk-weurt",
+      "title": "Vierdaagseviering",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/148394/2026-07-19/vierdaagseviering",
+      "region": "Beuningen",
+      "place": "Sint-Andreas Kerk Weurt⛪",
+      "dateLabel": "zondag 19 juli 2026",
+      "timeLabel": "van 10:00 tot 11:00 uur",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "missing",
+      "firstSeenAt": "2026-07-16T08:41:02.596Z",
+      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-wandel-mee-met-het-wandelcafe-beuningen-zondag-19-juli-2026-het-dijkmagazijn",
       "title": "Wandel mee met het Wandelcafé Beuningen",
       "sourceId": "beuningen-samen-jongeren",
       "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/144433/2026-08-02/wandel-mee-met-het-wandelcafe-beuningen-2",
+      "sourceUrl": "https://beuningensamen.nl/agenda/144433/2026-07-19/wandel-mee-met-het-wandelcafe-beuningen-2",
       "region": "Beuningen",
       "place": "Het Dijkmagazijn",
-      "dateLabel": "zondag 2 augustus 2026",
+      "dateLabel": "zondag 19 juli 2026",
       "timeLabel": "van 10:00 tot 12:30 uur (wekelijks)",
       "reviewStatus": "pending",
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "missing",
-      "firstSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "firstSeenAt": "2026-06-16T14:49:36.620Z",
+      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-wandel-mee-met-het-wandelcafe-beuningen-zondag-16-augustus-2026-het-dijkmagazijn",
@@ -4241,7 +4257,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-wandel-mee-met-het-wandelcafe-beuningen-zondag-23-augustus-2026-het-dijkmagazijn",
@@ -4258,7 +4274,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-wandel-mee-met-het-wandelcafe-beuningen-zondag-9-augustus-2026-het-dijkmagazijn",
@@ -4275,24 +4291,24 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
-      "id": "beuningen-samen-jongeren-wandelen-in-de-mooie-natuur-donderdag-30-juli-2026-ontmoetingscentrum-de-paulus",
+      "id": "beuningen-samen-jongeren-wandelen-in-de-mooie-natuur-donderdag-16-juli-2026-ontmoetingscentrum-de-paulus",
       "title": "Wandelen in de mooie natuur",
       "sourceId": "beuningen-samen-jongeren",
       "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/117582/2026-07-30/wandelen-in-de-mooie-natuur",
+      "sourceUrl": "https://beuningensamen.nl/agenda/117582/2026-07-16/wandelen-in-de-mooie-natuur",
       "region": "Beuningen",
       "place": "Ontmoetingscentrum de Paulus",
-      "dateLabel": "donderdag 30 juli 2026",
+      "dateLabel": "donderdag 16 juli 2026",
       "timeLabel": "van 18:15 tot 19:30 uur (wekelijks)",
       "reviewStatus": "pending",
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "missing",
-      "firstSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "firstSeenAt": "2026-06-16T14:49:36.620Z",
+      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-wandelen-in-de-mooie-natuur-donderdag-13-augustus-2026-ontmoetingscentrum-de-pau",
@@ -4309,7 +4325,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-wandelen-in-de-mooie-natuur-donderdag-20-augustus-2026-ontmoetingscentrum-de-pau",
@@ -4326,7 +4342,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-wandelen-in-de-mooie-natuur-donderdag-6-augustus-2026-ontmoetingscentrum-de-paul",
@@ -4343,7 +4359,7 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-wandelen-in-de-mooie-natuur-donderdag-27-augustus-2026-ontmoetingscentrum-de-pau",
@@ -4360,24 +4376,41 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
-      "id": "beuningen-samen-jongeren-zelfbescherming-train-ninjutsu-in-nijmegen-dinsdag-28-juli-2026-ploegstraat-16",
+      "id": "beuningen-samen-jongeren-woord-en-communieviering-zondag-19-juli-2026-sint-corneliuskerk",
+      "title": "Woord- en Communieviering",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/148396/2026-07-19/woord-en-communieviering",
+      "region": "Beuningen",
+      "place": "Sint Corneliuskerk⛪",
+      "dateLabel": "zondag 19 juli 2026",
+      "timeLabel": "van 10:00 tot 11:00 uur",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "missing",
+      "firstSeenAt": "2026-07-16T08:41:02.596Z",
+      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-zelfbescherming-train-ninjutsu-in-nijmegen-dinsdag-14-juli-2026-ploegstraat-16",
       "title": "Zelfbescherming? Train Ninjutsu in Nijmegen",
       "sourceId": "beuningen-samen-jongeren",
       "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/130238/2026-07-28/zelfbescherming-train-ninjutsu-in-nijmegen-2",
+      "sourceUrl": "https://beuningensamen.nl/agenda/130238/2026-07-14/zelfbescherming-train-ninjutsu-in-nijmegen-2",
       "region": "Beuningen",
       "place": "Ploegstraat 16",
-      "dateLabel": "dinsdag 28 juli 2026",
+      "dateLabel": "dinsdag 14 juli 2026",
       "timeLabel": "van 20:00 tot 21:30 uur (wekelijks)",
       "reviewStatus": "pending",
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "missing",
-      "firstSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastSeenAt": "2026-07-01T16:06:27.483Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "firstSeenAt": "2026-06-16T14:49:36.620Z",
+      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
       "id": "beuningen-samen-jongeren-zelfbescherming-train-ninjutsu-in-nijmegen-dinsdag-11-augustus-2026-ploegstraat-",
@@ -4394,47 +4427,110 @@
       "status": "missing",
       "firstSeenAt": "2026-06-12T02:42:04.076Z",
       "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
-      "id": "beuningen-samen-jongeren-zelfbescherming-train-ninjutsu-in-nijmegen-dinsdag-4-augustus-2026-ploegstraat-1",
-      "title": "Zelfbescherming? Train Ninjutsu in Nijmegen",
-      "sourceId": "beuningen-samen-jongeren",
-      "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/130238/2026-08-04/zelfbescherming-train-ninjutsu-in-nijmegen-2",
-      "region": "Beuningen",
-      "place": "Ploegstraat 16",
-      "dateLabel": "dinsdag 4 augustus 2026",
-      "timeLabel": "van 20:00 tot 21:30 uur (wekelijks)",
-      "reviewStatus": "pending",
-      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-      "status": "missing",
-      "firstSeenAt": "2026-06-12T02:42:04.076Z",
-      "lastSeenAt": "2026-06-15T09:08:09.762Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
-    },
-    {
-      "id": "beuningen-samen-jongeren-zumba-in-de-leghe-polder-in-beuningen-dinsdag-28-juli-2026-sociaal-cultureel-cen",
+      "id": "beuningen-samen-jongeren-zumba-in-de-leghe-polder-in-beuningen-dinsdag-14-juli-2026-sociaal-cultureel-cen",
       "title": "Zumba in de Lèghe Polder in Beuningen",
       "sourceId": "beuningen-samen-jongeren",
       "source": "Beuningen Samen agenda jongeren",
-      "sourceUrl": "https://beuningensamen.nl/agenda/136828/2026-07-28/zumba-in-de-leghe-polder-in-beuningen",
+      "sourceUrl": "https://beuningensamen.nl/agenda/136828/2026-07-14/zumba-in-de-leghe-polder-in-beuningen",
       "region": "Beuningen",
       "place": "Sociaal Cultureel Centrum De Lèghe Polder",
-      "dateLabel": "dinsdag 28 juli 2026",
+      "dateLabel": "dinsdag 14 juli 2026",
       "timeLabel": "van 20:00 tot 21:00 uur (wekelijks)",
       "reviewStatus": "pending",
       "note": "Nog te beoordelen voor opname in het weekoverzicht.",
       "status": "missing",
       "firstSeenAt": "2026-06-16T14:49:36.620Z",
-      "lastSeenAt": "2026-07-01T16:06:27.483Z",
-      "lastMissingAt": "2026-07-17T14:57:40.207Z"
+      "lastSeenAt": "2026-07-17T14:57:40.207Z",
+      "lastMissingAt": "2026-07-20T09:42:00.612Z"
     },
     {
-      "id": "land-van-cuijk-2026-07-muziektheater-rosalia-s-rust-zaterdag-24-oktober-2026-sambeek",
+      "id": "beuningen-samen-jongeren-eicharistieviering-zondag-26-juli-2026-sint-andreas-kerk-weurt",
+      "title": "Eicharistieviering",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/148394/2026-07-26/eicharistieviering",
+      "region": "Beuningen",
+      "place": "Sint-Andreas Kerk Weurt⛪",
+      "dateLabel": "zondag 26 juli 2026",
+      "timeLabel": "van 10:00 tot 11:00 uur",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "new",
+      "firstSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-eucharistieviering-zondag-26-juli-2026-sint-corneliuskerk",
+      "title": "Eucharistieviering",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/148396/2026-07-26/eucharistieviering",
+      "region": "Beuningen",
+      "place": "Sint Corneliuskerk⛪",
+      "dateLabel": "zondag 26 juli 2026",
+      "timeLabel": "van 10:00 tot 11:00 uur",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "new",
+      "firstSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-informatiepunt-digitale-overheid-ido-vrijdag-31-juli-2026-bibliotheek-gelderland",
+      "title": "Informatiepunt Digitale overheid. IDO",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/110088/2026-07-31/informatiepunt-digitale-overheid-ido-3",
+      "region": "Beuningen",
+      "place": "Bibliotheek Gelderland Zuid, vestiging Beuningen",
+      "dateLabel": "vrijdag 31 juli 2026",
+      "timeLabel": "van 10:00 tot 12:00 uur (wekelijks)",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "new",
+      "firstSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-jongerenactiviteiten-vrijdagavond-vrijdag-31-juli-2026-jeugd-activiteiten-centru",
+      "title": "Jongerenactiviteiten vrijdagavond",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/111398/2026-07-31/jongerenactiviteiten-vrijdagavond",
+      "region": "Beuningen",
+      "place": "Jeugd Activiteiten Centrum Hotspot",
+      "dateLabel": "vrijdag 31 juli 2026",
+      "timeLabel": "van 18:00 tot 22:00 uur (wekelijks)",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "new",
+      "firstSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "beuningen-samen-jongeren-jongerenactiviteiten-woensdagavond-woensdag-29-juli-2026-jeugd-activiteiten-cent",
+      "title": "Jongerenactiviteiten woensdagavond",
+      "sourceId": "beuningen-samen-jongeren",
+      "source": "Beuningen Samen agenda jongeren",
+      "sourceUrl": "https://beuningensamen.nl/agenda/111399/2026-07-29/jongerenactiviteiten-woensdagavond-2",
+      "region": "Beuningen",
+      "place": "Jeugd Activiteiten Centrum Hotspot",
+      "dateLabel": "woensdag 29 juli 2026",
+      "timeLabel": "van 17:00 tot 21:00 uur (wekelijks)",
+      "reviewStatus": "pending",
+      "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+      "status": "new",
+      "firstSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "land-van-cuijk-2026-08-muziektheater-rosalia-s-rust-zaterdag-24-oktober-2026-sambeek",
       "title": "Muziektheater Rosalia’s Rust",
-      "sourceId": "land-van-cuijk-2026-07",
-      "source": "Land van Cuijk Uitagenda 07-2026",
+      "sourceId": "land-van-cuijk-2026-08",
+      "source": "Land van Cuijk Uitagenda 08-2026",
       "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-10-22/muziektheater-rosalias-rust/",
       "region": "Land van Cuijk",
       "place": "Sambeek",
@@ -4443,8 +4539,104 @@
       "reviewStatus": "pending",
       "note": "Muziektheater harmonie Semper Unitas in samenwerking met toneelvereniging VEST",
       "status": "new",
-      "firstSeenAt": "2026-07-17T14:57:40.207Z",
-      "lastSeenAt": "2026-07-17T14:57:40.207Z"
+      "firstSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "land-van-cuijk-2026-07-vakantiejaarmarkt-mill-woensdag-29-juli-2026-mill",
+      "title": "Vakantiejaarmarkt Mill",
+      "sourceId": "land-van-cuijk-2026-07",
+      "source": "Land van Cuijk Uitagenda 07-2026",
+      "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Mill%20en%20Sint%20Hubert/2026-07-29/vakantiejaarmarkt-mill/",
+      "region": "Land van Cuijk",
+      "place": "Mill",
+      "dateLabel": "woensdag 29 juli 2026",
+      "timeLabel": "10.00 uur",
+      "reviewStatus": "pending",
+      "note": "De Vakantiejaarmarkt van 10.00 tot 18.00 uur in het centrum van Mill",
+      "status": "new",
+      "firstSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "land-van-cuijk-2026-07-vierdaagse-niersstraat-met-ontbijt-donderdag-23-juli-2026-gennep",
+      "title": "Vierdaagse Niersstraat met ontbijt",
+      "sourceId": "land-van-cuijk-2026-07",
+      "source": "Land van Cuijk Uitagenda 07-2026",
+      "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Gennep/2026-07-23/vierdaagse-niersstraat-met-ontbijt/",
+      "region": "Land van Cuijk",
+      "place": "Gennep",
+      "dateLabel": "donderdag 23 juli 2026",
+      "timeLabel": "7.00 uur",
+      "reviewStatus": "pending",
+      "note": "Vanaf 7:00u kun je bij Stelleke kijken en ontbijten. Reserveer of kom langs",
+      "status": "new",
+      "firstSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "land-van-cuijk-2026-07-vierdaagsefeest-cuijk-dinsdag-21-juli-2026-cuijk",
+      "title": "Vierdaagsefeest Cuijk",
+      "sourceId": "land-van-cuijk-2026-07",
+      "source": "Land van Cuijk Uitagenda 07-2026",
+      "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Cuijk/2026-07-21/vierdaagsefeest-cuijk/",
+      "region": "Land van Cuijk",
+      "place": "Cuijk",
+      "dateLabel": "dinsdag 21 juli 2026",
+      "timeLabel": "13.30 uur",
+      "reviewStatus": "pending",
+      "note": "#Vierdagenfeest! in Cuijk! Verschillende evenementen voor jong en oud",
+      "status": "new",
+      "firstSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "land-van-cuijk-2026-07-vierdaagsefeest-cuijk-donderdag-23-juli-2026-cuijk",
+      "title": "Vierdaagsefeest Cuijk",
+      "sourceId": "land-van-cuijk-2026-07",
+      "source": "Land van Cuijk Uitagenda 07-2026",
+      "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Cuijk/2026-07-21/vierdaagsefeest-cuijk/",
+      "region": "Land van Cuijk",
+      "place": "Cuijk",
+      "dateLabel": "donderdag 23 juli 2026",
+      "timeLabel": "11.00 uur",
+      "reviewStatus": "pending",
+      "note": "#Vierdagenfeest! in Cuijk! Verschillende evenementen voor jong en oud",
+      "status": "new",
+      "firstSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "land-van-cuijk-2026-07-vierdaagsefeest-cuijk-vrijdag-24-juli-2026-cuijk",
+      "title": "Vierdaagsefeest Cuijk",
+      "sourceId": "land-van-cuijk-2026-07",
+      "source": "Land van Cuijk Uitagenda 07-2026",
+      "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Cuijk/2026-07-21/vierdaagsefeest-cuijk/",
+      "region": "Land van Cuijk",
+      "place": "Cuijk",
+      "dateLabel": "vrijdag 24 juli 2026",
+      "timeLabel": "6.00 uur",
+      "reviewStatus": "pending",
+      "note": "#Vierdagenfeest! in Cuijk! Verschillende evenementen voor jong en oud",
+      "status": "new",
+      "firstSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
+    },
+    {
+      "id": "land-van-cuijk-2026-07-vierdaagsefeest-cuijk-woensdag-22-juli-2026-cuijk",
+      "title": "Vierdaagsefeest Cuijk",
+      "sourceId": "land-van-cuijk-2026-07",
+      "source": "Land van Cuijk Uitagenda 07-2026",
+      "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Cuijk/2026-07-21/vierdaagsefeest-cuijk/",
+      "region": "Land van Cuijk",
+      "place": "Cuijk",
+      "dateLabel": "woensdag 22 juli 2026",
+      "timeLabel": "19.00 uur",
+      "reviewStatus": "pending",
+      "note": "#Vierdagenfeest! in Cuijk! Verschillende evenementen voor jong en oud",
+      "status": "new",
+      "firstSeenAt": "2026-07-20T09:42:00.612Z",
+      "lastSeenAt": "2026-07-20T09:42:00.612Z"
     }
   ]
 }
