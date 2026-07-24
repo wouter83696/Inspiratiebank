@@ -4573,20 +4573,20 @@
       "note": "Lasergamen, Mystic Golf, LaserSquash en StepZone in het centrum van Nijmegen."
     }
   ],
-  "generated": "23 juli 2026",
+  "generated": "24 juli 2026",
   "sourceCheck": {
-    "lastCheckedAt": "2026-07-23T15:31:21.737Z",
+    "lastCheckedAt": "2026-07-24T09:03:47.249Z",
     "reviewFile": "website-bestanden/data/offers_pending_review.json",
     "sourcesChecked": 40,
-    "sourcesWithChanges": 28,
-    "newCandidateCount": 11
+    "sourcesWithChanges": 31,
+    "newCandidateCount": 1
   },
   "teamIdeas": [],
   "sourceReview": {
-    "generatedAt": "2026-07-23T15:31:21.737Z",
+    "generatedAt": "2026-07-24T09:03:47.249Z",
     "pendingCount": 212,
-    "newCount": 11,
-    "changedSourceCount": 28,
+    "newCount": 1,
+    "changedSourceCount": 31,
     "changedSources": [
       {
         "id": "land-van-cuijk-2026-08",
@@ -4594,21 +4594,10 @@
         "url": "https://www.landvancuijk.nl/agenda/2026/08/",
         "region": "Land van Cuijk",
         "mode": "agenda-events",
-        "newItemCount": 9,
+        "newItemCount": 1,
         "itemCount": 62,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
-      },
-      {
-        "id": "land-van-cuijk-2026-07",
-        "name": "Land van Cuijk Uitagenda 07-2026",
-        "url": "https://www.landvancuijk.nl/agenda/2026/07/",
-        "region": "Land van Cuijk",
-        "mode": "agenda-events",
-        "newItemCount": 2,
-        "itemCount": 117,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "beuningen-samen-jongeren",
@@ -4619,7 +4608,7 @@
         "newItemCount": 0,
         "itemCount": 28,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "debastei-agenda",
@@ -4630,7 +4619,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "de-wijchense-berg",
@@ -4641,7 +4630,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "escape-boot-nijmegen",
@@ -4652,7 +4641,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "focus-arnhem-agenda",
@@ -4663,7 +4652,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "beuningen-events",
@@ -4674,7 +4663,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "gemeente-nijmegen-events",
@@ -4685,7 +4674,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "grip-boulderhal",
@@ -4696,7 +4685,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "into-nijmegen-agenda",
@@ -4707,7 +4696,18 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
+      },
+      {
+        "id": "land-van-cuijk-2026-07",
+        "name": "Land van Cuijk Uitagenda 07-2026",
+        "url": "https://www.landvancuijk.nl/agenda/2026/07/",
+        "region": "Land van Cuijk",
+        "mode": "agenda-events",
+        "newItemCount": 0,
+        "itemCount": 117,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "lux-programma",
@@ -4718,7 +4718,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "museumpark-orientalis-agenda",
@@ -4729,7 +4729,18 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
+      },
+      {
+        "id": "musis-stadstheater-agenda",
+        "name": "Musis & Stadstheater agenda",
+        "url": "https://www.musisenstadstheater.nl/nl/agenda",
+        "region": "Arnhem",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "natuurmonumenten-agenda",
@@ -4740,7 +4751,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "nijmegen-outdoor",
@@ -4751,7 +4762,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "nimma-sportzomer",
@@ -4762,7 +4773,18 @@
         "newItemCount": 0,
         "itemCount": 6,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
+      },
+      {
+        "id": "ouwehands-dierenpark",
+        "name": "Ouwehands Dierenpark",
+        "url": "https://www.ouwehand.nl/",
+        "region": "Verder weg (30-50 km)",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "planet-awesome",
@@ -4773,7 +4795,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "pretpark-tivoli",
@@ -4784,7 +4806,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "rozet-agenda",
@@ -4795,7 +4817,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "staatsbosbeheer-activiteiten",
@@ -4806,7 +4828,18 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
+      },
+      {
+        "id": "sup-surf-nijmegen",
+        "name": "SUP & SURF Nijmegen",
+        "url": "https://supensurf-nijmegen.nl/",
+        "region": "Dichtbij (0-10 km)",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "visit-arnhem-events",
@@ -4817,7 +4850,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "visit-arnhem-zomertips",
@@ -4828,7 +4861,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "visit-nijmegen-events",
@@ -4839,7 +4872,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "visit-nijmegen-zomertips",
@@ -4850,7 +4883,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "vue-nijmegen",
@@ -4861,7 +4894,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "watermuseum-activiteiten",
@@ -4872,7 +4905,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "you-jump-nijmegen",
@@ -4883,7 +4916,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       },
       {
         "id": "zooparc-overloon",
@@ -4894,41 +4927,13 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-07-23T15:31:21.737Z"
+        "lastCheckedAt": "2026-07-24T09:03:47.249Z"
       }
     ],
     "previewItems": [
       {
-        "title": "9 augustus: Zomerwandeling voor blinden en slechtzienden op Tongelaar",
-        "source": "Land van Cuijk Uitagenda 08-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Mill%20en%20Sint%20Hubert/2026-08-09/9-augustus-zomerwandeling-voor-blinden-en-slechtzienden-op-tongelaar/",
-        "region": "Land van Cuijk",
-        "place": "Mill",
-        "dateLabel": "zondag 9 augustus 2026",
-        "timeLabel": "10.00 uur",
-        "note": "Gratis wandeling op Landgoed Tongelaar voor mensen met een visuele beperking",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-07-23T15:31:21.737Z",
-        "lastSeenAt": "2026-07-23T15:31:21.737Z"
-      },
-      {
-        "title": "Feestelijke opening 10-de editie Kunst van het Geloven",
-        "source": "Land van Cuijk Uitagenda 08-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-08-28/feestelijke-opening-10-de-editie-kunst-van-het-geloven/",
-        "region": "Land van Cuijk",
-        "place": "Sambeek",
-        "dateLabel": "vrijdag 28 augustus 2026",
-        "timeLabel": "10.30 uur",
-        "note": "In de Sint Petrus Basiliek feestelijke opening Hedendaagse Kunstmanifestatie",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-07-23T15:31:21.737Z",
-        "lastSeenAt": "2026-07-23T15:31:21.737Z"
-      },
-      {
         "title": "Muziektheater Rosalia’s Rust",
-        "source": "Land van Cuijk Uitagenda 07-2026",
+        "source": "Land van Cuijk Uitagenda 08-2026",
         "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-10-22/muziektheater-rosalias-rust/",
         "region": "Land van Cuijk",
         "place": "Sambeek",
@@ -4937,120 +4942,8 @@
         "note": "Muziektheater harmonie Semper Unitas in samenwerking met toneelvereniging VEST",
         "status": "new",
         "reviewStatus": "pending",
-        "firstSeenAt": "2026-07-23T15:31:21.737Z",
-        "lastSeenAt": "2026-07-23T15:31:21.737Z"
-      },
-      {
-        "title": "Opening kermis",
-        "source": "Land van Cuijk Uitagenda 08-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Mill%20en%20Sint%20Hubert/2026-08-08/opening-kermis/",
-        "region": "Land van Cuijk",
-        "place": "Langenboom",
-        "dateLabel": "zaterdag 8 augustus 2026",
-        "timeLabel": "19.00 uur",
-        "note": "Amicitia ondersteunt opening kermis muzikaal",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-07-23T15:31:21.737Z",
-        "lastSeenAt": "2026-07-23T15:31:21.737Z"
-      },
-      {
-        "title": "Wandeling Rondje Tongelaar",
-        "source": "Land van Cuijk Uitagenda 07-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Mill%20en%20Sint%20Hubert/2026-07-26/wandeling-rondje-tongelaar/",
-        "region": "Land van Cuijk",
-        "place": "Mill",
-        "dateLabel": "zondag 26 juli 2026",
-        "timeLabel": "10.00 uur",
-        "note": "Zomerwandeling! Geniet van al het moois dat Landgoed Tongelaar te bieden heeft",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-07-23T15:31:21.737Z",
-        "lastSeenAt": "2026-07-23T15:31:21.737Z"
-      },
-      {
-        "title": "Wandeling: Rondje Tongelaar - Biologische landbouw",
-        "source": "Land van Cuijk Uitagenda 08-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Mill%20en%20Sint%20Hubert/2026-08-23/wandeling-rondje-tongelaar-biologische-landbouw/",
-        "region": "Land van Cuijk",
-        "place": "Mill",
-        "dateLabel": "zondag 23 augustus 2026",
-        "timeLabel": "10.00 uur",
-        "note": "Hoor alles over de biologische akkers op Landgoed Tongelaar",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-07-23T15:31:21.737Z",
-        "lastSeenAt": "2026-07-23T15:31:21.737Z"
-      },
-      {
-        "title": "Zomerschool: Vertraag - Verbind - Creëer",
-        "source": "Land van Cuijk Uitagenda 08-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-08-03/zomerschool-vertraag-verbind-creeer/",
-        "region": "Land van Cuijk",
-        "place": "Oeffelt",
-        "dateLabel": "dinsdag 4 augustus 2026",
-        "timeLabel": "10.00 uur",
-        "note": "Mindfulness & Creëren met Aquarel & Klei Werken in Atelier & Tuin",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-07-23T15:31:21.737Z",
-        "lastSeenAt": "2026-07-23T15:31:21.737Z"
-      },
-      {
-        "title": "Zomerschool: Vertraag - Verbind - Creëer",
-        "source": "Land van Cuijk Uitagenda 08-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-08-03/zomerschool-vertraag-verbind-creeer/",
-        "region": "Land van Cuijk",
-        "place": "Oeffelt",
-        "dateLabel": "donderdag 6 augustus 2026",
-        "timeLabel": "10.00 uur",
-        "note": "Mindfulness & Creëren met Aquarel & Klei Werken in Atelier & Tuin",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-07-23T15:31:21.737Z",
-        "lastSeenAt": "2026-07-23T15:31:21.737Z"
-      },
-      {
-        "title": "Zomerschool: Vertraag - Verbind - Creëer",
-        "source": "Land van Cuijk Uitagenda 08-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-08-03/zomerschool-vertraag-verbind-creeer/",
-        "region": "Land van Cuijk",
-        "place": "Oeffelt",
-        "dateLabel": "maandag 3 augustus 2026",
-        "timeLabel": "10.00 uur",
-        "note": "Mindfulness & Creëren met Aquarel & Klei Werken in Atelier & Tuin",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-07-23T15:31:21.737Z",
-        "lastSeenAt": "2026-07-23T15:31:21.737Z"
-      },
-      {
-        "title": "Zomerschool: Vertraag - Verbind - Creëer",
-        "source": "Land van Cuijk Uitagenda 08-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-08-03/zomerschool-vertraag-verbind-creeer/",
-        "region": "Land van Cuijk",
-        "place": "Oeffelt",
-        "dateLabel": "vrijdag 7 augustus 2026",
-        "timeLabel": "10.00 uur",
-        "note": "Mindfulness & Creëren met Aquarel & Klei Werken in Atelier & Tuin",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-07-23T15:31:21.737Z",
-        "lastSeenAt": "2026-07-23T15:31:21.737Z"
-      },
-      {
-        "title": "Zomerschool: Vertraag - Verbind - Creëer",
-        "source": "Land van Cuijk Uitagenda 08-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-08-03/zomerschool-vertraag-verbind-creeer/",
-        "region": "Land van Cuijk",
-        "place": "Oeffelt",
-        "dateLabel": "woensdag 5 augustus 2026",
-        "timeLabel": "10.00 uur",
-        "note": "Mindfulness & Creëren met Aquarel & Klei Werken in Atelier & Tuin",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-07-23T15:31:21.737Z",
-        "lastSeenAt": "2026-07-23T15:31:21.737Z"
+        "firstSeenAt": "2026-07-24T09:03:47.249Z",
+        "lastSeenAt": "2026-07-24T09:03:47.249Z"
       }
     ]
   }
