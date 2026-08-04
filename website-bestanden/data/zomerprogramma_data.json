@@ -4573,42 +4573,42 @@
       "note": "Lasergamen, Mystic Golf, LaserSquash en StepZone in het centrum van Nijmegen."
     }
   ],
-  "generated": "3 augustus 2026",
+  "generated": "4 augustus 2026",
   "sourceCheck": {
-    "lastCheckedAt": "2026-08-03T16:02:39.713Z",
+    "lastCheckedAt": "2026-08-04T09:20:36.244Z",
     "reviewFile": "website-bestanden/data/offers_pending_review.json",
     "sourcesChecked": 40,
     "sourcesWithChanges": 28,
-    "newCandidateCount": 18
+    "newCandidateCount": 4
   },
   "teamIdeas": [],
   "sourceReview": {
-    "generatedAt": "2026-08-03T16:02:39.713Z",
-    "pendingCount": 199,
-    "newCount": 18,
+    "generatedAt": "2026-08-04T09:20:36.244Z",
+    "pendingCount": 203,
+    "newCount": 4,
     "changedSourceCount": 28,
     "changedSources": [
-      {
-        "id": "land-van-cuijk-2026-09",
-        "name": "Land van Cuijk Uitagenda 09-2026",
-        "url": "https://www.landvancuijk.nl/agenda/2026/09/",
-        "region": "Land van Cuijk",
-        "mode": "agenda-events",
-        "newItemCount": 17,
-        "itemCount": 95,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
-      },
       {
         "id": "land-van-cuijk-2026-08",
         "name": "Land van Cuijk Uitagenda 08-2026",
         "url": "https://www.landvancuijk.nl/agenda/2026/08/",
         "region": "Land van Cuijk",
         "mode": "agenda-events",
-        "newItemCount": 1,
-        "itemCount": 67,
+        "newItemCount": 2,
+        "itemCount": 69,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
+      },
+      {
+        "id": "land-van-cuijk-2026-09",
+        "name": "Land van Cuijk Uitagenda 09-2026",
+        "url": "https://www.landvancuijk.nl/agenda/2026/09/",
+        "region": "Land van Cuijk",
+        "mode": "agenda-events",
+        "newItemCount": 2,
+        "itemCount": 97,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "beuningen-samen-jongeren",
@@ -4619,7 +4619,7 @@
         "newItemCount": 0,
         "itemCount": 32,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "de-wijchense-berg",
@@ -4630,7 +4630,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "escape-boot-nijmegen",
@@ -4641,7 +4641,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "focus-arnhem-agenda",
@@ -4652,7 +4652,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "beuningen-events",
@@ -4663,7 +4663,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "gemeente-nijmegen-events",
@@ -4674,7 +4674,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "grip-boulderhal",
@@ -4685,7 +4685,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "into-nijmegen-agenda",
@@ -4696,7 +4696,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "lux-programma",
@@ -4707,18 +4707,18 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
-        "id": "museumpark-orientalis-agenda",
-        "name": "Museumpark Orientalis agenda",
-        "url": "https://www.museumparkorientalis.nl/activiteitenagenda/",
-        "region": "Heilig Landstichting",
+        "id": "musis-stadstheater-agenda",
+        "name": "Musis & Stadstheater agenda",
+        "url": "https://www.musisenstadstheater.nl/nl/agenda",
+        "region": "Arnhem",
         "mode": "fingerprint",
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "natuurmonumenten-agenda",
@@ -4729,7 +4729,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "nijmegen-outdoor",
@@ -4740,7 +4740,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "nimma-sportzomer",
@@ -4751,7 +4751,7 @@
         "newItemCount": 0,
         "itemCount": 5,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "ouwehands-dierenpark",
@@ -4762,7 +4762,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "planet-awesome",
@@ -4773,7 +4773,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "pretpark-tivoli",
@@ -4784,7 +4784,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "rozet-agenda",
@@ -4795,7 +4795,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "staatsbosbeheer-activiteiten",
@@ -4806,7 +4806,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "visit-arnhem-events",
@@ -4817,7 +4817,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "visit-arnhem-zomertips",
@@ -4828,7 +4828,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "visit-nijmegen-events",
@@ -4839,7 +4839,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "visit-nijmegen-zomertips",
@@ -4850,7 +4850,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "vue-nijmegen",
@@ -4861,7 +4861,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "watermuseum-activiteiten",
@@ -4872,7 +4872,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "you-jump-nijmegen",
@@ -4883,7 +4883,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       },
       {
         "id": "zooparc-overloon",
@@ -4894,261 +4894,65 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-03T16:02:39.713Z"
+        "lastCheckedAt": "2026-08-04T09:20:36.244Z"
       }
     ],
     "previewItems": [
       {
-        "title": "Filmcafe Grave: Calle Málaga",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-04/filmcafe-grave-calle-malaga/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "maandag 7 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Een liefdevol portret van een vrouw die zich niet klein laat krijgen",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: Calle Málaga",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-04/filmcafe-grave-calle-malaga/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "vrijdag 4 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Een liefdevol portret van een vrouw die zich niet klein laat krijgen",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: La Vita va Cosi",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-11/filmcafe-grave-la-vita-va-cosi/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "maandag 14 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Een hartverwarmend underdogverhaal over dingen die niet te koop zijn",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: La Vita va Cosi",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-11/filmcafe-grave-la-vita-va-cosi/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "vrijdag 11 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Een hartverwarmend underdogverhaal over dingen die niet te koop zijn",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: Moss & Freud",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-12/filmcafe-grave-moss-and-freud/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "woensdag 16 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Een bijzonder verhaal over Lucian Freud en supermodel Kate Moss",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: Moss & Freud",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-12/filmcafe-grave-moss-and-freud/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "zaterdag 12 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Een bijzonder verhaal over Lucian Freud en supermodel Kate Moss",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: Muy Lejos",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-26/filmcafe-grave-muy-lejos/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "woensdag 30 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Sergio reist met de harde kern van Barcelona naar Utrecht voor een uitwedstrijd",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: Muy Lejos",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-26/filmcafe-grave-muy-lejos/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "zaterdag 26 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Sergio reist met de harde kern van Barcelona naar Utrecht voor een uitwedstrijd",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: Oekraïne Benefietmiddag",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-20/filmcafe-grave-oekraine-benefietmiddag/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "zondag 20 september 2026",
-        "timeLabel": "13.00 uur",
-        "note": "Een benefietmiddag voor Oekraïne vol kunst, muziek en ontmoeting",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: Sunny Dancer",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-25/filmcafe-grave-sunny-dancer/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "maandag 28 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Ivy wordt door haar ouders naar het Children Run Free Camp gestuurd",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: Sunny Dancer",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-25/filmcafe-grave-sunny-dancer/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "vrijdag 25 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Ivy wordt door haar ouders naar het Children Run Free Camp gestuurd",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: The Invite",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-19/filmcafe-grave-the-invite/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "woensdag 23 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Een etentje met excentrieke bovenburen zet een vastgelopen huwelijk op scherp",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: The Invite",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-19/filmcafe-grave-the-invite/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "zaterdag 19 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Een etentje met excentrieke bovenburen zet een vastgelopen huwelijk op scherp",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: The Odyssey",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-05/filmcafe-grave-the-odyssey/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "woensdag 9 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Het klassieke epos van Homerus: Odysseus trotseert alles op weg naar huis",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: The Odyssey",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-05/filmcafe-grave-the-odyssey/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "zaterdag 5 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Het klassieke epos van Homerus: Odysseus trotseert alles op weg naar huis",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: Zondag de Negenste",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-18/filmcafe-grave-zondag-de-negenste/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "maandag 21 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Na een leven vol gemiste kansen zien de broers Horst en Franz elkaar weer",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Filmcafe Grave: Zondag de Negenste",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-18/filmcafe-grave-zondag-de-negenste/",
-        "region": "Land van Cuijk",
-        "place": "Velp",
-        "dateLabel": "vrijdag 18 september 2026",
-        "timeLabel": "20.00 uur",
-        "note": "Na een leven vol gemiste kansen zien de broers Horst en Franz elkaar weer",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
-      },
-      {
-        "title": "Springkussen Spektakel",
+        "title": "Family Obstacle Run",
         "source": "Land van Cuijk Uitagenda 08-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-08-08/springkussen-spektakel/",
+        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-08-23/family-obstacle-run/",
         "region": "Land van Cuijk",
-        "place": "Boxmeer",
-        "dateLabel": "zaterdag 8 augustus 2026",
-        "timeLabel": "11.00 uur",
-        "note": "Eindeloos springen in het centrum van Boxmeer. Gratis toegang en parkeren",
+        "place": "Vierlingsbeek",
+        "dateLabel": "zondag 23 augustus 2026",
+        "timeLabel": "14.00 uur",
+        "note": "Grenzen verleggen, elkaar helpen én onder de modder thuiskomen",
         "status": "new",
         "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-03T16:02:39.713Z"
+        "firstSeenAt": "2026-08-04T09:20:36.244Z",
+        "lastSeenAt": "2026-08-04T09:20:36.244Z"
+      },
+      {
+        "title": "Lezing Vreedzame wapens: een verrassende kijk op oorlog en vrede",
+        "source": "Land van Cuijk Uitagenda 08-2026",
+        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-08-27/lezing-vreedzame-wapens-een-verrassende-kijk-op-oorlog-en-vrede/",
+        "region": "Land van Cuijk",
+        "place": "Grave",
+        "dateLabel": "donderdag 27 augustus 2026",
+        "timeLabel": "19.30 uur",
+        "note": "Wat bedoelt kunstenaar Jos Verschaeren met deze schijnbare tegenstelling",
+        "status": "new",
+        "reviewStatus": "pending",
+        "firstSeenAt": "2026-08-04T09:20:36.244Z",
+        "lastSeenAt": "2026-08-04T09:20:36.244Z"
+      },
+      {
+        "title": "Open monumentendagen bij Stadsmuseum Grave",
+        "source": "Land van Cuijk Uitagenda 09-2026",
+        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-12/open-monumentendagen-bij-stadsmuseum-grave/",
+        "region": "Land van Cuijk",
+        "place": "Grave",
+        "dateLabel": "zaterdag 12 september 2026",
+        "timeLabel": "12.00 uur",
+        "note": "Met een knapzak op pad door historisch Grave",
+        "status": "new",
+        "reviewStatus": "pending",
+        "firstSeenAt": "2026-08-04T09:20:36.244Z",
+        "lastSeenAt": "2026-08-04T09:20:36.244Z"
+      },
+      {
+        "title": "Open monumentendagen bij Stadsmuseum Grave",
+        "source": "Land van Cuijk Uitagenda 09-2026",
+        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Grave/2026-09-12/open-monumentendagen-bij-stadsmuseum-grave/",
+        "region": "Land van Cuijk",
+        "place": "Grave",
+        "dateLabel": "zondag 13 september 2026",
+        "timeLabel": "12.00 uur",
+        "note": "Met een knapzak op pad door historisch Grave",
+        "status": "new",
+        "reviewStatus": "pending",
+        "firstSeenAt": "2026-08-04T09:20:36.244Z",
+        "lastSeenAt": "2026-08-04T09:20:36.244Z"
       }
     ]
   }
