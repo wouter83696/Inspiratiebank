@@ -4575,18 +4575,18 @@
   ],
   "generated": "6 augustus 2026",
   "sourceCheck": {
-    "lastCheckedAt": "2026-08-06T09:21:45.996Z",
+    "lastCheckedAt": "2026-08-06T15:42:28.259Z",
     "reviewFile": "website-bestanden/data/offers_pending_review.json",
     "sourcesChecked": 40,
-    "sourcesWithChanges": 30,
+    "sourcesWithChanges": 27,
     "newCandidateCount": 0
   },
   "teamIdeas": [],
   "sourceReview": {
-    "generatedAt": "2026-08-06T09:21:45.996Z",
+    "generatedAt": "2026-08-06T15:42:28.259Z",
     "pendingCount": 210,
     "newCount": 0,
-    "changedSourceCount": 30,
+    "changedSourceCount": 27,
     "changedSources": [
       {
         "id": "beuningen-samen-jongeren",
@@ -4597,7 +4597,7 @@
         "newItemCount": 0,
         "itemCount": 32,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "debastei-agenda",
@@ -4608,7 +4608,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "de-wijchense-berg",
@@ -4619,7 +4619,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "escape-boot-nijmegen",
@@ -4630,7 +4630,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "focus-arnhem-agenda",
@@ -4641,7 +4641,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "beuningen-events",
@@ -4652,7 +4652,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "gemeente-nijmegen-events",
@@ -4663,7 +4663,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "grip-boulderhal",
@@ -4674,18 +4674,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
-      },
-      {
-        "id": "into-nijmegen-agenda",
-        "name": "Into Nijmegen Uitagenda",
-        "url": "https://www.intonijmegen.com/agenda/agenda-overzicht",
-        "region": "Nijmegen",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "land-van-cuijk-2026-08",
@@ -4696,7 +4685,7 @@
         "newItemCount": 0,
         "itemCount": 70,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "land-van-cuijk-2026-09",
@@ -4707,7 +4696,7 @@
         "newItemCount": 0,
         "itemCount": 103,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "lux-programma",
@@ -4718,7 +4707,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "museumpark-orientalis-agenda",
@@ -4729,18 +4718,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
-      },
-      {
-        "id": "musis-stadstheater-agenda",
-        "name": "Musis & Stadstheater agenda",
-        "url": "https://www.musisenstadstheater.nl/nl/agenda",
-        "region": "Arnhem",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "natuurmonumenten-agenda",
@@ -4751,18 +4729,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
-      },
-      {
-        "id": "nijmegen-outdoor",
-        "name": "Nijmegen Outdoor",
-        "url": "https://nijmegenoutdoor.nl/",
-        "region": "Dichtbij (0-10 km)",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "nimma-sportzomer",
@@ -4773,7 +4740,7 @@
         "newItemCount": 0,
         "itemCount": 5,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "ouwehands-dierenpark",
@@ -4784,7 +4751,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "planet-awesome",
@@ -4795,7 +4762,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "pretpark-tivoli",
@@ -4806,7 +4773,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "rozet-agenda",
@@ -4817,7 +4784,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "staatsbosbeheer-activiteiten",
@@ -4828,7 +4795,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "sup-surf-nijmegen",
@@ -4839,7 +4806,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "visit-arnhem-events",
@@ -4850,7 +4817,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "visit-arnhem-zomertips",
@@ -4861,7 +4828,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "visit-nijmegen-events",
@@ -4872,7 +4839,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "visit-nijmegen-zomertips",
@@ -4883,7 +4850,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "vue-nijmegen",
@@ -4894,18 +4861,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
-      },
-      {
-        "id": "watermuseum-activiteiten",
-        "name": "Watermuseum activiteiten",
-        "url": "https://watermuseum.nl/activiteiten/",
-        "region": "Arnhem",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "id": "you-jump-nijmegen",
@@ -4916,7 +4872,18 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-06T09:21:45.996Z"
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
+      },
+      {
+        "id": "zooparc-overloon",
+        "name": "ZooParc Overloon",
+        "url": "https://www.zooparc.nl/",
+        "region": "Verder weg (30-50 km)",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-08-06T15:42:28.259Z"
       }
     ],
     "previewItems": [
@@ -4932,7 +4899,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-05T09:18:49.038Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "500 jaar Bagijnenkerk Grave",
@@ -4946,7 +4913,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-04T15:55:25.690Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "500 jaar Bagijnenkerk Grave",
@@ -4960,7 +4927,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-04T15:55:25.690Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Flamenco bij volle maan in Beeldentuin Cuijk",
@@ -4974,7 +4941,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-04T15:55:25.690Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Informatieavond Korte Cursussen",
@@ -4988,7 +4955,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-04T15:55:25.690Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Kienavond in de Nielt",
@@ -5002,7 +4969,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-04T15:55:25.690Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Smartlappenmiddag in De Nielt",
@@ -5016,7 +4983,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-04T15:55:25.690Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Family Obstacle Run",
@@ -5030,7 +4997,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-04T09:20:36.244Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Lezing Vreedzame wapens: een verrassende kijk op oorlog en vrede",
@@ -5044,7 +5011,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-04T09:20:36.244Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Open monumentendagen bij Stadsmuseum Grave",
@@ -5058,7 +5025,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-04T09:20:36.244Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Open monumentendagen bij Stadsmuseum Grave",
@@ -5072,7 +5039,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-04T09:20:36.244Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Filmcafe Grave: Calle Málaga",
@@ -5086,7 +5053,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Filmcafe Grave: Calle Málaga",
@@ -5100,7 +5067,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Filmcafe Grave: La Vita va Cosi",
@@ -5114,7 +5081,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Filmcafe Grave: La Vita va Cosi",
@@ -5128,7 +5095,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Filmcafe Grave: Moss & Freud",
@@ -5142,7 +5109,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Filmcafe Grave: Moss & Freud",
@@ -5156,7 +5123,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       },
       {
         "title": "Filmcafe Grave: Muy Lejos",
@@ -5170,7 +5137,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-03T16:02:39.713Z",
-        "lastSeenAt": "2026-08-06T09:21:45.996Z"
+        "lastSeenAt": "2026-08-06T15:42:28.259Z"
       }
     ]
   }
