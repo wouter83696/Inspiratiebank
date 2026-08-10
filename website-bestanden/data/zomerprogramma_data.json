@@ -4575,29 +4575,62 @@
   ],
   "generated": "10 augustus 2026",
   "sourceCheck": {
-    "lastCheckedAt": "2026-08-10T08:13:25.458Z",
+    "lastCheckedAt": "2026-08-10T14:36:35.692Z",
     "reviewFile": "website-bestanden/data/offers_pending_review.json",
     "sourcesChecked": 40,
-    "sourcesWithChanges": 30,
-    "newCandidateCount": 5
+    "sourcesWithChanges": 29,
+    "newCandidateCount": 3
   },
   "teamIdeas": [],
   "sourceReview": {
-    "generatedAt": "2026-08-10T08:13:25.458Z",
-    "pendingCount": 210,
-    "newCount": 5,
-    "changedSourceCount": 30,
+    "generatedAt": "2026-08-10T14:36:35.692Z",
+    "pendingCount": 213,
+    "newCount": 3,
+    "changedSourceCount": 29,
     "changedSources": [
+      {
+        "id": "land-van-cuijk-2026-08",
+        "name": "Land van Cuijk Uitagenda 08-2026",
+        "url": "https://www.landvancuijk.nl/agenda/2026/08/",
+        "region": "Land van Cuijk",
+        "mode": "agenda-events",
+        "newItemCount": 2,
+        "itemCount": 75,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
+      },
+      {
+        "id": "land-van-cuijk-2026-09",
+        "name": "Land van Cuijk Uitagenda 09-2026",
+        "url": "https://www.landvancuijk.nl/agenda/2026/09/",
+        "region": "Land van Cuijk",
+        "mode": "agenda-events",
+        "newItemCount": 1,
+        "itemCount": 104,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
+      },
       {
         "id": "beuningen-samen-jongeren",
         "name": "Beuningen Samen agenda jongeren",
         "url": "https://beuningensamen.nl/agenda?date_from=10-08-2026&leeftijd_beuningensamen%5B%5D=1886",
         "region": "Beuningen",
         "mode": "agenda-beuningen",
-        "newItemCount": 5,
+        "newItemCount": 0,
         "itemCount": 29,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
+      },
+      {
+        "id": "debastei-agenda",
+        "name": "De Bastei agenda",
+        "url": "https://www.debastei.nl/nl/agenda",
+        "region": "Nijmegen",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "de-wijchense-berg",
@@ -4608,7 +4641,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "escape-boot-nijmegen",
@@ -4619,7 +4652,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "focus-arnhem-agenda",
@@ -4630,7 +4663,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "beuningen-events",
@@ -4641,7 +4674,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "gemeente-nijmegen-events",
@@ -4652,7 +4685,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "grip-boulderhal",
@@ -4663,7 +4696,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "into-nijmegen-agenda",
@@ -4674,7 +4707,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "intonijmegen-weektips",
@@ -4685,29 +4718,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
-      },
-      {
-        "id": "land-van-cuijk-2026-08",
-        "name": "Land van Cuijk Uitagenda 08-2026",
-        "url": "https://www.landvancuijk.nl/agenda/2026/08/",
-        "region": "Land van Cuijk",
-        "mode": "agenda-events",
-        "newItemCount": 0,
-        "itemCount": 73,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
-      },
-      {
-        "id": "land-van-cuijk-2026-09",
-        "name": "Land van Cuijk Uitagenda 09-2026",
-        "url": "https://www.landvancuijk.nl/agenda/2026/09/",
-        "region": "Land van Cuijk",
-        "mode": "agenda-events",
-        "newItemCount": 0,
-        "itemCount": 103,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "lux-programma",
@@ -4718,7 +4729,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "museumpark-orientalis-agenda",
@@ -4729,18 +4740,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
-      },
-      {
-        "id": "musis-stadstheater-agenda",
-        "name": "Musis & Stadstheater agenda",
-        "url": "https://www.musisenstadstheater.nl/nl/agenda",
-        "region": "Arnhem",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "natuurmonumenten-agenda",
@@ -4751,18 +4751,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
-      },
-      {
-        "id": "nijmegen-outdoor",
-        "name": "Nijmegen Outdoor",
-        "url": "https://nijmegenoutdoor.nl/",
-        "region": "Dichtbij (0-10 km)",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "nimma-sportzomer",
@@ -4773,18 +4762,18 @@
         "newItemCount": 0,
         "itemCount": 5,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
-        "id": "ouwehands-dierenpark",
-        "name": "Ouwehands Dierenpark",
-        "url": "https://www.ouwehand.nl/",
-        "region": "Verder weg (30-50 km)",
+        "id": "olround-nijmegen",
+        "name": "Olround Nijmegen",
+        "url": "https://www.olroundnijmegen.nl/",
+        "region": "Dichtbij (0-10 km)",
         "mode": "fingerprint",
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "planet-awesome",
@@ -4795,7 +4784,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "pretpark-tivoli",
@@ -4806,18 +4795,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
-      },
-      {
-        "id": "rox-escape-nijmegen",
-        "name": "ROX Escape Nijmegen",
-        "url": "https://roxescape.nl/",
-        "region": "Dichtbij (0-10 km)",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "rozet-agenda",
@@ -4828,7 +4806,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "staatsbosbeheer-activiteiten",
@@ -4839,7 +4817,18 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
+      },
+      {
+        "id": "sup-surf-nijmegen",
+        "name": "SUP & SURF Nijmegen",
+        "url": "https://supensurf-nijmegen.nl/",
+        "region": "Dichtbij (0-10 km)",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "visit-arnhem-events",
@@ -4850,7 +4839,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "visit-arnhem-zomertips",
@@ -4861,7 +4850,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "visit-nijmegen-events",
@@ -4872,7 +4861,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "visit-nijmegen-zomertips",
@@ -4883,7 +4872,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "vue-nijmegen",
@@ -4894,7 +4883,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "you-jump-nijmegen",
@@ -4905,7 +4894,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       },
       {
         "id": "zooparc-overloon",
@@ -4916,79 +4905,51 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-10T08:13:25.458Z"
+        "lastCheckedAt": "2026-08-10T14:36:35.692Z"
       }
     ],
     "previewItems": [
       {
-        "title": "Eucharistieviering",
-        "source": "Beuningen Samen agenda jongeren",
-        "sourceUrl": "https://beuningensamen.nl/agenda/149321/2026-08-15/eucharistieviering-4",
-        "region": "Beuningen",
-        "place": "Sint-Andreas Kerk Weurt⛪",
-        "dateLabel": "zaterdag 15 augustus 2026",
-        "timeLabel": "van 19:00 tot 20:00 uur",
-        "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+        "title": "Midweekwandeling langs de Vierlingsbeekse Molenbeek",
+        "source": "Land van Cuijk Uitagenda 09-2026",
+        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-09-03/midweekwandeling-langs-de-vierlingsbeekse-molenbeek/",
+        "region": "Land van Cuijk",
+        "place": "Vierlingsbeek",
+        "dateLabel": "donderdag 3 september 2026",
+        "timeLabel": "13.30 uur",
+        "note": "Door een gids van IVN De Maasvallei begeleide wandeling",
         "status": "new",
         "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-10T08:13:25.458Z",
-        "lastSeenAt": "2026-08-10T08:13:25.458Z"
+        "firstSeenAt": "2026-08-10T14:36:35.692Z",
+        "lastSeenAt": "2026-08-10T14:36:35.692Z"
       },
       {
-        "title": "Eucharistieviering",
-        "source": "Beuningen Samen agenda jongeren",
-        "sourceUrl": "https://beuningensamen.nl/agenda/148396/2026-08-16/eucharistieviering",
-        "region": "Beuningen",
-        "place": "Sint Corneliuskerk⛪",
-        "dateLabel": "zondag 16 augustus 2026",
-        "timeLabel": "van 10:00 tot 11:00 uur",
-        "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+        "title": "Open podium",
+        "source": "Land van Cuijk Uitagenda 08-2026",
+        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-08-23/open-podium/",
+        "region": "Land van Cuijk",
+        "place": "Sambeek",
+        "dateLabel": "zondag 23 augustus 2026",
+        "timeLabel": "16.00 uur",
+        "note": "Open podium in de kloostertuin in Sambeek",
         "status": "new",
         "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-10T08:13:25.458Z",
-        "lastSeenAt": "2026-08-10T08:13:25.458Z"
+        "firstSeenAt": "2026-08-10T14:36:35.692Z",
+        "lastSeenAt": "2026-08-10T14:36:35.692Z"
       },
       {
-        "title": "Informatiepunt Digitale overheid. IDO",
-        "source": "Beuningen Samen agenda jongeren",
-        "sourceUrl": "https://beuningensamen.nl/agenda/110088/2026-08-21/informatiepunt-digitale-overheid-ido-3",
-        "region": "Beuningen",
-        "place": "Bibliotheek Gelderland Zuid, vestiging Beuningen",
-        "dateLabel": "vrijdag 21 augustus 2026",
-        "timeLabel": "van 10:00 tot 12:00 uur (wekelijks)",
-        "note": "Nog te beoordelen voor opname in het weekoverzicht.",
+        "title": "Vier het mee: de opening van het De Pontipad 2.0",
+        "source": "Land van Cuijk Uitagenda 08-2026",
+        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-08-29/vier-het-mee-de-opening-van-het-de-pontipad-2dot0/",
+        "region": "Land van Cuijk",
+        "place": "Vortum-Mullem",
+        "dateLabel": "zaterdag 29 augustus 2026",
+        "timeLabel": "11.00 uur",
+        "note": "Kom naar De Schutkooi in Vortum-Mullem",
         "status": "new",
         "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-10T08:13:25.458Z",
-        "lastSeenAt": "2026-08-10T08:13:25.458Z"
-      },
-      {
-        "title": "Jongerenactiviteiten vrijdagavond",
-        "source": "Beuningen Samen agenda jongeren",
-        "sourceUrl": "https://beuningensamen.nl/agenda/111398/2026-08-21/jongerenactiviteiten-vrijdagavond",
-        "region": "Beuningen",
-        "place": "Jeugd Activiteiten Centrum Hotspot",
-        "dateLabel": "vrijdag 21 augustus 2026",
-        "timeLabel": "van 18:00 tot 22:00 uur (wekelijks)",
-        "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-10T08:13:25.458Z",
-        "lastSeenAt": "2026-08-10T08:13:25.458Z"
-      },
-      {
-        "title": "Zumba in de Lèghe Polder in Beuningen",
-        "source": "Beuningen Samen agenda jongeren",
-        "sourceUrl": "https://beuningensamen.nl/agenda/136828/2026-08-25/zumba-in-de-leghe-polder-in-beuningen",
-        "region": "Beuningen",
-        "place": "Sociaal Cultureel Centrum De Lèghe Polder",
-        "dateLabel": "dinsdag 25 augustus 2026",
-        "timeLabel": "van 19:00 tot 20:00 uur (wekelijks)",
-        "note": "Nog te beoordelen voor opname in het weekoverzicht.",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-10T08:13:25.458Z",
-        "lastSeenAt": "2026-08-10T08:13:25.458Z"
+        "firstSeenAt": "2026-08-10T14:36:35.692Z",
+        "lastSeenAt": "2026-08-10T14:36:35.692Z"
       }
     ]
   }
