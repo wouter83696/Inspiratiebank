@@ -4573,20 +4573,20 @@
       "note": "Lasergamen, Mystic Golf, LaserSquash en StepZone in het centrum van Nijmegen."
     }
   ],
-  "generated": "11 augustus 2026",
+  "generated": "12 augustus 2026",
   "sourceCheck": {
-    "lastCheckedAt": "2026-08-11T14:35:49.739Z",
+    "lastCheckedAt": "2026-08-12T07:59:24.794Z",
     "reviewFile": "website-bestanden/data/offers_pending_review.json",
     "sourcesChecked": 40,
-    "sourcesWithChanges": 30,
-    "newCandidateCount": 3
+    "sourcesWithChanges": 31,
+    "newCandidateCount": 1
   },
   "teamIdeas": [],
   "sourceReview": {
-    "generatedAt": "2026-08-11T14:35:49.739Z",
-    "pendingCount": 216,
-    "newCount": 3,
-    "changedSourceCount": 30,
+    "generatedAt": "2026-08-12T07:59:24.794Z",
+    "pendingCount": 217,
+    "newCount": 1,
+    "changedSourceCount": 31,
     "changedSources": [
       {
         "id": "land-van-cuijk-2026-09",
@@ -4594,10 +4594,10 @@
         "url": "https://www.landvancuijk.nl/agenda/2026/09/",
         "region": "Land van Cuijk",
         "mode": "agenda-events",
-        "newItemCount": 3,
-        "itemCount": 107,
+        "newItemCount": 1,
+        "itemCount": 108,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "beuningen-samen-jongeren",
@@ -4608,7 +4608,7 @@
         "newItemCount": 0,
         "itemCount": 29,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "de-wijchense-berg",
@@ -4619,7 +4619,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "escape-boot-nijmegen",
@@ -4630,7 +4630,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "focus-arnhem-agenda",
@@ -4641,18 +4641,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
-      },
-      {
-        "id": "gamestate-arnhem",
-        "name": "Gamestate Arnhem",
-        "url": "https://www.gamestate.com/nl/arnhem",
-        "region": "In de regio (10-30 km)",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "beuningen-events",
@@ -4663,7 +4652,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "gemeente-nijmegen-events",
@@ -4674,7 +4663,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "grip-boulderhal",
@@ -4685,7 +4674,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "into-nijmegen-agenda",
@@ -4696,7 +4685,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "land-van-cuijk-2026-08",
@@ -4707,7 +4696,7 @@
         "newItemCount": 0,
         "itemCount": 75,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "lux-programma",
@@ -4718,7 +4707,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "museumpark-orientalis-agenda",
@@ -4729,7 +4718,18 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
+      },
+      {
+        "id": "musis-stadstheater-agenda",
+        "name": "Musis & Stadstheater agenda",
+        "url": "https://www.musisenstadstheater.nl/nl/agenda",
+        "region": "Arnhem",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "natuurmonumenten-agenda",
@@ -4740,7 +4740,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "nijmegen-outdoor",
@@ -4751,7 +4751,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "nimma-sportzomer",
@@ -4762,7 +4762,7 @@
         "newItemCount": 0,
         "itemCount": 5,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "olround-nijmegen",
@@ -4773,7 +4773,18 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
+      },
+      {
+        "id": "ouwehands-dierenpark",
+        "name": "Ouwehands Dierenpark",
+        "url": "https://www.ouwehand.nl/",
+        "region": "Verder weg (30-50 km)",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "planet-awesome",
@@ -4784,7 +4795,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "pretpark-tivoli",
@@ -4795,7 +4806,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "rozet-agenda",
@@ -4806,7 +4817,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "staatsbosbeheer-activiteiten",
@@ -4817,7 +4828,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "sup-surf-nijmegen",
@@ -4828,7 +4839,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "visit-arnhem-events",
@@ -4839,7 +4850,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "visit-arnhem-zomertips",
@@ -4850,7 +4861,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "visit-nijmegen-events",
@@ -4861,7 +4872,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "visit-nijmegen-zomertips",
@@ -4872,7 +4883,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "vue-nijmegen",
@@ -4883,7 +4894,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "watermuseum-activiteiten",
@@ -4894,7 +4905,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "you-jump-nijmegen",
@@ -4905,7 +4916,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       },
       {
         "id": "zooparc-overloon",
@@ -4916,51 +4927,23 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-11T14:35:49.739Z"
+        "lastCheckedAt": "2026-08-12T07:59:24.794Z"
       }
     ],
     "previewItems": [
       {
-        "title": "Church Tour PATRICIA in Lamberturkerk Beers",
+        "title": "Parkinsoncafé Beugen: Parkinson-neuroloog van Prooije",
         "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Cuijk/2026-09-10/church-tour-patricia-in-lamberturkerk-beers/",
+        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Boxmeer/2026-09-03/parkinsoncafe-beugen-parkinson-neuroloog-van-prooije/",
         "region": "Land van Cuijk",
-        "place": "Beers",
-        "dateLabel": "donderdag 10 september 2026",
-        "timeLabel": "19.30 uur",
-        "note": "Zangeres PATRICIA komt met haar Church Tour naar Lambertuskerk Beers",
+        "place": "Beugen",
+        "dateLabel": "donderdag 3 september 2026",
+        "timeLabel": "14.00 uur",
+        "note": "Op de eerste donderdag van september bent u weer van harte welkom bij de bijeenkomst van ons Parkinsoncafé Land van Cuijk",
         "status": "new",
         "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-11T14:35:49.739Z",
-        "lastSeenAt": "2026-08-11T14:35:49.739Z"
-      },
-      {
-        "title": "Open Monumentendagen bij Lambertuskerk Beers",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Cuijk/2026-09-11/open-monumentendagen-bij-lambertuskerk-beers/",
-        "region": "Land van Cuijk",
-        "place": "Beers",
-        "dateLabel": "vrijdag 11 september 2026",
-        "timeLabel": "11.00 uur",
-        "note": "De Lambertuskerk in Beers opent haar deuren tijdens de Open Monumentendagen '26",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-11T14:35:49.739Z",
-        "lastSeenAt": "2026-08-11T14:35:49.739Z"
-      },
-      {
-        "title": "Open Monumentendagen bij Lambertuskerk Beers",
-        "source": "Land van Cuijk Uitagenda 09-2026",
-        "sourceUrl": "https://www.landvancuijk.nl/uitagenda/Cuijk/2026-09-11/open-monumentendagen-bij-lambertuskerk-beers/",
-        "region": "Land van Cuijk",
-        "place": "Beers",
-        "dateLabel": "zaterdag 12 september 2026",
-        "timeLabel": "11.00 uur",
-        "note": "De Lambertuskerk in Beers opent haar deuren tijdens de Open Monumentendagen '26",
-        "status": "new",
-        "reviewStatus": "pending",
-        "firstSeenAt": "2026-08-11T14:35:49.739Z",
-        "lastSeenAt": "2026-08-11T14:35:49.739Z"
+        "firstSeenAt": "2026-08-12T07:59:24.794Z",
+        "lastSeenAt": "2026-08-12T07:59:24.794Z"
       }
     ]
   }
