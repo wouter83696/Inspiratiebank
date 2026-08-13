@@ -1599,7 +1599,7 @@
 	      const lockedUntil = Number(localStorage.getItem(ADMIN_LOGIN_LOCKED_UNTIL_KEY) || 0);
 	      if(lockedUntil > Date.now()){
 	        const minutes = Math.max(1, Math.ceil((lockedUntil - Date.now()) / 60000));
-	        return `Te veel pogingen. Probeer over ${minutes} minuut${minutes === 1 ? '' : 'en'} opnieuw.`;
+	        return `Te veel pogingen. Probeer over ${minutes} ${minutes === 1 ? 'minuut' : 'minuten'} opnieuw.`;
 	      }
 	    }catch(error){}
 	    return '';
