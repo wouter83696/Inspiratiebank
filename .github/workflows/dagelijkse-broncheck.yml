@@ -2,6 +2,12 @@ name: Dagelijkse BCJN-broncheck
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/dagelijkse-broncheck.yml"
+      - "website-bestanden/scripts/**"
   schedule:
     - cron: "31 6,13 * * 1-5"
     - cron: "*/10 * * * *"
@@ -33,8 +39,8 @@ jobs:
         env:
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           GITHUB_EVENT_SCHEDULE: ${{ github.event.schedule }}
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_URL: https://iipyzhlbpdpwfvdhdnuw.supabase.co
+          SUPABASE_ANON_KEY: sb_publishable_KzZxZwXKhAPmupGd51vOFQ_DqEZFyMU
           SUPABASE_TABLE: bcjn_state
           SUPABASE_STATE_ID: bcjn-zomer-2026
         run: node website-bestanden/scripts/source-check-request.js decide
@@ -60,12 +66,12 @@ jobs:
       - name: Automatische agenda publiceren
         if: steps.check_request.outputs.should_run == 'true'
         env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_URL: https://iipyzhlbpdpwfvdhdnuw.supabase.co
+          SUPABASE_ANON_KEY: sb_publishable_KzZxZwXKhAPmupGd51vOFQ_DqEZFyMU
           SUPABASE_TABLE: bcjn_state
           SUPABASE_STATE_ID: bcjn-zomer-2026
         run: |
-          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+          if [ -z "$SUPABASE_URL" ] || { [ -z "$SUPABASE_SERVICE_ROLE_KEY" ] && [ -z "$SUPABASE_ANON_KEY" ]; }; then
             echo "Supabase secrets ontbreken; broncheckdata is wel bijgewerkt."
             exit 0
           fi
@@ -76,8 +82,8 @@ jobs:
         if: always() && steps.check_request.outputs.reason == 'siteverzoek'
         env:
           CHECK_STATUS: ${{ job.status }}
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_URL: https://iipyzhlbpdpwfvdhdnuw.supabase.co
+          SUPABASE_ANON_KEY: sb_publishable_KzZxZwXKhAPmupGd51vOFQ_DqEZFyMU
           SUPABASE_TABLE: bcjn_state
           SUPABASE_STATE_ID: bcjn-zomer-2026
         run: node website-bestanden/scripts/source-check-request.js finish
