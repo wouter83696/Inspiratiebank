@@ -226,7 +226,7 @@
     .weekHeadingRow{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-direction:row;flex-wrap:nowrap;width:100%}
     .weekHeadingMain{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
     .weekTitleContent{flex:1 1 auto}
-    .weekHeaderMeta{margin:0;padding-top:0;align-self:flex-start}
+    .weekHeaderMeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0;max-width:100%;margin:0;padding-top:0;align-self:flex-start}
     .weekTop h3{margin:0;color:#07345e;font-weight:600;font-size:clamp(1.72rem,2.55vw,2.28rem);line-height:1.1;letter-spacing:-.025em}
     .weekTop .dates{color:#123968;margin-top:9px;font-size:1.04rem}
     .weekTop .status{margin-top:8px;line-height:1.42}
@@ -329,9 +329,9 @@
     .agendaLegendBar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 0 10px}
     .agendaThemeLegend{display:flex;flex-wrap:wrap;gap:6px;margin:0}
     .agendaFreshness{
-      display:inline-flex;align-items:center;max-width:100%;margin:-2px 0 12px;padding:6px 10px;
+      display:inline-flex;align-items:center;max-width:100%;min-height:30px;margin:0;padding:6px 10px;
       border-radius:999px;background:rgba(255,255,255,.58);border:1px solid rgba(79,142,158,.07);
-      color:rgba(11,18,32,.54);font-size:.76rem;font-weight:500;line-height:1.28
+      color:rgba(11,18,32,.54);font-size:.74rem;font-weight:500;line-height:1.28
     }
     .agendaFreshness[hidden]{display:none}
     #inspirationThemeLegend{margin:10px 0 14px}
@@ -416,14 +416,14 @@
     .ongoingAccordion th:nth-child(2),.ongoingWeeksCell{white-space:nowrap}
     .ongoingTitleCell .nameWithIcon{align-items:center}
     .ongoingTitleCell .nameWithIcon .domainIcon{margin-top:0}
-    .ongoingAccordion table{min-width:940px;table-layout:fixed}
-    .ongoingAccordion th:nth-child(1),.ongoingAccordion td:nth-child(1){width:25%}
-    .ongoingAccordion th:nth-child(2),.ongoingAccordion td:nth-child(2){width:10%}
+    .ongoingAccordion table{min-width:880px;table-layout:fixed}
+    .ongoingAccordion th:nth-child(1),.ongoingAccordion td:nth-child(1){width:27%}
+    .ongoingAccordion th:nth-child(2),.ongoingAccordion td:nth-child(2){width:7%}
     .ongoingAccordion th:nth-child(3),.ongoingAccordion td:nth-child(3){width:14%}
     .ongoingAccordion th:nth-child(4),.ongoingAccordion td:nth-child(4){width:6%}
     .ongoingAccordion th:nth-child(5),.ongoingAccordion td:nth-child(5){width:6%}
-    .ongoingAccordion th:nth-child(6),.ongoingAccordion td:nth-child(6){width:27%}
-    .ongoingAccordion th:nth-child(7),.ongoingAccordion td:nth-child(7){width:12%}
+    .ongoingAccordion th:nth-child(6),.ongoingAccordion td:nth-child(6){width:32%}
+    .ongoingAccordion th:nth-child(7),.ongoingAccordion td:nth-child(7){width:8%}
     .ongoingLocationCell .cardPillGroup{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:0}
     .ongoingMobileLabels{display:none}
     .ongoingMetaLine{display:none}
@@ -1466,11 +1466,7 @@
         scroll-snap-align:start;
         white-space:nowrap
       }
-      .agendaFreshness{
-        margin:0 0 10px;
-        border-radius:12px;
-        white-space:normal
-      }
+      .agendaFreshness{border-radius:12px;white-space:normal}
       .ongoingTitleLine{
         display:flex !important;
         flex-direction:column !important;
@@ -1490,7 +1486,7 @@
     }
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
-  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260813-week-count-align">
+  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260813-agenda-compact-meta">
 </head>
 <body>
   <header class="topbar">
@@ -1559,7 +1555,6 @@
       <div class="agendaLegendBar">
         <div id="agendaThemeLegend"></div>
       </div>
-      <div id="agendaFreshness" class="agendaFreshness" hidden></div>
       <div id="weekPanels" class="weekStack"></div>
       <section id="longerOffers" class="ongoingAccordion open">
         <div class="ongoingAccordionButton">
@@ -3779,30 +3774,40 @@
   function formatAgendaDate(date){
     return `${date.getDate()} ${MONTH_LABELS[date.getMonth()]}`;
   }
-  function formatPublicDateTime(value){
+  function formatPublicDateTime(value, compact=false){
     const date = new Date(value);
     if(Number.isNaN(date.getTime())) return '';
+    if(compact) return date.toLocaleString('nl-NL', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
     return date.toLocaleString('nl-NL', {dateStyle:'medium', timeStyle:'short'});
   }
-  function renderAgendaFreshness(){
-    const el = $('#agendaFreshness');
-    if(!el) return;
+  function agendaFreshnessText(compact=false){
     const sourceCheck = DATA.sourceCheck || {};
     const sourceReview = DATA.sourceReview || {};
     const checkedAt = sourceCheck.lastCheckedAt || sourceReview.generatedAt || '';
-    const formatted = formatPublicDateTime(checkedAt);
-    if(!formatted){
-      el.hidden = true;
-      el.textContent = '';
-      return;
-    }
+    const formatted = formatPublicDateTime(checkedAt, compact);
+    if(!formatted) return '';
     const sourcesChecked = Number(sourceCheck.sourcesChecked);
     const newCount = Number(sourceCheck.newCandidateCount ?? sourceReview.newCount);
-    const bits = [`Agenda laatst gecontroleerd: ${formatted}`];
-    if(Number.isFinite(sourcesChecked) && sourcesChecked > 0) bits.push(`${sourcesChecked} bronnen bekeken`);
+    const bits = [compact ? `Gecontroleerd ${formatted}` : `Agenda laatst gecontroleerd: ${formatted}`];
+    if(Number.isFinite(sourcesChecked) && sourcesChecked > 0) bits.push(compact ? `${sourcesChecked} bronnen` : `${sourcesChecked} bronnen bekeken`);
     if(Number.isFinite(newCount) && newCount > 0) bits.push(`${newCount} nieuwe items om te beoordelen`);
-    el.textContent = bits.join(' · ');
-    el.hidden = false;
+    return bits.join(' · ');
+  }
+  function agendaFreshnessBadge(){
+    const text = agendaFreshnessText(true);
+    return text ? `<span class="agendaFreshness">${escapeHtml(text)}</span>` : '';
+  }
+  function renderAgendaFreshness(){
+    const text = agendaFreshnessText(true);
+    $$('.agendaFreshness').forEach(el => {
+      if(!text){
+        el.hidden = true;
+        el.textContent = '';
+        return;
+      }
+      el.textContent = text;
+      el.hidden = false;
+    });
   }
   function mondayBasedDayIndex(date){
     return (date.getDay() + 6) % 7;
@@ -4015,11 +4020,15 @@
   function weekAvailabilityLabel(item){
     return orderedWeekIds(splitWeeks(item.week)).map(id => weekName(id)).join(', ');
   }
-  function compactWeekAvailabilityLabel(item){
+  function compactWeekAvailabilityLabel(item, short=false){
     const ids = orderedWeekIds(splitWeeks(item.week));
     if(!ids.length) return weekAvailabilityLabel(item);
     const weekNumbers = ids.map(id => ACTIVE_WEEKS.find(week => week.id === id)?.week).filter(Boolean);
     const allConsecutive = ids.every((id, index) => ACTIVE_WEEKS.findIndex(week => week.id === id) === ACTIVE_WEEKS.findIndex(week => week.id === ids[0]) + index);
+    if(short){
+      if(weekNumbers.length > 1 && allConsecutive) return `W${weekNumbers[0]}-${weekNumbers[weekNumbers.length - 1]}`;
+      return weekNumbers.map(number => `W${number}`).join(', ');
+    }
     if(weekNumbers.length > 2 && allConsecutive) return `Week ${weekNumbers[0]} t/m ${weekNumbers[weekNumbers.length - 1]}`;
     return weekNumbers.map(number => `Week ${number}`).join(', ');
   }
@@ -4055,7 +4064,7 @@
       <td>${costPill(item.cost)}</td>
       <td>${stimulusPill(item.stimulus)}</td>
       <td><div class="small">${escapeHtml(audienceText(item.fit))}</div></td>
-      <td class="websiteCell"><a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open website</a></td>
+      <td class="websiteCell"><a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a></td>
     </tr>`;
   }
   function flexibleExternalRow(item){
@@ -4065,15 +4074,15 @@
     const costLabel = normalizeIdeaCost(item.cost);
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const mobileLabels = `<div class="ongoingMobileLabels">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div>`;
-    const metaLine = `<div class="ongoingMetaLine"><strong>Beschikbaar:</strong> ${escapeHtml(compactWeekAvailabilityLabel(item))}</div>`;
+    const metaLine = `<div class="ongoingMetaLine"><strong>Beschikbaar:</strong> ${escapeHtml(compactWeekAvailabilityLabel(item, true))}</div>`;
     return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)}">
 	      <td class="ongoingTitleCell"><span class="name">${titleWithIcon(item.title, item.domain, 'nameWithIcon')}</span><div>${agendaReviewPill(item)}</div><div class="small">${escapeHtml(item.date)} • ${escapeHtml(item.time)}</div></td>
-      <td class="ongoingWeeksCell">${escapeHtml(compactWeekAvailabilityLabel(item))}</td>
+      <td class="ongoingWeeksCell">${escapeHtml(compactWeekAvailabilityLabel(item, true))}</td>
       <td class="ongoingLocationCell">${mobileLabels}<div class="cardPillGroup">${placePills}</div></td>
       <td class="ongoingCostCell">${costPill(costLabel)}</td>
       <td class="ongoingStimulusCell">${stimulusPill(stimulusLabel)}</td>
       <td class="ongoingFitCell">${metaLine}<div class="small">${escapeHtml(audienceText(item.fit))}</div></td>
-      <td class="websiteCell"><a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open website</a></td>
+      <td class="websiteCell"><a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a></td>
     </tr>`;
   }
   function renderFlexibleOffers(){
@@ -4084,7 +4093,7 @@
     const count = $('#flexibleOfferCount');
     if(count) count.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${escapeHtml(items.length)}</strong> optie${items.length === 1 ? '' : 's'}</span>`;
     $('#flexibleOffersWrap').innerHTML = items.length
-      ? `<table><thead><tr><th>Aanbod</th><th>Beschikbaar</th><th>Locatie en afstand</th><th>Kosten</th><th>Prikkel</th><th>Beschrijving</th><th>Website</th></tr></thead><tbody>${items.map(flexibleExternalRow).join('')}</tbody></table>`
+      ? `<table><thead><tr><th>Aanbod</th><th>Weken</th><th>Locatie en afstand</th><th>Kosten</th><th>Prikkel</th><th>Beschrijving</th><th>Website</th></tr></thead><tbody>${items.map(flexibleExternalRow).join('')}</tbody></table>`
       : `<div class="empty">${escapeHtml(hasActiveAgendaFilters(filters) ? agendaEmptyMessage(filters) : 'Er is nog geen tijdelijk aanbod voor deze periode zichtbaar.')}</div>`;
   }
   function weekNavControls(currentId){
@@ -4166,7 +4175,7 @@
               <div class="weekHeadingRow">
                 <div class="weekHeadingMain">
                   <h3>${escapeHtml(publicWeekDates(w))}</h3>
-                  <div class="weekHeaderMeta">${weekCountBadge(weekItemCount)}</div>
+                  <div class="weekHeaderMeta">${weekCountBadge(weekItemCount)}${agendaFreshnessBadge()}</div>
                 </div>
                 ${weekNavControls(w.id)}
               </div>
