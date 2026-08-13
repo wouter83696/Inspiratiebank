@@ -227,15 +227,26 @@
   border-color:var(--agenda-line,var(--theme-line));
 }
 
+.agendaItemTitle,
+.agendaReviewCardTitle{
+  display:grid;
+  grid-template-columns:19px minmax(0,1fr);
+  align-items:center;
+  gap:8px;
+}
+
 .agendaItemTitle .domainIcon,
 .agendaReviewCardTitle .domainIcon{
   width:19px;
   height:19px;
+  align-self:center;
   opacity:.95;
 }
 
 .agendaItemTitle .ideaTitleText,
 .agendaReviewCardTitle .ideaTitleText{
+  display:block;
+  min-width:0;
   text-indent:0;
 }
 

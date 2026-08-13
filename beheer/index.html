@@ -524,10 +524,10 @@
     .agendaReviewCard.themeDefault{--agenda-card-tint:#eff9f3}
     .agendaReviewCard.hiddenItem{opacity:.58;background:rgba(11,18,32,.035)}
     .agendaReviewCard.newItem{box-shadow:0 8px 20px rgba(20,38,42,.035)}
-    .agendaReviewCardTitle{display:block;position:relative;color:var(--accent-dark);font-size:.88rem;font-weight:500;line-height:1.25;text-align:left}
-    .agendaReviewCardTitle .domainIcon{position:absolute;left:0;top:.08em;width:19px;height:19px;background:color-mix(in srgb,var(--theme-tint-strong) 82%,transparent);border-color:color-mix(in srgb,var(--theme-line) 78%,transparent);color:var(--theme-ink);opacity:.95}
+    .agendaReviewCardTitle{display:grid;grid-template-columns:19px minmax(0,1fr);align-items:center;gap:8px;color:var(--accent-dark);font-size:.88rem;font-weight:500;line-height:1.25;text-align:left}
+    .agendaReviewCardTitle .domainIcon{align-self:center;width:19px;height:19px;background:color-mix(in srgb,var(--theme-tint-strong) 82%,transparent);border-color:color-mix(in srgb,var(--theme-line) 78%,transparent);color:var(--theme-ink);opacity:.95}
     .agendaReviewCardTitle .domainIcon svg{width:10px;height:10px}
-    .agendaReviewCardTitle .ideaTitleText{display:block;min-width:0;text-indent:26px;overflow-wrap:anywhere;hyphens:auto}
+    .agendaReviewCardTitle .ideaTitleText{display:block;min-width:0;overflow-wrap:anywhere;hyphens:auto}
     .agendaReviewCardMeta{margin-top:8px;color:#123968;font-size:.79rem;line-height:1.48;overflow-wrap:anywhere;hyphens:auto}
     .agendaReviewMeta{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
     .agendaReviewMeta .pill{font-size:.72rem;padding:4px 8px}
@@ -3239,7 +3239,7 @@
 	      const visiblePeriods = periodItems.slice(0, 2);
 	      const isToday = day.iso === todayIso;
 	      return `<section class="agendaReviewDay${isToday ? ' today' : ''}" data-agenda-day="${escapeHtml(`${weekId}:${day.iso}`)}" tabindex="0">
-	        <div class="agendaReviewDayHead"><div><strong>${escapeHtml(day.label)}</strong><span>${escapeHtml(day.prettyDate)}</span></div>${isToday ? '<span class="todayLabel">Vandaag</span>' : ''}</div>
+	        <div class="agendaReviewDayHead"><div><strong>${escapeHtml(day.label)}</strong><span>${escapeHtml(day.prettyDate)}</span></div></div>
 	        <div class="agendaReviewDayItems">
 	          ${visiblePeriods.map(item => renderAgendaWeekCard(item, states.get(item.id), true)).join('')}
 	          ${periodItems.length > visiblePeriods.length ? `<div class="agendaMore">+ ${periodItems.length - visiblePeriods.length} meerdaagse optie${periodItems.length - visiblePeriods.length === 1 ? '' : 's'} in lijstweergave</div>` : ''}
