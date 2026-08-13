@@ -5,7 +5,7 @@ Supabase instellen voor Inspiratiebank - Zomer 2026
 3. Plak de inhoud van schema.sql en voer die uit.
 4. Kopieer de Project URL en anon public key naar:
    website-bestanden/config.js
-5. Gebruik voor het automatische broncheck-script de service role key als omgevingsvariabele.
+5. Gebruik voor het automatische broncheck-script en andere schrijfacties de service role key als omgevingsvariabele.
 
 Benodigde variabelen voor de broncheck:
 
@@ -26,4 +26,6 @@ Automatisch via GitHub:
 Belangrijk:
 - Zet de service role key nooit in config.js en nooit zichtbaar in de browser.
 - De gewone website gebruikt alleen de anon public key.
-- Het beheerwachtwoord 6545 is een lichte drempel in de website zelf. Voor echte afscherming kun je later Supabase Auth of een kleine serverfunctie toevoegen.
+- Publieke inzendingen en meldingen schrijven via beperkte RPC-functies.
+- Beheeracties schrijven via een RPC-functie die het beheerwachtwoord controleert.
+- Het standaard beheerwachtwoord is 6545. Verander dit na installatie in Supabase door de hash in bcjn_admin_settings te vervangen.

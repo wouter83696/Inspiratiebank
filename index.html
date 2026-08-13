@@ -461,8 +461,8 @@
     .themeSport{--theme-tint:rgba(0,132,168,.055);--theme-tint-strong:rgba(0,132,168,.14);--theme-line:rgba(0,132,168,.18);--theme-ink:#08677f;--agenda-tint:#edf8fb;--agenda-line:rgba(0,132,168,.22)}
     .themeAction{--theme-tint:rgba(238,126,27,.065);--theme-tint-strong:rgba(238,126,27,.16);--theme-line:rgba(199,92,11,.18);--theme-ink:#9a4f0f;--agenda-tint:#fff3e8;--agenda-line:rgba(199,92,11,.23)}
     .themeDefault{--theme-tint:rgba(0,185,86,.045);--theme-tint-strong:rgba(0,185,86,.11);--theme-line:rgba(0,155,72,.11);--theme-ink:#087b43;--agenda-tint:#eff9f3;--agenda-line:rgba(0,155,72,.18)}
-    .ideaThemeCard{min-width:0;background:rgba(250,250,248,.92);border-color:color-mix(in srgb,var(--theme-line) 55%,#EAECEF);box-shadow:0 10px 26px rgba(20,38,42,.045)}
-    .ideaThemeCard:hover{background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.86);border-color:var(--theme-line);box-shadow:0 16px 34px rgba(20,38,42,.075)}
+    .ideaThemeCard{min-width:0;background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.92);border-color:color-mix(in srgb,var(--theme-line) 68%,#EAECEF);box-shadow:0 10px 26px rgba(20,38,42,.045)}
+    .ideaThemeCard:hover{background:linear-gradient(var(--theme-tint-strong),var(--theme-tint-strong)),rgba(255,255,255,.94);border-color:var(--theme-line);box-shadow:0 16px 34px rgba(20,38,42,.075)}
     .ideaImageFrame{
       position:relative;overflow:hidden;margin:-18px -18px 4px;border-radius:18px 18px 0 0;
       aspect-ratio:16 / 8.8;background:linear-gradient(var(--theme-tint),rgba(255,255,255,.58));
@@ -1915,6 +1915,12 @@
 	    const text = await response.text();
 	    return text ? JSON.parse(text) : null;
 	  }
+	  async function supabaseRpc(name, body={}){
+	    return supabaseFetch(`rpc/${name}`, {
+	      method:'POST',
+	      body:JSON.stringify(body)
+	    });
+	  }
 	  async function loadSupabaseStorage(){
 	    const id = encodeURIComponent(SUPABASE_STATE_ID);
 	    const rows = await supabaseFetch(`${SUPABASE_TABLE}?id=eq.${id}&select=data`);
@@ -1940,6 +1946,20 @@
 	      body:JSON.stringify(payload)
 	    });
 	    return true;
+	  }
+	  async function appendSupabaseStateItem(fieldName, item){
+	    if(!supabaseConfigured()) return false;
+	    try{
+	      const data = await supabaseRpc('bcjn_append_state_item', {
+	        state_id:SUPABASE_STATE_ID,
+	        field_name:fieldName,
+	        item_data:item
+	      });
+	      centralStorage = normalizeCentralStorage(data || centralStorage || {});
+	      return true;
+	    }catch(error){
+	      return false;
+	    }
 	  }
 	  function centralStorageActive(){
 	    return Boolean(centralStorage) && /^https?:$/i.test(window.location.protocol);
@@ -2965,19 +2985,22 @@
       showReportToast('Deze melding staat al open voor beheer.');
       return false;
     }
-    reports.unshift({
-      id:`report-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,
-      kind:safeKind,
-      key:safeKey,
-      title,
-      reason:safeReason,
-      status:'open',
-      createdAt:new Date().toISOString()
-    });
-    saveReports(reports.slice(0, 250));
-    const saved = await saveCentralStorage();
-    showReportToast(saved ? 'Dank je, de melding is bewaard voor beheer.' : 'Melding lokaal bewaard. Online opslaan lukte nu niet.');
-  }
+	    const report = {
+	      id:`report-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,
+	      kind:safeKind,
+	      key:safeKey,
+	      title,
+	      reason:safeReason,
+	      status:'open',
+	      createdAt:new Date().toISOString()
+	    };
+	    reports.unshift(report);
+	    saveReports(reports.slice(0, 250));
+	    const saved = centralStorageActive() && supabaseConfigured()
+	      ? (await appendSupabaseStateItem('reports', report)) || (await saveCentralStorage())
+	      : await saveCentralStorage();
+	    showReportToast(saved ? 'Dank je, de melding is bewaard voor beheer.' : 'Melding lokaal bewaard. Online opslaan lukte nu niet.');
+	  }
 	  function allLinks(){
 	    const merged = [];
     const seen = new Set();
@@ -3433,13 +3456,16 @@
     if(!teamIdeaLooksUseful(item)){
       setTeamIdeaStatus('Vul iets concreets in: een duidelijke activiteit en kort waarom, waar of wanneer dit bruikbaar is.', 'warn');
       return;
-    }
-    const stored = loadStoredTeamIdeas();
-    stored.unshift(item);
-    if(!saveStoredTeamIdeas(stored) || !(await saveCentralStorage())){
-      setTeamIdeaStatus('Opslaan lukte niet.', 'warn');
-      return;
-    }
+	    }
+	    const stored = loadStoredTeamIdeas();
+	    stored.unshift(item);
+	    const saved = centralStorageActive() && supabaseConfigured()
+	      ? (await appendSupabaseStateItem('colleagueIdeas', item)) || (saveStoredTeamIdeas(stored) && await saveCentralStorage())
+	      : (saveStoredTeamIdeas(stored) && await saveCentralStorage());
+	    if(!saved){
+	      setTeamIdeaStatus('Opslaan lukte niet.', 'warn');
+	      return;
+	    }
     form.reset();
     refreshCollections();
     syncCustomSelect($('#teamIdeaDomainInput'));
@@ -3481,13 +3507,16 @@
 	    if(alreadyExists || alreadyPending){
 	      setLinkAddStatus('Deze link staat al in de lijst of wacht al op goedkeuring.', 'warn');
 	      return;
-	    }
-	    const links = loadPendingLinks();
-	    links.unshift(item);
-	    if(!savePendingLinks(links) || !(await saveCentralStorage())){
-	      setLinkAddStatus('Opslaan lukte niet.', 'warn');
-	      return;
-	    }
+		    }
+		    const links = loadPendingLinks();
+		    links.unshift(item);
+		    const saved = centralStorageActive() && supabaseConfigured()
+		      ? (await appendSupabaseStateItem('pendingLinks', item)) || (savePendingLinks(links) && await saveCentralStorage())
+		      : (savePendingLinks(links) && await saveCentralStorage());
+		    if(!saved){
+		      setLinkAddStatus('Opslaan lukte niet.', 'warn');
+		      return;
+		    }
 	    form.reset();
 	    setLinkAddStatus(`${item.name} is ontvangen en wordt eerst gecontroleerd.`, 'ok');
 	  }
