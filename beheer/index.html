@@ -1836,9 +1836,7 @@
       detailText = `De vorige aanvraag van ${formatAdminDateTime(requestState.requestedAt)} bleef te lang openstaan. Je kunt nu opnieuw op Controleer nu klikken.`;
     } else if(requestState.status === 'done' && requestState.completedAt){
       titleText = `Agenda gecontroleerd: ${formatAdminDateTime(requestState.completedAt)}`;
-      detailText = sourceAgendaCheckedAt()
-        ? `Laatste bijgewerkte agenda: ${formatAdminDateTime(sourceAgendaCheckedAt())}.${sourceSummary ? ` ${sourceSummary}.` : ''}`
-        : `De aangevraagde controle is afgerond.${sourceSummary ? ` ${sourceSummary}.` : ''}`;
+      detailText = sourceSummary || 'De aangevraagde controle is afgerond.';
     } else if(requestState.status === 'error' && requestState.completedAt){
       titleText = `Controle niet gelukt: ${formatAdminDateTime(requestState.completedAt)}`;
       detailText = 'Probeer het later opnieuw. Als je de agenda zelf hebt nagekeken, kun je hem handmatig als gecheckt markeren.';
