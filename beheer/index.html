@@ -1762,10 +1762,10 @@
       parts.push(`${sourceCount} bronnen bekeken`);
     }
     if(Number.isFinite(changedCount)){
-      parts.push(`${changedCount} bronpagina${changedCount === 1 ? '' : "'s"} gewijzigd`);
+      parts.push(`${changedCount} pagina${changedCount === 1 ? '' : "'s"} hadden aangepaste inhoud`);
     }
     if(Number.isFinite(newCount)){
-      parts.push(`${newCount} nieuwe agenda-kandidaat${newCount === 1 ? '' : 'en'}`);
+      parts.push(`${newCount} nieuwe agenda-item${newCount === 1 ? '' : 's'} gevonden`);
     }
     return parts.join(', ');
   }
