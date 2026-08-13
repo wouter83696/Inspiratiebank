@@ -329,10 +329,11 @@
     .agendaLegendBar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 0 10px}
     .agendaThemeLegend{display:flex;flex-wrap:wrap;gap:6px;margin:0}
     .agendaFreshness{
-      display:inline-flex;align-items:center;max-width:100%;min-height:30px;margin:0;padding:6px 10px;
+      display:inline-flex;align-items:center;gap:5px;max-width:100%;min-height:30px;margin:0;padding:6px 9px;
       border-radius:999px;background:rgba(255,255,255,.58);border:1px solid rgba(79,142,158,.07);
       color:rgba(11,18,32,.54);font-size:.74rem;font-weight:500;line-height:1.28
     }
+    .agendaFreshness svg{width:13px;height:13px;flex:0 0 13px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.78}
     .agendaFreshness[hidden]{display:none}
     #inspirationThemeLegend{margin:10px 0 14px}
     .agendaLegendItem{
@@ -3791,27 +3792,32 @@
     const newCount = Number(sourceCheck.newCandidateCount ?? sourceReview.newCount);
     if(compact){
       const timeLabel = checkedDate.toLocaleTimeString('nl-NL', {hour:'2-digit', minute:'2-digit'});
-      return `Bijgewerkt ${timeLabel}`;
+      return timeLabel;
     }
-    const bits = [compact ? `Bijgewerkt ${formatted}` : `Agenda laatst gecontroleerd: ${formatted}`];
-    if(Number.isFinite(sourcesChecked) && sourcesChecked > 0) bits.push(compact ? `${sourcesChecked} bronnen` : `${sourcesChecked} bronnen bekeken`);
+    const bits = [`Agenda laatst gecontroleerd: ${formatted}`];
+    if(Number.isFinite(sourcesChecked) && sourcesChecked > 0) bits.push(`${sourcesChecked} bronnen bekeken`);
     if(Number.isFinite(newCount) && newCount > 0) bits.push(`${newCount} nieuwe items om te beoordelen`);
     return bits.join(' · ');
   }
   function agendaFreshnessBadge(){
     const text = agendaFreshnessText(true);
     const fullText = agendaFreshnessText(false);
-    return text ? `<span class="agendaFreshness" title="${escapeHtml(fullText)}">${escapeHtml(text)}</span>` : '';
+    return text ? `<span class="agendaFreshness" title="${escapeHtml(fullText)}" aria-label="${escapeHtml(fullText)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg><span class="agendaFreshnessTime">${escapeHtml(text)}</span></span>` : '';
   }
   function renderAgendaFreshness(){
     const text = agendaFreshnessText(true);
+    const fullText = agendaFreshnessText(false);
     $$('.agendaFreshness').forEach(el => {
       if(!text){
         el.hidden = true;
-        el.textContent = '';
+        const timeEl = el.querySelector('.agendaFreshnessTime');
+        if(timeEl) timeEl.textContent = '';
         return;
       }
-      el.textContent = text;
+      const timeEl = el.querySelector('.agendaFreshnessTime');
+      if(timeEl) timeEl.textContent = text;
+      el.title = fullText;
+      el.setAttribute('aria-label', fullText);
       el.hidden = false;
     });
   }
