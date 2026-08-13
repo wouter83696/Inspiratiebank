@@ -1820,10 +1820,10 @@
       const queuedMinutes = minutesSince(requestState.requestedAt);
       if(queuedMinutes >= 15){
         titleText = 'Controle staat nog klaar';
-        detailText = `Aangevraagd om ${formatAdminDateTime(requestState.requestedAt)}; wacht al ${elapsedLabel(queuedMinutes)}. GitHub pakt dit automatisch op, meestal binnen 10 tot 45 minuten. Deze pagina ververst de status vanzelf.`;
+        detailText = `Aangevraagd om ${formatAdminDateTime(requestState.requestedAt)}. De controle wacht al ${elapsedLabel(queuedMinutes)} en start normaal vanzelf. Deze pagina werkt de status automatisch bij.`;
       } else {
         titleText = 'Controle aangevraagd';
-        detailText = `Aangevraagd om ${formatAdminDateTime(requestState.requestedAt)}; wacht al ${elapsedLabel(queuedMinutes)}. Zodra GitHub begint, verandert dit naar “Agenda wordt gecontroleerd”.`;
+        detailText = `Aangevraagd om ${formatAdminDateTime(requestState.requestedAt)}. De bronnen worden zo opgepakt; meestal zie je binnen 10 tot 45 minuten resultaat.`;
       }
     } else if(requestState.status === 'running'){
       const runningMinutes = minutesSince(requestState.startedAt);
