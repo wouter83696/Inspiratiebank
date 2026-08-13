@@ -1416,6 +1416,7 @@
 	  const SUPABASE_TABLE = CONFIG.supabaseTable || 'bcjn_state';
 	  const SUPABASE_STATE_ID = CONFIG.supabaseStateId || 'bcjn-zomer-2026';
 	  const AGENDA_CHECK_STALE_MINUTES = 75;
+	  const AGENDA_CHECK_REFRESH_MS = 30000;
   const $ = selector => document.querySelector(selector);
   const $$ = selector => Array.from(document.querySelectorAll(selector));
   let confirmDialogResolve = null;
@@ -1445,6 +1446,8 @@
     });
   }
   let centralStorage = null;
+  let agendaCheckRefreshTimer = null;
+  let agendaCheckRefreshBusy = false;
   let editingSourceLink = null;
   let editingAdminIdea = null;
   const ICONS = {
@@ -1738,6 +1741,36 @@
     if(!Number.isFinite(date.getTime())) return '';
     return date.toLocaleString('nl-NL', {dateStyle:'medium', timeStyle:'short'});
   }
+  function minutesSince(value){
+    const time = new Date(value || '').getTime();
+    if(!Number.isFinite(time)) return 0;
+    return Math.max(0, Math.floor((Date.now() - time) / 60000));
+  }
+  function elapsedLabel(minutes=0){
+    if(minutes < 1) return 'net';
+    if(minutes === 1) return '1 minuut';
+    return `${minutes} minuten`;
+  }
+  async function refreshAgendaCheckFromStorage(){
+    if(agendaCheckRefreshBusy || !centralStorageActive()) return;
+    agendaCheckRefreshBusy = true;
+    const loaded = await loadCentralStorage();
+    if(loaded){
+      renderLinks();
+      renderAgendaReview();
+      renderAgendaCheckStatus();
+    }
+    agendaCheckRefreshBusy = false;
+  }
+  function syncAgendaCheckAutoRefresh(requestState){
+    const shouldRefresh = centralStorageActive() && (requestState.status === 'queued' || requestState.status === 'running');
+    if(shouldRefresh && !agendaCheckRefreshTimer){
+      agendaCheckRefreshTimer = window.setInterval(refreshAgendaCheckFromStorage, AGENDA_CHECK_REFRESH_MS);
+    } else if(!shouldRefresh && agendaCheckRefreshTimer){
+      window.clearInterval(agendaCheckRefreshTimer);
+      agendaCheckRefreshTimer = null;
+    }
+  }
   function agendaSourceCheckRequestState(){
     if(!centralStorageActive()) return {status:'unavailable'};
     const requestedAt = centralStorage.agendaSourceCheckRequestedAt || '';
@@ -1765,22 +1798,20 @@
     let titleText = '';
     let detailText = '';
     if(requestState.status === 'queued'){
-      const requestedTime = new Date(requestState.requestedAt || '').getTime();
-      const queuedMinutes = Number.isFinite(requestedTime) ? Math.floor((Date.now() - requestedTime) / 60000) : 0;
+      const queuedMinutes = minutesSince(requestState.requestedAt);
       if(queuedMinutes >= 15){
         titleText = 'Controle staat nog klaar';
-        detailText = `Aangevraagd om ${formatAdminDateTime(requestState.requestedAt)}. De agenda is nog niet opnieuw gecontroleerd. Je kunt later verversen of opnieuw op Controleer nu klikken.`;
+        detailText = `Aangevraagd om ${formatAdminDateTime(requestState.requestedAt)}; wacht al ${elapsedLabel(queuedMinutes)}. GitHub pakt dit automatisch op, meestal binnen 10 tot 45 minuten. Deze pagina ververst de status vanzelf.`;
       } else {
         titleText = 'Controle aangevraagd';
-        detailText = 'De agenda staat klaar om opnieuw gecontroleerd te worden. Meestal zie je binnen 15 tot 20 minuten een update.';
+        detailText = `Aangevraagd om ${formatAdminDateTime(requestState.requestedAt)}; wacht al ${elapsedLabel(queuedMinutes)}. Zodra GitHub begint, verandert dit naar “Agenda wordt gecontroleerd”.`;
       }
     } else if(requestState.status === 'running'){
-      const startedTime = new Date(requestState.startedAt || '').getTime();
-      const runningMinutes = Number.isFinite(startedTime) ? Math.floor((Date.now() - startedTime) / 60000) : 0;
+      const runningMinutes = minutesSince(requestState.startedAt);
       titleText = runningMinutes >= 15 ? 'Controle duurt langer dan normaal' : 'Agenda wordt gecontroleerd';
       detailText = runningMinutes >= 15
-        ? `Gestart om ${formatAdminDateTime(requestState.startedAt)}. Ververs beheer later nog eens of vraag de controle opnieuw aan.`
-        : 'De bronnen worden nu nagekeken. Ververs beheer straks om de nieuwste status te zien.';
+        ? `Gestart om ${formatAdminDateTime(requestState.startedAt)}; bezig sinds ${elapsedLabel(runningMinutes)}. De status wordt automatisch ververst.`
+        : `Gestart om ${formatAdminDateTime(requestState.startedAt)}; bezig sinds ${elapsedLabel(runningMinutes)}. De bronnen worden nu nagekeken.`;
     } else if(requestState.status === 'expired'){
       titleText = 'Controle opnieuw aanvragen';
       detailText = `De vorige aanvraag van ${formatAdminDateTime(requestState.requestedAt)} bleef te lang openstaan. Je kunt nu opnieuw op Controleer nu klikken.`;
@@ -1808,15 +1839,17 @@
     texts.forEach(text => { text.textContent = detailText; });
     $$('[data-request-agenda-source-check]').forEach(button => {
       const pending = requestState.status === 'queued' || requestState.status === 'running';
+      const queuedMinutes = requestState.status === 'queued' ? minutesSince(requestState.requestedAt) : 0;
       button.disabled = pending;
       button.textContent = requestState.status === 'running'
         ? 'Check loopt'
         : requestState.status === 'queued'
-          ? 'Aangevraagd'
+          ? queuedMinutes >= 1 ? `Wacht ${queuedMinutes} min` : 'Aangevraagd'
           : requestState.status === 'expired'
             ? 'Opnieuw controleren'
             : 'Controleer nu';
     });
+    syncAgendaCheckAutoRefresh(requestState);
   }
   async function requestAgendaSourceCheck(){
     if(!centralStorageActive()){
@@ -1837,7 +1870,7 @@
       return;
     }
     renderAgendaCheckStatus();
-    setStatus('#adminStatus', 'Agenda-check aangevraagd. Meestal zie je binnen 15 tot 20 minuten een update.', 'ok');
+    setStatus('#adminStatus', 'Agenda-check aangevraagd. De status wordt automatisch ververst terwijl GitHub hem oppakt.', 'ok');
   }
   async function markAgendaCheckedNow(){
     const checkedAt = new Date().toISOString();
