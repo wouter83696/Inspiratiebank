@@ -122,6 +122,10 @@
   border-radius:16px;
 }
 
+.agendaMobileList{
+  display:none;
+}
+
 .agendaReviewBoard{
   overflow-x:auto;
   margin:0 18px 22px;
@@ -411,8 +415,8 @@
   }
   .agendaDay.pastDay:not(.today) .agendaItem,
   .agendaDay.pastDay:not(.today) .agendaEmpty{
-    opacity:.82;
-    filter:saturate(.9);
+    opacity:.9;
+    filter:saturate(.96);
   }
   .agendaItemTitle{
     align-items:start;
@@ -433,6 +437,56 @@
     grid-template-columns:1fr;
     overflow:visible;
     margin:0;
+  }
+  .weekPanel.agendaListMode .agendaBoard{
+    display:none;
+  }
+  .weekPanel.agendaListMode .agendaMobileList{
+    display:grid;
+    gap:10px;
+    padding:0 12px 12px;
+  }
+  .agendaMobileListDay{
+    display:grid;
+    gap:8px;
+    padding:12px;
+    border:1px solid rgba(79,142,158,.075);
+    border-radius:16px;
+    background:rgba(255,255,255,.62);
+  }
+  .agendaMobileListDay.today{
+    background:rgba(222,244,241,.38);
+    border-color:rgba(79,142,158,.16);
+  }
+  .agendaMobileListDay.pastDay:not(.today){
+    background:rgba(248,250,249,.72);
+  }
+  .agendaMobileListDay h4{
+    display:flex;
+    align-items:baseline;
+    gap:7px;
+    margin:0 2px;
+    color:#07345e;
+    font-size:1rem;
+    font-weight:650;
+    line-height:1.15;
+  }
+  .agendaMobileListDay h4 small{
+    color:#123968;
+    font-size:.82rem;
+    font-weight:560;
+  }
+  .agendaMobileListItems{
+    display:grid;
+    gap:8px;
+  }
+  .agendaMobileListEmpty{
+    margin:0 12px 12px;
+    padding:14px;
+    border-radius:16px;
+    background:rgba(255,255,255,.62);
+    color:rgba(11,18,32,.56);
+    text-align:center;
   }
   .agendaDay,
   .agendaReviewDay{
