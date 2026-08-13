@@ -694,7 +694,7 @@
     .filterShuffle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .filterShuffle:hover{background:#fff}
     .filterOptions{
-      grid-column:1 / -1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:8px;
+      grid-column:1 / -1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;gap:8px;
       max-height:0;opacity:0;overflow:hidden;visibility:hidden;pointer-events:none;transform:translateY(-8px);
       padding:0 8px;border:1px solid rgba(255,255,255,.66);border-radius:22px;background:rgba(255,255,255,.50);
       box-shadow:0 16px 38px rgba(20,38,42,.065);backdrop-filter:blur(18px);
@@ -752,7 +752,7 @@
     #agendaFilters .filterOptions .customSelect[data-select-id="agendaDistance"]{grid-column:5 / 7}
     #agendaFilters .filterOptions .customSelect[data-select-id="agendaCost"]{grid-column:7 / 9}
     #agendaFilters .filterOptions .customSelect[data-select-id="agendaStimulus"]{grid-column:9 / 11}
-    #agendaFilters .filterOptions .filterReset{grid-column:11 / 12}
+    #agendaFilters .filterOptions .filterReset{grid-column:11 / 12;align-self:center;height:40px;min-height:40px;padding:0 9px;line-height:1}
     #agendaFilters .filterOptions .agendaSearchStatus{grid-column:12 / 13;align-self:center}
     @media (min-width:641px){
       #ideaFilters .filterOptions{grid-template-columns:repeat(5,minmax(118px,1fr)) auto auto;align-items:center}
