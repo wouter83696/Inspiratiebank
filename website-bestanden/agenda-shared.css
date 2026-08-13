@@ -201,6 +201,7 @@
 
 .agendaItem,
 .agendaReviewCard{
+  --agenda-title-offset:27px;
   min-height:0;
   padding:11px 11px 9px;
   border-radius:13px;
@@ -269,6 +270,11 @@
 
 .agendaItemMeta{margin-top:8px}
 .agendaReviewCardMeta{margin-top:8px}
+.agendaItemMeta,
+.agendaReviewCardMeta{
+  display:block;
+  margin-left:var(--agenda-title-offset);
+}
 
 .weekNav{
   display:inline-flex;
@@ -317,6 +323,7 @@
 @media (min-width:981px){
   .agendaBoard .agendaItem,
   .agendaReviewBoard .agendaReviewCard{
+    --agenda-title-offset:23px;
     padding:10px 10px 9px;
     border-radius:12px;
   }
