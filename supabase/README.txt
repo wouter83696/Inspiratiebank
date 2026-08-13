@@ -27,5 +27,11 @@ Belangrijk:
 - Zet de service role key nooit in config.js en nooit zichtbaar in de browser.
 - De gewone website gebruikt alleen de anon public key.
 - Publieke inzendingen en meldingen schrijven via beperkte RPC-functies.
+- Publieke inzendingen en beheerlogins hebben server-side rate limiting in Supabase.
 - Beheeracties schrijven via een RPC-functie die het beheerwachtwoord controleert.
-- Het standaard beheerwachtwoord is 6545. Verander dit na installatie in Supabase door de hash in bcjn_admin_settings te vervangen.
+- Gebruik een lang, uniek beheerwachtwoord. Werk de hash in Supabase bij met:
+
+update public.bcjn_admin_settings
+   set password_hash = crypt('jouw-lange-wachtwoord', gen_salt('bf')),
+       updated_at = now()
+ where id = 'bcjn-zomer-2026';

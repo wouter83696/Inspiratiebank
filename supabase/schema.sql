@@ -53,15 +53,87 @@ on conflict (id) do nothing;
 
 revoke all on public.bcjn_admin_settings from anon, authenticated;
 
+create table if not exists public.bcjn_rate_limits (
+  bucket text not null,
+  client_hash text not null,
+  window_start timestamptz not null default now(),
+  attempt_count integer not null default 1,
+  updated_at timestamptz not null default now(),
+  primary key (bucket, client_hash)
+);
+
+alter table public.bcjn_rate_limits enable row level security;
+
+revoke all on public.bcjn_rate_limits from anon, authenticated;
+
 create or replace function public.bcjn_now_iso()
 returns text
 language sql
 stable
+set search_path = public, pg_temp
 as $$
   select to_char(now() at time zone 'utc', 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"');
 $$;
 
-create or replace function public.bcjn_verify_admin_password(password text)
+create or replace function public.bcjn_check_rate_limit(
+  bucket text,
+  client_id text,
+  max_attempts integer,
+  window_seconds integer
+)
+returns void
+language plpgsql
+security definer
+set search_path = public, pg_temp
+as $$
+declare
+  safe_client_id text := left(coalesce(nullif(client_id, ''), 'anonymous'), 200);
+  safe_window interval := make_interval(secs => greatest(1, least(window_seconds, 86400)));
+  hash text;
+  current_record public.bcjn_rate_limits%rowtype;
+begin
+  if bucket is null or bucket = '' then
+    raise exception 'Rate-limit bucket ontbreekt.';
+  end if;
+
+  if max_attempts < 1 then
+    raise exception 'Rate-limit configuratie is ongeldig.';
+  end if;
+
+  hash := encode(digest(bucket || ':' || safe_client_id, 'sha256'), 'hex');
+
+  select *
+    into current_record
+    from public.bcjn_rate_limits
+   where bcjn_rate_limits.bucket = bcjn_check_rate_limit.bucket
+     and bcjn_rate_limits.client_hash = hash
+   for update;
+
+  if not found or current_record.window_start < now() - safe_window then
+    insert into public.bcjn_rate_limits(bucket, client_hash, window_start, attempt_count, updated_at)
+    values (bucket, hash, now(), 1, now())
+    on conflict (bucket, client_hash)
+    do update set window_start = excluded.window_start,
+                  attempt_count = excluded.attempt_count,
+                  updated_at = excluded.updated_at;
+    return;
+  end if;
+
+  if current_record.attempt_count >= max_attempts then
+    raise exception 'Te veel pogingen. Probeer het later opnieuw.';
+  end if;
+
+  update public.bcjn_rate_limits
+     set attempt_count = attempt_count + 1,
+         updated_at = now()
+   where bcjn_rate_limits.bucket = bcjn_check_rate_limit.bucket
+     and bcjn_rate_limits.client_hash = hash;
+end;
+$$;
+
+drop function if exists public.bcjn_verify_admin_password(text);
+
+create or replace function public.bcjn_verify_admin_password(password text, client_id text default null)
 returns boolean
 language plpgsql
 security definer
@@ -70,6 +142,8 @@ as $$
 declare
   stored_hash text;
 begin
+  perform public.bcjn_check_rate_limit('admin-login', client_id, 10, 900);
+
   select password_hash
     into stored_hash
     from public.bcjn_admin_settings
@@ -79,7 +153,9 @@ begin
 end;
 $$;
 
-create or replace function public.bcjn_append_state_item(state_id text, field_name text, item_data jsonb)
+drop function if exists public.bcjn_append_state_item(text, text, jsonb);
+
+create or replace function public.bcjn_append_state_item(state_id text, field_name text, item_data jsonb, client_id text default null)
 returns jsonb
 language plpgsql
 security definer
@@ -89,6 +165,8 @@ declare
   allowed_fields constant text[] := array['colleagueIdeas', 'pendingLinks', 'reports'];
   next_data jsonb;
 begin
+  perform public.bcjn_check_rate_limit('public-' || coalesce(field_name, 'unknown'), client_id, 8, 900);
+
   if not field_name = any(allowed_fields) then
     raise exception 'Veld mag niet publiek worden aangepast.';
   end if;
@@ -157,6 +235,8 @@ begin
 end;
 $$;
 
-grant execute on function public.bcjn_verify_admin_password(text) to anon, authenticated;
-grant execute on function public.bcjn_append_state_item(text, text, jsonb) to anon, authenticated;
+grant execute on function public.bcjn_verify_admin_password(text, text) to anon, authenticated;
+grant execute on function public.bcjn_append_state_item(text, text, jsonb, text) to anon, authenticated;
 grant execute on function public.bcjn_save_state_admin(text, text, jsonb) to anon, authenticated;
+revoke execute on function public.bcjn_check_rate_limit(text, text, integer, integer) from public;
+revoke execute on function public.bcjn_check_rate_limit(text, text, integer, integer) from anon, authenticated;

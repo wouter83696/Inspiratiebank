@@ -905,6 +905,7 @@
     }
     .teamFileName:empty{display:none}
     .teamFieldHint{font-size:.78rem;line-height:1.35;color:rgba(11,18,32,.55)}
+    .formTrap{position:absolute;left:-10000px;top:auto;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
     .teamActionBar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
     .teamActionButtons{display:flex;gap:10px;flex-wrap:wrap}
     .ideaActions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
@@ -1470,6 +1471,10 @@
         <div class="sectionHead teamHead"><div><h2>Agendabron insturen</h2><p>Stuur een officiële evenement- of agendalink in. We controleren de bron eerst; daarna kan passend aanbod in de UIT-agenda komen.</p></div></div>
         <div class="teamFormBox linkAddBox">
           <form id="linkAddForm" class="teamForm">
+            <label class="formTrap" aria-hidden="true">
+              <span>Laat dit veld leeg</span>
+              <input type="text" name="website" tabindex="-1" autocomplete="off" data-security-trap>
+            </label>
             <div class="teamFormGrid">
               <label class="teamField wide">
                 <span>Officiële evenement- of agendalink</span>
@@ -1559,6 +1564,10 @@
       <div id="teamAdditions" class="sectionHead teamHead"><div><h2>Delen</h2><p>Heb je een idee, uitje of link dat ook anderen kan inspireren? Voeg het hier toe. Na beoordeling kan het tussen de andere inspiratie-items komen te staan.</p></div></div>
       <div class="teamFormBox">
         <form id="teamIdeaForm" class="teamForm">
+          <label class="formTrap" aria-hidden="true">
+            <span>Laat dit veld leeg</span>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" data-security-trap>
+          </label>
           <div class="teamFormGrid">
             <label class="teamField wide">
               <span>Idee of plek</span>
@@ -1853,6 +1862,11 @@
 	  const REPORTS_KEY = 'zomerprogramma_item_reports_v1';
 	  const USER_LOCATION_KEY = 'zomerprogramma_user_location_v1';
 	  const USER_LOCATION_RADIUS_KEY = 'zomerprogramma_user_location_radius_v1';
+	  const SECURITY_CLIENT_ID_KEY = 'inspiratiebank_client_id_v1';
+	  const SECURITY_ACTION_PREFIX = 'inspiratiebank_action_at_v1_';
+	  const PUBLIC_FORM_MIN_MS = 2500;
+	  const PUBLIC_SUBMIT_COOLDOWN_MS = 12000;
+	  const PUBLIC_REPORT_COOLDOWN_MS = 3000;
 	  const DEFAULT_LOCATION = {label:'Nijmegen', lat:51.8240, lon:5.8040, isDefault:true};
 	  const DEFAULT_LOCATION_RADIUS_KM = 50;
 	  const SUPPORTED_REGION_RADIUS_KM = 70;
@@ -1921,6 +1935,53 @@
 	      body:JSON.stringify(body)
 	    });
 	  }
+	  function securityClientId(){
+	    try{
+	      let id = localStorage.getItem(SECURITY_CLIENT_ID_KEY);
+	      if(!id){
+	        const random = crypto?.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+	        id = `web-${random}`;
+	        localStorage.setItem(SECURITY_CLIENT_ID_KEY, id);
+	      }
+	      return id;
+	    }catch(error){
+	      return `session-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+	    }
+	  }
+	  function initPublicFormSecurity(form){
+	    if(form) form.dataset.securityStartedAt = String(Date.now());
+	  }
+	  function publicActionAllowed(action, options={}){
+	    const now = Date.now();
+	    const form = options.form || null;
+	    const notify = typeof options.notify === 'function' ? options.notify : () => {};
+	    const trapValue = String(form?.querySelector('[data-security-trap]')?.value || '').trim();
+	    if(trapValue){
+	      notify('Opslaan lukte niet. Probeer het formulier opnieuw te openen.');
+	      return false;
+	    }
+	    const startedAt = Number(form?.dataset.securityStartedAt || window.__pageSecurityStartedAt || now);
+	    const minMs = options.minMs ?? PUBLIC_FORM_MIN_MS;
+	    if(now - startedAt < minMs){
+	      notify('Wacht heel even en probeer het daarna opnieuw.');
+	      return false;
+	    }
+	    try{
+	      const key = `${SECURITY_ACTION_PREFIX}${action}`;
+	      const lastAt = Number(localStorage.getItem(key) || 0);
+	      const cooldownMs = options.cooldownMs ?? PUBLIC_SUBMIT_COOLDOWN_MS;
+	      if(lastAt && now - lastAt < cooldownMs){
+	        notify('Deze actie is net ontvangen. Probeer het straks opnieuw.');
+	        return false;
+	      }
+	    }catch(error){
+	      return true;
+	    }
+	    return true;
+	  }
+	  function markPublicAction(action){
+	    try{ localStorage.setItem(`${SECURITY_ACTION_PREFIX}${action}`, String(Date.now())); }catch(error){}
+	  }
 	  async function loadSupabaseStorage(){
 	    const id = encodeURIComponent(SUPABASE_STATE_ID);
 	    const rows = await supabaseFetch(`${SUPABASE_TABLE}?id=eq.${id}&select=data`);
@@ -1953,7 +2014,8 @@
 	      const data = await supabaseRpc('bcjn_append_state_item', {
 	        state_id:SUPABASE_STATE_ID,
 	        field_name:fieldName,
-	        item_data:item
+	        item_data:item,
+	        client_id:securityClientId()
 	      });
 	      centralStorage = normalizeCentralStorage(data || centralStorage || {});
 	      return true;
@@ -2967,6 +3029,11 @@
     showReportToast.timer = window.setTimeout(() => toast.classList.remove('show'), 2600);
   }
   async function saveItemReport({kind, key, title, reason}){
+    if(!publicActionAllowed('report', {
+      minMs:1000,
+      cooldownMs:PUBLIC_REPORT_COOLDOWN_MS,
+      notify:showReportToast
+    })) return false;
     const safeKind = normalize(kind || '');
     const safeKey = String(key || '').trim();
     const safeReason = String(reason || '').trim();
@@ -2999,6 +3066,7 @@
 	    const saved = centralStorageActive() && supabaseConfigured()
 	      ? (await appendSupabaseStateItem('reports', report)) || (await saveCentralStorage())
 	      : await saveCentralStorage();
+	    if(saved) markPublicAction('report');
 	    showReportToast(saved ? 'Dank je, de melding is bewaard voor beheer.' : 'Melding lokaal bewaard. Online opslaan lukte nu niet.');
 	  }
 	  function allLinks(){
@@ -3402,6 +3470,7 @@
   async function handleTeamIdeaSubmit(event){
     event.preventDefault();
     const form = event.currentTarget;
+    if(!publicActionAllowed('teamIdea', {form, notify:setTeamIdeaStatus})) return;
     const by = $('#teamIdeaByInput').value.trim();
     const domain = $('#teamIdeaDomainInput').value;
     const imageFile = $('#teamIdeaImageInput')?.files?.[0] || null;
@@ -3466,7 +3535,9 @@
 	      setTeamIdeaStatus('Opslaan lukte niet.', 'warn');
 	      return;
 	    }
+    markPublicAction('teamIdea');
     form.reset();
+    initPublicFormSecurity(form);
     refreshCollections();
     syncCustomSelect($('#teamIdeaDomainInput'));
     syncCustomSelect($('#teamIdeaLocationInput'));
@@ -3484,6 +3555,7 @@
 	  async function handleLinkAddSubmit(event){
 	    event.preventDefault();
 	    const form = event.currentTarget;
+	    if(!publicActionAllowed('linkAdd', {form, notify:setLinkAddStatus})) return;
 	    const item = normalizeCustomLink({
 	      id:`pending-link-${Date.now()}`,
 	      name:linkNameFromUrl($('#linkUrlInput').value),
@@ -3517,7 +3589,9 @@
 		      setLinkAddStatus('Opslaan lukte niet.', 'warn');
 		      return;
 		    }
+	    markPublicAction('linkAdd');
 	    form.reset();
+	    initPublicFormSecurity(form);
 	    setLinkAddStatus(`${item.name} is ontvangen en wordt eerst gecontroleerd.`, 'ok');
 	  }
 
@@ -4483,6 +4557,9 @@
     ['agendaDomain','agendaDistance','agendaCost','agendaStimulus'].forEach(id=>$('#'+id).addEventListener('change', renderAgenda));
     ['ideaSearch','ideaDomain','ideaLocation','ideaDistance','ideaCost','ideaStimulus'].forEach(id=>$('#'+id).addEventListener('input',renderIdeas));
     $$('[data-view-group="ideas"]').forEach(btn=>btn.addEventListener('click',()=>setIdeaView(btn.dataset.view)));
+    window.__pageSecurityStartedAt = Date.now();
+    initPublicFormSecurity($('#teamIdeaForm'));
+    initPublicFormSecurity($('#linkAddForm'));
     $('#teamIdeaForm').addEventListener('submit', handleTeamIdeaSubmit);
     const teamIdeaImageInput = $('#teamIdeaImageInput');
     if(teamIdeaImageInput) teamIdeaImageInput.addEventListener('change', syncTeamIdeaImageName);
