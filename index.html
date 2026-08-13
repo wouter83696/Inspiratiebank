@@ -422,8 +422,8 @@
     .ongoingAccordion th:nth-child(3),.ongoingAccordion td:nth-child(3){width:14%}
     .ongoingAccordion th:nth-child(4),.ongoingAccordion td:nth-child(4){width:6%}
     .ongoingAccordion th:nth-child(5),.ongoingAccordion td:nth-child(5){width:6%}
-    .ongoingAccordion th:nth-child(6),.ongoingAccordion td:nth-child(6){width:32%}
-    .ongoingAccordion th:nth-child(7),.ongoingAccordion td:nth-child(7){width:8%}
+    .ongoingAccordion th:nth-child(6),.ongoingAccordion td:nth-child(6){width:31%}
+    .ongoingAccordion th:nth-child(7),.ongoingAccordion td:nth-child(7){width:9%}
     .ongoingLocationCell .cardPillGroup{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:0}
     .ongoingMobileLabels{display:none}
     .ongoingMetaLine{display:none}
@@ -445,7 +445,7 @@
     .siteButton{
       display:inline-flex;align-items:center;gap:7px;justify-content:center;
       border:1px solid rgba(79,142,158,.10);border-radius:999px;background:rgba(255,255,255,.78);color:var(--accent-dark) !important;text-decoration:none;
-      max-width:100%;min-width:0;padding:9px 12px;font-size:.86rem;font-weight:500;line-height:1.18;text-align:left;white-space:normal;overflow-wrap:anywhere;box-shadow:0 8px 20px rgba(20,38,42,.04);
+      max-width:100%;min-width:72px;padding:9px 12px;font-size:.86rem;font-weight:500;line-height:1.18;text-align:center;white-space:nowrap;box-shadow:0 8px 20px rgba(20,38,42,.04);
       transition:transform .18s var(--ease), background .18s ease, border-color .18s ease;
     }
     .siteButton:hover{transform:translateY(-1px);background:#fff;border-color:rgba(79,142,158,.16);text-decoration:none}
@@ -3784,18 +3784,24 @@
     const sourceCheck = DATA.sourceCheck || {};
     const sourceReview = DATA.sourceReview || {};
     const checkedAt = sourceCheck.lastCheckedAt || sourceReview.generatedAt || '';
+    const checkedDate = new Date(checkedAt);
     const formatted = formatPublicDateTime(checkedAt, compact);
     if(!formatted) return '';
     const sourcesChecked = Number(sourceCheck.sourcesChecked);
     const newCount = Number(sourceCheck.newCandidateCount ?? sourceReview.newCount);
-    const bits = [compact ? `Gecontroleerd ${formatted}` : `Agenda laatst gecontroleerd: ${formatted}`];
+    if(compact){
+      const timeLabel = checkedDate.toLocaleTimeString('nl-NL', {hour:'2-digit', minute:'2-digit'});
+      return `Bijgewerkt ${timeLabel}`;
+    }
+    const bits = [compact ? `Bijgewerkt ${formatted}` : `Agenda laatst gecontroleerd: ${formatted}`];
     if(Number.isFinite(sourcesChecked) && sourcesChecked > 0) bits.push(compact ? `${sourcesChecked} bronnen` : `${sourcesChecked} bronnen bekeken`);
     if(Number.isFinite(newCount) && newCount > 0) bits.push(`${newCount} nieuwe items om te beoordelen`);
     return bits.join(' · ');
   }
   function agendaFreshnessBadge(){
     const text = agendaFreshnessText(true);
-    return text ? `<span class="agendaFreshness">${escapeHtml(text)}</span>` : '';
+    const fullText = agendaFreshnessText(false);
+    return text ? `<span class="agendaFreshness" title="${escapeHtml(fullText)}">${escapeHtml(text)}</span>` : '';
   }
   function renderAgendaFreshness(){
     const text = agendaFreshnessText(true);
@@ -4026,8 +4032,8 @@
     const weekNumbers = ids.map(id => ACTIVE_WEEKS.find(week => week.id === id)?.week).filter(Boolean);
     const allConsecutive = ids.every((id, index) => ACTIVE_WEEKS.findIndex(week => week.id === id) === ACTIVE_WEEKS.findIndex(week => week.id === ids[0]) + index);
     if(short){
-      if(weekNumbers.length > 1 && allConsecutive) return `W${weekNumbers[0]}-${weekNumbers[weekNumbers.length - 1]}`;
-      return weekNumbers.map(number => `W${number}`).join(', ');
+      if(weekNumbers.length > 1 && allConsecutive) return `${weekNumbers[0]}-${weekNumbers[weekNumbers.length - 1]}`;
+      return weekNumbers.join(', ');
     }
     if(weekNumbers.length > 2 && allConsecutive) return `Week ${weekNumbers[0]} t/m ${weekNumbers[weekNumbers.length - 1]}`;
     return weekNumbers.map(number => `Week ${number}`).join(', ');
