@@ -830,7 +830,6 @@
     .viewBtn.active{background:rgba(168,225,221,.42);color:var(--accent-dark);box-shadow:inset 0 0 0 1px rgba(79,142,158,.08)}
     .viewIcon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px}
     .viewIcon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-    .agendaMobileViewBar{display:none}
     .ideaView[hidden],.teamView[hidden]{display:none !important}
     .tableWrap.ideaView.active,.tableWrap.teamView.active{display:block}
     .cards.ideaView.active,.cards.teamView.active{display:grid}
@@ -1158,9 +1157,6 @@
       #agendaFilters .filterToggle svg{width:18px;height:18px;margin:0}
       #ideaFilters .mobileViewBar{grid-column:3;grid-row:1;justify-self:end;min-width:0}
       #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:3;grid-row:1;justify-self:stretch;min-width:118px;max-width:130px;width:100%}
-      #agendaFilters .agendaMobileViewBar{grid-column:1 / -1;grid-row:3;display:flex;justify-content:flex-start}
-      #agendaFilters .agendaMobileViewBar .viewSwitch{border-radius:16px;padding:3px}
-      #agendaFilters .agendaMobileViewBar .viewBtn{width:32px;height:32px;border-radius:13px}
       #ideaFilters .filterOptions{grid-column:1 / -1;grid-row:3;display:grid !important;grid-template-columns:minmax(0,1fr) !important;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden}
       #agendaFilters .filterOptions{grid-column:1 / -1;grid-row:2;display:grid !important;grid-template-columns:minmax(0,1fr) !important;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden}
       #ideaFilters .filterOptions .customSelect,
@@ -1434,7 +1430,7 @@
     }
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
-  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260813-agenda-mobile-list">
+  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260813-single-agenda-view">
 </head>
 <body>
   <header class="topbar">
@@ -1487,16 +1483,6 @@
             Filters
           </button>
           <select id="agendaWeekFilter" aria-label="Week filteren" data-include-placeholder-option="true"><option value="">Week</option></select>
-          <div class="agendaMobileViewBar" aria-label="Agendaweergave">
-            <div class="viewSwitch">
-              <button class="viewBtn active" type="button" data-view-group="agenda" data-agenda-view="week" aria-label="Weekweergave" title="Weekweergave" aria-pressed="true">
-                <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg></span>
-              </button>
-              <button class="viewBtn" type="button" data-view-group="agenda" data-agenda-view="list" aria-label="Lijstweergave" title="Lijstweergave" aria-pressed="false">
-                <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 6h12"></path><path d="M8 12h12"></path><path d="M8 18h12"></path><path d="M4 6h.01"></path><path d="M4 12h.01"></path><path d="M4 18h.01"></path></svg></span>
-              </button>
-            </div>
-          </div>
           <div class="filterOptions">
             <select id="agendaDomain" data-theme-select="true" aria-label="Categorie filteren"><option value="all">Categorie</option></select>
             <select id="agendaDistance" aria-label="Afstand filteren"><option value="all">Afstand</option></select>
@@ -2182,7 +2168,6 @@
   ACTIVE_WEEKS = rollingWeeks();
   WEEK_START = Object.fromEntries(ACTIVE_WEEKS.map(week => [week.id, week.startIso]));
   let selectedAgendaWeek = ACTIVE_WEEKS[0]?.id || '';
-  let agendaView = localStorage.getItem('zomerprogramma_agenda_view_v1') === 'list' ? 'list' : 'week';
   const expandedAgendaDays = new Set();
   const DUTCH_MONTHS = {
     januari:'01',
@@ -3830,28 +3815,6 @@
       </article>`;
     }).join('');
   }
-  function renderAgendaMobileList(weekId, concrete){
-    const todayIso = formatIsoDate(new Date());
-    const sections = weekDays(weekId).map(day => {
-      const occurring = concrete.filter(item => itemOccursOnDay(item, day.iso));
-      const items = occurring.filter(item => !isFlexiblePeriodOffer(item));
-      const periods = sortAgendaPeriods(occurring.filter(item => isFlexiblePeriodOffer(item) && showPeriodInAgenda(item)));
-      const entries = [
-        ...periods.map(item => ({item, compact:true})),
-        ...items.map(item => ({item, compact:false}))
-      ];
-      return {day, entries};
-    }).filter(section => section.entries.length);
-    if(!sections.length) return `<div class="agendaMobileListEmpty">${escapeHtml(agendaEmptyMessage())}</div>`;
-    return sections.map(({day, entries}) => {
-      const isToday = day.iso === todayIso;
-      const isPastDay = day.iso < todayIso;
-      return `<section class="agendaMobileListDay${isPastDay ? ' pastDay' : ''}${isToday ? ' today' : ''}"${isToday ? ' aria-current="date"' : ''}>
-        <h4><span>${escapeHtml(day.label)}</span><small>${escapeHtml(day.prettyDate)}</small></h4>
-        <div class="agendaMobileListItems">${entries.map(entry => agendaItem(entry.item, entry.compact)).join('')}</div>
-      </section>`;
-    }).join('');
-  }
 	  function byWeek(weekId){
 	    return allExternalItems().filter(item => weekDays(weekId).some(day => itemOccursOnDay(item, day.iso)));
 	  }
@@ -4047,8 +4010,7 @@
       const weekItemCount = visibleWeekItemCount(w.id, concrete);
       visibleCount += weekItemCount;
 	    const agendaHtml = renderAgendaBoard(w.id, concrete);
-      const listHtml = renderAgendaMobileList(w.id, concrete);
-      return `<article class="weekPanel${agendaView === 'list' ? ' agendaListMode' : ''}" id="${escapeHtml(w.id)}">
+      return `<article class="weekPanel" id="${escapeHtml(w.id)}">
         <div class="weekTop">
           <div class="weekTitle">
             <div class="weekBadge"><span class="weekBadgeNumber">${escapeHtml(w.week)}</span></div>
@@ -4067,7 +4029,6 @@
         <div class="weekBody">
           <div class="subBlock">
             <div class="agendaBoard" data-week-board="${escapeHtml(w.id)}">${agendaHtml}</div>
-            <div class="agendaMobileList" data-week-list="${escapeHtml(w.id)}">${listHtml}</div>
           </div>
         </div>
       </article>`;
@@ -4352,7 +4313,6 @@
     renderWeekPanels();
     renderFlexibleOffers();
     updateAgendaThemeChips();
-    setAgendaView(agendaView, {persist:false});
   }
   function isMobileAgendaLayout(){
     return window.matchMedia('(max-width: 640px)').matches;
@@ -4482,16 +4442,6 @@
     $('#ideaCards').classList.toggle('active', !listOn);
     $('#ideaCards').hidden = listOn;
     $('#ideaList').hidden = !listOn;
-  }
-  function setAgendaView(view, options={}){
-    agendaView = view === 'list' ? 'list' : 'week';
-    if(options.persist !== false) localStorage.setItem('zomerprogramma_agenda_view_v1', agendaView);
-    $$('[data-view-group="agenda"]').forEach(btn => {
-      const active = btn.dataset.agendaView === agendaView;
-      btn.classList.toggle('active', active);
-      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
-    });
-    $$('.weekPanel').forEach(panel => panel.classList.toggle('agendaListMode', agendaView === 'list'));
   }
 	  function resetFilters(){
 	    ['ideaSearch','ideaDomain','ideaLocation','ideaDistance','ideaCost','ideaStimulus'].forEach(id => {
@@ -4648,7 +4598,6 @@
     ['agendaDomain','agendaDistance','agendaCost','agendaStimulus'].forEach(id=>$('#'+id).addEventListener('change', renderAgenda));
     ['ideaSearch','ideaDomain','ideaLocation','ideaDistance','ideaCost','ideaStimulus'].forEach(id=>$('#'+id).addEventListener('input',renderIdeas));
     $$('[data-view-group="ideas"]').forEach(btn=>btn.addEventListener('click',()=>setIdeaView(btn.dataset.view)));
-    $$('[data-view-group="agenda"]').forEach(btn=>btn.addEventListener('click',()=>setAgendaView(btn.dataset.agendaView)));
     window.__pageSecurityStartedAt = Date.now();
     initPublicFormSecurity($('#teamIdeaForm'));
     initPublicFormSecurity($('#linkAddForm'));
