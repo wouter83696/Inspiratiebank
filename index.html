@@ -178,7 +178,7 @@
     .tabHeroStat strong{display:block;font-size:1.34rem;font-weight:500;line-height:.98;color:inherit}
     .tabHeroStat span:not(.tabHeroStatDivider):not(.tabHeroStat){display:block;margin-top:2px;color:rgba(11,18,32,.58)}
     .tabHeroStatDivider{display:none;color:rgba(49,95,107,.52)}
-    .tabHero + .filterBar{--hero-search-height:40px;position:relative;z-index:2;margin-top:calc(var(--hero-search-height) / -2)}
+    .tabHero + .filterBar{--hero-search-height:44px;position:relative;z-index:2;margin-top:calc(var(--hero-search-height) / -2)}
     @media (min-width:641px){
       .tabHero.agendaHero{background-position:center 62%,center,center}
       .tabHeroTitle,.tabHeroLine,.tabHeroActions{transform:translateY(4px)}
@@ -737,9 +737,15 @@
     #ideaFilters .filterOptions .customSelect[data-select-id="ideaStimulus"]{grid-column:9 / 11}
     #ideaFilters .filterOptions .filterShuffle{grid-column:11 / 12}
     #ideaFilters .filterOptions .filterReset{grid-column:12 / 13}
-    #agendaFilters .filterSearch{grid-column:1 / 10}
-    #agendaFilters .filterToggle{grid-column:10 / 11;justify-self:end}
-    #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:11 / 13;justify-self:start;max-height:76px;opacity:1;overflow:visible;visibility:visible;pointer-events:auto;transform:none}
+    #agendaFilters{--agenda-main-filter-height:44px;align-items:stretch}
+    #agendaFilters .filterSearch{grid-column:1 / 10;align-self:stretch}
+    #agendaFilters .filterSearch input,
+    #agendaFilters .filterToggle,
+    #agendaFilters .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{height:var(--agenda-main-filter-height);min-height:var(--agenda-main-filter-height)}
+    #agendaFilters .filterToggle{grid-column:10 / 11;justify-self:end;align-self:stretch}
+    #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:11 / 13;justify-self:start;align-self:stretch;max-height:76px;opacity:1;overflow:visible;visibility:visible;pointer-events:auto;transform:none}
+    #agendaFilters .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::before,
+    #agendaFilters .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::after{align-self:center}
     #agendaFilters .filterOptions .customSelect[data-select-id="agendaDomain"]{grid-column:1 / 5}
     #agendaFilters .filterOptions .customSelect[data-select-id="agendaDistance"]{grid-column:5 / 7}
     #agendaFilters .filterOptions .customSelect[data-select-id="agendaCost"]{grid-column:7 / 9}
