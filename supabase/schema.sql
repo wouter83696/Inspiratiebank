@@ -141,15 +141,25 @@ set search_path = public, pg_temp
 as $$
 declare
   stored_hash text;
+  password_ok boolean;
+  safe_client_id text := left(coalesce(nullif(client_id, ''), 'anonymous'), 200);
 begin
-  perform public.bcjn_check_rate_limit('admin-login', client_id, 10, 900);
-
   select password_hash
     into stored_hash
     from public.bcjn_admin_settings
    where id = 'bcjn-zomer-2026';
 
-  return stored_hash is not null and stored_hash = crypt(coalesce(password, ''), stored_hash);
+  password_ok := stored_hash is not null and stored_hash = crypt(coalesce(password, ''), stored_hash);
+
+  if password_ok then
+    delete from public.bcjn_rate_limits
+     where bucket = 'admin-login'
+       and client_hash = encode(digest('admin-login:' || safe_client_id, 'sha256'), 'hex');
+    return true;
+  end if;
+
+  perform public.bcjn_check_rate_limit('admin-login', client_id, 10, 900);
+  return false;
 end;
 $$;
 

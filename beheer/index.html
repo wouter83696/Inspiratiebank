@@ -1426,6 +1426,7 @@
   const $ = selector => document.querySelector(selector);
   const $$ = selector => Array.from(document.querySelectorAll(selector));
   let confirmDialogResolve = null;
+  let lastStorageErrorMessage = '';
   function closeConfirmDialog(result=false){
     const modal = $('#confirmModal');
     if(!modal || modal.hidden) return;
@@ -1642,27 +1643,43 @@
 	    return true;
 	  }
 	  async function saveSupabaseStorage(){
-	    const id = encodeURIComponent(SUPABASE_STATE_ID);
 	    centralStorage.updatedAt = new Date().toISOString();
-	    if(adminPassword){
-	      try{
-	        const data = await supabaseRpc('bcjn_save_state_admin', {
-	          state_id:SUPABASE_STATE_ID,
-	          password:adminPassword,
-	          next_data:centralStorage
-	        });
-	        centralStorage = normalizeCentralStorage(data || centralStorage);
-	        return true;
-	      }catch(error){
-	        // Val terug op de oude route zolang de live Supabase-functies nog niet zijn bijgewerkt.
-	      }
+	    if(!adminPassword){
+	      throw new Error('Log opnieuw in bij beheer voordat je wijzigingen online opslaat.');
 	    }
-	    await supabaseFetch(`${SUPABASE_TABLE}?id=eq.${id}`, {
-	      method:'PATCH',
-	      headers:{Prefer:'return=minimal'},
-	      body:JSON.stringify({data:centralStorage, updated_at:centralStorage.updatedAt})
-	    });
-	    return true;
+	    try{
+	      const data = await supabaseRpc('bcjn_save_state_admin', {
+	        state_id:SUPABASE_STATE_ID,
+	        password:adminPassword,
+	        next_data:centralStorage
+	      });
+	      centralStorage = normalizeCentralStorage(data || centralStorage);
+	      return true;
+	    }catch(error){
+	      adminPassword = '';
+	      sessionStorage.removeItem(ADMIN_PASSWORD_SESSION_KEY);
+	      sessionStorage.removeItem(ADMIN_SESSION_KEY);
+	      throw new Error('Opslaan in Supabase is geweigerd. Log opnieuw in en probeer daarna nog een keer op te slaan.');
+	    }
+	  }
+	  function storageErrorMessage(fallback='Opslaan lukte niet in de online opslag.'){
+	    return lastStorageErrorMessage || fallback;
+	  }
+	  async function resumeAdminSession(){
+	    if(sessionStorage.getItem(ADMIN_SESSION_KEY) !== '1') return false;
+	    if(!supabaseConfigured()) return true;
+	    if(!adminPassword){
+	      sessionStorage.removeItem(ADMIN_SESSION_KEY);
+	      setStatus('#loginStatus', 'Log opnieuw in om beheerwijzigingen online op te slaan.', 'warn');
+	      return false;
+	    }
+	    const ok = await verifySupabaseAdminPassword(adminPassword);
+	    if(ok) return true;
+	    adminPassword = '';
+	    sessionStorage.removeItem(ADMIN_PASSWORD_SESSION_KEY);
+	    sessionStorage.removeItem(ADMIN_SESSION_KEY);
+	    setStatus('#loginStatus', 'Je beheersessie is verlopen. Log opnieuw in.', 'warn');
+	    return false;
 	  }
 	  function centralStorageActive(){
 	    return Boolean(centralStorage) && /^https?:$/i.test(window.location.protocol);
@@ -1709,11 +1726,13 @@
     }
   }
 	  async function saveCentralStorage(){
+	    lastStorageErrorMessage = '';
 	    if(!centralStorageActive()) return true;
 	    if(supabaseConfigured()){
 	      try{
 	        return await saveSupabaseStorage();
 	      }catch(error){
+	        lastStorageErrorMessage = error.message || 'Opslaan lukte niet in Supabase.';
 	        return false;
 	      }
 	    }
@@ -1728,6 +1747,7 @@
       centralStorage = normalizeCentralStorage(await response.json());
       return true;
     }catch(error){
+      lastStorageErrorMessage = error.message || 'Opslaan lukte niet in de online opslag.';
       return false;
     }
   }
@@ -4352,7 +4372,7 @@
     }
     saveArray(COLLEAGUE_STORAGE_KEY, stored);
     if(!(await saveCentralStorage())){
-      setStatus('#adminIdeaEditStatus', 'Opslaan lukte niet in de online opslag.', 'warn');
+      setStatus('#adminIdeaEditStatus', storageErrorMessage('Opslaan lukte niet in de online opslag.'), 'warn');
       return;
     }
     setupIdeaFilters();
@@ -4406,7 +4426,7 @@
 	  }
   async function init(){
     await loadCentralStorage();
-    if(sessionStorage.getItem(ADMIN_SESSION_KEY) === '1') showAdmin();
+    if(await resumeAdminSession()) showAdmin();
     $('#logoutBtn').addEventListener('click', logoutAdmin);
     $('#adminSidebarToggle')?.addEventListener('click', toggleAdminSidebar);
     $('#loginForm').addEventListener('submit', async event => {
