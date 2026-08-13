@@ -20,6 +20,7 @@
     }
   </script>
   <link rel="canonical" href="https://inspiratiebank.uitgesproken.me/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="website-bestanden/hero-achtergronden/inspiratiebank.svg" as="image" type="image/svg+xml">
@@ -327,6 +328,12 @@
     .agendaItem .domainIcon svg{width:14px;height:14px}
     .agendaLegendBar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 0 10px}
     .agendaThemeLegend{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+    .agendaFreshness{
+      display:inline-flex;align-items:center;max-width:100%;margin:-2px 0 12px;padding:6px 10px;
+      border-radius:999px;background:rgba(255,255,255,.58);border:1px solid rgba(79,142,158,.07);
+      color:rgba(11,18,32,.54);font-size:.76rem;font-weight:500;line-height:1.28
+    }
+    .agendaFreshness[hidden]{display:none}
     #inspirationThemeLegend{margin:10px 0 14px}
     .agendaLegendItem{
       appearance:none;font:inherit;text-align:left;
@@ -438,7 +445,7 @@
     .siteButton{
       display:inline-flex;align-items:center;gap:7px;justify-content:center;
       border:1px solid rgba(79,142,158,.10);border-radius:999px;background:rgba(255,255,255,.78);color:var(--accent-dark) !important;text-decoration:none;
-      padding:9px 12px;font-size:.86rem;font-weight:500;white-space:nowrap;box-shadow:0 8px 20px rgba(20,38,42,.04);
+      max-width:100%;min-width:0;padding:9px 12px;font-size:.86rem;font-weight:500;line-height:1.18;text-align:left;white-space:normal;overflow-wrap:anywhere;box-shadow:0 8px 20px rgba(20,38,42,.04);
       transition:transform .18s var(--ease), background .18s ease, border-color .18s ease;
     }
     .siteButton:hover{transform:translateY(-1px);background:#fff;border-color:rgba(79,142,158,.16);text-decoration:none}
@@ -449,7 +456,7 @@
       color:var(--accent-dark) !important
     }
     #ideaList .siteButton.secondary{background:#fff;box-shadow:0 8px 20px rgba(20,38,42,.04)}
-    .siteButton::after{content:"↗";font-size:.82em;opacity:.85}
+    .siteButton::after{content:"↗";flex:0 0 auto;font-size:.82em;opacity:.85}
     .websiteCell{vertical-align:middle;text-align:center}
     .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:12px}
     .card{min-width:0;padding:18px;min-height:215px;display:flex;flex-direction:column;gap:10px;background:#fff;border-color:#EAECEF;box-shadow:0 10px 26px rgba(20,38,42,.045);transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease)}
@@ -516,7 +523,7 @@
     .ideaThemeCard .pill{padding:5px 8px}
     .cardFooter{margin-top:auto;display:flex;gap:8px;flex-wrap:nowrap;align-items:center}
     .cardFooter .siteButton{
-      min-width:0;max-width:calc(100% - 38px);overflow:hidden;text-overflow:ellipsis
+      min-width:0;max-width:calc(100% - 38px)
     }
     .cardFooter .reportMenu{margin-left:auto}
     .activityStatusIcon{
@@ -1369,36 +1376,49 @@
     }
     @media (max-width:640px){
       .weekTitle{
+        display:grid !important;
         grid-template-columns:50px minmax(0,1fr) !important;
+        grid-template-areas:
+          "badge title"
+          "badge meta"
+          ". nav" !important;
+        column-gap:12px !important;
+        row-gap:7px !important;
         align-items:start !important
       }
+      .weekBadge{
+        grid-area:badge !important;
+        justify-self:start !important
+      }
       .weekTitleContent{
-        grid-column:2 !important;
-        grid-row:1 !important;
-        display:block !important;
+        display:contents !important;
         min-width:0 !important
       }
       .weekHeadingRow{
-        display:flex !important;
-        flex-direction:row !important;
-        align-items:flex-start !important;
-        justify-content:space-between !important;
-        flex-wrap:nowrap !important;
-        gap:10px !important;
-        width:100% !important
+        display:contents !important
       }
       .weekHeadingMain{
+        display:contents !important;
         min-width:0 !important
       }
+      .weekTop h3{
+        grid-area:title !important;
+        align-self:end !important;
+        min-width:0 !important;
+        font-size:clamp(1.55rem,7vw,2rem) !important;
+        line-height:1.06 !important;
+        white-space:nowrap !important
+      }
       .weekNav{
-        flex:0 0 auto !important;
-        margin-left:auto !important;
+        grid-area:nav !important;
+        justify-self:end !important;
+        align-self:start !important;
+        margin:0 !important;
         padding-top:0 !important
       }
       .weekHeaderMeta{
+        grid-area:meta !important;
         position:static !important;
-        grid-column:auto !important;
-        grid-row:auto !important;
         justify-self:start !important;
         align-self:flex-start !important;
         margin:0 !important;
@@ -1409,7 +1429,47 @@
         width:auto !important;
         max-width:100% !important;
         min-height:30px !important;
-        display:inline-flex !important
+        display:inline-flex !important;
+        line-height:1.15 !important;
+        white-space:normal !important
+      }
+      .weekHeaderMeta .weekCountBadge span{
+        white-space:normal !important;
+        line-height:1.15 !important
+      }
+      .agendaLegendBar{
+        display:block;
+        position:relative;
+        overflow:hidden
+      }
+      #agendaThemeLegend{
+        display:block;
+        position:relative;
+        width:100%;
+        overflow:hidden
+      }
+      #agendaThemeLegend .agendaThemeLegend{
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        overflow-y:hidden;
+        padding:0 24px 2px 0;
+        scroll-snap-type:x proximity;
+        scrollbar-width:none;
+        -webkit-overflow-scrolling:touch;
+        -webkit-mask-image:linear-gradient(to right,#000 calc(100% - 30px),transparent);
+        mask-image:linear-gradient(to right,#000 calc(100% - 30px),transparent)
+      }
+      #agendaThemeLegend .agendaThemeLegend::-webkit-scrollbar{display:none}
+      #agendaThemeLegend .agendaLegendItem{
+        min-height:36px;
+        flex:0 0 auto;
+        scroll-snap-align:start;
+        white-space:nowrap
+      }
+      .agendaFreshness{
+        margin:0 0 10px;
+        border-radius:12px;
+        white-space:normal
       }
       .ongoingTitleLine{
         display:flex !important;
@@ -1499,6 +1559,7 @@
       <div class="agendaLegendBar">
         <div id="agendaThemeLegend"></div>
       </div>
+      <div id="agendaFreshness" class="agendaFreshness" hidden></div>
       <div id="weekPanels" class="weekStack"></div>
       <section id="longerOffers" class="ongoingAccordion open">
         <div class="ongoingAccordionButton">
@@ -3274,6 +3335,7 @@
 	    setHeroStat('offers', offerTotal);
 	    const ideaTotal = allInspirationItems().length;
 	    setHeroStat('ideas', ideaTotal);
+	    renderAgendaFreshness();
 	  }
   function setTeamIdeaStatus(message, kind=''){
     const status = $('#teamIdeaStatus');
@@ -3653,6 +3715,31 @@
   }
   function formatAgendaDate(date){
     return `${date.getDate()} ${MONTH_LABELS[date.getMonth()]}`;
+  }
+  function formatPublicDateTime(value){
+    const date = new Date(value);
+    if(Number.isNaN(date.getTime())) return '';
+    return date.toLocaleString('nl-NL', {dateStyle:'medium', timeStyle:'short'});
+  }
+  function renderAgendaFreshness(){
+    const el = $('#agendaFreshness');
+    if(!el) return;
+    const sourceCheck = DATA.sourceCheck || {};
+    const sourceReview = DATA.sourceReview || {};
+    const checkedAt = sourceCheck.lastCheckedAt || sourceReview.generatedAt || '';
+    const formatted = formatPublicDateTime(checkedAt);
+    if(!formatted){
+      el.hidden = true;
+      el.textContent = '';
+      return;
+    }
+    const sourcesChecked = Number(sourceCheck.sourcesChecked);
+    const newCount = Number(sourceCheck.newCandidateCount ?? sourceReview.newCount);
+    const bits = [`Agenda laatst gecontroleerd: ${formatted}`];
+    if(Number.isFinite(sourcesChecked) && sourcesChecked > 0) bits.push(`${sourcesChecked} bronnen bekeken`);
+    if(Number.isFinite(newCount) && newCount > 0) bits.push(`${newCount} nieuwe items om te beoordelen`);
+    el.textContent = bits.join(' · ');
+    el.hidden = false;
   }
   function mondayBasedDayIndex(date){
     return (date.getDay() + 6) % 7;
