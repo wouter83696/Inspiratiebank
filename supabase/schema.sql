@@ -84,7 +84,7 @@ create or replace function public.bcjn_check_rate_limit(
 returns void
 language plpgsql
 security definer
-set search_path = public, pg_temp
+set search_path = public, extensions, pg_temp
 as $$
 declare
   safe_client_id text := left(coalesce(nullif(client_id, ''), 'anonymous'), 200);
@@ -137,7 +137,7 @@ create or replace function public.bcjn_verify_admin_password(password text, clie
 returns boolean
 language plpgsql
 security definer
-set search_path = public, pg_temp
+set search_path = public, extensions, pg_temp
 as $$
 declare
   stored_hash text;
@@ -169,7 +169,7 @@ create or replace function public.bcjn_append_state_item(state_id text, field_na
 returns jsonb
 language plpgsql
 security definer
-set search_path = public, pg_temp
+set search_path = public, extensions, pg_temp
 as $$
 declare
   allowed_fields constant text[] := array['colleagueIdeas', 'pendingLinks', 'reports'];
@@ -212,7 +212,7 @@ create or replace function public.bcjn_save_state_admin(state_id text, password 
 returns jsonb
 language plpgsql
 security definer
-set search_path = public, pg_temp
+set search_path = public, extensions, pg_temp
 as $$
 declare
   stored_hash text;
