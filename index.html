@@ -1234,6 +1234,45 @@
       .agendaItemActions{margin-top:7px}
       .agendaMore{min-height:26px;padding:5px 7px;font-size:.76rem}
       .agendaEmpty{margin-top:2px;padding:7px 9px;font-size:.76rem;background:rgba(255,255,255,.58)}
+      .agendaHero{
+        min-height:236px;
+        margin:calc(-1 * clamp(84px,16svh,104px)) calc(50% - 50vw) 0;
+        padding:clamp(106px,18svh,128px) max(20px,calc((100vw - var(--max)) / 2 + 20px)) 30px;
+        background-position:center top,center,center
+      }
+      .agendaHero .tabHeroLine,
+      .agendaHero .tabHeroTitle{display:none}
+      .agendaHero .tabHeroActions{
+        width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+        align-items:center;gap:8px;margin-top:0
+      }
+      .agendaHero .tabHeroButton{height:44px;min-height:44px;padding:0 12px;font-size:.9rem;gap:8px}
+      .agendaHero .tabHeroButton.primary{font-size:.95rem}
+      .agendaHero .tabHeroStats{
+        width:100%;min-height:34px;margin-top:18px;justify-content:space-between;gap:8px;
+        padding:7px 12px;background:rgba(255,255,255,.28);border-color:rgba(255,255,255,.24)
+      }
+      .agendaHero + .filterBar{margin-top:-22px;margin-bottom:8px}
+      #agendaFilters.agendaSearchFilters.more{
+        grid-template-columns:minmax(0,1fr) 44px minmax(122px,132px);
+        row-gap:8px
+      }
+      #agendaFilters .filterSearch input{border-radius:16px}
+      .weekPanel{border-radius:22px}
+      .weekTop{padding:12px 12px 10px;background:rgba(255,255,255,.74)}
+      .weekTitle{grid-template-columns:auto minmax(0,1fr) auto;gap:8px 10px;align-items:center}
+      .weekBadge{width:46px;height:46px;margin:0;border-radius:12px;font-size:1.18rem}
+      .weekHeadingRow{display:contents}
+      .weekTitleContent{grid-column:2;grid-row:1;align-self:center}
+      .weekTop h3{font-size:1.18rem;line-height:1.12}
+      .weekTop .dates{margin-top:3px;font-size:.86rem}
+      .weekTop .status{display:none}
+      .weekHeaderMeta{grid-column:2;grid-row:2;margin-top:2px;padding:0}
+      .weekNav{grid-column:3;grid-row:1 / span 2;align-self:center;margin:0;gap:6px}
+      .weekNavButton{width:34px;height:34px;background:rgba(255,255,255,.9)}
+      .weekBody{padding:0 0 12px}
+      .agendaBoard{border-radius:0;background:transparent}
+      .agendaDay:first-child{border-top:1px solid rgba(11,18,32,.06)}
       #inspirationThemeLegend{display:block;position:relative;width:100%;margin:0 0 10px;overflow:hidden}
       #inspirationThemeLegend .agendaThemeLegend{
         display:flex;flex-wrap:nowrap;gap:6px;width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:0 22px 2px 0;
