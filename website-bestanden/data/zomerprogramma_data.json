@@ -4573,20 +4573,20 @@
       "note": "Lasergamen, Mystic Golf, LaserSquash en StepZone in het centrum van Nijmegen."
     }
   ],
-  "generated": "12 augustus 2026",
+  "generated": "13 augustus 2026",
   "sourceCheck": {
-    "lastCheckedAt": "2026-08-12T14:35:46.131Z",
+    "lastCheckedAt": "2026-08-13T08:00:49.636Z",
     "reviewFile": "website-bestanden/data/offers_pending_review.json",
     "sourcesChecked": 40,
-    "sourcesWithChanges": 28,
+    "sourcesWithChanges": 29,
     "newCandidateCount": 0
   },
   "teamIdeas": [],
   "sourceReview": {
-    "generatedAt": "2026-08-12T14:35:46.131Z",
+    "generatedAt": "2026-08-13T08:00:49.636Z",
     "pendingCount": 217,
     "newCount": 0,
-    "changedSourceCount": 28,
+    "changedSourceCount": 29,
     "changedSources": [
       {
         "id": "beuningen-samen-jongeren",
@@ -4597,7 +4597,7 @@
         "newItemCount": 0,
         "itemCount": 29,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "de-wijchense-berg",
@@ -4608,7 +4608,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "escape-boot-nijmegen",
@@ -4619,7 +4619,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "focus-arnhem-agenda",
@@ -4630,7 +4630,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "beuningen-events",
@@ -4641,7 +4641,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "gemeente-nijmegen-events",
@@ -4652,7 +4652,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "grip-boulderhal",
@@ -4663,7 +4663,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "into-nijmegen-agenda",
@@ -4674,7 +4674,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "land-van-cuijk-2026-08",
@@ -4685,7 +4685,7 @@
         "newItemCount": 0,
         "itemCount": 75,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "land-van-cuijk-2026-09",
@@ -4696,7 +4696,7 @@
         "newItemCount": 0,
         "itemCount": 108,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "lux-programma",
@@ -4707,7 +4707,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "museumpark-orientalis-agenda",
@@ -4718,7 +4718,18 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
+      },
+      {
+        "id": "musis-stadstheater-agenda",
+        "name": "Musis & Stadstheater agenda",
+        "url": "https://www.musisenstadstheater.nl/nl/agenda",
+        "region": "Arnhem",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "natuurmonumenten-agenda",
@@ -4729,7 +4740,18 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
+      },
+      {
+        "id": "nijmegen-outdoor",
+        "name": "Nijmegen Outdoor",
+        "url": "https://nijmegenoutdoor.nl/",
+        "region": "Dichtbij (0-10 km)",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "nimma-sportzomer",
@@ -4740,7 +4762,7 @@
         "newItemCount": 0,
         "itemCount": 5,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "olround-nijmegen",
@@ -4751,18 +4773,18 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
-        "id": "openluchtmuseum-activiteiten",
-        "name": "Openluchtmuseum activiteitenagenda",
-        "url": "https://www.openluchtmuseum.nl/nl/activiteitenagenda#event",
-        "region": "Arnhem",
+        "id": "ouwehands-dierenpark",
+        "name": "Ouwehands Dierenpark",
+        "url": "https://www.ouwehand.nl/",
+        "region": "Verder weg (30-50 km)",
         "mode": "fingerprint",
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "planet-awesome",
@@ -4773,7 +4795,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "pretpark-tivoli",
@@ -4784,7 +4806,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "rozet-agenda",
@@ -4795,7 +4817,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "staatsbosbeheer-activiteiten",
@@ -4806,7 +4828,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "visit-arnhem-events",
@@ -4817,7 +4839,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "visit-arnhem-zomertips",
@@ -4828,7 +4850,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "visit-nijmegen-events",
@@ -4839,7 +4861,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "visit-nijmegen-zomertips",
@@ -4850,7 +4872,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "vue-nijmegen",
@@ -4861,18 +4883,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
-      },
-      {
-        "id": "watermuseum-activiteiten",
-        "name": "Watermuseum activiteiten",
-        "url": "https://watermuseum.nl/activiteiten/",
-        "region": "Arnhem",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "you-jump-nijmegen",
@@ -4883,7 +4894,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "id": "zooparc-overloon",
@@ -4894,7 +4905,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-08-12T14:35:46.131Z"
+        "lastCheckedAt": "2026-08-13T08:00:49.636Z"
       }
     ],
     "previewItems": [
@@ -4910,7 +4921,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-12T07:59:24.794Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "Church Tour PATRICIA in Lamberturkerk Beers",
@@ -4924,7 +4935,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-11T14:35:49.739Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "Open Monumentendagen bij Lambertuskerk Beers",
@@ -4938,7 +4949,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-11T14:35:49.739Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "Open Monumentendagen bij Lambertuskerk Beers",
@@ -4952,7 +4963,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-11T14:35:49.739Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "Midweekwandeling langs de Vierlingsbeekse Molenbeek",
@@ -4966,7 +4977,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-10T14:36:35.692Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "Open podium",
@@ -4980,7 +4991,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-10T14:36:35.692Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "Vier het mee: de opening van het De Pontipad 2.0",
@@ -4994,7 +5005,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-10T14:36:35.692Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "Eucharistieviering",
@@ -5008,7 +5019,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-10T08:13:25.458Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "Eucharistieviering",
@@ -5022,7 +5033,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-10T08:13:25.458Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "Informatiepunt Digitale overheid. IDO",
@@ -5036,7 +5047,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-10T08:13:25.458Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "Jongerenactiviteiten vrijdagavond",
@@ -5050,7 +5061,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-10T08:13:25.458Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "Zumba in de Lèghe Polder in Beuningen",
@@ -5064,7 +5075,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-10T08:13:25.458Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "Dag van het paard",
@@ -5078,7 +5089,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-07T14:32:04.717Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "G'woon Jan op de Brinkiosk",
@@ -5092,7 +5103,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-07T14:32:04.717Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "Van oldtimers tot Formule 1: zondag vol spektakel op de Brink",
@@ -5106,7 +5117,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-07T14:32:04.717Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "Muziekworkshop",
@@ -5120,7 +5131,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-05T09:18:49.038Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "500 jaar Bagijnenkerk Grave",
@@ -5134,7 +5145,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-04T15:55:25.690Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       },
       {
         "title": "500 jaar Bagijnenkerk Grave",
@@ -5148,7 +5159,7 @@
         "status": "known",
         "reviewStatus": "pending",
         "firstSeenAt": "2026-08-04T15:55:25.690Z",
-        "lastSeenAt": "2026-08-12T14:35:46.131Z"
+        "lastSeenAt": "2026-08-13T08:00:49.636Z"
       }
     ]
   }
