@@ -26,44 +26,23 @@ async function findHtmlPath() {
   throw new Error("Kon de HTML-pagina niet vinden.");
 }
 
-function normalizeTeamIdeas(teamIdeas) {
-  return (teamIdeas || []).map((item) => ({
-    ...item,
-    title: item.title || "",
-    by: item.by || item.submittedBy || "",
-    domain: item.domain || "",
-    locationType: item.locationType || "",
-    distanceBand: item.distanceBand || "",
-    fit: item.fit || "",
-    note: item.note || "",
-  }));
-}
-
 async function main() {
   const rawData = await fs.readFile(dataPath, "utf8");
   const parsedData = JSON.parse(rawData);
-  const teamIdeas = normalizeTeamIdeas(parsedData.teamIdeas);
-  const { teamIdeas: _ignore, ...inlineData } = parsedData;
 
   const htmlPath = await findHtmlPath();
   const rawHtml = await fs.readFile(htmlPath, "utf8");
-  const dataStart = rawHtml.indexOf("const DATA = ");
-  const teamStart = rawHtml.indexOf("const TEAM_IDEAS = ");
-  const nextConst = rawHtml.indexOf("\n\n  const $ =", teamStart);
-
-  if (dataStart === -1 || teamStart === -1 || nextConst === -1) {
-    throw new Error("Kon de inline data-blokken in de HTML niet vinden.");
+  const version = parsedData.sourceCheck?.lastCheckedAt || parsedData.generated || Date.now();
+  const dataUrl = `website-bestanden/data/zomerprogramma_data.json?v=${encodeURIComponent(String(version))}`;
+  const nextHtml = rawHtml.replace(
+    /const SITE_DATA_URL = 'website-bestanden\/data\/zomerprogramma_data\.json\?v=[^']*';/,
+    `const SITE_DATA_URL = '${dataUrl}';`,
+  );
+  if (nextHtml === rawHtml) {
+    throw new Error("Kon SITE_DATA_URL in de HTML niet vinden.");
   }
-
-  const nextBlock = rawHtml.slice(nextConst);
-  const nextHtml =
-    rawHtml.slice(0, dataStart) +
-    `const DATA = ${JSON.stringify(inlineData)};\n` +
-    `  const TEAM_IDEAS = ${JSON.stringify(teamIdeas, null, 2)};\n` +
-    nextBlock;
-
   await fs.writeFile(htmlPath, nextHtml, "utf8");
-  console.log("Inline data in HTML bijgewerkt.");
+  console.log("Publieke data-URL in HTML bijgewerkt.");
 
   const beheerData = {
     generated: parsedData.generated,

@@ -491,29 +491,6 @@ function buildSourceReview(pendingReview) {
   const pendingItems = (pendingReview.items || [])
     .filter((item) => item.reviewStatus === "pending" && item.status !== "missing");
   const trulyNewItems = pendingItems.filter((item) => item.status === "new");
-  const previewBase = trulyNewItems.length ? trulyNewItems : pendingItems;
-
-  const previewItems = [...previewBase]
-    .sort((a, b) =>
-      compareIsoDescending(a.firstSeenAt || a.lastSeenAt, b.firstSeenAt || b.lastSeenAt) ||
-      a.title.localeCompare(b.title, "nl"),
-    )
-    .slice(0, 18)
-    .map((item) => ({
-      title: item.title,
-      source: item.source,
-      sourceUrl: item.sourceUrl || "",
-      region: item.region || "",
-      place: item.place || "",
-      dateLabel: item.dateLabel || "",
-      timeLabel: item.timeLabel || "",
-      note: item.note || "",
-      status: item.status || "known",
-      reviewStatus: item.reviewStatus || "pending",
-      firstSeenAt: item.firstSeenAt || "",
-      lastSeenAt: item.lastSeenAt || "",
-    }));
-
   const changedSources = (pendingReview.sources || [])
     .filter((source) => source.pageChanged || (source.newItemCount || 0) > 0)
     .map((source) => ({
@@ -535,7 +512,6 @@ function buildSourceReview(pendingReview) {
     newCount: trulyNewItems.length,
     changedSourceCount: changedSources.length,
     changedSources,
-    previewItems,
   };
 }
 
