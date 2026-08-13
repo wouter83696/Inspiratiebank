@@ -1751,6 +1751,24 @@
     if(minutes === 1) return '1 minuut';
     return `${minutes} minuten`;
   }
+  function agendaSourceCheckSummary(){
+    const sourceCheck = BASE.sourceCheck || {};
+    const sourceReview = BASE.sourceReview || {};
+    const sourceCount = Number(sourceCheck.sourcesChecked);
+    const changedCount = Number(sourceCheck.sourcesWithChanges ?? sourceReview.changedSourceCount);
+    const newCount = Number(sourceCheck.newCandidateCount ?? sourceReview.newCount);
+    const parts = [];
+    if(Number.isFinite(sourceCount) && sourceCount > 0){
+      parts.push(`${sourceCount} bronnen bekeken`);
+    }
+    if(Number.isFinite(changedCount)){
+      parts.push(`${changedCount} bronpagina${changedCount === 1 ? '' : "'s"} gewijzigd`);
+    }
+    if(Number.isFinite(newCount)){
+      parts.push(`${newCount} nieuwe agenda-kandidaat${newCount === 1 ? '' : 'en'}`);
+    }
+    return parts.join(', ');
+  }
   async function refreshAgendaCheckFromStorage(){
     if(agendaCheckRefreshBusy || !centralStorageActive()) return;
     agendaCheckRefreshBusy = true;
@@ -1795,6 +1813,7 @@
     if(!titles.length || !texts.length) return;
     const requestState = agendaSourceCheckRequestState();
     const checkedAt = latestAgendaCheckedAt();
+    const sourceSummary = agendaSourceCheckSummary();
     let titleText = '';
     let detailText = '';
     if(requestState.status === 'queued'){
@@ -1818,8 +1837,8 @@
     } else if(requestState.status === 'done' && requestState.completedAt){
       titleText = `Agenda gecontroleerd: ${formatAdminDateTime(requestState.completedAt)}`;
       detailText = sourceAgendaCheckedAt()
-        ? `Laatste bijgewerkte agenda: ${formatAdminDateTime(sourceAgendaCheckedAt())}.`
-        : 'De aangevraagde controle is afgerond.';
+        ? `Laatste bijgewerkte agenda: ${formatAdminDateTime(sourceAgendaCheckedAt())}.${sourceSummary ? ` ${sourceSummary}.` : ''}`
+        : `De aangevraagde controle is afgerond.${sourceSummary ? ` ${sourceSummary}.` : ''}`;
     } else if(requestState.status === 'error' && requestState.completedAt){
       titleText = `Controle niet gelukt: ${formatAdminDateTime(requestState.completedAt)}`;
       detailText = 'Probeer het later opnieuw. Als je de agenda zelf hebt nagekeken, kun je hem handmatig als gecheckt markeren.';
@@ -1833,7 +1852,7 @@
       titleText = `Laatst gecheckt: ${formatAdminDateTime(checkedAt)}`;
       detailText = Number.isFinite(manualTime) && manualTime >= (Number.isFinite(sourceTime) ? sourceTime : 0)
         ? 'Handmatig gemarkeerd in beheer.'
-        : 'Gebaseerd op de laatste agenda-update.';
+        : `Gebaseerd op de laatste agenda-update.${sourceSummary ? ` ${sourceSummary}.` : ''}`;
     }
     titles.forEach(title => { title.textContent = titleText; });
     texts.forEach(text => { text.textContent = detailText; });
