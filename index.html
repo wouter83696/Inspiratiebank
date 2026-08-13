@@ -2520,7 +2520,7 @@
       url: String(item.url || '').trim(),
       image: String(item.image || '').trim(),
       imageAlt: String(item.imageAlt || item.title || '').trim(),
-      imageStatus: item.image ? String(item.imageStatus || 'pending').trim() : '',
+      imageStatus: item.image ? String(item.imageStatus || (item.imageApproved === true ? 'approved' : 'pending')).trim() : '',
       source: item.source || `Ingebracht door ${by}`,
       createdAt: item.createdAt || ''
     };
@@ -3077,8 +3077,8 @@
       fit:item.fit || item.note || 'Toegevoegd door iemand uit de omgeving.',
       source:item.url ? '' : 'Inzending',
       url:item.url || '',
-      image:approvedImage && item.imageStatus === 'approved' ? approvedImage.src : '',
-      imageAlt:approvedImage && item.imageStatus === 'approved' ? approvedImage.alt : '',
+      image:approvedImage ? approvedImage.src : '',
+      imageAlt:approvedImage ? approvedImage.alt : '',
       imageStatus:item.imageStatus || ''
     };
   }
