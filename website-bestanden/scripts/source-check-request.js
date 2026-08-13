@@ -10,6 +10,13 @@ const url = process.env.SUPABASE_URL || "";
 const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || "";
 const table = process.env.SUPABASE_TABLE || "bcjn_state";
 const stateId = process.env.SUPABASE_STATE_ID || "bcjn-zomer-2026";
+const fixedCheckSchedule = "31 6,13 * * 1-5";
+const requestPollSchedule = "*/30 6-18 * * 1-5";
+const dutchTimeZone = "Europe/Amsterdam";
+const catchUpWindows = [
+  { name: "ochtendplanning", startMinute: 8 * 60 + 45, endMinute: 10 * 60 + 30 },
+  { name: "middagplanning", startMinute: 15 * 60 + 45, endMinute: 17 * 60 + 30 },
+];
 
 function writeOutput(values = {}) {
   if (!outputPath) return;
@@ -31,6 +38,45 @@ function normalizeStorage(value = {}) {
 function timeOf(value = "") {
   const time = new Date(value || "").getTime();
   return Number.isFinite(time) ? time : 0;
+}
+
+function dutchDateParts(date) {
+  const parts = new Intl.DateTimeFormat("nl-NL", {
+    timeZone: dutchTimeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return {
+    dateKey: `${values.year}-${values.month}-${values.day}`,
+    minuteOfDay: Number(values.hour) * 60 + Number(values.minute),
+  };
+}
+
+function latestStoredSourceCheck(storage = {}) {
+  return storage.sourceCheck?.lastCheckedAt || storage.sourceReview?.generatedAt || "";
+}
+
+function catchUpCheckReason(storage = {}, now = new Date()) {
+  if (eventName !== "schedule" || schedule !== requestPollSchedule) return "";
+  const nowParts = dutchDateParts(now);
+  const activeWindow = catchUpWindows.find(
+    (window) => nowParts.minuteOfDay >= window.startMinute && nowParts.minuteOfDay <= window.endMinute,
+  );
+  if (!activeWindow) return "";
+
+  const lastCheckedAt = latestStoredSourceCheck(storage);
+  const lastCheckedTime = timeOf(lastCheckedAt);
+  if (!lastCheckedTime || lastCheckedTime > now.getTime()) return activeWindow.name;
+
+  const lastParts = dutchDateParts(new Date(lastCheckedTime));
+  const alreadyCheckedThisWindow =
+    lastParts.dateKey === nowParts.dateKey && lastParts.minuteOfDay >= activeWindow.startMinute;
+  return alreadyCheckedThisWindow ? "" : activeWindow.name;
 }
 
 async function supabaseFetch(pathname, options = {}) {
@@ -69,8 +115,14 @@ async function saveStorage(storage) {
 }
 
 async function decide() {
-  if (eventName === "workflow_dispatch" || schedule === "31 6,13 * * 1-5") {
-    writeOutput({ should_run: "true", reason: eventName === "workflow_dispatch" ? "handmatig gestart" : "vaste planning" });
+  if (eventName === "workflow_dispatch" || eventName === "push" || schedule === fixedCheckSchedule) {
+    const reason =
+      eventName === "workflow_dispatch"
+        ? "handmatig gestart"
+        : eventName === "push"
+          ? "wijziging gepubliceerd"
+          : "vaste planning";
+    writeOutput({ should_run: "true", reason });
     return;
   }
 
@@ -89,6 +141,13 @@ async function decide() {
   const startedTime = timeOf(storage.agendaSourceCheckStartedAt);
   const runningStale = startedTime > 0 && Date.now() - startedTime > 45 * 60 * 1000;
   const hasPendingRequest = requestedTime > completedTime && (requestedTime > startedTime || runningStale);
+  const catchUpReason = catchUpCheckReason(storage);
+
+  if (catchUpReason) {
+    console.log(`Agenda-check gestart via ${catchUpReason}; vorige check: ${latestStoredSourceCheck(storage) || "onbekend"}.`);
+    writeOutput({ should_run: "true", reason: catchUpReason });
+    return;
+  }
 
   if (!hasPendingRequest) {
     console.log("Geen open agenda-checkverzoek.");
