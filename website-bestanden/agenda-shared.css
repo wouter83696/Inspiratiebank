@@ -234,7 +234,7 @@
 .agendaReviewCardTitle{
   display:grid;
   grid-template-columns:19px minmax(0,1fr);
-  align-items:start;
+  align-items:center;
   gap:8px;
 }
 
@@ -242,8 +242,8 @@
 .agendaReviewCardTitle .domainIcon{
   width:19px;
   height:19px;
-  align-self:start;
-  margin-top:1px;
+  align-self:center;
+  margin-top:0;
   opacity:.95;
 }
 
