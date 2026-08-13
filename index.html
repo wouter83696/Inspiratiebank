@@ -3960,9 +3960,7 @@
     }
     renderAgenda();
     if(options.scroll){
-      if(!options.scrollToToday || !scrollToTodayAgendaDay()){
-        window.requestAnimationFrame(() => $('#weekPanels')?.scrollIntoView({behavior:'smooth', block:'start'}));
-      }
+      window.requestAnimationFrame(() => $('#weekPanels')?.scrollIntoView({behavior:'smooth', block:'start'}));
     }
   }
   function setOngoingOpen(open, options={}){
@@ -4314,22 +4312,6 @@
     renderFlexibleOffers();
     updateAgendaThemeChips();
   }
-  function isMobileAgendaLayout(){
-    return window.matchMedia('(max-width: 640px)').matches;
-  }
-  function scrollToTodayAgendaDay(options={}){
-    if(!isMobileAgendaLayout()) return false;
-    const panel = $('#tab-weken');
-    if(!panel || !panel.classList.contains('active')) return false;
-    const today = panel.querySelector('.agendaDay.today');
-    if(!today) return false;
-    window.requestAnimationFrame(() => {
-      const topOffset = Math.min(170, Math.max(96, window.innerHeight * 0.16));
-      const top = today.getBoundingClientRect().top + window.scrollY - topOffset;
-      window.scrollTo({top:Math.max(0, top), behavior:options.behavior || 'smooth'});
-    });
-    return true;
-  }
   function filteredInspirationItems(){
     const q = $('#ideaSearch').value;
     const filters = {domain:$('#ideaDomain').value, locationType:$('#ideaLocation').value, distanceBand:$('#ideaDistance').value, cost:$('#ideaCost').value, stimulus:$('#ideaStimulus').value};
@@ -4406,9 +4388,7 @@
     $$('.tabPanel').forEach(p=>p.classList.toggle('active',p.id === 'tab-'+name));
     const panel = $('#tab-'+name);
     if(panel && options.scroll !== false){
-      if(!(name === 'weken' && options.scrollToToday && scrollToTodayAgendaDay())){
-        window.requestAnimationFrame(()=>scrollToSection(panel.id));
-      }
+      window.requestAnimationFrame(()=>scrollToSection(panel.id));
     }
   }
   function setAgendaDayFocus(dayEl){
@@ -4480,16 +4460,15 @@
     const initialTab = tabFromHash();
     if(initialTab){
       setTab(initialTab, {scroll:false});
-      if(initialTab === 'weken') scrollToTodayAgendaDay({behavior:'auto'});
     }
     else setTab('inspiratie', {scroll:false});
     window.addEventListener('hashchange', () => {
       const nextTab = tabFromHash();
-      if(nextTab) setTab(nextTab, {scrollToToday:nextTab === 'weken'});
+      if(nextTab) setTab(nextTab);
       else setTab('inspiratie', {scroll:false});
       if(window.location.hash === '#longerOffers') setOngoingOpen(true, {scroll:false});
     });
-    $$('.tab').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab, {scrollToToday:btn.dataset.tab === 'weken'})));
+    $$('.tab').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
     document.addEventListener('click', event => {
       if(!event.target.closest('.customSelect')) closeCustomSelects();
       if(!event.target.closest('[data-report-menu]')) closeReportMenus();
@@ -4593,7 +4572,6 @@
       const week = $('#agendaWeekFilter').value;
       if(week && week !== 'all') selectedAgendaWeek = week;
       renderAgenda();
-      scrollToTodayAgendaDay();
     });
     ['agendaDomain','agendaDistance','agendaCost','agendaStimulus'].forEach(id=>$('#'+id).addEventListener('change', renderAgenda));
     ['ideaSearch','ideaDomain','ideaLocation','ideaDistance','ideaCost','ideaStimulus'].forEach(id=>$('#'+id).addEventListener('input',renderIdeas));
@@ -4611,7 +4589,7 @@
       link.addEventListener('click', event => {
         const id = link.getAttribute('href').slice(1);
         event.preventDefault();
-        if(id !== 'weekPanels' || !scrollToTodayAgendaDay()) scrollToSection(id);
+        scrollToSection(id);
       });
     });
     const mixIdeasBtn = $('#mixIdeasBtn');
