@@ -276,21 +276,20 @@
   justify-content:center;
   width:34px;
   height:34px;
-  border:1px solid rgba(7,52,94,.095);
+  border:0;
   border-radius:999px;
-  background:rgba(255,255,255,.76);
+  background:transparent;
   color:#07345e;
   cursor:pointer;
-  box-shadow:0 6px 14px rgba(20,38,42,.028);
+  box-shadow:none;
   transition:.18s var(--ease);
 }
 
 .weekNavButton:hover:not(:disabled){
-  background:#fff;
+  background:rgba(168,225,221,.18);
   color:#07345e;
-  border-color:rgba(7,52,94,.16);
-  transform:translateY(-1px);
-  box-shadow:0 8px 18px rgba(20,38,42,.05);
+  transform:none;
+  box-shadow:none;
 }
 
 .weekNavButton:disabled{
@@ -299,11 +298,11 @@
 }
 
 .weekNavButton svg{
-  width:16px;
-  height:16px;
+  width:17px;
+  height:17px;
   fill:none;
   stroke:currentColor;
-  stroke-width:2.6;
+  stroke-width:2.8;
   stroke-linecap:round;
   stroke-linejoin:round;
 }
@@ -354,13 +353,33 @@
     justify-content:flex-start;
   }
   .weekNav{
-    order:-1;
-    width:100%;
-    margin:0 0 2px;
+    order:0;
+    width:auto;
+    margin-left:auto;
+    margin-right:0;
+    margin-bottom:0;
   }
   .weekNavButton{
-    width:40px;
-    height:40px;
+    width:34px;
+    height:34px;
+  }
+  .agendaDay.pastDay:not(.today) .agendaItem,
+  .agendaDay.pastDay:not(.today) .agendaEmpty{
+    opacity:.82;
+    filter:saturate(.9);
+  }
+  .agendaItemTitle{
+    align-items:start;
+    gap:8px;
+    font-size:.9rem;
+    line-height:1.22;
+  }
+  .agendaItemTitle .domainIcon{
+    margin-top:1px;
+  }
+  .agendaItemMeta{
+    font-size:.8rem;
+    line-height:1.36;
   }
   .weekBody{padding:0}
   .agendaBoard,
