@@ -65,6 +65,26 @@
   gap:22px;
 }
 
+.weekTitleContent{
+  flex:1 1 auto;
+  min-width:0;
+}
+
+.weekHeadingRow{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  width:100%;
+}
+
+.weekHeadingMain{
+  display:grid;
+  gap:6px;
+  min-width:0;
+  justify-items:start;
+}
+
 .weekBadge,
 .agendaReviewWeekBadge{
   width:66px;
@@ -85,8 +105,36 @@
   color:#07345e;
   font-size:clamp(1.72rem,2.55vw,2.28rem);
   font-weight:600;
-  line-height:1.1;
+  line-height:1.16;
   letter-spacing:-.025em;
+  padding-bottom:2px;
+  overflow:visible;
+}
+
+.weekHeaderMeta{
+  margin:0;
+  padding:0;
+  align-self:flex-start;
+  justify-self:start;
+}
+
+.weekHeaderMeta .weekCountBadge{
+  width:auto;
+  max-width:none;
+  min-height:30px;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  line-height:1.12;
+  vertical-align:top;
+}
+
+.weekHeaderMeta .weekCountBadge span{
+  display:inline-flex;
+  align-items:baseline;
+  gap:4px;
+  min-width:0;
+  white-space:nowrap;
 }
 
 .weekTop .dates,
