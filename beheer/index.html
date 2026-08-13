@@ -1551,6 +1551,8 @@
 	      agendaSourceCheckCompletedAt:typeof value.agendaSourceCheckCompletedAt === 'string' ? value.agendaSourceCheckCompletedAt : '',
 	      agendaSourceCheckStatus:typeof value.agendaSourceCheckStatus === 'string' ? value.agendaSourceCheckStatus : '',
 	      agendaSourceCheckMessage:typeof value.agendaSourceCheckMessage === 'string' ? value.agendaSourceCheckMessage : '',
+	      sourceCheck:value.sourceCheck && typeof value.sourceCheck === 'object' ? value.sourceCheck : {},
+	      sourceReview:value.sourceReview && typeof value.sourceReview === 'object' ? value.sourceReview : {},
 	      trashItems:Array.isArray(value.trashItems) ? value.trashItems : [],
 	      reports:Array.isArray(value.reports) ? value.reports : []
 	    };
@@ -1799,7 +1801,8 @@
     localStorage.removeItem(key);
   }
   function sourceAgendaCheckedAt(){
-    return BASE.sourceCheck?.lastCheckedAt || BASE.sourceReview?.generatedAt || '';
+    const online = centralStorageActive() ? centralStorage : {};
+    return online.sourceCheck?.lastCheckedAt || online.sourceReview?.generatedAt || BASE.sourceCheck?.lastCheckedAt || BASE.sourceReview?.generatedAt || '';
   }
   function storedAgendaCheckedAt(){
     if(centralStorageActive() && typeof centralStorage.agendaManualCheckedAt === 'string') return centralStorage.agendaManualCheckedAt;
@@ -1828,8 +1831,9 @@
     return `${minutes} minuten`;
   }
   function agendaSourceCheckSummary(){
-    const sourceCheck = BASE.sourceCheck || {};
-    const sourceReview = BASE.sourceReview || {};
+    const online = centralStorageActive() ? centralStorage : {};
+    const sourceCheck = online.sourceCheck?.lastCheckedAt ? online.sourceCheck : BASE.sourceCheck || {};
+    const sourceReview = online.sourceReview?.generatedAt ? online.sourceReview : BASE.sourceReview || {};
     const sourceCount = Number(sourceCheck.sourcesChecked);
     const changedCount = Number(sourceCheck.sourcesWithChanges ?? sourceReview.changedSourceCount);
     const newCount = Number(sourceCheck.newCandidateCount ?? sourceReview.newCount);
@@ -1850,14 +1854,17 @@
     agendaCheckRefreshBusy = true;
     const loaded = await loadCentralStorage();
     if(loaded){
-      renderLinks();
-      renderAgendaReview();
+      const requestState = agendaSourceCheckRequestState();
+      if(requestState.status === 'queued' || requestState.status === 'running'){
+        renderLinks();
+        renderAgendaReview();
+      }
       renderAgendaCheckStatus();
     }
     agendaCheckRefreshBusy = false;
   }
   function syncAgendaCheckAutoRefresh(requestState){
-    const shouldRefresh = centralStorageActive() && (requestState.status === 'queued' || requestState.status === 'running');
+    const shouldRefresh = centralStorageActive();
     if(shouldRefresh && !agendaCheckRefreshTimer){
       agendaCheckRefreshTimer = window.setInterval(refreshAgendaCheckFromStorage, AGENDA_CHECK_REFRESH_MS);
     } else if(!shouldRefresh && agendaCheckRefreshTimer){

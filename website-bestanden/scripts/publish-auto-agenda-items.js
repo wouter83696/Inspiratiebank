@@ -6,6 +6,7 @@ const crypto = require("node:crypto");
 
 const assetDir = path.resolve(__dirname, "..");
 const reviewPath = path.join(assetDir, "data", "offers_pending_review.json");
+const dataPath = path.join(assetDir, "data", "zomerprogramma_data.json");
 
 const MONTHS = {
   januari: 0,
@@ -51,6 +52,8 @@ function defaultStorage() {
     deletedAgendaItemIds: [],
     verifiedAgendaItemIds: [],
     blockedAgendaRules: [],
+    sourceCheck: {},
+    sourceReview: {},
   };
 }
 
@@ -68,6 +71,8 @@ function normalizeStorage(value = {}) {
     deletedAgendaItemIds: Array.isArray(value.deletedAgendaItemIds) ? value.deletedAgendaItemIds : [],
     verifiedAgendaItemIds: Array.isArray(value.verifiedAgendaItemIds) ? value.verifiedAgendaItemIds : [],
     blockedAgendaRules: Array.isArray(value.blockedAgendaRules) ? value.blockedAgendaRules : [],
+    sourceCheck: value.sourceCheck && typeof value.sourceCheck === "object" ? value.sourceCheck : {},
+    sourceReview: value.sourceReview && typeof value.sourceReview === "object" ? value.sourceReview : {},
   };
 }
 
@@ -531,6 +536,7 @@ async function saveCentralStorage(storage) {
 
 async function main() {
   const review = await readJson(reviewPath, { items: [] });
+  const siteData = await readJson(dataPath, {});
   const candidates = (review.items || [])
     .filter((item) => item.status !== "missing")
     .map(toAgendaOffer)
@@ -570,6 +576,8 @@ async function main() {
     String(a.date || "").localeCompare(String(b.date || ""), "nl") ||
     String(a.title || "").localeCompare(String(b.title || ""), "nl"),
     );
+  storage.sourceCheck = siteData.sourceCheck && typeof siteData.sourceCheck === "object" ? siteData.sourceCheck : {};
+  storage.sourceReview = siteData.sourceReview && typeof siteData.sourceReview === "object" ? siteData.sourceReview : {};
 
   await saveCentralStorage(storage);
   console.log(`Automatische UIT-agenda bijgewerkt: ${addedOrUpdated} vondsten verwerkt.`);
