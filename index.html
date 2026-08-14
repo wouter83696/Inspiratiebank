@@ -854,7 +854,7 @@
     .ideaMapCanvas{
       position:relative;min-height:560px;overflow:hidden;background:#e8f2f2
     }
-    #ideaLeafletMap{position:absolute;inset:0;z-index:1;background:#e8f2f2}
+    #ideaMapProviderCanvas{position:absolute;inset:0;z-index:1;background:#e8f2f2}
     .leaflet-container{font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:#e8f2f2}
     .leaflet-control-attribution{font-size:10px}
     .leaflet-control-zoom{border:0 !important;box-shadow:0 10px 24px rgba(20,38,42,.12) !important}
@@ -2132,12 +2132,14 @@
 	  const CENTRAL_STORAGE_ENDPOINT = CONFIG.storageEndpoint || '';
 	  const SUPABASE_TABLE = CONFIG.supabaseTable || 'bcjn_state';
 	  const SUPABASE_STATE_ID = CONFIG.supabaseStateId || 'bcjn-zomer-2026';
+	  const MAP_PROVIDER = String(CONFIG.mapProvider || 'leaflet').toLowerCase();
+	  const MAP_TILE_URL = CONFIG.mapTileUrl || 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	  const MAP_ATTRIBUTION = CONFIG.mapAttribution || '&copy; OpenStreetMap';
 	  let centralStorage = null;
 	  let userLocation = loadUserLocation();
 	  let userLocationRadiusKm = loadUserLocationRadius();
 	  let activeIdeaMapKey = '';
-	  let ideaLeafletMap = null;
-	  let ideaLeafletMarkers = [];
+	  let ideaMapProvider = null;
 
 	  function normalizeCentralStorage(value={}){
 	    return {
@@ -4699,35 +4701,25 @@
   function setActiveIdeaMapItem(key, {scroll=true}={}){
     activeIdeaMapKey = key || activeIdeaMapKey;
     if(!activeIdeaMapKey) return;
-    $$('[data-leaflet-pin-key],[data-map-result-key]').forEach(node => {
-      const nodeKey = node.dataset.leafletPinKey || node.dataset.mapResultKey;
+    $$('[data-map-pin-key],[data-map-result-key]').forEach(node => {
+      const nodeKey = node.dataset.mapPinKey || node.dataset.mapResultKey;
       const active = nodeKey === activeIdeaMapKey;
       node.classList.toggle('active', active);
     });
-    ideaLeafletMarkers.forEach(marker => {
-      const active = marker.options.ideaKey === activeIdeaMapKey;
-      const element = marker.getElement();
-      if(element) element.classList.toggle('active', active);
-      if(active && ideaLeafletMap){
-        ideaLeafletMap.panTo(marker.getLatLng(), {animate:true, duration:.35});
-      }
-    });
+    if(ideaMapProvider) ideaMapProvider.setActive(activeIdeaMapKey);
     const result = $(`[data-map-result-key="${CSS.escape(activeIdeaMapKey)}"]`);
     if(result && scroll) result.scrollIntoView({behavior:'smooth', block:'nearest'});
   }
-  function destroyIdeaLeafletMap(){
-    ideaLeafletMarkers = [];
-    if(ideaLeafletMap){
-      ideaLeafletMap.remove();
-      ideaLeafletMap = null;
-    }
+  function destroyIdeaMapProvider(){
+    if(ideaMapProvider) ideaMapProvider.destroy();
+    ideaMapProvider = null;
   }
   function ideaLeafletIcon(point, active=false){
     return L.divIcon({
       className:`ideaLeafletMarkerWrap${active ? ' active' : ''}`,
       iconSize:[32,32],
       iconAnchor:[16,16],
-      html:`<span class="ideaLeafletMarker ${domainThemeClass(point.item.domain)}${active ? ' active' : ''}" data-leaflet-pin-key="${escapeHtml(point.key)}">${domainIcon(point.item.domain)}</span>`
+      html:`<span class="ideaLeafletMarker ${domainThemeClass(point.item.domain)}${active ? ' active' : ''}" data-map-pin-key="${escapeHtml(point.key)}">${domainIcon(point.item.domain)}</span>`
     });
   }
   function userLeafletIcon(){
@@ -4738,59 +4730,81 @@
       html:`<span class="ideaLeafletMarker user" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-12A7 7 0 0 0 5 9c0 5.9 7 12 7 12Z"></path><circle cx="12" cy="9" r="2.4"></circle></svg></span>`
     });
   }
-  function initLeafletIdeaMap(points){
-    const container = $('#ideaLeafletMap');
-    if(!container || !window.L) return false;
-    destroyIdeaLeafletMap();
-    ideaLeafletMap = L.map(container, {
+  function createLeafletMapProvider(container, points, options={}){
+    if(!container || !window.L) return null;
+    const map = L.map(container, {
       scrollWheelZoom:false,
       tap:true,
       zoomControl:true,
       attributionControl:true
     });
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer(MAP_TILE_URL, {
       maxZoom:19,
-      attribution:'&copy; OpenStreetMap'
-    }).addTo(ideaLeafletMap);
-    const userPoint = userLocation || DEFAULT_LOCATION;
+      attribution:MAP_ATTRIBUTION
+    }).addTo(map);
+    const userPoint = options.userPoint || DEFAULT_LOCATION;
     L.marker([userPoint.lat, userPoint.lon], {
       icon:userLeafletIcon(),
       title:'Jouw locatie',
       keyboard:false
-    }).addTo(ideaLeafletMap).on('click', openLocationModal);
+    }).addTo(map).on('click', options.onLocationClick || (() => {}));
     const bounds = [[userPoint.lat, userPoint.lon]];
     const markerLayer = L.markerClusterGroup
       ? L.markerClusterGroup({showCoverageOnHover:false,maxClusterRadius:42,spiderfyDistanceMultiplier:1.15})
       : L.layerGroup();
-    ideaLeafletMarkers = points.map(point => {
+    const markers = points.map(point => {
       const marker = L.marker([point.lat, point.lon], {
         icon:ideaLeafletIcon(point, point.key === activeIdeaMapKey),
         title:point.item.title,
         ideaKey:point.key
       });
-      marker.on('click', () => setActiveIdeaMapItem(point.key));
+      marker.on('click', () => options.onSelect?.(point.key));
       markerLayer.addLayer(marker);
       bounds.push([point.lat, point.lon]);
       return marker;
     });
-    markerLayer.addTo(ideaLeafletMap);
+    markerLayer.addTo(map);
     window.requestAnimationFrame(() => {
-      ideaLeafletMap.invalidateSize();
-      ideaLeafletMap.fitBounds(bounds, {padding:[34,34], maxZoom:12});
+      map.invalidateSize();
+      map.fitBounds(bounds, {padding:[34,34], maxZoom:12});
       setActiveIdeaMapItem(activeIdeaMapKey, {scroll:false});
     });
-    return true;
+    return {
+      setActive(key){
+        markers.forEach(marker => {
+          const active = marker.options.ideaKey === key;
+          const element = marker.getElement();
+          if(element) element.classList.toggle('active', active);
+          if(active) map.panTo(marker.getLatLng(), {animate:true, duration:.35});
+        });
+      },
+      destroy(){
+        markerLayer.clearLayers();
+        map.remove();
+      }
+    };
+  }
+  function createIdeaMapProvider(container, points){
+    const provider = MAP_PROVIDER === 'openstreetmap' || MAP_PROVIDER === 'osm' ? 'leaflet' : MAP_PROVIDER;
+    if(provider === 'leaflet'){
+      return createLeafletMapProvider(container, points, {
+        userPoint:userLocation || DEFAULT_LOCATION,
+        onSelect:key => setActiveIdeaMapItem(key),
+        onLocationClick:openLocationModal
+      });
+    }
+    return null;
   }
   function renderIdeaMap(items=[]){
     const map = $('#ideaMap');
     if(!map) return;
     if(!map.classList.contains('active')){
-      destroyIdeaLeafletMap();
+      destroyIdeaMapProvider();
       return;
     }
     const points = items.map(ideaMapPoint).filter(Boolean);
     if(!points.length){
-      destroyIdeaLeafletMap();
+      destroyIdeaMapProvider();
       map.innerHTML = `<div class="ideaMapEmpty">${escapeHtml(inspirationEmptyMessage())}</div>`;
       return;
     }
@@ -4803,7 +4817,7 @@
       </button>`;
     }).join('');
     map.innerHTML = `<div class="ideaMapCanvas" aria-label="Kaart met inspiratiepunten">
-      <div id="ideaLeafletMap"></div>
+      <div id="ideaMapProviderCanvas"></div>
       <div class="ideaMapHeader">
         <span class="ideaMapBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18"></path><path d="M7 5v14"></path><path d="M17 5v14"></path></svg>${escapeHtml(points.length)} pins</span>
         <button class="ideaMapLocation" type="button" data-location-settings-btn title="Postcode en afstand wijzigen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>${escapeHtml(locationDisplayText())}</button>
@@ -4813,8 +4827,10 @@
       <div class="ideaMapPanelHead"><h3>Activiteiten op kaart</h3><p>${escapeHtml(userLocation?.isDefault ? 'Standaard rond Nijmegen.' : `Afstand vanaf ${locationDisplayText()}.`)}</p></div>
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
-    if(!initLeafletIdeaMap(points)){
-      $('#ideaLeafletMap').innerHTML = `<div class="ideaMapEmpty">Kaart kon niet worden geladen.</div>`;
+    destroyIdeaMapProvider();
+    ideaMapProvider = createIdeaMapProvider($('#ideaMapProviderCanvas'), points);
+    if(!ideaMapProvider){
+      $('#ideaMapProviderCanvas').innerHTML = `<div class="ideaMapEmpty">Kaartprovider kon niet worden geladen.</div>`;
     }
   }
   function showRandomIdea(){
@@ -4826,7 +4842,7 @@
     const mapOn = $('#ideaMap')?.classList.contains('active');
     if(mapOn){
       setActiveIdeaMapItem(key);
-      const marker = $(`[data-leaflet-pin-key="${CSS.escape(key)}"]`);
+      const marker = $(`[data-map-pin-key="${CSS.escape(key)}"]`);
       if(marker){
         document.querySelectorAll('.ideaRandomFocus').forEach(el => el.classList.remove('ideaRandomFocus'));
         marker.classList.add('ideaRandomFocus');
@@ -4996,9 +5012,9 @@
       if(event.target.closest('[data-location-settings-btn]')) openLocationModal();
     });
     document.addEventListener('click', event => {
-      const mapTarget = event.target.closest('[data-leaflet-pin-key],[data-map-result-key]');
+      const mapTarget = event.target.closest('[data-map-pin-key],[data-map-result-key]');
       if(!mapTarget) return;
-      setActiveIdeaMapItem(mapTarget.dataset.leafletPinKey || mapTarget.dataset.mapResultKey);
+      setActiveIdeaMapItem(mapTarget.dataset.mapPinKey || mapTarget.dataset.mapResultKey);
     });
     $('#locationResetBtn').addEventListener('click', () => {
       saveUserLocationRadius(DEFAULT_LOCATION_RADIUS_KM, {sync:false});

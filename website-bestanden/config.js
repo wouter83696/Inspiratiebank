@@ -6,5 +6,11 @@ window.BCJN_CONFIG = {
   supabaseUrl: "https://iipyzhlbpdpwfvdhdnuw.supabase.co",
   supabaseAnonKey: "sb_publishable_KzZxZwXKhAPmupGd51vOFQ_DqEZFyMU",
   supabaseTable: "bcjn_state",
-  supabaseStateId: "bcjn-zomer-2026"
+  supabaseStateId: "bcjn-zomer-2026",
+
+  // Kaart-provider. Nu gebruikt de site Leaflet/OpenStreetMap.
+  // Later kun je hier een andere provider achter hangen zonder de activiteitendata te wijzigen.
+  mapProvider: "leaflet",
+  mapTileUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  mapAttribution: "&copy; OpenStreetMap"
 };
