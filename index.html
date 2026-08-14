@@ -226,6 +226,7 @@
     .weekHeadingRow{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-direction:row;flex-wrap:nowrap;width:100%}
     .weekHeadingMain{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
     .weekTitleContent{flex:1 1 auto}
+    .weekDateLine{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;min-width:0;max-width:100%}
     .weekHeaderMeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0;max-width:100%;margin:0;padding-top:0;align-self:flex-start}
     .weekTop h3{margin:0;color:#07345e;font-weight:600;font-size:clamp(1.72rem,2.55vw,2.28rem);line-height:1.1;letter-spacing:-.025em}
     .weekTop .dates{color:#123968;margin-top:9px;font-size:1.04rem}
@@ -1402,8 +1403,16 @@
         display:contents !important;
         min-width:0 !important
       }
-      .weekTop h3{
+      .weekDateLine{
         grid-area:title !important;
+        align-self:end !important;
+        display:flex !important;
+        align-items:baseline !important;
+        gap:7px !important;
+        flex-wrap:wrap !important;
+        min-width:0 !important
+      }
+      .weekTop h3{
         align-self:end !important;
         min-width:0 !important;
         font-size:clamp(1.55rem,7vw,2rem) !important;
@@ -1487,7 +1496,7 @@
     }
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
-  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260813-agenda-compact-meta">
+  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260814-agenda-date-meta">
 </head>
 <body>
   <header class="topbar">
@@ -4186,8 +4195,8 @@
             <div class="weekTitleContent">
               <div class="weekHeadingRow">
                 <div class="weekHeadingMain">
-                  <h3>${escapeHtml(publicWeekDates(w))}</h3>
-                  <div class="weekHeaderMeta">${weekCountBadge(weekItemCount)}${agendaFreshnessBadge()}</div>
+                  <div class="weekDateLine"><h3>${escapeHtml(publicWeekDates(w))}</h3>${agendaFreshnessBadge()}</div>
+                  <div class="weekHeaderMeta">${weekCountBadge(weekItemCount)}</div>
                 </div>
                 ${weekNavControls(w.id)}
               </div>

@@ -85,6 +85,15 @@
   justify-items:start;
 }
 
+.weekDateLine{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  flex-wrap:wrap;
+  min-width:0;
+  max-width:100%;
+}
+
 .weekBadge,
 .agendaReviewWeekBadge{
   width:66px;
