@@ -507,8 +507,10 @@
     .card .fine strong{display:block;margin:7px 0 2px;color:var(--accent-dark)}
     .cardMetaLine{
       display:block;width:100%;margin:2px 0 2px;padding:6px 10px;
-      border-radius:10px;background:rgba(232,242,242,.42);border:1px solid rgba(79,142,158,.06);
-      color:rgba(11,18,32,.70);font-size:.82rem;line-height:1.35
+      border-radius:7px;
+      background:color-mix(in srgb,var(--theme-tint-strong) 62%,rgba(255,255,255,.56));
+      border:1px solid color-mix(in srgb,var(--theme-line) 56%,rgba(255,255,255,.54));
+      color:var(--muted);font-size:.82rem;line-height:1.35
     }
     .cardMetaLine strong{display:inline !important;margin:0 !important;color:var(--accent-dark);font-weight:600}
     .cardLabels{display:flex;align-items:center;gap:5px;flex-wrap:nowrap;min-width:0;max-width:100%;overflow:hidden}
@@ -1435,7 +1437,7 @@
       .ideaThemeCard h3 .ideaTitle{gap:8px}
       .ideaThemeCard > p:not(.fine){font-size:.9rem;line-height:1.38}
       .card .fine{font-size:.8rem;line-height:1.34}
-      .cardMetaLine{margin:0;padding:5px 8px 5px 5px;border-radius:9px;font-size:.78rem;line-height:1.28}
+      .cardMetaLine{margin:0;padding:5px 8px 5px 5px;border-radius:7px;font-size:.78rem;line-height:1.28}
       .cardLabels{gap:5px}
       .cardPillGroup{gap:4px}
       .cardFooter{gap:7px}
