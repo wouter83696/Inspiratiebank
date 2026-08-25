@@ -891,18 +891,23 @@
     .ideaLeafletMarker svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaLeafletMarker .domainIcon{position:relative;z-index:1;width:100%;height:100%;margin:0;border:0;background:transparent;color:inherit}
     .ideaLeafletMarker .domainIcon svg{width:14px;height:14px}
-    .ideaLeafletMarker:hover,.ideaLeafletMarker.active{transform:scale(1.12);box-shadow:0 12px 24px rgba(20,38,42,.16);background:color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 70%,white)}
+    .ideaLeafletMarker:hover{transform:scale(1.08);box-shadow:0 12px 24px rgba(20,38,42,.16);background:color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 70%,white)}
+    .ideaLeafletMarker.active{
+      transform:scale(1.12);background:#fff;border-color:rgba(63,120,132,.82);
+      box-shadow:0 13px 28px rgba(20,38,42,.16),0 0 0 5px rgba(168,225,221,.46)
+    }
     .ideaLeafletMarker.home{
       width:38px;height:38px;background:rgba(255,255,255,.96);color:var(--accent-dark);
       border:2px solid rgba(168,225,221,.72);
       box-shadow:0 10px 24px rgba(20,38,42,.14),0 0 0 8px rgba(168,225,221,.22)
     }
-    .ideaLeafletMarker.home .domainIcon svg{width:18px;height:18px;stroke-width:2.15}
+    .ideaLeafletMarker.home .domainIcon svg{width:18px;height:18px;stroke-width:1.75}
     .ideaLeafletMarker.home:not(.user)::after{
-      bottom:-6px;width:11px;height:11px;background:rgba(255,255,255,.96);border-color:rgba(168,225,221,.72)
+      display:none
     }
     .ideaLeafletMarker.home:hover,.ideaLeafletMarker.home.active{
-      background:#fff;box-shadow:0 13px 28px rgba(20,38,42,.17),0 0 0 9px rgba(168,225,221,.32)
+      background:#fff;border-color:rgba(63,120,132,.82);
+      box-shadow:0 13px 28px rgba(20,38,42,.17),0 0 0 9px rgba(168,225,221,.34)
     }
     .ideaLeafletMarkerCount{
       position:absolute;right:-10px;top:-10px;z-index:2;min-width:22px;height:22px;padding:0 6px;border-radius:999px;
