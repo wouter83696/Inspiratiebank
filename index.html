@@ -2911,7 +2911,7 @@
   function cardMetaLine(item={}){
     const groupValue = String(item.group || 'Op maat').trim();
     const durationValue = String(item.duration || 'Op maat').trim();
-    return `<span class="cardMetaLine"><span class="cardMetaPart"><span class="metaIcon" aria-hidden="true">${ICONS.people}</span><strong>Personen:</strong> ${escapeHtml(groupValue)}</span><span class="cardMetaDot">•</span><span class="cardMetaPart"><span class="metaIcon" aria-hidden="true">${ICONS.clock}</span><strong>Duur:</strong> ${escapeHtml(durationValue)}</span></span>`;
+    return `<span class="cardMetaLine"><span class="cardMetaPart"><span class="metaIcon" aria-hidden="true">${ICONS.people}</span>${escapeHtml(groupValue)}</span><span class="cardMetaDot">•</span><span class="cardMetaPart"><span class="metaIcon" aria-hidden="true">${ICONS.clock}</span>${escapeHtml(durationValue)}</span></span>`;
   }
   function distanceLabelForKm(km, context='inspiration'){
     if(!Number.isFinite(km)) return '';
@@ -4817,8 +4817,8 @@
   }
   function ideaMapMeta(item, point){
     const parts = [];
-    if(item.group) parts.push(`<span class="cardMetaPart"><span class="metaIcon" aria-hidden="true">${ICONS.people}</span><strong>Personen:</strong> ${escapeHtml(item.group)}</span>`);
-    if(item.duration) parts.push(`<span class="cardMetaPart"><span class="metaIcon" aria-hidden="true">${ICONS.clock}</span><strong>Duur:</strong> ${escapeHtml(item.duration)}</span>`);
+    if(item.group) parts.push(`<span class="cardMetaPart"><span class="metaIcon" aria-hidden="true">${ICONS.people}</span>${escapeHtml(item.group)}</span>`);
+    if(item.duration) parts.push(`<span class="cardMetaPart"><span class="metaIcon" aria-hidden="true">${ICONS.clock}</span>${escapeHtml(item.duration)}</span>`);
     return [...new Set(parts.filter(Boolean))].join('<span class="cardMetaDot">•</span>');
   }
   function ideaMapPills(item={}, point){
