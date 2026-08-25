@@ -4781,6 +4781,9 @@
     if(!coord) return null;
     return {item, key:ideaDomKey(item), index, ...coord};
   }
+  function ideaMapUsesHomeIcon(point={}, item={}){
+    return point.source === 'user' || point.home || itemIsHomeActivity(item);
+  }
   function ideaMapMeta(item, point){
     const parts = [];
     if(item.group) parts.push(`<strong>Personen:</strong> ${escapeHtml(item.group)}`);
@@ -4814,9 +4817,9 @@
       const image = approvedIdeaImage(point.item);
       const thumb = image ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async"></span>` : '';
       const pills = ideaMapPills(point.item, point);
-      const home = point.home || itemIsHomeActivity(point.item);
-      const icon = home ? ICONS.home : domainIcon(point.item.domain);
-      return `<button class="ideaMapResult ${domainThemeClass(point.item.domain)}${home ? ' homeResult' : ''}${image ? ' hasThumb' : ''}${active ? ' active' : ''}" type="button" data-map-result-key="${escapeHtml(point.key)}">
+      const useHomeIcon = ideaMapUsesHomeIcon(point, point.item);
+      const icon = useHomeIcon ? ICONS.home : domainIcon(point.item.domain);
+      return `<button class="ideaMapResult ${domainThemeClass(point.item.domain)}${useHomeIcon ? ' homeResult' : ''}${image ? ' hasThumb' : ''}${active ? ' active' : ''}" type="button" data-map-result-key="${escapeHtml(point.key)}">
         <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${icon}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${ideaMapMeta(point.item, point)}</span></span>
         ${thumb}
       </button>`;
@@ -4881,7 +4884,7 @@
     ideaMapProvider = null;
   }
   function ideaLeafletIcon(point, active=false){
-    const isHome = point.source === 'user' && point.home;
+    const isHome = ideaMapUsesHomeIcon(point, point.item);
     const themeClass = isHome ? 'home' : domainThemeClass(point.item.domain);
     const iconHtml = isHome ? ICONS.home : domainIcon(point.item.domain);
     return L.divIcon({
@@ -4944,13 +4947,13 @@
         window.setTimeout(() => options.onCluster?.(clusterKeys), 120);
       });
     }
-    const homePoints = points.filter(point => point.source === 'user' && point.home);
-    const mapPoints = points.filter(point => !(point.source === 'user' && point.home));
+    const homePoints = points.filter(point => ideaMapUsesHomeIcon(point, point.item));
+    const mapPoints = points.filter(point => !ideaMapUsesHomeIcon(point, point.item));
     let homeMarker = null;
     if(homePoints.length){
       homeMarker = L.marker([userPoint.lat, userPoint.lon], {
         icon:homeLeafletIcon(homePoints, homePoints.some(point => point.key === activeIdeaMapKey)),
-        title:homePoints.length === 1 ? homePoints[0].item.title : `${homePoints.length} thuisactiviteiten`,
+        title:homePoints.length === 1 ? homePoints[0].item.title : `${homePoints.length} activiteiten op eigen locatie`,
         ideaKeys:homePoints.map(point => point.key)
       }).addTo(map);
       homeMarker.on('click', () => {
