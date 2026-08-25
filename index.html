@@ -947,7 +947,12 @@
     .ideaMapResultPills .pill{min-height:22px;padding:4px 7px;font-size:.68rem;box-shadow:none}
     .ideaMapResultPills .stimulusPill{width:28px;min-width:28px;height:22px;min-height:22px;padding:4px 6px}
     .ideaMapResultPills .stimulusIcon,.ideaMapResultPills .stimulusIcon svg{width:13px;height:13px}
-    .ideaMapResultMeta{display:block;margin-top:6px;color:rgba(11,18,32,.62);font-size:.74rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .ideaMapResultMeta{
+      display:block;margin-top:7px;max-width:100%;padding:5px 8px;border-radius:10px;
+      color:rgba(11,18,32,.64);background:rgba(255,255,255,.46);border:1px solid rgba(79,142,158,.08);
+      font-size:.72rem;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+    }
+    .ideaMapResultMeta strong{display:inline;color:var(--accent-dark);font-size:inherit;line-height:inherit}
     .ideaMapResultThumbWrap{
       position:relative;display:block;align-self:stretch;justify-self:stretch;width:94px;height:100%;min-height:118px;overflow:hidden;border-radius:0 15px 15px 0;
       border-left:1px solid rgba(255,255,255,.72);box-shadow:-10px 0 22px rgba(20,38,42,.045)
@@ -4768,8 +4773,8 @@
   }
   function ideaMapMeta(item, point){
     const parts = [];
-    if(item.group) parts.push(`Personen: ${item.group}`);
-    if(item.duration) parts.push(`Duur: ${item.duration}`);
+    if(item.group) parts.push(`<strong>Personen:</strong> ${escapeHtml(item.group)}`);
+    if(item.duration) parts.push(`<strong>Duur:</strong> ${escapeHtml(item.duration)}`);
     return [...new Set(parts.filter(Boolean))].join(' • ');
   }
   function ideaMapPills(item={}, point){
@@ -4802,7 +4807,7 @@
       const home = point.home || itemIsHomeActivity(point.item);
       const icon = home ? ICONS.home : domainIcon(point.item.domain);
       return `<button class="ideaMapResult ${domainThemeClass(point.item.domain)}${home ? ' homeResult' : ''}${image ? ' hasThumb' : ''}${active ? ' active' : ''}" type="button" data-map-result-key="${escapeHtml(point.key)}">
-        <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${icon}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${escapeHtml(ideaMapMeta(point.item, point))}</span></span>
+        <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${icon}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${ideaMapMeta(point.item, point)}</span></span>
         ${thumb}
       </button>`;
     }).join('');
