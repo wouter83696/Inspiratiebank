@@ -480,8 +480,8 @@
       box-shadow:0 16px 34px rgba(64,45,20,.065)
     }
     .ideaImageFrame{
-      position:relative;overflow:hidden;margin:-18px -18px 6px;border-radius:18px 18px 0 0;
-      aspect-ratio:16 / 9.4;background:linear-gradient(var(--theme-tint),rgba(255,255,255,.58));
+      position:relative;overflow:hidden;margin:-18px -18px 8px;border-radius:18px 18px 0 0;
+      aspect-ratio:16 / 7.9;background:linear-gradient(var(--theme-tint),rgba(255,255,255,.58));
       border-bottom:1px solid color-mix(in srgb,var(--theme-line) 56%,rgba(255,255,255,.48))
     }
     .ideaImageFrame img{width:100%;height:100%;object-fit:cover;display:block}
@@ -514,8 +514,17 @@
     .stimulusPillText{display:none}
     .card h3{margin:0;color:var(--accent-dark);font-size:1.08rem;line-height:1.18;font-weight:500}
     .ideaThemeCard h3{margin-top:6px}
+    .ideaThemeCard.hasImage h3{margin-top:0}
     .ideaThemeCard .cardLabels + .cardMetaLine{margin-top:0}
     .ideaThemeCard h3 .ideaTitle{display:flex;align-items:center;gap:10px}
+    .ideaThemeCard.hasImage h3 .ideaTitle{align-items:flex-start}
+    .ideaThemeCard.hasImage h3 .domainIcon{
+      width:38px;height:38px;flex:0 0 38px;margin-top:-26px;
+      background:color-mix(in srgb,var(--theme-tint-strong) 88%,#fff);
+      border:2px solid rgba(255,255,255,.92);
+      box-shadow:0 8px 20px rgba(20,38,42,.10),0 0 0 1px var(--theme-line)
+    }
+    .ideaThemeCard.hasImage h3 .domainIcon svg{width:17px;height:17px}
     .card p{margin:0;color:rgba(11,18,32,.70);line-height:1.43}
     .ideaThemeCard > p:not(.fine){font-size:.95rem;line-height:1.48;color:rgba(11,18,32,.66)}
     .card .fine{margin-top:2px;color:var(--muted);font-size:.86rem}
@@ -1204,7 +1213,7 @@
     .footerContact{justify-self:end;margin-left:10px;margin-right:clamp(18px,4vw,56px);color:var(--accent-dark);font-weight:500;text-decoration:none;padding:8px 0}
     .footerContact:hover{color:var(--accent)}
     @media (min-width:981px){#ideaCards.cards{align-items:stretch}#ideaCards .card{height:100%}}
-    @media (min-width:1180px){#ideaCards.cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}#ideaCards .card{gap:9px}#ideaCards .ideaImageFrame{aspect-ratio:16 / 8.8}}
+    @media (min-width:1180px){#ideaCards.cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}#ideaCards .card{gap:9px}#ideaCards .ideaImageFrame{aspect-ratio:16 / 7.9}}
     @media (max-width:980px){.hero{grid-template-columns:1fr;gap:16px;padding-top:18px}.heroMain{min-height:auto}.quick{grid-template-columns:repeat(3,1fr)}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.filters,.filters.more,.teamFormGrid,.agendaSearchFilters{grid-template-columns:1fr 1fr}.filterSearch{grid-column:1/-1}.weekBody{padding:0 12px 18px}.agendaBoard{grid-template-columns:repeat(2,minmax(0,1fr));gap:0}.agendaDay{min-height:360px}.agendaDay:nth-child(odd){border-left:0}.agendaDay:nth-child(n+3){border-top:1px solid rgba(11,18,32,.06)}}
     @media (max-width:980px){.ideaMap{grid-template-columns:1fr;height:auto;min-height:0;max-height:none}.ideaMapCanvas{min-height:420px}.ideaMapPanel{border-left:0;border-top:0}.ideaMapResults{grid-template-columns:repeat(2,minmax(0,1fr));max-height:none;overflow:visible}}
     @media (max-width:960px){.tabHeroTitle{font-size:5.05rem}.tabHeroLine{font-size:1.25rem}}
@@ -1463,8 +1472,10 @@
       .cards{gap:10px;width:100%;min-width:0}
       .card{width:100%;min-width:0;min-height:0;padding:13px 14px;gap:8px;border-radius:18px;overflow:hidden}
       .card h3{font-size:1rem;line-height:1.16}
-      .ideaImageFrame{margin:-13px -14px 5px;border-radius:18px 18px 0 0;aspect-ratio:16 / 8}
+      .ideaImageFrame{margin:-13px -14px 7px;border-radius:18px 18px 0 0;aspect-ratio:16 / 8}
+      .ideaThemeCard.hasImage h3 .domainIcon{width:34px;height:34px;flex-basis:34px;margin-top:-24px}
       .ideaThemeCard h3{margin-top:4px}
+      .ideaThemeCard.hasImage h3{margin-top:0}
       .ideaThemeCard h3 .ideaTitle{gap:8px}
       .ideaThemeCard > p:not(.fine){font-size:.9rem;line-height:1.38}
       .card .fine{font-size:.8rem;line-height:1.34}
@@ -4466,7 +4477,7 @@
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
     const image = approvedIdeaImage(item);
-    return `<article class="card ideaThemeCard ${domainThemeClass(item.domain)}" data-idea-key="${escapeHtml(ideaDomKey(item))}">
+    return `<article class="card ideaThemeCard ${domainThemeClass(item.domain)}${image ? ' hasImage' : ''}" data-idea-key="${escapeHtml(ideaDomKey(item))}">
       ${image ? ideaImageMarkup(image) : ''}
       <h3>${titleWithIcon(item.title, item.domain)}</h3>
       <div class="cardLabels">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div>
