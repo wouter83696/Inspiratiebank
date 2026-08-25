@@ -925,31 +925,32 @@
     .ideaMapClear:hover{background:#fff;border-color:rgba(79,142,158,.18)}
     .ideaMapResults{display:grid;gap:8px;padding:12px;overflow:auto;min-height:0;align-content:start}
     .ideaMapResult{
-      width:100%;display:grid;grid-template-columns:34px minmax(0,1fr);gap:11px;text-align:left;align-items:center;
+      width:100%;display:grid;grid-template-columns:minmax(0,1fr);gap:11px;text-align:left;align-items:center;
       padding:12px;border-radius:16px;border:1px solid var(--theme-line,rgba(79,142,158,.10));
       background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.92);cursor:pointer;color:inherit;
       overflow:visible;min-height:116px;height:auto;
       transition:background .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease)
     }
     .ideaMapResult.hasThumb{
-      grid-template-columns:34px minmax(0,1fr) minmax(118px,32%);min-height:132px;padding:0 0 0 12px;gap:13px
+      grid-template-columns:minmax(0,1fr) minmax(108px,30%);min-height:126px;padding:0;gap:0;overflow:hidden
     }
     .ideaMapResult:hover,.ideaMapResult.active{background:linear-gradient(var(--theme-tint-strong),var(--theme-tint-strong)),rgba(255,255,255,.96);border-color:var(--theme-line,rgba(79,142,158,.18));transform:translateY(-1px)}
     .ideaMapResult.active{box-shadow:0 0 0 2px var(--theme-line,rgba(79,142,158,.18)),0 10px 24px rgba(20,38,42,.08)}
+    .ideaMapResultTitle{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:center;min-width:0}
     .ideaMapResult .domainIcon{width:34px;height:34px;margin:0;align-self:center;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
     .ideaMapResult.homeResult .domainIcon{background:#fff;border-color:rgba(79,142,158,.18);color:var(--accent-dark);box-shadow:0 0 0 4px rgba(168,225,221,.20)}
     .ideaMapResult .domainIcon svg{width:15px;height:15px}
     .ideaMapResultText{display:block;min-width:0;padding:2px 0}
-    .ideaMapResult.hasThumb .ideaMapResultText{padding:12px 0}
+    .ideaMapResult.hasThumb .ideaMapResultText{padding:12px 10px 12px 12px}
     .ideaMapResult.hasThumb .ideaMapResultText{align-self:center}
-    .ideaMapResult strong{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:var(--accent-dark);font-size:.9rem;line-height:1.14}
+    .ideaMapResult strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--accent-dark);font-size:.9rem;line-height:1.14}
     .ideaMapResultPills{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:6px}
     .ideaMapResultPills .pill{min-height:22px;padding:4px 7px;font-size:.68rem;box-shadow:none}
     .ideaMapResultPills .stimulusPill{width:28px;min-width:28px;height:22px;min-height:22px;padding:4px 6px}
     .ideaMapResultPills .stimulusIcon,.ideaMapResultPills .stimulusIcon svg{width:13px;height:13px}
-    .ideaMapResultMeta{display:block;margin-top:6px;color:rgba(11,18,32,.62);font-size:.76rem;line-height:1.25}
+    .ideaMapResultMeta{display:block;margin-top:6px;color:rgba(11,18,32,.62);font-size:.74rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .ideaMapResultThumbWrap{
-      position:relative;display:block;align-self:stretch;justify-self:stretch;width:100%;height:auto;min-height:132px;overflow:hidden;border-radius:0 15px 15px 0;
+      position:relative;display:block;align-self:stretch;justify-self:stretch;width:100%;height:auto;min-height:126px;overflow:hidden;border-radius:0 15px 15px 0;
       border-left:1px solid rgba(255,255,255,.72);box-shadow:-10px 0 22px rgba(20,38,42,.045)
     }
     .ideaMapResultThumbWrap::before{
@@ -957,7 +958,7 @@
       background:linear-gradient(90deg,rgba(255,253,249,.34),rgba(255,253,249,0));pointer-events:none
     }
     .ideaMapResultThumb{
-      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.96) contrast(.98)
+      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:saturate(.96) contrast(.98)
     }
     .ideaMapEmpty{grid-column:1/-1;padding:28px;border:1px dashed rgba(79,142,158,.16);border-radius:18px;color:var(--muted);background:rgba(255,255,255,.72)}
     .ideaTitle{display:flex;align-items:flex-start;gap:10px}
@@ -4797,8 +4798,7 @@
       const home = point.home || itemIsHomeActivity(point.item);
       const icon = home ? ICONS.home : domainIcon(point.item.domain);
       return `<button class="ideaMapResult ${domainThemeClass(point.item.domain)}${home ? ' homeResult' : ''}${image ? ' hasThumb' : ''}${active ? ' active' : ''}" type="button" data-map-result-key="${escapeHtml(point.key)}">
-        <span class="domainIcon" aria-hidden="true">${icon}</span>
-        <span class="ideaMapResultText"><strong>${escapeHtml(point.item.title)}</strong><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${escapeHtml(ideaMapMeta(point.item, point))}</span></span>
+        <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${icon}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${escapeHtml(ideaMapMeta(point.item, point))}</span></span>
         ${thumb}
       </button>`;
     }).join('');
