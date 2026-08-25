@@ -11,6 +11,6 @@ window.BCJN_CONFIG = {
   // Kaart-provider. Nu gebruikt de site Leaflet/OpenStreetMap.
   // Later kun je hier een andere provider achter hangen zonder de activiteitendata te wijzigen.
   mapProvider: "leaflet",
-  mapTileUrl: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+  mapTileUrl: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
   mapAttribution: "&copy; OpenStreetMap &copy; CARTO"
 };
