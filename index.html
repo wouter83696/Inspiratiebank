@@ -926,6 +926,7 @@
     .ideaMapClear:hover{background:#fff;border-color:rgba(79,142,158,.18)}
     .ideaMapResults{display:grid;gap:8px;padding:12px;overflow:auto;min-height:0;align-content:start}
     .ideaMapResult{
+      position:relative;
       width:100%;display:grid;grid-template-columns:minmax(0,1fr);gap:11px;text-align:left;align-items:center;
       padding:12px;border-radius:16px;border:1px solid var(--theme-line,rgba(79,142,158,.10));
       background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.92);cursor:pointer;color:inherit;
@@ -944,6 +945,7 @@
     .ideaMapResultText{display:block;min-width:0;padding:2px 0}
     .ideaMapResult.hasThumb .ideaMapResultText{padding:12px 12px 12px 10px}
     .ideaMapResult.hasThumb .ideaMapResultText{align-self:center}
+    .ideaMapResult.hasLink .ideaMapResultText{padding-right:38px}
     .ideaMapResult strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--accent-dark);font-size:.9rem;line-height:1.14}
     .ideaMapResultPills{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:6px}
     .ideaMapResultPills .pill{min-height:22px;padding:4px 7px;font-size:.68rem;box-shadow:none}
@@ -958,12 +960,12 @@
     }
     .ideaMapResultMeta strong{display:inline;color:var(--accent-dark);font-size:inherit;line-height:inherit;font-weight:600}
     .ideaMapResultLink{
-      position:relative;z-index:2;display:inline-flex;align-items:center;gap:5px;width:max-content;max-width:100%;min-height:26px;margin-top:8px;
-      padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.82);border:1px solid rgba(79,142,158,.10);
-      color:var(--accent-dark);font-size:.72rem;font-weight:650;text-decoration:none;box-shadow:0 6px 14px rgba(20,38,42,.05)
+      position:absolute;right:10px;bottom:10px;z-index:2;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;
+      border-radius:999px;background:rgba(255,255,255,.74);border:1px solid rgba(79,142,158,.10);
+      color:var(--accent-dark);font-size:0;text-decoration:none;box-shadow:0 6px 14px rgba(20,38,42,.05);backdrop-filter:blur(10px)
     }
     .ideaMapResultLink:hover{background:#fff;border-color:rgba(79,142,158,.18);transform:translateY(-1px)}
-    .ideaMapResultLink svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .ideaMapResultLink svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .ideaMapResultThumbWrap{
       position:relative;display:block;align-self:stretch;justify-self:stretch;width:96px;height:100%;min-height:118px;overflow:hidden;border-radius:15px 0 0 15px;
       border-right:1px solid rgba(255,255,255,.72);box-shadow:10px 0 22px rgba(20,38,42,.045)
@@ -2212,6 +2214,7 @@
 	  let userLocationRadiusKm = loadUserLocationRadius();
 	  let activeIdeaMapKey = '';
 	  let activeIdeaMapClusterKeys = null;
+	  let pendingIdeaMapZoomTarget = null;
 	  let ideaMapProvider = null;
 
 	  function normalizeCentralStorage(value={}){
@@ -4825,10 +4828,9 @@
       const image = approvedIdeaImage(point.item);
       const thumb = image ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async"></span>` : '';
       const pills = ideaMapPills(point.item, point);
-      const useHomeIcon = ideaMapUsesHomeIcon(point, point.item);
-      const icon = useHomeIcon ? ICONS.home : domainIcon(point.item.domain);
+      const icon = domainIcon(point.item.domain);
       const link = point.item.url ? `<a class="ideaMapResultLink" href="${escapeHtml(point.item.url)}" target="_blank" rel="noopener" aria-label="${escapeHtml(sourceButtonLabel(point.item))} openen">Website ${ICONS.external}</a>` : '';
-      return `<article class="ideaMapResult ${domainThemeClass(point.item.domain)}${useHomeIcon ? ' homeResult' : ''}${image ? ' hasThumb' : ''}${active ? ' active' : ''}" role="button" tabindex="0" data-map-result-key="${escapeHtml(point.key)}">
+      return `<article class="ideaMapResult ${domainThemeClass(point.item.domain)}${image ? ' hasThumb' : ''}${link ? ' hasLink' : ''}${active ? ' active' : ''}" role="button" tabindex="0" data-map-result-key="${escapeHtml(point.key)}">
         ${thumb}
         <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${icon}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${ideaMapMeta(point.item, point)}</span>${link}</span>
       </article>`;
@@ -4853,7 +4855,10 @@
   }
   function setActiveIdeaMapItem(key, {scroll=true, clearCluster=false, refreshPanel=false}={}){
     const shouldRefreshPanel = refreshPanel || (clearCluster && activeIdeaMapClusterKeys);
-    if(clearCluster) activeIdeaMapClusterKeys = null;
+    if(clearCluster){
+      activeIdeaMapClusterKeys = null;
+      pendingIdeaMapZoomTarget = null;
+    }
     activeIdeaMapKey = key || activeIdeaMapKey;
     if(!activeIdeaMapKey) return;
     if(shouldRefreshPanel){
@@ -4873,6 +4878,9 @@
       else result.scrollIntoView({behavior:'smooth', block:'nearest'});
     }
   }
+  function mapZoomTargetKey(type, keys=[]){
+    return `${type}:${[...new Set(keys.filter(Boolean))].sort().join('|')}`;
+  }
   function setActiveIdeaMapCluster(keys=[]){
     const uniqueKeys = [...new Set(keys.filter(Boolean))];
     if(uniqueKeys.length <= 1){
@@ -4886,6 +4894,7 @@
   function clearActiveIdeaMapCluster(){
     if(!activeIdeaMapClusterKeys) return;
     activeIdeaMapClusterKeys = null;
+    pendingIdeaMapZoomTarget = null;
     updateIdeaMapPanel();
   }
   function destroyIdeaMapProvider(){
@@ -4934,13 +4943,18 @@
       markerLayer.on('clusterclick', event => {
         const childMarkers = event.layer?.getAllChildMarkers?.() || [];
         const clusterKeys = childMarkers.map(marker => marker.options.ideaKey).filter(Boolean);
+        const targetKey = mapZoomTargetKey('cluster', clusterKeys);
+        const shouldZoom = pendingIdeaMapZoomTarget === targetKey;
         const clusterBounds = event.layer?.getBounds?.();
-        if(clusterBounds?.isValid?.() && !clusterBounds.getNorthEast().equals(clusterBounds.getSouthWest())){
-          map.fitBounds(clusterBounds, {padding:[42,42], maxZoom:16});
-        } else if(event.latlng){
-          map.setView(event.latlng, Math.min(map.getZoom() + 2, 16), {animate:true});
+        options.onCluster?.(clusterKeys);
+        pendingIdeaMapZoomTarget = targetKey;
+        if(shouldZoom){
+          if(clusterBounds?.isValid?.() && !clusterBounds.getNorthEast().equals(clusterBounds.getSouthWest())){
+            map.fitBounds(clusterBounds, {padding:[42,42], maxZoom:16});
+          } else if(event.latlng){
+            map.setView(event.latlng, Math.min(map.getZoom() + 2, 16), {animate:true});
+          }
         }
-        window.setTimeout(() => options.onCluster?.(clusterKeys), 120);
       });
     }
     const homePoints = points.filter(point => ideaMapUsesHomeIcon(point, point.item));
@@ -4953,8 +4967,13 @@
         ideaKeys:homePoints.map(point => point.key)
       }).addTo(map);
       homeMarker.on('click', () => {
+        const keys = homePoints.map(point => point.key);
+        const targetKey = mapZoomTargetKey('home', keys);
+        const shouldZoom = pendingIdeaMapZoomTarget === targetKey;
         if(homePoints.length === 1) options.onSelect?.(homePoints[0].key);
-        else options.onCluster?.(homePoints.map(point => point.key));
+        else options.onCluster?.(keys);
+        pendingIdeaMapZoomTarget = targetKey;
+        if(shouldZoom) map.setView(homeMarker.getLatLng(), Math.min(map.getZoom() + 2, 16), {animate:true});
       });
     }
     const markers = mapPoints.map(point => {
@@ -4963,7 +4982,13 @@
         title:point.item.title,
         ideaKey:point.key
       });
-      marker.on('click', () => options.onSelect?.(point.key));
+      marker.on('click', () => {
+        const targetKey = mapZoomTargetKey('pin', [point.key]);
+        const shouldZoom = pendingIdeaMapZoomTarget === targetKey;
+        options.onSelect?.(point.key);
+        pendingIdeaMapZoomTarget = targetKey;
+        if(shouldZoom) map.setView(marker.getLatLng(), Math.min(map.getZoom() + 2, 16), {animate:true});
+      });
       markerLayer.addLayer(marker);
       bounds.push([point.lat, point.lon]);
       return marker;
@@ -5227,6 +5252,7 @@
       if(event.target.closest('.ideaMapResultLink')) return;
       const mapTarget = event.target.closest('[data-map-pin-key],[data-map-result-key]');
       if(!mapTarget) return;
+      if(mapTarget.dataset.mapResultKey && !mapTarget.dataset.mapPinKey) pendingIdeaMapZoomTarget = null;
       setActiveIdeaMapItem(mapTarget.dataset.mapPinKey || mapTarget.dataset.mapResultKey);
     });
     document.addEventListener('keydown', event => {
@@ -5235,6 +5261,7 @@
       const mapTarget = event.target.closest('[data-map-result-key]');
       if(!mapTarget) return;
       event.preventDefault();
+      pendingIdeaMapZoomTarget = null;
       setActiveIdeaMapItem(mapTarget.dataset.mapResultKey);
     });
     $('#locationResetBtn').addEventListener('click', () => {
