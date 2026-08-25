@@ -4752,8 +4752,8 @@
   function ideaMapMeta(item, point){
     const parts = [];
     if(point?.source === 'user') parts.push(userLocation?.isDefault ? 'rond Nijmegen' : 'vanaf jouw postcode');
-    if(item.group) parts.push(item.group);
-    if(item.duration) parts.push(item.duration);
+    if(item.group) parts.push(`Personen: ${item.group}`);
+    if(item.duration) parts.push(`Duur: ${item.duration}`);
     return [...new Set(parts.filter(Boolean))].join(' • ');
   }
   function ideaMapPills(item={}, point){
