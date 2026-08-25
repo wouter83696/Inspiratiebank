@@ -895,6 +895,17 @@
     .ideaLeafletMarker .domainIcon{position:relative;z-index:1;width:100%;height:100%;margin:0;border:0;background:transparent;color:inherit}
     .ideaLeafletMarker .domainIcon svg{width:14px;height:14px}
     .ideaLeafletMarker:hover,.ideaLeafletMarker.active{transform:scale(1.12);box-shadow:0 12px 24px rgba(20,38,42,.16);background:color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 70%,white)}
+    .ideaLeafletMarker.home{
+      background:#fff;color:var(--accent-dark);border-color:rgba(79,142,158,.22);
+      box-shadow:0 8px 18px rgba(20,38,42,.11),0 0 0 5px rgba(168,225,221,.24)
+    }
+    .ideaLeafletMarker.home:not(.user)::after{background:#fff;border-color:rgba(79,142,158,.22)}
+    .ideaLeafletMarker.home:hover,.ideaLeafletMarker.home.active{background:#fff;box-shadow:0 12px 24px rgba(20,38,42,.16),0 0 0 6px rgba(168,225,221,.34)}
+    .ideaLeafletMarkerCount{
+      position:absolute;right:-8px;top:-8px;z-index:2;min-width:18px;height:18px;padding:0 5px;border-radius:999px;
+      display:inline-flex;align-items:center;justify-content:center;background:var(--accent-dark);color:#fff;
+      border:2px solid #fff;font-size:10px;font-weight:800;line-height:1;box-shadow:0 6px 12px rgba(20,38,42,.12)
+    }
     .ideaLeafletMarker.user{
       width:36px;height:36px;background:#fff;color:#07345e;border-color:rgba(79,142,158,.18);
       box-shadow:0 12px 28px rgba(20,38,42,.14)
@@ -922,9 +933,10 @@
       width:100%;display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:11px;text-align:left;align-items:center;
       padding:12px;border-radius:16px;border:1px solid var(--theme-line,rgba(79,142,158,.10));
       background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.92);cursor:pointer;color:inherit;
-      transition:background .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease)
+      transition:background .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease)
     }
     .ideaMapResult:hover,.ideaMapResult.active{background:linear-gradient(var(--theme-tint-strong),var(--theme-tint-strong)),rgba(255,255,255,.96);border-color:var(--theme-line,rgba(79,142,158,.18));transform:translateY(-1px)}
+    .ideaMapResult.active{box-shadow:0 0 0 2px var(--theme-line,rgba(79,142,158,.18)),0 10px 24px rgba(20,38,42,.08)}
     .ideaMapResult .domainIcon{width:34px;height:34px;margin:0;align-self:center;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
     .ideaMapResult .domainIcon svg{width:15px;height:15px}
     .ideaMapResultText{display:block;min-width:0}
@@ -2100,7 +2112,7 @@
   const weekName = id => { const w = ACTIVE_WEEKS.find(x=>x.id===id); return w ? 'Week '+w.week : id; };
   const isConcrete = item => !/doorlopend|wekelijks|bij mooi weer|check programma|actuele/i.test(String(item.date + ' ' + item.time));
   const IDEA_TYPE_OPTIONS = ['Eigen aanbod','Bestaand extern aanbod','Zoekbron / agenda','Inzending'];
-  const IDEA_LOCATION_OPTIONS = ['Binnen','Buiten','Op pad','Online'];
+  const IDEA_LOCATION_OPTIONS = ['Binnen','Buiten','Thuis','Op pad','Online'];
   const AGENDA_DISTANCE_OPTIONS = ['Op locatie','0–10 km (dichtbij)','10–25 km (regio)'];
   const INSPIRATION_DISTANCE_OPTIONS = ['Op locatie','0–10 km','10–25 km','25–50 km (uitstap)','50+ km (ver weg / dagtrips)'];
   const IDEA_DISTANCE_OPTIONS = INSPIRATION_DISTANCE_OPTIONS;
@@ -2432,6 +2444,7 @@
     social:`<svg viewBox="0 0 20 20"><circle cx="7.4" cy="7" r="2.4"></circle><circle cx="13.2" cy="8" r="2"></circle><path d="M3.7 15c.7-2.1 2-3.2 3.7-3.2s3 1.1 3.7 3.2"></path><path d="M10.8 14.6c.6-1.4 1.6-2.2 2.9-2.2 1.4 0 2.4.9 3 2.6"></path></svg>`,
     sport:`<svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="6"></circle><path d="M10 4v12"></path><path d="M4 10h12"></path><path d="M6.2 6.2c1 .9 2.4 1.4 3.8 1.4s2.8-.5 3.8-1.4"></path><path d="M6.2 13.8c1-.9 2.4-1.4 3.8-1.4s2.8.5 3.8 1.4"></path></svg>`,
     action:`<svg viewBox="0 0 24 24"><path d="M13 2.8 5.2 13h6.1l-1 8.2 8.5-11.5h-6.2L13 2.8z"></path></svg>`,
+    home:`<svg viewBox="0 0 20 20"><path d="M4 9.2 10 4l6 5.2"></path><path d="M5.8 8.4V16h8.4V8.4"></path><path d="M8.4 16v-4.2h3.2V16"></path></svg>`,
     default:`<svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5"></circle></svg>`
   };
 
@@ -2545,10 +2558,12 @@
     const v = normalize(value);
     if(!v) return 'Binnen';
     const hasOnline = v.includes('online');
+    const hasHome = v === 'thuis' || v.includes('thuis') || v.includes('aan huis') || v.includes('bij jou') || v.includes('eigen locatie');
     const hasOutside = v.includes('buiten de deur') || v.includes('op pad') || v.includes('ergens anders') || v.includes('niet thuis') || v.includes('extern');
     const hasOutdoor = v === 'buiten' || v.includes('buitenactiviteit') || v.includes('buitenruimte') || v.includes('wandelen') || v.includes('park') || v.includes('route');
-    const hasIndoor = v === 'binnen' || v.includes('op locatie') || v.includes('op groep') || v.includes('op terrein') || v.includes('terrein') || v.includes('thuis') || v.includes('binnenruimte');
+    const hasIndoor = v === 'binnen' || v.includes('op locatie') || v.includes('op groep') || v.includes('op terrein') || v.includes('terrein') || v.includes('binnenruimte');
     if(hasOnline) return 'Online';
+    if(hasHome) return 'Thuis';
     if(v.includes('op locatie + buiten') || v.includes('binnen + buiten') || v.includes('binnen en buiten')) return hasOutside ? 'Op pad' : 'Buiten';
     if(hasOutside && hasIndoor) return 'Op pad';
     if(hasOutside) return 'Op pad';
@@ -2763,9 +2778,13 @@
     return 2 * radius * Math.asin(Math.sqrt(h));
   }
   function itemCoordinate(item={}){
-    const lat = Number(item.lat ?? item.latitude);
-    const lon = Number(item.lon ?? item.lng ?? item.longitude);
-    if(Number.isFinite(lat) && Number.isFinite(lon)) return {lat, lon};
+    const rawLat = item.lat ?? item.latitude;
+    const rawLon = item.lon ?? item.lng ?? item.longitude;
+    const hasLat = String(rawLat ?? '').trim() !== '';
+    const hasLon = String(rawLon ?? '').trim() !== '';
+    const lat = Number(rawLat);
+    const lon = Number(rawLon);
+    if(hasLat && hasLon && Number.isFinite(lat) && Number.isFinite(lon)) return {lat, lon};
     const text = normalize(`${item.address || ''} ${item.where || ''} ${item.place || ''} ${item.location || ''} ${item.title || ''} ${item.source || ''}`);
     const match = Object.entries(KNOWN_PLACE_COORDS)
       .sort((a,b) => b[0].length - a[0].length)
@@ -2783,12 +2802,20 @@
       || text.includes('op terrein')
       || text.includes('online');
   }
+  function itemIsHomeActivity(item={}){
+    const text = normalize(`${item.locationType || ''} ${item.address || ''} ${item.where || ''} ${item.place || ''} ${item.location || ''} ${item.materials || ''} ${item.fit || ''}`);
+    return text.includes('thuis')
+      || text.includes('aan huis')
+      || text.includes('bij jou')
+      || text.includes('eigen locatie')
+      || text.includes('online');
+  }
   function ideaMapCoordinate(item={}){
     const coord = itemCoordinate(item);
     if(coord) return {...coord, source:'place'};
     if(itemCanUseUserLocation(item)){
       const location = userLocation || DEFAULT_LOCATION;
-      return {lat:location.lat, lon:location.lon, source:'user'};
+      return {lat:location.lat, lon:location.lon, source:'user', home:itemIsHomeActivity(item)};
     }
     return null;
   }
@@ -4734,7 +4761,10 @@
   }
   function ideaMapPanelMarkup(points=[]){
     const visiblePoints = visibleIdeaMapPoints(points);
-    const resultsHtml = visiblePoints.map(point => {
+    const orderedPoints = activeIdeaMapKey
+      ? [...visiblePoints].sort((a,b) => (a.key === activeIdeaMapKey ? -1 : b.key === activeIdeaMapKey ? 1 : 0))
+      : visiblePoints;
+    const resultsHtml = orderedPoints.map(point => {
       const active = point.key === activeIdeaMapKey;
       const image = approvedIdeaImage(point.item);
       const thumb = image ? `<img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async">` : '';
@@ -4762,12 +4792,12 @@
     panel.outerHTML = ideaMapPanelMarkup(points);
     setActiveIdeaMapItem(activeIdeaMapKey, {scroll:false});
   }
-  function setActiveIdeaMapItem(key, {scroll=true, clearCluster=false}={}){
-    const refreshPanel = clearCluster && activeIdeaMapClusterKeys;
+  function setActiveIdeaMapItem(key, {scroll=true, clearCluster=false, refreshPanel=false}={}){
+    const shouldRefreshPanel = refreshPanel || (clearCluster && activeIdeaMapClusterKeys);
     if(clearCluster) activeIdeaMapClusterKeys = null;
     activeIdeaMapKey = key || activeIdeaMapKey;
     if(!activeIdeaMapKey) return;
-    if(refreshPanel){
+    if(shouldRefreshPanel){
       updateIdeaMapPanel();
       return;
     }
@@ -4778,7 +4808,11 @@
     });
     if(ideaMapProvider) ideaMapProvider.setActive(activeIdeaMapKey);
     const result = $(`[data-map-result-key="${CSS.escape(activeIdeaMapKey)}"]`);
-    if(result && scroll) result.scrollIntoView({behavior:'smooth', block:'nearest'});
+    if(result && scroll){
+      const panel = result.closest('.ideaMapResults');
+      if(panel) panel.scrollTo({top:Math.max(0, result.offsetTop - 12), behavior:'smooth'});
+      else result.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
   }
   function setActiveIdeaMapCluster(keys=[]){
     const uniqueKeys = [...new Set(keys.filter(Boolean))];
@@ -4800,11 +4834,23 @@
     ideaMapProvider = null;
   }
   function ideaLeafletIcon(point, active=false){
+    const isHome = point.source === 'user' && point.home;
+    const themeClass = isHome ? 'home' : domainThemeClass(point.item.domain);
+    const iconHtml = isHome ? ICONS.home : domainIcon(point.item.domain);
     return L.divIcon({
       className:`ideaLeafletMarkerWrap${active ? ' active' : ''}`,
       iconSize:[34,40],
       iconAnchor:[17,35],
-      html:`<span class="ideaLeafletMarker ${domainThemeClass(point.item.domain)}${active ? ' active' : ''}" data-map-pin-key="${escapeHtml(point.key)}">${domainIcon(point.item.domain)}</span>`
+      html:`<span class="ideaLeafletMarker ${themeClass}${active ? ' active' : ''}" data-map-pin-key="${escapeHtml(point.key)}"><span class="domainIcon" aria-hidden="true">${iconHtml}</span></span>`
+    });
+  }
+  function homeLeafletIcon(points=[], active=false){
+    const count = points.length;
+    return L.divIcon({
+      className:`ideaLeafletMarkerWrap home${active ? ' active' : ''}`,
+      iconSize:[40,46],
+      iconAnchor:[20,41],
+      html:`<span class="ideaLeafletMarker home${active ? ' active' : ''}" data-map-home-key="${escapeHtml(points.map(point => point.key).join('|'))}"><span class="domainIcon" aria-hidden="true">${ICONS.home}</span>${count > 1 ? `<span class="ideaLeafletMarkerCount">${escapeHtml(count)}</span>` : ''}</span>`
     });
   }
   function userLeafletIcon(){
@@ -4851,7 +4897,21 @@
         window.setTimeout(() => options.onCluster?.(clusterKeys), 120);
       });
     }
-    const markers = points.map(point => {
+    const homePoints = points.filter(point => point.source === 'user' && point.home);
+    const mapPoints = points.filter(point => !(point.source === 'user' && point.home));
+    let homeMarker = null;
+    if(homePoints.length){
+      homeMarker = L.marker([userPoint.lat, userPoint.lon], {
+        icon:homeLeafletIcon(homePoints, homePoints.some(point => point.key === activeIdeaMapKey)),
+        title:homePoints.length === 1 ? homePoints[0].item.title : `${homePoints.length} thuisactiviteiten`,
+        ideaKeys:homePoints.map(point => point.key)
+      }).addTo(map);
+      homeMarker.on('click', () => {
+        if(homePoints.length === 1) options.onSelect?.(homePoints[0].key);
+        else options.onCluster?.(homePoints.map(point => point.key));
+      });
+    }
+    const markers = mapPoints.map(point => {
       const marker = L.marker([point.lat, point.lon], {
         icon:ideaLeafletIcon(point, point.key === activeIdeaMapKey),
         title:point.item.title,
@@ -4862,6 +4922,7 @@
       bounds.push([point.lat, point.lon]);
       return marker;
     });
+    homePoints.forEach(point => bounds.push([point.lat, point.lon]));
     markerLayer.addTo(map);
     window.requestAnimationFrame(() => {
       map.invalidateSize();
@@ -4873,9 +4934,21 @@
         markers.forEach(marker => {
           const active = marker.options.ideaKey === key;
           const element = marker.getElement();
-          if(element) element.classList.toggle('active', active);
+          if(element){
+            element.classList.toggle('active', active);
+            element.querySelector('.ideaLeafletMarker')?.classList.toggle('active', active);
+          }
           if(active) map.panTo(marker.getLatLng(), {animate:true, duration:.35});
         });
+        if(homeMarker){
+          const active = homeMarker.options.ideaKeys.includes(key);
+          const element = homeMarker.getElement();
+          if(element){
+            element.classList.toggle('active', active);
+            element.querySelector('.ideaLeafletMarker')?.classList.toggle('active', active);
+          }
+          if(active) map.panTo(homeMarker.getLatLng(), {animate:true, duration:.35});
+        }
       },
       destroy(){
         markerLayer.clearLayers();
@@ -4888,7 +4961,7 @@
     if(provider === 'leaflet'){
       return createLeafletMapProvider(container, points, {
         userPoint:userLocation || DEFAULT_LOCATION,
-        onSelect:key => setActiveIdeaMapItem(key, {clearCluster:true}),
+        onSelect:key => setActiveIdeaMapItem(key, {clearCluster:true, refreshPanel:true}),
         onCluster:keys => setActiveIdeaMapCluster(keys),
         onLocationClick:openLocationModal
       });
