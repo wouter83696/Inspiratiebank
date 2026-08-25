@@ -655,6 +655,22 @@
     .locationLegendItem .locationRadius::before{content:"-";color:rgba(49,95,107,.42)}
     .locationLegendItem .locationChevron{width:13px;height:13px;margin-left:2px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.62}
     .locationLegendItem:hover{background:rgba(255,255,255,.76);border-color:rgba(255,255,255,.88);box-shadow:0 9px 22px rgba(20,38,42,.055)}
+    .quickDiscover{
+      display:flex;align-items:center;gap:8px;margin:6px 0 16px;padding:2px 0 4px;
+      overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch
+    }
+    .quickDiscover::-webkit-scrollbar{display:none}
+    .quickDiscoverButton{
+      flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:8px 13px;
+      border:1px solid rgba(79,142,158,.10);border-radius:999px;background:rgba(255,255,255,.62);
+      color:var(--accent-dark);font:inherit;font-size:.82rem;font-weight:600;white-space:nowrap;cursor:pointer;
+      box-shadow:0 7px 18px rgba(20,38,42,.045);backdrop-filter:blur(14px);
+      transition:background .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease)
+    }
+    .quickDiscoverButton:hover,.quickDiscoverButton.active{
+      background:rgba(168,225,221,.22);border-color:rgba(79,142,158,.20);box-shadow:0 9px 22px rgba(20,38,42,.065);transform:translateY(-1px)
+    }
+    .quickDiscoverButton svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .filters{display:grid;grid-template-columns:1.5fr repeat(4,minmax(130px,1fr));gap:8px;margin:0;align-items:center}
     .filters.more{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:12px;row-gap:0;transition:row-gap .24s var(--ease)}
     .filterSearch{position:relative;min-width:0}
@@ -1809,6 +1825,32 @@
         </div>
       </div>
       <div id="inspirationThemeLegend"></div>
+      <div class="quickDiscover" aria-label="Snelle keuzes">
+        <button class="quickDiscoverButton" type="button" data-quick-filter="shuffle">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.7 5.1L19 10l-5.3 1.9L12 17l-1.7-5.1L5 10l5.3-1.9L12 3Z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"></path></svg>
+          <span>Verras me</span>
+        </button>
+        <button class="quickDiscoverButton" type="button" data-quick-filter="near">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+          <span>Dichtbij</span>
+        </button>
+        <button class="quickDiscoverButton" type="button" data-quick-filter="free">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 7.5c-.8-.8-1.8-1.2-3-1.2-2.6 0-4.6 2.4-4.6 5.7s2 5.7 4.6 5.7c1.2 0 2.2-.4 3-1.2"></path><path d="M5 10h8"></path><path d="M5 14h8"></path></svg>
+          <span>Gratis</span>
+        </button>
+        <button class="quickDiscoverButton" type="button" data-quick-filter="calm">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"></path><path d="M3 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0"></path></svg>
+          <span>Rustig</span>
+        </button>
+        <button class="quickDiscoverButton" type="button" data-quick-filter="inside">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5"></path><path d="M6.5 9.5V20h11V9.5"></path><path d="M10 20v-5h4v5"></path></svg>
+          <span>Binnen</span>
+        </button>
+        <button class="quickDiscoverButton" type="button" data-quick-filter="outside">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19c4.8-.7 9-4.2 11-12"></path><path d="M7 14c2.1 1.1 4.2 1.1 6.2.1C16.8 12.4 19 9.6 19 4c-5.5.3-9.2 3-11.3 7-.8 1.5-1 2.8-.7 4.4z"></path></svg>
+          <span>Op pad</span>
+        </button>
+      </div>
       <div id="ideaList" class="tableWrap ideaView" hidden></div>
       <div id="ideaMap" class="ideaMap ideaView" hidden></div>
       <div id="ideaCards" class="cards ideaView active"></div>
@@ -4712,6 +4754,46 @@
       button.classList.toggle('active', selected);
       button.setAttribute('aria-pressed', selected ? 'true' : 'false');
     });
+    updateQuickDiscoverButtons();
+  }
+  function updateQuickDiscoverButtons(){
+    const states = {
+      near: $('#ideaDistance')?.value === '0–10 km',
+      free: $('#ideaCost')?.value === 'Gratis',
+      calm: $('#ideaStimulus')?.value === 'Laag',
+      inside: $('#ideaLocation')?.value === 'Binnen',
+      outside: $('#ideaLocation')?.value === 'Op pad'
+    };
+    $$('.quickDiscoverButton[data-quick-filter]').forEach(button => {
+      const active = Boolean(states[button.dataset.quickFilter]);
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+  function setIdeaFilterValue(id, value){
+    const el = $('#'+id);
+    if(!el) return;
+    el.value = value;
+    syncCustomSelect(el);
+  }
+  function toggleIdeaFilterValue(id, value){
+    const el = $('#'+id);
+    if(!el) return;
+    setIdeaFilterValue(id, el.value === value ? 'all' : value);
+  }
+  function applyQuickDiscoverFilter(type){
+    if(type === 'shuffle'){
+      ideaMixSeed += 1;
+      localStorage.setItem('zomerprogramma_idea_mix_seed_v1', String(ideaMixSeed));
+      renderIdeas();
+      return;
+    }
+    if(type === 'near') toggleIdeaFilterValue('ideaDistance', '0–10 km');
+    if(type === 'free') toggleIdeaFilterValue('ideaCost', 'Gratis');
+    if(type === 'calm') toggleIdeaFilterValue('ideaStimulus', 'Laag');
+    if(type === 'inside') toggleIdeaFilterValue('ideaLocation', 'Binnen');
+    if(type === 'outside') toggleIdeaFilterValue('ideaLocation', 'Op pad');
+    renderIdeas();
   }
   function updateAgendaThemeChips(){
     const active = domainDisplayLabel($('#agendaDomain')?.value || 'all');
@@ -5299,6 +5381,9 @@
       ideaMixSeed += 1;
       localStorage.setItem('zomerprogramma_idea_mix_seed_v1', String(ideaMixSeed));
       renderIdeas();
+    });
+    $$('.quickDiscoverButton[data-quick-filter]').forEach(button => {
+      button.addEventListener('click', () => applyQuickDiscoverFilter(button.dataset.quickFilter));
     });
     const ongoingToggle = $('#ongoingToggle');
     if(ongoingToggle) ongoingToggle.addEventListener('click', () => toggleOngoing({scroll:false}));
