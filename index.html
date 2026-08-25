@@ -964,11 +964,13 @@
     .ideaMapResultPills .stimulusPill{width:28px;min-width:28px;height:22px;min-height:22px;padding:4px 6px}
     .ideaMapResultPills .stimulusIcon,.ideaMapResultPills .stimulusIcon svg{width:13px;height:13px}
     .ideaMapResultMeta{
-      display:block;margin-top:7px;max-width:100%;padding:5px 8px;border-radius:10px;
-      color:rgba(11,18,32,.64);background:rgba(255,255,255,.46);border:1px solid rgba(79,142,158,.08);
-      font-size:.72rem;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+      display:block;margin-top:7px;max-width:100%;padding:5px 8px;border-radius:7px;
+      color:var(--muted);
+      background:color-mix(in srgb,var(--theme-tint-strong) 62%,rgba(255,255,255,.56));
+      border:1px solid color-mix(in srgb,var(--theme-line) 56%,rgba(255,255,255,.54));
+      font-size:.72rem;line-height:1.22;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
     }
-    .ideaMapResultMeta strong{display:inline;color:var(--accent-dark);font-size:inherit;line-height:inherit}
+    .ideaMapResultMeta strong{display:inline;color:var(--accent-dark);font-size:inherit;line-height:inherit;font-weight:600}
     .ideaMapResultThumbWrap{
       position:relative;display:block;align-self:stretch;justify-self:stretch;width:94px;height:100%;min-height:118px;overflow:hidden;border-radius:0 15px 15px 0;
       border-left:1px solid rgba(255,255,255,.72);box-shadow:-10px 0 22px rgba(20,38,42,.045)
