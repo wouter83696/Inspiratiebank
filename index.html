@@ -516,15 +516,15 @@
     .card .fine{margin-top:2px;color:var(--muted);font-size:.86rem}
     .card .fine strong{display:block;margin:7px 0 2px;color:var(--accent-dark)}
     .cardMetaLine{
-      display:flex;align-items:center;gap:7px;width:100%;min-width:0;margin:2px 0 2px;padding:6px 9px;
+      display:flex;align-items:center;gap:6px;width:100%;min-width:0;margin:2px 0 2px;padding:6px 8px;
       border-radius:7px;
       background:color-mix(in srgb,var(--theme-tint-strong) 62%,rgba(255,255,255,.56));
       border:1px solid color-mix(in srgb,var(--theme-line) 56%,rgba(255,255,255,.54));
-      color:var(--muted);font-size:.82rem;line-height:1.25;white-space:nowrap;overflow:hidden
+      color:var(--muted);font-size:.8rem;line-height:1.25;white-space:nowrap;overflow:hidden
     }
     .cardMetaLine strong{display:inline !important;margin:0 !important;color:var(--accent-dark);font-weight:600}
-    .cardMetaPart{display:inline-flex;align-items:center;gap:4px;min-width:0}
-    .cardMetaPart:last-child{overflow:hidden;text-overflow:ellipsis}
+    .cardMetaPart{display:inline-flex;align-items:center;gap:4px;min-width:0;flex:0 1 auto}
+    .cardMetaPart:last-child{flex:1 1 auto;overflow:visible;text-overflow:clip}
     .cardMetaDot{flex:0 0 auto;color:color-mix(in srgb,var(--accent-dark) 40%,var(--muted))}
     .metaIcon{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;flex:0 0 14px;color:color-mix(in srgb,var(--theme-ink) 76%,var(--accent-dark))}
     .metaIcon svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
