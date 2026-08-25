@@ -879,14 +879,20 @@
     .ideaMapBadge svg,.ideaMapLocation svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaLeafletMarker{
       position:relative;
-      width:28px;height:28px;border-radius:999px;border:1px solid var(--theme-line,rgba(79,142,158,.18));
+      width:30px;height:30px;border-radius:999px;border:1px solid var(--theme-line,rgba(79,142,158,.18));
       background:var(--theme-tint-strong,rgba(168,225,221,.28));
       color:var(--theme-ink,var(--accent-dark));box-shadow:0 8px 18px rgba(20,38,42,.10);
       display:inline-flex;align-items:center;justify-content:center;padding:0;cursor:pointer;
       transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease)
     }
+    .ideaLeafletMarker:not(.user)::after{
+      content:"";position:absolute;left:50%;bottom:-5px;width:9px;height:9px;
+      transform:translateX(-50%) rotate(45deg);border-radius:2px;
+      background:inherit;border-right:1px solid var(--theme-line,rgba(79,142,158,.18));border-bottom:1px solid var(--theme-line,rgba(79,142,158,.18));
+      box-shadow:3px 3px 8px rgba(20,38,42,.055);z-index:-1
+    }
     .ideaLeafletMarker svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-    .ideaLeafletMarker .domainIcon{width:100%;height:100%;margin:0;border:0;background:transparent;color:inherit}
+    .ideaLeafletMarker .domainIcon{position:relative;z-index:1;width:100%;height:100%;margin:0;border:0;background:transparent;color:inherit}
     .ideaLeafletMarker .domainIcon svg{width:14px;height:14px}
     .ideaLeafletMarker:hover,.ideaLeafletMarker.active{transform:scale(1.12);box-shadow:0 12px 24px rgba(20,38,42,.16);background:color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 70%,white)}
     .ideaLeafletMarker.user{
@@ -913,7 +919,7 @@
     .ideaMapClear:hover{background:#fff;border-color:rgba(79,142,158,.18)}
     .ideaMapResults{display:grid;gap:8px;padding:12px;overflow:auto;min-height:0}
     .ideaMapResult{
-      width:100%;display:grid;grid-template-columns:34px minmax(0,1fr);gap:11px;text-align:left;align-items:center;
+      width:100%;display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:11px;text-align:left;align-items:center;
       padding:12px;border-radius:16px;border:1px solid var(--theme-line,rgba(79,142,158,.10));
       background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.92);cursor:pointer;color:inherit;
       transition:background .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease)
@@ -924,6 +930,10 @@
     .ideaMapResultText{display:block;min-width:0}
     .ideaMapResult strong{display:block;color:var(--accent-dark);font-size:.94rem;line-height:1.16}
     .ideaMapResultMeta{display:block;margin-top:4px;color:rgba(11,18,32,.62);font-size:.78rem;line-height:1.3}
+    .ideaMapResultThumb{
+      width:58px;height:46px;border-radius:12px;object-fit:cover;display:block;
+      border:1px solid rgba(255,255,255,.72);box-shadow:0 8px 18px rgba(20,38,42,.08)
+    }
     .ideaMapEmpty{grid-column:1/-1;padding:28px;border:1px dashed rgba(79,142,158,.16);border-radius:18px;color:var(--muted);background:rgba(255,255,255,.72)}
     .ideaTitle{display:flex;align-items:flex-start;gap:10px}
     .ideaTitleText{display:block}
@@ -4726,9 +4736,12 @@
     const visiblePoints = visibleIdeaMapPoints(points);
     const resultsHtml = visiblePoints.map(point => {
       const active = point.key === activeIdeaMapKey;
+      const image = approvedIdeaImage(point.item);
+      const thumb = image ? `<img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async">` : '';
       return `<button class="ideaMapResult ${domainThemeClass(point.item.domain)}${active ? ' active' : ''}" type="button" data-map-result-key="${escapeHtml(point.key)}">
         <span class="domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span>
         <span class="ideaMapResultText"><strong>${escapeHtml(point.item.title)}</strong><span class="ideaMapResultMeta">${escapeHtml(ideaMapMeta(point.item, point))}</span></span>
+        ${thumb}
       </button>`;
     }).join('');
     const panelTitle = activeIdeaMapClusterKeys ? `${visiblePoints.length} activiteiten op deze plek` : 'Activiteiten op kaart';
@@ -4789,8 +4802,8 @@
   function ideaLeafletIcon(point, active=false){
     return L.divIcon({
       className:`ideaLeafletMarkerWrap${active ? ' active' : ''}`,
-      iconSize:[32,32],
-      iconAnchor:[16,16],
+      iconSize:[34,40],
+      iconAnchor:[17,35],
       html:`<span class="ideaLeafletMarker ${domainThemeClass(point.item.domain)}${active ? ' active' : ''}" data-map-pin-key="${escapeHtml(point.key)}">${domainIcon(point.item.domain)}</span>`
     });
   }
