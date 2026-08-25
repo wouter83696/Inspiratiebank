@@ -1184,12 +1184,19 @@
         padding:clamp(128px,23svh,154px) max(24px,calc((100vw - var(--max)) / 2 + 24px)) clamp(48px,7.5svh,58px);
         border:0;border-radius:0;
         box-shadow:none;
+        background-position:24% top,center,center;
       }
-      .tabHero::before{inset:6% -30% -18% 8%;opacity:.82}
+      .tabHero::before{
+        content:"";position:absolute;z-index:0;inset:0;pointer-events:none;
+        background:
+          linear-gradient(90deg,rgba(255,253,249,.82) 0%,rgba(255,253,249,.56) 48%,rgba(255,253,249,.18) 100%),
+          linear-gradient(180deg,rgba(255,253,249,.22) 0%,rgba(255,253,249,0) 42%,rgba(255,253,249,.18) 100%);
+        opacity:.94
+      }
       .tabHero::after{opacity:.42}
       .tabHeroKicker{order:1;font-size:.76rem;margin-bottom:5px}
-      .tabHeroTitle{order:2;font-size:clamp(2.92rem,14.9vw,3.48rem);line-height:.91}
-      .inspirationHero .tabHeroTitle{font-size:clamp(3.08rem,15.65vw,3.66rem);line-height:.9}
+      .tabHeroTitle{order:2;font-size:clamp(2.62rem,13.2vw,3.18rem);line-height:.94;letter-spacing:-.035em}
+      .inspirationHero .tabHeroTitle{font-size:clamp(2.78rem,13.9vw,3.32rem);line-height:.94}
       .tabHeroLine{order:3;margin-top:clamp(11px,2.2svh,15px);font-size:clamp(1.04rem,4.2vw,1.14rem)}
       .tabHeroActions{order:4;margin-top:clamp(30px,5.4svh,40px);gap:7px}
       .tabHeroButton{height:42px;min-height:42px;padding:0 11px;font-size:clamp(.72rem,3.2vw,.78rem)}
@@ -1368,7 +1375,7 @@
         min-height:236px;
         margin:calc(-1 * clamp(84px,16svh,104px)) calc(50% - 50vw) 0;
         padding:clamp(106px,18svh,128px) max(20px,calc((100vw - var(--max)) / 2 + 20px)) 30px;
-        background-position:center top,center,center
+        background-position:58% top,center,center
       }
       .agendaHero .tabHeroLine,
       .agendaHero .tabHeroTitle{display:none}
