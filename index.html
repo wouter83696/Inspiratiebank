@@ -857,11 +857,12 @@
     #ideaMapProviderCanvas{position:absolute;inset:0;z-index:1;background:#e8f2f2}
     .leaflet-container{font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:#e8f2f2}
     .leaflet-control-attribution{font-size:10px}
-    .leaflet-control-zoom{border:0 !important;box-shadow:0 10px 24px rgba(20,38,42,.12) !important}
-    .leaflet-control-zoom a{border:0 !important;color:var(--accent-dark) !important}
-    .marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:rgba(168,225,221,.34)}
+    .leaflet-top.leaflet-right{top:14px;right:14px}
+    .leaflet-control-zoom{border:0 !important;border-radius:13px !important;overflow:hidden;box-shadow:0 10px 24px rgba(20,38,42,.12) !important}
+    .leaflet-control-zoom a{width:32px !important;height:32px !important;line-height:31px !important;border:0 !important;color:var(--accent-dark) !important}
+    .marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:rgba(168,225,221,.26)}
     .marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{
-      background:#fff;color:var(--accent-dark);font-weight:700;box-shadow:0 10px 22px rgba(20,38,42,.13)
+      background:rgba(255,255,255,.94);color:var(--accent-dark);font-weight:700;box-shadow:0 10px 22px rgba(20,38,42,.13)
     }
     .ideaMapHeader{
       position:absolute;z-index:4;left:18px;top:18px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:calc(100% - 36px)
@@ -876,7 +877,7 @@
     .ideaLeafletMarker{
       position:relative;
       width:30px;height:30px;border-radius:999px;border:1px solid var(--theme-line,rgba(79,142,158,.18));
-      background:linear-gradient(180deg,var(--theme-tint-strong,rgba(168,225,221,.28)),rgba(255,255,255,.94));
+      background:color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 72%,white);
       color:var(--theme-ink,var(--accent-dark));box-shadow:0 10px 20px rgba(20,38,42,.12);
       display:inline-flex;align-items:center;justify-content:center;padding:0;cursor:pointer;
       transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease)
@@ -900,15 +901,17 @@
     .ideaMapPanelHead p{margin:5px 0 0;color:var(--muted);font-size:.84rem;line-height:1.35}
     .ideaMapResults{display:grid;gap:8px;padding:12px;overflow:auto;min-height:0}
     .ideaMapResult{
-      width:100%;display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;text-align:left;align-items:start;
+      width:100%;display:grid;grid-template-columns:32px minmax(0,1fr);gap:10px;text-align:left;align-items:center;
       padding:12px;border-radius:16px;border:1px solid var(--theme-line,rgba(79,142,158,.10));
       background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.92);cursor:pointer;color:inherit;
       transition:background .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease)
     }
     .ideaMapResult:hover,.ideaMapResult.active{background:linear-gradient(var(--theme-tint-strong),var(--theme-tint-strong)),rgba(255,255,255,.96);border-color:var(--theme-line,rgba(79,142,158,.18));transform:translateY(-1px)}
-    .ideaMapResult .domainIcon{width:30px;height:30px;margin:0}
-    .ideaMapResult strong{display:block;color:var(--accent-dark);font-size:.94rem;line-height:1.18}
-    .ideaMapResult span:not(.domainIcon){display:block;margin-top:5px;color:rgba(11,18,32,.62);font-size:.78rem;line-height:1.3}
+    .ideaMapResult .domainIcon{width:32px;height:32px;margin:0;align-self:center;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
+    .ideaMapResult .domainIcon svg{width:15px;height:15px}
+    .ideaMapResultText{display:block;min-width:0}
+    .ideaMapResult strong{display:block;color:var(--accent-dark);font-size:.94rem;line-height:1.2}
+    .ideaMapResultMeta{display:block;margin-top:4px;color:rgba(11,18,32,.62);font-size:.78rem;line-height:1.3}
     .ideaMapEmpty{grid-column:1/-1;padding:28px;border:1px dashed rgba(79,142,158,.16);border-radius:18px;color:var(--muted);background:rgba(255,255,255,.72)}
     .ideaTitle{display:flex;align-items:flex-start;gap:10px}
     .ideaTitleText{display:block}
@@ -4735,9 +4738,10 @@
     const map = L.map(container, {
       scrollWheelZoom:false,
       tap:true,
-      zoomControl:true,
+      zoomControl:false,
       attributionControl:true
     });
+    L.control.zoom({position:'topright'}).addTo(map);
     L.tileLayer(MAP_TILE_URL, {
       maxZoom:19,
       attribution:MAP_ATTRIBUTION
@@ -4813,7 +4817,7 @@
       const active = point.key === activeIdeaMapKey;
       return `<button class="ideaMapResult ${domainThemeClass(point.item.domain)}${active ? ' active' : ''}" type="button" data-map-result-key="${escapeHtml(point.key)}">
         <span class="domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span>
-        <span><strong>${escapeHtml(point.item.title)}</strong><span>${escapeHtml(ideaMapMeta(point.item, point))}</span></span>
+        <span class="ideaMapResultText"><strong>${escapeHtml(point.item.title)}</strong><span class="ideaMapResultMeta">${escapeHtml(ideaMapMeta(point.item, point))}</span></span>
       </button>`;
     }).join('');
     map.innerHTML = `<div class="ideaMapCanvas" aria-label="Kaart met inspiratiepunten">
