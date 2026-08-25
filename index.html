@@ -928,28 +928,29 @@
       width:100%;display:grid;grid-template-columns:34px minmax(0,1fr);gap:11px;text-align:left;align-items:center;
       padding:12px;border-radius:16px;border:1px solid var(--theme-line,rgba(79,142,158,.10));
       background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.92);cursor:pointer;color:inherit;
-      overflow:hidden;min-height:88px;height:auto;
+      overflow:visible;min-height:116px;height:auto;
       transition:background .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease)
     }
     .ideaMapResult.hasThumb{
-      grid-template-columns:34px minmax(0,1fr) 78px;min-height:96px;padding:10px 10px 10px 12px
+      grid-template-columns:34px minmax(0,1fr) 92px;min-height:124px;padding:0 0 0 12px;gap:12px
     }
     .ideaMapResult:hover,.ideaMapResult.active{background:linear-gradient(var(--theme-tint-strong),var(--theme-tint-strong)),rgba(255,255,255,.96);border-color:var(--theme-line,rgba(79,142,158,.18));transform:translateY(-1px)}
     .ideaMapResult.active{box-shadow:0 0 0 2px var(--theme-line,rgba(79,142,158,.18)),0 10px 24px rgba(20,38,42,.08)}
     .ideaMapResult .domainIcon{width:34px;height:34px;margin:0;align-self:center;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
     .ideaMapResult.homeResult .domainIcon{background:#fff;border-color:rgba(79,142,158,.18);color:var(--accent-dark);box-shadow:0 0 0 4px rgba(168,225,221,.20)}
     .ideaMapResult .domainIcon svg{width:15px;height:15px}
-    .ideaMapResultText{display:block;min-width:0}
+    .ideaMapResultText{display:block;min-width:0;padding:2px 0}
+    .ideaMapResult.hasThumb .ideaMapResultText{padding:12px 0}
     .ideaMapResult.hasThumb .ideaMapResultText{align-self:center}
-    .ideaMapResult strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--accent-dark);font-size:.94rem;line-height:1.16}
+    .ideaMapResult strong{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:var(--accent-dark);font-size:.9rem;line-height:1.14}
     .ideaMapResultPills{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:6px}
     .ideaMapResultPills .pill{min-height:22px;padding:4px 7px;font-size:.68rem;box-shadow:none}
     .ideaMapResultPills .stimulusPill{width:28px;min-width:28px;height:22px;min-height:22px;padding:4px 6px}
     .ideaMapResultPills .stimulusIcon,.ideaMapResultPills .stimulusIcon svg{width:13px;height:13px}
-    .ideaMapResultMeta{display:block;margin-top:5px;color:rgba(11,18,32,.62);font-size:.78rem;line-height:1.3}
+    .ideaMapResultMeta{display:block;margin-top:6px;color:rgba(11,18,32,.62);font-size:.76rem;line-height:1.25}
     .ideaMapResultThumbWrap{
-      position:relative;display:block;align-self:center;justify-self:end;width:78px;height:72px;overflow:hidden;border-radius:13px;
-      border:1px solid rgba(255,255,255,.78);box-shadow:0 8px 18px rgba(20,38,42,.08)
+      position:relative;display:block;align-self:stretch;justify-self:stretch;width:92px;height:auto;min-height:124px;overflow:hidden;border-radius:0 15px 15px 0;
+      border-left:1px solid rgba(255,255,255,.72);box-shadow:-8px 0 18px rgba(20,38,42,.045)
     }
     .ideaMapResultThumb{
       position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block
