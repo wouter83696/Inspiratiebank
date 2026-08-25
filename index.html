@@ -494,6 +494,11 @@
     .categoryPill .domainIcon{width:14px;height:14px;border:0;background:transparent;color:currentColor}
     .categoryPill .domainIcon svg{width:13px;height:13px;stroke-width:2}
     .locationPill{background:rgba(232,242,242,.78);border:1px solid rgba(79,142,158,.12);color:rgba(49,95,107,.84)}
+    .locationPill.homeLocationPill{
+      width:28px;min-width:28px;height:24px;min-height:24px;padding:5px 7px;
+      justify-content:center;background:rgba(232,242,242,.80);border-color:rgba(79,142,158,.14);color:var(--accent-dark)
+    }
+    .locationPill.homeLocationPill svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .locationPill.distanceNear{background:rgba(237,248,251,.86);border-color:rgba(0,132,168,.16);color:#356f7b}
     .locationPill.distanceMid{background:rgba(227,244,249,.88);border-color:rgba(0,132,168,.17);color:#2f6878}
     .locationPill.distanceFar{background:rgba(241,244,246,.88);border-color:rgba(11,18,32,.10);color:rgba(11,18,32,.58)}
@@ -2661,13 +2666,20 @@
     const location = compactIdeaBadgeLabel(locationLabel);
     const distance = compactIdeaBadgeLabel(distanceLabel);
     const pills = [];
-    if(location) pills.push(location);
+    if(isHomeLocationBadge(location)) pills.push(location);
     const sameTerrain = normalize(location).includes('terrein') && normalize(distance).includes('terrein');
     if(distance && !sameTerrain && normalize(distance) !== normalize(location)) pills.push(distance);
     return pills;
   }
+  function isHomeLocationBadge(label=''){
+    const v = normalize(label);
+    return v === 'binnen' || v === 'thuis' || v.includes('rondom huis') || v.includes('aan huis') || v.includes('eigen locatie');
+  }
   function locationPill(label=''){
     const normalized = normalize(label);
+    if(isHomeLocationBadge(label)){
+      return `<span class="pill locationPill homeLocationPill" title="${escapeHtml(label)}" aria-label="${escapeHtml(label)}">${ICONS.home}</span>`;
+    }
     const distanceClass = normalized.includes('25') || normalized.includes('50') ? 'distanceFar'
       : normalized.includes('10') ? 'distanceMid'
       : normalized.includes('km') ? 'distanceNear'
