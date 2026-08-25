@@ -468,8 +468,8 @@
     .themeSport{--theme-tint:rgba(0,132,168,.055);--theme-tint-strong:rgba(0,132,168,.14);--theme-line:rgba(0,132,168,.18);--theme-ink:#08677f;--agenda-tint:#edf8fb;--agenda-line:rgba(0,132,168,.22)}
     .themeAction{--theme-tint:rgba(238,126,27,.065);--theme-tint-strong:rgba(238,126,27,.16);--theme-line:rgba(199,92,11,.18);--theme-ink:#9a4f0f;--agenda-tint:#fff3e8;--agenda-line:rgba(199,92,11,.23)}
     .themeDefault{--theme-tint:rgba(0,185,86,.045);--theme-tint-strong:rgba(0,185,86,.11);--theme-line:rgba(0,155,72,.11);--theme-ink:#087b43;--agenda-tint:#eff9f3;--agenda-line:rgba(0,155,72,.18)}
-    .ideaThemeCard{min-width:0;background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,253,249,.92);border-color:color-mix(in srgb,var(--theme-line) 68%,#EFE9DE);box-shadow:0 10px 26px rgba(64,45,20,.04)}
-    .ideaThemeCard:hover{background:linear-gradient(var(--theme-tint-strong),var(--theme-tint-strong)),rgba(255,253,249,.95);border-color:var(--theme-line);box-shadow:0 16px 34px rgba(64,45,20,.065)}
+    .ideaThemeCard{min-width:0;background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,253,249,.94);border-color:color-mix(in srgb,var(--theme-line) 78%,#EFE9DE);box-shadow:0 10px 26px rgba(64,45,20,.04)}
+    .ideaThemeCard:hover{background:linear-gradient(var(--theme-tint-strong),var(--theme-tint-strong)),rgba(255,253,249,.96);border-color:var(--theme-line);box-shadow:0 16px 34px rgba(64,45,20,.065)}
     .ideaImageFrame{
       position:relative;overflow:hidden;margin:-18px -18px 4px;border-radius:18px 18px 0 0;
       aspect-ratio:16 / 8.8;background:linear-gradient(var(--theme-tint),rgba(255,255,255,.58));
@@ -506,13 +506,18 @@
     .card .fine{margin-top:2px;color:var(--muted);font-size:.86rem}
     .card .fine strong{display:block;margin:7px 0 2px;color:var(--accent-dark)}
     .cardMetaLine{
-      display:block;width:100%;margin:2px 0 2px;padding:6px 10px;
+      display:flex;align-items:center;gap:7px;width:100%;min-width:0;margin:2px 0 2px;padding:6px 9px;
       border-radius:7px;
       background:color-mix(in srgb,var(--theme-tint-strong) 62%,rgba(255,255,255,.56));
       border:1px solid color-mix(in srgb,var(--theme-line) 56%,rgba(255,255,255,.54));
-      color:var(--muted);font-size:.82rem;line-height:1.35
+      color:var(--muted);font-size:.82rem;line-height:1.25;white-space:nowrap;overflow:hidden
     }
     .cardMetaLine strong{display:inline !important;margin:0 !important;color:var(--accent-dark);font-weight:600}
+    .cardMetaPart{display:inline-flex;align-items:center;gap:4px;min-width:0}
+    .cardMetaPart:last-child{overflow:hidden;text-overflow:ellipsis}
+    .cardMetaDot{flex:0 0 auto;color:color-mix(in srgb,var(--accent-dark) 40%,var(--muted))}
+    .metaIcon{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;flex:0 0 14px;color:color-mix(in srgb,var(--theme-ink) 76%,var(--accent-dark))}
+    .metaIcon svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .cardLabels{display:flex;align-items:center;gap:5px;flex-wrap:nowrap;min-width:0;max-width:100%;overflow:hidden}
     .cardLabelRow,.cardPillGroup{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0;max-width:100%}
     .ideaThemeCard .cardPillGroup{flex-wrap:wrap}
@@ -952,13 +957,15 @@
     .ideaMapResultPills .stimulusPill{width:28px;min-width:28px;height:22px;min-height:22px;padding:4px 6px}
     .ideaMapResultPills .stimulusIcon,.ideaMapResultPills .stimulusIcon svg{width:13px;height:13px}
     .ideaMapResultMeta{
-      display:block;margin-top:7px;max-width:100%;padding:5px 8px;border-radius:7px;
+      display:flex;align-items:center;gap:6px;margin-top:7px;max-width:100%;padding:5px 8px;border-radius:7px;
       color:var(--muted);
       background:color-mix(in srgb,var(--theme-tint-strong) 62%,rgba(255,255,255,.56));
       border:1px solid color-mix(in srgb,var(--theme-line) 56%,rgba(255,255,255,.54));
-      font-size:.72rem;line-height:1.22;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+      font-size:.72rem;line-height:1.22;white-space:nowrap;overflow:hidden
     }
     .ideaMapResultMeta strong{display:inline;color:var(--accent-dark);font-size:inherit;line-height:inherit;font-weight:600}
+    .ideaMapResultMeta .metaIcon{width:12px;height:12px;flex-basis:12px}
+    .ideaMapResultMeta .metaIcon svg{width:12px;height:12px}
     .ideaMapResultLink{
       position:absolute;right:10px;bottom:10px;z-index:2;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;
       border-radius:999px;background:rgba(255,255,255,.74);border:1px solid rgba(79,142,158,.10);
@@ -2483,6 +2490,8 @@
     sport:`<svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="6"></circle><path d="M10 4v12"></path><path d="M4 10h12"></path><path d="M6.2 6.2c1 .9 2.4 1.4 3.8 1.4s2.8-.5 3.8-1.4"></path><path d="M6.2 13.8c1-.9 2.4-1.4 3.8-1.4s2.8.5 3.8 1.4"></path></svg>`,
     action:`<svg viewBox="0 0 24 24"><path d="M13 2.8 5.2 13h6.1l-1 8.2 8.5-11.5h-6.2L13 2.8z"></path></svg>`,
     home:`<svg viewBox="0 0 20 20"><path d="M4 9.2 10 4l6 5.2"></path><path d="M5.8 8.4V16h8.4V8.4"></path><path d="M8.4 16v-4.2h3.2V16"></path></svg>`,
+    people:`<svg viewBox="0 0 20 20"><circle cx="7.2" cy="7.3" r="2.2"></circle><circle cx="13.2" cy="8.2" r="1.8"></circle><path d="M3.8 15c.7-2 1.8-3 3.4-3s2.8 1 3.4 3"></path><path d="M10.9 14.8c.6-1.3 1.6-2 2.8-2 1.3 0 2.2.8 2.8 2.2"></path></svg>`,
+    clock:`<svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="6.4"></circle><path d="M10 6.4V10l2.4 1.7"></path></svg>`,
     external:`<svg viewBox="0 0 20 20"><path d="M7 5h8v8"></path><path d="M15 5 6 14"></path></svg>`,
     default:`<svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5"></circle></svg>`
   };
@@ -2891,7 +2900,8 @@
   }
   function cardMetaLine(item={}){
     const groupValue = String(item.group || 'Op maat').trim();
-    return `<span class="cardMetaLine"><strong>Personen:</strong> ${escapeHtml(groupValue)} • <strong>Duur:</strong> ${escapeHtml(item.duration || 'Op maat')}</span>`;
+    const durationValue = String(item.duration || 'Op maat').trim();
+    return `<span class="cardMetaLine"><span class="cardMetaPart"><span class="metaIcon" aria-hidden="true">${ICONS.people}</span><strong>Personen:</strong> ${escapeHtml(groupValue)}</span><span class="cardMetaDot">•</span><span class="cardMetaPart"><span class="metaIcon" aria-hidden="true">${ICONS.clock}</span><strong>Duur:</strong> ${escapeHtml(durationValue)}</span></span>`;
   }
   function distanceLabelForKm(km, context='inspiration'){
     if(!Number.isFinite(km)) return '';
@@ -4797,9 +4807,9 @@
   }
   function ideaMapMeta(item, point){
     const parts = [];
-    if(item.group) parts.push(`<strong>Personen:</strong> ${escapeHtml(item.group)}`);
-    if(item.duration) parts.push(`<strong>Duur:</strong> ${escapeHtml(item.duration)}`);
-    return [...new Set(parts.filter(Boolean))].join(' • ');
+    if(item.group) parts.push(`<span class="cardMetaPart"><span class="metaIcon" aria-hidden="true">${ICONS.people}</span><strong>Personen:</strong> ${escapeHtml(item.group)}</span>`);
+    if(item.duration) parts.push(`<span class="cardMetaPart"><span class="metaIcon" aria-hidden="true">${ICONS.clock}</span><strong>Duur:</strong> ${escapeHtml(item.duration)}</span>`);
+    return [...new Set(parts.filter(Boolean))].join('<span class="cardMetaDot">•</span>');
   }
   function ideaMapPills(item={}, point){
     const locationLabel = point?.home ? 'Thuis' : normalizeIdeaLocation(item.locationType);
