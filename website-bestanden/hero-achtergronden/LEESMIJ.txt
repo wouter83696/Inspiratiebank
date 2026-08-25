@@ -1,16 +1,20 @@
 Hero-achtergronden
 ==================
 
-Vervang deze SVG-bestanden als je de hero-achtergrond wilt aanpassen:
+Actieve hero-achtergronden:
 
-- inspiratiebank.svg
-  Achtergrond voor de tab Inspiratiebank.
+- inspiratiebank-header.png
+  Achtergrond voor de tab Inspiratiebank, met Nijmegen-sfeer.
 
-- uit-agenda.svg
+- uit-agenda-header.png
   Achtergrond voor de tab UIT-agenda.
 
+Oude SVG-achtergronden, bewaard als terugvaloptie:
+
+- inspiratiebank.svg
+- uit-agenda.svg
+
 Let op:
-- Houd bij voorkeur dezelfde bestandsnamen aan.
-- Gebruik een brede SVG-verhouding, bijvoorbeeld 1600 x 620.
-- Zet geen herkenbare iconen, personen of objecten in de SVG als je dezelfde rustige stijl wilt behouden.
+- Houd bij voorkeur dezelfde bestandsnamen aan als je de actieve PNG's wilt vervangen.
+- Gebruik een brede verhouding. De huidige PNG's zijn 1916 x 821.
 - Na vervangen hoef je de HTML/CSS niet aan te passen zolang de bestandsnamen hetzelfde blijven.
