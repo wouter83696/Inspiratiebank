@@ -2824,10 +2824,16 @@
   }
   function itemIsHomeActivity(item={}){
     const text = normalize(`${item.locationType || ''} ${item.address || ''} ${item.where || ''} ${item.place || ''} ${item.location || ''} ${item.materials || ''} ${item.fit || ''}`);
-    return text.includes('thuis')
+    const location = normalizeIdeaLocation(item.locationType || '');
+    return location === 'Thuis'
+      || text.includes('thuis')
       || text.includes('aan huis')
       || text.includes('bij jou')
       || text.includes('eigen locatie')
+      || text.includes('rondom huis')
+      || text.includes('rond het huis')
+      || text.includes('in en om het huis')
+      || text.includes('binnenhuis')
       || text.includes('online');
   }
   function ideaMapCoordinate(item={}){
@@ -2835,7 +2841,7 @@
     if(coord) return {...coord, source:'place'};
     if(itemCanUseUserLocation(item)){
       const location = userLocation || DEFAULT_LOCATION;
-      return {lat:location.lat, lon:location.lon, source:'user', home:itemIsHomeActivity(item)};
+      return {lat:location.lat, lon:location.lon, source:'user', home:true};
     }
     return null;
   }
@@ -4763,7 +4769,7 @@
   }
   function ideaMapMeta(item, point){
     const parts = [];
-    if(point?.source === 'user') parts.push(userLocation?.isDefault ? 'rond Nijmegen' : 'vanaf jouw postcode');
+    if(point?.source === 'user') parts.push('Thuis/rondom huis');
     if(item.group) parts.push(`Personen: ${item.group}`);
     if(item.duration) parts.push(`Duur: ${item.duration}`);
     return [...new Set(parts.filter(Boolean))].join(' • ');
