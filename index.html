@@ -31,13 +31,13 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
   <style>
     :root{
-      --bg:#FAFCFB;
-      --paper:#FAFAF8;
-      --paper-soft:rgba(250,250,248,.78);
-      --white:rgba(255,255,255,.82);
+      --bg:#FBFAF6;
+      --paper:#FFFCF7;
+      --paper-soft:rgba(255,252,247,.78);
+      --white:rgba(255,253,249,.84);
       --ink:rgba(11,18,32,.84);
       --muted:rgba(11,18,32,.62);
-      --line:rgba(11,18,32,.09);
+      --line:rgba(64,45,20,.085);
       --accent:#4f8e9e;
       --accent-dark:#315f6b;
       --accent-soft:#A8E1DD;
@@ -48,7 +48,7 @@
       --sun:#F5D98A;
       --sun-soft:#FBE8B2;
       --rose:#F6DFE7;
-      --shadow:0 18px 50px rgba(20,38,42,.08);
+      --shadow:0 18px 50px rgba(64,45,20,.07);
       --radius:24px;
       --radius-sm:16px;
       --max:1280px;
@@ -65,10 +65,10 @@
       color:var(--ink);
       font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
       background:
-        radial-gradient(circle at 8% -4%, rgba(251,232,178,.07), transparent 20%),
-        radial-gradient(circle at 34% 10%, rgba(214,236,242,.20), transparent 29%),
-        radial-gradient(circle at 46% 102%, rgba(168,225,221,.12), transparent 28%),
-        radial-gradient(circle at 96% 2%, rgba(234,230,247,.26), transparent 26%),
+        radial-gradient(circle at 8% -4%, rgba(251,232,178,.14), transparent 22%),
+        radial-gradient(circle at 34% 10%, rgba(232,240,231,.18), transparent 29%),
+        radial-gradient(circle at 46% 102%, rgba(168,225,221,.10), transparent 28%),
+        radial-gradient(circle at 96% 2%, rgba(244,232,216,.24), transparent 26%),
         var(--bg);
       min-height:100dvh;
     }
@@ -129,7 +129,7 @@
     .hero{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:stretch;padding:32px 0 44px}
     .heroMain,.quickCard,.panel,.weekPanel,.card{
       background:color-mix(in srgb,var(--paper) 88%,transparent);
-      border:1px solid #EAECEF;
+      border:1px solid #EFE9DE;
       box-shadow:var(--shadow);
       border-radius:var(--radius);
     }
@@ -220,8 +220,8 @@
     .notice{background:rgba(248,236,194,.58);border:1px solid rgba(186,151,56,.14);border-radius:18px;padding:13px 15px;color:#6b5927;line-height:1.48}
     .weekStack{display:grid;gap:18px}
     .notice + .weekStack{margin-top:16px}
-    .weekPanel{overflow:hidden;background:rgba(255,255,255,.84);border-color:rgba(234,236,239,.86);box-shadow:0 18px 48px rgba(20,38,42,.055)}
-    .weekTop{display:block;padding:28px 28px 14px;border-bottom:0;background:rgba(255,255,255,.70)}
+    .weekPanel{overflow:hidden;background:rgba(255,253,249,.86);border-color:rgba(239,233,222,.88);box-shadow:0 18px 48px rgba(64,45,20,.045)}
+    .weekTop{display:block;padding:28px 28px 14px;border-bottom:0;background:rgba(255,253,249,.72)}
     .weekTitle{display:flex;gap:16px;align-items:center}
     .weekTitle > div{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
     .weekBadge{width:52px;height:52px;margin-top:2px;border-radius:13px;background:linear-gradient(145deg,rgba(168,225,221,.90),rgba(216,242,238,.76));display:grid;place-items:center;color:#07345e;font-weight:600;font-size:1.42rem;line-height:1;text-align:center;flex:0 0 auto}
@@ -464,8 +464,8 @@
     .siteButton::after{content:"↗";flex:0 0 auto;font-size:.82em;opacity:.85}
     .websiteCell{vertical-align:middle;text-align:center}
     .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:12px}
-    .card{min-width:0;padding:18px;min-height:215px;display:flex;flex-direction:column;gap:10px;background:#fff;border-color:#EAECEF;box-shadow:0 10px 26px rgba(20,38,42,.045);transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease)}
-    .card:hover{transform:translateY(-2px);background:#fff;box-shadow:0 16px 34px rgba(20,38,42,.075);border-color:rgba(79,142,158,.13)}
+    .card{min-width:0;padding:18px;min-height:215px;display:flex;flex-direction:column;gap:10px;background:#fffdf9;border-color:#EFE9DE;box-shadow:0 10px 26px rgba(64,45,20,.04);transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease)}
+    .card:hover{transform:translateY(-2px);background:#fffefb;box-shadow:0 16px 34px rgba(64,45,20,.065);border-color:rgba(79,142,158,.13)}
     .themeCreative{--theme-tint:rgba(229,0,90,.055);--theme-tint-strong:rgba(229,0,90,.13);--theme-line:rgba(229,0,90,.18);--theme-ink:#a00042;--agenda-tint:#fdf0f6;--agenda-line:rgba(229,0,90,.22)}
     .themeCulture{--theme-tint:rgba(72,70,184,.055);--theme-tint-strong:rgba(72,70,184,.13);--theme-line:rgba(72,70,184,.18);--theme-ink:#4644a0;--agenda-tint:#f1f0fb;--agenda-line:rgba(72,70,184,.22)}
     .themeNature{--theme-tint:rgba(0,155,72,.06);--theme-tint-strong:rgba(0,155,72,.14);--theme-line:rgba(0,155,72,.18);--theme-ink:#087b43;--agenda-tint:#eef8f2;--agenda-line:rgba(0,155,72,.22)}
@@ -473,8 +473,8 @@
     .themeSport{--theme-tint:rgba(0,132,168,.055);--theme-tint-strong:rgba(0,132,168,.14);--theme-line:rgba(0,132,168,.18);--theme-ink:#08677f;--agenda-tint:#edf8fb;--agenda-line:rgba(0,132,168,.22)}
     .themeAction{--theme-tint:rgba(238,126,27,.065);--theme-tint-strong:rgba(238,126,27,.16);--theme-line:rgba(199,92,11,.18);--theme-ink:#9a4f0f;--agenda-tint:#fff3e8;--agenda-line:rgba(199,92,11,.23)}
     .themeDefault{--theme-tint:rgba(0,185,86,.045);--theme-tint-strong:rgba(0,185,86,.11);--theme-line:rgba(0,155,72,.11);--theme-ink:#087b43;--agenda-tint:#eff9f3;--agenda-line:rgba(0,155,72,.18)}
-    .ideaThemeCard{min-width:0;background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.92);border-color:color-mix(in srgb,var(--theme-line) 68%,#EAECEF);box-shadow:0 10px 26px rgba(20,38,42,.045)}
-    .ideaThemeCard:hover{background:linear-gradient(var(--theme-tint-strong),var(--theme-tint-strong)),rgba(255,255,255,.94);border-color:var(--theme-line);box-shadow:0 16px 34px rgba(20,38,42,.075)}
+    .ideaThemeCard{min-width:0;background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,253,249,.92);border-color:color-mix(in srgb,var(--theme-line) 68%,#EFE9DE);box-shadow:0 10px 26px rgba(64,45,20,.04)}
+    .ideaThemeCard:hover{background:linear-gradient(var(--theme-tint-strong),var(--theme-tint-strong)),rgba(255,253,249,.95);border-color:var(--theme-line);box-shadow:0 16px 34px rgba(64,45,20,.065)}
     .ideaImageFrame{
       position:relative;overflow:hidden;margin:-18px -18px 4px;border-radius:18px 18px 0 0;
       aspect-ratio:16 / 8.8;background:linear-gradient(var(--theme-tint),rgba(255,255,255,.58));
