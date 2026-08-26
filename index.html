@@ -480,12 +480,19 @@
       box-shadow:0 16px 34px rgba(64,45,20,.065)
     }
     .ideaImageFrame{
-      position:relative;overflow:hidden;margin:0 0 4px;border-radius:13px;
-      aspect-ratio:16 / 7.4;background:linear-gradient(var(--theme-tint),rgba(255,255,255,.58));
+      position:relative;overflow:visible;margin:-4px -4px 16px;border-radius:13px;
+      aspect-ratio:16 / 7.2;background:linear-gradient(var(--theme-tint),rgba(255,255,255,.58));
       border:1px solid color-mix(in srgb,var(--theme-line) 48%,rgba(255,255,255,.55));
       box-shadow:0 8px 18px rgba(20,38,42,.045)
     }
-    .ideaImageFrame img{width:100%;height:100%;object-fit:cover;display:block}
+    .ideaImageFrame img{width:100%;height:100%;object-fit:cover;display:block;border-radius:12px}
+    .ideaImageBadge{
+      position:absolute;left:12px;bottom:-17px;z-index:2;display:inline-flex;align-items:center;justify-content:center;
+      width:38px;height:38px;border-radius:999px;background:#fff;border:3px solid rgba(255,255,255,.96);
+      color:var(--theme-ink);box-shadow:0 8px 18px rgba(20,38,42,.075)
+    }
+    .ideaImageBadge .domainIcon{width:32px;height:32px;margin:0;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
+    .ideaImageBadge .domainIcon svg{width:15px;height:15px}
     .ideaThemeRow td{background:rgba(255,255,255,.20)}
     .ideaThemeRow:hover td{background:var(--theme-tint)}
     .ideaThemeCard .domainIcon,.ideaThemeRow .domainIcon{background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
@@ -515,6 +522,9 @@
     .stimulusPillText{display:none}
     .card h3{margin:0;color:var(--accent-dark);font-size:1.08rem;line-height:1.18;font-weight:500}
     .ideaThemeCard h3{margin-top:6px}
+    .ideaThemeCard.hasImage h3{margin-top:0;padding-left:46px}
+    .ideaThemeCard.hasImage h3 .ideaTitle{display:block}
+    .ideaThemeCard.hasImage h3 .domainIcon{display:none}
     .ideaThemeCard .cardLabels + .cardMetaLine{margin-top:0}
     .ideaThemeCard h3 .ideaTitle{display:flex;align-items:center;gap:10px}
     .card p{margin:0;color:rgba(11,18,32,.70);line-height:1.43}
@@ -522,18 +532,18 @@
     .card .fine{margin-top:2px;color:var(--muted);font-size:.86rem}
     .card .fine strong{display:block;margin:7px 0 2px;color:var(--accent-dark)}
     .cardMetaLine{
-      display:flex;align-items:center;gap:6px;width:100%;min-width:0;margin:2px 0 2px;padding:6px 8px;
+      display:flex;align-items:center;gap:5px;width:100%;min-width:0;margin:2px 0 2px;padding:5px 8px;
       border-radius:7px;
       background:color-mix(in srgb,var(--theme-tint-strong) 62%,rgba(255,255,255,.56));
       border:1px solid color-mix(in srgb,var(--theme-line) 56%,rgba(255,255,255,.54));
-      color:var(--muted);font-size:.8rem;line-height:1.25;white-space:nowrap;overflow:hidden
+      color:var(--muted);font-size:.74rem;line-height:1.22;white-space:nowrap;overflow:hidden
     }
     .cardMetaLine strong{display:inline !important;margin:0 !important;color:var(--accent-dark);font-weight:600}
-    .cardMetaPart{display:inline-flex;align-items:center;gap:4px;min-width:0;flex:0 1 auto}
-    .cardMetaPart:last-child{flex:1 1 auto;overflow:visible;text-overflow:clip}
+    .cardMetaPart{display:inline-flex;align-items:center;gap:3px;min-width:0;flex:0 0 auto}
+    .cardMetaPart:last-child{flex:0 0 auto;overflow:visible;text-overflow:clip}
     .cardMetaDot{flex:0 0 auto;color:color-mix(in srgb,var(--accent-dark) 40%,var(--muted))}
-    .metaIcon{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;flex:0 0 14px;color:color-mix(in srgb,var(--theme-ink) 76%,var(--accent-dark))}
-    .metaIcon svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+    .metaIcon{display:inline-flex;align-items:center;justify-content:center;width:13px;height:13px;flex:0 0 13px;color:color-mix(in srgb,var(--theme-ink) 76%,var(--accent-dark))}
+    .metaIcon svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .cardLabels{display:flex;align-items:center;gap:5px;flex-wrap:nowrap;min-width:0;max-width:100%;overflow:hidden;margin-top:-1px}
     .cardLabelRow,.cardPillGroup{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0;max-width:100%}
     .ideaThemeCard .cardPillGroup{flex-wrap:wrap}
@@ -1465,7 +1475,7 @@
       .cards{gap:10px;width:100%;min-width:0}
       .card{width:100%;min-width:0;min-height:0;padding:13px 14px;gap:8px;border-radius:18px;overflow:hidden}
       .card h3{font-size:1rem;line-height:1.16}
-      .ideaImageFrame{margin:0 0 5px;border-radius:13px;aspect-ratio:16 / 8}
+      .ideaImageFrame{margin:0 0 15px;border-radius:13px;aspect-ratio:16 / 8}
       .ideaThemeCard h3{margin-top:4px}
       .ideaThemeCard h3 .ideaTitle{gap:8px}
       .ideaThemeCard > p:not(.fine){font-size:.9rem;line-height:1.38}
@@ -2143,7 +2153,7 @@
     const base = src.replace(/\.jpe?g($|\?)/i, '');
     return `${base}-480.jpg 480w, ${base}-800.jpg 800w, ${src} 1200w`;
   }
-  function ideaImageMarkup(image={}){
+  function ideaImageMarkup(image={}, domain=''){
     const srcset = responsiveImageSrcset(image.src || '');
     const attrs = [
       `src="${escapeHtml(image.src || '')}"`,
@@ -2153,7 +2163,7 @@
       'loading="lazy"',
       'decoding="async"'
     ].filter(Boolean).join(' ');
-    return `<figure class="ideaImageFrame"><img ${attrs}></figure>`;
+    return `<figure class="ideaImageFrame"><img ${attrs}><span class="ideaImageBadge" aria-hidden="true"><span class="domainIcon">${domainIcon(domain)}</span></span></figure>`;
   }
   function approvedIdeaImage(item={}){
     if(item.image && (item.imageStatus === 'approved' || item.imageApproved === true)){
@@ -4469,7 +4479,7 @@
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
     const image = approvedIdeaImage(item);
     return `<article class="card ideaThemeCard ${domainThemeClass(item.domain)}${image ? ' hasImage' : ''}" data-idea-key="${escapeHtml(ideaDomKey(item))}">
-      ${image ? ideaImageMarkup(image) : ''}
+      ${image ? ideaImageMarkup(image, item.domain) : ''}
       <h3>${titleWithIcon(item.title, item.domain)}</h3>
       <div class="cardLabels">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div>
       ${cardMetaLine(item)}
