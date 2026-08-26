@@ -972,27 +972,28 @@
     .ideaMapResult.hasThumb .ideaMapResultText{padding:0}
     .ideaMapResult.hasLink .ideaMapResultText{padding-right:0}
     .ideaMapResult strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--accent-dark);font-size:.9rem;line-height:1.14}
-    .ideaMapResultPills{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:6px}
+    .ideaMapResultInfo{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:6px;min-width:0}
+    .ideaMapResultPills{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:0}
     .ideaMapResultPills .pill{min-height:22px;padding:4px 7px;font-size:.68rem;box-shadow:none}
     .ideaMapResultPills .stimulusPill{width:28px;min-width:28px;height:22px;min-height:22px;padding:4px 6px}
     .ideaMapResultPills .stimulusIcon,.ideaMapResultPills .stimulusIcon svg{width:13px;height:13px}
     .ideaMapResultMeta{
-      display:flex;align-items:center;gap:10px;margin-top:7px;max-width:100%;padding:5px 9px;border-radius:7px;
+      display:flex;align-items:center;gap:9px;flex:1 1 128px;min-width:126px;max-width:100%;margin-top:0;padding:4px 8px;border-radius:7px;
       color:var(--muted);
       background:color-mix(in srgb,var(--theme-tint-strong) 36%,rgba(255,255,255,.74));
       border:1px solid color-mix(in srgb,var(--theme-line) 34%,rgba(255,255,255,.66));
-      font-size:.72rem;line-height:1.22;white-space:nowrap;overflow:hidden
+      font-size:.7rem;line-height:1.16;white-space:nowrap;overflow:hidden
     }
     .ideaMapResultMeta strong{display:inline;color:var(--accent-dark);font-size:inherit;line-height:inherit;font-weight:600}
     .ideaMapResultMeta .metaIcon{width:12px;height:12px;flex-basis:12px}
     .ideaMapResultMeta .metaIcon svg{width:12px;height:12px}
     .ideaMapResultLink{
-      justify-self:start;display:inline-flex;align-items:center;gap:5px;width:auto;min-height:27px;margin-top:8px;padding:6px 10px;
+      flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;min-height:26px;margin-top:0;padding:0;
       border-radius:999px;background:rgba(255,255,255,.74);border:1px solid rgba(79,142,158,.10);
-      color:var(--accent-dark);font-size:.72rem;font-weight:700;line-height:1;text-decoration:none;box-shadow:0 6px 14px rgba(20,38,42,.045);backdrop-filter:blur(10px)
+      color:var(--accent-dark);font-size:0;font-weight:700;line-height:1;text-decoration:none;box-shadow:0 6px 14px rgba(20,38,42,.045);backdrop-filter:blur(10px)
     }
     .ideaMapResultLink:hover{background:#fff;border-color:rgba(79,142,158,.18);transform:translateY(-1px)}
-    .ideaMapResultLink svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .ideaMapResultLink svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .ideaMapResultThumbWrap{
       position:relative;display:block;width:100%;aspect-ratio:16 / 7.7;overflow:hidden;border-radius:12px;flex:0 0 auto;
       border:1px solid color-mix(in srgb,var(--theme-line) 48%,rgba(255,255,255,.55));box-shadow:0 8px 18px rgba(20,38,42,.045)
@@ -4866,10 +4867,10 @@
       const thumb = image ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async"></span>` : '';
       const pills = ideaMapPills(point.item, point);
       const icon = domainIcon(point.item.domain);
-      const link = point.item.url ? `<a class="ideaMapResultLink" href="${escapeHtml(point.item.url)}" target="_blank" rel="noopener" aria-label="${escapeHtml(sourceButtonLabel(point.item))} openen">Website ${ICONS.external}</a>` : '';
+      const link = point.item.url ? `<a class="ideaMapResultLink" href="${escapeHtml(point.item.url)}" target="_blank" rel="noopener" aria-label="${escapeHtml(sourceButtonLabel(point.item))} openen" title="${escapeHtml(sourceButtonLabel(point.item))} openen">${ICONS.external}</a>` : '';
       return `<article class="ideaMapResult ${domainThemeClass(point.item.domain)}${image ? ' hasThumb' : ''}${link ? ' hasLink' : ''}${active ? ' active' : ''}" role="button" tabindex="0" data-map-result-key="${escapeHtml(point.key)}">
         ${thumb}
-        <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${icon}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${ideaMapMeta(point.item, point)}</span>${link}</span>
+        <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${icon}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultInfo"><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${ideaMapMeta(point.item, point)}</span>${link}</span></span>
       </article>`;
     }).join('');
     const panelTitle = activeIdeaMapClusterKeys ? `${visiblePoints.length} activiteiten op deze plek` : 'Activiteiten op kaart';
