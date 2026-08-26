@@ -457,6 +457,9 @@
     }
     #ideaList .siteButton.secondary{background:#fff;box-shadow:0 8px 20px rgba(20,38,42,.04)}
     .siteButton::after{content:"↗";flex:0 0 auto;font-size:.82em;opacity:.85}
+    .siteButtonText{
+      display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+    }
     .websiteCell{vertical-align:middle;text-align:center}
     .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:12px}
     .card{min-width:0;padding:18px;min-height:215px;display:flex;flex-direction:column;gap:10px;background:#fffdf9;border-color:#EFE9DE;box-shadow:0 10px 26px rgba(64,45,20,.04);transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease)}
@@ -545,10 +548,11 @@
     .card .pill:hover{box-shadow:none;transform:none}
     .agendaLegendItem:hover{box-shadow:0 0 0 3px color-mix(in srgb,var(--theme-line) 34%,transparent);transform:translateY(-1px)}
     .ideaThemeCard .pill{padding:5px 8px}
-    .cardFooter{margin-top:auto;display:flex;gap:8px;flex-wrap:nowrap;align-items:center}
+    .cardFooter{margin-top:auto;display:flex;gap:8px;flex-wrap:nowrap;align-items:center;min-width:0}
     .cardFooter .siteButton{
-      min-width:0;max-width:calc(100% - 38px)
+      flex:0 1 auto;justify-content:flex-start;min-width:0;max-width:calc(100% - 42px);overflow:hidden
     }
+    .cardFooter .siteButton::after{margin-left:auto}
     .cardFooter .reportMenu{margin-left:auto}
     .activityStatusIcon{
       display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;
@@ -4473,7 +4477,7 @@
       ${cardMetaLine(item)}
       <p>${escapeHtml(audienceText(item.fit))}</p>
       <p class="fine"><strong>Praktisch:</strong>${escapeHtml(audienceText(item.materials || 'Nog bepalen'))}</p>
-      <div class="cardFooter">${item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(sourceButtonLabel(item))}</a>` : ''}${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}</div>
+      <div class="cardFooter">${item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : ''}${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}</div>
     </article>`;
   }
   function matches(item, query, filters){
