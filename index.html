@@ -914,19 +914,23 @@
       transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease),border-color .18s var(--ease)
     }
     .ideaLeafletMarker::before{
-      content:"";position:absolute;inset:-7px;border-radius:999px;background:rgba(168,225,221,.34);
+      content:"";position:absolute;inset:-7px;border-radius:999px;background:color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.34)) 78%,transparent);
       opacity:0;transform:scale(.92);transition:opacity .18s var(--ease),transform .18s var(--ease);z-index:-2
     }
     .ideaLeafletMarker svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaLeafletMarker .domainIcon{position:relative;z-index:1;width:100%;height:100%;margin:0;border:0;background:transparent;color:inherit}
     .ideaLeafletMarker .domainIcon svg{width:14px;height:14px}
     .ideaLeafletMarker:hover,.ideaLeafletMarker:focus-visible{
-      transform:scale(1.1);background:#fff;border-color:rgba(63,120,132,.82);
-      box-shadow:0 13px 28px rgba(20,38,42,.16),0 0 0 7px rgba(168,225,221,.36)
+      transform:scale(1.1);
+      background:color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 54%,white);
+      border-color:color-mix(in srgb,var(--theme-ink,var(--accent-dark)) 58%,transparent);
+      box-shadow:0 13px 28px rgba(20,38,42,.16),0 0 0 7px color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 78%,transparent)
     }
     .ideaLeafletMarker.active{
-      transform:scale(1.12);background:#fff;border-color:rgba(63,120,132,.82);
-      box-shadow:0 13px 28px rgba(20,38,42,.16),0 0 0 5px rgba(168,225,221,.46)
+      transform:scale(1.12);
+      background:color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 42%,white);
+      border-color:color-mix(in srgb,var(--theme-ink,var(--accent-dark)) 64%,transparent);
+      box-shadow:0 13px 28px rgba(20,38,42,.16),0 0 0 5px color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 86%,transparent)
     }
     .ideaLeafletMarker.active::before{opacity:1;transform:scale(1)}
     .ideaLeafletMarker.home{
