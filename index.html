@@ -895,6 +895,12 @@
       display:grid;place-items:center;line-height:1 !important;border:1px solid rgba(79,142,158,.16);
       background:rgba(255,255,255,.96);color:var(--accent-dark);font-weight:750;box-shadow:0 8px 18px rgba(20,38,42,.12)
     }
+    .marker-cluster.active div{
+      border-color:rgba(49,95,107,.72);
+      background:color-mix(in srgb,rgba(168,225,221,.42) 45%,white);
+      color:var(--accent-dark);
+      box-shadow:0 13px 28px rgba(20,38,42,.17),0 0 0 8px rgba(168,225,221,.34)
+    }
     .ideaMapHeader{
       position:absolute;z-index:4;left:16px;bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:calc(100% - 32px)
     }
@@ -4942,12 +4948,14 @@
     }
     activeIdeaMapClusterKeys = uniqueKeys;
     activeIdeaMapKey = uniqueKeys.includes(activeIdeaMapKey) ? activeIdeaMapKey : uniqueKeys[0];
+    ideaMapProvider?.setActiveCluster?.(uniqueKeys);
     updateIdeaMapPanel();
   }
   function clearActiveIdeaMapCluster(){
     if(!activeIdeaMapClusterKeys) return;
     activeIdeaMapClusterKeys = null;
     pendingIdeaMapZoomTarget = null;
+    ideaMapProvider?.clearActiveCluster?.();
     updateIdeaMapPanel();
   }
   function destroyIdeaMapProvider(){
@@ -4992,6 +5000,18 @@
     const markerLayer = L.markerClusterGroup
       ? L.markerClusterGroup({showCoverageOnHover:false,zoomToBoundsOnClick:false,spiderfyOnMaxZoom:false,maxClusterRadius:42})
       : L.layerGroup();
+    const clusterSignature = keys => [...new Set(keys.filter(Boolean))].sort().join('|');
+    let activeClusterSignature = activeIdeaMapClusterKeys ? clusterSignature(activeIdeaMapClusterKeys) : '';
+    const visibleClusterLayers = () => Object.values(markerLayer._featureGroup?._layers || {})
+      .filter(layer => typeof layer.getAllChildMarkers === 'function' && typeof layer.getElement === 'function');
+    const syncActiveCluster = () => {
+      container.querySelectorAll('.marker-cluster.active').forEach(element => element.classList.remove('active'));
+      if(!activeClusterSignature) return;
+      visibleClusterLayers().forEach(cluster => {
+        const keys = cluster.getAllChildMarkers().map(marker => marker.options.ideaKey).filter(Boolean);
+        cluster.getElement()?.classList.toggle('active', clusterSignature(keys) === activeClusterSignature);
+      });
+    };
     if(markerLayer.on){
       markerLayer.on('clusterclick', event => {
         const childMarkers = event.layer?.getAllChildMarkers?.() || [];
@@ -5000,6 +5020,8 @@
         const shouldZoom = pendingIdeaMapZoomTarget === targetKey;
         const clusterBounds = event.layer?.getBounds?.();
         options.onCluster?.(clusterKeys);
+        activeClusterSignature = clusterSignature(clusterKeys);
+        window.requestAnimationFrame(syncActiveCluster);
         pendingIdeaMapZoomTarget = targetKey;
         if(shouldZoom){
           if(clusterBounds?.isValid?.() && !clusterBounds.getNorthEast().equals(clusterBounds.getSouthWest())){
@@ -5073,6 +5095,16 @@
           }
           if(active) map.panTo(homeMarker.getLatLng(), {animate:true, duration:.35});
         }
+        if(!activeIdeaMapClusterKeys) activeClusterSignature = '';
+        window.requestAnimationFrame(syncActiveCluster);
+      },
+      setActiveCluster(keys=[]){
+        activeClusterSignature = clusterSignature(keys);
+        window.requestAnimationFrame(syncActiveCluster);
+      },
+      clearActiveCluster(){
+        activeClusterSignature = '';
+        syncActiveCluster();
       },
       destroy(){
         markerLayer.clearLayers();
