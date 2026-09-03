@@ -8,10 +8,13 @@ window.BCJN_CONFIG = {
   supabaseTable: "bcjn_state",
   supabaseStateId: "bcjn-zomer-2026",
 
-  // Kaart-provider. OpenStreetMap Standard geeft een frisse kaartstijl zonder API-key.
-  // Later kun je hier een andere provider achter hangen zonder de activiteitendata te wijzigen.
+  // Kaart-provider. OpenStreetMap Standard werkt zonder API-key.
+  // Wil je de rustigere CARTO Voyager-kaart terug, vraag gratis een CARTO Basemaps key aan
+  // en plak die hieronder. Zet mapTileUrl dan op:
+  // "https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
   mapProvider: "leaflet",
   mapTileUrl: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+  mapCartoApiKey: "",
   mapReferenceTileUrl: "",
   mapAttribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
 };
