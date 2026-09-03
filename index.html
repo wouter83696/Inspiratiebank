@@ -2742,6 +2742,10 @@
     const match = String(value || '').toUpperCase().match(/\b(\d{4})\s*([A-Z]{2})\b/);
     return match ? cleanPostcode(`${match[1]}${match[2]}`) : '';
   }
+  function ideaLocationNeedsExactAddress(value=''){
+    const location = normalizeIdeaLocation(value);
+    return location === 'Buiten' || location === 'Op pad';
+  }
   function loadUserLocation(){
     if(typeof localStorage === 'undefined') return {...DEFAULT_LOCATION};
     try{
@@ -3823,6 +3827,22 @@
       if(status) status.textContent = error.message || 'Adres automatisch aanvullen lukte niet. Je kunt het adres handmatig invullen.';
     }
   }
+  function syncTeamIdeaLocationRequirements(){
+    const locationInput = $('#teamIdeaLocationInput');
+    const postcodeInput = $('#teamIdeaPostcodeInput');
+    const houseNumberInput = $('#teamIdeaHouseNumberInput');
+    const addressInput = $('#teamIdeaAddressInput');
+    const status = $('#teamIdeaAddressStatus');
+    const needsAddress = ideaLocationNeedsExactAddress(locationInput?.value || '');
+    [postcodeInput, houseNumberInput].forEach(input => {
+      if(input) input.required = needsAddress;
+    });
+    if(status && needsAddress && (!cleanPostcode(postcodeInput?.value || '') || !String(houseNumberInput?.value || '').trim())){
+      status.textContent = 'Voor buiten de deur of op pad zijn postcode en huisnummer nodig. Kies Thuis, Binnen of Online als dit geen externe plek is.';
+    }else if(status?.textContent?.startsWith('Voor buiten de deur')){
+      status.textContent = '';
+    }
+  }
   function setupTeamForm(){
     fillSelectOptions('#teamIdeaDomainInput', unique(allInspirationItems().map(x=>x.domain)), domainDisplayLabel);
     fillSelectOptions('#teamIdeaLocationInput', IDEA_LOCATION_OPTIONS);
@@ -3834,6 +3854,7 @@
     enhanceCustomSelect($('#teamIdeaCostInput'));
     enhanceCustomSelect($('#teamIdeaStimulusInput'));
     enhanceCustomSelect($('#teamIdeaDurationInput'));
+    syncTeamIdeaLocationRequirements();
     syncTeamIdeaImageName();
   }
   function refreshCollections(){
@@ -3979,6 +4000,24 @@
       setTeamIdeaStatus('Kies ook een categorie.', 'warn');
       return;
     }
+    if(ideaLocationNeedsExactAddress(item.locationType) && (!item.postcode || !item.houseNumber)){
+      setTeamIdeaStatus('Vul bij buiten de deur of op pad een postcode en huisnummer in. Is het thuis, binnen of online? Kies dan die locatie.', 'warn');
+      $('#teamIdeaPostcodeInput')?.focus();
+      return;
+    }
+    if(ideaLocationNeedsExactAddress(item.locationType) && (!item.lat || !item.lon)){
+      await syncTeamIdeaAddressFromPostcode();
+      item.address = $('#teamIdeaAddressInput').value.trim() || item.address;
+      item.lat = $('#teamIdeaLatInput').value.trim();
+      item.lon = $('#teamIdeaLonInput').value.trim();
+      item.distanceBand = $('#teamIdeaDistanceInput').value;
+      item.distanceKm = form.dataset.addressDistanceKm || item.distanceKm;
+    }
+    if(ideaLocationNeedsExactAddress(item.locationType) && (!item.lat || !item.lon)){
+      setTeamIdeaStatus('Het adres kon nog niet exact op de kaart gezet worden. Controleer postcode en huisnummer, of kies Thuis/Binnen/Online als het geen externe plek is.', 'warn');
+      $('#teamIdeaPostcodeInput')?.focus();
+      return;
+    }
     if(!teamIdeaLooksUseful(item)){
       setTeamIdeaStatus('Vul iets concreets in: een duidelijke activiteit en kort waarom, waar of wanneer dit bruikbaar is.', 'warn');
       return;
@@ -4001,6 +4040,7 @@
     syncCustomSelect($('#teamIdeaCostInput'));
     syncCustomSelect($('#teamIdeaStimulusInput'));
     syncCustomSelect($('#teamIdeaDurationInput'));
+    syncTeamIdeaLocationRequirements();
     syncTeamIdeaImageName();
     $('#teamIdeaAddressStatus').textContent = '';
     $('#teamIdeaLatInput').value = '';
@@ -5334,14 +5374,17 @@
     $('#teamIdeaModalClose').addEventListener('click', closeTeamIdeaModal);
     ['#teamIdeaPostcodeInput','#teamIdeaHouseNumberInput'].forEach(selector => {
       const input = $(selector);
+      if(input) input.addEventListener('input', syncTeamIdeaLocationRequirements);
       if(input) input.addEventListener('change', syncTeamIdeaAddressFromPostcode);
       if(input) input.addEventListener('blur', syncTeamIdeaAddressFromPostcode);
     });
+    $('#teamIdeaLocationInput')?.addEventListener('change', syncTeamIdeaLocationRequirements);
     $('#teamIdeaAddressInput')?.addEventListener('input', () => {
       $('#teamIdeaAddressStatus').textContent = '';
       $('#teamIdeaLatInput').value = '';
       $('#teamIdeaLonInput').value = '';
       setTeamIdeaAddressDistance(null);
+      syncTeamIdeaLocationRequirements();
     });
     $('#confirmModal').addEventListener('click', event => {
       if(event.target.id === 'confirmModal') closeConfirmDialog(false);
