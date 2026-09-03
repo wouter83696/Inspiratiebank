@@ -891,11 +891,19 @@
     .leaflet-control-zoom{border:0 !important;border-radius:13px !important;overflow:hidden;box-shadow:0 10px 24px rgba(20,38,42,.12) !important}
     .leaflet-control-zoom a{width:32px !important;height:32px !important;line-height:31px !important;border:0 !important;color:var(--accent-dark) !important}
     .marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:transparent !important}
-    .marker-cluster{border-radius:999px}
+    .marker-cluster{border-radius:999px;overflow:visible !important}
     .marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{
       width:36px !important;height:36px !important;margin:0 !important;border-radius:999px;
       display:grid;place-items:center;line-height:1 !important;border:1px solid rgba(79,142,158,.16);
-      background:rgba(255,255,255,.96);color:var(--accent-dark);font-weight:750;box-shadow:0 8px 18px rgba(20,38,42,.12)
+      background:rgba(255,255,255,.96);color:var(--accent-dark);font-weight:750;box-shadow:0 8px 18px rgba(20,38,42,.12);
+      transition:background .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease)
+    }
+    .marker-cluster:hover,.marker-cluster:focus-visible{z-index:1000 !important}
+    .marker-cluster:hover div,.marker-cluster:focus-visible div{
+      transform:scale(1.08);
+      border-color:rgba(49,95,107,.62);
+      background:rgba(255,255,255,.98);
+      box-shadow:0 13px 28px rgba(20,38,42,.17),0 0 0 8px rgba(168,225,221,.30)
     }
     .marker-cluster.active div{
       border-color:rgba(49,95,107,.72);
@@ -2062,7 +2070,7 @@
     </div>
   </div>
 
-  <script src="website-bestanden/config.js?v=20260903-esri-light-gray"></script>
+  <script src="website-bestanden/config.js?v=20260903-esri-street-map"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script>
@@ -2256,7 +2264,7 @@
 	  const SUPABASE_TABLE = CONFIG.supabaseTable || 'bcjn_state';
 	  const SUPABASE_STATE_ID = CONFIG.supabaseStateId || 'bcjn-zomer-2026';
 	  const MAP_PROVIDER = String(CONFIG.mapProvider || 'leaflet').toLowerCase();
-	  const MAP_TILE_URL = CONFIG.mapTileUrl || 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}';
+	  const MAP_TILE_URL = CONFIG.mapTileUrl || 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}';
 	  const MAP_REFERENCE_TILE_URL = CONFIG.mapReferenceTileUrl || '';
 	  const MAP_ATTRIBUTION = CONFIG.mapAttribution || 'Sources: Esri, HERE, Garmin, &copy; OpenStreetMap contributors, and the GIS User Community';
 	  let centralStorage = null;
@@ -2730,6 +2738,10 @@
   function cleanPostcode(value=''){
     return String(value || '').toUpperCase().replace(/\s+/g,'').replace(/^(\d{4})([A-Z]{2})$/, '$1 $2');
   }
+  function postcodeFromText(value=''){
+    const match = String(value || '').toUpperCase().match(/\b(\d{4})\s*([A-Z]{2})\b/);
+    return match ? cleanPostcode(`${match[1]}${match[2]}`) : '';
+  }
   function loadUserLocation(){
     if(typeof localStorage === 'undefined') return {...DEFAULT_LOCATION};
     try{
@@ -2996,6 +3008,8 @@
   }
   function normalizeTeamIdea(item={}, index=0){
     const by = String(item.by || 'Iemand').trim() || 'Iemand';
+    const address = String(item.address || item.where || item.place || item.location || '').trim();
+    const postcode = cleanPostcode(item.postcode || postcodeFromText(address));
     return {
       id: item.id || `${normalize(by)}-${normalize(item.title || 'idee')}-${index}`,
       title: String(item.title || '').trim(),
@@ -3005,8 +3019,8 @@
       locationType: normalizeIdeaLocation(item.locationType || 'Op locatie'),
       distanceBand: normalizeIdeaDistance(item.distanceBand, item),
       distanceKm: String(item.distanceKm || '').trim(),
-      address: String(item.address || item.where || item.place || item.location || '').trim(),
-      postcode: cleanPostcode(item.postcode || ''),
+      address,
+      postcode,
       houseNumber: String(item.houseNumber || item.huisnummer || '').trim(),
       lat: String(item.lat || '').trim(),
       lon: String(item.lon || item.lng || '').trim(),
@@ -3575,6 +3589,10 @@
       distanceBand:item.distanceBand,
       distanceKm:item.distanceKm || '',
       address:item.address || '',
+      postcode:item.postcode || postcodeFromText(item.address || ''),
+      houseNumber:item.houseNumber || '',
+      lat:item.lat || '',
+      lon:item.lon || '',
       duration:item.duration,
       group:item.group,
       cost:item.cost,
@@ -4993,12 +5011,12 @@
     });
     L.control.zoom({position:'topright'}).addTo(map);
     L.tileLayer(MAP_TILE_URL, {
-      maxZoom:16,
+      maxZoom:19,
       attribution:MAP_ATTRIBUTION
     }).addTo(map);
     if(MAP_REFERENCE_TILE_URL){
       L.tileLayer(MAP_REFERENCE_TILE_URL, {
-        maxZoom:16,
+        maxZoom:19,
         pane:'tilePane'
       }).addTo(map);
     }

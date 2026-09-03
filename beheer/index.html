@@ -1749,6 +1749,10 @@
   function cleanPostcode(value=''){
     return String(value || '').toUpperCase().replace(/\s+/g,'').replace(/^(\d{4})([A-Z]{2})$/, '$1 $2');
   }
+  function postcodeFromText(value=''){
+    const match = String(value || '').toUpperCase().match(/\b(\d{4})\s*([A-Z]{2})\b/);
+    return match ? cleanPostcode(`${match[1]}${match[2]}`) : '';
+  }
   function parsePdokPoint(value=''){
     const match = String(value || '').match(/POINT\(([-\d.]+)\s+([-\d.]+)\)/i);
     return match ? {lon:Number(match[1]), lat:Number(match[2])} : null;
@@ -2163,6 +2167,8 @@
   }
   function normalizeTeamIdea(item={}, index=0){
     const by = String(item.by || 'Iemand').trim() || 'Iemand';
+    const address = String(item.address || item.where || item.place || item.location || '').trim();
+    const postcode = cleanPostcode(item.postcode || postcodeFromText(address));
     return {
       ...item,
       id:item.id || `${normalize(by)}-${normalize(item.title || 'idee')}-${index}`,
@@ -2172,8 +2178,8 @@
       type:item.type || 'Inzending',
       distanceBand:item.distanceBand || 'Op locatie',
       distanceKm:String(item.distanceKm || '').trim(),
-      address:String(item.address || item.where || item.place || item.location || '').trim(),
-      postcode:cleanPostcode(item.postcode || ''),
+      address,
+      postcode,
       houseNumber:String(item.houseNumber || item.huisnummer || '').trim(),
       lat:String(item.lat || '').trim(),
       lon:String(item.lon || item.lng || '').trim(),
