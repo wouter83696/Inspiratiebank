@@ -8,10 +8,10 @@ window.BCJN_CONFIG = {
   supabaseTable: "bcjn_state",
   supabaseStateId: "bcjn-zomer-2026",
 
-  // Kaart-provider. OpenFreeMap Positron geeft een rustige kaartstijl zonder API-key.
+  // Kaart-provider. Esri Light Gray Canvas geeft een rustige rasterkaart zonder API-key.
   // Later kun je hier een andere provider achter hangen zonder de activiteitendata te wijzigen.
   mapProvider: "leaflet",
-  mapStyleUrl: "https://tiles.openfreemap.org/styles/positron",
-  mapTileUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-  mapAttribution: '<a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a> <a href="https://www.openmaptiles.org/" target="_blank" rel="noopener">&copy; OpenMapTiles</a> Data from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
+  mapTileUrl: "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+  mapReferenceTileUrl: "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}",
+  mapAttribution: "Sources: Esri, HERE, Garmin, &copy; OpenStreetMap contributors, and the GIS User Community"
 };
