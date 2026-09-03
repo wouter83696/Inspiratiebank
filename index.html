@@ -1447,20 +1447,33 @@
       .agendaMore{min-height:26px;padding:5px 7px;font-size:.76rem}
       .agendaEmpty{margin-top:2px;padding:7px 9px;font-size:.76rem;background:rgba(255,255,255,.58)}
       .agendaHero{
-        min-height:236px;
+        min-height:clamp(318px,42svh,354px);
         margin:calc(-1 * clamp(84px,16svh,104px)) calc(50% - 50vw) 0;
-        padding:clamp(106px,18svh,128px) max(20px,calc((100vw - var(--max)) / 2 + 20px)) 30px;
-        background-position:58% top,center,center
+        padding:clamp(108px,16svh,124px) max(20px,calc((100vw - var(--max)) / 2 + 20px)) 32px;
+        background-position:54% top,center,center
       }
-      .agendaHero .tabHeroLine,
-      .agendaHero .tabHeroTitle{display:none}
+      .agendaHero::before{
+        background:
+          linear-gradient(90deg,rgba(255,253,249,.9) 0%,rgba(255,253,249,.68) 45%,rgba(255,253,249,.18) 100%),
+          linear-gradient(180deg,rgba(255,253,249,.28) 0%,rgba(255,253,249,0) 48%,rgba(255,253,249,.3) 100%)
+      }
+      .agendaHero .tabHeroTitle{
+        display:block;order:2;max-width:8.8em;
+        font-size:clamp(2.28rem,11.2vw,2.96rem);line-height:.94;letter-spacing:-.035em
+      }
+      .agendaHero .tabHeroLine{
+        display:block;order:3;margin-top:8px;
+        font-size:clamp(.96rem,4.1vw,1.1rem);line-height:1.22;color:rgba(49,95,107,.9)
+      }
       .agendaHero .tabHeroActions{
+        order:4;
         width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-        align-items:center;gap:8px;margin-top:0
+        align-items:center;gap:8px;margin-top:20px
       }
-      .agendaHero .tabHeroButton{height:44px;min-height:44px;padding:0 12px;font-size:.9rem;gap:8px}
-      .agendaHero .tabHeroButton.primary{font-size:.95rem}
+      .agendaHero .tabHeroButton{height:44px;min-height:44px;padding:0 12px;font-size:.86rem;gap:8px}
+      .agendaHero .tabHeroButton.primary{font-size:.9rem}
       .agendaHero .tabHeroStats{
+        order:5;
         width:100%;min-height:0;margin-top:14px;justify-content:flex-start;gap:8px 10px;
         padding:0;background:transparent;border-color:transparent
       }
