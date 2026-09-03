@@ -8,9 +8,9 @@ window.BCJN_CONFIG = {
   supabaseTable: "bcjn_state",
   supabaseStateId: "bcjn-zomer-2026",
 
-  // Kaart-provider. De publieke OpenStreetMap-tiles hebben geen aparte API-key nodig.
+  // Kaart-provider. Carto Voyager geeft de rustige kaartstijl zonder aparte API-key.
   // Later kun je hier een andere provider achter hangen zonder de activiteitendata te wijzigen.
   mapProvider: "leaflet",
-  mapTileUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-  mapAttribution: "&copy; OpenStreetMap contributors"
+  mapTileUrl: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
+  mapAttribution: "&copy; OpenStreetMap &copy; CARTO"
 };

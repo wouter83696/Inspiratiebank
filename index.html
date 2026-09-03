@@ -2062,7 +2062,7 @@
     </div>
   </div>
 
-  <script src="website-bestanden/config.js?v=20260827-osm-tiles"></script>
+  <script src="website-bestanden/config.js?v=20260903-carto-voyager"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script>
@@ -2256,8 +2256,8 @@
 	  const SUPABASE_TABLE = CONFIG.supabaseTable || 'bcjn_state';
 	  const SUPABASE_STATE_ID = CONFIG.supabaseStateId || 'bcjn-zomer-2026';
 	  const MAP_PROVIDER = String(CONFIG.mapProvider || 'leaflet').toLowerCase();
-	  const MAP_TILE_URL = CONFIG.mapTileUrl || 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-	  const MAP_ATTRIBUTION = CONFIG.mapAttribution || '&copy; OpenStreetMap';
+	  const MAP_TILE_URL = CONFIG.mapTileUrl || 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png';
+	  const MAP_ATTRIBUTION = CONFIG.mapAttribution || '&copy; OpenStreetMap &copy; CARTO';
 	  let centralStorage = null;
 	  let userLocation = loadUserLocation();
 	  let userLocationRadiusKm = loadUserLocationRadius();
