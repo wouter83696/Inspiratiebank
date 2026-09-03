@@ -8,9 +8,10 @@ window.BCJN_CONFIG = {
   supabaseTable: "bcjn_state",
   supabaseStateId: "bcjn-zomer-2026",
 
-  // Kaart-provider. Carto Voyager geeft de rustige kaartstijl zonder aparte API-key.
+  // Kaart-provider. OpenFreeMap Positron geeft een rustige kaartstijl zonder API-key.
   // Later kun je hier een andere provider achter hangen zonder de activiteitendata te wijzigen.
   mapProvider: "leaflet",
-  mapTileUrl: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png",
-  mapAttribution: "&copy; OpenStreetMap &copy; CARTO"
+  mapStyleUrl: "https://tiles.openfreemap.org/styles/positron",
+  mapTileUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  mapAttribution: '<a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a> <a href="https://www.openmaptiles.org/" target="_blank" rel="noopener">&copy; OpenMapTiles</a> Data from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
 };

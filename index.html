@@ -30,6 +30,7 @@
   <link rel="preload" href="website-bestanden/hero-achtergronden/uit-agenda-header.png" as="image" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
   <style>
@@ -2062,8 +2063,10 @@
     </div>
   </div>
 
-  <script src="website-bestanden/config.js?v=20260903-carto-voyager"></script>
+  <script src="website-bestanden/config.js?v=20260903-openfreemap-positron"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script>
   const SITE_DATA_URL = 'website-bestanden/data/zomerprogramma_data.json?v=2026-09-02T17%3A14%3A59.346Z';
@@ -2256,8 +2259,9 @@
 	  const SUPABASE_TABLE = CONFIG.supabaseTable || 'bcjn_state';
 	  const SUPABASE_STATE_ID = CONFIG.supabaseStateId || 'bcjn-zomer-2026';
 	  const MAP_PROVIDER = String(CONFIG.mapProvider || 'leaflet').toLowerCase();
-	  const MAP_TILE_URL = CONFIG.mapTileUrl || 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png';
-	  const MAP_ATTRIBUTION = CONFIG.mapAttribution || '&copy; OpenStreetMap &copy; CARTO';
+	  const MAP_STYLE_URL = CONFIG.mapStyleUrl || '';
+	  const MAP_TILE_URL = CONFIG.mapTileUrl || 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	  const MAP_ATTRIBUTION = CONFIG.mapAttribution || '&copy; OpenStreetMap contributors';
 	  let centralStorage = null;
 	  let userLocation = loadUserLocation();
 	  let userLocationRadiusKm = loadUserLocationRadius();
@@ -4991,10 +4995,15 @@
       attributionControl:true
     });
     L.control.zoom({position:'topright'}).addTo(map);
-    L.tileLayer(MAP_TILE_URL, {
-      maxZoom:19,
-      attribution:MAP_ATTRIBUTION
-    }).addTo(map);
+    if(MAP_STYLE_URL && L.maplibreGL){
+      L.maplibreGL({style:MAP_STYLE_URL}).addTo(map);
+      if(MAP_ATTRIBUTION) map.attributionControl.addAttribution(MAP_ATTRIBUTION);
+    } else {
+      L.tileLayer(MAP_TILE_URL, {
+        maxZoom:19,
+        attribution:MAP_ATTRIBUTION
+      }).addTo(map);
+    }
     const userPoint = options.userPoint || DEFAULT_LOCATION;
     const bounds = [[userPoint.lat, userPoint.lon]];
     const markerLayer = L.markerClusterGroup
