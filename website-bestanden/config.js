@@ -8,13 +8,14 @@ window.BCJN_CONFIG = {
   supabaseTable: "bcjn_state",
   supabaseStateId: "bcjn-zomer-2026",
 
-  // Kaart-provider. Esri World Street Map werkt zonder API-key en oogt dichter bij Google Maps.
+  // Kaart-provider. OpenFreeMap Bright werkt zonder API-key en oogt lichter/moderner.
   // Wil je exact de rustigere CARTO Voyager-kaart terug, vraag gratis een CARTO Basemaps key aan
-  // en plak die hieronder. Zet mapTileUrl dan op:
+  // en plak die hieronder. Maak mapStyleUrl dan leeg en zet mapTileUrl op:
   // "https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
   mapProvider: "leaflet",
-  mapTileUrl: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+  mapStyleUrl: "https://tiles.openfreemap.org/styles/bright",
+  mapTileUrl: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
   mapCartoApiKey: "",
   mapReferenceTileUrl: "",
-  mapAttribution: "Sources: Esri, HERE, Garmin, FAO, NOAA, USGS, &copy; OpenStreetMap contributors, and the GIS User Community"
+  mapAttribution: '<a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a> <a href="https://www.openmaptiles.org/" target="_blank" rel="noopener">&copy; OpenMapTiles</a> Data from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
 };

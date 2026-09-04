@@ -30,6 +30,7 @@
   <link rel="preload" href="website-bestanden/hero-achtergronden/uit-agenda-header.png" as="image" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
   <style>
@@ -2083,8 +2084,10 @@
     </div>
   </div>
 
-  <script src="website-bestanden/config.js?v=20260903-street-map"></script>
+  <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script>
   const SITE_DATA_URL = 'website-bestanden/data/zomerprogramma_data.json?v=2026-09-03T17%3A06%3A36.065Z';
@@ -2278,12 +2281,13 @@
 	  const SUPABASE_STATE_ID = CONFIG.supabaseStateId || 'bcjn-zomer-2026';
 	  const MAP_PROVIDER = String(CONFIG.mapProvider || 'leaflet').toLowerCase();
 	  const MAP_CARTO_API_KEY = String(CONFIG.mapCartoApiKey || '').trim();
-	  function mapTileUrlWithKey(url=''){
+	  function mapUrlWithCartoKey(url=''){
 	    if(!url || !MAP_CARTO_API_KEY || !/cartocdn\.com/i.test(url) || /[?&]key=/.test(url)) return url;
 	    return `${url}${url.includes('?') ? '&' : '?'}key=${encodeURIComponent(MAP_CARTO_API_KEY)}`;
 	  }
-	  const MAP_TILE_URL = mapTileUrlWithKey(CONFIG.mapTileUrl || 'https://tile.openstreetmap.org/{z}/{x}/{y}.png');
-	  const MAP_REFERENCE_TILE_URL = mapTileUrlWithKey(CONFIG.mapReferenceTileUrl || '');
+	  const MAP_STYLE_URL = mapUrlWithCartoKey(CONFIG.mapStyleUrl || '');
+	  const MAP_TILE_URL = mapUrlWithCartoKey(CONFIG.mapTileUrl || 'https://tile.openstreetmap.org/{z}/{x}/{y}.png');
+	  const MAP_REFERENCE_TILE_URL = mapUrlWithCartoKey(CONFIG.mapReferenceTileUrl || '');
 	  const MAP_ATTRIBUTION = CONFIG.mapAttribution || '&copy; OpenStreetMap contributors';
 	  let centralStorage = null;
 	  let userLocation = loadUserLocation();
@@ -5068,11 +5072,18 @@
       attributionControl:true
     });
     L.control.zoom({position:'topright'}).addTo(map);
-    L.tileLayer(MAP_TILE_URL, {
-      maxZoom:19,
-      attribution:MAP_ATTRIBUTION
-    }).addTo(map);
-    if(MAP_REFERENCE_TILE_URL){
+    if(MAP_STYLE_URL && L.maplibreGL){
+      L.maplibreGL({
+        style:MAP_STYLE_URL,
+        attribution:MAP_ATTRIBUTION
+      }).addTo(map);
+    } else {
+      L.tileLayer(MAP_TILE_URL, {
+        maxZoom:19,
+        attribution:MAP_ATTRIBUTION
+      }).addTo(map);
+    }
+    if(!MAP_STYLE_URL && MAP_REFERENCE_TILE_URL){
       L.tileLayer(MAP_REFERENCE_TILE_URL, {
         maxZoom:19,
         pane:'tilePane'
@@ -5423,11 +5434,10 @@
         return;
       }
       if(event.target.closest('.ideaMapResultLink')) return;
-      const mapTarget = event.target.closest('[data-map-pin-key],[data-map-result-key]');
+      const mapTarget = event.target.closest('[data-map-result-key]');
       if(!mapTarget) return;
-      if(mapTarget.dataset.mapResultKey && !mapTarget.dataset.mapPinKey) pendingIdeaMapZoomTarget = null;
-      if(mapTarget.dataset.mapPinKey) setActiveIdeaMapItem(mapTarget.dataset.mapPinKey, {clearCluster:true, refreshPanel:true});
-      else setActiveIdeaMapItem(mapTarget.dataset.mapResultKey);
+      pendingIdeaMapZoomTarget = null;
+      setActiveIdeaMapItem(mapTarget.dataset.mapResultKey);
     });
     document.addEventListener('keydown', event => {
       if(event.key !== 'Enter' && event.key !== ' ') return;
