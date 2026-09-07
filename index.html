@@ -1071,6 +1071,7 @@
     .teamField{display:grid;gap:7px;min-width:0}
     .teamField.wide{grid-column:1 / -1}
     .teamAddressPair{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,.42fr);gap:12px;align-items:end}
+    .teamAddressPair[hidden],.teamAddressField[hidden]{display:none !important}
     .teamField span{font-size:.88rem;color:var(--accent-dark);font-weight:500}
     .teamField input,.teamField select,.teamField textarea{
       width:100%;min-width:0;max-width:100%;border:1px solid rgba(11,18,32,.08);background:rgba(255,255,255,.76);
@@ -1932,7 +1933,7 @@
                 <input id="teamIdeaHouseNumberInput" name="houseNumber" type="text" autocomplete="address-line2" placeholder="Bijv. 12A">
               </label>
             </div>
-            <label class="teamField wide">
+            <label class="teamField wide teamAddressField">
               <span>Adres</span>
               <input id="teamIdeaAddressInput" name="address" type="text" autocomplete="street-address" placeholder="Wordt automatisch aangevuld of vul handmatig in">
               <small id="teamIdeaAddressStatus" class="teamFieldHint" role="status" aria-live="polite"></small>
@@ -3868,12 +3869,16 @@
     const addressInput = $('#teamIdeaAddressInput');
     const status = $('#teamIdeaAddressStatus');
     const needsAddress = ideaLocationNeedsExactAddress(locationInput?.value || '');
+    const addressPair = postcodeInput?.closest('.teamAddressPair');
+    const addressField = addressInput?.closest('.teamAddressField');
+    if(addressPair) addressPair.hidden = !needsAddress;
+    if(addressField) addressField.hidden = !needsAddress;
     [postcodeInput, houseNumberInput].forEach(input => {
       if(input) input.required = needsAddress;
     });
     if(status && needsAddress && (!cleanPostcode(postcodeInput?.value || '') || !String(houseNumberInput?.value || '').trim())){
       status.textContent = 'Voor Buiten de deur zijn postcode en huisnummer nodig. Kies Op locatie of Online als dit geen externe plek is.';
-    }else if(status?.textContent?.startsWith('Voor buiten de deur')){
+    }else if(status && !needsAddress){
       status.textContent = '';
     }
   }
