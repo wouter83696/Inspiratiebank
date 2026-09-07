@@ -2228,7 +2228,7 @@
   const IDEA_TYPE_OPTIONS = ['Eigen aanbod','Bestaand extern aanbod','Zoekbron / agenda','Inzending'];
   const IDEA_LOCATION_OPTIONS = ['Binnen','Buiten','Thuis','Op pad','Online'];
   const TEAM_IDEA_LOCATION_OPTIONS = [
-    {value:'Binnen', label:'Ter plekke'},
+    {value:'Binnen', label:'Op je eigen plek'},
     {value:'Op pad', label:'Eropuit'},
     {value:'Online', label:'Online'}
   ];
@@ -3878,7 +3878,7 @@
       if(input) input.required = needsAddress;
     });
     if(status && needsAddress && (!cleanPostcode(postcodeInput?.value || '') || !String(houseNumberInput?.value || '').trim())){
-      status.textContent = 'Voor Eropuit zijn postcode en huisnummer nodig. Kies Ter plekke of Online als dit geen externe plek is.';
+      status.textContent = 'Voor Eropuit zijn postcode en huisnummer nodig. Kies Op je eigen plek of Online als dit geen externe plek is.';
     }else if(status && !needsAddress){
       status.textContent = '';
     }
@@ -4046,7 +4046,7 @@
       return;
     }
     if(ideaLocationNeedsExactAddress(item.locationType) && (!item.postcode || !item.houseNumber)){
-      setTeamIdeaStatus('Vul bij Eropuit een postcode en huisnummer in. Kies anders Ter plekke of Online.', 'warn');
+      setTeamIdeaStatus('Vul bij Eropuit een postcode en huisnummer in. Kies anders Op je eigen plek of Online.', 'warn');
       $('#teamIdeaPostcodeInput')?.focus();
       return;
     }
@@ -4059,7 +4059,7 @@
       item.distanceKm = form.dataset.addressDistanceKm || item.distanceKm;
     }
     if(ideaLocationNeedsExactAddress(item.locationType) && (!item.lat || !item.lon)){
-      setTeamIdeaStatus('Het adres kon nog niet exact op de kaart gezet worden. Controleer postcode en huisnummer, of kies Ter plekke of Online.', 'warn');
+      setTeamIdeaStatus('Het adres kon nog niet exact op de kaart gezet worden. Controleer postcode en huisnummer, of kies Op je eigen plek of Online.', 'warn');
       $('#teamIdeaPostcodeInput')?.focus();
       return;
     }
