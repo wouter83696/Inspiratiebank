@@ -5029,7 +5029,10 @@
     if(result && scroll){
       const panel = result.closest('.ideaMapResults');
       if(panel){
-        const centeredTop = result.offsetTop - Math.max(12, (panel.clientHeight - result.offsetHeight) / 2);
+        const panelRect = panel.getBoundingClientRect();
+        const resultRect = result.getBoundingClientRect();
+        const resultTop = resultRect.top - panelRect.top + panel.scrollTop;
+        const centeredTop = resultTop - Math.max(12, (panel.clientHeight - result.offsetHeight) / 2);
         panel.scrollTo({top:Math.max(0, centeredTop), behavior:'smooth'});
       }
       else result.scrollIntoView({behavior:'smooth', block:'nearest'});
