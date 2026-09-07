@@ -4937,6 +4937,29 @@
     if(!coord) return null;
     return {item, key:ideaDomKey(item), index, ...coord};
   }
+  function spreadIdeaMapPoints(points=[]){
+    const groups = new Map();
+    points.forEach(point => {
+      const groupKey = `${Number(point.lat).toFixed(5)}|${Number(point.lon).toFixed(5)}`;
+      if(!groups.has(groupKey)) groups.set(groupKey, []);
+      groups.get(groupKey).push(point);
+    });
+    return points.map(point => {
+      const groupKey = `${Number(point.lat).toFixed(5)}|${Number(point.lon).toFixed(5)}`;
+      const group = groups.get(groupKey) || [point];
+      if(group.length === 1) return point;
+      const position = group.indexOf(point);
+      const ring = Math.floor(position / 12) + 1;
+      const slot = position % 12;
+      const angle = (slot / 12) * Math.PI * 2 + ring * .31;
+      const radius = .0018 * ring;
+      return {
+        ...point,
+        lat:point.lat + Math.sin(angle) * radius,
+        lon:point.lon + Math.cos(angle) * radius
+      };
+    });
+  }
   function ideaMapUsesHomeIcon(point={}, item={}){
     return point.source === 'user' || point.home || itemIsHomeActivity(item);
   }
@@ -5099,9 +5122,7 @@
     }
     const userPoint = options.userPoint || DEFAULT_LOCATION;
     const bounds = [[userPoint.lat, userPoint.lon]];
-    const markerLayer = L.markerClusterGroup
-      ? L.markerClusterGroup({showCoverageOnHover:false,zoomToBoundsOnClick:false,spiderfyOnMaxZoom:false,maxClusterRadius:42,clusterPane:'ideaMarkerPane'})
-      : L.layerGroup();
+    const markerLayer = L.layerGroup();
     const clusterSignature = keys => [...new Set(keys.filter(Boolean))].sort().join('|');
     let activeClusterSignature = activeIdeaMapClusterKeys ? clusterSignature(activeIdeaMapClusterKeys) : '';
     const visibleClusterLayers = () => Object.values(markerLayer._featureGroup?._layers || {})
@@ -5134,28 +5155,7 @@
         }
       });
     }
-    const homePoints = points.filter(point => ideaMapUsesHomeIcon(point, point.item));
-    const mapPoints = points.filter(point => !ideaMapUsesHomeIcon(point, point.item));
-    let homeMarker = null;
-    if(homePoints.length){
-      homeMarker = L.marker([userPoint.lat, userPoint.lon], {
-        icon:homeLeafletIcon(homePoints, homePoints.some(point => point.key === activeIdeaMapKey)),
-        title:homePoints.length === 1 ? homePoints[0].item.title : `${homePoints.length} activiteiten op eigen locatie`,
-        pane:'ideaMarkerPane',
-        zIndexOffset:500,
-        ideaKeys:homePoints.map(point => point.key)
-      }).addTo(map);
-      homeMarker.on('click', event => {
-        if(event?.originalEvent) L.DomEvent.stop(event.originalEvent);
-        const keys = homePoints.map(point => point.key);
-        const targetKey = mapZoomTargetKey('home', keys);
-        const shouldZoom = pendingIdeaMapZoomTarget === targetKey;
-        if(homePoints.length === 1) options.onSelect?.(homePoints[0].key);
-        else options.onCluster?.(keys);
-        pendingIdeaMapZoomTarget = targetKey;
-        if(shouldZoom) map.setView(homeMarker.getLatLng(), Math.min(map.getZoom() + 2, 16), {animate:true});
-      });
-    }
+    const mapPoints = spreadIdeaMapPoints(points);
     const markers = mapPoints.map(point => {
       const marker = L.marker([point.lat, point.lon], {
         icon:ideaLeafletIcon(point, point.key === activeIdeaMapKey),
@@ -5175,7 +5175,6 @@
       bounds.push([point.lat, point.lon]);
       return marker;
     });
-    homePoints.forEach(point => bounds.push([point.lat, point.lon]));
     markerLayer.addTo(map);
     window.requestAnimationFrame(() => {
       map.invalidateSize();
@@ -5193,15 +5192,6 @@
           }
           if(active) map.panTo(marker.getLatLng(), {animate:true, duration:.35});
         });
-        if(homeMarker){
-          const active = homeMarker.options.ideaKeys.includes(key);
-          const element = homeMarker.getElement();
-          if(element){
-            element.classList.toggle('active', active);
-            element.querySelector('.ideaLeafletMarker')?.classList.toggle('active', active);
-          }
-          if(active) map.panTo(homeMarker.getLatLng(), {animate:true, duration:.35});
-        }
         if(!activeIdeaMapClusterKeys) activeClusterSignature = '';
         window.requestAnimationFrame(syncActiveCluster);
       },
@@ -5224,11 +5214,26 @@
     if(provider === 'leaflet'){
       return createLeafletMapProvider(container, points, {
         userPoint:userLocation || DEFAULT_LOCATION,
-        onSelect:key => setActiveIdeaMapItem(key, {clearCluster:true, refreshPanel:true}),
+        onSelect:key => openIdeaTileFromMap(key),
         onCluster:keys => setActiveIdeaMapCluster(keys)
       });
     }
     return null;
+  }
+  function openIdeaTileFromMap(key){
+    activeIdeaMapKey = key;
+    activeIdeaMapClusterKeys = null;
+    pendingIdeaMapZoomTarget = null;
+    setIdeaView('tiles');
+    window.requestAnimationFrame(() => {
+      const target = [...$('#ideaCards').querySelectorAll('[data-idea-key]')]
+        .find(node => node.dataset.ideaKey === key);
+      if(!target) return;
+      document.querySelectorAll('.ideaRandomFocus').forEach(node => node.classList.remove('ideaRandomFocus'));
+      target.classList.add('ideaRandomFocus');
+      target.scrollIntoView({behavior:'smooth', block:'center'});
+      window.setTimeout(() => target.classList.remove('ideaRandomFocus'), 2200);
+    });
   }
   function renderIdeaMap(items=[]){
     const map = $('#ideaMap');
