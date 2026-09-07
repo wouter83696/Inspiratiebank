@@ -2227,8 +2227,8 @@
   const IDEA_TYPE_OPTIONS = ['Eigen aanbod','Bestaand extern aanbod','Zoekbron / agenda','Inzending'];
   const IDEA_LOCATION_OPTIONS = ['Binnen','Buiten','Thuis','Op pad','Online'];
   const TEAM_IDEA_LOCATION_OPTIONS = [
-    {value:'Binnen', label:'Op locatie'},
-    {value:'Op pad', label:'Buiten de deur'},
+    {value:'Binnen', label:'Ter plekke'},
+    {value:'Op pad', label:'Eropuit'},
     {value:'Online', label:'Online'}
   ];
   const AGENDA_DISTANCE_OPTIONS = ['Op locatie','0–10 km (dichtbij)','10–25 km (regio)'];
@@ -3877,7 +3877,7 @@
       if(input) input.required = needsAddress;
     });
     if(status && needsAddress && (!cleanPostcode(postcodeInput?.value || '') || !String(houseNumberInput?.value || '').trim())){
-      status.textContent = 'Voor Buiten de deur zijn postcode en huisnummer nodig. Kies Op locatie of Online als dit geen externe plek is.';
+      status.textContent = 'Voor Eropuit zijn postcode en huisnummer nodig. Kies Ter plekke of Online als dit geen externe plek is.';
     }else if(status && !needsAddress){
       status.textContent = '';
     }
@@ -4045,7 +4045,7 @@
       return;
     }
     if(ideaLocationNeedsExactAddress(item.locationType) && (!item.postcode || !item.houseNumber)){
-      setTeamIdeaStatus('Vul bij Buiten de deur een postcode en huisnummer in. Kies anders Op locatie of Online.', 'warn');
+      setTeamIdeaStatus('Vul bij Eropuit een postcode en huisnummer in. Kies anders Ter plekke of Online.', 'warn');
       $('#teamIdeaPostcodeInput')?.focus();
       return;
     }
@@ -4058,7 +4058,7 @@
       item.distanceKm = form.dataset.addressDistanceKm || item.distanceKm;
     }
     if(ideaLocationNeedsExactAddress(item.locationType) && (!item.lat || !item.lon)){
-      setTeamIdeaStatus('Het adres kon nog niet exact op de kaart gezet worden. Controleer postcode en huisnummer, of kies Op locatie of Online.', 'warn');
+      setTeamIdeaStatus('Het adres kon nog niet exact op de kaart gezet worden. Controleer postcode en huisnummer, of kies Ter plekke of Online.', 'warn');
       $('#teamIdeaPostcodeInput')?.focus();
       return;
     }
