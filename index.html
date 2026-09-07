@@ -999,6 +999,11 @@
     }
     .ideaMapResult:hover,.ideaMapResult.active{background:linear-gradient(var(--theme-tint-strong),var(--theme-tint-strong)),rgba(255,255,255,.96);border-color:var(--theme-line,rgba(79,142,158,.18));transform:translateY(-1px)}
     .ideaMapResult.active{box-shadow:0 0 0 2px var(--theme-line,rgba(79,142,158,.18)),0 10px 24px rgba(20,38,42,.08)}
+    .ideaMapResult.markerLinkedFocus{animation:markerLinkedFocus 1.05s var(--ease)}
+    @keyframes markerLinkedFocus{
+      0%,100%{box-shadow:0 0 0 2px var(--theme-line,rgba(79,142,158,.18)),0 10px 24px rgba(20,38,42,.08)}
+      45%{box-shadow:0 0 0 5px color-mix(in srgb,var(--theme-ink,var(--accent-dark)) 34%,transparent),0 14px 30px rgba(20,38,42,.16)}
+    }
     .ideaMapResultTitle{display:flex;align-items:center;gap:8px;min-width:0}
     .ideaMapResult .domainIcon{width:28px;height:28px;margin:0;align-self:center;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
     .ideaMapResult .domainIcon svg{width:14px;height:14px}
@@ -4999,15 +5004,15 @@
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
   }
-  function updateIdeaMapPanel({scroll=false}={}){
+  function updateIdeaMapPanel({scroll=false, emphasize=false}={}){
     const map = $('#ideaMap');
     const panel = map?.querySelector('.ideaMapPanel');
     if(!panel) return;
     const points = filteredInspirationItems().map(ideaMapPoint).filter(Boolean);
     panel.outerHTML = ideaMapPanelMarkup(points);
-    setActiveIdeaMapItem(activeIdeaMapKey, {scroll});
+    setActiveIdeaMapItem(activeIdeaMapKey, {scroll, emphasize});
   }
-  function setActiveIdeaMapItem(key, {scroll=true, clearCluster=false, refreshPanel=false}={}){
+  function setActiveIdeaMapItem(key, {scroll=true, clearCluster=false, refreshPanel=false, emphasize=false}={}){
     const shouldRefreshPanel = refreshPanel || (clearCluster && activeIdeaMapClusterKeys);
     if(clearCluster){
       activeIdeaMapClusterKeys = null;
@@ -5016,7 +5021,7 @@
     activeIdeaMapKey = key || activeIdeaMapKey;
     if(!activeIdeaMapKey) return;
     if(shouldRefreshPanel){
-      updateIdeaMapPanel({scroll});
+      updateIdeaMapPanel({scroll, emphasize});
       return;
     }
     $$('[data-map-pin-key],[data-map-result-key]').forEach(node => {
@@ -5031,6 +5036,12 @@
       if(panel) panel.scrollTo({top:Math.max(0, result.offsetTop - 12), behavior:'smooth'});
       else result.scrollIntoView({behavior:'smooth', block:'nearest'});
     }
+    if(result && emphasize){
+      result.classList.remove('markerLinkedFocus');
+      void result.offsetWidth;
+      result.classList.add('markerLinkedFocus');
+      window.setTimeout(() => result.classList.remove('markerLinkedFocus'), 1100);
+    }
   }
   function mapZoomTargetKey(type, keys=[]){
     return `${type}:${[...new Set(keys.filter(Boolean))].sort().join('|')}`;
@@ -5044,7 +5055,7 @@
     activeIdeaMapClusterKeys = uniqueKeys;
     activeIdeaMapKey = uniqueKeys.includes(activeIdeaMapKey) ? activeIdeaMapKey : uniqueKeys[0];
     ideaMapProvider?.setActiveCluster?.(uniqueKeys);
-    updateIdeaMapPanel();
+    updateIdeaMapPanel({scroll:true, emphasize:true});
   }
   function clearActiveIdeaMapCluster(){
     if(!activeIdeaMapClusterKeys) return;
@@ -5214,7 +5225,7 @@
     if(provider === 'leaflet'){
       return createLeafletMapProvider(container, points, {
         userPoint:userLocation || DEFAULT_LOCATION,
-        onSelect:key => setActiveIdeaMapItem(key, {clearCluster:true, refreshPanel:true}),
+        onSelect:key => setActiveIdeaMapItem(key, {clearCluster:true, refreshPanel:true, emphasize:true}),
         onCluster:keys => setActiveIdeaMapCluster(keys)
       });
     }
