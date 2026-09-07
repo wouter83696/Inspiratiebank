@@ -27,7 +27,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="website-bestanden/hero-achtergronden/inspiratiebank-header.png" as="image" type="image/png">
-  <link rel="preload" href="website-bestanden/hero-achtergronden/uit-agenda-header.png" as="image" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css">
@@ -164,7 +163,7 @@
       box-shadow:none;
     }
     .tabHero::before,.tabHero::after{content:none}
-    .tabHero.agendaHero{--hero-bg-image:url("website-bestanden/hero-achtergronden/uit-agenda-header.png")}
+    .tabHero.agendaHero{--hero-bg-image:url("website-bestanden/hero-achtergronden/inspiratiebank-header.png")}
     .tabHeroKicker{position:relative;z-index:1;display:block;margin:0 0 10px;color:var(--accent-dark);font-size:.78rem;font-weight:600;letter-spacing:.05em;line-height:1}
     .tabHeroTitle{position:relative;z-index:1;margin:0 0 0 -.025em;color:var(--accent-dark);font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:5.35rem;font-weight:500;line-height:.92;letter-spacing:-.045em}
     .tabHeroLine{position:relative;z-index:1;margin:10px 0 0;color:var(--accent);font-size:1.28rem;line-height:1.2;font-weight:400}
@@ -184,7 +183,7 @@
     .tabHeroStatDivider{display:inline;color:rgba(49,95,107,.32)}
     .tabHero + .filterBar{--hero-search-height:44px;position:relative;z-index:2;margin-top:calc(var(--hero-search-height) / -2)}
     @media (min-width:641px){
-      .tabHero.agendaHero{background-position:center 62%,center,center}
+      .tabHero.agendaHero{background-position:center top,center,center}
       .tabHeroTitle,.tabHeroLine,.tabHeroActions{transform:translateY(-14px)}
       .tabHeroKicker{transform:translateY(0)}
       .tabHeroLine{margin-top:15px}
@@ -1453,10 +1452,10 @@
       .agendaMore{min-height:26px;padding:5px 7px;font-size:.76rem}
       .agendaEmpty{margin-top:2px;padding:7px 9px;font-size:.76rem;background:rgba(255,255,255,.58)}
       .agendaHero{
-        min-height:clamp(318px,42svh,354px);
-        margin:calc(-1 * clamp(84px,16svh,104px)) calc(50% - 50vw) 0;
-        padding:clamp(108px,16svh,124px) max(20px,calc((100vw - var(--max)) / 2 + 20px)) 32px;
-        background-position:54% top,center,center
+        min-height:clamp(392px,46svh,412px);
+        margin:calc(-1 * clamp(102px,20svh,122px)) calc(50% - 50vw) 0;
+        padding:clamp(128px,23svh,154px) max(24px,calc((100vw - var(--max)) / 2 + 24px)) clamp(48px,7.5svh,58px);
+        background-position:24% top,center,center
       }
       .agendaHero::before{
         background:
@@ -1483,7 +1482,7 @@
         width:100%;min-height:0;margin-top:14px;justify-content:flex-start;gap:8px 10px;
         padding:0;background:transparent;border-color:transparent
       }
-      .agendaHero + .filterBar{margin-top:-22px;margin-bottom:8px}
+      .agendaHero + .filterBar{margin-top:calc(var(--mobile-search-row-height) / -2 - 4px);margin-bottom:4px}
       #agendaFilters.agendaSearchFilters.more{
         grid-template-columns:minmax(0,1fr) 44px minmax(122px,132px);
         row-gap:8px
@@ -4794,10 +4793,7 @@
     window.requestAnimationFrame(step);
   }
   function warmHeroBackgrounds(){
-    [
-      'website-bestanden/hero-achtergronden/inspiratiebank-header.png',
-      'website-bestanden/hero-achtergronden/uit-agenda-header.png'
-    ].forEach(src => {
+    ['website-bestanden/hero-achtergronden/inspiratiebank-header.png'].forEach(src => {
       const img = new Image();
       img.decoding = 'async';
       img.src = src;
