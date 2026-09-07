@@ -1602,10 +1602,10 @@
     @media (max-width:640px){
       .weekTitle{
         display:grid !important;
-        grid-template-columns:50px minmax(0,1fr) 68px !important;
+        grid-template-columns:50px minmax(0,1fr) auto auto !important;
         grid-template-areas:
-          "badge title nav"
-          "badge meta meta" !important;
+          "badge title title nav"
+          "meta meta checked checked" !important;
         column-gap:12px !important;
         row-gap:7px !important;
         align-items:start !important
@@ -1626,15 +1626,11 @@
         min-width:0 !important
       }
       .weekDateLine{
-        grid-area:title !important;
-        align-self:end !important;
-        display:flex !important;
-        align-items:baseline !important;
-        gap:7px !important;
-        flex-wrap:wrap !important;
+        display:contents !important;
         min-width:0 !important
       }
       .weekTop h3{
+        grid-area:title !important;
         align-self:end !important;
         min-width:0 !important;
         font-size:clamp(1.48rem,6.2vw,1.72rem) !important;
@@ -1656,6 +1652,12 @@
         margin:0 !important;
         padding-top:0 !important;
         max-width:100% !important
+      }
+      .weekDateLine .agendaFreshness{
+        grid-area:checked !important;
+        justify-self:end !important;
+        align-self:start !important;
+        white-space:nowrap !important
       }
       .weekHeaderMeta .weekCountBadge{
         width:auto !important;
