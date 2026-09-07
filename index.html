@@ -1452,34 +1452,29 @@
       .agendaMore{min-height:26px;padding:5px 7px;font-size:.76rem}
       .agendaEmpty{margin-top:2px;padding:7px 9px;font-size:.76rem;background:rgba(255,255,255,.58)}
       .agendaHero{
-        min-height:clamp(392px,46svh,412px);
+        min-height:clamp(300px,54svh,340px);
         margin:calc(-1 * clamp(102px,20svh,122px)) calc(50% - 50vw) 0;
         padding:clamp(128px,23svh,154px) max(24px,calc((100vw - var(--max)) / 2 + 24px)) clamp(48px,7.5svh,58px);
         background-position:24% top,center,center
       }
-      .agendaHero::before{
-        background:
-          linear-gradient(90deg,rgba(255,253,249,.9) 0%,rgba(255,253,249,.68) 45%,rgba(255,253,249,.18) 100%),
-          linear-gradient(180deg,rgba(255,253,249,.28) 0%,rgba(255,253,249,0) 48%,rgba(255,253,249,.3) 100%)
-      }
       .agendaHero .tabHeroTitle{
         display:block;order:2;max-width:8.8em;
-        font-size:clamp(2.28rem,11.2vw,2.96rem);line-height:.94;letter-spacing:-.035em
+        font-size:clamp(2.78rem,13.9vw,3.32rem);line-height:.94;letter-spacing:-.035em
       }
       .agendaHero .tabHeroLine{
-        display:block;order:3;margin-top:8px;
-        font-size:clamp(.96rem,4.1vw,1.1rem);line-height:1.22;color:rgba(49,95,107,.9)
+        display:block;order:3;margin-top:clamp(11px,2.2svh,15px);
+        font-size:clamp(1.04rem,4.2vw,1.14rem);line-height:1.2;color:var(--accent)
       }
       .agendaHero .tabHeroActions{
         order:4;
         width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-        align-items:center;gap:8px;margin-top:20px
+        align-items:center;gap:8px;margin-top:clamp(30px,5.4svh,40px)
       }
-      .agendaHero .tabHeroButton{height:44px;min-height:44px;padding:0 12px;font-size:.86rem;gap:8px}
-      .agendaHero .tabHeroButton.primary{font-size:.9rem}
+      .agendaHero .tabHeroButton{height:42px;min-height:42px;padding:0 11px;font-size:clamp(.72rem,3.2vw,.78rem);gap:8px}
+      .agendaHero .tabHeroButton.primary{padding:0 13px;font-size:clamp(.76rem,3.4vw,.82rem)}
       .agendaHero .tabHeroStats{
         order:5;
-        width:100%;min-height:0;margin-top:14px;justify-content:flex-start;gap:8px 10px;
+        width:100%;min-height:0;margin-top:clamp(12px,2svh,16px);justify-content:flex-start;gap:8px 10px;
         padding:0;background:transparent;border-color:transparent
       }
       .agendaHero + .filterBar{margin-top:calc(var(--mobile-search-row-height) / -2 - 4px);margin-bottom:4px}
@@ -1607,11 +1602,10 @@
     @media (max-width:640px){
       .weekTitle{
         display:grid !important;
-        grid-template-columns:50px minmax(0,1fr) !important;
+        grid-template-columns:50px minmax(0,1fr) auto !important;
         grid-template-areas:
-          "badge title"
-          "badge meta"
-          ". nav" !important;
+          "badge title title"
+          "badge meta nav" !important;
         column-gap:12px !important;
         row-gap:7px !important;
         align-items:start !important
@@ -1650,7 +1644,7 @@
       .weekNav{
         grid-area:nav !important;
         justify-self:end !important;
-        align-self:start !important;
+        align-self:center !important;
         margin:0 !important;
         padding-top:0 !important
       }
@@ -4163,7 +4157,7 @@
   function agendaFreshnessBadge(){
     const text = agendaFreshnessText(true);
     const fullText = agendaFreshnessText(false);
-    return text ? `<span class="agendaFreshness" title="${escapeHtml(fullText)}" aria-label="${escapeHtml(fullText)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg><span class="agendaFreshnessTime">${escapeHtml(text)}</span></span>` : '';
+    return text ? `<span class="agendaFreshness" title="${escapeHtml(fullText)}" aria-label="${escapeHtml(fullText)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg><span class="agendaFreshnessLabel">Gecheckt</span><span class="agendaFreshnessTime">${escapeHtml(text)}</span></span>` : '';
   }
   function renderAgendaFreshness(){
     const text = agendaFreshnessText(true);
