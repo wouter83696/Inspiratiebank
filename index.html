@@ -928,9 +928,9 @@
     .ideaMapBadge svg,.ideaMapLocation svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaLeafletMarker{
       position:relative;
-      width:30px;height:30px;border-radius:999px;border:1px solid var(--theme-line,rgba(79,142,158,.18));
-      background:var(--theme-tint-strong,rgba(168,225,221,.28));
-      color:var(--theme-ink,var(--accent-dark));box-shadow:0 8px 18px rgba(20,38,42,.10);
+      width:30px;height:30px;border-radius:999px;border:1px solid color-mix(in srgb,var(--theme-ink,var(--accent-dark)) 46%,transparent);
+      background:color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 76%,var(--theme-ink,var(--accent-dark)) 24%);
+      color:var(--theme-ink,var(--accent-dark));box-shadow:0 9px 20px rgba(20,38,42,.18),0 0 0 2px rgba(255,255,255,.72);
       display:inline-flex;align-items:center;justify-content:center;padding:0;cursor:pointer;
       transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease),border-color .18s var(--ease)
     }
@@ -943,14 +943,14 @@
     .ideaLeafletMarker .domainIcon svg{width:14px;height:14px}
     .ideaLeafletMarker:hover,.ideaLeafletMarker:focus-visible{
       transform:scale(1.1);
-      background:color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 54%,white);
-      border-color:color-mix(in srgb,var(--theme-ink,var(--accent-dark)) 58%,transparent);
+      background:color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 68%,var(--theme-ink,var(--accent-dark)) 32%);
+      border-color:color-mix(in srgb,var(--theme-ink,var(--accent-dark)) 70%,transparent);
       box-shadow:0 13px 28px rgba(20,38,42,.16),0 0 0 7px color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 78%,transparent)
     }
     .ideaLeafletMarker.active{
       transform:scale(1.12);
-      background:color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 42%,white);
-      border-color:color-mix(in srgb,var(--theme-ink,var(--accent-dark)) 64%,transparent);
+      background:color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 60%,var(--theme-ink,var(--accent-dark)) 40%);
+      border-color:color-mix(in srgb,var(--theme-ink,var(--accent-dark)) 78%,transparent);
       box-shadow:0 13px 28px rgba(20,38,42,.16),0 0 0 5px color-mix(in srgb,var(--theme-tint-strong,rgba(168,225,221,.28)) 86%,transparent)
     }
     .ideaLeafletMarker.active::before{opacity:1;transform:scale(1)}
@@ -5126,7 +5126,10 @@
       clusterMarkers.forEach(marker => {
         const active = activeClusterSignature && clusterSignature(marker.options.ideaKeys) === activeClusterSignature;
         const element = marker.getElement();
-        if(element) element.classList.toggle('active', Boolean(active));
+        if(element){
+          element.classList.toggle('active', Boolean(active));
+          element.querySelector('.ideaLeafletMarker')?.classList.toggle('active', Boolean(active));
+        }
       });
     };
     const markers = [];
@@ -5134,9 +5137,12 @@
       const point = group[0];
       if(group.length > 1){
         const keys = group.map(item => item.key);
+        const isHomeGroup = group.every(item => ideaMapUsesHomeIcon(item, item.item));
         const marker = L.marker([point.lat, point.lon], {
-          icon:locationLeafletClusterIcon(group, clusterSignature(keys) === activeClusterSignature),
-          title:`${group.length} activiteiten op deze locatie`,
+          icon:isHomeGroup
+            ? homeLeafletIcon(group, clusterSignature(keys) === activeClusterSignature)
+            : locationLeafletClusterIcon(group, clusterSignature(keys) === activeClusterSignature),
+          title:isHomeGroup ? `${group.length} activiteiten op eigen locatie` : `${group.length} activiteiten op deze locatie`,
           pane:'ideaMarkerPane',
           ideaKeys:keys
         });
