@@ -1911,8 +1911,8 @@
               <input id="teamIdeaTitleInput" name="title" type="text" placeholder="Bijv. braderie-rondje met budgetopdracht" required>
             </label>
             <label class="teamField">
-              <span>Ingebracht door</span>
-              <input id="teamIdeaByInput" name="by" type="text" placeholder="Jouw naam, afdeling, groep of team" required>
+              <span>Naam</span>
+              <input id="teamIdeaByInput" name="by" type="text" placeholder="Jouw naam" required>
             </label>
             <label class="teamField">
               <span>Categorie</span>
@@ -2227,7 +2227,7 @@
   const IDEA_LOCATION_OPTIONS = ['Binnen','Buiten','Thuis','Op pad','Online'];
   const TEAM_IDEA_LOCATION_OPTIONS = [
     {value:'Binnen', label:'Op locatie'},
-    {value:'Op pad', label:'Elders'},
+    {value:'Op pad', label:'Buiten de deur'},
     {value:'Online', label:'Online'}
   ];
   const AGENDA_DISTANCE_OPTIONS = ['Op locatie','0–10 km (dichtbij)','10–25 km (regio)'];
@@ -3073,7 +3073,7 @@
       image: String(item.image || '').trim(),
       imageAlt: String(item.imageAlt || item.title || '').trim(),
       imageStatus: item.image ? String(item.imageStatus || (item.imageApproved === true ? 'approved' : 'pending')).trim() : '',
-      source: item.source || `Ingebracht door ${by}`,
+      source: String(item.source || by).replace(/^Ingebracht door\s+/i, ''),
       createdAt: item.createdAt || ''
     };
   }
@@ -3872,7 +3872,7 @@
       if(input) input.required = needsAddress;
     });
     if(status && needsAddress && (!cleanPostcode(postcodeInput?.value || '') || !String(houseNumberInput?.value || '').trim())){
-      status.textContent = 'Voor Elders zijn postcode en huisnummer nodig. Kies Op locatie of Online als dit geen externe plek is.';
+      status.textContent = 'Voor Buiten de deur zijn postcode en huisnummer nodig. Kies Op locatie of Online als dit geen externe plek is.';
     }else if(status?.textContent?.startsWith('Voor buiten de deur')){
       status.textContent = '';
     }
@@ -4028,11 +4028,11 @@
       image:imageData,
       imageAlt:$('#teamIdeaTitleInput').value.trim(),
       imageStatus:imageData ? 'pending' : '',
-      source:by ? `Ingebracht door ${by}` : 'Inzending',
+      source:by || 'Inzending',
       createdAt:new Date().toISOString()
     });
     if(!item.title || !item.by){
-      setTeamIdeaStatus('Vul minimaal het idee en je naam, afdeling, groep of team in.', 'warn');
+      setTeamIdeaStatus('Vul minimaal het idee en je naam in.', 'warn');
       return;
     }
     if(!domain){
@@ -4040,7 +4040,7 @@
       return;
     }
     if(ideaLocationNeedsExactAddress(item.locationType) && (!item.postcode || !item.houseNumber)){
-      setTeamIdeaStatus('Vul bij Elders een postcode en huisnummer in. Kies anders Op locatie of Online.', 'warn');
+      setTeamIdeaStatus('Vul bij Buiten de deur een postcode en huisnummer in. Kies anders Op locatie of Online.', 'warn');
       $('#teamIdeaPostcodeInput')?.focus();
       return;
     }
