@@ -60,7 +60,7 @@
     button,input,select,textarea{font:inherit}
     button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:none;box-shadow:var(--focus)}
     .shell{max-width:var(--max);margin:0 auto;padding:18px clamp(14px,3vw,28px) 72px}
-    #agendaReviewPanel,#agendaRulesPanel,#submittedLinksPanel,#submittedIdeasPanel,#reportsPanel,#inspirationAdminPanel,#sourceOwnPanel,#backupPanel{scroll-margin-top:92px}
+    #agendaReviewPanel,#ongoingAdminSection,#agendaAdminSection,#agendaRulesPanel,#submittedLinksPanel,#submittedIdeasPanel,#reportsPanel,#inspirationAdminPanel,#sourceOwnPanel,#backupPanel{scroll-margin-top:92px}
     .topbar{
       position:relative;z-index:60;
       width:min(100%,var(--max));
@@ -978,6 +978,16 @@
               <span class="adminNavText">UIT-agenda</span>
               <span class="adminNavHint">week</span>
             </button>
+            <button class="adminNavButton adminNavSub" type="button" data-admin-target="agenda" data-admin-scroll="agendaAdminSection" title="Agenda">
+              <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 7h14"></path><path d="M5 12h14"></path><path d="M5 17h9"></path></svg></span>
+              <span class="adminNavText">Agenda</span>
+              <span class="adminNavHint">items</span>
+            </button>
+            <button class="adminNavButton adminNavSub" type="button" data-admin-target="agenda" data-admin-scroll="ongoingAdminSection" title="Doorlopend aanbod">
+              <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 7h9a4 4 0 0 1 4 4"></path><path d="m17 4 3 3-3 3"></path><path d="M17 17H8a4 4 0 0 1-4-4"></path><path d="m7 20-3-3 3-3"></path></svg></span>
+              <span class="adminNavText">Doorlopend aanbod</span>
+              <span class="adminNavHint">aanbod</span>
+            </button>
             <button class="adminNavButton adminNavSub" type="button" data-admin-target="agenda" data-admin-scroll="agendaRulesPanel" title="Uitsluitingen">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M7 12h10"></path><path d="M10 17h4"></path></svg></span>
               <span class="adminNavText">Uitsluitingen</span>
@@ -1134,7 +1144,7 @@
       </div>
 
         <section class="panel tintedPanel toneAgenda agendaReviewPanel" id="agendaReviewPanel">
-          <div class="panelHead">
+          <div class="panelHead" id="ongoingAdminSection">
             <div><h2>Doorlopend aanbod beheren</h2></div>
             <span id="ongoingAdminCount" class="pill">0 items</span>
           </div>
@@ -1144,7 +1154,7 @@
           </div>
           <div id="ongoingAdminList" class="ongoingAdminList"></div>
           <div class="sectionDivider"></div>
-          <div class="panelHead">
+          <div class="panelHead" id="agendaAdminSection">
             <div>
               <h2>UIT-agenda beheren</h2>
               <p>Controleer vaste en automatisch gevonden agenda-items. Verberg tijdelijk of verwijder wat niet passend is.</p>
@@ -4471,7 +4481,7 @@
   function adminScrollTargetFromHash(){
     const hash = String(window.location.hash || '').replace('#','');
     if(hash === 'sources') return 'sourceOwnPanel';
-    return ['agendaRulesPanel','sourceOwnPanel'].includes(hash) ? hash : '';
+    return ['ongoingAdminSection','agendaAdminSection','agendaRulesPanel','sourceOwnPanel'].includes(hash) ? hash : '';
   }
   function setAdminWorkspace(target='meldkamer', options={}){
     const next = ['meldkamer','agenda','inspiration','backup'].includes(target) ? target : 'meldkamer';
@@ -4521,6 +4531,8 @@
       submittedLinksPanel:'meldkamer',
       submittedIdeasPanel:'meldkamer',
       agendaReviewPanel:'agenda',
+      ongoingAdminSection:'agenda',
+      agendaAdminSection:'agenda',
       agendaRulesPanel:'agenda',
       sources:'agenda',
       inspirationAdminPanel:'inspiration',
