@@ -187,8 +187,9 @@
     .adminSidebarIdentity{display:flex;align-items:center;gap:10px;min-width:0}
     .adminSidebarMark{
       display:inline-flex;align-items:center;justify-content:center;flex:0 0 38px;width:38px;height:38px;border-radius:13px;
-      background:rgba(168,225,221,.30);color:var(--accent-dark);font-weight:600
+      overflow:hidden;background:#3f7884;box-shadow:0 4px 12px rgba(49,95,107,.14)
     }
+    .adminSidebarMark img{display:block;width:100%;height:100%;object-fit:cover}
     .adminSidebarText{min-width:0}
     .adminSidebarTitle{font-weight:600;color:var(--accent-dark);line-height:1.05}
     .adminSidebarSub{margin-top:2px;color:var(--muted);font-size:.78rem;line-height:1.25}
@@ -925,7 +926,7 @@
         <aside class="adminSidebar" aria-label="Beheernavigatie">
           <div class="adminSidebarBrand">
             <div class="adminSidebarIdentity">
-              <span class="adminSidebarMark">IB</span>
+              <span class="adminSidebarMark"><img src="../favicon-48.png?v=20260908" alt=""></span>
               <div class="adminSidebarText">
                 <div class="adminSidebarTitle">Beheer</div>
                 <div class="adminSidebarSub">Inspiratiebank</div>
