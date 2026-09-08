@@ -563,22 +563,6 @@
     .agendaReviewCardActions .button.titleAction{background:rgba(245,229,188,.72);border-color:rgba(139,111,34,.20);color:#6f5a1e}
     .agendaReviewCardActions .button.hot{background:rgba(246,223,231,.78);border-color:rgba(198,98,133,.18);color:#8d4a63}
     .agendaReviewCardActions .button.primary{background:rgba(168,225,221,.82);border-color:rgba(79,142,158,.20);color:#24596A;box-shadow:none}
-    .agendaActionMenu{display:inline-grid;margin-left:auto}
-    .agendaActionMenu[open]{flex:1 0 100%;margin-left:0}
-    .agendaActionMenu>summary{list-style:none;cursor:pointer;margin-left:auto}
-    .agendaActionMenu>summary::-webkit-details-marker{display:none}
-    .agendaActionMenu[open]>summary{background:rgba(214,236,242,.88);border-color:rgba(79,142,158,.22)}
-    .agendaActionMenuPanel{
-      display:grid;gap:3px;width:100%;margin-top:6px;padding:6px;border:1px solid rgba(79,142,158,.12);
-      border-radius:12px;background:#fff;box-shadow:0 14px 30px rgba(20,38,42,.14)
-    }
-    .agendaActionMenuPanel .agendaMenuAction{
-      width:100%;justify-content:flex-start;padding:8px 10px;border-radius:8px;background:transparent;
-      color:var(--accent-dark);box-shadow:none;font-size:.78rem
-    }
-    .agendaActionMenuPanel .agendaMenuAction:hover{background:rgba(79,142,158,.08);transform:none}
-    .agendaActionMenuPanel .agendaMenuAction svg{width:14px;height:14px}
-    .agendaActionMenuPanel .agendaMenuAction.hot{color:#8d4a63;background:transparent}
     .agendaMore{padding:5px 8px;color:var(--muted);font-size:.74rem;line-height:1.3}
     .agendaRulesPanel{
       display:grid;gap:10px;margin:10px 0 14px;padding:12px;border:1px solid #EAECEF;
@@ -3031,7 +3015,6 @@
     if(name === 'spark') return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.6 5.1L19 10l-5.4 1.9L12 17l-1.6-5.1L5 10l5.4-1.9L12 3Z"></path><path d="M19 15l.7 2.1L22 18l-2.3.9L19 21l-.7-2.1L16 18l2.3-.9L19 15Z"></path></svg>';
     if(name === 'edit') return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5Z"></path></svg>';
     if(name === 'image') return '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="8.5" cy="10" r="1.5"></circle><path d="m21 15-4.5-4.5L9 18"></path><path d="m14 14-2-2-5 6"></path></svg>';
-    if(name === 'more') return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle></svg>';
     return '';
   }
   const ADMIN_DEMO_IDEA_IMAGES = [
@@ -3450,15 +3433,10 @@
 	      const visibilityLabel = state.isHidden ? 'Toon' : 'Verberg';
 	      const visibilityIcon = state.isHidden ? actionIcon('eyeOff') : actionIcon('eye');
 	      return `${openAction}${editAction}${verifyAction}
-	        <details class="agendaActionMenu">
-	          <summary class="button iconAction" aria-label="Meer acties" title="Meer acties">${actionIcon('more')}</summary>
-	          <div class="agendaActionMenuPanel">
-	            <button class="button agendaMenuAction visibilityAction" data-hide-agenda="${escapeHtml(item.id)}" data-hidden="${state.isHidden ? '1' : '0'}" type="button">${visibilityIcon}<span>${escapeHtml(visibilityLabel)}</span></button>
-	            <button class="button agendaMenuAction sourceAction" data-block-agenda-source="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(sourceValue)}" type="button">${actionIcon('ban')}<span>Weiger bron</span></button>
-	            <button class="button agendaMenuAction titleAction" data-block-agenda-title="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(normalize(item.title))}" type="button">${actionIcon('text')}<span>Weiger deel van titel</span></button>
-	            <button class="button agendaMenuAction hot" data-delete-agenda="${escapeHtml(item.id)}" type="button">${actionIcon('trash')}<span>Verwijder</span></button>
-	          </div>
-	        </details>`;
+	        <button class="button iconAction visibilityAction" data-hide-agenda="${escapeHtml(item.id)}" data-hidden="${state.isHidden ? '1' : '0'}" type="button" aria-label="${escapeHtml(visibilityLabel)}" title="${escapeHtml(visibilityLabel)}">${visibilityIcon}</button>
+	        <button class="button iconAction sourceAction" data-block-agenda-source="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(sourceValue)}" type="button" aria-label="Weiger bron" title="Weiger bron">${actionIcon('ban')}</button>
+	        <button class="button iconAction titleAction" data-block-agenda-title="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(normalize(item.title))}" type="button" aria-label="Weiger deel van titel" title="Weiger deel van titel">${actionIcon('text')}</button>
+	        <button class="button iconAction hot" data-delete-agenda="${escapeHtml(item.id)}" type="button" aria-label="Verwijder" title="Verwijder">${actionIcon('trash')}</button>`;
 	    }
 	    const verifyAction = state.isVerified || state.isHidden ? '' : `<button class="button small primary" data-verify-agenda="${escapeHtml(item.id)}" type="button">Goedkeuren</button>`;
 	    const openAction = item.url ? `<a class="button small" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a>` : '';
