@@ -35,10 +35,10 @@ async function main() {
   const version = parsedData.sourceCheck?.lastCheckedAt || parsedData.generated || Date.now();
   const dataUrl = `website-bestanden/data/zomerprogramma_data.json?v=${encodeURIComponent(String(version))}`;
   const nextHtml = rawHtml.replace(
-    /const SITE_DATA_URL = 'website-bestanden\/data\/zomerprogramma_data\.json\?v=[^']*';/,
+    /const SITE_DATA_URL = 'website-bestanden\/data\/zomerprogramma_data\.json(?:\?v=[^']*)?';/,
     `const SITE_DATA_URL = '${dataUrl}';`,
   );
-  if (nextHtml === rawHtml) {
+  if (!nextHtml.includes(`const SITE_DATA_URL = '${dataUrl}';`)) {
     throw new Error("Kon SITE_DATA_URL in de HTML niet vinden.");
   }
   await fs.writeFile(htmlPath, nextHtml, "utf8");

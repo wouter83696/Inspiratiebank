@@ -5029,7 +5029,7 @@
       ? (sharedPlace ? `${visiblePoints.length} activiteiten in ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}` : `${visiblePoints.length} activiteiten op deze plek`)
       : 'Activiteiten op kaart';
     const panelText = activeIdeaMapClusterKeys
-      ? (sharedPlace ? 'Globaal geplaatst op plaatsniveau; de activiteiten kunnen verschillende adressen hebben.' : 'Activiteiten op dezelfde locatie. Kies een tegel of toon alles.')
+      ? (sharedPlace ? `Deze activiteiten liggen verspreid over ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}.` : 'Activiteiten op dezelfde locatie. Kies een tegel of toon alles.')
       : (userLocation?.isDefault ? 'Standaard rond Nijmegen.' : `Afstand vanaf ${locationDisplayText()}.`);
     const clearButton = activeIdeaMapClusterKeys ? '<button class="ideaMapClear" type="button" data-map-clear-cluster>Alles tonen</button>' : '';
     return `<aside class="ideaMapPanel">
@@ -5196,7 +5196,7 @@
           title:isHomeGroup
             ? `${group.length} activiteiten op eigen locatie`
             : sharedPlace
-              ? `${group.length} activiteiten in ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)} (globaal geplaatst)`
+              ? `${group.length} activiteiten in ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}`
               : `${group.length} activiteiten op deze locatie`,
           pane:'ideaMarkerPane',
           ideaKeys:keys
