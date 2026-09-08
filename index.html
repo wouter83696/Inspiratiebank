@@ -564,6 +564,7 @@
     .cardFooter .siteButton .siteButtonText{max-width:100%;overflow:hidden;text-overflow:ellipsis}
     .cardFooter .siteButton::after{margin-left:auto}
     .cardFooter .reportMenu{margin-left:auto}
+    .cardDetailsToggle{display:none}
     .activityStatusIcon{
       display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;
       width:30px;height:30px;border:1px solid rgba(11,18,32,.07);border-radius:999px;
@@ -1432,7 +1433,7 @@
       .weekHeaderMeta .weekCountBadge span{display:inline-flex;flex-direction:row;align-items:baseline;gap:4px}
       .weekHeaderMeta .weekCountBadge svg{width:16px;height:16px;flex:0 0 16px}
       .weekHeaderMeta .weekCountBadge strong{display:inline;font-size:inherit;font-weight:650;line-height:inherit}
-      .weekCountWord{display:none}
+      .weekHeaderMeta .weekCountBadge .weekCountWord{display:none}
       .agendaBoard{display:grid;grid-template-columns:1fr;gap:0;overflow:hidden;background:rgba(255,255,255,.54);border-radius:18px}
       .agendaDay{
         display:grid;grid-template-columns:58px minmax(0,1fr);align-items:flex-start;gap:10px;
@@ -1525,6 +1526,11 @@
       .ideaThemeCard h3 .ideaTitle{gap:8px}
       .ideaThemeCard > p:not(.fine){font-size:.9rem;line-height:1.38}
       .card .fine{font-size:.8rem;line-height:1.34}
+      .ideaThemeCard.hasCollapsibleDetails:not(.detailsExpanded) > p:not(.fine),
+      .ideaThemeCard.hasCollapsibleDetails:not(.detailsExpanded) > .fine{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical}
+      .ideaThemeCard.hasCollapsibleDetails:not(.detailsExpanded) > p:not(.fine){-webkit-line-clamp:3}
+      .ideaThemeCard.hasCollapsibleDetails:not(.detailsExpanded) > .fine{-webkit-line-clamp:2}
+      .cardDetailsToggle{display:inline-flex;align-items:center;justify-content:flex-start;align-self:flex-start;min-height:30px;margin:-1px 0 0;padding:4px 0;border:0;background:transparent;color:var(--accent-dark);font-size:.8rem;font-weight:600;cursor:pointer}
       .cardMetaLine{margin:0;padding:5px 8px 5px 5px;border-radius:7px;font-size:.78rem;line-height:1.28}
       .cardLabels{gap:5px}
       .cardPillGroup{gap:4px}
@@ -2193,7 +2199,7 @@
   const weekName = id => { const w = ACTIVE_WEEKS.find(x=>x.id===id); return w ? 'Week '+w.week : id; };
   const isConcrete = item => !/doorlopend|wekelijks|bij mooi weer|check programma|actuele/i.test(String(item.date + ' ' + item.time));
   const IDEA_TYPE_OPTIONS = ['Eigen aanbod','Bestaand extern aanbod','Zoekbron / agenda','Inzending'];
-  const IDEA_LOCATION_OPTIONS = ['Binnen','Buiten','Thuis','Op pad','Online'];
+  const IDEA_LOCATION_OPTIONS = ['Binnen','Op pad','Online'];
   const TEAM_IDEA_LOCATION_OPTIONS = [
     {value:'Binnen', label:'Op je eigen plek'},
     {value:'Op pad', label:'Eropuit'},
@@ -2640,8 +2646,8 @@
   function weekCountBadge(count){
     const amount = Number(count);
     const label = amount === 1 ? 'activiteit' : 'activiteiten';
-    const qualifier = amount === 1 ? '' : '<span class="weekCountWord"> verschillende</span>';
-    return `<span class="weekCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${escapeHtml(count)}</strong>${qualifier} ${label}</span></span>`;
+    const qualifier = amount === 1 ? '' : '<span class="weekCountWord">verschillende</span>';
+    return `<span class="weekCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${escapeHtml(count)}</strong>${qualifier}<span class="weekCountLabel">${label}</span></span></span>`;
   }
   function normalizeIdeaType(value=''){
     const v = normalize(value);
@@ -2668,6 +2674,12 @@
     if(hasOutdoor) return 'Buiten';
     if(hasIndoor) return 'Binnen';
     return 'Binnen';
+  }
+  function ideaLocationDisplayLabel(value=''){
+    const location = normalizeIdeaLocation(value);
+    if(location === 'Online') return 'Online';
+    if(location === 'Op pad' || location === 'Buiten') return 'Eropuit';
+    return 'Op je eigen plek';
   }
   function normalizeIdeaCost(value=''){
     const v = normalize(value);
@@ -2970,7 +2982,9 @@
   function cardMetaLine(item={}){
     const groupValue = String(item.group || 'Op maat').trim();
     const durationValue = String(item.duration || 'Op maat').trim();
-    return `<span class="cardMetaLine"><span class="cardMetaPart"><span class="metaIcon" aria-hidden="true">${ICONS.people}</span>${escapeHtml(groupValue)}</span><span class="cardMetaPart"><span class="metaIcon" aria-hidden="true">${ICONS.clock}</span>${escapeHtml(durationValue)}</span></span>`;
+    const groupLabel = normalize(groupValue) === 'op maat' ? 'Groep flexibel' : groupValue;
+    const durationLabel = normalize(durationValue) === 'op maat' ? 'Duur flexibel' : durationValue;
+    return `<span class="cardMetaLine"><span class="cardMetaPart" title="Groepsgrootte: ${escapeHtml(groupValue)}" aria-label="Groepsgrootte: ${escapeHtml(groupValue)}"><span class="metaIcon" aria-hidden="true">${ICONS.people}</span>${escapeHtml(groupLabel)}</span><span class="cardMetaPart" title="Duur: ${escapeHtml(durationValue)}" aria-label="Duur: ${escapeHtml(durationValue)}"><span class="metaIcon" aria-hidden="true">${ICONS.clock}</span>${escapeHtml(durationLabel)}</span></span>`;
   }
   function distanceLabelForKm(km, context='inspiration'){
     if(!Number.isFinite(km)) return '';
@@ -4138,8 +4152,9 @@
     const sourcesChecked = Number(sourceCheck.sourcesChecked);
     const newCount = Number(sourceCheck.newCandidateCount ?? sourceReview.newCount);
     if(compact){
+      const dateLabel = checkedDate.toLocaleDateString('nl-NL', {day:'numeric', month:'short'}).replace(/\.$/, '');
       const timeLabel = checkedDate.toLocaleTimeString('nl-NL', {hour:'2-digit', minute:'2-digit'});
-      return timeLabel;
+      return `${dateLabel}, ${timeLabel}`;
     }
     const bits = [`Agenda laatst gecontroleerd: ${formatted}`];
     if(Number.isFinite(sourcesChecked) && sourcesChecked > 0) bits.push(`${sourcesChecked} bronnen bekeken`);
@@ -4564,13 +4579,19 @@
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
     const image = approvedIdeaImage(item);
-    return `<article class="card ideaThemeCard ${domainThemeClass(item.domain)}${image ? ' hasImage' : ''}" data-idea-key="${escapeHtml(ideaDomKey(item))}">
+    const fitText = audienceText(item.fit);
+    const practicalText = audienceText(item.materials || 'Nog bepalen');
+    const detailsToggle = `${fitText} ${practicalText}`.length > 180
+      ? '<button class="cardDetailsToggle" type="button" aria-expanded="false">Meer</button>'
+      : '';
+    return `<article class="card ideaThemeCard ${domainThemeClass(item.domain)}${image ? ' hasImage' : ''}${detailsToggle ? ' hasCollapsibleDetails' : ''}" data-idea-key="${escapeHtml(ideaDomKey(item))}">
       ${image ? ideaImageMarkup(image) : ''}
       <h3>${titleWithIcon(item.title, item.domain)}</h3>
       <div class="cardLabels">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div>
       ${cardMetaLine(item)}
-      <p>${escapeHtml(audienceText(item.fit))}</p>
-      <p class="fine"><strong>Praktisch:</strong>${escapeHtml(audienceText(item.materials || 'Nog bepalen'))}</p>
+      <p>${escapeHtml(fitText)}</p>
+      <p class="fine"><strong>Praktisch:</strong>${escapeHtml(practicalText)}</p>
+      ${detailsToggle}
       <div class="cardFooter">${item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : ''}${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}</div>
     </article>`;
   }
@@ -4788,7 +4809,7 @@
   function setupFilters(){
     const items = allInspirationItems();
     fillSelect('#ideaDomain', unique(items.map(x=>x.domain)), 'Categorie', domainDisplayLabel);
-    fillSelect('#ideaLocation', IDEA_LOCATION_OPTIONS, 'Locatie');
+    fillSelect('#ideaLocation', IDEA_LOCATION_OPTIONS, 'Locatie', ideaLocationDisplayLabel);
     fillSelect('#ideaDistance', INSPIRATION_DISTANCE_OPTIONS, 'Afstand');
     fillSelect('#ideaCost', IDEA_COST_OPTIONS, 'Kosten');
     fillSelect('#ideaStimulus', IDEA_STIMULUS_OPTIONS, 'Prikkelbelasting');
@@ -5372,6 +5393,13 @@
     });
     $$('.tab').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
     document.addEventListener('click', event => {
+      const detailsToggle = event.target.closest('.cardDetailsToggle');
+      if(detailsToggle){
+        const card = detailsToggle.closest('.ideaThemeCard');
+        const expanded = card?.classList.toggle('detailsExpanded') || false;
+        detailsToggle.textContent = expanded ? 'Minder' : 'Meer';
+        detailsToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      }
       if(!event.target.closest('.customSelect')) closeCustomSelects();
       if(!event.target.closest('[data-report-menu]')) closeReportMenus();
     });
