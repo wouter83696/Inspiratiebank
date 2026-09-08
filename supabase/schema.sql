@@ -112,7 +112,7 @@ begin
   if not found or current_record.window_start < now() - safe_window then
     insert into public.bcjn_rate_limits(bucket, client_hash, window_start, attempt_count, updated_at)
     values (bucket, hash, now(), 1, now())
-    on conflict (bucket, client_hash)
+    on conflict on constraint bcjn_rate_limits_pkey
     do update set window_start = excluded.window_start,
                   attempt_count = excluded.attempt_count,
                   updated_at = excluded.updated_at;

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="nl">
 <head>
+  <base href="/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#FAFCFB">
@@ -5333,14 +5334,32 @@
       if(menu !== except) menu.open = false;
     });
   }
-  function tabFromHash(){
+  function tabFromLocation(){
+    if(/^\/uit-agenda(?:\/|$)/.test(window.location.pathname)) return 'weken';
     const name = String(window.location.hash || '').replace(/^#tab-/,'');
     return ['weken','inspiratie'].includes(name) ? name : '';
+  }
+  function ideaViewFromLocation(){
+    const view = new URLSearchParams(window.location.search).get('weergave');
+    return {tegels:'tiles', lijst:'list', kaart:'map', tiles:'tiles', list:'list', map:'map'}[view] || 'tiles';
+  }
+  function updatePublicRoute(tabName, view, {replace=false}={}){
+    const url = new URL(window.location.href);
+    url.pathname = tabName === 'weken' ? '/uit-agenda/' : '/';
+    url.hash = '';
+    const publicView = {tiles:'tegels', list:'lijst', map:'kaart'}[view] || 'tegels';
+    if(tabName === 'inspiratie' && publicView !== 'tegels') url.searchParams.set('weergave', publicView);
+    else url.searchParams.delete('weergave');
+    window.history[replace ? 'replaceState' : 'pushState']({tab:tabName, view}, '', `${url.pathname}${url.search}${url.hash}`);
   }
   function setTab(name, options={}){
     $$('.tab').forEach(b=>{ const on=b.dataset.tab===name; b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
     $$('.tabPanel').forEach(p=>p.classList.toggle('active',p.id === 'tab-'+name));
     const panel = $('#tab-'+name);
+    if(options.updateUrl !== false){
+      const currentView = $('[data-view-group="ideas"].active')?.dataset.view || ideaViewFromLocation();
+      updatePublicRoute(name, currentView);
+    }
     if(panel && options.scroll !== false){
       window.requestAnimationFrame(()=>scrollToSection(panel.id));
     }
@@ -5365,7 +5384,7 @@
       button.setAttribute('aria-selected','false');
     });
   }
-  function setIdeaView(view){
+  function setIdeaView(view, options={}){
     const nextView = ['tiles','list','map'].includes(view) ? view : 'tiles';
     const listOn = nextView === 'list';
     const mapOn = nextView === 'map';
@@ -5380,6 +5399,7 @@
     $('#ideaCards').hidden = listOn || mapOn;
     $('#ideaList').hidden = !listOn;
     $('#ideaMap').hidden = !mapOn;
+    if(options.updateUrl !== false) updatePublicRoute('inspiratie', nextView);
     if(mapOn) renderIdeaMap(filteredInspirationItems());
   }
 	  function resetFilters(){
@@ -5415,20 +5435,25 @@
 	    if(!hasSiteData) return;
 	    refreshActiveWeeks();
 	    await loadCentralStorage();
-	    setupAgendaFilters(); renderAgenda(); refreshCollections(); setIdeaView('tiles');
+	    setupAgendaFilters(); renderAgenda(); refreshCollections(); setIdeaView(ideaViewFromLocation(), {updateUrl:false});
     syncLocationUi();
     warmHeroBackgrounds();
     setOngoingOpen(true, {scroll:false});
-    const initialTab = tabFromHash();
+    const initialTab = tabFromLocation();
     if(initialTab){
-      setTab(initialTab, {scroll:false});
+      setTab(initialTab, {scroll:false, updateUrl:false});
     }
-    else setTab('inspiratie', {scroll:false});
+    else setTab('inspiratie', {scroll:false, updateUrl:false});
     window.addEventListener('hashchange', () => {
-      const nextTab = tabFromHash();
-      if(nextTab) setTab(nextTab);
-      else setTab('inspiratie', {scroll:false});
+      const nextTab = tabFromLocation();
+      if(nextTab) setTab(nextTab, {updateUrl:false});
+      else setTab('inspiratie', {scroll:false, updateUrl:false});
       if(window.location.hash === '#longerOffers') setOngoingOpen(true, {scroll:false});
+    });
+    window.addEventListener('popstate', () => {
+      const nextTab = tabFromLocation() || 'inspiratie';
+      setTab(nextTab, {scroll:false, updateUrl:false});
+      if(nextTab === 'inspiratie') setIdeaView(ideaViewFromLocation(), {updateUrl:false});
     });
     $$('.tab').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
     document.addEventListener('click', event => {

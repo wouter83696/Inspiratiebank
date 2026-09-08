@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>UIT-agenda laden...</title>
+</head>
+<body>
+  <p>UIT-agenda laden...</p>
+  <script>
+    fetch('/index.html', {cache:'no-cache'})
+      .then(response => {
+        if(!response.ok) throw new Error(`Laden gaf status ${response.status}`);
+        return response.text();
+      })
+      .then(html => {
+        document.open();
+        document.write(html);
+        document.close();
+      })
+      .catch(() => {
+        window.location.replace('/#tab-weken');
+      });
+  </script>
+</body>
+</html>
