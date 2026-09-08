@@ -190,6 +190,10 @@
   margin:0 18px 22px;
 }
 
+.weekBody>.agendaReviewBoard{
+  margin:0;
+}
+
 .agendaDay,
 .agendaReviewDay{
   min-height:520px;
@@ -270,6 +274,16 @@
   border-radius:13px;
   background:rgba(255,255,255,.84);
   border:1px solid rgba(79,142,158,.16);
+}
+
+.adminAgendaItem{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.adminAgendaItem .agendaReviewCardMeta{
+  margin-top:0;
 }
 
 .agendaItem.themeCreative,

@@ -3518,9 +3518,9 @@
 	  }
 	  function renderAgendaWeekCard(item, state, compact=false){
 	    const meta = [[item.time, item.where].filter(Boolean).join(' · ') || item.date, isAgendaFlexiblePeriod(item) ? item.date : ''].filter(Boolean).join(' · ');
-	    return `<article class="agendaReviewCard ${domainThemeClass(item.domain)} ${state.isHidden ? 'hiddenItem' : ''} ${state.isNew ? 'newItem' : ''}">
-	      <div class="agendaReviewCardTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span class="ideaTitleText">${escapeHtml(item.title)}</span></div>
-	      <div class="agendaReviewCardMeta">${escapeHtml(meta)}</div>
+	    return `<article class="agendaItem adminAgendaItem agendaReviewCard ${domainThemeClass(item.domain)}${compact ? ' multiDayItem' : ''} ${state.isHidden ? 'hiddenItem' : ''} ${state.isNew ? 'newItem' : ''}">
+	      <div class="agendaItemTitle agendaReviewCardTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span class="ideaTitleText">${escapeHtml(item.title)}</span></div>
+	      <div class="agendaItemMeta agendaReviewCardMeta">${escapeHtml(meta)}</div>
 	      <div class="agendaReviewMeta">${agendaReviewPills(item, state, true)}</div>
 	      <div class="agendaReviewCardActions">${agendaReviewActions(item, state, true)}</div>
 	    </article>`;
@@ -3535,30 +3535,34 @@
 	      const periodItems = occurring.filter(item => isAgendaFlexiblePeriod(item) && showAgendaPeriodInWeek(item));
 	      const visiblePeriods = periodItems.slice(0, 2);
 	      const isToday = day.iso === todayIso;
-	      return `<section class="agendaReviewDay${isToday ? ' today' : ''}" data-agenda-day="${escapeHtml(`${weekId}:${day.iso}`)}" tabindex="0">
-	        <div class="agendaReviewDayHead"><div><strong>${escapeHtml(day.label)}</strong><span>${escapeHtml(day.prettyDate)}</span></div></div>
-	        <div class="agendaReviewDayItems">
+	      return `<article class="agendaDay agendaReviewDay${isToday ? ' today' : ''}" data-agenda-day="${escapeHtml(`${weekId}:${day.iso}`)}" tabindex="0">
+	        <div class="agendaHead agendaReviewDayHead"><div><strong>${escapeHtml(day.label)}</strong><span>${escapeHtml(day.prettyDate)}</span></div></div>
+	        <div class="agendaList agendaReviewDayItems"><div class="agendaGroup">
 	          ${visiblePeriods.map(item => renderAgendaWeekCard(item, states.get(item.id), true)).join('')}
 	          ${periodItems.length > visiblePeriods.length ? `<div class="agendaMore">+ ${periodItems.length - visiblePeriods.length} meerdaagse optie${periodItems.length - visiblePeriods.length === 1 ? '' : 's'} in lijstweergave</div>` : ''}
 	          ${dayItems.map(item => renderAgendaWeekCard(item, states.get(item.id))).join('')}
 	          ${!dayItems.length && !periodItems.length ? '<div class="agendaEmpty">Geen items</div>' : ''}
-	        </div>
-	      </section>`;
+	        </div></div>
+	      </article>`;
 	    }).join('');
-	    return `<section class="agendaReviewWeek">
-	      <div class="agendaReviewWeekHead">
-	        <div class="agendaReviewWeekTitle">
-	          <div class="agendaReviewWeekBadge">${escapeHtml(week?.week || weekId.replace('w',''))}</div>
-	          <div>
-	            <h3>${escapeHtml(week ? `Week ${week.week} — ${week.dates}` : agendaWeekLabel(weekId))}</h3>
-	            <span class="agendaReviewCountBadge"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 5h8M8 10h8M8 15h8"></path><path d="m3.5 5 1 1 2-2M3.5 10l1 1 2-2M3.5 15l1 1 2-2"></path></svg><span><strong>${weekItems.length}</strong> ${weekItems.length === 1 ? 'activiteit' : 'activiteiten'}</span></span>
-	            <p>${escapeHtml(week?.planning || 'Weekoverzicht')}</p>${weekStatusText(week || {})}
+	    return `<article class="weekPanel agendaReviewWeek adminAgendaWeek">
+	      <div class="weekTop agendaReviewWeekHead">
+	        <div class="weekTitle agendaReviewWeekTitle">
+	          <div class="weekBadge agendaReviewWeekBadge"><span class="weekBadgeNumber">${escapeHtml(week?.week || weekId.replace('w',''))}</span></div>
+	          <div class="weekTitleContent">
+	            <div class="weekHeadingRow">
+	              <div class="weekHeadingMain">
+	                <div class="weekDateLine"><h3>${escapeHtml(week ? `Week ${week.week} — ${week.dates}` : agendaWeekLabel(weekId))}</h3></div>
+	                <div class="weekHeaderMeta"><span class="weekCountBadge agendaReviewCountBadge"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 5h8M8 10h8M8 15h8"></path><path d="m3.5 5 1 1 2-2M3.5 10l1 1 2-2M3.5 15l1 1 2-2"></path></svg><span><strong>${weekItems.length}</strong> ${weekItems.length === 1 ? 'activiteit' : 'activiteiten'}</span></span></div>
+	              </div>
+	              <div class="weekMeta agendaReviewWeekMeta">${week ? pill(week.status, /aangepast|beperkt|geen/i.test(String(week.status || '')) ? 'warn' : 'ok') : ''}</div>
+	            </div>
+	            <div class="dates">${escapeHtml(week?.planning || 'Weekoverzicht')}</div>${weekStatusText(week || {})}
 	          </div>
 	        </div>
-	        <div class="agendaReviewWeekMeta">${week ? pill(week.status, /aangepast|beperkt|geen/i.test(String(week.status || '')) ? 'warn' : 'ok') : ''}</div>
 	      </div>
-	      <div class="agendaReviewBoard">${daysHtml}</div>
-	    </section>`;
+	      <div class="weekBody"><div class="agendaBoard agendaReviewBoard">${daysHtml}</div></div>
+	    </article>`;
 	  }
 	  function renderAgendaWeekView(items, states, filters){
 	    if(filters.week === 'all'){
