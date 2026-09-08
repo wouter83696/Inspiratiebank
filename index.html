@@ -2913,12 +2913,12 @@
     const hasLon = String(rawLon ?? '').trim() !== '';
     const lat = Number(rawLat);
     const lon = Number(rawLon);
-    if(hasLat && hasLon && Number.isFinite(lat) && Number.isFinite(lon)) return {lat, lon};
+    if(hasLat && hasLon && Number.isFinite(lat) && Number.isFinite(lon)) return {lat, lon, precision:'exact'};
     const text = normalize(`${item.address || ''} ${item.where || ''} ${item.place || ''} ${item.location || ''} ${item.title || ''} ${item.source || ''}`);
     const match = Object.entries(KNOWN_PLACE_COORDS)
       .sort((a,b) => b[0].length - a[0].length)
       .find(([place]) => text.includes(place));
-    return match ? {lat:match[1][0], lon:match[1][1]} : null;
+    return match ? {lat:match[1][0], lon:match[1][1], precision:'place', place:match[0]} : null;
   }
   function itemCanUseUserLocation(item={}){
     const text = normalize(`${item.locationType || ''} ${item.address || ''} ${item.where || ''} ${item.place || ''} ${item.location || ''} ${item.materials || ''} ${item.fit || ''}`);
@@ -2946,6 +2946,10 @@
       || text.includes('online');
   }
   function ideaMapCoordinate(item={}){
+    if(itemCanUseUserLocation(item) && itemIsHomeActivity(item)){
+      const location = userLocation || DEFAULT_LOCATION;
+      return {lat:location.lat, lon:location.lon, source:'user', home:true, precision:'user'};
+    }
     const coord = itemCoordinate(item);
     if(coord) return {...coord, source:'place'};
     if(itemCanUseUserLocation(item)){
@@ -5015,9 +5019,16 @@
         <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${icon}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultInfo"><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${ideaMapMeta(point.item, point)}</span>${link}</span></span>
       </article>`;
     }).join('');
-    const panelTitle = activeIdeaMapClusterKeys ? `${visiblePoints.length} activiteiten op deze plek` : 'Activiteiten op kaart';
+    const sharedPlace = activeIdeaMapClusterKeys
+      && visiblePoints.length
+      && visiblePoints.every(point => point.precision === 'place' && point.place === visiblePoints[0].place)
+      ? visiblePoints[0].place
+      : '';
+    const panelTitle = activeIdeaMapClusterKeys
+      ? (sharedPlace ? `${visiblePoints.length} activiteiten in ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}` : `${visiblePoints.length} activiteiten op deze plek`)
+      : 'Activiteiten op kaart';
     const panelText = activeIdeaMapClusterKeys
-      ? 'Activiteiten op dezelfde locatie. Kies een tegel of toon alles.'
+      ? (sharedPlace ? 'Globaal geplaatst op plaatsniveau; de activiteiten kunnen verschillende adressen hebben.' : 'Activiteiten op dezelfde locatie. Kies een tegel of toon alles.')
       : (userLocation?.isDefault ? 'Standaard rond Nijmegen.' : `Afstand vanaf ${locationDisplayText()}.`);
     const clearButton = activeIdeaMapClusterKeys ? '<button class="ideaMapClear" type="button" data-map-clear-cluster>Alles tonen</button>' : '';
     return `<aside class="ideaMapPanel">
@@ -5176,11 +5187,16 @@
       if(group.length > 1){
         const keys = group.map(item => item.key);
         const isHomeGroup = group.every(item => ideaMapUsesHomeIcon(item, item.item));
+        const sharedPlace = group.every(item => item.precision === 'place' && item.place === group[0].place) ? group[0].place : '';
         const marker = L.marker([point.lat, point.lon], {
           icon:isHomeGroup
             ? homeLeafletIcon(group, clusterSignature(keys) === activeClusterSignature)
             : locationLeafletClusterIcon(group, clusterSignature(keys) === activeClusterSignature),
-          title:isHomeGroup ? `${group.length} activiteiten op eigen locatie` : `${group.length} activiteiten op deze locatie`,
+          title:isHomeGroup
+            ? `${group.length} activiteiten op eigen locatie`
+            : sharedPlace
+              ? `${group.length} activiteiten in ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)} (globaal geplaatst)`
+              : `${group.length} activiteiten op deze locatie`,
           pane:'ideaMarkerPane',
           ideaKeys:keys
         });
