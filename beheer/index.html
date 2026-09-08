@@ -770,6 +770,17 @@
     .confirmModalText{margin:0;color:var(--muted);line-height:1.55}
     .confirmModalActions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:16px}
     .confirmModalActions .button{min-width:118px}
+    .agendaEditModalCard{width:min(760px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto}
+    .agendaEditForm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+    .agendaEditForm label{display:grid;gap:6px;color:var(--accent-dark);font-size:.84rem;font-weight:500}
+    .agendaEditForm > .wide{grid-column:1/-1}
+    .agendaEditForm label.wide{grid-column:1/-1}
+    .agendaEditForm input,.agendaEditForm select,.agendaEditForm textarea{width:100%}
+    .agendaEditForm textarea{min-height:94px;resize:vertical}
+    .agendaEditChecks{display:flex;gap:18px;flex-wrap:wrap;grid-column:1/-1}
+    .agendaEditChecks label{display:flex;grid-template-columns:none;align-items:center;gap:8px;color:var(--muted)}
+    .agendaEditChecks input{width:18px;height:18px}
+    @media (max-width:640px){.agendaEditForm{grid-template-columns:1fr}.agendaEditForm > .wide,.agendaEditForm label.wide,.agendaEditChecks{grid-column:1}.agendaEditModalCard{width:calc(100vw - 20px);padding:18px}}
     #adminApp[hidden],#loginPanel[hidden]{display:none !important}
     .adminTopGrid .list{max-height:520px}
     @media (max-width:1040px){.adminTopGrid{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.filters,.filters.more{grid-template-columns:1fr 1fr}.filterSearch{grid-column:1/-1}.filterReset{grid-column:1/-1;justify-content:center}.agendaAdminFilters{flex-wrap:wrap}.agendaReviewBoard{grid-template-columns:repeat(7,180px);margin:0 12px 18px}.agendaReviewDay{min-height:360px}.agendaReviewItem{grid-template-columns:1fr}.agendaReviewActions{justify-content:flex-start;max-width:none}.agendaReviewDetails{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -1364,6 +1375,33 @@
       </div>
     </section>
   </main>
+  <div id="agendaEditModal" class="confirmModal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="agendaEditTitle">
+    <div class="confirmModalCard agendaEditModalCard">
+      <div class="confirmModalTop">
+        <div class="confirmModalBadge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5Z"></path></svg></div>
+        <div><p class="confirmModalKicker">UIT-agenda</p><h2 id="agendaEditTitle" class="confirmModalTitle">Agenda-item wijzigen</h2></div>
+      </div>
+      <form id="agendaEditForm" class="agendaEditForm">
+        <label class="wide">Titel<input id="agendaEditItemTitle" required></label>
+        <label>Datum of periode<input id="agendaEditDate" placeholder="Bijv. 10 sep t/m 15 okt"></label>
+        <label>Tijd<input id="agendaEditTime" placeholder="Bijv. 19.00 - 23.00"></label>
+        <label>Plek<input id="agendaEditWhere"></label>
+        <label>Categorie<select id="agendaEditDomain"></select></label>
+        <label>Afstand<select id="agendaEditDistance"></select></label>
+        <label>Kosten<select id="agendaEditCost"></select></label>
+        <label>Prikkelbelasting<select id="agendaEditStimulus"></select></label>
+        <label>Bronnaam<input id="agendaEditSource"></label>
+        <label>Website<input id="agendaEditUrl" type="url" inputmode="url" placeholder="https://"></label>
+        <label class="wide">Beschrijving<textarea id="agendaEditFit"></textarea></label>
+        <div class="agendaEditChecks">
+          <label><input id="agendaEditSeasonLimited" type="checkbox"> Doorlopend aanbod</label>
+          <label><input id="agendaEditPinToAgenda" type="checkbox"> Als losse agenda-activiteit tonen</label>
+        </div>
+        <div class="confirmModalActions wide"><button id="agendaEditCancel" class="button" type="button">Annuleren</button><button class="button primary" type="submit">Wijzigingen opslaan</button></div>
+        <span id="agendaEditStatus" class="status wide" role="status" aria-live="polite"></span>
+      </form>
+    </div>
+  </div>
   <div id="confirmModal" class="confirmModal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="confirmModalTitle" aria-describedby="confirmModalText">
     <div class="confirmModalCard">
       <div class="confirmModalTop">
@@ -1402,6 +1440,7 @@
 	  const SOURCE_LINK_OVERRIDES_KEY = 'zomerprogramma_source_link_overrides_v1';
 	  const HIDDEN_SOURCE_LINKS_KEY = 'zomerprogramma_hidden_source_link_keys_v1';
 	  const AUTO_AGENDA_KEY = 'zomerprogramma_auto_agenda_items_v1';
+	  const AGENDA_OVERRIDES_KEY = 'zomerprogramma_agenda_item_overrides_v1';
 	  const HIDDEN_AGENDA_KEY = 'zomerprogramma_hidden_agenda_items_v1';
 	  const DELETED_AGENDA_KEY = 'zomerprogramma_deleted_agenda_items_v1';
 	  const VERIFIED_AGENDA_KEY = 'zomerprogramma_verified_agenda_items_v1';
@@ -1457,6 +1496,7 @@
   let agendaCheckRefreshBusy = false;
   let editingSourceLink = null;
   let editingAdminIdea = null;
+  let editingAgendaItemId = '';
   const ICONS = {
     creative:`<svg viewBox="0 0 20 20"><path d="M10 3l1.8 4.2L16 9l-4.2 1.8L10 15l-1.8-4.2L4 9l4.2-1.8L10 3z"></path></svg>`,
     culture:`<svg viewBox="0 0 20 20"><path d="M4 7l6-3 6 3"></path><path d="M5 8h10"></path><path d="M6 8v6"></path><path d="M10 8v6"></path><path d="M14 8v6"></path><path d="M4 15h12"></path></svg>`,
@@ -1542,6 +1582,7 @@
 	      sourceLinkOverrides:Array.isArray(value.sourceLinkOverrides) ? value.sourceLinkOverrides : [],
 	      hiddenSourceLinkKeys:Array.isArray(value.hiddenSourceLinkKeys) ? value.hiddenSourceLinkKeys : [],
 	      autoAgendaItems:Array.isArray(value.autoAgendaItems) ? value.autoAgendaItems : [],
+	      agendaItemOverrides:Array.isArray(value.agendaItemOverrides) ? value.agendaItemOverrides : [],
 	      hiddenAgendaItemIds:Array.isArray(value.hiddenAgendaItemIds) ? value.hiddenAgendaItemIds : [],
 	      deletedAgendaItemIds:Array.isArray(value.deletedAgendaItemIds) ? value.deletedAgendaItemIds : [],
 	      verifiedAgendaItemIds:Array.isArray(value.verifiedAgendaItemIds) ? value.verifiedAgendaItemIds : [],
@@ -1684,6 +1725,7 @@
 	      [SOURCE_LINK_OVERRIDES_KEY]:'sourceLinkOverrides',
 	      [HIDDEN_SOURCE_LINKS_KEY]:'hiddenSourceLinkKeys',
 	      [AUTO_AGENDA_KEY]:'autoAgendaItems',
+	      [AGENDA_OVERRIDES_KEY]:'agendaItemOverrides',
 	      [HIDDEN_AGENDA_KEY]:'hiddenAgendaItemIds',
 	      [DELETED_AGENDA_KEY]:'deletedAgendaItemIds',
 	      [VERIFIED_AGENDA_KEY]:'verifiedAgendaItemIds',
@@ -2456,16 +2498,23 @@
 	  function autoAgendaItems(){
 	    return dedupeAgendaItems(loadArray(AUTO_AGENDA_KEY).map(normalizeAgendaOffer).filter(item => item.title));
 	  }
+	  function agendaItemOverrides(){
+	    return loadArray(AGENDA_OVERRIDES_KEY).filter(item => item && item.id).map(item => ({...item, id:String(item.id)}));
+	  }
+	  function applyAgendaItemOverride(item={}){
+	    const override = agendaItemOverrides().find(entry => entry.id === String(item.id || ''));
+	    return override ? normalizeAgendaOffer({...item, ...override, id:item.id}) : item;
+	  }
 	  function baseAgendaItems(){
 	    return (Array.isArray(BASE.external) ? BASE.external : [])
-	      .map((item, index) => normalizeAgendaOffer({...item, id:item.id || `base-${index}`, reviewStatus:item.reviewStatus || 'verified'}, index))
+	      .map((item, index) => applyAgendaItemOverride(normalizeAgendaOffer({...item, id:item.id || `base-${index}`, reviewStatus:item.reviewStatus || 'verified'}, index)))
 	      .filter(item => item.title);
 	  }
 	  function agendaReviewItems(){
 	    const rules = agendaBlockRules();
 	    const items = [
 	      ...baseAgendaItems().map(item => ({...item, agendaKind:'base'})),
-	      ...autoAgendaItems().map(item => ({...item, agendaKind:'auto'}))
+	      ...autoAgendaItems().map(item => ({...applyAgendaItemOverride(item), agendaKind:'auto'}))
 	    ];
 	    const seen = new Set();
 	    return dedupeAgendaItems(items).filter(item => {
@@ -3303,12 +3352,13 @@
 	  }
 	  function agendaReviewActions(item, state, compact=false){
 	    if(compact){
+	      const editAction = `<button class="button iconAction" data-edit-agenda="${escapeHtml(item.id)}" type="button" aria-label="Wijzig" title="Wijzig">${actionIcon('edit')}</button>`;
 	      const verifyAction = state.isVerified || state.isHidden ? '' : `<button class="button iconAction primary" data-verify-agenda="${escapeHtml(item.id)}" type="button" aria-label="Goedkeuren" title="Goedkeuren">${actionIcon('check')}</button>`;
 	      const openAction = item.url ? `<a class="button iconAction openAction" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" aria-label="Open bron" title="Open bron">${actionIcon('external')}</a>` : '';
 	      const sourceValue = agendaSourceValue(item);
 	      const visibilityLabel = state.isHidden ? 'Toon' : 'Verberg';
 	      const visibilityIcon = state.isHidden ? actionIcon('eyeOff') : actionIcon('eye');
-	      return `${openAction}${verifyAction}
+	      return `${openAction}${editAction}${verifyAction}
 	        <button class="button iconAction visibilityAction" data-hide-agenda="${escapeHtml(item.id)}" data-hidden="${state.isHidden ? '1' : '0'}" type="button" aria-label="${escapeHtml(visibilityLabel)}" title="${escapeHtml(visibilityLabel)}">${visibilityIcon}</button>
 	        <button class="button iconAction sourceAction" data-block-agenda-source="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(sourceValue)}" type="button" aria-label="Weiger bron" title="Weiger bron">${actionIcon('ban')}</button>
 	        <button class="button iconAction titleAction" data-block-agenda-title="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(normalize(item.title))}" type="button" aria-label="Weiger titel" title="Weiger titel">${actionIcon('text')}</button>
@@ -3316,8 +3366,9 @@
 	    }
 	    const verifyAction = state.isVerified || state.isHidden ? '' : `<button class="button small primary" data-verify-agenda="${escapeHtml(item.id)}" type="button">Goedkeuren</button>`;
 	    const openAction = item.url ? `<a class="button small" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a>` : '';
+	    const editAction = `<button class="button small" data-edit-agenda="${escapeHtml(item.id)}" type="button">Wijzig</button>`;
 	    const sourceValue = agendaSourceValue(item);
-	    return `${openAction}${verifyAction}
+	    return `${openAction}${editAction}${verifyAction}
 	      <button class="button small ${state.isHidden ? '' : 'warn'}" data-hide-agenda="${escapeHtml(item.id)}" data-hidden="${state.isHidden ? '1' : '0'}" type="button">${state.isHidden ? 'Toon' : 'Verberg'}</button>
 	      <button class="button small warn" data-block-agenda-source="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(sourceValue)}" type="button">${compact ? 'Weiger bron' : 'Weiger bron'}</button>
 	      <button class="button small warn" data-block-agenda-title="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(normalize(item.title))}" type="button">${compact ? 'Weiger titel' : 'Weiger titel'}</button>
@@ -3682,6 +3733,80 @@
     renderReports();
     setStatus('#adminStatus', 'Melding afgehandeld.', 'ok');
   }
+	  function agendaEditSelectOptions(select, options=[], value=''){
+	    const values = [...new Set([value, ...options].filter(Boolean))];
+	    select.innerHTML = values.map(option => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`).join('');
+	    select.value = value || values[0] || '';
+	  }
+	  function closeAgendaEdit(){
+	    const modal = $('#agendaEditModal');
+	    modal.hidden = true;
+	    modal.setAttribute('aria-hidden', 'true');
+	    document.body.style.overflow = '';
+	    editingAgendaItemId = '';
+	    setStatus('#agendaEditStatus', '');
+	  }
+	  function startAgendaEdit(id){
+	    const item = agendaReviewItems().find(offer => String(offer.id) === String(id));
+	    if(!item) return;
+	    editingAgendaItemId = String(item.id);
+	    $('#agendaEditTitle').textContent = isAgendaOngoingOffer(item) || isAgendaFlexiblePeriod(item) ? 'Doorlopend aanbod wijzigen' : 'Agenda-item wijzigen';
+	    $('#agendaEditItemTitle').value = item.title || '';
+	    $('#agendaEditDate').value = item.date || '';
+	    $('#agendaEditTime').value = item.time || '';
+	    $('#agendaEditWhere').value = item.where || '';
+	    agendaEditSelectOptions($('#agendaEditDomain'), ADMIN_THEME_LEGEND, item.domain || 'Cultuur');
+	    agendaEditSelectOptions($('#agendaEditDistance'), AGENDA_DISTANCE_OPTIONS, item.distanceBand || '0–10 km (dichtbij)');
+	    agendaEditSelectOptions($('#agendaEditCost'), IDEA_COST_OPTIONS, item.cost || 'Gratis');
+	    agendaEditSelectOptions($('#agendaEditStimulus'), IDEA_STIMULUS_OPTIONS, item.stimulus || 'Middel');
+	    $('#agendaEditSource').value = item.source || '';
+	    $('#agendaEditUrl').value = item.url || '';
+	    $('#agendaEditFit').value = item.fit || '';
+	    $('#agendaEditSeasonLimited').checked = Boolean(item.seasonLimited);
+	    $('#agendaEditPinToAgenda').checked = Boolean(item.pinToAgenda);
+	    const modal = $('#agendaEditModal');
+	    modal.hidden = false;
+	    modal.setAttribute('aria-hidden', 'false');
+	    document.body.style.overflow = 'hidden';
+	    $('#agendaEditItemTitle').focus();
+	  }
+	  async function saveAgendaEdit(event){
+	    event.preventDefault();
+	    const item = agendaReviewItems().find(offer => String(offer.id) === editingAgendaItemId);
+	    if(!item) return;
+	    const title = $('#agendaEditItemTitle').value.trim();
+	    if(!title){
+	      setStatus('#agendaEditStatus', 'Vul een titel in.', 'warn');
+	      return;
+	    }
+	    const override = {
+	      id:item.id,
+	      title,
+	      date:$('#agendaEditDate').value.trim(),
+	      time:$('#agendaEditTime').value.trim(),
+	      where:$('#agendaEditWhere').value.trim(),
+	      domain:$('#agendaEditDomain').value,
+	      distanceBand:$('#agendaEditDistance').value,
+	      cost:$('#agendaEditCost').value,
+	      stimulus:$('#agendaEditStimulus').value,
+	      source:$('#agendaEditSource').value.trim(),
+	      url:normalizeUrl($('#agendaEditUrl').value),
+	      fit:$('#agendaEditFit').value.trim(),
+	      seasonLimited:$('#agendaEditSeasonLimited').checked,
+	      pinToAgenda:$('#agendaEditPinToAgenda').checked,
+	      updatedAt:new Date().toISOString()
+	    };
+	    const overrides = agendaItemOverrides().filter(entry => entry.id !== override.id);
+	    saveArray(AGENDA_OVERRIDES_KEY, [override, ...overrides]);
+	    if(!(await saveCentralStorage())){
+	      setStatus('#agendaEditStatus', storageErrorMessage(), 'warn');
+	      return;
+	    }
+	    closeAgendaEdit();
+	    setupAgendaReviewControls();
+	    renderAgendaReview();
+	    setStatus('#adminStatus', 'Agenda-item gewijzigd en direct bijgewerkt op de publieke agenda.', 'ok');
+	  }
 	  async function verifyAgendaItem(id){
 	    const ids = new Set(loadArray(VERIFIED_AGENDA_KEY));
 	    ids.add(id);
@@ -3844,6 +3969,7 @@
 	      deletedAgendaItemIds:loadArray(DELETED_AGENDA_KEY),
 	      verifiedAgendaItemIds:loadArray(VERIFIED_AGENDA_KEY),
 	      blockedAgendaRules:loadArray(BLOCKED_AGENDA_RULES_KEY),
+	      agendaItemOverrides:agendaItemOverrides(),
 	      agendaManualCheckedAt:storedAgendaCheckedAt(),
 	      customLinks:customLinks(),
 	      pendingLinks:pendingLinks(),
@@ -3909,6 +4035,11 @@
 	      saveArray(DELETED_AGENDA_KEY, [...new Set([...loadArray(DELETED_AGENDA_KEY), ...(parsed.deletedAgendaItemIds || [])])]);
 	      saveArray(VERIFIED_AGENDA_KEY, [...new Set([...loadArray(VERIFIED_AGENDA_KEY), ...(parsed.verifiedAgendaItemIds || [])])]);
 	      saveArray(BLOCKED_AGENDA_RULES_KEY, dedupeAgendaBlockRules([...agendaBlockRules(), ...(parsed.blockedAgendaRules || [])]));
+	      if(Array.isArray(parsed.agendaItemOverrides)){
+	        const importedOverrides = parsed.agendaItemOverrides.filter(entry => entry && entry.id).map(entry => ({...entry, id:String(entry.id)}));
+	        const importedIds = new Set(importedOverrides.map(entry => entry.id));
+	        saveArray(AGENDA_OVERRIDES_KEY, [...importedOverrides, ...agendaItemOverrides().filter(entry => !importedIds.has(String(entry.id)))]);
+	      }
 	      if(typeof parsed.agendaManualCheckedAt === 'string' && parsed.agendaManualCheckedAt){
 	        localStorage.setItem(AGENDA_MANUAL_CHECK_KEY, parsed.agendaManualCheckedAt);
 	        if(centralStorageActive()) centralStorage.agendaManualCheckedAt = parsed.agendaManualCheckedAt;
@@ -4561,6 +4692,11 @@
     });
     $('#confirmModalCancel').addEventListener('click', () => closeConfirmDialog(false));
     $('#confirmModalConfirm').addEventListener('click', () => closeConfirmDialog(true));
+    $('#agendaEditForm').addEventListener('submit', saveAgendaEdit);
+    $('#agendaEditCancel').addEventListener('click', closeAgendaEdit);
+    $('#agendaEditModal').addEventListener('click', event => {
+      if(event.target.id === 'agendaEditModal') closeAgendaEdit();
+    });
     $('#agendaBlockInput').addEventListener('keydown', event => {
       if(event.key !== 'Enter') return;
       event.preventDefault();
@@ -4593,6 +4729,8 @@
 	      if(rejectButton) rejectPendingLink(rejectButton.dataset.rejectLink);
 	      const verifyButton = event.target.closest('[data-verify-agenda]');
 	      if(verifyButton) verifyAgendaItem(verifyButton.dataset.verifyAgenda);
+	      const agendaEditButton = event.target.closest('[data-edit-agenda]');
+	      if(agendaEditButton) startAgendaEdit(agendaEditButton.dataset.editAgenda);
 	      const agendaHideButton = event.target.closest('[data-hide-agenda]');
 	      if(agendaHideButton) toggleAgendaItemVisibility(agendaHideButton.dataset.hideAgenda, agendaHideButton.dataset.hidden === '1');
 	      const agendaDeleteButton = event.target.closest('[data-delete-agenda]');
@@ -4624,6 +4762,10 @@
       if(event.key !== 'Escape') return;
       if(!$('#confirmModal').hidden){
         closeConfirmDialog(false);
+        return;
+      }
+      if(!$('#agendaEditModal').hidden){
+        closeAgendaEdit();
         return;
       }
       clearAgendaReviewDayFocus();
