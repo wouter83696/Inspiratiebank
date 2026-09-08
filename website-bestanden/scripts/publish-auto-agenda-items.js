@@ -467,6 +467,42 @@ function toAgendaOffer(item) {
   };
 }
 
+function compactDutchDate(date) {
+  return new Intl.DateTimeFormat("nl-NL", {
+    day: "numeric",
+    month: "short",
+    timeZone: "Europe/Amsterdam",
+  }).format(date).replace(/\.$/, "");
+}
+
+function recurringAgendaOffers(items = []) {
+  const groups = new Map();
+  for (const item of items) {
+    const date = parseDutchDate(item.date);
+    if (!date || !item.week) continue;
+    const key = `${normalizedAgendaTitle(item.title)}|${normalize(item.where)}`;
+    if (!key.replace("|", "")) continue;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push({...item, parsedDate:date});
+  }
+  return [...groups.entries()].flatMap(([key, group]) => {
+    const weeks = [...new Set(group.map((item) => item.week))].sort();
+    if (weeks.length < 2) return [];
+    const ordered = [...group].sort((a, b) => a.parsedDate - b.parsedDate);
+    const first = ordered[0];
+    const last = ordered[ordered.length - 1];
+    return [{
+      ...first,
+      id:`recurring-${crypto.createHash("sha256").update(key).digest("hex").slice(0, 18)}`,
+      week:weeks.join(","),
+      date:`${compactDutchDate(first.parsedDate)} t/m ${compactDutchDate(last.parsedDate)} ${last.parsedDate.getUTCFullYear()}`,
+      time:new Set(group.map((item) => item.time).filter(Boolean)).size === 1 ? first.time : "diverse tijden",
+      seasonLimited:true,
+      derivedRecurring:true,
+    }];
+  });
+}
+
 async function readJson(filePath, fallback) {
   try {
     return JSON.parse(await fs.readFile(filePath, "utf8"));
@@ -541,6 +577,7 @@ async function main() {
     .filter((item) => item.status !== "missing")
     .map(toAgendaOffer)
     .filter(Boolean);
+  candidates.push(...recurringAgendaOffers(candidates));
 
   const storage = await loadCentralStorage();
   const submittedCandidates = [

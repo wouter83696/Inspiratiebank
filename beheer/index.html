@@ -572,6 +572,9 @@
     .agendaRuleMeta{display:block;margin-top:3px;color:var(--muted);font-size:.76rem}
     .agendaReviewList{display:grid;gap:10px;max-height:760px;overflow:auto;padding-right:4px}
     .agendaReviewList[hidden],.agendaReviewWeekView[hidden]{display:none !important}
+    .ongoingAdminPicker{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;margin:14px 0}
+    .ongoingAdminPicker label{display:grid;gap:6px;flex:1 1 320px;color:var(--accent-dark);font-size:.84rem;font-weight:500}
+    .ongoingAdminList{display:grid;gap:10px}
     .agendaReviewItem{
       display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:start;
       padding:14px;border:1px solid var(--theme-line);border-radius:18px;
@@ -1105,6 +1108,16 @@
 
         <section class="panel tintedPanel toneAgenda agendaReviewPanel" id="agendaReviewPanel">
           <div class="panelHead">
+            <div><h2>Doorlopend aanbod beheren</h2></div>
+            <span id="ongoingAdminCount" class="pill">0 items</span>
+          </div>
+          <div class="ongoingAdminPicker">
+            <label>Agenda-item toevoegen<select id="ongoingAdminSelect"></select></label>
+            <button class="button small primary" id="ongoingAdminAddBtn" type="button">Als doorlopend instellen</button>
+          </div>
+          <div id="ongoingAdminList" class="ongoingAdminList"></div>
+          <div class="sectionDivider"></div>
+          <div class="panelHead">
             <div>
               <h2>UIT-agenda beheren</h2>
               <p>Controleer vaste en automatisch gevonden agenda-items. Verberg tijdelijk of verwijder wat niet passend is.</p>
@@ -1511,6 +1524,9 @@
   let editingSourceLink = null;
   let editingAdminIdea = null;
   let editingAgendaItemId = '';
+  let editingAgendaItemIds = [];
+  let editingAgendaSource = null;
+  let ongoingAdminGroups = new Map();
   const ICONS = {
     creative:`<svg viewBox="0 0 20 20"><path d="M10 3l1.8 4.2L16 9l-4.2 1.8L10 15l-1.8-4.2L4 9l4.2-1.8L10 3z"></path></svg>`,
     culture:`<svg viewBox="0 0 20 20"><path d="M4 7l6-3 6 3"></path><path d="M5 8h10"></path><path d="M6 8v6"></path><path d="M10 8v6"></path><path d="M14 8v6"></path><path d="M4 15h12"></path></svg>`,
@@ -2272,12 +2288,12 @@
     const time = normalize(item.time || item.timeLabel || '').replace(/\s+/g,' ');
     const place = normalize(item.where || item.place || item.location || '');
     const host = sourceHost(item.url || item.sourceUrl || '');
-    return [
-      agendaContentKey(item),
-      title && date && place ? `${title}|${date}|${place}` : '',
-      title && date && time ? `${title}|${date}|${time}` : '',
-      title && place && host ? `${title}|${place}|${host}` : ''
-    ].filter(Boolean);
+	    return [
+	      agendaContentKey(item),
+	      title && date && place ? `${title}|${date}|${place}` : '',
+	      title && date && time ? `${title}|${date}|${time}` : '',
+	      title && date && place && host ? `${title}|${date}|${place}|${host}` : ''
+	    ].filter(Boolean);
   }
 	  function normalizeLink(link={}){
 	    return {
@@ -2549,19 +2565,34 @@
 	  function verifiedAgendaIds(){
 	    return new Set(loadArray(VERIFIED_AGENDA_KEY));
 	  }
-	  const ADMIN_WEEK_START = {
-	    w29:'2026-07-13',
-	    w30:'2026-07-20',
-	    w31:'2026-07-27',
-	    w32:'2026-08-03',
-	    w33:'2026-08-10',
-	    w34:'2026-08-17'
-	  };
+	  function adminIsoWeek(date){
+	    const value = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+	    value.setUTCDate(value.getUTCDate() + 4 - (value.getUTCDay() || 7));
+	    const yearStart = new Date(Date.UTC(value.getUTCFullYear(), 0, 1));
+	    return Math.ceil((((value - yearStart) / 86400000) + 1) / 7);
+	  }
+	  function adminRollingWeeks(){
+	    const today = new Date();
+	    const start = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+	    start.setDate(start.getDate() - ((start.getDay() + 6) % 7));
+	    return Array.from({length:6}, (_, index) => {
+	      const monday = new Date(start);
+	      monday.setDate(start.getDate() + index * 7);
+	      const sunday = new Date(monday);
+	      sunday.setDate(monday.getDate() + 6);
+	      const week = adminIsoWeek(monday);
+	      return {id:`w${week}`, week:String(week), startIso:formatIsoDate(monday), dates:`${formatAgendaDate(monday)} t/m ${formatAgendaDate(sunday)} ${sunday.getFullYear()}`, status:'Vooruitblik', planning:'Doorlopende vooruitblik van zes weken.'};
+	    });
+	  }
+	  let ADMIN_WEEKS = [];
+	  let ADMIN_WEEK_START = {};
 	  const ADMIN_DAY_LABELS = ['Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag','Zondag'];
 	  const ADMIN_MONTHS = {
 	    januari:0,februari:1,maart:2,april:3,mei:4,juni:5,
 	    juli:6,augustus:7,september:8,oktober:9,november:10,december:11
 	  };
+	  ADMIN_WEEKS = adminRollingWeeks();
+	  ADMIN_WEEK_START = Object.fromEntries(ADMIN_WEEKS.map(week => [week.id, week.startIso]));
 	  let agendaAdminView = 'week';
 	  function parseIsoDate(value){
 	    const parts = String(value || '').split('-').map(Number);
@@ -2643,7 +2674,7 @@
 	    })?.iso || days[0].iso;
 	  }
 	  function agendaWeekLabel(weekId){
-	    const week = (Array.isArray(BASE.weeks) ? BASE.weeks : []).find(item => item.id === weekId);
+	    const week = ADMIN_WEEKS.find(item => item.id === weekId) || (Array.isArray(BASE.weeks) ? BASE.weeks : []).find(item => item.id === weekId);
 	    if(week) return `Week ${week.week}`;
 	    return weekId === 'zonder' ? 'Zonder duidelijke week' : weekId;
 	  }
@@ -3434,7 +3465,7 @@
 	    </article>`;
 	  }
 	  function renderAgendaSingleWeekView(items, states, weekId){
-	    const week = (Array.isArray(BASE.weeks) ? BASE.weeks : []).find(item => item.id === weekId);
+	    const week = ADMIN_WEEKS.find(item => item.id === weekId) || (Array.isArray(BASE.weeks) ? BASE.weeks : []).find(item => item.id === weekId);
 	    const todayIso = formatIsoDate(new Date());
 	    const weekItems = items.filter(item => itemWeekIds(item).includes(weekId));
 	    const daysHtml = weekDays(weekId).map(day => {
@@ -3491,6 +3522,36 @@
 	          || normalize(a.title).localeCompare(normalize(b.title));
 	      });
 	    const states = new Map(allItems.map(item => [item.id, agendaReviewState(item, hidden, verified)]));
+	    const recurringGroups = new Map();
+	    allItems.forEach(item => {
+	      const weeks = itemWeekIds(item).filter(weekId => ADMIN_WEEK_START[weekId]);
+	      if(!weeks.length) return;
+	      const key = `${normalizedAgendaTitle(item.title)}|${normalize(item.where)}`;
+	      if(!recurringGroups.has(key)) recurringGroups.set(key, []);
+	      recurringGroups.get(key).push(item);
+	    });
+	    const recurringItems = [...recurringGroups.values()].flatMap(group => {
+	      const weeks = [...new Set(group.flatMap(itemWeekIds).filter(weekId => ADMIN_WEEK_START[weekId]))];
+	      if(weeks.length < 2) return [];
+	      const dated = group.map(item => ({item, range:parseDutchDateRange(item.date)})).filter(entry => entry.range?.start).sort((a,b) => a.range.start.localeCompare(b.range.start));
+	      if(!dated.length) return [];
+	      const first = dated[0].item;
+	      const last = dated[dated.length - 1].item;
+	      return [{...first, week:weeks.join(','), date:`${formatAgendaDate(parseIsoDate(dated[0].range.start))} t/m ${formatAgendaDate(parseIsoDate(dated[dated.length - 1].range.end))} 2026`, seasonLimited:true, groupIds:group.map(item => String(item.id))}];
+	    });
+	    const explicitItems = allItems.filter(item => (isAgendaOngoingOffer(item) || isAgendaFlexiblePeriod(item)) && itemWeekIds(item).some(weekId => ADMIN_WEEK_START[weekId]));
+	    const ongoingItems = dedupeAgendaItems([...recurringItems, ...explicitItems]);
+	    ongoingAdminGroups = new Map(ongoingItems.map(item => [String(item.id), item]));
+	    const ongoingIds = new Set(ongoingItems.flatMap(item => item.groupIds || [String(item.id)]));
+	    const ongoingCandidates = allItems.filter(item => !ongoingIds.has(String(item.id)));
+	    $('#ongoingAdminCount').textContent = `${ongoingItems.length} item${ongoingItems.length === 1 ? '' : 's'}`;
+	    $('#ongoingAdminList').innerHTML = ongoingItems.length
+	      ? ongoingItems.map(item => renderAgendaListItem(item, states.get(item.id) || agendaReviewState(item, hidden, verified)).replaceAll('data-edit-agenda=', 'data-edit-ongoing=')).join('')
+	      : '<div class="empty">Nog geen doorlopend aanbod. Kies hierboven een agenda-item om het toe te voegen.</div>';
+	    $('#ongoingAdminSelect').innerHTML = ongoingCandidates.length
+	      ? `<option value="">Kies een agenda-item</option>${ongoingCandidates.map(item => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.title)} · ${escapeHtml(item.date || 'geen datum')}</option>`).join('')}`
+	      : '<option value="">Geen andere agenda-items</option>';
+	    $('#ongoingAdminAddBtn').disabled = !ongoingCandidates.length;
 	    const items = allItems.filter(item => agendaMatchesFilters(item, states.get(item.id), filters));
 	    $('#agendaReviewCount').textContent = `${items.length} / ${allItems.length} item${allItems.length === 1 ? '' : 's'}`;
 	    $('#agendaRuleCount').textContent = `${rules.length} regel${rules.length === 1 ? '' : 's'}`;
@@ -3758,12 +3819,16 @@
 	    modal.setAttribute('aria-hidden', 'true');
 	    document.body.style.overflow = '';
 	    editingAgendaItemId = '';
+	    editingAgendaItemIds = [];
+	    editingAgendaSource = null;
 	    setStatus('#agendaEditStatus', '');
 	  }
-	  function startAgendaEdit(id){
-	    const item = agendaReviewItems().find(offer => String(offer.id) === String(id));
+	  function startAgendaEdit(id, options={}){
+	    const item = options.item || agendaReviewItems().find(offer => String(offer.id) === String(id));
 	    if(!item) return;
 	    editingAgendaItemId = String(item.id);
+	    editingAgendaItemIds = (item.groupIds || [item.id]).map(String);
+	    editingAgendaSource = item;
 	    $('#agendaEditTitle').textContent = isAgendaOngoingOffer(item) || isAgendaFlexiblePeriod(item) ? 'Doorlopend aanbod wijzigen' : 'Agenda-item wijzigen';
 	    $('#agendaEditItemTitle').value = item.title || '';
 	    $('#agendaEditDate').value = item.date || '';
@@ -3776,7 +3841,7 @@
 	    $('#agendaEditSource').value = item.source || '';
 	    $('#agendaEditUrl').value = item.url || '';
 	    $('#agendaEditFit').value = item.fit || '';
-	    $('#agendaEditSeasonLimited').checked = Boolean(item.seasonLimited);
+	    $('#agendaEditSeasonLimited').checked = options.markOngoing ? true : Boolean(item.seasonLimited);
 	    $('#agendaEditPinToAgenda').checked = Boolean(item.pinToAgenda);
 	    const modal = $('#agendaEditModal');
 	    modal.hidden = false;
@@ -3786,7 +3851,7 @@
 	  }
 	  async function saveAgendaEdit(event){
 	    event.preventDefault();
-	    const item = agendaReviewItems().find(offer => String(offer.id) === editingAgendaItemId);
+	    const item = editingAgendaSource || agendaReviewItems().find(offer => String(offer.id) === editingAgendaItemId);
 	    if(!item) return;
 	    const title = $('#agendaEditItemTitle').value.trim();
 	    if(!title){
@@ -3794,7 +3859,6 @@
 	      return;
 	    }
 	    const override = {
-	      id:item.id,
 	      title,
 	      date:$('#agendaEditDate').value.trim(),
 	      time:$('#agendaEditTime').value.trim(),
@@ -3810,8 +3874,9 @@
 	      pinToAgenda:$('#agendaEditPinToAgenda').checked,
 	      updatedAt:new Date().toISOString()
 	    };
-	    const overrides = agendaItemOverrides().filter(entry => entry.id !== override.id);
-	    saveArray(AGENDA_OVERRIDES_KEY, [override, ...overrides]);
+	    const targetIds = editingAgendaItemIds.length ? editingAgendaItemIds : [String(item.id)];
+	    const overrides = agendaItemOverrides().filter(entry => !targetIds.includes(String(entry.id)));
+	    saveArray(AGENDA_OVERRIDES_KEY, [...targetIds.map(id => ({...override, id})), ...overrides]);
 	    if(!(await saveCentralStorage())){
 	      setStatus('#agendaEditStatus', storageErrorMessage(), 'warn');
 	      return;
@@ -4712,6 +4777,10 @@
     $('#agendaEditModal').addEventListener('click', event => {
       if(event.target.id === 'agendaEditModal') closeAgendaEdit();
     });
+    $('#ongoingAdminAddBtn').addEventListener('click', () => {
+      const id = $('#ongoingAdminSelect').value;
+      if(id) startAgendaEdit(id, {markOngoing:true});
+    });
     $('#agendaBlockInput').addEventListener('keydown', event => {
       if(event.key !== 'Enter') return;
       event.preventDefault();
@@ -4746,6 +4815,8 @@
 	      if(verifyButton) verifyAgendaItem(verifyButton.dataset.verifyAgenda);
 	      const agendaEditButton = event.target.closest('[data-edit-agenda]');
 	      if(agendaEditButton) startAgendaEdit(agendaEditButton.dataset.editAgenda);
+	      const ongoingEditButton = event.target.closest('[data-edit-ongoing]');
+	      if(ongoingEditButton) startAgendaEdit(ongoingEditButton.dataset.editOngoing, {item:ongoingAdminGroups.get(String(ongoingEditButton.dataset.editOngoing))});
 	      const agendaHideButton = event.target.closest('[data-hide-agenda]');
 	      if(agendaHideButton) toggleAgendaItemVisibility(agendaHideButton.dataset.hideAgenda, agendaHideButton.dataset.hidden === '1');
 	      const agendaDeleteButton = event.target.closest('[data-delete-agenda]');

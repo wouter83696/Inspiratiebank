@@ -4430,7 +4430,7 @@
     externalItems.forEach(item => {
       const activeWeekIds = orderedWeekIds(splitWeeks(item.week));
       if(!activeWeekIds.length || !eventDateMeta(item)?.start) return;
-      const key = `${normalize(item.title || '')}|${normalize(item.url || '')}`;
+	  const key = `${normalize(item.title || '')}|${normalize(item.where || '')}`;
       if(!key.replace('|', '')) return;
       if(!recurringGroups.has(key)) recurringGroups.set(key, []);
       recurringGroups.get(key).push({...item, activeWeekIds});
