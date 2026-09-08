@@ -575,7 +575,37 @@
     .agendaReviewList[hidden],.agendaReviewWeekView[hidden]{display:none !important}
     .ongoingAdminPicker{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;margin:14px 0}
     .ongoingAdminPicker label{display:grid;gap:6px;flex:1 1 320px;color:var(--accent-dark);font-size:.84rem;font-weight:500}
-    .ongoingAdminList{display:grid;gap:10px}
+    .ongoingAdminList{min-width:0}
+    .ongoingAdminTableWrap{
+      overflow-x:auto;border:1px solid rgba(79,142,158,.10);border-radius:16px;
+      background:rgba(255,255,255,.72);box-shadow:0 12px 30px rgba(20,38,42,.04)
+    }
+    .ongoingAdminTable{width:100%;min-width:1120px;border-collapse:collapse;table-layout:fixed}
+    .ongoingAdminTable th,.ongoingAdminTable td{
+      padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid rgba(11,18,32,.07);
+      font-size:.84rem;line-height:1.35
+    }
+    .ongoingAdminTable th{color:rgba(11,18,32,.56);font-weight:500;background:rgba(255,255,255,.78)}
+    .ongoingAdminTable tr:last-child td{border-bottom:0}
+    .ongoingAdminTable .ideaThemeRow td{background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.54)}
+    .ongoingAdminTable .ideaThemeRow:hover td{background:linear-gradient(var(--theme-tint-strong),var(--theme-tint-strong)),rgba(255,255,255,.62)}
+    .ongoingAdminTable th:nth-child(1){width:22%}.ongoingAdminTable th:nth-child(2){width:8%}
+    .ongoingAdminTable th:nth-child(3){width:13%}.ongoingAdminTable th:nth-child(4){width:7%}
+    .ongoingAdminTable th:nth-child(5){width:7%}.ongoingAdminTable th:nth-child(6){width:25%}
+    .ongoingAdminTable th:nth-child(7){width:8%}.ongoingAdminTable th:nth-child(8){width:10%}
+    .ongoingAdminTitle{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;align-items:start;color:var(--accent-dark);font-weight:600}
+    .ongoingAdminTitle .domainIcon{width:22px;height:22px;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
+    .ongoingAdminTitle .domainIcon svg{width:12px;height:12px}
+    .ongoingAdminSub{display:block;margin:4px 0 0 30px;color:var(--muted);font-size:.78rem}
+    .ongoingAdminLocation{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+    .ongoingAdminDescription{color:var(--muted)}
+    .ongoingAdminActions{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+    .ongoingAdminActions .button.iconAction{flex:0 0 28px;width:28px;height:28px;padding:0;border-radius:10px;box-shadow:none;background:rgba(255,255,255,.82);border-color:rgba(79,142,158,.10);color:var(--accent-dark)}
+    .ongoingAdminActions .button.iconAction svg{width:15px;height:15px}
+    .ongoingAdminActions .openAction{background:rgba(214,236,242,.72)!important;color:#315f6d!important}
+    .ongoingAdminActions .visibilityAction{background:rgba(221,239,232,.78)!important;color:#4f7663!important}
+    .ongoingAdminActions .sourceAction,.ongoingAdminActions .titleAction{background:rgba(248,236,194,.82)!important;color:#7a6424!important}
+    .ongoingAdminActions .button.hot{background:rgba(246,223,231,.82);color:#84435a}
     .agendaReviewItem{
       display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:start;
       padding:14px;border:1px solid var(--theme-line);border-radius:18px;
@@ -3456,6 +3486,25 @@
 	      <div class="agendaReviewActions">${agendaReviewActions(item, state)}</div>
 	    </article>`;
 	  }
+	  function renderOngoingAdminRow(item, state){
+	    const weeks = itemWeekIds(item).filter(id => id !== 'zonder').map(id => id.replace(/^w/i, '')).join(', ') || '–';
+	    const distance = normalizeIdeaDistance(item.distanceBand, item, 'agenda');
+	    const location = normalizeIdeaLocation(item.locationType || item.location || '');
+	    const placeLabels = compactPlacePills(location, distance);
+	    const placePills = placeLabels.length ? placeLabels.map(label => pill(label, 'soft')).join('') : `<span class="small">${escapeHtml(item.where || '–')}</span>`;
+	    const website = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a>` : '<span class="small">–</span>';
+	    const actions = agendaReviewActions(item, state, true).replaceAll('data-edit-agenda=', 'data-edit-ongoing=');
+	    return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)} ${state.isHidden ? 'hiddenItem' : ''}">
+	      <td><span class="ongoingAdminTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span>${escapeHtml(item.title)}</span></span><span class="ongoingAdminSub">${escapeHtml([item.date, item.time].filter(Boolean).join(' · ') || 'Datum nog checken')}</span></td>
+	      <td>${escapeHtml(weeks)}</td>
+	      <td><div class="ongoingAdminLocation">${placePills}</div>${item.where ? `<span class="small">${escapeHtml(item.where)}</span>` : ''}</td>
+	      <td>${costPill(item.cost)}</td>
+	      <td>${stimulusPill(item.stimulus)}</td>
+	      <td class="ongoingAdminDescription">${escapeHtml(item.fit || '–')}</td>
+	      <td>${website}</td>
+	      <td><div class="ongoingAdminActions">${actions}</div></td>
+	    </tr>`;
+	  }
 	  function renderAgendaWeekCard(item, state, compact=false){
 	    const meta = [[item.time, item.where].filter(Boolean).join(' · ') || item.date, isAgendaFlexiblePeriod(item) ? item.date : ''].filter(Boolean).join(' · ');
 	    return `<article class="agendaReviewCard ${domainThemeClass(item.domain)} ${state.isHidden ? 'hiddenItem' : ''} ${state.isNew ? 'newItem' : ''}">
@@ -3547,7 +3596,7 @@
 	    const ongoingCandidates = allItems.filter(item => !ongoingIds.has(String(item.id)));
 	    $('#ongoingAdminCount').textContent = `${ongoingItems.length} item${ongoingItems.length === 1 ? '' : 's'}`;
 	    $('#ongoingAdminList').innerHTML = ongoingItems.length
-	      ? ongoingItems.map(item => renderAgendaListItem(item, states.get(item.id) || agendaReviewState(item, hidden, verified)).replaceAll('data-edit-agenda=', 'data-edit-ongoing=')).join('')
+	      ? `<div class="ongoingAdminTableWrap"><table class="ongoingAdminTable"><thead><tr><th>Aanbod</th><th>Weken</th><th>Locatie en afstand</th><th>Kosten</th><th>Prikkel</th><th>Beschrijving</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${ongoingItems.map(item => renderOngoingAdminRow(item, states.get(item.id) || agendaReviewState(item, hidden, verified))).join('')}</tbody></table></div>`
 	      : '<div class="empty">Nog geen doorlopend aanbod. Kies hierboven een agenda-item om het toe te voegen.</div>';
 	    $('#ongoingAdminSelect').innerHTML = ongoingCandidates.length
 	      ? `<option value="">Kies een agenda-item</option>${ongoingCandidates.map(item => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.title)} · ${escapeHtml(item.date || 'geen datum')}</option>`).join('')}`
