@@ -1426,7 +1426,7 @@
   </div>
 
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
-  <script src="../website-bestanden/data/beheer_items.js"></script>
+  <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
   const ADMIN_SESSION_KEY = 'bcjn_zomer_beheer_open_v1';
   const ADMIN_PASSWORD_SESSION_KEY = 'bcjn_zomer_beheer_password_v1';
@@ -1450,7 +1450,21 @@
 	  const ADMIN_SIDEBAR_COLLAPSED_KEY = 'zomerprogramma_admin_sidebar_collapsed_v1';
 	  const REPORTS_KEY = 'zomerprogramma_item_reports_v1';
 	  const TRASH_RETENTION_DAYS = 30;
-	  const BASE = window.BCJN_BEHEER_BASE || {inspiration:[], teamIdeas:[], links:[]};
+	  const EMPTY_ADMIN_BASE = {weeks:[], external:[], inspiration:[], teamIdeas:[], links:[], sourceCheck:{}, sourceReview:{}};
+	  let BASE = window.BCJN_BEHEER_BASE || {...EMPTY_ADMIN_BASE};
+	  async function loadAdminBaseData(){
+	    try{
+	      const response = await fetch(`../website-bestanden/data/zomerprogramma_data.json?v=${Date.now()}`, {cache:'no-store'});
+	      if(!response.ok) throw new Error(`Agenda-data ophalen gaf status ${response.status}`);
+	      const data = await response.json();
+	      BASE = data && typeof data === 'object' ? {...EMPTY_ADMIN_BASE, ...data} : {...EMPTY_ADMIN_BASE};
+	      return true;
+	    }catch(error){
+	      console.error('Actuele beheerdata kon niet worden geladen; reserve-data wordt gebruikt.', error);
+	      BASE = window.BCJN_BEHEER_BASE || {...EMPTY_ADMIN_BASE};
+	      return false;
+	    }
+	  }
 	  const CONFIG = window.BCJN_CONFIG || {};
 	  const CENTRAL_STORAGE_ENDPOINT = CONFIG.storageEndpoint || '';
 	  const SUPABASE_TABLE = CONFIG.supabaseTable || 'bcjn_state';
@@ -4555,6 +4569,7 @@
 	    window.requestAnimationFrame(() => $('#loginPanel').scrollIntoView({behavior:'smooth', block:'start'}));
 	  }
   async function init(){
+    await loadAdminBaseData();
     await loadCentralStorage();
     if(await resumeAdminSession()) showAdmin();
     $('#logoutBtn').addEventListener('click', logoutAdmin);
