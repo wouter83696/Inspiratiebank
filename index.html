@@ -4241,7 +4241,7 @@
     return /dagelijks|wisselende voorstellingen|start wanneer je wilt|diverse tijden|di t\/m zo|ma t\/m zo|maandag t\/m zondag/.test(dateTimeLabel);
   }
   function isOngoingOffer(item={}){
-    return item.seasonLimited === true;
+    return item.seasonLimited === true || isFlexiblePeriodOffer(item);
   }
 	function showPeriodInAgenda(item){
 	  const span = eventSpanDays(item);
@@ -4407,10 +4407,33 @@
     return weekNumbers.map(number => `Week ${number}`).join(', ');
   }
   function sharedFlexibleOffers(){
-    const flexible = allExternalItems()
-      .filter(isConcrete)
+    const externalItems = allExternalItems();
+    const recurringGroups = new Map();
+    externalItems.forEach(item => {
+      const activeWeekIds = orderedWeekIds(splitWeeks(item.week));
+      if(!activeWeekIds.length || !eventDateMeta(item)?.start) return;
+      const key = `${normalize(item.title || '')}|${normalize(item.url || '')}`;
+      if(!key.replace('|', '')) return;
+      if(!recurringGroups.has(key)) recurringGroups.set(key, []);
+      recurringGroups.get(key).push({...item, activeWeekIds});
+    });
+    const recurring = [...recurringGroups.values()].flatMap(items => {
+      const weekIds = orderedWeekIds(items.flatMap(item => item.activeWeekIds));
+      if(weekIds.length < 2) return [];
+      const dates = items.map(eventDateMeta).filter(Boolean).map(meta => meta.start).sort();
+      const first = items[0];
+      return [{
+        ...first,
+        week:weekIds.join(','),
+        date:`${formatAgendaDate(parseIsoDate(dates[0]))} t/m ${formatAgendaDate(parseIsoDate(dates[dates.length - 1]))}`,
+        time:unique(items.map(item => item.time).filter(Boolean)).length === 1 ? first.time : 'diverse tijden',
+        seasonLimited:true,
+        derivedRecurring:true
+      }];
+    });
+    const flexible = [...externalItems, ...recurring]
       .filter(isOngoingOffer)
-      .filter(item => ACTIVE_WEEKS.some(week => weekDays(week.id).some(day => itemOccursOnDay(item, day.iso))))
+      .filter(item => item.derivedRecurring || ACTIVE_WEEKS.some(week => weekDays(week.id).some(day => itemOccursOnDay(item, day.iso))))
       .filter(item => !(isMultiDayFestival(item) && eventSpanDays(item) > 0));
     const merged = new Map();
     flexible.forEach(item => {
