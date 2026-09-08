@@ -691,8 +691,9 @@
     .adminIdeaImageBadge{position:absolute;left:10px;bottom:10px;border-radius:999px;padding:5px 8px;background:rgba(255,255,255,.88);color:var(--accent-dark);font-size:.72rem;font-weight:600;box-shadow:0 8px 20px rgba(20,38,42,.10)}
     .ideaThemeCard{min-width:0;background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.92);border-color:color-mix(in srgb,var(--theme-line) 68%,#EAECEF);box-shadow:0 12px 34px rgba(20,38,42,.055)}
     .ideaThemeCard:hover{background:linear-gradient(var(--theme-tint-strong),var(--theme-tint-strong)),rgba(255,255,255,.94);border-color:var(--theme-line);box-shadow:0 16px 38px rgba(20,38,42,.07)}
-    .ideaThemeRow td{background:linear-gradient(color-mix(in srgb,var(--theme-tint) 38%,transparent),color-mix(in srgb,var(--theme-tint) 38%,transparent)),rgba(255,255,255,.96)}
-    .ideaThemeRow:hover td{background:linear-gradient(color-mix(in srgb,var(--theme-tint-strong) 42%,transparent),color-mix(in srgb,var(--theme-tint-strong) 42%,transparent)),rgba(255,255,255,.97)}
+    .ideaThemeRow td{background:var(--agenda-tint,#fff);border-bottom-color:var(--agenda-line,var(--theme-line))}
+    .ideaThemeRow td:first-child{box-shadow:inset 2px 0 0 color-mix(in srgb,var(--theme-line) 72%,transparent)}
+    .ideaThemeRow:hover td{background:linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.28)),var(--agenda-tint,#fff)}
     .ideaThemeRow.hiddenItem td{background:rgba(11,18,32,.035);opacity:.72}
     .ideaThemeCard .domainIcon,.ideaThemeRow .domainIcon{background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
     .adminIdeaPhotoPreview{display:inline-grid;gap:5px;justify-items:start;min-width:58px}
@@ -777,8 +778,8 @@
       box-shadow:-14px 0 24px rgba(20,38,42,.055)
     }
     #adminIdeaList th:last-child{z-index:4;background:rgba(255,255,255,.96)}
-    #adminIdeaList .ideaThemeRow td:last-child{background:linear-gradient(color-mix(in srgb,var(--theme-tint) 38%,transparent),color-mix(in srgb,var(--theme-tint) 38%,transparent)),rgba(255,255,255,.96)}
-    #adminIdeaList .ideaThemeRow:hover td:last-child{background:linear-gradient(color-mix(in srgb,var(--theme-tint-strong) 42%,transparent),color-mix(in srgb,var(--theme-tint-strong) 42%,transparent)),rgba(255,255,255,.97)}
+    #adminIdeaList .ideaThemeRow td:last-child{background:var(--agenda-tint,#fff)}
+    #adminIdeaList .ideaThemeRow:hover td:last-child{background:linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.28)),var(--agenda-tint,#fff)}
     #adminIdeaList .ideaActions{justify-content:flex-end}
     .agendaReviewTable .rowActions{justify-content:flex-start}
     .confirmModal{
@@ -885,12 +886,12 @@
         padding:13px;border:1px solid color-mix(in srgb,var(--theme-line) 58%,#EAECEF);
         border-radius:18px;background:rgba(255,255,255,.72);box-shadow:0 10px 24px rgba(20,38,42,.045)
       }
-      #adminIdeaList tr.ideaThemeRow{background:linear-gradient(color-mix(in srgb,var(--theme-tint) 38%,transparent),color-mix(in srgb,var(--theme-tint) 38%,transparent)),rgba(255,255,255,.96)}
+      #adminIdeaList tr.ideaThemeRow{background:var(--agenda-tint,#fff);border-color:var(--agenda-line,var(--theme-line))}
       #adminIdeaList td{
         display:grid;grid-template-columns:78px minmax(0,1fr);gap:8px;align-items:start;padding:7px 0;border:0;font-size:.88rem
       }
       #adminIdeaList td::before{content:attr(data-label);color:rgba(11,18,32,.48);font-size:.72rem;font-weight:600;letter-spacing:.01em}
-      #adminIdeaList td:first-child{display:block;padding-top:0}
+      #adminIdeaList td:first-child{display:block;padding-top:0;box-shadow:none}
       #adminIdeaList td:first-child::before{display:none}
       #adminIdeaList td:last-child{
         position:static;min-width:0;background:transparent;box-shadow:none;padding-bottom:0
