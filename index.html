@@ -2283,6 +2283,7 @@
 	  let userLocationRadiusKm = loadUserLocationRadius();
 	  let activeIdeaMapKey = '';
 	  let activeIdeaMapClusterKeys = null;
+	  let activeIdeaMapClusterIsArea = false;
 	  let pendingIdeaMapZoomTarget = null;
 	  let ideaMapProvider = null;
 
@@ -5007,6 +5008,7 @@
     const clusterPoints = points.filter(point => clusterKeySet.has(point.key));
     if(clusterPoints.length) return clusterPoints;
     activeIdeaMapClusterKeys = null;
+    activeIdeaMapClusterIsArea = false;
     return points;
   }
   function ideaMapPanelMarkup(points=[]){
@@ -5032,10 +5034,10 @@
       ? visiblePoints[0].place
       : '';
     const panelTitle = activeIdeaMapClusterKeys
-      ? (sharedPlace ? `${visiblePoints.length} activiteiten in ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}` : `${visiblePoints.length} activiteiten op deze plek`)
+      ? (sharedPlace ? `${visiblePoints.length} activiteiten in ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}` : `${visiblePoints.length} activiteiten ${activeIdeaMapClusterIsArea ? 'in dit gebied' : 'op deze plek'}`)
       : 'Activiteiten op kaart';
     const panelText = activeIdeaMapClusterKeys
-      ? (sharedPlace ? `Deze activiteiten liggen verspreid over ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}.` : 'Activiteiten op dezelfde locatie. Kies een tegel of toon alles.')
+      ? (sharedPlace ? `Deze activiteiten liggen verspreid over ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}.` : activeIdeaMapClusterIsArea ? 'Zoom in voor losse markers of kies hieronder een tegel.' : 'Activiteiten op dezelfde locatie. Kies een tegel of toon alles.')
       : (userLocation?.isDefault ? 'Standaard rond Nijmegen.' : `Afstand vanaf ${locationDisplayText()}.`);
     const clearButton = activeIdeaMapClusterKeys ? '<button class="ideaMapClear" type="button" data-map-clear-cluster>Alles tonen</button>' : '';
     return `<aside class="ideaMapPanel">
@@ -5055,6 +5057,7 @@
     const shouldRefreshPanel = refreshPanel || (clearCluster && activeIdeaMapClusterKeys);
     if(clearCluster){
       activeIdeaMapClusterKeys = null;
+      activeIdeaMapClusterIsArea = false;
       pendingIdeaMapZoomTarget = null;
     }
     activeIdeaMapKey = key || activeIdeaMapKey;
@@ -5091,13 +5094,14 @@
   function mapZoomTargetKey(type, keys=[]){
     return `${type}:${[...new Set(keys.filter(Boolean))].sort().join('|')}`;
   }
-  function setActiveIdeaMapCluster(keys=[]){
+  function setActiveIdeaMapCluster(keys=[], {area=false}={}){
     const uniqueKeys = [...new Set(keys.filter(Boolean))];
     if(uniqueKeys.length <= 1){
       if(uniqueKeys[0]) setActiveIdeaMapItem(uniqueKeys[0], {clearCluster:true});
       return;
     }
     activeIdeaMapClusterKeys = uniqueKeys;
+    activeIdeaMapClusterIsArea = area;
     activeIdeaMapKey = uniqueKeys.includes(activeIdeaMapKey) ? activeIdeaMapKey : uniqueKeys[0];
     ideaMapProvider?.setActiveCluster?.(uniqueKeys);
     updateIdeaMapPanel({scroll:true, emphasize:true});
@@ -5105,6 +5109,7 @@
   function clearActiveIdeaMapCluster(){
     if(!activeIdeaMapClusterKeys) return;
     activeIdeaMapClusterKeys = null;
+    activeIdeaMapClusterIsArea = false;
     pendingIdeaMapZoomTarget = null;
     ideaMapProvider?.clearActiveCluster?.();
     updateIdeaMapPanel();
@@ -5148,6 +5153,7 @@
     const map = L.map(container, {
       scrollWheelZoom:false,
       tap:true,
+      maxZoom:19,
       zoomControl:false,
       attributionControl:true
     });
@@ -5174,9 +5180,19 @@
     }
     const userPoint = options.userPoint || DEFAULT_LOCATION;
     const bounds = [[userPoint.lat, userPoint.lon]];
-    const markerLayer = L.layerGroup();
     const clusterSignature = keys => [...new Set(keys.filter(Boolean))].sort().join('|');
     let activeClusterSignature = activeIdeaMapClusterKeys ? clusterSignature(activeIdeaMapClusterKeys) : '';
+    const markerLayer = L.markerClusterGroup({
+      maxClusterRadius:52,
+      disableClusteringAtZoom:13,
+      showCoverageOnHover:false,
+      spiderfyOnMaxZoom:false,
+      zoomToBoundsOnClick:false,
+      iconCreateFunction(cluster){
+        const keys = cluster.getAllChildMarkers().flatMap(marker => marker.options.ideaKeys || [marker.options.ideaKey]).filter(Boolean);
+        return locationLeafletClusterIcon(keys, clusterSignature(keys) === activeClusterSignature);
+      }
+    });
     const clusterMarkers = [];
     const syncActiveCluster = () => {
       clusterMarkers.forEach(marker => {
@@ -5236,6 +5252,13 @@
       bounds.push([point.lat, point.lon]);
       markers.push(marker);
     });
+    markerLayer.on('clusterclick', event => {
+      if(event?.originalEvent) L.DomEvent.stop(event.originalEvent);
+      const keys = event.layer.getAllChildMarkers().flatMap(marker => marker.options.ideaKeys || [marker.options.ideaKey]).filter(Boolean);
+      activeClusterSignature = clusterSignature(keys);
+      options.onCluster?.(keys, {area:true});
+      markerLayer.refreshClusters();
+    });
     markerLayer.addTo(map);
     window.requestAnimationFrame(() => {
       map.invalidateSize();
@@ -5258,10 +5281,12 @@
       },
       setActiveCluster(keys=[]){
         activeClusterSignature = clusterSignature(keys);
+        markerLayer.refreshClusters();
         window.requestAnimationFrame(syncActiveCluster);
       },
       clearActiveCluster(){
         activeClusterSignature = '';
+        markerLayer.refreshClusters();
         syncActiveCluster();
       },
       destroy(){
@@ -5276,7 +5301,7 @@
       return createLeafletMapProvider(container, points, {
         userPoint:userLocation || DEFAULT_LOCATION,
         onSelect:key => setActiveIdeaMapItem(key, {clearCluster:true, refreshPanel:true, emphasize:true}),
-        onCluster:keys => setActiveIdeaMapCluster(keys)
+        onCluster:(keys, clusterOptions) => setActiveIdeaMapCluster(keys, clusterOptions)
       });
     }
     return null;
