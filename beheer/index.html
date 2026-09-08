@@ -537,12 +537,17 @@
     .agendaReviewCardMeta{margin-top:8px;color:#123968;font-size:.79rem;line-height:1.48;overflow-wrap:anywhere;hyphens:auto}
     .agendaReviewMeta{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
     .agendaReviewMeta .pill{font-size:.72rem;padding:4px 8px}
-    .agendaStatusIcon,.agendaKindIcon{
+    .agendaStatusIcon{
       width:24px;height:24px;padding:0;justify-content:center;border-radius:999px
     }
-    .agendaStatusIcon svg,.agendaKindIcon svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-    .agendaKindIcon{opacity:.88}
-    .agendaStatusDot{width:10px;height:10px;padding:0;border-radius:999px;background:var(--accent)}
+    .agendaStatusIcon svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+    .activityStatusIcon{
+      display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;
+      width:25px;height:25px;border:1px solid rgba(11,18,32,.07);border-radius:999px;
+      background:rgba(255,255,255,.60);color:rgba(11,18,32,.46)
+    }
+    .activityStatusIcon.auto{background:rgba(248,236,194,.62);border-color:rgba(186,151,56,.16);color:#7a6424}
+    .activityStatusIcon svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .agendaReviewCardActions{
       display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-top:2px;padding-top:8px;
       border-top:1px solid rgba(79,142,158,.10)
@@ -3440,19 +3445,19 @@
 	  }
 	  function agendaReviewPills(item, state, compact=false){
 	    if(compact){
-	      const autoIcon = item.agendaKind === 'auto' && !state.isVerified ? `<span class="pill warn agendaKindIcon" title="Automatisch toegevoegd" aria-label="Automatisch toegevoegd">${actionIcon('spark')}</span>` : '';
+	      const autoIcon = item.agendaKind === 'auto' && !state.isVerified ? `<span class="activityStatusIcon auto" role="img" title="Automatisch toegevoegd" aria-label="Automatisch toegevoegd"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4"></path><path d="M12 17v4"></path><path d="M3 12h4"></path><path d="M17 12h4"></path><path d="m5.6 5.6 2.8 2.8"></path><path d="m15.6 15.6 2.8 2.8"></path><path d="m18.4 5.6-2.8 2.8"></path><path d="m8.4 15.6-2.8 2.8"></path><circle cx="12" cy="12" r="2.5"></circle></svg></span>` : '';
 	      const statusIcon = state.isHidden
 	        ? `<span class="pill warn agendaStatusIcon" title="Verborgen" aria-label="Verborgen">${actionIcon('eyeOff')}</span>`
 	        : state.isVerified
 	          ? `<span class="pill ok agendaStatusIcon" title="Gecheckt" aria-label="Gecheckt">${actionIcon('check')}</span>`
-	          : '<span class="pill new agendaStatusDot" title="Nieuw" aria-label="Nieuw"></span>';
+	          : '';
 	      return `${autoIcon}${statusIcon}`;
 	    }
 	    if(state.isHidden) return '<span class="pill warn">Verborgen</span>';
 	    if(item.agendaKind !== 'auto' && state.isVerified) return '<span class="pill ok">Vast gecheckt</span>';
 	    const typePill = item.agendaKind === 'auto' ? '<span class="pill warn">Automatisch</span>' : '<span class="pill soft">Vast</span>';
 	    const ongoingPill = isAgendaOngoingOffer(item) ? '<span class="pill soft">Doorlopend</span>' : '';
-	    const status = state.isVerified ? '<span class="pill ok">Gecheckt</span>' : '<span class="pill new">Nieuw</span>';
+	    const status = state.isVerified ? '<span class="pill ok">Gecheckt</span>' : '';
 	    return `${typePill}${ongoingPill}${status}`;
 	  }
 	  function renderAgendaListItem(item, state){
