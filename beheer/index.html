@@ -267,6 +267,9 @@
     .workspaceHeader h2{font-size:1.55rem}
     .workspaceHeader p{margin:5px 0 0;max-width:760px}
     .adminStack{display:grid;gap:14px}
+    .adminStack>#agendaReviewPanel{order:1}
+    .adminStack>.sourceGrid{order:2}
+    .adminStack>#agendaRulesPanel{order:3}
     .agendaCheckNotice{
       display:flex;align-items:center;justify-content:space-between;gap:16px;
       padding:14px 16px;border:1px solid color-mix(in srgb,rgba(79,142,158,.08) 45%,#EAECEF);border-radius:18px;
@@ -984,19 +987,19 @@
               <span class="adminNavHint">items</span>
             </button>
             <button class="adminNavButton adminNavSub" type="button" data-admin-target="agenda" data-admin-scroll="ongoingAdminSection" title="Doorlopend aanbod">
-              <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 7h9a4 4 0 0 1 4 4"></path><path d="m17 4 3 3-3 3"></path><path d="M17 17H8a4 4 0 0 1-4-4"></path><path d="m7 20-3-3 3-3"></path></svg></span>
+              <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18.2 8c5.1 0 5.1 8 0 8-4.2 0-6.2-8-10.4-8-5.1 0-5.1 8 0 8 4.2 0 6.2-8 10.4-8Z"></path></svg></span>
               <span class="adminNavText">Doorlopend aanbod</span>
               <span class="adminNavHint">aanbod</span>
-            </button>
-            <button class="adminNavButton adminNavSub" type="button" data-admin-target="agenda" data-admin-scroll="agendaRulesPanel" title="Uitsluitingen">
-              <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M7 12h10"></path><path d="M10 17h4"></path></svg></span>
-              <span class="adminNavText">Uitsluitingen</span>
-              <span class="adminNavHint">regels</span>
             </button>
             <button class="adminNavButton adminNavSub" type="button" data-admin-target="agenda" data-admin-scroll="sourceOwnPanel" title="Bronnen">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1"></path><path d="M14 11a5 5 0 0 0-7.1 0l-2 2a5 5 0 0 0 7.1 7.1l1.1-1.1"></path></svg></span>
               <span class="adminNavText">Bronnen</span>
               <span class="adminNavHint">links</span>
+            </button>
+            <button class="adminNavButton adminNavSub" type="button" data-admin-target="agenda" data-admin-scroll="agendaRulesPanel" title="Uitsluitingen">
+              <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M7 12h10"></path><path d="M10 17h4"></path></svg></span>
+              <span class="adminNavText">Uitsluitingen</span>
+              <span class="adminNavHint">regels</span>
             </button>
             <button class="adminNavButton" type="button" data-admin-target="backup" title="Herstel">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.2"></circle><path d="M12 8v4.2l2.8 1.7"></path><path d="M8.2 4.8 6.4 3"></path><path d="M15.8 4.8 17.6 3"></path></svg></span>
@@ -1144,16 +1147,6 @@
       </div>
 
         <section class="panel tintedPanel toneAgenda agendaReviewPanel" id="agendaReviewPanel">
-          <div class="panelHead" id="ongoingAdminSection">
-            <div><h2>Doorlopend aanbod beheren</h2></div>
-            <span id="ongoingAdminCount" class="pill">0 items</span>
-          </div>
-          <div class="ongoingAdminPicker">
-            <label>Agenda-item toevoegen<select id="ongoingAdminSelect"></select></label>
-            <button class="button small primary" id="ongoingAdminAddBtn" type="button">Als doorlopend instellen</button>
-          </div>
-          <div id="ongoingAdminList" class="ongoingAdminList"></div>
-          <div class="sectionDivider"></div>
           <div class="panelHead" id="agendaAdminSection">
             <div>
               <h2>UIT-agenda beheren</h2>
@@ -1199,6 +1192,16 @@
           <div id="agendaAdminThemeLegend" class="agendaAdminThemeLegend"></div>
           <div id="agendaReviewWeekView" class="agendaReviewWeekView"></div>
           <div id="agendaReviewList" class="agendaReviewList"></div>
+          <div class="sectionDivider"></div>
+          <div class="panelHead" id="ongoingAdminSection">
+            <div><h2>Doorlopend aanbod beheren</h2></div>
+            <span id="ongoingAdminCount" class="pill">0 items</span>
+          </div>
+          <div class="ongoingAdminPicker">
+            <label>Agenda-item toevoegen<select id="ongoingAdminSelect"></select></label>
+            <button class="button small primary" id="ongoingAdminAddBtn" type="button">Als doorlopend instellen</button>
+          </div>
+          <div id="ongoingAdminList" class="ongoingAdminList"></div>
         </section>
             </div>
           </section>
