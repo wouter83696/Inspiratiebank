@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#F4F7F5">
+  <meta name="theme-color" content="#FBFAF6">
   <meta name="robots" content="noindex">
   <title>Beheer - Inspiratiebank</title>
   <script>
@@ -12,14 +12,17 @@
     }
   </script>
   <link rel="canonical" href="https://wouter83696.github.io/Inspiratiebank/beheer/">
-  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../favicon-32.png?v=20260908" type="image/png" sizes="32x32">
+  <link rel="icon" href="../favicon-48.png?v=20260908" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=20260908">
+  <link rel="manifest" href="../site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#F4F7F5;
-      --paper:#FAFAF8;
+      --bg:#FBFAF6;
+      --paper:#FFFCF7;
       --ink:rgba(11,18,32,.84);
       --muted:rgba(11,18,32,.62);
       --line:rgba(11,18,32,.09);
@@ -43,9 +46,10 @@
       color:var(--ink);
       font-family:"IBM Plex Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
       background:
-        radial-gradient(circle at 34% 10%, rgba(214,236,242,.28), transparent 29%),
-        radial-gradient(circle at 46% 102%, rgba(168,225,221,.18), transparent 28%),
-        radial-gradient(circle at 96% 2%, rgba(234,230,247,.42), transparent 26%),
+        radial-gradient(circle at 8% -4%, rgba(251,232,178,.14), transparent 22%),
+        radial-gradient(circle at 34% 10%, rgba(232,240,231,.18), transparent 29%),
+        radial-gradient(circle at 46% 102%, rgba(168,225,221,.10), transparent 28%),
+        radial-gradient(circle at 96% 2%, rgba(244,232,216,.24), transparent 26%),
         var(--bg);
       min-height:100dvh;
     }
@@ -179,7 +183,7 @@
       position:fixed;left:0;top:0;bottom:0;z-index:80;width:var(--admin-sidebar-w);
       display:grid;grid-template-rows:auto 1fr auto;gap:18px;min-height:100dvh;height:100dvh;overflow:hidden;
       padding:18px 14px;border:0;border-right:1px solid rgba(11,18,32,.08);border-radius:0;
-      background:linear-gradient(180deg,rgba(250,250,248,.96),rgba(244,250,249,.94));
+      background:linear-gradient(180deg,rgba(255,252,247,.97),rgba(251,250,246,.95));
       box-shadow:18px 0 42px rgba(20,38,42,.06);backdrop-filter:blur(18px);
       transition:width .22s var(--ease),padding .22s var(--ease),box-shadow .22s var(--ease)
     }
