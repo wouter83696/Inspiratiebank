@@ -189,7 +189,7 @@
     .adminSidebarBrand{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:2px 2px 6px;min-width:0}
     .adminSidebarIdentity{display:flex;align-items:center;gap:10px;min-width:0}
     .adminSidebarMark{
-      display:inline-flex;align-items:center;justify-content:center;flex:0 0 38px;width:38px;height:38px;border-radius:13px;
+      display:inline-flex;align-items:center;justify-content:center;flex:0 0 38px;width:38px;height:38px;border-radius:16px;
       overflow:hidden;background:#3f7884;box-shadow:0 4px 12px rgba(49,95,107,.14)
     }
     .adminSidebarMark img{display:block;width:100%;height:100%;object-fit:cover}
@@ -683,17 +683,18 @@
     .card{padding:16px;min-height:215px;display:flex;flex-direction:column;gap:10px;border:1px solid rgba(255,255,255,.72);border-radius:18px;background:rgba(250,250,248,.90);box-shadow:0 12px 34px rgba(20,38,42,.07);transition:.2s cubic-bezier(.22,1,.36,1)}
     .card:hover{transform:translateY(-3px);background:#fff}
     .adminIdeaImageFrame{
-      position:relative;overflow:hidden;margin:-16px -16px 4px;border-radius:18px 18px 0 0;
-      aspect-ratio:16 / 8.8;background:linear-gradient(var(--theme-tint),rgba(255,255,255,.58));
-      border-bottom:1px solid rgba(79,142,158,.08)
+      position:relative;overflow:hidden;margin:-10px -10px 10px;border-radius:13px;
+      aspect-ratio:16 / 8.7;background:linear-gradient(var(--theme-tint),rgba(255,255,255,.58));
+      border:1px solid color-mix(in srgb,var(--theme-line) 48%,rgba(255,255,255,.55));
+      box-shadow:0 8px 18px rgba(20,38,42,.045)
     }
-    .adminIdeaImageFrame img{width:100%;height:100%;display:block;object-fit:cover}
+    .adminIdeaImageFrame img{width:100%;height:100%;display:block;object-fit:cover;border-radius:12px}
     .adminIdeaImageBadge{position:absolute;left:10px;bottom:10px;border-radius:999px;padding:5px 8px;background:rgba(255,255,255,.88);color:var(--accent-dark);font-size:.72rem;font-weight:600;box-shadow:0 8px 20px rgba(20,38,42,.10)}
-    .ideaThemeCard{min-width:0;background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.92);border-color:color-mix(in srgb,var(--theme-line) 68%,#EAECEF);box-shadow:0 12px 34px rgba(20,38,42,.055)}
-    .ideaThemeCard:hover{background:linear-gradient(var(--theme-tint-strong),var(--theme-tint-strong)),rgba(255,255,255,.94);border-color:var(--theme-line);box-shadow:0 16px 38px rgba(20,38,42,.07)}
-    .ideaThemeRow td{background:var(--agenda-tint,#fff);border-bottom-color:var(--agenda-line,var(--theme-line))}
-    .ideaThemeRow td:first-child{box-shadow:inset 2px 0 0 color-mix(in srgb,var(--theme-line) 72%,transparent)}
-    .ideaThemeRow:hover td{background:linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.28)),var(--agenda-tint,#fff)}
+    .ideaThemeCard{min-width:0;padding:18px;background:linear-gradient(color-mix(in srgb,var(--theme-tint) 38%,transparent),color-mix(in srgb,var(--theme-tint) 38%,transparent)),rgba(255,255,255,.96);border-color:color-mix(in srgb,var(--theme-line) 74%,#EFE9DE);box-shadow:0 10px 26px rgba(64,45,20,.04)}
+    .ideaThemeCard:hover{background:linear-gradient(color-mix(in srgb,var(--theme-tint-strong) 42%,transparent),color-mix(in srgb,var(--theme-tint-strong) 42%,transparent)),rgba(255,255,255,.97);border-color:var(--theme-line);box-shadow:0 16px 34px rgba(64,45,20,.065)}
+    .ideaThemeRow td{background:linear-gradient(color-mix(in srgb,var(--theme-tint) 38%,transparent),color-mix(in srgb,var(--theme-tint) 38%,transparent)),rgba(255,255,255,.96)}
+    .ideaThemeRow td:first-child{box-shadow:none}
+    .ideaThemeRow:hover td{background:linear-gradient(color-mix(in srgb,var(--theme-tint-strong) 42%,transparent),color-mix(in srgb,var(--theme-tint-strong) 42%,transparent)),rgba(255,255,255,.97)}
     .ideaThemeRow.hiddenItem td{background:rgba(11,18,32,.035);opacity:.72}
     .ideaThemeCard .domainIcon,.ideaThemeRow .domainIcon{background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
     .adminIdeaPhotoPreview{display:inline-grid;gap:5px;justify-items:start;min-width:58px}
@@ -756,26 +757,20 @@
     .tableWrap{overflow-x:auto;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.48)}
     table{width:100%;border-collapse:separate;border-spacing:0;min-width:760px}
     #adminIdeaList table{min-width:0;table-layout:fixed}
-    #adminIdeaList th:nth-child(1),#adminIdeaList td:nth-child(1){width:17%}
-    #adminIdeaList th:nth-child(2),#adminIdeaList td:nth-child(2){width:11%}
-    #adminIdeaList th:nth-child(3),#adminIdeaList td:nth-child(3){width:8%}
-    #adminIdeaList th:nth-child(4),#adminIdeaList td:nth-child(4){width:24%}
-    #adminIdeaList th:nth-child(5),#adminIdeaList td:nth-child(5){width:20%}
-    #adminIdeaList th:nth-child(6),#adminIdeaList td:nth-child(6){width:9%}
-    #adminIdeaList th:nth-child(7),#adminIdeaList td:nth-child(7){width:11%}
-    #adminIdeaList td:nth-child(4) .cardPillGroup{flex-wrap:nowrap;gap:6px;align-items:center}
-    #adminIdeaList td:nth-child(4) .pill,
-    #adminIdeaList td:nth-child(4) .stimulusPill{flex:0 0 auto;padding-left:8px;padding-right:8px}
+    #adminIdeaList th:nth-child(1),#adminIdeaList td:nth-child(1){width:28%}
+    #adminIdeaList th:nth-child(2),#adminIdeaList td:nth-child(2){width:26%}
+    #adminIdeaList th:nth-child(3),#adminIdeaList td:nth-child(3){width:28%}
+    #adminIdeaList th:nth-child(4),#adminIdeaList td:nth-child(4){width:9%}
+    #adminIdeaList th:nth-child(5),#adminIdeaList td:nth-child(5){width:9%}
+    #adminIdeaList td:nth-child(2) .cardPillGroup{flex-wrap:nowrap;gap:6px;align-items:center}
+    #adminIdeaList td:nth-child(2) .pill,
+    #adminIdeaList td:nth-child(2) .stimulusPill{flex:0 0 auto;padding-left:8px;padding-right:8px}
     th,td{text-align:left;vertical-align:top;border-bottom:1px solid rgba(11,18,32,.07);padding:11px 12px;font-size:.92rem;line-height:1.35}
     th{color:rgba(11,18,32,.56);font-weight:500;background:rgba(255,255,255,.55)}
     tr:last-child td{border-bottom:0}
     td span{display:block;color:var(--muted);font-size:.86rem;line-height:1.35;margin-top:3px}
     td .pill,td .stimulusPill{display:inline-flex;margin-top:0;color:inherit;font-size:.76rem}
     td .stimulusIcon{display:inline-flex;margin-top:0}
-    .adminIdeaCategory{display:flex;align-items:center;gap:7px;color:var(--theme-ink);font-weight:500}
-    .adminIdeaCategory .domainIcon{width:20px;height:20px;margin:0}
-    .adminIdeaCategory .domainIcon svg{width:12px;height:12px}
-    .adminIdeaCategoryText{display:block;min-width:0;overflow-wrap:anywhere}
     #adminIdeaList .ideaActions{justify-content:flex-end}
     .agendaReviewTable .rowActions{justify-content:flex-start}
     .confirmModal{
@@ -882,7 +877,7 @@
         padding:13px;border:1px solid color-mix(in srgb,var(--theme-line) 58%,#EAECEF);
         border-radius:18px;background:rgba(255,255,255,.72);box-shadow:0 10px 24px rgba(20,38,42,.045)
       }
-      #adminIdeaList tr.ideaThemeRow{background:var(--agenda-tint,#fff);border-color:var(--agenda-line,var(--theme-line))}
+      #adminIdeaList tr.ideaThemeRow{background:linear-gradient(color-mix(in srgb,var(--theme-tint) 38%,transparent),color-mix(in srgb,var(--theme-tint) 38%,transparent)),rgba(255,255,255,.96)}
       #adminIdeaList td{
         display:grid;grid-template-columns:78px minmax(0,1fr);gap:8px;align-items:start;padding:7px 0;border:0;font-size:.88rem
       }
@@ -892,7 +887,7 @@
       #adminIdeaList td:last-child{
         position:static;min-width:0;background:transparent;box-shadow:none;padding-bottom:0
       }
-      #adminIdeaList td:nth-child(4) .cardPillGroup{flex-wrap:wrap}
+      #adminIdeaList td:nth-child(2) .cardPillGroup{flex-wrap:wrap}
       #adminIdeaList .ideaActions{justify-content:flex-start}
       #adminIdeaList .siteButton{max-width:100%}
       #adminIdeaList .adminIdeaPhotoPreview{min-width:0}
@@ -910,7 +905,7 @@
         <a class="adminMenuItem" href="#submittedIdeasPanel">Toegevoegde inspiratie</a>
         <a class="adminMenuItem" href="#agendaReviewPanel">UIT-agenda beheren</a>
         <a class="adminMenuItem" href="#inspirationAdminPanel">Inspiratiebank opschonen</a>
-        <a class="adminMenuItem" href="#sourceOwnPanel">Bronlinks</a>
+        <a class="adminMenuItem" href="#sourceOwnPanel">Bronnen</a>
         <a class="adminMenuItem" href="#backupPanel">Overnemen of herstellen</a>
       </div>
     </details>
@@ -1107,7 +1102,7 @@
         <section class="panel tintedPanel toneSource" id="sourceOwnPanel">
           <div class="panelHead">
             <div>
-              <h2>Bronlinks</h2>
+              <h2>Bronnen</h2>
               <p>Voeg bronnen toe en beheer de links die op de gewone pagina bij Bronnen staan. Je kunt bronlinks openen, wijzigen of verwijderen.</p>
             </div>
           </div>
@@ -1146,7 +1141,7 @@
         <section class="panel tintedPanel toneAgenda agendaReviewPanel" id="agendaReviewPanel">
           <div class="panelHead" id="agendaAdminSection">
             <div>
-              <h2>UIT-agenda beheren</h2>
+              <h2>Agenda-items</h2>
               <p>Controleer vaste en automatisch gevonden agenda-items. Verberg tijdelijk of verwijder wat niet passend is.</p>
             </div>
             <div class="rowActions">
@@ -1209,15 +1204,9 @@
                 <h2>Inspiratiebank</h2>
                 <p>Ruim inspiratie-items op, beheer foto’s en pas activiteiten aan zonder dat het dashboard in de weg zit.</p>
               </div>
+              <span id="ideaCount" class="pill">0 items</span>
             </div>
       <section class="panel tintedPanel toneClean" id="inspirationAdminPanel">
-        <div class="panelHead">
-          <div>
-            <h2>Inspiratiebank opschonen</h2>
-            <p>Bekijk vaste inspiratie-items en aanvullingen naast elkaar. Verberg wat tijdelijk niet passend is en verwijder alleen activiteiten die echt niet bruikbaar of onduidelijk zijn.</p>
-          </div>
-          <span id="ideaCount" class="pill">0 items</span>
-        </div>
         <div class="adminIdeaToolbar">
           <div></div>
           <div class="viewBar">
@@ -3129,9 +3118,9 @@
     const website = item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.source || 'Bekijk website')}</a>` : '';
     return `<article class="card ideaThemeCard ${domainThemeClass(item.domain)} ${item.hidden ? 'hiddenItem' : ''}">
       ${imageMarkup}
+      <h3>${titleWithIcon(item.title, item.domain)}</h3>
       <div class="cardPills"><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)} ${item.kind === 'collega-toegevoegd' && !item.approved ? '<span class="pill warn">Wacht op goedkeuring</span>' : ''}${item.hidden ? '<span class="pill warn">Verborgen</span>' : ''}</div></div>
       ${cardMetaLine(item)}
-      <h3>${titleWithIcon(item.title, item.domain)}</h3>
       ${source ? `<div class="small">${escapeHtml(source)}</div>` : ''}
       <p>${escapeHtml(description)}</p>
       <p class="fine"><strong>Praktisch:</strong>${escapeHtml(practical)}</p>
@@ -3153,8 +3142,6 @@
     const website = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.source || 'Open')}</a>` : '<span class="small">-</span>';
     return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)} ${item.hidden ? 'hiddenItem' : ''}" data-idea-key="${escapeHtml(item.key)}">
       <td data-label="Activiteit">${titleWithIcon(item.title, item.domain, 'adminIdeaTitle')}${activityMeta ? `<div class="small adminIdeaMetaLine">${escapeHtml(activityMeta)}</div>` : ''}${source ? `<div class="small adminIdeaMetaLine">${escapeHtml(source)}</div>` : ''}</td>
-      <td data-label="Categorie"><span class="adminIdeaCategory"><span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span class="adminIdeaCategoryText">${escapeHtml(domainDisplayLabel(item.domain))}</span></span></td>
-      <td data-label="Foto">${adminIdeaPhotoPreview(item)}</td>
       <td data-label="Badges"><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel || item.stimulus)}</div></td>
       <td data-label="Praktisch"><div class="small">${escapeHtml(item.rules || item.materials || item.description || '-')}</div></td>
       <td data-label="Website">${website}</td>
@@ -3170,7 +3157,7 @@
     $('#ideaCount').textContent = `${items.length} item${items.length === 1 ? '' : 's'}`;
     const empty = `<div class="empty">${escapeHtml(adminIdeaEmptyMessage(query, filters))}</div>`;
     $('#adminIdeaList').innerHTML = items.length
-      ? `<table><thead><tr><th>Activiteit</th><th>Categorie</th><th>Foto</th><th>Badges</th><th>Praktisch</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${items.map(adminIdeaRow).join('')}</tbody></table>`
+      ? `<table><thead><tr><th>Activiteit</th><th>Badges</th><th>Praktisch</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${items.map(adminIdeaRow).join('')}</tbody></table>`
       : empty;
     $('#adminIdeaCards').innerHTML = items.length ? items.map(adminIdeaCard).join('') : empty;
   }
