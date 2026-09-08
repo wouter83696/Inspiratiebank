@@ -208,7 +208,7 @@
     .adminSidebarGroup::-webkit-scrollbar-thumb{background:rgba(79,142,158,.22);border-radius:999px}
     .adminSidebarLabel{padding:4px 8px;color:rgba(11,18,32,.42);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
     .adminNavButton{
-      display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;gap:9px;width:100%;
+      display:grid;grid-template-columns:30px minmax(0,1fr);align-items:center;gap:9px;width:100%;
       border:0;border-radius:12px;background:transparent;color:rgba(11,18,32,.70);
       padding:9px 10px;font:inherit;font-size:.88rem;text-align:left;cursor:pointer;
       transition:background .16s var(--ease), color .16s var(--ease), transform .16s var(--ease)
@@ -222,8 +222,7 @@
     .adminNavButton.active .adminNavIcon{background:rgba(168,225,221,.34);border-color:rgba(79,142,158,.14)}
     .adminNavIcon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .adminNavText{min-width:0;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .adminNavHint{color:rgba(11,18,32,.38);font-size:.72rem}
-    .adminNavSub{margin-left:20px;width:calc(100% - 20px);grid-template-columns:26px minmax(0,1fr) auto;padding:7px 9px;font-size:.82rem;color:rgba(11,18,32,.58)}
+    .adminNavSub{margin-left:20px;width:calc(100% - 20px);grid-template-columns:26px minmax(0,1fr);padding:7px 9px;font-size:.82rem;color:rgba(11,18,32,.58)}
     .adminNavSub .adminNavIcon{width:26px;height:26px;border-radius:9px;background:rgba(255,255,255,.42)}
     .adminNavSub .adminNavIcon svg{width:14px;height:14px}
     .adminNavSub.active{background:rgba(168,225,221,.18);color:var(--accent-dark)}
@@ -246,7 +245,6 @@
     #adminApp.adminSidebarCollapsed .adminSidebarText,
     #adminApp.adminSidebarCollapsed .adminSidebarLabel,
     #adminApp.adminSidebarCollapsed .adminNavText,
-    #adminApp.adminSidebarCollapsed .adminNavHint,
     #adminApp.adminSidebarCollapsed .adminSidebarFoot .mini span{display:none}
     #adminApp.adminSidebarCollapsed .adminSidebarMark{width:38px;height:38px;flex-basis:38px}
     #adminApp.adminSidebarCollapsed .adminSidebarToggle{position:absolute;inset:0;width:100%;height:54px;border-radius:0;opacity:0}
@@ -831,7 +829,6 @@
       #adminApp.adminSidebarCollapsed .adminSidebarText,
       #adminApp.adminSidebarCollapsed .adminSidebarLabel,
       #adminApp.adminSidebarCollapsed .adminNavText,
-      #adminApp.adminSidebarCollapsed .adminNavHint,
       #adminApp.adminSidebarCollapsed .adminSidebarFoot .mini span{display:block}
       .adminSidebarToggle{display:none}
       .adminSidebarGroup,#adminApp.adminSidebarCollapsed .adminSidebarGroup{grid-template-columns:repeat(2,minmax(0,1fr));padding:4px 0 8px}
@@ -861,7 +858,6 @@
       .adminNavSub,#adminApp.adminSidebarCollapsed .adminNavSub{margin:0;width:auto}
       .adminNavIcon,#adminApp.adminSidebarCollapsed .adminNavIcon{width:26px;height:26px;border-radius:9px}
       .adminNavText,#adminApp.adminSidebarCollapsed .adminNavText{display:block;font-size:.82rem}
-      .adminNavHint,#adminApp.adminSidebarCollapsed .adminNavHint{display:none}
       .adminSidebarFoot,#adminApp.adminSidebarCollapsed .adminSidebarFoot{display:flex;gap:6px;padding-top:6px;border-top:1px solid rgba(11,18,32,.055)}
       .adminSidebarFoot .mini,#adminApp.adminSidebarCollapsed .adminSidebarFoot .mini{
         grid-template-columns:24px auto;width:auto;margin:0;padding:6px 8px;min-height:30px;font-size:.78rem
@@ -968,42 +964,34 @@
             <button class="adminNavButton active" type="button" data-admin-target="meldkamer" title="Dashboard">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"></rect><rect x="14" y="4" width="6" height="6" rx="1.5"></rect><rect x="4" y="14" width="6" height="6" rx="1.5"></rect><rect x="14" y="14" width="6" height="6" rx="1.5"></rect></svg></span>
               <span class="adminNavText">Dashboard</span>
-              <span class="adminNavHint">3</span>
             </button>
             <button class="adminNavButton" type="button" data-admin-target="inspiration" title="Inspiratiebank">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.7 5.1L19 10l-5.3 1.9L12 17l-1.7-5.1L5 10l5.3-1.9L12 3Z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"></path></svg></span>
               <span class="adminNavText">Inspiratiebank</span>
-              <span class="adminNavHint">lijst</span>
             </button>
             <button class="adminNavButton" type="button" data-admin-target="agenda" title="UIT-agenda">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg></span>
               <span class="adminNavText">UIT-agenda</span>
-              <span class="adminNavHint">week</span>
             </button>
             <button class="adminNavButton adminNavSub" type="button" data-admin-target="agenda" data-admin-scroll="agendaAdminSection" title="Agenda">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 7h14"></path><path d="M5 12h14"></path><path d="M5 17h9"></path></svg></span>
               <span class="adminNavText">Agenda</span>
-              <span class="adminNavHint">items</span>
             </button>
             <button class="adminNavButton adminNavSub" type="button" data-admin-target="agenda" data-admin-scroll="ongoingAdminSection" title="Doorlopend aanbod">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18.2 8c5.1 0 5.1 8 0 8-4.2 0-6.2-8-10.4-8-5.1 0-5.1 8 0 8 4.2 0 6.2-8 10.4-8Z"></path></svg></span>
               <span class="adminNavText">Doorlopend aanbod</span>
-              <span class="adminNavHint">aanbod</span>
             </button>
             <button class="adminNavButton adminNavSub" type="button" data-admin-target="agenda" data-admin-scroll="sourceOwnPanel" title="Bronnen">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1"></path><path d="M14 11a5 5 0 0 0-7.1 0l-2 2a5 5 0 0 0 7.1 7.1l1.1-1.1"></path></svg></span>
               <span class="adminNavText">Bronnen</span>
-              <span class="adminNavHint">links</span>
             </button>
             <button class="adminNavButton adminNavSub" type="button" data-admin-target="agenda" data-admin-scroll="agendaRulesPanel" title="Uitsluitingen">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M7 12h10"></path><path d="M10 17h4"></path></svg></span>
               <span class="adminNavText">Uitsluitingen</span>
-              <span class="adminNavHint">regels</span>
             </button>
             <button class="adminNavButton" type="button" data-admin-target="backup" title="Herstel">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.2"></circle><path d="M12 8v4.2l2.8 1.7"></path><path d="M8.2 4.8 6.4 3"></path><path d="M15.8 4.8 17.6 3"></path></svg></span>
               <span class="adminNavText">Herstel</span>
-              <span class="adminNavHint">data</span>
             </button>
           </nav>
           <div class="adminSidebarFoot">
