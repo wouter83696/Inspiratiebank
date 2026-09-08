@@ -159,7 +159,7 @@
       padding:clamp(150px,13vw,182px) var(--hero-edge) clamp(32px,3.1vw,42px);
       border:0;border-radius:0;
       background:
-        var(--hero-bg-image) center top/cover no-repeat,
+        var(--hero-bg-image) center 18%/cover no-repeat,
         linear-gradient(105deg,rgba(255,255,255,.95) 0 45%,rgba(240,248,247,.72) 66%,rgba(194,229,226,.44)),
         var(--paper);
       box-shadow:none;
@@ -185,7 +185,7 @@
     .tabHeroStatDivider{display:inline;color:rgba(49,95,107,.32)}
     .tabHero + .filterBar{--hero-search-height:44px;position:relative;z-index:2;margin-top:calc(var(--hero-search-height) / -2)}
     @media (min-width:641px){
-      .tabHero.agendaHero{background-position:center top,center,center}
+      .tabHero.agendaHero{background-position:center 18%,center,center}
       .tabHeroTitle,.tabHeroLine,.tabHeroActions{transform:translateY(-14px)}
       .tabHeroKicker{transform:translateY(0)}
       .tabHeroLine{margin-top:15px}
@@ -1273,7 +1273,7 @@
         padding:clamp(120px,21.8svh,146px) max(24px,calc((100vw - var(--max)) / 2 + 24px)) clamp(27px,4.6svh,36px);
         border:0;border-radius:0;
         box-shadow:none;
-        background-position:24% top,center,center;
+        background-position:24% 12%,center,center;
       }
       .tabHero::before{
         content:"";position:absolute;z-index:0;inset:0;pointer-events:none;
@@ -1466,7 +1466,7 @@
         min-height:clamp(258px,45svh,287px);
         margin:calc(-1 * clamp(102px,20svh,122px)) calc(50% - 50vw) 0;
         padding:clamp(120px,21.8svh,146px) max(24px,calc((100vw - var(--max)) / 2 + 24px)) clamp(27px,4.6svh,36px);
-        background-position:24% top,center,center
+        background-position:24% 12%,center,center
       }
       .agendaHero .tabHeroTitle{
         display:block;order:2;max-width:8.8em;
