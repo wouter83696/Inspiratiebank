@@ -755,13 +755,14 @@
     .empty{padding:18px;border:1px dashed rgba(11,18,32,.14);border-radius:18px;background:rgba(255,255,255,.40);color:var(--muted);text-align:center}
     .tableWrap{overflow-x:auto;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.48)}
     table{width:100%;border-collapse:separate;border-spacing:0;min-width:760px}
-    #adminIdeaList table{min-width:1180px}
-    #adminIdeaList th:nth-child(1),#adminIdeaList td:nth-child(1){width:22%}
-    #adminIdeaList th:nth-child(2),#adminIdeaList td:nth-child(2){width:10%}
+    #adminIdeaList table{min-width:0;table-layout:fixed}
+    #adminIdeaList th:nth-child(1),#adminIdeaList td:nth-child(1){width:17%}
+    #adminIdeaList th:nth-child(2),#adminIdeaList td:nth-child(2){width:11%}
     #adminIdeaList th:nth-child(3),#adminIdeaList td:nth-child(3){width:8%}
     #adminIdeaList th:nth-child(4),#adminIdeaList td:nth-child(4){width:24%}
-    #adminIdeaList th:nth-child(5),#adminIdeaList td:nth-child(5){width:21%}
-    #adminIdeaList th:nth-child(6),#adminIdeaList td:nth-child(6){width:12%}
+    #adminIdeaList th:nth-child(5),#adminIdeaList td:nth-child(5){width:20%}
+    #adminIdeaList th:nth-child(6),#adminIdeaList td:nth-child(6){width:9%}
+    #adminIdeaList th:nth-child(7),#adminIdeaList td:nth-child(7){width:11%}
     #adminIdeaList td:nth-child(4) .cardPillGroup{flex-wrap:nowrap;gap:6px;align-items:center}
     #adminIdeaList td:nth-child(4) .pill,
     #adminIdeaList td:nth-child(4) .stimulusPill{flex:0 0 auto;padding-left:8px;padding-right:8px}
@@ -771,15 +772,10 @@
     td span{display:block;color:var(--muted);font-size:.86rem;line-height:1.35;margin-top:3px}
     td .pill,td .stimulusPill{display:inline-flex;margin-top:0;color:inherit;font-size:.76rem}
     td .stimulusIcon{display:inline-flex;margin-top:0}
-    #adminIdeaList th:last-child,
-    #adminIdeaList td:last-child{
-      position:sticky;right:0;z-index:3;
-      min-width:118px;background:rgba(250,250,248,.96);
-      box-shadow:-14px 0 24px rgba(20,38,42,.055)
-    }
-    #adminIdeaList th:last-child{z-index:4;background:rgba(255,255,255,.96)}
-    #adminIdeaList .ideaThemeRow td:last-child{background:var(--agenda-tint,#fff)}
-    #adminIdeaList .ideaThemeRow:hover td:last-child{background:linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.28)),var(--agenda-tint,#fff)}
+    .adminIdeaCategory{display:flex;align-items:center;gap:7px;color:var(--theme-ink);font-weight:500}
+    .adminIdeaCategory .domainIcon{width:20px;height:20px;margin:0}
+    .adminIdeaCategory .domainIcon svg{width:12px;height:12px}
+    .adminIdeaCategoryText{display:block;min-width:0;overflow-wrap:anywhere}
     #adminIdeaList .ideaActions{justify-content:flex-end}
     .agendaReviewTable .rowActions{justify-content:flex-start}
     .confirmModal{
@@ -3157,7 +3153,7 @@
     const website = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.source || 'Open')}</a>` : '<span class="small">-</span>';
     return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)} ${item.hidden ? 'hiddenItem' : ''}" data-idea-key="${escapeHtml(item.key)}">
       <td data-label="Activiteit">${titleWithIcon(item.title, item.domain, 'adminIdeaTitle')}${activityMeta ? `<div class="small adminIdeaMetaLine">${escapeHtml(activityMeta)}</div>` : ''}${source ? `<div class="small adminIdeaMetaLine">${escapeHtml(source)}</div>` : ''}</td>
-      <td data-label="Categorie">${escapeHtml(domainDisplayLabel(item.domain))}</td>
+      <td data-label="Categorie"><span class="adminIdeaCategory"><span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span class="adminIdeaCategoryText">${escapeHtml(domainDisplayLabel(item.domain))}</span></span></td>
       <td data-label="Foto">${adminIdeaPhotoPreview(item)}</td>
       <td data-label="Badges"><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel || item.stimulus)}</div></td>
       <td data-label="Praktisch"><div class="small">${escapeHtml(item.rules || item.materials || item.description || '-')}</div></td>
