@@ -603,7 +603,7 @@
     .ongoingAdminSub{display:block;margin:4px 0 0 30px;color:var(--muted);font-size:.78rem}
     .ongoingAdminLocation{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
     .ongoingAdminDescription{color:var(--muted)}
-    .ongoingAdminActions{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+    .ongoingAdminActions{display:grid;grid-template-columns:repeat(3,28px);gap:5px;align-items:center;justify-content:start}
     .ongoingAdminActions .button.iconAction{flex:0 0 28px;width:28px;height:28px;padding:0;border-radius:10px;box-shadow:none;background:rgba(255,255,255,.82);border-color:rgba(79,142,158,.10);color:var(--accent-dark)}
     .ongoingAdminActions .button.iconAction svg{width:15px;height:15px}
     .ongoingAdminActions .openAction{background:rgba(214,236,242,.72)!important;color:#315f6d!important}
@@ -2547,7 +2547,7 @@
 	    const haystack = normalize([item.title, item.source, item.where, item.domain, item.fit, item.url].filter(Boolean).join(' '));
 	    return rules.find(rule => {
 	      if(rule.type === 'source') return sourceValue === rule.value || hostValue === rule.value || normalize(item.source || '') === rule.value;
-	      if(rule.type === 'title') return titleValue === rule.value;
+	      if(rule.type === 'title') return titleValue.includes(rule.value);
 	      return haystack.includes(rule.value);
 	    }) || null;
 	  }
@@ -3273,7 +3273,7 @@
     }).join('') : '<div class="empty">De prullenbak is leeg.</div>';
   }
 	  function agendaRuleTypeLabel(type=''){
-	    return {source:'Bron', title:'Titel', keyword:'Woord'}[type] || 'Regel';
+	    return {source:'Bron', title:'Titel bevat', keyword:'Woord'}[type] || 'Regel';
 	  }
 	  function pill(label, kind=''){
 	    if(!label) return '';
@@ -3441,7 +3441,7 @@
 	      return `${openAction}${editAction}${verifyAction}
 	        <button class="button iconAction visibilityAction" data-hide-agenda="${escapeHtml(item.id)}" data-hidden="${state.isHidden ? '1' : '0'}" type="button" aria-label="${escapeHtml(visibilityLabel)}" title="${escapeHtml(visibilityLabel)}">${visibilityIcon}</button>
 	        <button class="button iconAction sourceAction" data-block-agenda-source="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(sourceValue)}" type="button" aria-label="Weiger bron" title="Weiger bron">${actionIcon('ban')}</button>
-	        <button class="button iconAction titleAction" data-block-agenda-title="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(normalize(item.title))}" type="button" aria-label="Weiger titel" title="Weiger titel">${actionIcon('text')}</button>
+	        <button class="button iconAction titleAction" data-block-agenda-title="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(normalize(item.title))}" type="button" aria-label="Weiger deel van titel" title="Weiger deel van titel">${actionIcon('text')}</button>
 	        <button class="button iconAction hot" data-delete-agenda="${escapeHtml(item.id)}" type="button" aria-label="Verwijder" title="Verwijder">${actionIcon('trash')}</button>`;
 	    }
 	    const verifyAction = state.isVerified || state.isHidden ? '' : `<button class="button small primary" data-verify-agenda="${escapeHtml(item.id)}" type="button">Goedkeuren</button>`;
@@ -3451,7 +3451,7 @@
 	    return `${openAction}${editAction}${verifyAction}
 	      <button class="button small ${state.isHidden ? '' : 'warn'}" data-hide-agenda="${escapeHtml(item.id)}" data-hidden="${state.isHidden ? '1' : '0'}" type="button">${state.isHidden ? 'Toon' : 'Verberg'}</button>
 	      <button class="button small warn" data-block-agenda-source="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(sourceValue)}" type="button">${compact ? 'Weiger bron' : 'Weiger bron'}</button>
-	      <button class="button small warn" data-block-agenda-title="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(normalize(item.title))}" type="button">${compact ? 'Weiger titel' : 'Weiger titel'}</button>
+	      <button class="button small warn" data-block-agenda-title="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(normalize(item.title))}" type="button">Weiger deel titel</button>
 	      <button class="button small hot" data-delete-agenda="${escapeHtml(item.id)}" type="button">Verwijder</button>`;
 	  }
 	  function agendaReviewPills(item, state, compact=false){
@@ -4074,10 +4074,19 @@
 	  }
 	  async function blockAgendaItem(id, type, rawValue){
 	    const item = findAgendaItem(id);
-	    const value = rawValue || (type === 'source' ? agendaSourceValue(item || {}) : normalize(item?.title || ''));
+	    let value = rawValue || (type === 'source' ? agendaSourceValue(item || {}) : normalize(item?.title || ''));
+	    if(type === 'title'){
+	      const entered = window.prompt('Welk deel van de titel wil je voortaan weigeren?', item?.title || value);
+	      if(entered === null) return;
+	      value = normalize(entered);
+	      if(!value){
+	        setStatus('#adminStatus', 'Vul een herkenbaar deel van de titel in.', 'warn');
+	        return;
+	      }
+	    }
 	    const label = type === 'source'
 	      ? `Bron: ${(item && (sourceHost(item.url) || item.source)) || value}`
-	      : `Titel: ${(item && item.title) || value}`;
+	      : `Titel bevat: ${value}`;
 	    if(!(await confirmDialog(`${label} voortaan standaard weigeren?`, {confirmText:'Standaard weigeren'}))) return;
 	    await addAgendaBlockRule(type, value, label);
 	  }
