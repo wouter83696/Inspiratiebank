@@ -264,6 +264,15 @@
     .adminWorkspace[data-admin-workspace="meldkamer"]>.workspaceHeader{margin-bottom:22px}
     .workspaceHeader h2{font-size:1.55rem}
     .workspaceHeader p{margin:5px 0 0;max-width:760px}
+    .adminCountBadge{
+      display:inline-flex;align-items:center;gap:7px;min-height:30px;padding:6px 10px;border-radius:10px;
+      background:rgba(232,242,242,.42);border:1px solid rgba(79,142,158,.06);
+      color:rgba(11,18,32,.66);box-shadow:0 3px 10px rgba(20,38,42,.02);
+      font-size:.78rem;font-weight:500;line-height:1;white-space:nowrap
+    }
+    .adminCountBadge svg{width:16px;height:16px;flex:0 0 16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.86}
+    .adminCountBadge>span{display:inline-flex;align-items:baseline;gap:4px}
+    .adminCountBadge strong{font-weight:650;color:rgba(11,18,32,.72)}
     .adminWorkspace[data-admin-workspace="meldkamer"] .panelHead h2{font-size:1.15rem;line-height:1.2;font-weight:600}
     .adminWorkspace[data-admin-workspace="meldkamer"] .panelHead p{margin:8px 0 0;font-size:.9rem;line-height:1.45;max-width:74ch}
     .adminWorkspace[data-admin-workspace="meldkamer"] .panelHead>.pill{font-size:.72rem}
@@ -1204,14 +1213,14 @@
           </section>
 
           <section class="adminWorkspace" data-admin-workspace="inspiration" hidden>
+      <section class="panel tintedPanel toneClean" id="inspirationAdminPanel">
             <div class="workspaceHeader">
               <div>
                 <h2>Inspiratiebank</h2>
                 <p>Ruim inspiratie-items op, beheer foto’s en pas activiteiten aan zonder dat het dashboard in de weg zit.</p>
               </div>
-              <span id="ideaCount" class="pill">0 items</span>
+              <span id="ideaCount" class="adminCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong id="ideaCountValue">0</strong><span id="ideaCountLabel">activiteiten</span></span></span>
             </div>
-      <section class="panel tintedPanel toneClean" id="inspirationAdminPanel">
         <div class="adminIdeaToolbar">
           <div></div>
           <div class="viewBar">
@@ -3159,7 +3168,8 @@
     const filters = ideaFilterValues();
     const items = sortAdminIdeas(allAdminIdeas().filter(item => ideaMatches(item, query)).filter(item => passesIdeaFilters(item, filters)));
     updateAdminThemeChips();
-    $('#ideaCount').textContent = `${items.length} item${items.length === 1 ? '' : 's'}`;
+    $('#ideaCountValue').textContent = items.length;
+    $('#ideaCountLabel').textContent = items.length === 1 ? 'activiteit' : 'activiteiten';
     const empty = `<div class="empty">${escapeHtml(adminIdeaEmptyMessage(query, filters))}</div>`;
     $('#adminIdeaList').innerHTML = items.length
       ? `<table><thead><tr><th>Activiteit</th><th>Badges</th><th>Praktisch</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${items.map(adminIdeaRow).join('')}</tbody></table>`
