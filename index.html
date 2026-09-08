@@ -571,7 +571,6 @@
     .cardFooter .siteButton .siteButtonText{max-width:100%;overflow:hidden;text-overflow:ellipsis}
     .cardFooter .siteButton::after{margin-left:auto}
     .cardFooter .reportMenu{margin-left:auto}
-    .cardDetailsToggle{display:none}
     .activityStatusIcon{
       display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;
       width:30px;height:30px;border:1px solid rgba(11,18,32,.07);border-radius:999px;
@@ -1533,11 +1532,6 @@
       .ideaThemeCard h3 .ideaTitle{gap:8px}
       .ideaThemeCard > p:not(.fine){font-size:.9rem;line-height:1.38}
       .card .fine{font-size:.8rem;line-height:1.34}
-      .ideaThemeCard.hasCollapsibleDetails:not(.detailsExpanded) > p:not(.fine),
-      .ideaThemeCard.hasCollapsibleDetails:not(.detailsExpanded) > .fine{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical}
-      .ideaThemeCard.hasCollapsibleDetails:not(.detailsExpanded) > p:not(.fine){-webkit-line-clamp:3}
-      .ideaThemeCard.hasCollapsibleDetails:not(.detailsExpanded) > .fine{-webkit-line-clamp:2}
-      .cardDetailsToggle{display:inline-flex;align-items:center;justify-content:flex-start;align-self:flex-start;min-height:30px;margin:-1px 0 0;padding:4px 0;border:0;background:transparent;color:var(--accent-dark);font-size:.8rem;font-weight:600;cursor:pointer}
       .cardMetaLine{margin:0;padding:5px 8px 5px 5px;border-radius:7px;font-size:.78rem;line-height:1.28}
       .cardLabels{gap:5px}
       .cardPillGroup{gap:4px}
@@ -4616,17 +4610,13 @@
     const image = approvedIdeaImage(item);
     const fitText = audienceText(item.fit);
     const practicalText = audienceText(item.materials || 'Nog bepalen');
-    const detailsToggle = `${fitText} ${practicalText}`.length > 180
-      ? '<button class="cardDetailsToggle" type="button" aria-expanded="false">Meer</button>'
-      : '';
-    return `<article class="card ideaThemeCard ${domainThemeClass(item.domain)}${image ? ' hasImage' : ''}${detailsToggle ? ' hasCollapsibleDetails' : ''}" data-idea-key="${escapeHtml(ideaDomKey(item))}">
+    return `<article class="card ideaThemeCard ${domainThemeClass(item.domain)}${image ? ' hasImage' : ''}" data-idea-key="${escapeHtml(ideaDomKey(item))}">
       ${image ? ideaImageMarkup(image) : ''}
       <h3>${titleWithIcon(item.title, item.domain)}</h3>
       <div class="cardLabels">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div>
       ${cardMetaLine(item)}
       <p>${escapeHtml(fitText)}</p>
       <p class="fine"><strong>Praktisch:</strong>${escapeHtml(practicalText)}</p>
-      ${detailsToggle}
       <div class="cardFooter">${item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : ''}${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}</div>
     </article>`;
   }
@@ -5488,13 +5478,6 @@
     });
     $$('.tab').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
     document.addEventListener('click', event => {
-      const detailsToggle = event.target.closest('.cardDetailsToggle');
-      if(detailsToggle){
-        const card = detailsToggle.closest('.ideaThemeCard');
-        const expanded = card?.classList.toggle('detailsExpanded') || false;
-        detailsToggle.textContent = expanded ? 'Minder' : 'Meer';
-        detailsToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-      }
       if(!event.target.closest('.customSelect')) closeCustomSelects();
       if(!event.target.closest('[data-report-menu]')) closeReportMenus();
     });
