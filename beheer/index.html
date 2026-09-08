@@ -577,9 +577,9 @@
       display:grid;gap:10px;margin:10px 0 14px;padding:12px;border:1px solid #EAECEF;
       border-radius:18px;background:rgba(251,253,252,.72);box-shadow:0 8px 20px rgba(20,38,42,.035)
     }
-    .agendaRulesHead{display:flex;justify-content:space-between;gap:14px;align-items:center}
-    .agendaRulesHead strong{display:block;color:var(--accent-dark);font-weight:600;font-size:.98rem}
-    .agendaRulesHead span:not(.pill){display:block;margin-top:1px;color:var(--muted);font-size:.78rem;line-height:1.3}
+    .adminWorkspace[data-admin-workspace="agenda"] .panelHead h2{margin:0;font-size:1.2rem;line-height:1.15;font-weight:600}
+    .adminWorkspace[data-admin-workspace="agenda"] .panelHead p{margin:8px 0 0;font-size:.9rem;line-height:1.45;max-width:74ch}
+    .agendaRulesHead{align-items:flex-start;margin-bottom:0}
     .agendaRuleList{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}
     .agendaRuleList .empty{padding:4px 2px;border:0;background:transparent;box-shadow:none;color:rgba(11,18,32,.50);font-size:.82rem;text-align:left}
     .agendaRuleCard{
@@ -1096,10 +1096,10 @@
           </div>
         </section>
         <section class="panel tintedPanel toneAgenda agendaRulesPanel" id="agendaRulesPanel">
-          <div class="agendaRulesHead">
+          <div class="panelHead agendaRulesHead">
             <div>
-              <strong>Uitsluitingen</strong>
-              <span>Nieuwe agenda-items met deze woorden, bronnen of titels worden automatisch overgeslagen.</span>
+              <h2>Uitsluitingen</h2>
+              <p>Nieuwe agenda-items met deze woorden, bronnen of titels worden automatisch overgeslagen.</p>
             </div>
             <span id="agendaRuleCount" class="pill">0 regels</span>
           </div>
