@@ -377,13 +377,13 @@
     }
     .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0}
     .sectionDivider{height:1px;background:rgba(11,18,32,.07);margin:18px 0}
-    .themeCreative{--theme-tint:rgba(229,0,90,.055);--theme-tint-strong:rgba(229,0,90,.13);--theme-line:rgba(229,0,90,.18);--theme-ink:#a00042}
-    .themeCulture{--theme-tint:rgba(72,70,184,.055);--theme-tint-strong:rgba(72,70,184,.13);--theme-line:rgba(72,70,184,.18);--theme-ink:#4644a0}
-    .themeNature{--theme-tint:rgba(0,155,72,.06);--theme-tint-strong:rgba(0,155,72,.14);--theme-line:rgba(0,155,72,.18);--theme-ink:#087b43}
-    .themeSocial{--theme-tint:rgba(247,203,51,.055);--theme-tint-strong:rgba(247,203,51,.18);--theme-line:rgba(213,163,16,.22);--theme-ink:#80610b}
-    .themeSport{--theme-tint:rgba(0,132,168,.055);--theme-tint-strong:rgba(0,132,168,.14);--theme-line:rgba(0,132,168,.18);--theme-ink:#08677f}
-    .themeAction{--theme-tint:rgba(238,126,27,.065);--theme-tint-strong:rgba(238,126,27,.16);--theme-line:rgba(199,92,11,.18);--theme-ink:#9a4f0f}
-    .themeDefault{--theme-tint:rgba(0,185,86,.045);--theme-tint-strong:rgba(0,185,86,.11);--theme-line:rgba(0,155,72,.11);--theme-ink:#087b43}
+    .themeCreative{--theme-tint:rgba(229,0,90,.055);--theme-tint-strong:rgba(229,0,90,.13);--theme-line:rgba(229,0,90,.18);--theme-ink:#a00042;--agenda-tint:#fdf0f6;--agenda-line:rgba(229,0,90,.22)}
+    .themeCulture{--theme-tint:rgba(72,70,184,.055);--theme-tint-strong:rgba(72,70,184,.13);--theme-line:rgba(72,70,184,.18);--theme-ink:#4644a0;--agenda-tint:#f1f0fb;--agenda-line:rgba(72,70,184,.22)}
+    .themeNature{--theme-tint:rgba(0,155,72,.06);--theme-tint-strong:rgba(0,155,72,.14);--theme-line:rgba(0,155,72,.18);--theme-ink:#087b43;--agenda-tint:#eef8f2;--agenda-line:rgba(0,155,72,.22)}
+    .themeSocial{--theme-tint:rgba(247,203,51,.055);--theme-tint-strong:rgba(247,203,51,.18);--theme-line:rgba(213,163,16,.22);--theme-ink:#80610b;--agenda-tint:#fff9e8;--agenda-line:rgba(213,163,16,.26)}
+    .themeSport{--theme-tint:rgba(0,132,168,.055);--theme-tint-strong:rgba(0,132,168,.14);--theme-line:rgba(0,132,168,.18);--theme-ink:#08677f;--agenda-tint:#edf8fb;--agenda-line:rgba(0,132,168,.22)}
+    .themeAction{--theme-tint:rgba(238,126,27,.065);--theme-tint-strong:rgba(238,126,27,.16);--theme-line:rgba(199,92,11,.18);--theme-ink:#9a4f0f;--agenda-tint:#fff3e8;--agenda-line:rgba(199,92,11,.23)}
+    .themeDefault{--theme-tint:rgba(0,185,86,.045);--theme-tint-strong:rgba(0,185,86,.11);--theme-line:rgba(0,155,72,.11);--theme-ink:#087b43;--agenda-tint:#eff9f3;--agenda-line:rgba(0,155,72,.18)}
     .domainIcon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:999px;background:var(--theme-tint-strong);border:1px solid var(--theme-line);color:var(--theme-ink);flex:0 0 auto}
     .domainIcon svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .agendaThemeLegend{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 12px}
@@ -519,15 +519,8 @@
       border-radius:13px;background:rgba(255,255,255,.84);box-shadow:none;color:inherit
     }
     .agendaReviewCard.themeCreative,.agendaReviewCard.themeCulture,.agendaReviewCard.themeNature,.agendaReviewCard.themeSocial,.agendaReviewCard.themeSport,.agendaReviewCard.themeAction,.agendaReviewCard.themeDefault{
-      background:var(--agenda-card-tint,#fff);border-color:var(--theme-line);box-shadow:0 8px 20px rgba(20,38,42,.035)
+      background:var(--agenda-tint,#fff);border-color:var(--agenda-line,var(--theme-line));box-shadow:0 8px 20px rgba(20,38,42,.035)
     }
-    .agendaReviewCard.themeCreative{--agenda-card-tint:#fdf0f6}
-    .agendaReviewCard.themeCulture{--agenda-card-tint:#f1f0fb}
-    .agendaReviewCard.themeNature{--agenda-card-tint:#eef8f2}
-    .agendaReviewCard.themeSocial{--agenda-card-tint:#fff9e8}
-    .agendaReviewCard.themeSport{--agenda-card-tint:#edf8fb}
-    .agendaReviewCard.themeAction{--agenda-card-tint:#fff3e8}
-    .agendaReviewCard.themeDefault{--agenda-card-tint:#eff9f3}
     .agendaReviewCard.hiddenItem{opacity:.58;background:rgba(11,18,32,.035)}
     .agendaReviewCard.newItem{box-shadow:0 8px 20px rgba(20,38,42,.035)}
     .agendaReviewCardTitle{display:grid;grid-template-columns:19px minmax(0,1fr);align-items:center;gap:8px;color:var(--accent-dark);font-size:.88rem;font-weight:500;line-height:1.25;text-align:left}
@@ -591,8 +584,8 @@
     }
     .ongoingAdminTable th{color:rgba(11,18,32,.56);font-weight:500;background:rgba(255,255,255,.78)}
     .ongoingAdminTable tr:last-child td{border-bottom:0}
-    .ongoingAdminTable .ideaThemeRow td{background:linear-gradient(var(--theme-tint),var(--theme-tint)),rgba(255,255,255,.54)}
-    .ongoingAdminTable .ideaThemeRow:hover td{background:linear-gradient(var(--theme-tint-strong),var(--theme-tint-strong)),rgba(255,255,255,.62)}
+    .ongoingAdminTable .ideaThemeRow td{background:var(--agenda-tint,#fff);border-bottom-color:var(--agenda-line,var(--theme-line))}
+    .ongoingAdminTable .ideaThemeRow:hover td{background:linear-gradient(rgba(255,255,255,.32),rgba(255,255,255,.32)),var(--agenda-tint,#fff)}
     .ongoingAdminTable th:nth-child(1){width:22%}.ongoingAdminTable th:nth-child(2){width:8%}
     .ongoingAdminTable th:nth-child(3){width:13%}.ongoingAdminTable th:nth-child(4){width:7%}
     .ongoingAdminTable th:nth-child(5){width:7%}.ongoingAdminTable th:nth-child(6){width:25%}
