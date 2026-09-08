@@ -184,6 +184,10 @@
     .tabHeroStat span:not(.tabHeroStatDivider):not(.tabHeroStat){display:inline;color:inherit}
     .tabHeroStatDivider{display:inline;color:rgba(49,95,107,.32)}
     .tabHero + .filterBar{--hero-search-height:44px;position:relative;z-index:2;margin-top:calc(var(--hero-search-height) / -2)}
+    .tabHero + .filterBar .filterSearch input{
+      background:rgba(255,253,249,.76);
+      backdrop-filter:blur(7px);
+    }
     @media (min-width:641px){
       .tabHero.agendaHero{background-position:center 18%,center,center}
       .tabHeroTitle,.tabHeroLine,.tabHeroActions{transform:translateY(-14px)}
@@ -3217,7 +3221,7 @@
       agendaContentKey(item),
       title && date && place ? `${title}|${date}|${place}` : '',
       title && date && time ? `${title}|${date}|${time}` : '',
-      title && place && host ? `${title}|${place}|${host}` : ''
+      title && date && place && host ? `${title}|${date}|${place}|${host}` : ''
     ].filter(Boolean);
   }
 	function linkNameFromUrl(value=''){
