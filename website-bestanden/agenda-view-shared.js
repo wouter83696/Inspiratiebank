@@ -45,15 +45,18 @@
 
   function renderOngoingRow(view){
     const classes = ['ideaThemeRow', view.themeClass || '', view.hidden ? 'hiddenItem' : ''].filter(Boolean).join(' ');
+    const titleActions = view.actionsInTitle && view.actions !== undefined
+      ? `<div class="ongoingAdminActions">${view.actions || ''}</div>`
+      : '';
     return `<tr class="${classes}">
-      <td class="ongoingTitleCell"><span class="name">${view.title || ''}</span>${view.review || ''}<div class="small">${view.date || ''}</div></td>
+      <td class="ongoingTitleCell"><span class="name">${view.title || ''}</span>${view.review || ''}<div class="small">${view.date || ''}</div>${titleActions}</td>
       <td class="ongoingWeeksCell">${view.weeks || ''}</td>
       <td class="ongoingLocationCell">${view.mobileLabels || ''}<div class="cardPillGroup ongoingAdminLocation">${view.place || ''}</div>${view.locationDetail || ''}</td>
       <td class="ongoingCostCell">${view.cost || ''}</td>
       <td class="ongoingStimulusCell">${view.stimulus || ''}</td>
       <td class="ongoingFitCell">${view.meta || ''}<div class="small ongoingAdminDescription">${view.description || ''}</div></td>
       <td class="websiteCell">${view.website || ''}</td>
-      ${view.actions !== undefined ? `<td class="ongoingManageCell"><div class="ongoingAdminActions">${view.actions || ''}</div></td>` : ''}
+      ${view.actions !== undefined && !view.actionsInTitle ? `<td class="ongoingManageCell"><div class="ongoingAdminActions">${view.actions || ''}</div></td>` : ''}
     </tr>`;
   }
 

@@ -66,6 +66,15 @@
   background:rgba(251,253,252,.92);
   box-shadow:0 14px 34px rgba(20,38,42,.045);
 }
+.ongoingAccordionButton{
+  appearance:none;width:100%;text-align:left;cursor:default;font:inherit;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;
+  padding:12px 18px;border:0;background:rgba(255,255,255,.26);color:var(--accent-dark)
+}
+.ongoingAccordionText{display:block;min-width:0}
+.ongoingTitleLine{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:8px}
+.ongoingTitleLine>strong{display:block;font-size:1.12rem;font-weight:600}
+.ongoingTitleLine .weekCountBadge{width:auto;min-height:30px;padding:6px 10px}
 .ongoingAccordionBody{border-top:1px solid rgba(11,18,32,.06);background:rgba(253,254,253,.88)}
 .ongoingAccordion .tableWrap{overflow-x:auto;border:0;border-radius:0;background:rgba(253,254,253,.88);box-shadow:none}
 .ongoingAccordion table{width:100%;min-width:880px;border-collapse:collapse;table-layout:fixed}
@@ -79,20 +88,8 @@
 .ongoingAccordion th:nth-child(5),.ongoingAccordion td:nth-child(5){width:6%}
 .ongoingAccordion th:nth-child(6),.ongoingAccordion td:nth-child(6){width:31%}
 .ongoingAccordion th:nth-child(7),.ongoingAccordion td:nth-child(7){width:9%}
-.ongoingAccordion.adminOngoingAccordion table{min-width:1120px}
-.ongoingAccordion.adminOngoingAccordion th:nth-child(1),.ongoingAccordion.adminOngoingAccordion td:nth-child(1){width:22%}
-.ongoingAccordion.adminOngoingAccordion th:nth-child(2),.ongoingAccordion.adminOngoingAccordion td:nth-child(2){width:6%}
-.ongoingAccordion.adminOngoingAccordion th:nth-child(3),.ongoingAccordion.adminOngoingAccordion td:nth-child(3){width:13%}
-.ongoingAccordion.adminOngoingAccordion th:nth-child(4),.ongoingAccordion.adminOngoingAccordion td:nth-child(4){width:5%}
-.ongoingAccordion.adminOngoingAccordion th:nth-child(5),.ongoingAccordion.adminOngoingAccordion td:nth-child(5){width:5%}
-.ongoingAccordion.adminOngoingAccordion th:nth-child(6),.ongoingAccordion.adminOngoingAccordion td:nth-child(6){width:25%}
-.ongoingAccordion.adminOngoingAccordion th:nth-child(7),.ongoingAccordion.adminOngoingAccordion td:nth-child(7){width:10%}
-.ongoingAccordion.adminOngoingAccordion th:nth-child(8),.ongoingAccordion.adminOngoingAccordion td:nth-child(8){width:14%}
 .ongoingAccordion .ongoingMobileLabels{display:none}
-.adminOngoingAccordion .websiteCell{min-width:0;overflow:hidden}
-.adminOngoingAccordion .websiteCell .siteButton{width:100%;min-width:0;max-width:100%;padding-left:8px;padding-right:8px;overflow:hidden}
-.adminOngoingAccordion .websiteCell .siteButtonText{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.adminOngoingAccordion .ongoingAdminActions{display:grid;grid-template-columns:repeat(4,28px);align-items:center;gap:5px;justify-content:start}
+.adminOngoingAccordion .ongoingAdminActions{display:flex;align-items:center;flex-wrap:wrap;gap:5px;justify-content:flex-start;margin-top:9px}
 .adminOngoingAccordion .ongoingAdminActions .button.iconAction{flex:0 0 28px;width:28px;height:28px;min-width:28px;padding:0}
 
 .sharedSourceRow{align-items:center}
