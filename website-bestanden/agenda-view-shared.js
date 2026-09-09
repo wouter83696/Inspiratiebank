@@ -1,4 +1,16 @@
 (function(){
+  function sourceButtonLabel(item={}){
+    const source = String(item.source || '').trim();
+    if(source && !/^ingebracht door\b/i.test(source) && source.toLocaleLowerCase('nl-NL') !== 'inzending') return source;
+    try{
+      const host = new URL(String(item.url || '')).hostname.replace(/^www\./i, '');
+      const name = host.split('.')[0].replace(/[-_]+/g, ' ').trim();
+      return name ? name.replace(/\b\w/g, letter => letter.toUpperCase()) : host;
+    }catch(error){
+      return 'Bekijk website';
+    }
+  }
+
   function renderItem(view){
     const classes = ['agendaItem', view.themeClass || '', view.compact ? 'multiDayItem' : '', view.admin ? 'adminAgendaItem agendaReviewCard' : '', view.hidden ? 'hiddenItem' : '', view.isNew ? 'newItem' : '']
       .filter(Boolean).join(' ');
@@ -59,5 +71,5 @@
     </tr>`;
   }
 
-  window.AgendaViewShared = Object.freeze({renderItem, renderDay, renderWeek, renderOngoingRow, renderAgendaRow});
+  window.AgendaViewShared = Object.freeze({sourceButtonLabel, renderItem, renderDay, renderWeek, renderOngoingRow, renderAgendaRow});
 })();

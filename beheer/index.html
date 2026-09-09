@@ -3492,7 +3492,8 @@
 	    const distance = normalizeIdeaDistance(item.distanceBand, item, 'agenda');
 	    const cost = normalizeIdeaCost(item.cost);
 	    const stimulus = normalizeIdeaStimulus(item.stimulus);
-	    const website = item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a>` : '<span class="small">–</span>';
+	    const websiteLabel = AgendaViewShared.sourceButtonLabel(item);
+	    const website = item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(websiteLabel)}</span></a>` : '<span class="small">–</span>';
 	    return AgendaViewShared.renderAgendaRow({
 	      themeClass:domainThemeClass(item.domain), hidden:state.isHidden, isNew:state.isNew,
 	      title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
@@ -3514,7 +3515,8 @@
 	    const placeLabels = compactPlacePills(location, distance);
 	    const placePills = placeLabels.length ? placeLabels.map(locationPill).join(' ') : `<span class="small">${escapeHtml(item.where || '–')}</span>`;
 	    const mobileLabels = `<div class="ongoingMobileLabels">${placePills} ${costPill(cost)} ${stimulusPill(stimulus)}</div>`;
-	    const website = item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a>` : '<span class="small">–</span>';
+	    const websiteLabel = AgendaViewShared.sourceButtonLabel(item);
+	    const website = item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(websiteLabel)}</span></a>` : '<span class="small">–</span>';
 	    const actions = agendaReviewActions(item, state, true).replaceAll('data-edit-agenda=', 'data-edit-ongoing=');
 	    return AgendaViewShared.renderOngoingRow({
         themeClass:domainThemeClass(item.domain), hidden:state.isHidden,

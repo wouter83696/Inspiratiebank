@@ -3228,19 +3228,8 @@
       title && date && place && host ? `${title}|${date}|${place}|${host}` : ''
     ].filter(Boolean);
   }
-	function linkNameFromUrl(value=''){
-	  try{
-	    const host = new URL(normalizeUrl(value)).hostname.replace(/^www\./i,'');
-	    const name = host.split('.')[0].replace(/[-_]+/g,' ').trim();
-	    return name ? name.replace(/\b\w/g, letter => letter.toUpperCase()) : host;
-	  }catch(error){
-	    return 'Nieuwe link';
-	  }
-	}
   function sourceButtonLabel(item={}){
-    const source = String(item.source || '').trim();
-    if(source && !/^ingebracht door\b/i.test(source) && normalize(source) !== 'inzending') return source;
-    return item.url ? linkNameFromUrl(item.url) : 'Bekijk website';
+    return AgendaViewShared.sourceButtonLabel(item);
   }
 	  function normalizeCustomLink(link={}){
 	    return {
@@ -4494,7 +4483,7 @@
       weeks:escapeHtml(compactWeekAvailabilityLabel(item, true)), mobileLabels, place:placePills,
       cost:costPill(costLabel), stimulus:stimulusPill(stimulusLabel), meta:metaLine,
       description:escapeHtml(audienceText(item.fit)),
-      website:`<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a>`
+      website:item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : '<span class="small">–</span>'
     });
   }
   function renderFlexibleOffers(){
