@@ -1739,7 +1739,8 @@
     }
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
-  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260909-shared-admin-views">
+  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260909-shared-components-v3">
+  <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20260909-shared-rebuild-1">
 </head>
 <body>
   <header class="topbar">
@@ -1874,9 +1875,9 @@
         </div>
       </div>
       <div id="inspirationThemeLegend"></div>
-      <div id="ideaList" class="tableWrap ideaView" hidden></div>
+      <div id="ideaList" class="tableWrap ideaView sharedIdeaList" hidden></div>
       <div id="ideaMap" class="ideaMap ideaView" hidden></div>
-      <div id="ideaCards" class="cards ideaView active"></div>
+      <div id="ideaCards" class="cards ideaView sharedIdeaCards active"></div>
       <div id="teamAdditions" class="sectionHead teamHead"><div><h2>Delen</h2><p>Heb je een idee, uitje of link dat ook anderen kan inspireren? Voeg het hier toe. Na beoordeling kan het tussen de andere inspiratie-items komen te staan.</p></div></div>
       <div class="teamFormBox">
         <form id="teamIdeaForm" class="teamForm">
@@ -2067,7 +2068,7 @@
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20260909-shared-desktop-views"></script>
-  <script src="website-bestanden/agenda-view-shared.js?v=20260909-shared-admin-table-v2"></script>
+  <script src="website-bestanden/agenda-view-shared.js?v=20260909-shared-components-v3"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
@@ -3554,28 +3555,13 @@
 	    showReportToast(saved ? 'Dank je, de melding is bewaard voor beheer.' : 'Melding lokaal bewaard. Online opslaan lukte nu niet.');
 	  }
 	  function allLinks(){
-	    const merged = [];
-    const seen = new Set();
-    const overrides = new Map(loadSourceLinkOverrides().map(link => [link.key, link]));
-    const hidden = loadHiddenSourceLinkKeys();
-    loadCustomLinks().forEach(rawLink => {
-      const link = normalizeCustomLink(rawLink);
-      const key = sourceLinkKey(link);
-      if(!link.name || !link.url || seen.has(key)) return;
-      seen.add(key);
-      merged.push(link);
-    });
-    DATA.links.forEach(rawLink => {
-      const link = normalizeCustomLink(rawLink);
-      const baseKey = sourceLinkKey(link);
-      if(hidden.has(baseKey)) return;
-      const managedLink = overrides.get(baseKey) || link;
-      const key = sourceLinkKey(managedLink);
-      if(!managedLink.name || !managedLink.url || seen.has(key)) return;
-      seen.add(key);
-      merged.push(managedLink);
-    });
-    return merged;
+	    return AgendaViewShared.mergeSourceLinks({
+	      custom:loadCustomLinks().map(normalizeCustomLink).filter(link => link.name && link.url),
+	      base:DATA.links.map(normalizeCustomLink).filter(link => link.name && link.url),
+	      overrides:loadSourceLinkOverrides(),
+	      hidden:loadHiddenSourceLinkKeys(),
+	      keyFor:sourceLinkKey
+	    }).map(entry => entry.link);
   }
   function teamIdeaKey(item={}){
     return [

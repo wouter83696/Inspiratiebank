@@ -982,7 +982,8 @@
       #agendaReviewList .agendaTableActions .button.iconAction{width:32px;height:32px}
     }
   </style>
-  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260909-shared-admin-views">
+  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260909-shared-components-v3">
+  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260909-shared-rebuild-1">
 </head>
 <body>
   <header class="topbar">
@@ -1253,7 +1254,7 @@
             </div>
           </div>
           <div id="agendaAdminThemeLegend" class="agendaAdminThemeLegend"></div>
-          <div id="agendaReviewList" class="tableWrap agendaReviewList"></div>
+          <div id="agendaReviewList" class="agendaReviewList weekStack agendaReviewWeekView"></div>
           <div class="sectionDivider"></div>
           <section class="ongoingAccordion adminOngoingAccordion" id="ongoingAdminSection">
             <div class="panelHead">
@@ -1313,8 +1314,8 @@
           <div id="adminThemeLegend"></div>
           <span id="ideaCount" class="adminCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span><strong id="ideaCountValue">0</strong><span id="ideaCountLabel">activiteiten</span></span></span>
         </div>
-        <div id="adminIdeaList" class="tableWrap adminIdeaView active"></div>
-        <div id="adminIdeaCards" class="cards adminIdeaView" hidden></div>
+        <div id="adminIdeaList" class="tableWrap adminIdeaView sharedIdeaList isAdmin active"></div>
+        <div id="adminIdeaCards" class="cards adminIdeaView sharedIdeaCards isAdmin" hidden></div>
         <div id="adminIdeaEditPanel" class="adminIdeaEditPanel" hidden>
           <div class="panelHead">
             <div>
@@ -1540,7 +1541,7 @@
 
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
   <script src="../website-bestanden/idea-view-shared.js?v=20260909-shared-desktop-views"></script>
-  <script src="../website-bestanden/agenda-view-shared.js?v=20260909-shared-admin-table-v2"></script>
+  <script src="../website-bestanden/agenda-view-shared.js?v=20260909-shared-components-v3"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
   const ADMIN_SESSION_KEY = 'bcjn_zomer_beheer_open_v1';
@@ -1638,6 +1639,8 @@
     action:`<svg viewBox="0 0 20 20"><path d="M11.8 2.6 5.2 10.5h4.5l-1.1 6.9 6.3-8.3h-4.3l1.2-6.5z"></path></svg>`,
     home:`<svg viewBox="0 0 20 20"><path d="M4 9.2 10 4l6 5.2"></path><path d="M5.8 8.4V16h8.4V8.4"></path><path d="M8.4 16v-4.2h3.2V16"></path></svg>`,
     globe:`<svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="6.5"></circle><path d="M3.8 10h12.4"></path><path d="M10 3.5c2 1.8 3 4 3 6.5s-1 4.7-3 6.5c-2-1.8-3-4-3-6.5s1-4.7 3-6.5z"></path></svg>`,
+    people:`<svg viewBox="0 0 20 20"><circle cx="7.2" cy="7.3" r="2.2"></circle><circle cx="13.2" cy="8.2" r="1.8"></circle><path d="M3.8 15c.7-2 1.8-3 3.4-3s2.8 1 3.4 3"></path><path d="M10.9 14.8c.6-1.3 1.6-2 2.8-2 1.3 0 2.2.8 2.8 2.2"></path></svg>`,
+    clock:`<svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="6.4"></circle><path d="M10 6.4V10l2.4 1.7"></path></svg>`,
     default:`<svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5"></circle></svg>`
   };
   const ADMIN_THEME_LEGEND = [
@@ -2285,7 +2288,7 @@
     const durationValue = String(item.duration || 'Op maat').trim();
     const groupLabel = normalize(groupValue) === 'op maat' ? 'Groep flexibel' : groupValue;
     const durationLabel = normalize(durationValue) === 'op maat' ? 'Duur flexibel' : durationValue;
-    return `<span class="cardMetaLine"><span class="cardMetaPart" title="Groepsgrootte: ${escapeHtml(groupValue)}" aria-label="Groepsgrootte: ${escapeHtml(groupValue)}">${escapeHtml(groupLabel)}</span><span class="cardMetaPart" title="Duur: ${escapeHtml(durationValue)}" aria-label="Duur: ${escapeHtml(durationValue)}">${escapeHtml(durationLabel)}</span></span>`;
+    return `<span class="cardMetaLine"><span class="cardMetaPart" title="Groepsgrootte: ${escapeHtml(groupValue)}" aria-label="Groepsgrootte: ${escapeHtml(groupValue)}"><span class="metaIcon" aria-hidden="true">${ICONS.people}</span>${escapeHtml(groupLabel)}</span><span class="cardMetaPart" title="Duur: ${escapeHtml(durationValue)}" aria-label="Duur: ${escapeHtml(durationValue)}"><span class="metaIcon" aria-hidden="true">${ICONS.clock}</span>${escapeHtml(durationLabel)}</span></span>`;
   }
   function distanceLabelForKm(km, context='inspiration'){
     if(!Number.isFinite(km)) return '';
@@ -2480,30 +2483,14 @@
 	  function hiddenSourceLinkKeys(){
 	    return new Set(loadArray(HIDDEN_SOURCE_LINKS_KEY).map(String));
 	  }
-	  function sourceOverridesByKey(){
-	    return new Map(sourceLinkOverrides().map(link => [link.key, link]));
-	  }
 	  function managedSourceLinks(){
-	    const rows = [];
-	    const seen = new Set();
-	    customLinks().forEach((link, index) => {
-	      const key = sourceLinkKey(link);
-	      if(seen.has(key)) return;
-	      seen.add(key);
-	      rows.push({link, index, key, kind:'custom'});
+	    return AgendaViewShared.mergeSourceLinks({
+	      custom:customLinks(),
+	      base:baseLinks(),
+	      overrides:sourceLinkOverrides(),
+	      hidden:hiddenSourceLinkKeys(),
+	      keyFor:sourceLinkKey
 	    });
-	    const overrides = sourceOverridesByKey();
-	    const hidden = hiddenSourceLinkKeys();
-	    baseLinks().forEach(link => {
-	      const baseKey = sourceLinkKey(link);
-	      if(hidden.has(baseKey)) return;
-	      const managedLink = overrides.get(baseKey) || link;
-	      const visibleKey = sourceLinkKey(managedLink);
-	      if(seen.has(visibleKey)) return;
-	      seen.add(visibleKey);
-	      rows.push({link:managedLink, index:null, key:baseKey, kind:'base', modified:overrides.has(baseKey)});
-	    });
-	    return rows;
 	  }
 	  function pendingLinks(){
 	    return loadArray(PENDING_LINKS_KEY)
@@ -3288,16 +3275,13 @@
 	    const editAttrs = custom
 	      ? `data-edit-link-kind="custom" data-edit-link-index="${index}"`
 	      : `data-edit-link-kind="base" data-edit-link-key="${escapeHtml(key)}"`;
-	    return `<article class="row">
-	      <div><strong>${escapeHtml(link.name)}</strong><span>${escapeHtml(meta)}</span></div>
-	      <div class="rowActions">
-	        <span class="pill soft">${escapeHtml(label)}</span>
-	        <a class="button small" href="${escapeHtml(link.url)}" target="_blank" rel="noopener">Open</a>
-	        <button class="button small" ${editAttrs} type="button">Wijzig</button>
-	        ${modified ? `<button class="button small warn" data-reset-base-link="${escapeHtml(key)}" type="button">Herstel</button>` : ''}
-	        ${custom ? `<button class="button small hot" data-remove-link="${index}" type="button">Verwijder</button>` : `<button class="button small hot" data-hide-source-link="${escapeHtml(key)}" type="button">Verwijder</button>`}
-	      </div>
-	    </article>`;
+	    return AgendaViewShared.renderSourceRow({
+	      title:escapeHtml(link.name),
+	      meta:escapeHtml(meta),
+	      status:`<span class="pill soft">${escapeHtml(label)}</span>`,
+	      website:`<a class="button small" href="${escapeHtml(link.url)}" target="_blank" rel="noopener">Open</a>`,
+	      actions:`<button class="button small" ${editAttrs} type="button">Wijzig</button>${modified ? `<button class="button small warn" data-reset-base-link="${escapeHtml(key)}" type="button">Herstel</button>` : ''}${custom ? `<button class="button small hot" data-remove-link="${index}" type="button">Verwijder</button>` : `<button class="button small hot" data-hide-source-link="${escapeHtml(key)}" type="button">Verwijder</button>`}`
+	    });
 	  }
 	  function renderLinks(){
 	    const links = managedSourceLinks();
@@ -3307,10 +3291,13 @@
 	  function renderPendingLinks(){
 	    const links = pendingLinks();
 	    $('#pendingLinkCount').textContent = `${links.length} wacht${links.length === 1 ? '' : 'en'}`;
-	    $('#pendingLinkList').innerHTML = links.length ? links.map((link, index) => `<article class="row">
-	      <div><strong>${escapeHtml(link.name)}</strong><span>${escapeHtml([link.category, link.note, link.by ? `door ${link.by}` : '', linkDateMeta(link)].filter(Boolean).join(' · '))}</span></div>
-	      <div class="rowActions"><a class="button small" href="${escapeHtml(link.url)}" target="_blank" rel="noopener">Open</a><button class="button small primary" data-approve-link="${index}" type="button">Goedkeuren</button><button class="button small hot" data-reject-link="${index}" type="button">Afwijzen</button></div>
-	    </article>`).join('') : '<div class="empty">Er wachten geen links op goedkeuring.</div>';
+	    $('#pendingLinkList').innerHTML = links.length ? links.map((link, index) => AgendaViewShared.renderSourceRow({
+	      title:escapeHtml(link.name),
+	      meta:escapeHtml([link.category, link.note, link.by ? `door ${link.by}` : '', linkDateMeta(link)].filter(Boolean).join(' · ')),
+	      status:'<span class="pill warn">Wacht op goedkeuring</span>',
+	      website:`<a class="button small" href="${escapeHtml(link.url)}" target="_blank" rel="noopener">Open</a>`,
+	      actions:`<button class="button small primary" data-approve-link="${index}" type="button">Goedkeuren</button><button class="button small hot" data-reject-link="${index}" type="button">Afwijzen</button>`
+	    })).join('') : '<div class="empty">Er wachten geen links op goedkeuring.</div>';
 	  }
   function renderSubmittedIdeas(){
     const hidden = hiddenTeamIds();
@@ -3542,23 +3529,64 @@
 	    const status = state.isVerified ? '<span class="pill ok">Gecheckt</span>' : '';
 	    return `${typePill}${ongoingPill}${status}`;
 	  }
-	  function renderAgendaListItem(item, state){
-	    const distance = normalizeIdeaDistance(item.distanceBand, item, 'agenda');
-	    const cost = normalizeIdeaCost(item.cost);
-	    const stimulus = normalizeIdeaStimulus(item.stimulus);
-	    const websiteLabel = AgendaViewShared.sourceButtonLabel(item);
-	    const website = item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(websiteLabel)}</span></a>` : '<span class="small">–</span>';
-	    return AgendaViewShared.renderAgendaRow({
-	      themeClass:domainThemeClass(item.domain), hidden:state.isHidden, isNew:state.isNew,
-	      title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
-	      review:`<div class="agendaTableBadges">${agendaReviewPills(item, state)}</div>`,
-	      date:escapeHtml([item.date, item.time].filter(Boolean).join(' · ') || 'Datum nog checken'),
-	      domain:escapeHtml(domainDisplayLabel(item.domain)),
-	      location:`${escapeHtml(item.where || 'Plek nog checken')}<div class="small">${escapeHtml(distance)}${item.distanceKm ? ` · ${escapeHtml(item.distanceKm)}` : ''}</div>`,
-	      cost:costPill(cost), stimulus:stimulusPill(stimulus),
-	      description:escapeHtml(item.fit || 'Geen extra toelichting.'), website,
+	  function agendaAdminItemOccursOnDay(item={}, day={}, weekId=''){
+	    if(!itemWeekIds(item).includes(weekId)) return false;
+	    const range = parseDutchDateRange(item.date);
+	    const dayDate = parseIsoDate(day.iso);
+	    if(range && dayDate){
+	      const start = parseIsoDate(range.start);
+	      const end = parseIsoDate(range.end || range.start);
+	      if(start && end && dayDate >= start && dayDate <= end){
+	        return !Array.isArray(item.daysOfWeek) || !item.daysOfWeek.length || item.daysOfWeek.includes(day.index);
+	      }
+	    }
+	    return itemDisplayDayIso(item, weekId) === day.iso;
+	  }
+	  function renderAgendaAdminCard(item, state){
+	    return AgendaViewShared.renderItem({
+	      admin:true,
+	      themeClass:domainThemeClass(item.domain),
+	      hidden:state.isHidden,
+	      isNew:state.isNew,
+	      href:item.url ? escapeHtml(item.url) : '',
+	      title:titleWithIcon(item.title, item.domain, 'agendaItemTitle agendaReviewCardTitle'),
+	      review:agendaReviewPills(item, state, true),
+	      meta:escapeHtml([item.time, item.where].filter(Boolean).join(' · ') || 'Tijd en plek nog checken'),
 	      actions:agendaReviewActions(item, state, true)
 	    });
+	  }
+	  function renderAgendaAdminWeeks(items, states){
+	    const todayIso = formatIsoDate(new Date());
+	    const weeks = ADMIN_WEEKS.map(week => {
+	      const weekItems = items.filter(item => itemWeekIds(item).includes(week.id));
+	      if(!weekItems.length) return '';
+	      const days = weekDays(week.id).map(day => {
+	        const dayItems = weekItems.filter(item => agendaAdminItemOccursOnDay(item, day, week.id));
+	        return AgendaViewShared.renderDay({
+	          admin:true,
+	          key:escapeHtml(`${week.id}:${day.iso}`),
+	          label:escapeHtml(day.label),
+	          date:escapeHtml(day.prettyDate),
+	          past:day.iso < todayIso,
+	          today:day.iso === todayIso,
+	          items:dayItems.map(item => renderAgendaAdminCard(item, states.get(item.id))).join(''),
+	          empty:dayItems.length ? '' : '<div class="agendaEmpty">Geen activiteiten</div>'
+	        });
+	      }).join('');
+	      return AgendaViewShared.renderWeek({
+	        admin:true,
+	        id:`admin-${escapeHtml(week.id)}`,
+	        week:escapeHtml(week.week),
+	        title:escapeHtml(week.dates),
+	        count:`<span class="weekCountBadge"><span><strong>${weekItems.length}</strong> item${weekItems.length === 1 ? '' : 's'}</span></span>`,
+	        days
+	      });
+	    }).filter(Boolean);
+	    const unscheduled = items.filter(item => !itemWeekIds(item).some(weekId => ADMIN_WEEK_START[weekId]));
+	    if(unscheduled.length){
+	      weeks.push(`<section class="panel"><div class="panelHead"><div><h3>Nog in te plannen</h3><p>Deze items hebben nog geen herkenbare week.</p></div></div><div class="cards">${unscheduled.map(item => renderAgendaAdminCard(item, states.get(item.id))).join('')}</div></section>`);
+	    }
+	    return weeks.join('');
 	  }
 	  function renderOngoingAdminRow(item, state){
 	    const weeks = itemWeekIds(item).filter(id => id !== 'zonder').map(id => id.replace(/^w/i, '')).join(', ') || '–';
@@ -3633,7 +3661,7 @@
 	      ? `<option value="">Kies een agenda-item</option>${ongoingCandidates.map(item => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.title)} · ${escapeHtml(item.date || 'geen datum')}</option>`).join('')}`
 	      : '<option value="">Geen andere agenda-items</option>';
 	    $('#ongoingAdminAddBtn').disabled = !ongoingCandidates.length;
-	    const items = allItems.filter(item => agendaMatchesFilters(item, states.get(item.id), filters));
+	    const items = allItems.filter(item => !ongoingIds.has(String(item.id)) && agendaMatchesFilters(item, states.get(item.id), filters));
 	    $('#agendaReviewCount').textContent = `${items.length} / ${allItems.length} item${allItems.length === 1 ? '' : 's'}`;
 	    $('#agendaRuleCount').textContent = `${rules.length} regel${rules.length === 1 ? '' : 's'}`;
 	    const pendingCount = allItems.filter(item => states.get(item.id).isNew).length;
@@ -3651,7 +3679,7 @@
 	      $('#agendaReviewList').innerHTML = '<div class="empty">Geen agenda-items om te beheren.</div>';
 	      return;
 	    }
-	    $('#agendaReviewList').innerHTML = `<table class="agendaReviewTable"><thead><tr><th>Activiteit</th><th>Categorie</th><th>Locatie en afstand</th><th>Kosten</th><th>Prikkel</th><th>Beschrijving</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${items.map(item => renderAgendaListItem(item, states.get(item.id))).join('')}</tbody></table>`;
+	    $('#agendaReviewList').innerHTML = renderAgendaAdminWeeks(items, states);
 	  }
   async function updateTitleVisibility(key, action){
     const titles = new Set(loadArray(ADMIN_HIDDEN_INSPIRATION_KEY).map(normalize));

@@ -85,6 +85,12 @@
 .ongoingAccordion.adminOngoingAccordion th:nth-child(7),.ongoingAccordion.adminOngoingAccordion td:nth-child(7){width:8%}
 .ongoingAccordion.adminOngoingAccordion th:nth-child(8),.ongoingAccordion.adminOngoingAccordion td:nth-child(8){width:12%}
 
+.sharedSourceRow{align-items:center}
+.sharedSourceMain{display:grid;gap:4px;min-width:0}
+.sharedSourceMain strong{color:var(--accent-dark);overflow-wrap:anywhere}
+.sharedSourceMain span{color:var(--muted);font-size:.84rem;line-height:1.4}
+.sharedSourceActions{align-items:center}
+
 /* Categorie-iconen houden in iedere gedeelde beheerweergave hun themarand. */
 #adminApp .agendaItemTitle .domainIcon,
 #adminApp .agendaReviewCardTitle .domainIcon,
@@ -337,6 +343,16 @@
   display:flex;
   flex-direction:column;
   gap:8px;
+}
+
+#adminApp .agendaReviewList.weekStack{
+  display:grid;
+  gap:18px;
+  max-height:none;
+  overflow:visible;
+  border:0;
+  border-radius:0;
+  background:transparent;
 }
 
 .adminAgendaItem .agendaReviewCardMeta{

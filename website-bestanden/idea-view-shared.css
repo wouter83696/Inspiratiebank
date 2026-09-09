@@ -1,0 +1,72 @@
+/* Canonieke inspiratieweergaven voor publiek en beheer. */
+.sharedIdeaCards{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  align-items:stretch;
+}
+.sharedIdeaCards .card{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  height:100%;
+  gap:9px;
+  padding:12px;
+  border:1px solid var(--theme-line,rgba(79,142,158,.14));
+  border-radius:8px;
+  background:var(--theme-tint,rgba(255,255,255,.92));
+  box-shadow:0 10px 26px rgba(20,38,42,.045);
+}
+.sharedIdeaCards .ideaImageFrame{
+  width:100%;
+  aspect-ratio:16 / 8.7;
+  margin:0;
+  overflow:hidden;
+  border-radius:7px;
+  background:rgba(255,255,255,.72);
+}
+.sharedIdeaCards .ideaImageFrame img{display:block;width:100%;height:100%;object-fit:cover}
+.sharedIdeaCards h3{margin:0;color:var(--accent-dark);font-size:1.08rem;line-height:1.16;font-weight:600}
+.sharedIdeaCards .ideaTitle,.sharedIdeaCards .nameWithIcon{display:flex;align-items:flex-start;gap:8px;min-width:0}
+.sharedIdeaCards .ideaTitleText{min-width:0;overflow-wrap:anywhere}
+.sharedIdeaCards .domainIcon{flex:0 0 auto}
+.sharedIdeaCards .cardLabels{display:flex;align-items:center;flex-wrap:wrap;gap:6px;min-height:27px}
+.sharedIdeaCards .cardMetaLine{width:100%;margin:0}
+.sharedIdeaCards .card>p{margin:3px 0 0;line-height:1.48}
+.sharedIdeaCards .fine{margin-top:4px}
+.sharedIdeaCards .fine strong{display:block;margin-bottom:2px;color:var(--accent-dark)}
+.sharedIdeaCards .cardFooter{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:10px;border-top:1px solid rgba(11,18,32,.055)}
+.sharedIdeaCards .ideaAdminCardActions{display:flex;align-items:center;gap:7px;margin-top:0;padding-top:9px;border-top:1px solid rgba(11,18,32,.055)}
+
+.sharedIdeaList{overflow-x:auto;border:1px solid rgba(11,18,32,.08);border-radius:8px;background:rgba(255,255,255,.88)}
+.sharedIdeaList table{width:100%;min-width:920px;border-collapse:collapse;table-layout:fixed}
+.sharedIdeaList th,.sharedIdeaList td{padding:11px 12px;text-align:left;vertical-align:middle;border-bottom:1px solid rgba(11,18,32,.065);font-size:.86rem;line-height:1.34}
+.sharedIdeaList th{color:rgba(11,18,32,.56);font-weight:600;background:rgba(255,255,255,.78)}
+.sharedIdeaList tr:last-child td{border-bottom:0}
+.sharedIdeaList th:nth-child(1),.sharedIdeaList td:nth-child(1){width:31%}
+.sharedIdeaList th:nth-child(2),.sharedIdeaList td:nth-child(2){width:28%}
+.sharedIdeaList th:nth-child(3),.sharedIdeaList td:nth-child(3){width:25%}
+.sharedIdeaList th:nth-child(4),.sharedIdeaList td:nth-child(4){width:16%}
+.sharedIdeaList.isAdmin th:nth-child(4),.sharedIdeaList.isAdmin td:nth-child(4){width:8%}
+.sharedIdeaList.isAdmin th:nth-child(5),.sharedIdeaList.isAdmin td:nth-child(5){width:8%}
+.sharedIdeaList .nameWithIcon{display:flex;align-items:center;gap:10px;color:var(--accent-dark);font-size:1rem;line-height:1.18;font-weight:500}
+.sharedIdeaList .ideaTitleText{min-width:0;overflow-wrap:anywhere}
+.sharedIdeaList .ideaListMeta{margin:3px 0 0 38px}
+.sharedIdeaList .cardPillGroup{display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
+.sharedIdeaList .ideaActions{display:flex;align-items:center;gap:7px}
+
+@media (min-width:1180px){.sharedIdeaCards{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}}
+@media (max-width:980px){.sharedIdeaCards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){
+  .sharedIdeaCards{grid-template-columns:1fr}
+  .sharedIdeaList{overflow:visible;border:0;background:transparent}
+  .sharedIdeaList table,.sharedIdeaList tbody,.sharedIdeaList tr,.sharedIdeaList td{display:block;width:100%;min-width:0}
+  .sharedIdeaList thead{display:none}
+  .sharedIdeaList tbody{display:grid;gap:10px}
+  .sharedIdeaList tr{padding:13px;border:1px solid var(--theme-line,rgba(79,142,158,.14));border-radius:8px;background:var(--theme-tint,rgba(255,255,255,.94))}
+  .sharedIdeaList td{display:grid;grid-template-columns:92px minmax(0,1fr);gap:8px;padding:8px 0;border:0}
+  .sharedIdeaList td::before{content:attr(data-label);color:rgba(11,18,32,.48);font-size:.72rem;font-weight:600}
+  .sharedIdeaList td:first-child{display:block;padding-top:0}
+  .sharedIdeaList td:first-child::before{display:none}
+  .sharedIdeaList .cardPillGroup{flex-wrap:wrap}
+}

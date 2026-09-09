@@ -71,5 +71,39 @@
     </tr>`;
   }
 
-  window.AgendaViewShared = Object.freeze({sourceButtonLabel, renderItem, renderDay, renderWeek, renderOngoingRow, renderAgendaRow});
+  function renderSourceRow(view){
+    return `<article class="row sharedSourceRow">
+      <div class="sharedSourceMain"><strong>${view.title || ''}</strong>${view.meta ? `<span>${view.meta}</span>` : ''}</div>
+      <div class="rowActions sharedSourceActions">${view.status || ''}${view.website || ''}${view.actions || ''}</div>
+    </article>`;
+  }
+
+  function mergeSourceLinks(options={}){
+    const custom = Array.isArray(options.custom) ? options.custom : [];
+    const base = Array.isArray(options.base) ? options.base : [];
+    const overrides = Array.isArray(options.overrides) ? options.overrides : [];
+    const hidden = new Set(options.hidden || []);
+    const keyFor = typeof options.keyFor === 'function' ? options.keyFor : link => String(link?.url || link?.name || '');
+    const overrideMap = new Map(overrides.map(link => [String(link.key || keyFor(link)), link]));
+    const rows = [];
+    const seen = new Set();
+    custom.forEach((link, index) => {
+      const key = keyFor(link);
+      if(!key || seen.has(key)) return;
+      seen.add(key);
+      rows.push({link, index, key, kind:'custom', modified:false});
+    });
+    base.forEach(link => {
+      const baseKey = keyFor(link);
+      if(!baseKey || hidden.has(baseKey)) return;
+      const managed = overrideMap.get(baseKey) || link;
+      const visibleKey = keyFor(managed);
+      if(!visibleKey || seen.has(visibleKey)) return;
+      seen.add(visibleKey);
+      rows.push({link:managed, index:null, key:baseKey, kind:'base', modified:overrideMap.has(baseKey)});
+    });
+    return rows;
+  }
+
+  window.AgendaViewShared = Object.freeze({sourceButtonLabel, renderItem, renderDay, renderWeek, renderOngoingRow, renderAgendaRow, renderSourceRow, mergeSourceLinks});
 })();
