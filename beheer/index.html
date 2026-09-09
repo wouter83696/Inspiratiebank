@@ -982,7 +982,7 @@
       #agendaReviewList .agendaTableActions .button.iconAction{width:32px;height:32px}
     }
   </style>
-  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260909-admin-public-match-v6">
+  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260909-admin-controls-v7">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260909-admin-public-match-v3">
 </head>
 <body>
@@ -3513,10 +3513,14 @@
 	    if(compact){
 	      const editAction = `<button class="button iconAction editAction" data-edit-agenda="${escapeHtml(item.id)}" type="button" aria-label="Wijzig" title="Wijzig">${actionIcon('edit')}</button>`;
 	      const verifyAction = state.isVerified || state.isHidden ? '' : `<button class="button iconAction primary" data-verify-agenda="${escapeHtml(item.id)}" type="button" aria-label="Goedkeuren" title="Goedkeuren">${actionIcon('check')}</button>`;
+	      const openAction = item.url ? `<a class="button iconAction openAction" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" aria-label="Open bron" title="Open bron">${actionIcon('external')}</a>` : '';
+	      const sourceValue = agendaSourceValue(item);
 	      const visibilityLabel = state.isHidden ? 'Toon' : 'Verberg';
 	      const visibilityIcon = state.isHidden ? actionIcon('eyeOff') : actionIcon('eye');
-	      return `${editAction}${verifyAction}
+	      return `${openAction}${editAction}${verifyAction}
 	        <button class="button iconAction visibilityAction" data-hide-agenda="${escapeHtml(item.id)}" data-hidden="${state.isHidden ? '1' : '0'}" type="button" aria-label="${escapeHtml(visibilityLabel)}" title="${escapeHtml(visibilityLabel)}">${visibilityIcon}</button>
+	        <button class="button iconAction sourceAction" data-block-agenda-source="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(sourceValue)}" type="button" aria-label="Weiger bron" title="Weiger bron">${actionIcon('ban')}</button>
+	        <button class="button iconAction titleAction" data-block-agenda-title="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(normalize(item.title))}" type="button" aria-label="Weiger deel van titel" title="Weiger deel van titel">${actionIcon('text')}</button>
 	        <button class="button iconAction hot" data-delete-agenda="${escapeHtml(item.id)}" type="button" aria-label="Verwijder" title="Verwijder">${actionIcon('trash')}</button>`;
 	    }
 	    const verifyAction = state.isVerified || state.isHidden ? '' : `<button class="button small primary" data-verify-agenda="${escapeHtml(item.id)}" type="button">Goedkeuren</button>`;

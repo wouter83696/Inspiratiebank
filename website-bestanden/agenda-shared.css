@@ -92,7 +92,7 @@
 .adminOngoingAccordion .websiteCell{min-width:0;overflow:hidden}
 .adminOngoingAccordion .websiteCell .siteButton{width:100%;min-width:0;max-width:100%;padding-left:8px;padding-right:8px;overflow:hidden}
 .adminOngoingAccordion .websiteCell .siteButtonText{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.adminOngoingAccordion .ongoingAdminActions{display:flex;align-items:center;gap:5px;flex-wrap:nowrap;justify-content:flex-start}
+.adminOngoingAccordion .ongoingAdminActions{display:grid;grid-template-columns:repeat(4,28px);align-items:center;gap:5px;justify-content:start}
 .adminOngoingAccordion .ongoingAdminActions .button.iconAction{flex:0 0 28px;width:28px;height:28px;min-width:28px;padding:0}
 
 .sharedSourceRow{align-items:center}
@@ -372,7 +372,7 @@
 
 .adminAgendaItem .agendaItemLink{color:inherit;text-decoration:none}
 .adminAgendaItem .agendaReviewCardActions{
-  display:flex;align-items:center;justify-content:flex-end;gap:5px;flex-wrap:nowrap;
+  display:grid;grid-template-columns:repeat(4,28px);align-items:center;justify-content:end;gap:5px;
   margin-top:6px;padding:0;border-top:0
 }
 .adminAgendaItem .agendaReviewCardActions .button.iconAction{flex:0 0 28px;width:28px;height:28px;min-width:28px;padding:0}
