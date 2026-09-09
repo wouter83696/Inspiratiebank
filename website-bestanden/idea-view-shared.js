@@ -3,14 +3,12 @@
     const classes = ['card', 'ideaThemeCard', view.themeClass || '', view.hasImage ? 'hasImage' : '', view.hidden ? 'hiddenItem' : '']
       .filter(Boolean).join(' ');
     const attributes = view.attributes || '';
-    const pillsClass = view.admin ? 'cardPills' : 'cardLabels';
-    const pills = view.admin ? `<div class="cardPillGroup">${view.pills || ''}</div>` : (view.pills || '');
+    const pillsClass = 'cardLabels';
+    const pills = view.pills || '';
     const source = view.source ? `<div class="small">${view.source}</div>` : '';
     const body = view.description ? `<p>${view.description}</p>` : '';
     const practical = `<p class="fine"><strong>Praktisch:</strong>${view.practical || ''}</p>`;
-    const footer = view.admin
-      ? `<div class="ideaAdminCardBottom">${view.website ? `<div class="cardFooter">${view.website}</div>` : ''}<div class="agendaReviewCardActions ideaAdminCardActions">${view.actions || ''}</div></div>`
-      : `<div class="cardFooter">${view.website || ''}${view.actions || ''}</div>`;
+    const footer = `<div class="cardFooter">${view.website || ''}${view.actions || ''}</div>${view.manageActions !== undefined ? `<div class="agendaReviewCardActions ideaAdminCardActions">${view.manageActions || ''}</div>` : ''}`;
     return `<article class="${classes}"${attributes ? ` ${attributes}` : ''}>
       ${view.image || ''}
       <h3>${view.title || ''}</h3>
@@ -26,5 +24,16 @@
     return `<tr class="${classes}"${attributes ? ` ${attributes}` : ''}>${cells}</tr>`;
   }
 
-  window.IdeaViewShared = Object.freeze({renderCard, renderRow});
+  function renderDesktopRow(view){
+    const cells = [
+      {label:'Activiteit', html:`${view.title || ''}${view.meta ? `<div class="small ideaListMeta">${view.meta}</div>` : ''}`},
+      {label:'Badges', html:`<div class="cardPillGroup">${view.pills || ''}</div>`},
+      {label:'Praktisch', html:`<div class="small">${view.practical || ''}</div>`},
+      {label:'Website', html:`<div class="ideaActions">${view.website || ''}${view.actions || ''}</div>`}
+    ];
+    if(view.manageActions !== undefined) cells.push({label:'Beheer', html:view.manageActions || ''});
+    return renderRow({...view, cells});
+  }
+
+  window.IdeaViewShared = Object.freeze({renderCard, renderRow, renderDesktopRow});
 })();

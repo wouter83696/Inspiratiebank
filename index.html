@@ -2066,8 +2066,8 @@
   </div>
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20260909-shared-admin-views"></script>
-  <script src="website-bestanden/agenda-view-shared.js?v=20260909-shared-admin-table"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20260909-shared-desktop-views"></script>
+  <script src="website-bestanden/agenda-view-shared.js?v=20260909-shared-admin-table-v2"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
@@ -4547,15 +4547,15 @@
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
     const sourceLink = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(sourceButtonLabel(item))}</a>` : '<span class="small">-</span>';
-    return IdeaViewShared.renderRow({
+    return IdeaViewShared.renderDesktopRow({
       themeClass:domainThemeClass(item.domain),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
-      cells:[
-        {html:`${titleWithIcon(item.title, item.domain, 'nameWithIcon')}<div class="small ideaListMeta">${escapeHtml(item.group || '')} • ${escapeHtml(item.duration || '')}</div>`},
-        {html:`<div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div>`},
-        {html:`<div class="small">${escapeHtml(audienceText(item.materials || item.fit || ''))}</div>`},
-        {html:`<div class="ideaActions">${sourceLink}${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}</div>`}
-      ]
+      title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
+      meta:`${escapeHtml(item.group || '')} • ${escapeHtml(item.duration || '')}`,
+      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
+      practical:escapeHtml(audienceText(item.materials || item.fit || '')),
+      website:sourceLink,
+      actions:`${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}`
     });
   }
 
