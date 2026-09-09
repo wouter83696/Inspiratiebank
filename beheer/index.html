@@ -273,7 +273,6 @@
     .adminCountBadge svg{width:16px;height:16px;flex:0 0 16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.86}
     .adminCountBadge>span{display:inline-flex;align-items:baseline;gap:4px}
     .adminCountBadge strong{font-weight:650;color:rgba(11,18,32,.72)}
-    .adminWorkspace[data-admin-workspace="meldkamer"] .panelHead h2{font-size:1.15rem;line-height:1.2;font-weight:600}
     .adminWorkspace[data-admin-workspace="meldkamer"] .panelHead p{margin:8px 0 0;font-size:.9rem;line-height:1.45;max-width:74ch}
     .adminWorkspace[data-admin-workspace="meldkamer"] .panelHead>.pill{font-size:.72rem}
     .adminWorkspace[data-admin-workspace="meldkamer"] .empty{font-size:.86rem;line-height:1.4}
@@ -332,9 +331,8 @@
     .loginPanel label{gap:8px;padding-left:12px}
     .loginPanel label input{margin-left:-12px;width:calc(100% + 12px)}
     .panelHead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
-    .panelHead h2{color:#24596A}
+    .panelHead h2{margin:0;color:#24596A;font-size:1.15rem;line-height:1.2;font-weight:600}
     .adminTopGrid .panelHead{align-items:flex-start}
-    .adminTopGrid .panelHead h2{font-size:1.2rem;line-height:1.15}
     .notice{border-radius:18px;background:rgba(248,236,194,.58);border:1px solid rgba(186,151,56,.14);padding:12px 14px;color:#6b5927;margin:14px 0}
     .formGrid{display:grid;gap:10px}
     .two{grid-template-columns:1fr 1fr}
@@ -580,7 +578,6 @@
       display:grid;gap:10px;margin:10px 0 14px;padding:12px;border:1px solid #EAECEF;
       border-radius:18px;background:rgba(251,253,252,.72);box-shadow:0 8px 20px rgba(20,38,42,.035)
     }
-    .adminWorkspace[data-admin-workspace="agenda"] .panelHead h2{margin:0;font-size:1.2rem;line-height:1.15;font-weight:600}
     .adminWorkspace[data-admin-workspace="agenda"] .panelHead p{margin:8px 0 0;font-size:.9rem;line-height:1.45;max-width:74ch}
     .agendaRulesHead{align-items:flex-start;margin-bottom:0}
     .agendaRuleList{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}
@@ -926,7 +923,7 @@
       <summary class="adminMenuButton" aria-current="page">Beheer</summary>
       <div class="adminMenuPanel" aria-label="Beheeropties">
         <a class="adminMenuItem" href="#reportsPanel">Meldingen</a>
-        <a class="adminMenuItem" href="#submittedLinksPanel">Ingestuurde bronlinks</a>
+        <a class="adminMenuItem" href="#submittedLinksPanel">Ingestuurde bronnen</a>
         <a class="adminMenuItem" href="#submittedIdeasPanel">Toegevoegde inspiratie</a>
         <a class="adminMenuItem" href="#agendaReviewPanel">UIT-agenda beheren</a>
         <a class="adminMenuItem" href="#inspirationAdminPanel">Inspiratiebank opschonen</a>
@@ -1047,7 +1044,7 @@
         <section class="panel tintedPanel toneSource" id="submittedLinksPanel">
           <div class="panelHead">
             <div>
-              <h2>Ingestuurde bronlinks</h2>
+              <h2>Ingestuurde bronnen</h2>
               <p>Bekijk links en agendabronnen die zijn aangedragen. Keur alleen bronnen goed die helpen bij passend aanbod.</p>
             </div>
             <span id="pendingLinkCount" class="pill">0 wachten</span>
