@@ -3622,10 +3622,6 @@
 	        days
 	      });
 	    }).filter(Boolean);
-	    const unscheduled = items.filter(item => !itemWeekIds(item).some(weekId => ADMIN_WEEK_START[weekId]));
-	    if(unscheduled.length){
-	      weeks.push(`<section class="panel"><div class="panelHead"><div><h3>Nog in te plannen</h3><p>Deze items hebben nog geen herkenbare week.</p></div></div><div class="cards">${unscheduled.map(item => renderAgendaAdminCard(item, states.get(item.id))).join('')}</div></section>`);
-	    }
 	    return weeks.join('');
 	  }
 	  function renderOngoingAdminRow(item, state){
