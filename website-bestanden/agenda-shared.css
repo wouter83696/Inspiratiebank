@@ -42,9 +42,48 @@
 /* Alle beheeracties volgen dezelfde lichte badgebehandeling. */
 #adminApp .button.iconAction{
   border:1px solid color-mix(in srgb,currentColor 18%,rgba(255,255,255,.72)) !important;
-  background-color:rgba(255,255,255,.84);
   box-shadow:0 3px 9px rgba(20,38,42,.035);
 }
+#adminApp .agendaReviewCardActions .button.iconAction,
+#adminApp .ongoingAdminActions .button.iconAction{background:rgba(226,244,247,.94);border-color:rgba(49,112,129,.18) !important;color:#2f6978}
+#adminApp .agendaReviewCardActions .button.iconAction.primary,
+#adminApp .ongoingAdminActions .button.iconAction.primary{background:rgba(190,236,231,.96);border-color:rgba(44,135,117,.20) !important;color:#286c5c}
+#adminApp .agendaReviewCardActions .button.iconAction.visibilityAction,
+#adminApp .ongoingAdminActions .button.iconAction.visibilityAction{background:rgba(224,242,232,.96);border-color:rgba(72,132,100,.18) !important;color:#477763}
+#adminApp .agendaReviewCardActions .button.iconAction.sourceAction,
+#adminApp .agendaReviewCardActions .button.iconAction.titleAction,
+#adminApp .ongoingAdminActions .button.iconAction.sourceAction,
+#adminApp .ongoingAdminActions .button.iconAction.titleAction{background:rgba(255,242,196,.96);border-color:rgba(181,143,35,.20) !important;color:#80651f}
+#adminApp .agendaReviewCardActions .button.iconAction.hot,
+#adminApp .ongoingAdminActions .button.iconAction.hot{background:rgba(251,224,234,.96);border-color:rgba(184,74,113,.18) !important;color:#9a4564}
+
+/* De openbare doorlopende tabel is ook in beheer de canonieke vormgeving. */
+.ongoingAccordion{
+  margin:18px 0 0;
+  overflow:hidden;
+  border:1px solid #EAECEF;
+  border-radius:var(--radius);
+  background:rgba(251,253,252,.92);
+  box-shadow:0 14px 34px rgba(20,38,42,.045);
+}
+.ongoingAccordionBody{border-top:1px solid rgba(11,18,32,.06);background:rgba(253,254,253,.88)}
+.ongoingAccordion .tableWrap{overflow-x:auto;border:0;border-radius:0;background:rgba(253,254,253,.88);box-shadow:none}
+.ongoingAccordion table{width:100%;min-width:880px;border-collapse:collapse;table-layout:fixed}
+.ongoingAccordion th,.ongoingAccordion td{padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid rgba(11,18,32,.07);font-size:.84rem;line-height:1.35}
+.ongoingAccordion th{color:rgba(11,18,32,.56);font-weight:500;background:rgba(255,255,255,.78)}
+.ongoingAccordion tr:last-child td{border-bottom:0}
+.ongoingAccordion th:nth-child(1),.ongoingAccordion td:nth-child(1){width:27%}
+.ongoingAccordion th:nth-child(2),.ongoingAccordion td:nth-child(2){width:7%;white-space:nowrap}
+.ongoingAccordion th:nth-child(3),.ongoingAccordion td:nth-child(3){width:14%}
+.ongoingAccordion th:nth-child(4),.ongoingAccordion td:nth-child(4){width:6%}
+.ongoingAccordion th:nth-child(5),.ongoingAccordion td:nth-child(5){width:6%}
+.ongoingAccordion th:nth-child(6),.ongoingAccordion td:nth-child(6){width:31%}
+.ongoingAccordion th:nth-child(7),.ongoingAccordion td:nth-child(7){width:9%}
+.ongoingAccordion.adminOngoingAccordion table{min-width:1120px}
+.ongoingAccordion.adminOngoingAccordion th:nth-child(1),.ongoingAccordion.adminOngoingAccordion td:nth-child(1){width:24%}
+.ongoingAccordion.adminOngoingAccordion th:nth-child(6),.ongoingAccordion.adminOngoingAccordion td:nth-child(6){width:25%}
+.ongoingAccordion.adminOngoingAccordion th:nth-child(7),.ongoingAccordion.adminOngoingAccordion td:nth-child(7){width:8%}
+.ongoingAccordion.adminOngoingAccordion th:nth-child(8),.ongoingAccordion.adminOngoingAccordion td:nth-child(8){width:12%}
 
 /* Categorie-iconen houden in iedere gedeelde beheerweergave hun themarand. */
 #adminApp .agendaItemTitle .domainIcon,

@@ -1199,15 +1199,17 @@
           <div id="agendaReviewWeekView" class="agendaReviewWeekView"></div>
           <div id="agendaReviewList" class="agendaReviewList"></div>
           <div class="sectionDivider"></div>
-          <div class="panelHead" id="ongoingAdminSection">
-            <div><h2>Doorlopend aanbod beheren</h2></div>
-            <span id="ongoingAdminCount" class="pill">0 items</span>
-          </div>
-          <div class="ongoingAdminPicker">
-            <label>Agenda-item toevoegen<select id="ongoingAdminSelect"></select></label>
-            <button class="button small primary" id="ongoingAdminAddBtn" type="button">Als doorlopend instellen</button>
-          </div>
-          <div id="ongoingAdminList" class="ongoingAdminList"></div>
+          <section class="ongoingAccordion adminOngoingAccordion" id="ongoingAdminSection">
+            <div class="panelHead">
+              <div><h2>Doorlopend aanbod beheren</h2></div>
+              <span id="ongoingAdminCount" class="pill">0 items</span>
+            </div>
+            <div class="ongoingAdminPicker">
+              <label>Agenda-item toevoegen<select id="ongoingAdminSelect"></select></label>
+              <button class="button small primary" id="ongoingAdminAddBtn" type="button">Als doorlopend instellen</button>
+            </div>
+            <div id="ongoingAdminList" class="ongoingAdminList ongoingAccordionBody"></div>
+          </section>
         </section>
             </div>
           </section>
@@ -3441,7 +3443,7 @@
 	  }
 	  function agendaReviewActions(item, state, compact=false){
 	    if(compact){
-	      const editAction = `<button class="button iconAction" data-edit-agenda="${escapeHtml(item.id)}" type="button" aria-label="Wijzig" title="Wijzig">${actionIcon('edit')}</button>`;
+	      const editAction = `<button class="button iconAction editAction" data-edit-agenda="${escapeHtml(item.id)}" type="button" aria-label="Wijzig" title="Wijzig">${actionIcon('edit')}</button>`;
 	      const verifyAction = state.isVerified || state.isHidden ? '' : `<button class="button iconAction primary" data-verify-agenda="${escapeHtml(item.id)}" type="button" aria-label="Goedkeuren" title="Goedkeuren">${actionIcon('check')}</button>`;
 	      const openAction = item.url ? `<a class="button iconAction openAction" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" aria-label="Open bron" title="Open bron">${actionIcon('external')}</a>` : '';
 	      const sourceValue = agendaSourceValue(item);
@@ -3503,18 +3505,21 @@
 	    const weeks = itemWeekIds(item).filter(id => id !== 'zonder').map(id => id.replace(/^w/i, '')).join(', ') || '–';
 	    const distance = normalizeIdeaDistance(item.distanceBand, item, 'agenda');
 	    const location = normalizeIdeaLocation(item.locationType || item.location || '');
+	    const cost = normalizeIdeaCost(item.cost);
+	    const stimulus = normalizeIdeaStimulus(item.stimulus);
 	    const placeLabels = compactPlacePills(location, distance);
-	    const placePills = placeLabels.length ? placeLabels.map(label => pill(label, 'soft')).join('') : `<span class="small">${escapeHtml(item.where || '–')}</span>`;
-	    const website = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a>` : '<span class="small">–</span>';
+	    const placePills = placeLabels.length ? placeLabels.map(locationPill).join(' ') : `<span class="small">${escapeHtml(item.where || '–')}</span>`;
+	    const mobileLabels = `<div class="ongoingMobileLabels">${placePills} ${costPill(cost)} ${stimulusPill(stimulus)}</div>`;
+	    const website = item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a>` : '<span class="small">–</span>';
 	    const actions = agendaReviewActions(item, state, true).replaceAll('data-edit-agenda=', 'data-edit-ongoing=');
 	    return AgendaViewShared.renderOngoingRow({
         themeClass:domainThemeClass(item.domain), hidden:state.isHidden,
         title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
         review:`<div>${agendaReviewPills(item, state, true)}</div>`,
         date:escapeHtml([item.date, item.time].filter(Boolean).join(' · ') || 'Datum nog checken'),
-        weeks:escapeHtml(weeks), place:placePills,
+        weeks:escapeHtml(weeks), place:placePills, mobileLabels,
         locationDetail:item.where ? `<span class="small">${escapeHtml(item.where)}</span>` : '',
-        cost:costPill(item.cost), stimulus:stimulusPill(item.stimulus),
+	        cost:costPill(cost), stimulus:stimulusPill(stimulus),
         meta:`<div class="ongoingMetaLine"><strong>Beschikbaar:</strong> ${escapeHtml(weeks)}</div>`,
         description:escapeHtml(item.fit || '–'), website, actions
       });
@@ -3548,10 +3553,25 @@
 	    }).join('');
 	    const renderedDays = weekDays(weekId);
 	    const dates = renderedDays.length ? `${formatCompactAgendaDate(parseIsoDate(renderedDays[0].iso))} t/m ${formatCompactAgendaDate(parseIsoDate(renderedDays[6].iso))}` : String(week?.dates || agendaWeekLabel(weekId));
+	    const checkedAt = latestAgendaCheckedAt();
+	    const checkedDate = new Date(checkedAt || '');
+	    const checkedCompact = Number.isFinite(checkedDate.getTime())
+	      ? `${checkedDate.toLocaleDateString('nl-NL', {day:'numeric', month:'short'}).replace(/\.$/, '')}, ${checkedDate.toLocaleTimeString('nl-NL', {hour:'2-digit', minute:'2-digit'})}`
+	      : '';
+	    const freshness = checkedCompact ? `<span class="agendaFreshness" title="Laatst gecontroleerd: ${escapeHtml(formatAdminDateTime(checkedAt))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg><span class="agendaFreshnessLabel">Gecheckt</span><span class="agendaFreshnessTime">${escapeHtml(checkedCompact)}</span></span>` : '';
+	    const weekIds = Object.keys(ADMIN_WEEK_START);
+	    const weekIndex = weekIds.indexOf(weekId);
+	    const previousWeek = weekIndex > 0 ? weekIds[weekIndex - 1] : '';
+	    const nextWeek = weekIndex >= 0 && weekIndex < weekIds.length - 1 ? weekIds[weekIndex + 1] : '';
+	    const navigation = `<div class="weekNav" aria-label="Door weken bladeren">
+	      <button class="weekNavButton" type="button" data-admin-week-jump="${escapeHtml(previousWeek)}" aria-label="Vorige week" title="Vorige week"${previousWeek ? '' : ' disabled'}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
+	      <button class="weekNavButton" type="button" data-admin-week-jump="${escapeHtml(nextWeek)}" aria-label="Volgende week" title="Volgende week"${nextWeek ? '' : ' disabled'}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+	    </div>`;
 	    return AgendaViewShared.renderWeek({
         admin:true, week:escapeHtml(week?.week || weekId.replace('w','')), title:escapeHtml(dates),
-        count:`<span class="weekCountBadge agendaReviewCountBadge"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M8 5h8M8 10h8M8 15h8"></path><path d="m3.5 5 1 1 2-2M3.5 10l1 1 2-2M3.5 15l1 1 2-2"></path></svg><span><strong>${weekItems.length}</strong> verschillende activiteiten</span></span>`,
-        status:weekStatusText(week || {}), days:daysHtml
+        freshness,
+        count:`<span class="weekCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${weekItems.length}</strong><span class="weekCountWord"> verschillende</span><span class="weekCountLabel"> activiteiten</span></span></span>`,
+        navigation, status:'', days:daysHtml
       });
 	  }
 	  function renderAgendaWeekView(items, states, filters){
@@ -3605,7 +3625,7 @@
 	    const ongoingCandidates = allItems.filter(item => !ongoingIds.has(String(item.id)));
 	    $('#ongoingAdminCount').textContent = `${ongoingItems.length} item${ongoingItems.length === 1 ? '' : 's'}`;
 	    $('#ongoingAdminList').innerHTML = ongoingItems.length
-	      ? `<div class="ongoingAdminTableWrap"><table class="ongoingAdminTable"><thead><tr><th>Aanbod</th><th>Weken</th><th>Locatie en afstand</th><th>Kosten</th><th>Prikkel</th><th>Beschrijving</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${ongoingItems.map(item => renderOngoingAdminRow(item, states.get(item.id) || agendaReviewState(item, hidden, verified))).join('')}</tbody></table></div>`
+	      ? `<div class="tableWrap ongoingAdminTableWrap"><table class="ongoingAdminTable"><thead><tr><th>Aanbod</th><th>Weken</th><th>Locatie en afstand</th><th>Kosten</th><th>Prikkel</th><th>Beschrijving</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${ongoingItems.map(item => renderOngoingAdminRow(item, states.get(item.id) || agendaReviewState(item, hidden, verified))).join('')}</tbody></table></div>`
 	      : '<div class="empty">Nog geen doorlopend aanbod. Kies hierboven een agenda-item om het toe te voegen.</div>';
 	    $('#ongoingAdminSelect').innerHTML = ongoingCandidates.length
 	      ? `<option value="">Kies een agenda-item</option>${ongoingCandidates.map(item => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.title)} · ${escapeHtml(item.date || 'geen datum')}</option>`).join('')}`
@@ -4765,6 +4785,15 @@
       setAgendaAdminView(btn.dataset.agendaView);
       renderAgendaReview();
     }));
+    $('#agendaReviewWeekView').addEventListener('click', event => {
+      const button = event.target.closest('[data-admin-week-jump]');
+      const weekId = button?.dataset.adminWeekJump || '';
+      if(!weekId) return;
+      const select = $('#agendaAdminWeekSelect');
+      select.value = weekId;
+      syncCustomSelect(select);
+      renderAgendaReview();
+    });
     ['#agendaAdminSearch','#agendaAdminWeekSelect','#agendaAdminKindFilter','#agendaAdminDomainFilter','#agendaAdminDistanceFilter','#agendaAdminCostFilter','#agendaAdminStimulusFilter','#agendaAdminStatusFilter']
       .forEach(selector => $(selector).addEventListener(selector === '#agendaAdminSearch' ? 'input' : 'change', renderAgendaReview));
     $('#agendaAdminThemeLegend').addEventListener('click', event => {
