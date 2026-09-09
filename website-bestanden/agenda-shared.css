@@ -326,11 +326,12 @@
 }
 
 .agendaHead>div,
-.agendaReviewDayHead>div{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+.agendaReviewDayHead>div{display:flex;align-items:baseline;gap:7px;flex-wrap:nowrap;min-width:0}
 
 .agendaHead strong,
 .agendaReviewDayHead strong{
   display:block;
+  white-space:nowrap;
   color:#082b55;
   font-size:1rem;
   font-weight:600;
@@ -340,6 +341,7 @@
 .agendaReviewDayHead span{
   display:inline;
   margin-top:0;
+  white-space:nowrap;
   color:#123968;
   font-size:.91rem;
 }
