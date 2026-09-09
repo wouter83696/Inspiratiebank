@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="nl">
+<html lang="nl" data-ui-build="single-desktop-source-v13">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta name="theme-color" content="#F8FAF9">
   <meta name="robots" content="noindex">
   <title>Beheer - Inspiratiebank</title>
@@ -621,27 +622,6 @@
     .ongoingAdminPicker{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;margin:14px 0}
     .ongoingAdminPicker label{display:grid;gap:6px;flex:1 1 320px;color:var(--accent-dark);font-size:.84rem;font-weight:500}
     .ongoingAdminList{min-width:0}
-    .ongoingAdminTableWrap{
-      overflow-x:auto;border:1px solid rgba(79,142,158,.10);border-radius:16px;
-      background:rgba(255,255,255,.72);box-shadow:0 12px 30px rgba(20,38,42,.04)
-    }
-    .ongoingAdminTable{width:100%;min-width:1120px;border-collapse:collapse;table-layout:fixed}
-    .ongoingAdminTable th,.ongoingAdminTable td{
-      padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid rgba(11,18,32,.07);
-      font-size:.84rem;line-height:1.35
-    }
-    .ongoingAdminTable th{color:rgba(11,18,32,.56);font-weight:500;background:rgba(255,255,255,.78)}
-    .ongoingAdminTable tr:last-child td{border-bottom:0}
-    .ongoingAdminTable .ideaThemeRow td{border-bottom-color:color-mix(in srgb,var(--theme-line) 74%,#EFE9DE)}
-    .ongoingAdminTable th:nth-child(1){width:22%}.ongoingAdminTable th:nth-child(2){width:8%}
-    .ongoingAdminTable th:nth-child(3){width:13%}.ongoingAdminTable th:nth-child(4){width:7%}
-    .ongoingAdminTable th:nth-child(5){width:7%}.ongoingAdminTable th:nth-child(6){width:25%}
-    .ongoingAdminTable th:nth-child(7){width:8%}.ongoingAdminTable th:nth-child(8){width:10%}
-    .ongoingAdminTitle{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;align-items:start;color:var(--accent-dark);font-weight:600}
-    .ongoingAdminTitle .domainIcon{width:22px;height:22px;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
-    .ongoingAdminTitle .domainIcon svg{width:12px;height:12px}
-    .ongoingAdminSub{display:block;margin:4px 0 0 30px;color:var(--muted);font-size:.78rem}
-    .ongoingAdminLocation{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
     .ongoingAdminDescription{color:var(--muted)}
     .ongoingAdminActions{display:grid;grid-template-columns:repeat(3,28px);gap:5px;align-items:center;justify-content:start}
     .ongoingAdminActions .button.iconAction{flex:0 0 28px;width:28px;height:28px;padding:0;border-radius:10px;box-shadow:none;background:rgba(255,255,255,.82);border-color:rgba(79,142,158,.10);color:var(--accent-dark)}
@@ -982,8 +962,8 @@
       #agendaReviewList .agendaTableActions .button.iconAction{width:32px;height:32px}
     }
   </style>
-  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260909-combined-badges-v12">
-  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260909-admin-public-match-v3">
+  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260909-single-desktop-source-v13">
+  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260909-single-desktop-source-v13">
 </head>
 <body>
   <header class="topbar">
@@ -1254,7 +1234,7 @@
             </div>
           </div>
           <div id="agendaAdminThemeLegend" class="agendaAdminThemeLegend"></div>
-          <div id="agendaReviewList" class="agendaReviewList weekStack agendaReviewWeekView"></div>
+          <div id="agendaReviewList" class="agendaReviewList weekStack"></div>
           <div class="sectionDivider"></div>
           <section class="ongoingAccordion adminOngoingAccordion" id="ongoingAdminSection">
             <div class="ongoingAccordionButton">
@@ -1539,8 +1519,8 @@
   </div>
 
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
-  <script src="../website-bestanden/idea-view-shared.js?v=20260909-shared-desktop-views"></script>
-  <script src="../website-bestanden/agenda-view-shared.js?v=20260909-combined-badges-v12"></script>
+  <script src="../website-bestanden/idea-view-shared.js?v=20260909-single-desktop-source-v13"></script>
+  <script src="../website-bestanden/agenda-view-shared.js?v=20260909-single-desktop-source-v13"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
   const ADMIN_SESSION_KEY = 'bcjn_zomer_beheer_open_v1';
@@ -3267,7 +3247,7 @@
     $('#ideaCountLabel').textContent = items.length === 1 ? 'activiteit' : 'activiteiten';
     const empty = `<div class="empty">${escapeHtml(adminIdeaEmptyMessage(query, filters))}</div>`;
     $('#adminIdeaList').innerHTML = items.length
-      ? `<table><thead><tr><th>Activiteit</th><th>Badges</th><th>Praktisch</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${items.map(adminIdeaRow).join('')}</tbody></table>`
+      ? IdeaViewShared.renderDesktopTable({admin:true, rows:items.map(adminIdeaRow).join('')})
       : empty;
     $('#adminIdeaCards').innerHTML = items.length ? items.map(adminIdeaCard).join('') : empty;
   }
@@ -3430,9 +3410,7 @@
 	    return true;
 	  }
 	  function isAgendaFlexiblePeriod(item={}){
-	    if(item.pinToAgenda) return false;
-	    const label = normalize(`${item.date || ''} ${item.time || ''}`);
-	    return agendaDateSpanDays(item) > 0 || /dagelijks|wisselende|zelf|start wanneer|diverse tijden|op reservering|check/.test(label);
+	    return AgendaViewShared.isFlexiblePeriodOffer(item, agendaDateSpanDays(item));
 	  }
 	  function isAgendaOngoingOffer(item={}){
 	    return item.seasonLimited === true;
@@ -3445,13 +3423,7 @@
 	    return span > 0 && span <= 21;
 	  }
 	  function sortAgendaAdminItems(items=[]){
-	    return [...items].sort((a,b) => {
-	      const spanDiff = agendaDateSpanDays(a) - agendaDateSpanDays(b);
-	      if(spanDiff !== 0) return spanDiff;
-	      const timeDiff = String(a.time || '').localeCompare(String(b.time || ''), 'nl');
-	      if(timeDiff !== 0) return timeDiff;
-	      return String(a.title || '').localeCompare(String(b.title || ''), 'nl');
-	    });
+	    return AgendaViewShared.sortAgendaItems(items, agendaDateSpanDays);
 	  }
 	  function agendaReviewSortDate(item={}){
 	    const range = parseDutchDateRange(item.date);
@@ -3638,7 +3610,8 @@
 	    return weeks.join('');
 	  }
 	  function renderOngoingAdminRow(item, state){
-	    const weeks = itemWeekIds(item).filter(id => id !== 'zonder').map(id => id.replace(/^w/i, '')).join(', ') || '–';
+	    const weekIds = orderedAdminWeekIds(itemWeekIds(item));
+	    const weeks = AgendaViewShared.compactWeekLabel(weekIds, ADMIN_WEEKS, true) || '–';
 	    const distance = normalizeIdeaDistance(item.distanceBand, item, 'agenda');
 	    const location = normalizeIdeaLocation(item.locationType || item.location || '');
 	    const cost = normalizeIdeaCost(item.cost);
@@ -3713,7 +3686,7 @@
 	    const ongoingCandidates = reviewItems.filter(item => !ongoingIds.has(String(item.id)));
 	    $('#ongoingAdminCount').innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${escapeHtml(ongoingItems.length)}</strong> optie${ongoingItems.length === 1 ? '' : 's'}</span>`;
 	    $('#ongoingAdminList').innerHTML = ongoingItems.length
-	      ? `<div class="tableWrap ongoingAdminTableWrap"><table class="ongoingAdminTable"><thead><tr><th>Aanbod</th><th>Weken</th><th>Badges</th><th>Beschrijving</th><th>Website</th></tr></thead><tbody>${ongoingItems.map(item => renderOngoingAdminRow(item, states.get(item.id) || agendaReviewState(item, hidden, verified))).join('')}</tbody></table></div>`
+	      ? `<div class="tableWrap">${AgendaViewShared.renderOngoingTable({rows:ongoingItems.map(item => renderOngoingAdminRow(item, states.get(item.id) || agendaReviewState(item, hidden, verified))).join('')})}</div>`
 	      : '<div class="empty">Nog geen doorlopend aanbod. Kies hierboven een agenda-item om het toe te voegen.</div>';
 	    $('#ongoingAdminSelect').innerHTML = ongoingCandidates.length
 	      ? `<option value="">Kies een agenda-item</option>${ongoingCandidates.map(item => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.title)} · ${escapeHtml(item.date || 'geen datum')}</option>`).join('')}`

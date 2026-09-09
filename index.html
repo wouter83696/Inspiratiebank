@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="nl">
+<html lang="nl" data-ui-build="single-desktop-source-v13">
 <head>
   <base href="/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta name="theme-color" content="#FAFCFB">
   <meta name="description" content="Een verzameling ideeën, uitjes en activiteiten om inspiratie op te doen, plannen te maken en samen te ontdekken.">
   <meta property="og:locale" content="nl_NL">
@@ -1727,6 +1728,8 @@
     }
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
+  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260909-single-desktop-source-v13">
+  <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20260909-single-desktop-source-v13">
 </head>
 <body>
   <header class="topbar">
@@ -2053,8 +2056,8 @@
   </div>
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20260909-shared-desktop-views"></script>
-  <script src="website-bestanden/agenda-view-shared.js?v=20260909-combined-badges-v12"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20260909-single-desktop-source-v13"></script>
+  <script src="website-bestanden/agenda-view-shared.js?v=20260909-single-desktop-source-v13"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
@@ -4218,10 +4221,7 @@
     return Math.max(0, Math.round((end - start) / 86400000));
   }
   function isFlexiblePeriodOffer(item){
-    if(item.pinToAgenda) return false;
-    const dateTimeLabel = normalize(`${item.date || ''} ${item.time || ''}`);
-    if(eventSpanDays(item) > 0) return true;
-    return /dagelijks|wisselende voorstellingen|start wanneer je wilt|diverse tijden|di t\/m zo|ma t\/m zo|maandag t\/m zondag/.test(dateTimeLabel);
+    return AgendaViewShared.isFlexiblePeriodOffer(item, eventSpanDays(item));
   }
   function isOngoingOffer(item={}){
     return item.seasonLimited === true || isFlexiblePeriodOffer(item);
@@ -4242,13 +4242,7 @@
     });
   }
   function sortWeekItems(items){
-    return [...items].sort((a,b) => {
-      const spanDiff = eventSpanDays(a) - eventSpanDays(b);
-      if(spanDiff !== 0) return spanDiff;
-      const timeDiff = String(a.time || '').localeCompare(String(b.time || ''), 'nl');
-      if(timeDiff !== 0) return timeDiff;
-      return String(a.title || '').localeCompare(String(b.title || ''), 'nl');
-    });
+    return AgendaViewShared.sortAgendaItems(items, eventSpanDays);
   }
   function visibleWeekItemCount(weekId, items=[]){
     const seen = new Set();
@@ -4373,15 +4367,7 @@
   }
   function compactWeekAvailabilityLabel(item, short=false){
     const ids = orderedWeekIds(splitWeeks(item.week));
-    if(!ids.length) return weekAvailabilityLabel(item);
-    const weekNumbers = ids.map(id => ACTIVE_WEEKS.find(week => week.id === id)?.week).filter(Boolean);
-    const allConsecutive = ids.every((id, index) => ACTIVE_WEEKS.findIndex(week => week.id === id) === ACTIVE_WEEKS.findIndex(week => week.id === ids[0]) + index);
-    if(short){
-      if(weekNumbers.length > 1 && allConsecutive) return `${weekNumbers[0]}-${weekNumbers[weekNumbers.length - 1]}`;
-      return weekNumbers.join(', ');
-    }
-    if(weekNumbers.length > 2 && allConsecutive) return `Week ${weekNumbers[0]} t/m ${weekNumbers[weekNumbers.length - 1]}`;
-    return weekNumbers.map(number => `Week ${number}`).join(', ');
+    return AgendaViewShared.compactWeekLabel(ids, ACTIVE_WEEKS, short) || weekAvailabilityLabel(item);
   }
   function sharedFlexibleOffers(){
     const externalItems = allExternalItems();
@@ -4435,7 +4421,7 @@
     const count = $('#flexibleOfferCount');
     if(count) count.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${escapeHtml(items.length)}</strong> optie${items.length === 1 ? '' : 's'}</span>`;
     $('#flexibleOffersWrap').innerHTML = items.length
-      ? `<table><thead><tr><th>Aanbod</th><th>Weken</th><th>Badges</th><th>Beschrijving</th><th>Website</th></tr></thead><tbody>${items.map(flexibleExternalRow).join('')}</tbody></table>`
+      ? AgendaViewShared.renderOngoingTable({rows:items.map(flexibleExternalRow).join('')})
       : `<div class="empty">${escapeHtml(hasActiveAgendaFilters(filters) ? agendaEmptyMessage(filters) : 'Er is nog geen tijdelijk aanbod voor deze periode zichtbaar.')}</div>`;
   }
   function weekNavControls(currentId){
@@ -4849,7 +4835,7 @@
     const empty = `<div class="empty">${escapeHtml(inspirationEmptyMessage())}</div>`;
     $('#ideaCards').innerHTML = items.length ? items.map(cardIdea).join('') : empty;
     $('#ideaList').innerHTML = items.length
-      ? `<table><thead><tr><th>Activiteit</th><th>Badges</th><th>Praktisch</th><th>Website</th></tr></thead><tbody>${items.map(ideaRow).join('')}</tbody></table>`
+      ? IdeaViewShared.renderDesktopTable({rows:items.map(ideaRow).join('')})
       : empty;
     renderIdeaMap(items);
   }

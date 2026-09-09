@@ -35,5 +35,12 @@
     return renderRow({...view, cells});
   }
 
-  window.IdeaViewShared = Object.freeze({renderCard, renderRow, renderDesktopRow});
+  function renderDesktopTable(view={}){
+    const admin = view.admin === true;
+    const headers = ['Activiteit', 'Badges', 'Praktisch', 'Website'];
+    if(admin) headers.push('Beheer');
+    return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
+  }
+
+  window.IdeaViewShared = Object.freeze({renderCard, renderRow, renderDesktopRow, renderDesktopTable});
 })();

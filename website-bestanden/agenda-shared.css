@@ -98,7 +98,6 @@
 
 /* Categorie-iconen houden in iedere gedeelde beheerweergave hun themarand. */
 #adminApp .agendaItemTitle .domainIcon,
-#adminApp .agendaReviewCardTitle .domainIcon,
 #adminApp .ongoingTitleCell .domainIcon,
 #adminApp .ideaThemeCard .domainIcon,
 #adminApp .ideaThemeRow .domainIcon{
@@ -107,24 +106,21 @@
   color:var(--theme-ink,var(--accent-dark));
 }
 
-.weekPanel,
-.agendaReviewWeek{
+.weekPanel{
   overflow:hidden;
   background:rgba(255,253,249,.86);
   border-color:rgba(239,233,222,.88);
   box-shadow:0 18px 48px rgba(64,45,20,.045);
 }
 
-.weekTop,
-.agendaReviewWeekHead{
+.weekTop{
   display:block;
   padding:28px 28px 14px;
   border-bottom:0;
   background:rgba(255,253,249,.72);
 }
 
-.weekTitle,
-.agendaReviewWeekTitle{
+.weekTitle{
   display:flex;
   align-items:center;
   gap:16px;
@@ -162,8 +158,7 @@
   max-width:100%;
 }
 
-.weekBadge,
-.agendaReviewWeekBadge{
+.weekBadge{
   width:52px;
   height:52px;
   margin-top:2px;
@@ -179,8 +174,7 @@
   flex:0 0 auto;
 }
 
-.weekTop h3,
-.agendaReviewWeekHead h3{
+.weekTop h3{
   margin:0;
   color:#07345e;
   font-size:clamp(1.72rem,2.55vw,2.28rem);
@@ -241,15 +235,13 @@
   white-space:nowrap;
 }
 
-.weekTop .dates,
-.agendaReviewWeekHead p{
+.weekTop .dates{
   margin-top:9px;
   color:#123968;
   font-size:1.04rem;
 }
 
-.weekMeta,
-.agendaReviewWeekMeta{
+.weekMeta{
   display:flex;
   align-items:center;
   justify-content:flex-end;
@@ -259,12 +251,10 @@
 }
 
 .weekMeta{max-width:440px}
-.agendaReviewWeekMeta{max-width:330px}
 
 .weekBody{padding:0 18px 22px}
 
-.agendaBoard,
-.agendaReviewBoard{
+.agendaBoard{
   display:grid;
   grid-template-columns:repeat(7,minmax(0,1fr));
   gap:0;
@@ -274,17 +264,7 @@
   border-radius:16px;
 }
 
-.agendaReviewBoard{
-  overflow-x:auto;
-  margin:0 18px 22px;
-}
-
-.weekBody>.agendaReviewBoard{
-  margin:0;
-}
-
-.agendaDay,
-.agendaReviewDay{
+.agendaDay{
   min-height:520px;
   padding:16px 10px 14px;
   border:0;
@@ -295,33 +275,28 @@
   gap:18px;
 }
 
-.agendaDay:first-child,
-.agendaReviewDay:first-child{
+.agendaDay:first-child{
   border-left:0;
 }
 
-.agendaDay:nth-child(odd),
-.agendaReviewDay:nth-child(odd){
+.agendaDay:nth-child(odd){
   --day-column-tint:rgba(255,255,255,.46);
   --day-head-tint:transparent;
 }
 
-.agendaDay:nth-child(even),
-.agendaReviewDay:nth-child(even){
+.agendaDay:nth-child(even){
   --day-column-tint:rgba(226,245,243,.22);
   --day-head-tint:transparent;
 }
 
-.agendaDay.today,
-.agendaReviewDay.today{
+.agendaDay.today{
   position:relative;
   z-index:1;
   background:rgba(222,244,241,.42);
   box-shadow:inset 0 0 0 1px rgba(79,142,158,.18),0 0 0 1px rgba(168,225,221,.18);
 }
 
-.agendaHead,
-.agendaReviewDayHead{
+.agendaHead{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
@@ -333,11 +308,9 @@
   border-bottom:0;
 }
 
-.agendaHead>div,
-.agendaReviewDayHead>div{display:flex;align-items:baseline;gap:7px;flex-wrap:nowrap;min-width:0}
+.agendaHead>div{display:flex;align-items:baseline;gap:7px;flex-wrap:nowrap;min-width:0}
 
-.agendaHead strong,
-.agendaReviewDayHead strong{
+.agendaHead strong{
   display:block;
   white-space:nowrap;
   color:#082b55;
@@ -345,8 +318,7 @@
   font-weight:600;
 }
 
-.agendaHead span,
-.agendaReviewDayHead span{
+.agendaHead span{
   display:inline;
   margin-top:0;
   white-space:nowrap;
@@ -372,18 +344,12 @@
   transition:background .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease);
 }
 
-.adminAgendaItem{
-  display:flex;
-  flex-direction:column;
-  gap:0;
-}
-
 .agendaItemLink{display:block;flex:0 0 auto;color:inherit;text-decoration:none}
-.adminAgendaItem .agendaReviewCardActions{
-  display:grid;grid-template-columns:repeat(4,28px);align-items:center;justify-content:end;gap:5px;
+.adminAgendaActions{
+  display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:5px;
   margin-top:6px;padding:0;border-top:0
 }
-.adminAgendaItem .agendaReviewCardActions .button.iconAction{flex:0 0 28px;width:28px;height:28px;min-width:28px;padding:0}
+.adminAgendaActions .button.iconAction{flex:0 0 28px;width:28px;height:28px;min-width:28px;padding:0}
 
 #adminApp .agendaReviewList.weekStack{
   display:grid;
@@ -395,7 +361,6 @@
   background:transparent;
 }
 
-#adminApp .agendaReviewBoard{overflow:hidden;margin:0}
 .agendaAdminMore{display:grid;gap:10px}
 .agendaAdminMore>summary{list-style:none}
 .agendaAdminMore>summary::-webkit-details-marker{display:none}
@@ -511,14 +476,6 @@
   stroke-linejoin:round;
 }
 
-@media (max-width:1040px){
-  .agendaReviewBoard{
-    grid-template-columns:repeat(7,180px);
-    margin:0 12px 18px;
-  }
-  .agendaReviewDay{min-height:360px}
-}
-
 @media (max-width:980px){
   .weekBody{padding:0 12px 18px}
   .agendaBoard{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -527,30 +484,21 @@
   .agendaDay:nth-child(n+3){border-top:1px solid rgba(11,18,32,.06)}
 }
 
-@media (max-width:820px){
-  .agendaReviewWeekHead{grid-template-columns:1fr}
-  .agendaReviewWeekMeta{justify-content:flex-start}
-}
-
 @media (max-width:640px){
-  .weekTop,
-  .agendaReviewWeekHead{
+  .weekTop{
     grid-template-columns:1fr;
     gap:16px;
     padding:18px 16px;
   }
-  .weekTitle,
-  .agendaReviewWeekTitle{
+  .weekTitle{
     gap:14px;
   }
-  .weekBadge,
-  .agendaReviewWeekBadge{
+  .weekBadge{
     width:56px;
     height:56px;
     font-size:1.42rem;
   }
-  .weekTop h3,
-  .agendaReviewWeekHead h3{
+  .weekTop h3{
     font-size:1.55rem;
     line-height:1.2;
     padding-bottom:2px;
@@ -601,14 +549,12 @@
     line-height:1.36;
   }
   .weekBody{padding:0}
-  .agendaBoard,
-  .agendaReviewBoard{
+  .agendaBoard{
     grid-template-columns:1fr;
     overflow:visible;
     margin:0;
   }
-  .agendaDay,
-  .agendaReviewDay{
+  .agendaDay{
     min-height:auto;
     padding:16px 12px 14px;
     gap:14px;
@@ -621,12 +567,10 @@
     width:100%;
     min-width:0;
   }
-  .agendaDay:first-child,
-  .agendaReviewDay:first-child{
+  .agendaDay:first-child{
     border-top:0;
   }
-  .agendaItem,
-  .agendaReviewCard{
+  .agendaItem{
     min-height:0;
   }
 }

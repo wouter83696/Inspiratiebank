@@ -12,18 +12,18 @@
   }
 
   function renderItem(view){
-    const classes = ['agendaItem', view.themeClass || '', view.compact ? 'multiDayItem' : '', view.admin ? 'adminAgendaItem' : '', view.hidden ? 'hiddenItem' : '', view.isNew ? 'newItem' : '']
+    const classes = ['agendaItem', view.themeClass || '', view.compact ? 'multiDayItem' : '', view.hidden ? 'hiddenItem' : '', view.isNew ? 'newItem' : '']
       .filter(Boolean).join(' ');
     const content = `${view.title || ''}${view.review || ''}<span class="agendaItemMeta">${view.meta || ''}</span>`;
     const main = view.href
       ? `<a class="agendaItemLink" href="${view.href}" target="_blank" rel="noopener">${content}</a>`
       : `<div class="agendaItemLink">${content}</div>`;
-    const actionsClass = view.admin ? 'agendaItemActions agendaReviewCardActions' : 'agendaItemActions';
+    const actionsClass = view.admin ? 'agendaItemActions agendaReviewCardActions adminAgendaActions' : 'agendaItemActions';
     return `<article class="${classes}">${main}${view.status || ''}<div class="${actionsClass}">${view.actions || ''}</div></article>`;
   }
 
   function renderDay(view){
-    const classes = ['agendaDay', view.admin ? 'adminAgendaDay' : '', view.past ? 'pastDay' : '', view.today ? 'today' : '', view.expanded ? 'expanded' : '']
+    const classes = ['agendaDay', view.past ? 'pastDay' : '', view.today ? 'today' : '', view.expanded ? 'expanded' : '']
       .filter(Boolean).join(' ');
     return `<article class="${classes}" data-agenda-day="${view.key || ''}" tabindex="0"${view.today ? ' aria-current="date"' : ''}>
       <div class="agendaHead"><div><strong>${view.label || ''}</strong><span>${view.date || ''}</span></div></div>
@@ -32,7 +32,7 @@
   }
 
   function renderWeek(view){
-    return `<article class="weekPanel${view.admin ? ' adminAgendaWeek' : ''}"${view.id ? ` id="${view.id}"` : ''}>
+    return `<article class="weekPanel"${view.id ? ` id="${view.id}"` : ''}>
       <div class="weekTop">
         <div class="weekTitle">
           <div class="weekBadge"><span class="weekBadgeNumber">${view.week || ''}</span></div>
@@ -56,6 +56,40 @@
       <td class="websiteCell">${view.website || ''}</td>
       ${view.actions !== undefined && !view.actionsInTitle ? `<td class="ongoingManageCell"><div class="ongoingAdminActions">${view.actions || ''}</div></td>` : ''}
     </tr>`;
+  }
+
+  function renderOngoingTable(view={}){
+    return `<table${view.className ? ` class="${view.className}"` : ''}><thead><tr><th>Aanbod</th><th>Weken</th><th>Badges</th><th>Beschrijving</th><th>Website</th></tr></thead><tbody>${view.rows || ''}</tbody></table>`;
+  }
+
+  function isFlexiblePeriodOffer(item={}, spanDays=0){
+    if(item.pinToAgenda) return false;
+    const label = String(`${item.date || ''} ${item.time || ''}`).toLocaleLowerCase('nl-NL');
+    return spanDays > 0 || /dagelijks|wisselende voorstellingen|start wanneer je wilt|diverse tijden|di t\/m zo|ma t\/m zo|maandag t\/m zondag/.test(label);
+  }
+
+  function sortAgendaItems(items=[], spanDaysFor=()=>0){
+    return [...items].sort((a,b) => {
+      const spanDiff = spanDaysFor(a) - spanDaysFor(b);
+      if(spanDiff !== 0) return spanDiff;
+      const timeDiff = String(a.time || '').localeCompare(String(b.time || ''), 'nl');
+      if(timeDiff !== 0) return timeDiff;
+      return String(a.title || '').localeCompare(String(b.title || ''), 'nl');
+    });
+  }
+
+  function compactWeekLabel(ids=[], weeks=[], short=false){
+    const ordered = weeks.filter(week => ids.includes(week.id));
+    const numbers = ordered.map(week => week.week).filter(Boolean);
+    if(!numbers.length) return '';
+    const firstIndex = weeks.findIndex(week => week.id === ordered[0]?.id);
+    const consecutive = ordered.every((week, index) => weeks.findIndex(candidate => candidate.id === week.id) === firstIndex + index);
+    if(short){
+      if(numbers.length > 1 && consecutive) return `${numbers[0]}-${numbers[numbers.length - 1]}`;
+      return numbers.join(', ');
+    }
+    if(numbers.length > 2 && consecutive) return `Week ${numbers[0]} t/m ${numbers[numbers.length - 1]}`;
+    return numbers.map(number => `Week ${number}`).join(', ');
   }
 
   function renderAgendaRow(view){
@@ -165,5 +199,5 @@
     return options.sort ? options.sort(result) : result;
   }
 
-  window.AgendaViewShared = Object.freeze({sourceButtonLabel, renderItem, renderDay, renderWeek, renderOngoingRow, renderAgendaRow, renderSourceRow, mergeSourceLinks, buildOngoingOffers});
+  window.AgendaViewShared = Object.freeze({sourceButtonLabel, renderItem, renderDay, renderWeek, renderOngoingRow, renderOngoingTable, renderAgendaRow, renderSourceRow, mergeSourceLinks, buildOngoingOffers, isFlexiblePeriodOffer, sortAgendaItems, compactWeekLabel});
 })();
