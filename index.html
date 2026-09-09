@@ -1740,7 +1740,7 @@
     }
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
-  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260907-mobile-card-width">
+  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260909-shared-admin-views">
 </head>
 <body>
   <header class="topbar">
@@ -2068,6 +2068,7 @@
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20260909-shared-admin-views"></script>
+  <script src="website-bestanden/agenda-view-shared.js?v=20260909-shared-admin-view"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
@@ -4317,13 +4318,12 @@
 	    const isMultiDay = meta.end && meta.end !== meta.start;
 	    const timeLabel = compact ? item.time : (isMultiDay && !item.pinToAgenda ? `${item.date} • ${item.time}` : item.time);
 	    const themeClass = domainThemeClass(item.domain);
-	    return `<div class="agendaItem ${themeClass}${compact ? ' multiDayItem' : ''}">
-	      <a class="agendaItemLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">
-	        ${titleWithIcon(item.title, item.domain, 'agendaItemTitle')}${agendaReviewPill(item)}
-	        <span class="agendaItemMeta">${escapeHtml(timeLabel)} • ${escapeHtml(item.where)}</span>
-	      </a>
-	      <div class="agendaItemActions">${reportMenu('agenda', agendaItemKey(item), item.title)}${activityStatusIcon(item)}</div>
-	    </div>`;
+	    return AgendaViewShared.renderItem({
+        themeClass, compact, href:escapeHtml(item.url),
+        title:titleWithIcon(item.title, item.domain, 'agendaItemTitle'), review:agendaReviewPill(item),
+        meta:`${escapeHtml(timeLabel)} • ${escapeHtml(item.where)}`,
+        actions:`${reportMenu('agenda', agendaItemKey(item), item.title)}${activityStatusIcon(item)}`
+      });
 	  }
   function renderAgendaBoard(weekId, concrete){
     const todayIso = formatIsoDate(new Date());
@@ -4352,18 +4352,13 @@
     return days.map(({day, dayKey, expanded, totalCount, items, periods, visibleEntries, hiddenCount}) => {
       const isToday = day.iso === todayIso;
       const isPastDay = day.iso < todayIso;
-      return `<article class="agendaDay${isPastDay ? ' pastDay' : ''}${isToday ? ' today' : ''}${expanded ? ' expanded' : ''}" data-agenda-day="${escapeHtml(dayKey)}" tabindex="0"${isToday ? ' aria-current="date"' : ''}>
-        <div class="agendaHead">
-          <div><strong>${escapeHtml(day.label)}</strong><span>${escapeHtml(day.prettyDate)}</span></div>
-        </div>
-	    <div class="agendaList">
-	      <div class="agendaGroup">
-	        ${visibleEntries.map(entry => agendaItem(entry.item, entry.compact)).join('')}
-	        ${hiddenCount ? `<button class="agendaMore" type="button" data-expand-agenda-day="${escapeHtml(dayKey)}" aria-expanded="false">+ ${hiddenCount} meer optie${hiddenCount === 1 ? '' : 's'}</button>` : expanded && totalCount > AGENDA_DAY_VISIBLE_LIMIT ? `<button class="agendaMore" type="button" data-collapse-agenda-day="${escapeHtml(dayKey)}" aria-expanded="true">Minder tonen</button>` : ''}
-	        ${!items.length && !periods.length ? `<div class="agendaEmpty">${escapeHtml(agendaEmptyMessage())}</div>` : ''}
-	      </div>
-	    </div>
-      </article>`;
+      return AgendaViewShared.renderDay({
+        key:escapeHtml(dayKey), label:escapeHtml(day.label), date:escapeHtml(day.prettyDate),
+        past:isPastDay, today:isToday, expanded,
+        items:visibleEntries.map(entry => agendaItem(entry.item, entry.compact)).join(''),
+        more:hiddenCount ? `<button class="agendaMore" type="button" data-expand-agenda-day="${escapeHtml(dayKey)}" aria-expanded="false">+ ${hiddenCount} meer optie${hiddenCount === 1 ? '' : 's'}</button>` : expanded && totalCount > AGENDA_DAY_VISIBLE_LIMIT ? `<button class="agendaMore" type="button" data-collapse-agenda-day="${escapeHtml(dayKey)}" aria-expanded="true">Minder tonen</button>` : '',
+        empty:!items.length && !periods.length ? `<div class="agendaEmpty">${escapeHtml(agendaEmptyMessage())}</div>` : ''
+      });
     }).join('');
   }
 	  function byWeek(weekId){
@@ -4494,15 +4489,14 @@
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const mobileLabels = `<div class="ongoingMobileLabels">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div>`;
     const metaLine = `<div class="ongoingMetaLine"><strong>Beschikbaar:</strong> ${escapeHtml(compactWeekAvailabilityLabel(item, true))}</div>`;
-    return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)}">
-	      <td class="ongoingTitleCell"><span class="name">${titleWithIcon(item.title, item.domain, 'nameWithIcon')}</span><div>${agendaReviewPill(item)}</div><div class="small">${escapeHtml(item.date)} • ${escapeHtml(item.time)}</div></td>
-      <td class="ongoingWeeksCell">${escapeHtml(compactWeekAvailabilityLabel(item, true))}</td>
-      <td class="ongoingLocationCell">${mobileLabels}<div class="cardPillGroup">${placePills}</div></td>
-      <td class="ongoingCostCell">${costPill(costLabel)}</td>
-      <td class="ongoingStimulusCell">${stimulusPill(stimulusLabel)}</td>
-      <td class="ongoingFitCell">${metaLine}<div class="small">${escapeHtml(audienceText(item.fit))}</div></td>
-      <td class="websiteCell"><a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a></td>
-    </tr>`;
+    return AgendaViewShared.renderOngoingRow({
+      themeClass:domainThemeClass(item.domain), title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
+      review:`<div>${agendaReviewPill(item)}</div>`, date:`${escapeHtml(item.date)} • ${escapeHtml(item.time)}`,
+      weeks:escapeHtml(compactWeekAvailabilityLabel(item, true)), mobileLabels, place:placePills,
+      cost:costPill(costLabel), stimulus:stimulusPill(stimulusLabel), meta:metaLine,
+      description:escapeHtml(audienceText(item.fit)),
+      website:`<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a>`
+    });
   }
   function renderFlexibleOffers(){
     const filters = agendaSearchState();
@@ -4590,28 +4584,12 @@
       const weekItemCount = visibleWeekItemCount(w.id, concrete);
       visibleCount += weekItemCount;
 	    const agendaHtml = renderAgendaBoard(w.id, concrete);
-      return `<article class="weekPanel" id="${escapeHtml(w.id)}">
-        <div class="weekTop">
-          <div class="weekTitle">
-            <div class="weekBadge"><span class="weekBadgeNumber">${escapeHtml(w.week)}</span></div>
-            <div class="weekTitleContent">
-              <div class="weekHeadingRow">
-                <div class="weekHeadingMain">
-                  <div class="weekDateLine"><h3>${escapeHtml(publicWeekDates(w))}</h3>${agendaFreshnessBadge()}</div>
-                  <div class="weekHeaderMeta">${weekCountBadge(weekItemCount)}</div>
-                </div>
-                ${weekNavControls(w.id)}
-              </div>
-              ${weekStatusText(w)}
-            </div>
-          </div>
-        </div>
-        <div class="weekBody">
-          <div class="subBlock">
-            <div class="agendaBoard" data-week-board="${escapeHtml(w.id)}">${agendaHtml}</div>
-          </div>
-        </div>
-      </article>`;
+      return AgendaViewShared.renderWeek({
+        id:escapeHtml(w.id), week:escapeHtml(w.week), title:escapeHtml(publicWeekDates(w)),
+        freshness:agendaFreshnessBadge(), count:weekCountBadge(weekItemCount),
+        navigation:weekNavControls(w.id), status:weekStatusText(w), days:agendaHtml,
+        boardAttribute:` data-week-board="${escapeHtml(w.id)}"`
+      });
     }).join('');
     const status = $('#agendaSearchStatus');
     if(status){

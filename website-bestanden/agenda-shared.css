@@ -39,6 +39,24 @@
   --agenda-line:rgba(0,155,72,.18);
 }
 
+/* Alle beheeracties volgen dezelfde lichte badgebehandeling. */
+#adminApp .button.iconAction{
+  border:1px solid color-mix(in srgb,currentColor 18%,rgba(255,255,255,.72)) !important;
+  background-color:rgba(255,255,255,.84);
+  box-shadow:0 3px 9px rgba(20,38,42,.035);
+}
+
+/* Categorie-iconen houden in iedere gedeelde beheerweergave hun themarand. */
+#adminApp .agendaItemTitle .domainIcon,
+#adminApp .agendaReviewCardTitle .domainIcon,
+#adminApp .ongoingTitleCell .domainIcon,
+#adminApp .ideaThemeCard .domainIcon,
+#adminApp .ideaThemeRow .domainIcon{
+  border:1px solid var(--agenda-line,var(--theme-line,rgba(79,142,158,.18)));
+  background:var(--agenda-tint,var(--theme-tint-strong,rgba(255,255,255,.76)));
+  color:var(--theme-ink,var(--accent-dark));
+}
+
 .weekPanel,
 .agendaReviewWeek{
   overflow:hidden;
