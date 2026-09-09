@@ -982,7 +982,7 @@
       #agendaReviewList .agendaTableActions .button.iconAction{width:32px;height:32px}
     }
   </style>
-  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260909-day-heading-v9">
+  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260909-literal-desktop-v11">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260909-admin-public-match-v3">
 </head>
 <body>
@@ -1540,7 +1540,7 @@
 
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
   <script src="../website-bestanden/idea-view-shared.js?v=20260909-shared-desktop-views"></script>
-  <script src="../website-bestanden/agenda-view-shared.js?v=20260909-exact-ongoing-v8"></script>
+  <script src="../website-bestanden/agenda-view-shared.js?v=20260909-literal-desktop-v11"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
   const ADMIN_SESSION_KEY = 'bcjn_zomer_beheer_open_v1';
@@ -2004,6 +2004,15 @@
       .filter(item => item.value && Number.isFinite(item.time))
       .sort((a,b) => b.time - a.time);
     return candidates[0]?.value || '';
+  }
+  function agendaAdminFreshnessBadge(){
+    const value = latestAgendaCheckedAt();
+    const date = new Date(value || '');
+    if(!Number.isFinite(date.getTime())) return '';
+    const dateLabel = date.toLocaleDateString('nl-NL', {day:'numeric', month:'short'}).replace(/\.$/, '');
+    const timeLabel = date.toLocaleTimeString('nl-NL', {hour:'2-digit', minute:'2-digit'});
+    const fullLabel = `Agenda laatst gecontroleerd: ${formatAdminDateTime(value)}`;
+    return `<span class="agendaFreshness" title="${escapeHtml(fullLabel)}" aria-label="${escapeHtml(fullLabel)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg><span class="agendaFreshnessLabel">Gecheckt</span><span class="agendaFreshnessTime">${escapeHtml(`${dateLabel}, ${timeLabel}`)}</span></span>`;
   }
   function formatAdminDateTime(value){
     const date = new Date(value || '');
@@ -3570,7 +3579,7 @@
 	      hidden:state.isHidden,
 	      isNew:state.isNew,
 	      href:item.url ? escapeHtml(item.url) : '',
-	      title:titleWithIcon(item.title, item.domain, 'agendaItemTitle agendaReviewCardTitle'),
+	      title:titleWithIcon(item.title, item.domain, 'agendaItemTitle'),
 	      meta:escapeHtml([item.time, item.where].filter(Boolean).join(' · ') || 'Tijd en plek nog checken'),
 	      actions:agendaReviewActions(item, state, true)
 	    });
@@ -3621,6 +3630,7 @@
 	        id:`admin-${escapeHtml(week.id)}`,
 	        week:escapeHtml(week.week),
 	        title:escapeHtml(weekTitle),
+	        freshness:agendaAdminFreshnessBadge(),
 	        count:`<span class="weekCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${weekItemCount}</strong>${weekItemCount === 1 ? '' : '<span class="weekCountWord">verschillende</span>'}<span class="weekCountLabel">${countLabel}</span></span></span>`,
 	        days
 	      });

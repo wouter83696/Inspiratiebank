@@ -12,9 +12,9 @@
   }
 
   function renderItem(view){
-    const classes = ['agendaItem', view.themeClass || '', view.compact ? 'multiDayItem' : '', view.admin ? 'adminAgendaItem agendaReviewCard' : '', view.hidden ? 'hiddenItem' : '', view.isNew ? 'newItem' : '']
+    const classes = ['agendaItem', view.themeClass || '', view.compact ? 'multiDayItem' : '', view.admin ? 'adminAgendaItem' : '', view.hidden ? 'hiddenItem' : '', view.isNew ? 'newItem' : '']
       .filter(Boolean).join(' ');
-    const content = `${view.title || ''}${view.review || ''}<span class="agendaItemMeta${view.admin ? ' agendaReviewCardMeta' : ''}">${view.meta || ''}</span>`;
+    const content = `${view.title || ''}${view.review || ''}<span class="agendaItemMeta">${view.meta || ''}</span>`;
     const main = view.href
       ? `<a class="agendaItemLink" href="${view.href}" target="_blank" rel="noopener">${content}</a>`
       : `<div class="agendaItemLink">${content}</div>`;
@@ -23,23 +23,23 @@
   }
 
   function renderDay(view){
-    const classes = ['agendaDay', view.admin ? 'agendaReviewDay' : '', view.past ? 'pastDay' : '', view.today ? 'today' : '', view.expanded ? 'expanded' : '']
+    const classes = ['agendaDay', view.admin ? 'adminAgendaDay' : '', view.past ? 'pastDay' : '', view.today ? 'today' : '', view.expanded ? 'expanded' : '']
       .filter(Boolean).join(' ');
     return `<article class="${classes}" data-agenda-day="${view.key || ''}" tabindex="0"${view.today ? ' aria-current="date"' : ''}>
-      <div class="agendaHead${view.admin ? ' agendaReviewDayHead' : ''}"><div><strong>${view.label || ''}</strong><span>${view.date || ''}</span></div></div>
-      <div class="agendaList${view.admin ? ' agendaReviewDayItems' : ''}"><div class="agendaGroup">${view.items || ''}${view.more || ''}${view.empty || ''}</div></div>
+      <div class="agendaHead"><div><strong>${view.label || ''}</strong><span>${view.date || ''}</span></div></div>
+      <div class="agendaList"><div class="agendaGroup">${view.items || ''}${view.more || ''}${view.empty || ''}</div></div>
     </article>`;
   }
 
   function renderWeek(view){
-    return `<article class="weekPanel${view.admin ? ' agendaReviewWeek adminAgendaWeek' : ''}"${view.id ? ` id="${view.id}"` : ''}>
-      <div class="weekTop${view.admin ? ' agendaReviewWeekHead' : ''}">
-        <div class="weekTitle${view.admin ? ' agendaReviewWeekTitle' : ''}">
-          <div class="weekBadge${view.admin ? ' agendaReviewWeekBadge' : ''}"><span class="weekBadgeNumber">${view.week || ''}</span></div>
+    return `<article class="weekPanel${view.admin ? ' adminAgendaWeek' : ''}"${view.id ? ` id="${view.id}"` : ''}>
+      <div class="weekTop">
+        <div class="weekTitle">
+          <div class="weekBadge"><span class="weekBadgeNumber">${view.week || ''}</span></div>
           <div class="weekTitleContent"><div class="weekHeadingRow"><div class="weekHeadingMain"><div class="weekDateLine"><h3>${view.title || ''}</h3>${view.freshness || ''}</div><div class="weekHeaderMeta">${view.count || ''}</div></div>${view.navigation || ''}</div>${view.status || ''}</div>
         </div>
       </div>
-      <div class="weekBody"><div class="subBlock"><div class="agendaBoard${view.admin ? ' agendaReviewBoard' : ''}"${view.boardAttribute || ''}>${view.days || ''}</div></div></div>
+      <div class="weekBody"><div class="subBlock"><div class="agendaBoard"${view.boardAttribute || ''}>${view.days || ''}</div></div></div>
     </article>`;
   }
 

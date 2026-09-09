@@ -131,6 +131,7 @@
   align-items:center;
   gap:16px;
 }
+.weekTitle>div{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
 
 .weekTitleContent{
   flex:1 1 auto;
@@ -141,15 +142,17 @@
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
-  gap:16px;
+  gap:14px;
+  flex-direction:row;
+  flex-wrap:nowrap;
   width:100%;
 }
 
 .weekHeadingMain{
-  display:grid;
-  gap:6px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
   min-width:0;
-  justify-items:start;
 }
 
 .weekDateLine{
@@ -224,6 +227,13 @@
 .weekCountBadge strong{display:inline;font:inherit;font-weight:650;color:rgba(11,18,32,.72)}
 .weekCountWord{display:inline}
 .weekCountLabel{display:inline}
+
+.agendaFreshness{
+  display:inline-flex;align-items:center;gap:5px;max-width:100%;min-height:30px;margin:0;padding:6px 9px;
+  border-radius:999px;background:rgba(255,255,255,.58);border:1px solid rgba(79,142,158,.07);
+  color:rgba(11,18,32,.54);font-size:.74rem;font-weight:500;line-height:1.28
+}
+.agendaFreshness svg{width:13px;height:13px;flex:0 0 13px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.78}
 
 .weekHeaderMeta .weekCountBadge span{
   display:inline-flex;
@@ -346,20 +356,21 @@
   font-size:.91rem;
 }
 
-.agendaList{gap:10px}
-.agendaGroup,
-.agendaReviewDayItems{
-  gap:10px;
-}
+.agendaList{display:grid;gap:10px}
+.agendaGroup{display:grid;gap:10px}
 
-.agendaItem,
-.agendaReviewCard{
-  --agenda-title-offset:27px;
+.agendaItem{
   min-height:0;
   padding:11px 11px 9px;
   border-radius:13px;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow:visible;
   background:rgba(255,255,255,.84);
   border:1px solid rgba(79,142,158,.16);
+  color:inherit;
+  text-decoration:none;
   transition:background .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease);
 }
 
@@ -369,7 +380,7 @@
   gap:0;
 }
 
-.adminAgendaItem .agendaItemLink{color:inherit;text-decoration:none}
+.agendaItemLink{display:block;flex:0 0 auto;color:inherit;text-decoration:none}
 .adminAgendaItem .agendaReviewCardActions{
   display:grid;grid-template-columns:repeat(4,28px);align-items:center;justify-content:end;gap:5px;
   margin-top:6px;padding:0;border-top:0
@@ -392,8 +403,6 @@
 .agendaAdminMore>summary::-webkit-details-marker{display:none}
 .agendaAdminMoreItems{display:grid;gap:10px}
 
-.adminAgendaItem .agendaReviewCardMeta{margin-top:8px}
-
 .agendaItem.themeCreative,
 .agendaItem.themeCulture,
 .agendaItem.themeNature,
@@ -401,77 +410,63 @@
 .agendaItem.themeSport,
 .agendaItem.themeAction,
 .agendaItem.themeDefault{
-  background:var(--agenda-tint);
-  border-color:var(--agenda-line);
-}
-
-.agendaReviewCard.themeCreative,
-.agendaReviewCard.themeCulture,
-.agendaReviewCard.themeNature,
-.agendaReviewCard.themeSocial,
-.agendaReviewCard.themeSport,
-.agendaReviewCard.themeAction,
-.agendaReviewCard.themeDefault{
   background:var(--agenda-tint,var(--theme-tint));
   border-color:var(--agenda-line,var(--theme-line));
   box-shadow:0 8px 20px rgba(20,38,42,.035);
 }
 
-.agendaReviewCard.themeCreative:hover,
-.agendaReviewCard.themeCulture:hover,
-.agendaReviewCard.themeNature:hover,
-.agendaReviewCard.themeSocial:hover,
-.agendaReviewCard.themeSport:hover,
-.agendaReviewCard.themeAction:hover,
-.agendaReviewCard.themeDefault:hover{
+.agendaItem.themeCreative:hover,
+.agendaItem.themeCulture:hover,
+.agendaItem.themeNature:hover,
+.agendaItem.themeSocial:hover,
+.agendaItem.themeSport:hover,
+.agendaItem.themeAction:hover,
+.agendaItem.themeDefault:hover{
   background:linear-gradient(rgba(255,255,255,.32),rgba(255,255,255,.32)),var(--agenda-tint,var(--theme-tint));
   border-color:var(--agenda-line,var(--theme-line));
   box-shadow:0 11px 24px rgba(20,38,42,.065);
 }
 
-.agendaItemTitle,
-.agendaReviewCardTitle{
+.agendaItemTitle{
   display:grid;
-  grid-template-columns:19px minmax(0,1fr);
+  grid-template-columns:24px minmax(0,1fr);
   align-items:center;
-  gap:8px;
+  gap:7px;
+  color:var(--accent-dark);
+  font-size:.86rem;
+  font-weight:500;
+  line-height:1.18;
+  text-align:left;
 }
 
-.agendaItemTitle .domainIcon,
-.agendaReviewCardTitle .domainIcon{
-  width:19px;
-  height:19px;
+.agendaItem .domainIcon{
+  width:26px;
+  height:26px;
   align-self:center;
   margin-top:0;
   opacity:.95;
 }
+.agendaItem .domainIcon svg{width:14px;height:14px}
 
-.agendaItemTitle .ideaTitleText,
-.agendaReviewCardTitle .ideaTitleText{
+.agendaItemTitle .ideaTitleText{
   display:block;
   min-width:0;
   text-indent:0;
-  overflow-wrap:break-word;
-  word-break:normal;
-  hyphens:manual;
+  overflow-wrap:anywhere;
+  hyphens:auto;
 }
 
-.agendaItemMeta,
-.agendaReviewCardMeta{
+.agendaItemMeta{
   color:#123968;
   font-size:.78rem;
   line-height:1.34;
-  overflow-wrap:break-word;
-  word-break:normal;
-  hyphens:manual;
+  overflow-wrap:anywhere;
+  hyphens:auto;
 }
 
-.agendaItemMeta{margin-top:8px}
-.agendaReviewCardMeta{margin-top:8px}
-.agendaItemMeta,
-.agendaReviewCardMeta{
+.agendaItemMeta{
   display:block;
-  margin-left:var(--agenda-title-offset);
+  margin-top:8px;
 }
 
 .weekNav{
@@ -516,39 +511,6 @@
   stroke-width:2.8;
   stroke-linecap:round;
   stroke-linejoin:round;
-}
-
-@media (min-width:981px){
-  .agendaBoard .agendaItem,
-  .agendaReviewBoard .agendaReviewCard{
-    --agenda-title-offset:23px;
-    padding:10px 10px 9px;
-    border-radius:12px;
-  }
-  .agendaBoard .agendaItemTitle,
-  .agendaReviewBoard .agendaReviewCardTitle{
-    grid-template-columns:17px minmax(0,1fr);
-    gap:6px;
-    font-size:.8rem;
-    line-height:1.16;
-    font-weight:560;
-  }
-  .agendaBoard .agendaItemTitle .domainIcon,
-  .agendaReviewBoard .agendaReviewCardTitle .domainIcon{
-    width:17px;
-    height:17px;
-  }
-  .agendaBoard .agendaItemTitle .domainIcon svg,
-  .agendaReviewBoard .agendaReviewCardTitle .domainIcon svg{
-    width:10px;
-    height:10px;
-  }
-  .agendaBoard .agendaItemMeta,
-  .agendaReviewBoard .agendaReviewCardMeta{
-    margin-top:7px;
-    font-size:.73rem;
-    line-height:1.32;
-  }
 }
 
 @media (max-width:1040px){
