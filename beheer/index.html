@@ -1482,6 +1482,7 @@
   </div>
 
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
+  <script src="../website-bestanden/idea-view-shared.js?v=20260909-shared-admin-views"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
   const ADMIN_SESSION_KEY = 'bcjn_zomer_beheer_open_v1';
@@ -3133,19 +3134,15 @@
     const practical = item.rules || item.materials || 'Nog bepalen';
     const source = item.source || item.kind || '';
     const website = item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.source || 'Bekijk website')}</a>` : '';
-    return `<article class="card ideaThemeCard ${domainThemeClass(item.domain)} ${item.hidden ? 'hiddenItem' : ''}">
-      ${imageMarkup}
-      <h3>${titleWithIcon(item.title, item.domain)}</h3>
-      <div class="cardPills"><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)} ${item.kind === 'collega-toegevoegd' && !item.approved ? '<span class="pill warn">Wacht op goedkeuring</span>' : ''}${item.hidden ? '<span class="pill warn">Verborgen</span>' : ''}</div></div>
-      ${cardMetaLine(item)}
-      ${source ? `<div class="small">${escapeHtml(source)}</div>` : ''}
-      <p>${escapeHtml(description)}</p>
-      <p class="fine"><strong>Praktisch:</strong>${escapeHtml(practical)}</p>
-      <div class="ideaAdminCardBottom">
-        ${website ? `<div class="cardFooter">${website}</div>` : ''}
-        <div class="agendaReviewCardActions ideaAdminCardActions">${adminIdeaActions(item)}</div>
-      </div>
-    </article>`;
+    return IdeaViewShared.renderCard({
+      admin:true, themeClass:domainThemeClass(item.domain), hidden:item.hidden, hasImage:Boolean(image),
+      attributes:`data-idea-key="${escapeHtml(item.key)}"`, image:imageMarkup,
+      title:titleWithIcon(item.title, item.domain),
+      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)} ${item.kind === 'collega-toegevoegd' && !item.approved ? '<span class="pill warn">Wacht op goedkeuring</span>' : ''}${item.hidden ? '<span class="pill warn">Verborgen</span>' : ''}`,
+      meta:cardMetaLine(item), source:source ? escapeHtml(source) : '',
+      description:escapeHtml(description), practical:escapeHtml(practical), website,
+      actions:adminIdeaActions(item)
+    });
   }
   function adminIdeaRow(item){
     const locationLabel = normalizeIdeaLocation(item.locationType);
@@ -3157,13 +3154,17 @@
     const approvalMeta = item.kind === 'collega-toegevoegd' && !item.approved ? 'Wacht op goedkeuring' : '';
     const activityMeta = [item.group || '', item.duration || '', approvalMeta, item.hidden ? 'Verborgen' : ''].filter(Boolean).join(' • ');
     const website = item.url ? `<a class="button iconAction adminWebsiteAction" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" aria-label="Website openen" title="${escapeHtml(`Website openen${item.source ? `: ${item.source}` : ''}`)}">${actionIcon('external')}</a>` : '<span class="small">-</span>';
-    return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)} ${item.hidden ? 'hiddenItem' : ''}" data-idea-key="${escapeHtml(item.key)}">
-      <td data-label="Activiteit">${titleWithIcon(item.title, item.domain, 'adminIdeaTitle')}${activityMeta ? `<div class="small adminIdeaMetaLine">${escapeHtml(activityMeta)}</div>` : ''}${source ? `<div class="small adminIdeaMetaLine">${escapeHtml(source)}</div>` : ''}</td>
-      <td data-label="Badges"><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel || item.stimulus)}</div></td>
-      <td data-label="Praktisch"><div class="small">${escapeHtml(item.rules || item.materials || item.description || '-')}</div></td>
-      <td data-label="Website">${website}</td>
-      <td data-label="Beheer">${adminIdeaActions(item)}</td>
-    </tr>`;
+    return IdeaViewShared.renderRow({
+      themeClass:domainThemeClass(item.domain), hidden:item.hidden,
+      attributes:`data-idea-key="${escapeHtml(item.key)}"`,
+      cells:[
+        {label:'Activiteit',html:`${titleWithIcon(item.title, item.domain, 'adminIdeaTitle')}${activityMeta ? `<div class="small adminIdeaMetaLine">${escapeHtml(activityMeta)}</div>` : ''}${source ? `<div class="small adminIdeaMetaLine">${escapeHtml(source)}</div>` : ''}`},
+        {label:'Badges',html:`<div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel || item.stimulus)}</div>`},
+        {label:'Praktisch',html:`<div class="small">${escapeHtml(item.rules || item.materials || item.description || '-')}</div>`},
+        {label:'Website',html:website},
+        {label:'Beheer',html:adminIdeaActions(item)}
+      ]
+    });
   }
   function renderIdeas(){
     renderSubmittedIdeas();

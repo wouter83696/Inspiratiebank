@@ -2067,6 +2067,7 @@
   </div>
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20260909-shared-admin-views"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
@@ -4564,13 +4565,17 @@
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
     const sourceLink = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(sourceButtonLabel(item))}</a>` : '<span class="small">-</span>';
-    return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)}" data-idea-key="${escapeHtml(ideaDomKey(item))}">
-      <td>${titleWithIcon(item.title, item.domain, 'nameWithIcon')}<div class="small ideaListMeta">${escapeHtml(item.group || '')} • ${escapeHtml(item.duration || '')}</div></td>
-      <td>${categoryPill(item.domain)}</td>
-      <td><div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div></td>
-      <td><div class="small">${escapeHtml(audienceText(item.materials || item.fit || ''))}</div></td>
-      <td><div class="ideaActions">${sourceLink}${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}</div></td>
-    </tr>`;
+    return IdeaViewShared.renderRow({
+      themeClass:domainThemeClass(item.domain),
+      attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
+      cells:[
+        {html:`${titleWithIcon(item.title, item.domain, 'nameWithIcon')}<div class="small ideaListMeta">${escapeHtml(item.group || '')} • ${escapeHtml(item.duration || '')}</div>`},
+        {html:categoryPill(item.domain)},
+        {html:`<div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div>`},
+        {html:`<div class="small">${escapeHtml(audienceText(item.materials || item.fit || ''))}</div>`},
+        {html:`<div class="ideaActions">${sourceLink}${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}</div>`}
+      ]
+    });
   }
 
   function renderWeekPanels(){
@@ -4625,15 +4630,15 @@
     const image = approvedIdeaImage(item);
     const fitText = audienceText(item.fit);
     const practicalText = audienceText(item.materials || 'Nog bepalen');
-    return `<article class="card ideaThemeCard ${domainThemeClass(item.domain)}${image ? ' hasImage' : ''}" data-idea-key="${escapeHtml(ideaDomKey(item))}">
-      ${image ? ideaImageMarkup(image) : ''}
-      <h3>${titleWithIcon(item.title, item.domain)}</h3>
-      <div class="cardLabels">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div>
-      ${cardMetaLine(item)}
-      <p>${escapeHtml(fitText)}</p>
-      <p class="fine"><strong>Praktisch:</strong>${escapeHtml(practicalText)}</p>
-      <div class="cardFooter">${item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : ''}${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}</div>
-    </article>`;
+    return IdeaViewShared.renderCard({
+      themeClass:domainThemeClass(item.domain), hasImage:Boolean(image),
+      attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
+      image:image ? ideaImageMarkup(image) : '', title:titleWithIcon(item.title, item.domain),
+      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
+      meta:cardMetaLine(item), description:escapeHtml(fitText), practical:escapeHtml(practicalText),
+      website:item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : '',
+      actions:`${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}`
+    });
   }
   function matches(item, query, filters){
     const text = JSON.stringify(item);
