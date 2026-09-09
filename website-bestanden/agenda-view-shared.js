@@ -45,5 +45,19 @@
     </tr>`;
   }
 
-  window.AgendaViewShared = Object.freeze({renderItem, renderDay, renderWeek, renderOngoingRow});
+  function renderAgendaRow(view){
+    const classes = ['ideaThemeRow', view.themeClass || '', view.hidden ? 'hiddenItem' : '', view.isNew ? 'newItem' : ''].filter(Boolean).join(' ');
+    return `<tr class="${classes}">
+      <td data-label="Activiteit"><span class="name">${view.title || ''}</span>${view.review || ''}<div class="small">${view.date || ''}</div></td>
+      <td data-label="Categorie">${view.domain || ''}</td>
+      <td data-label="Locatie en afstand">${view.location || ''}</td>
+      <td data-label="Kosten">${view.cost || ''}</td>
+      <td data-label="Prikkel">${view.stimulus || ''}</td>
+      <td data-label="Beschrijving"><div class="small">${view.description || ''}</div></td>
+      <td class="websiteCell" data-label="Website">${view.website || ''}</td>
+      ${view.actions !== undefined ? `<td data-label="Beheer"><div class="agendaTableActions">${view.actions || ''}</div></td>` : ''}
+    </tr>`;
+  }
+
+  window.AgendaViewShared = Object.freeze({renderItem, renderDay, renderWeek, renderOngoingRow, renderAgendaRow});
 })();

@@ -401,6 +401,10 @@
     .domainIcon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:999px;background:var(--theme-tint-strong);border:1px solid var(--theme-line);color:var(--theme-ink);flex:0 0 auto}
     .domainIcon svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .agendaThemeLegend{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 12px}
+    .adminThemeLegendRow{display:flex;align-items:center;gap:14px}
+    .adminThemeLegendRow #adminThemeLegend{min-width:0;flex:1 1 auto}
+    .adminThemeLegendRow .agendaThemeLegend{margin-right:0}
+    .adminThemeLegendRow .adminCountBadge{flex:0 0 auto;margin:10px 0 12px}
     .agendaLegendItem{
       appearance:none;font:inherit;text-align:left;
       display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 8px;
@@ -589,8 +593,31 @@
     .agendaRuleType{display:block;color:var(--accent-dark);font-size:.78rem;font-weight:600;text-transform:uppercase}
     .agendaRuleValue{display:block;margin-top:2px;color:var(--ink);font-size:.88rem;line-height:1.25;overflow-wrap:anywhere}
     .agendaRuleMeta{display:block;margin-top:3px;color:var(--muted);font-size:.76rem}
-    .agendaReviewList{display:grid;gap:10px;max-height:760px;overflow:auto;padding-right:4px}
+    .agendaReviewList{display:block;max-height:none;overflow-x:auto;padding:0}
     .agendaReviewList[hidden],.agendaReviewWeekView[hidden]{display:none !important}
+    .agendaReviewTable{width:100%;min-width:1120px;border-collapse:collapse;table-layout:fixed}
+    .agendaReviewTable th,.agendaReviewTable td{padding:13px 14px;text-align:left;vertical-align:top;border-bottom:1px solid rgba(11,18,32,.07);font-size:.86rem;line-height:1.4}
+    .agendaReviewTable th{color:rgba(11,18,32,.56);font-weight:500;background:rgba(255,255,255,.78)}
+    .agendaReviewTable tr:last-child td{border-bottom:0}
+    .agendaReviewTable .ideaThemeRow td{border-bottom-color:color-mix(in srgb,var(--theme-line) 72%,#EFE9DE)}
+    .agendaReviewTable tr.newItem td:first-child{box-shadow:inset 4px 0 0 rgba(79,142,158,.25)}
+    .agendaReviewTable tr.hiddenItem{opacity:.64}
+    .agendaReviewTable tr.hiddenItem td{background:rgba(11,18,32,.025)}
+    .agendaReviewTable th:nth-child(1){width:21%}.agendaReviewTable th:nth-child(2){width:10%}
+    .agendaReviewTable th:nth-child(3){width:15%}.agendaReviewTable th:nth-child(4){width:7%}
+    .agendaReviewTable th:nth-child(5){width:7%}.agendaReviewTable th:nth-child(6){width:20%}
+    .agendaReviewTable th:nth-child(7){width:7%}.agendaReviewTable th:nth-child(8){width:13%}
+    .agendaTableTitle{display:grid;grid-template-columns:22px minmax(0,1fr);gap:9px;align-items:start;color:var(--accent-dark);font-weight:600}
+    .agendaTableTitle .domainIcon{width:22px;height:22px;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
+    .agendaTableTitle .domainIcon svg{width:12px;height:12px}
+    .agendaTableSub{display:block;margin:5px 0 0 31px;color:var(--muted);font-size:.78rem;overflow-wrap:anywhere}
+    .agendaTableBadges{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+    .agendaTableDate strong{display:block;color:var(--accent-dark);font-weight:500}
+    .agendaTableDate span,.agendaTablePractical{color:var(--muted)}
+    .agendaTablePractical strong{display:block;margin-bottom:3px;color:var(--accent-dark);font-weight:500}
+    .agendaTableActions{display:grid;grid-template-columns:repeat(3,28px);gap:5px;align-items:center;justify-content:start}
+    .agendaTableActions .button.iconAction{width:28px;height:28px;padding:0;border-radius:10px;box-shadow:none}
+    .agendaTableActions .button.iconAction svg{width:15px;height:15px}
     .ongoingAdminPicker{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;margin:14px 0}
     .ongoingAdminPicker label{display:grid;gap:6px;flex:1 1 320px;color:var(--accent-dark);font-size:.84rem;font-weight:500}
     .ongoingAdminList{min-width:0}
@@ -857,7 +884,7 @@
       .adminSidebarFoot .mini,#adminApp.adminSidebarCollapsed .adminSidebarFoot .mini{grid-template-columns:30px minmax(0,1fr);width:100%;margin:0;padding:7px 8px}
       .adminWorkspaceShell,#adminApp.adminSidebarCollapsed .adminWorkspaceShell{margin-left:0;padding:0;max-width:none}
     }
-    @media (max-width:640px){.filterBar{padding:10px}.filters.more{grid-template-columns:minmax(0,1fr) auto;gap:8px}.filterSearch{grid-column:auto}.filterToggle{display:inline-flex}.filters.more.expanded .filterToggle{background:rgba(168,225,221,.30);border-color:rgba(79,142,158,.14)}.filters.more:not(.expanded)>select,.filters.more:not(.expanded)>.customSelect,.filters.more:not(.expanded)>.filterReset{display:none}.filters.more>select,.filters.more>.customSelect,.filters.more>.filterReset{grid-column:1/-1}.filterReset{justify-content:center}#adminThemeLegend,.agendaAdminThemeLegend{margin-left:-14px;margin-right:-14px;overflow:hidden}.agendaThemeLegend{flex-wrap:nowrap;overflow-x:auto;padding:0 14px 3px;scrollbar-width:none}.agendaThemeLegend::-webkit-scrollbar{display:none}.agendaControlBar{grid-template-columns:1fr}.agendaReviewWeekHead{padding:18px 16px;gap:16px}.agendaReviewWeekTitle{gap:14px}.agendaReviewWeekBadge{width:56px;height:56px;font-size:1.42rem}.agendaReviewWeekHead h3{font-size:1.55rem}.agendaReviewBoard{grid-template-columns:1fr;overflow:visible;margin:0}.agendaReviewDay{min-height:auto;padding:16px 12px 14px;gap:14px;border-right:0;border-bottom:1px solid rgba(11,18,32,.055)}.agendaReviewCard{min-height:132px}.agendaReviewDetails{grid-template-columns:1fr}.agendaReviewList{max-height:none;overflow:visible}.agendaReviewActions .button,.agendaReviewCardActions .button{flex:1 1 auto}}
+    @media (max-width:640px){.filterBar{padding:10px}.filters.more{grid-template-columns:minmax(0,1fr) auto;gap:8px}.filterSearch{grid-column:auto}.filterToggle{display:inline-flex}.filters.more.expanded .filterToggle{background:rgba(168,225,221,.30);border-color:rgba(79,142,158,.14)}.filters.more:not(.expanded)>select,.filters.more:not(.expanded)>.customSelect,.filters.more:not(.expanded)>.filterReset{display:none}.filters.more>select,.filters.more>.customSelect,.filters.more>.filterReset{grid-column:1/-1}.filterReset{justify-content:center}.adminThemeLegendRow{align-items:flex-start;flex-wrap:wrap;gap:0}#adminThemeLegend,.agendaAdminThemeLegend{margin-left:-14px;margin-right:-14px;overflow:hidden}.adminThemeLegendRow #adminThemeLegend{flex-basis:calc(100% + 28px)}.adminThemeLegendRow .adminCountBadge{margin:2px 0 12px}.agendaThemeLegend{flex-wrap:nowrap;overflow-x:auto;padding:0 14px 3px;scrollbar-width:none}.agendaThemeLegend::-webkit-scrollbar{display:none}.agendaControlBar{grid-template-columns:1fr}.agendaReviewWeekHead{padding:18px 16px;gap:16px}.agendaReviewWeekTitle{gap:14px}.agendaReviewWeekBadge{width:56px;height:56px;font-size:1.42rem}.agendaReviewWeekHead h3{font-size:1.55rem}.agendaReviewBoard{grid-template-columns:1fr;overflow:visible;margin:0}.agendaReviewDay{min-height:auto;padding:16px 12px 14px;gap:14px;border-right:0;border-bottom:1px solid rgba(11,18,32,.055)}.agendaReviewCard{min-height:132px}.agendaReviewDetails{grid-template-columns:1fr}.agendaReviewList{max-height:none;overflow:visible}.agendaReviewActions .button,.agendaReviewCardActions .button{flex:1 1 auto}}
     @media (max-width:640px){
       body.adminMode .shell{padding:0 10px 44px}
       .adminLayout{gap:10px;margin-top:0}
@@ -913,6 +940,19 @@
       #adminIdeaList .ideaActions{justify-content:flex-start}
       #adminIdeaList .siteButton{max-width:100%}
       #adminIdeaList .adminIdeaPhotoPreview{min-width:0}
+      #agendaReviewList.tableWrap{overflow:visible;border:0;background:transparent;border-radius:0}
+      #agendaReviewList table,#agendaReviewList tbody,#agendaReviewList tr,#agendaReviewList td{display:block;width:100%;min-width:0}
+      #agendaReviewList thead{display:none}
+      #agendaReviewList tbody{display:grid;gap:10px}
+      #agendaReviewList tr{padding:13px;border:1px solid color-mix(in srgb,var(--theme-line) 58%,#EAECEF);border-radius:18px;background:rgba(255,255,255,.76);box-shadow:0 10px 24px rgba(20,38,42,.045)}
+      #agendaReviewList tr.ideaThemeRow{background:linear-gradient(color-mix(in srgb,var(--theme-tint) 38%,transparent),color-mix(in srgb,var(--theme-tint) 38%,transparent)),rgba(255,255,255,.96)}
+      #agendaReviewList td{display:grid;grid-template-columns:78px minmax(0,1fr);gap:8px;align-items:start;padding:7px 0;border:0;font-size:.88rem}
+      #agendaReviewList td::before{content:attr(data-label);color:rgba(11,18,32,.48);font-size:.72rem;font-weight:600}
+      #agendaReviewList td:first-child{display:block;padding-top:0;box-shadow:none}
+      #agendaReviewList td:first-child::before{display:none}
+      #agendaReviewList td:last-child{padding-bottom:0}
+      #agendaReviewList .agendaTableActions{grid-template-columns:repeat(7,32px)}
+      #agendaReviewList .agendaTableActions .button.iconAction{width:32px;height:32px}
     }
   </style>
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260909-shared-admin-views">
@@ -1209,9 +1249,8 @@
             <div class="workspaceHeader">
               <div>
                 <h2>Inspiratiebank</h2>
-                <p>Ruim inspiratie-items op, beheer foto’s en pas activiteiten aan zonder dat het dashboard in de weg zit.</p>
+                <p>Ruim inspiratie-items op, beheer foto’s en pas activiteiten aan.</p>
               </div>
-              <span id="ideaCount" class="adminCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span><strong id="ideaCountValue">0</strong><span id="ideaCountLabel">activiteiten</span></span></span>
             </div>
         <div class="adminIdeaToolbar">
           <div></div>
@@ -1244,7 +1283,10 @@
             </button>
           </div>
         </div>
-        <div id="adminThemeLegend"></div>
+        <div class="adminThemeLegendRow">
+          <div id="adminThemeLegend"></div>
+          <span id="ideaCount" class="adminCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span><strong id="ideaCountValue">0</strong><span id="ideaCountLabel">activiteiten</span></span></span>
+        </div>
         <div id="adminIdeaList" class="tableWrap adminIdeaView active"></div>
         <div id="adminIdeaCards" class="cards adminIdeaView" hidden></div>
         <div id="adminIdeaEditPanel" class="adminIdeaEditPanel" hidden>
@@ -1472,7 +1514,7 @@
 
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
   <script src="../website-bestanden/idea-view-shared.js?v=20260909-shared-admin-views"></script>
-  <script src="../website-bestanden/agenda-view-shared.js?v=20260909-shared-admin-view"></script>
+  <script src="../website-bestanden/agenda-view-shared.js?v=20260909-shared-admin-table"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
   const ADMIN_SESSION_KEY = 'bcjn_zomer_beheer_open_v1';
@@ -2627,7 +2669,7 @@
 	  };
 	  ADMIN_WEEKS = adminRollingWeeks();
 	  ADMIN_WEEK_START = Object.fromEntries(ADMIN_WEEKS.map(week => [week.id, week.startIso]));
-	  let agendaAdminView = 'week';
+	  let agendaAdminView = 'list';
 	  function parseIsoDate(value){
 	    const parts = String(value || '').split('-').map(Number);
 	    if(parts.length !== 3 || parts.some(Number.isNaN)) return null;
@@ -3372,15 +3414,15 @@
 	    $('#agendaAdminThemeLegend').innerHTML = agendaThemeLegendHtml();
 	    updateAgendaAdminThemeChips();
 	  }
-	  function setAgendaAdminView(view='week'){
-	    agendaAdminView = view === 'list' ? 'list' : 'week';
+	  function setAgendaAdminView(){
+	    agendaAdminView = 'list';
 	    document.querySelectorAll('[data-agenda-view]').forEach(btn => {
 	      const active = btn.dataset.agendaView === agendaAdminView;
 	      btn.classList.toggle('active', active);
 	      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
 	    });
-	    $('#agendaReviewWeekView').hidden = agendaAdminView !== 'week';
-	    $('#agendaReviewList').hidden = agendaAdminView !== 'list';
+	    $('#agendaReviewWeekView').hidden = true;
+	    $('#agendaReviewList').hidden = false;
 	  }
 	  function setAgendaReviewDayFocus(dayEl){
 	    const board = dayEl?.closest('.agendaReviewBoard');
@@ -3473,23 +3515,21 @@
 	    return `${typePill}${ongoingPill}${status}`;
 	  }
 	  function renderAgendaListItem(item, state){
-	    const sourceLabel = agendaDisplayHost(item.url) || item.source || 'Bron onbekend';
-	    const weekText = itemWeekIds(item).filter(id => id !== 'zonder').map(agendaWeekLabel).join(', ') || 'Geen duidelijke week';
-	    const dateText = [[item.date, item.time].filter(Boolean).join(' · ') || 'Datum nog checken', weekText].filter(Boolean).join(' · ');
-	    return `<article class="agendaReviewItem ${domainThemeClass(item.domain)} ${state.isHidden ? 'hiddenItem' : ''} ${state.isNew ? 'newItem' : ''}">
-	      <div class="agendaReviewMain">
-	        <div class="agendaReviewTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span>${escapeHtml(item.title)}</span></div>
-	        <div class="agendaReviewMeta">${agendaReviewPills(item, state)}</div>
-	        <div class="agendaReviewDetails">
-	          <span><b>Datum</b>${escapeHtml(dateText)}</span>
-	          <span><b>Plek</b>${escapeHtml(item.where || 'Plek nog checken')}</span>
-	          <span><b>Bron</b>${escapeHtml(sourceLabel)}</span>
-	          <span><b>Soort</b>${escapeHtml(isAgendaOngoingOffer(item) ? 'Doorlopend aanbod' : 'Dagactiviteit')}</span>
-	        </div>
-	        ${item.fit ? `<p class="agendaReviewNote">${escapeHtml(item.fit)}</p>` : ''}
-	      </div>
-	      <div class="agendaReviewActions">${agendaReviewActions(item, state)}</div>
-	    </article>`;
+	    const distance = normalizeIdeaDistance(item.distanceBand, item, 'agenda');
+	    const cost = normalizeIdeaCost(item.cost);
+	    const stimulus = normalizeIdeaStimulus(item.stimulus);
+	    const website = item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a>` : '<span class="small">–</span>';
+	    return AgendaViewShared.renderAgendaRow({
+	      themeClass:domainThemeClass(item.domain), hidden:state.isHidden, isNew:state.isNew,
+	      title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
+	      review:`<div class="agendaTableBadges">${agendaReviewPills(item, state)}</div>`,
+	      date:escapeHtml([item.date, item.time].filter(Boolean).join(' · ') || 'Datum nog checken'),
+	      domain:escapeHtml(domainDisplayLabel(item.domain)),
+	      location:`${escapeHtml(item.where || 'Plek nog checken')}<div class="small">${escapeHtml(distance)}${item.distanceKm ? ` · ${escapeHtml(item.distanceKm)}` : ''}</div>`,
+	      cost:costPill(cost), stimulus:stimulusPill(stimulus),
+	      description:escapeHtml(item.fit || 'Geen extra toelichting.'), website,
+	      actions:agendaReviewActions(item, state, true)
+	    });
 	  }
 	  function renderOngoingAdminRow(item, state){
 	    const weeks = itemWeekIds(item).filter(id => id !== 'zonder').map(id => id.replace(/^w/i, '')).join(', ') || '–';
@@ -3637,13 +3677,13 @@
 	    }).join('') : '<div class="empty">Nog geen regels ingesteld.</div>';
 	    if(!items.length){
 	      $('#agendaReviewList').innerHTML = '<div class="empty">Geen agenda-items om te beheren.</div>';
-	      $('#agendaReviewWeekView').innerHTML = '<div class="empty">Geen agenda-items met deze filters.</div>';
-	      setAgendaAdminView(agendaAdminView);
+	      $('#agendaReviewWeekView').innerHTML = '';
+	      setAgendaAdminView();
 	      return;
 	    }
-	    $('#agendaReviewWeekView').innerHTML = renderAgendaWeekView(items, states, filters);
-	    $('#agendaReviewList').innerHTML = items.map(item => renderAgendaListItem(item, states.get(item.id))).join('');
-	    setAgendaAdminView(agendaAdminView);
+	    $('#agendaReviewWeekView').innerHTML = '';
+	    $('#agendaReviewList').innerHTML = `<table class="agendaReviewTable"><thead><tr><th>Activiteit</th><th>Categorie</th><th>Locatie en afstand</th><th>Kosten</th><th>Prikkel</th><th>Beschrijving</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${items.map(item => renderAgendaListItem(item, states.get(item.id))).join('')}</tbody></table>`;
+	    setAgendaAdminView();
 	  }
   async function updateTitleVisibility(key, action){
     const titles = new Set(loadArray(ADMIN_HIDDEN_INSPIRATION_KEY).map(normalize));

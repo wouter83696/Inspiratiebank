@@ -2067,7 +2067,7 @@
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20260909-shared-admin-views"></script>
-  <script src="website-bestanden/agenda-view-shared.js?v=20260909-shared-admin-view"></script>
+  <script src="website-bestanden/agenda-view-shared.js?v=20260909-shared-admin-table"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
@@ -4470,15 +4470,15 @@
 
   function externalRow(item){
 	    const distanceLabel = normalizeIdeaDistance(item.distanceBand, item, 'agenda');
-    return `<tr class="ideaThemeRow ${domainThemeClass(item.domain)}">
-	      <td><span class="name">${escapeHtml(item.title)}</span><div>${agendaReviewPill(item)}</div><div class="small">${escapeHtml(item.date)} • ${escapeHtml(item.time)}</div></td>
-      <td>${escapeHtml(domainDisplayLabel(item.domain))}</td>
-      <td>${escapeHtml(item.where)}<div class="small">${escapeHtml(distanceLabel)}${item.distanceKm ? ` • ${escapeHtml(item.distanceKm)}` : ''}</div></td>
-      <td>${costPill(item.cost)}</td>
-      <td>${stimulusPill(item.stimulus)}</td>
-      <td><div class="small">${escapeHtml(audienceText(item.fit))}</div></td>
-      <td class="websiteCell"><a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a></td>
-    </tr>`;
+    return AgendaViewShared.renderAgendaRow({
+      themeClass:domainThemeClass(item.domain), title:escapeHtml(item.title),
+      review:`<div>${agendaReviewPill(item)}</div>`, date:`${escapeHtml(item.date)} • ${escapeHtml(item.time)}`,
+      domain:escapeHtml(domainDisplayLabel(item.domain)),
+      location:`${escapeHtml(item.where)}<div class="small">${escapeHtml(distanceLabel)}${item.distanceKm ? ` • ${escapeHtml(item.distanceKm)}` : ''}</div>`,
+      cost:costPill(item.cost), stimulus:stimulusPill(item.stimulus),
+      description:escapeHtml(audienceText(item.fit)),
+      website:item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Open</a>` : '<span class="small">–</span>'
+    });
   }
   function flexibleExternalRow(item){
 	    const distanceLabel = normalizeIdeaDistance(item.distanceBand, item, 'agenda');
