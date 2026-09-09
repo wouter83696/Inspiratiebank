@@ -439,18 +439,17 @@
     .ongoingMobileLabels{display:none}
     .ongoingMetaLine{display:none}
     table{width:100%;border-collapse:separate;border-spacing:0;min-width:760px}
-    #ideaList table{min-width:1040px}
-    #ideaList th:nth-child(1),#ideaList td:nth-child(1){width:26%}
-    #ideaList th:nth-child(2),#ideaList td:nth-child(2){width:11%}
+    #ideaList table{min-width:920px}
+    #ideaList th:nth-child(1),#ideaList td:nth-child(1){width:31%}
+    #ideaList th:nth-child(2),#ideaList td:nth-child(2){width:28%}
     #ideaList th:nth-child(3),#ideaList td:nth-child(3){width:25%}
-    #ideaList th:nth-child(4),#ideaList td:nth-child(4){width:23%}
-    #ideaList th:nth-child(5),#ideaList td:nth-child(5){width:15%}
+    #ideaList th:nth-child(4),#ideaList td:nth-child(4){width:16%}
     #ideaList .ideaListMeta{margin-left:38px}
     #ideaList .nameWithIcon{align-items:center;color:var(--accent-dark);font-size:1rem;line-height:1.18;font-weight:500}
     #ideaList .nameWithIcon .domainIcon{align-self:center;margin-top:0}
     #ideaList .nameWithIcon .ideaTitleText{font-weight:500}
-    #ideaList td:nth-child(3) .cardPillGroup{flex-wrap:nowrap}
-    #ideaList td:nth-child(3) .pill{flex:0 0 auto}
+    #ideaList td:nth-child(2) .cardPillGroup{flex-wrap:nowrap}
+    #ideaList td:nth-child(2) .pill{flex:0 0 auto}
     th,td{text-align:left;vertical-align:top;border-bottom:1px solid rgba(11,18,32,.07);padding:11px 12px;font-size:.92rem;line-height:1.35}
     th{color:rgba(11,18,32,.56);font-weight:500;background:rgba(255,255,255,.55);position:sticky;top:0}
     tr:last-child td{border-bottom:0}
@@ -4564,7 +4563,6 @@
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       cells:[
         {html:`${titleWithIcon(item.title, item.domain, 'nameWithIcon')}<div class="small ideaListMeta">${escapeHtml(item.group || '')} • ${escapeHtml(item.duration || '')}</div>`},
-        {html:categoryPill(item.domain)},
         {html:`<div class="cardPillGroup">${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}</div>`},
         {html:`<div class="small">${escapeHtml(audienceText(item.materials || item.fit || ''))}</div>`},
         {html:`<div class="ideaActions">${sourceLink}${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}</div>`}
@@ -4921,7 +4919,7 @@
     const empty = `<div class="empty">${escapeHtml(inspirationEmptyMessage())}</div>`;
     $('#ideaCards').innerHTML = items.length ? items.map(cardIdea).join('') : empty;
     $('#ideaList').innerHTML = items.length
-      ? `<table><thead><tr><th>Activiteit</th><th>Categorie</th><th>Badges</th><th>Praktisch</th><th>Website</th></tr></thead><tbody>${items.map(ideaRow).join('')}</tbody></table>`
+      ? `<table><thead><tr><th>Activiteit</th><th>Badges</th><th>Praktisch</th><th>Website</th></tr></thead><tbody>${items.map(ideaRow).join('')}</tbody></table>`
       : empty;
     renderIdeaMap(items);
   }
