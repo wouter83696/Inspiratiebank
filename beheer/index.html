@@ -982,8 +982,8 @@
       #agendaReviewList .agendaTableActions .button.iconAction{width:32px;height:32px}
     }
   </style>
-  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260909-shared-components-v3">
-  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260909-shared-rebuild-1">
+  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260909-public-match-v4">
+  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260909-public-match-v2">
 </head>
 <body>
   <header class="topbar">
@@ -1541,7 +1541,7 @@
 
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
   <script src="../website-bestanden/idea-view-shared.js?v=20260909-shared-desktop-views"></script>
-  <script src="../website-bestanden/agenda-view-shared.js?v=20260909-shared-components-v3"></script>
+  <script src="../website-bestanden/agenda-view-shared.js?v=20260909-public-restored-v5"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
   const ADMIN_SESSION_KEY = 'bcjn_zomer_beheer_open_v1';
@@ -3562,6 +3562,9 @@
 	      if(!weekItems.length) return '';
 	      const days = weekDays(week.id).map(day => {
 	        const dayItems = weekItems.filter(item => agendaAdminItemOccursOnDay(item, day, week.id));
+	        const visibleItems = dayItems.slice(0, 4);
+	        const hiddenItems = dayItems.slice(4);
+	        const more = hiddenItems.length ? `<details class="agendaAdminMore"><summary class="agendaMore">+ ${hiddenItems.length} meer optie${hiddenItems.length === 1 ? '' : 's'}</summary><div class="agendaAdminMoreItems">${hiddenItems.map(item => renderAgendaAdminCard(item, states.get(item.id))).join('')}</div></details>` : '';
 	        return AgendaViewShared.renderDay({
 	          admin:true,
 	          key:escapeHtml(`${week.id}:${day.iso}`),
@@ -3569,16 +3572,21 @@
 	          date:escapeHtml(day.prettyDate),
 	          past:day.iso < todayIso,
 	          today:day.iso === todayIso,
-	          items:dayItems.map(item => renderAgendaAdminCard(item, states.get(item.id))).join(''),
-	          empty:dayItems.length ? '' : '<div class="agendaEmpty">Geen activiteiten</div>'
+	          items:visibleItems.map(item => renderAgendaAdminCard(item, states.get(item.id))).join(''),
+	          more,
+	          empty:''
 	        });
 	      }).join('');
+	      const weekStart = parseIsoDate(week.startIso);
+	      const weekEnd = addDays(weekStart, 6);
+	      const weekTitle = `${formatCompactAgendaDate(weekStart)} t/m ${formatCompactAgendaDate(weekEnd)}`;
+	      const countLabel = weekItems.length === 1 ? 'activiteit' : 'activiteiten';
 	      return AgendaViewShared.renderWeek({
 	        admin:true,
 	        id:`admin-${escapeHtml(week.id)}`,
 	        week:escapeHtml(week.week),
-	        title:escapeHtml(week.dates),
-	        count:`<span class="weekCountBadge"><span><strong>${weekItems.length}</strong> item${weekItems.length === 1 ? '' : 's'}</span></span>`,
+	        title:escapeHtml(weekTitle),
+	        count:`<span class="weekCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${weekItems.length}</strong>${weekItems.length === 1 ? '' : '<span class="weekCountWord">verschillende</span>'}<span class="weekCountLabel">${countLabel}</span></span></span>`,
 	        days
 	      });
 	    }).filter(Boolean);
@@ -3612,6 +3620,28 @@
         description:escapeHtml(item.fit || '–'), website, actions
       });
 	  }
+	  function orderedAdminWeekIds(ids=[]){
+	    return [...new Set(ids.filter(weekId => ADMIN_WEEK_START[weekId]))].sort((a,b) => ADMIN_WEEKS.findIndex(week => week.id === a) - ADMIN_WEEKS.findIndex(week => week.id === b));
+	  }
+	  function isAgendaMultiDayFestival(item={}){
+	    const text = normalize(`${item.title || ''} ${(item.tags || []).join(' ')}`);
+	    return /festival|feesten|feestweek|kermis/.test(text) && agendaDateSpanDays(item) > 0;
+	  }
+	  function adminOngoingOffers(items=[]){
+	    return AgendaViewShared.buildOngoingOffers(items, {
+	      weekIdsFor:item => itemWeekIds(item),
+	      orderWeeks:orderedAdminWeekIds,
+	      dateStartFor:item => parseDutchDateRange(item.date)?.start || '',
+	      recurringKey:item => `${normalizedAgendaTitle(item.title)}|${normalize(item.where)}`,
+	      formatRange:dates => `${formatAgendaDate(parseIsoDate(dates[0]))} t/m ${formatAgendaDate(parseIsoDate(dates[dates.length - 1]))}`,
+	      groupIdsFor:group => group.map(item => String(item.id)),
+	      isOngoing:item => isAgendaOngoingOffer(item) || isAgendaFlexiblePeriod(item),
+	      isActive:item => ADMIN_WEEKS.some(week => weekDays(week.id).some(day => agendaAdminItemOccursOnDay(item, day, week.id))),
+	      exclude:isAgendaMultiDayFestival,
+	      itemKey:item => `${normalizedAgendaTitle(item.title)}|${item.url || ''}`,
+	      sort:list => [...list].sort((a,b) => agendaReviewSortDate(a).localeCompare(agendaReviewSortDate(b)) || normalize(a.title).localeCompare(normalize(b.title)))
+	    });
+	  }
 	  function renderAgendaReview(){
 	    const hidden = hiddenAgendaIds();
 	    const deleted = deletedAgendaIds();
@@ -3631,25 +3661,7 @@
 	          || normalize(a.title).localeCompare(normalize(b.title));
 	      });
 	    const states = new Map(allItems.map(item => [item.id, agendaReviewState(item, hidden, verified)]));
-	    const recurringGroups = new Map();
-	    allItems.forEach(item => {
-	      const weeks = itemWeekIds(item).filter(weekId => ADMIN_WEEK_START[weekId]);
-	      if(!weeks.length) return;
-	      const key = `${normalizedAgendaTitle(item.title)}|${normalize(item.where)}`;
-	      if(!recurringGroups.has(key)) recurringGroups.set(key, []);
-	      recurringGroups.get(key).push(item);
-	    });
-	    const recurringItems = [...recurringGroups.values()].flatMap(group => {
-	      const weeks = [...new Set(group.flatMap(itemWeekIds).filter(weekId => ADMIN_WEEK_START[weekId]))];
-	      if(weeks.length < 2) return [];
-	      const dated = group.map(item => ({item, range:parseDutchDateRange(item.date)})).filter(entry => entry.range?.start).sort((a,b) => a.range.start.localeCompare(b.range.start));
-	      if(!dated.length) return [];
-	      const first = dated[0].item;
-	      const last = dated[dated.length - 1].item;
-	      return [{...first, week:weeks.join(','), date:`${formatAgendaDate(parseIsoDate(dated[0].range.start))} t/m ${formatAgendaDate(parseIsoDate(dated[dated.length - 1].range.end))} 2026`, seasonLimited:true, groupIds:group.map(item => String(item.id))}];
-	    });
-	    const explicitItems = allItems.filter(item => (isAgendaOngoingOffer(item) || isAgendaFlexiblePeriod(item)) && itemWeekIds(item).some(weekId => ADMIN_WEEK_START[weekId]));
-	    const ongoingItems = dedupeAgendaItems([...recurringItems, ...explicitItems]);
+	    const ongoingItems = adminOngoingOffers(allItems);
 	    ongoingAdminGroups = new Map(ongoingItems.map(item => [String(item.id), item]));
 	    const ongoingIds = new Set(ongoingItems.flatMap(item => item.groupIds || [String(item.id)]));
 	    const ongoingCandidates = allItems.filter(item => !ongoingIds.has(String(item.id)));

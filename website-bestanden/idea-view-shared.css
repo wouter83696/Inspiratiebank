@@ -9,33 +9,48 @@
   display:flex;
   flex-direction:column;
   min-width:0;
+  min-height:215px;
   height:100%;
-  gap:9px;
-  padding:12px;
-  border:1px solid var(--theme-line,rgba(79,142,158,.14));
-  border-radius:8px;
-  background:var(--theme-tint,rgba(255,255,255,.92));
-  box-shadow:0 10px 26px rgba(20,38,42,.045);
+  gap:10px;
+  padding:18px;
+  border-color:#EFE9DE;
+  background:#fffdf9;
+  box-shadow:0 10px 26px rgba(64,45,20,.04);
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease);
+}
+.sharedIdeaCards .ideaThemeCard{
+  background:linear-gradient(color-mix(in srgb,var(--theme-tint) 38%,transparent),color-mix(in srgb,var(--theme-tint) 38%,transparent)),rgba(255,255,255,.96);
+  border-color:color-mix(in srgb,var(--theme-line) 74%,#EFE9DE);
+}
+.sharedIdeaCards .ideaThemeCard:hover{
+  transform:translateY(-2px);
+  background:linear-gradient(color-mix(in srgb,var(--theme-tint-strong) 42%,transparent),color-mix(in srgb,var(--theme-tint-strong) 42%,transparent)),rgba(255,255,255,.97);
+  border-color:var(--theme-line);
+  box-shadow:0 16px 34px rgba(64,45,20,.065);
 }
 .sharedIdeaCards .ideaImageFrame{
+  position:relative;
   width:100%;
   aspect-ratio:16 / 8.7;
-  margin:0;
+  margin:-10px -10px 10px;
   overflow:hidden;
-  border-radius:7px;
-  background:rgba(255,255,255,.72);
+  border-radius:13px;
+  background:linear-gradient(var(--theme-tint),rgba(255,255,255,.58));
+  border:1px solid color-mix(in srgb,var(--theme-line) 48%,rgba(255,255,255,.55));
+  box-shadow:0 8px 18px rgba(20,38,42,.045);
 }
-.sharedIdeaCards .ideaImageFrame img{display:block;width:100%;height:100%;object-fit:cover}
-.sharedIdeaCards h3{margin:0;color:var(--accent-dark);font-size:1.08rem;line-height:1.16;font-weight:600}
+.sharedIdeaCards .ideaImageFrame img{display:block;width:100%;height:100%;object-fit:cover;border-radius:12px}
+.sharedIdeaCards h3{margin:6px 0 0;color:var(--accent-dark);font-size:1.08rem;line-height:1.18;font-weight:500}
+.sharedIdeaCards .hasImage h3{margin-top:0}
 .sharedIdeaCards .ideaTitle,.sharedIdeaCards .nameWithIcon{display:flex;align-items:flex-start;gap:8px;min-width:0}
 .sharedIdeaCards .ideaTitleText{min-width:0;overflow-wrap:anywhere}
 .sharedIdeaCards .domainIcon{flex:0 0 auto}
 .sharedIdeaCards .cardLabels{display:flex;align-items:center;flex-wrap:wrap;gap:6px;min-height:27px}
 .sharedIdeaCards .cardMetaLine{width:100%;margin:0}
-.sharedIdeaCards .card>p{margin:3px 0 0;line-height:1.48}
-.sharedIdeaCards .fine{margin-top:4px}
-.sharedIdeaCards .fine strong{display:block;margin-bottom:2px;color:var(--accent-dark)}
-.sharedIdeaCards .cardFooter{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:10px;border-top:1px solid rgba(11,18,32,.055)}
+.sharedIdeaCards .card>p{margin:0;color:rgba(11,18,32,.66);font-size:.95rem;line-height:1.48}
+.sharedIdeaCards .fine{margin-top:2px;color:var(--muted);font-size:.86rem}
+.sharedIdeaCards .fine strong{display:block;margin:7px 0 2px;color:var(--accent-dark)}
+.sharedIdeaCards .cardFooter{display:flex;align-items:center;gap:8px;margin-top:auto;min-width:0}
 .sharedIdeaCards .ideaAdminCardActions{display:flex;align-items:center;gap:7px;margin-top:0;padding-top:9px;border-top:1px solid rgba(11,18,32,.055)}
 
 .sharedIdeaList{overflow-x:auto;border:1px solid rgba(11,18,32,.08);border-radius:8px;background:rgba(255,255,255,.88)}

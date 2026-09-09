@@ -307,6 +307,9 @@
   border-bottom:0;
 }
 
+.agendaHead>div,
+.agendaReviewDayHead>div{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+
 .agendaHead strong,
 .agendaReviewDayHead strong{
   display:block;
@@ -317,8 +320,8 @@
 
 .agendaHead span,
 .agendaReviewDayHead span{
-  display:block;
-  margin-top:6px;
+  display:inline;
+  margin-top:0;
   color:#123968;
   font-size:.91rem;
 }
@@ -342,8 +345,26 @@
 .adminAgendaItem{
   display:flex;
   flex-direction:column;
-  gap:8px;
+  gap:0;
 }
+
+.adminAgendaItem .agendaItemLink{color:inherit;text-decoration:none}
+.agendaAdminMenu{position:relative;align-self:flex-end;margin-top:6px;z-index:8}
+.agendaAdminMenu summary{
+  display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;
+  border:1px solid rgba(11,18,32,.07);border-radius:999px;background:rgba(255,255,255,.58);
+  color:rgba(11,18,32,.52);cursor:pointer;list-style:none
+}
+.agendaAdminMenu summary::-webkit-details-marker{display:none}
+.agendaAdminMenu summary svg{width:14px;height:14px;fill:currentColor}
+.agendaAdminMenu[open] summary{background:#fff;color:var(--accent-dark)}
+.agendaAdminMenu .agendaReviewCardActions{
+  position:absolute;right:0;top:calc(100% + 6px);z-index:50;
+  display:grid;grid-template-columns:repeat(4,30px);gap:6px;width:max-content;
+  margin:0;padding:8px;border:1px solid rgba(11,18,32,.09);border-radius:10px;
+  background:rgba(255,255,255,.98);box-shadow:0 14px 34px rgba(20,38,42,.16)
+}
+.agendaAdminMenu .agendaReviewCardActions .button.iconAction{width:30px;height:30px;min-width:30px;padding:0}
 
 #adminApp .agendaReviewList.weekStack{
   display:grid;
@@ -354,6 +375,12 @@
   border-radius:0;
   background:transparent;
 }
+
+#adminApp .agendaReviewBoard{overflow:hidden;margin:0}
+.agendaAdminMore{display:grid;gap:10px}
+.agendaAdminMore>summary{list-style:none}
+.agendaAdminMore>summary::-webkit-details-marker{display:none}
+.agendaAdminMoreItems{display:grid;gap:10px}
 
 .adminAgendaItem .agendaReviewCardMeta{
   margin-top:0;

@@ -1739,8 +1739,6 @@
     }
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
-  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260909-shared-components-v3">
-  <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20260909-shared-rebuild-1">
 </head>
 <body>
   <header class="topbar">
@@ -2068,7 +2066,7 @@
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20260909-shared-desktop-views"></script>
-  <script src="website-bestanden/agenda-view-shared.js?v=20260909-shared-components-v3"></script>
+  <script src="website-bestanden/agenda-view-shared.js?v=20260909-public-restored-v5"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
@@ -4399,48 +4397,18 @@
   }
   function sharedFlexibleOffers(){
     const externalItems = allExternalItems();
-    const recurringGroups = new Map();
-    externalItems.forEach(item => {
-      const activeWeekIds = orderedWeekIds(splitWeeks(item.week));
-      if(!activeWeekIds.length || !eventDateMeta(item)?.start) return;
-	  const key = `${normalize(item.title || '')}|${normalize(item.where || '')}`;
-      if(!key.replace('|', '')) return;
-      if(!recurringGroups.has(key)) recurringGroups.set(key, []);
-      recurringGroups.get(key).push({...item, activeWeekIds});
+    return AgendaViewShared.buildOngoingOffers(externalItems, {
+      weekIdsFor:item => splitWeeks(item.week),
+      orderWeeks:orderedWeekIds,
+      dateStartFor:item => eventDateMeta(item)?.start || '',
+      recurringKey:item => `${normalize(item.title || '')}|${normalize(item.where || '')}`,
+      formatRange:dates => `${formatAgendaDate(parseIsoDate(dates[0]))} t/m ${formatAgendaDate(parseIsoDate(dates[dates.length - 1]))}`,
+      isOngoing:isOngoingOffer,
+      isActive:item => ACTIVE_WEEKS.some(week => weekDays(week.id).some(day => itemOccursOnDay(item, day.iso))),
+      exclude:item => isMultiDayFestival(item) && eventSpanDays(item) > 0,
+      itemKey:item => `${normalize(item.title || '')}|${item.url || ''}`,
+      sort:sortWeekItems
     });
-    const recurring = [...recurringGroups.values()].flatMap(items => {
-      const weekIds = orderedWeekIds(items.flatMap(item => item.activeWeekIds));
-      if(weekIds.length < 2) return [];
-      const dates = items.map(eventDateMeta).filter(Boolean).map(meta => meta.start).sort();
-      const first = items[0];
-      return [{
-        ...first,
-        week:weekIds.join(','),
-        date:`${formatAgendaDate(parseIsoDate(dates[0]))} t/m ${formatAgendaDate(parseIsoDate(dates[dates.length - 1]))}`,
-        time:unique(items.map(item => item.time).filter(Boolean)).length === 1 ? first.time : 'diverse tijden',
-        seasonLimited:true,
-        derivedRecurring:true
-      }];
-    });
-    const flexible = [...externalItems, ...recurring]
-      .filter(isOngoingOffer)
-      .filter(item => item.derivedRecurring || ACTIVE_WEEKS.some(week => weekDays(week.id).some(day => itemOccursOnDay(item, day.iso))))
-      .filter(item => !(isMultiDayFestival(item) && eventSpanDays(item) > 0));
-    const merged = new Map();
-    flexible.forEach(item => {
-      const key = `${normalize(item.title || '')}|${item.url || ''}`;
-      const weekIds = splitWeeks(item.week);
-      if(!merged.has(key)){
-        merged.set(key, {...item, weekIds:[...weekIds]});
-        return;
-      }
-      const current = merged.get(key);
-      current.weekIds = orderedWeekIds([...current.weekIds, ...weekIds]);
-    });
-    return sortWeekItems([...merged.values()].map(item => ({
-      ...item,
-      week: orderedWeekIds(item.weekIds || splitWeeks(item.week)).join(',')
-    })));
   }
 
   function externalRow(item){

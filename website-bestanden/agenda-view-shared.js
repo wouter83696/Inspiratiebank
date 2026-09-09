@@ -18,8 +18,9 @@
     const main = view.href
       ? `<a class="agendaItemLink" href="${view.href}" target="_blank" rel="noopener">${content}</a>`
       : `<div class="agendaItemLink">${content}</div>`;
-    const actionsClass = view.admin ? 'agendaItemActions agendaReviewCardActions' : 'agendaItemActions';
-    return `<article class="${classes}">${main}${view.status || ''}<div class="${actionsClass}">${view.actions || ''}</div></article>`;
+    const publicActions = `<div class="agendaItemActions">${view.actions || ''}</div>`;
+    const adminActions = `<details class="agendaAdminMenu"><summary aria-label="Beheeracties" title="Beheeracties"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="4" cy="10" r="1.4"></circle><circle cx="10" cy="10" r="1.4"></circle><circle cx="16" cy="10" r="1.4"></circle></svg></summary><div class="agendaItemActions agendaReviewCardActions">${view.actions || ''}</div></details>`;
+    return `<article class="${classes}">${main}${view.status || ''}${view.admin ? adminActions : publicActions}</article>`;
   }
 
   function renderDay(view){
@@ -105,5 +106,64 @@
     return rows;
   }
 
-  window.AgendaViewShared = Object.freeze({sourceButtonLabel, renderItem, renderDay, renderWeek, renderOngoingRow, renderAgendaRow, renderSourceRow, mergeSourceLinks});
+  function buildOngoingOffers(items=[], options={}){
+    const weekIdsFor = options.weekIdsFor || (() => []);
+    const orderWeeks = options.orderWeeks || (ids => [...new Set(ids)]);
+    const dateStartFor = options.dateStartFor || (() => '');
+    const recurringGroups = new Map();
+    items.forEach(item => {
+      const weekIds = orderWeeks(weekIdsFor(item));
+      const start = dateStartFor(item);
+      if(!weekIds.length || !start) return;
+      const key = options.recurringKey ? options.recurringKey(item) : `${item.title || ''}|${item.where || ''}`;
+      if(!key || key === '|') return;
+      if(!recurringGroups.has(key)) recurringGroups.set(key, []);
+      recurringGroups.get(key).push({item, weekIds, start});
+    });
+    const recurring = [...recurringGroups.values()].flatMap(entries => {
+      const weekIds = orderWeeks(entries.flatMap(entry => entry.weekIds));
+      if(weekIds.length < 2) return [];
+      const dates = entries.map(entry => entry.start).filter(Boolean).sort();
+      const first = entries[0].item;
+      const times = [...new Set(entries.map(entry => entry.item.time).filter(Boolean))];
+      const recurringItem = {
+        ...first,
+        week:weekIds.join(','),
+        date:options.formatRange ? options.formatRange(dates) : first.date,
+        time:times.length === 1 ? first.time : 'diverse tijden',
+        seasonLimited:true,
+        derivedRecurring:true
+      };
+      if(options.groupIdsFor) recurringItem.groupIds = options.groupIdsFor(entries.map(entry => entry.item));
+      return [recurringItem];
+    });
+    const candidates = [...items, ...recurring]
+      .filter(item => options.isOngoing ? options.isOngoing(item) : item.seasonLimited === true)
+      .filter(item => item.derivedRecurring || !options.isActive || options.isActive(item))
+      .filter(item => !options.exclude || !options.exclude(item));
+    const merged = new Map();
+    candidates.forEach(item => {
+      const key = options.itemKey ? options.itemKey(item) : `${item.title || ''}|${item.url || ''}`;
+      const weekIds = weekIdsFor(item);
+      if(!merged.has(key)){
+        merged.set(key, {...item, weekIds:[...weekIds]});
+        return;
+      }
+      const current = merged.get(key);
+      current.weekIds = orderWeeks([...current.weekIds, ...weekIds]);
+      const currentIds = current.groupIds || (current.id ? [String(current.id)] : []);
+      const nextIds = item.groupIds || (item.id ? [String(item.id)] : []);
+      if(currentIds.length || nextIds.length) current.groupIds = [...new Set([...currentIds, ...nextIds])];
+      if(item.derivedRecurring){
+        current.derivedRecurring = true;
+        current.seasonLimited = true;
+        current.date = item.date || current.date;
+        current.time = item.time || current.time;
+      }
+    });
+    const result = [...merged.values()].map(item => ({...item, week:orderWeeks(item.weekIds || weekIdsFor(item)).join(',')}));
+    return options.sort ? options.sort(result) : result;
+  }
+
+  window.AgendaViewShared = Object.freeze({sourceButtonLabel, renderItem, renderDay, renderWeek, renderOngoingRow, renderAgendaRow, renderSourceRow, mergeSourceLinks, buildOngoingOffers});
 })();
