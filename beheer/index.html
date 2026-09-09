@@ -1163,16 +1163,6 @@
               <span id="agendaReviewCount" class="pill">0 items</span>
             </div>
           </div>
-          <div class="agendaAdminToolbar">
-            <div class="viewSwitch" aria-label="Weergave UIT-agenda beheer">
-              <button class="viewBtn active" type="button" data-agenda-view="week" aria-pressed="true" title="Weekweergave">
-                <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><rect x="3" y="3" width="5" height="5" rx="1"></rect><rect x="12" y="3" width="5" height="5" rx="1"></rect><rect x="3" y="12" width="5" height="5" rx="1"></rect><rect x="12" y="12" width="5" height="5" rx="1"></rect></svg></span>
-              </button>
-              <button class="viewBtn" type="button" data-agenda-view="list" aria-pressed="false" title="Lijstweergave">
-                <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><circle cx="4" cy="5" r="1"></circle><circle cx="4" cy="10" r="1"></circle><circle cx="4" cy="15" r="1"></circle><path d="M8 5h9"></path><path d="M8 10h9"></path><path d="M8 15h9"></path></svg></span>
-              </button>
-            </div>
-          </div>
           <div class="filterBar">
             <div class="filters agendaAdminFilters" id="agendaAdminFilters">
               <div class="filterSearch"><input id="agendaAdminSearch" type="search" placeholder="Zoek titel, plek, bron..."></div>
@@ -1196,8 +1186,8 @@
             </div>
           </div>
           <div id="agendaAdminThemeLegend" class="agendaAdminThemeLegend"></div>
-          <div id="agendaReviewWeekView" class="agendaReviewWeekView"></div>
-          <div id="agendaReviewList" class="agendaReviewList"></div>
+          <div id="agendaReviewList" class="tableWrap agendaReviewList"></div>
+          <div id="agendaReviewWeekView" class="agendaReviewWeekView" hidden></div>
           <div class="sectionDivider"></div>
           <section class="ongoingAccordion adminOngoingAccordion" id="ongoingAdminSection">
             <div class="panelHead">
@@ -1221,7 +1211,7 @@
                 <h2>Inspiratiebank</h2>
                 <p>Ruim inspiratie-items op, beheer foto’s en pas activiteiten aan zonder dat het dashboard in de weg zit.</p>
               </div>
-              <span id="ideaCount" class="adminCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong id="ideaCountValue">0</strong><span id="ideaCountLabel">activiteiten</span></span></span>
+              <span id="ideaCount" class="adminCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span><strong id="ideaCountValue">0</strong><span id="ideaCountLabel">activiteiten</span></span></span>
             </div>
         <div class="adminIdeaToolbar">
           <div></div>
