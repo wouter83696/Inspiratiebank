@@ -77,18 +77,16 @@
 .ongoingTitleLine .weekCountBadge{width:auto;min-height:30px;padding:6px 10px}
 .ongoingAccordionBody{border-top:1px solid rgba(11,18,32,.06);background:rgba(253,254,253,.88)}
 .ongoingAccordion .tableWrap{overflow-x:auto;border:0;border-radius:0;background:rgba(253,254,253,.88);box-shadow:none}
-.ongoingAccordion table{width:100%;min-width:880px;border-collapse:collapse;table-layout:fixed}
+.ongoingAccordion table{width:100%;min-width:760px;border-collapse:collapse;table-layout:fixed}
 .ongoingAccordion th,.ongoingAccordion td{padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid rgba(11,18,32,.07);font-size:.84rem;line-height:1.35}
 .ongoingAccordion th{color:rgba(11,18,32,.56);font-weight:500;background:rgba(255,255,255,.78)}
 .ongoingAccordion tr:last-child td{border-bottom:0}
 .ongoingAccordion th:nth-child(1),.ongoingAccordion td:nth-child(1){width:27%}
 .ongoingAccordion th:nth-child(2),.ongoingAccordion td:nth-child(2){width:7%;white-space:nowrap}
-.ongoingAccordion th:nth-child(3),.ongoingAccordion td:nth-child(3){width:14%}
-.ongoingAccordion th:nth-child(4),.ongoingAccordion td:nth-child(4){width:6%}
-.ongoingAccordion th:nth-child(5),.ongoingAccordion td:nth-child(5){width:6%}
-.ongoingAccordion th:nth-child(6),.ongoingAccordion td:nth-child(6){width:31%}
-.ongoingAccordion th:nth-child(7),.ongoingAccordion td:nth-child(7){width:9%}
-.ongoingAccordion .ongoingMobileLabels{display:none}
+.ongoingAccordion th:nth-child(3),.ongoingAccordion td:nth-child(3){width:20%}
+.ongoingAccordion th:nth-child(4),.ongoingAccordion td:nth-child(4){width:37%}
+.ongoingAccordion th:nth-child(5),.ongoingAccordion td:nth-child(5){width:9%}
+.ongoingBadgesCell .cardPillGroup{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:0}
 .adminOngoingAccordion .ongoingAdminActions{display:flex;align-items:center;flex-wrap:wrap;gap:5px;justify-content:flex-start;margin-top:9px}
 .adminOngoingAccordion .ongoingAdminActions .button.iconAction{flex:0 0 28px;width:28px;height:28px;min-width:28px;padding:0}
 
