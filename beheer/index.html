@@ -982,8 +982,8 @@
       #agendaReviewList .agendaTableActions .button.iconAction{width:32px;height:32px}
     }
   </style>
-  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260909-public-match-v4">
-  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260909-public-match-v2">
+  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260909-admin-public-match-v6">
+  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260909-admin-public-match-v3">
 </head>
 <body>
   <header class="topbar">
@@ -1541,7 +1541,7 @@
 
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
   <script src="../website-bestanden/idea-view-shared.js?v=20260909-shared-desktop-views"></script>
-  <script src="../website-bestanden/agenda-view-shared.js?v=20260909-public-restored-v5"></script>
+  <script src="../website-bestanden/agenda-view-shared.js?v=20260909-admin-public-match-v6"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
   const ADMIN_SESSION_KEY = 'bcjn_zomer_beheer_open_v1';
@@ -1925,6 +1925,13 @@
   function normalize(value=''){
     return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();
   }
+  function audienceText(value=''){
+    return String(value || '')
+      .replace(/\bjongeren\b/gi, match => match[0] === match[0].toUpperCase() ? 'Mensen' : 'mensen')
+      .replace(/\bde jongere\b/gi, match => match[0] === match[0].toUpperCase() ? 'De persoon' : 'de persoon')
+      .replace(/\bhet kind\b/gi, match => match[0] === match[0].toUpperCase() ? 'De persoon' : 'de persoon')
+      .replace(/\bjullie\b/gi, match => match[0] === match[0].toUpperCase() ? 'Je' : 'je');
+  }
   function cleanPostcode(value=''){
     return String(value || '').toUpperCase().replace(/\s+/g,'').replace(/^(\d{4})([A-Z]{2})$/, '$1 $2');
   }
@@ -2191,11 +2198,13 @@
     const v = normalize(value);
     if(!v) return 'Binnen';
     const hasOnline = v.includes('online');
+    const hasHome = v === 'thuis' || v.includes('thuis') || v.includes('aan huis') || v.includes('bij jou') || v.includes('eigen locatie');
     const hasOutside = v.includes('buiten de deur') || v.includes('op pad') || v.includes('ergens anders') || v.includes('niet thuis') || v.includes('extern');
     const hasOutdoor = v === 'buiten' || v.includes('buitenactiviteit') || v.includes('buitenruimte') || v.includes('wandelen') || v.includes('park') || v.includes('route');
-    const hasIndoor = v === 'binnen' || v.includes('op locatie') || v.includes('op groep') || v.includes('op terrein') || v.includes('terrein') || v.includes('thuis') || v.includes('binnenruimte');
-    if(hasOnline) return 'Online / voorbereiding';
-    if(v.includes('binnen + buiten') || v.includes('binnen en buiten')) return hasOutside ? 'Op pad' : 'Buiten';
+    const hasIndoor = v === 'binnen' || v.includes('op locatie') || v.includes('op groep') || v.includes('op terrein') || v.includes('terrein') || v.includes('binnenruimte');
+    if(hasOnline) return 'Online';
+    if(hasHome) return 'Thuis';
+    if(v.includes('op locatie + buiten') || v.includes('binnen + buiten') || v.includes('binnen en buiten')) return hasOutside ? 'Op pad' : 'Buiten';
     if(hasOutside && hasIndoor) return 'Op pad';
     if(hasOutside) return 'Op pad';
     if(hasOutdoor) return 'Buiten';
@@ -3420,9 +3429,21 @@
 	  function isAgendaOngoingOffer(item={}){
 	    return item.seasonLimited === true;
 	  }
+	  function isAgendaConcrete(item={}){
+	    return !/doorlopend|wekelijks|bij mooi weer|check programma|actuele/i.test(String(`${item.date || ''} ${item.time || ''}`));
+	  }
 	  function showAgendaPeriodInWeek(item={}){
 	    const span = agendaDateSpanDays(item);
 	    return span > 0 && span <= 21;
+	  }
+	  function sortAgendaAdminItems(items=[]){
+	    return [...items].sort((a,b) => {
+	      const spanDiff = agendaDateSpanDays(a) - agendaDateSpanDays(b);
+	      if(spanDiff !== 0) return spanDiff;
+	      const timeDiff = String(a.time || '').localeCompare(String(b.time || ''), 'nl');
+	      if(timeDiff !== 0) return timeDiff;
+	      return String(a.title || '').localeCompare(String(b.title || ''), 'nl');
+	    });
 	  }
 	  function agendaReviewSortDate(item={}){
 	    const range = parseDutchDateRange(item.date);
@@ -3492,14 +3513,10 @@
 	    if(compact){
 	      const editAction = `<button class="button iconAction editAction" data-edit-agenda="${escapeHtml(item.id)}" type="button" aria-label="Wijzig" title="Wijzig">${actionIcon('edit')}</button>`;
 	      const verifyAction = state.isVerified || state.isHidden ? '' : `<button class="button iconAction primary" data-verify-agenda="${escapeHtml(item.id)}" type="button" aria-label="Goedkeuren" title="Goedkeuren">${actionIcon('check')}</button>`;
-	      const openAction = item.url ? `<a class="button iconAction openAction" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" aria-label="Open bron" title="Open bron">${actionIcon('external')}</a>` : '';
-	      const sourceValue = agendaSourceValue(item);
 	      const visibilityLabel = state.isHidden ? 'Toon' : 'Verberg';
 	      const visibilityIcon = state.isHidden ? actionIcon('eyeOff') : actionIcon('eye');
-	      return `${openAction}${editAction}${verifyAction}
+	      return `${editAction}${verifyAction}
 	        <button class="button iconAction visibilityAction" data-hide-agenda="${escapeHtml(item.id)}" data-hidden="${state.isHidden ? '1' : '0'}" type="button" aria-label="${escapeHtml(visibilityLabel)}" title="${escapeHtml(visibilityLabel)}">${visibilityIcon}</button>
-	        <button class="button iconAction sourceAction" data-block-agenda-source="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(sourceValue)}" type="button" aria-label="Weiger bron" title="Weiger bron">${actionIcon('ban')}</button>
-	        <button class="button iconAction titleAction" data-block-agenda-title="${escapeHtml(item.id)}" data-rule-value="${escapeHtml(normalize(item.title))}" type="button" aria-label="Weiger deel van titel" title="Weiger deel van titel">${actionIcon('text')}</button>
 	        <button class="button iconAction hot" data-delete-agenda="${escapeHtml(item.id)}" type="button" aria-label="Verwijder" title="Verwijder">${actionIcon('trash')}</button>`;
 	    }
 	    const verifyAction = state.isVerified || state.isHidden ? '' : `<button class="button small primary" data-verify-agenda="${escapeHtml(item.id)}" type="button">Goedkeuren</button>`;
@@ -3542,37 +3559,51 @@
 	    }
 	    return itemDisplayDayIso(item, weekId) === day.iso;
 	  }
-	  function renderAgendaAdminCard(item, state){
+	  function renderAgendaAdminCard(item, state, compact=false){
 	    return AgendaViewShared.renderItem({
 	      admin:true,
+	      compact,
 	      themeClass:domainThemeClass(item.domain),
 	      hidden:state.isHidden,
 	      isNew:state.isNew,
 	      href:item.url ? escapeHtml(item.url) : '',
 	      title:titleWithIcon(item.title, item.domain, 'agendaItemTitle agendaReviewCardTitle'),
-	      review:agendaReviewPills(item, state, true),
 	      meta:escapeHtml([item.time, item.where].filter(Boolean).join(' · ') || 'Tijd en plek nog checken'),
 	      actions:agendaReviewActions(item, state, true)
 	    });
 	  }
+	  function visibleAgendaAdminWeekCount(weekId, items=[]){
+	    const seen = new Set();
+	    weekDays(weekId).forEach(day => {
+	      items.forEach(item => {
+	        const visible = agendaAdminItemOccursOnDay(item, day, weekId) && (!isAgendaFlexiblePeriod(item) || showAgendaPeriodInWeek(item));
+	        if(visible) seen.add(agendaItemKey(item));
+	      });
+	    });
+	    return seen.size;
+	  }
 	  function renderAgendaAdminWeeks(items, states){
 	    const todayIso = formatIsoDate(new Date());
 	    const weeks = ADMIN_WEEKS.map(week => {
-	      const weekItems = items.filter(item => itemWeekIds(item).includes(week.id));
+	      const weekItems = sortAgendaAdminItems(items.filter(item => itemWeekIds(item).includes(week.id)));
 	      if(!weekItems.length) return '';
 	      const days = weekDays(week.id).map(day => {
-	        const dayItems = weekItems.filter(item => agendaAdminItemOccursOnDay(item, day, week.id));
+	        const occurring = weekItems.filter(item => agendaAdminItemOccursOnDay(item, day, week.id));
+	        const dayItems = [
+	          ...occurring.filter(item => isAgendaFlexiblePeriod(item) && showAgendaPeriodInWeek(item)).map(item => ({item, compact:true})),
+	          ...occurring.filter(item => !isAgendaFlexiblePeriod(item)).map(item => ({item, compact:false}))
+	        ];
 	        const visibleItems = dayItems.slice(0, 4);
 	        const hiddenItems = dayItems.slice(4);
-	        const more = hiddenItems.length ? `<details class="agendaAdminMore"><summary class="agendaMore">+ ${hiddenItems.length} meer optie${hiddenItems.length === 1 ? '' : 's'}</summary><div class="agendaAdminMoreItems">${hiddenItems.map(item => renderAgendaAdminCard(item, states.get(item.id))).join('')}</div></details>` : '';
+	        const more = hiddenItems.length ? `<details class="agendaAdminMore"><summary class="agendaMore">+ ${hiddenItems.length} meer optie${hiddenItems.length === 1 ? '' : 's'}</summary><div class="agendaAdminMoreItems">${hiddenItems.map(entry => renderAgendaAdminCard(entry.item, states.get(entry.item.id), entry.compact)).join('')}</div></details>` : '';
 	        return AgendaViewShared.renderDay({
 	          admin:true,
 	          key:escapeHtml(`${week.id}:${day.iso}`),
 	          label:escapeHtml(day.label),
-	          date:escapeHtml(day.prettyDate),
+	          date:escapeHtml(formatCompactAgendaDate(parseIsoDate(day.iso))),
 	          past:day.iso < todayIso,
 	          today:day.iso === todayIso,
-	          items:visibleItems.map(item => renderAgendaAdminCard(item, states.get(item.id))).join(''),
+	          items:visibleItems.map(entry => renderAgendaAdminCard(entry.item, states.get(entry.item.id), entry.compact)).join(''),
 	          more,
 	          empty:''
 	        });
@@ -3580,13 +3611,14 @@
 	      const weekStart = parseIsoDate(week.startIso);
 	      const weekEnd = addDays(weekStart, 6);
 	      const weekTitle = `${formatCompactAgendaDate(weekStart)} t/m ${formatCompactAgendaDate(weekEnd)}`;
-	      const countLabel = weekItems.length === 1 ? 'activiteit' : 'activiteiten';
+	      const weekItemCount = visibleAgendaAdminWeekCount(week.id, weekItems);
+	      const countLabel = weekItemCount === 1 ? 'activiteit' : 'activiteiten';
 	      return AgendaViewShared.renderWeek({
 	        admin:true,
 	        id:`admin-${escapeHtml(week.id)}`,
 	        week:escapeHtml(week.week),
 	        title:escapeHtml(weekTitle),
-	        count:`<span class="weekCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${weekItems.length}</strong>${weekItems.length === 1 ? '' : '<span class="weekCountWord">verschillende</span>'}<span class="weekCountLabel">${countLabel}</span></span></span>`,
+	        count:`<span class="weekCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${weekItemCount}</strong>${weekItemCount === 1 ? '' : '<span class="weekCountWord">verschillende</span>'}<span class="weekCountLabel">${countLabel}</span></span></span>`,
 	        days
 	      });
 	    }).filter(Boolean);
@@ -3607,17 +3639,20 @@
 	    const mobileLabels = `<div class="ongoingMobileLabels">${placePills} ${costPill(cost)} ${stimulusPill(stimulus)}</div>`;
 	    const websiteLabel = AgendaViewShared.sourceButtonLabel(item);
 	    const website = item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(websiteLabel)}</span></a>` : '<span class="small">–</span>';
-	    const actions = agendaReviewActions(item, state, true).replaceAll('data-edit-agenda=', 'data-edit-ongoing=');
+	    const actions = agendaReviewActions(item, state, true)
+	      .replaceAll('data-edit-agenda=', 'data-edit-ongoing=')
+	      .replaceAll('data-verify-agenda=', 'data-verify-ongoing=')
+	      .replaceAll('data-hide-agenda=', 'data-hide-ongoing=')
+	      .replaceAll('data-delete-agenda=', 'data-delete-ongoing=');
 	    return AgendaViewShared.renderOngoingRow({
         themeClass:domainThemeClass(item.domain), hidden:state.isHidden,
         title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
-        review:`<div>${agendaReviewPills(item, state, true)}</div>`,
-        date:escapeHtml([item.date, item.time].filter(Boolean).join(' · ') || 'Datum nog checken'),
+	        date:escapeHtml([item.date, item.time].filter(Boolean).join(' · ') || 'Datum nog checken'),
         weeks:escapeHtml(weeks), place:placePills, mobileLabels,
         locationDetail:item.where ? `<span class="small">${escapeHtml(item.where)}</span>` : '',
 	        cost:costPill(cost), stimulus:stimulusPill(stimulus),
         meta:`<div class="ongoingMetaLine"><strong>Beschikbaar:</strong> ${escapeHtml(weeks)}</div>`,
-        description:escapeHtml(item.fit || '–'), website, actions
+	        description:escapeHtml(audienceText(item.fit || '–')), website, actions
       });
 	  }
 	  function orderedAdminWeekIds(ids=[]){
@@ -3639,8 +3674,12 @@
 	      isActive:item => ADMIN_WEEKS.some(week => weekDays(week.id).some(day => agendaAdminItemOccursOnDay(item, day, week.id))),
 	      exclude:isAgendaMultiDayFestival,
 	      itemKey:item => `${normalizedAgendaTitle(item.title)}|${item.url || ''}`,
-	      sort:list => [...list].sort((a,b) => agendaReviewSortDate(a).localeCompare(agendaReviewSortDate(b)) || normalize(a.title).localeCompare(normalize(b.title)))
+	      sort:sortAgendaAdminItems
 	    });
+	  }
+	  function ongoingAdminGroupIds(id){
+	    const item = ongoingAdminGroups.get(String(id));
+	    return (item?.groupIds || [id]).map(String);
 	  }
 	  function renderAgendaReview(){
 	    const hidden = hiddenAgendaIds();
@@ -3673,7 +3712,7 @@
 	      ? `<option value="">Kies een agenda-item</option>${ongoingCandidates.map(item => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.title)} · ${escapeHtml(item.date || 'geen datum')}</option>`).join('')}`
 	      : '<option value="">Geen andere agenda-items</option>';
 	    $('#ongoingAdminAddBtn').disabled = !ongoingCandidates.length;
-	    const items = allItems.filter(item => !ongoingIds.has(String(item.id)) && agendaMatchesFilters(item, states.get(item.id), filters));
+	    const items = allItems.filter(item => isAgendaConcrete(item) && agendaMatchesFilters(item, states.get(item.id), filters));
 	    $('#agendaReviewCount').textContent = `${items.length} / ${allItems.length} item${allItems.length === 1 ? '' : 's'}`;
 	    $('#agendaRuleCount').textContent = `${rules.length} regel${rules.length === 1 ? '' : 's'}`;
 	    const pendingCount = allItems.filter(item => states.get(item.id).isNew).length;
@@ -4003,16 +4042,17 @@
 	    renderAgendaReview();
 	    setStatus('#adminStatus', 'Agenda-item gewijzigd en direct bijgewerkt op de publieke agenda.', 'ok');
 	  }
-	  async function verifyAgendaItem(id){
+	  async function verifyAgendaItem(idOrIds){
+	    const targetIds = (Array.isArray(idOrIds) ? idOrIds : [idOrIds]).map(String);
 	    const ids = new Set(loadArray(VERIFIED_AGENDA_KEY));
-	    ids.add(id);
+	    targetIds.forEach(id => ids.add(id));
 	    saveArray(VERIFIED_AGENDA_KEY, [...ids]);
 	    if(!(await saveCentralStorage())){
 	      setStatus('#adminStatus', 'Opslaan in de online opslag lukte niet.', 'warn');
 	      return;
 	    }
 	    renderAgendaReview();
-	    setStatus('#adminStatus', 'UIT-agenda item gemarkeerd als gecheckt.', 'ok');
+	    setStatus('#adminStatus', targetIds.length === 1 ? 'UIT-agenda item gemarkeerd als gecheckt.' : 'Doorlopend aanbod gemarkeerd als gecheckt.', 'ok');
 	  }
 	  async function verifyAllAgendaItems(){
 	    const hidden = hiddenAgendaIds();
@@ -4044,10 +4084,10 @@
 	    renderAgendaReview();
 	    setStatus('#adminStatus', `${count} UIT-agenda item${count === 1 ? '' : 's'} goedgekeurd.`, 'ok');
 	  }
-	  async function toggleAgendaItemVisibility(id, hidden){
+	  async function toggleAgendaItemVisibility(idOrIds, hidden){
+	    const targetIds = (Array.isArray(idOrIds) ? idOrIds : [idOrIds]).map(String);
 	    const ids = new Set(loadArray(HIDDEN_AGENDA_KEY));
-	    if(hidden) ids.delete(id);
-	    else ids.add(id);
+	    targetIds.forEach(id => hidden ? ids.delete(id) : ids.add(id));
 	    saveArray(HIDDEN_AGENDA_KEY, [...ids]);
 	    if(!(await saveCentralStorage())){
 	      setStatus('#adminStatus', 'Opslaan in de online opslag lukte niet.', 'warn');
@@ -4056,30 +4096,34 @@
 	    renderAgendaReview();
 	    setStatus('#adminStatus', hidden ? 'UIT-agenda item weer zichtbaar gemaakt.' : 'UIT-agenda item verborgen.', 'ok');
 	  }
-	  async function deleteAgendaItem(id){
-	    if(!(await confirmDialog('Dit agenda-item echt verwijderen?', {confirmText:'Verwijderen'}))) return;
+	  async function deleteAgendaItem(idOrIds){
+	    const targetIds = (Array.isArray(idOrIds) ? idOrIds : [idOrIds]).map(String);
+	    if(!(await confirmDialog(targetIds.length === 1 ? 'Dit agenda-item echt verwijderen?' : 'Dit doorlopende aanbod echt verwijderen?', {confirmText:'Verwijderen'}))) return;
 	    const deleted = deletedAgendaIds();
 	    const items = autoAgendaItems();
-	    const item = agendaReviewItems().find(offer => offer.id === id || agendaItemKey(offer) === id);
-	    if(item) addTrashItem('agenda', item.title, [item.date, item.time, item.source].filter(Boolean).join(' · '), {id, item});
-	    deleted.add(id);
-	    if(item){
+	    const matchingItems = agendaReviewItems().filter(offer => targetIds.includes(String(offer.id)) || targetIds.includes(agendaItemKey(offer)));
+	    matchingItems.forEach(item => addTrashItem('agenda', item.title, [item.date, item.time, item.source].filter(Boolean).join(' · '), {id:item.id, item}));
+	    targetIds.forEach(id => deleted.add(id));
+	    matchingItems.forEach(item => {
 	      deleted.add(agendaItemKey(item));
 	      deleted.add(agendaContentKey(item));
-	    }
+	    });
 	    saveArray(DELETED_AGENDA_KEY, [...deleted]);
-	    if(item && item.agendaKind === 'auto'){
-	      saveArray(AUTO_AGENDA_KEY, items.filter(offer => offer.id !== id && agendaItemKey(offer) !== id && agendaContentKey(offer) !== agendaContentKey(item)));
-	    }
+	    const deletedContentKeys = new Set(matchingItems.map(agendaContentKey));
+	    saveArray(AUTO_AGENDA_KEY, items.filter(offer => !targetIds.includes(String(offer.id)) && !targetIds.includes(agendaItemKey(offer)) && !deletedContentKeys.has(agendaContentKey(offer))));
 	    const hidden = new Set(loadArray(HIDDEN_AGENDA_KEY));
-	    hidden.delete(id);
-	    if(item) hidden.delete(agendaItemKey(item));
-	    if(item) hidden.delete(agendaContentKey(item));
+	    targetIds.forEach(id => hidden.delete(id));
+	    matchingItems.forEach(item => {
+	      hidden.delete(agendaItemKey(item));
+	      hidden.delete(agendaContentKey(item));
+	    });
 	    saveArray(HIDDEN_AGENDA_KEY, [...hidden]);
 	    const verified = new Set(loadArray(VERIFIED_AGENDA_KEY));
-	    verified.delete(id);
-	    if(item) verified.delete(agendaItemKey(item));
-	    if(item) verified.delete(agendaContentKey(item));
+	    targetIds.forEach(id => verified.delete(id));
+	    matchingItems.forEach(item => {
+	      verified.delete(agendaItemKey(item));
+	      verified.delete(agendaContentKey(item));
+	    });
 	    saveArray(VERIFIED_AGENDA_KEY, [...verified]);
 	    if(!(await saveCentralStorage())){
 	      setStatus('#adminStatus', 'Verwijderen lukte niet in de online opslag.', 'warn');
@@ -4937,14 +4981,20 @@
 	      if(rejectButton) rejectPendingLink(rejectButton.dataset.rejectLink);
 	      const verifyButton = event.target.closest('[data-verify-agenda]');
 	      if(verifyButton) verifyAgendaItem(verifyButton.dataset.verifyAgenda);
+	      const ongoingVerifyButton = event.target.closest('[data-verify-ongoing]');
+	      if(ongoingVerifyButton) verifyAgendaItem(ongoingAdminGroupIds(ongoingVerifyButton.dataset.verifyOngoing));
 	      const agendaEditButton = event.target.closest('[data-edit-agenda]');
 	      if(agendaEditButton) startAgendaEdit(agendaEditButton.dataset.editAgenda);
 	      const ongoingEditButton = event.target.closest('[data-edit-ongoing]');
 	      if(ongoingEditButton) startAgendaEdit(ongoingEditButton.dataset.editOngoing, {item:ongoingAdminGroups.get(String(ongoingEditButton.dataset.editOngoing))});
 	      const agendaHideButton = event.target.closest('[data-hide-agenda]');
 	      if(agendaHideButton) toggleAgendaItemVisibility(agendaHideButton.dataset.hideAgenda, agendaHideButton.dataset.hidden === '1');
+	      const ongoingHideButton = event.target.closest('[data-hide-ongoing]');
+	      if(ongoingHideButton) toggleAgendaItemVisibility(ongoingAdminGroupIds(ongoingHideButton.dataset.hideOngoing), ongoingHideButton.dataset.hidden === '1');
 	      const agendaDeleteButton = event.target.closest('[data-delete-agenda]');
 	      if(agendaDeleteButton) deleteAgendaItem(agendaDeleteButton.dataset.deleteAgenda);
+	      const ongoingDeleteButton = event.target.closest('[data-delete-ongoing]');
+	      if(ongoingDeleteButton) deleteAgendaItem(ongoingAdminGroupIds(ongoingDeleteButton.dataset.deleteOngoing));
 	      const blockSourceButton = event.target.closest('[data-block-agenda-source]');
 	      if(blockSourceButton) blockAgendaItem(blockSourceButton.dataset.blockAgendaSource, 'source', blockSourceButton.dataset.ruleValue);
 	      const blockTitleButton = event.target.closest('[data-block-agenda-title]');

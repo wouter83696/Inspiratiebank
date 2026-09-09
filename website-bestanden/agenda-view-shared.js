@@ -18,9 +18,8 @@
     const main = view.href
       ? `<a class="agendaItemLink" href="${view.href}" target="_blank" rel="noopener">${content}</a>`
       : `<div class="agendaItemLink">${content}</div>`;
-    const publicActions = `<div class="agendaItemActions">${view.actions || ''}</div>`;
-    const adminActions = `<details class="agendaAdminMenu"><summary aria-label="Beheeracties" title="Beheeracties"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="4" cy="10" r="1.4"></circle><circle cx="10" cy="10" r="1.4"></circle><circle cx="16" cy="10" r="1.4"></circle></svg></summary><div class="agendaItemActions agendaReviewCardActions">${view.actions || ''}</div></details>`;
-    return `<article class="${classes}">${main}${view.status || ''}${view.admin ? adminActions : publicActions}</article>`;
+    const actionsClass = view.admin ? 'agendaItemActions agendaReviewCardActions' : 'agendaItemActions';
+    return `<article class="${classes}">${main}${view.status || ''}<div class="${actionsClass}">${view.actions || ''}</div></article>`;
   }
 
   function renderDay(view){

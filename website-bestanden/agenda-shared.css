@@ -80,10 +80,20 @@
 .ongoingAccordion th:nth-child(6),.ongoingAccordion td:nth-child(6){width:31%}
 .ongoingAccordion th:nth-child(7),.ongoingAccordion td:nth-child(7){width:9%}
 .ongoingAccordion.adminOngoingAccordion table{min-width:1120px}
-.ongoingAccordion.adminOngoingAccordion th:nth-child(1),.ongoingAccordion.adminOngoingAccordion td:nth-child(1){width:24%}
+.ongoingAccordion.adminOngoingAccordion th:nth-child(1),.ongoingAccordion.adminOngoingAccordion td:nth-child(1){width:22%}
+.ongoingAccordion.adminOngoingAccordion th:nth-child(2),.ongoingAccordion.adminOngoingAccordion td:nth-child(2){width:6%}
+.ongoingAccordion.adminOngoingAccordion th:nth-child(3),.ongoingAccordion.adminOngoingAccordion td:nth-child(3){width:13%}
+.ongoingAccordion.adminOngoingAccordion th:nth-child(4),.ongoingAccordion.adminOngoingAccordion td:nth-child(4){width:5%}
+.ongoingAccordion.adminOngoingAccordion th:nth-child(5),.ongoingAccordion.adminOngoingAccordion td:nth-child(5){width:5%}
 .ongoingAccordion.adminOngoingAccordion th:nth-child(6),.ongoingAccordion.adminOngoingAccordion td:nth-child(6){width:25%}
-.ongoingAccordion.adminOngoingAccordion th:nth-child(7),.ongoingAccordion.adminOngoingAccordion td:nth-child(7){width:8%}
-.ongoingAccordion.adminOngoingAccordion th:nth-child(8),.ongoingAccordion.adminOngoingAccordion td:nth-child(8){width:12%}
+.ongoingAccordion.adminOngoingAccordion th:nth-child(7),.ongoingAccordion.adminOngoingAccordion td:nth-child(7){width:10%}
+.ongoingAccordion.adminOngoingAccordion th:nth-child(8),.ongoingAccordion.adminOngoingAccordion td:nth-child(8){width:14%}
+.ongoingAccordion .ongoingMobileLabels{display:none}
+.adminOngoingAccordion .websiteCell{min-width:0;overflow:hidden}
+.adminOngoingAccordion .websiteCell .siteButton{width:100%;min-width:0;max-width:100%;padding-left:8px;padding-right:8px;overflow:hidden}
+.adminOngoingAccordion .websiteCell .siteButtonText{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.adminOngoingAccordion .ongoingAdminActions{display:flex;align-items:center;gap:5px;flex-wrap:nowrap;justify-content:flex-start}
+.adminOngoingAccordion .ongoingAdminActions .button.iconAction{flex:0 0 28px;width:28px;height:28px;min-width:28px;padding:0}
 
 .sharedSourceRow{align-items:center}
 .sharedSourceMain{display:grid;gap:4px;min-width:0}
@@ -105,27 +115,24 @@
 .weekPanel,
 .agendaReviewWeek{
   overflow:hidden;
-  background:rgba(255,255,255,.84);
-  border-color:rgba(234,236,239,.86);
-  box-shadow:0 18px 48px rgba(20,38,42,.055);
+  background:rgba(255,253,249,.86);
+  border-color:rgba(239,233,222,.88);
+  box-shadow:0 18px 48px rgba(64,45,20,.045);
 }
 
 .weekTop,
 .agendaReviewWeekHead{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) auto;
-  align-items:start;
-  gap:18px;
-  padding:28px 28px 22px;
+  display:block;
+  padding:28px 28px 14px;
   border-bottom:0;
-  background:rgba(255,255,255,.70);
+  background:rgba(255,253,249,.72);
 }
 
 .weekTitle,
 .agendaReviewWeekTitle{
   display:flex;
-  align-items:flex-start;
-  gap:22px;
+  align-items:center;
+  gap:16px;
 }
 
 .weekTitleContent{
@@ -159,15 +166,18 @@
 
 .weekBadge,
 .agendaReviewWeekBadge{
-  width:66px;
-  height:66px;
-  border-radius:14px;
+  width:52px;
+  height:52px;
+  margin-top:2px;
+  border-radius:13px;
   background:linear-gradient(145deg,rgba(168,225,221,.90),rgba(216,242,238,.76));
   display:grid;
   place-items:center;
   color:#07345e;
   font-weight:600;
-  font-size:1.75rem;
+  font-size:1.42rem;
+  line-height:1;
+  text-align:center;
   flex:0 0 auto;
 }
 
@@ -177,9 +187,9 @@
   color:#07345e;
   font-size:clamp(1.72rem,2.55vw,2.28rem);
   font-weight:600;
-  line-height:1.16;
-  letter-spacing:-.025em;
-  padding-bottom:2px;
+  line-height:1.1;
+  letter-spacing:0;
+  padding-bottom:0;
   overflow:visible;
 }
 
@@ -206,6 +216,17 @@
   line-height:1.12;
   vertical-align:top;
 }
+
+.weekCountBadge{
+  display:inline-flex;align-items:center;gap:7px;min-height:30px;padding:6px 10px;border-radius:10px;
+  background:rgba(232,242,242,.24);border:1px solid rgba(79,142,158,.035);
+  color:rgba(11,18,32,.66);box-shadow:0 3px 10px rgba(20,38,42,.02);
+  font-size:.78rem;font-weight:500;line-height:1;backdrop-filter:blur(8px)
+}
+.weekCountBadge svg{display:block;width:16px;height:16px;flex:0 0 16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.86}
+.weekCountBadge strong{display:inline;font:inherit;font-weight:650;color:rgba(11,18,32,.72)}
+.weekCountWord{display:inline}
+.weekCountLabel{display:inline}
 
 .weekHeaderMeta .weekCountBadge span{
   display:inline-flex;
@@ -260,13 +281,13 @@
 .agendaDay,
 .agendaReviewDay{
   min-height:520px;
-  padding:22px 10px 14px;
+  padding:16px 10px 14px;
   border:0;
   border-left:1px solid rgba(79,142,158,.085);
   background:var(--day-column-tint,rgba(255,255,255,.44));
   display:flex;
   flex-direction:column;
-  gap:24px;
+  gap:18px;
 }
 
 .agendaDay:first-child,
@@ -340,6 +361,7 @@
   border-radius:13px;
   background:rgba(255,255,255,.84);
   border:1px solid rgba(79,142,158,.16);
+  transition:background .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease);
 }
 
 .adminAgendaItem{
@@ -349,22 +371,11 @@
 }
 
 .adminAgendaItem .agendaItemLink{color:inherit;text-decoration:none}
-.agendaAdminMenu{position:relative;align-self:flex-end;margin-top:6px;z-index:8}
-.agendaAdminMenu summary{
-  display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;
-  border:1px solid rgba(11,18,32,.07);border-radius:999px;background:rgba(255,255,255,.58);
-  color:rgba(11,18,32,.52);cursor:pointer;list-style:none
+.adminAgendaItem .agendaReviewCardActions{
+  display:flex;align-items:center;justify-content:flex-end;gap:5px;flex-wrap:nowrap;
+  margin-top:6px;padding:0;border-top:0
 }
-.agendaAdminMenu summary::-webkit-details-marker{display:none}
-.agendaAdminMenu summary svg{width:14px;height:14px;fill:currentColor}
-.agendaAdminMenu[open] summary{background:#fff;color:var(--accent-dark)}
-.agendaAdminMenu .agendaReviewCardActions{
-  position:absolute;right:0;top:calc(100% + 6px);z-index:50;
-  display:grid;grid-template-columns:repeat(4,30px);gap:6px;width:max-content;
-  margin:0;padding:8px;border:1px solid rgba(11,18,32,.09);border-radius:10px;
-  background:rgba(255,255,255,.98);box-shadow:0 14px 34px rgba(20,38,42,.16)
-}
-.agendaAdminMenu .agendaReviewCardActions .button.iconAction{width:30px;height:30px;min-width:30px;padding:0}
+.adminAgendaItem .agendaReviewCardActions .button.iconAction{flex:0 0 28px;width:28px;height:28px;min-width:28px;padding:0}
 
 #adminApp .agendaReviewList.weekStack{
   display:grid;
@@ -382,9 +393,7 @@
 .agendaAdminMore>summary::-webkit-details-marker{display:none}
 .agendaAdminMoreItems{display:grid;gap:10px}
 
-.adminAgendaItem .agendaReviewCardMeta{
-  margin-top:0;
-}
+.adminAgendaItem .agendaReviewCardMeta{margin-top:8px}
 
 .agendaItem.themeCreative,
 .agendaItem.themeCulture,
@@ -404,8 +413,21 @@
 .agendaReviewCard.themeSport,
 .agendaReviewCard.themeAction,
 .agendaReviewCard.themeDefault{
-  background:var(--agenda-card-tint);
+  background:var(--agenda-tint,var(--theme-tint));
   border-color:var(--agenda-line,var(--theme-line));
+  box-shadow:0 8px 20px rgba(20,38,42,.035);
+}
+
+.agendaReviewCard.themeCreative:hover,
+.agendaReviewCard.themeCulture:hover,
+.agendaReviewCard.themeNature:hover,
+.agendaReviewCard.themeSocial:hover,
+.agendaReviewCard.themeSport:hover,
+.agendaReviewCard.themeAction:hover,
+.agendaReviewCard.themeDefault:hover{
+  background:linear-gradient(rgba(255,255,255,.32),rgba(255,255,255,.32)),var(--agenda-tint,var(--theme-tint));
+  border-color:var(--agenda-line,var(--theme-line));
+  box-shadow:0 11px 24px rgba(20,38,42,.065);
 }
 
 .agendaItemTitle,
