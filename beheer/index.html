@@ -1227,7 +1227,6 @@
           </div>
           <div id="agendaAdminThemeLegend" class="agendaAdminThemeLegend"></div>
           <div id="agendaReviewList" class="tableWrap agendaReviewList"></div>
-          <div id="agendaReviewWeekView" class="agendaReviewWeekView" hidden></div>
           <div class="sectionDivider"></div>
           <section class="ongoingAccordion adminOngoingAccordion" id="ongoingAdminSection">
             <div class="panelHead">
@@ -2669,7 +2668,6 @@
 	  };
 	  ADMIN_WEEKS = adminRollingWeeks();
 	  ADMIN_WEEK_START = Object.fromEntries(ADMIN_WEEKS.map(week => [week.id, week.startIso]));
-	  let agendaAdminView = 'list';
 	  function parseIsoDate(value){
 	    const parts = String(value || '').split('-').map(Number);
 	    if(parts.length !== 3 || parts.some(Number.isNaN)) return null;
@@ -3414,30 +3412,6 @@
 	    $('#agendaAdminThemeLegend').innerHTML = agendaThemeLegendHtml();
 	    updateAgendaAdminThemeChips();
 	  }
-	  function setAgendaAdminView(){
-	    agendaAdminView = 'list';
-	    document.querySelectorAll('[data-agenda-view]').forEach(btn => {
-	      const active = btn.dataset.agendaView === agendaAdminView;
-	      btn.classList.toggle('active', active);
-	      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
-	    });
-	    $('#agendaReviewWeekView').hidden = true;
-	    $('#agendaReviewList').hidden = false;
-	  }
-	  function setAgendaReviewDayFocus(dayEl){
-	    const board = dayEl?.closest('.agendaReviewBoard');
-	    if(!board) return;
-	    const alreadyFocused = dayEl.classList.contains('dayFocused');
-	    board.querySelectorAll('.agendaReviewDay').forEach(day => day.classList.remove('dayFocused'));
-	    board.classList.toggle('dayFocusActive', !alreadyFocused);
-	    if(!alreadyFocused) dayEl.classList.add('dayFocused');
-	  }
-	  function clearAgendaReviewDayFocus(){
-	    document.querySelectorAll('.agendaReviewBoard.dayFocusActive').forEach(board => {
-	      board.classList.remove('dayFocusActive');
-	      board.querySelectorAll('.agendaReviewDay').forEach(day => day.classList.remove('dayFocused'));
-	    });
-	  }
 	  function agendaAdminFilters(){
 	    return {
 	      query:$('#agendaAdminSearch')?.value || '',
@@ -3554,64 +3528,6 @@
         description:escapeHtml(item.fit || '–'), website, actions
       });
 	  }
-	  function renderAgendaWeekCard(item, state, compact=false){
-	    const meta = [[item.time, item.where].filter(Boolean).join(' · ') || item.date, isAgendaFlexiblePeriod(item) ? item.date : ''].filter(Boolean).join(' · ');
-	    return AgendaViewShared.renderItem({
-        admin:true, themeClass:domainThemeClass(item.domain), compact,
-        hidden:state.isHidden, isNew:state.isNew,
-        title:`<span class="agendaItemTitle agendaReviewCardTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span class="ideaTitleText">${escapeHtml(item.title)}</span></span>`,
-        meta:escapeHtml(meta), status:`<div class="agendaReviewMeta">${agendaReviewPills(item, state, true)}</div>`,
-        actions:agendaReviewActions(item, state, true)
-      });
-	  }
-	  function renderAgendaSingleWeekView(items, states, weekId){
-	    const week = ADMIN_WEEKS.find(item => item.id === weekId) || (Array.isArray(BASE.weeks) ? BASE.weeks : []).find(item => item.id === weekId);
-	    const todayIso = formatIsoDate(new Date());
-	    const weekItems = items.filter(item => itemWeekIds(item).includes(weekId));
-	    const daysHtml = weekDays(weekId).map(day => {
-	      const occurring = weekItems.filter(item => agendaItemOccursOnDay(item, day.iso));
-	      const dayItems = occurring.filter(item => !isAgendaFlexiblePeriod(item));
-	      const periodItems = occurring.filter(item => isAgendaFlexiblePeriod(item) && showAgendaPeriodInWeek(item));
-	      const visiblePeriods = periodItems.slice(0, 2);
-	      const isToday = day.iso === todayIso;
-	      return AgendaViewShared.renderDay({
-          admin:true, key:escapeHtml(`${weekId}:${day.iso}`), label:escapeHtml(day.label), date:escapeHtml(day.prettyDate), today:isToday,
-          items:`${visiblePeriods.map(item => renderAgendaWeekCard(item, states.get(item.id), true)).join('')}${dayItems.map(item => renderAgendaWeekCard(item, states.get(item.id))).join('')}`,
-          more:periodItems.length > visiblePeriods.length ? `<div class="agendaMore">+ ${periodItems.length - visiblePeriods.length} meerdaagse optie${periodItems.length - visiblePeriods.length === 1 ? '' : 's'} in lijstweergave</div>` : '',
-          empty:!dayItems.length && !periodItems.length ? '<div class="agendaEmpty">Geen items</div>' : ''
-        });
-	    }).join('');
-	    const renderedDays = weekDays(weekId);
-	    const dates = renderedDays.length ? `${formatCompactAgendaDate(parseIsoDate(renderedDays[0].iso))} t/m ${formatCompactAgendaDate(parseIsoDate(renderedDays[6].iso))}` : String(week?.dates || agendaWeekLabel(weekId));
-	    const checkedAt = latestAgendaCheckedAt();
-	    const checkedDate = new Date(checkedAt || '');
-	    const checkedCompact = Number.isFinite(checkedDate.getTime())
-	      ? `${checkedDate.toLocaleDateString('nl-NL', {day:'numeric', month:'short'}).replace(/\.$/, '')}, ${checkedDate.toLocaleTimeString('nl-NL', {hour:'2-digit', minute:'2-digit'})}`
-	      : '';
-	    const freshness = checkedCompact ? `<span class="agendaFreshness" title="Laatst gecontroleerd: ${escapeHtml(formatAdminDateTime(checkedAt))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg><span class="agendaFreshnessLabel">Gecheckt</span><span class="agendaFreshnessTime">${escapeHtml(checkedCompact)}</span></span>` : '';
-	    const weekIds = Object.keys(ADMIN_WEEK_START);
-	    const weekIndex = weekIds.indexOf(weekId);
-	    const previousWeek = weekIndex > 0 ? weekIds[weekIndex - 1] : '';
-	    const nextWeek = weekIndex >= 0 && weekIndex < weekIds.length - 1 ? weekIds[weekIndex + 1] : '';
-	    const navigation = `<div class="weekNav" aria-label="Door weken bladeren">
-	      <button class="weekNavButton" type="button" data-admin-week-jump="${escapeHtml(previousWeek)}" aria-label="Vorige week" title="Vorige week"${previousWeek ? '' : ' disabled'}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
-	      <button class="weekNavButton" type="button" data-admin-week-jump="${escapeHtml(nextWeek)}" aria-label="Volgende week" title="Volgende week"${nextWeek ? '' : ' disabled'}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
-	    </div>`;
-	    return AgendaViewShared.renderWeek({
-        admin:true, week:escapeHtml(week?.week || weekId.replace('w','')), title:escapeHtml(dates),
-        freshness,
-        count:`<span class="weekCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${weekItems.length}</strong><span class="weekCountWord"> verschillende</span><span class="weekCountLabel"> activiteiten</span></span></span>`,
-        navigation, status:'', days:daysHtml
-      });
-	  }
-	  function renderAgendaWeekView(items, states, filters){
-	    if(filters.week === 'all'){
-	      return Object.keys(ADMIN_WEEK_START)
-	        .map(weekId => renderAgendaSingleWeekView(items, states, weekId))
-	        .join('');
-	    }
-	    return renderAgendaSingleWeekView(items, states, filters.week || 'w29');
-	  }
 	  function renderAgendaReview(){
 	    const hidden = hiddenAgendaIds();
 	    const deleted = deletedAgendaIds();
@@ -3661,10 +3577,11 @@
 	      ? `<option value="">Kies een agenda-item</option>${ongoingCandidates.map(item => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.title)} · ${escapeHtml(item.date || 'geen datum')}</option>`).join('')}`
 	      : '<option value="">Geen andere agenda-items</option>';
 	    $('#ongoingAdminAddBtn').disabled = !ongoingCandidates.length;
-	    const items = allItems.filter(item => agendaMatchesFilters(item, states.get(item.id), filters));
-	    $('#agendaReviewCount').textContent = `${items.length} / ${allItems.length} item${allItems.length === 1 ? '' : 's'}`;
+	    const agendaItems = allItems.filter(item => !ongoingIds.has(String(item.id)));
+	    const items = agendaItems.filter(item => agendaMatchesFilters(item, states.get(item.id), filters));
+	    $('#agendaReviewCount').textContent = `${items.length} / ${agendaItems.length} item${agendaItems.length === 1 ? '' : 's'}`;
 	    $('#agendaRuleCount').textContent = `${rules.length} regel${rules.length === 1 ? '' : 's'}`;
-	    const pendingCount = allItems.filter(item => states.get(item.id).isNew).length;
+	    const pendingCount = agendaItems.filter(item => states.get(item.id).isNew).length;
 	    const approveAllButton = $('#approveAllAgendaBtn');
 	    approveAllButton.disabled = !pendingCount;
 	    approveAllButton.textContent = pendingCount ? `Alles goedkeuren (${pendingCount})` : 'Alles is goedgekeurd';
@@ -3677,13 +3594,9 @@
 	    }).join('') : '<div class="empty">Nog geen regels ingesteld.</div>';
 	    if(!items.length){
 	      $('#agendaReviewList').innerHTML = '<div class="empty">Geen agenda-items om te beheren.</div>';
-	      $('#agendaReviewWeekView').innerHTML = '';
-	      setAgendaAdminView();
 	      return;
 	    }
-	    $('#agendaReviewWeekView').innerHTML = '';
 	    $('#agendaReviewList').innerHTML = `<table class="agendaReviewTable"><thead><tr><th>Activiteit</th><th>Categorie</th><th>Locatie en afstand</th><th>Kosten</th><th>Prikkel</th><th>Beschrijving</th><th>Website</th><th>Beheer</th></tr></thead><tbody>${items.map(item => renderAgendaListItem(item, states.get(item.id))).join('')}</tbody></table>`;
-	    setAgendaAdminView();
 	  }
   async function updateTitleVisibility(key, action){
     const titles = new Set(loadArray(ADMIN_HIDDEN_INSPIRATION_KEY).map(normalize));
@@ -4811,19 +4724,6 @@
       if($('#adminApp') && !$('#adminApp').hidden) setAdminWorkspace(adminWorkspaceFromHash(), {scroll:false, scrollTarget:adminScrollTargetFromHash()});
     });
     document.querySelectorAll('[data-admin-view]').forEach(btn => btn.addEventListener('click', () => setAdminIdeaView(btn.dataset.adminView)));
-    document.querySelectorAll('[data-agenda-view]').forEach(btn => btn.addEventListener('click', () => {
-      setAgendaAdminView(btn.dataset.agendaView);
-      renderAgendaReview();
-    }));
-    $('#agendaReviewWeekView').addEventListener('click', event => {
-      const button = event.target.closest('[data-admin-week-jump]');
-      const weekId = button?.dataset.adminWeekJump || '';
-      if(!weekId) return;
-      const select = $('#agendaAdminWeekSelect');
-      select.value = weekId;
-      syncCustomSelect(select);
-      renderAgendaReview();
-    });
     ['#agendaAdminSearch','#agendaAdminWeekSelect','#agendaAdminKindFilter','#agendaAdminDomainFilter','#agendaAdminDistanceFilter','#agendaAdminCostFilter','#agendaAdminStimulusFilter','#agendaAdminStatusFilter']
       .forEach(selector => $(selector).addEventListener(selector === '#agendaAdminSearch' ? 'input' : 'change', renderAgendaReview));
     $('#agendaAdminThemeLegend').addEventListener('click', event => {
@@ -4962,18 +4862,8 @@
 	      if(restoreTrashButton) restoreTrashItem(restoreTrashButton.dataset.restoreTrash);
 	      const removeTrashButton = event.target.closest('[data-remove-trash]');
 	      if(removeTrashButton) removeTrashItem(removeTrashButton.dataset.removeTrash);
-	      const reviewDay = event.target.closest('.agendaReviewDay');
-	      if(reviewDay && !event.target.closest('a,button,details,input,select,textarea')) setAgendaReviewDayFocus(reviewDay);
 	    });
     document.addEventListener('keydown', event => {
-      if(event.key === 'Enter' || event.key === ' '){
-        const reviewDay = event.target.closest('.agendaReviewDay');
-        if(reviewDay){
-          event.preventDefault();
-          setAgendaReviewDayFocus(reviewDay);
-          return;
-        }
-      }
       if(event.key !== 'Escape') return;
       if(!$('#confirmModal').hidden){
         closeConfirmDialog(false);
@@ -4983,8 +4873,7 @@
         closeAgendaEdit();
         return;
       }
-      clearAgendaReviewDayFocus();
-      closeCustomSelects();
+	      closeCustomSelects();
       $('#adminMenu').open = false;
     });
   }
