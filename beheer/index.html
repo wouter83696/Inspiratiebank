@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="nl" data-ui-build="single-desktop-source-v14">
+<html lang="nl" data-ui-build="single-desktop-source-v15">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -962,7 +962,7 @@
       #agendaReviewList .agendaTableActions .button.iconAction{width:32px;height:32px}
     }
   </style>
-  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260910-single-desktop-source-v14">
+  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260910-single-desktop-source-v15">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260910-single-desktop-source-v14">
 </head>
 <body>
@@ -1520,7 +1520,7 @@
 
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
   <script src="../website-bestanden/idea-view-shared.js?v=20260910-single-desktop-source-v14"></script>
-  <script src="../website-bestanden/agenda-view-shared.js?v=20260910-single-desktop-source-v14"></script>
+  <script src="../website-bestanden/agenda-view-shared.js?v=20260910-single-desktop-source-v15"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
   const ADMIN_SESSION_KEY = 'bcjn_zomer_beheer_open_v1';
@@ -3633,7 +3633,7 @@
         weeks:escapeHtml(weeks), place:placePills,
 	        cost:costPill(cost), stimulus:stimulusPill(stimulus),
         meta:`<div class="ongoingMetaLine"><strong>Beschikbaar:</strong> ${escapeHtml(weeks)}</div>`,
-	        description:escapeHtml(audienceText(item.fit || '–')), website, actions, manageFirst:true
+	        description:escapeHtml(audienceText(item.fit || '–')), website, actions
       });
 	  }
 	  function orderedAdminWeekIds(ids=[]){
@@ -3687,7 +3687,7 @@
 	    const ongoingCandidates = reviewItems.filter(item => !ongoingIds.has(String(item.id)));
 	    $('#ongoingAdminCount').innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${escapeHtml(ongoingItems.length)}</strong> optie${ongoingItems.length === 1 ? '' : 's'}</span>`;
 	    $('#ongoingAdminList').innerHTML = ongoingItems.length
-	      ? `<div class="tableWrap">${AgendaViewShared.renderOngoingTable({admin:true, manageFirst:true, rows:ongoingItems.map(item => renderOngoingAdminRow(item, states.get(item.id) || agendaReviewState(item, hidden, verified))).join('')})}</div>`
+	      ? `<div class="tableWrap">${AgendaViewShared.renderOngoingTable({admin:true, rows:ongoingItems.map(item => renderOngoingAdminRow(item, states.get(item.id) || agendaReviewState(item, hidden, verified))).join('')})}</div>`
 	      : '<div class="empty">Nog geen doorlopend aanbod. Kies hierboven een agenda-item om het toe te voegen.</div>';
 	    $('#ongoingAdminSelect').innerHTML = ongoingCandidates.length
 	      ? `<option value="">Kies een agenda-item</option>${ongoingCandidates.map(item => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.title)} · ${escapeHtml(item.date || 'geen datum')}</option>`).join('')}`

@@ -63,8 +63,9 @@
   }
 
   function renderOngoingTable(view={}){
-    const manageHead = view.admin && view.manageFirst ? '<th class="ongoingManageHead">Beheer</th>' : '';
-    return `<table${view.className ? ` class="${view.className}"` : ''}><thead><tr>${manageHead}<th class="ongoingTitleHead">Aanbod</th><th class="ongoingWeeksHead">Weken</th><th class="ongoingBadgesHead">Badges</th><th class="ongoingFitHead">Beschrijving</th><th class="ongoingWebsiteHead">Website</th></tr></thead><tbody>${view.rows || ''}</tbody></table>`;
+    const manageHeadLeft = view.admin && view.manageFirst ? '<th class="ongoingManageHead">Beheer</th>' : '';
+    const manageHeadRight = view.admin && !view.manageFirst ? '<th class="ongoingManageHead">Beheer</th>' : '';
+    return `<table${view.className ? ` class="${view.className}"` : ''}><thead><tr>${manageHeadLeft}<th class="ongoingTitleHead">Aanbod</th><th class="ongoingWeeksHead">Weken</th><th class="ongoingBadgesHead">Badges</th><th class="ongoingFitHead">Beschrijving</th><th class="ongoingWebsiteHead">Website</th>${manageHeadRight}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
   function isFlexiblePeriodOffer(item={}, spanDays=0){
