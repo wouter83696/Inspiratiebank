@@ -71,7 +71,11 @@
 .sharedIdeaList .ideaTitleText{min-width:0;overflow-wrap:anywhere}
 .sharedIdeaList .ideaListMeta{margin:3px 0 0 38px}
 .sharedIdeaList .cardPillGroup{display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
-.sharedIdeaList .ideaActions{display:flex;align-items:center;gap:7px}
+.sharedIdeaList td:nth-child(4){overflow:hidden}
+.sharedIdeaList .ideaActions{display:flex;align-items:center;gap:7px;width:100%;min-width:0;max-width:100%}
+.sharedIdeaList .siteButton{min-width:0;max-width:100%;overflow:hidden}
+.sharedIdeaList .siteButtonText{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sharedIdeaList .siteButton::after{flex:0 0 auto}
 .sharedIdeaList .ideaAdminListActions{display:flex;align-items:center;justify-content:flex-start;min-width:0}
 .sharedIdeaList .ideaAdminListActions .ideaActions{display:grid;grid-template-columns:repeat(2,25px);gap:4px}
 .sharedIdeaList .ideaAdminListActions .button.iconAction{width:25px;height:25px;min-width:25px;padding:0}
