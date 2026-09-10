@@ -84,17 +84,17 @@
 .ongoingAccordion tr:last-child td{border-bottom:0}
 .ongoingAccordion th:nth-child(1),.ongoingAccordion td:nth-child(1){width:27%}
 .ongoingAccordion th:nth-child(2),.ongoingAccordion td:nth-child(2){width:7%;white-space:nowrap}
-.ongoingAccordion th:nth-child(3),.ongoingAccordion td:nth-child(3){width:20%}
-.ongoingAccordion th:nth-child(4),.ongoingAccordion td:nth-child(4){width:37%}
-.ongoingAccordion th:nth-child(5),.ongoingAccordion td:nth-child(5){width:9%}
+.ongoingAccordion th:nth-child(3),.ongoingAccordion td:nth-child(3){width:18%}
+.ongoingAccordion th:nth-child(4),.ongoingAccordion td:nth-child(4){width:34%}
+.ongoingAccordion th:nth-child(5),.ongoingAccordion td:nth-child(5){width:14%}
 .ongoingBadgesCell .cardPillGroup{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:0}
 .adminOngoingAccordion table{min-width:0}
 .adminOngoingAccordion .ongoingManageHead,.adminOngoingAccordion .ongoingManageCell{width:9% !important}
 .adminOngoingAccordion .ongoingTitleHead,.adminOngoingAccordion .ongoingTitleCell{width:24% !important}
 .adminOngoingAccordion .ongoingWeeksHead,.adminOngoingAccordion .ongoingWeeksCell{width:7% !important;white-space:nowrap}
-.adminOngoingAccordion .ongoingBadgesHead,.adminOngoingAccordion .ongoingBadgesCell{width:17% !important}
-.adminOngoingAccordion .ongoingFitHead,.adminOngoingAccordion .ongoingFitCell{width:34% !important}
-.adminOngoingAccordion .ongoingWebsiteHead,.adminOngoingAccordion .websiteCell{width:9% !important}
+.adminOngoingAccordion .ongoingBadgesHead,.adminOngoingAccordion .ongoingBadgesCell{width:15% !important}
+.adminOngoingAccordion .ongoingFitHead,.adminOngoingAccordion .ongoingFitCell{width:31% !important}
+.adminOngoingAccordion .ongoingWebsiteHead,.adminOngoingAccordion .websiteCell{width:14% !important}
 .adminOngoingAccordion .ongoingAdminActions{display:grid;grid-template-columns:repeat(2,25px);align-items:center;gap:4px;justify-content:start;margin:0}
 .adminOngoingAccordion .ongoingAdminActions .button.iconAction{width:25px;height:25px;min-width:25px;padding:0}
 .adminOngoingAccordion .websiteCell .siteButton{width:100%;min-width:0;max-width:100%;padding-inline:8px}
