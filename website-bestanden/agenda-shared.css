@@ -73,7 +73,7 @@
   padding:12px;border:0;background:rgba(255,255,255,.26);color:var(--accent-dark)
 }
 .ongoingAccordionText{display:block;min-width:0}
-.ongoingTitleLine{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:8px}
+.ongoingTitleLine{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;flex-wrap:wrap}
 .ongoingTitleLine>strong{display:block;font-size:1.12rem;font-weight:600}
 .ongoingTitleLine .weekCountBadge{width:auto;min-height:30px;padding:6px 10px}
 .ongoingAccordionBody{border-top:1px solid rgba(11,18,32,.06);background:rgba(253,254,253,.88)}
@@ -152,7 +152,7 @@
 
 .weekTitle{
   display:flex;
-  align-items:flex-start;
+  align-items:center;
   gap:16px;
 }
 .weekTitle>div{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
@@ -523,6 +523,11 @@
 }
 
 @media (max-width:640px){
+  .ongoingTitleLine{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:7px;
+  }
   .weekTop{
     grid-template-columns:1fr;
     gap:16px;
