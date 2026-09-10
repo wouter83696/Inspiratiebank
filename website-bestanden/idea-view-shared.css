@@ -74,7 +74,7 @@
 .sharedIdeaList.isAdmin th:nth-child(3),.sharedIdeaList.isAdmin td:nth-child(3){width:27%}
 .sharedIdeaList.isAdmin th:nth-child(4),.sharedIdeaList.isAdmin td:nth-child(4){width:10%}
 .sharedIdeaList.isAdmin th:nth-child(5),.sharedIdeaList.isAdmin td:nth-child(5){width:11%}
-.sharedIdeaList .nameWithIcon{display:flex;align-items:center;gap:10px;color:var(--accent-dark);font-size:1rem;line-height:1.18;font-weight:500}
+.sharedIdeaList .nameWithIcon{display:flex;align-items:center;gap:10px;color:var(--accent-dark);font-size:1rem;line-height:1.18;font-weight:400}
 .sharedIdeaList .nameWithIcon .domainIcon{
   display:inline-flex;
   align-items:center;
@@ -97,7 +97,7 @@
   margin:0;
   color:var(--accent-dark);
   font-size:1rem;
-  font-weight:500;
+  font-weight:400;
   line-height:1.18;
   overflow-wrap:anywhere;
 }
