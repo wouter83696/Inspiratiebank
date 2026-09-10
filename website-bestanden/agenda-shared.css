@@ -386,9 +386,9 @@
 .agendaItem.themeSport,
 .agendaItem.themeAction,
 .agendaItem.themeDefault{
-  background:var(--agenda-tint,var(--theme-tint));
-  border-color:var(--agenda-line,var(--theme-line));
-  box-shadow:0 8px 20px rgba(20,38,42,.035);
+  background:linear-gradient(color-mix(in srgb,var(--theme-tint) 38%,transparent),color-mix(in srgb,var(--theme-tint) 38%,transparent)),rgba(255,255,255,.96);
+  border-color:color-mix(in srgb,var(--theme-line) 74%,#EFE9DE);
+  box-shadow:0 10px 26px rgba(64,45,20,.04);
 }
 
 .agendaItem.themeCreative:hover,
@@ -398,9 +398,9 @@
 .agendaItem.themeSport:hover,
 .agendaItem.themeAction:hover,
 .agendaItem.themeDefault:hover{
-  background:linear-gradient(rgba(255,255,255,.32),rgba(255,255,255,.32)),var(--agenda-tint,var(--theme-tint));
-  border-color:var(--agenda-line,var(--theme-line));
-  box-shadow:0 11px 24px rgba(20,38,42,.065);
+  background:linear-gradient(color-mix(in srgb,var(--theme-tint-strong) 42%,transparent),color-mix(in srgb,var(--theme-tint-strong) 42%,transparent)),rgba(255,255,255,.97);
+  border-color:var(--theme-line);
+  box-shadow:0 16px 34px rgba(64,45,20,.065);
 }
 
 .agendaItemTitle{
