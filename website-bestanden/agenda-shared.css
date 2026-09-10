@@ -189,16 +189,16 @@
 }
 
 .weekBadge{
-  width:48px;
-  height:48px;
+  width:64px;
+  height:64px;
   margin-top:0;
-  border-radius:12px;
+  border-radius:15px;
   background:linear-gradient(145deg,rgba(168,225,221,.90),rgba(216,242,238,.76));
   display:grid;
   place-items:center;
   color:#07345e;
   font-weight:600;
-  font-size:1.28rem;
+  font-size:1.5rem;
   line-height:1;
   text-align:center;
   flex:0 0 auto;
@@ -207,7 +207,7 @@
 .weekTop h3{
   margin:0;
   color:#07345e;
-  font-size:clamp(1.72rem,2.55vw,2.28rem);
+  font-size:clamp(1.66rem,2.3vw,2.12rem);
   font-weight:600;
   line-height:1.1;
   letter-spacing:0;
