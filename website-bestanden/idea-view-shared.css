@@ -4,6 +4,7 @@
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:12px;
   align-items:stretch;
+  font-family:"IBM Plex Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 .sharedIdeaCards .card{
   display:flex;
@@ -53,7 +54,13 @@
 .sharedIdeaCards .cardFooter{display:flex;align-items:center;gap:8px;margin-top:auto;min-width:0}
 .sharedIdeaCards .ideaAdminCardActions{display:flex;align-items:center;gap:7px;margin-top:0;padding-top:9px;border-top:1px solid rgba(11,18,32,.055)}
 
-.sharedIdeaList{overflow-x:auto;border:1px solid rgba(11,18,32,.08);border-radius:8px;background:rgba(255,255,255,.88)}
+.sharedIdeaList{
+  overflow-x:auto;
+  border:1px solid rgba(11,18,32,.08);
+  border-radius:8px;
+  background:rgba(255,255,255,.88);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
 .sharedIdeaList table{width:100%;min-width:920px;border-collapse:collapse;table-layout:fixed}
 .sharedIdeaList th,.sharedIdeaList td{padding:11px 12px;text-align:left;vertical-align:middle;border-bottom:1px solid rgba(11,18,32,.065);font-size:.86rem;line-height:1.34}
 .sharedIdeaList th{color:rgba(11,18,32,.56);font-weight:600;background:rgba(255,255,255,.78)}
