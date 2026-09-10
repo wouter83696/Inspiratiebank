@@ -66,14 +66,14 @@
 .sharedIdeaList th{color:rgba(11,18,32,.56);font-weight:600;background:rgba(255,255,255,.78)}
 .sharedIdeaList tr:last-child td{border-bottom:0}
 .sharedIdeaList th:nth-child(1),.sharedIdeaList td:nth-child(1){width:31%}
-.sharedIdeaList th:nth-child(2),.sharedIdeaList td:nth-child(2){width:28%}
-.sharedIdeaList th:nth-child(3),.sharedIdeaList td:nth-child(3){width:25%}
-.sharedIdeaList th:nth-child(4),.sharedIdeaList td:nth-child(4){width:16%}
-.sharedIdeaList.isAdmin th:nth-child(1),.sharedIdeaList.isAdmin td:nth-child(1){width:30%}
-.sharedIdeaList.isAdmin th:nth-child(2),.sharedIdeaList.isAdmin td:nth-child(2){width:22%}
-.sharedIdeaList.isAdmin th:nth-child(3),.sharedIdeaList.isAdmin td:nth-child(3){width:27%}
-.sharedIdeaList.isAdmin th:nth-child(4),.sharedIdeaList.isAdmin td:nth-child(4){width:10%}
-.sharedIdeaList.isAdmin th:nth-child(5),.sharedIdeaList.isAdmin td:nth-child(5){width:11%}
+.sharedIdeaList th:nth-child(2),.sharedIdeaList td:nth-child(2){width:23%}
+.sharedIdeaList th:nth-child(3),.sharedIdeaList td:nth-child(3){width:24%}
+.sharedIdeaList th:nth-child(4),.sharedIdeaList td:nth-child(4){width:22%}
+.sharedIdeaList.isAdmin th:nth-child(1),.sharedIdeaList.isAdmin td:nth-child(1){width:29%}
+.sharedIdeaList.isAdmin th:nth-child(2),.sharedIdeaList.isAdmin td:nth-child(2){width:20%}
+.sharedIdeaList.isAdmin th:nth-child(3),.sharedIdeaList.isAdmin td:nth-child(3){width:24%}
+.sharedIdeaList.isAdmin th:nth-child(4),.sharedIdeaList.isAdmin td:nth-child(4){width:14%}
+.sharedIdeaList.isAdmin th:nth-child(5),.sharedIdeaList.isAdmin td:nth-child(5){width:13%}
 .sharedIdeaList .nameWithIcon{display:flex;align-items:center;gap:10px;color:#214D5A;font-size:1rem;line-height:1.18;font-weight:400}
 .sharedIdeaList .nameWithIcon .domainIcon{
   display:inline-flex;
