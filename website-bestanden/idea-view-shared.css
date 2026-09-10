@@ -62,17 +62,18 @@
 .sharedIdeaList th:nth-child(2),.sharedIdeaList td:nth-child(2){width:28%}
 .sharedIdeaList th:nth-child(3),.sharedIdeaList td:nth-child(3){width:25%}
 .sharedIdeaList th:nth-child(4),.sharedIdeaList td:nth-child(4){width:16%}
-.sharedIdeaList.isAdmin th:nth-child(1),.sharedIdeaList.isAdmin td:nth-child(1){width:9%}
-.sharedIdeaList.isAdmin th:nth-child(2),.sharedIdeaList.isAdmin td:nth-child(2){width:29%}
-.sharedIdeaList.isAdmin th:nth-child(3),.sharedIdeaList.isAdmin td:nth-child(3){width:24%}
-.sharedIdeaList.isAdmin th:nth-child(4),.sharedIdeaList.isAdmin td:nth-child(4){width:28%}
-.sharedIdeaList.isAdmin th:nth-child(5),.sharedIdeaList.isAdmin td:nth-child(5){width:10%}
+.sharedIdeaList.isAdmin th:nth-child(1),.sharedIdeaList.isAdmin td:nth-child(1){width:30%}
+.sharedIdeaList.isAdmin th:nth-child(2),.sharedIdeaList.isAdmin td:nth-child(2){width:22%}
+.sharedIdeaList.isAdmin th:nth-child(3),.sharedIdeaList.isAdmin td:nth-child(3){width:27%}
+.sharedIdeaList.isAdmin th:nth-child(4),.sharedIdeaList.isAdmin td:nth-child(4){width:10%}
+.sharedIdeaList.isAdmin th:nth-child(5),.sharedIdeaList.isAdmin td:nth-child(5){width:11%}
 .sharedIdeaList .nameWithIcon{display:flex;align-items:center;gap:10px;color:var(--accent-dark);font-size:1rem;line-height:1.18;font-weight:500}
 .sharedIdeaList .ideaTitleText{min-width:0;overflow-wrap:anywhere}
 .sharedIdeaList .ideaListMeta{margin:3px 0 0 38px}
 .sharedIdeaList .cardPillGroup{display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
 .sharedIdeaList .ideaActions{display:flex;align-items:center;gap:7px}
-.sharedIdeaList .ideaAdminListActions{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:4px}
+.sharedIdeaList .ideaAdminListActions{display:flex;align-items:center;justify-content:flex-start;min-width:0}
+.sharedIdeaList .ideaAdminListActions .ideaActions{display:grid;grid-template-columns:repeat(2,25px);gap:4px}
 .sharedIdeaList .ideaAdminListActions .button.iconAction{width:25px;height:25px;min-width:25px;padding:0}
 
 @media (min-width:1180px){.sharedIdeaCards{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}}
@@ -88,9 +89,5 @@
   .sharedIdeaList td::before{content:attr(data-label);color:rgba(11,18,32,.48);font-size:.72rem;font-weight:600}
   .sharedIdeaList td:first-child{display:block;padding-top:0}
   .sharedIdeaList td:first-child::before{display:none}
-  .sharedIdeaList.isAdmin td:first-child{display:grid;padding-top:8px}
-  .sharedIdeaList.isAdmin td:first-child::before{display:block}
-  .sharedIdeaList.isAdmin td:nth-child(2){display:block;padding-top:0}
-  .sharedIdeaList.isAdmin td:nth-child(2)::before{display:none}
   .sharedIdeaList .cardPillGroup{flex-wrap:wrap}
 }
