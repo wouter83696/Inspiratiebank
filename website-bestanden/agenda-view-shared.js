@@ -48,18 +48,23 @@
     const titleActions = view.actionsInTitle && view.actions !== undefined
       ? `<div class="ongoingAdminActions">${view.actions || ''}</div>`
       : '';
+    const manageCell = view.actions !== undefined && view.manageFirst
+      ? `<td class="ongoingManageCell" data-label="Beheer"><div class="ongoingAdminActions">${view.actions || ''}</div></td>`
+      : '';
     return `<tr class="${classes}">
+      ${manageCell}
       <td class="ongoingTitleCell"><span class="name">${view.title || ''}</span>${view.review || ''}<div class="small">${view.date || ''}</div>${titleActions}</td>
       <td class="ongoingWeeksCell">${view.weeks || ''}</td>
       <td class="ongoingBadgesCell"><div class="cardPillGroup ongoingBadges">${view.place || ''}${view.cost || ''}${view.stimulus || ''}</div></td>
       <td class="ongoingFitCell">${view.meta || ''}<div class="small ongoingAdminDescription">${view.description || ''}</div></td>
       <td class="websiteCell">${view.website || ''}</td>
-      ${view.actions !== undefined && !view.actionsInTitle ? `<td class="ongoingManageCell"><div class="ongoingAdminActions">${view.actions || ''}</div></td>` : ''}
+      ${view.actions !== undefined && !view.actionsInTitle && !view.manageFirst ? `<td class="ongoingManageCell" data-label="Beheer"><div class="ongoingAdminActions">${view.actions || ''}</div></td>` : ''}
     </tr>`;
   }
 
   function renderOngoingTable(view={}){
-    return `<table${view.className ? ` class="${view.className}"` : ''}><thead><tr><th>Aanbod</th><th>Weken</th><th>Badges</th><th>Beschrijving</th><th>Website</th></tr></thead><tbody>${view.rows || ''}</tbody></table>`;
+    const manageHead = view.admin && view.manageFirst ? '<th class="ongoingManageHead">Beheer</th>' : '';
+    return `<table${view.className ? ` class="${view.className}"` : ''}><thead><tr>${manageHead}<th class="ongoingTitleHead">Aanbod</th><th class="ongoingWeeksHead">Weken</th><th class="ongoingBadgesHead">Badges</th><th class="ongoingFitHead">Beschrijving</th><th class="ongoingWebsiteHead">Website</th></tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
   function isFlexiblePeriodOffer(item={}, spanDays=0){

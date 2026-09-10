@@ -31,14 +31,19 @@
       {label:'Praktisch', html:`<div class="small">${view.practical || ''}</div>`},
       {label:'Website', html:`<div class="ideaActions">${view.website || ''}${view.actions || ''}</div>`}
     ];
-    if(view.manageActions !== undefined) cells.push({label:'Beheer', html:view.manageActions || ''});
+    if(view.manageActions !== undefined){
+      const manageCell = {label:'Beheer', html:`<div class="ideaAdminListActions">${view.manageActions || ''}</div>`};
+      if(view.manageFirst) cells.unshift(manageCell);
+      else cells.push(manageCell);
+    }
     return renderRow({...view, cells});
   }
 
   function renderDesktopTable(view={}){
     const admin = view.admin === true;
     const headers = ['Activiteit', 'Badges', 'Praktisch', 'Website'];
-    if(admin) headers.push('Beheer');
+    if(admin && view.manageFirst) headers.unshift('Beheer');
+    else if(admin) headers.push('Beheer');
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
