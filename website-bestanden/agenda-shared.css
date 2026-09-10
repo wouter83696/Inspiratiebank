@@ -118,10 +118,10 @@
 }
 
 /* Titel en thema-icoon zijn in publiek en beheer exact dezelfde component. */
-.ongoingTitleCell .name{display:block;color:#285563;font-size:1rem;font-weight:400;line-height:1.18}
+.ongoingTitleCell .name{display:block;color:#214D5A;font-size:1rem;font-weight:400;line-height:1.18}
 .ongoingTitleCell .nameWithIcon{display:flex;align-items:center;gap:10px;min-width:0}
 .ongoingTitleCell .nameWithIcon .ideaTitleText{
-  display:block;min-width:0;margin:0;color:#285563;
+  display:block;min-width:0;margin:0;color:#214D5A;
   font-size:1rem;font-weight:400;line-height:1.18;overflow-wrap:anywhere
 }
 #adminApp .ongoingTitleCell .nameWithIcon .domainIcon,
@@ -428,7 +428,7 @@
   grid-template-columns:24px minmax(0,1fr);
   align-items:center;
   gap:7px;
-  color:#285563;
+  color:#214D5A;
   font-size:.86rem;
   font-weight:400;
   line-height:1.18;
