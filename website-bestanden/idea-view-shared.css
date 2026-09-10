@@ -77,7 +77,7 @@
 .sharedIdeaList .siteButtonText{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sharedIdeaList .siteButton::after{flex:0 0 auto}
 .sharedIdeaList .ideaAdminListActions{display:flex;align-items:center;justify-content:flex-start;min-width:0}
-.sharedIdeaList .ideaAdminListActions .ideaActions{display:grid;grid-template-columns:repeat(2,25px);gap:4px}
+.sharedIdeaList .ideaAdminListActions .ideaActions{display:grid;grid-template-columns:repeat(4,25px);gap:4px}
 .sharedIdeaList .ideaAdminListActions .button.iconAction{width:25px;height:25px;min-width:25px;padding:0}
 
 @media (min-width:1180px){.sharedIdeaCards{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}}

@@ -799,21 +799,22 @@
       border:1px solid rgba(79,142,158,.12);background:rgba(255,255,255,.82);color:var(--accent-dark)
     }
     .ideaActions .button.iconAction svg{width:15px;height:15px}
-    .ideaActions .button.iconAction.editIdeaAction{background:rgba(255,255,255,.86);border-color:rgba(79,142,158,.16);color:#315f6d}
-    .ideaActions .button.iconAction.approveIdeaAction{background:rgba(255,255,255,.88);border-color:rgba(72,132,100,.18);color:#426e5d}
-    .ideaActions .button.iconAction.visibilityIdeaAction{background:rgba(255,255,255,.86);border-color:rgba(72,132,100,.14);color:#4f7663}
-    .ideaActions .button.iconAction.warn{background:rgba(255,255,255,.86);border-color:rgba(186,151,56,.16);color:#7a6424}
-    .ideaActions .button.iconAction.hot{background:rgba(255,255,255,.86);border-color:rgba(198,98,133,.16);color:#8d4a63}
+    .ideaActions .button.iconAction.editIdeaAction{background:rgba(223,243,247,.92);border-color:rgba(79,142,158,.18);color:#315f6d}
+    .ideaActions .button.iconAction.approveIdeaAction{background:rgba(168,225,221,.64);border-color:rgba(72,132,100,.18);color:#426e5d}
+    .ideaActions .button.iconAction.approveIdeaAction:disabled{opacity:1}
+    .ideaActions .button.iconAction.visibilityIdeaAction,
+    .ideaActions .button.iconAction.visibilityIdeaAction.warn{background:rgba(221,239,232,.88);border-color:rgba(72,132,100,.16);color:#4f7663}
+    .ideaActions .button.iconAction.hot{background:rgba(246,223,231,.90);border-color:rgba(198,98,133,.18);color:#8d4a63}
     .small{font-size:.84rem;color:var(--muted);line-height:1.36}
     .empty{padding:18px;border:1px dashed rgba(11,18,32,.14);border-radius:18px;background:rgba(255,255,255,.40);color:var(--muted);text-align:center}
     .tableWrap{overflow-x:auto;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.48)}
     table{width:100%;border-collapse:separate;border-spacing:0;min-width:760px}
     #adminIdeaList table{min-width:920px;table-layout:fixed}
-    #adminIdeaList th:nth-child(1),#adminIdeaList td:nth-child(1){width:31%}
-    #adminIdeaList th:nth-child(2),#adminIdeaList td:nth-child(2){width:28%}
+    #adminIdeaList th:nth-child(1),#adminIdeaList td:nth-child(1){width:29%}
+    #adminIdeaList th:nth-child(2),#adminIdeaList td:nth-child(2){width:21%}
     #adminIdeaList th:nth-child(3),#adminIdeaList td:nth-child(3){width:25%}
-    #adminIdeaList th:nth-child(4),#adminIdeaList td:nth-child(4){width:8%}
-    #adminIdeaList th:nth-child(5),#adminIdeaList td:nth-child(5){width:8%}
+    #adminIdeaList th:nth-child(4),#adminIdeaList td:nth-child(4){width:10%}
+    #adminIdeaList th:nth-child(5),#adminIdeaList td:nth-child(5){width:15%}
     #adminIdeaList .ideaListMeta{margin-left:38px}
     #adminIdeaList .nameWithIcon{display:flex;align-items:center;gap:10px;color:var(--accent-dark);font-size:1rem;line-height:1.18;font-weight:500}
     #adminIdeaList .nameWithIcon .domainIcon{align-self:center;margin-top:0}
@@ -963,7 +964,7 @@
     }
   </style>
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260910-single-desktop-source-v17">
-  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260910-site-link-fit-v19">
+  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260910-admin-actions-v20">
 </head>
 <body>
   <header class="topbar">
