@@ -152,7 +152,7 @@
 
 .weekTitle{
   display:flex;
-  align-items:center;
+  align-items:flex-start;
   gap:16px;
 }
 .weekTitle>div{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
@@ -189,16 +189,16 @@
 }
 
 .weekBadge{
-  width:52px;
-  height:52px;
-  margin-top:2px;
-  border-radius:13px;
+  width:40px;
+  height:40px;
+  margin-top:0;
+  border-radius:10px;
   background:linear-gradient(145deg,rgba(168,225,221,.90),rgba(216,242,238,.76));
   display:grid;
   place-items:center;
   color:#07345e;
   font-weight:600;
-  font-size:1.42rem;
+  font-size:1.12rem;
   line-height:1;
   text-align:center;
   flex:0 0 auto;
@@ -532,9 +532,10 @@
     gap:14px;
   }
   .weekBadge{
-    width:56px;
-    height:56px;
-    font-size:1.42rem;
+    width:36px;
+    height:36px;
+    border-radius:9px;
+    font-size:1rem;
   }
   .weekTop h3{
     font-size:1.55rem;
