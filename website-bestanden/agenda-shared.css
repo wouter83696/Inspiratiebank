@@ -69,7 +69,7 @@
 .ongoingAccordionButton{
   appearance:none;width:100%;text-align:left;cursor:default;font:inherit;
   display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;
-  padding:12px 18px;border:0;background:rgba(255,255,255,.26);color:var(--accent-dark)
+  padding:12px;border:0;background:rgba(255,255,255,.26);color:var(--accent-dark)
 }
 .ongoingAccordionText{display:block;min-width:0}
 .ongoingTitleLine{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:8px}
@@ -98,6 +98,7 @@
 .adminOngoingAccordion .ongoingAdminActions .button.iconAction{width:25px;height:25px;min-width:25px;padding:0}
 .adminOngoingAccordion .websiteCell .siteButton{width:100%;min-width:0;max-width:100%;padding-inline:8px}
 .adminOngoingAccordion .websiteCell .siteButtonText{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.adminOngoingAccordion .ongoingAdminPicker{margin:0;padding:14px 12px 18px}
 
 .sharedSourceRow{align-items:center}
 .sharedSourceMain{display:grid;gap:4px;min-width:0}
@@ -118,7 +119,10 @@
 /* Titel en thema-icoon zijn in publiek en beheer exact dezelfde component. */
 .ongoingTitleCell .name{display:block;color:var(--accent-dark);font-size:1rem;font-weight:500;line-height:1.18}
 .ongoingTitleCell .nameWithIcon{display:flex;align-items:center;gap:10px;min-width:0}
-.ongoingTitleCell .nameWithIcon .ideaTitleText{display:block;min-width:0;font-weight:500;overflow-wrap:anywhere}
+.ongoingTitleCell .nameWithIcon .ideaTitleText{
+  display:block;min-width:0;margin:0;color:var(--accent-dark);
+  font-size:1rem;font-weight:500;line-height:1.18;overflow-wrap:anywhere
+}
 #adminApp .ongoingTitleCell .nameWithIcon .domainIcon,
 .ongoingTitleCell .nameWithIcon .domainIcon{
   display:inline-flex;align-items:center;justify-content:center;
