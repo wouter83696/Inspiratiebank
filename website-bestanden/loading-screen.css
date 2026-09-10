@@ -1,11 +1,18 @@
+.appLoading{overflow:hidden}
+.appLoading > :not(.appLoader){visibility:hidden !important}
 .appLoader{
   position:fixed;
   inset:0;
-  z-index:10000;
+  z-index:2147483647;
   display:grid;
   place-items:center;
+  width:100%;
+  min-height:100vh;
+  min-height:100dvh;
   padding:24px;
   background:var(--bg);
+  isolation:isolate;
+  overflow:hidden;
   opacity:1;
   visibility:visible;
   transition:opacity .36s var(--ease),visibility 0s linear .36s;
@@ -49,6 +56,7 @@
   to{transform:translateY(-4px);opacity:1}
 }
 @media (max-width:640px){
+  .appLoader{padding:max(24px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left))}
   .appLoaderMark{width:68px;height:68px;border-radius:16px;margin-bottom:16px}
   .appLoaderTitle{font-size:1.3rem}
   .appLoaderStatus{font-size:.86rem}

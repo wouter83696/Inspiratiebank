@@ -117,13 +117,23 @@
 @media (max-width:640px){
   .sharedIdeaCards{grid-template-columns:1fr}
   .sharedIdeaList{overflow:visible;border:0;background:transparent}
+  #ideaList.sharedIdeaList table,#adminIdeaList.sharedIdeaList table{min-width:0}
   .sharedIdeaList table,.sharedIdeaList tbody,.sharedIdeaList tr,.sharedIdeaList td{display:block;width:100%;min-width:0}
   .sharedIdeaList thead{display:none}
   .sharedIdeaList tbody{display:grid;gap:10px}
-  .sharedIdeaList tr{padding:13px;border:1px solid var(--theme-line,rgba(79,142,158,.14));border-radius:8px;background:var(--theme-tint,rgba(255,255,255,.94))}
-  .sharedIdeaList td{display:grid;grid-template-columns:92px minmax(0,1fr);gap:8px;padding:8px 0;border:0}
-  .sharedIdeaList td::before{content:attr(data-label);color:rgba(11,18,32,.48);font-size:.72rem;font-weight:600}
-  .sharedIdeaList td:first-child{display:block;padding-top:0}
-  .sharedIdeaList td:first-child::before{display:none}
+  .sharedIdeaList tr{display:flex;flex-direction:column;gap:10px;padding:15px;border:1px solid var(--theme-line,rgba(79,142,158,.14));border-radius:16px;background:var(--theme-tint,rgba(255,255,255,.94));box-shadow:0 8px 22px rgba(20,38,42,.04)}
+  .sharedIdeaList td{display:block;padding:0;border:0}
+  #ideaList.sharedIdeaList td,#adminIdeaList.sharedIdeaList td{width:100%;background:transparent;box-shadow:none}
+  #ideaList.sharedIdeaList .ideaThemeRow:hover td,#adminIdeaList.sharedIdeaList .ideaThemeRow:hover td{background:transparent}
+  .sharedIdeaList td::before{display:none;content:none}
+  .sharedIdeaList .nameWithIcon{align-items:flex-start;font-size:1.02rem}
+  .sharedIdeaList .nameWithIcon .ideaTitleText{font-size:1.02rem;line-height:1.24}
+  .sharedIdeaList .ideaListMeta{margin:4px 0 0 38px}
   .sharedIdeaList .cardPillGroup{flex-wrap:wrap}
+  .sharedIdeaList td:nth-child(3) .small{color:rgba(11,18,32,.66);font-size:.9rem;line-height:1.45}
+  .sharedIdeaList .ideaActions{justify-content:flex-start;flex-wrap:wrap}
+  .sharedIdeaList .siteButton{max-width:min(100%,260px)}
+  .sharedIdeaList .ideaAdminListActions .ideaActions{display:flex;flex-wrap:wrap;gap:6px}
+  .sharedIdeaList.isAdmin .ideaAdminListActions .ideaActions{justify-content:flex-end}
+  .sharedIdeaList .ideaAdminListActions .button.iconAction{width:32px;height:32px;min-width:32px}
 }

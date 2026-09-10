@@ -931,22 +931,21 @@
       #adminIdeaList thead{display:none}
       #adminIdeaList tbody{display:grid;gap:10px}
       #adminIdeaList tr{
-        padding:13px;border:1px solid color-mix(in srgb,var(--theme-line) 58%,#EAECEF);
+        display:flex;flex-direction:column;gap:10px;padding:15px;border:1px solid color-mix(in srgb,var(--theme-line) 58%,#EAECEF);
         border-radius:18px;background:rgba(255,255,255,.72);box-shadow:0 10px 24px rgba(20,38,42,.045)
       }
       #adminIdeaList tr.ideaThemeRow{background:linear-gradient(color-mix(in srgb,var(--theme-tint) 38%,transparent),color-mix(in srgb,var(--theme-tint) 38%,transparent)),rgba(255,255,255,.96)}
-      #adminIdeaList td{
-        display:grid;grid-template-columns:78px minmax(0,1fr);gap:8px;align-items:start;padding:7px 0;border:0;font-size:.88rem
-      }
-      #adminIdeaList td::before{content:attr(data-label);color:rgba(11,18,32,.48);font-size:.72rem;font-weight:600;letter-spacing:.01em}
-      #adminIdeaList td:first-child{display:block;padding-top:0;box-shadow:none}
-      #adminIdeaList td:first-child::before{display:none}
+      #adminIdeaList td{display:block;padding:0;border:0;font-size:.88rem}
+      #adminIdeaList td::before{display:none;content:none}
+      #adminIdeaList td:first-child{display:block;box-shadow:none}
       #adminIdeaList td:last-child{
         position:static;min-width:0;background:transparent;box-shadow:none;padding-bottom:0
       }
       #adminIdeaList td:nth-child(2) .cardPillGroup{flex-wrap:wrap}
-      #adminIdeaList .ideaActions{justify-content:flex-start}
-      #adminIdeaList .siteButton{max-width:100%}
+      #adminIdeaList .ideaActions{justify-content:flex-start;flex-wrap:wrap}
+      #adminIdeaList .siteButton{max-width:min(100%,260px)}
+      #adminIdeaList .ideaAdminListActions .ideaActions{display:flex;flex-wrap:wrap;gap:6px}
+      #adminIdeaList .ideaAdminListActions .button.iconAction{width:32px;height:32px;min-width:32px}
       #adminIdeaList .adminIdeaPhotoPreview{min-width:0}
       #agendaReviewList.tableWrap{overflow:visible;border:0;background:transparent;border-radius:0}
       #agendaReviewList table,#agendaReviewList tbody,#agendaReviewList tr,#agendaReviewList td{display:block;width:100%;min-width:0}
@@ -963,11 +962,11 @@
       #agendaReviewList .agendaTableActions .button.iconAction{width:32px;height:32px}
     }
   </style>
-  <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260910-v1">
+  <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260910-mobile-v2">
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260910-ongoing-column-balance-v34">
-  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260910-list-column-balance-v26">
+  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260910-mobile-list-v29">
 </head>
-<body>
+<body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
     <div class="appLoaderInner">
       <img class="appLoaderMark" src="../apple-touch-icon.png" alt="">
@@ -5015,9 +5014,15 @@
   init().finally(() => {
     window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
       const loader = document.getElementById('appLoader');
-      if(!loader) return;
+      if(!loader){
+        document.body.classList.remove('appLoading');
+        return;
+      }
       loader.classList.add('isReady');
-      window.setTimeout(() => loader.remove(), 420);
+      window.setTimeout(() => {
+        loader.remove();
+        document.body.classList.remove('appLoading');
+      }, 420);
     }));
   });
   </script>
