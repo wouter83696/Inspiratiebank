@@ -28,13 +28,18 @@
     const cells = [
       {label:'Activiteit', html:`${view.title || ''}${view.meta ? `<div class="small ideaListMeta">${view.meta}</div>` : ''}`},
       {label:'Badges', html:`<div class="cardPillGroup">${view.pills || ''}</div>`},
-      {label:'Praktisch', html:`<div class="small">${view.practical || ''}</div>`},
-      {label:'Website', html:`<div class="ideaActions">${view.website || ''}${view.actions || ''}</div>`}
+      {label:'Praktisch', html:`<div class="small">${view.practical || ''}</div>`}
     ];
     if(view.manageActions !== undefined){
+      cells.push({label:'Website', html:`<div class="ideaActions">${view.website || ''}${view.actions || ''}</div>`});
       const manageCell = {label:'Beheer', html:`<div class="ideaAdminListActions">${view.manageActions || ''}</div>`};
       if(view.manageFirst) cells.unshift(manageCell);
       else cells.push(manageCell);
+    }else{
+      cells.push(
+        {label:'Website', html:`<div class="ideaActions">${view.website || ''}</div>`},
+        {label:'Melden', html:`<div class="ideaReportListAction">${view.actions || ''}</div>`}
+      );
     }
     return renderRow({...view, cells});
   }
@@ -44,6 +49,7 @@
     const headers = ['Activiteit', 'Badges', 'Praktisch', 'Website'];
     if(admin && view.manageFirst) headers.unshift('Beheer');
     else if(admin) headers.push('Beheer');
+    else headers.push('Melden');
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 

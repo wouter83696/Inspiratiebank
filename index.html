@@ -1538,41 +1538,6 @@
       .cardFooter{gap:7px}
       .cardFooter .siteButton{min-height:34px;padding:8px 12px;font-size:.85rem}
       .activityStatusIcon{width:27px;height:27px}
-      .ongoingAccordion{border-radius:18px;box-shadow:0 10px 26px rgba(20,38,42,.045)}
-      .ongoingAccordionButton{padding:18px 18px 14px}
-      .ongoingAccordionBody{background:transparent;border-top:1px solid rgba(11,18,32,.05)}
-      .ongoingAccordion .tableWrap{background:transparent}
-      .ongoingAccordion .tableWrap{overflow:visible}
-      .ongoingAccordion table{display:block;min-width:0;width:100%}
-      .ongoingAccordion thead{display:none}
-      .ongoingAccordion tbody{display:grid;gap:12px}
-      .ongoingAccordion tr{
-        display:flex;flex-direction:column;gap:8px;padding:13px 14px;
-        border:0;border-radius:0;background:transparent;box-shadow:none
-      }
-      .ongoingAccordion tr + tr{border-top:1px solid rgba(11,18,32,.06)}
-      .ongoingAccordion td{display:block;border:0;padding:0;color:rgba(11,18,32,.70);font-size:.9rem;line-height:1.38}
-      .ongoingAccordion td::before{display:none}
-      .ongoingAccordion td:nth-child(1)::before{content:none}
-      .ongoingAccordion td:nth-child(2)::before{content:"Beschikbaar"}
-      .ongoingAccordion td:nth-child(3)::before{content:"Badges"}
-      .ongoingAccordion td:nth-child(4)::before{content:"Beschrijving"}
-      .ongoingAccordion td:nth-child(5)::before{content:"Website"}
-      .ongoingTitleCell{order:2}
-      .ongoingTitleCell .name{display:block;font-size:1rem;line-height:1.16}
-      .ongoingTitleCell .nameWithIcon{display:flex;align-items:center;gap:10px;color:var(--accent-dark);font-size:1rem;line-height:1.16}
-      .ongoingTitleCell .nameWithIcon .domainIcon{width:28px;height:28px;margin-top:0;flex:0 0 28px}
-      .ongoingWeeksCell,.ongoingBadgesCell,.ongoingFitCell,.ongoingAccordion td.websiteCell{grid-column:1/-1}
-      .ongoingWeeksCell{order:3}
-      .ongoingBadgesCell{order:1}
-      .ongoingFitCell{order:4;color:rgba(11,18,32,.66)}
-      .ongoingAccordion td.websiteCell{order:5}
-      .ongoingMetaLine{display:block;width:100%;margin:0;padding:6px 10px;border-radius:10px;background:rgba(232,242,242,.42);border:1px solid rgba(79,142,158,.06);color:rgba(11,18,32,.70);font-size:.8rem;line-height:1.3}
-      .ongoingMetaLine strong{color:var(--accent-dark);font-weight:600}
-      .ongoingWeeksCell{display:none}
-      .ongoingFitCell .small{font-size:.9rem;line-height:1.38;color:rgba(11,18,32,.66)}
-      .ongoingAccordion td.websiteCell{text-align:left;margin-top:2px}
-      .ongoingAccordion .siteButton{max-width:100%;min-height:34px;padding:8px 12px;font-size:.84rem}
       .teamFileControl{align-items:flex-start;flex-direction:column}
       .teamFileName{width:100%}
       .teamForm .teamActionBar{justify-content:center}
@@ -1581,30 +1546,6 @@
       #sourceAdditions .teamActionBar{justify-content:flex-start}
       #sourceAdditions .teamActionBar .formButton.primary{justify-content:center}
       #sourceAdditions .teamFormStatus{text-align:left}
-    }
-    @media (max-width:760px){
-      .ongoingAccordion .tableWrap{padding:0;background:transparent}
-      .ongoingAccordion tbody{display:grid;gap:10px;width:100%;padding:12px}
-      .ongoingAccordion tr{
-        display:flex;flex-direction:column;gap:9px;width:100%;box-sizing:border-box;padding:14px 16px 16px;
-        border:1px solid var(--theme-line,rgba(79,142,158,.10));border-radius:16px;
-        background:var(--theme-tint,rgba(255,255,255,.72));box-shadow:0 8px 18px rgba(20,38,42,.035)
-      }
-      .ongoingAccordion tr + tr{border-top:1px solid var(--theme-line,rgba(79,142,158,.10))}
-      .ongoingAccordion td{display:block;width:100% !important;align-self:stretch;box-sizing:border-box;border:0;padding:0}
-      .ongoingAccordion td::before{display:none !important}
-      .ongoingAccordion td.ongoingWeeksCell{display:none !important}
-      .ongoingAccordion .ongoingBadgesCell .cardPillGroup{display:flex !important;align-items:center;gap:5px;flex-wrap:wrap;width:100%;overflow:visible;margin:0}
-      .ongoingAccordion .ongoingTitleCell{order:2}
-      .ongoingAccordion .ongoingTitleCell .nameWithIcon{display:grid;grid-template-columns:28px minmax(0,1fr);align-items:center;gap:10px;font-size:1.05rem;line-height:1.16}
-      .ongoingAccordion .ongoingTitleCell .nameWithIcon .domainIcon{width:28px;height:28px;margin:0;flex:0 0 28px;align-self:center}
-      .ongoingAccordion .ongoingBadgesCell{order:1}
-      .ongoingAccordion .ongoingFitCell{order:4}
-      .ongoingAccordion td.websiteCell{order:5;text-align:left;margin-top:2px}
-      .ongoingAccordion .ongoingMetaLine{display:inline-flex !important;align-items:baseline;gap:4px;width:auto;max-width:100%;margin:0 0 6px;padding:6px 9px;border-radius:10px;background:rgba(255,255,255,.52);border:1px solid rgba(79,142,158,.07);color:rgba(11,18,32,.70);font-size:.78rem;line-height:1.28}
-      .ongoingAccordion .ongoingFitCell .small{font-size:.92rem;line-height:1.38;color:rgba(11,18,32,.68)}
-      .ongoingAccordion .ongoingTitleCell .small{display:none}
-      .ongoingAccordion .siteButton{min-width:86px;max-width:100%;min-height:36px;padding:9px 13px;font-size:.86rem}
     }
     @media (max-width:640px){
       .weekTitle{
@@ -1728,9 +1669,9 @@
     }
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
-  <link rel="stylesheet" href="website-bestanden/loading-screen.css?v=20260910-mobile-v2">
-  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260911-mobile-admin-cards-v36">
-  <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20260911-mobile-list-rows-v30">
+  <link rel="stylesheet" href="website-bestanden/loading-screen.css?v=20260911-no-content-bleed-v3">
+  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260911-ongoing-mobile-order-v37">
+  <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20260911-report-column-v31">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -2064,7 +2005,7 @@
   </div>
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20260910-single-desktop-source-v14"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20260911-report-column-v15"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20260910-single-desktop-source-v15"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
