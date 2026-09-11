@@ -27,7 +27,7 @@
   function renderDesktopRow(view){
     const cells = [
       {label:'Activiteit', html:`${view.title || ''}${view.meta ? `<div class="small ideaListMeta">${view.meta}</div>` : ''}`},
-      {label:'Badges', html:`<div class="cardPillGroup">${view.pills || ''}</div>`},
+      {label:'Badges', html:`<div class="cardPillGroup">${view.pills || ''}</div>${view.meta ? `<div class="mobileIdeaListMeta">${view.meta}</div>` : ''}`},
       {label:'Praktisch', html:`<div class="small">${view.practical || ''}</div>`}
     ];
     if(view.manageActions !== undefined){
