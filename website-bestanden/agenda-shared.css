@@ -536,7 +536,7 @@
   .ongoingAccordion td::before{display:none !important}
   .ongoingAccordion td.ongoingWeeksCell{display:none !important}
   .ongoingAccordion .ongoingTitleCell{order:1}
-  .ongoingAccordion .ongoingBadgesCell{order:2;padding-left:38px}
+  .ongoingAccordion .ongoingBadgesCell{order:2;padding-left:0}
   .ongoingAccordion .ongoingFitCell{order:3}
   .ongoingAccordion td.websiteCell{order:4;margin-top:2px;text-align:left}
   .ongoingAccordion .ongoingBadgesCell .cardPillGroup{display:flex;align-items:center;gap:5px;flex-wrap:wrap;width:100%;margin:0;background:transparent !important;box-shadow:none !important}
