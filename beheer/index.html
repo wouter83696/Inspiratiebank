@@ -973,7 +973,7 @@
   </style>
   <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260911-no-content-bleed-v3">
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260911-ongoing-mobile-order-v37">
-  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260911-report-column-v31">
+  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260911-mobile-list-meta-v32">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -3239,14 +3239,13 @@
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
     const approvalMeta = item.kind === 'collega-toegevoegd' && !item.approved ? 'Wacht op goedkeuring' : '';
-    const activityMeta = [item.group || 'Op maat', item.duration || 'Op maat'].join(' • ');
     const websiteLabel = AgendaViewShared.sourceButtonLabel(item);
     const website = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="${escapeHtml(websiteLabel)}"><span class="siteButtonText">${escapeHtml(websiteLabel)}</span></a>` : '<span class="small">-</span>';
     return IdeaViewShared.renderDesktopRow({
       themeClass:domainThemeClass(item.domain), hidden:item.hidden,
       attributes:`data-idea-key="${escapeHtml(item.key)}"`,
       title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
-      meta:escapeHtml(activityMeta),
+      meta:cardMetaLine(item),
       pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel || item.stimulus)}`,
       practical:escapeHtml(item.materials || item.description || '-'),
       website,

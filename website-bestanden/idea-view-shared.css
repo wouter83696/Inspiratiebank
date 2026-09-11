@@ -103,6 +103,9 @@
   overflow-wrap:anywhere;
 }
 .sharedIdeaList .ideaListMeta{margin:3px 0 0 38px}
+.sharedIdeaList .ideaListMeta .cardMetaLine{
+  display:flex;width:auto;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none
+}
 .sharedIdeaList .cardPillGroup{display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
 .sharedIdeaList td:nth-child(4){overflow:hidden}
 .sharedIdeaList .ideaActions{display:flex;align-items:center;gap:7px;width:100%;min-width:0;max-width:100%}
@@ -142,9 +145,11 @@
   .sharedIdeaList .nameWithIcon .domainIcon{flex-basis:28px}
   .sharedIdeaList .nameWithIcon .ideaTitleText{font-size:.98rem;line-height:1.22}
   .sharedIdeaList .ideaListMeta{margin:3px 0 0 37px;font-size:.8rem;line-height:1.3}
+  .sharedIdeaList .ideaListMeta .cardMetaLine{gap:9px;font-size:.8rem;line-height:1.3}
+  .sharedIdeaList td:nth-child(2) .cardPillGroup{width:calc(100% - 37px);margin-left:37px}
   .sharedIdeaList .cardPillGroup{flex-wrap:wrap}
   .sharedIdeaList td:nth-child(3) .small{
-    display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;
+    display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
     margin-left:37px;color:rgba(11,18,32,.62);font-size:.82rem;line-height:1.38
   }
   .sharedIdeaList .ideaActions{justify-content:flex-start;flex-wrap:nowrap}
