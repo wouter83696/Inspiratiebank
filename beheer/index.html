@@ -280,7 +280,8 @@
     .adminWorkspace[data-admin-workspace="meldkamer"] .agendaCheckEyebrow{font-size:.68rem}
     .adminWorkspace[data-admin-workspace="meldkamer"] .agendaCheckNotice strong{font-size:.96rem}
     .adminWorkspace[data-admin-workspace="meldkamer"] .agendaCheckDetail{font-size:.84rem}
-    .adminStack{display:grid;gap:14px}
+    .adminStack{display:grid;gap:14px;min-width:0;width:100%;max-width:100%}
+    .adminStack>*{min-width:0;width:100%;max-width:100%}
     .adminStack>#agendaReviewPanel{order:1}
     .adminStack>.sourceGrid{order:2}
     .adminStack>#agendaRulesPanel{order:3}
@@ -866,7 +867,8 @@
     @media (max-width:640px){.agendaEditForm{grid-template-columns:1fr}.agendaEditForm > .wide,.agendaEditForm label.wide,.agendaEditChecks{grid-column:1}.agendaEditModalCard{width:calc(100vw - 20px);padding:18px}}
     #adminApp[hidden],#loginPanel[hidden]{display:none !important}
     .adminTopGrid .list{max-height:520px}
-    @media (max-width:1040px){.adminTopGrid{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.filters,.filters.more{grid-template-columns:1fr 1fr}.filterSearch{grid-column:1/-1}.filterReset{grid-column:1/-1;justify-content:center}.agendaAdminFilters{flex-wrap:wrap}.agendaReviewBoard{grid-template-columns:repeat(7,180px);margin:0 12px 18px}.agendaReviewDay{min-height:360px}.agendaReviewItem{grid-template-columns:1fr}.agendaReviewActions{justify-content:flex-start;max-width:none}.agendaReviewDetails{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:1320px){.agendaAdminFilters{flex-wrap:wrap}}
+    @media (max-width:1040px){.adminTopGrid{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.filters,.filters.more{grid-template-columns:1fr 1fr}.filterSearch{grid-column:1/-1}.filterReset{grid-column:1/-1;justify-content:center}.agendaReviewBoard{grid-template-columns:repeat(7,180px);margin:0 12px 18px}.agendaReviewDay{min-height:360px}.agendaReviewItem{grid-template-columns:1fr}.agendaReviewActions{justify-content:flex-start;max-width:none}.agendaReviewDetails{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media (min-width:1180px){#adminIdeaCards.cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}#adminIdeaCards .card{height:100%;gap:9px}#adminIdeaCards .ideaImageFrame{aspect-ratio:16 / 8.7}}
 @media (max-width:820px){body{padding-top:26px}.topbar{margin-top:14px;padding:0 8px;gap:6px;align-items:flex-start}.topbar .adminMenu{top:14px;left:8px}.topbar .tabs{gap:2px;padding:4px}.tab,.mini{min-height:30px;padding:6px 8px;font-size:.76rem}.actions{display:none}.actions .mini{min-height:30px;padding:6px 0;font-size:.76rem}.hero{padding-top:10px}.loginPanel{margin-top:42px}.adminLayout{grid-template-columns:1fr}.adminSidebar{position:static;min-height:0}.adminSidebarGroup{grid-template-columns:repeat(2,minmax(0,1fr))}.adminSidebarLabel{grid-column:1/-1}.adminSidebarFoot{align-self:auto}.grid,.two,.adminTopGrid,.sourceGrid,.cards,.filters{grid-template-columns:1fr}.row{grid-template-columns:1fr}.rowActions{justify-content:flex-start}.filterSearch{grid-column:auto}.filterReset{grid-column:auto}.adminIdeaToolbar{align-items:flex-start}.viewBar{justify-content:flex-start}.agendaAdminToolbar{align-items:flex-start}.agendaReviewWeekHead{grid-template-columns:1fr}.agendaReviewWeekMeta{justify-content:flex-start}.agendaRulesHead{flex-direction:column}.agendaRuleList{grid-template-columns:1fr}}
     @media (max-width:820px){
@@ -895,7 +897,7 @@
     @media (max-width:640px){.filterBar{padding:10px}.filters.more{grid-template-columns:minmax(0,1fr) auto;gap:8px}.filterSearch{grid-column:auto}.filterToggle{display:inline-flex}.filters.more.expanded .filterToggle{background:rgba(168,225,221,.30);border-color:rgba(79,142,158,.14)}.filters.more:not(.expanded)>select,.filters.more:not(.expanded)>.customSelect,.filters.more:not(.expanded)>.filterReset{display:none}.filters.more>select,.filters.more>.customSelect,.filters.more>.filterReset{grid-column:1/-1}.filterReset{justify-content:center}.adminThemeLegendRow{align-items:flex-start;flex-wrap:wrap;gap:0}#adminThemeLegend,.agendaAdminThemeLegend{margin-left:-14px;margin-right:-14px;overflow:hidden}.adminThemeLegendRow #adminThemeLegend{flex-basis:calc(100% + 28px)}.adminThemeLegendRow .adminCountBadge{margin:2px 0 12px}.agendaThemeLegend{flex-wrap:nowrap;overflow-x:auto;padding:0 14px 3px;scrollbar-width:none}.agendaThemeLegend::-webkit-scrollbar{display:none}.agendaControlBar{grid-template-columns:1fr}.agendaReviewWeekHead{padding:18px 16px;gap:16px}.agendaReviewWeekTitle{gap:14px}.agendaReviewWeekBadge{width:56px;height:56px;font-size:1.42rem}.agendaReviewWeekHead h3{font-size:1.55rem}.agendaReviewBoard{grid-template-columns:1fr;overflow:visible;margin:0}.agendaReviewDay{min-height:auto;padding:16px 12px 14px;gap:14px;border-right:0;border-bottom:1px solid rgba(11,18,32,.055)}.agendaReviewCard{min-height:132px}.agendaReviewDetails{grid-template-columns:1fr}.agendaReviewList{max-height:none;overflow:visible}.agendaReviewActions .button,.agendaReviewCardActions .button{flex:1 1 auto}}
     @media (max-width:640px){
       body.adminMode .shell{padding:0 10px 44px}
-      .adminLayout{gap:10px;margin-top:0}
+      .adminLayout{width:100%;max-width:100%;gap:10px;margin-top:0;overflow:hidden}
       .adminSidebar,#adminApp.adminSidebarCollapsed .adminSidebar{
         position:sticky;top:0;z-index:75;margin:0 -10px 6px;padding:9px 10px 10px;border-radius:0 0 20px 20px;
         border-left:0;border-right:0;border-top:0
@@ -916,7 +918,8 @@
       .adminSidebarFoot .mini,#adminApp.adminSidebarCollapsed .adminSidebarFoot .mini{
         grid-template-columns:24px auto;width:auto;margin:0;padding:6px 8px;min-height:30px;font-size:.78rem
       }
-      .adminWorkspaceShell,#adminApp.adminSidebarCollapsed .adminWorkspaceShell{padding:8px 0 44px}
+      .adminWorkspaceShell,#adminApp.adminSidebarCollapsed .adminWorkspaceShell{width:100%;max-width:100%;padding:8px 0 44px;overflow:hidden}
+      .adminWorkspace,.adminWorkspace .panel,.adminStack,.adminStack>*{width:100%;max-width:100%;min-width:0}
       .workspaceHeader{display:block;margin:8px 0 10px;padding:0 2px}
       .workspaceHeader h2{font-size:1.38rem}
       .workspaceHeader p{font-size:.9rem;line-height:1.4}
@@ -963,7 +966,7 @@
     }
   </style>
   <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260910-mobile-v2">
-  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260910-ongoing-column-balance-v34">
+  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260911-mobile-admin-cards-v36">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260910-mobile-list-v29">
 </head>
 <body class="appLoading">
