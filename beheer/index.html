@@ -1,8 +1,14 @@
 <!doctype html>
-<html lang="nl" data-ui-build="single-desktop-source-v18">
+<html lang="nl" class="appLoading" data-ui-build="single-desktop-source-v18">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html.appLoading{overflow:hidden;background:#F8FAF9}
+    html.appLoading body{margin:0;overflow:hidden;background:#F8FAF9}
+    html.appLoading body > :not(.appLoader){display:none !important}
+    html.appLoading .appLoader{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;width:100%;min-height:100vh;padding:24px;background:#F8FAF9}
+  </style>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta name="theme-color" content="#F8FAF9">
   <meta name="robots" content="noindex">
@@ -971,7 +977,7 @@
       #agendaReviewList .agendaTableActions .button.iconAction{width:32px;height:32px}
     }
   </style>
-  <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260911-no-content-bleed-v3">
+  <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260911-first-paint-v4">
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260911-ongoing-public-mobile-v38">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260911-mobile-list-compact-v35">
 </head>
@@ -5024,12 +5030,14 @@
       const loader = document.getElementById('appLoader');
       if(!loader){
         document.body.classList.remove('appLoading');
+        document.documentElement.classList.remove('appLoading');
         return;
       }
       loader.classList.add('isReady');
       window.setTimeout(() => {
         loader.remove();
         document.body.classList.remove('appLoading');
+        document.documentElement.classList.remove('appLoading');
       }, 420);
     }));
   });
