@@ -31,7 +31,8 @@
 }
 .sharedIdeaCards .ideaImageFrame{
   position:relative;
-  width:100%;
+  width:auto;
+  align-self:stretch;
   aspect-ratio:16 / 8.7;
   margin:-10px -10px 10px;
   overflow:hidden;
@@ -41,6 +42,10 @@
   box-shadow:0 8px 18px rgba(20,38,42,.045);
 }
 .sharedIdeaCards .ideaImageFrame img{display:block;width:100%;height:100%;object-fit:cover;border-radius:12px}
+
+@media (max-width:700px){
+  .sharedIdeaCards .ideaImageFrame{margin:-4px -4px 10px}
+}
 .sharedIdeaCards h3{margin:6px 0 0;color:var(--accent-dark);font-size:1.08rem;line-height:1.18;font-weight:500}
 .sharedIdeaCards .hasImage h3{margin-top:0}
 .sharedIdeaCards .ideaTitle,.sharedIdeaCards .nameWithIcon{display:flex;align-items:flex-start;gap:8px;min-width:0}
