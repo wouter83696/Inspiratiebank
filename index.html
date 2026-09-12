@@ -344,6 +344,7 @@
     .agendaItem .domainIcon{width:26px;height:26px;background:color-mix(in srgb,var(--theme-tint-strong) 82%,transparent);border-color:color-mix(in srgb,var(--theme-line) 78%,transparent);color:var(--theme-ink);opacity:.95}
     .agendaItem .domainIcon svg{width:14px;height:14px}
     .agendaLegendBar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 0 10px}
+    .agendaMobileSectionSwitch{display:none}
     .agendaThemeLegend{display:flex;flex-wrap:wrap;gap:6px;margin:0}
     .agendaFreshness{
       display:inline-flex;align-items:center;gap:5px;max-width:100%;min-height:30px;margin:0;padding:6px 9px;
@@ -1341,6 +1342,19 @@
       .agendaSearchFilters.more .filterToggle{grid-column:2;justify-self:end;min-width:0}
       .agendaSearchFilters.more .agendaSearchStatus{grid-column:1/-1}
       .agendaLegendBar{align-items:flex-start;flex-direction:column;position:relative;width:100%;margin:0 0 10px;overflow:hidden}
+      .agendaMobileSectionSwitch{
+        display:grid;grid-template-columns:1fr 1fr;gap:4px;width:100%;margin:0 0 12px;padding:4px;
+        border:1px solid rgba(79,142,158,.11);border-radius:16px;background:rgba(255,255,255,.7);
+        box-shadow:0 8px 20px rgba(20,38,42,.035);scroll-margin-top:12px
+      }
+      .agendaMobileSectionButton{
+        appearance:none;min-width:0;min-height:40px;padding:8px 10px;border:0;border-radius:12px;background:transparent;
+        color:#55727a;font:inherit;font-size:.84rem;font-weight:600;line-height:1.15;cursor:pointer
+      }
+      .agendaMobileSectionButton.active{background:rgba(191,235,232,.62);color:#245c68;box-shadow:inset 0 0 0 1px rgba(79,142,158,.12)}
+      #tab-weken[data-mobile-agenda-section="weeks"] #longerOffers{display:none}
+      #tab-weken[data-mobile-agenda-section="ongoing"] #weekPanels{display:none}
+      #tab-weken[data-mobile-agenda-section="ongoing"] #longerOffers{margin-top:0}
       .agendaThemeLegend{
         display:flex;flex-wrap:nowrap;gap:6px;width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:0 22px 2px 0;
         -webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none;
@@ -1728,6 +1742,10 @@
       </div>
       <div class="agendaLegendBar">
         <div id="agendaThemeLegend"></div>
+      </div>
+      <div class="agendaMobileSectionSwitch" aria-label="Agenda-onderdeel">
+        <button class="agendaMobileSectionButton active" type="button" data-agenda-mobile-section="weeks" aria-pressed="true">Weekagenda</button>
+        <button class="agendaMobileSectionButton" type="button" data-agenda-mobile-section="ongoing" aria-pressed="false">Doorlopend aanbod</button>
       </div>
       <div id="weekPanels" class="weekStack"></div>
       <section id="longerOffers" class="ongoingAccordion open">
@@ -4420,6 +4438,21 @@
     const panel = $('#ongoingContent');
     setOngoingOpen(Boolean(panel && panel.hidden), options);
   }
+  function setMobileAgendaSection(section, options={}){
+    const agendaPanel = $('#tab-weken');
+    if(!agendaPanel) return;
+    const nextSection = section === 'ongoing' ? 'ongoing' : 'weeks';
+    agendaPanel.dataset.mobileAgendaSection = nextSection;
+    $$('[data-agenda-mobile-section]').forEach(button => {
+      const active = button.dataset.agendaMobileSection === nextSection;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    if(nextSection === 'ongoing') setOngoingOpen(true, {scroll:false});
+    if(options.scroll && window.matchMedia('(max-width:640px)').matches){
+      window.requestAnimationFrame(() => $('.agendaMobileSectionSwitch')?.scrollIntoView({behavior:'smooth', block:'start'}));
+    }
+  }
 
   function ideaRow(item){
     const locationLabel = normalizeIdeaLocation(item.locationType);
@@ -5327,6 +5360,7 @@
     syncLocationUi();
     warmHeroBackgrounds();
     setOngoingOpen(true, {scroll:false});
+    setMobileAgendaSection(window.location.hash === '#longerOffers' ? 'ongoing' : 'weeks');
     const initialTab = tabFromLocation();
     if(initialTab){
       setTab(initialTab, {scroll:false, updateUrl:false});
@@ -5336,7 +5370,7 @@
       const nextTab = tabFromLocation();
       if(nextTab) setTab(nextTab, {updateUrl:false});
       else setTab('inspiratie', {scroll:false, updateUrl:false});
-      if(window.location.hash === '#longerOffers') setOngoingOpen(true, {scroll:false});
+      if(window.location.hash === '#longerOffers') setMobileAgendaSection('ongoing');
     });
     window.addEventListener('popstate', () => {
       const nextTab = tabFromLocation() || 'inspiratie';
@@ -5344,6 +5378,9 @@
       if(nextTab === 'inspiratie') setIdeaView(ideaViewFromLocation(), {updateUrl:false});
     });
     $$('.tab').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
+    $$('[data-agenda-mobile-section]').forEach(button => button.addEventListener('click', () => {
+      setMobileAgendaSection(button.dataset.agendaMobileSection, {scroll:true});
+    }));
     document.addEventListener('click', event => {
       if(!event.target.closest('.customSelect')) closeCustomSelects();
       if(!event.target.closest('[data-report-menu]')) closeReportMenus();
