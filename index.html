@@ -344,7 +344,21 @@
     .agendaItem .domainIcon{width:26px;height:26px;background:color-mix(in srgb,var(--theme-tint-strong) 82%,transparent);border-color:color-mix(in srgb,var(--theme-line) 78%,transparent);color:var(--theme-ink);opacity:.95}
     .agendaItem .domainIcon svg{width:14px;height:14px}
     .agendaLegendBar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 0 10px}
-    .agendaMobileSectionSwitch{display:none}
+    .agendaSectionTabs{
+      display:flex;align-items:center;gap:22px;width:max-content;max-width:100%;margin:2px 0 14px;
+      border-bottom:1px solid rgba(79,142,158,.14);scroll-margin-top:12px
+    }
+    .agendaSectionTab{
+      position:relative;appearance:none;min-height:40px;padding:8px 1px 10px;border:0;background:transparent;
+      color:#718087;text-decoration:none;font:inherit;font-size:.86rem;font-weight:500;line-height:1.15;cursor:pointer
+    }
+    .agendaSectionTab::after{
+      content:"";position:absolute;right:0;bottom:-1px;left:0;height:2px;border-radius:2px 2px 0 0;
+      background:var(--accent-dark);opacity:0;transform:scaleX(.55);transition:opacity .16s var(--ease),transform .16s var(--ease)
+    }
+    .agendaSectionTab:hover{color:#315f69}
+    .agendaSectionTab.active{color:#245c68;font-weight:650}
+    .agendaSectionTab.active::after{opacity:1;transform:scaleX(1)}
     .agendaThemeLegend{display:flex;flex-wrap:wrap;gap:6px;margin:0}
     .agendaFreshness{
       display:inline-flex;align-items:center;gap:5px;max-width:100%;min-height:30px;margin:0;padding:6px 9px;
@@ -821,7 +835,7 @@
       #ideaFilters .filterOptions .filterReset{min-width:max-content;justify-self:start}
     }
     .teamHead{margin-top:28px;scroll-margin-top:22px}
-    #longerOffers{scroll-margin-top:100px}
+    #weekPanels,#longerOffers{scroll-margin-top:100px}
     .ideaToolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:16px 0 12px;flex-wrap:wrap}
     .ideaToolbar.viewOnly{justify-content:flex-end;margin-top:0}
     .sectionToolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;margin:16px 0 12px}
@@ -1330,19 +1344,8 @@
       .agendaSearchFilters.more .filterToggle{grid-column:2;justify-self:end;min-width:0}
       .agendaSearchFilters.more .agendaSearchStatus{grid-column:1/-1}
       .agendaLegendBar{align-items:flex-start;flex-direction:column;position:relative;width:100%;margin:0 0 10px;overflow:hidden}
-      .agendaMobileSectionSwitch{
-        display:grid;grid-template-columns:1fr 1fr;gap:4px;width:100%;margin:0 0 12px;padding:4px;
-        border:1px solid rgba(79,142,158,.11);border-radius:16px;background:rgba(255,255,255,.7);
-        box-shadow:0 8px 20px rgba(20,38,42,.035);scroll-margin-top:12px
-      }
-      .agendaMobileSectionButton{
-        appearance:none;min-width:0;min-height:40px;padding:8px 10px;border:0;border-radius:12px;background:transparent;
-        color:#55727a;font:inherit;font-size:.84rem;font-weight:600;line-height:1.15;cursor:pointer
-      }
-      .agendaMobileSectionButton.active{background:rgba(191,235,232,.62);color:#245c68;box-shadow:inset 0 0 0 1px rgba(79,142,158,.12)}
-      #tab-weken[data-mobile-agenda-section="weeks"] #longerOffers{display:none}
-      #tab-weken[data-mobile-agenda-section="ongoing"] #weekPanels{display:none}
-      #tab-weken[data-mobile-agenda-section="ongoing"] #longerOffers{margin-top:0}
+      .agendaSectionTabs{gap:18px;margin:0 0 12px;padding:0 2px}
+      .agendaSectionTab{min-height:38px;font-size:.82rem}
       .agendaThemeLegend{
         display:flex;flex-wrap:nowrap;gap:6px;width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:0 22px 2px 0;
         -webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none;
@@ -1756,10 +1759,10 @@
       <div class="agendaLegendBar">
         <div id="agendaThemeLegend"></div>
       </div>
-      <div class="agendaMobileSectionSwitch" aria-label="Agenda-onderdeel">
-        <button class="agendaMobileSectionButton active" type="button" data-agenda-mobile-section="weeks" aria-pressed="true">Weekagenda</button>
-        <button class="agendaMobileSectionButton" type="button" data-agenda-mobile-section="ongoing" aria-pressed="false">Doorlopend aanbod</button>
-      </div>
+      <nav class="agendaSectionTabs" aria-label="Snel naar agenda-onderdeel">
+        <a class="agendaSectionTab active" href="#weekPanels" data-agenda-section="weeks" aria-current="location">Weekagenda</a>
+        <a class="agendaSectionTab" href="#longerOffers" data-agenda-section="ongoing">Doorlopend aanbod</a>
+      </nav>
       <div id="weekPanels" class="weekStack"></div>
       <section id="longerOffers" class="ongoingAccordion open">
         <div class="ongoingAccordionButton">
@@ -4444,19 +4447,26 @@
     const panel = $('#ongoingContent');
     setOngoingOpen(Boolean(panel && panel.hidden), options);
   }
-  function setMobileAgendaSection(section, options={}){
+  function setAgendaSection(section, options={}){
     const agendaPanel = $('#tab-weken');
     if(!agendaPanel) return;
     const nextSection = section === 'ongoing' ? 'ongoing' : 'weeks';
-    agendaPanel.dataset.mobileAgendaSection = nextSection;
-    $$('[data-agenda-mobile-section]').forEach(button => {
-      const active = button.dataset.agendaMobileSection === nextSection;
+    agendaPanel.dataset.agendaSection = nextSection;
+    $$('[data-agenda-section]').forEach(button => {
+      const active = button.dataset.agendaSection === nextSection;
       button.classList.toggle('active', active);
-      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+      if(active) button.setAttribute('aria-current', 'location');
+      else button.removeAttribute('aria-current');
     });
     if(nextSection === 'ongoing') setOngoingOpen(true, {scroll:false});
-    if(options.scroll && window.matchMedia('(max-width:640px)').matches){
-      window.requestAnimationFrame(() => $('.agendaMobileSectionSwitch')?.scrollIntoView({behavior:'smooth', block:'start'}));
+    if(options.updateUrl !== false){
+      const url = new URL(window.location.href);
+      url.hash = nextSection === 'ongoing' ? 'longerOffers' : 'weekPanels';
+      window.history.replaceState(null, '', url);
+    }
+    if(options.scroll){
+      const target = nextSection === 'ongoing' ? $('#longerOffers') : $('#weekPanels');
+      window.requestAnimationFrame(() => target?.scrollIntoView({behavior:'smooth', block:'start'}));
     }
   }
 
@@ -5366,7 +5376,7 @@
     syncLocationUi();
     warmHeroBackgrounds();
     setOngoingOpen(true, {scroll:false});
-    setMobileAgendaSection(window.location.hash === '#longerOffers' ? 'ongoing' : 'weeks');
+    setAgendaSection(window.location.hash === '#longerOffers' ? 'ongoing' : 'weeks', {updateUrl:false});
     const initialTab = tabFromLocation();
     if(initialTab){
       setTab(initialTab, {scroll:false, updateUrl:false});
@@ -5376,7 +5386,8 @@
       const nextTab = tabFromLocation();
       if(nextTab) setTab(nextTab, {updateUrl:false});
       else setTab('inspiratie', {scroll:false, updateUrl:false});
-      if(window.location.hash === '#longerOffers') setMobileAgendaSection('ongoing');
+      if(window.location.hash === '#longerOffers') setAgendaSection('ongoing', {updateUrl:false});
+      if(window.location.hash === '#weekPanels') setAgendaSection('weeks', {updateUrl:false});
     });
     window.addEventListener('popstate', () => {
       const nextTab = tabFromLocation() || 'inspiratie';
@@ -5384,8 +5395,9 @@
       if(nextTab === 'inspiratie') setIdeaView(ideaViewFromLocation(), {updateUrl:false});
     });
     $$('.tab').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
-    $$('[data-agenda-mobile-section]').forEach(button => button.addEventListener('click', () => {
-      setMobileAgendaSection(button.dataset.agendaMobileSection, {scroll:true});
+    $$('[data-agenda-section]').forEach(link => link.addEventListener('click', event => {
+      event.preventDefault();
+      setAgendaSection(link.dataset.agendaSection, {scroll:true});
     }));
     document.addEventListener('click', event => {
       if(!event.target.closest('.customSelect')) closeCustomSelects();
@@ -5530,6 +5542,7 @@
       link.addEventListener('click', event => {
         const id = link.getAttribute('href').slice(1);
         event.preventDefault();
+        if(id === 'weekPanels') setAgendaSection('weeks', {updateUrl:true});
         scrollToSection(id);
       });
     });
