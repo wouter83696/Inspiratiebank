@@ -2089,6 +2089,11 @@
     .replace(/\bde jongere\b/gi, match => match[0] === match[0].toUpperCase() ? 'De persoon' : 'de persoon')
     .replace(/\bhet kind\b/gi, match => match[0] === match[0].toUpperCase() ? 'De persoon' : 'de persoon')
     .replace(/\bjullie\b/gi, match => match[0] === match[0].toUpperCase() ? 'Je' : 'je');
+  const publicOngoingDescription = (str='') => audienceText(str)
+    .replace(/\s*Nog te beoordelen voor opname in het weekoverzicht\.?/gi, ' ')
+    .replace(/\s*Check datum, reservering, kosten en prikkelbelasting voordat je dit plant\.?/gi, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
   const IDEA_IMAGE_MAX_BYTES = 1500000;
   const DEMO_IDEA_IMAGES = [
     {keywords:['bijlwerpen','archery','fundustry'], image:'website-bestanden/afbeeldingen/activiteiten/archery-outdoor-foto.jpg', alt:'Buitenactiviteit met doelen in het groen'},
@@ -4363,7 +4368,7 @@
       review:`<div>${agendaReviewPill(item)}</div>`, date:`${escapeHtml(item.date)} • ${escapeHtml(item.time)}`,
       weeks:escapeHtml(compactWeekAvailabilityLabel(item, true)), place:placePills,
       cost:costPill(costLabel), stimulus:stimulusPill(stimulusLabel), meta:'',
-      description:escapeHtml(audienceText(item.fit)),
+      description:escapeHtml(publicOngoingDescription(item.fit)),
       website:item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : '<span class="small">–</span>'
     });
   }
