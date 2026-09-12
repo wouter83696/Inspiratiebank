@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="nl" class="appLoading" data-ui-build="single-desktop-source-v18">
+<html lang="nl" class="appLoading" data-ui-build="single-desktop-source-v19">
 <head>
   <base href="/">
   <meta charset="utf-8">
@@ -570,14 +570,6 @@
     .cardFooter .siteButton .siteButtonText{max-width:100%;overflow:hidden;text-overflow:ellipsis}
     .cardFooter .siteButton::after{margin-left:auto}
     .cardFooter .reportMenu{margin-left:auto}
-    .activityStatusIcon{
-      display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;
-      width:30px;height:30px;border:1px solid rgba(11,18,32,.07);border-radius:999px;
-      background:rgba(255,255,255,.60);color:rgba(11,18,32,.46)
-    }
-    .activityStatusIcon.verified{background:rgba(221,239,232,.72);border-color:rgba(72,132,100,.14);color:#426e5d}
-    .activityStatusIcon.auto{background:rgba(248,236,194,.62);border-color:rgba(186,151,56,.16);color:#7a6424}
-    .activityStatusIcon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .reportMenu{position:relative;display:inline-flex;align-items:center;flex:0 0 auto}
     .reportMenu summary{list-style:none}
     .reportMenu summary::-webkit-details-marker{display:none}
@@ -595,10 +587,6 @@
     .agendaItem .reportMenu{position:relative;right:auto;top:auto;z-index:4;display:flex;justify-content:flex-end}
     .agendaItem .reportButton{width:25px;height:25px;background:rgba(255,255,255,.46)}
     .agendaItem .reportButton svg{width:13px;height:13px}
-    .agendaItem .activityStatusIcon{width:25px;height:25px;background:rgba(255,255,255,.46)}
-    .agendaItem .activityStatusIcon.verified{background:rgba(221,239,232,.72)}
-    .agendaItem .activityStatusIcon.auto{background:rgba(248,236,194,.62)}
-    .agendaItem .activityStatusIcon svg{width:13px;height:13px}
     .reportPanel{
       position:absolute;right:0;top:calc(100% + 7px);z-index:45;display:grid;gap:2px;
       min-width:190px;padding:6px;border:1px solid rgba(11,18,32,.08);border-radius:16px;
@@ -1552,7 +1540,6 @@
       .cardPillGroup{gap:4px}
       .cardFooter{gap:7px}
       .cardFooter .siteButton{min-height:34px;padding:8px 12px;font-size:.85rem}
-      .activityStatusIcon{width:27px;height:27px}
       .teamFileControl{align-items:flex-start;flex-direction:column}
       .teamFileName{width:100%}
       .teamForm .teamActionBar{justify-content:center}
@@ -3418,13 +3405,6 @@
   function agendaReviewPill(item){
 	    return '';
 	  }
-  function activityStatusIcon(item={}){
-    const status = String(item.reviewStatus || '').toLowerCase();
-    if(!status || status === 'verified') return '';
-    return `<span class="activityStatusIcon auto" role="img" aria-label="Automatisch gevonden activiteit" title="Automatisch gevonden activiteit">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4"></path><path d="M12 17v4"></path><path d="M3 12h4"></path><path d="M17 12h4"></path><path d="m5.6 5.6 2.8 2.8"></path><path d="m15.6 15.6 2.8 2.8"></path><path d="m18.4 5.6-2.8 2.8"></path><path d="m8.4 15.6-2.8 2.8"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
-    </span>`;
-  }
   function loadReports(){
     if(centralStorageActive()) return Array.isArray(centralStorage.reports) ? centralStorage.reports : [];
     if(typeof localStorage === 'undefined') return [];
@@ -4249,7 +4229,7 @@
         themeClass, compact, href:escapeHtml(item.url),
         title:titleWithIcon(item.title, item.domain, 'agendaItemTitle'), review:agendaReviewPill(item),
         meta:`${escapeHtml(timeLabel)} • ${escapeHtml(item.where)}`,
-        actions:`${reportMenu('agenda', agendaItemKey(item), item.title)}${activityStatusIcon(item)}`
+        actions:reportMenu('agenda', agendaItemKey(item), item.title)
       });
 	  }
   function renderAgendaBoard(weekId, concrete){
@@ -4470,7 +4450,7 @@
       pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
       practical:escapeHtml(audienceText(item.materials || item.fit || '')),
       website:sourceLink,
-      actions:`${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}`
+      actions:reportMenu('inspiratiebank', ideaDomKey(item), item.title)
     });
   }
 
@@ -4517,7 +4497,7 @@
       pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
       meta:cardMetaLine(item), description:escapeHtml(fitText), practical:escapeHtml(practicalText),
       website:item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : '',
-      actions:`${reportMenu('inspiratiebank', ideaDomKey(item), item.title)}${activityStatusIcon(item)}`
+      actions:reportMenu('inspiratiebank', ideaDomKey(item), item.title)
     });
   }
   function matches(item, query, filters){
