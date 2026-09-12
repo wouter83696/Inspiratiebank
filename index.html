@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="nl" class="appLoading" data-ui-build="single-desktop-source-v19">
+<html lang="nl" class="appLoading" data-ui-build="single-desktop-source-v20">
 <head>
   <base href="/">
   <meta charset="utf-8">
@@ -1683,6 +1683,32 @@
       <span class="appLoaderStatus">Inspiratie verzamelen...</span>
     </div>
   </div>
+  <script>
+    (() => {
+      const loader = document.getElementById('appLoader');
+      const isAgenda = /^\/uit-agenda(?:\/|$)/.test(window.location.pathname);
+      const title = loader?.querySelector('.appLoaderTitle');
+      const status = loader?.querySelector('.appLoaderStatus');
+      if(isAgenda && loader){
+        loader.setAttribute('aria-label', 'UIT-agenda laden');
+        if(title) title.textContent = 'UIT-agenda';
+        if(status) status.textContent = 'Activiteiten verzamelen...';
+      }
+      const showLoader = () => {
+        document.documentElement.classList.add('appLoading');
+        document.body.classList.add('appLoading');
+        loader?.classList.remove('isReady');
+      };
+      window.addEventListener('beforeunload', showLoader);
+      window.addEventListener('pagehide', showLoader);
+      window.addEventListener('pageshow', event => {
+        if(!event.persisted) return;
+        loader?.classList.add('isReady');
+        document.body.classList.remove('appLoading');
+        document.documentElement.classList.remove('appLoading');
+      });
+    })();
+  </script>
   <header class="topbar">
     <nav class="tabs" role="navigation" aria-label="Hoofdnavigatie">
       <button class="tab active" data-tab="inspiratie" type="button" aria-selected="true">Inspiratiebank</button>
@@ -5608,7 +5634,6 @@
       }
       loader.classList.add('isReady');
       window.setTimeout(() => {
-        loader.remove();
         document.body.classList.remove('appLoading');
         document.documentElement.classList.remove('appLoading');
       }, 420);
