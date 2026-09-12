@@ -1934,6 +1934,13 @@
       .replace(/\bhet kind\b/gi, match => match[0] === match[0].toUpperCase() ? 'De persoon' : 'de persoon')
       .replace(/\bjullie\b/gi, match => match[0] === match[0].toUpperCase() ? 'Je' : 'je');
   }
+  function ongoingDescription(value=''){
+    return audienceText(value)
+      .replace(/\s*Nog te beoordelen voor opname in het weekoverzicht\.?/gi, ' ')
+      .replace(/\s*Check datum, reservering, kosten en prikkelbelasting voordat je dit plant\.?/gi, ' ')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
+  }
   function cleanPostcode(value=''){
     return String(value || '').toUpperCase().replace(/\s+/g,'').replace(/^(\d{4})([A-Z]{2})$/, '$1 $2');
   }
@@ -3655,7 +3662,7 @@
         weeks:escapeHtml(weeks), place:placePills,
 	        cost:costPill(cost), stimulus:stimulusPill(stimulus),
         meta:`<div class="ongoingMetaLine"><strong>Beschikbaar:</strong> ${escapeHtml(weeks)}</div>`,
-	        description:escapeHtml(audienceText(item.fit || '–')), website, actions
+	        description:escapeHtml(ongoingDescription(item.fit) || '–'), website, actions
       });
 	  }
 	  function orderedAdminWeekIds(ids=[]){
