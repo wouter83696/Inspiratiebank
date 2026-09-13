@@ -172,6 +172,10 @@
   margin:0;
 }
 
+#longerOffers .weekSectionNavigation{
+  margin:0 0 16px;
+}
+
 .weekHeadingRow{
   display:flex;
   align-items:flex-start;
