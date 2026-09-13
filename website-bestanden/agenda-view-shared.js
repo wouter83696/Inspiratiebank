@@ -58,7 +58,7 @@
       <td class="ongoingWeeksCell">${view.weeks || ''}</td>
       <td class="ongoingBadgesCell"><div class="cardPillGroup ongoingBadges">${view.place || ''}${view.cost || ''}${view.stimulus || ''}</div></td>
       <td class="ongoingFitCell">${view.meta || ''}<div class="small ongoingAdminDescription">${view.description || ''}</div></td>
-      <td class="websiteCell">${view.website || ''}</td>
+      ${view.hideWebsite ? '' : `<td class="websiteCell">${view.website || ''}</td>`}
       ${view.actions !== undefined && !view.actionsInTitle && !view.manageFirst ? `<td class="ongoingManageCell" data-label="Beheer"><div class="ongoingAdminActions">${view.actions || ''}</div></td>` : ''}
     </tr>`;
   }
@@ -66,7 +66,9 @@
   function renderOngoingTable(view={}){
     const manageHeadLeft = view.admin && view.manageFirst ? '<th class="ongoingManageHead">Beheer</th>' : '';
     const manageHeadRight = view.admin && !view.manageFirst ? '<th class="ongoingManageHead">Beheer</th>' : '';
-    return `<table${view.className ? ` class="${view.className}"` : ''}><thead><tr>${manageHeadLeft}<th class="ongoingTitleHead">Aanbod</th><th class="ongoingWeeksHead">Weken</th><th class="ongoingBadgesHead">Badges</th><th class="ongoingFitHead">Beschrijving</th><th class="ongoingWebsiteHead">Website</th>${manageHeadRight}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
+    const tableClasses = [view.className || '', view.hideWebsite ? 'ongoingTableNoWebsite' : ''].filter(Boolean).join(' ');
+    const websiteHead = view.hideWebsite ? '' : '<th class="ongoingWebsiteHead">Website</th>';
+    return `<table${tableClasses ? ` class="${tableClasses}"` : ''}><thead><tr>${manageHeadLeft}<th class="ongoingTitleHead">Aanbod</th><th class="ongoingWeeksHead">Weken</th><th class="ongoingBadgesHead">Badges</th><th class="ongoingFitHead">Beschrijving</th>${websiteHead}${manageHeadRight}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
   function isFlexiblePeriodOffer(item={}, spanDays=0){

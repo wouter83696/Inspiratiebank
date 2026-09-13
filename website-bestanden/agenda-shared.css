@@ -87,6 +87,10 @@
 .ongoingAccordion th:nth-child(3),.ongoingAccordion td:nth-child(3){width:15%}
 .ongoingAccordion th:nth-child(4),.ongoingAccordion td:nth-child(4){width:34%}
 .ongoingAccordion th:nth-child(5),.ongoingAccordion td:nth-child(5){width:17%}
+.ongoingAccordion .ongoingTableNoWebsite th:nth-child(1),.ongoingAccordion .ongoingTableNoWebsite td:nth-child(1){width:32%}
+.ongoingAccordion .ongoingTableNoWebsite th:nth-child(2),.ongoingAccordion .ongoingTableNoWebsite td:nth-child(2){width:8%;white-space:nowrap}
+.ongoingAccordion .ongoingTableNoWebsite th:nth-child(3),.ongoingAccordion .ongoingTableNoWebsite td:nth-child(3){width:20%}
+.ongoingAccordion .ongoingTableNoWebsite th:nth-child(4),.ongoingAccordion .ongoingTableNoWebsite td:nth-child(4){width:40%}
 .ongoingBadgesCell .cardPillGroup{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:0}
 .adminOngoingAccordion table{min-width:0}
 .adminOngoingAccordion .ongoingManageHead,.adminOngoingAccordion .ongoingManageCell{width:9% !important}
