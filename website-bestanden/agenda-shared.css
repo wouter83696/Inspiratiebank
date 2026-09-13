@@ -162,6 +162,16 @@
   min-width:0;
 }
 
+.weekSectionNavigation{
+  display:flex;
+  align-items:center;
+  margin:-8px 0 18px;
+}
+
+.weekSectionNavigation .agendaSectionTabs{
+  margin:0;
+}
+
 .weekHeadingRow{
   display:flex;
   align-items:flex-start;
@@ -177,6 +187,19 @@
   flex-direction:column;
   align-items:flex-start;
   min-width:0;
+}
+
+.weekHeadingActions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:16px;
+  margin-left:auto;
+  min-width:0;
+}
+
+.weekHeadingActions .weekNav{
+  margin-left:0;
 }
 
 .weekDateLine{
@@ -562,6 +585,9 @@
   .adminOngoingAccordion .ongoingAdminActions{display:grid;grid-template-columns:repeat(6,25px);gap:5px;justify-content:end}
 
   .ongoingTitleLine{gap:7px}
+  .weekSectionNavigation{
+    margin:-4px 0 14px;
+  }
   .weekTop{
     grid-template-columns:1fr;
     gap:16px;

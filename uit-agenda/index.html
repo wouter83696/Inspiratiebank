@@ -1,13 +1,67 @@
 <!doctype html>
-<html lang="nl">
+<html lang="nl" class="appLoading">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>UIT-agenda laden...</title>
+  <title>UIT-agenda | Inspiratiebank</title>
+  <style>
+    :root{
+      --bg:#fbfaf6;
+      --ink:#315f6b;
+      --accent-dark:#315f6b;
+      --muted:#73777f;
+      --ease:cubic-bezier(.2,.7,.2,1);
+    }
+    html.appLoading,
+    html.appLoading body{
+      min-height:100%;
+      margin:0;
+      overflow:hidden;
+      background:#fbfaf6;
+      font-family:"IBM Plex Sans",Arial,sans-serif;
+    }
+    .appLoader{
+      position:fixed;
+      inset:0;
+      z-index:2147483647;
+      display:grid;
+      place-items:center;
+      width:100%;
+      min-height:100vh;
+      min-height:100dvh;
+      padding:24px;
+      box-sizing:border-box;
+      background:#fbfaf6;
+    }
+    .appLoaderInner{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      color:#315f6b;
+      text-align:center;
+    }
+    .appLoaderMark{
+      display:block;
+      width:76px;
+      height:76px;
+      margin:0 0 18px;
+      border-radius:18px;
+      box-shadow:0 12px 30px rgba(49,95,107,.12);
+    }
+    .appLoaderTitle{font-size:1.42rem;font-weight:600;line-height:1.15}
+    .appLoaderStatus{margin-top:8px;color:#73777f;font-size:.9rem;line-height:1.35}
+  </style>
+  <link rel="stylesheet" href="/website-bestanden/loading-screen.css?v=20260911-first-paint-v4">
 </head>
-<body>
-  <p>UIT-agenda laden...</p>
+<body class="appLoading">
+  <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="UIT-agenda laden">
+    <div class="appLoaderInner">
+      <img class="appLoaderMark" src="/apple-touch-icon.png" alt="">
+      <strong class="appLoaderTitle">UIT-agenda</strong>
+      <span class="appLoaderStatus">Activiteiten verzamelen...</span>
+    </div>
+  </div>
   <script>
     fetch('/index.html', {cache:'no-cache'})
       .then(response => {

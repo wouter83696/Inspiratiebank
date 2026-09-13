@@ -241,10 +241,14 @@
     .weekBadgeNumber{display:grid;place-items:center;width:100%;height:100%;line-height:1;text-align:center;transform:translateY(-1px)}
     .weekHeadingRow{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-direction:row;flex-wrap:nowrap;width:100%}
     .weekHeadingMain{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
+    .weekHeadingActions{display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-left:auto;min-width:0}
+    .weekSectionNavigation{display:flex;align-items:center;margin:-8px 0 18px}
+    .weekSectionNavigation .agendaSectionTabs{margin:0}
+    .weekHeadingActions .weekNav{margin-left:0}
     .weekTitleContent{flex:1 1 auto}
     .weekDateLine{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;min-width:0;max-width:100%}
     .weekHeaderMeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0;max-width:100%;margin:0;padding-top:0;align-self:flex-start}
-    .weekTop h3{margin:0;color:#07345e;font-weight:600;font-size:clamp(1.66rem,2.3vw,2.12rem);line-height:1.1;letter-spacing:-.025em}
+    .weekTop h3{margin:0;color:#07345e;font-weight:600;font-size:clamp(1.66rem,2.3vw,2.12rem);line-height:1.1;letter-spacing:0}
     .weekTop .dates{color:#123968;margin-top:9px;font-size:1.04rem}
     .weekTop .status{margin-top:8px;line-height:1.42}
     .weekTop .status span{display:block;margin-top:3px;color:rgba(11,18,32,.68)}
@@ -1346,6 +1350,7 @@
       .agendaLegendBar{align-items:flex-start;flex-direction:column;position:relative;width:100%;margin:0 0 10px;overflow:hidden}
       .agendaSectionTabs{gap:18px;margin:0 0 12px;padding:0 2px}
       .agendaSectionTab{min-height:38px;font-size:.82rem}
+      .weekSectionNavigation{margin:-4px 0 14px}
       .agendaThemeLegend{
         display:flex;flex-wrap:nowrap;gap:6px;width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:0 22px 2px 0;
         -webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none;
@@ -1759,10 +1764,6 @@
       <div class="agendaLegendBar">
         <div id="agendaThemeLegend"></div>
       </div>
-      <nav class="agendaSectionTabs" aria-label="Snel naar agenda-onderdeel">
-        <a class="agendaSectionTab active" href="#weekPanels" data-agenda-section="weeks" aria-current="location">Weekagenda</a>
-        <a class="agendaSectionTab" href="#longerOffers" data-agenda-section="ongoing">Doorlopend aanbod</a>
-      </nav>
       <div id="weekPanels" class="weekStack"></div>
       <section id="longerOffers" class="ongoingAccordion open">
         <div class="ongoingAccordionButton">
@@ -4490,6 +4491,14 @@
     });
   }
 
+  function agendaSectionNavigation(){
+    const activeSection = $('#tab-weken')?.dataset.agendaSection === 'ongoing' ? 'ongoing' : 'weeks';
+    return `<nav class="agendaSectionTabs" aria-label="Agenda-onderdelen">
+      <a class="agendaSectionTab${activeSection === 'weeks' ? ' active' : ''}" href="#weekPanels" data-agenda-section="weeks"${activeSection === 'weeks' ? ' aria-current="location"' : ''}>Weekagenda</a>
+      <a class="agendaSectionTab${activeSection === 'ongoing' ? ' active' : ''}" href="#longerOffers" data-agenda-section="ongoing"${activeSection === 'ongoing' ? ' aria-current="location"' : ''}>Doorlopend aanbod</a>
+    </nav>`;
+  }
+
   function renderWeekPanels(){
     renderThemeLegends();
     const filters = agendaSearchState();
@@ -4501,9 +4510,10 @@
       const concrete = sortWeekItems(all.filter(isConcrete));
       const weekItemCount = visibleWeekItemCount(w.id, concrete);
       visibleCount += weekItemCount;
-	    const agendaHtml = renderAgendaBoard(w.id, concrete);
+      const agendaHtml = renderAgendaBoard(w.id, concrete);
       return AgendaViewShared.renderWeek({
         id:escapeHtml(w.id), week:escapeHtml(w.week), title:escapeHtml(publicWeekDates(w)),
+        sectionNavigation:i === 0 ? agendaSectionNavigation() : '',
         freshness:agendaFreshnessBadge(), count:weekCountBadge(weekItemCount),
         navigation:weekNavControls(w.id), status:weekStatusText(w), days:agendaHtml,
         boardAttribute:` data-week-board="${escapeHtml(w.id)}"`
@@ -5395,11 +5405,12 @@
       if(nextTab === 'inspiratie') setIdeaView(ideaViewFromLocation(), {updateUrl:false});
     });
     $$('.tab').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
-    $$('[data-agenda-section]').forEach(link => link.addEventListener('click', event => {
-      event.preventDefault();
-      setAgendaSection(link.dataset.agendaSection, {scroll:true});
-    }));
     document.addEventListener('click', event => {
+      const agendaSectionLink = event.target.closest('[data-agenda-section]');
+      if(agendaSectionLink){
+        event.preventDefault();
+        setAgendaSection(agendaSectionLink.dataset.agendaSection, {scroll:true});
+      }
       if(!event.target.closest('.customSelect')) closeCustomSelects();
       if(!event.target.closest('[data-report-menu]')) closeReportMenus();
     });

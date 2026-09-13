@@ -34,9 +34,10 @@
   function renderWeek(view){
     return `<article class="weekPanel"${view.id ? ` id="${view.id}"` : ''}>
       <div class="weekTop">
+        ${view.sectionNavigation ? `<div class="weekSectionNavigation">${view.sectionNavigation}</div>` : ''}
         <div class="weekTitle">
           <div class="weekBadge"><span class="weekBadgeNumber">${view.week || ''}</span></div>
-          <div class="weekTitleContent"><div class="weekHeadingRow"><div class="weekHeadingMain"><div class="weekDateLine"><h3>${view.title || ''}</h3>${view.freshness || ''}</div><div class="weekHeaderMeta">${view.count || ''}</div></div>${view.navigation || ''}</div>${view.status || ''}</div>
+          <div class="weekTitleContent"><div class="weekHeadingRow"><div class="weekHeadingMain"><div class="weekDateLine"><h3>${view.title || ''}</h3>${view.freshness || ''}</div><div class="weekHeaderMeta">${view.count || ''}</div></div><div class="weekHeadingActions">${view.navigation || ''}</div></div>${view.status || ''}</div>
         </div>
       </div>
       <div class="weekBody"><div class="subBlock"><div class="agendaBoard"${view.boardAttribute || ''}>${view.days || ''}</div></div></div>
