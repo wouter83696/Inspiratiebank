@@ -1747,7 +1747,7 @@
   <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20260912-photo-alignment-v36">
   <style>
     @media (max-width:640px){
-      :root{--mobile-search-row-height:42px;--mobile-filter-button-size:40px;--mobile-view-button-size:28px;--mobile-view-switch-width:92px}
+      :root{--mobile-search-row-height:46px;--mobile-filter-button-size:54px;--mobile-view-button-size:28px;--mobile-view-switch-width:92px}
       .tabHero,
       .agendaHero{
         min-height:clamp(350px,58svh,390px) !important;
@@ -1767,23 +1767,49 @@
         display:grid !important;
         grid-template-columns:minmax(0,1fr) !important;
         column-gap:6px !important;
-        row-gap:6px !important;
+        row-gap:8px !important;
         width:calc(100vw - 28px) !important;
         max-width:calc(100vw - 28px) !important;
         overflow:visible !important;
+        position:relative !important;
       }
-      #ideaFilters .filterSearch{grid-column:1 !important;grid-row:1 !important;min-width:0 !important;width:100% !important;max-width:100% !important;overflow:hidden !important}
-      #ideaFilters .filterSearch input{height:var(--mobile-search-row-height) !important;min-height:var(--mobile-search-row-height) !important;width:100% !important;min-width:0 !important;max-width:100% !important}
+      #ideaFilters .filterSearch{grid-column:1 !important;grid-row:1 !important;min-width:0 !important;width:100% !important;max-width:100% !important;overflow:visible !important;position:relative !important;z-index:1 !important}
+      #ideaFilters .filterSearch input{position:relative !important;z-index:1 !important;height:var(--mobile-search-row-height) !important;min-height:var(--mobile-search-row-height) !important;width:100% !important;min-width:0 !important;max-width:100% !important;padding-right:68px !important;border-radius:18px !important}
       #ideaFilters .filterToggle,
-      #agendaFilters .filterToggle{width:var(--mobile-filter-button-size) !important;min-width:var(--mobile-filter-button-size) !important;max-width:var(--mobile-filter-button-size) !important;height:var(--mobile-filter-button-size) !important;min-height:var(--mobile-filter-button-size) !important;border-radius:15px !important;padding:0 !important}
-      #ideaFilters .filterToggle{grid-column:1 !important;grid-row:2 !important;justify-self:start !important}
-      #ideaFilters .mobileViewBar{display:flex !important;grid-column:1 !important;grid-row:2 !important;width:var(--mobile-view-switch-width) !important;min-width:0 !important;max-width:var(--mobile-view-switch-width) !important;margin-left:46px !important;justify-self:start !important;overflow:visible !important}
+      #agendaFilters .filterToggle{
+        position:absolute !important;
+        top:0 !important;
+        right:0 !important;
+        z-index:12 !important;
+        width:var(--mobile-filter-button-size) !important;
+        min-width:var(--mobile-filter-button-size) !important;
+        max-width:var(--mobile-filter-button-size) !important;
+        height:var(--mobile-search-row-height) !important;
+        min-height:var(--mobile-search-row-height) !important;
+        padding:0 !important;
+        border:0 !important;
+        border-left:1px solid rgba(11,18,32,.10) !important;
+        border-radius:0 18px 18px 0 !important;
+        background:transparent !important;
+        box-shadow:none !important;
+        backdrop-filter:none !important;
+      }
+      #ideaFilters .filterSearch + .filterToggle,
+      #agendaFilters .filterSearch + .filterToggle{display:inline-flex !important;align-items:center !important;justify-content:center !important}
+      #ideaFilters .filterToggle span{display:none !important}
+      #agendaFilters .filterToggle{font-size:0 !important;color:var(--accent-dark) !important}
+      #ideaFilters .filterToggle svg,
+      #agendaFilters .filterToggle svg{width:19px !important;height:19px !important;margin:0 !important}
+      #ideaFilters .mobileViewBar{display:flex !important;grid-column:1 !important;grid-row:2 !important;width:var(--mobile-view-switch-width) !important;min-width:0 !important;max-width:var(--mobile-view-switch-width) !important;margin-left:0 !important;justify-self:start !important;overflow:visible !important}
       #ideaFilters .mobileViewBar .viewSwitch{display:flex !important;width:var(--mobile-view-switch-width) !important;min-width:0 !important;height:34px !important;padding:2px !important;border-radius:14px !important;justify-content:space-between !important}
       #ideaFilters .mobileViewBar .viewBtn{width:var(--mobile-view-button-size) !important;height:30px !important;border-radius:11px !important}
       #ideaFilters .mobileViewBar .viewIcon,
       #ideaFilters .mobileViewBar .viewIcon svg{width:14px !important;height:14px !important}
-      #agendaFilters.agendaSearchFilters.more{grid-template-columns:minmax(0,1fr) var(--mobile-filter-button-size) !important;column-gap:6px !important;width:calc(100vw - 28px) !important;max-width:calc(100vw - 28px) !important}
-      #agendaFilters .filterSearch input{height:var(--mobile-search-row-height) !important;min-height:var(--mobile-search-row-height) !important}
+      #ideaFilters .filterOptions{grid-column:1 !important;grid-row:3 !important}
+      #agendaFilters.agendaSearchFilters.more{grid-template-columns:minmax(0,1fr) !important;column-gap:6px !important;width:calc(100vw - 28px) !important;max-width:calc(100vw - 28px) !important;position:relative !important}
+      #agendaFilters .filterSearch{grid-column:1 !important;grid-row:1 !important;width:100% !important;max-width:100% !important;position:relative !important;z-index:1 !important}
+      #agendaFilters .filterSearch input{position:relative !important;z-index:1 !important;height:var(--mobile-search-row-height) !important;min-height:var(--mobile-search-row-height) !important;padding-right:68px !important;border-radius:18px !important}
+      #agendaFilters .filterOptions{grid-column:1 !important;grid-row:2 !important}
       .agendaSectionTab{min-height:40px !important}
       .weekSectionNavigation{align-items:center !important}
       .weekSectionNavigation .agendaSectionTabs{align-items:center !important;margin:0 !important}
