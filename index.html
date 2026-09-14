@@ -591,6 +591,48 @@
     .cardFooter .siteButton .siteButtonText{max-width:100%;overflow:hidden;text-overflow:ellipsis}
     .cardFooter .siteButton::after{margin-left:auto}
     .cardFooter .reportMenu{margin-left:auto}
+    .ideaSurpriseCard{
+      align-self:start;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:12px 14px;
+      min-height:0;padding:17px 20px;border:1px solid rgba(226,168,54,.22);border-radius:16px;
+      background:linear-gradient(135deg,rgba(255,248,229,.92),rgba(255,253,247,.96) 58%,rgba(255,255,255,.96));
+      box-shadow:0 12px 30px rgba(64,45,20,.045)
+    }
+    .ideaSurpriseMark{
+      position:relative;display:grid;place-items:center;width:48px;height:48px;border-radius:999px;
+      background:rgba(248,236,194,.68);border:1px solid rgba(213,163,16,.18);color:#9a6413
+    }
+    .ideaSurpriseMark::before,.ideaSurpriseMark::after{
+      content:"";position:absolute;width:6px;height:13px;border-radius:999px;background:#d79d28;transform:rotate(22deg);opacity:.72
+    }
+    .ideaSurpriseMark::before{top:-3px;right:7px}
+    .ideaSurpriseMark::after{top:4px;right:-6px;transform:rotate(55deg)}
+    .ideaSurpriseMark svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+    .ideaSurpriseText{min-width:0}
+    .ideaSurpriseText strong{display:block;color:rgba(11,18,32,.92);font-size:1.03rem;font-weight:650;line-height:1.16}
+    .ideaSurpriseText span{display:block;margin-top:3px;color:rgba(11,18,32,.62);font-size:.9rem;line-height:1.34}
+    .ideaSurpriseButton{
+      grid-column:1 / -1;justify-self:start;
+      appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:9px 16px;
+      border:1px solid rgba(213,163,16,.22);border-radius:999px;background:linear-gradient(180deg,#ffe39b,#f6ce72);
+      color:#815313;font:inherit;font-size:.9rem;font-weight:700;line-height:1;white-space:nowrap;cursor:pointer;
+      box-shadow:0 10px 22px rgba(179,119,27,.13);transition:transform .18s var(--ease),box-shadow .18s var(--ease),filter .18s var(--ease)
+    }
+    .ideaSurpriseButton:hover{transform:translateY(-1px);filter:saturate(1.04);box-shadow:0 14px 28px rgba(179,119,27,.16)}
+    .ideaSurpriseButton svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .ideaSurpriseRow td{padding:12px;background:rgba(255,253,247,.96)}
+    .ideaSurpriseRow .ideaSurpriseCard{grid-column:auto;margin:0;border-radius:14px;box-shadow:none}
+    @media (min-width:1180px){
+      #ideaCards .ideaSurpriseCard{grid-column:span 2;grid-template-columns:auto minmax(0,1fr) auto}
+      #ideaCards .ideaSurpriseButton{grid-column:auto;justify-self:end}
+    }
+    @media (max-width:640px){
+      #ideaCards .ideaSurpriseCard{grid-column:1 / -1;grid-template-columns:auto minmax(0,1fr);padding:15px 16px;border-radius:16px}
+      #ideaCards .ideaSurpriseMark{width:42px;height:42px}
+      #ideaCards .ideaSurpriseMark svg{width:20px;height:20px}
+      #ideaCards .ideaSurpriseText strong{font-size:1rem}
+      #ideaCards .ideaSurpriseText span{font-size:.86rem}
+      #ideaCards .ideaSurpriseButton{grid-column:1 / -1;justify-self:stretch;min-height:44px}
+    }
     .reportMenu{position:relative;display:inline-flex;align-items:center;flex:0 0 auto}
     .reportMenu summary{list-style:none}
     .reportMenu summary::-webkit-details-marker{display:none}
@@ -4752,6 +4794,26 @@
       actions:reportMenu('inspiratiebank', ideaDomKey(item), item.title)
     });
   }
+  function surpriseIdeaIcon(){
+    return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.7 5.1L19 10l-5.3 1.9L12 17l-1.7-5.1L5 10l5.3-1.9L12 3Z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"></path></svg>`;
+  }
+  function surpriseIdeaCard(){
+    return `<article class="ideaSurpriseCard" aria-label="Laat een willekeurig idee kiezen">
+      <span class="ideaSurpriseMark" aria-hidden="true">${surpriseIdeaIcon()}</span>
+      <span class="ideaSurpriseText"><strong>Geen zin om te kiezen?</strong><span>Laat je verrassen door een activiteit die bij je past.</span></span>
+      <button class="ideaSurpriseButton" type="button" data-random-idea><span>Verras me</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11"></path><path d="m11 6 4 4-4 4"></path></svg></button>
+    </article>`;
+  }
+  function surpriseIdeaRow(){
+    return `<tr class="ideaSurpriseRow"><td colspan="5">${surpriseIdeaCard()}</td></tr>`;
+  }
+  function withSurpriseMarkup(items, renderer, surpriseRenderer, insertAfter=2){
+    if(!items.length) return '';
+    const index = Math.min(Math.max(1, insertAfter), items.length);
+    const before = items.slice(0,index).map(renderer).join('');
+    const after = items.slice(index).map(renderer).join('');
+    return `${before}${items.length > 2 ? surpriseRenderer() : ''}${after}`;
+  }
   function matches(item, query, filters){
     const text = JSON.stringify(item);
     if(query && !includes(text, query)) return false;
@@ -5054,9 +5116,10 @@
     const items = filteredInspirationItems();
     updateInspirationThemeChips();
     const empty = `<div class="empty">${escapeHtml(inspirationEmptyMessage())}</div>`;
-    $('#ideaCards').innerHTML = items.length ? items.map(cardIdea).join('') : empty;
+    const surpriseAfter = window.matchMedia('(min-width:1180px)').matches ? 4 : window.matchMedia('(min-width:641px)').matches ? 3 : 2;
+    $('#ideaCards').innerHTML = items.length ? withSurpriseMarkup(items, cardIdea, surpriseIdeaCard, surpriseAfter) : empty;
     $('#ideaList').innerHTML = items.length
-      ? IdeaViewShared.renderDesktopTable({rows:items.map(ideaRow).join('')})
+      ? IdeaViewShared.renderDesktopTable({rows:withSurpriseMarkup(items, ideaRow, surpriseIdeaRow, 3)})
       : empty;
     renderIdeaMap(items);
   }
@@ -5761,6 +5824,12 @@
     $('#linkAddForm').addEventListener('submit', handleLinkAddSubmit);
     const randomIdeaBtn = $('#randomIdeaBtn');
     if(randomIdeaBtn) randomIdeaBtn.addEventListener('click', showRandomIdea);
+    document.addEventListener('click', event => {
+      const trigger = event.target.closest('[data-random-idea]');
+      if(!trigger) return;
+      event.preventDefault();
+      showRandomIdea();
+    });
     $$('a[href="#teamAdditions"],a[href="#sourceAdditions"],a[href="#weekPanels"]').forEach(link => {
       link.addEventListener('click', event => {
         const id = link.getAttribute('href').slice(1);
