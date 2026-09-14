@@ -1280,14 +1280,14 @@
     @media (max-width:640px){.toolbarActions{gap:10px}.agendaToolbar{display:flex}.agendaToolbar .toolbarActions{width:100%}.sectionToolbar .formButton.primary.largeAction,.sectionToolbar .formButton.secondary.largeAction{padding:11px 15px}}
     @media (max-width:640px){.sectionToolbar .formButton.secondary.largeAction.downloadAction{width:100%;min-height:42px;padding:9px 13px}}
     @media (max-width:640px){
-      :root{--mobile-search-row-height:44px}
+      :root{--mobile-search-row-height:42px;--mobile-filter-button-size:40px;--mobile-view-button-size:30px;--mobile-view-switch-width:96px}
       .tabHero{
         display:flex;
         flex-direction:column;
         align-items:flex-start;
-        min-height:clamp(258px,45svh,287px);
+        min-height:clamp(350px,58svh,390px);
         margin:calc(-1 * clamp(102px,20svh,122px)) calc(50% - 50vw) 0;
-        padding:clamp(120px,21.8svh,146px) max(24px,calc((100vw - var(--max)) / 2 + 24px)) clamp(27px,4.6svh,36px);
+        padding:clamp(120px,21.8svh,146px) max(24px,calc((100vw - var(--max)) / 2 + 24px)) clamp(96px,12svh,112px);
         border:0;border-radius:0;
         box-shadow:none;
         background-position:56% 42%,center,center;
@@ -1353,7 +1353,7 @@
       .agendaSearchFilters.more .agendaSearchStatus{grid-column:1/-1}
       .agendaLegendBar{align-items:flex-start;flex-direction:column;position:relative;width:100%;margin:0 0 10px;overflow:hidden}
       .agendaSectionTabs{gap:8px;margin:0 0 12px;padding:0 2px}
-      .agendaSectionTab{min-height:44px;font-size:.76rem;white-space:nowrap}
+      .agendaSectionTab{min-height:40px;font-size:.76rem;white-space:nowrap}
       .weekSectionNavigation{margin:-4px 0 14px}
       .agendaThemeLegend{
         display:flex;flex-wrap:nowrap;gap:6px;width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:0 22px 2px 0;
@@ -1363,15 +1363,16 @@
       }
       .agendaThemeLegend::-webkit-scrollbar{display:none}
       #agendaThemeLegend{display:block;width:100%;max-width:100%;overflow:hidden}
-      .agendaLegendItem{flex:0 0 auto;justify-content:flex-start;min-height:44px;padding:8px 10px;scroll-snap-align:start;white-space:nowrap}
+      .agendaLegendItem{flex:0 0 auto;justify-content:flex-start;min-height:40px;padding:7px 9px;scroll-snap-align:start;white-space:nowrap}
       .inspirationToolbar .viewBar{display:none}
       .mobileViewBar{display:flex;justify-content:flex-end;margin:0}
-      .filters.more{grid-template-columns:minmax(0,1fr) 44px auto;align-items:center;gap:6px;max-width:100%;overflow:visible}
+      .filters.more{grid-template-columns:minmax(0,1fr) var(--mobile-filter-button-size) minmax(0,var(--mobile-view-switch-width));align-items:center;gap:6px;max-width:100%;overflow:visible}
       .filters.more .filterSearch{grid-column:1;min-width:0}
+      .filters.more .filterSearch input{max-width:100%}
       .filters.more .filterToggle{grid-column:auto;justify-self:start;min-width:0}
-      .filters.more .mobileViewBar{grid-column:auto}
-      .filters.more .mobileViewBar .viewSwitch{border-radius:16px;padding:3px}
-      .filters.more .mobileViewBar .viewBtn{width:44px;height:44px;border-radius:14px}
+      .filters.more .mobileViewBar{grid-column:auto;width:var(--mobile-view-switch-width);min-width:0;max-width:100%}
+      .filters.more .mobileViewBar .viewSwitch{width:100%;justify-content:space-between;border-radius:15px;padding:2px}
+      .filters.more .mobileViewBar .viewBtn{width:var(--mobile-view-button-size);height:var(--mobile-view-button-size);border-radius:12px}
       #ideaFilters .filterSearch{grid-column:1}
       #ideaFilters .filterToggle{grid-column:2}
       #ideaFilters .mobileViewBar{grid-column:3}
@@ -1392,16 +1393,18 @@
       #agendaFilters .filterSearch{grid-column:1}
       #agendaFilters .filterToggle{grid-column:2}
       #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:1 / -1}
-      #ideaFilters.filters.more{grid-template-columns:minmax(0,1fr) 44px auto;align-items:center;column-gap:6px;row-gap:8px;width:100%;max-width:100%;overflow:visible}
-      #agendaFilters.agendaSearchFilters.more{grid-template-columns:minmax(0,1fr) 44px;align-items:center;column-gap:6px;row-gap:8px;width:100%;max-width:100%;overflow:visible}
+      #ideaFilters.filters.more{grid-template-columns:minmax(0,calc(100% - var(--mobile-filter-button-size) - var(--mobile-view-switch-width) - 12px)) var(--mobile-filter-button-size) var(--mobile-view-switch-width) !important;align-items:center;column-gap:6px;row-gap:8px;width:100%;max-width:100%;overflow:visible;box-sizing:border-box}
+      #agendaFilters.agendaSearchFilters.more{grid-template-columns:minmax(0,calc(100% - var(--mobile-filter-button-size) - 6px)) var(--mobile-filter-button-size) !important;align-items:center;column-gap:6px;row-gap:8px;width:100%;max-width:100%;overflow:visible;box-sizing:border-box}
       #ideaFilters .filterSearch,
       #agendaFilters .filterSearch{grid-column:1;grid-row:1;min-width:0}
       #ideaFilters .filterToggle,
-      #agendaFilters .filterToggle{grid-column:2;grid-row:1;justify-self:stretch;min-width:44px;width:44px;height:44px;min-height:44px;max-width:44px;padding:0;border-radius:16px;background:var(--control-surface);border-color:rgba(11,18,32,.055);box-shadow:0 8px 20px rgba(20,38,42,.04)}
+      #agendaFilters .filterToggle{grid-column:2;grid-row:1;justify-self:stretch;min-width:var(--mobile-filter-button-size);width:var(--mobile-filter-button-size);height:var(--mobile-filter-button-size);min-height:var(--mobile-filter-button-size);max-width:var(--mobile-filter-button-size);padding:0;border-radius:15px;background:var(--control-surface);border-color:rgba(11,18,32,.055);box-shadow:0 8px 20px rgba(20,38,42,.04)}
       #ideaFilters .filterToggle span{display:none}
       #agendaFilters .filterToggle{font-size:0}
       #agendaFilters .filterToggle svg{width:18px;height:18px;margin:0}
       #ideaFilters .mobileViewBar{grid-column:3;grid-row:1;justify-self:end;min-width:0}
+      #ideaFilters .mobileViewBar .viewIcon,
+      #ideaFilters .mobileViewBar .viewIcon svg{width:14px;height:14px}
       #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{display:none}
       #ideaFilters .filterOptions{grid-column:1 / -1;grid-row:3;display:grid !important;grid-template-columns:minmax(0,1fr) !important;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden}
       #agendaFilters .filterOptions{grid-column:1 / -1;grid-row:2;display:grid !important;grid-template-columns:minmax(0,1fr) !important;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden}
@@ -1422,7 +1425,7 @@
       #ideaFilters .filterOptions .filterReset,
       #agendaFilters .filterOptions .filterReset{justify-content:flex-start;min-height:44px;padding:8px 10px}
       #ideaFilters .filterSearch input,
-      #agendaFilters .filterSearch input{height:44px;min-height:44px;padding-left:38px;padding-right:10px;text-align:left;border-radius:16px}
+      #agendaFilters .filterSearch input{width:100%;min-width:0;box-sizing:border-box;height:var(--mobile-search-row-height);min-height:var(--mobile-search-row-height);padding-left:38px;padding-right:10px;text-align:left;border-radius:16px}
       #ideaFilters .filterSearch::before,
       #agendaFilters .filterSearch::before{left:13px}
       #ideaFilters .filterOptions .customSelect,
@@ -1483,9 +1486,9 @@
       .agendaMore{min-height:26px;padding:5px 7px;font-size:.76rem}
       .agendaEmpty{margin-top:2px;padding:7px 9px;font-size:.76rem;background:rgba(255,255,255,.58)}
       .agendaHero{
-        min-height:clamp(258px,45svh,287px);
+        min-height:clamp(350px,58svh,390px);
         margin:calc(-1 * clamp(102px,20svh,122px)) calc(50% - 50vw) 0;
-        padding:clamp(120px,21.8svh,146px) max(24px,calc((100vw - var(--max)) / 2 + 24px)) clamp(27px,4.6svh,36px);
+        padding:clamp(120px,21.8svh,146px) max(24px,calc((100vw - var(--max)) / 2 + 24px)) clamp(96px,12svh,112px);
         background-position:58% 42%,center,center
       }
       .agendaHero .tabHeroTitle{
@@ -1510,7 +1513,7 @@
       }
       .agendaHero + .filterBar{margin-top:calc(var(--hero-search-height) / -2);margin-bottom:8px}
       #agendaFilters.agendaSearchFilters.more{
-        grid-template-columns:minmax(0,1fr) 44px;
+        grid-template-columns:minmax(0,1fr) var(--mobile-filter-button-size);
         row-gap:8px
       }
       #agendaFilters .filterSearch input{border-radius:16px}
@@ -1519,11 +1522,11 @@
       .weekSectionNavigation{align-items:center;gap:8px;margin:0 0 18px}
       .weekSectionNavigation .agendaSectionTabs{flex:1 1 auto;min-width:0}
       .agendaWeekFilterSlot{flex:0 0 auto}
-      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{display:block;width:120px;min-width:120px;max-width:120px}
-      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{height:44px;min-height:44px;padding:8px 10px;border-radius:16px;font-size:.8rem}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{display:block;width:112px;min-width:112px;max-width:112px}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{height:40px;min-height:40px;padding:7px 9px;border-radius:15px;font-size:.78rem}
       .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::before{width:15px;height:15px;flex-basis:15px}
       .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::after{width:11px;height:11px;flex-basis:11px}
-      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectLabel{max-width:66px}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectLabel{max-width:60px}
       .weekTitle{grid-template-columns:auto minmax(0,1fr) auto;gap:8px 10px;align-items:center}
       .weekBadge{width:42px;height:42px;margin:0 0 0 2px;border-radius:10px;font-size:1.1rem}
       .weekHeadingRow{display:contents}
@@ -1546,7 +1549,7 @@
         mask-image:linear-gradient(to right,#000 calc(100% - 30px),transparent)
       }
       #inspirationThemeLegend .agendaThemeLegend::-webkit-scrollbar{display:none}
-      #inspirationThemeLegend .agendaLegendItem{flex:0 0 auto;min-width:0;min-height:44px;padding:8px 10px;scroll-snap-align:start;white-space:nowrap}
+      #inspirationThemeLegend .agendaLegendItem{flex:0 0 auto;min-width:0;min-height:40px;padding:7px 9px;scroll-snap-align:start;white-space:nowrap}
       .locationLegendItem{padding:7px 12px}
       .cards{gap:10px;width:100%;min-width:0}
       .card{width:100%;min-width:0;min-height:0;padding:13px 14px;gap:8px;border-radius:18px;overflow:hidden}
@@ -1601,16 +1604,16 @@
       }
       .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{
         display:block !important;
-        width:120px !important;
-        min-width:120px !important;
-        max-width:120px !important
+        width:112px !important;
+        min-width:112px !important;
+        max-width:112px !important
       }
       .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{
-        height:44px !important;
-        min-height:44px !important;
-        padding:8px 10px !important;
-        border-radius:16px !important;
-        font-size:.8rem !important
+        height:40px !important;
+        min-height:40px !important;
+        padding:7px 9px !important;
+        border-radius:15px !important;
+        font-size:.78rem !important
       }
       .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::before{
         width:15px !important;
@@ -1623,7 +1626,7 @@
         flex-basis:11px !important
       }
       .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectLabel{
-        max-width:66px !important
+        max-width:60px !important
       }
       .weekBadge{
         grid-area:badge !important;
@@ -1711,9 +1714,9 @@
       }
       #agendaThemeLegend .agendaThemeLegend::-webkit-scrollbar{display:none}
       #agendaThemeLegend .agendaLegendItem{
-        min-height:44px;
-        padding-top:8px;
-        padding-bottom:8px;
+        min-height:40px;
+        padding-top:7px;
+        padding-bottom:7px;
         flex:0 0 auto;
         scroll-snap-align:start;
         white-space:nowrap
@@ -1740,8 +1743,57 @@
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
   <link rel="stylesheet" href="website-bestanden/loading-screen.css?v=20260911-first-paint-v4">
-  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260911-ongoing-light-cards-v39">
+  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260914-mobile-controls-v1">
   <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20260912-photo-alignment-v36">
+  <style>
+    @media (max-width:640px){
+      :root{--mobile-search-row-height:42px;--mobile-filter-button-size:40px;--mobile-view-button-size:28px;--mobile-view-switch-width:92px}
+      .tabHero,
+      .agendaHero{
+        min-height:clamp(350px,58svh,390px) !important;
+        padding-bottom:clamp(96px,12svh,112px) !important;
+      }
+      .tabHero + .filterBar,
+      .agendaHero + .filterBar{margin-top:calc(var(--hero-search-height) / -2) !important}
+      #tab-inspiratie > .filterBar,
+      #tab-weken > .filterBar{
+        width:calc(100vw - 28px) !important;
+        max-width:calc(100vw - 28px) !important;
+        margin-left:0 !important;
+        margin-right:0 !important;
+        overflow:visible !important;
+      }
+      #ideaFilters.filters.more{
+        display:grid !important;
+        grid-template-columns:minmax(0,1fr) !important;
+        column-gap:6px !important;
+        row-gap:6px !important;
+        width:calc(100vw - 28px) !important;
+        max-width:calc(100vw - 28px) !important;
+        overflow:visible !important;
+      }
+      #ideaFilters .filterSearch{grid-column:1 !important;grid-row:1 !important;min-width:0 !important;width:100% !important;max-width:100% !important;overflow:hidden !important}
+      #ideaFilters .filterSearch input{height:var(--mobile-search-row-height) !important;min-height:var(--mobile-search-row-height) !important;width:100% !important;min-width:0 !important;max-width:100% !important}
+      #ideaFilters .filterToggle,
+      #agendaFilters .filterToggle{width:var(--mobile-filter-button-size) !important;min-width:var(--mobile-filter-button-size) !important;max-width:var(--mobile-filter-button-size) !important;height:var(--mobile-filter-button-size) !important;min-height:var(--mobile-filter-button-size) !important;border-radius:15px !important;padding:0 !important}
+      #ideaFilters .filterToggle{grid-column:1 !important;grid-row:2 !important;justify-self:start !important}
+      #ideaFilters .mobileViewBar{display:flex !important;grid-column:1 !important;grid-row:2 !important;width:var(--mobile-view-switch-width) !important;min-width:0 !important;max-width:var(--mobile-view-switch-width) !important;margin-left:46px !important;justify-self:start !important;overflow:visible !important}
+      #ideaFilters .mobileViewBar .viewSwitch{display:flex !important;width:var(--mobile-view-switch-width) !important;min-width:0 !important;height:34px !important;padding:2px !important;border-radius:14px !important;justify-content:space-between !important}
+      #ideaFilters .mobileViewBar .viewBtn{width:var(--mobile-view-button-size) !important;height:30px !important;border-radius:11px !important}
+      #ideaFilters .mobileViewBar .viewIcon,
+      #ideaFilters .mobileViewBar .viewIcon svg{width:14px !important;height:14px !important}
+      #agendaFilters.agendaSearchFilters.more{grid-template-columns:minmax(0,1fr) var(--mobile-filter-button-size) !important;column-gap:6px !important;width:calc(100vw - 28px) !important;max-width:calc(100vw - 28px) !important}
+      #agendaFilters .filterSearch input{height:var(--mobile-search-row-height) !important;min-height:var(--mobile-search-row-height) !important}
+      .agendaSectionTab{min-height:40px !important}
+      .weekSectionNavigation{align-items:center !important}
+      .weekSectionNavigation .agendaSectionTabs{align-items:center !important;margin:0 !important}
+      .agendaWeekFilterSlot{align-self:center !important}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{width:112px !important;min-width:112px !important;max-width:112px !important}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{height:40px !important;min-height:40px !important;padding:7px 9px !important;border-radius:15px !important;font-size:.78rem !important}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectLabel{max-width:60px !important}
+      .agendaWeekFilterSlot .customSelect.openUp .customSelectMenu{top:calc(100% + 7px) !important;bottom:auto !important}
+    }
+  </style>
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
