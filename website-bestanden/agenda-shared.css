@@ -195,8 +195,8 @@
 }
 
 .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{
-  height:42px;
-  min-height:42px;
+  height:44px;
+  min-height:44px;
 }
 
 .weekHeadingRow{
@@ -531,8 +531,8 @@
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  width:34px;
-  height:34px;
+  width:44px;
+  height:44px;
   border:0;
   border-radius:999px;
   background:transparent;
@@ -602,7 +602,7 @@
   .ongoingAccordion .ongoingTitleCell .small{display:none}
   .ongoingAccordion .ongoingMetaLine{display:flex;align-items:baseline;gap:4px;width:100%;max-width:100%;margin:0 0 4px;padding:0;border:0;border-radius:0;background:transparent !important;box-shadow:none !important;font-size:.78rem;line-height:1.28}
   .ongoingAccordion .ongoingFitCell .small{font-size:.92rem;line-height:1.38;color:rgba(11,18,32,.68)}
-  .ongoingAccordion .siteButton{min-width:86px;max-width:100%;min-height:36px;padding:9px 13px;font-size:.86rem}
+  .ongoingAccordion .siteButton{min-width:86px;max-width:100%;min-height:44px;padding:9px 13px;font-size:.86rem}
   .adminOngoingAccordion .ongoingManageCell{display:flex !important;order:5;justify-content:flex-end;margin-top:3px}
   .adminOngoingAccordion .ongoingTitleCell,
   .adminOngoingAccordion .ongoingBadgesCell,
@@ -627,29 +627,29 @@
   }
   .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{
     display:block;
-    width:118px;
-    min-width:118px;
-    max-width:118px;
+    width:128px;
+    min-width:128px;
+    max-width:128px;
   }
   .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{
-    height:36px;
-    min-height:36px;
-    padding:7px 9px;
-    border-radius:14px;
-    font-size:.78rem;
+    height:44px;
+    min-height:44px;
+    padding:8px 10px;
+    border-radius:16px;
+    font-size:.8rem;
   }
   .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::before{
-    width:14px;
-    height:14px;
-    flex-basis:14px;
+    width:15px;
+    height:15px;
+    flex-basis:15px;
   }
   .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::after{
-    width:10px;
-    height:10px;
-    flex-basis:10px;
+    width:11px;
+    height:11px;
+    flex-basis:11px;
   }
   .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectLabel{
-    max-width:66px;
+    max-width:74px;
   }
   .weekTop{
     grid-template-columns:1fr;
@@ -694,8 +694,8 @@
     margin-bottom:0;
   }
   .weekNavButton{
-    width:34px;
-    height:34px;
+    width:44px;
+    height:44px;
   }
   .agendaDay.pastDay:not(.today) .agendaItem,
   .agendaDay.pastDay:not(.today) .agendaEmpty{
