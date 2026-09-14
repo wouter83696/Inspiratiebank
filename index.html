@@ -190,7 +190,7 @@
     .tabHeroStat strong{display:inline;font-size:inherit;font-weight:650;line-height:inherit;color:inherit}
     .tabHeroStat span:not(.tabHeroStatDivider):not(.tabHeroStat){display:inline;color:inherit}
     .tabHeroStatDivider{display:inline;color:rgba(49,95,107,.32)}
-    .tabHero + .filterBar{--hero-search-height:44px;position:relative;z-index:2;margin-top:calc(var(--hero-search-height) / -2)}
+    .tabHero + .filterBar{--hero-search-height:44px;position:relative;z-index:2;margin-top:14px}
     .tabHero + .filterBar .filterSearch input,
     .tabHero + .filterBar .filterToggle,
     .tabHero + .filterBar .viewSwitch{
@@ -203,7 +203,7 @@
       .tabHeroKicker{transform:translateY(0)}
       .tabHeroLine{margin-top:15px}
       .tabHeroActions{margin-top:36px}
-      .tabHero + .filterBar{margin-top:calc(var(--hero-search-height) / -2)}
+      .tabHero + .filterBar{margin-top:18px}
     }
     .quick{display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:10px}
     .quickCard{display:flex;align-items:center;gap:14px;padding:17px;box-shadow:0 10px 30px rgba(20,38,42,.06)}
@@ -242,8 +242,11 @@
     .weekHeadingRow{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-direction:row;flex-wrap:nowrap;width:100%}
     .weekHeadingMain{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
     .weekHeadingActions{display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-left:auto;min-width:0}
-    .weekSectionNavigation{display:flex;align-items:center;margin:-8px 0 18px}
+    .weekSectionNavigation{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:-8px 0 18px}
     .weekSectionNavigation .agendaSectionTabs{margin:0}
+    .agendaWeekFilterSlot{display:flex;align-items:center;justify-content:flex-end;margin-left:auto;min-width:0}
+    .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{width:144px;min-width:132px;max-width:156px;max-height:none;opacity:1;overflow:visible;visibility:visible;pointer-events:auto;transform:none}
+    .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{height:42px;min-height:42px}
     .weekHeadingActions .weekNav{margin-left:0}
     .weekTitleContent{flex:1 1 auto}
     .weekDateLine{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;min-width:0;max-width:100%}
@@ -816,11 +819,11 @@
     #ideaFilters .filterOptions .filterShuffle{grid-column:11 / 12}
     #ideaFilters .filterOptions .filterReset{grid-column:12 / 13}
     #agendaFilters{--agenda-main-filter-height:44px;align-items:stretch}
-    #agendaFilters .filterSearch{grid-column:1 / 10;align-self:stretch}
+    #agendaFilters .filterSearch{grid-column:1 / 11;align-self:stretch}
     #agendaFilters .filterSearch input,
     #agendaFilters .filterToggle,
     #agendaFilters .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{height:var(--agenda-main-filter-height);min-height:var(--agenda-main-filter-height)}
-    #agendaFilters .filterToggle{grid-column:10 / 11;justify-self:end;align-self:stretch}
+    #agendaFilters .filterToggle{grid-column:11 / 13;justify-self:start;align-self:stretch}
     #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:11 / 13;justify-self:start;align-self:stretch;max-height:76px;opacity:1;overflow:visible;visibility:visible;pointer-events:auto;transform:none}
     #agendaFilters .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::before,
     #agendaFilters .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::after{align-self:center}
@@ -1318,7 +1321,7 @@
       .tabHeroStat svg{width:15px;height:15px;margin-top:0;flex:0 0 15px}
       .tabHeroStat strong{display:inline;font-size:inherit;font-weight:650;line-height:inherit;color:inherit}
       .tabHeroStat span:not(.tabHeroStatDivider):not(.tabHeroStat){display:inline;margin-top:0;color:inherit;font-weight:500}
-      .tabHero + .filterBar{margin-top:calc(var(--mobile-search-row-height) / -2 + 6px);margin-bottom:4px}
+      .tabHero + .filterBar{margin-top:18px;margin-bottom:8px}
       .hero{display:flex;flex-direction:column;gap:14px;padding-top:44px}
       .quick{order:1;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:1fr;gap:8px}
       .heroMain{order:0;padding:24px 22px}
@@ -1389,7 +1392,7 @@
       #agendaFilters .filterToggle{grid-column:2}
       #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:1 / -1}
       #ideaFilters.filters.more{grid-template-columns:minmax(0,1fr) 44px auto;align-items:center;column-gap:6px;row-gap:8px;width:100%;max-width:100%;overflow:visible}
-      #agendaFilters.agendaSearchFilters.more{grid-template-columns:minmax(0,1fr) 44px minmax(118px,130px);align-items:center;column-gap:6px;row-gap:8px;width:100%;max-width:100%;overflow:visible}
+      #agendaFilters.agendaSearchFilters.more{grid-template-columns:minmax(0,1fr) 44px;align-items:center;column-gap:6px;row-gap:8px;width:100%;max-width:100%;overflow:visible}
       #ideaFilters .filterSearch,
       #agendaFilters .filterSearch{grid-column:1;grid-row:1;min-width:0}
       #ideaFilters .filterToggle,
@@ -1398,7 +1401,7 @@
       #agendaFilters .filterToggle{font-size:0}
       #agendaFilters .filterToggle svg{width:18px;height:18px;margin:0}
       #ideaFilters .mobileViewBar{grid-column:3;grid-row:1;justify-self:end;min-width:0}
-      #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:3;grid-row:1;justify-self:stretch;min-width:118px;max-width:130px;width:100%}
+      #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{display:none}
       #ideaFilters .filterOptions{grid-column:1 / -1;grid-row:3;display:grid !important;grid-template-columns:minmax(0,1fr) !important;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden}
       #agendaFilters .filterOptions{grid-column:1 / -1;grid-row:2;display:grid !important;grid-template-columns:minmax(0,1fr) !important;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden}
       #ideaFilters .filterOptions .customSelect,
@@ -1504,19 +1507,28 @@
         width:100%;min-height:0;margin-top:clamp(12px,2svh,16px);justify-content:flex-start;gap:8px 10px;
         padding:0;background:transparent;border-color:transparent
       }
-      .agendaHero + .filterBar{margin-top:calc(var(--mobile-search-row-height) / -2 + 6px);margin-bottom:4px}
+      .agendaHero + .filterBar{margin-top:18px;margin-bottom:8px}
       #agendaFilters.agendaSearchFilters.more{
-        grid-template-columns:minmax(0,1fr) 44px minmax(122px,132px);
+        grid-template-columns:minmax(0,1fr) 44px;
         row-gap:8px
       }
       #agendaFilters .filterSearch input{border-radius:16px}
       .weekPanel{border-radius:22px}
       .weekTop{padding:12px 12px 10px;background:rgba(255,255,255,.74)}
+      .weekSectionNavigation{align-items:center;gap:10px;margin:0 0 18px}
+      .weekSectionNavigation .agendaSectionTabs{flex:1 1 auto;min-width:0}
+      .agendaWeekFilterSlot{flex:0 0 auto}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{display:block;width:118px;min-width:118px;max-width:118px}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{height:36px;min-height:36px;padding:7px 9px;border-radius:14px;font-size:.78rem}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::before{width:14px;height:14px;flex-basis:14px}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::after{width:10px;height:10px;flex-basis:10px}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectLabel{max-width:66px}
       .weekTitle{grid-template-columns:auto minmax(0,1fr) auto;gap:8px 10px;align-items:center}
       .weekBadge{width:42px;height:42px;margin:0;border-radius:10px;font-size:1.1rem}
       .weekHeadingRow{display:contents}
       .weekTitleContent{grid-column:2;grid-row:1;align-self:center}
-      .weekTop h3{font-size:1.18rem;line-height:1.12}
+      .weekDateLine{align-items:center;gap:9px}
+      .weekTop h3{font-size:1.52rem;line-height:1.12}
       .weekTop .dates{margin-top:3px;font-size:.86rem}
       .weekTop .status{display:none}
       .weekHeaderMeta{grid-column:2;grid-row:2;margin-top:2px;padding:0}
@@ -1567,6 +1579,50 @@
         column-gap:12px !important;
         row-gap:7px !important;
         align-items:start !important
+      }
+      .weekSectionNavigation{
+        display:flex !important;
+        align-items:center !important;
+        justify-content:space-between !important;
+        gap:10px !important;
+        margin:0 0 18px !important
+      }
+      .weekSectionNavigation .agendaSectionTabs{
+        flex:1 1 auto !important;
+        min-width:0 !important
+      }
+      .agendaWeekFilterSlot{
+        display:flex !important;
+        flex:0 0 auto !important;
+        align-items:center !important;
+        justify-content:flex-end !important;
+        margin-left:0 !important
+      }
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{
+        display:block !important;
+        width:118px !important;
+        min-width:118px !important;
+        max-width:118px !important
+      }
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{
+        height:36px !important;
+        min-height:36px !important;
+        padding:7px 9px !important;
+        border-radius:14px !important;
+        font-size:.78rem !important
+      }
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::before{
+        width:14px !important;
+        height:14px !important;
+        flex-basis:14px !important
+      }
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::after{
+        width:10px !important;
+        height:10px !important;
+        flex-basis:10px !important
+      }
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectLabel{
+        max-width:66px !important
       }
       .weekBadge{
         grid-area:badge !important;
@@ -4540,7 +4596,29 @@
     return `<nav class="agendaSectionTabs" aria-label="Agenda-onderdelen">
       <a class="agendaSectionTab${activeSection === 'weeks' ? ' active' : ''}" href="#weekPanels" data-agenda-section="weeks"${activeSection === 'weeks' ? ' aria-current="location"' : ''}>Weekagenda</a>
       <a class="agendaSectionTab${activeSection === 'ongoing' ? ' active' : ''}" href="#longerOffers" data-agenda-section="ongoing"${activeSection === 'ongoing' ? ' aria-current="location"' : ''}>Doorlopend aanbod</a>
-    </nav>`;
+    </nav><span id="agendaWeekFilterSlot" class="agendaWeekFilterSlot"></span>`;
+  }
+
+  function agendaWeekFilterControl(){
+    const select = $('#agendaWeekFilter');
+    return select?.closest('.customSelect') || select || null;
+  }
+
+  function parkAgendaWeekFilter(){
+    const control = agendaWeekFilterControl();
+    if(!control) return;
+    const parking = $('#agendaWeekFilterParking') || document.createElement('span');
+    parking.id = 'agendaWeekFilterParking';
+    parking.hidden = true;
+    if(!parking.isConnected) document.body.appendChild(parking);
+    parking.appendChild(control);
+  }
+
+  function placeAgendaWeekFilter(){
+    const slot = $('#agendaWeekFilterSlot');
+    const control = agendaWeekFilterControl();
+    if(slot && control) slot.appendChild(control);
+    syncCustomSelect($('#agendaWeekFilter'));
   }
 
   function renderWeekPanels(){
@@ -4549,6 +4627,7 @@
     const {scope, week} = filters;
     const weeksToRender = scope === 'all' ? ACTIVE_WEEKS : ACTIVE_WEEKS.filter(w => w.id === week);
     let visibleCount = 0;
+    parkAgendaWeekFilter();
     $('#weekPanels').innerHTML = weeksToRender.map((w,i)=>{
       const all = filterAgendaItems(byWeek(w.id), filters);
       const concrete = sortWeekItems(all.filter(isConcrete));
@@ -4563,6 +4642,7 @@
         boardAttribute:` data-week-board="${escapeHtml(w.id)}"`
       });
     }).join('');
+    placeAgendaWeekFilter();
     const status = $('#agendaSearchStatus');
     if(status){
       status.textContent = hasActiveAgendaFilters(filters)
