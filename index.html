@@ -130,6 +130,9 @@
       color:#fff;
       box-shadow:none;
     }
+    .topbarBrand{display:none}
+    .topbarBrandMark{display:block;width:28px;height:28px;border-radius:8px}
+    .topbarBrandText{font-size:1rem;font-weight:700;letter-spacing:-.03em;color:var(--accent-dark)}
     .actions{
       display:flex;align-items:center;gap:14px;margin-left:auto;padding:3px 0;min-height:40px;pointer-events:auto
     }
@@ -970,6 +973,172 @@
       #tab-inspiratie .desktopHeroSubtitle{display:none}
       #tab-inspiratie .mobileHeroTitle,
       #tab-inspiratie .mobileHeroSubtitle{display:inline}
+    }
+    @media (min-width:981px){
+      .topbar{
+        width:100%;
+        max-width:none;
+        margin:0;
+        padding:18px var(--hero-edge) 0;
+        align-items:center;
+        justify-content:flex-start;
+        gap:34px;
+      }
+      .topbarBrand{
+        display:inline-flex;
+        align-items:center;
+        gap:10px;
+        pointer-events:auto;
+        text-decoration:none;
+      }
+      .topbar .tabs{
+        background:transparent;
+        border-color:transparent;
+        box-shadow:none;
+        padding:0;
+        gap:12px;
+      }
+      .topbar>.tabs .tab{
+        min-height:34px;
+        padding:8px 14px;
+        font-size:.82rem;
+        font-weight:600;
+      }
+      .topbar>.tabs .tab.active{
+        background:rgba(168,225,221,.34);
+        color:var(--accent-dark);
+      }
+      .profileButton{
+        margin-left:auto;
+        width:44px;
+        height:44px;
+        flex-basis:44px;
+      }
+      .tabHero{
+        min-height:clamp(270px,22vw,322px);
+        margin-top:-86px;
+        padding-top:clamp(126px,10.5vw,154px);
+        padding-bottom:48px;
+        background-position:center 42%, center, center;
+      }
+      .tabHeroTitle{
+        font-size:clamp(3.35rem,4.7vw,5rem);
+        line-height:.95;
+        letter-spacing:-.045em;
+      }
+      .tabHeroLine{
+        margin-top:10px;
+        font-size:1.18rem;
+      }
+      .tabHeroTitle,
+      .tabHeroLine{
+        transform:none;
+      }
+      .tabHeroActions{display:none}
+      .tabHero + .filterBar{
+        margin-top:-22px;
+        margin-bottom:18px;
+      }
+      .tabHero + .filterBar .filterSearch input,
+      .tabHero + .filterBar .filterToggle,
+      .tabHero + .filterBar .viewSwitch{
+        height:48px;
+        min-height:48px;
+        border-radius:17px;
+        background:rgba(255,253,249,.84);
+      }
+      .filters.more .filterOptions,
+      .agendaSearchFilters.more .filterOptions{
+        left:auto;
+        right:0;
+        top:calc(100% + 10px);
+        width:min(520px,calc(100vw - 56px));
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+        padding:0 10px;
+        border-radius:20px;
+        background:rgba(255,253,249,.96);
+        box-shadow:0 18px 46px rgba(20,38,42,.13);
+      }
+      .filters.more.expanded .filterOptions,
+      .agendaSearchFilters.more.expanded .filterOptions{
+        max-height:230px;
+        padding:10px;
+      }
+      #ideaFilters .filterOptions .customSelect[data-select-id],
+      #ideaFilters .filterOptions .filterShuffle,
+      #ideaFilters .filterOptions .filterReset,
+      #agendaFilters .filterOptions .customSelect[data-select-id],
+      #agendaFilters .filterOptions .filterReset,
+      #agendaFilters .filterOptions .agendaSearchStatus{
+        grid-column:auto;
+        width:100%;
+        min-width:0;
+      }
+      #ideaFilters .filterOptions .filterShuffle,
+      #agendaFilters .filterOptions .agendaSearchStatus{
+        grid-column:1 / -1;
+      }
+      #ideaFilters .filterOptions .filterReset,
+      #agendaFilters .filterOptions .filterReset{
+        justify-content:center;
+      }
+      #ideaFilters .filterSearch{grid-column:1 / 13}
+      #ideaFilters .filterToggle{
+        grid-column:12 / 13;
+        width:54px;
+        min-width:54px;
+        max-width:54px;
+        border-radius:0 17px 17px 0;
+      }
+      #ideaFilters .mobileViewBar{display:none}
+      #agendaFilters .filterSearch{grid-column:1 / 13}
+      #agendaFilters .filterToggle{
+        grid-column:12 / 13;
+        width:54px;
+        min-width:54px;
+        max-width:54px;
+        border-radius:0 17px 17px 0;
+      }
+      #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:10 / 12}
+      .agendaLegendBar,
+      .inspirationDesktopFilterRow{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:18px;
+        margin:4px 0 22px;
+      }
+      #inspirationThemeLegend{
+        flex:1 1 auto;
+        min-width:0;
+      }
+      #inspirationThemeLegend .agendaThemeLegend,
+      #agendaThemeLegend .agendaThemeLegend{
+        flex-wrap:nowrap;
+        gap:10px;
+        overflow-x:auto;
+        overflow-y:hidden;
+        padding:0 2px 2px 0;
+        scrollbar-width:none;
+      }
+      #inspirationThemeLegend .agendaThemeLegend::-webkit-scrollbar,
+      #agendaThemeLegend .agendaThemeLegend::-webkit-scrollbar{display:none}
+      .desktopViewBar{
+        display:flex;
+        flex:0 0 auto;
+        margin:0;
+      }
+      .desktopViewBar .viewSwitch{
+        min-height:40px;
+        border-radius:16px;
+        padding:3px;
+      }
+      .desktopViewBar .viewBtn{
+        width:34px;
+        height:34px;
+      }
+      #ideaCards{margin-top:0}
     }
     .ideaView[hidden],.teamView[hidden]{display:none !important}
     .tableWrap.ideaView.active,.tableWrap.teamView.active{display:block}
@@ -2001,6 +2170,10 @@
     })();
   </script>
   <header class="topbar">
+    <a class="topbarBrand" href="#" aria-label="Inspiratiebank home">
+      <img class="topbarBrandMark" src="favicon.svg" alt="">
+      <span class="topbarBrandText">Inspiratiebank</span>
+    </a>
     <nav class="tabs" role="navigation" aria-label="Hoofdnavigatie">
       <button class="tab active" data-tab="inspiratie" type="button" aria-selected="true">Inspiratiebank</button>
       <button class="tab" data-tab="weken" type="button">UIT-agenda</button>
@@ -2030,7 +2203,7 @@
         <div class="filters agendaSearchFilters more" id="agendaFilters">
           <div class="filterSearch"><input id="agendaSearch" type="search" placeholder="Zoek in activiteiten..."></div>
           <button class="filterToggle" id="agendaFilterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-controls="agendaFilters">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16"></path><path d="M7 12h10"></path><path d="M10 19h4"></path></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><circle cx="15" cy="7" r="2"></circle><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="9" cy="17" r="2"></circle></svg>
             Filters
           </button>
           <select id="agendaWeekFilter" aria-label="Week filteren" data-include-placeholder-option="true"><option value="">Week</option></select>
@@ -2101,7 +2274,7 @@
         <div class="filters more" id="ideaFilters">
           <div class="filterSearch"><input id="ideaSearch" type="search" placeholder="Zoek inspiratie..."></div>
           <button class="filterToggle" id="filterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-controls="ideaFilters">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16"></path><path d="M7 12h10"></path><path d="M10 19h4"></path></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><circle cx="15" cy="7" r="2"></circle><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="9" cy="17" r="2"></circle></svg>
             <span>Filters</span>
           </button>
           <div class="viewBar mobileViewBar">
@@ -2113,7 +2286,7 @@
                 <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><circle cx="4" cy="5" r="1"></circle><circle cx="4" cy="10" r="1"></circle><circle cx="4" cy="15" r="1"></circle><path d="M8 5h9"></path><path d="M8 10h9"></path><path d="M8 15h9"></path></svg></span>
               </button>
               <button class="viewBtn" type="button" data-view-group="ideas" data-view="map" aria-label="Kaartweergave" title="Kaartweergave">
-                <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 17s5-4.6 5-9A5 5 0 0 0 5 8c0 4.4 5 9 5 9Z"></path><circle cx="10" cy="8" r="1.7"></circle></svg></span>
+                <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M2.5 5.5 7 3.5l6 2 4.5-2v11L13 16.5l-6-2-4.5 2Z"></path><path d="M7 3.5v11"></path><path d="M13 5.5v11"></path></svg></span>
               </button>
             </div>
           </div>
@@ -2145,7 +2318,7 @@
               <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><circle cx="4" cy="5" r="1"></circle><circle cx="4" cy="10" r="1"></circle><circle cx="4" cy="15" r="1"></circle><path d="M8 5h9"></path><path d="M8 10h9"></path><path d="M8 15h9"></path></svg></span>
             </button>
             <button class="viewBtn" type="button" data-view-group="ideas" data-view="map" aria-label="Kaartweergave" title="Kaartweergave">
-              <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 17s5-4.6 5-9A5 5 0 0 0 5 8c0 4.4 5 9 5 9Z"></path><circle cx="10" cy="8" r="1.7"></circle></svg></span>
+              <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M2.5 5.5 7 3.5l6 2 4.5-2v11L13 16.5l-6-2-4.5 2Z"></path><path d="M7 3.5v11"></path><path d="M13 5.5v11"></path></svg></span>
             </button>
           </div>
         </div>
