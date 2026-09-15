@@ -1016,10 +1016,10 @@
       }
       .tabHero{
         min-height:clamp(286px,23vw,340px);
-        margin-top:-92px;
-        padding-top:clamp(132px,11vw,164px);
+        margin-top:-116px;
+        padding-top:clamp(146px,12vw,182px);
         padding-bottom:52px;
-        background-position:center 36%, center, center;
+        background-position:center 40%, center, center;
       }
       .tabHeroTitle{
         font-size:clamp(3.35rem,4.7vw,5rem);
@@ -1038,19 +1038,19 @@
       .tabHero + .filterBar{
         display:flex;
         align-items:center;
-        justify-content:center;
+        justify-content:flex-start;
         gap:14px;
         margin-top:-25px;
         margin-bottom:18px;
       }
       .tabHero + .filterBar .filters,
       .tabHero + .filterBar .agendaSearchFilters{
-        flex:0 1 min(820px,calc(100% - 150px));
-        width:min(820px,calc(100% - 150px));
+        flex:0 1 min(850px,calc(100% - 150px));
+        width:min(850px,calc(100% - 150px));
       }
       #tab-weken .tabHero + .filterBar .agendaSearchFilters{
-        flex-basis:min(930px,100%);
-        width:min(930px,100%);
+        flex-basis:min(930px,calc(100% - 150px));
+        width:min(930px,calc(100% - 150px));
       }
       .tabHero + .filterBar .filterSearch input,
       .tabHero + .filterBar .filterToggle,
@@ -1066,7 +1066,7 @@
         left:0;
         right:0;
         top:auto;
-        width:100%;
+        width:min(100%,850px);
         margin-top:10px;
         grid-template-columns:repeat(4,minmax(0,1fr));
         gap:8px;
