@@ -1825,7 +1825,11 @@
       #ideaFilters .filterSearch input{position:relative !important;z-index:1 !important;height:var(--mobile-search-row-height) !important;min-height:var(--mobile-search-row-height) !important;width:100% !important;min-width:0 !important;max-width:100% !important;padding-left:42px !important;padding-right:68px !important;border-radius:18px !important}
       #ideaFilters .filterToggle,
       #agendaFilters .filterToggle{
-        position:absolute !important;
+        position:relative !important;
+        grid-column:1 !important;
+        grid-row:1 !important;
+        justify-self:end !important;
+        align-self:stretch !important;
         top:0 !important;
         right:0 !important;
         z-index:12 !important;
