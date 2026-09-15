@@ -755,7 +755,7 @@
     .locationLegendItem .locationChevron{width:13px;height:13px;margin-left:2px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.62}
     .locationLegendItem:hover{background:#fff;border-color:rgba(255,255,255,.88);box-shadow:0 9px 22px rgba(20,38,42,.055)}
     .filters{display:grid;grid-template-columns:1.5fr repeat(4,minmax(130px,1fr));gap:8px;margin:0;align-items:center}
-    .filters.more{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:12px;row-gap:0;transition:row-gap .24s var(--ease)}
+    .filters.more{position:relative;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:12px;row-gap:0;transition:row-gap .24s var(--ease)}
     .filterSearch{position:relative;min-width:0}
     .filterToggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:96px;min-height:40px;border:1px solid rgba(255,255,255,.78);border-radius:16px;background:var(--control-surface);color:var(--accent-dark);padding:8px 13px;font:inherit;font-size:.84rem;font-weight:500;white-space:nowrap;cursor:pointer;box-shadow:0 8px 20px rgba(20,38,42,.06);transition:background .22s var(--ease),border-color .22s var(--ease),box-shadow .22s var(--ease)}
     .filterToggle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -764,7 +764,7 @@
     .filterSearch input{position:relative;z-index:1;padding-left:42px}
     .filterSearch input::placeholder{text-align:left}
     .filters select{padding-right:30px}
-    .agendaSearchFilters{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;column-gap:12px;row-gap:0;transition:row-gap .24s var(--ease)}
+    .agendaSearchFilters{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;column-gap:12px;row-gap:0;transition:row-gap .24s var(--ease)}
     .agendaSearchFilters .filterSearch{min-width:0}
     .agendaSearchFilters .customSelect{flex:0 1 124px;min-width:104px}
     .agendaSearchFilters .themeSelect{flex-basis:124px}
@@ -831,6 +831,14 @@
       max-height:84px;opacity:1;overflow:visible;visibility:visible;pointer-events:auto;transform:translateY(0);padding:8px;
       transition:max-height .38s var(--ease),opacity .24s var(--ease) .06s,transform .38s var(--ease),padding .38s var(--ease),visibility 0s;
     }
+    @media (min-width:641px){
+      .filters.more.expanded,
+      .agendaSearchFilters.more.expanded{row-gap:0}
+      .filters.more .filterOptions,
+      .agendaSearchFilters.more .filterOptions{
+        position:absolute;left:0;right:0;top:calc(100% + 9px);z-index:35;
+      }
+    }
     .filters.more>select,
     .filters.more>.customSelect,
     .filters.more>.filterReset,
@@ -843,7 +851,7 @@
       transition:max-height .32s var(--ease),opacity .24s var(--ease),transform .32s var(--ease),visibility 0s linear .32s;
     }
     .filters.more.expanded,
-    .agendaSearchFilters.more.expanded{align-items:center;row-gap:12px}
+    .agendaSearchFilters.more.expanded{align-items:center;row-gap:0}
     .filters.more.expanded>select,
     .filters.more.expanded>.customSelect,
     .filters.more.expanded>.filterReset,
