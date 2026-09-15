@@ -971,136 +971,6 @@
       #tab-inspiratie .mobileHeroTitle,
       #tab-inspiratie .mobileHeroSubtitle{display:inline}
     }
-    @media (min-width:981px){
-      body:has(#tab-inspiratie.active) .topbar{
-        align-items:center;
-        margin-top:18px;
-      }
-      body:has(#tab-inspiratie.active) .topbar .tabs{
-        background:transparent;
-        border-color:transparent;
-        box-shadow:none;
-        padding:0;
-        gap:10px;
-      }
-      body:has(#tab-inspiratie.active) .topbar>.tabs .tab{
-        min-height:34px;
-        padding:8px 14px;
-        color:var(--accent-dark);
-        background:transparent;
-      }
-      body:has(#tab-inspiratie.active) .topbar>.tabs .tab.active{
-        background:rgba(168,225,221,.34);
-        color:var(--accent-dark);
-        box-shadow:inset 0 -2px 0 rgba(0,87,102,.78);
-      }
-      body:has(#tab-inspiratie.active) .profileButton{
-        flex-basis:44px;
-        width:44px;
-        height:44px;
-        margin-left:auto;
-      }
-      #tab-inspiratie.active > .filterBar{
-        position:absolute;
-        top:54px;
-        right:calc(var(--hero-edge) + 56px);
-        z-index:32;
-        width:min(390px,calc(100vw - 620px));
-        min-width:330px;
-        margin:0;
-        pointer-events:auto;
-      }
-      #tab-inspiratie.active #ideaFilters.filters.more{
-        display:grid;
-        grid-template-columns:minmax(0,1fr);
-        column-gap:0;
-        row-gap:0;
-        width:100%;
-      }
-      #tab-inspiratie.active #ideaFilters .filterSearch{grid-column:1;grid-row:1}
-      #tab-inspiratie.active #ideaFilters .filterSearch input{
-        height:44px;
-        min-height:44px;
-        padding-right:60px;
-        border-radius:16px;
-      }
-      #tab-inspiratie.active #ideaFilters .filterToggle{
-        grid-column:1;
-        grid-row:1;
-        justify-self:end;
-        width:54px;
-        min-width:54px;
-        max-width:54px;
-        height:44px;
-        min-height:44px;
-        border-radius:0 16px 16px 0;
-      }
-      #tab-inspiratie.active #ideaFilters > .mobileViewBar{display:none}
-      #tab-inspiratie.active #ideaFilters .filterOptions{
-        top:calc(100% + 8px);
-        right:0;
-        left:auto;
-        width:min(780px,calc(100vw - 56px));
-      }
-      #tab-inspiratie.active .inspirationHero{
-        min-height:clamp(265px,23vw,310px);
-        margin-top:-124px;
-        padding-top:clamp(138px,12vw,166px);
-        padding-bottom:34px;
-      }
-      #tab-inspiratie.active .inspirationHero .tabHeroTitle{
-        font-size:clamp(3rem,4.1vw,4rem);
-        line-height:.98;
-        letter-spacing:-.035em;
-        transform:none;
-      }
-      #tab-inspiratie.active .inspirationHero .tabHeroLine{
-        margin-top:9px;
-        max-width:560px;
-        font-size:1.06rem;
-        line-height:1.35;
-        color:var(--accent);
-        transform:none;
-      }
-      #tab-inspiratie.active .inspirationHero .tabHeroActions{display:none}
-      #tab-inspiratie.active .desktopHeroTitle,
-      #tab-inspiratie.active .desktopHeroSubtitle{display:inline}
-      #tab-inspiratie.active .mobileHeroTitle,
-      #tab-inspiratie.active .mobileHeroSubtitle{display:none}
-      #tab-inspiratie.active .inspirationDesktopFilterRow{
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        gap:18px;
-        margin:16px 0 24px;
-      }
-      #tab-inspiratie.active #inspirationThemeLegend{
-        flex:1 1 auto;
-        min-width:0;
-        margin:0;
-      }
-      #tab-inspiratie.active #inspirationThemeLegend .agendaThemeLegend{
-        flex-wrap:nowrap;
-        align-items:center;
-        gap:8px;
-        overflow-x:auto;
-        overflow-y:hidden;
-        padding:0 2px 2px 0;
-        scrollbar-width:none;
-      }
-      #tab-inspiratie.active #inspirationThemeLegend .agendaThemeLegend::-webkit-scrollbar{display:none}
-      #tab-inspiratie.active #inspirationThemeLegend .agendaLegendItem{
-        flex:0 0 auto;
-        min-height:40px;
-        padding:8px 13px;
-      }
-      #tab-inspiratie.active .desktopViewBar{
-        display:flex;
-        flex:0 0 auto;
-        margin:0;
-      }
-      #tab-inspiratie.active #ideaCards{margin-top:0}
-    }
     .ideaView[hidden],.teamView[hidden]{display:none !important}
     .tableWrap.ideaView.active,.tableWrap.teamView.active{display:block}
     .cards.ideaView.active,.cards.teamView.active{display:grid}
@@ -2214,8 +2084,8 @@
 
     <section id="tab-inspiratie" class="tabPanel active" role="tabpanel">
       <section class="tabHero inspirationHero" aria-labelledby="inspirationHeroTitle">
-        <h1 class="tabHeroTitle" id="inspirationHeroTitle"><span class="desktopHeroTitle">Ontdek iets nieuws</span><span class="mobileHeroTitle">Inspiratiebank</span></h1>
-        <p class="tabHeroLine"><span class="desktopHeroSubtitle">Activiteiten, plekken en ideeën voor een rijker dagelijks leven.</span><span class="mobileHeroSubtitle">Ontdek iets nieuws</span></p>
+        <h1 class="tabHeroTitle" id="inspirationHeroTitle"><span class="desktopHeroTitle">Inspiratiebank</span><span class="mobileHeroTitle">Inspiratiebank</span></h1>
+        <p class="tabHeroLine"><span class="desktopHeroSubtitle">Ontdek iets nieuws</span><span class="mobileHeroSubtitle">Ontdek iets nieuws</span></p>
         <div class="tabHeroActions">
           <button class="tabHeroButton primary" id="randomIdeaBtn" type="button">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.7 5.1L19 10l-5.3 1.9L12 17l-1.7-5.1L5 10l5.3-1.9L12 3Z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"></path></svg>
