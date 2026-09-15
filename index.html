@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="nl" class="appLoading" data-ui-build="single-desktop-source-v20">
+<html lang="nl" class="appLoading" data-ui-build="single-desktop-source-v21">
 <head>
   <base href="/">
   <meta charset="utf-8">
@@ -755,9 +755,9 @@
     .filterSearch{position:relative;min-width:0}
     .filterToggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:96px;min-height:40px;border:1px solid rgba(255,255,255,.78);border-radius:16px;background:var(--control-surface);color:var(--accent-dark);padding:8px 13px;font:inherit;font-size:.84rem;font-weight:500;white-space:nowrap;cursor:pointer;box-shadow:0 8px 20px rgba(20,38,42,.06);transition:background .22s var(--ease),border-color .22s var(--ease),box-shadow .22s var(--ease)}
     .filterToggle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-    .filterSearch::before{content:"";position:absolute;z-index:1;left:15px;top:50%;width:16px;height:16px;transform:translateY(-50%);pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%235f6973' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-4-4'/%3E%3C/svg%3E") center/contain no-repeat}
+    .filterSearch::before{content:"";position:absolute;z-index:3;left:15px;top:50%;width:16px;height:16px;transform:translateY(-50%);pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%235f6973' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-4-4'/%3E%3C/svg%3E") center/contain no-repeat}
     .filters input,.filters select{width:100%;min-width:0;min-height:40px;border:1px solid rgba(255,255,255,.78);background:rgba(255,255,255,.78);border-radius:16px;padding:8px 15px;color:var(--ink);font-size:.86rem;text-align:left;box-shadow:0 8px 20px rgba(20,38,42,.06);backdrop-filter:blur(18px)}
-    .filterSearch input{position:relative;padding-left:42px}
+    .filterSearch input{position:relative;z-index:1;padding-left:42px}
     .filterSearch input::placeholder{text-align:left}
     .filters select{padding-right:30px}
     .agendaSearchFilters{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;column-gap:12px;row-gap:0;transition:row-gap .24s var(--ease)}
@@ -851,9 +851,10 @@
       transition:max-height .38s var(--ease),opacity .24s var(--ease) .06s,transform .38s var(--ease),visibility 0s;
       grid-column:auto
     }
-    #ideaFilters .filterSearch{grid-column:1 / 10}
-    #ideaFilters .filterToggle{grid-column:10 / 11;justify-self:end}
-    #ideaFilters .mobileViewBar{grid-column:11 / 13;justify-self:start}
+    #ideaFilters .filterSearch{grid-column:1 / 11;grid-row:1}
+    #ideaFilters .filterSearch input{padding-right:112px}
+    #ideaFilters .filterToggle{grid-column:10 / 11;grid-row:1;justify-self:stretch;align-self:stretch;z-index:4;border:0;border-radius:0 16px 16px 0;background:transparent;box-shadow:none;backdrop-filter:none}
+    #ideaFilters .mobileViewBar{grid-column:11 / 13;grid-row:1;justify-self:start}
     #ideaFilters .filterOptions .customSelect[data-select-id="ideaDomain"]{grid-column:1 / 3}
     #ideaFilters .filterOptions .customSelect[data-select-id="ideaLocation"]{grid-column:3 / 5}
     #ideaFilters .filterOptions .customSelect[data-select-id="ideaDistance"]{grid-column:5 / 7}
@@ -862,11 +863,12 @@
     #ideaFilters .filterOptions .filterShuffle{grid-column:11 / 12}
     #ideaFilters .filterOptions .filterReset{grid-column:12 / 13}
     #agendaFilters{--agenda-main-filter-height:44px;align-items:stretch}
-    #agendaFilters .filterSearch{grid-column:1 / 11;align-self:stretch}
+    #agendaFilters .filterSearch{grid-column:1 / 13;grid-row:1;align-self:stretch}
+    #agendaFilters .filterSearch input{padding-right:112px}
     #agendaFilters .filterSearch input,
     #agendaFilters .filterToggle,
     #agendaFilters .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{height:var(--agenda-main-filter-height);min-height:var(--agenda-main-filter-height)}
-    #agendaFilters .filterToggle{grid-column:11 / 13;justify-self:start;align-self:stretch}
+    #agendaFilters .filterToggle{grid-column:11 / 13;grid-row:1;justify-self:stretch;align-self:stretch;z-index:4;border:0;border-radius:0 16px 16px 0;background:transparent;box-shadow:none;backdrop-filter:none}
     #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{grid-column:11 / 13;justify-self:start;align-self:stretch;max-height:76px;opacity:1;overflow:visible;visibility:visible;pointer-events:auto;transform:none}
     #agendaFilters .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::before,
     #agendaFilters .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton::after{align-self:center}
@@ -1789,7 +1791,7 @@
   <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20260912-photo-alignment-v36">
   <style>
     @media (max-width:640px){
-      :root{--mobile-search-row-height:46px;--mobile-filter-button-size:54px;--mobile-view-button-size:28px;--mobile-view-switch-width:88px;--mobile-search-with-view-width:calc(100vw - 130px)}
+      :root{--mobile-search-row-height:46px;--mobile-filter-button-size:54px;--mobile-view-button-size:30px;--mobile-view-switch-width:104px;--mobile-search-with-view-width:calc(100vw - 146px)}
       .tabHero,
       .agendaHero{
         min-height:clamp(350px,58svh,390px) !important;
@@ -1806,7 +1808,10 @@
         overflow:visible !important;
       }
       #ideaFilters.filters.more{
-        display:block !important;
+        display:grid !important;
+        grid-template-columns:minmax(0,1fr) var(--mobile-view-switch-width) !important;
+        align-items:center !important;
+        column-gap:14px !important;
         row-gap:8px !important;
         width:calc(100vw - 28px) !important;
         max-width:calc(100vw - 28px) !important;
@@ -1814,9 +1819,9 @@
         overflow:visible !important;
         position:relative !important;
       }
-      #ideaFilters .filterSearch{grid-column:auto !important;grid-row:auto !important;min-width:0 !important;width:var(--mobile-search-with-view-width) !important;max-width:var(--mobile-search-with-view-width) !important;overflow:visible !important;position:relative !important;z-index:1 !important}
+      #ideaFilters .filterSearch{grid-column:1 !important;grid-row:1 !important;min-width:0 !important;width:auto !important;max-width:none !important;overflow:visible !important;position:relative !important;z-index:1 !important}
       #ideaFilters .filterSearch::before,
-      #agendaFilters .filterSearch::before{z-index:3 !important;opacity:.95 !important}
+      #agendaFilters .filterSearch::before{content:"" !important;display:block !important;z-index:5 !important;opacity:.95 !important}
       #ideaFilters .filterSearch input{position:relative !important;z-index:1 !important;height:var(--mobile-search-row-height) !important;min-height:var(--mobile-search-row-height) !important;width:100% !important;min-width:0 !important;max-width:100% !important;padding-left:42px !important;padding-right:68px !important;border-radius:18px !important}
       #ideaFilters .filterToggle,
       #agendaFilters .filterToggle{
@@ -1831,22 +1836,22 @@
         min-height:var(--mobile-search-row-height) !important;
         padding:0 !important;
         border:0 !important;
-        border-left:1px solid rgba(11,18,32,.10) !important;
+        border-left:0 !important;
         border-radius:0 18px 18px 0 !important;
         background:transparent !important;
         box-shadow:none !important;
         backdrop-filter:none !important;
       }
-      #ideaFilters .filterToggle{right:auto !important;left:calc(var(--mobile-search-with-view-width) - var(--mobile-filter-button-size)) !important}
+      #ideaFilters .filterToggle{right:0 !important;left:auto !important}
       #ideaFilters .filterSearch + .filterToggle,
       #agendaFilters .filterSearch + .filterToggle{display:inline-flex !important;align-items:center !important;justify-content:center !important}
       #ideaFilters .filterToggle span{display:none !important}
       #agendaFilters .filterToggle{font-size:0 !important;color:var(--accent-dark) !important}
       #ideaFilters .filterToggle svg,
       #agendaFilters .filterToggle svg{width:19px !important;height:19px !important;margin:0 !important}
-      #ideaFilters .mobileViewBar{position:absolute !important;top:0 !important;right:auto !important;left:calc(100vw - 28px - var(--mobile-view-switch-width)) !important;display:flex !important;grid-column:auto !important;grid-row:auto !important;width:var(--mobile-view-switch-width) !important;min-width:0 !important;max-width:var(--mobile-view-switch-width) !important;margin-left:0 !important;justify-self:start !important;align-self:center !important;overflow:visible !important;z-index:3 !important}
-      #ideaFilters .mobileViewBar .viewSwitch{display:flex !important;width:var(--mobile-view-switch-width) !important;min-width:0 !important;height:34px !important;padding:2px !important;border-radius:14px !important;justify-content:space-between !important}
-      #ideaFilters .mobileViewBar .viewBtn{width:var(--mobile-view-button-size) !important;height:30px !important;border-radius:11px !important}
+      #ideaFilters .mobileViewBar{position:relative !important;top:auto !important;right:auto !important;left:auto !important;display:flex !important;grid-column:2 !important;grid-row:1 !important;width:var(--mobile-view-switch-width) !important;min-width:var(--mobile-view-switch-width) !important;max-width:var(--mobile-view-switch-width) !important;margin-left:0 !important;justify-self:end !important;align-self:center !important;overflow:visible !important;z-index:3 !important}
+      #ideaFilters .mobileViewBar .viewSwitch{display:flex !important;width:var(--mobile-view-switch-width) !important;min-width:0 !important;height:var(--mobile-search-row-height) !important;min-height:var(--mobile-search-row-height) !important;padding:3px !important;border-radius:18px !important;justify-content:space-between !important;align-items:center !important}
+      #ideaFilters .mobileViewBar .viewBtn{width:var(--mobile-view-button-size) !important;height:38px !important;border-radius:14px !important}
       #ideaFilters .mobileViewBar .viewIcon,
       #ideaFilters .mobileViewBar .viewIcon svg{width:14px !important;height:14px !important}
       #ideaFilters .filterOptions{grid-column:1 / -1 !important;grid-row:2 !important;width:100% !important;margin-top:8px !important}
