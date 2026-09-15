@@ -7,7 +7,7 @@
     const pills = view.pills || '';
     const source = view.source ? `<div class="small">${view.source}</div>` : '';
     const body = view.description ? `<p>${view.description}</p>` : '';
-    const practical = `<p class="fine"><strong>Praktisch:</strong>${view.practical || ''}</p>`;
+    const practical = view.practical ? `<details class="ideaPracticalDetails"><summary>Praktisch</summary><p class="ideaPracticalText">${view.practical}</p></details>` : '';
     const footer = `<div class="cardFooter">${view.website || ''}${view.actions || ''}</div>${view.manageActions !== undefined ? `<div class="agendaReviewCardActions ideaAdminCardActions">${view.manageActions || ''}</div>` : ''}`;
     return `<article class="${classes}"${attributes ? ` ${attributes}` : ''}>
       ${view.image || ''}
