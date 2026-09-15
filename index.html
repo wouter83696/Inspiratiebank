@@ -246,7 +246,7 @@
     .weekHeadingActions{display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-left:auto;min-width:0}
     .weekSectionNavigation{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:-8px 0 18px}
     .weekSectionNavigation .agendaSectionTabs{margin:0}
-    .agendaWeekAddButton{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:8px 14px;border:1px solid rgba(79,142,158,.14);border-radius:999px;background:rgba(255,253,249,.74);color:var(--accent-dark);font-size:.84rem;font-weight:500;line-height:1;text-decoration:none;white-space:nowrap;box-shadow:0 8px 20px rgba(20,38,42,.045)}
+    .agendaWeekAddButton{display:inline-flex;align-items:center;justify-content:center;align-self:center;gap:8px;height:40px;min-height:40px;padding:8px 14px;border:1px solid rgba(79,142,158,.14);border-radius:999px;background:rgba(255,253,249,.74);color:var(--accent-dark);font-size:.84rem;font-weight:500;line-height:1;text-decoration:none;white-space:nowrap;box-shadow:0 8px 20px rgba(20,38,42,.045)}
     .agendaWeekAddButton svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .agendaWeekFilterSlot{display:flex;align-items:center;justify-content:flex-end;margin-left:auto;min-width:0}
     .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{width:144px;min-width:132px;max-width:156px;max-height:none;opacity:1;overflow:visible;visibility:visible;pointer-events:auto;transform:none}
@@ -1917,13 +1917,15 @@
       }
       .weekSectionNavigation .agendaSectionTab{font-size:.78rem !important}
       .agendaWeekAddButton{
+        height:40px !important;
         min-height:40px !important;
-        max-width:112px !important;
-        padding:8px 9px !important;
+        max-width:none !important;
+        padding:8px 12px !important;
         border-radius:16px !important;
-        font-size:.70rem !important;
+        font-size:.78rem !important;
         gap:7px !important;
         justify-self:end !important;
+        align-self:center !important;
         overflow:hidden !important
       }
       .agendaWeekAddButton span{min-width:0 !important;overflow:hidden !important;text-overflow:ellipsis !important;white-space:nowrap !important}
@@ -4813,7 +4815,7 @@
     return `<nav class="agendaSectionTabs" aria-label="Agenda-onderdelen">
       <a class="agendaSectionTab${activeSection === 'weeks' ? ' active' : ''}" href="#weekPanels" data-agenda-section="weeks"${activeSection === 'weeks' ? ' aria-current="location"' : ''}>Weekagenda</a>
       <a class="agendaSectionTab${activeSection === 'ongoing' ? ' active' : ''}" href="#longerOffers" data-agenda-section="ongoing"${activeSection === 'ongoing' ? ' aria-current="location"' : ''}>Doorlopend aanbod</a>
-    </nav><a class="agendaWeekAddButton" href="#sourceAdditions"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg><span>Activiteit toevoegen</span></a>`;
+    </nav><a class="agendaWeekAddButton" href="#sourceAdditions"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg><span>Activiteit</span></a>`;
   }
 
   function agendaWeekFilterControl(){
