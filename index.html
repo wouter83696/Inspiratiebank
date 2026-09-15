@@ -597,31 +597,31 @@
     .cardFooter .reportMenu{margin-left:auto}
     .ideaSurpriseCard{
       align-self:start;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:12px 14px;
-      min-height:0;padding:17px 20px;border:1px solid rgba(226,168,54,.22);border-radius:16px;
-      background:linear-gradient(135deg,rgba(255,248,229,.92),rgba(255,253,247,.96) 58%,rgba(255,255,255,.96));
-      box-shadow:0 12px 30px rgba(64,45,20,.045)
+      min-height:0;padding:16px 18px;border:1px solid rgba(79,142,158,.13);border-radius:16px;
+      background:rgba(255,253,249,.88);
+      box-shadow:0 10px 26px rgba(64,45,20,.035)
     }
     .ideaSurpriseMark{
-      position:relative;display:grid;place-items:center;width:48px;height:48px;border-radius:999px;
-      background:rgba(248,236,194,.68);border:1px solid rgba(213,163,16,.18);color:#9a6413
+      position:relative;display:grid;place-items:center;width:42px;height:42px;border-radius:999px;
+      background:rgba(168,225,221,.34);border:1px solid rgba(79,142,158,.13);color:var(--accent-dark)
     }
     .ideaSurpriseMark::before,.ideaSurpriseMark::after{
-      content:"";position:absolute;width:6px;height:13px;border-radius:999px;background:#d79d28;transform:rotate(22deg);opacity:.72
+      content:none
     }
     .ideaSurpriseMark::before{top:-3px;right:7px}
     .ideaSurpriseMark::after{top:4px;right:-6px;transform:rotate(55deg)}
-    .ideaSurpriseMark svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+    .ideaSurpriseMark svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaSurpriseText{min-width:0}
     .ideaSurpriseText strong{display:block;color:rgba(11,18,32,.92);font-size:1.03rem;font-weight:650;line-height:1.16}
     .ideaSurpriseText span{display:block;margin-top:3px;color:rgba(11,18,32,.62);font-size:.9rem;line-height:1.34}
     .ideaSurpriseButton{
       grid-column:1 / -1;justify-self:start;
-      appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:9px 16px;
-      border:1px solid rgba(213,163,16,.22);border-radius:999px;background:linear-gradient(180deg,#ffe39b,#f6ce72);
-      color:#815313;font:inherit;font-size:.9rem;font-weight:700;line-height:1;white-space:nowrap;cursor:pointer;
-      box-shadow:0 10px 22px rgba(179,119,27,.13);transition:transform .18s var(--ease),box-shadow .18s var(--ease),filter .18s var(--ease)
+      appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:8px 15px;
+      border:1px solid rgba(63,120,132,.22);border-radius:999px;background:#3F7884;
+      color:#fff;font:inherit;font-size:.84rem;font-weight:650;line-height:1;white-space:nowrap;cursor:pointer;
+      box-shadow:0 8px 18px rgba(63,120,132,.14);transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease)
     }
-    .ideaSurpriseButton:hover{transform:translateY(-1px);filter:saturate(1.04);box-shadow:0 14px 28px rgba(179,119,27,.16)}
+    .ideaSurpriseButton:hover{transform:translateY(-1px);background:#356f7b;box-shadow:0 12px 24px rgba(63,120,132,.16)}
     .ideaSurpriseButton svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .ideaSurpriseRow td{padding:12px;background:rgba(255,253,247,.96)}
     .ideaSurpriseRow .ideaSurpriseCard{grid-column:auto;margin:0;border-radius:14px;box-shadow:none}
