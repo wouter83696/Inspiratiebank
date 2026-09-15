@@ -130,9 +130,6 @@
       color:#fff;
       box-shadow:none;
     }
-    .topbarBrand{display:none}
-    .topbarBrandMark{display:block;width:28px;height:28px;border-radius:8px}
-    .topbarBrandText{font-size:1rem;font-weight:700;letter-spacing:-.03em;color:var(--accent-dark)}
     .actions{
       display:flex;align-items:center;gap:14px;margin-left:auto;padding:3px 0;min-height:40px;pointer-events:auto
     }
@@ -982,37 +979,51 @@
         padding:18px var(--hero-edge) 0;
         align-items:center;
         justify-content:flex-start;
-        gap:34px;
-      }
-      .topbarBrand{
-        display:inline-flex;
-        align-items:center;
-        gap:10px;
-        pointer-events:auto;
-        text-decoration:none;
+        gap:0;
       }
       .topbar .tabs{
         background:transparent;
         border-color:transparent;
         box-shadow:none;
         padding:0;
-        gap:12px;
+        gap:24px;
       }
       .topbar>.tabs .tab{
+        position:relative;
         min-height:34px;
-        padding:8px 14px;
+        padding:8px 0 10px;
+        border-radius:0;
         font-size:.82rem;
         font-weight:600;
-      }
-      .topbar>.tabs .tab.active{
-        background:rgba(168,225,221,.34);
+        background:transparent;
         color:var(--accent-dark);
       }
-      .profileButton{
-        margin-left:auto;
-        width:44px;
-        height:44px;
-        flex-basis:44px;
+      .topbar>.tabs .tab::after{
+        content:"" !important;
+        display:block !important;
+        position:absolute;
+        left:0;
+        right:0;
+        bottom:3px;
+        height:2px;
+        border-radius:999px;
+        background:currentColor;
+        opacity:0;
+        transform:scaleX(.35);
+        transition:opacity .18s var(--ease),transform .18s var(--ease);
+      }
+      .topbar>.tabs .tab:hover{
+        background:transparent;
+        color:var(--accent-dark);
+      }
+      .topbar>.tabs .tab.active{
+        background:transparent;
+        color:var(--accent-dark);
+      }
+      .topbar>.tabs .tab:hover::after,
+      .topbar>.tabs .tab.active::after{
+        opacity:1;
+        transform:scaleX(1);
       }
       .tabHero{
         min-height:clamp(286px,23vw,340px);
@@ -1037,7 +1048,7 @@
       .tabHeroActions{display:none}
       .tabHero + .filterBar{
         display:flex;
-        align-items:center;
+        align-items:flex-start;
         justify-content:flex-start;
         gap:14px;
         margin-top:-25px;
@@ -1045,12 +1056,13 @@
       }
       .tabHero + .filterBar .filters,
       .tabHero + .filterBar .agendaSearchFilters{
-        flex:0 1 min(850px,calc(100% - 150px));
-        width:min(850px,calc(100% - 150px));
+        flex:1 1 auto;
+        width:auto;
+        min-width:0;
       }
       #tab-weken .tabHero + .filterBar .agendaSearchFilters{
-        flex-basis:min(930px,calc(100% - 150px));
-        width:min(930px,calc(100% - 150px));
+        flex:1 1 auto;
+        width:auto;
       }
       .tabHero + .filterBar .filterSearch input,
       .tabHero + .filterBar .filterToggle,
@@ -1066,7 +1078,7 @@
         left:0;
         right:0;
         top:auto;
-        width:min(100%,850px);
+        width:100%;
         margin-top:10px;
         grid-template-columns:repeat(4,minmax(0,1fr));
         gap:8px;
@@ -2191,17 +2203,10 @@
     })();
   </script>
   <header class="topbar">
-    <a class="topbarBrand" href="#" aria-label="Inspiratiebank home">
-      <img class="topbarBrandMark" src="favicon.svg" alt="">
-      <span class="topbarBrandText">Inspiratiebank</span>
-    </a>
     <nav class="tabs" role="navigation" aria-label="Hoofdnavigatie">
       <button class="tab active" data-tab="inspiratie" type="button" aria-selected="true">Inspiratiebank</button>
       <button class="tab" data-tab="weken" type="button">UIT-agenda</button>
     </nav>
-    <button class="profileButton" type="button" aria-label="Profiel (binnenkort)" title="Profiel">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.25"></circle><path d="M5.5 20c1-4 3.3-6 6.5-6s5.5 2 6.5 6"></path></svg>
-    </button>
   </header>
 
   <main class="shell">
