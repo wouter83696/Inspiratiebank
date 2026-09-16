@@ -2057,7 +2057,13 @@
     }
     #ideaCards .ideaImageFrame{
       background:#f7f4ee;
-      border-color:rgba(64,45,20,.09);
+      margin:-18px -18px 10px;
+      border:0;
+      border-radius:calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+      box-shadow:none;
+    }
+    #ideaCards .ideaImageFrame img{
+      border-radius:inherit;
     }
     #ideaCards .ideaThemeCard h3{
       font-weight:600;
@@ -2144,6 +2150,10 @@
     }
     @media (max-width:640px){
       :root{--mobile-search-row-height:46px;--mobile-filter-button-size:54px;--mobile-view-button-size:30px;--mobile-view-switch-width:104px;--mobile-search-with-view-width:calc(100vw - 146px)}
+      #ideaCards .ideaImageFrame{
+        margin:-13px -14px 10px;
+        border-radius:17px 17px 0 0;
+      }
       .tabHero,
       .agendaHero{
         min-height:clamp(350px,58svh,390px) !important;
