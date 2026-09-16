@@ -2351,12 +2351,17 @@
       border-radius:inherit;
     }
     #ideaCards .ideaThemeCard h3{
+      display:flex;
+      align-items:center;
+      gap:9px;
       order:2;
       margin:0;
       font-weight:600;
       font-size:1rem;
       line-height:1.24;
     }
+    #ideaCards .ideaThemeCard h3 .domainIcon{width:30px;height:30px;margin:0;flex:0 0 30px;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
+    #ideaCards .ideaThemeCard h3 .domainIcon svg{width:15px;height:15px}
     #ideaCards .cardThemePill{
       position:relative;
       z-index:2;
@@ -5839,7 +5844,7 @@
       themeClass:domainThemeClass(item.domain), hasImage:Boolean(image),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       image:image ? ideaImageMarkup(image) : '',
-      themePill:categoryPill(item.domain), title:escapeHtml(item.title),
+      title:`<span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span class="ideaTitleText">${escapeHtml(item.title)}</span>`,
       pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
       meta:cardMetaLine(item, {compact:true}), description:escapeHtml(fitText), practical:'',
       website:item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : '',
