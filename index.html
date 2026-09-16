@@ -15,8 +15,9 @@
       .desktopStickyControls{
         display:block;position:sticky;top:0;z-index:25;
         margin-top:-25px;padding:10px 0 8px;
-        background:#F8F5EB;
+        background:transparent;
       }
+      .desktopStickyControls.isStuck{background:#F8F5EB}
       #tab-inspiratie .desktopStickyControls > .filterBar{margin-top:0;margin-bottom:8px}
       .desktopStickyControls .inspirationDesktopFilterRow{margin-bottom:0}
     }
@@ -6892,7 +6893,27 @@
 	    renderAgenda();
 	    refreshCollections();
 	  }
+  function setupStickyControlsBackground(){
+    const controls = document.querySelector('.desktopStickyControls');
+    if(!controls) return;
+    const desktop = window.matchMedia('(min-width:981px)');
+    let pending = false;
+    const update = () => {
+      pending = false;
+      controls.classList.toggle('isStuck', desktop.matches && controls.getClientRects().length > 0 && controls.getBoundingClientRect().top <= 0);
+    };
+    const schedule = () => {
+      if(pending) return;
+      pending = true;
+      requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', schedule, {passive:true});
+    window.addEventListener('resize', schedule);
+    new ResizeObserver(schedule).observe(controls);
+    update();
+  }
 	  async function init(){
+        setupStickyControlsBackground();
 	    setupTopTabNavigation();
 	    setupDesktopSidebar();
 	    setupIdeaFilterSheet();
