@@ -2101,7 +2101,7 @@
       height:15px;
     }
     #ideaCards .cardLabels{
-      gap:12px;
+      gap:14px;
       min-height:24px;
       font-size:.8rem;
     }
@@ -2136,12 +2136,14 @@
       border-radius:0;
       background:transparent;
       font-size:.78rem;
+      gap:14px;
     }
     #ideaCards .metaIcon,
     #ideaCards .stimulusIcon{
       width:14px;
       height:14px;
       flex-basis:14px;
+      color:#356F7B;
     }
     #ideaCards .metaIcon svg,
     #ideaCards .stimulusIcon svg{
@@ -5226,18 +5228,16 @@
     const locationLabel = normalizeIdeaLocation(item.locationType);
     const distanceLabel = personalDistanceLabel(item);
     const costLabel = normalizeIdeaCost(item.cost);
-    const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
     const image = approvedIdeaImage(item);
     const fitText = audienceText(item.fit);
-    const practicalText = audienceText(item.materials || 'Nog bepalen');
     return IdeaViewShared.renderCard({
       themeClass:domainThemeClass(item.domain), hasImage:Boolean(image),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       image:image ? ideaImageMarkup(image) : '',
       themePill:categoryPill(item.domain), title:escapeHtml(item.title),
-      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
-      meta:cardMetaLine(item), description:escapeHtml(fitText), practical:escapeHtml(practicalText),
+      pills:`${placePills} ${costPill(costLabel)} ${cardMetaLine(item)}`,
+      meta:'', description:escapeHtml(fitText), practical:'',
       website:item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : '',
       actions:reportMenu('inspiratiebank', ideaDomKey(item), item.title)
     });
