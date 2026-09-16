@@ -1168,17 +1168,18 @@
         grid-row:1;
         justify-self:start;
         align-self:center;
-        width:42px;
-        min-width:42px;
-        max-width:42px;
-        height:42px;
-        min-height:42px;
-        border:1px solid rgba(255,255,255,.62);
-        border-radius:14px;
-        background:rgba(255,255,255,.50);
-        box-shadow:0 5px 14px rgba(20,38,42,.035);
-        transform:translateX(-18px);
+        width:38px;
+        min-width:38px;
+        max-width:38px;
+        height:38px;
+        min-height:38px;
+        border:1px solid rgba(255,255,255,.86);
+        border-radius:13px;
+        background:rgba(255,255,255,.76);
+        box-shadow:0 5px 14px rgba(20,38,42,.045);
+        transform:translateX(-4px);
       }
+      #ideaFilters .filterToggle svg{width:16px;height:16px}
       #ideaFilters .mobileViewBar{display:none}
       #agendaFilters .filterSearch{grid-column:1 / 13}
       #agendaFilters .filterToggle{
@@ -1223,16 +1224,22 @@
         margin:0;
       }
       .desktopViewBar .viewSwitch{
-        min-height:40px;
-        border-radius:16px;
-        padding:3px;
+        min-height:34px;
+        border-radius:14px;
+        padding:2px;
         background:rgba(255,253,249,.62);
       }
       #ideaFilters .filterSearch input{background:rgba(255,253,249,.62)}
       .desktopViewBar .viewBtn{
-        width:34px;
-        height:34px;
+        width:29px;
+        height:29px;
+        border-radius:11px;
+        color:rgba(49,95,107,.30);
       }
+      .desktopViewBar .viewBtn:hover{color:rgba(49,95,107,.62)}
+      .desktopViewBar .viewBtn.active{color:rgba(31,101,114,.88);background:rgba(168,225,221,.25)}
+      .desktopViewBar .viewIcon,
+      .desktopViewBar .viewIcon svg{width:14px;height:14px}
       .locationLegendItem,
       .locationLegendItem.locationSet{
         padding:8px 14px;
