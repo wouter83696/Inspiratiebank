@@ -2101,11 +2101,11 @@
       height:15px;
     }
     #ideaCards .cardLabels{
-      gap:9px;
+      gap:14px;
       min-height:24px;
       flex-wrap:nowrap;
       overflow:visible;
-      font-size:.74rem;
+      font-size:.78rem;
     }
     #ideaCards .cardLabels .pill{
       min-width:0;
@@ -2118,11 +2118,11 @@
       background:transparent;
       box-shadow:none;
       color:rgba(49,95,107,.78);
-      font-size:.74rem;
+      font-size:.78rem;
     }
     #ideaCards .cardLabels .costPill{
       line-height:1;
-      transform:translateY(-1px);
+      transform:none;
     }
     #ideaCards .cardLabels .locationPill:not(.homeLocationPill):not(.onlineLocationPill)::before{
       content:"";
@@ -2143,7 +2143,7 @@
       border-radius:0;
       background:transparent;
       font-size:.78rem;
-      gap:9px;
+      gap:14px;
       white-space:nowrap;
     }
     #ideaCards .metaIcon,
@@ -5248,8 +5248,8 @@
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       image:image ? ideaImageMarkup(image) : '',
       themePill:categoryPill(item.domain), title:escapeHtml(item.title),
-      pills:`${placePills} ${costPill(costLabel)} ${cardMetaLine(item, {compact:true})} ${stimulusPill(stimulusLabel)}`,
-      meta:'', description:escapeHtml(fitText), practical:'',
+      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
+      meta:cardMetaLine(item, {compact:true}), description:escapeHtml(fitText), practical:'',
       website:item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : '',
       actions:reportMenu('inspiratiebank', ideaDomKey(item), item.title)
     });
