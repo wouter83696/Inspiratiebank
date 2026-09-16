@@ -2101,9 +2101,11 @@
       height:15px;
     }
     #ideaCards .cardLabels{
-      gap:14px;
+      gap:9px;
       min-height:24px;
-      font-size:.8rem;
+      flex-wrap:nowrap;
+      overflow:visible;
+      font-size:.74rem;
     }
     #ideaCards .cardLabels .pill{
       min-width:0;
@@ -2116,6 +2118,11 @@
       background:transparent;
       box-shadow:none;
       color:rgba(49,95,107,.78);
+      font-size:.74rem;
+    }
+    #ideaCards .cardLabels .costPill{
+      line-height:1;
+      transform:translateY(-1px);
     }
     #ideaCards .cardLabels .locationPill:not(.homeLocationPill):not(.onlineLocationPill)::before{
       content:"";
@@ -2136,7 +2143,8 @@
       border-radius:0;
       background:transparent;
       font-size:.78rem;
-      gap:14px;
+      gap:9px;
+      white-space:nowrap;
     }
     #ideaCards .metaIcon,
     #ideaCards .stimulusIcon{
@@ -2155,6 +2163,9 @@
       #ideaCards .ideaImageFrame{
         margin:-13px -14px 10px;
         border-radius:17px 17px 0 0;
+      }
+      #ideaCards .cardLabels{
+        flex-wrap:wrap;
       }
       .tabHero,
       .agendaHero{
@@ -3601,11 +3612,11 @@
     }).join('');
     return `<span class="pill stimulusPill ${kind}" title="Prikkelbelasting: ${escapeHtml(label)}" aria-label="Prikkelbelasting: ${escapeHtml(label)}"><span class="stimulusIcon" aria-hidden="true"><svg viewBox="0 0 22 18">${paths}</svg></span><span class="stimulusPillText">${escapeHtml(label)}</span></span>`;
   }
-  function cardMetaLine(item={}){
+  function cardMetaLine(item={}, {compact=false}={}){
     const groupValue = String(item.group || 'Op maat').trim();
     const durationValue = String(item.duration || 'Op maat').trim();
-    const groupLabel = normalize(groupValue) === 'op maat' ? 'Groep flexibel' : groupValue;
-    const durationLabel = normalize(durationValue) === 'op maat' ? 'Duur flexibel' : durationValue;
+    const groupLabel = normalize(groupValue) === 'op maat' ? (compact ? 'Flexibel' : 'Groep flexibel') : groupValue;
+    const durationLabel = normalize(durationValue) === 'op maat' ? (compact ? 'Flexibel' : 'Duur flexibel') : durationValue;
     return `<span class="cardMetaLine"><span class="cardMetaPart" title="Groepsgrootte: ${escapeHtml(groupValue)}" aria-label="Groepsgrootte: ${escapeHtml(groupValue)}"><span class="metaIcon" aria-hidden="true">${ICONS.people}</span>${escapeHtml(groupLabel)}</span><span class="cardMetaPart" title="Duur: ${escapeHtml(durationValue)}" aria-label="Duur: ${escapeHtml(durationValue)}"><span class="metaIcon" aria-hidden="true">${ICONS.clock}</span>${escapeHtml(durationLabel)}</span></span>`;
   }
   function distanceLabelForKm(km, context='inspiration'){
@@ -5228,6 +5239,7 @@
     const locationLabel = normalizeIdeaLocation(item.locationType);
     const distanceLabel = personalDistanceLabel(item);
     const costLabel = normalizeIdeaCost(item.cost);
+    const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
     const image = approvedIdeaImage(item);
     const fitText = audienceText(item.fit);
@@ -5236,7 +5248,7 @@
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       image:image ? ideaImageMarkup(image) : '',
       themePill:categoryPill(item.domain), title:escapeHtml(item.title),
-      pills:`${placePills} ${costPill(costLabel)} ${cardMetaLine(item)}`,
+      pills:`${placePills} ${costPill(costLabel)} ${cardMetaLine(item, {compact:true})} ${stimulusPill(stimulusLabel)}`,
       meta:'', description:escapeHtml(fitText), practical:'',
       website:item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : '',
       actions:reportMenu('inspiratiebank', ideaDomKey(item), item.title)
