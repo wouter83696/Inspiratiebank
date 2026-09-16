@@ -37,10 +37,7 @@
       if(view.manageFirst) cells.unshift(manageCell);
       else cells.push(manageCell);
     }else{
-      cells.push(
-        {label:'Website', html:`<div class="ideaActions">${view.website || ''}</div>`},
-        {label:'Melden', html:`<div class="ideaReportListAction">${view.actions || ''}</div>`}
-      );
+      cells.push({label:'Website', html:`<div class="ideaActions">${view.website || ''}</div>`});
     }
     return renderRow({...view, cells});
   }
@@ -50,7 +47,6 @@
     const headers = ['Activiteit', 'Badges', 'Praktisch', 'Website'];
     if(admin && view.manageFirst) headers.unshift('Beheer');
     else if(admin) headers.push('Beheer');
-    else headers.push('Melden');
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 

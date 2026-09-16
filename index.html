@@ -2701,7 +2701,7 @@
     #ideaList .ideaListTheme{margin-bottom:10px}
     #ideaList .ideaListTheme .categoryPill{min-height:31px;padding:7px 11px;font-size:.76rem;box-shadow:0 3px 10px rgba(20,38,42,.045)}
     #ideaList .nameWithIcon .ideaTitleText{color:#006780;font-size:1.03rem;font-weight:600;line-height:1.25}
-    #ideaList .ideaListMeta{margin:9px 0 0}
+    #ideaList .ideaListMeta{margin:7px 0 0 38px}
     #ideaList .cardMetaLine{color:#617F99;gap:14px}
     #ideaList .cardMetaLine .metaIcon{color:#00738D}
     #ideaList td:nth-child(3) .small{color:#71869A;line-height:1.45}
@@ -3177,7 +3177,7 @@
   </div>
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20260916-calm-theme-pill-v1"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20260916-list-title-icons-v1"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20260915-week-card-header-v1"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
@@ -5763,12 +5763,11 @@
     return IdeaViewShared.renderDesktopRow({
       themeClass:domainThemeClass(item.domain),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
-      title:`<div class="ideaListTheme">${categoryPill(item.domain)}</div><div class="nameWithIcon"><span class="ideaTitleText">${escapeHtml(item.title)}</span></div>`,
+      title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
       meta:cardMetaLine(item, {compact:true}),
       pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
       practical:escapeHtml(audienceText(item.materials || item.fit || '')),
-      website:sourceLink,
-      actions:reportMenu('inspiratiebank', ideaDomKey(item), item.title)
+      website:sourceLink
     });
   }
 
@@ -5862,7 +5861,7 @@
     </article>`;
   }
   function surpriseIdeaRow(){
-    return `<tr class="ideaSurpriseRow"><td colspan="5">${surpriseIdeaCard()}</td></tr>`;
+    return `<tr class="ideaSurpriseRow"><td colspan="4">${surpriseIdeaCard()}</td></tr>`;
   }
   function withSurpriseMarkup(items, renderer, surpriseRenderer, insertAfter=2){
     if(!items.length) return '';
