@@ -11,6 +11,7 @@
     const footer = `<div class="cardFooter">${view.website || ''}${view.actions || ''}</div>${view.manageActions !== undefined ? `<div class="agendaReviewCardActions ideaAdminCardActions">${view.manageActions || ''}</div>` : ''}`;
     return `<article class="${classes}"${attributes ? ` ${attributes}` : ''}>
       ${view.image || ''}
+      ${view.themePill ? `<div class="cardThemePill">${view.themePill}</div>` : ''}
       <h3>${view.title || ''}</h3>
       <div class="${pillsClass}">${pills}</div>
       ${view.meta || ''}${source}${body}${practical}${footer}

@@ -2062,9 +2062,55 @@
     #ideaCards .ideaThemeCard h3{
       font-weight:600;
     }
+    #ideaCards .cardThemePill{
+      position:relative;
+      z-index:2;
+      align-self:flex-start;
+      margin:0 0 1px;
+    }
+    #ideaCards .hasImage .cardThemePill{
+      margin-top:-34px;
+      margin-bottom:5px;
+    }
+    #ideaCards .cardThemePill .categoryPill{
+      min-height:34px;
+      padding:8px 12px;
+      border-color:rgba(255,255,255,.74);
+      box-shadow:0 7px 18px rgba(20,38,42,.08);
+      font-size:.8rem;
+    }
+    #ideaCards .cardThemePill .domainIcon{
+      width:17px;
+      height:17px;
+    }
+    #ideaCards .cardThemePill .domainIcon svg{
+      width:15px;
+      height:15px;
+    }
+    #ideaCards .cardLabels{
+      gap:12px;
+      min-height:24px;
+    }
+    #ideaCards .cardLabels .pill{
+      min-width:0;
+      width:auto;
+      height:auto;
+      min-height:0;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      box-shadow:none;
+      color:rgba(49,95,107,.78);
+    }
     #ideaCards .cardMetaLine{
-      background:rgba(247,248,246,.88);
-      border-color:rgba(64,45,20,.055);
+      width:auto;
+      align-self:flex-start;
+      margin:0;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
     }
     @media (max-width:640px){
       :root{--mobile-search-row-height:46px;--mobile-filter-button-size:54px;--mobile-view-button-size:30px;--mobile-view-switch-width:104px;--mobile-search-with-view-width:calc(100vw - 146px)}
@@ -2582,7 +2628,7 @@
   </div>
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20260915-compact-practical-v1"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20260916-calm-theme-pill-v1"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20260915-week-card-header-v1"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
@@ -5148,7 +5194,8 @@
     return IdeaViewShared.renderCard({
       themeClass:domainThemeClass(item.domain), hasImage:Boolean(image),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
-      image:image ? ideaImageMarkup(image) : '', title:titleWithIcon(item.title, item.domain),
+      image:image ? ideaImageMarkup(image) : '',
+      themePill:categoryPill(item.domain), title:escapeHtml(item.title),
       pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
       meta:cardMetaLine(item), description:escapeHtml(fitText), practical:escapeHtml(practicalText),
       website:item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : '',
