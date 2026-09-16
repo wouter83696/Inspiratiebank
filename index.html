@@ -612,7 +612,6 @@
     }
     .card .pill:hover{box-shadow:none;transform:none}
     .agendaLegendItem:hover{box-shadow:0 0 0 3px color-mix(in srgb,var(--theme-line) 34%,transparent);transform:translateY(-1px)}
-    .ideaThemeCard .pill{padding:5px 8px}
     .cardFooter{margin-top:auto;display:flex;gap:8px;flex-wrap:nowrap;align-items:center;min-width:0}
     .cardFooter .siteButton{
       flex:0 1 auto;justify-content:flex-start;min-width:0;max-width:calc(100% - 42px);overflow:hidden
@@ -2373,25 +2372,25 @@
       box-shadow:0 6px 16px rgba(20,38,42,.07);
       font-size:.76rem;
     }
-    #ideaCards .cardThemePill .categoryPill.themeCreative{background:#FCE7F0}
-    #ideaCards .cardThemePill .categoryPill.themeCulture{background:#ECEBFA}
-    #ideaCards .cardThemePill .categoryPill.themeNature{background:#E5F5EC}
-    #ideaCards .cardThemePill .categoryPill.themeSocial{background:#FFF6D9}
-    #ideaCards .cardThemePill .categoryPill.themeSport{background:#E4F4F8}
-    #ideaCards .cardThemePill .categoryPill.themeAction{background:#FDEDDD}
-    #ideaCards .cardThemePill .categoryPill.themeDefault{background:#E7F5ED}
+    #ideaCards .cardThemePill .categoryPill.themeCreative{background:rgba(252,231,240,.93)}
+    #ideaCards .cardThemePill .categoryPill.themeCulture{background:rgba(236,235,250,.93)}
+    #ideaCards .cardThemePill .categoryPill.themeNature{background:rgba(229,245,236,.93)}
+    #ideaCards .cardThemePill .categoryPill.themeSocial{background:rgba(255,246,217,.93)}
+    #ideaCards .cardThemePill .categoryPill.themeSport{background:rgba(228,244,248,.93)}
+    #ideaCards .cardThemePill .categoryPill.themeAction{background:rgba(253,237,221,.93)}
+    #ideaCards .cardThemePill .categoryPill.themeDefault{background:rgba(231,245,237,.93)}
     #ideaCards .hasImage .cardThemePill .categoryPill{
       border-color:rgba(255,255,255,.68);
       -webkit-backdrop-filter:blur(7px);
       backdrop-filter:blur(7px);
     }
-    #ideaCards .hasImage .cardThemePill .categoryPill.themeCreative{background:rgba(252,231,240,.88)}
-    #ideaCards .hasImage .cardThemePill .categoryPill.themeCulture{background:rgba(236,235,250,.88)}
-    #ideaCards .hasImage .cardThemePill .categoryPill.themeNature{background:rgba(229,245,236,.88)}
-    #ideaCards .hasImage .cardThemePill .categoryPill.themeSocial{background:rgba(255,246,217,.88)}
-    #ideaCards .hasImage .cardThemePill .categoryPill.themeSport{background:rgba(228,244,248,.88)}
-    #ideaCards .hasImage .cardThemePill .categoryPill.themeAction{background:rgba(253,237,221,.88)}
-    #ideaCards .hasImage .cardThemePill .categoryPill.themeDefault{background:rgba(231,245,237,.88)}
+    #ideaCards .hasImage .cardThemePill .categoryPill.themeCreative{background:rgba(252,231,240,.93)}
+    #ideaCards .hasImage .cardThemePill .categoryPill.themeCulture{background:rgba(236,235,250,.93)}
+    #ideaCards .hasImage .cardThemePill .categoryPill.themeNature{background:rgba(229,245,236,.93)}
+    #ideaCards .hasImage .cardThemePill .categoryPill.themeSocial{background:rgba(255,246,217,.93)}
+    #ideaCards .hasImage .cardThemePill .categoryPill.themeSport{background:rgba(228,244,248,.93)}
+    #ideaCards .hasImage .cardThemePill .categoryPill.themeAction{background:rgba(253,237,221,.93)}
+    #ideaCards .hasImage .cardThemePill .categoryPill.themeDefault{background:rgba(231,245,237,.93)}
     #ideaCards .cardThemePill .domainIcon{
       width:17px;
       height:17px;
@@ -2414,32 +2413,6 @@
       flex-wrap:wrap;
       overflow:visible;
       font-size:.78rem;
-    }
-    #ideaCards .cardLabels .pill{
-      min-width:0;
-      width:auto;
-      height:auto;
-      min-height:27px;
-      padding:6px 9px;
-      border:1px solid rgba(79,142,158,.07);
-      border-radius:999px;
-      box-shadow:none;
-      color:rgba(49,95,107,.78);
-      font-size:.75rem;
-    }
-    #ideaCards .cardLabels .costPill{
-      line-height:1;
-      transform:none;
-    }
-    #ideaCards .cardLabels .locationPill:not(.homeLocationPill):not(.onlineLocationPill)::before{
-      content:"";
-      flex:0 0 14px;
-      width:14px;
-      height:14px;
-      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%233b6470' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E") center/contain no-repeat;
-    }
-    #ideaCards .cardLabels .stimulusPillText{
-      display:none;
     }
     #ideaCards .cardMetaLine{
       order:5;
@@ -2675,7 +2648,7 @@
         background:#FFFEFC;box-shadow:0 8px 24px rgba(64,45,20,.035);
       }
       #ideaCards .ideaImageFrame{
-        flex-shrink:0;aspect-ratio:2 / 1;margin:0 -8px 2px;border-radius:13px;
+        flex-shrink:0;aspect-ratio:16 / 9;margin:0 -10px 2px;border-radius:13px;
       }
       #ideaCards .hasImage .cardThemePill{top:23px;left:21px}
       #ideaCards .cardThemePill .categoryPill{
@@ -2684,7 +2657,6 @@
       }
       #ideaCards .ideaThemeCard h3{font-size:1.08rem;line-height:1.25;color:#006780}
       #ideaCards .cardLabels{gap:7px;min-height:31px}
-      #ideaCards .cardLabels .pill{min-height:31px;padding:7px 10px;font-size:.8rem;border:0}
       #ideaCards .ideaThemeCard > p:not(.fine){font-size:.92rem;line-height:1.45;color:#71869A;-webkit-line-clamp:3}
       #ideaCards .cardMetaLine{font-size:.83rem;gap:18px;margin-top:auto;padding-top:12px;color:#617F99}
       #ideaCards .cardMetaLine .metaIcon{width:18px;height:18px;color:#00738D}
