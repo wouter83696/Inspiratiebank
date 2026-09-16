@@ -976,12 +976,12 @@
     @media (min-width:981px){
       .desktopMenuButton{
         display:inline-flex;align-items:center;justify-content:center;flex:0 0 34px;width:34px;height:34px;
-        margin:0 14px 20px 0;padding:0;border:1px solid rgba(255,255,255,.72);border-radius:12px;
-        background:rgba(255,253,249,.66);box-shadow:0 6px 18px rgba(20,38,42,.04);backdrop-filter:blur(12px);
-        color:var(--accent-dark);cursor:pointer
+        position:relative;z-index:2;margin:0 14px 0 0;padding:0;border:0;border-radius:8px;
+        background:transparent;box-shadow:none;backdrop-filter:none;
+        color:var(--accent-dark);pointer-events:auto;cursor:pointer
       }
-      .desktopMenuButton:hover{background:rgba(255,253,249,.9)}
-      .desktopMenuButton svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+      .desktopMenuButton:hover{background:rgba(168,225,221,.14)}
+      .desktopMenuButton svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
       .desktopSidebarLayer{position:fixed;inset:0;z-index:120;display:block;pointer-events:none;visibility:hidden}
       .desktopSidebarLayer.isOpen{pointer-events:auto;visibility:visible}
       .desktopSidebarBackdrop{position:absolute;inset:0;border:0;background:rgba(26,46,51,.18);opacity:0;transition:opacity .22s var(--ease);cursor:default}
@@ -1205,10 +1205,10 @@
         transform:none;
       }
       #ideaFilters .desktopLocationBar .locationLegendItem{
-        height:48px;
-        min-height:48px;
+        height:42px;
+        min-height:42px;
         border:1px solid rgba(255,255,255,.78);
-        border-radius:17px;
+        border-radius:15px;
         background:rgba(255,253,249,.62);
         box-shadow:0 8px 20px rgba(20,38,42,.04);
         backdrop-filter:blur(18px);
@@ -1224,14 +1224,14 @@
         grid-column:3;
         grid-row:1;
         justify-self:start;
-        align-self:stretch;
-        width:48px;
-        min-width:48px;
-        max-width:48px;
-        height:48px;
-        min-height:48px;
+        align-self:center;
+        width:42px;
+        min-width:42px;
+        max-width:42px;
+        height:42px;
+        min-height:42px;
         border:1px solid rgba(255,255,255,.78);
-        border-radius:17px;
+        border-radius:15px;
         background:rgba(255,253,249,.62);
         box-shadow:0 8px 20px rgba(20,38,42,.04);
         backdrop-filter:blur(18px);
