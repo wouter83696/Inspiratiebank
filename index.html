@@ -2784,9 +2784,13 @@
       height:14px;
       background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23405F5D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E") center/contain no-repeat;
     }
-    /* In de lijst volgt de badge de inhoud in plaats van de brede tabelkolom. */
-    #ideaList .cardPillGroup{width:max-content;max-width:100%}
-    #ideaList .cardPillGroup .pill{flex:0 0 auto}
+    /* In de lijst eindigt de badge direct na het laatste segment. Een inline-grid
+       voorkomt dat de flexcontainer alsnog de volledige tabelkolom inneemt. */
+    #ideaList .cardPillGroup{
+      display:inline-grid;grid-auto-flow:column;grid-auto-columns:max-content;
+      justify-content:start;width:fit-content !important;max-width:100%
+    }
+    #ideaList .cardPillGroup .pill{width:auto;min-width:0;flex:none}
     .ideaMapResultPills .pill{min-height:24px;padding:4px 8px;font-size:.66rem}
     .ideaMapResultPills .stimulusPill{width:auto;min-width:28px;height:24px;min-height:24px;padding:4px 8px}
     .ideaMapResultInfo{
@@ -2859,8 +2863,11 @@
     .ongoingTitleCell .name,
     .ongoingTitleCell .ideaTitleText{color:#006780;font-weight:500;line-height:1.25}
     .ongoingFitCell .small{color:#74716E}
-    .ongoingBadgesCell .cardPillGroup{width:max-content;max-width:100%;gap:0;margin:0}
-    .ongoingBadgesCell .cardPillGroup .pill{flex:0 0 auto}
+    .ongoingBadgesCell .cardPillGroup{
+      display:inline-grid;grid-auto-flow:column;grid-auto-columns:max-content;
+      justify-content:start;width:fit-content !important;max-width:100%;gap:0;margin:0
+    }
+    .ongoingBadgesCell .cardPillGroup .pill{width:auto;min-width:0;flex:none}
     .ongoingAccordion .siteButton{
       border-color:rgba(112,94,63,.14);background:#F7F1E7;
       box-shadow:none;color:#00738D !important;
