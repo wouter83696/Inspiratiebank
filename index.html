@@ -2097,6 +2097,7 @@
     #ideaCards .cardLabels{
       gap:12px;
       min-height:24px;
+      font-size:.8rem;
     }
     #ideaCards .cardLabels .pill{
       min-width:0;
@@ -2120,6 +2121,18 @@
     #ideaCards .cardLabels .stimulusPillText{
       display:inline;
     }
+    #ideaCards .cardLabels .costIcon{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 14px;
+      width:14px;
+      height:14px;
+      color:var(--accent-dark);
+      font-size:.8rem;
+      font-weight:700;
+      line-height:1;
+    }
     #ideaCards .cardMetaLine{
       width:auto;
       align-self:flex-start;
@@ -2128,6 +2141,18 @@
       border:0;
       border-radius:0;
       background:transparent;
+      font-size:.78rem;
+    }
+    #ideaCards .metaIcon,
+    #ideaCards .stimulusIcon{
+      width:14px;
+      height:14px;
+      flex-basis:14px;
+    }
+    #ideaCards .metaIcon svg,
+    #ideaCards .stimulusIcon svg{
+      width:14px;
+      height:14px;
     }
     @media (max-width:640px){
       :root{--mobile-search-row-height:46px;--mobile-filter-button-size:54px;--mobile-view-button-size:30px;--mobile-view-switch-width:104px;--mobile-search-with-view-width:calc(100vw - 146px)}
@@ -3292,7 +3317,7 @@
   function costPill(value){
     const label = normalizeIdeaCost(value);
     const kind = label === 'Gratis' ? 'costFree' : label === '€€€' ? 'costHigh' : label === '€€' ? 'costMid' : 'costLow';
-    return `<span class="pill costPill ${kind}" title="Kosten: ${escapeHtml(label)}" aria-label="Kosten: ${escapeHtml(label)}">${escapeHtml(label)}</span>`;
+    return `<span class="pill costPill ${kind}" title="Kosten: ${escapeHtml(label)}" aria-label="Kosten: ${escapeHtml(label)}"><span class="costIcon" aria-hidden="true">€</span>${escapeHtml(label)}</span>`;
   }
   function normalizeIdeaStimulus(value=''){
     const v = normalize(value);
