@@ -2689,7 +2689,15 @@
       #ideaCards .cardMetaLine{font-size:.83rem;gap:18px;margin-top:auto;padding-top:12px;color:#617F99}
       #ideaCards .cardMetaLine .metaIcon{width:18px;height:18px;color:#00738D}
       #ideaCards .cardFooter{right:14px;bottom:13px}
-      #ideaCards .cardFooter .siteButton{width:44px;min-width:44px;height:44px;color:#00738D !important}
+      #ideaCards .cardFooter .siteButton{
+        display:flex;align-items:center;justify-content:center;gap:0;
+        width:34px;min-width:34px;height:34px;min-height:34px;padding:0;
+        color:#00738D !important;box-shadow:0 3px 10px rgba(20,38,42,.04);
+      }
+      #ideaCards .cardFooter .siteButton::after{
+        content:"";display:block;width:17px;height:17px;flex:0 0 17px;margin:0;transform:none;opacity:1;
+        background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300738D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E") center/contain no-repeat;
+      }
     }
   </style>
 </head>
