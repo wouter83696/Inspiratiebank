@@ -1550,7 +1550,7 @@
       position:relative;
       width:100%;display:flex;flex-direction:column;gap:7px;text-align:left;align-items:stretch;
       padding:12px 13px;border-radius:16px;border:1px solid #EFE9DE;
-      background:#fff;cursor:pointer;color:inherit;box-shadow:0 6px 18px rgba(64,45,20,.035);
+      background:#fffdf8;cursor:pointer;color:inherit;box-shadow:0 6px 18px rgba(92,65,33,.04);
       overflow:hidden;min-height:0;height:auto;flex:0 0 auto;
       transition:background .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease)
     }
@@ -1558,8 +1558,8 @@
       display:grid;grid-template-columns:112px minmax(0,1fr);align-items:center;column-gap:12px;row-gap:0;
       min-height:0;padding:8px;overflow:hidden
     }
-    .ideaMapResult:hover,.ideaMapResult.active{background:#fffefb;border-color:var(--theme-line,rgba(79,142,158,.18));transform:translateY(-1px)}
-    .ideaMapResult.active{box-shadow:0 0 0 2px var(--theme-line,rgba(79,142,158,.18)),0 10px 24px rgba(20,38,42,.08)}
+    .ideaMapResult:hover,.ideaMapResult.active{background:#fffaf4;border-color:var(--theme-line,rgba(79,142,158,.18));transform:translateY(-1px)}
+    .ideaMapResult.active{box-shadow:0 0 0 2px var(--theme-line,rgba(79,142,158,.18)),0 10px 24px rgba(92,65,33,.075)}
     .ideaMapResultTitle{display:flex;align-items:center;gap:8px;min-width:0}
     .ideaMapResult .domainIcon{width:30px;height:30px;margin:0;align-self:center;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
     .ideaMapResult .domainIcon svg{width:15px;height:15px}
@@ -1575,7 +1575,7 @@
     .ideaMapResultPills .stimulusIcon,.ideaMapResultPills .stimulusIcon svg{width:12px;height:12px}
     .ideaMapResultMeta{
       display:flex;align-items:center;gap:7px;flex:0 1 auto;min-width:0;max-width:100%;margin-top:0;padding:3px 0;
-      color:#617F99;
+      color:#697472;
       font-size:.65rem;line-height:1.14;white-space:nowrap;overflow:hidden
     }
     .ideaMapResultMeta strong{display:inline;color:var(--accent-dark);font-size:inherit;line-height:inherit;font-weight:600}
@@ -2321,7 +2321,7 @@
     }
     #ideaCards .ideaThemeCard,
     #ideaCards .ideaThemeCard:hover{
-      background:#fffdf9;
+      background:#fffdf8;
       border-color:rgba(64,45,20,.075);
     }
     #ideaCards .ideaThemeCard{
@@ -2330,11 +2330,11 @@
       padding:13px 14px 14px;
       min-height:390px;
       border-radius:16px;
-      box-shadow:0 9px 24px rgba(64,45,20,.04);
+      box-shadow:0 9px 24px rgba(92,65,33,.045);
     }
     #ideaCards .ideaThemeCard:hover{
       transform:translateY(-2px);
-      box-shadow:0 14px 30px rgba(64,45,20,.065);
+      box-shadow:0 14px 30px rgba(92,65,33,.065);
     }
     #ideaCards .ideaImageFrame{
       background:#f7f4ee;
@@ -2453,7 +2453,7 @@
       -webkit-line-clamp:3;
       font-size:.86rem;
       line-height:1.45;
-      color:rgba(49,67,79,.76);
+      color:rgba(76,75,72,.76);
     }
     #ideaCards .cardFooter{
       position:absolute;
@@ -2664,7 +2664,7 @@
       #ideaCards .ideaThemeCard{
         padding:12px 20px 20px;gap:10px;min-height:410px;
         border:1px solid rgba(64,45,20,.035);border-radius:18px;
-        background:#FFFEFC;box-shadow:0 8px 24px rgba(64,45,20,.035);
+        background:#fffdf8;box-shadow:0 8px 24px rgba(92,65,33,.04);
       }
       #ideaCards .ideaImageFrame{
         flex-shrink:0;aspect-ratio:16 / 9;margin:-6px -14px 2px;border-radius:13px;
@@ -2677,9 +2677,9 @@
       }
       #ideaCards .ideaThemeCard h3{font-size:1.08rem;line-height:1.25;color:#006780}
       #ideaCards .cardLabels{gap:7px;min-height:31px}
-      #ideaCards .ideaThemeCard > p:not(.fine){font-size:.92rem;line-height:1.45;color:#71869A;-webkit-line-clamp:3}
-      #ideaCards .cardMetaLine{font-size:.83rem;gap:18px;margin-top:auto;padding-top:12px;color:#617F99}
-      #ideaCards .cardMetaLine .metaIcon{width:18px;height:18px;color:#00738D}
+      #ideaCards .ideaThemeCard > p:not(.fine){font-size:.92rem;line-height:1.45;color:#74716E;-webkit-line-clamp:3}
+      #ideaCards .cardMetaLine{font-size:.83rem;gap:18px;margin-top:auto;padding-top:12px;color:#697472}
+      #ideaCards .cardMetaLine .metaIcon{width:18px;height:18px;color:#55777A}
       #ideaCards .cardFooter{right:14px;bottom:13px}
       #ideaCards .cardFooter .siteButton{
         display:flex;align-items:center;justify-content:center;gap:0;
@@ -2693,21 +2693,21 @@
     }
 
     /* Public list uses the same quiet surfaces and typography as the tiles. */
-    #ideaList.sharedIdeaList{border:1px solid rgba(64,45,20,.055);border-radius:18px;background:#FFFEFC;box-shadow:0 8px 24px rgba(64,45,20,.035)}
+    #ideaList.sharedIdeaList{border:1px solid rgba(64,45,20,.055);border-radius:18px;background:#fffdf8;box-shadow:0 8px 24px rgba(92,65,33,.04)}
     #ideaList.sharedIdeaList table{border-collapse:collapse;border-spacing:0}
-    #ideaList.sharedIdeaList th{background:#FFFEFC;border-bottom:1px solid rgba(64,45,20,.06);color:#71869A;padding:13px 16px;font-size:.8rem}
-    #ideaList.sharedIdeaList .ideaThemeRow td{background:#FFFEFC;border-bottom:1px solid rgba(64,45,20,.06);padding:14px 16px;vertical-align:middle}
-    #ideaList.sharedIdeaList .ideaThemeRow:hover td{background:#fffdf8}
+    #ideaList.sharedIdeaList th{background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06);color:#74716E;padding:13px 16px;font-size:.8rem}
+    #ideaList.sharedIdeaList .ideaThemeRow td{background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06);padding:14px 16px;vertical-align:middle}
+    #ideaList.sharedIdeaList .ideaThemeRow:hover td{background:#fffaf4}
     #ideaList .ideaListTheme{margin-bottom:10px}
     #ideaList .ideaListTheme .categoryPill{min-height:31px;padding:7px 11px;font-size:.76rem;box-shadow:0 3px 10px rgba(20,38,42,.045)}
     #ideaList .nameWithIcon .ideaTitleText{color:#006780;font-size:1.03rem;font-weight:500;line-height:1.25}
     #ideaList .ideaListMeta{margin:7px 0 0 38px}
-    #ideaList .cardMetaLine{color:#617F99;gap:14px}
-    #ideaList .cardMetaLine .metaIcon{color:#00738D}
-    #ideaList td:nth-child(3) .small{color:#71869A;line-height:1.45}
+    #ideaList .cardMetaLine{color:#697472;gap:14px}
+    #ideaList .cardMetaLine .metaIcon{color:#55777A}
+    #ideaList td:nth-child(3) .small{color:#74716E;line-height:1.45}
     #ideaList td:nth-child(2) .cardPillGroup{flex-wrap:wrap}
     #ideaList .siteButton.secondary{box-shadow:0 3px 10px rgba(20,38,42,.04);color:#00738D !important}
-    #ideaList .ideaSurpriseRow td{padding:12px 16px;border-bottom:1px solid rgba(64,45,20,.06);background:#FFFEFC}
+    #ideaList .ideaSurpriseRow td{padding:12px 16px;border-bottom:1px solid rgba(64,45,20,.06);background:#fffdf8}
 
     /* Verbonden, subtiel transparante informatiebadge in alle inspiratieweergaven. */
     #ideaCards .cardLabels,
@@ -2764,9 +2764,9 @@
     .ideaMapResultPills{flex:0 1 auto;width:auto;min-width:0}
     .ideaMapResultMeta{flex:0 1 auto}
     @media(max-width:640px){
-      #ideaList.sharedIdeaList .ideaThemeRow{margin:0;padding:16px;border:0;border-bottom:1px solid rgba(64,45,20,.06);border-radius:0;background:#FFFEFC;box-shadow:none;gap:12px}
+      #ideaList.sharedIdeaList .ideaThemeRow{margin:0;padding:16px;border:0;border-bottom:1px solid rgba(64,45,20,.06);border-radius:0;background:#fffdf8;box-shadow:none;gap:12px}
       #ideaList.sharedIdeaList .ideaThemeRow td,#ideaList.sharedIdeaList .ideaThemeRow:hover td{padding:0;background:transparent;border-radius:0}
-      #ideaList.sharedIdeaList .ideaSurpriseRow{padding:12px;margin:0;background:#FFFEFC;border-bottom:1px solid rgba(64,45,20,.06)}
+      #ideaList.sharedIdeaList .ideaSurpriseRow{padding:12px;margin:0;background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06)}
       #ideaList .mobileIdeaListMeta{width:100%;margin-top:3px}
       .ideaMapResultInfo{flex-wrap:wrap}
     }
