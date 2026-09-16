@@ -988,7 +988,7 @@
       .desktopSidebarLayer.isOpen .desktopSidebarBackdrop{opacity:1}
       .desktopSidebar{
         position:absolute;left:0;top:0;bottom:0;width:min(360px,calc(100vw - 44px));
-        display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:16px;padding:20px 18px 18px;
+        display:grid;grid-template-rows:auto minmax(0,1fr);gap:16px;padding:20px 18px 18px;
         border-right:1px solid rgba(123,112,88,.10);background:linear-gradient(180deg,rgba(255,253,249,.99),rgba(250,247,239,.985));
         box-sizing:border-box;box-shadow:20px 0 52px rgba(56,49,36,.13);transform:translateX(-102%);transition:transform .25s var(--ease);overflow:hidden
       }
@@ -1026,7 +1026,6 @@
       .desktopSidebarMount .customSelectButton{width:100%;min-height:42px;background:rgba(255,253,249,.92);border-color:rgba(123,112,88,.10)}
       .desktopSidebarMount .customSelectOptions{z-index:140}
       .desktopSidebarMount .filterShuffle,.desktopSidebarMount .filterReset{justify-content:center}
-      .desktopSidebarFooter{padding-top:13px;border-top:1px solid rgba(123,112,88,.10);color:rgba(74,92,89,.62);font-size:.78rem;line-height:1.4;text-align:center}
       body.desktopSidebarOpen{overflow:hidden}
       .topbar{
         width:100%;
@@ -2499,7 +2498,6 @@
           <div class="desktopSidebarMount" id="desktopSidebarFiltersMount"></div>
         </section>
       </div>
-      <div class="desktopSidebarFooter">Inspiratiebank · rustig kiezen wat bij je past</div>
     </aside>
   </div>
 
