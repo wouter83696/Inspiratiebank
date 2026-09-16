@@ -2693,7 +2693,12 @@
       #ideaCards .cardFooter .siteButton{
         display:flex;align-items:center;justify-content:center;gap:0;
         width:34px;min-width:34px;height:34px;min-height:34px;padding:0;
-        color:#00738D !important;box-shadow:0 3px 10px rgba(20,38,42,.04);
+        border-color:rgba(112,94,63,.14);background:#F7F1E7;
+        color:#00738D !important;box-shadow:none;
+      }
+      #ideaCards .cardFooter .siteButton:hover{
+        background:#EFE6D7;border-color:rgba(112,94,63,.22);
+        box-shadow:0 4px 10px rgba(92,65,33,.06)
       }
       #ideaCards .cardFooter .siteButton::after{
         content:"";display:block;width:17px;height:17px;flex:0 0 17px;margin:0;transform:none;opacity:1;
@@ -2715,7 +2720,14 @@
     #ideaList .cardMetaLine .metaIcon{color:#55777A}
     #ideaList td:nth-child(3) .small{color:#74716E;line-height:1.45}
     #ideaList td:nth-child(2) .cardPillGroup{flex-wrap:wrap}
-    #ideaList .siteButton.secondary{box-shadow:0 3px 10px rgba(20,38,42,.04);color:#00738D !important}
+    #ideaList .siteButton.secondary{
+      border-color:rgba(112,94,63,.14);background:#F7F1E7;
+      box-shadow:none;color:#00738D !important
+    }
+    #ideaList .siteButton.secondary:hover{
+      background:#EFE6D7;border-color:rgba(112,94,63,.22);
+      box-shadow:0 4px 10px rgba(92,65,33,.06)
+    }
     #ideaList .ideaSurpriseRow td{padding:12px 16px;border-bottom:1px solid rgba(64,45,20,.06);background:#fffdf8}
 
     /* Verbonden, warm-neutrale informatiebadge in alle inspiratieweergaven. */
@@ -2850,11 +2862,13 @@
     .ongoingBadgesCell .cardPillGroup{width:max-content;max-width:100%;gap:0;margin:0}
     .ongoingBadgesCell .cardPillGroup .pill{flex:0 0 auto}
     .ongoingAccordion .siteButton{
-      box-shadow:0 3px 10px rgba(20,38,42,.04);color:#00738D !important;
+      border-color:rgba(112,94,63,.14);background:#F7F1E7;
+      box-shadow:none;color:#00738D !important;
       transition:background-color .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease)
     }
     .ongoingAccordion .siteButton:hover{
-      transform:translateY(-1px);background:#fffaf4;border-color:rgba(0,115,141,.16)
+      transform:translateY(-1px);background:#EFE6D7;border-color:rgba(112,94,63,.22);
+      box-shadow:0 4px 10px rgba(92,65,33,.06)
     }
     .ideaMapResult strong{font-weight:500}
     @media(max-width:640px){
