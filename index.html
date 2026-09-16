@@ -2228,17 +2228,19 @@
     #ideaCards .cardThemePill{
       position:relative;
       z-index:2;
-      display:inline-flex;
-      align-items:center;
-      flex:0 0 auto;
-      margin:0;
+      align-self:flex-start;
+      margin:0 0 1px;
+    }
+    #ideaCards .hasImage .cardThemePill{
+      margin-top:-34px;
+      margin-bottom:5px;
     }
     #ideaCards .cardThemePill .categoryPill{
-      min-height:24px;
-      padding:4px 8px;
-      border-color:rgba(255,255,255,.68);
-      box-shadow:none;
-      font-size:.76rem;
+      min-height:34px;
+      padding:8px 12px;
+      border-color:rgba(255,255,255,.74);
+      box-shadow:0 7px 18px rgba(20,38,42,.08);
+      font-size:.8rem;
     }
     #ideaCards .cardThemePill .categoryPill.themeCreative{background:#FCE7F0}
     #ideaCards .cardThemePill .categoryPill.themeCulture{background:#ECEBFA}
@@ -2248,21 +2250,21 @@
     #ideaCards .cardThemePill .categoryPill.themeAction{background:#FDEDDD}
     #ideaCards .cardThemePill .categoryPill.themeDefault{background:#E7F5ED}
     #ideaCards .cardThemePill .domainIcon{
-      width:14px;
-      height:14px;
+      width:17px;
+      height:17px;
     }
     #ideaCards .cardThemePill .domainIcon svg{
-      width:13px;
-      height:13px;
+      width:15px;
+      height:15px;
     }
     #ideaCards .cardLabels{
-      gap:14px;
+      gap:10px;
       min-height:24px;
       flex-wrap:nowrap;
       overflow:visible;
       font-size:.78rem;
     }
-    #ideaCards .cardLabels .pill:not(.categoryPill){
+    #ideaCards .cardLabels .pill{
       min-width:0;
       width:auto;
       height:auto;

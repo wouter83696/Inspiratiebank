@@ -11,9 +11,10 @@
     const footer = `<div class="cardFooter">${view.website || ''}${view.actions || ''}</div>${view.manageActions !== undefined ? `<div class="agendaReviewCardActions ideaAdminCardActions">${view.manageActions || ''}</div>` : ''}`;
     return `<article class="${classes}"${attributes ? ` ${attributes}` : ''}>
       ${view.image || ''}
+      ${view.themePill ? `<div class="cardThemePill">${view.themePill}</div>` : ''}
       <h3>${view.title || ''}</h3>
-      <div class="${pillsClass}">${view.themePill ? `<div class="cardThemePill">${view.themePill}</div>` : ''}${pills}</div>
-      ${view.meta || ''}${source}${body}${practical}${footer}
+      <div class="${pillsClass}">${pills}${view.meta || ''}</div>
+      ${source}${body}${practical}${footer}
     </article>`;
   }
 
