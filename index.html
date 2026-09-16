@@ -404,8 +404,10 @@
     button.agendaLegendItem:hover{background:rgba(255,255,255,.76);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-line) 64%,transparent)}
     button.agendaLegendItem.active{background:var(--theme-tint);box-shadow:inset 0 0 0 1px var(--theme-line);color:var(--theme-ink)}
     button.agendaLegendItem:hover{transform:translateY(-1px)}
-    .agendaLegendItem .domainIcon{width:18px;height:18px;background:color-mix(in srgb,var(--theme-tint-strong) 56%,white);border-color:color-mix(in srgb,var(--theme-line) 54%,transparent);color:color-mix(in srgb,var(--theme-ink) 72%,var(--accent-dark))}
-    .agendaLegendItem .domainIcon svg{width:11px;height:11px}
+    /* Gebruik op badges exact dezelfde themamarkering als op de tegels. Alleen
+       de afmeting volgt de context; kleur, rand en pictogramverhouding zijn gelijk. */
+    .agendaLegendItem .domainIcon{width:18px;height:18px;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
+    .agendaLegendItem .domainIcon svg{width:50%;height:50%}
     .agendaItem.multiDayItem{background:var(--agenda-tint,var(--theme-tint))}
     .agendaItem.multiDayItem:hover,
     .agendaItem.multiDayItem:focus-visible{background:linear-gradient(rgba(255,255,255,.32),rgba(255,255,255,.32)),var(--agenda-tint,var(--theme-tint))}
@@ -2365,7 +2367,7 @@
       line-height:1.24;
     }
     #ideaCards .ideaThemeCard h3 .domainIcon{width:30px;height:30px;margin:0;flex:0 0 30px;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
-    #ideaCards .ideaThemeCard h3 .domainIcon svg{width:15px;height:15px}
+    #ideaCards .ideaThemeCard h3 .domainIcon svg{width:50%;height:50%}
     #ideaCards .cardThemePill{
       position:relative;
       z-index:2;
