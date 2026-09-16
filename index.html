@@ -5986,20 +5986,35 @@
     renderFlexibleOffers();
     updateAgendaThemeChips();
   }
+  const selectedIdeaCategories = new Set();
+  function isIdeaCategorySelected(value){
+    return value === 'all' ? selectedIdeaCategories.size === 0 : selectedIdeaCategories.has(domainDisplayLabel(value));
+  }
+  function toggleIdeaCategory(value){
+    const category = domainDisplayLabel(value);
+    if(value === 'all') selectedIdeaCategories.clear();
+    else if(selectedIdeaCategories.has(category)) selectedIdeaCategories.delete(category);
+    else selectedIdeaCategories.add(category);
+    const select = $('#ideaDomain');
+    const option = [...select.options].find(option => selectedIdeaCategories.size === 1 && selectedIdeaCategories.has(domainDisplayLabel(option.value)));
+    select.value = option?.value || 'all';
+    syncCustomSelect(select);
+  }
   function filteredInspirationItems(){
     const q = $('#ideaSearch').value;
-    const filters = {domain:$('#ideaDomain').value, locationType:$('#ideaLocation').value, distanceBand:$('#ideaDistance').value, cost:$('#ideaCost').value, stimulus:$('#ideaStimulus').value};
+    const filters = {domain:'all', locationType:$('#ideaLocation').value, distanceBand:$('#ideaDistance').value, cost:$('#ideaCost').value, stimulus:$('#ideaStimulus').value};
     const duration = $('#ideaDuration')?.value || 'all';
     const items = allInspirationItems().filter(item => {
+      if(selectedIdeaCategories.size && !selectedIdeaCategories.has(domainDisplayLabel(item.domain))) return false;
       if(!matches(item,q,filters) || !matchesIdeaDuration(item,duration)) return false;
       const distance = itemDistanceKm(item);
       return userLocationRadiusKm >= 50 || !Number.isFinite(distance) || distance <= userLocationRadiusKm;
     });
-    return filters.domain && filters.domain !== 'all' ? sortIdeasAlphabetically(items) : smartMixedIdeas(items);
+    return selectedIdeaCategories.size ? sortIdeasAlphabetically(items) : smartMixedIdeas(items);
   }
   function inspirationEmptyMessage(){
     const filters = {domain:$('#ideaDomain').value, locationType:$('#ideaLocation').value, distanceBand:$('#ideaDistance').value, cost:$('#ideaCost').value, stimulus:$('#ideaStimulus').value, duration:$('#ideaDuration')?.value || 'all'};
-    const activeFilters = Object.values(filters).filter(value => value && value !== 'all').length;
+    const activeFilters = selectedIdeaCategories.size + Object.values(filters).filter(value => value && value !== 'all').length;
     const hasQuery = Boolean($('#ideaSearch').value.trim());
     if(!activeFilters && !hasQuery && userLocationRadiusKm >= 50) return 'Er staan nog geen ideeën klaar.';
     const hints = [];
@@ -6012,11 +6027,8 @@
     return `Geen ideeën gevonden. Probeer ${hints.slice(0,2).join(' of ') || 'minder filters'}.`;
   }
   function updateInspirationThemeChips(){
-    const active = domainDisplayLabel($('#ideaDomain')?.value || 'all');
     $$('#inspirationThemeLegend [data-theme-filter]').forEach(button => {
-      const selected = active === 'all'
-        ? button.dataset.themeFilter === 'all'
-        : normalize(button.dataset.themeFilter) === normalize(active);
+      const selected = isIdeaCategorySelected(button.dataset.themeFilter);
       button.classList.toggle('active', selected);
       button.setAttribute('aria-pressed', selected ? 'true' : 'false');
     });
@@ -6025,6 +6037,10 @@
     const el = $('#'+id);
     if(!el) return;
     el.value = value;
+    if(id === 'ideaDomain'){
+      selectedIdeaCategories.clear();
+      if(value !== 'all') selectedIdeaCategories.add(domainDisplayLabel(value));
+    }
     syncCustomSelect(el);
   }
   function ideaDurationBand(item={}){
@@ -6092,7 +6108,9 @@
     if(rangeValue) rangeValue.textContent = userLocationRadiusKm >= 50 ? '50+ km' : `${userLocationRadiusKm} km`;
     $$('[data-sheet-filter]').forEach(button => {
       const control = $('#'+button.dataset.sheetFilter);
-      const active = control && String(control.value) === String(button.dataset.value);
+      const active = button.dataset.sheetFilter === 'ideaDomain'
+        ? isIdeaCategorySelected(button.dataset.value)
+        : control && String(control.value) === String(button.dataset.value);
       button.classList.toggle('active', Boolean(active));
       button.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
@@ -6181,7 +6199,8 @@
     $('#ideaFilterSheetLayer')?.addEventListener('click', event => {
       const chip = event.target.closest('[data-sheet-filter]');
       if(!chip) return;
-      setIdeaFilterValue(chip.dataset.sheetFilter, chip.dataset.value);
+      if(chip.dataset.sheetFilter === 'ideaDomain') toggleIdeaCategory(chip.dataset.value);
+      else setIdeaFilterValue(chip.dataset.sheetFilter, chip.dataset.value);
       renderIdeas();
     });
     $('#ideaFilterDistanceRange')?.addEventListener('input', event => {
@@ -6751,6 +6770,7 @@
     if(mapOn) renderIdeaMap(filteredInspirationItems());
   }
 	  function resetFilters(){
+        selectedIdeaCategories.clear();
 	    ['ideaSearch','ideaDomain','ideaLocation','ideaDistance','ideaCost','ideaStimulus','ideaDuration'].forEach(id => {
 	      const el = $('#'+id);
 	      if(!el) return;
@@ -6964,6 +6984,10 @@
       renderAgenda();
     });
     ['agendaDomain','agendaDistance','agendaCost','agendaStimulus'].forEach(id=>$('#'+id).addEventListener('change', renderAgenda));
+    $('#ideaDomain')?.addEventListener('input', event => {
+      selectedIdeaCategories.clear();
+      if(event.target.value !== 'all') selectedIdeaCategories.add(domainDisplayLabel(event.target.value));
+    });
     ['ideaSearch','ideaDomain','ideaLocation','ideaDistance','ideaCost','ideaStimulus','ideaDuration'].forEach(id=>$('#'+id)?.addEventListener('input',renderIdeas));
     $$('[data-view-group="ideas"]').forEach(btn=>btn.addEventListener('click',()=>setIdeaView(btn.dataset.view)));
     window.__pageSecurityStartedAt = Date.now();
@@ -7056,12 +7080,7 @@
 	    $('#inspirationThemeLegend').addEventListener('click', event => {
 	      const chip = event.target.closest('[data-theme-filter]');
 	      if(!chip) return;
-	      const select = $('#ideaDomain');
-	      const current = domainDisplayLabel(select.value);
-	      const next = normalize(current) === normalize(chip.dataset.themeFilter) ? 'all' : chip.dataset.themeFilter;
-	      const matching = [...select.options].find(option => normalize(domainDisplayLabel(option.value)) === normalize(next));
-	      select.value = matching ? matching.value : 'all';
-	      if(select._syncCustomSelect) select._syncCustomSelect();
+	      toggleIdeaCategory(chip.dataset.themeFilter);
 	      renderIdeas();
 	    });
 	    const backToTopBtn = $('#backToTopBtn');
