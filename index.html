@@ -984,8 +984,13 @@
         background:transparent;box-shadow:none;backdrop-filter:none;
         color:rgba(49,95,107,.72);pointer-events:auto;cursor:pointer
       }
+      .desktopMenuButton.isDrawerToggle{position:fixed;z-index:140;margin:0}
+      .desktopMenuButtonPlaceholder{display:block;flex:0 0 50px;width:50px;height:42px}
       .desktopMenuButton:hover{background:rgba(241,235,220,.52)}
       .desktopMenuButton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round}
+      .desktopMenuButton .menuCloseIcon{display:none}
+      .desktopMenuButton[aria-expanded="true"] .menuOpenIcon{display:none}
+      .desktopMenuButton[aria-expanded="true"] .menuCloseIcon{display:block}
       .desktopSidebarLayer{position:fixed;inset:0;z-index:120;display:block;pointer-events:none;visibility:hidden}
       .desktopSidebarLayer.isOpen{pointer-events:auto;visibility:visible}
       .desktopSidebarBackdrop{position:absolute;inset:0;border:0;background:rgba(48,46,39,.14);opacity:0;transition:opacity .22s var(--ease);cursor:default}
@@ -1003,12 +1008,9 @@
       .desktopSidebarIconButton:hover{background:rgba(217,231,214,.52);color:var(--accent-dark)}
       .desktopSidebarIconButton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
       .desktopSidebarBack[hidden]{visibility:hidden;display:inline-flex}
-      .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarHeader{
-        grid-template-columns:minmax(0,1fr) 34px;gap:8px
-      }
+      .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarHeader{display:block;padding-top:1px}
       .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarBack{display:none!important}
-      .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarTitle{grid-column:1;padding-left:52px;text-align:left}
-      .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarHeader [data-sidebar-close]{grid-column:2}
+      .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarTitle{min-height:38px;padding:8px 0 0 var(--desktop-menu-title-indent,52px);text-align:left;line-height:1.2}
       .desktopSidebarBody{width:100%;min-width:0;min-height:0;overflow:auto;padding:4px 2px 10px;box-sizing:border-box;scrollbar-width:thin}
       .desktopSidebarView[hidden]{display:none!important}
       .desktopSidebarView,.desktopSidebarMount{width:100%;min-width:0;box-sizing:border-box}
@@ -2512,7 +2514,8 @@
   </script>
   <header class="topbar">
     <button class="desktopMenuButton" id="desktopMenuButton" type="button" aria-label="Menu openen" aria-controls="desktopSidebar" aria-expanded="false">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14"></path><path d="M5 12h14"></path><path d="M5 16h14"></path></svg>
+      <svg class="menuOpenIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14"></path><path d="M5 12h14"></path><path d="M5 16h14"></path></svg>
+      <svg class="menuCloseIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg>
     </button>
     <nav class="tabs" role="navigation" aria-label="Hoofdnavigatie">
       <button class="tab active" data-tab="inspiratie" type="button" aria-selected="true"><img class="brandTabMark" src="assets/inspiratiebank-logo/inspiratiebank-mark.svg" alt="" aria-hidden="true"><span>Inspiratiebank</span></button>
@@ -2525,7 +2528,6 @@
       <div class="desktopSidebarHeader">
         <button class="desktopSidebarIconButton desktopSidebarBack" type="button" data-sidebar-back aria-label="Terug naar menu" hidden><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></button>
         <h2 class="desktopSidebarTitle" id="desktopSidebarTitle">Menu</h2>
-        <button class="desktopSidebarIconButton" type="button" data-sidebar-close aria-label="Menu sluiten"><svg viewBox="0 0 24 24"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
       </div>
       <div class="desktopSidebarBody">
         <section class="desktopSidebarView" data-sidebar-view="menu">
@@ -3679,6 +3681,7 @@
     document.body.style.overflow = '';
   }
   let desktopSidebarState = 'menu';
+  let desktopMenuButtonOrigin = null;
   const desktopSidebarOrigins = new Map();
   function desktopSidebarEnabled(){
     return window.matchMedia('(min-width:981px)').matches;
@@ -3693,6 +3696,40 @@
       const next = origin.next && origin.next.parentNode === origin.parent ? origin.next : null;
       origin.parent.insertBefore(node,next);
     });
+  }
+  function pinDesktopMenuButton(){
+    const button = $('#desktopMenuButton');
+    if(!button || desktopMenuButtonOrigin) return;
+    const rect = button.getBoundingClientRect();
+    const parent = button.parentNode;
+    const next = button.nextSibling;
+    const placeholder = document.createElement('span');
+    placeholder.className = 'desktopMenuButtonPlaceholder';
+    placeholder.setAttribute('aria-hidden','true');
+    parent.insertBefore(placeholder,button);
+    desktopMenuButtonOrigin = {parent,next,placeholder};
+    button.classList.add('isDrawerToggle');
+    button.style.left = `${rect.left}px`;
+    button.style.top = `${rect.top}px`;
+    document.body.appendChild(button);
+    const sidebar = $('#desktopSidebar');
+    if(sidebar){
+      const sidebarWidth = sidebar.getBoundingClientRect().width || 360;
+      const titleIndent = Math.max(52,Math.min(sidebarWidth - 110,rect.left + 32));
+      sidebar.style.setProperty('--desktop-menu-title-indent',`${titleIndent}px`);
+    }
+  }
+  function restoreDesktopMenuButton(){
+    const button = $('#desktopMenuButton');
+    const origin = desktopMenuButtonOrigin;
+    if(!button || !origin) return;
+    const next = origin.next && origin.next.parentNode === origin.parent ? origin.next : null;
+    origin.parent.insertBefore(button,next);
+    origin.placeholder.remove();
+    button.classList.remove('isDrawerToggle');
+    button.style.removeProperty('left');
+    button.style.removeProperty('top');
+    desktopMenuButtonOrigin = null;
   }
   function setDesktopSidebarState(state='menu'){
     const nextState = ['menu','location','filters'].includes(state) ? state : 'menu';
@@ -3726,10 +3763,13 @@
     if(!desktopSidebarEnabled()) return false;
     const layer = $('#desktopSidebarLayer');
     if(!layer) return false;
+    pinDesktopMenuButton();
     setDesktopSidebarState(state);
     layer.classList.add('isOpen');
     layer.setAttribute('aria-hidden','false');
-    $('#desktopMenuButton')?.setAttribute('aria-expanded','true');
+    const menuButton = $('#desktopMenuButton');
+    menuButton?.setAttribute('aria-expanded','true');
+    menuButton?.setAttribute('aria-label','Menu sluiten');
     document.body.classList.add('desktopSidebarOpen');
     return true;
   }
@@ -3739,14 +3779,20 @@
     restoreDesktopSidebarNodes();
     layer.classList.remove('isOpen');
     layer.setAttribute('aria-hidden','true');
-    $('#desktopMenuButton')?.setAttribute('aria-expanded','false');
+    const menuButton = $('#desktopMenuButton');
+    menuButton?.setAttribute('aria-expanded','false');
+    menuButton?.setAttribute('aria-label','Menu openen');
     $('#filterToggle')?.setAttribute('aria-expanded','false');
     $('#agendaFilterToggle')?.setAttribute('aria-expanded','false');
     document.body.classList.remove('desktopSidebarOpen');
     desktopSidebarState = 'menu';
+    restoreDesktopMenuButton();
   }
   function setupDesktopSidebar(){
-    $('#desktopMenuButton')?.addEventListener('click', () => openDesktopSidebar('menu'));
+    $('#desktopMenuButton')?.addEventListener('click', () => {
+      if($('#desktopSidebarLayer')?.classList.contains('isOpen')) closeDesktopSidebar();
+      else openDesktopSidebar('menu');
+    });
     $$('[data-sidebar-close]').forEach(button => button.addEventListener('click', closeDesktopSidebar));
     $('[data-sidebar-back]')?.addEventListener('click', () => setDesktopSidebarState('menu'));
     $$('[data-sidebar-open]').forEach(button => button.addEventListener('click', () => setDesktopSidebarState(button.dataset.sidebarOpen)));
