@@ -2791,9 +2791,14 @@
       gap:0;
       width:100%;min-width:0;padding:3px 1px;
     }
-    .ideaMapResultMeta .cardMetaPart{justify-content:center;overflow:hidden;text-overflow:ellipsis}
-    .ideaMapResultMeta .mapGroupMeta{grid-column:1;justify-content:flex-start;padding-left:7px}
+    .ideaMapResultMeta .cardMetaPart{
+      display:grid;grid-template-columns:12px minmax(0,1fr);align-items:center;
+      justify-content:initial;column-gap:5px;min-width:0;padding-left:7px;
+      overflow:hidden;text-overflow:ellipsis
+    }
+    .ideaMapResultMeta .mapGroupMeta{grid-column:1}
     .ideaMapResultMeta .mapDurationMeta{grid-column:2}
+    .ideaMapResultMeta .cardMetaPart .metaIcon{grid-column:1;margin:0}
     .ideaMapResult.hasLink .ideaMapResultInfo{
       display:grid;
       grid-template-columns:minmax(0,1fr) 32px;
