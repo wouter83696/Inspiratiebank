@@ -985,6 +985,7 @@
       .desktopMenuButton.isDrawerToggle{position:fixed;z-index:140;margin:0}
       .desktopMenuButtonPlaceholder{display:block;flex:0 0 50px;width:50px;height:42px}
       .desktopMenuButton:hover{background:rgba(241,235,220,.52)}
+      .desktopMenuButton[aria-expanded="true"],.desktopMenuButton[aria-expanded="true"]:hover{background:transparent}
       .desktopMenuButton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round}
       .desktopMenuButton .menuCloseIcon{display:none}
       .desktopMenuButton[aria-expanded="true"] .menuOpenIcon{display:none}
@@ -1044,6 +1045,7 @@
       .desktopSidebarMount .customSelectOptions{z-index:140}
       .desktopSidebarMount .filterShuffle,.desktopSidebarMount .filterReset{justify-content:center}
       body.desktopSidebarOpen{overflow:hidden}
+      body.desktopSidebarOpen .topbar .tabs{visibility:hidden}
       .topbar{
         width:100%;
         max-width:none;
