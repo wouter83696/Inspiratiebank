@@ -2820,23 +2820,63 @@
       border-radius:50% !important;
       overflow:hidden;
     }
-    .ongoingAccordion{background:#fffdf8;box-shadow:0 8px 24px rgba(92,65,33,.04)}
+    .ongoingAccordion{
+      border-color:rgba(64,45,20,.055);background:#fffdf8;
+      box-shadow:0 8px 24px rgba(92,65,33,.04)
+    }
     .ongoingAccordion.open,
     .ongoingAccordionBody,
     .ongoingAccordion .tableWrap{background:#fffdf8}
-    .ongoingAccordionButton,
-    .ongoingAccordion th{background:rgba(255,253,248,.82)}
-    .ongoingAccordion td{background:#fffdf8;color:#74716E}
+    .ongoingAccordionButton{
+      cursor:pointer;background:#fffdf8;
+      transition:background-color .18s var(--ease),color .18s var(--ease)
+    }
+    .ongoingAccordionButton:hover{background:#fffaf4}
+    .ongoingAccordionButton:focus-visible{outline:2px solid rgba(0,103,128,.28);outline-offset:-2px}
+    .ongoingAccordionBody{border-top-color:rgba(64,45,20,.06)}
+    .ongoingAccordion th{
+      padding:13px 16px;background:#fffdf8;border-bottom-color:rgba(64,45,20,.06);
+      color:#74716E;font-size:.8rem
+    }
+    .ongoingAccordion td{
+      padding:10px 16px;background:#fffdf8;border-bottom-color:rgba(64,45,20,.06);
+      color:#74716E;vertical-align:middle;
+      transition:background-color .18s var(--ease)
+    }
+    .ongoingAccordion tbody tr:hover td{background:#fffaf4}
     .ongoingTitleCell .name,
     .ongoingTitleCell .ideaTitleText{color:#006780;font-weight:500;line-height:1.25}
     .ongoingFitCell .small{color:#74716E}
-    .ongoingBadgesCell .cardPillGroup{width:100%;gap:0;margin:0}
+    .ongoingBadgesCell .cardPillGroup{width:max-content;max-width:100%;gap:0;margin:0}
+    .ongoingBadgesCell .cardPillGroup .pill{flex:0 0 auto}
+    .ongoingAccordion .siteButton{
+      box-shadow:0 3px 10px rgba(20,38,42,.04);color:#00738D !important;
+      transition:background-color .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease)
+    }
+    .ongoingAccordion .siteButton:hover{
+      transform:translateY(-1px);background:#fffaf4;border-color:rgba(0,115,141,.16)
+    }
     .ideaMapResult strong{font-weight:500}
     @media(max-width:640px){
       #ideaList.sharedIdeaList .ideaThemeRow{margin:0;padding:16px;border:0;border-bottom:1px solid rgba(64,45,20,.06);border-radius:0;background:#fffdf8;box-shadow:none;gap:12px}
       #ideaList.sharedIdeaList .ideaThemeRow td,#ideaList.sharedIdeaList .ideaThemeRow:hover td{padding:0;background:transparent;border-radius:0}
       #ideaList.sharedIdeaList .ideaSurpriseRow{padding:12px;margin:0;background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06)}
       #ideaList .mobileIdeaListMeta{width:100%;margin-top:3px}
+      .ongoingAccordion tbody{gap:0;padding:0}
+      .ongoingAccordion tr{
+        padding:16px;border:0;border-bottom:1px solid rgba(64,45,20,.06);border-radius:0;
+        background:#fffdf8;box-shadow:none
+      }
+      .ongoingAccordion tr:last-child{border-bottom:0}
+      .ongoingAccordion tbody tr:hover td{background:transparent}
+      .ongoingAccordion .ongoingBadgesCell .cardPillGroup{
+        width:max-content;max-width:100%;gap:0;flex-wrap:nowrap;
+        border:1px solid rgba(112,94,63,.16);border-radius:0;
+        background:#F7F1E7 !important;overflow:hidden
+      }
+      .ongoingAccordion .ongoingBadgesCell .cardPillGroup .pill{
+        min-height:27px;flex:0 0 auto;padding:6px 10px;background:transparent !important
+      }
       .ideaMapResultInfo{flex-wrap:wrap}
     }
   </style>
