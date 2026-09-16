@@ -2683,27 +2683,33 @@
     }
 
     /* Public list uses the same quiet surfaces and typography as the tiles. */
-    #ideaList.sharedIdeaList{border:0;border-radius:0;background:transparent;box-shadow:none}
-    #ideaList.sharedIdeaList table{border-collapse:separate;border-spacing:0 12px}
-    #ideaList.sharedIdeaList th{background:transparent;border:0;color:#71869A;padding:0 18px 2px;font-size:.8rem}
-    #ideaList.sharedIdeaList .ideaThemeRow td{background:#FFFEFC;border:0;padding:18px;vertical-align:middle}
+    #ideaList.sharedIdeaList{border:1px solid rgba(64,45,20,.055);border-radius:18px;background:#FFFEFC;box-shadow:0 8px 24px rgba(64,45,20,.035)}
+    #ideaList.sharedIdeaList table{border-collapse:collapse;border-spacing:0}
+    #ideaList.sharedIdeaList th{background:#FFFEFC;border-bottom:1px solid rgba(64,45,20,.06);color:#71869A;padding:13px 16px;font-size:.8rem}
+    #ideaList.sharedIdeaList .ideaThemeRow td{background:#FFFEFC;border-bottom:1px solid rgba(64,45,20,.06);padding:14px 16px;vertical-align:middle}
     #ideaList.sharedIdeaList .ideaThemeRow:hover td{background:#fffdf8}
-    #ideaList .ideaThemeRow td:first-child{border-radius:18px 0 0 18px}
-    #ideaList .ideaThemeRow td:last-child{border-radius:0 18px 18px 0}
-    #ideaList .ideaListTheme{margin-bottom:10px}
-    #ideaList .ideaListTheme .categoryPill{min-height:31px;padding:7px 11px;font-size:.76rem;box-shadow:0 3px 10px rgba(20,38,42,.045)}
+    #ideaList .ideaListActivity{display:flex;align-items:center;gap:12px;min-width:0}
+    #ideaList .ideaListThumb{display:block;flex:0 0 70px;width:70px;height:54px;overflow:hidden;border-radius:10px;background:var(--theme-tint-strong)}
+    #ideaList .ideaListThumb img{display:block;width:100%;height:100%;object-fit:cover}
+    #ideaList .ideaListThumbFallback{display:grid;place-items:center;color:var(--theme-ink)}
+    #ideaList .ideaListThumbFallback svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+    #ideaList .ideaListText{min-width:0}
+    #ideaList .ideaListTheme{margin-bottom:6px}
+    #ideaList .ideaListTheme .categoryPill{min-height:26px;padding:5px 9px;font-size:.7rem;box-shadow:none}
     #ideaList .nameWithIcon .ideaTitleText{color:#006780;font-size:1.03rem;font-weight:600;line-height:1.25}
     #ideaList .ideaListMeta{margin:9px 0 0}
     #ideaList .cardMetaLine{color:#617F99;gap:14px}
     #ideaList .cardMetaLine .metaIcon{color:#00738D}
     #ideaList td:nth-child(3) .small{color:#71869A;line-height:1.45}
     #ideaList td:nth-child(2) .cardPillGroup{flex-wrap:wrap}
-    #ideaList .siteButton.secondary{box-shadow:0 3px 10px rgba(20,38,42,.04);color:#00738D !important}
-    #ideaList .ideaSurpriseRow td{padding:4px 0;border:0;background:transparent}
+    #ideaList .siteButton.secondary.listArrowButton{display:flex;width:38px;min-width:38px;height:38px;min-height:38px;padding:0;margin:auto;box-shadow:0 3px 10px rgba(20,38,42,.04);color:#00738D !important}
+    #ideaList .listArrowButton::after{content:"";width:17px;height:17px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300738D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E") center/contain no-repeat}
+    #ideaList .ideaSurpriseRow td{padding:12px 16px;border-bottom:1px solid rgba(64,45,20,.06);background:#FFFEFC}
     @media(max-width:640px){
-      #ideaList.sharedIdeaList .ideaThemeRow{margin-bottom:12px;padding:18px;border:0;border-radius:18px;background:#FFFEFC;box-shadow:0 8px 24px rgba(64,45,20,.035);gap:12px}
+      #ideaList.sharedIdeaList .ideaThemeRow{margin:0;padding:16px;border:0;border-bottom:1px solid rgba(64,45,20,.06);border-radius:0;background:#FFFEFC;box-shadow:none;gap:12px}
       #ideaList.sharedIdeaList .ideaThemeRow td,#ideaList.sharedIdeaList .ideaThemeRow:hover td{padding:0;background:transparent;border-radius:0}
-      #ideaList.sharedIdeaList .ideaSurpriseRow{padding:0;margin:4px 0 16px;background:transparent;border:0}
+      #ideaList.sharedIdeaList .ideaSurpriseRow{padding:12px;margin:0;background:#FFFEFC;border-bottom:1px solid rgba(64,45,20,.06)}
+      #ideaList .ideaListThumb{flex-basis:62px;width:62px;height:48px}
       #ideaList .mobileIdeaListMeta{width:100%;margin-top:3px}
     }
   </style>
@@ -3169,7 +3175,7 @@
   </div>
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20260916-calm-theme-pill-v1"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20260916-connected-list-v2"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20260915-week-card-header-v1"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
@@ -5751,16 +5757,19 @@
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
     const websiteLabel = sourceButtonLabel(item);
-    const sourceLink = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="${escapeHtml(websiteLabel)}"><span class="siteButtonText">${escapeHtml(websiteLabel)}</span></a>` : '<span class="small">-</span>';
+    const image = approvedIdeaImage(item);
+    const thumbnail = image
+      ? `<span class="ideaListThumb"><img src="${escapeHtml(image.src)}" alt="" loading="lazy" decoding="async"></span>`
+      : `<span class="ideaListThumb ideaListThumbFallback" aria-hidden="true">${domainIcon(item.domain)}</span>`;
+    const sourceLink = item.url ? `<a class="siteButton secondary listArrowButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="${escapeHtml(websiteLabel)}" aria-label="Open website van ${escapeHtml(item.title)}"></a>` : '<span class="small">-</span>';
     return IdeaViewShared.renderDesktopRow({
       themeClass:domainThemeClass(item.domain),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
-      title:`<div class="ideaListTheme">${categoryPill(item.domain)}</div><div class="nameWithIcon"><span class="ideaTitleText">${escapeHtml(item.title)}</span></div>`,
+      title:`<div class="ideaListActivity">${thumbnail}<div class="ideaListText"><div class="ideaListTheme">${categoryPill(item.domain)}</div><div class="nameWithIcon"><span class="ideaTitleText">${escapeHtml(item.title)}</span></div></div></div>`,
       meta:cardMetaLine(item, {compact:true}),
       pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
       practical:escapeHtml(audienceText(item.materials || item.fit || '')),
-      website:sourceLink,
-      actions:reportMenu('inspiratiebank', ideaDomKey(item), item.title)
+      website:sourceLink
     });
   }
 
@@ -5854,7 +5863,7 @@
     </article>`;
   }
   function surpriseIdeaRow(){
-    return `<tr class="ideaSurpriseRow"><td colspan="5">${surpriseIdeaCard()}</td></tr>`;
+    return `<tr class="ideaSurpriseRow"><td colspan="4">${surpriseIdeaCard()}</td></tr>`;
   }
   function withSurpriseMarkup(items, renderer, surpriseRenderer, insertAfter=2){
     if(!items.length) return '';
