@@ -1239,9 +1239,9 @@
         grid-row:1;
         justify-self:start;
         align-self:center;
-        width:112px;
-        min-width:112px;
-        max-width:112px;
+        width:48px;
+        min-width:48px;
+        max-width:48px;
         height:48px;
         min-height:48px;
         border:1px solid rgba(255,255,255,.78);
@@ -1252,8 +1252,8 @@
         color:rgba(31,87,99,.92);
         transform:none;
       }
-      #ideaFilters .filterToggle{gap:9px}
-      #ideaFilters .filterToggle span{display:inline}
+      #ideaFilters .filterToggle{gap:0}
+      #ideaFilters .filterToggle span{display:none}
       #ideaFilters .filterToggle:hover{background:rgba(255,253,249,.84)}
       #ideaFilters .filterToggle svg{width:16px;height:16px}
       #ideaFilters .mobileViewBar{display:none}
@@ -3073,7 +3073,6 @@
           <div class="filterSearch"><input id="agendaSearch" type="search" placeholder="Zoek in activiteiten..."></div>
           <button class="filterToggle" id="agendaFilterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-controls="agendaFilters">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><circle cx="15" cy="7" r="2"></circle><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="9" cy="17" r="2"></circle></svg>
-            Filters
           </button>
           <select id="agendaWeekFilter" aria-label="Week filteren" data-include-placeholder-option="true"><option value="">Week</option></select>
           <div class="filterOptions">
@@ -3146,7 +3145,6 @@
           <div class="desktopLocationBar" id="inspirationDesktopLocation"></div>
           <button class="filterToggle" id="filterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-haspopup="dialog" aria-controls="ideaFilterSheetLayer">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><circle cx="15" cy="7" r="2"></circle><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="9" cy="17" r="2"></circle></svg>
-            <span>Filters</span>
           </button>
           <div class="viewBar mobileViewBar">
             <div class="viewSwitch" aria-label="Weergave inspiratiebank">
