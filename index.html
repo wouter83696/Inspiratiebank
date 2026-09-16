@@ -1346,6 +1346,15 @@
     }
     .ideaFilterChip:hover{background:#fff;border-color:rgba(79,142,158,.20)}
     .ideaFilterChip.active{background:#2f8f96;border-color:#2f8f96;color:#fff;box-shadow:0 5px 14px rgba(47,143,150,.16)}
+    #ideaFilterCategoryChips .ideaFilterChip:not(.active){background:var(--agenda-tint);border-color:var(--agenda-line);color:var(--theme-ink)}
+    #ideaFilterCategoryChips .ideaFilterChip.active:not(:first-child){background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink);box-shadow:inset 0 0 0 1px var(--theme-line),0 5px 13px rgba(64,45,20,.05)}
+    #ideaFilterCategoryChips .ideaFilterChip .domainIcon{width:18px;height:18px;border:0;background:transparent;color:currentColor}
+    #ideaFilterCategoryChips .ideaFilterChip .domainIcon svg{width:13px;height:13px}
+    #ideaFilterPriceChips .costFree{background:rgba(221,239,232,.68);border-color:rgba(72,132,100,.13);color:#426e5d}
+    #ideaFilterPriceChips .costLow{background:rgba(250,242,210,.68);border-color:rgba(186,151,56,.14);color:#80610b}
+    #ideaFilterPriceChips .costMid{background:rgba(248,231,190,.68);border-color:rgba(199,137,38,.15);color:#865f16}
+    #ideaFilterPriceChips .costHigh{background:rgba(246,223,231,.68);border-color:rgba(132,67,90,.13);color:#84435a}
+    #ideaFilterPriceChips .ideaFilterChip.active{box-shadow:inset 0 0 0 1px currentColor,0 5px 13px rgba(64,45,20,.05)}
     .ideaFilterMix{
       display:flex;align-items:center;justify-content:flex-start;gap:10px;width:100%;min-height:46px;padding:10px 13px;border:1px solid rgba(79,142,158,.12);
       border-radius:14px;background:rgba(255,255,255,.68);color:var(--accent-dark);font:inherit;font-size:.84rem;font-weight:600;cursor:pointer
@@ -2918,10 +2927,10 @@
           <div class="ideaFilterSectionHead"><h3>Prijs</h3></div>
           <div class="ideaFilterChips" id="ideaFilterPriceChips">
             <button class="ideaFilterChip" type="button" data-sheet-filter="ideaCost" data-value="all">Alles</button>
-            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaCost" data-value="Gratis">Gratis</button>
-            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaCost" data-value="€">€</button>
-            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaCost" data-value="€€">€€</button>
-            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaCost" data-value="€€€">€€€</button>
+            <button class="ideaFilterChip costFree" type="button" data-sheet-filter="ideaCost" data-value="Gratis">Gratis</button>
+            <button class="ideaFilterChip costLow" type="button" data-sheet-filter="ideaCost" data-value="€">€</button>
+            <button class="ideaFilterChip costMid" type="button" data-sheet-filter="ideaCost" data-value="€€">€€</button>
+            <button class="ideaFilterChip costHigh" type="button" data-sheet-filter="ideaCost" data-value="€€€">€€€</button>
           </div>
         </section>
         <section class="ideaFilterSection">
@@ -2934,8 +2943,7 @@
           </div>
         </section>
         <section class="ideaFilterSection">
-          <div class="ideaFilterSectionHead"><h3>Mix aanbod</h3></div>
-          <button class="ideaFilterMix" id="ideaFilterMixBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.7 5.1L19 10l-5.3 1.9L12 17l-1.7-5.1L5 10l5.3-1.9L12 3Z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"></path></svg><span>Maak een nieuwe rustige mix</span></button>
+          <button class="ideaFilterMix" id="ideaFilterMixBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.7 5.1L19 10l-5.3 1.9L12 17l-1.7-5.1L5 10l5.3-1.9L12 3Z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"></path></svg><span>Mix de kaarten</span></button>
         </section>
       </div>
       <footer class="ideaFilterSheetFooter">
