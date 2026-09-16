@@ -1082,13 +1082,13 @@
       }
       .desktopLocationBar{
         display:flex;
-        flex:0 0 auto;
         align-items:center;
       }
       .desktopLocationBar .locationLegendItem{
-        min-width:218px;
+        width:100%;
+        min-width:0;
         justify-content:center;
-        padding:0 20px;
+        padding:0 16px;
       }
       .filters.more .filterOptions,
       .agendaSearchFilters.more .filterOptions{
@@ -1133,13 +1133,44 @@
       #agendaFilters .filterOptions .filterReset{
         justify-content:center;
       }
-      #ideaFilters .filterSearch{grid-column:1 / 13}
+      #ideaFilters .filterSearch{grid-column:1 / 12;grid-row:1}
+      #ideaFilters .filterSearch input{padding-right:230px}
+      #ideaFilters .desktopLocationBar{
+        grid-column:9 / 12;
+        grid-row:1;
+        align-self:center;
+        z-index:4;
+        height:36px;
+        padding-left:8px;
+        border-left:1px solid rgba(79,142,158,.10);
+      }
+      #ideaFilters .desktopLocationBar .locationLegendItem{
+        height:36px;
+        min-height:36px;
+        border:0;
+        border-radius:12px;
+        background:transparent;
+        box-shadow:none;
+        backdrop-filter:none;
+      }
+      #ideaFilters .desktopLocationBar .locationLegendItem:hover{
+        background:rgba(168,225,221,.10);
+        box-shadow:none;
+      }
       #ideaFilters .filterToggle{
         grid-column:12 / 13;
-        width:54px;
-        min-width:54px;
-        max-width:54px;
-        border-radius:0 17px 17px 0;
+        grid-row:1;
+        justify-self:end;
+        align-self:center;
+        width:42px;
+        min-width:42px;
+        max-width:42px;
+        height:42px;
+        min-height:42px;
+        border:1px solid rgba(255,255,255,.62);
+        border-radius:14px;
+        background:rgba(255,255,255,.50);
+        box-shadow:0 5px 14px rgba(20,38,42,.035);
       }
       #ideaFilters .mobileViewBar{display:none}
       #agendaFilters .filterSearch{grid-column:1 / 13}
@@ -2452,6 +2483,7 @@
       <div class="filterBar">
         <div class="filters more" id="ideaFilters">
           <div class="filterSearch"><input id="ideaSearch" type="search" placeholder="Zoek inspiratie..."></div>
+          <div class="desktopLocationBar" id="inspirationDesktopLocation"></div>
           <button class="filterToggle" id="filterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-controls="ideaFilters">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><circle cx="15" cy="7" r="2"></circle><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="9" cy="17" r="2"></circle></svg>
             <span>Filters</span>
@@ -2485,7 +2517,6 @@
             </button>
           </div>
         </div>
-        <div class="desktopLocationBar" id="inspirationDesktopLocation"></div>
       </div>
       <div class="inspirationDesktopFilterRow">
         <div id="inspirationThemeLegend"></div>
