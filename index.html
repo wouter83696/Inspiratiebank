@@ -1139,7 +1139,9 @@
         grid-column:9 / 12;
         grid-row:1;
         align-self:center;
+        justify-self:end;
         z-index:4;
+        width:220px;
         height:36px;
         padding-left:8px;
         border-left:1px solid rgba(79,142,158,.10);
@@ -1152,6 +1154,8 @@
         background:transparent;
         box-shadow:none;
         backdrop-filter:none;
+        justify-content:flex-end;
+        padding-right:12px;
       }
       #ideaFilters .desktopLocationBar .locationLegendItem:hover{
         background:rgba(168,225,221,.10);
@@ -1160,7 +1164,7 @@
       #ideaFilters .filterToggle{
         grid-column:12 / 13;
         grid-row:1;
-        justify-self:end;
+        justify-self:start;
         align-self:center;
         width:42px;
         min-width:42px;
@@ -1171,6 +1175,7 @@
         border-radius:14px;
         background:rgba(255,255,255,.50);
         box-shadow:0 5px 14px rgba(20,38,42,.035);
+        transform:translateX(-18px);
       }
       #ideaFilters .mobileViewBar{display:none}
       #agendaFilters .filterSearch{grid-column:1 / 13}
