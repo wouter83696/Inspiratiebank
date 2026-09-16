@@ -975,13 +975,13 @@
     }
     @media (min-width:981px){
       .desktopMenuButton{
-        display:inline-flex;align-items:center;justify-content:center;flex:0 0 34px;width:34px;height:34px;
-        position:relative;z-index:2;margin:0 14px 0 0;padding:0;border:0;border-radius:8px;
+        display:inline-flex;align-items:center;justify-content:center;flex:0 0 42px;width:42px;height:42px;
+        position:relative;z-index:2;margin:0 8px 0 0;padding:0;border:0;border-radius:11px;
         background:transparent;box-shadow:none;backdrop-filter:none;
         color:var(--accent-dark);pointer-events:auto;cursor:pointer
       }
-      .desktopMenuButton:hover{background:rgba(168,225,221,.14)}
-      .desktopMenuButton svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+      .desktopMenuButton:hover{background:rgba(241,235,220,.52)}
+      .desktopMenuButton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
       .desktopSidebarLayer{position:fixed;inset:0;z-index:120;display:block;pointer-events:none;visibility:hidden}
       .desktopSidebarLayer.isOpen{pointer-events:auto;visibility:visible}
       .desktopSidebarBackdrop{position:absolute;inset:0;border:0;background:rgba(48,46,39,.14);opacity:0;transition:opacity .22s var(--ease);cursor:default}
@@ -1045,13 +1045,13 @@
         border-color:transparent;
         box-shadow:none;
         padding:0;
-        gap:24px;
+        gap:6px;
       }
       .topbar .tabs::after{
         content:"";
         position:absolute;
         left:0;
-        bottom:3px;
+        bottom:1px;
         width:var(--tab-indicator-width);
         height:2px;
         border-radius:999px;
@@ -1063,10 +1063,10 @@
       }
       .topbar>.tabs .tab{
         position:relative;
-        min-height:34px;
-        padding:8px 0 10px;
-        border-radius:0;
-        font-size:.82rem;
+        min-height:42px;
+        padding:10px 11px 12px;
+        border-radius:11px;
+        font-size:.94rem;
         font-weight:600;
         background:transparent;
         color:var(--accent-dark);
@@ -1076,7 +1076,7 @@
         display:none !important;
       }
       .topbar>.tabs .tab:hover{
-        background:transparent;
+        background:rgba(241,235,220,.52);
         color:var(--accent-dark);
       }
       .topbar>.tabs .tab.active{
