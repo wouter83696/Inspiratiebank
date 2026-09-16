@@ -2784,6 +2784,29 @@
       height:14px;
       background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23405F5D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E") center/contain no-repeat;
     }
+    /* Op tegels is praktische informatie een rustige metadataregel, geen badge-balk. */
+    #ideaCards .cardLabels{
+      display:inline-flex;width:auto;max-width:100%;min-height:0;align-self:flex-start;
+      gap:7px;padding:0;border:0;background:transparent;overflow:visible
+    }
+    #ideaCards .cardLabels .pill{
+      min-height:22px;flex:0 0 auto;gap:4px;padding:3px 2px;
+      border:0 !important;background:transparent !important;
+      color:#617573;font-size:.7rem;font-weight:500
+    }
+    #ideaCards .cardLabels .pill + .pill{
+      position:relative;margin-left:3px;padding-left:10px;border-left:0 !important
+    }
+    #ideaCards .cardLabels .pill + .pill::before{
+      content:"·";position:absolute;left:0;top:50%;transform:translateY(-52%);
+      width:auto;height:auto;background:none;color:rgba(64,95,93,.30);font-size:.74rem
+    }
+    #ideaCards .cardLabels .locationPill:not(.homeLocationPill):not(.onlineLocationPill)::before{
+      flex-basis:12px;width:12px;height:12px
+    }
+    #ideaCards .cardLabels .stimulusPill{
+      width:auto;min-width:20px;height:22px;min-height:22px;padding-right:2px
+    }
     /* In de lijst eindigt de badge direct na het laatste segment. Een inline-grid
        voorkomt dat de flexcontainer alsnog de volledige tabelkolom inneemt. */
     #ideaList .cardPillGroup{
