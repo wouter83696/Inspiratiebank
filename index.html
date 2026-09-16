@@ -626,12 +626,12 @@
     .cardFooter .reportMenu{margin-left:auto}
     .ideaSurpriseCard{
       grid-column:1 / -1;align-self:start;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px 14px;
-      min-height:80px;padding:14px 22px;border:1px solid #F5E1B5;border-radius:14px;
+      min-height:70px;padding:10px 18px;border:1px solid #F5E1B5;border-radius:14px;
       background:#FFF8E9;
       box-shadow:none
     }
     .ideaSurpriseMark{
-      position:relative;display:grid;place-items:center;width:50px;height:50px;border-radius:999px;
+      position:relative;display:grid;place-items:center;width:44px;height:44px;border-radius:999px;
       background:#FCF0D1;border:0;color:#805B08
     }
     .ideaSurpriseMark::before,.ideaSurpriseMark::after{
@@ -639,7 +639,7 @@
     }
     .ideaSurpriseMark::before{top:-3px;right:7px}
     .ideaSurpriseMark::after{top:4px;right:-6px;transform:rotate(55deg)}
-    .ideaSurpriseMark svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+    .ideaSurpriseMark svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaSurpriseText{min-width:0}
     .ideaSurpriseText strong{display:block;color:var(--accent-dark);font-size:1rem;font-weight:600;line-height:1.16}
     .ideaSurpriseText span{display:block;margin-top:4px;color:#7A8085;font-size:.9rem;line-height:1.34}
@@ -659,9 +659,9 @@
       #ideaCards .ideaSurpriseButton{grid-column:auto;justify-self:end}
     }
     @media (max-width:640px){
-      #ideaCards .ideaSurpriseCard{grid-column:1 / -1;grid-template-columns:auto minmax(0,1fr);padding:15px 16px;border-radius:16px}
-      #ideaCards .ideaSurpriseMark{width:42px;height:42px}
-      #ideaCards .ideaSurpriseMark svg{width:20px;height:20px}
+      #ideaCards .ideaSurpriseCard{grid-column:1 / -1;grid-template-columns:auto minmax(0,1fr);padding:12px 14px;border-radius:16px}
+      #ideaCards .ideaSurpriseMark{width:38px;height:38px}
+      #ideaCards .ideaSurpriseMark svg{width:18px;height:18px}
       #ideaCards .ideaSurpriseText strong{font-size:1rem}
       #ideaCards .ideaSurpriseText span{font-size:.86rem}
       #ideaCards .ideaSurpriseButton{grid-column:1 / -1;justify-self:stretch;min-height:44px}
@@ -2347,14 +2347,14 @@
     }
     #ideaCards .ideaImageFrame{
       background:#f7f4ee;
-      margin:0 0 3px;
+      margin:0;
       border:0;
       border-radius:12px;
       aspect-ratio:16 / 8.7;
       box-shadow:none;
     }
     @media (min-width:981px){
-      #ideaCards .ideaImageFrame{margin:-7px -8px 3px}
+      #ideaCards .ideaImageFrame{margin:-7px -8px 0}
     }
     #ideaCards .ideaImageFrame img{
       border-radius:inherit;
@@ -2445,7 +2445,7 @@
       order:5;
       width:auto;
       align-self:flex-start;
-      margin:auto 48px 0 0;
+      margin:auto 48px -3px 0;
       padding:3px 0 0;
       border:0;
       border-radius:0;
@@ -2520,7 +2520,7 @@
     @media (max-width:640px){
       :root{--mobile-search-row-height:46px;--mobile-filter-button-size:54px;--mobile-view-button-size:30px;--mobile-view-switch-width:104px;--mobile-search-with-view-width:calc(100vw - 146px)}
       #ideaCards .ideaImageFrame{
-        margin:0 0 3px;
+        margin:0;
         border-radius:12px;
       }
       #ideaCards .ideaThemeCard{min-height:370px;padding:12px}
@@ -2676,7 +2676,7 @@
         background:#fffdf8;box-shadow:0 8px 24px rgba(92,65,33,.04);
       }
       #ideaCards .ideaImageFrame{
-        flex-shrink:0;aspect-ratio:16 / 9;margin:-6px -14px 2px;border-radius:13px;
+        flex-shrink:0;aspect-ratio:16 / 9;margin:-6px -14px -1px;border-radius:13px;
       }
       #ideaCards .hasImage .cardThemePill{top:23px;left:21px}
       #ideaCards .cardThemePill .categoryPill,
@@ -2687,7 +2687,7 @@
       #ideaCards .ideaThemeCard h3{font-size:1.08rem;line-height:1.25;color:#006780}
       #ideaCards .cardLabels{gap:7px;min-height:31px}
       #ideaCards .ideaThemeCard > p:not(.fine){font-size:.92rem;line-height:1.45;color:#74716E;-webkit-line-clamp:3}
-      #ideaCards .cardMetaLine{font-size:.83rem;gap:18px;margin-top:auto;padding-top:12px;color:#697472}
+      #ideaCards .cardMetaLine{font-size:.83rem;gap:18px;margin-top:auto;margin-bottom:-4px;padding-top:12px;color:#697472}
       #ideaCards .cardMetaLine .metaIcon{width:18px;height:18px;color:#55777A}
       #ideaCards .cardFooter{right:14px;bottom:13px}
       #ideaCards .cardFooter .siteButton{
@@ -2787,8 +2787,8 @@
     /* Op tegels is praktische informatie een rustige metadataregel, geen badge-balk. */
     #ideaCards .cardLabels{
       display:inline-flex;width:auto;max-width:100%;min-height:0;align-self:flex-start;
-      gap:7px;padding:1px 5px;border:1px solid rgba(112,94,63,.08);border-radius:6px;
-      background:rgba(247,241,231,.34);box-shadow:none;overflow:visible
+      gap:7px;padding:1px 5px;border:1px solid rgba(112,94,63,.055);border-radius:6px;
+      background:rgba(247,241,231,.16);box-shadow:none;overflow:visible
     }
     #ideaCards .cardLabels .pill{
       min-height:22px;flex:0 0 auto;gap:4px;padding:3px 2px;
