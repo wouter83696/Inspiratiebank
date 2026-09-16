@@ -2380,6 +2380,18 @@
     #ideaCards .cardThemePill .categoryPill.themeSport{background:#E4F4F8}
     #ideaCards .cardThemePill .categoryPill.themeAction{background:#FDEDDD}
     #ideaCards .cardThemePill .categoryPill.themeDefault{background:#E7F5ED}
+    #ideaCards .hasImage .cardThemePill .categoryPill{
+      border-color:rgba(255,255,255,.68);
+      -webkit-backdrop-filter:blur(7px);
+      backdrop-filter:blur(7px);
+    }
+    #ideaCards .hasImage .cardThemePill .categoryPill.themeCreative{background:rgba(252,231,240,.88)}
+    #ideaCards .hasImage .cardThemePill .categoryPill.themeCulture{background:rgba(236,235,250,.88)}
+    #ideaCards .hasImage .cardThemePill .categoryPill.themeNature{background:rgba(229,245,236,.88)}
+    #ideaCards .hasImage .cardThemePill .categoryPill.themeSocial{background:rgba(255,246,217,.88)}
+    #ideaCards .hasImage .cardThemePill .categoryPill.themeSport{background:rgba(228,244,248,.88)}
+    #ideaCards .hasImage .cardThemePill .categoryPill.themeAction{background:rgba(253,237,221,.88)}
+    #ideaCards .hasImage .cardThemePill .categoryPill.themeDefault{background:rgba(231,245,237,.88)}
     #ideaCards .cardThemePill .domainIcon{
       width:17px;
       height:17px;
@@ -2472,7 +2484,14 @@
       box-shadow:0 5px 14px rgba(20,38,42,.06);
       color:var(--accent-dark) !important;
     }
-    #ideaCards .cardFooter .siteButton::after{content:"↗";margin:0;font-size:1rem}
+    #ideaCards .cardFooter .siteButton::after{
+      content:"→";
+      display:block;
+      margin:0;
+      font-size:1.22rem;
+      line-height:1;
+      transform:translateY(-1px);
+    }
     #ideaCards .cardFooter .siteButtonText{
       position:absolute;
       width:1px;
