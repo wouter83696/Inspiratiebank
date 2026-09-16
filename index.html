@@ -367,7 +367,7 @@
       border-color:var(--agenda-line,var(--theme-line));
       box-shadow:0 11px 24px rgba(20,38,42,.065);
     }
-    .agendaItem .domainIcon{width:26px;height:26px;background:color-mix(in srgb,var(--theme-tint-strong) 82%,transparent);border-color:color-mix(in srgb,var(--theme-line) 78%,transparent);color:var(--theme-ink);opacity:.95}
+    .agendaItem .domainIcon{width:26px;height:26px;background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink);opacity:1}
     .agendaItem .domainIcon svg{width:14px;height:14px}
     .agendaLegendBar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 0 10px}
     .agendaSectionTabs{
@@ -404,10 +404,13 @@
     button.agendaLegendItem:hover{background:rgba(255,255,255,.76);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-line) 64%,transparent)}
     button.agendaLegendItem.active{background:var(--theme-tint);box-shadow:inset 0 0 0 1px var(--theme-line);color:var(--theme-ink)}
     button.agendaLegendItem:hover{transform:translateY(-1px)}
-    /* Gebruik op badges exact dezelfde themamarkering als op de tegels. Alleen
-       de afmeting volgt de context; kleur, rand en pictogramverhouding zijn gelijk. */
-    .agendaLegendItem .domainIcon{width:18px;height:18px;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
-    .agendaLegendItem .domainIcon svg{width:50%;height:50%}
+    /* De badge blijft compacter, maar gebruikt exact dezelfde vaste
+       themakleuren als de tegel (dus zonder verschil door transparantie). */
+    .agendaLegendItem .domainIcon{
+      width:18px;height:18px;flex:0 0 18px;
+      background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink)
+    }
+    .agendaLegendItem .domainIcon svg{width:9px;height:9px;stroke-width:1.8}
     .agendaItem.multiDayItem{background:var(--agenda-tint,var(--theme-tint))}
     .agendaItem.multiDayItem:hover,
     .agendaItem.multiDayItem:focus-visible{background:linear-gradient(rgba(255,255,255,.32),rgba(255,255,255,.32)),var(--agenda-tint,var(--theme-tint))}
@@ -519,13 +522,13 @@
     .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:12px}
     .card{min-width:0;padding:18px;min-height:215px;display:flex;flex-direction:column;gap:10px;background:#fffdf9;border-color:#EFE9DE;box-shadow:0 10px 26px rgba(64,45,20,.04);transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease)}
     .card:hover{transform:translateY(-2px);background:#fffefb;box-shadow:0 16px 34px rgba(64,45,20,.065);border-color:rgba(79,142,158,.13)}
-    .themeCreative{--theme-tint:rgba(229,0,90,.055);--theme-tint-strong:rgba(229,0,90,.13);--theme-line:rgba(229,0,90,.18);--theme-ink:#a00042;--agenda-tint:#fdf0f6;--agenda-line:rgba(229,0,90,.22)}
-    .themeCulture{--theme-tint:rgba(72,70,184,.055);--theme-tint-strong:rgba(72,70,184,.13);--theme-line:rgba(72,70,184,.18);--theme-ink:#4644a0;--agenda-tint:#f1f0fb;--agenda-line:rgba(72,70,184,.22)}
-    .themeNature{--theme-tint:rgba(0,155,72,.06);--theme-tint-strong:rgba(0,155,72,.14);--theme-line:rgba(0,155,72,.18);--theme-ink:#087b43;--agenda-tint:#eef8f2;--agenda-line:rgba(0,155,72,.22)}
-    .themeSocial{--theme-tint:rgba(247,203,51,.055);--theme-tint-strong:rgba(247,203,51,.18);--theme-line:rgba(213,163,16,.22);--theme-ink:#80610b;--agenda-tint:#fff9e8;--agenda-line:rgba(213,163,16,.26)}
-    .themeSport{--theme-tint:rgba(0,132,168,.055);--theme-tint-strong:rgba(0,132,168,.14);--theme-line:rgba(0,132,168,.18);--theme-ink:#08677f;--agenda-tint:#edf8fb;--agenda-line:rgba(0,132,168,.22)}
-    .themeAction{--theme-tint:rgba(238,126,27,.065);--theme-tint-strong:rgba(238,126,27,.16);--theme-line:rgba(199,92,11,.18);--theme-ink:#9a4f0f;--agenda-tint:#fff3e8;--agenda-line:rgba(199,92,11,.23)}
-    .themeDefault{--theme-tint:rgba(0,185,86,.045);--theme-tint-strong:rgba(0,185,86,.11);--theme-line:rgba(0,155,72,.11);--theme-ink:#087b43;--agenda-tint:#eff9f3;--agenda-line:rgba(0,155,72,.18)}
+    .themeCreative{--theme-tint:rgba(229,0,90,.055);--theme-tint-strong:rgba(229,0,90,.13);--theme-line:rgba(229,0,90,.18);--theme-icon-bg:#fde0ec;--theme-icon-line:#f8d1e0;--theme-ink:#a00042;--agenda-tint:#fdf0f6;--agenda-line:rgba(229,0,90,.22)}
+    .themeCulture{--theme-tint:rgba(72,70,184,.055);--theme-tint-strong:rgba(72,70,184,.13);--theme-line:rgba(72,70,184,.18);--theme-icon-bg:#e7e7f6;--theme-icon-line:#deddf2;--theme-ink:#4644a0;--agenda-tint:#f1f0fb;--agenda-line:rgba(72,70,184,.22)}
+    .themeNature{--theme-tint:rgba(0,155,72,.06);--theme-tint-strong:rgba(0,155,72,.14);--theme-line:rgba(0,155,72,.18);--theme-icon-bg:#dbf1e3;--theme-icon-line:#d1ebdc;--theme-ink:#087b43;--agenda-tint:#eef8f2;--agenda-line:rgba(0,155,72,.22)}
+    .themeSocial{--theme-tint:rgba(247,203,51,.055);--theme-tint-strong:rgba(247,203,51,.18);--theme-line:rgba(213,163,16,.22);--theme-icon-bg:#fef6da;--theme-icon-line:#f6e9c2;--theme-ink:#80610b;--agenda-tint:#fff9e8;--agenda-line:rgba(213,163,16,.26)}
+    .themeSport{--theme-tint:rgba(0,132,168,.055);--theme-tint-strong:rgba(0,132,168,.14);--theme-line:rgba(0,132,168,.18);--theme-icon-bg:#dbedf3;--theme-icon-line:#d1e7ed;--theme-ink:#08677f;--agenda-tint:#edf8fb;--agenda-line:rgba(0,132,168,.22)}
+    .themeAction{--theme-tint:rgba(238,126,27,.065);--theme-tint-strong:rgba(238,126,27,.16);--theme-line:rgba(199,92,11,.18);--theme-icon-bg:#fce8dc;--theme-icon-line:#f5dfcf;--theme-ink:#9a4f0f;--agenda-tint:#fff3e8;--agenda-line:rgba(199,92,11,.23)}
+    .themeDefault{--theme-tint:rgba(0,185,86,.045);--theme-tint-strong:rgba(0,185,86,.11);--theme-line:rgba(0,155,72,.11);--theme-icon-bg:#e3f4e9;--theme-icon-line:#d9ecdf;--theme-ink:#087b43;--agenda-tint:#eff9f3;--agenda-line:rgba(0,155,72,.18)}
     .ideaThemeCard{
       min-width:0;
       background:linear-gradient(color-mix(in srgb,var(--theme-tint) 38%,transparent),color-mix(in srgb,var(--theme-tint) 38%,transparent)),rgba(255,255,255,.96);
@@ -546,7 +549,7 @@
     .ideaImageFrame img{width:100%;height:100%;object-fit:cover;display:block;border-radius:12px}
     .ideaThemeRow td{background:linear-gradient(color-mix(in srgb,var(--theme-tint) 38%,transparent),color-mix(in srgb,var(--theme-tint) 38%,transparent)),rgba(255,255,255,.96)}
     .ideaThemeRow:hover td{background:linear-gradient(color-mix(in srgb,var(--theme-tint-strong) 42%,transparent),color-mix(in srgb,var(--theme-tint-strong) 42%,transparent)),rgba(255,255,255,.97)}
-    .ideaThemeCard .domainIcon,.ideaThemeRow .domainIcon{background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
+    .ideaThemeCard .domainIcon,.ideaThemeRow .domainIcon{background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink)}
     .domainThemePill{background:var(--theme-tint-strong);color:var(--theme-ink)}
     .categoryPill{background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
     .categoryPillText{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -827,7 +830,7 @@
     .themeSelect .customSelectMenu{width:max-content;min-width:100%;max-width:min(360px,calc(100vw - 30px));border-color:rgba(11,18,32,.08);background:#fff}
     .themeSelect .customSelectOption{display:flex;align-items:center;gap:8px;color:var(--ink)}
     .themeSelect .customSelectOption:hover,.themeSelect .customSelectOption.active{background:rgba(11,18,32,.035);box-shadow:inset 0 0 0 1px var(--theme-line);color:var(--theme-ink)}
-    .themeSelect .customSelectButton .domainIcon,.themeSelect .customSelectOption .domainIcon{width:22px;height:22px;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
+    .themeSelect .customSelectButton .domainIcon,.themeSelect .customSelectOption .domainIcon{width:22px;height:22px;background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink)}
     .themeSelect .customSelectButton .domainIcon svg,.themeSelect .customSelectOption .domainIcon svg{width:12px;height:12px}
     .choiceSelect .customSelectButton,.choiceSelect .customSelectOption{gap:8px}
     .choiceSelect .customSelectOption{display:flex;align-items:center}
@@ -1383,9 +1386,9 @@
     #ideaFilterCategoryChips .ideaFilterChip.active:not(:first-child)::after{content:none}
     .ideaFilterCategoryHint{margin:0;color:rgba(49,95,107,.72);font-size:.76rem;line-height:1.4}
     #ideaFilterCategoryChips .ideaFilterChip .domainIcon{
-      width:18px;height:18px;background:color-mix(in srgb,var(--theme-tint-strong) 52%,white);
-      border-color:color-mix(in srgb,var(--theme-line) 45%,transparent);
-      color:color-mix(in srgb,var(--theme-ink) 72%,var(--accent-dark))
+      width:18px;height:18px;background:var(--theme-icon-bg);
+      border-color:var(--theme-icon-line);
+      color:var(--theme-ink)
     }
     #ideaFilterCategoryChips .ideaFilterChip .domainIcon svg{width:11px;height:11px}
     #ideaFilterPriceChips .ideaFilterChip:not(:first-child){
@@ -1567,7 +1570,7 @@
     .ideaMapResult:hover,.ideaMapResult.active{background:#fffaf4;border-color:var(--theme-line,rgba(79,142,158,.18));transform:translateY(-1px)}
     .ideaMapResult.active{box-shadow:0 0 0 2px var(--theme-line,rgba(79,142,158,.18)),0 10px 24px rgba(92,65,33,.075)}
     .ideaMapResultTitle{display:flex;align-items:center;gap:8px;min-width:0}
-    .ideaMapResult .domainIcon{width:30px;height:30px;margin:0;align-self:center;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
+    .ideaMapResult .domainIcon{width:30px;height:30px;margin:0;align-self:center;background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink)}
     .ideaMapResult .domainIcon svg{width:15px;height:15px}
     .ideaMapResultText{display:flex;flex-direction:column;align-items:stretch;min-width:0;padding:0}
     .ideaMapResult.hasThumb .ideaMapResultText{align-self:center;justify-content:center;min-height:96px;padding:0}
@@ -2366,7 +2369,7 @@
       font-size:1rem;
       line-height:1.24;
     }
-    #ideaCards .ideaThemeCard h3 .domainIcon{width:30px;height:30px;margin:0;flex:0 0 30px;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
+    #ideaCards .ideaThemeCard h3 .domainIcon{width:30px;height:30px;margin:0;flex:0 0 30px;background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink)}
     #ideaCards .ideaThemeCard h3 .domainIcon svg{width:50%;height:50%}
     #ideaCards .cardThemePill{
       position:relative;
@@ -2866,7 +2869,7 @@
   </script>
   <header class="topbar">
     <nav class="tabs" role="navigation" aria-label="Hoofdnavigatie">
-      <button class="tab active" data-tab="inspiratie" type="button" aria-selected="true"><img class="brandTabMark" src="assets/inspiratiebank-icon/inspiratiebank-icon-128x128.png" alt="" aria-hidden="true"><span>Inspiratiebank</span></button>
+      <button class="tab active" data-tab="inspiratie" type="button" aria-selected="true"><img class="brandTabMark" src="inspiratiebank-app-icon-180.png" alt="" aria-hidden="true"><span>Inspiratiebank</span></button>
       <button class="tab" data-tab="weken" type="button">UIT-agenda</button>
     </nav>
   </header>
@@ -2875,13 +2878,13 @@
     <aside class="desktopSidebar" id="desktopSidebar" data-sidebar-state="menu" role="dialog" aria-modal="true" aria-labelledby="desktopSidebarTitle">
       <div class="desktopSidebarHeader">
         <button class="desktopSidebarIconButton desktopSidebarBack" type="button" data-sidebar-back aria-label="Terug naar menu" hidden><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></button>
-        <h2 class="desktopSidebarTitle" id="desktopSidebarTitle"><span class="desktopSidebarBrandTitle"><img src="assets/inspiratiebank-icon/inspiratiebank-icon-128x128.png" alt="" aria-hidden="true"><span>Inspiratiebank</span></span><span class="desktopSidebarStateTitle" hidden></span></h2>
+        <h2 class="desktopSidebarTitle" id="desktopSidebarTitle"><span class="desktopSidebarBrandTitle"><img src="inspiratiebank-app-icon-180.png" alt="" aria-hidden="true"><span>Inspiratiebank</span></span><span class="desktopSidebarStateTitle" hidden></span></h2>
         <button class="desktopSidebarIconButton desktopSidebarClose" type="button" data-sidebar-close aria-label="Menu sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
       </div>
       <div class="desktopSidebarBody">
         <section class="desktopSidebarView" data-sidebar-view="menu">
           <nav class="desktopSidebarNav" aria-label="Menu">
-            <button class="desktopSidebarNavItem active" type="button" data-sidebar-tab="inspiratie"><span class="desktopSidebarNavIcon"><img src="assets/inspiratiebank-icon/inspiratiebank-icon-128x128.png" alt="" aria-hidden="true"></span><span>Inspiratiebank</span><span class="desktopSidebarNavChevron"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></span></button>
+            <button class="desktopSidebarNavItem active" type="button" data-sidebar-tab="inspiratie"><span class="desktopSidebarNavIcon"><img src="inspiratiebank-app-icon-180.png" alt="" aria-hidden="true"></span><span>Inspiratiebank</span><span class="desktopSidebarNavChevron"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></span></button>
             <button class="desktopSidebarNavItem" type="button" data-sidebar-tab="weken"><span class="desktopSidebarNavIcon"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg></span><span>UIT-agenda</span><span class="desktopSidebarNavChevron"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></span></button>
             <div class="desktopSidebarDivider"></div>
             <button class="desktopSidebarNavItem" type="button" data-sidebar-open="location"><span class="desktopSidebarNavIcon"><svg viewBox="0 0 24 24"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><span>Locatie en afstand</span><span class="desktopSidebarNavChevron"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></span></button>
