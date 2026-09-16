@@ -984,6 +984,15 @@
       }
       .desktopMenuButton:hover{background:rgba(241,235,220,.52)}
       .desktopMenuButton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round}
+      .desktopMenuButton .menuCloseIcon{display:none}
+      body.desktopSidebarOpen .desktopMenuButton{
+        position:fixed;left:var(--desktop-menu-left);top:var(--desktop-menu-top);z-index:130;
+        margin:0;background:rgba(250,247,239,.92);backdrop-filter:blur(8px)
+      }
+      body.desktopSidebarOpen .desktopMenuButton .menuOpenIcon{display:none}
+      body.desktopSidebarOpen .desktopMenuButton .menuCloseIcon{display:block}
+      body.desktopSidebarOpen .topbar{z-index:130}
+      body.desktopSidebarOpen .topbar .tabs{visibility:hidden}
       .desktopSidebarLayer{position:fixed;inset:0;z-index:120;display:block;pointer-events:none;visibility:hidden}
       .desktopSidebarLayer.isOpen{pointer-events:auto;visibility:visible}
       .desktopSidebarBackdrop{position:absolute;inset:0;border:0;background:rgba(48,46,39,.14);opacity:0;transition:opacity .22s var(--ease);cursor:default}
@@ -995,7 +1004,10 @@
         box-sizing:border-box;box-shadow:14px 0 34px rgba(56,49,36,.14);transform:translateX(-102%);transition:transform .25s var(--ease);overflow:hidden
       }
       .desktopSidebarLayer.isOpen .desktopSidebar{transform:translateX(0)}
-      .desktopSidebarHeader{display:grid;grid-template-columns:42px minmax(0,1fr) 42px;align-items:center;gap:8px;min-height:42px}
+      .desktopSidebarHeader{
+        display:grid;grid-template-columns:42px minmax(0,1fr);align-items:center;gap:8px;min-height:42px;
+        margin-top:max(0px,calc(var(--desktop-menu-top, 20px) - 20px));margin-left:60px
+      }
       .desktopSidebarTitle{margin:0;color:var(--accent-dark);font-size:1.12rem;font-weight:600;text-align:center}
       .desktopSidebarBrandTitle{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;font-size:.94rem;font-weight:600}
       .desktopSidebarBrandTitle img{display:block;width:22px;height:22px;flex:0 0 22px}
@@ -1006,10 +1018,11 @@
       .desktopSidebarBack[hidden]{visibility:hidden;display:inline-flex}
       .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarBack{display:none!important}
       .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarTitle{
-        grid-column:1 / 3;grid-row:1;justify-self:start;display:flex;align-items:center;
-        min-width:0;height:42px;margin:0;padding:0 0 0 10px;text-align:left;line-height:1
+        grid-column:1 / -1;grid-row:1;justify-self:start;display:flex;align-items:center;
+        min-width:0;max-width:100%;height:42px;margin:0;padding:0;
+        overflow:hidden;text-align:left;line-height:1
       }
-      .desktopSidebarClose{grid-column:3;grid-row:1}
+      .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarBrandTitle{overflow:hidden;text-overflow:ellipsis}
       .desktopSidebarBody{width:100%;min-width:0;min-height:0;overflow:auto;padding:4px 2px 10px;box-sizing:border-box;scrollbar-width:thin}
       .desktopSidebarView[hidden]{display:none!important}
       .desktopSidebarView,.desktopSidebarMount{width:100%;min-width:0;box-sizing:border-box}
@@ -2514,6 +2527,7 @@
   <header class="topbar">
     <button class="desktopMenuButton" id="desktopMenuButton" type="button" aria-label="Menu openen" aria-controls="desktopSidebar" aria-expanded="false">
       <svg class="menuOpenIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14"></path><path d="M5 12h14"></path><path d="M5 16h14"></path></svg>
+      <svg class="menuCloseIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg>
     </button>
     <nav class="tabs" role="navigation" aria-label="Hoofdnavigatie">
       <button class="tab active" data-tab="inspiratie" type="button" aria-selected="true"><img class="brandTabMark" src="assets/inspiratiebank-icon/inspiratiebank-icoon-128x128.png" alt="" aria-hidden="true"><span>Inspiratiebank</span></button>
@@ -2526,7 +2540,6 @@
       <div class="desktopSidebarHeader">
         <button class="desktopSidebarIconButton desktopSidebarBack" type="button" data-sidebar-back aria-label="Terug naar menu" hidden><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></button>
         <h2 class="desktopSidebarTitle" id="desktopSidebarTitle"><span class="desktopSidebarBrandTitle"><img src="assets/inspiratiebank-icon/inspiratiebank-icoon-128x128.png" alt="" aria-hidden="true"><span>Inspiratiebank</span></span><span class="desktopSidebarStateTitle" hidden></span></h2>
-        <button class="desktopSidebarIconButton desktopSidebarClose" type="button" data-sidebar-close aria-label="Menu sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
       </div>
       <div class="desktopSidebarBody">
         <section class="desktopSidebarView" data-sidebar-view="menu">
@@ -3736,6 +3749,12 @@
     layer.classList.add('isOpen');
     layer.setAttribute('aria-hidden','false');
     const menuButton = $('#desktopMenuButton');
+    if(menuButton){
+      const rect = menuButton.getBoundingClientRect();
+      document.documentElement.style.setProperty('--desktop-menu-left', `${rect.left}px`);
+      document.documentElement.style.setProperty('--desktop-menu-top', `${rect.top}px`);
+      menuButton.setAttribute('aria-label','Menu sluiten');
+    }
     menuButton?.setAttribute('aria-expanded','true');
     document.body.classList.add('desktopSidebarOpen');
     return true;
@@ -3748,13 +3767,17 @@
     layer.setAttribute('aria-hidden','true');
     const menuButton = $('#desktopMenuButton');
     menuButton?.setAttribute('aria-expanded','false');
+    menuButton?.setAttribute('aria-label','Menu openen');
     $('#filterToggle')?.setAttribute('aria-expanded','false');
     $('#agendaFilterToggle')?.setAttribute('aria-expanded','false');
     document.body.classList.remove('desktopSidebarOpen');
     desktopSidebarState = 'menu';
   }
   function setupDesktopSidebar(){
-    $('#desktopMenuButton')?.addEventListener('click', () => openDesktopSidebar('menu'));
+    $('#desktopMenuButton')?.addEventListener('click', () => {
+      if($('#desktopSidebarLayer')?.classList.contains('isOpen')) closeDesktopSidebar();
+      else openDesktopSidebar('menu');
+    });
     $$('[data-sidebar-close]').forEach(button => button.addEventListener('click', closeDesktopSidebar));
     $('[data-sidebar-back]')?.addEventListener('click', () => setDesktopSidebarState('menu'));
     $$('[data-sidebar-open]').forEach(button => button.addEventListener('click', () => setDesktopSidebarState(button.dataset.sidebarOpen)));
