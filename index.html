@@ -11,7 +11,7 @@
     html.appLoading .appLoader{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;width:100%;min-height:100vh;padding:24px;background:#FBFAF6}
   </style>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta name="theme-color" content="#FAFCFB">
+  <meta name="theme-color" content="#0F6B6B">
   <meta name="description" content="Een verzameling ideeën, uitjes en activiteiten om inspiratie op te doen, plannen te maken en samen te ontdekken.">
   <meta property="og:locale" content="nl_NL">
   <meta property="og:type" content="website">
@@ -28,10 +28,14 @@
     }
   </script>
   <link rel="canonical" href="https://inspiratiebank.uitgesproken.me/">
-  <link rel="icon" href="favicon-32.png?v=20260915-transparent-icon-v1" type="image/png" sizes="32x32">
-  <link rel="icon" href="favicon-48.png?v=20260915-transparent-icon-v1" type="image/png" sizes="48x48">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260915-transparent-icon-v1">
-  <link rel="manifest" href="site.webmanifest?v=20260915-transparent-icon-v1">
+  <link rel="icon" href="favicon.ico?v=20260916-brand-v1" sizes="any">
+  <link rel="icon" href="assets/inspiratiebank-logo/inspiratiebank-mark.svg?v=20260916-brand-v1" type="image/svg+xml">
+  <link rel="icon" href="favicon-32x32.png?v=20260916-brand-v1" type="image/png" sizes="32x32">
+  <link rel="icon" href="favicon-16x16.png?v=20260916-brand-v1" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260916-brand-v1" sizes="180x180">
+  <link rel="manifest" href="site.webmanifest?v=20260916-brand-v1">
+  <link rel="mask-icon" href="safari-pinned-tab.svg?v=20260916-brand-v1" color="#0F6B6B">
+  <meta name="msapplication-config" content="browserconfig.xml?v=20260916-brand-v1">
   <meta name="apple-mobile-web-app-title" content="Inspiratiebank">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,6 +129,7 @@
       background:rgba(168,225,221,.16);
       color:var(--accent-dark);
     }
+    .topbar .brandTabMark{display:block;width:22px;height:22px;flex:0 0 22px;margin-right:7px}
     .topbar>.tabs .tab.active{
       background:#005766;
       color:#fff;
@@ -1016,6 +1021,7 @@
       .desktopSidebarNavItem.active{background:rgba(218,235,219,.42);color:var(--accent-dark)}
       .desktopSidebarNavIcon{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:10px;background:rgba(255,253,249,.48);border:1px solid rgba(123,112,88,.045)}
       .desktopSidebarNavIcon svg,.desktopSidebarNavChevron svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+      .desktopSidebarNavIcon img{display:block;width:20px;height:20px}
       .desktopSidebarNavChevron{display:inline-flex;opacity:.48}
       .desktopSidebarDivider{height:1px;margin:10px 8px;background:rgba(123,112,88,.10)}
       .desktopSidebarIntro{margin:0 4px 16px;color:var(--muted);font-size:.88rem;line-height:1.48}
@@ -2509,7 +2515,7 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14"></path><path d="M5 12h14"></path><path d="M5 16h14"></path></svg>
     </button>
     <nav class="tabs" role="navigation" aria-label="Hoofdnavigatie">
-      <button class="tab active" data-tab="inspiratie" type="button" aria-selected="true">Inspiratiebank</button>
+      <button class="tab active" data-tab="inspiratie" type="button" aria-selected="true"><img class="brandTabMark" src="assets/inspiratiebank-logo/inspiratiebank-mark.svg" alt="" aria-hidden="true"><span>Inspiratiebank</span></button>
       <button class="tab" data-tab="weken" type="button">UIT-agenda</button>
     </nav>
   </header>
@@ -2524,7 +2530,7 @@
       <div class="desktopSidebarBody">
         <section class="desktopSidebarView" data-sidebar-view="menu">
           <nav class="desktopSidebarNav" aria-label="Menu">
-            <button class="desktopSidebarNavItem active" type="button" data-sidebar-tab="inspiratie"><span class="desktopSidebarNavIcon"><svg viewBox="0 0 24 24"><path d="M12 3c-4 3-6 6-6 10a6 6 0 0 0 12 0c0-4-2-7-6-10Z"></path><path d="M12 9v9"></path></svg></span><span>Inspiratiebank</span><span class="desktopSidebarNavChevron"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></span></button>
+            <button class="desktopSidebarNavItem active" type="button" data-sidebar-tab="inspiratie"><span class="desktopSidebarNavIcon"><img src="assets/inspiratiebank-logo/inspiratiebank-mark.svg" alt="" aria-hidden="true"></span><span>Inspiratiebank</span><span class="desktopSidebarNavChevron"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></span></button>
             <button class="desktopSidebarNavItem" type="button" data-sidebar-tab="weken"><span class="desktopSidebarNavIcon"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg></span><span>UIT-agenda</span><span class="desktopSidebarNavChevron"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></span></button>
             <div class="desktopSidebarDivider"></div>
             <button class="desktopSidebarNavItem" type="button" data-sidebar-open="location"><span class="desktopSidebarNavIcon"><svg viewBox="0 0 24 24"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><span>Locatie en afstand</span><span class="desktopSidebarNavChevron"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></span></button>
