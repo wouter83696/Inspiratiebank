@@ -981,7 +981,7 @@
         color:rgba(49,95,107,.72);pointer-events:auto;cursor:pointer
       }
       .desktopMenuButton:hover{background:rgba(241,235,220,.52)}
-      .desktopMenuButton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+      .desktopMenuButton img{display:block;width:30px;height:30px;border-radius:7px}
       .desktopSidebarLayer{position:fixed;inset:0;z-index:120;display:block;pointer-events:none;visibility:hidden}
       .desktopSidebarLayer.isOpen{pointer-events:auto;visibility:visible}
       .desktopSidebarBackdrop{position:absolute;inset:0;border:0;background:rgba(48,46,39,.14);opacity:0;transition:opacity .22s var(--ease);cursor:default}
@@ -998,6 +998,7 @@
       .desktopSidebarIconButton{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border:0;border-radius:11px;background:transparent;color:rgba(49,95,107,.74);cursor:pointer}
       .desktopSidebarIconButton:hover{background:rgba(217,231,214,.52);color:var(--accent-dark)}
       .desktopSidebarIconButton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+      .desktopSidebarIconButton img{display:block;width:30px;height:30px;border-radius:7px}
       .desktopSidebarBack[hidden]{visibility:hidden;display:inline-flex}
       .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarHeader{
         display:flex;justify-content:flex-start;padding-left:max(0px,min(calc(var(--hero-edge) - 18px),calc(100% - 112px)));box-sizing:border-box
@@ -2498,7 +2499,7 @@
   </script>
   <header class="topbar">
     <button class="desktopMenuButton" id="desktopMenuButton" type="button" aria-label="Menu openen" aria-controls="desktopSidebar" aria-expanded="false">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
+      <img src="favicon.svg" alt="" aria-hidden="true">
     </button>
     <nav class="tabs" role="navigation" aria-label="Hoofdnavigatie">
       <button class="tab active" data-tab="inspiratie" type="button" aria-selected="true">Inspiratiebank</button>
@@ -2510,8 +2511,8 @@
     <aside class="desktopSidebar" id="desktopSidebar" data-sidebar-state="menu" role="dialog" aria-modal="true" aria-labelledby="desktopSidebarTitle">
       <div class="desktopSidebarHeader">
         <button class="desktopSidebarIconButton desktopSidebarBack" type="button" data-sidebar-back aria-label="Terug naar menu" hidden><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></button>
-        <h2 class="desktopSidebarTitle" id="desktopSidebarTitle">Menu</h2>
-        <button class="desktopSidebarIconButton" type="button" data-sidebar-close aria-label="Menu sluiten"><svg viewBox="0 0 24 24"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
+        <h2 class="desktopSidebarTitle" id="desktopSidebarTitle">Inspiratiebank</h2>
+        <button class="desktopSidebarIconButton" type="button" data-sidebar-close aria-label="Menu sluiten"><img src="favicon.svg" alt="" aria-hidden="true"></button>
       </div>
       <div class="desktopSidebarBody">
         <section class="desktopSidebarView" data-sidebar-view="menu">
@@ -3688,7 +3689,7 @@
     if(sidebar) sidebar.dataset.sidebarState = nextState;
     $$('[data-sidebar-view]').forEach(view => { view.hidden = view.dataset.sidebarView !== nextState; });
     const title = $('#desktopSidebarTitle');
-    if(title) title.textContent = nextState === 'location' ? 'Locatie en afstand' : nextState === 'filters' ? 'Filters' : 'Menu';
+    if(title) title.textContent = nextState === 'location' ? 'Locatie en afstand' : nextState === 'filters' ? 'Filters' : 'Inspiratiebank';
     const back = $('[data-sidebar-back]');
     if(back) back.hidden = nextState === 'menu';
     if(nextState === 'location'){
