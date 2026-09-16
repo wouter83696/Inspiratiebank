@@ -965,6 +965,7 @@
     .viewIcon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .desktopViewBar{display:none}
     .desktopLocationBar{display:none}
+    .desktopMenuButton,.desktopSidebarLayer{display:none}
     .mobileHeroTitle,.mobileHeroSubtitle{display:none}
     @media (max-width:980px){
       #tab-inspiratie .desktopHeroTitle,
@@ -973,6 +974,59 @@
       #tab-inspiratie .mobileHeroSubtitle{display:inline}
     }
     @media (min-width:981px){
+      .desktopMenuButton{
+        display:inline-flex;align-items:center;justify-content:center;flex:0 0 34px;width:34px;height:34px;
+        margin:0 14px 20px 0;padding:0;border:1px solid rgba(255,255,255,.72);border-radius:12px;
+        background:rgba(255,253,249,.66);box-shadow:0 6px 18px rgba(20,38,42,.04);backdrop-filter:blur(12px);
+        color:var(--accent-dark);cursor:pointer
+      }
+      .desktopMenuButton:hover{background:rgba(255,253,249,.9)}
+      .desktopMenuButton svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+      .desktopSidebarLayer{position:fixed;inset:0;z-index:120;display:block;pointer-events:none;visibility:hidden}
+      .desktopSidebarLayer.isOpen{pointer-events:auto;visibility:visible}
+      .desktopSidebarBackdrop{position:absolute;inset:0;border:0;background:rgba(26,46,51,.18);opacity:0;transition:opacity .22s var(--ease);cursor:default}
+      .desktopSidebarLayer.isOpen .desktopSidebarBackdrop{opacity:1}
+      .desktopSidebar{
+        position:absolute;left:0;top:0;bottom:0;width:min(360px,calc(100vw - 44px));
+        display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:16px;padding:20px 18px 18px;
+        border-right:1px solid rgba(79,142,158,.10);background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(250,250,247,.97));
+        box-sizing:border-box;box-shadow:20px 0 52px rgba(20,38,42,.13);transform:translateX(-102%);transition:transform .25s var(--ease);overflow:hidden
+      }
+      .desktopSidebarLayer.isOpen .desktopSidebar{transform:translateX(0)}
+      .desktopSidebarHeader{display:grid;grid-template-columns:34px minmax(0,1fr) 34px;align-items:center;gap:8px;min-height:40px}
+      .desktopSidebarTitle{margin:0;color:var(--accent-dark);font-size:1.12rem;font-weight:600;text-align:center}
+      .desktopSidebarIconButton{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border:0;border-radius:11px;background:transparent;color:rgba(49,95,107,.78);cursor:pointer}
+      .desktopSidebarIconButton:hover{background:rgba(168,225,221,.18);color:var(--accent-dark)}
+      .desktopSidebarIconButton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+      .desktopSidebarBack[hidden]{visibility:hidden;display:inline-flex}
+      .desktopSidebarBody{width:100%;min-width:0;min-height:0;overflow:auto;padding:4px 2px 10px;box-sizing:border-box;scrollbar-width:thin}
+      .desktopSidebarView[hidden]{display:none!important}
+      .desktopSidebarView,.desktopSidebarMount{width:100%;min-width:0;box-sizing:border-box}
+      .desktopSidebarNav{display:grid;gap:5px}
+      .desktopSidebarNavItem{
+        display:grid;grid-template-columns:32px minmax(0,1fr) 16px;align-items:center;gap:10px;width:100%;min-height:48px;
+        padding:7px 10px;border:0;border-radius:13px;background:transparent;color:rgba(31,75,86,.84);font:inherit;font-size:.9rem;text-align:left;text-decoration:none;cursor:pointer
+      }
+      .desktopSidebarNavItem:hover,.desktopSidebarNavItem.active{background:rgba(168,225,221,.18);color:var(--accent-dark)}
+      .desktopSidebarNavIcon{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:10px;background:rgba(255,255,255,.62);border:1px solid rgba(79,142,158,.08)}
+      .desktopSidebarNavIcon svg,.desktopSidebarNavChevron svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+      .desktopSidebarNavChevron{display:inline-flex;opacity:.48}
+      .desktopSidebarDivider{height:1px;margin:10px 8px;background:rgba(11,18,32,.06)}
+      .desktopSidebarIntro{margin:0 4px 16px;color:var(--muted);font-size:.88rem;line-height:1.48}
+      .desktopSidebarMount .locationForm{margin:0;max-width:none}
+      .desktopSidebarMount .locationFieldsRow{grid-template-columns:minmax(0,1fr) 118px}
+      .desktopSidebarMount .locationField input,.desktopSidebarMount .locationField select{background:#fff}
+      .desktopSidebarMount .filterOptions{
+        position:static!important;display:grid!important;grid-template-columns:1fr!important;gap:10px!important;width:100%!important;
+        max-height:none!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;
+        background:transparent!important;box-shadow:none!important;opacity:1!important;overflow:visible!important;visibility:visible!important;pointer-events:auto!important;transform:none!important
+      }
+      .desktopSidebarMount .filterOptions>*{grid-column:1!important;width:100%!important;min-width:0!important;max-width:100%!important;max-height:none!important;min-height:42px!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important}
+      .desktopSidebarMount .customSelectButton{width:100%;min-height:42px;background:#fff}
+      .desktopSidebarMount .customSelectOptions{z-index:140}
+      .desktopSidebarMount .filterShuffle,.desktopSidebarMount .filterReset{justify-content:center}
+      .desktopSidebarFooter{padding-top:13px;border-top:1px solid rgba(11,18,32,.06);color:rgba(49,95,107,.62);font-size:.78rem;line-height:1.4;text-align:center}
+      body.desktopSidebarOpen{overflow:hidden}
       .topbar{
         width:100%;
         max-width:none;
@@ -2404,11 +2458,44 @@
     })();
   </script>
   <header class="topbar">
+    <button class="desktopMenuButton" id="desktopMenuButton" type="button" aria-label="Menu openen" aria-controls="desktopSidebar" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
+    </button>
     <nav class="tabs" role="navigation" aria-label="Hoofdnavigatie">
       <button class="tab active" data-tab="inspiratie" type="button" aria-selected="true">Inspiratiebank</button>
       <button class="tab" data-tab="weken" type="button">UIT-agenda</button>
     </nav>
   </header>
+  <div class="desktopSidebarLayer" id="desktopSidebarLayer" aria-hidden="true">
+    <button class="desktopSidebarBackdrop" type="button" data-sidebar-close aria-label="Menu sluiten"></button>
+    <aside class="desktopSidebar" id="desktopSidebar" role="dialog" aria-modal="true" aria-labelledby="desktopSidebarTitle">
+      <div class="desktopSidebarHeader">
+        <button class="desktopSidebarIconButton desktopSidebarBack" type="button" data-sidebar-back aria-label="Terug naar menu" hidden><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg></button>
+        <h2 class="desktopSidebarTitle" id="desktopSidebarTitle">Menu</h2>
+        <button class="desktopSidebarIconButton" type="button" data-sidebar-close aria-label="Menu sluiten"><svg viewBox="0 0 24 24"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
+      </div>
+      <div class="desktopSidebarBody">
+        <section class="desktopSidebarView" data-sidebar-view="menu">
+          <nav class="desktopSidebarNav" aria-label="Menu">
+            <button class="desktopSidebarNavItem active" type="button" data-sidebar-tab="inspiratie"><span class="desktopSidebarNavIcon"><svg viewBox="0 0 24 24"><path d="M12 3c-4 3-6 6-6 10a6 6 0 0 0 12 0c0-4-2-7-6-10Z"></path><path d="M12 9v9"></path></svg></span><span>Inspiratiebank</span><span class="desktopSidebarNavChevron"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></span></button>
+            <button class="desktopSidebarNavItem" type="button" data-sidebar-tab="weken"><span class="desktopSidebarNavIcon"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg></span><span>UIT-agenda</span><span class="desktopSidebarNavChevron"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></span></button>
+            <div class="desktopSidebarDivider"></div>
+            <button class="desktopSidebarNavItem" type="button" data-sidebar-open="location"><span class="desktopSidebarNavIcon"><svg viewBox="0 0 24 24"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><span>Locatie en afstand</span><span class="desktopSidebarNavChevron"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></span></button>
+            <button class="desktopSidebarNavItem" type="button" data-sidebar-open="filters"><span class="desktopSidebarNavIcon"><svg viewBox="0 0 24 24"><path d="M4 7h9"></path><path d="M17 7h3"></path><circle cx="15" cy="7" r="2"></circle><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="9" cy="17" r="2"></circle></svg></span><span>Filters</span><span class="desktopSidebarNavChevron"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg></span></button>
+          </nav>
+        </section>
+        <section class="desktopSidebarView" data-sidebar-view="location" hidden>
+          <p class="desktopSidebarIntro">Vul je postcode of plaats in en kies binnen welke afstand je activiteiten wilt bekijken.</p>
+          <div class="desktopSidebarMount" id="desktopSidebarLocationMount"></div>
+        </section>
+        <section class="desktopSidebarView" data-sidebar-view="filters" hidden>
+          <p class="desktopSidebarIntro">Verfijn de inspiratiebank op categorie, locatie, afstand, kosten en prikkelbelasting.</p>
+          <div class="desktopSidebarMount" id="desktopSidebarFiltersMount"></div>
+        </section>
+      </div>
+      <div class="desktopSidebarFooter">Inspiratiebank · rustig kiezen wat bij je past</div>
+    </aside>
+  </div>
 
   <main class="shell">
     <section id="tab-weken" class="tabPanel" role="tabpanel">
@@ -2719,8 +2806,8 @@
       <form id="locationForm" class="locationForm">
         <div class="locationFieldsRow">
           <div class="locationField">
-            <label for="locationPostcodeInput">Postcode</label>
-            <input id="locationPostcodeInput" type="text" inputmode="text" autocomplete="postal-code" placeholder="Bijv. 6603 AB">
+            <label for="locationPostcodeInput">Postcode of plaats</label>
+            <input id="locationPostcodeInput" type="text" inputmode="text" autocomplete="postal-code" placeholder="Bijv. 6603 AB of Nijmegen">
           </div>
           <div class="locationField">
             <label for="locationRadiusInput">Afstand</label>
@@ -3517,7 +3604,7 @@
     $$('[data-location-settings-btn]').forEach(button => {
       button.classList.toggle('locationSet', !userLocation?.isDefault);
     });
-    if(input) input.value = userLocation?.isDefault ? '' : cleanPostcode(userLocation.postcode || '');
+    if(input) input.value = userLocation?.isDefault ? '' : (cleanPostcode(userLocation.postcode || '') || userLocation.place || userLocation.label || '');
     if(status){
       status.classList.remove('warn');
       status.textContent = userLocation?.isDefault ? 'Standaard: Nijmegen binnen 50+ km.' : 'Je postcode en afstand zijn lokaal bewaard op dit apparaat.';
@@ -3539,6 +3626,84 @@
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
+  let desktopSidebarState = 'menu';
+  const desktopSidebarOrigins = new Map();
+  function desktopSidebarEnabled(){
+    return window.matchMedia('(min-width:981px)').matches;
+  }
+  function rememberSidebarOrigin(node){
+    if(!node || desktopSidebarOrigins.has(node)) return;
+    desktopSidebarOrigins.set(node, {parent:node.parentNode, next:node.nextSibling});
+  }
+  function restoreDesktopSidebarNodes(){
+    desktopSidebarOrigins.forEach((origin,node) => {
+      if(!origin.parent || node.parentNode === origin.parent) return;
+      const next = origin.next && origin.next.parentNode === origin.parent ? origin.next : null;
+      origin.parent.insertBefore(node,next);
+    });
+  }
+  function setDesktopSidebarState(state='menu'){
+    const nextState = ['menu','location','filters'].includes(state) ? state : 'menu';
+    restoreDesktopSidebarNodes();
+    desktopSidebarState = nextState;
+    $$('[data-sidebar-view]').forEach(view => { view.hidden = view.dataset.sidebarView !== nextState; });
+    const title = $('#desktopSidebarTitle');
+    if(title) title.textContent = nextState === 'location' ? 'Locatie en afstand' : nextState === 'filters' ? 'Filters' : 'Menu';
+    const back = $('[data-sidebar-back]');
+    if(back) back.hidden = nextState === 'menu';
+    if(nextState === 'location'){
+      const form = $('#locationForm');
+      const mount = $('#desktopSidebarLocationMount');
+      if(form && mount){ rememberSidebarOrigin(form); mount.appendChild(form); syncLocationUi(); }
+      window.requestAnimationFrame(() => $('#locationPostcodeInput')?.focus());
+    }
+    if(nextState === 'filters'){
+      const activeTab = $('.topbar .tab.active')?.dataset.tab || 'inspiratie';
+      const options = activeTab === 'weken' ? $('#agendaFilters .filterOptions') : $('#ideaFilters .filterOptions');
+      const mount = $('#desktopSidebarFiltersMount');
+      if(options && mount){ rememberSidebarOrigin(options); mount.appendChild(options); }
+      (activeTab === 'weken' ? $('#agendaFilterToggle') : $('#filterToggle'))?.setAttribute('aria-expanded','true');
+    }else{
+      $('#filterToggle')?.setAttribute('aria-expanded','false');
+      $('#agendaFilterToggle')?.setAttribute('aria-expanded','false');
+    }
+  }
+  function openDesktopSidebar(state='menu'){
+    if(!desktopSidebarEnabled()) return false;
+    const layer = $('#desktopSidebarLayer');
+    if(!layer) return false;
+    setDesktopSidebarState(state);
+    layer.classList.add('isOpen');
+    layer.setAttribute('aria-hidden','false');
+    $('#desktopMenuButton')?.setAttribute('aria-expanded','true');
+    document.body.classList.add('desktopSidebarOpen');
+    return true;
+  }
+  function closeDesktopSidebar(){
+    const layer = $('#desktopSidebarLayer');
+    if(!layer?.classList.contains('isOpen')) return;
+    restoreDesktopSidebarNodes();
+    layer.classList.remove('isOpen');
+    layer.setAttribute('aria-hidden','true');
+    $('#desktopMenuButton')?.setAttribute('aria-expanded','false');
+    $('#filterToggle')?.setAttribute('aria-expanded','false');
+    $('#agendaFilterToggle')?.setAttribute('aria-expanded','false');
+    document.body.classList.remove('desktopSidebarOpen');
+    desktopSidebarState = 'menu';
+  }
+  function setupDesktopSidebar(){
+    $('#desktopMenuButton')?.addEventListener('click', () => openDesktopSidebar('menu'));
+    $$('[data-sidebar-close]').forEach(button => button.addEventListener('click', closeDesktopSidebar));
+    $('[data-sidebar-back]')?.addEventListener('click', () => setDesktopSidebarState('menu'));
+    $$('[data-sidebar-open]').forEach(button => button.addEventListener('click', () => setDesktopSidebarState(button.dataset.sidebarOpen)));
+    $$('[data-sidebar-tab]').forEach(button => button.addEventListener('click', () => {
+      setTab(button.dataset.sidebarTab);
+      closeDesktopSidebar();
+    }));
+    window.addEventListener('resize', () => {
+      if(!desktopSidebarEnabled()) closeDesktopSidebar();
+    }, {passive:true});
+  }
   function parsePdokPoint(value=''){
     const match = String(value || '').match(/POINT\(([-\d.]+)\s+([-\d.]+)\)/i);
     return match ? {lon:Number(match[1]), lat:Number(match[2])} : null;
@@ -3554,6 +3719,22 @@
     const point = parsePdokPoint(doc?.centroide_ll);
     if(!point || !Number.isFinite(point.lat) || !Number.isFinite(point.lon)) throw new Error('Deze postcode is niet gevonden.');
     return {label:doc.woonplaatsnaam || clean, place:doc.woonplaatsnaam || '', postcode:clean, lat:point.lat, lon:point.lon};
+  }
+  async function geocodePlace(place=''){
+    const clean = String(place || '').trim();
+    if(clean.length < 2) throw new Error('Vul een postcode of plaatsnaam in.');
+    const url = `https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?q=${encodeURIComponent(clean)}&fq=type:woonplaats&rows=1`;
+    const response = await fetch(url, {headers:{Accept:'application/json'}});
+    if(!response.ok) throw new Error('De plaats kon nu niet worden opgezocht.');
+    const doc = (await response.json())?.response?.docs?.[0];
+    const point = parsePdokPoint(doc?.centroide_ll);
+    if(!doc || !point || !Number.isFinite(point.lat) || !Number.isFinite(point.lon)) throw new Error('Deze postcode of plaats is niet gevonden.');
+    const label = doc.woonplaatsnaam || doc.weergavenaam || clean;
+    return {label, place:label, postcode:'', lat:point.lat, lon:point.lon};
+  }
+  async function geocodeLocation(value=''){
+    const clean = String(value || '').trim();
+    return /^\d{4}\s?[A-Z]{2}$/i.test(clean) ? geocodePostcode(clean) : geocodePlace(clean);
   }
   function addressLabelFromPdokDoc(doc={}){
     const number = [doc.huisnummer, doc.huisletter, doc.huisnummertoevoeging].filter(Boolean).join('');
@@ -6127,6 +6308,7 @@
     $$('.tab').forEach(b=>{ const on=b.dataset.tab===name; b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
     syncTopTabIndicator();
     $$('.tabPanel').forEach(p=>p.classList.toggle('active',p.id === 'tab-'+name));
+    $$('[data-sidebar-tab]').forEach(button => button.classList.toggle('active', button.dataset.sidebarTab === name));
     const panel = $('#tab-'+name);
     if(options.updateUrl !== false){
       const currentView = $('[data-view-group="ideas"].active')?.dataset.view || ideaViewFromLocation();
@@ -6205,6 +6387,7 @@
 	  }
 	  async function init(){
 	    setupTopTabNavigation();
+	    setupDesktopSidebar();
 	    const hasSiteData = await loadSiteData();
 	    if(!hasSiteData) return;
 	    refreshActiveWeeks();
@@ -6250,6 +6433,10 @@
     });
     document.addEventListener('keydown', event => {
       if(event.key === 'Escape'){
+        if($('#desktopSidebarLayer')?.classList.contains('isOpen')){
+          closeDesktopSidebar();
+          return;
+        }
         if(!$('#confirmModal').hidden){
           closeConfirmDialog(false);
           return;
@@ -6294,7 +6481,9 @@
       if(event.target.id === 'locationModal') closeLocationModal();
     });
     document.addEventListener('click', event => {
-      if(event.target.closest('[data-location-settings-btn]')) openLocationModal();
+      if(event.target.closest('[data-location-settings-btn]')){
+        if(!openDesktopSidebar('location')) openLocationModal();
+      }
     });
     document.addEventListener('click', event => {
       if(event.target.closest('[data-map-clear-cluster]')){
@@ -6320,6 +6509,7 @@
       saveUserLocationRadius(DEFAULT_LOCATION_RADIUS_KM, {sync:false});
       saveUserLocation(null);
       closeLocationModal();
+      closeDesktopSidebar();
     });
     enhanceCustomSelect($('#locationRadiusInput'));
     $('#locationRadiusInput')?.addEventListener('change', event => {
@@ -6330,10 +6520,10 @@
       const status = $('#locationStatus');
       const input = $('#locationPostcodeInput');
       const radiusInput = $('#locationRadiusInput');
-      const postcode = cleanPostcode(input?.value || '');
-      if(status) status.textContent = 'Postcode opzoeken...';
+      const locationQuery = String(input?.value || '').trim();
+      if(status) status.textContent = 'Locatie opzoeken...';
       try{
-        const location = await geocodePostcode(postcode);
+        const location = await geocodeLocation(locationQuery);
         if(!isSupportedLocation(location)){
           const km = Math.round(supportedRegionDistanceKm(location));
           if(status){
@@ -6345,6 +6535,7 @@
         saveUserLocationRadius(radiusInput?.value, {sync:false});
         saveUserLocation(location);
         closeLocationModal();
+        closeDesktopSidebar();
       }catch(error){
         if(status) status.textContent = error.message || 'De postcode kon niet worden gebruikt.';
       }
@@ -6442,11 +6633,13 @@
 	    $('#resetBtn').addEventListener('click',resetFilters);
 	    $('#agendaResetBtn').addEventListener('click',resetAgendaFilters);
 	    $('#agendaFilterToggle').addEventListener('click',()=>{
+	      if(openDesktopSidebar('filters')) return;
 	      const filters = $('#agendaFilters');
 	      const expanded = filters.classList.toggle('expanded');
 	      $('#agendaFilterToggle').setAttribute('aria-expanded', expanded ? 'true' : 'false');
 	    });
 	    $('#filterToggle').addEventListener('click',()=>{
+	      if(openDesktopSidebar('filters')) return;
 	      const filters = $('#ideaFilters');
 	      const expanded = filters.classList.toggle('expanded');
 	      $('#filterToggle').setAttribute('aria-expanded', expanded ? 'true' : 'false');
