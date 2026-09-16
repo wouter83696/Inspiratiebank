@@ -714,6 +714,10 @@
     .backToTop svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
     .backToTop:hover{background:#fff}
     .backToTop.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+    @media (min-width:981px){
+      .backToTop{display:inline-flex;align-items:center;justify-content:center;right:24px;bottom:24px;background:rgba(255,253,249,.94);box-shadow:0 4px 16px rgba(20,38,42,.08);visibility:hidden}
+      .backToTop.show{visibility:visible}
+    }
     .ideaModal{
       position:fixed;inset:0;z-index:95;display:grid;place-items:center;
       padding:20px;background:rgba(244,247,245,.70);backdrop-filter:blur(14px)
@@ -7231,7 +7235,8 @@
 	    if(backToTopBtn){
 	      const syncBackToTop = () => {
 	        const isMobile = window.matchMedia('(max-width: 640px)').matches;
-	        backToTopBtn.classList.toggle('show', isMobile && window.scrollY > 500);
+	        const isDesktop = window.matchMedia('(min-width:981px)').matches;
+	        backToTopBtn.classList.toggle('show', (isMobile || isDesktop) && window.scrollY > 500);
 	      };
 	      window.addEventListener('scroll', syncBackToTop, {passive:true});
 	      window.addEventListener('resize', syncBackToTop);
