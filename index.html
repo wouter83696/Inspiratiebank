@@ -2119,19 +2119,7 @@
       background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%233b6470' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E") center/contain no-repeat;
     }
     #ideaCards .cardLabels .stimulusPillText{
-      display:inline;
-    }
-    #ideaCards .cardLabels .costIcon{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      flex:0 0 14px;
-      width:14px;
-      height:14px;
-      color:var(--accent-dark);
-      font-size:.8rem;
-      font-weight:700;
-      line-height:1;
+      display:none;
     }
     #ideaCards .cardMetaLine{
       width:auto;
@@ -3317,7 +3305,7 @@
   function costPill(value){
     const label = normalizeIdeaCost(value);
     const kind = label === 'Gratis' ? 'costFree' : label === '€€€' ? 'costHigh' : label === '€€' ? 'costMid' : 'costLow';
-    return `<span class="pill costPill ${kind}" title="Kosten: ${escapeHtml(label)}" aria-label="Kosten: ${escapeHtml(label)}"><span class="costIcon" aria-hidden="true">€</span>${escapeHtml(label)}</span>`;
+    return `<span class="pill costPill ${kind}" title="Kosten: ${escapeHtml(label)}" aria-label="Kosten: ${escapeHtml(label)}">${escapeHtml(label)}</span>`;
   }
   function normalizeIdeaStimulus(value=''){
     const v = normalize(value);
