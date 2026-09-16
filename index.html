@@ -981,11 +981,29 @@
         gap:0;
       }
       .topbar .tabs{
+        --tab-indicator-x:0px;
+        --tab-indicator-width:0px;
+        --tab-indicator-opacity:0;
+        position:relative;
         background:transparent;
         border-color:transparent;
         box-shadow:none;
         padding:0;
         gap:24px;
+      }
+      .topbar .tabs::after{
+        content:"";
+        position:absolute;
+        left:0;
+        bottom:3px;
+        width:var(--tab-indicator-width);
+        height:2px;
+        border-radius:999px;
+        background:var(--accent-dark);
+        opacity:var(--tab-indicator-opacity);
+        transform:translateX(var(--tab-indicator-x));
+        transition:transform .28s var(--ease),width .28s var(--ease),opacity .18s var(--ease);
+        pointer-events:none;
       }
       .topbar>.tabs .tab{
         position:relative;
@@ -998,18 +1016,8 @@
         color:var(--accent-dark);
       }
       .topbar>.tabs .tab::after{
-        content:"" !important;
-        display:block !important;
-        position:absolute;
-        left:0;
-        right:0;
-        bottom:3px;
-        height:2px;
-        border-radius:999px;
-        background:currentColor;
-        opacity:0;
-        transform:scaleX(.35);
-        transition:opacity .18s var(--ease),transform .18s var(--ease);
+        content:none !important;
+        display:none !important;
       }
       .topbar>.tabs .tab:hover{
         background:transparent;
@@ -1018,11 +1026,6 @@
       .topbar>.tabs .tab.active{
         background:transparent;
         color:var(--accent-dark);
-      }
-      .topbar>.tabs .tab:hover::after,
-      .topbar>.tabs .tab.active::after{
-        opacity:1;
-        transform:scaleX(1);
       }
       .tabHero{
         min-height:clamp(304px,24vw,356px);
@@ -1035,6 +1038,9 @@
         font-size:clamp(3.35rem,4.7vw,5rem);
         line-height:.95;
         letter-spacing:-.045em;
+      }
+      #tab-inspiratie .tabHeroTitle{
+        font-size:clamp(3.1rem,4.35vw,4.6rem);
       }
       .tabHeroLine{
         margin-top:10px;
@@ -1051,7 +1057,7 @@
         justify-content:flex-start;
         gap:14px;
         margin-top:-25px;
-        margin-bottom:18px;
+        margin-bottom:8px;
       }
       .tabHero + .filterBar .filters,
       .tabHero + .filterBar .agendaSearchFilters{
@@ -1169,6 +1175,15 @@
       .desktopViewBar .viewBtn{
         width:34px;
         height:34px;
+      }
+      .locationLegendItem,
+      .locationLegendItem.locationSet{
+        padding:8px 14px;
+        background:rgba(255,253,249,.60);
+        border-color:rgba(79,142,158,.08);
+        box-shadow:0 5px 14px rgba(20,38,42,.035);
+        color:rgba(49,95,107,.76);
+        font-weight:550;
       }
       #ideaCards{margin-top:0}
     }
@@ -5888,8 +5903,22 @@
     else url.searchParams.delete('weergave');
     window.history[replace ? 'replaceState' : 'pushState']({tab:tabName, view}, '', `${url.pathname}${url.search}${url.hash}`);
   }
+  function syncTopTabIndicator(){
+    const tabs = $('.topbar .tabs');
+    const active = tabs?.querySelector('.tab.active');
+    if(!tabs || !active){
+      tabs?.style.setProperty('--tab-indicator-opacity','0');
+      return;
+    }
+    const tabsRect = tabs.getBoundingClientRect();
+    const activeRect = active.getBoundingClientRect();
+    tabs.style.setProperty('--tab-indicator-x', `${activeRect.left - tabsRect.left}px`);
+    tabs.style.setProperty('--tab-indicator-width', `${activeRect.width}px`);
+    tabs.style.setProperty('--tab-indicator-opacity','1');
+  }
   function setTab(name, options={}){
     $$('.tab').forEach(b=>{ const on=b.dataset.tab===name; b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
+    syncTopTabIndicator();
     $$('.tabPanel').forEach(p=>p.classList.toggle('active',p.id === 'tab-'+name));
     const panel = $('#tab-'+name);
     if(options.updateUrl !== false){
@@ -5919,6 +5948,7 @@
       button.classList.remove('active');
       button.setAttribute('aria-selected','false');
     });
+    syncTopTabIndicator();
   }
   function setIdeaView(view, options={}){
     const nextView = ['tiles','list','map'].includes(view) ? view : 'tiles';
@@ -5998,6 +6028,7 @@
     });
     window.addEventListener('scroll', syncAgendaSectionFromScroll, {passive:true});
     window.addEventListener('resize', syncAgendaSectionFromScroll, {passive:true});
+    window.addEventListener('resize', syncTopTabIndicator, {passive:true});
     $$('.tab').forEach(btn=>btn.addEventListener('click',()=>setTab(btn.dataset.tab)));
     document.addEventListener('click', event => {
       const agendaSectionLink = event.target.closest('[data-agenda-section]');
