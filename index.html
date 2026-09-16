@@ -1048,18 +1048,8 @@
         gap:6px;
       }
       .topbar .tabs::after{
-        content:"";
-        position:absolute;
-        left:0;
-        bottom:1px;
-        width:var(--tab-indicator-width);
-        height:2px;
-        border-radius:999px;
-        background:var(--accent-dark);
-        opacity:var(--tab-indicator-opacity);
-        transform:translateX(var(--tab-indicator-x));
-        transition:transform .28s var(--ease),width .28s var(--ease),opacity .18s var(--ease);
-        pointer-events:none;
+        content:none;
+        display:none;
       }
       .topbar>.tabs .tab{
         position:relative;
@@ -1069,7 +1059,7 @@
         font-size:.94rem;
         font-weight:600;
         background:transparent;
-        color:var(--accent-dark);
+        color:rgba(49,95,107,.78);
       }
       .topbar>.tabs .tab::after{
         content:none !important;
@@ -1077,11 +1067,12 @@
       }
       .topbar>.tabs .tab:hover{
         background:rgba(241,235,220,.52);
-        color:var(--accent-dark);
+        color:rgba(36,79,88,.94);
       }
       .topbar>.tabs .tab.active{
         background:transparent;
-        color:var(--accent-dark);
+        color:#244f58;
+        font-weight:650;
       }
       .tabHero{
         min-height:clamp(304px,24vw,356px);
