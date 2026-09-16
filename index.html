@@ -1560,24 +1560,9 @@
     }
     .ideaMapResult:hover,.ideaMapResult.active{background:#fffefb;border-color:var(--theme-line,rgba(79,142,158,.18));transform:translateY(-1px)}
     .ideaMapResult.active{box-shadow:0 0 0 2px var(--theme-line,rgba(79,142,158,.18)),0 10px 24px rgba(20,38,42,.08)}
-    .ideaMapResultTitle{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
-    .ideaMapResult .categoryPill{min-height:26px;padding:5px 9px;font-size:.7rem;box-shadow:none}
-    .ideaMapResult .categoryPill.themeCreative{background:rgba(252,231,240,.93)}
-    .ideaMapResult .categoryPill.themeCulture{background:rgba(236,235,250,.93)}
-    .ideaMapResult .categoryPill.themeNature{background:rgba(229,245,236,.93)}
-    .ideaMapResult .categoryPill.themeSocial{background:rgba(255,246,217,.93)}
-    .ideaMapResult .categoryPill.themeSport{background:rgba(228,244,248,.93)}
-    .ideaMapResult .categoryPill.themeAction{background:rgba(253,237,221,.93)}
-    .ideaMapResult .categoryPill.themeDefault{background:rgba(231,245,237,.93)}
-    .ideaMapPhotoThemeIcon{position:absolute;z-index:2;top:8px;left:8px;display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(255,255,255,.72);border-radius:999px;color:var(--theme-ink);box-shadow:0 4px 12px rgba(20,38,42,.08);backdrop-filter:blur(7px)}
-    .ideaMapPhotoThemeIcon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .ideaMapPhotoThemeIcon.themeCreative{background:rgba(252,231,240,.93)}
-    .ideaMapPhotoThemeIcon.themeCulture{background:rgba(236,235,250,.93)}
-    .ideaMapPhotoThemeIcon.themeNature{background:rgba(229,245,236,.93)}
-    .ideaMapPhotoThemeIcon.themeSocial{background:rgba(255,246,217,.93)}
-    .ideaMapPhotoThemeIcon.themeSport{background:rgba(228,244,248,.93)}
-    .ideaMapPhotoThemeIcon.themeAction{background:rgba(253,237,221,.93)}
-    .ideaMapPhotoThemeIcon.themeDefault{background:rgba(231,245,237,.93)}
+    .ideaMapResultTitle{display:flex;align-items:center;gap:8px;min-width:0}
+    .ideaMapResult .domainIcon{width:30px;height:30px;margin:0;align-self:center;background:var(--theme-tint-strong);border-color:var(--theme-line);color:var(--theme-ink)}
+    .ideaMapResult .domainIcon svg{width:15px;height:15px}
     .ideaMapResultText{display:flex;flex-direction:column;align-items:stretch;min-width:0;padding:0}
     .ideaMapResult.hasThumb .ideaMapResultText{align-self:center;justify-content:center;min-height:96px;padding:0}
     .ideaMapResult.hasLink .ideaMapResultText{padding-right:0}
@@ -6480,14 +6465,12 @@
     const resultsHtml = orderedPoints.map(point => {
       const active = point.key === activeIdeaMapKey;
       const image = approvedIdeaImage(point.item);
-      const themePill = categoryPill(point.item.domain);
-      const photoThemeIcon = `<span class="ideaMapPhotoThemeIcon ${domainThemeClass(point.item.domain)}" aria-hidden="true">${domainIcon(point.item.domain)}</span>`;
-      const thumb = image ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async">${photoThemeIcon}</span>` : '';
+      const thumb = image ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async"></span>` : '';
       const pills = ideaMapPills(point.item, point);
       const link = point.item.url ? `<a class="ideaMapResultLink" href="${escapeHtml(point.item.url)}" target="_blank" rel="noopener" aria-label="${escapeHtml(sourceButtonLabel(point.item))} openen" title="${escapeHtml(sourceButtonLabel(point.item))} openen"></a>` : '';
       return `<article class="ideaMapResult ${domainThemeClass(point.item.domain)}${image ? ' hasThumb' : ''}${link ? ' hasLink' : ''}${active ? ' active' : ''}" role="button" tabindex="0" data-map-result-key="${escapeHtml(point.key)}">
         ${thumb}
-        <span class="ideaMapResultText"><span class="ideaMapResultTitle">${image ? '' : themePill}<strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultInfo"><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${ideaMapMeta(point.item, point)}</span>${link}</span></span>
+        <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultInfo"><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${ideaMapMeta(point.item, point)}</span>${link}</span></span>
       </article>`;
     }).join('');
     const sharedPlace = activeIdeaMapClusterKeys
