@@ -2043,6 +2043,29 @@
   <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260914-mobile-controls-v1">
   <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20260915-compact-practical-v1">
   <style>
+    /* De kaart zelf blijft rustig; categorieaccenten zitten alleen in iconen en badges. */
+    #ideaCards .ideaThemeCard,
+    #ideaCards .ideaThemeCard:hover{
+      background:#fffdf9;
+      border-color:rgba(64,45,20,.10);
+    }
+    #ideaCards .ideaThemeCard{
+      box-shadow:0 10px 28px rgba(64,45,20,.045);
+    }
+    #ideaCards .ideaThemeCard:hover{
+      box-shadow:0 16px 34px rgba(64,45,20,.07);
+    }
+    #ideaCards .ideaImageFrame{
+      background:#f7f4ee;
+      border-color:rgba(64,45,20,.09);
+    }
+    #ideaCards .ideaThemeCard h3{
+      font-weight:600;
+    }
+    #ideaCards .cardMetaLine{
+      background:rgba(247,248,246,.88);
+      border-color:rgba(64,45,20,.055);
+    }
     @media (max-width:640px){
       :root{--mobile-search-row-height:46px;--mobile-filter-button-size:54px;--mobile-view-button-size:30px;--mobile-view-switch-width:104px;--mobile-search-with-view-width:calc(100vw - 146px)}
       .tabHero,
