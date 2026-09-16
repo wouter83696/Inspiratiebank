@@ -224,6 +224,7 @@
     .tab.active{background:rgba(168,225,221,.42);color:var(--accent-dark);box-shadow:inset 0 0 0 1px rgba(79,142,158,.08)}
     .tabPanel{display:none;animation:in .25s var(--ease)}
     .tabPanel.active{display:block;scroll-margin-top:92px}
+    #tab-weken{background:var(--bg)}
     @keyframes in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
     .sectionHead{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin:24px 0 12px}
     .sectionHead.updatedHead{display:block;position:relative}
@@ -5919,6 +5920,22 @@
     tabs.style.setProperty('--tab-indicator-width', `${activeRect.width}px`);
     tabs.style.setProperty('--tab-indicator-opacity','1');
   }
+  function setupTopTabNavigation(){
+    const tabs = $('.topbar .tabs');
+    if(!tabs || tabs.dataset.indicatorReady === 'true') return;
+    tabs.dataset.indicatorReady = 'true';
+    tabs.querySelectorAll('.tab').forEach(btn=>{
+      btn.addEventListener('click',()=>setTab(btn.dataset.tab));
+      btn.addEventListener('pointerenter',()=>syncTopTabIndicator(btn));
+      btn.addEventListener('focus',()=>syncTopTabIndicator(btn));
+    });
+    tabs.addEventListener('pointerleave',()=>syncTopTabIndicator());
+    tabs.addEventListener('focusout',event=>{
+      if(!tabs.contains(event.relatedTarget)) syncTopTabIndicator();
+    });
+    window.addEventListener('resize',()=>syncTopTabIndicator(), {passive:true});
+    setTab(tabFromLocation() || 'inspiratie', {scroll:false, updateUrl:false});
+  }
   function setTab(name, options={}){
     $$('.tab').forEach(b=>{ const on=b.dataset.tab===name; b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
     syncTopTabIndicator();
@@ -6000,6 +6017,7 @@
 	    refreshCollections();
 	  }
 	  async function init(){
+	    setupTopTabNavigation();
 	    const hasSiteData = await loadSiteData();
 	    if(!hasSiteData) return;
 	    refreshActiveWeeks();
@@ -6031,15 +6049,8 @@
     });
     window.addEventListener('scroll', syncAgendaSectionFromScroll, {passive:true});
     window.addEventListener('resize', syncAgendaSectionFromScroll, {passive:true});
-    window.addEventListener('resize', syncTopTabIndicator, {passive:true});
     $$('.tab').forEach(btn=>{
-      btn.addEventListener('click',()=>setTab(btn.dataset.tab));
-      if(btn.closest('.topbar')){
-        btn.addEventListener('mouseenter',()=>syncTopTabIndicator(btn));
-        btn.addEventListener('mouseleave',()=>syncTopTabIndicator());
-        btn.addEventListener('focus',()=>syncTopTabIndicator(btn));
-        btn.addEventListener('blur',()=>syncTopTabIndicator());
-      }
+      if(!btn.closest('.topbar')) btn.addEventListener('click',()=>setTab(btn.dataset.tab));
     });
     document.addEventListener('click', event => {
       const agendaSectionLink = event.target.closest('[data-agenda-section]');
