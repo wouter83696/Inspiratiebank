@@ -1002,16 +1002,19 @@
       .desktopSidebarLayer.isOpen .desktopSidebar{transform:translateX(0)}
       .desktopSidebarHeader{display:grid;grid-template-columns:34px minmax(0,1fr) 34px;align-items:center;gap:8px;min-height:40px}
       .desktopSidebarTitle{margin:0;color:var(--accent-dark);font-size:1.12rem;font-weight:600;text-align:center}
-      .desktopSidebarBrandTitle{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+      .desktopSidebarBrandTitle{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;font-size:.94rem;font-weight:600}
       .desktopSidebarBrandTitle img{display:block;width:22px;height:22px;flex:0 0 22px}
       .desktopSidebarStateTitle[hidden],.desktopSidebarBrandTitle[hidden]{display:none!important}
       .desktopSidebarIconButton{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border:0;border-radius:11px;background:transparent;color:rgba(49,95,107,.74);cursor:pointer}
       .desktopSidebarIconButton:hover{background:rgba(217,231,214,.52);color:var(--accent-dark)}
       .desktopSidebarIconButton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
       .desktopSidebarBack[hidden]{visibility:hidden;display:inline-flex}
-      .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarHeader{display:block;padding-top:1px}
+      .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarHeader{display:block;min-height:40px}
       .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarBack{display:none!important}
-      .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarTitle{min-height:38px;padding:6px 0 0 var(--desktop-menu-title-indent,52px);text-align:left;line-height:1.2}
+      .desktopSidebar[data-sidebar-state="menu"] .desktopSidebarTitle{
+        position:absolute;top:var(--desktop-menu-title-top,20px);left:var(--desktop-menu-title-left,70px);
+        display:flex;align-items:center;height:42px;margin:0;padding:0;text-align:left;line-height:1
+      }
       .desktopSidebarBody{width:100%;min-width:0;min-height:0;overflow:auto;padding:4px 2px 10px;box-sizing:border-box;scrollbar-width:thin}
       .desktopSidebarView[hidden]{display:none!important}
       .desktopSidebarView,.desktopSidebarMount{width:100%;min-width:0;box-sizing:border-box}
@@ -3715,9 +3718,8 @@
     document.body.appendChild(button);
     const sidebar = $('#desktopSidebar');
     if(sidebar){
-      const sidebarWidth = sidebar.getBoundingClientRect().width || 360;
-      const titleIndent = Math.max(52,Math.min(sidebarWidth - 112,rect.left + 47));
-      sidebar.style.setProperty('--desktop-menu-title-indent',`${titleIndent}px`);
+      sidebar.style.setProperty('--desktop-menu-title-left',`${rect.left + 58}px`);
+      sidebar.style.setProperty('--desktop-menu-title-top',`${rect.top}px`);
     }
   }
   function restoreDesktopMenuButton(){
