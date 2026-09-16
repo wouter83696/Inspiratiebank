@@ -1311,6 +1311,64 @@
       }
       #ideaCards{margin-top:0}
     }
+    #ideaFilters>.filterOptions{display:none!important}
+    .ideaFilterSheetLayer{position:fixed;inset:0;z-index:170;display:flex;justify-content:flex-end;visibility:hidden;pointer-events:none}
+    .ideaFilterSheetLayer.isOpen{visibility:visible;pointer-events:auto}
+    .ideaFilterSheetBackdrop{position:absolute;inset:0;border:0;background:rgba(48,46,39,.18);opacity:0;transition:opacity .24s var(--ease);cursor:default}
+    .ideaFilterSheetLayer.isOpen .ideaFilterSheetBackdrop{opacity:1}
+    .ideaFilterSheet{
+      position:relative;z-index:1;display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(440px,calc(100vw - 28px));height:100%;
+      background:linear-gradient(180deg,#fffdfa 0%,#faf7ef 100%);box-shadow:-16px 0 40px rgba(56,49,36,.14);
+      transform:translateX(102%);transition:transform .26s var(--ease);overflow:hidden
+    }
+    .ideaFilterSheetLayer.isOpen .ideaFilterSheet{transform:translateX(0)}
+    .ideaFilterSheetHeader{display:flex;align-items:center;justify-content:space-between;min-height:68px;padding:12px 20px;border-bottom:1px solid rgba(123,112,88,.08)}
+    .ideaFilterSheetHeader h2{margin:0;color:var(--accent-dark);font-size:1.2rem;font-weight:650}
+    .ideaFilterSheetClose{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:0;border-radius:12px;background:transparent;color:rgba(49,95,107,.72);cursor:pointer}
+    .ideaFilterSheetClose:hover{background:rgba(217,231,214,.45);color:var(--accent-dark)}
+    .ideaFilterSheetClose svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+    .ideaFilterSheetBody{min-height:0;overflow:auto;padding:20px 20px 28px;scroll-behavior:smooth}
+    .ideaFilterSection{display:grid;gap:11px;padding:0 0 22px;margin:0 0 22px;border-bottom:1px solid rgba(123,112,88,.09);scroll-margin-top:14px}
+    .ideaFilterSection:last-child{margin-bottom:0;border-bottom:0}
+    .ideaFilterSectionHead{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+    .ideaFilterSection h3{margin:0;color:#285663;font-size:.91rem;font-weight:650}
+    .ideaFilterSectionValue{color:rgba(49,95,107,.62);font-size:.79rem;font-weight:550}
+    .ideaFilterLocationField{display:flex;align-items:center;gap:10px;min-height:46px;padding:0 13px;border:1px solid rgba(79,142,158,.12);border-radius:14px;background:rgba(255,255,255,.76)}
+    .ideaFilterLocationField svg{width:18px;height:18px;flex:0 0 18px;fill:none;stroke:rgba(49,95,107,.72);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .ideaFilterLocationField input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;font-size:.9rem}
+    .ideaFilterLocationField input::placeholder{color:rgba(49,95,107,.45)}
+    .ideaFilterRange{width:100%;height:24px;margin:1px 0 0;accent-color:#2f8f96;cursor:pointer}
+    .ideaFilterRangeLabels{display:flex;justify-content:space-between;color:rgba(49,95,107,.46);font-size:.7rem}
+    .ideaFilterChips{display:flex;flex-wrap:wrap;gap:8px}
+    .ideaFilterChip{
+      display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 13px;border:1px solid rgba(79,142,158,.12);border-radius:999px;
+      background:rgba(255,255,255,.68);color:rgba(49,95,107,.80);font:inherit;font-size:.79rem;font-weight:550;cursor:pointer;transition:.18s var(--ease)
+    }
+    .ideaFilterChip:hover{background:#fff;border-color:rgba(79,142,158,.20)}
+    .ideaFilterChip.active{background:#2f8f96;border-color:#2f8f96;color:#fff;box-shadow:0 5px 14px rgba(47,143,150,.16)}
+    .ideaFilterMix{
+      display:flex;align-items:center;justify-content:flex-start;gap:10px;width:100%;min-height:46px;padding:10px 13px;border:1px solid rgba(79,142,158,.12);
+      border-radius:14px;background:rgba(255,255,255,.68);color:var(--accent-dark);font:inherit;font-size:.84rem;font-weight:600;cursor:pointer
+    }
+    .ideaFilterMix:hover{background:#fff}
+    .ideaFilterMix svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+    .ideaFilterSheetStatus{min-height:19px;margin:0;color:rgba(49,95,107,.66);font-size:.78rem;line-height:1.4}
+    .ideaFilterSheetStatus.warn{color:#9a5b32}
+    .ideaFilterSheetFooter{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;padding:14px 20px calc(14px + env(safe-area-inset-bottom));border-top:1px solid rgba(123,112,88,.09);background:rgba(255,253,249,.94);backdrop-filter:blur(14px)}
+    .ideaFilterSheetAction{min-height:46px;border:0;border-radius:15px;padding:10px 17px;font:inherit;font-size:.86rem;font-weight:650;cursor:pointer}
+    .ideaFilterSheetAction.secondary{background:rgba(255,255,255,.7);color:var(--accent-dark);border:1px solid rgba(79,142,158,.11)}
+    .ideaFilterSheetAction.primary{background:#2f8f96;color:#fff;box-shadow:0 8px 20px rgba(47,143,150,.18)}
+    body.ideaFilterSheetOpen{overflow:hidden}
+    @media (max-width:640px){
+      .ideaFilterSheetLayer{align-items:flex-end}
+      .ideaFilterSheet{width:100%;height:min(94dvh,760px);border-radius:24px 24px 0 0;box-shadow:0 -16px 40px rgba(56,49,36,.16);transform:translateY(102%)}
+      .ideaFilterSheetLayer.isOpen .ideaFilterSheet{transform:translateY(0)}
+      .ideaFilterSheetHeader{min-height:62px;padding:10px 16px}
+      .ideaFilterSheetBody{padding:18px 16px 24px}
+      .ideaFilterSection{padding-bottom:19px;margin-bottom:19px}
+      .ideaFilterSheetFooter{padding-left:16px;padding-right:16px}
+      .ideaFilterChip{min-height:36px;padding:7px 12px;font-size:.76rem}
+    }
     .ideaView[hidden],.teamView[hidden]{display:none !important}
     .tableWrap.ideaView.active,.tableWrap.teamView.active{display:block}
     .cards.ideaView.active,.cards.teamView.active{display:grid}
@@ -2630,7 +2688,7 @@
         <div class="filters more" id="ideaFilters">
           <div class="filterSearch"><input id="ideaSearch" type="search" placeholder="Zoek inspiratie..."></div>
           <div class="desktopLocationBar" id="inspirationDesktopLocation"></div>
-          <button class="filterToggle" id="filterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-controls="ideaFilters">
+          <button class="filterToggle" id="filterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-haspopup="dialog" aria-controls="ideaFilterSheetLayer">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><circle cx="15" cy="7" r="2"></circle><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="9" cy="17" r="2"></circle></svg>
             <span>Filters</span>
           </button>
@@ -2653,6 +2711,7 @@
             <select id="ideaDistance"><option value="all">Afstand</option></select>
             <select id="ideaCost"><option value="all">Kosten</option></select>
             <select id="ideaStimulus"><option value="all">Prikkelbelasting</option></select>
+            <select id="ideaDuration"><option value="all">Duur</option></select>
             <button class="filterShuffle" id="mixIdeasBtn" type="button">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.7 5.1L19 10l-5.3 1.9L12 17l-1.7-5.1L5 10l5.3-1.9L12 3Z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"></path></svg>
               <span>Mix aanbod</span>
@@ -2829,6 +2888,61 @@
         <button id="confirmModalConfirm" class="formButton primary" type="button">Bevestigen</button>
       </div>
     </div>
+  </div>
+  <div class="ideaFilterSheetLayer" id="ideaFilterSheetLayer" aria-hidden="true">
+    <button class="ideaFilterSheetBackdrop" type="button" data-idea-filter-close aria-label="Filters sluiten"></button>
+    <aside class="ideaFilterSheet" role="dialog" aria-modal="true" aria-labelledby="ideaFilterSheetTitle">
+      <header class="ideaFilterSheetHeader">
+        <h2 id="ideaFilterSheetTitle">Filters</h2>
+        <button class="ideaFilterSheetClose" type="button" data-idea-filter-close aria-label="Filters sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
+      </header>
+      <div class="ideaFilterSheetBody" id="ideaFilterSheetBody">
+        <section class="ideaFilterSection" id="ideaFilterLocationSection">
+          <div class="ideaFilterSectionHead"><h3>Locatie</h3></div>
+          <label class="ideaFilterLocationField" for="ideaFilterLocationInput">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+            <input id="ideaFilterLocationInput" type="text" inputmode="text" autocomplete="postal-code" placeholder="Postcode of plaats">
+          </label>
+          <p class="ideaFilterSheetStatus" id="ideaFilterLocationStatus" role="status" aria-live="polite"></p>
+        </section>
+        <section class="ideaFilterSection" id="ideaFilterDistanceSection">
+          <div class="ideaFilterSectionHead"><h3>Afstand</h3><span class="ideaFilterSectionValue" id="ideaFilterDistanceValue">50+ km</span></div>
+          <input class="ideaFilterRange" id="ideaFilterDistanceRange" type="range" min="0" max="4" step="1" value="4" aria-label="Maximale afstand">
+          <div class="ideaFilterRangeLabels" aria-hidden="true"><span>3 km</span><span>5 km</span><span>10 km</span><span>25 km</span><span>50+ km</span></div>
+        </section>
+        <section class="ideaFilterSection">
+          <div class="ideaFilterSectionHead"><h3>Categorieën</h3></div>
+          <div class="ideaFilterChips" id="ideaFilterCategoryChips"></div>
+        </section>
+        <section class="ideaFilterSection">
+          <div class="ideaFilterSectionHead"><h3>Prijs</h3></div>
+          <div class="ideaFilterChips" id="ideaFilterPriceChips">
+            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaCost" data-value="all">Alles</button>
+            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaCost" data-value="Gratis">Gratis</button>
+            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaCost" data-value="€">€</button>
+            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaCost" data-value="€€">€€</button>
+            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaCost" data-value="€€€">€€€</button>
+          </div>
+        </section>
+        <section class="ideaFilterSection">
+          <div class="ideaFilterSectionHead"><h3>Duur</h3></div>
+          <div class="ideaFilterChips" id="ideaFilterDurationChips">
+            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaDuration" data-value="all">Alle</button>
+            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaDuration" data-value="short">Tot 1 uur</button>
+            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaDuration" data-value="medium">1–3 uur</button>
+            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaDuration" data-value="long">Langer</button>
+          </div>
+        </section>
+        <section class="ideaFilterSection">
+          <div class="ideaFilterSectionHead"><h3>Mix aanbod</h3></div>
+          <button class="ideaFilterMix" id="ideaFilterMixBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.7 5.1L19 10l-5.3 1.9L12 17l-1.7-5.1L5 10l5.3-1.9L12 3Z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"></path></svg><span>Maak een nieuwe rustige mix</span></button>
+        </section>
+      </div>
+      <footer class="ideaFilterSheetFooter">
+        <button class="ideaFilterSheetAction secondary" id="ideaFilterClearBtn" type="button">Wissen</button>
+        <button class="ideaFilterSheetAction primary" id="ideaFilterApplyBtn" type="button">Toon activiteiten</button>
+      </footer>
+    </aside>
   </div>
   <div id="locationModal" class="ideaModal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="locationModalTitle" aria-describedby="locationModalText">
     <div class="ideaModalCard">
@@ -5785,7 +5899,15 @@
     fillSelect('#ideaDistance', INSPIRATION_DISTANCE_OPTIONS, 'Afstand');
     fillSelect('#ideaCost', IDEA_COST_OPTIONS, 'Kosten');
     fillSelect('#ideaStimulus', IDEA_STIMULUS_OPTIONS, 'Prikkelbelasting');
+    const duration = $('#ideaDuration');
+    if(duration){
+      const current = duration.value || 'all';
+      duration.innerHTML = '<option value="all">Duur</option><option value="short">Tot 1 uur</option><option value="medium">1–3 uur</option><option value="long">Langer dan 3 uur</option>';
+      duration.value = [...duration.options].some(option => option.value === current) ? current : 'all';
+    }
     ['ideaDomain','ideaLocation','ideaDistance','ideaCost','ideaStimulus'].forEach(id => enhanceCustomSelect($('#'+id)));
+    buildIdeaFilterCategoryChips();
+    syncIdeaFilterSheet();
   }
   function setupAgendaFilters(){
     const items = allExternalItems();
@@ -5823,17 +5945,24 @@
   function filteredInspirationItems(){
     const q = $('#ideaSearch').value;
     const filters = {domain:$('#ideaDomain').value, locationType:$('#ideaLocation').value, distanceBand:$('#ideaDistance').value, cost:$('#ideaCost').value, stimulus:$('#ideaStimulus').value};
-    const items = allInspirationItems().filter(x=>matches(x,q,filters));
+    const duration = $('#ideaDuration')?.value || 'all';
+    const items = allInspirationItems().filter(item => {
+      if(!matches(item,q,filters) || !matchesIdeaDuration(item,duration)) return false;
+      const distance = itemDistanceKm(item);
+      return userLocationRadiusKm >= 50 || !Number.isFinite(distance) || distance <= userLocationRadiusKm;
+    });
     return filters.domain && filters.domain !== 'all' ? sortIdeasAlphabetically(items) : smartMixedIdeas(items);
   }
   function inspirationEmptyMessage(){
-    const filters = {domain:$('#ideaDomain').value, locationType:$('#ideaLocation').value, distanceBand:$('#ideaDistance').value, cost:$('#ideaCost').value, stimulus:$('#ideaStimulus').value};
+    const filters = {domain:$('#ideaDomain').value, locationType:$('#ideaLocation').value, distanceBand:$('#ideaDistance').value, cost:$('#ideaCost').value, stimulus:$('#ideaStimulus').value, duration:$('#ideaDuration')?.value || 'all'};
     const activeFilters = Object.values(filters).filter(value => value && value !== 'all').length;
     const hasQuery = Boolean($('#ideaSearch').value.trim());
-    if(!activeFilters && !hasQuery) return 'Er staan nog geen ideeën klaar.';
+    if(!activeFilters && !hasQuery && userLocationRadiusKm >= 50) return 'Er staan nog geen ideeën klaar.';
     const hints = [];
     if(filters.distanceBand && filters.distanceBand !== 'all') hints.push('zet afstand ruimer');
+    if(userLocationRadiusKm < 50) hints.push('vergroot de maximale afstand');
     if(filters.cost && filters.cost !== 'all') hints.push('zet kosten ruimer');
+    if(filters.duration && filters.duration !== 'all') hints.push('kies een ruimere duur');
     if(filters.stimulus && filters.stimulus !== 'all') hints.push('probeer ook een andere prikkelbelasting');
     if(hasQuery) hints.push('maak je zoekterm korter');
     return `Geen ideeën gevonden. Probeer ${hints.slice(0,2).join(' of ') || 'minder filters'}.`;
@@ -5854,6 +5983,178 @@
     el.value = value;
     syncCustomSelect(el);
   }
+  function ideaDurationBand(item={}){
+    const value = normalize(item.duration || '');
+    if(!value || value.includes('flexibel') || value.includes('op maat')) return 'flexible';
+    if(value.includes('hele dag') || value.includes('dagdeel') || value.includes('halve dag')) return 'long';
+    const amounts = String(item.duration || '').match(/\d+(?:[.,]\d+)?/g)?.map(amount => Number(amount.replace(',','.'))) || [];
+    if(!amounts.length) return 'flexible';
+    const maximum = Math.max(...amounts);
+    const minutes = value.includes('uur') ? maximum * 60 : maximum;
+    if(minutes <= 60) return 'short';
+    if(minutes <= 180) return 'medium';
+    return 'long';
+  }
+  function matchesIdeaDuration(item, value='all'){
+    if(!value || value === 'all') return true;
+    const band = ideaDurationBand(item);
+    return band === 'flexible' || band === value;
+  }
+  const IDEA_FILTER_RADIUS_STEPS = [3,5,10,25,50];
+  let ideaFilterSheetReturnFocus = null;
+  function buildIdeaFilterCategoryChips(){
+    const container = $('#ideaFilterCategoryChips');
+    const select = $('#ideaDomain');
+    if(!container || !select) return;
+    container.innerHTML = '';
+    const options = [...select.options];
+    const ordered = [options.find(option => option.value === 'all')];
+    AGENDA_THEME_LEGEND.forEach(theme => {
+      const option = options.find(candidate => normalize(domainDisplayLabel(candidate.value)) === normalize(domainDisplayLabel(theme)));
+      if(option && !ordered.includes(option)) ordered.push(option);
+    });
+    options.forEach(option => { if(!ordered.includes(option)) ordered.push(option); });
+    ordered.filter(Boolean).forEach(option => {
+      const button = document.createElement('button');
+      button.className = `ideaFilterChip ${option.value === 'all' ? '' : domainThemeClass(option.value)}`.trim();
+      button.type = 'button';
+      button.dataset.sheetFilter = 'ideaDomain';
+      button.dataset.value = option.value;
+      button.innerHTML = option.value === 'all'
+        ? 'Alles'
+        : `<span class="domainIcon" aria-hidden="true">${domainIcon(option.value)}</span><span>${escapeHtml(domainDisplayLabel(option.value))}</span>`;
+      container.appendChild(button);
+    });
+  }
+  function updateIdeaFilterSheetCount(count=filteredInspirationItems().length){
+    const button = $('#ideaFilterApplyBtn');
+    if(!button) return;
+    button.textContent = count === 1 ? 'Toon 1 activiteit' : `Toon ${count} activiteiten`;
+  }
+  function syncIdeaFilterSheet(){
+    const locationInput = $('#ideaFilterLocationInput');
+    const locationStatus = $('#ideaFilterLocationStatus');
+    const range = $('#ideaFilterDistanceRange');
+    const rangeValue = $('#ideaFilterDistanceValue');
+    if(locationInput && document.activeElement !== locationInput){
+      locationInput.value = userLocation?.isDefault ? '' : (cleanPostcode(userLocation.postcode || '') || userLocation.place || userLocation.label || '');
+    }
+    if(locationStatus && !locationStatus.dataset.busy){
+      locationStatus.classList.remove('warn');
+      locationStatus.textContent = userLocation?.isDefault ? 'Standaardlocatie: Nijmegen' : `Ingesteld op ${locationDisplayText()}`;
+    }
+    const radiusIndex = Math.max(0, IDEA_FILTER_RADIUS_STEPS.indexOf(userLocationRadiusKm));
+    if(range) range.value = String(radiusIndex);
+    if(rangeValue) rangeValue.textContent = userLocationRadiusKm >= 50 ? '50+ km' : `${userLocationRadiusKm} km`;
+    $$('[data-sheet-filter]').forEach(button => {
+      const control = $('#'+button.dataset.sheetFilter);
+      const active = control && String(control.value) === String(button.dataset.value);
+      button.classList.toggle('active', Boolean(active));
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+  function openIdeaFilterSheet(section='top'){
+    const layer = $('#ideaFilterSheetLayer');
+    const body = $('#ideaFilterSheetBody');
+    if(!layer || !body) return;
+    ideaFilterSheetReturnFocus = document.activeElement;
+    buildIdeaFilterCategoryChips();
+    syncIdeaFilterSheet();
+    updateIdeaFilterSheetCount();
+    layer.classList.add('isOpen');
+    layer.setAttribute('aria-hidden','false');
+    document.body.classList.add('ideaFilterSheetOpen');
+    $('#filterToggle')?.setAttribute('aria-expanded','true');
+    window.requestAnimationFrame(() => {
+      if(section === 'location'){
+        window.setTimeout(() => {
+          body.scrollTo({top:0,behavior:'smooth'});
+          $('#ideaFilterLocationInput')?.focus({preventScroll:true});
+        }, 180);
+      }else{
+        window.setTimeout(() => {
+          $('.ideaFilterSheetClose')?.focus({preventScroll:true});
+          body.scrollTop = 0;
+        }, 180);
+      }
+    });
+  }
+  function closeIdeaFilterSheet(){
+    const layer = $('#ideaFilterSheetLayer');
+    if(!layer?.classList.contains('isOpen')) return;
+    layer.classList.remove('isOpen');
+    layer.setAttribute('aria-hidden','true');
+    document.body.classList.remove('ideaFilterSheetOpen');
+    $('#filterToggle')?.setAttribute('aria-expanded','false');
+    if(ideaFilterSheetReturnFocus?.focus) ideaFilterSheetReturnFocus.focus();
+    ideaFilterSheetReturnFocus = null;
+  }
+  function clearIdeaFilterSheet(){
+    ['ideaDomain','ideaLocation','ideaDistance','ideaCost','ideaStimulus','ideaDuration'].forEach(id => setIdeaFilterValue(id,'all'));
+    saveUserLocationRadius(DEFAULT_LOCATION_RADIUS_KM, {sync:false});
+    saveUserLocation(null);
+    const input = $('#ideaFilterLocationInput');
+    if(input) input.value = '';
+    syncIdeaFilterSheet();
+    renderIdeas();
+  }
+  async function applyIdeaFilterSheet(){
+    const input = $('#ideaFilterLocationInput');
+    const status = $('#ideaFilterLocationStatus');
+    const query = String(input?.value || '').trim();
+    const current = userLocation?.isDefault ? '' : (cleanPostcode(userLocation.postcode || '') || userLocation.place || userLocation.label || '');
+    if(!query || normalize(query) === normalize(current)){
+      closeIdeaFilterSheet();
+      return;
+    }
+    if(status){
+      status.dataset.busy = 'true';
+      status.classList.remove('warn');
+      status.textContent = 'Locatie opzoeken...';
+    }
+    try{
+      const location = await geocodeLocation(query);
+      if(!isSupportedLocation(location)){
+        if(status){
+          status.classList.add('warn');
+          status.textContent = 'Voor deze locatie staat nog geen lokale set klaar. Kies een locatie in de regio Nijmegen.';
+        }
+        return;
+      }
+      saveUserLocation(location);
+      closeIdeaFilterSheet();
+    }catch(error){
+      if(status){
+        status.classList.add('warn');
+        status.textContent = error.message || 'De locatie kon niet worden gebruikt.';
+      }
+    }finally{
+      if(status) delete status.dataset.busy;
+    }
+  }
+  function setupIdeaFilterSheet(){
+    $$('[data-idea-filter-close]').forEach(button => button.addEventListener('click', closeIdeaFilterSheet));
+    $('#ideaFilterSheetLayer')?.addEventListener('click', event => {
+      const chip = event.target.closest('[data-sheet-filter]');
+      if(!chip) return;
+      setIdeaFilterValue(chip.dataset.sheetFilter, chip.dataset.value);
+      renderIdeas();
+    });
+    $('#ideaFilterDistanceRange')?.addEventListener('input', event => {
+      const radius = IDEA_FILTER_RADIUS_STEPS[Number(event.target.value)] || DEFAULT_LOCATION_RADIUS_KM;
+      saveUserLocationRadius(radius);
+      renderIdeas();
+    });
+    $('#ideaFilterClearBtn')?.addEventListener('click', clearIdeaFilterSheet);
+    $('#ideaFilterApplyBtn')?.addEventListener('click', applyIdeaFilterSheet);
+    $('#ideaFilterLocationInput')?.addEventListener('keydown', event => {
+      if(event.key === 'Enter'){
+        event.preventDefault();
+        applyIdeaFilterSheet();
+      }
+    });
+    $('#ideaFilterMixBtn')?.addEventListener('click', () => $('#mixIdeasBtn')?.click());
+  }
   function updateAgendaThemeChips(){
     const active = domainDisplayLabel($('#agendaDomain')?.value || 'all');
     $$('#agendaThemeLegend [data-theme-filter]').forEach(button => {
@@ -5867,6 +6168,8 @@
   function renderIdeas(){
     const items = filteredInspirationItems();
     updateInspirationThemeChips();
+    syncIdeaFilterSheet();
+    updateIdeaFilterSheetCount(items.length);
     const empty = `<div class="empty">${escapeHtml(inspirationEmptyMessage())}</div>`;
     const surpriseAfter = window.matchMedia('(min-width:1180px)').matches ? 4 : window.matchMedia('(min-width:641px)').matches ? 3 : 2;
     $('#ideaCards').innerHTML = items.length ? withSurpriseMarkup(items, cardIdea, surpriseIdeaCard, surpriseAfter) : empty;
@@ -6404,7 +6707,7 @@
     if(mapOn) renderIdeaMap(filteredInspirationItems());
   }
 	  function resetFilters(){
-	    ['ideaSearch','ideaDomain','ideaLocation','ideaDistance','ideaCost','ideaStimulus'].forEach(id => {
+	    ['ideaSearch','ideaDomain','ideaLocation','ideaDistance','ideaCost','ideaStimulus','ideaDuration'].forEach(id => {
 	      const el = $('#'+id);
 	      if(!el) return;
 	      el.value = el.tagName === 'SELECT' ? 'all' : '';
@@ -6434,6 +6737,7 @@
 	  async function init(){
 	    setupTopTabNavigation();
 	    setupDesktopSidebar();
+	    setupIdeaFilterSheet();
 	    const hasSiteData = await loadSiteData();
 	    if(!hasSiteData) return;
 	    refreshActiveWeeks();
@@ -6479,6 +6783,10 @@
     });
     document.addEventListener('keydown', event => {
       if(event.key === 'Escape'){
+        if($('#ideaFilterSheetLayer')?.classList.contains('isOpen')){
+          closeIdeaFilterSheet();
+          return;
+        }
         if($('#desktopSidebarLayer')?.classList.contains('isOpen')){
           closeDesktopSidebar();
           return;
@@ -6528,7 +6836,10 @@
     });
     document.addEventListener('click', event => {
       if(event.target.closest('[data-location-settings-btn]')){
-        if(!openDesktopSidebar('location')) openLocationModal();
+        event.preventDefault();
+        const activeTab = $('.topbar .tab.active')?.dataset.tab || 'inspiratie';
+        if(activeTab === 'inspiratie') openIdeaFilterSheet('location');
+        else if(!openDesktopSidebar('location')) openLocationModal();
       }
     });
     document.addEventListener('click', event => {
@@ -6609,7 +6920,7 @@
       renderAgenda();
     });
     ['agendaDomain','agendaDistance','agendaCost','agendaStimulus'].forEach(id=>$('#'+id).addEventListener('change', renderAgenda));
-    ['ideaSearch','ideaDomain','ideaLocation','ideaDistance','ideaCost','ideaStimulus'].forEach(id=>$('#'+id).addEventListener('input',renderIdeas));
+    ['ideaSearch','ideaDomain','ideaLocation','ideaDistance','ideaCost','ideaStimulus','ideaDuration'].forEach(id=>$('#'+id)?.addEventListener('input',renderIdeas));
     $$('[data-view-group="ideas"]').forEach(btn=>btn.addEventListener('click',()=>setIdeaView(btn.dataset.view)));
     window.__pageSecurityStartedAt = Date.now();
     initPublicFormSecurity($('#teamIdeaForm'));
@@ -6685,10 +6996,7 @@
 	      $('#agendaFilterToggle').setAttribute('aria-expanded', expanded ? 'true' : 'false');
 	    });
 	    $('#filterToggle').addEventListener('click',()=>{
-	      if(openDesktopSidebar('filters')) return;
-	      const filters = $('#ideaFilters');
-	      const expanded = filters.classList.toggle('expanded');
-	      $('#filterToggle').setAttribute('aria-expanded', expanded ? 'true' : 'false');
+	      openIdeaFilterSheet('top');
 	    });
 	    $('#agendaThemeLegend').addEventListener('click', event => {
 	      const chip = event.target.closest('[data-theme-filter]');
