@@ -629,12 +629,13 @@
     .ideaSurpriseText span{display:block;margin-top:3px;color:rgba(11,18,32,.62);font-size:.9rem;line-height:1.34}
     .ideaSurpriseButton{
       justify-self:end;
-      appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:8px 15px;
-      border:1px solid rgba(63,120,132,.22);border-radius:999px;background:#3F7884;
-      color:#fff;font:inherit;font-size:.84rem;font-weight:650;line-height:1;white-space:nowrap;cursor:pointer;
-      box-shadow:0 8px 18px rgba(63,120,132,.14);transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease)
+      appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:12px 28px;
+      border:1px solid transparent;border-radius:999px;background:#F5E1B0;
+      color:#805B08;font:inherit;font-size:.94rem;font-weight:600;line-height:1;white-space:nowrap;cursor:pointer;
+      box-shadow:none;transition:transform .18s var(--ease),background .18s var(--ease)
     }
-    .ideaSurpriseButton:hover{transform:translateY(-1px);background:#356f7b;box-shadow:0 12px 24px rgba(63,120,132,.16)}
+    .ideaSurpriseButton svg{width:22px;height:22px;flex:0 0 22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .ideaSurpriseButton:hover{transform:translateY(-1px);background:#EED59A}
     .ideaSurpriseRow td{padding:12px;background:rgba(255,253,247,.96)}
     .ideaSurpriseRow .ideaSurpriseCard{grid-column:auto;margin:0;border-radius:14px;box-shadow:none}
     @media (min-width:1180px){
@@ -5714,7 +5715,7 @@
     return `<article class="ideaSurpriseCard" aria-label="Laat een willekeurig idee kiezen">
       <span class="ideaSurpriseMark" aria-hidden="true">${surpriseIdeaIcon()}</span>
       <span class="ideaSurpriseText"><strong>Geen zin om te kiezen?</strong><span>Laat je verrassen door een activiteit die bij je past.</span></span>
-      <button class="ideaSurpriseButton" type="button" data-random-idea><span>Verras me</span></button>
+      <button class="ideaSurpriseButton" type="button" data-random-idea>${surpriseIdeaIcon()}<span>Verras me</span></button>
     </article>`;
   }
   function surpriseIdeaRow(){
