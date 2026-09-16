@@ -2667,6 +2667,30 @@
       .weekHeaderMeta .weekCountBadge,
       .weekDateLine .agendaFreshness{min-height:32px !important;border-radius:12px !important}
     }
+    @media (min-width:981px){
+      #ideaCards.cards{gap:16px;align-items:stretch}
+      #ideaCards .ideaThemeCard{
+        padding:12px 20px 20px;gap:10px;min-height:410px;
+        border:1px solid rgba(64,45,20,.035);border-radius:18px;
+        background:#FFFEFC;box-shadow:0 8px 24px rgba(64,45,20,.035);
+      }
+      #ideaCards .ideaImageFrame{
+        flex-shrink:0;aspect-ratio:2 / 1;margin:0 -8px 2px;border-radius:13px;
+      }
+      #ideaCards .hasImage .cardThemePill{top:23px;left:21px}
+      #ideaCards .cardThemePill .categoryPill{
+        min-height:34px;padding:8px 12px;font-size:.82rem;
+        box-shadow:0 3px 10px rgba(20,38,42,.045);
+      }
+      #ideaCards .ideaThemeCard h3{font-size:1.08rem;line-height:1.25;color:#006780}
+      #ideaCards .cardLabels{gap:7px;min-height:31px}
+      #ideaCards .cardLabels .pill{min-height:31px;padding:7px 10px;font-size:.8rem;border:0}
+      #ideaCards .ideaThemeCard > p:not(.fine){font-size:.92rem;line-height:1.45;color:#71869A;-webkit-line-clamp:3}
+      #ideaCards .cardMetaLine{font-size:.83rem;gap:18px;margin-top:auto;padding-top:12px;color:#617F99}
+      #ideaCards .cardMetaLine .metaIcon{width:18px;height:18px;color:#00738D}
+      #ideaCards .cardFooter{right:14px;bottom:13px}
+      #ideaCards .cardFooter .siteButton{width:44px;min-width:44px;height:44px;color:#00738D !important}
+    }
   </style>
 </head>
 <body class="appLoading">
