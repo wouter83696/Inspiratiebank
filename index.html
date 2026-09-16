@@ -2696,12 +2696,12 @@
     #ideaList.sharedIdeaList{border:1px solid rgba(64,45,20,.055);border-radius:18px;background:#fffdf8;box-shadow:0 8px 24px rgba(92,65,33,.04)}
     #ideaList.sharedIdeaList table{border-collapse:collapse;border-spacing:0}
     #ideaList.sharedIdeaList th{background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06);color:#74716E;padding:13px 16px;font-size:.8rem}
-    #ideaList.sharedIdeaList .ideaThemeRow td{background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06);padding:14px 16px;vertical-align:middle}
+    #ideaList.sharedIdeaList .ideaThemeRow td{background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06);padding:10px 16px;vertical-align:middle}
     #ideaList.sharedIdeaList .ideaThemeRow:hover td{background:#fffaf4}
-    #ideaList .ideaListTheme{margin-bottom:10px}
+    #ideaList .ideaListTheme{margin-bottom:5px}
     #ideaList .ideaListTheme .categoryPill{min-height:31px;padding:7px 11px;font-size:.76rem;box-shadow:0 3px 10px rgba(20,38,42,.045)}
     #ideaList .nameWithIcon .ideaTitleText{color:#006780;font-size:1.03rem;font-weight:500;line-height:1.25}
-    #ideaList .ideaListMeta{margin:7px 0 0 38px}
+    #ideaList .ideaListMeta{margin:4px 0 0 38px}
     #ideaList .cardMetaLine{color:#697472;gap:14px}
     #ideaList .cardMetaLine .metaIcon{color:#55777A}
     #ideaList td:nth-child(3) .small{color:#74716E;line-height:1.45}
@@ -2712,6 +2712,7 @@
     /* Verbonden, subtiel transparante informatiebadge in alle inspiratieweergaven. */
     #ideaCards .cardLabels,
     #ideaList .cardPillGroup,
+    .ongoingBadgesCell .cardPillGroup,
     .ideaMapResultPills{
       display:inline-flex;
       align-items:center;
@@ -2729,6 +2730,7 @@
     }
     #ideaCards .cardLabels .pill,
     #ideaList .cardPillGroup .pill,
+    .ongoingBadgesCell .cardPillGroup .pill,
     .ideaMapResultPills .pill{
       min-height:27px;
       flex:1 1 0;
@@ -2742,15 +2744,18 @@
     }
     #ideaCards .cardLabels .pill + .pill,
     #ideaList .cardPillGroup .pill + .pill,
+    .ongoingBadgesCell .cardPillGroup .pill + .pill,
     .ideaMapResultPills .pill + .pill{
       border-left:1px solid rgba(79,142,158,.11) !important;
       border-radius:0;
     }
     #ideaCards .cardLabels .pill:last-child,
     #ideaList .cardPillGroup .pill:last-child,
+    .ongoingBadgesCell .cardPillGroup .pill:last-child,
     .ideaMapResultPills .pill:last-child{border-radius:0 8px 8px 0}
     #ideaCards .cardLabels .locationPill:not(.homeLocationPill):not(.onlineLocationPill)::before,
     #ideaList .cardPillGroup .locationPill:not(.homeLocationPill):not(.onlineLocationPill)::before,
+    .ongoingBadgesCell .cardPillGroup .locationPill:not(.homeLocationPill):not(.onlineLocationPill)::before,
     .ideaMapResultPills .locationPill:not(.homeLocationPill):not(.onlineLocationPill)::before{
       content:"";
       flex:0 0 14px;
@@ -2763,6 +2768,22 @@
     .ideaMapResultInfo{flex-wrap:nowrap}
     .ideaMapResultPills{flex:0 1 auto;width:auto;min-width:0}
     .ideaMapResultMeta{flex:0 1 auto}
+    #ideaCards .ideaThemeCard h3 .domainIcon,
+    #ideaList .nameWithIcon .domainIcon,
+    .ongoingTitleCell .nameWithIcon .domainIcon,
+    .ideaMapResult .domainIcon{border-radius:8px}
+    .ongoingAccordion{background:#fffdf8;box-shadow:0 8px 24px rgba(92,65,33,.04)}
+    .ongoingAccordion.open,
+    .ongoingAccordionBody,
+    .ongoingAccordion .tableWrap{background:#fffdf8}
+    .ongoingAccordionButton,
+    .ongoingAccordion th{background:rgba(255,253,248,.82)}
+    .ongoingAccordion td{background:#fffdf8;color:#74716E}
+    .ongoingTitleCell .name,
+    .ongoingTitleCell .ideaTitleText{color:#006780;font-weight:500;line-height:1.25}
+    .ongoingFitCell .small{color:#74716E}
+    .ongoingBadgesCell .cardPillGroup{width:100%;gap:0;margin:0}
+    .ideaMapResult strong{font-weight:500}
     @media(max-width:640px){
       #ideaList.sharedIdeaList .ideaThemeRow{margin:0;padding:16px;border:0;border-bottom:1px solid rgba(64,45,20,.06);border-radius:0;background:#fffdf8;box-shadow:none;gap:12px}
       #ideaList.sharedIdeaList .ideaThemeRow td,#ideaList.sharedIdeaList .ideaThemeRow:hover td{padding:0;background:transparent;border-radius:0}
