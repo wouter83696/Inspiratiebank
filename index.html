@@ -9,6 +9,17 @@
     html.appLoading body{margin:0;overflow:hidden;background:#FBFAF6}
     html.appLoading body > :not(.appLoader){display:none !important}
     html.appLoading .appLoader{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;width:100%;min-height:100vh;padding:24px;background:#FBFAF6}
+    .desktopStickyControls{display:contents}
+    @media (min-width:981px){
+      html,body{overflow-x:clip !important;overflow-y:visible}
+      .desktopStickyControls{
+        display:block;position:sticky;top:0;z-index:25;
+        margin-top:-25px;padding:10px 0 8px;
+        background:#F8F5EB;
+      }
+      .desktopStickyControls > .filterBar{margin-top:0;margin-bottom:8px}
+      .desktopStickyControls .inspirationDesktopFilterRow{margin-bottom:0}
+    }
   </style>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta name="theme-color" content="#0F6B6B">
@@ -195,10 +206,10 @@
     .tabHeroStat strong{display:inline;font-size:inherit;font-weight:650;line-height:inherit;color:inherit}
     .tabHeroStat span:not(.tabHeroStatDivider):not(.tabHeroStat){display:inline;color:inherit}
     .tabHeroStatDivider{display:inline;color:rgba(49,95,107,.32)}
-    .tabHero + .filterBar{--hero-search-height:44px;position:relative;z-index:2;margin-top:calc(var(--hero-search-height) / -2)}
-    .tabHero + .filterBar .filterSearch input,
-    .tabHero + .filterBar .filterToggle,
-    .tabHero + .filterBar .viewSwitch{
+    :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar){--hero-search-height:44px;position:relative;z-index:2;margin-top:calc(var(--hero-search-height) / -2)}
+    :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar) .filterSearch input,
+    :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar) .filterToggle,
+    :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar) .viewSwitch{
       background:rgba(255,253,249,.76);
       backdrop-filter:blur(7px);
     }
@@ -207,7 +218,7 @@
       .tabHeroKicker{transform:translateY(0)}
       .tabHeroLine{margin-top:15px}
       .tabHeroActions{margin-top:36px}
-      .tabHero + .filterBar{margin-top:calc(var(--hero-search-height) / -2)}
+      :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar){margin-top:calc(var(--hero-search-height) / -2)}
     }
     .quick{display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:10px}
     .quickCard{display:flex;align-items:center;gap:14px;padding:17px;box-shadow:0 10px 30px rgba(20,38,42,.06)}
@@ -1108,7 +1119,7 @@
         transform:none;
       }
       .tabHeroActions{display:none}
-      .tabHero + .filterBar{
+      :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar){
         display:flex;
         align-items:flex-start;
         justify-content:flex-start;
@@ -1116,20 +1127,20 @@
         margin-top:-25px;
         margin-bottom:8px;
       }
-      .tabHero + .filterBar .filters,
-      .tabHero + .filterBar .agendaSearchFilters{
+      :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar) .filters,
+      :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar) .agendaSearchFilters{
         flex:1 1 auto;
         width:auto;
         min-width:0;
       }
-      #tab-weken .tabHero + .filterBar .agendaSearchFilters{
+      #tab-weken :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar) .agendaSearchFilters{
         flex:1 1 auto;
         width:auto;
       }
-      .tabHero + .filterBar .filterSearch input,
-      .tabHero + .filterBar .filterToggle,
-      .tabHero + .filterBar .viewSwitch,
-      .tabHero + .filterBar .desktopLocationBar .locationLegendItem{
+      :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar) .filterSearch input,
+      :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar) .filterToggle,
+      :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar) .viewSwitch,
+      :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar) .desktopLocationBar .locationLegendItem{
         height:48px;
         min-height:48px;
         border-radius:17px;
@@ -1845,7 +1856,7 @@
       .tabHeroStat svg{width:15px;height:15px;margin-top:0;flex:0 0 15px}
       .tabHeroStat strong{display:inline;font-size:inherit;font-weight:650;line-height:inherit;color:inherit}
       .tabHeroStat span:not(.tabHeroStatDivider):not(.tabHeroStat){display:inline;margin-top:0;color:inherit;font-weight:500}
-      .tabHero + .filterBar{margin-top:calc(var(--hero-search-height) / -2);margin-bottom:8px}
+      :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar){margin-top:calc(var(--hero-search-height) / -2);margin-bottom:8px}
       .hero{display:flex;flex-direction:column;gap:14px;padding-top:44px}
       .quick{order:1;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:1fr;gap:8px}
       .heroMain{order:0;padding:24px 22px}
@@ -2439,7 +2450,7 @@
         min-height:clamp(350px,58svh,390px) !important;
         padding-bottom:clamp(96px,12svh,112px) !important;
       }
-      .tabHero + .filterBar,
+      :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar),
       .agendaHero + .filterBar{margin-top:calc(var(--hero-search-height) / -2) !important}
       #tab-inspiratie > .filterBar,
       #tab-weken > .filterBar{
@@ -2732,6 +2743,7 @@
           </a>
         </div>
       </section>
+      <div class="desktopStickyControls">
       <div class="filterBar">
         <div class="filters more" id="ideaFilters">
           <div class="filterSearch"><input id="ideaSearch" type="search" placeholder="Zoek inspiratie..."></div>
@@ -2786,6 +2798,7 @@
             </button>
           </div>
         </div>
+      </div>
       </div>
       <div id="ideaList" class="tableWrap ideaView sharedIdeaList" hidden></div>
       <div id="ideaMap" class="ideaMap ideaView" hidden></div>
