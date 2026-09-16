@@ -967,7 +967,7 @@
     .viewIcon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .desktopViewBar{display:none}
     .desktopLocationBar{display:none}
-    .desktopMenuButton,.desktopSidebarLayer{display:none}
+    .desktopSidebarLayer{display:none}
     .mobileHeroTitle,.mobileHeroSubtitle{display:none}
     @media (max-width:980px){
       #tab-inspiratie .desktopHeroTitle,
@@ -976,14 +976,6 @@
       #tab-inspiratie .mobileHeroSubtitle{display:inline}
     }
     @media (min-width:981px){
-      .desktopMenuButton{
-        display:inline-flex;align-items:center;justify-content:center;flex:0 0 42px;width:42px;height:42px;
-        position:relative;z-index:2;margin:0 8px 0 0;padding:0;border:0;border-radius:11px;
-        background:transparent;box-shadow:none;backdrop-filter:none;
-        color:rgba(49,95,107,.72);pointer-events:auto;cursor:pointer
-      }
-      .desktopMenuButton:hover{background:rgba(241,235,220,.52)}
-      .desktopMenuButton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round}
       .desktopSidebarLayer{position:fixed;inset:0;z-index:120;display:block;pointer-events:none;visibility:hidden}
       .desktopSidebarLayer.isOpen{pointer-events:auto;visibility:visible}
       .desktopSidebarBackdrop{position:absolute;inset:0;border:0;background:rgba(48,46,39,.14);opacity:0;transition:opacity .22s var(--ease);cursor:default}
@@ -2512,9 +2504,6 @@
     })();
   </script>
   <header class="topbar">
-    <button class="desktopMenuButton" id="desktopMenuButton" type="button" aria-label="Menu openen" aria-controls="desktopSidebar" aria-expanded="false">
-      <svg class="menuOpenIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14"></path><path d="M5 12h14"></path><path d="M5 16h14"></path></svg>
-    </button>
     <nav class="tabs" role="navigation" aria-label="Hoofdnavigatie">
       <button class="tab active" data-tab="inspiratie" type="button" aria-selected="true"><img class="brandTabMark" src="assets/inspiratiebank-icon/inspiratiebank-icon-128x128.png" alt="" aria-hidden="true"><span>Inspiratiebank</span></button>
       <button class="tab" data-tab="weken" type="button">UIT-agenda</button>
@@ -3710,7 +3699,7 @@
       stateTitle.textContent = nextState === 'location' ? 'Locatie en afstand' : nextState === 'filters' ? 'Filters' : '';
     }
     const back = $('[data-sidebar-back]');
-    if(back) back.hidden = nextState === 'menu';
+    if(back) back.hidden = true;
     if(nextState === 'location'){
       const form = $('#locationForm');
       const mount = $('#desktopSidebarLocationMount');
@@ -3735,8 +3724,6 @@
     setDesktopSidebarState(state);
     layer.classList.add('isOpen');
     layer.setAttribute('aria-hidden','false');
-    const menuButton = $('#desktopMenuButton');
-    menuButton?.setAttribute('aria-expanded','true');
     document.body.classList.add('desktopSidebarOpen');
     return true;
   }
@@ -3746,15 +3733,12 @@
     restoreDesktopSidebarNodes();
     layer.classList.remove('isOpen');
     layer.setAttribute('aria-hidden','true');
-    const menuButton = $('#desktopMenuButton');
-    menuButton?.setAttribute('aria-expanded','false');
     $('#filterToggle')?.setAttribute('aria-expanded','false');
     $('#agendaFilterToggle')?.setAttribute('aria-expanded','false');
     document.body.classList.remove('desktopSidebarOpen');
     desktopSidebarState = 'menu';
   }
   function setupDesktopSidebar(){
-    $('#desktopMenuButton')?.addEventListener('click', () => openDesktopSidebar('menu'));
     $$('[data-sidebar-close]').forEach(button => button.addEventListener('click', closeDesktopSidebar));
     $('[data-sidebar-back]')?.addEventListener('click', () => setDesktopSidebarState('menu'));
     $$('[data-sidebar-open]').forEach(button => button.addEventListener('click', () => setDesktopSidebarState(button.dataset.sidebarOpen)));
