@@ -1333,16 +1333,16 @@
       #ideaCards{margin-top:0}
     }
     #ideaFilters>.filterOptions{display:none!important}
-    .ideaFilterSheetLayer{position:fixed;inset:0;z-index:170;display:flex;justify-content:flex-end;visibility:hidden;pointer-events:none}
-    .ideaFilterSheetLayer.isOpen{visibility:visible;pointer-events:auto}
-    .ideaFilterSheetBackdrop{position:absolute;inset:0;border:0;background:rgba(48,46,39,.18);opacity:0;transition:opacity .24s var(--ease);cursor:default}
+    .ideaFilterSheetLayer{position:fixed;inset:0;z-index:170;display:flex;justify-content:flex-end;visibility:hidden;pointer-events:none;transition:visibility 0s linear .34s}
+    .ideaFilterSheetLayer.isOpen{visibility:visible;pointer-events:auto;transition-delay:0s}
+    .ideaFilterSheetBackdrop{position:absolute;inset:0;border:0;background:rgba(48,46,39,.18);opacity:0;transition:opacity .28s ease;cursor:default}
     .ideaFilterSheetLayer.isOpen .ideaFilterSheetBackdrop{opacity:1}
     .ideaFilterSheet{
       position:relative;z-index:1;display:grid;grid-template-rows:auto minmax(0,1fr) auto;width:min(440px,calc(100vw - 28px));height:100%;
       background:linear-gradient(180deg,#fffdfa 0%,#faf7ef 100%);box-shadow:-16px 0 40px rgba(56,49,36,.14);
-      transform:translateX(102%);transition:transform .26s var(--ease);overflow:hidden
+      transform:translate3d(100%,0,0);opacity:.985;transition:transform .34s cubic-bezier(.32,.72,0,1),opacity .22s ease;will-change:transform;overflow:hidden
     }
-    .ideaFilterSheetLayer.isOpen .ideaFilterSheet{transform:translateX(0)}
+    .ideaFilterSheetLayer.isOpen .ideaFilterSheet{transform:translate3d(0,0,0);opacity:1}
     .ideaFilterSheetHeader{display:flex;align-items:center;justify-content:space-between;min-height:68px;padding:12px 20px;border-bottom:1px solid rgba(123,112,88,.08)}
     .ideaFilterSheetHeader h2{margin:0;color:var(--accent-dark);font-size:1.2rem;font-weight:650}
     .ideaFilterSheetClose{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:0;border-radius:12px;background:transparent;color:rgba(49,95,107,.72);cursor:pointer}
@@ -1428,8 +1428,8 @@
     }
     @media (max-width:640px){
       .ideaFilterSheetLayer{align-items:flex-end}
-      .ideaFilterSheet{width:100%;height:min(94dvh,760px);border-radius:24px 24px 0 0;box-shadow:0 -16px 40px rgba(56,49,36,.16);transform:translateY(102%)}
-      .ideaFilterSheetLayer.isOpen .ideaFilterSheet{transform:translateY(0)}
+      .ideaFilterSheet{width:100%;height:min(94dvh,760px);border-radius:24px 24px 0 0;box-shadow:0 -16px 40px rgba(56,49,36,.16);transform:translate3d(0,100%,0)}
+      .ideaFilterSheetLayer.isOpen .ideaFilterSheet{transform:translate3d(0,0,0)}
       .ideaFilterSheetHeader{min-height:62px;padding:10px 16px}
       .ideaFilterSheetBody{padding:18px 16px 24px}
       .ideaFilterSection{padding-bottom:19px;margin-bottom:19px}
