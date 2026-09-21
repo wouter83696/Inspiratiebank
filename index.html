@@ -2522,6 +2522,11 @@
       line-height:1.45;
       color:rgba(76,75,72,.76);
     }
+    #ideaCards .ideaPracticalDetails{
+      order:5;
+      align-self:flex-start;
+      margin-top:0;
+    }
     #ideaCards .cardFooter{
       position:absolute;
       right:14px;
@@ -3310,11 +3315,11 @@
             </label>
             <label class="teamField">
               <span>Kosten</span>
-              <select id="teamIdeaCostInput" name="cost" data-choice-select="cost"></select>
+              <select id="teamIdeaCostInput" name="cost"></select>
             </label>
             <label class="teamField">
               <span>Prikkelbelasting</span>
-              <select id="teamIdeaStimulusInput" name="stimulus" data-choice-select="stimulus"></select>
+              <select id="teamIdeaStimulusInput" name="stimulus"></select>
             </label>
             <label class="teamField">
               <span>Duur</span>
@@ -3345,8 +3350,8 @@
               <textarea id="teamIdeaFitInput" name="fit" placeholder="Bijv. waarom past dit idee goed, voor wie is het prettig, of wat maakt het inspirerend?"></textarea>
             </label>
             <label class="teamField wide">
-              <span>Praktische notitie / materiaal</span>
-              <textarea id="teamIdeaNoteInput" name="note" placeholder="Bijv. voorbereiding, tijdstip, materiaal, rustopties of iets om vooraf rekening mee te houden."></textarea>
+              <span>Materiaal / praktische informatie (optioneel)</span>
+              <textarea id="teamIdeaNoteInput" name="note" placeholder="Bijv. benodigd materiaal, voorbereiding of iets om vooraf rekening mee te houden."></textarea>
             </label>
           </div>
           <div class="teamActionBar">
@@ -6186,7 +6191,7 @@
       image:image ? ideaImageMarkup(image, item.url) : '',
       title:cardTitle,
       pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
-      meta:cardMetaLine(item, {compact:true}), description:escapeHtml(fitText), practical:'',
+      meta:cardMetaLine(item, {compact:true}), description:escapeHtml(fitText), practical:escapeHtml(item.materials || ''),
       website:'',
       actions:reportMenu('inspiratiebank', ideaDomKey(item), item.title)
     });
