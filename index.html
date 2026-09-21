@@ -2476,11 +2476,32 @@
       overflow:visible;
       font-size:.78rem;
     }
-    #ideaCards .cardMetaLine{
+    #ideaCards .cardMetaBlock{
       order:3;
+      display:grid;
+      grid-template-columns:max-content;
+      gap:5px;
+      width:fit-content;
+      max-width:100%;
+      padding:7px 10px;
+      border:1px solid rgba(112,94,63,.06);
+      border-radius:10px;
+      background:rgba(247,241,231,.18);
+      box-sizing:border-box;
+    }
+    #ideaCards .cardMetaBlock .cardLabels{
+      order:initial;
+      margin:0;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
+    }
+    #ideaCards .cardMetaLine{
+      order:initial;
       width:auto;
       align-self:flex-start;
-      margin:0 0 0 9px;
+      margin:0;
       padding:0;
       border:0;
       border-radius:0;
@@ -2721,7 +2742,8 @@
       #ideaCards .ideaThemeCard h3{font-size:1.08rem;line-height:1.25;color:#006780}
       #ideaCards .cardLabels{gap:7px;min-height:31px}
       #ideaCards .ideaThemeCard > p:not(.fine){font-size:.92rem;line-height:1.45;color:#74716E}
-      #ideaCards .cardMetaLine{font-size:.79rem;gap:16px;margin:0 0 0 9px;padding:0;color:#697472}
+      #ideaCards .cardMetaBlock{gap:6px;padding:8px 11px;border-radius:11px}
+      #ideaCards .cardMetaLine{font-size:.79rem;gap:16px;margin:0;padding:0;color:#697472}
       #ideaCards .cardMetaLine .metaIcon{width:16px;height:16px;color:#55777A}
       #ideaCards .cardFooter{right:14px;bottom:13px}
       #ideaCards .cardFooter .siteButton{
@@ -2821,8 +2843,8 @@
     /* Op tegels is praktische informatie een rustige metadataregel, geen badge-balk. */
     #ideaCards .cardLabels{
       display:inline-flex;width:auto;max-width:100%;min-height:0;align-self:flex-start;
-      gap:7px;padding:4px 7px;border:1px solid rgba(112,94,63,.055);border-radius:7px;
-      background:rgba(247,241,231,.16);box-shadow:none;overflow:visible
+      gap:7px;padding:0;border:0;border-radius:0;
+      background:transparent;box-shadow:none;overflow:visible
     }
     #ideaCards .cardLabels .pill{
       min-height:22px;flex:0 0 auto;gap:4px;padding:3px 2px;
