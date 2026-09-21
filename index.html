@@ -2366,6 +2366,16 @@
     #ideaCards .ideaImageFrame img{
       border-radius:inherit;
     }
+    #ideaCards .ideaImageLink{
+      display:block;
+      width:100%;
+      height:100%;
+      border-radius:inherit;
+    }
+    #ideaCards .ideaImageLink:focus-visible{
+      outline:2px solid rgba(0,115,141,.38);
+      outline-offset:-3px;
+    }
     #ideaCards .ideaThemeCard h3{
       display:flex;
       align-items:center;
@@ -3577,7 +3587,7 @@
     const base = src.replace(/\.jpe?g($|\?)/i, '');
     return `${base}-480.jpg 480w, ${base}-800.jpg 800w, ${src} 1200w`;
   }
-  function ideaImageMarkup(image={}){
+  function ideaImageMarkup(image={}, url=''){
     const srcset = responsiveImageSrcset(image.src || '');
     const attrs = [
       `src="${escapeHtml(image.src || '')}"`,
@@ -3587,7 +3597,11 @@
       'loading="lazy"',
       'decoding="async"'
     ].filter(Boolean).join(' ');
-    return `<figure class="ideaImageFrame"><img ${attrs}></figure>`;
+    const imageMarkup = `<img ${attrs}>`;
+    const linkedImage = url
+      ? `<a class="ideaImageLink" href="${escapeHtml(url)}" target="_blank" rel="noopener" aria-label="Open website van ${escapeHtml(image.alt || 'deze activiteit')}">${imageMarkup}</a>`
+      : imageMarkup;
+    return `<figure class="ideaImageFrame">${linkedImage}</figure>`;
   }
   function approvedIdeaImage(item={}){
     if(item.image && (item.imageStatus === 'approved' || item.imageApproved === true)){
@@ -6132,7 +6146,7 @@
     return IdeaViewShared.renderCard({
       themeClass:domainThemeClass(item.domain), hasImage:Boolean(image),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
-      image:image ? ideaImageMarkup(image) : '',
+      image:image ? ideaImageMarkup(image, item.url) : '',
       title:cardTitle,
       pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
       meta:cardMetaLine(item, {compact:true}), description:escapeHtml(fitText), practical:'',
