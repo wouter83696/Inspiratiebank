@@ -2376,6 +2376,24 @@
       font-size:1rem;
       line-height:1.24;
     }
+    #ideaCards .ideaTitleLink{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      min-width:0;
+      color:inherit;
+      text-decoration:none;
+      transition:color .16s ease;
+    }
+    #ideaCards .ideaTitleLink:hover{
+      color:#168697;
+      text-decoration:none;
+    }
+    #ideaCards .ideaTitleLink:focus-visible{
+      outline:2px solid rgba(0,115,141,.34);
+      outline-offset:4px;
+      border-radius:5px;
+    }
     #ideaCards .ideaThemeCard h3 .domainIcon{width:30px;height:30px;margin:0;flex:0 0 30px;background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink)}
     #ideaCards .ideaThemeCard h3 .domainIcon svg{width:50%;height:50%}
     #ideaCards .cardThemePill{
@@ -6107,14 +6125,18 @@
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
     const image = approvedIdeaImage(item);
     const fitText = audienceText(item.fit);
+    const titleContents = `<span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
+    const cardTitle = item.url
+      ? `<a class="ideaTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="Open website van ${escapeHtml(item.title)}">${titleContents}</a>`
+      : titleContents;
     return IdeaViewShared.renderCard({
       themeClass:domainThemeClass(item.domain), hasImage:Boolean(image),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       image:image ? ideaImageMarkup(image) : '',
-      title:`<span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span class="ideaTitleText">${escapeHtml(item.title)}</span>`,
+      title:cardTitle,
       pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
       meta:cardMetaLine(item, {compact:true}), description:escapeHtml(fitText), practical:'',
-      website:item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : '',
+      website:'',
       actions:reportMenu('inspiratiebank', ideaDomKey(item), item.title)
     });
   }
