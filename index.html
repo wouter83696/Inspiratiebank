@@ -1370,6 +1370,10 @@
     }
     .ideaFilterChip:hover{background:rgba(255,255,255,.78);border-color:rgba(79,142,158,.16)}
     .ideaFilterChip.active{background:rgba(220,239,229,.62);border-color:rgba(54,135,93,.16);color:#326b52;box-shadow:inset 0 0 0 1px rgba(54,135,93,.07)}
+    #ideaFilterPlaceChips .ideaFilterChip{gap:6px;min-height:34px;padding:7px 11px;font-weight:500}
+    #ideaFilterPlaceChips .ideaFilterChip svg{
+      width:15px;height:15px;flex:0 0 15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round
+    }
     #ideaFilterCategoryChips .ideaFilterChip{
       gap:6px;min-height:32px;padding:6px 9px;
       border-color:color-mix(in srgb,var(--theme-line) 52%,transparent);
@@ -3455,6 +3459,15 @@
           <div class="ideaFilterRangeLabels" aria-hidden="true"><span>3 km</span><span>5 km</span><span>10 km</span><span>25 km</span><span>50+ km</span></div>
         </section>
         <section class="ideaFilterSection">
+          <div class="ideaFilterSectionHead"><h3>Waar</h3></div>
+          <div class="ideaFilterChips" id="ideaFilterPlaceChips">
+            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaLocation" data-value="all">Alle</button>
+            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaLocation" data-value="Thuis"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 9.2 10 4l6 5.2"></path><path d="M5.8 8.4V16h8.4V8.4"></path><path d="M8.4 16v-4.2h3.2V16"></path></svg><span>Thuis</span></button>
+            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaLocation" data-value="Op pad">Eropuit</button>
+            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaLocation" data-value="Online">Online</button>
+          </div>
+        </section>
+        <section class="ideaFilterSection">
           <div class="ideaFilterSectionHead"><h3>Categorieën</h3></div>
           <p class="ideaFilterCategoryHint" id="ideaFilterCategoryHint">Kies één of meer categorieën. Klik nogmaals om uit te zetten.</p>
           <div class="ideaFilterChips" id="ideaFilterCategoryChips" aria-describedby="ideaFilterCategoryHint"></div>
@@ -3678,7 +3691,7 @@
   const weekName = id => { const w = ACTIVE_WEEKS.find(x=>x.id===id); return w ? 'Week '+w.week : id; };
   const isConcrete = item => !/doorlopend|wekelijks|bij mooi weer|check programma|actuele/i.test(String(item.date + ' ' + item.time));
   const IDEA_TYPE_OPTIONS = ['Eigen aanbod','Bestaand extern aanbod','Zoekbron / agenda','Inzending'];
-  const IDEA_LOCATION_OPTIONS = ['Binnen','Op pad','Online'];
+  const IDEA_LOCATION_OPTIONS = ['Binnen','Thuis','Op pad','Online'];
   const TEAM_IDEA_LOCATION_OPTIONS = [
     {value:'Binnen', label:'Op je eigen plek'},
     {value:'Op pad', label:'Eropuit'},
@@ -4162,9 +4175,10 @@
   }
   function ideaLocationDisplayLabel(value=''){
     const location = normalizeIdeaLocation(value);
+    if(location === 'Thuis') return 'Thuis';
     if(location === 'Online') return 'Online';
     if(location === 'Op pad' || location === 'Buiten') return 'Eropuit';
-    return 'Op je eigen plek';
+    return 'Binnen';
   }
   function normalizeIdeaCost(value=''){
     const v = normalize(value);
@@ -6232,10 +6246,19 @@
     return `${before}${items.length > 2 ? surpriseRenderer() : ''}${after}`;
   }
   function matches(item, query, filters){
-    const text = JSON.stringify(item);
+    const homeAliases = itemIsHomeActivity(item) ? ' thuis aan huis bij jou op eigen plek thuisactiviteit' : '';
+    const text = `${JSON.stringify(item)}${homeAliases}`;
     if(query && !includes(text, query)) return false;
     for(const [key,val] of Object.entries(filters)){
       if(!val || val === 'all') continue;
+      if(key === 'locationType'){
+        const location = normalizeIdeaLocation(item.locationType);
+        if(val === 'Thuis' && !itemIsHomeActivity(item)) return false;
+        if(val === 'Binnen' && (location !== 'Binnen' || itemIsHomeActivity(item))) return false;
+        if(val === 'Op pad' && location !== 'Op pad' && location !== 'Buiten') return false;
+        if(val === 'Online' && location !== 'Online') return false;
+        continue;
+      }
       if(normalizedIdeaField(item, key) !== val) return false;
     }
     return true;
