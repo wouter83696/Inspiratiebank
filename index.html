@@ -1571,8 +1571,8 @@
       display:grid;grid-template-columns:112px minmax(0,1fr);align-items:center;column-gap:12px;row-gap:0;
       min-height:0;padding:8px;overflow:hidden
     }
-    .ideaMapResult:hover,.ideaMapResult.active{background:#fffaf4;border-color:var(--theme-line,rgba(79,142,158,.18));transform:translateY(-1px)}
-    .ideaMapResult.active{box-shadow:0 0 0 2px var(--theme-line,rgba(79,142,158,.18)),0 10px 24px rgba(92,65,33,.075)}
+    .ideaMapResult:hover{background:#fffdf8;border-color:#E7DFD3;transform:translateY(-1px);box-shadow:0 10px 22px rgba(92,65,33,.06)}
+    .ideaMapResult.active{background:#fffdf8;border-color:var(--theme-line,rgba(79,142,158,.18));transform:translateY(-1px);box-shadow:0 0 0 2px var(--theme-line,rgba(79,142,158,.18)),0 10px 24px rgba(92,65,33,.075)}
     .ideaMapResultTitle{display:flex;align-items:center;gap:8px;min-width:0}
     .ideaMapResult .domainIcon{width:30px;height:30px;margin:0;align-self:center;background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink)}
     .ideaMapResult .domainIcon svg{width:15px;height:15px}
@@ -2920,15 +2920,15 @@
     .ideaMapResultMeta{
       grid-column:1;grid-row:2;
       display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
+      grid-template-columns:max-content max-content;
       align-items:center;
-      gap:0;
+      column-gap:14px;
       width:100%;min-width:0;padding:3px 1px;
     }
     .ideaMapResultMeta .cardMetaPart{
       display:grid;grid-template-columns:12px minmax(0,1fr);align-items:center;
-      justify-content:initial;column-gap:5px;min-width:0;padding-left:7px;
-      overflow:hidden;text-overflow:ellipsis
+      justify-content:initial;column-gap:5px;min-width:0;padding-left:0;
+      overflow:visible;white-space:nowrap
     }
     .ideaMapResultMeta .mapGroupMeta{grid-column:1}
     .ideaMapResultMeta .mapDurationMeta{grid-column:2}
