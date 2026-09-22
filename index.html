@@ -2477,10 +2477,10 @@
     }
     #ideaCards .cardMetaBlock{
       order:3;
-      display:grid;
-      grid-template-columns:repeat(3,max-content);
-      column-gap:12px;
-      row-gap:5px;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:5px;
       width:fit-content;
       max-width:100%;
       padding:7px 10px;
@@ -2490,7 +2490,7 @@
       box-sizing:border-box;
     }
     #ideaCards .cardMetaBlock .cardLabels{
-      display:contents;
+      display:flex;
       order:initial;
       margin:0;
       padding:0;
@@ -2499,7 +2499,8 @@
       background:transparent;
     }
     #ideaCards .cardMetaLine{
-      display:contents;
+      display:flex;
+      align-items:center;
       order:initial;
       width:auto;
       align-self:flex-start;
@@ -2580,7 +2581,7 @@
       flex-basis:14px;
     }
     #ideaCards .metaIcon{color:#356F7B}
-    #ideaCards .stimulusIcon{color:inherit}
+    #ideaCards .stimulusIcon{color:#356F7B}
     #ideaCards .metaIcon svg,
     #ideaCards .stimulusIcon svg{
       width:14px;
@@ -2600,7 +2601,6 @@
         flex-wrap:nowrap;
       }
       #ideaCards .cardMetaBlock{
-        grid-template-columns:repeat(3,max-content);
         width:fit-content;max-width:100%;padding:6px 9px;column-gap:9px;row-gap:5px
       }
       #ideaCards .cardMetaBlock .pill,
@@ -2860,7 +2860,7 @@
       flex:0 0 14px;
       width:14px;
       height:14px;
-      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23405F5D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E") center/contain no-repeat;
+      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23356F7B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E") center/contain no-repeat;
     }
     /* Op tegels is praktische informatie een rustige metadataregel, geen badge-balk. */
     #ideaCards .cardLabels{
@@ -2959,12 +2959,11 @@
     }
     #ideaList .cardPillGroup .pill + .pill,
     .ideaMapResultPills .pill + .pill{
-      position:relative;margin-left:3px;padding-left:10px;border-left:0 !important
+      position:relative;margin-left:3px;padding-left:2px;border-left:0 !important
     }
     #ideaList .cardPillGroup .pill + .pill::before,
     .ideaMapResultPills .pill + .pill::before{
-      content:"·";position:absolute;left:0;top:50%;transform:translateY(-52%);
-      width:auto;height:auto;background:none;color:rgba(64,95,93,.30);font-size:.74rem
+      content:none
     }
     #ideaList .cardPillGroup .locationPill:not(.homeLocationPill):not(.onlineLocationPill)::before,
     .ideaMapResultPills .locationPill:not(.homeLocationPill):not(.onlineLocationPill)::before{
@@ -2974,6 +2973,10 @@
     .ideaMapResultPills .stimulusPill{
       width:auto;min-width:20px;height:22px;min-height:22px;padding-right:2px
     }
+    #ideaList .cardPillGroup .stimulusIcon,
+    .ideaMapResultPills .stimulusIcon,
+    #ideaList .cardMetaLine .metaIcon,
+    .ideaMapResultMeta .metaIcon{color:#356F7B}
     .ideaMapResult.hasLink .ideaMapResultInfo{grid-template-columns:minmax(0,1fr) 30px}
     #ideaList .siteButton.secondary,
     .ideaMapResultLink{
