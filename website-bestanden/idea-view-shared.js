@@ -3,6 +3,10 @@
     return content ? `<details class="ideaPracticalDetails"><summary>Praktisch</summary><p class="ideaPracticalText">${content}</p></details>` : '';
   }
 
+  function renderPracticalList(content){
+    return content ? `<p class="ideaPracticalListText">${content}</p>` : '<span class="ideaPracticalEmpty">-</span>';
+  }
+
   function renderCard(view){
     const classes = ['card', 'ideaThemeCard', view.themeClass || '', view.hasImage ? 'hasImage' : '', view.hidden ? 'hiddenItem' : '']
       .filter(Boolean).join(' ');
@@ -33,7 +37,7 @@
     const cells = [
       {label:'Activiteit', html:`${view.title || ''}${view.meta ? `<div class="small ideaListMeta">${view.meta}</div>` : ''}`},
       {label:'Badges', html:`<div class="cardPillGroup">${view.pills || ''}</div>${view.meta ? `<div class="mobileIdeaListMeta">${view.meta}</div>` : ''}`},
-      {label:'Praktisch', html:renderPractical(view.practical)}
+      {label:'Praktisch', html:renderPracticalList(view.practical)}
     ];
     if(view.manageActions !== undefined){
       cells.push({label:'Website', html:`<div class="ideaActions">${view.website || ''}${view.actions || ''}</div>`});

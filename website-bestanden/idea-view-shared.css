@@ -118,6 +118,10 @@
   display:flex;width:auto;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none
 }
 .sharedIdeaList .mobileIdeaListMeta{display:none}
+.sharedIdeaList .ideaPracticalListText{
+  margin:0;color:rgba(76,75,72,.72);font-size:.8rem;line-height:1.4;font-weight:400
+}
+.sharedIdeaList .ideaPracticalEmpty{color:rgba(76,75,72,.42);font-size:.8rem}
 .sharedIdeaList .cardPillGroup{display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
 .sharedIdeaList td:nth-child(4){overflow:hidden}
 .sharedIdeaList .ideaActions{display:flex;align-items:center;gap:7px;width:100%;min-width:0;max-width:100%}
@@ -164,6 +168,9 @@
   .sharedIdeaList .cardPillGroup{flex-wrap:wrap}
   .sharedIdeaList td:nth-child(3) .small{
     display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
+    margin-left:0;color:rgba(11,18,32,.62);font-size:.82rem;line-height:1.38
+  }
+  .sharedIdeaList .ideaPracticalListText{
     margin-left:0;color:rgba(11,18,32,.62);font-size:.82rem;line-height:1.38
   }
   .sharedIdeaList .ideaActions{justify-content:flex-start;flex-wrap:nowrap}
