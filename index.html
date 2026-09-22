@@ -585,15 +585,15 @@
     .ideaThemeCard > p:not(.fine){font-size:.95rem;line-height:1.48;color:rgba(11,18,32,.66)}
     .card .fine{margin-top:2px;color:var(--muted);font-size:.86rem}
     .card .fine strong{display:block;margin:7px 0 2px;color:var(--accent-dark)}
-    .ideaPracticalDetails{margin-top:0;color:var(--muted);font-size:.86rem}
+    .ideaPracticalDetails{margin-top:1px;color:var(--muted);font-size:.76rem}
     .ideaPracticalDetails summary{
-      display:inline-flex;align-items:center;gap:5px;min-height:24px;padding:0;border:0;border-radius:0;
-      background:transparent;color:var(--accent-dark);font-weight:500;line-height:1;cursor:pointer;list-style:none
+      display:inline-flex;align-items:center;gap:4px;min-height:20px;padding:0;border:0;border-radius:0;
+      background:transparent;color:rgba(49,95,107,.72);font-weight:450;line-height:1.2;cursor:pointer;list-style:none
     }
     .ideaPracticalDetails summary::-webkit-details-marker{display:none}
     .ideaPracticalDetails summary::after{content:"";width:11px;height:11px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%233b6470' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .18s var(--ease)}
     .ideaPracticalDetails[open] summary::after{transform:rotate(180deg)}
-    .ideaPracticalText{margin:7px 0 0;color:rgba(11,18,32,.66);line-height:1.43}
+    .ideaPracticalText{margin:5px 0 0;color:rgba(76,75,72,.66);font-size:.76rem;line-height:1.4}
     .cardMetaLine{
       display:flex;align-items:center;gap:9px;width:100%;min-width:0;margin:1px 0 2px;padding:4px 8px;
       border-radius:7px;
@@ -2291,7 +2291,7 @@
   </style>
   <link rel="stylesheet" href="website-bestanden/loading-screen.css?v=20260911-first-paint-v4">
   <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260914-mobile-controls-v1">
-  <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20260921-practical-link-v1">
+  <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20260922-practical-toggle-v1">
   <style>
     /* De kaart zelf blijft rustig; categorieaccenten zitten alleen in iconen en badges. */
     @media (min-width:981px){
@@ -2526,10 +2526,10 @@
     #ideaCards .ideaPracticalDetails{
       order:5;
       align-self:flex-start;
-      margin-top:0;
+      margin-top:-1px;
     }
     #ideaCards .ideaPracticalDetails summary{
-      min-height:24px;
+      min-height:20px;
       padding:0;
       border:0;
       border-radius:0;
@@ -3530,7 +3530,7 @@
   </div>
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20260921-practical-link-v1"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20260922-practical-toggle-v1"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20260915-week-card-header-v1"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
@@ -6123,7 +6123,7 @@
       title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
       meta:cardMetaLine(item, {compact:true}),
       pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
-      practical:escapeHtml(audienceText(item.materials || item.fit || '')),
+      practical:escapeHtml(item.materials || ''),
       website:sourceLink
     });
   }
