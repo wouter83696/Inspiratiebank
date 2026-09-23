@@ -1830,7 +1830,31 @@
     .footerCopy strong{color:var(--accent-dark);font-weight:500}
     .footerContact{justify-self:end;margin-left:10px;margin-right:clamp(18px,4vw,56px);color:var(--accent-dark);font-weight:500;text-decoration:none;padding:8px 0}
     .footerContact:hover{color:var(--accent)}
-    @media (min-width:981px){#ideaCards.cards{align-items:stretch}#ideaCards .card{height:100%}}
+    @media (min-width:981px){
+      #ideaCards.cards{align-items:stretch}
+      #ideaCards .card{height:100%}
+      .ideaMap{
+        position:relative;
+        grid-template-rows:minmax(600px,72vh);
+      }
+      .ideaMapCanvas{grid-area:1 / 1;min-height:600px}
+      .ideaMapPanel{
+        position:absolute;left:0;right:0;bottom:0;z-index:800;
+        min-height:0;background:transparent;border:0;pointer-events:none;
+      }
+      .ideaMapPanelHead,.ideaMapResults{pointer-events:auto}
+      .ideaMapPanelHead{padding:12px 18px 10px}
+      .ideaMapPanelHead h3,.ideaMapPanelHead p{
+        width:max-content;max-width:min(540px,70vw);padding:2px 6px;
+        border-radius:6px;background:rgba(255,255,255,.82);
+        box-shadow:0 3px 12px rgba(20,38,42,.06);
+        backdrop-filter:blur(8px)
+      }
+      .ideaMapPanelHead p{margin-top:2px}
+      .ideaMapResults{padding:0 18px 18px;scrollbar-width:none}
+      .ideaMapResults::-webkit-scrollbar{display:none}
+      .ideaMapResult{width:clamp(330px,29vw,410px)}
+    }
     @media (max-width:640px){.sourceAdditionsBlock{margin-top:28px}#teamAdditions{margin-top:28px}.sourceAdditionsBlock .sectionHead h2,#teamAdditions h2{font-size:1.35rem}}
     @media (min-width:1180px){#ideaCards.cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}#ideaCards .card{gap:9px}#ideaCards .ideaImageFrame{aspect-ratio:16 / 8.7}}
     @media (max-width:980px){.hero{grid-template-columns:1fr;gap:16px;padding-top:18px}.heroMain{min-height:auto}.quick{grid-template-columns:repeat(3,1fr)}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.filters,.filters.more,.teamFormGrid,.agendaSearchFilters{grid-template-columns:1fr 1fr}.filterSearch{grid-column:1/-1}.weekBody{padding:0 12px 18px}.agendaBoard{grid-template-columns:repeat(2,minmax(0,1fr));gap:0}.agendaDay{min-height:360px}.agendaDay:nth-child(odd){border-left:0}.agendaDay:nth-child(n+3){border-top:1px solid rgba(11,18,32,.06)}}
@@ -2923,41 +2947,33 @@
     .ideaMapResultPills .pill{min-height:24px;padding:4px 8px;font-size:.66rem}
     .ideaMapResultPills .stimulusPill{width:auto;min-width:28px;height:24px;min-height:24px;padding:4px 8px}
     .ideaMapResultInfo{
-      display:grid;
-      grid-template-columns:minmax(0,1fr);
-      grid-template-rows:auto auto;
+      display:flex;
       align-items:center;
-      row-gap:4px;
+      gap:10px;
       flex-wrap:nowrap;
+      margin-top:11px;
+      min-width:0;
     }
-    .ideaMapResultPills{grid-column:1;grid-row:1;width:100%;min-width:0}
+    .ideaMapResultPills{width:auto;min-width:0;flex:0 0 auto}
     .ideaMapResultMeta{
-      grid-column:1;grid-row:2;
-      display:grid;
-      grid-template-columns:max-content max-content;
+      display:flex;
       align-items:center;
-      column-gap:14px;
-      width:100%;min-width:0;padding:3px 1px;
+      gap:10px;
+      width:auto;min-width:0;padding:3px 1px;
     }
     .ideaMapResultMeta .cardMetaPart{
-      display:grid;grid-template-columns:12px minmax(0,1fr);align-items:center;
-      justify-content:initial;column-gap:5px;min-width:0;padding-left:0;
+      display:flex;align-items:center;
+      justify-content:flex-start;gap:5px;min-width:0;padding-left:0;
       overflow:visible;white-space:nowrap
     }
-    .ideaMapResultMeta .mapGroupMeta{grid-column:1}
-    .ideaMapResultMeta .mapDurationMeta{grid-column:2}
-    .ideaMapResultMeta .cardMetaPart .metaIcon{grid-column:1;margin:0}
     .ideaMapResult.hasLink .ideaMapResultInfo{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) 32px;
-      grid-template-rows:auto auto;
+      display:flex;
       align-items:center;
-      column-gap:7px;
-      row-gap:4px;
+      gap:10px;
     }
-    .ideaMapResult.hasLink .ideaMapResultPills{grid-column:1;grid-row:1;width:100%;max-width:100%;justify-self:stretch}
-    .ideaMapResult.hasLink .ideaMapResultMeta{grid-column:1;grid-row:2;min-width:0;overflow:visible;justify-self:start}
-    .ideaMapResult.hasLink .ideaMapResultLink{grid-column:2;grid-row:1 / 3;margin-left:0;justify-self:end;align-self:center}
+    .ideaMapResult.hasLink .ideaMapResultPills{width:auto;max-width:100%}
+    .ideaMapResult.hasLink .ideaMapResultMeta{min-width:0;overflow:visible}
+    .ideaMapResult.hasLink .ideaMapResultLink{margin-left:auto;align-self:center}
 
     /* De compacte tegelmetadata en linkknop lopen door in lijst- en kaartweergave. */
     #ideaList .cardPillGroup,
@@ -2996,7 +3012,7 @@
     .ideaMapResultPills .stimulusIcon,
     #ideaList .cardMetaLine .metaIcon,
     .ideaMapResultMeta .metaIcon{color:#356F7B}
-    .ideaMapResult.hasLink .ideaMapResultInfo{grid-template-columns:minmax(0,1fr) 30px}
+    .ideaMapResult.hasLink .ideaMapResultInfo{display:flex}
     #ideaList .siteButton.secondary,
     .ideaMapResultLink{
       display:grid;place-items:center;width:30px;min-width:30px;height:30px;min-height:30px;padding:0;
