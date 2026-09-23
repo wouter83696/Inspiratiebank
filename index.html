@@ -1612,6 +1612,23 @@
     }
     .ideaMapResultLink:hover{background:#fff;border-color:rgba(79,142,158,.18);transform:translateY(-1px)}
     .ideaMapResultLink::after{content:"";width:15px;height:15px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300738D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E") center/contain no-repeat}
+    .ideaMapDetailCard{
+      display:flex;flex:0 0 100%;flex-direction:column;gap:8px;width:100%;min-width:0;
+      scroll-snap-align:start
+    }
+    .ideaMapDetailCard > .card{
+      width:100%;height:auto;min-height:0;margin:0;padding:16px;gap:10px;
+      border-radius:16px;overflow:visible
+    }
+    .ideaMapDetailCard > .card:hover{transform:none}
+    .ideaMapDetailCard .ideaThemeCard h3 + .cardMetaBlock{margin-top:7px}
+    .ideaMapDetailBack{
+      display:inline-flex;align-items:center;align-self:flex-start;gap:6px;min-height:32px;padding:6px 10px;
+      border:1px solid rgba(79,142,158,.11);border-radius:999px;background:rgba(255,255,255,.92);
+      color:var(--accent-dark);font:inherit;font-size:.74rem;font-weight:550;cursor:pointer;
+      box-shadow:0 5px 14px rgba(20,38,42,.05)
+    }
+    .ideaMapDetailBack svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaMapResultThumbWrap{
       position:relative;display:block;width:100%;height:96px;overflow:hidden;border-radius:13px;flex:0 0 auto;
       border:1px solid color-mix(in srgb,var(--theme-line) 48%,rgba(255,255,255,.55));box-shadow:0 8px 18px rgba(20,38,42,.045)
@@ -3048,6 +3065,14 @@
       border-radius:0;
       background:transparent;
     }
+    .sharedMetaBlock .cardPillGroup .pill{
+      width:auto;min-width:0;min-height:22px;flex:0 0 auto;gap:4px;padding:3px 2px;
+      border:0 !important;background:transparent !important;
+      color:#617573;font-size:.7rem;font-weight:500
+    }
+    .sharedMetaBlock .cardPillGroup .pill + .pill{
+      margin-left:3px;padding-left:2px;border-left:0 !important
+    }
     .sharedMetaBlock .cardMetaLine{
       width:auto;
       margin:0;
@@ -3642,7 +3667,7 @@
   </div>
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20260923-unified-metadata-v1"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20260923-map-detail-v2"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20260915-week-card-header-v1"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
@@ -3868,6 +3893,7 @@
 	  let userLocationRadiusKm = loadUserLocationRadius();
 	  let activeIdeaMapKey = '';
 	  let activeIdeaMapClusterKeys = null;
+	  let ideaMapDetailKey = '';
 	  let ideaMapPanelExpanded = false;
 	  let activeIdeaMapClusterIsArea = false;
 	  let pendingIdeaMapZoomTarget = null;
@@ -6950,7 +6976,8 @@
     const orderedPoints = activeIdeaMapKey
       ? [...visiblePoints].sort((a,b) => (a.key === activeIdeaMapKey ? -1 : b.key === activeIdeaMapKey ? 1 : 0))
       : visiblePoints;
-    const resultsHtml = orderedPoints.map(point => {
+    const detailPoint = ideaMapDetailKey ? points.find(point => point.key === ideaMapDetailKey) : null;
+    const listHtml = orderedPoints.map(point => {
       const active = point.key === activeIdeaMapKey;
       const image = approvedIdeaImage(point.item);
       const thumb = image ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async"></span>` : '';
@@ -6961,15 +6988,25 @@
         <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultBody"><span class="ideaMapResultInfo"><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${ideaMapMeta(point.item, point)}</span></span>${link}</span></span>
       </article>`;
     }).join('');
+    const backButton = detailPoint && activeIdeaMapClusterKeys?.length > 1
+      ? '<button class="ideaMapDetailBack" type="button" data-map-detail-back aria-label="Terug naar activiteiten op deze locatie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span>Terug naar lijst</span></button>'
+      : '';
+    const resultsHtml = detailPoint
+      ? `<div class="ideaMapDetailCard" data-map-detail-key="${escapeHtml(detailPoint.key)}">${backButton}${cardIdea(detailPoint.item)}</div>`
+      : listHtml;
     const sharedPlace = activeIdeaMapClusterKeys
       && visiblePoints.length
       && visiblePoints.every(point => point.precision === 'place' && point.place === visiblePoints[0].place)
       ? visiblePoints[0].place
       : '';
-    const panelTitle = activeIdeaMapClusterKeys
+    const panelTitle = detailPoint
+      ? detailPoint.item.title
+      : activeIdeaMapClusterKeys
       ? (sharedPlace ? `${visiblePoints.length} activiteiten in ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}` : `${visiblePoints.length} activiteiten ${activeIdeaMapClusterIsArea ? 'in dit gebied' : 'op deze plek'}`)
       : 'Activiteiten op kaart';
-    const panelText = activeIdeaMapClusterKeys
+    const panelText = detailPoint
+      ? 'Bekijk de activiteit of open de website voor meer informatie.'
+      : activeIdeaMapClusterKeys
       ? (sharedPlace ? `Deze activiteiten liggen verspreid over ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}.` : activeIdeaMapClusterIsArea ? 'Zoom in voor losse markers of kies hieronder een tegel.' : 'Activiteiten op dezelfde locatie. Kies een tegel of toon alles.')
       : (userLocation?.isDefault ? 'Standaard rond Nijmegen.' : `Afstand vanaf ${locationDisplayText()}.`);
     const clearButton = activeIdeaMapClusterKeys ? '<button class="ideaMapClear" type="button" data-map-clear-cluster>Alles tonen</button>' : '';
@@ -7041,10 +7078,14 @@
   function setActiveIdeaMapCluster(keys=[], {area=false}={}){
     const uniqueKeys = [...new Set(keys.filter(Boolean))];
     if(uniqueKeys.length <= 1){
-      if(uniqueKeys[0]) setActiveIdeaMapItem(uniqueKeys[0], {clearCluster:true});
+      if(uniqueKeys[0]){
+        ideaMapDetailKey = uniqueKeys[0];
+        setActiveIdeaMapItem(uniqueKeys[0], {clearCluster:true, refreshPanel:true, emphasize:true});
+      }
       return;
     }
     activeIdeaMapClusterKeys = uniqueKeys;
+    ideaMapDetailKey = '';
     ideaMapPanelExpanded = true;
     activeIdeaMapClusterIsArea = area;
     activeIdeaMapKey = uniqueKeys.includes(activeIdeaMapKey) ? activeIdeaMapKey : uniqueKeys[0];
@@ -7052,8 +7093,9 @@
     updateIdeaMapPanel({scroll:true, emphasize:true});
   }
   function clearActiveIdeaMapCluster(){
-    if(!activeIdeaMapClusterKeys) return;
+    if(!activeIdeaMapClusterKeys && !ideaMapDetailKey) return;
     activeIdeaMapClusterKeys = null;
+    ideaMapDetailKey = '';
     activeIdeaMapClusterIsArea = false;
     pendingIdeaMapZoomTarget = null;
     ideaMapProvider?.clearActiveCluster?.();
@@ -7248,7 +7290,10 @@
     if(provider === 'leaflet'){
       return createLeafletMapProvider(container, points, {
         userPoint:userLocation || DEFAULT_LOCATION,
-        onSelect:key => setActiveIdeaMapItem(key, {clearCluster:true, refreshPanel:true, emphasize:true}),
+        onSelect:key => {
+          ideaMapDetailKey = key;
+          setActiveIdeaMapItem(key, {clearCluster:true, refreshPanel:true, emphasize:true});
+        },
         onCluster:(keys, clusterOptions) => setActiveIdeaMapCluster(keys, clusterOptions)
       });
     }
@@ -7267,6 +7312,7 @@
       map.innerHTML = `<div class="ideaMapEmpty">${escapeHtml(inspirationEmptyMessage())}</div>`;
       return;
     }
+    if(ideaMapDetailKey && !points.some(point => point.key === ideaMapDetailKey)) ideaMapDetailKey = '';
     if(!activeIdeaMapKey || !points.some(point => point.key === activeIdeaMapKey)) activeIdeaMapKey = points[0].key;
     map.innerHTML = `<div class="ideaMapCanvas" aria-label="Kaart met inspiratiepunten">
       <div id="ideaMapProviderCanvas"></div>
@@ -7576,11 +7622,17 @@
         clearActiveIdeaMapCluster();
         return;
       }
+      if(event.target.closest('[data-map-detail-back]')){
+        ideaMapDetailKey = '';
+        updateIdeaMapPanel({scroll:true});
+        return;
+      }
       if(event.target.closest('.ideaMapResultLink')) return;
       const mapTarget = event.target.closest('[data-map-result-key]');
       if(!mapTarget) return;
       pendingIdeaMapZoomTarget = null;
-      setActiveIdeaMapItem(mapTarget.dataset.mapResultKey);
+      ideaMapDetailKey = mapTarget.dataset.mapResultKey;
+      setActiveIdeaMapItem(mapTarget.dataset.mapResultKey, {refreshPanel:true, emphasize:true});
     });
     document.addEventListener('keydown', event => {
       if(event.key !== 'Enter' && event.key !== ' ') return;
@@ -7589,7 +7641,8 @@
       if(!mapTarget) return;
       event.preventDefault();
       pendingIdeaMapZoomTarget = null;
-      setActiveIdeaMapItem(mapTarget.dataset.mapResultKey);
+      ideaMapDetailKey = mapTarget.dataset.mapResultKey;
+      setActiveIdeaMapItem(mapTarget.dataset.mapResultKey, {refreshPanel:true, emphasize:true});
     });
     $('#locationResetBtn').addEventListener('click', () => {
       saveUserLocationRadius(DEFAULT_LOCATION_RADIUS_KM, {sync:false});

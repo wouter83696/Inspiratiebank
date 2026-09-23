@@ -11,7 +11,7 @@
     const classes = ['card', 'ideaThemeCard', view.themeClass || '', view.hasImage ? 'hasImage' : '', view.hidden ? 'hiddenItem' : '']
       .filter(Boolean).join(' ');
     const attributes = view.attributes || '';
-    const pillsClass = 'cardLabels';
+    const pillsClass = 'cardLabels cardPillGroup';
     const pills = view.pills || '';
     const source = view.source ? `<div class="small">${view.source}</div>` : '';
     const body = view.description ? `<p>${view.description}</p>` : '';
@@ -21,7 +21,7 @@
       ${view.image || ''}
       ${view.themePill ? `<div class="cardThemePill">${view.themePill}</div>` : ''}
       <h3>${view.title || ''}</h3>
-      <div class="cardMetaBlock"><div class="${pillsClass}">${pills}</div>${view.meta || ''}</div>
+      <div class="cardMetaBlock sharedMetaBlock"><div class="${pillsClass}">${pills}</div>${view.meta || ''}</div>
       ${source}${body}${practical}${footer}
     </article>`;
   }
