@@ -1635,7 +1635,7 @@
       flex:0 0 auto;width:100%;max-width:none;height:auto !important;min-height:0 !important;max-height:100%;margin:0;overflow-x:hidden;overflow-y:auto
     }
     .ideaMapDetailCard > .card:hover{transform:none}
-    .ideaMapPanel.isDetail .ideaMapDetailCard{animation:ideaMapDetailEnter .2s ease-out}
+    .ideaMapPanel.hasDetail .ideaMapDetailCard{animation:ideaMapDetailEnter .2s ease-out}
     .ideaMapDetailCard .sharedIdeaCard:not(.hasImage){padding-top:50px}
     .ideaMapDetailToolbar{
       position:absolute;z-index:5;top:10px;left:10px;margin:0;padding:0;
@@ -1651,7 +1651,7 @@
     .ideaMapDetailBack svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaMapDetailBack span{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     @keyframes ideaMapDetailEnter{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
-    @media (prefers-reduced-motion:reduce){.ideaMapPanel.isDetail .ideaMapDetailCard{animation:none}}
+    @media (prefers-reduced-motion:reduce){.ideaMapPanel.hasDetail .ideaMapDetailCard{animation:none}}
     .ideaMapDetailCard .sharedIdeaCard .sharedMetaBlock{
       display:grid;grid-template-columns:repeat(5,max-content);align-items:center;column-gap:10px;
       width:max-content;max-width:100%;padding:7px 9px;white-space:nowrap;overflow-x:auto;scrollbar-width:none
@@ -1892,7 +1892,6 @@
         width:min(380px,calc(100% - 96px));min-height:0;
         overflow:hidden;background:transparent;border:0;pointer-events:none;
       }
-      .ideaMapPanel.isDetail{width:min(340px,calc(100% - 96px))}
       .ideaMapPanelHead,.ideaMapResults{pointer-events:auto}
       .ideaMapPanelHead{display:none}
       .ideaMapPanelHeadRow{justify-content:flex-end}
@@ -1911,10 +1910,10 @@
       }
       .ideaMapResults::-webkit-scrollbar{display:none}
       .ideaMapResult{width:100%;scroll-snap-align:start}
-      .ideaMapPanel.isDetail .ideaMapDetailCard.sharedIdeaCards{width:100%;flex-basis:auto}
-      .ideaMapPanel.isDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 8.5}
-      .ideaMapPanel.isDetail .sharedIdeaCard h3{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-      .ideaMapPanel.isDetail .sharedIdeaCard > p:not(.fine){display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+      .ideaMapPanel.hasDetail .ideaMapDetailCard.sharedIdeaCards{width:100%;flex-basis:auto}
+      .ideaMapPanel.hasDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 8.5}
+      .ideaMapPanel.hasDetail .sharedIdeaCard h3{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+      .ideaMapPanel.hasDetail .sharedIdeaCard > p:not(.fine){display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
       .ideaMapCanvas .leaflet-top.leaflet-right{right:auto;left:14px}
     }
     @media (max-width:640px){.sourceAdditionsBlock{margin-top:28px}#teamAdditions{margin-top:28px}.sourceAdditionsBlock .sectionHead h2,#teamAdditions h2{font-size:1.35rem}}
@@ -6422,7 +6421,7 @@
       themeClass:domainThemeClass(item.domain), hasImage:Boolean(image),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       toolbar:mapDetailAction === 'back'
-        ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailBack" type="button" data-map-detail-back aria-label="Terug naar de activiteitenlijst" title="Terug naar lijst"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span>Terug naar lijst</span></button></div>'
+        ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailBack" type="button" data-map-detail-back aria-label="Tegel inklappen" title="Tegel inklappen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 14 6-6 6 6"></path></svg><span>Tegel inklappen</span></button></div>'
         : '',
       image:image ? ideaImageMarkup(image, item.url) : '',
       title:cardTitle,
@@ -7040,11 +7039,11 @@
   }
   function ideaMapPanelMarkup(points=[]){
     const visiblePoints = visibleIdeaMapPoints(points);
-    const orderedPoints = activeIdeaMapKey
-      ? [...visiblePoints].sort((a,b) => (a.key === activeIdeaMapKey ? -1 : b.key === activeIdeaMapKey ? 1 : 0))
-      : visiblePoints;
-    const detailPoint = ideaMapDetailKey ? points.find(point => point.key === ideaMapDetailKey) : null;
-    const listHtml = orderedPoints.map(point => {
+    const detailPoint = ideaMapDetailKey ? visiblePoints.find(point => point.key === ideaMapDetailKey) : null;
+    const listHtml = visiblePoints.map(point => {
+      if(point.key === detailPoint?.key){
+        return `<div class="ideaMapDetailCard sharedIdeaCards" data-map-detail-key="${escapeHtml(point.key)}">${cardIdea(point.item, {mapDetailAction:'back'})}</div>`;
+      }
       const active = point.key === activeIdeaMapKey;
       const image = approvedIdeaImage(point.item);
       const thumb = image ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async"></span>` : '';
@@ -7060,22 +7059,15 @@
         <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultBody">${metadataBlock}</span></span>
       </article>`;
     }).join('');
-    const resultsHtml = detailPoint
-      ? `<div class="ideaMapDetailCard sharedIdeaCards" data-map-detail-key="${escapeHtml(detailPoint.key)}">${cardIdea(detailPoint.item, {mapDetailAction:'back'})}</div>`
-      : listHtml;
     const sharedPlace = activeIdeaMapClusterKeys
       && visiblePoints.length
       && visiblePoints.every(point => point.precision === 'place' && point.place === visiblePoints[0].place)
       ? visiblePoints[0].place
       : '';
-    const panelTitle = detailPoint
-      ? detailPoint.item.title
-      : activeIdeaMapClusterKeys
+    const panelTitle = activeIdeaMapClusterKeys
       ? (sharedPlace ? `${visiblePoints.length} activiteiten in ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}` : `${visiblePoints.length} activiteiten ${activeIdeaMapClusterIsArea ? 'in dit gebied' : 'op deze plek'}`)
       : 'Activiteiten op kaart';
-    const panelText = detailPoint
-      ? 'Bekijk de activiteit of open de website voor meer informatie.'
-      : activeIdeaMapClusterKeys
+    const panelText = activeIdeaMapClusterKeys
       ? (sharedPlace ? `Deze activiteiten liggen verspreid over ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}.` : activeIdeaMapClusterIsArea ? 'Zoom in voor losse markers of kies hieronder een tegel.' : 'Activiteiten op dezelfde locatie. Kies een tegel of toon alles.')
       : (userLocation?.isDefault ? 'Standaard rond Nijmegen.' : `Afstand vanaf ${locationDisplayText()}.`);
     const clearButton = activeIdeaMapClusterKeys ? '<button class="ideaMapClear" type="button" data-map-clear-cluster>Alles tonen</button>' : '';
@@ -7083,9 +7075,9 @@
     const toggleIcon = ideaMapPanelExpanded ? '<path d="m6 14 6-6 6 6"></path>' : '<path d="m6 10 6 6 6-6"></path>';
     const visibleTitle = ideaMapPanelExpanded ? panelTitle : 'Kies een marker op de kaart';
     const visibleText = ideaMapPanelExpanded ? panelText : 'De bijbehorende activiteiten verschijnen hier.';
-    return `<aside class="ideaMapPanel${ideaMapPanelExpanded ? ' isExpanded' : ''}${detailPoint ? ' isDetail' : ' isList'}">
+    return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${detailPoint ? ' hasDetail' : ''}">
       <div class="ideaMapPanelHead"><div class="ideaMapPanelHeadRow"><div><h3>${escapeHtml(visibleTitle)}</h3><p>${escapeHtml(visibleText)}</p></div><div class="ideaMapPanelActions">${clearButton}<button class="ideaMapPanelToggle" type="button" data-map-panel-toggle aria-expanded="${ideaMapPanelExpanded ? 'true' : 'false'}" title="${toggleLabel}" aria-label="${toggleLabel}"><svg viewBox="0 0 24 24" aria-hidden="true">${toggleIcon}</svg></button></div></div></div>
-      <div class="ideaMapResults">${resultsHtml}</div>
+      <div class="ideaMapResults">${listHtml}</div>
     </aside>`;
   }
   function updateIdeaMapPanel({scroll=false, emphasize=false}={}){
@@ -7110,13 +7102,14 @@
       updateIdeaMapPanel({scroll, emphasize});
       return;
     }
-    $$('[data-map-pin-key],[data-map-result-key]').forEach(node => {
-      const nodeKey = node.dataset.mapPinKey || node.dataset.mapResultKey;
+    $$('[data-map-pin-key],[data-map-result-key],[data-map-detail-key]').forEach(node => {
+      const nodeKey = node.dataset.mapPinKey || node.dataset.mapResultKey || node.dataset.mapDetailKey;
       const active = nodeKey === activeIdeaMapKey;
       node.classList.toggle('active', active);
     });
     if(ideaMapProvider) ideaMapProvider.setActive(activeIdeaMapKey);
-    const result = $(`[data-map-result-key="${CSS.escape(activeIdeaMapKey)}"]`);
+    const escapedActiveKey = CSS.escape(activeIdeaMapKey);
+    const result = $(`[data-map-result-key="${escapedActiveKey}"],[data-map-detail-key="${escapedActiveKey}"]`);
     if(result && scroll){
       const panel = result.closest('.ideaMapResults');
       if(panel){
