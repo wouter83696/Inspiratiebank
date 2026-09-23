@@ -2835,7 +2835,7 @@
         background:#fffdf8;box-shadow:0 8px 24px rgba(92,65,33,.04);
       }
       .sharedIdeaCard .ideaImageFrame{
-        flex-shrink:0;aspect-ratio:16 / 9;margin:-6px -14px -1px;border-radius:13px;
+        flex-shrink:0;aspect-ratio:16 / 9.4;margin:-4px -10px 0;border-radius:13px;
       }
       .sharedIdeaCard.hasImage .cardThemePill{top:23px;left:21px}
       .sharedIdeaCard .cardThemePill .categoryPill,
@@ -3081,10 +3081,11 @@
     }
     .sharedMetaBlock .cardPillGroup{
       display:grid;
-      grid-template-columns:72px 46px 22px;
+      grid-template-columns:repeat(3,max-content);
       align-items:center;
-      column-gap:8px;
-      width:100% !important;
+      column-gap:12px;
+      width:max-content !important;
+      max-width:100%;
     }
     .sharedMetaBlock .cardPillGroup .pill{
       width:auto;min-width:0;min-height:22px;flex:0 0 auto;gap:4px;padding:3px 2px;
@@ -3096,17 +3097,18 @@
     }
     .sharedMetaBlock .cardMetaLine{
       display:grid;
-      grid-template-columns:72px max-content;
+      grid-template-columns:repeat(2,max-content);
       align-items:center;
-      column-gap:8px;
-      width:100%;
+      column-gap:14px;
+      width:max-content;
+      max-width:100%;
       margin:0;
       padding:0;
       border:0;
       border-radius:0;
       background:transparent;
     }
-    #ideaList .sharedMetaBlock{width:190px}
+    #ideaList .sharedMetaBlock{width:max-content}
     #ideaList .sharedMetaBlock .cardPillGroup{display:grid}
     #ideaList .sharedMetaBlock .cardMetaLine{display:grid}
     #ideaList .sharedMetaBlock .cardPillGroup .pill + .pill{margin-left:0;padding-left:0}
