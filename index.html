@@ -1635,25 +1635,23 @@
       flex:0 0 auto;width:100%;max-width:none;height:auto !important;min-height:0 !important;max-height:100%;margin:0;overflow-x:hidden;overflow-y:auto
     }
     .ideaMapDetailCard > .card:hover{transform:none}
-    .ideaMapDetailCard .sharedIdeaCard > h3{padding-right:40px}
+    .ideaMapPanel.isDetail .ideaMapDetailCard{animation:ideaMapDetailEnter .2s ease-out}
+    .ideaMapDetailCard .sharedIdeaCard:not(.hasImage){padding-top:50px}
     .ideaMapDetailToolbar{
-      position:absolute;z-index:5;top:10px;right:10px;margin:0;padding:0;
+      position:absolute;z-index:5;top:10px;left:10px;margin:0;padding:0;
       pointer-events:none
     }
     .ideaMapDetailBack{
       display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;padding:0;
-      border:1px solid rgba(255,255,255,.78);border-radius:999px;background:rgba(255,253,249,.76);color:var(--accent-dark);
+      border:1px solid rgba(255,255,255,.96);border-radius:999px;background:rgba(255,255,255,.94);color:var(--accent-dark);
       font:inherit;font-size:.72rem;font-weight:550;cursor:pointer;pointer-events:auto;
-      box-shadow:0 8px 20px rgba(20,38,42,.06);backdrop-filter:blur(7px)
-    }
-    .ideaMapDetailBack:hover{background:rgba(255,253,249,.9);border-color:rgba(255,255,255,.9);box-shadow:0 10px 22px rgba(20,38,42,.08)}
-    .ideaMapDetailToolbar.isClose .ideaMapDetailBack{
-      background:rgba(255,255,255,.94);border-color:rgba(255,255,255,.96);
       box-shadow:0 8px 22px rgba(20,38,42,.16);backdrop-filter:blur(10px)
     }
-    .ideaMapDetailToolbar.isClose .ideaMapDetailBack:hover{background:#fff;box-shadow:0 10px 24px rgba(20,38,42,.19)}
+    .ideaMapDetailBack:hover{background:#fff;box-shadow:0 10px 24px rgba(20,38,42,.19)}
     .ideaMapDetailBack svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaMapDetailBack span{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @keyframes ideaMapDetailEnter{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
+    @media (prefers-reduced-motion:reduce){.ideaMapPanel.isDetail .ideaMapDetailCard{animation:none}}
     .ideaMapDetailCard .sharedIdeaCard .sharedMetaBlock{
       display:grid;grid-template-columns:repeat(5,max-content);align-items:center;column-gap:10px;
       width:max-content;max-width:100%;padding:7px 9px;white-space:nowrap;overflow-x:auto;scrollbar-width:none
@@ -6424,9 +6422,7 @@
       themeClass:domainThemeClass(item.domain), hasImage:Boolean(image),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       toolbar:mapDetailAction === 'back'
-        ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailBack" type="button" data-map-detail-back aria-label="Terug naar activiteiten op deze locatie" title="Terug naar lijst"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span>Terug naar lijst</span></button></div>'
-        : mapDetailAction === 'close'
-        ? '<div class="ideaMapDetailToolbar isClose"><button class="ideaMapDetailBack" type="button" data-map-detail-close aria-label="Activiteit sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button></div>'
+        ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailBack" type="button" data-map-detail-back aria-label="Terug naar de activiteitenlijst" title="Terug naar lijst"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span>Terug naar lijst</span></button></div>'
         : '',
       image:image ? ideaImageMarkup(image, item.url) : '',
       title:cardTitle,
@@ -7065,7 +7061,7 @@
       </article>`;
     }).join('');
     const resultsHtml = detailPoint
-      ? `<div class="ideaMapDetailCard sharedIdeaCards" data-map-detail-key="${escapeHtml(detailPoint.key)}">${cardIdea(detailPoint.item, {mapDetailAction:activeIdeaMapClusterKeys?.length > 1 ? 'back' : 'close'})}</div>`
+      ? `<div class="ideaMapDetailCard sharedIdeaCards" data-map-detail-key="${escapeHtml(detailPoint.key)}">${cardIdea(detailPoint.item, {mapDetailAction:'back'})}</div>`
       : listHtml;
     const sharedPlace = activeIdeaMapClusterKeys
       && visiblePoints.length
@@ -7698,12 +7694,10 @@
       if(event.target.closest('[data-map-detail-back]')){
         ideaMapDetailKey = '';
         updateIdeaMapPanel({scroll:true});
-        return;
-      }
-      if(event.target.closest('[data-map-detail-close]')){
-        clearActiveIdeaMapCluster();
-        ideaMapPanelExpanded = false;
-        updateIdeaMapPanel();
+        requestAnimationFrame(() => {
+          const activeResult = document.querySelector(`[data-map-result-key="${CSS.escape(activeIdeaMapKey)}"]`);
+          activeResult?.focus({preventScroll:true});
+        });
         return;
       }
       const mapTarget = event.target.closest('[data-map-result-key]');
