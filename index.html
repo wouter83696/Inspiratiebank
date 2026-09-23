@@ -1897,6 +1897,7 @@
         width:min(380px,calc(100% - 96px));min-height:0;
         background:transparent;border:0;pointer-events:none;
       }
+      .ideaMapPanel.isDetail{width:min(340px,calc(100% - 96px))}
       .ideaMapPanelHead,.ideaMapResults{pointer-events:auto}
       .ideaMapPanelHead{display:none}
       .ideaMapPanelHeadRow{justify-content:flex-end}
@@ -1915,6 +1916,10 @@
       }
       .ideaMapResults::-webkit-scrollbar{display:none}
       .ideaMapResult{width:100%;scroll-snap-align:start}
+      .ideaMapPanel.isDetail .ideaMapDetailCard.sharedIdeaCards{width:100%;flex-basis:auto}
+      .ideaMapPanel.isDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 8.5}
+      .ideaMapPanel.isDetail .sharedIdeaCard h3{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+      .ideaMapPanel.isDetail .sharedIdeaCard > p:not(.fine){display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
       .ideaMapCanvas .leaflet-top.leaflet-right{right:auto;left:14px}
     }
     @media (max-width:640px){.sourceAdditionsBlock{margin-top:28px}#teamAdditions{margin-top:28px}.sourceAdditionsBlock .sectionHead h2,#teamAdditions h2{font-size:1.35rem}}
@@ -3132,6 +3137,18 @@
       border-radius:0;
       background:transparent;
     }
+    .ideaMapResult .ideaMapResultInfo{
+      display:grid;grid-template-columns:repeat(5,max-content);align-items:center;column-gap:8px;
+      width:max-content;max-width:100%;padding:6px 8px;overflow:hidden;white-space:nowrap
+    }
+    .ideaMapResult .ideaMapResultInfo > .ideaMapResultPills,
+    .ideaMapResult .ideaMapResultInfo > .cardMetaLine{display:contents}
+    .ideaMapResult .ideaMapResultInfo .pill,
+    .ideaMapResult .ideaMapResultInfo .cardMetaPart{font-size:.65rem;gap:3px}
+    .ideaMapResult .ideaMapResultInfo .metaIcon,
+    .ideaMapResult .ideaMapResultInfo .stimulusIcon,
+    .ideaMapResult .ideaMapResultInfo .metaIcon svg,
+    .ideaMapResult .ideaMapResultInfo .stimulusIcon svg{width:12px;height:12px;flex-basis:12px}
     #ideaList .sharedMetaBlock{width:max-content}
     #ideaList .sharedMetaBlock .cardPillGroup{
       display:grid;
@@ -4797,7 +4814,7 @@
       .join(' ');
     return {
       pills:`${placePills} ${costPill(normalizeIdeaCost(item.cost))} ${stimulusPill(normalizeIdeaStimulus(item.stimulus))}`.trim(),
-      meta:map ? ideaMapMeta(item, point) : cardMetaLine(item, {compact:true})
+      meta:cardMetaLine(item, {compact:true})
     };
   }
   function distanceLabelForKm(km, context='inspiration'){
@@ -7032,12 +7049,6 @@
   function ideaMapUsesHomeIcon(point={}, item={}){
     return point.source === 'user' || point.home || itemIsHomeActivity(item);
   }
-  function ideaMapMeta(item, point){
-    const parts = [];
-    if(item.group) parts.push(`<span class="cardMetaPart mapGroupMeta"><span class="metaIcon" aria-hidden="true">${ICONS.people}</span>${escapeHtml(item.group)}</span>`);
-    if(item.duration) parts.push(`<span class="cardMetaPart mapDurationMeta"><span class="metaIcon" aria-hidden="true">${ICONS.clock}</span>${escapeHtml(item.duration)}</span>`);
-    return [...new Set(parts.filter(Boolean))].join('');
-  }
   function visibleIdeaMapPoints(points=[]){
     if(!activeIdeaMapClusterKeys) return points;
     const clusterKeySet = new Set(activeIdeaMapClusterKeys);
@@ -7062,7 +7073,7 @@
         className:'ideaMapResultInfo',
         pillsClass:'ideaMapResultPills',
         pills:metadata.pills,
-        meta:`<span class="ideaMapResultMeta">${metadata.meta}</span>`
+        meta:metadata.meta
       });
       const link = point.item.url ? `<a class="ideaMapResultLink" href="${escapeHtml(point.item.url)}" target="_blank" rel="noopener" aria-label="${escapeHtml(sourceButtonLabel(point.item))} openen" title="${escapeHtml(sourceButtonLabel(point.item))} openen"></a>` : '';
       return `<article class="ideaMapResult ${domainThemeClass(point.item.domain)}${image ? ' hasThumb' : ''}${link ? ' hasLink' : ''}${active ? ' active' : ''}" role="button" tabindex="0" data-map-result-key="${escapeHtml(point.key)}">
