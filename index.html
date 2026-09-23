@@ -493,6 +493,8 @@
     #ideaList .nameWithIcon{align-items:center;color:var(--accent-dark);font-size:1rem;line-height:1.18;font-weight:400}
     #ideaList .nameWithIcon .domainIcon{align-self:center;margin-top:0}
     #ideaList .nameWithIcon .ideaTitleText{font-weight:400}
+    #ideaList .ideaListTitleLink{color:#006780;text-decoration:none;text-decoration-thickness:1px;text-underline-offset:3px}
+    #ideaList .ideaListTitleLink:hover,#ideaList .ideaListTitleLink:focus-visible{color:var(--accent-dark);text-decoration:underline}
     #ideaList td:nth-child(2) .cardPillGroup{flex-wrap:nowrap}
     #ideaList td:nth-child(2) .pill{flex:0 0 auto}
     th,td{text-align:left;vertical-align:top;border-bottom:1px solid rgba(11,18,32,.07);padding:11px 12px;font-size:.92rem;line-height:1.35}
@@ -6335,16 +6337,18 @@
 
   function ideaRow(item){
     const metadata = sharedIdeaMetadata(item);
-    const websiteLabel = sourceButtonLabel(item);
-    const sourceLink = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="${escapeHtml(websiteLabel)}"><span class="siteButtonText">${escapeHtml(websiteLabel)}</span></a>` : '<span class="small">-</span>';
+    const titleText = item.url
+      ? `<a class="ideaListTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="${escapeHtml(sourceButtonLabel(item))}">${escapeHtml(item.title)}</a>`
+      : `<span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
+    const linkedTitle = `<span class="nameWithIcon"><span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>${titleText}</span>`;
     return IdeaViewShared.renderDesktopRow({
       themeClass:domainThemeClass(item.domain),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
-      title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
+      title:linkedTitle,
       meta:metadata.meta,
       pills:metadata.pills,
-      practical:escapeHtml(item.materials || ''),
-      website:sourceLink
+      description:escapeHtml(audienceText(item.fit)),
+      practical:escapeHtml(item.materials || '')
     });
   }
 

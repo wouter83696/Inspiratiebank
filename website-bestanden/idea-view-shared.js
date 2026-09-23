@@ -43,22 +43,20 @@
     const cells = [
       {label:'Activiteit', html:`${view.title || ''}`},
       {label:'Kenmerken', html:renderMetadata({pills:view.pills, meta:view.meta})},
+      {label:'Beschrijving', html:renderPracticalList(view.description)},
       {label:'Praktisch', html:renderPracticalList(view.practical)}
     ];
     if(view.manageActions !== undefined){
-      cells.push({label:'Website', html:`<div class="ideaActions">${view.website || ''}${view.actions || ''}</div>`});
       const manageCell = {label:'Beheer', html:`<div class="ideaAdminListActions">${view.manageActions || ''}</div>`};
       if(view.manageFirst) cells.unshift(manageCell);
       else cells.push(manageCell);
-    }else{
-      cells.push({label:'Website', html:`<div class="ideaActions">${view.website || ''}</div>`});
     }
     return renderRow({...view, cells});
   }
 
   function renderDesktopTable(view={}){
     const admin = view.admin === true;
-    const headers = ['Activiteit', 'Kenmerken', 'Praktisch', 'Website'];
+    const headers = ['Activiteit', 'Kenmerken', 'Beschrijving', 'Praktisch'];
     if(admin && view.manageFirst) headers.unshift('Beheer');
     else if(admin) headers.push('Beheer');
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
