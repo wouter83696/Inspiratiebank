@@ -3070,6 +3070,13 @@
       border-radius:0;
       background:transparent;
     }
+    .sharedMetaBlock .cardPillGroup{
+      display:grid;
+      grid-template-columns:minmax(60px,max-content) minmax(32px,max-content) 22px;
+      align-items:center;
+      column-gap:10px;
+      width:100% !important;
+    }
     .sharedMetaBlock .cardPillGroup .pill{
       width:auto;min-width:0;min-height:22px;flex:0 0 auto;gap:4px;padding:3px 2px;
       border:0 !important;background:transparent !important;
@@ -3079,7 +3086,10 @@
       margin-left:3px;padding-left:2px;border-left:0 !important
     }
     .sharedMetaBlock .cardMetaLine{
-      width:auto;
+      display:grid;
+      grid-template-columns:minmax(60px,max-content) minmax(88px,max-content);
+      align-items:center;
+      width:100%;
       margin:0;
       padding:0;
       border:0;
@@ -3087,6 +3097,7 @@
       background:transparent;
       gap:12px;
     }
+    #ideaList .sharedMetaBlock{width:220px}
     .ideaMapResultBody{
       display:flex;
       align-items:center;
@@ -3672,7 +3683,7 @@
   </div>
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20260923-shared-card-v4"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20260923-characteristics-v1"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20260915-week-card-header-v1"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>

@@ -42,7 +42,7 @@
   function renderDesktopRow(view){
     const cells = [
       {label:'Activiteit', html:`${view.title || ''}`},
-      {label:'Metadata', html:renderMetadata({pills:view.pills, meta:view.meta})},
+      {label:'Kenmerken', html:renderMetadata({pills:view.pills, meta:view.meta})},
       {label:'Praktisch', html:renderPracticalList(view.practical)}
     ];
     if(view.manageActions !== undefined){
@@ -58,7 +58,7 @@
 
   function renderDesktopTable(view={}){
     const admin = view.admin === true;
-    const headers = ['Activiteit', 'Metadata', 'Praktisch', 'Website'];
+    const headers = ['Activiteit', 'Kenmerken', 'Praktisch', 'Website'];
     if(admin && view.manageFirst) headers.unshift('Beheer');
     else if(admin) headers.push('Beheer');
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
