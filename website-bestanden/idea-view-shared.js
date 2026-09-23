@@ -14,7 +14,7 @@
   }
 
   function renderCard(view){
-    const classes = ['card', 'ideaThemeCard', view.themeClass || '', view.hasImage ? 'hasImage' : '', view.hidden ? 'hiddenItem' : '']
+    const classes = ['card', 'ideaThemeCard', 'sharedIdeaCard', view.themeClass || '', view.hasImage ? 'hasImage' : '', view.hidden ? 'hiddenItem' : '']
       .filter(Boolean).join(' ');
     const attributes = view.attributes || '';
     const pills = view.pills || '';
@@ -23,6 +23,7 @@
     const practical = renderPractical(view.practical);
     const footer = `<div class="cardFooter">${view.website || ''}${view.actions || ''}</div>${view.manageActions !== undefined ? `<div class="agendaReviewCardActions ideaAdminCardActions">${view.manageActions || ''}</div>` : ''}`;
     return `<article class="${classes}"${attributes ? ` ${attributes}` : ''}>
+      ${view.toolbar || ''}
       ${view.image || ''}
       ${view.themePill ? `<div class="cardThemePill">${view.themePill}</div>` : ''}
       <h3>${view.title || ''}</h3>
