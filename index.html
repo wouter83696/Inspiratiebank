@@ -1582,8 +1582,8 @@
       display:grid;grid-template-columns:104px minmax(0,1fr);align-items:center;column-gap:10px;row-gap:0;
       min-height:0;padding:8px;overflow:hidden
     }
-    .ideaMapResult:hover{background:#fffdf8;border-color:#E7DFD3;transform:translateY(-1px);box-shadow:0 10px 22px rgba(92,65,33,.06)}
-    .ideaMapResult.active{background:#fffdf8;border-color:var(--theme-line,rgba(79,142,158,.18));transform:translateY(-1px);box-shadow:0 0 0 2px var(--theme-line,rgba(79,142,158,.18)),0 10px 24px rgba(92,65,33,.075)}
+    .ideaMapResult:hover{background:#fffdf8;border-color:#E7DFD3;transform:none;box-shadow:0 8px 20px rgba(92,65,33,.055)}
+    .ideaMapResult.active{background:#fffdf8;border-color:rgba(79,142,158,.16);transform:none;box-shadow:0 8px 20px rgba(92,65,33,.06)}
     .ideaMapResultTitle{display:flex;align-items:center;gap:8px;min-width:0}
     .ideaMapResult .domainIcon{width:30px;height:30px;margin:0;align-self:center;background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink)}
     .ideaMapResult .domainIcon svg{width:15px;height:15px}
@@ -1844,7 +1844,7 @@
         background:transparent;border:0;pointer-events:none;
       }
       .ideaMapPanelHead,.ideaMapResults{pointer-events:auto}
-      .ideaMapPanelHead{padding:0 0 10px}
+      .ideaMapPanelHead{display:none}
       .ideaMapPanelHeadRow{justify-content:flex-end}
       .ideaMapPanelHeadRow > div:first-child{display:none}
       .ideaMapPanelHead h3,.ideaMapPanelHead p{
@@ -7209,10 +7209,6 @@
     if(!activeIdeaMapKey || !points.some(point => point.key === activeIdeaMapKey)) activeIdeaMapKey = points[0].key;
     map.innerHTML = `<div class="ideaMapCanvas" aria-label="Kaart met inspiratiepunten">
       <div id="ideaMapProviderCanvas"></div>
-      <div class="ideaMapHeader">
-        <span class="ideaMapBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18"></path><path d="M7 5v14"></path><path d="M17 5v14"></path></svg>${escapeHtml(points.length)} pins</span>
-        <button class="ideaMapLocation" type="button" data-location-settings-btn title="Postcode en afstand wijzigen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>${escapeHtml(locationDisplayText())}</button>
-      </div>
     </div>
     ${ideaMapPanelMarkup(points)}`;
     destroyIdeaMapProvider();
