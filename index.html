@@ -1840,11 +1840,13 @@
       .ideaMapCanvas{grid-area:1 / 1;min-height:600px}
       .ideaMapPanel{
         position:absolute;top:18px;right:18px;bottom:18px;left:auto;z-index:800;
-        width:min(410px,calc(100% - 96px));min-height:0;
+        width:min(380px,calc(100% - 96px));min-height:0;
         background:transparent;border:0;pointer-events:none;
       }
       .ideaMapPanelHead,.ideaMapResults{pointer-events:auto}
       .ideaMapPanelHead{padding:0 0 10px}
+      .ideaMapPanelHeadRow{justify-content:flex-end}
+      .ideaMapPanelHeadRow > div:first-child{display:none}
       .ideaMapPanelHead h3,.ideaMapPanelHead p{
         width:max-content;max-width:100%;padding:2px 6px;
         border-radius:6px;background:rgba(255,255,255,.82);
@@ -7112,10 +7114,12 @@
           window.requestAnimationFrame(syncActiveCluster);
         });
         clusterMarkers.push(marker);
-        markerLayer.addLayer(marker);
+        if(isHomeGroup) marker.addTo(map);
+        else markerLayer.addLayer(marker);
         bounds.push([point.lat, point.lon]);
         return;
       }
+      const isHomePoint = ideaMapUsesHomeIcon(point, point.item);
       const marker = L.marker([point.lat, point.lon], {
         icon:ideaLeafletIcon(point, point.key === activeIdeaMapKey),
         title:point.item.title,
@@ -7130,7 +7134,8 @@
         pendingIdeaMapZoomTarget = targetKey;
         if(shouldZoom) map.setView(marker.getLatLng(), Math.min(map.getZoom() + 2, 16), {animate:true});
       });
-      markerLayer.addLayer(marker);
+      if(isHomePoint) marker.addTo(map);
+      else markerLayer.addLayer(marker);
       bounds.push([point.lat, point.lon]);
       markers.push(marker);
     });
