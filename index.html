@@ -1647,11 +1647,13 @@
     .ideaMapDetailBack svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaMapDetailBack span{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .ideaMapDetailCard .sharedMetaBlock{
-      display:flex;flex-flow:row nowrap;align-items:center;gap:12px;width:max-content;max-width:100%;white-space:nowrap
+      display:grid;grid-template-columns:repeat(5,max-content);align-items:center;column-gap:10px;
+      width:max-content;max-width:100%;padding:7px 9px;white-space:nowrap;overflow-x:auto;scrollbar-width:none
     }
+    .ideaMapDetailCard .sharedMetaBlock::-webkit-scrollbar{display:none}
     .ideaMapDetailCard .sharedMetaBlock > .cardPillGroup,
     .ideaMapDetailCard .sharedMetaBlock > .cardMetaLine{
-      display:grid;width:max-content !important;margin:0
+      display:contents
     }
     .ideaMapResultThumbWrap{
       position:relative;display:block;width:100%;height:80px;overflow:hidden;border-radius:11px;flex:0 0 auto;
