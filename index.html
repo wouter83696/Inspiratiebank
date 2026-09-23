@@ -1839,21 +1839,27 @@
       }
       .ideaMapCanvas{grid-area:1 / 1;min-height:600px}
       .ideaMapPanel{
-        position:absolute;left:0;right:0;bottom:0;z-index:800;
-        min-height:0;background:transparent;border:0;pointer-events:none;
+        position:absolute;top:18px;right:18px;bottom:18px;left:auto;z-index:800;
+        width:min(410px,calc(100% - 96px));min-height:0;
+        background:transparent;border:0;pointer-events:none;
       }
       .ideaMapPanelHead,.ideaMapResults{pointer-events:auto}
-      .ideaMapPanelHead{padding:12px 18px 10px}
+      .ideaMapPanelHead{padding:0 0 10px}
       .ideaMapPanelHead h3,.ideaMapPanelHead p{
-        width:max-content;max-width:min(540px,70vw);padding:2px 6px;
+        width:max-content;max-width:100%;padding:2px 6px;
         border-radius:6px;background:rgba(255,255,255,.82);
         box-shadow:0 3px 12px rgba(20,38,42,.06);
         backdrop-filter:blur(8px)
       }
       .ideaMapPanelHead p{margin-top:2px}
-      .ideaMapResults{padding:0 18px 18px;scrollbar-width:none}
+      .ideaMapResults{
+        flex:1;flex-direction:column;gap:10px;padding:0 2px 2px 0;
+        overflow-x:hidden;overflow-y:auto;scroll-snap-type:y proximity;
+        scrollbar-width:none
+      }
       .ideaMapResults::-webkit-scrollbar{display:none}
-      .ideaMapResult{width:clamp(330px,29vw,410px)}
+      .ideaMapResult{width:100%;scroll-snap-align:start}
+      .ideaMapCanvas .leaflet-top.leaflet-right{right:auto;left:14px}
     }
     @media (max-width:640px){.sourceAdditionsBlock{margin-top:28px}#teamAdditions{margin-top:28px}.sourceAdditionsBlock .sectionHead h2,#teamAdditions h2{font-size:1.35rem}}
     @media (min-width:1180px){#ideaCards.cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}#ideaCards .card{gap:9px}#ideaCards .ideaImageFrame{aspect-ratio:16 / 8.7}}
@@ -6947,9 +6953,15 @@
       if(panel){
         const panelRect = panel.getBoundingClientRect();
         const resultRect = result.getBoundingClientRect();
-        const resultLeft = resultRect.left - panelRect.left + panel.scrollLeft;
-        const centeredLeft = resultLeft - Math.max(12, (panel.clientWidth - result.offsetWidth) / 2);
-        panel.scrollTo({left:Math.max(0, centeredLeft), behavior:'smooth'});
+        if(window.matchMedia('(min-width:981px)').matches){
+          const resultTop = resultRect.top - panelRect.top + panel.scrollTop;
+          const centeredTop = resultTop - Math.max(8, (panel.clientHeight - result.offsetHeight) / 2);
+          panel.scrollTo({top:Math.max(0, centeredTop), behavior:'smooth'});
+        }else{
+          const resultLeft = resultRect.left - panelRect.left + panel.scrollLeft;
+          const centeredLeft = resultLeft - Math.max(12, (panel.clientWidth - result.offsetWidth) / 2);
+          panel.scrollTo({left:Math.max(0, centeredLeft), behavior:'smooth'});
+        }
       }
       else result.scrollIntoView({behavior:'smooth', block:'nearest'});
     }
