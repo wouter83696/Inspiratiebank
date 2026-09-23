@@ -3101,9 +3101,30 @@
       background:transparent;
     }
     #ideaList .sharedMetaBlock{width:max-content}
-    #ideaList .sharedMetaBlock .cardPillGroup{display:grid}
+    #ideaList .sharedMetaBlock .cardPillGroup{
+      display:grid;
+      grid-template-columns:repeat(3,max-content);
+      align-items:center;
+      column-gap:12px;
+      width:max-content !important;
+      max-width:100%;
+      margin:0;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      box-shadow:none;
+      overflow:visible;
+    }
     #ideaList .sharedMetaBlock .cardMetaLine{display:grid}
-    #ideaList .sharedMetaBlock .cardPillGroup .pill + .pill{margin-left:0;padding-left:0}
+    #ideaList .sharedMetaBlock .cardPillGroup .pill{
+      min-height:22px;
+      padding:3px 2px;
+      border:0 !important;
+      background:transparent !important;
+      box-shadow:none;
+    }
+    #ideaList .sharedMetaBlock .cardPillGroup .pill + .pill{margin-left:0;padding-left:0;border-left:0 !important}
     .ideaMapResultBody{
       display:flex;
       align-items:center;
