@@ -2835,7 +2835,7 @@
         background:#fffdf8;box-shadow:0 8px 24px rgba(92,65,33,.04);
       }
       .sharedIdeaCard .ideaImageFrame{
-        flex-shrink:0;aspect-ratio:16 / 9;margin:-4px 0 -1px;border-radius:13px;
+        flex-shrink:0;aspect-ratio:16 / 9;margin:-6px -14px -1px;border-radius:13px;
       }
       .sharedIdeaCard.hasImage .cardThemePill{top:23px;left:21px}
       .sharedIdeaCard .cardThemePill .categoryPill,
@@ -3080,7 +3080,11 @@
       background:transparent;
     }
     .sharedMetaBlock .cardPillGroup{
-      display:contents;
+      display:grid;
+      grid-template-columns:72px 46px 22px;
+      align-items:center;
+      column-gap:8px;
+      width:100% !important;
     }
     .sharedMetaBlock .cardPillGroup .pill{
       width:auto;min-width:0;min-height:22px;flex:0 0 auto;gap:4px;padding:3px 2px;
@@ -3091,29 +3095,20 @@
       margin-left:0;padding-left:0;border-left:0 !important
     }
     .sharedMetaBlock .cardMetaLine{
-      display:contents
-    }
-    .sharedMetaBlock{
       display:grid;
-      grid-template-columns:max-content max-content max-content;
-      grid-template-rows:22px 22px;
+      grid-template-columns:72px max-content;
       align-items:center;
-      column-gap:14px;
-      row-gap:3px;
-      width:max-content;
-      max-width:100%;
-      padding:6px 9px;
+      column-gap:8px;
+      width:100%;
+      margin:0;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
     }
-    .sharedMetaBlock .cardPillGroup .pill:nth-child(1){grid-column:1;grid-row:1}
-    .sharedMetaBlock .cardPillGroup .pill:nth-child(2){grid-column:2;grid-row:1}
-    .sharedMetaBlock .cardPillGroup .pill:nth-child(3){grid-column:3;grid-row:1}
-    .sharedMetaBlock .cardMetaLine .cardMetaPart:nth-child(1){grid-column:1;grid-row:2}
-    .sharedMetaBlock .cardMetaLine .cardMetaPart:nth-child(2){grid-column:2 / 4;grid-row:2}
-    #ideaList .sharedMetaBlock{width:max-content}
-    #ideaList .sharedMetaBlock .cardPillGroup,
-    #ideaList .sharedMetaBlock .cardMetaLine,
-    .ideaMapDetailCard .sharedMetaBlock > .cardPillGroup,
-    .ideaMapDetailCard .sharedMetaBlock > .cardMetaLine{display:contents}
+    #ideaList .sharedMetaBlock{width:190px}
+    #ideaList .sharedMetaBlock .cardPillGroup{display:grid}
+    #ideaList .sharedMetaBlock .cardMetaLine{display:grid}
     #ideaList .sharedMetaBlock .cardPillGroup .pill + .pill{margin-left:0;padding-left:0}
     .ideaMapResultBody{
       display:flex;
