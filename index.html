@@ -3667,7 +3667,7 @@
   </div>
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20260923-map-detail-v2"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20260923-central-metadata-v3"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20260915-week-card-header-v1"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
@@ -4712,6 +4712,18 @@
     const groupLabel = normalize(groupValue) === 'op maat' ? (compact ? 'Flexibel' : 'Groep flexibel') : groupValue;
     const durationLabel = normalize(durationValue) === 'op maat' ? (compact ? 'Flexibel' : 'Duur flexibel') : durationValue;
     return `<span class="cardMetaLine"><span class="cardMetaPart" title="Groepsgrootte: ${escapeHtml(groupValue)}" aria-label="Groepsgrootte: ${escapeHtml(groupValue)}"><span class="metaIcon" aria-hidden="true">${ICONS.people}</span>${escapeHtml(groupLabel)}</span><span class="cardMetaPart" title="Duur: ${escapeHtml(durationValue)}" aria-label="Duur: ${escapeHtml(durationValue)}"><span class="metaIcon" aria-hidden="true">${ICONS.clock}</span>${escapeHtml(durationLabel)}</span></span>`;
+  }
+  function sharedIdeaMetadata(item={}, {point=null, map=false}={}){
+    const locationLabel = point?.home ? 'Thuis' : normalizeIdeaLocation(item.locationType);
+    const distanceLabel = map && point?.source === 'user' && point?.home ? '' : personalDistanceLabel(item);
+    const placePills = compactPlacePills(locationLabel, distanceLabel)
+      .filter(label => normalize(label) !== 'op pad')
+      .map(locationPill)
+      .join(' ');
+    return {
+      pills:`${placePills} ${costPill(normalizeIdeaCost(item.cost))} ${stimulusPill(normalizeIdeaStimulus(item.stimulus))}`.trim(),
+      meta:map ? ideaMapMeta(item, point) : cardMetaLine(item, {compact:true})
+    };
   }
   function distanceLabelForKm(km, context='inspiration'){
     if(!Number.isFinite(km)) return '';
@@ -6250,19 +6262,15 @@
   }
 
   function ideaRow(item){
-    const locationLabel = normalizeIdeaLocation(item.locationType);
-    const distanceLabel = personalDistanceLabel(item);
-    const costLabel = normalizeIdeaCost(item.cost);
-    const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
-    const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
+    const metadata = sharedIdeaMetadata(item);
     const websiteLabel = sourceButtonLabel(item);
     const sourceLink = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="${escapeHtml(websiteLabel)}"><span class="siteButtonText">${escapeHtml(websiteLabel)}</span></a>` : '<span class="small">-</span>';
     return IdeaViewShared.renderDesktopRow({
       themeClass:domainThemeClass(item.domain),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
-      meta:cardMetaLine(item, {compact:true}),
-      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
+      meta:metadata.meta,
+      pills:metadata.pills,
       practical:escapeHtml(item.materials || ''),
       website:sourceLink
     });
@@ -6329,11 +6337,7 @@
   }
 
   function cardIdea(item){
-    const locationLabel = normalizeIdeaLocation(item.locationType);
-    const distanceLabel = personalDistanceLabel(item);
-    const costLabel = normalizeIdeaCost(item.cost);
-    const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
-    const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
+    const metadata = sharedIdeaMetadata(item);
     const image = approvedIdeaImage(item);
     const fitText = audienceText(item.fit);
     const titleContents = `<span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
@@ -6345,8 +6349,8 @@
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       image:image ? ideaImageMarkup(image, item.url) : '',
       title:cardTitle,
-      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
-      meta:cardMetaLine(item, {compact:true}), description:escapeHtml(fitText), practical:escapeHtml(item.materials || ''),
+      pills:metadata.pills,
+      meta:metadata.meta, description:escapeHtml(fitText), practical:escapeHtml(item.materials || ''),
       website:'',
       actions:reportMenu('inspiratiebank', ideaDomKey(item), item.title)
     });
@@ -6953,15 +6957,6 @@
     if(item.duration) parts.push(`<span class="cardMetaPart mapDurationMeta"><span class="metaIcon" aria-hidden="true">${ICONS.clock}</span>${escapeHtml(item.duration)}</span>`);
     return [...new Set(parts.filter(Boolean))].join('');
   }
-  function ideaMapPills(item={}, point){
-    const locationLabel = point?.home ? 'Thuis' : normalizeIdeaLocation(item.locationType);
-    const distanceLabel = point?.source === 'user' && point?.home ? '' : personalDistanceLabel(item);
-    const placePills = compactPlacePills(locationLabel, distanceLabel)
-      .filter(label => normalize(label) !== 'op pad')
-      .map(locationPill)
-      .join(' ');
-    return `${placePills} ${costPill(item.cost)} ${stimulusPill(item.stimulus)}`.trim();
-  }
   function visibleIdeaMapPoints(points=[]){
     if(!activeIdeaMapClusterKeys) return points;
     const clusterKeySet = new Set(activeIdeaMapClusterKeys);
@@ -6981,11 +6976,17 @@
       const active = point.key === activeIdeaMapKey;
       const image = approvedIdeaImage(point.item);
       const thumb = image ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async"></span>` : '';
-      const pills = ideaMapPills(point.item, point);
+      const metadata = sharedIdeaMetadata(point.item, {point, map:true});
+      const metadataBlock = IdeaViewShared.renderMetadata({
+        className:'ideaMapResultInfo',
+        pillsClass:'ideaMapResultPills',
+        pills:metadata.pills,
+        meta:`<span class="ideaMapResultMeta">${metadata.meta}</span>`
+      });
       const link = point.item.url ? `<a class="ideaMapResultLink" href="${escapeHtml(point.item.url)}" target="_blank" rel="noopener" aria-label="${escapeHtml(sourceButtonLabel(point.item))} openen" title="${escapeHtml(sourceButtonLabel(point.item))} openen"></a>` : '';
       return `<article class="ideaMapResult ${domainThemeClass(point.item.domain)}${image ? ' hasThumb' : ''}${link ? ' hasLink' : ''}${active ? ' active' : ''}" role="button" tabindex="0" data-map-result-key="${escapeHtml(point.key)}">
         ${thumb}
-        <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultBody"><span class="ideaMapResultInfo"><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${ideaMapMeta(point.item, point)}</span></span>${link}</span></span>
+        <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultBody">${metadataBlock}${link}</span></span>
       </article>`;
     }).join('');
     const backButton = detailPoint && activeIdeaMapClusterKeys?.length > 1

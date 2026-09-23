@@ -1,4 +1,10 @@
 (function(){
+  function renderMetadata(view={}){
+    const classes = ['sharedMetaBlock', view.className || ''].filter(Boolean).join(' ');
+    const pillClasses = ['cardPillGroup', view.pillsClass || ''].filter(Boolean).join(' ');
+    return `<span class="${classes}"><span class="${pillClasses}">${view.pills || ''}</span>${view.meta || ''}</span>`;
+  }
+
   function renderPractical(content){
     return content ? `<details class="ideaPracticalDetails"><summary>Praktisch</summary><p class="ideaPracticalText">${content}</p></details>` : '';
   }
@@ -11,7 +17,6 @@
     const classes = ['card', 'ideaThemeCard', view.themeClass || '', view.hasImage ? 'hasImage' : '', view.hidden ? 'hiddenItem' : '']
       .filter(Boolean).join(' ');
     const attributes = view.attributes || '';
-    const pillsClass = 'cardLabels cardPillGroup';
     const pills = view.pills || '';
     const source = view.source ? `<div class="small">${view.source}</div>` : '';
     const body = view.description ? `<p>${view.description}</p>` : '';
@@ -21,7 +26,7 @@
       ${view.image || ''}
       ${view.themePill ? `<div class="cardThemePill">${view.themePill}</div>` : ''}
       <h3>${view.title || ''}</h3>
-      <div class="cardMetaBlock sharedMetaBlock"><div class="${pillsClass}">${pills}</div>${view.meta || ''}</div>
+      ${renderMetadata({className:'cardMetaBlock', pillsClass:'cardLabels', pills, meta:view.meta})}
       ${source}${body}${practical}${footer}
     </article>`;
   }
@@ -36,7 +41,7 @@
   function renderDesktopRow(view){
     const cells = [
       {label:'Activiteit', html:`${view.title || ''}`},
-      {label:'Metadata', html:`<div class="sharedMetaBlock"><div class="cardPillGroup">${view.pills || ''}</div>${view.meta || ''}</div>`},
+      {label:'Metadata', html:renderMetadata({pills:view.pills, meta:view.meta})},
       {label:'Praktisch', html:renderPracticalList(view.practical)}
     ];
     if(view.manageActions !== undefined){
@@ -58,5 +63,5 @@
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
-  window.IdeaViewShared = Object.freeze({renderCard, renderRow, renderDesktopRow, renderDesktopTable});
+  window.IdeaViewShared = Object.freeze({renderMetadata, renderCard, renderRow, renderDesktopRow, renderDesktopTable});
 })();
