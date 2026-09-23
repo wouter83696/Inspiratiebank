@@ -1901,6 +1901,17 @@
         scrollbar-width:none
       }
       .ideaMapResults::-webkit-scrollbar{display:none}
+      .ideaMapPanel.isList .ideaMapResults{
+        padding:10px 8px 18px 10px;
+        border:1px solid rgba(255,255,255,.72);border-radius:18px;
+        background:rgba(255,253,249,.76);
+        box-shadow:0 14px 34px rgba(20,38,42,.08),inset 0 -20px 18px -20px rgba(49,95,107,.22);
+        backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+        scrollbar-width:thin;scrollbar-color:rgba(49,95,107,.30) transparent
+      }
+      .ideaMapPanel.isList .ideaMapResults::-webkit-scrollbar{display:block;width:6px}
+      .ideaMapPanel.isList .ideaMapResults::-webkit-scrollbar-track{background:transparent}
+      .ideaMapPanel.isList .ideaMapResults::-webkit-scrollbar-thumb{background:rgba(49,95,107,.26);border-radius:999px}
       .ideaMapResult{width:100%;scroll-snap-align:start}
       .ideaMapCanvas .leaflet-top.leaflet-right{right:auto;left:14px}
     }
@@ -7080,7 +7091,7 @@
     const toggleIcon = ideaMapPanelExpanded ? '<path d="m6 14 6-6 6 6"></path>' : '<path d="m6 10 6 6 6-6"></path>';
     const visibleTitle = ideaMapPanelExpanded ? panelTitle : 'Kies een marker op de kaart';
     const visibleText = ideaMapPanelExpanded ? panelText : 'De bijbehorende activiteiten verschijnen hier.';
-    return `<aside class="ideaMapPanel${ideaMapPanelExpanded ? ' isExpanded' : ''}">
+    return `<aside class="ideaMapPanel${ideaMapPanelExpanded ? ' isExpanded' : ''}${detailPoint ? ' isDetail' : ' isList'}">
       <div class="ideaMapPanelHead"><div class="ideaMapPanelHeadRow"><div><h3>${escapeHtml(visibleTitle)}</h3><p>${escapeHtml(visibleText)}</p></div><div class="ideaMapPanelActions">${clearButton}<button class="ideaMapPanelToggle" type="button" data-map-panel-toggle aria-expanded="${ideaMapPanelExpanded ? 'true' : 'false'}" title="${toggleLabel}" aria-label="${toggleLabel}"><svg viewBox="0 0 24 24" aria-hidden="true">${toggleIcon}</svg></button></div></div></div>
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
