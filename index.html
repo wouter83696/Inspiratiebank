@@ -3020,7 +3020,59 @@
     .ideaMapResultPills .stimulusIcon,
     #ideaList .cardMetaLine .metaIcon,
     .ideaMapResultMeta .metaIcon{color:#356F7B}
+    .sharedMetaBlock,
+    .ideaMapResultInfo,
+    .ongoingBadgesCell .cardPillGroup{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:5px;
+      width:fit-content;
+      max-width:100%;
+      padding:7px 10px;
+      border:1px solid rgba(112,94,63,.035);
+      border-radius:10px;
+      background:rgba(247,241,231,.11);
+      box-sizing:border-box;
+      box-shadow:none;
+    }
+    .sharedMetaBlock .cardPillGroup,
+    .ideaMapResultInfo .ideaMapResultPills,
+    .ongoingBadgesCell .cardPillGroup{
+      margin:0;
+    }
+    .sharedMetaBlock .cardPillGroup,
+    .ideaMapResultInfo .ideaMapResultPills{
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
+    }
+    .sharedMetaBlock .cardMetaLine{
+      width:auto;
+      margin:0;
+      padding:0;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      gap:12px;
+    }
+    .ideaMapResultBody{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-width:0;
+      margin-top:11px;
+    }
+    .ideaMapResultInfo{
+      flex:0 1 auto;
+      flex-direction:row;
+      align-items:center;
+      gap:10px;
+      margin-top:0;
+    }
     .ideaMapResult.hasLink .ideaMapResultInfo{display:flex}
+    .ideaMapResult.hasLink .ideaMapResultLink{margin-left:auto}
     #ideaList .siteButton.secondary,
     .ideaMapResultLink{
       display:grid;place-items:center;width:30px;min-width:30px;height:30px;min-height:30px;padding:0;
@@ -3075,10 +3127,19 @@
     .ongoingTitleCell .ideaTitleText{color:#006780;font-weight:500;line-height:1.25}
     .ongoingFitCell .small{color:#74716E}
     .ongoingBadgesCell .cardPillGroup{
-      display:inline-grid;grid-auto-flow:column;grid-auto-columns:max-content;
-      justify-content:start;width:fit-content !important;max-width:100%;gap:0;margin:0
+      display:inline-flex;flex-direction:row;align-items:center;
+      justify-content:flex-start;width:fit-content !important;max-width:100%;gap:7px;margin:0;
+      padding:7px 10px;border:1px solid rgba(112,94,63,.035);border-radius:10px;
+      background:rgba(247,241,231,.11);overflow:visible
     }
-    .ongoingBadgesCell .cardPillGroup .pill{width:auto;min-width:0;flex:none}
+    .ongoingBadgesCell .cardPillGroup .pill{
+      width:auto;min-width:0;min-height:22px;flex:none;gap:4px;padding:3px 2px;
+      border:0 !important;background:transparent !important;
+      color:#617573;font-size:.7rem;font-weight:500
+    }
+    .ongoingBadgesCell .cardPillGroup .pill + .pill{
+      margin-left:3px;padding-left:2px;border-left:0 !important
+    }
     .ongoingAccordion .siteButton{
       border-color:#E9DFCF;background:#F8F3EA;
       box-shadow:none;color:#00738D !important;
@@ -3102,14 +3163,14 @@
       .ongoingAccordion tr:last-child{border-bottom:0}
       .ongoingAccordion tbody tr:hover td{background:transparent}
       .ongoingAccordion .ongoingBadgesCell .cardPillGroup{
-        width:max-content;max-width:100%;gap:0;flex-wrap:nowrap;
-        border:1px solid rgba(112,94,63,.16);border-radius:0;
-        background:#F7F1E7 !important;overflow:hidden
+        width:max-content;max-width:100%;gap:7px;flex-wrap:nowrap;
+        padding:7px 10px;border:1px solid rgba(112,94,63,.035);border-radius:10px;
+        background:rgba(247,241,231,.11) !important;overflow:visible
       }
       .ongoingAccordion .ongoingBadgesCell .cardPillGroup .pill{
-        min-height:27px;flex:0 0 auto;padding:6px 10px;background:transparent !important
+        min-height:22px;flex:0 0 auto;padding:3px 2px;background:transparent !important
       }
-      .ideaMapResultInfo{flex-wrap:wrap}
+      .ideaMapResultInfo{flex-wrap:nowrap}
     }
   </style>
 </head>
@@ -3581,7 +3642,7 @@
   </div>
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20260922-practical-list-v2"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20260923-unified-metadata-v1"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20260915-week-card-header-v1"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
@@ -6897,7 +6958,7 @@
       const link = point.item.url ? `<a class="ideaMapResultLink" href="${escapeHtml(point.item.url)}" target="_blank" rel="noopener" aria-label="${escapeHtml(sourceButtonLabel(point.item))} openen" title="${escapeHtml(sourceButtonLabel(point.item))} openen"></a>` : '';
       return `<article class="ideaMapResult ${domainThemeClass(point.item.domain)}${image ? ' hasThumb' : ''}${link ? ' hasLink' : ''}${active ? ' active' : ''}" role="button" tabindex="0" data-map-result-key="${escapeHtml(point.key)}">
         ${thumb}
-        <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultInfo"><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${ideaMapMeta(point.item, point)}</span>${link}</span></span>
+        <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultBody"><span class="ideaMapResultInfo"><span class="ideaMapResultPills">${pills}</span><span class="ideaMapResultMeta">${ideaMapMeta(point.item, point)}</span></span>${link}</span></span>
       </article>`;
     }).join('');
     const sharedPlace = activeIdeaMapClusterKeys

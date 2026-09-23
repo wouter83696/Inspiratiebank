@@ -35,8 +35,8 @@
 
   function renderDesktopRow(view){
     const cells = [
-      {label:'Activiteit', html:`${view.title || ''}${view.meta ? `<div class="small ideaListMeta">${view.meta}</div>` : ''}`},
-      {label:'Badges', html:`<div class="cardPillGroup">${view.pills || ''}</div>${view.meta ? `<div class="mobileIdeaListMeta">${view.meta}</div>` : ''}`},
+      {label:'Activiteit', html:`${view.title || ''}`},
+      {label:'Metadata', html:`<div class="sharedMetaBlock"><div class="cardPillGroup">${view.pills || ''}</div>${view.meta || ''}</div>`},
       {label:'Praktisch', html:renderPracticalList(view.practical)}
     ];
     if(view.manageActions !== undefined){
@@ -52,7 +52,7 @@
 
   function renderDesktopTable(view={}){
     const admin = view.admin === true;
-    const headers = ['Activiteit', 'Badges', 'Praktisch', 'Website'];
+    const headers = ['Activiteit', 'Metadata', 'Praktisch', 'Website'];
     if(admin && view.manageFirst) headers.unshift('Beheer');
     else if(admin) headers.push('Beheer');
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
