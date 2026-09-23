@@ -5,8 +5,8 @@
     return `<span class="${classes}"><span class="${pillClasses}">${view.pills || ''}</span>${view.meta || ''}</span>`;
   }
 
-  function renderPractical(content){
-    return content ? `<details class="ideaPracticalDetails"><summary>Praktisch</summary><p class="ideaPracticalText">${content}</p></details>` : '';
+  function renderPractical(content, open=false){
+    return content ? `<details class="ideaPracticalDetails"${open ? ' open' : ''}><summary>Praktisch</summary><p class="ideaPracticalText">${content}</p></details>` : '';
   }
 
   function renderPracticalList(content){
@@ -20,7 +20,7 @@
     const pills = view.pills || '';
     const source = view.source ? `<div class="small">${view.source}</div>` : '';
     const body = view.description ? `<p>${view.description}</p>` : '';
-    const practical = renderPractical(view.practical);
+    const practical = renderPractical(view.practical, view.practicalOpen === true);
     const footer = `<div class="cardFooter">${view.website || ''}${view.actions || ''}</div>${view.manageActions !== undefined ? `<div class="agendaReviewCardActions ideaAdminCardActions">${view.manageActions || ''}</div>` : ''}`;
     return `<article class="${classes}"${attributes ? ` ${attributes}` : ''}>
       ${view.toolbar || ''}
