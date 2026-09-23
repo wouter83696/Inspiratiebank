@@ -1901,17 +1901,15 @@
         scrollbar-width:none
       }
       .ideaMapResults::-webkit-scrollbar{display:none}
-      .ideaMapPanel.isList .ideaMapResults{
-        padding:10px 8px 18px 10px;
-        border:1px solid rgba(255,255,255,.72);border-radius:18px;
-        background:rgba(255,253,249,.76);
-        box-shadow:0 14px 34px rgba(20,38,42,.08),inset 0 -20px 18px -20px rgba(49,95,107,.22);
-        backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
-        scrollbar-width:thin;scrollbar-color:rgba(49,95,107,.30) transparent
+      .ideaMapScrollHint{
+        position:absolute;left:50%;bottom:3px;z-index:3;display:flex;align-items:center;justify-content:center;
+        width:38px;height:26px;border:1px solid rgba(255,255,255,.78);border-radius:999px;
+        background:rgba(255,253,249,.82);color:var(--accent-dark);
+        box-shadow:0 7px 20px rgba(20,38,42,.13);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+        opacity:0;transform:translate(-50%,8px);transition:opacity .18s var(--ease),transform .18s var(--ease);pointer-events:none
       }
-      .ideaMapPanel.isList .ideaMapResults::-webkit-scrollbar{display:block;width:6px}
-      .ideaMapPanel.isList .ideaMapResults::-webkit-scrollbar-track{background:transparent}
-      .ideaMapPanel.isList .ideaMapResults::-webkit-scrollbar-thumb{background:rgba(49,95,107,.26);border-radius:999px}
+      .ideaMapScrollHint svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+      .ideaMapPanel.canScrollMore .ideaMapScrollHint{opacity:1;transform:translate(-50%,0)}
       .ideaMapResult{width:100%;scroll-snap-align:start}
       .ideaMapCanvas .leaflet-top.leaflet-right{right:auto;left:14px}
     }
@@ -7094,7 +7092,15 @@
     return `<aside class="ideaMapPanel${ideaMapPanelExpanded ? ' isExpanded' : ''}${detailPoint ? ' isDetail' : ' isList'}">
       <div class="ideaMapPanelHead"><div class="ideaMapPanelHeadRow"><div><h3>${escapeHtml(visibleTitle)}</h3><p>${escapeHtml(visibleText)}</p></div><div class="ideaMapPanelActions">${clearButton}<button class="ideaMapPanelToggle" type="button" data-map-panel-toggle aria-expanded="${ideaMapPanelExpanded ? 'true' : 'false'}" title="${toggleLabel}" aria-label="${toggleLabel}"><svg viewBox="0 0 24 24" aria-hidden="true">${toggleIcon}</svg></button></div></div></div>
       <div class="ideaMapResults">${resultsHtml}</div>
+      ${detailPoint ? '' : '<span class="ideaMapScrollHint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"></path></svg></span>'}
     </aside>`;
+  }
+  function syncIdeaMapScrollHint(panel=$('#ideaMap .ideaMapPanel')){
+    const results = panel?.querySelector('.ideaMapResults');
+    if(!panel || !results || !panel.classList.contains('isList')) return;
+    const update = () => panel.classList.toggle('canScrollMore', results.scrollHeight - results.scrollTop - results.clientHeight > 8);
+    results.addEventListener('scroll', update, {passive:true});
+    requestAnimationFrame(update);
   }
   function updateIdeaMapPanel({scroll=false, emphasize=false}={}){
     const map = $('#ideaMap');
@@ -7102,6 +7108,7 @@
     if(!panel) return;
     const points = filteredInspirationItems().map(ideaMapPoint).filter(Boolean);
     panel.outerHTML = ideaMapPanelMarkup(points);
+    syncIdeaMapScrollHint();
     setActiveIdeaMapItem(activeIdeaMapKey, {scroll, emphasize});
   }
   function setActiveIdeaMapItem(key, {scroll=true, clearCluster=false, refreshPanel=false, emphasize=false}={}){
@@ -7395,6 +7402,7 @@
       <div id="ideaMapProviderCanvas"></div>
     </div>
     ${ideaMapPanelMarkup(points)}`;
+    syncIdeaMapScrollHint();
     destroyIdeaMapProvider();
     ideaMapProvider = createIdeaMapProvider($('#ideaMapProviderCanvas'), points);
     if(!ideaMapProvider){
