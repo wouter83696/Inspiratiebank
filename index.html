@@ -262,7 +262,7 @@
     .weekTop{display:block;padding:28px 28px 14px;border-bottom:0;background:#FFFEFC}
     .weekTitle{display:flex;gap:16px;align-items:center}
     .weekTitle > div{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
-    .weekBadge{width:64px;height:64px;margin-top:0;border-radius:15px;background:linear-gradient(145deg,rgba(168,225,221,.90),rgba(216,242,238,.76));display:grid;place-items:center;color:#07345e;font-weight:600;font-size:1.5rem;line-height:1;text-align:center;flex:0 0 auto}
+    .weekBadge{width:64px;height:64px;margin-top:0;border:1px solid rgba(79,142,158,.20);border-radius:15px;background:#DDF2EF;display:grid;place-items:center;color:#245c68;font-weight:600;font-size:1.5rem;line-height:1;text-align:center;flex:0 0 auto}
     .weekBadgeNumber{display:grid;place-items:center;width:100%;height:100%;line-height:1;text-align:center;transform:translateY(-1px)}
     .weekHeadingRow{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-direction:row;flex-wrap:nowrap;width:100%}
     .weekHeadingMain{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
@@ -294,8 +294,8 @@
     }
     .weekCountBadge{
       display:inline-flex;align-items:center;gap:7px;min-height:30px;padding:6px 10px;border-radius:10px;
-      background:#F7F1E7;border:1px solid rgba(112,94,63,.16);
-      color:#405F5D;box-shadow:none;
+      background:rgba(247,241,231,.11);border:1px solid rgba(112,94,63,.035);
+      color:#617573;box-shadow:none;
       font-size:.78rem;font-weight:500;line-height:1;backdrop-filter:blur(8px)
     }
     .weekCountWord{display:inline}
@@ -304,7 +304,7 @@
     .weekHeaderMeta .weekCountBadge{
       width:auto;max-width:220px;min-height:30px;padding:6px 10px;border-radius:10px;
       display:inline-flex;align-items:center;gap:7px;
-      background:#F7F1E7;border-color:rgba(112,94,63,.16);
+      background:rgba(247,241,231,.11);border-color:rgba(112,94,63,.035);
       box-shadow:none;font-size:.78rem;line-height:1
     }
     .weekHeaderMeta .weekCountBadge span{display:inline-flex;flex-direction:row;align-items:baseline;gap:4px;white-space:nowrap}
@@ -3505,12 +3505,12 @@
       background:var(--theme-tint-strong,rgba(255,253,249,.86))
     }
     #tab-weken .weekPanel,
-    #tab-weken .agendaBoard,
-    #tab-weken .agendaDay{background:#fffdf8}
-    #tab-weken .agendaDay:nth-child(even){background:#fffbf4}
+    #tab-weken .agendaBoard{background:#FFFEFC}
+    #tab-weken .agendaDay,
+    #tab-weken .agendaDay:nth-child(even){background:transparent}
     #tab-weken .agendaDay.today{
-      background:#fbf5e9;
-      box-shadow:inset 0 0 0 1px rgba(112,94,63,.07)
+      background:rgba(221,242,239,.48);
+      box-shadow:inset 0 0 0 1px rgba(79,142,158,.13)
     }
     #tab-weken .agendaItemMeta{color:#697472}
     #tab-weken .agendaEmpty{
@@ -3519,8 +3519,8 @@
       color:#697472
     }
     #tab-weken .agendaSectionTabs{
-      border-color:rgba(112,94,63,.07);
-      background:rgba(247,241,231,.38);
+      border-color:rgba(79,142,158,.10);
+      background:transparent;
       box-shadow:none
     }
     #tab-weken .agendaSectionTab:hover{background:rgba(168,225,221,.14)}
@@ -3529,26 +3529,29 @@
     .ongoingAccordion{
       border-radius:18px;
       border-color:rgba(64,45,20,.055);
-      background:#fffdf8;
+      background:#FFFEFC;
       box-shadow:0 8px 24px rgba(92,65,33,.04)
     }
-    .ongoingAccordionButton{min-height:58px;padding:12px 16px;background:#fffdf8}
+    .ongoingAccordion.open,
+    .ongoingAccordionBody,
+    .ongoingAccordion .tableWrap{background:#FFFEFC}
+    .ongoingAccordionButton{min-height:58px;padding:12px 16px;background:transparent}
     .ongoingAccordionText > strong,
     .ongoingTitleLine > strong{font-size:1rem;font-weight:500;color:#006780}
     .ongoingTitleLine #flexibleOfferCount{
       min-height:27px;padding:5px 8px;
-      border:1px solid rgba(112,94,63,.055);
-      background:rgba(247,241,231,.22);
+      border:1px solid rgba(112,94,63,.035);
+      background:rgba(247,241,231,.11);
       color:#617573;box-shadow:none
     }
     .ongoingAccordion table{border-collapse:collapse;border-spacing:0}
     .ongoingAccordion th{
-      padding:13px 16px;background:#fffdf8;
+      padding:13px 16px;background:#FFFEFC;
       border-bottom:1px solid rgba(64,45,20,.06);
       color:#74716E;font-size:.8rem;font-weight:500
     }
     .ongoingAccordion td{
-      padding:10px 16px;background:#fffdf8;
+      padding:10px 16px;background:#FFFEFC;
       border-bottom:1px solid rgba(64,45,20,.06);
       color:#74716E;vertical-align:middle
     }
