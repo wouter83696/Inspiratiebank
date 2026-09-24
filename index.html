@@ -32,7 +32,6 @@
       }
       #tab-inspiratie .desktopStickyControls > .filterBar{margin-top:0;margin-bottom:8px}
       .desktopStickyControls .inspirationDesktopFilterRow{margin-bottom:0}
-      .tabHeroTitle,.tabHeroLine{transform:translateY(24px)}
     }
   </style>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -2565,20 +2564,22 @@
   <style>
     /* De kaart zelf blijft rustig; categorieaccenten zitten alleen in iconen en badges. */
     @media (min-width:981px){
-      #tab-inspiratie .tabHeroTitle{
+      :is(#tab-inspiratie,#tab-weken) .tabHeroTitle{
         max-width:520px;
         margin-top:12px;
         font-size:43px;
         font-weight:600;
         line-height:1.12;
         letter-spacing:0;
+        transform:translateY(24px);
       }
-      #tab-inspiratie .tabHeroLine{
+      :is(#tab-inspiratie,#tab-weken) .tabHeroLine{
         max-width:680px;
         margin-top:8px;
         font-size:21px;
         font-weight:400;
         line-height:1.35;
+        transform:translateY(24px);
       }
       .inspirationDesktopFilterRow .desktopViewBar{
         transform:none;
