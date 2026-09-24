@@ -3834,7 +3834,7 @@
           <div class="ideaFilterChips" id="ideaFilterPlaceChips">
             <button class="ideaFilterChip" type="button" data-sheet-filter="ideaLocation" data-value="all">Alle</button>
             <button class="ideaFilterChip" type="button" data-sheet-filter="ideaLocation" data-value="Thuis"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 9.2 10 4l6 5.2"></path><path d="M5.8 8.4V16h8.4V8.4"></path><path d="M8.4 16v-4.2h3.2V16"></path></svg><span>Thuis</span></button>
-            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaLocation" data-value="Op pad">Eropuit</button>
+            <button class="ideaFilterChip" type="button" data-sheet-filter="ideaLocation" data-value="Op pad">Buitenshuis</button>
             <button class="ideaFilterChip" type="button" data-sheet-filter="ideaLocation" data-value="Online">Online</button>
           </div>
         </section>
@@ -4065,7 +4065,7 @@
   const IDEA_LOCATION_OPTIONS = ['Binnen','Thuis','Op pad','Online'];
   const TEAM_IDEA_LOCATION_OPTIONS = [
     {value:'Binnen', label:'Op je eigen plek'},
-    {value:'Op pad', label:'Eropuit'},
+    {value:'Op pad', label:'Buitenshuis'},
     {value:'Online', label:'Online'}
   ];
   const AGENDA_DISTANCE_OPTIONS = ['Op locatie','0–10 km (dichtbij)','10–25 km (regio)'];
@@ -4550,7 +4550,7 @@
     const location = normalizeIdeaLocation(value);
     if(location === 'Thuis') return 'Thuis';
     if(location === 'Online') return 'Online';
-    if(location === 'Op pad' || location === 'Buiten') return 'Eropuit';
+    if(location === 'Op pad' || location === 'Buiten') return 'Buitenshuis';
     return 'Binnen';
   }
   function normalizeIdeaCost(value=''){
@@ -5821,7 +5821,7 @@
       if(input) input.required = needsAddress;
     });
     if(status && needsAddress && (!cleanPostcode(postcodeInput?.value || '') || !String(houseNumberInput?.value || '').trim())){
-      status.textContent = 'Voor Eropuit zijn postcode en huisnummer nodig. Kies Op je eigen plek of Online als dit geen externe plek is.';
+      status.textContent = 'Voor Buitenshuis zijn postcode en huisnummer nodig. Kies Op je eigen plek of Online als dit geen externe plek is.';
     }else if(status && !needsAddress){
       status.textContent = '';
     }
@@ -5989,7 +5989,7 @@
       return;
     }
     if(ideaLocationNeedsExactAddress(item.locationType) && (!item.postcode || !item.houseNumber)){
-      setTeamIdeaStatus('Vul bij Eropuit een postcode en huisnummer in. Kies anders Op je eigen plek of Online.', 'warn');
+      setTeamIdeaStatus('Vul bij Buitenshuis een postcode en huisnummer in. Kies anders Op je eigen plek of Online.', 'warn');
       $('#teamIdeaPostcodeInput')?.focus();
       return;
     }
