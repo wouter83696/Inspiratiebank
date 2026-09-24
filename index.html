@@ -3056,7 +3056,6 @@
     }
 
     /* Public list uses the same quiet surfaces and typography as the tiles. */
-    #ideaList.sharedIdeaList .ideaThemeRow:hover .ideaListTitleLink{color:#168697;text-decoration:none}
     #ideaList .ideaListTheme{margin-bottom:5px}
     #ideaList .ideaListTheme .categoryPill{min-height:31px;padding:7px 11px;font-size:.76rem;box-shadow:0 3px 10px rgba(20,38,42,.045)}
     #ideaList .ideaListTitleLink,
@@ -3422,8 +3421,6 @@
     .ongoingAccordion tbody tr:hover td{background:#fffaf4}
     .ongoingTitleCell .name,
     .ongoingTitleCell .ideaTitleText{color:#006780;font-weight:500;line-height:1.25}
-    .ongoingTitleLink{color:#006780;text-decoration:none}
-    .ongoingTitleLink:hover,.ongoingTitleLink:focus-visible{color:#168697;text-decoration:none}
     .ongoingFitCell .small{color:#74716E}
     .ongoingBadgesCell .cardPillGroup{
       display:inline-flex;flex-direction:row;align-items:center;
@@ -3530,6 +3527,11 @@
       color:#74716E;vertical-align:middle
     }
     .sharedPublicList .ideaThemeRow:hover td{background:#fffaf4}
+    .sharedPublicList :is(.ideaListTitleLink,.ongoingTitleLink){color:#006780;text-decoration:none}
+    .sharedPublicList .ideaThemeRow:hover :is(.ideaListTitleLink,.ongoingTitleLink),
+    .sharedPublicList :is(.ideaListTitleLink,.ongoingTitleLink):focus-visible{
+      color:#168697;text-decoration:none
+    }
     .sharedPublicList tbody tr:last-child td{border-bottom:0}
     .ongoingAccordion{--shared-list-head-bg:#fffdf9}
     .ongoingAccordion.open,
@@ -6687,7 +6689,7 @@
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const title = titleWithIcon(item.title, item.domain, 'nameWithIcon');
     const linkedTitle = item.url
-      ? `<a class="ongoingTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="${escapeHtml(sourceButtonLabel(item))}">${title}</a>`
+      ? `<a class="ongoingTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${title}</a>`
       : title;
     return AgendaViewShared.renderOngoingRow({
       themeClass:domainThemeClass(item.domain), title:linkedTitle,
@@ -6824,7 +6826,7 @@
     const metadata = sharedIdeaMetadata(item);
     const image = approvedIdeaImage(item);
     const titleText = item.url
-      ? `<a class="ideaListTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="${escapeHtml(sourceButtonLabel(item))}">${escapeHtml(item.title)}</a>`
+      ? `<a class="ideaListTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.title)}</a>`
       : `<span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
     const visual = `<span class="ideaListVisual${image ? ' hasImage' : ''}" aria-hidden="true">${image ? `<img class="ideaListThumb" src="${escapeHtml(image.src)}" alt="" loading="lazy" decoding="async">` : ''}<span class="domainIcon">${domainIcon(item.domain)}</span></span>`;
     const titleRow = `<span class="ideaListTitleRow">${titleText}</span>`;
