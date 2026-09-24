@@ -3562,15 +3562,15 @@
     @media(min-width:641px){
       #agendaFilters{
         --agenda-main-filter-height:48px;
-        grid-template-columns:minmax(0,1fr) 236px 44px;
+        grid-template-columns:minmax(0,1fr) 260px;
         column-gap:0
       }
       #agendaFilters .filterSearch{
-        grid-column:1 / 4;grid-row:1;
+        grid-column:1 / 3;grid-row:1;
         filter:drop-shadow(0 12px 25px rgba(20,38,42,.055))
       }
       #agendaFilters .filterSearch input{
-        height:48px;min-height:48px;padding-right:280px;
+        height:48px;min-height:48px;padding-right:268px;
         border:1px solid rgba(255,255,255,.78);
         border-radius:18px;background:rgba(255,253,249,.94);
         box-shadow:none
@@ -3590,7 +3590,7 @@
         background:rgba(168,225,221,.14)
       }
       #agendaFilters .filterToggle{
-        grid-column:3;grid-row:1;z-index:6;
+        display:none;grid-column:2;grid-row:1;z-index:6;
         justify-self:center;align-self:center;
         width:36px;min-width:36px;max-width:36px;
         height:36px;min-height:36px;padding:0;
@@ -3602,11 +3602,11 @@
       #agendaFilters .filterOptions{top:calc(100% + 9px)}
       #agendaFilters .desktopLocationBar{
         display:flex;grid-column:2;grid-row:1;z-index:5;
-        align-items:center;align-self:center;width:100%;height:36px
+        align-items:center;align-self:stretch;justify-self:stretch;width:100%;height:48px;padding:0
       }
       #agendaFilters .desktopLocationBar .locationLegendItem{
-        width:calc(100% - 8px);height:36px;min-height:36px;margin:0 4px;
-        justify-content:flex-end;padding:0 7px;
+        width:calc(100% - 16px);height:36px;min-height:36px;margin:6px 8px;
+        justify-content:flex-end;padding:0 8px;
         border:0;border-radius:12px;background:transparent;
         box-shadow:none;backdrop-filter:none;
         transition:background .18s var(--ease)
@@ -4724,7 +4724,7 @@
     const inspirationLocation = $('#inspirationDesktopLocation');
     if(inspirationLocation) inspirationLocation.innerHTML = locationLegendButton({filterIcon:true});
     const agendaLocation = $('#agendaDesktopLocation');
-    if(agendaLocation) agendaLocation.innerHTML = locationLegendButton();
+    if(agendaLocation) agendaLocation.innerHTML = locationLegendButton({filterIcon:true});
     syncLocationUi();
     [agendaLegend, inspirationLegend].forEach(legend => {
       const scroller = legend?.querySelector('.agendaThemeLegend');
