@@ -1379,7 +1379,7 @@
         border-radius:15px;
         padding:2px;
         background:rgba(255,253,249,.62);
-        box-shadow:0 8px 20px rgba(20,38,42,.04);
+        box-shadow:0 5px 14px rgba(20,38,42,.025);
         backdrop-filter:blur(18px);
       }
       #ideaFilters .filterSearch input{background:rgba(255,253,249,.62)}
@@ -2590,7 +2590,7 @@
         line-height:1.35;
       }
       .inspirationDesktopFilterRow .desktopViewBar{
-        transform:translateY(-6px);
+        transform:none;
       }
     }
     @media (max-width:980px){
@@ -3617,7 +3617,7 @@
     }
     /* Zoekbalk en chiprij delen in beide hoofdweergaven exact dezelfde componentbasis. */
     .sharedDiscoveryChipRow{
-      align-items:center;padding:3px 6px 4px;margin:9px 0 6px;background:transparent
+      align-items:center;padding:3px 6px 4px;margin:6px 0 6px;background:transparent
     }
     .sharedDiscoveryChipRow :is(#inspirationThemeLegend,#agendaThemeLegend) .agendaThemeLegend{
       padding-top:4px;padding-bottom:6px
@@ -3640,7 +3640,7 @@
     /* De gedeelde Alles-chip gebruikt dezelfde neutrale filtervariant. */
     :is(#ideaFilterCategoryChips,#agendaFilterCategoryChips) .ideaFilterChip:first-child,
     .sharedDiscoveryChipRow .agendaLegendItem.themeDefault{
-      background:rgba(255,255,255,.52);border-color:var(--ink);color:var(--ink);
+      background:rgba(255,255,255,.52);border-color:rgba(79,142,158,.28);color:rgba(49,95,107,.86);
       box-shadow:inset 0 0 0 1px rgba(54,135,93,.07)
     }
     :is(#ideaFilterCategoryChips,#agendaFilterCategoryChips) .ideaFilterChip:first-child:hover,
