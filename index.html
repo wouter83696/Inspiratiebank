@@ -3073,7 +3073,7 @@
     /* Public list uses the same quiet surfaces and typography as the tiles. */
     #ideaList.sharedIdeaList{border:1px solid rgba(64,45,20,.055);border-radius:18px;background:#FFFEFC;box-shadow:0 8px 24px rgba(92,65,33,.04)}
     #ideaList.sharedIdeaList table{border-collapse:collapse;border-spacing:0}
-    #ideaList.sharedIdeaList th{background:#FFFEFC;border-bottom:1px solid rgba(64,45,20,.06);color:#74716E;padding:13px 16px;font-size:.8rem}
+    #ideaList.sharedIdeaList th{background:rgba(247,241,231,.42);border-bottom:1px solid rgba(64,45,20,.06);color:#74716E;padding:13px 16px;font-size:.8rem}
     #ideaList.sharedIdeaList .ideaThemeRow td{background:#FFFEFC;border-bottom:1px solid rgba(64,45,20,.06);padding:10px 16px;vertical-align:middle}
     #ideaList.sharedIdeaList .ideaThemeRow:hover td{background:#fffaf4}
     #ideaList.sharedIdeaList .ideaThemeRow:hover .ideaListTitleLink{color:#168697;text-decoration:none}
@@ -3534,9 +3534,10 @@
     .ongoingAccordion .tableWrap{background:#fffdf9}
     .ongoingAccordionButton{
       min-height:58px;padding:12px 16px;background:#fffdf8;
-      border-bottom:1px solid rgba(64,45,20,.06)
+      border-bottom:1px solid rgba(64,45,20,.06);
+      cursor:default;user-select:none
     }
-    .ongoingAccordionButton:hover{background:#fffaf4}
+    .ongoingAccordionButton:hover{background:#fffdf8;color:var(--accent-dark)}
     .ongoingAccordionText > strong,
     .ongoingTitleLine > strong{font-size:1rem;font-weight:500;color:#006780}
     .ongoingTitleLine #flexibleOfferCount{
@@ -3548,7 +3549,7 @@
     #ideaList.sharedIdeaList table,
     .ongoingAccordion table{border-collapse:collapse;border-spacing:0}
     .ongoingAccordion th{
-      padding:13px 16px;background:#fffdf8;
+      padding:13px 16px;background:rgba(247,241,231,.42);
       border-bottom:1px solid rgba(64,45,20,.06);
       color:#74716E;font-size:.8rem;font-weight:500
     }
@@ -3685,7 +3686,7 @@
     }
     /* Lijstweergave volgt dezelfde warme witte vlakken als de tegels. */
     #ideaList.sharedIdeaList{background:#fffdf9}
-    #ideaList.sharedIdeaList th{background:#fffdf8}
+    #ideaList.sharedIdeaList th{background:rgba(247,241,231,.42)}
     #ideaList.sharedIdeaList .ideaThemeRow td,
     #ideaList .ideaSurpriseRow td{background:#fffdf9}
     #agendaFilterWeekChips .ideaFilterChip:hover{
