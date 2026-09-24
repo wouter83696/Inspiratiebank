@@ -3524,8 +3524,16 @@
       background:transparent;
       box-shadow:none
     }
+    #tab-weken .weekSectionNavigation{
+      margin:-8px -28px 18px;padding:0 28px;
+      background:rgba(247,241,231,.42);
+      border-bottom:1px solid rgba(64,45,20,.06)
+    }
     #tab-weken .agendaSectionTab::after{content:none}
     #tab-weken .agendaSectionTab:hover{background:transparent;color:#315f69}
+    @media(max-width:640px){
+      #tab-weken .weekSectionNavigation{margin:0 -16px 18px!important;padding:0 16px!important}
+    }
 
     /* Doorlopend aanbod deelt exact dezelfde tabelvlakken als de lijstweergave. */
     #ideaList.sharedIdeaList,
