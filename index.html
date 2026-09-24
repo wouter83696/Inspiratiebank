@@ -813,6 +813,22 @@
     .filters input,.filters select{width:100%;min-width:0;min-height:40px;border:1px solid rgba(255,255,255,.78);background:rgba(255,255,255,.78);border-radius:16px;padding:8px 15px;color:var(--ink);font-size:.86rem;text-align:left;box-shadow:0 8px 20px rgba(20,38,42,.06);backdrop-filter:blur(18px)}
     .filterSearch input{position:relative;z-index:1;padding-left:42px}
     .filterSearch input::placeholder{text-align:left}
+    .ideaSearchSuggestions{
+      position:absolute;z-index:40;top:calc(100% + 7px);left:0;right:0;display:none;
+      padding:6px;border:1px solid rgba(79,142,158,.12);border-radius:14px;
+      background:rgba(255,253,249,.98);box-shadow:0 18px 40px rgba(20,38,42,.12);backdrop-filter:blur(18px)
+    }
+    .ideaSearchSuggestions.open{display:grid;gap:2px}
+    .ideaSearchSuggestion{
+      display:grid;grid-template-columns:28px minmax(0,1fr);align-items:center;gap:9px;width:100%;min-width:0;
+      padding:8px 10px;border:0;border-radius:10px;background:transparent;color:inherit;text-align:left;cursor:pointer
+    }
+    .ideaSearchSuggestion:hover,.ideaSearchSuggestion.active{background:rgba(168,225,221,.18)}
+    .ideaSearchSuggestionIcon{display:grid;place-items:center;width:28px;height:28px;border-radius:999px;background:var(--theme-icon-bg);border:1px solid var(--theme-icon-line);color:var(--theme-ink)}
+    .ideaSearchSuggestionIcon svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .ideaSearchSuggestionText{min-width:0}
+    .ideaSearchSuggestionText strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#006780;font-size:.84rem;font-weight:500;line-height:1.25}
+    .ideaSearchSuggestionText small{display:block;margin-top:2px;color:var(--muted);font-size:.7rem;line-height:1.2}
     .filters select{padding-right:30px}
     .agendaSearchFilters{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;column-gap:12px;row-gap:0;transition:row-gap .24s var(--ease)}
     .agendaSearchFilters .filterSearch{min-width:0}
@@ -3592,7 +3608,7 @@
       <div class="desktopStickyControls">
       <div class="filterBar">
         <div class="filters more" id="ideaFilters">
-          <div class="filterSearch"><input id="ideaSearch" type="search" placeholder="Zoek inspiratie..."></div>
+          <div class="filterSearch"><input id="ideaSearch" type="search" placeholder="Zoek inspiratie..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ideaSearchSuggestions"><div class="ideaSearchSuggestions" id="ideaSearchSuggestions" role="listbox" aria-label="Zoeksuggesties"></div></div>
           <div class="desktopLocationBar" id="inspirationDesktopLocation"></div>
           <button class="ideaAddButton ideaFilterAddButton" type="button" data-idea-submit-open aria-label="Inspiratie toevoegen" title="Inspiratie toevoegen" aria-haspopup="dialog" aria-controls="ideaSubmitSheetLayer" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
           <button class="filterToggle" id="filterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-haspopup="dialog" aria-controls="ideaFilterSheetLayer">
@@ -6931,6 +6947,95 @@
     renderFlexibleOffers();
     updateAgendaThemeChips();
   }
+  let ideaSearchSuggestionIndex = -1;
+  function closeIdeaSearchSuggestions(){
+    const input = $('#ideaSearch');
+    const list = $('#ideaSearchSuggestions');
+    if(!input || !list) return;
+    ideaSearchSuggestionIndex = -1;
+    list.classList.remove('open');
+    list.innerHTML = '';
+    input.setAttribute('aria-expanded','false');
+    input.removeAttribute('aria-activedescendant');
+  }
+  function ideaSearchSuggestionsFor(query=''){
+    const needle = normalize(query.trim());
+    if(!needle) return [];
+    const seen = new Set();
+    return allInspirationItems().map(item => {
+      const title = String(item.title || '').trim();
+      const titleKey = normalize(title);
+      const domain = domainDisplayLabel(item.domain);
+      const haystack = `${titleKey} ${normalize(domain)} ${normalize(item.place || item.location || '')}`;
+      if(!title || !haystack.includes(needle)) return null;
+      const score = titleKey.startsWith(needle) ? 0 : titleKey.split(/\s+/).some(word => word.startsWith(needle)) ? 1 : titleKey.includes(needle) ? 2 : 3;
+      return {item,title,domain,score};
+    }).filter(suggestion => {
+      if(!suggestion) return false;
+      const key = normalize(suggestion.title);
+      if(seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).sort((a,b) => a.score - b.score || a.title.localeCompare(b.title,'nl')).slice(0,6);
+  }
+  function setIdeaSearchSuggestionActive(index){
+    const input = $('#ideaSearch');
+    const options = $$('#ideaSearchSuggestions .ideaSearchSuggestion');
+    if(!input || !options.length) return;
+    ideaSearchSuggestionIndex = (index + options.length) % options.length;
+    options.forEach((option, optionIndex) => {
+      const active = optionIndex === ideaSearchSuggestionIndex;
+      option.classList.toggle('active', active);
+      option.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    const activeOption = options[ideaSearchSuggestionIndex];
+    input.setAttribute('aria-activedescendant', activeOption.id);
+    activeOption.scrollIntoView({block:'nearest'});
+  }
+  function chooseIdeaSearchSuggestion(title=''){
+    const input = $('#ideaSearch');
+    if(!input || !title) return;
+    input.value = title;
+    closeIdeaSearchSuggestions();
+    renderIdeas();
+    input.focus();
+  }
+  function renderIdeaSearchSuggestions(){
+    const input = $('#ideaSearch');
+    const list = $('#ideaSearchSuggestions');
+    if(!input || !list) return;
+    const suggestions = ideaSearchSuggestionsFor(input.value);
+    ideaSearchSuggestionIndex = -1;
+    if(!suggestions.length){
+      closeIdeaSearchSuggestions();
+      return;
+    }
+    list.innerHTML = suggestions.map((suggestion,index) => `<button class="ideaSearchSuggestion ${domainThemeClass(suggestion.item.domain)}" id="ideaSearchSuggestion-${index}" type="button" role="option" aria-selected="false" data-search-suggestion="${escapeHtml(suggestion.title)}"><span class="ideaSearchSuggestionIcon" aria-hidden="true">${domainIcon(suggestion.item.domain)}</span><span class="ideaSearchSuggestionText"><strong>${escapeHtml(suggestion.title)}</strong><small>${escapeHtml(suggestion.domain)}</small></span></button>`).join('');
+    list.classList.add('open');
+    input.setAttribute('aria-expanded','true');
+  }
+  function setupIdeaSearchAutocomplete(){
+    const input = $('#ideaSearch');
+    const list = $('#ideaSearchSuggestions');
+    if(!input || !list) return;
+    input.addEventListener('input', renderIdeaSearchSuggestions);
+    input.addEventListener('focus', renderIdeaSearchSuggestions);
+    input.addEventListener('keydown', event => {
+      const options = $$('#ideaSearchSuggestions .ideaSearchSuggestion');
+      if(event.key === 'ArrowDown' && options.length){ event.preventDefault(); setIdeaSearchSuggestionActive(ideaSearchSuggestionIndex + 1); }
+      else if(event.key === 'ArrowUp' && options.length){ event.preventDefault(); setIdeaSearchSuggestionActive(ideaSearchSuggestionIndex - 1); }
+      else if(event.key === 'Enter' && ideaSearchSuggestionIndex >= 0){ event.preventDefault(); chooseIdeaSearchSuggestion(options[ideaSearchSuggestionIndex]?.dataset.searchSuggestion || ''); }
+      else if(event.key === 'Escape'){ closeIdeaSearchSuggestions(); }
+    });
+    list.addEventListener('mousedown', event => event.preventDefault());
+    list.addEventListener('click', event => {
+      const option = event.target.closest('[data-search-suggestion]');
+      if(option) chooseIdeaSearchSuggestion(option.dataset.searchSuggestion || '');
+    });
+    document.addEventListener('click', event => {
+      if(!event.target.closest('#ideaFilters .filterSearch')) closeIdeaSearchSuggestions();
+    });
+  }
   const selectedIdeaCategories = new Set();
   function isIdeaCategorySelected(value){
     return value === 'all' ? selectedIdeaCategories.size === 0 : selectedIdeaCategories.has(domainDisplayLabel(value));
@@ -8050,6 +8155,7 @@
       if(event.target.value !== 'all') selectedIdeaCategories.add(domainDisplayLabel(event.target.value));
     });
     ['ideaSearch','ideaDomain','ideaLocation','ideaDistance','ideaCost','ideaStimulus','ideaDuration'].forEach(id=>$('#'+id)?.addEventListener('input',renderIdeas));
+    setupIdeaSearchAutocomplete();
     $$('[data-view-group="ideas"]').forEach(btn=>btn.addEventListener('click',()=>setIdeaView(btn.dataset.view)));
     window.__pageSecurityStartedAt = Date.now();
     initPublicFormSecurity($('#teamIdeaForm'));
