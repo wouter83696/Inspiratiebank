@@ -3513,6 +3513,8 @@
     .sharedPublicList{
       --shared-list-head-bg:var(--section-header-surface);
       --shared-list-row-bg:#fffdf9;
+      --shared-list-hover-bg:#F1FAFB;
+      --shared-list-hover-title:#168697;
       border:1px solid rgba(64,45,20,.055);border-radius:18px;
       background:#fffdf9;box-shadow:0 8px 24px rgba(92,65,33,.04)
     }
@@ -3527,10 +3529,11 @@
       border-bottom:1px solid rgba(64,45,20,.06);
       color:#74716E;vertical-align:middle
     }
+    .sharedPublicList .ideaThemeRow:hover td{background:var(--shared-list-hover-bg)}
     .sharedPublicList :is(.ideaListTitleLink,.ongoingTitleLink){color:#006780;text-decoration:none}
     .sharedPublicList :is(.ideaListTitleLink,.ongoingTitleLink):hover,
     .sharedPublicList :is(.ideaListTitleLink,.ongoingTitleLink):focus-visible{
-      color:#168697;text-decoration:none
+      color:var(--shared-list-hover-title);text-decoration:none
     }
     .sharedPublicList tbody tr:last-child td{border-bottom:0}
     .ongoingAccordion{--shared-list-head-bg:#fffdf9}
