@@ -497,10 +497,12 @@
       border:1px solid color-mix(in srgb,var(--theme-line) 48%,rgba(255,255,255,.6));box-shadow:0 5px 12px rgba(20,38,42,.06)
     }
     #ideaList .ideaListThumb{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+    #ideaList .ideaListVisual:not(.hasImage){background:transparent;border-color:transparent;box-shadow:none}
     #ideaList .ideaListVisual .domainIcon{
       position:absolute;right:-5px;bottom:-5px;display:inline-flex;width:27px;height:27px;min-width:27px;flex-basis:27px;margin:0;
       border:2px solid #fffdf8;box-shadow:0 4px 10px rgba(20,38,42,.10)
     }
+    #ideaList .ideaListVisual:not(.hasImage) .domainIcon{inset:50% auto auto 50%;right:auto;bottom:auto;transform:translate(-50%,-50%)}
     #ideaList .ideaListVisual .domainIcon svg{width:14px;height:14px}
     #ideaList .ideaListTitleRow{display:flex;align-items:center;min-width:0}
     #ideaList .nameWithIcon .ideaTitleText{font-weight:400}
