@@ -25,6 +25,11 @@
         background:var(--page-surface);
         background-attachment:fixed;
       }
+      .desktopStickyControls.isStuck::after{
+        content:"";position:absolute;z-index:-1;pointer-events:none;
+        left:0;right:0;bottom:-14px;height:14px;
+        background:linear-gradient(180deg,rgba(248,245,235,.72),rgba(248,245,235,0));
+      }
       #tab-inspiratie .desktopStickyControls > .filterBar{margin-top:0;margin-bottom:8px}
       .desktopStickyControls .inspirationDesktopFilterRow{margin-bottom:0}
     }
