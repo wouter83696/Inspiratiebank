@@ -40,6 +40,13 @@
   }
 
   function renderDesktopRow(view){
+    if(view.compactSummary){
+      return renderRow({...view, cells:[
+        {label:'Activiteit', html:`<div class="ideaListSummary">${view.title || ''}${renderMetadata({className:'ideaListSummaryMeta', pills:view.pills, meta:view.meta})}</div>`},
+        {label:'Beschrijving', html:renderPracticalList(view.description)},
+        {label:'Praktisch', html:renderPracticalList(view.practical)}
+      ]});
+    }
     const cells = [
       {label:'Activiteit', html:`${view.title || ''}`},
       {label:'Kenmerken', html:renderMetadata({pills:view.pills, meta:view.meta})},
@@ -56,10 +63,12 @@
 
   function renderDesktopTable(view={}){
     const admin = view.admin === true;
-    const headers = ['Activiteit', 'Kenmerken', 'Beschrijving', 'Praktisch'];
+    const headers = view.compactSummary
+      ? ['Activiteit', 'Beschrijving', 'Praktisch']
+      : ['Activiteit', 'Kenmerken', 'Beschrijving', 'Praktisch'];
     if(admin && view.manageFirst) headers.unshift('Beheer');
     else if(admin) headers.push('Beheer');
-    return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
+    return `<table${view.compactSummary ? ' class="compactSummaryTable"' : ''}><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
   window.IdeaViewShared = Object.freeze({renderMetadata, renderCard, renderRow, renderDesktopRow, renderDesktopTable});

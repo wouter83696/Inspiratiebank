@@ -492,10 +492,19 @@
     #ideaList .ideaListMeta{margin-left:38px}
     #ideaList .nameWithIcon{align-items:center;color:var(--accent-dark);font-size:1rem;line-height:1.18;font-weight:400}
     #ideaList .nameWithIcon .domainIcon{align-self:center;margin-top:0}
-    #ideaList .ideaListVisual{display:block;flex:0 0 50px;width:50px;height:50px}
+    #ideaList .ideaListVisual{display:block;flex:0 0 78px;width:78px;height:70px}
     #ideaList .ideaListThumb{display:block;width:100%;height:100%;object-fit:cover;border-radius:9px;border:1px solid rgba(79,142,158,.10);box-shadow:0 5px 12px rgba(20,38,42,.06)}
     #ideaList .ideaListTitleRow{display:flex;align-items:center;gap:10px;min-width:0}
     #ideaList .nameWithIcon.hasThumb{gap:12px}
+    #ideaList .compactSummaryTable{min-width:820px}
+    #ideaList .compactSummaryTable th:nth-child(1),#ideaList .compactSummaryTable td:nth-child(1){width:46%}
+    #ideaList .compactSummaryTable th:nth-child(2),#ideaList .compactSummaryTable td:nth-child(2){width:32%}
+    #ideaList .compactSummaryTable th:nth-child(3),#ideaList .compactSummaryTable td:nth-child(3){width:22%}
+    #ideaList .ideaListSummary{min-width:0}
+    #ideaList .ideaListSummaryMeta{display:flex;margin:7px 0 0 90px}
+    #ideaList .ideaListSummary:not(:has(.ideaListVisual)) .ideaListSummaryMeta{margin-left:38px}
+    #ideaList .ideaListSummaryMeta .cardMetaLine{display:flex;flex-wrap:nowrap;gap:12px;white-space:nowrap}
+    #ideaList .ideaListSummaryMeta .cardPillGroup{display:none}
     #ideaList .nameWithIcon .ideaTitleText{font-weight:400}
     #ideaList .ideaListTitleLink{color:#006780;text-decoration:none;text-decoration-thickness:1px;text-underline-offset:3px}
     #ideaList .ideaListTitleLink:hover,#ideaList .ideaListTitleLink:focus-visible{color:var(--accent-dark);text-decoration:underline}
@@ -2924,7 +2933,7 @@
     #ideaList.sharedIdeaList{border:1px solid rgba(64,45,20,.055);border-radius:18px;background:#fffdf8;box-shadow:0 8px 24px rgba(92,65,33,.04)}
     #ideaList.sharedIdeaList table{border-collapse:collapse;border-spacing:0}
     #ideaList.sharedIdeaList th{background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06);color:#74716E;padding:13px 16px;font-size:.8rem}
-    #ideaList.sharedIdeaList .ideaThemeRow td{background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06);padding:10px 16px;vertical-align:middle}
+    #ideaList.sharedIdeaList .ideaThemeRow td{background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06);padding:12px 16px;vertical-align:middle}
     #ideaList.sharedIdeaList .ideaThemeRow:hover td{background:#fffaf4}
     #ideaList .ideaListTheme{margin-bottom:5px}
     #ideaList .ideaListTheme .categoryPill{min-height:31px;padding:7px 11px;font-size:.76rem;box-shadow:0 3px 10px rgba(20,38,42,.045)}
@@ -3282,6 +3291,14 @@
       #ideaList.sharedIdeaList .ideaThemeRow td,#ideaList.sharedIdeaList .ideaThemeRow:hover td{padding:0;background:transparent;border-radius:0}
       #ideaList.sharedIdeaList .ideaSurpriseRow{padding:12px;margin:0;background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06)}
       #ideaList .mobileIdeaListMeta{width:100%;margin-top:3px}
+      #ideaList .compactSummaryTable{min-width:0}
+      #ideaList .ideaListVisual{flex-basis:66px;width:66px;height:60px}
+      #ideaList .ideaListSummaryMeta,#ideaList .ideaListSummary:not(:has(.ideaListVisual)) .ideaListSummaryMeta{margin:8px 0 0 0}
+      #ideaList .ideaListSummaryMeta .cardMetaLine{flex-wrap:wrap;white-space:normal}
+      #ideaList .compactSummaryTable td:nth-child(1),#ideaList .compactSummaryTable td:nth-child(2),#ideaList .compactSummaryTable td:nth-child(3){width:100%;grid-column:1 / -1}
+      #ideaList .ideaSurpriseCard{grid-template-columns:auto minmax(0,1fr);padding:12px 14px}
+      #ideaList .ideaSurpriseMark{width:38px;height:38px}
+      #ideaList .ideaSurpriseButton{grid-column:1 / -1;justify-self:stretch;min-height:44px}
       .ongoingAccordion tbody{gap:0;padding:0}
       .ongoingAccordion tr{
         padding:16px;border:0;border-bottom:1px solid rgba(64,45,20,.06);border-radius:0;
@@ -6375,6 +6392,7 @@
     const titleRow = `<span class="ideaListTitleRow"><span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>${titleText}</span>`;
     const linkedTitle = `<span class="nameWithIcon${image ? ' hasThumb' : ''}">${visual}${titleRow}</span>`;
     return IdeaViewShared.renderDesktopRow({
+      compactSummary:true,
       themeClass:domainThemeClass(item.domain),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       title:linkedTitle,
@@ -6507,7 +6525,7 @@
     </article>`;
   }
   function surpriseIdeaRow(){
-    return `<tr class="ideaSurpriseRow"><td colspan="4">${surpriseIdeaCard()}</td></tr>`;
+    return `<tr class="ideaSurpriseRow"><td colspan="3">${surpriseIdeaCard()}</td></tr>`;
   }
   function withSurpriseMarkup(items, renderer, surpriseRenderer, insertAfter=2){
     if(!items.length) return '';
@@ -7038,7 +7056,7 @@
     const surpriseAfter = window.matchMedia('(min-width:1180px)').matches ? 4 : window.matchMedia('(min-width:641px)').matches ? 3 : 2;
     $('#ideaCards').innerHTML = items.length ? withSurpriseMarkup(items, cardIdea, surpriseIdeaCard, surpriseAfter) : empty;
     $('#ideaList').innerHTML = items.length
-      ? IdeaViewShared.renderDesktopTable({rows:withSurpriseMarkup(items, ideaRow, surpriseIdeaRow, 3)})
+      ? IdeaViewShared.renderDesktopTable({compactSummary:true, rows:withSurpriseMarkup(items, ideaRow, surpriseIdeaRow, 3)})
       : empty;
     renderIdeaMap(items);
   }
