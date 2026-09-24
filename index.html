@@ -491,9 +491,17 @@
     table{width:100%;border-collapse:separate;border-spacing:0;min-width:760px}
     #ideaList .ideaListMeta{margin-left:38px}
     #ideaList .nameWithIcon{align-items:center;color:var(--accent-dark);font-size:1rem;line-height:1.18;font-weight:400}
-    #ideaList .nameWithIcon .domainIcon{align-self:center;margin-top:0}
-    #ideaList .ideaListVisual{display:block;flex:0 0 50px;width:50px;height:50px}
-    #ideaList .ideaListThumb{display:block;width:100%;height:100%;object-fit:cover;border-radius:9px;border:1px solid rgba(79,142,158,.10);box-shadow:0 5px 12px rgba(20,38,42,.06)}
+    #ideaList .ideaListVisual{
+      position:relative;display:block;flex:0 0 54px;width:54px;height:54px;margin-right:4px;border-radius:10px;
+      background:linear-gradient(145deg,var(--theme-tint-strong),rgba(255,255,255,.9));
+      border:1px solid color-mix(in srgb,var(--theme-line) 48%,rgba(255,255,255,.6));box-shadow:0 5px 12px rgba(20,38,42,.06)
+    }
+    #ideaList .ideaListThumb{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+    #ideaList .ideaListVisual .domainIcon{
+      position:absolute;right:-5px;bottom:-5px;display:inline-flex;width:27px;height:27px;min-width:27px;flex-basis:27px;margin:0;
+      border:2px solid #fffdf8;box-shadow:0 4px 10px rgba(20,38,42,.10)
+    }
+    #ideaList .ideaListVisual .domainIcon svg{width:14px;height:14px}
     #ideaList .ideaListTitleRow{display:flex;align-items:center;min-width:0}
     #ideaList .nameWithIcon .ideaTitleText{font-weight:400}
     #ideaList .ideaListTitleLink{color:#006780;text-decoration:none;text-decoration-thickness:1px;text-underline-offset:3px}
@@ -6396,11 +6404,9 @@
     const titleText = item.url
       ? `<a class="ideaListTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="${escapeHtml(sourceButtonLabel(item))}">${escapeHtml(item.title)}</a>`
       : `<span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
-    const visual = image
-      ? `<span class="ideaListVisual" aria-hidden="true"><img class="ideaListThumb" src="${escapeHtml(image.src)}" alt="" loading="lazy" decoding="async"></span>`
-      : '';
+    const visual = `<span class="ideaListVisual${image ? ' hasImage' : ''}" aria-hidden="true">${image ? `<img class="ideaListThumb" src="${escapeHtml(image.src)}" alt="" loading="lazy" decoding="async">` : ''}<span class="domainIcon">${domainIcon(item.domain)}</span></span>`;
     const titleRow = `<span class="ideaListTitleRow">${titleText}</span>`;
-    const linkedTitle = `<span class="nameWithIcon"><span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>${visual}${titleRow}</span>`;
+    const linkedTitle = `<span class="nameWithIcon">${visual}${titleRow}</span>`;
     return IdeaViewShared.renderDesktopRow({
       themeClass:domainThemeClass(item.domain),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
