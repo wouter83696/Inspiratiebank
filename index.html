@@ -1546,18 +1546,18 @@
       background:#fff;color:var(--accent-dark);font-weight:750;box-shadow:0 8px 18px rgba(20,38,42,.12);
       transition:background .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease)
     }
-    .marker-cluster:hover,.marker-cluster:focus-visible{z-index:1000 !important}
-    .marker-cluster:hover div,.marker-cluster:focus-visible div{
+    .marker-cluster:hover{z-index:1000 !important}
+    .marker-cluster:hover div{
       transform:scale(1.08);
       border-color:rgba(49,95,107,.62);
       background:rgba(255,255,255,.98);
       box-shadow:0 13px 28px rgba(20,38,42,.17),0 0 0 8px rgba(168,225,221,.30)
     }
     .marker-cluster.active div{
-      border-color:rgba(49,95,107,.72);
-      background:color-mix(in srgb,rgba(168,225,221,.42) 45%,white);
+      border-color:rgba(79,142,158,.16);
+      background:#fff;
       color:var(--accent-dark);
-      box-shadow:0 13px 28px rgba(20,38,42,.17),0 0 0 8px rgba(168,225,221,.34)
+      box-shadow:0 8px 18px rgba(20,38,42,.12)
     }
     .ideaMapHeader{
       position:absolute;z-index:4;left:16px;bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:calc(100% - 32px)
@@ -1591,7 +1591,7 @@
     .ideaLeafletMarker svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaLeafletMarker .domainIcon{position:relative;z-index:1;width:100%;height:100%;margin:0;border:0;background:transparent;color:inherit}
     .ideaLeafletMarker .domainIcon svg{width:14px;height:14px}
-    .ideaLeafletMarker:hover,.ideaLeafletMarker:focus-visible{
+    .ideaLeafletMarker:hover{
       transform:scale(1.1);
       background:color-mix(in srgb,var(--marker-bg) 84%,var(--theme-ink,var(--accent-dark)) 16%);
       border-color:color-mix(in srgb,var(--theme-ink,var(--accent-dark)) 70%,transparent);
@@ -1666,7 +1666,7 @@
     #ideaMap.suppressResultHover .ideaMapResult:hover{
       background:#fffdf8;border-color:#EFE9DE;transform:none;box-shadow:0 6px 18px rgba(92,65,33,.04)
     }
-    .ideaMapResult.active{background:#fffdf8;border-color:rgba(79,142,158,.16);transform:none;box-shadow:0 8px 20px rgba(92,65,33,.06)}
+    .ideaMapResult.active{background:#fffdf8;border-color:#EFE9DE;transform:none;box-shadow:0 6px 18px rgba(92,65,33,.04)}
     .ideaMapResultTitle{display:flex;align-items:center;gap:8px;min-width:0}
     .ideaMapResult.hasThumb .ideaMapResultTitle{transform:translateY(4px)}
     .ideaMapResult .domainIcon{width:30px;height:30px;margin:0;align-self:center;background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink)}
@@ -1751,18 +1751,18 @@
     @keyframes ideaMapDetailIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     @media (prefers-reduced-motion:reduce){.ideaMapAccordionBody,.ideaMapSingleCard{animation:none}}
     .ideaMapDetailToolbar{
-      position:absolute;z-index:5;top:14px;right:14px;display:flex;align-items:center;
+      position:absolute;z-index:5;top:18px;right:18px;display:flex;align-items:center;
       width:auto;padding:0;color:var(--accent-dark);pointer-events:none
     }
     .ideaMapDetailClose{
       display:grid;place-items:center;flex:0 0 auto;width:30px;height:30px;padding:0;border:1px solid rgba(61,126,136,.18);border-radius:999px;cursor:pointer;pointer-events:auto;
-      background:#fffdfa;color:#315f66;box-shadow:0 4px 12px rgba(20,38,42,.09)
+      background:#fffdfa;color:#315f66;box-shadow:none
     }
     .ideaMapPanel.isSingleDetail .sharedIdeaCard.hasImage .ideaMapDetailClose{
       border-color:rgba(61,126,136,.18);background:#fffdfa
     }
     .ideaMapPanel.isSingleDetail .sharedIdeaCard:not(.hasImage) h3{padding-right:36px}
-    .ideaMapDetailClose:hover{background:#f5faf8;border-color:rgba(61,126,136,.26);box-shadow:0 5px 14px rgba(20,38,42,.12)}
+    .ideaMapDetailClose:hover{background:#f5faf8;border-color:rgba(61,126,136,.26);box-shadow:none}
     .ideaMapDetailToolbar svg{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaMapDetailClose svg{width:13px;height:13px}
     .ideaMapResultThumbWrap{
@@ -3254,12 +3254,15 @@
     .ideaMapResult .ideaMapResultInfo .stimulusIcon svg{
       width:13px;height:13px;flex-basis:13px;color:#55777A !important
     }
-    .ideaMapResult:hover,
-    .ideaMapResult:focus-visible{
+    .ideaMapResult:hover{
       background:#fffdf8;border-color:rgba(64,45,20,.10);transform:translateY(-2px);
       box-shadow:0 16px 34px rgba(64,45,20,.065)
     }
-    .ideaMapResult:focus-visible{outline:2px solid rgba(0,115,141,.34);outline-offset:2px}
+    .ideaMapResult:focus-visible{outline:none}
+    .ideaMapResult.active{
+      background:#fffdf8;border-color:#EFE9DE;transform:none;
+      box-shadow:0 6px 18px rgba(92,65,33,.04)
+    }
     #ideaList .sharedMetaBlock{width:max-content}
     #ideaList .sharedMetaBlock .cardPillGroup{
       display:grid;
@@ -7921,7 +7924,7 @@
       if(!mapTarget) return;
       pendingIdeaMapZoomTarget = null;
       ideaMapDetailKey = mapTarget.dataset.mapResultKey;
-      setActiveIdeaMapItem(mapTarget.dataset.mapResultKey, {refreshPanel:true, emphasize:true});
+      setActiveIdeaMapItem(mapTarget.dataset.mapResultKey, {refreshPanel:true});
     });
     document.addEventListener('keydown', event => {
       if(event.key !== 'Enter' && event.key !== ' ') return;
