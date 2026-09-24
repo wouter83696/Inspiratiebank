@@ -1652,7 +1652,8 @@
     .ideaMapPanel:not(.isExpanded) .ideaMapResults{display:none}
     .ideaMapResults{
       display:flex;flex-direction:row;gap:10px;padding:0 16px 16px;overflow-x:auto;overflow-y:hidden;min-height:0;
-      align-content:normal;scroll-snap-type:x proximity;scrollbar-width:thin;overscroll-behavior-inline:contain
+      align-content:normal;scroll-snap-type:x proximity;scrollbar-width:thin;overscroll-behavior-inline:contain;
+      font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;letter-spacing:0
     }
     .ideaMapResult{
       position:relative;
@@ -1681,7 +1682,7 @@
     .ideaMapResult .domainIcon svg{width:15px;height:15px}
     .ideaMapResultText{display:flex;flex-direction:column;align-items:stretch;min-width:0;padding:0}
     .ideaMapResult.hasThumb .ideaMapResultText{align-self:center;justify-content:center;min-height:80px;padding:0}
-    .ideaMapResult strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#006780;font-size:.92rem;line-height:1.2;font-weight:600}
+    .ideaMapResult strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#006780;font-family:inherit;font-size:.92rem;line-height:1.25;font-weight:500;letter-spacing:0}
     .ideaMapResultInfo{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-top:5px;min-width:0}
     .ideaMapResult.hasThumb .ideaMapResultInfo{width:100%;margin-top:6px}
     .ideaMapResultPills{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-top:0}
@@ -3396,7 +3397,7 @@
       transform:translateY(-1px);background:#F1E7D7;border-color:#DFD0B8;
       box-shadow:0 4px 10px rgba(92,65,33,.06)
     }
-    .ideaMapResult strong{font-weight:500}
+    .ideaMapResult,.ideaMapResultInfo{font-family:inherit;letter-spacing:0}
     @media(max-width:640px){
       #ideaList.sharedIdeaList .ideaThemeRow{margin:0;padding:16px;border:0;border-bottom:1px solid rgba(64,45,20,.06);border-radius:0;background:#fffdf8;box-shadow:none;gap:12px}
       #ideaList.sharedIdeaList .ideaThemeRow td,#ideaList.sharedIdeaList .ideaThemeRow:hover td{padding:0;background:transparent;border-radius:0}
