@@ -2020,10 +2020,7 @@
     .locationHint{margin:0;color:rgba(11,18,32,.58);font-size:.86rem;line-height:1.4}
     .locationHint.warn{color:#7a6424}
     .empty{padding:20px;border:1px dashed rgba(11,18,32,.14);border-radius:18px;background:rgba(255,255,255,.40);color:var(--muted);text-align:center}
-    .sourceAdditionsBlock{margin:42px 0 18px;scroll-margin-top:100px}
-    .sourceAdditionsBlock .sectionHead{margin:0 0 16px;padding-inline:18px}
-    .sourceAdditionsBlock .sectionHead p{max-width:none}
-    .sourceAdditionsBlock .sectionHead h2,#teamAdditions h2{font-size:clamp(1.35rem,1.8vw,1.7rem)}
+    #teamAdditions h2{font-size:clamp(1.35rem,1.8vw,1.7rem)}
     #teamAdditions{margin-top:42px;padding-inline:18px}
     .linkAddBox{margin:0}
     .siteFooter{
@@ -2075,7 +2072,7 @@
       .ideaMapPanel.isSingleDetail .sharedIdeaCard > p:not(.fine){display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
       .ideaMapCanvas .leaflet-top.leaflet-right{right:14px;left:auto}
     }
-    @media (max-width:640px){.sourceAdditionsBlock{margin-top:28px}#teamAdditions{margin-top:28px}.sourceAdditionsBlock .sectionHead h2,#teamAdditions h2{font-size:1.35rem}}
+    @media (max-width:640px){#teamAdditions{margin-top:28px}#teamAdditions h2{font-size:1.35rem}}
     @media (min-width:1180px){#ideaCards.cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}#ideaCards .card{gap:9px}.sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 8.7}}
     @media (max-width:980px){.hero{grid-template-columns:1fr;gap:16px;padding-top:18px}.heroMain{min-height:auto}.quick{grid-template-columns:repeat(3,1fr)}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.filters,.filters.more,.teamFormGrid,.agendaSearchFilters{grid-template-columns:1fr 1fr}.filterSearch{grid-column:1/-1}.weekBody{padding:0 12px 18px}.agendaBoard{grid-template-columns:repeat(2,minmax(0,1fr));gap:0}.agendaDay{min-height:360px}.agendaDay:nth-child(odd){border-left:0}.agendaDay:nth-child(n+3){border-top:1px solid rgba(11,18,32,.06)}}
     @media (max-width:980px){.ideaMap{grid-template-columns:1fr;grid-template-rows:minmax(420px,62vh) auto;height:auto;min-height:0;max-height:none}.ideaMapCanvas{min-height:420px}.ideaMapPanel{border-left:0}.ideaMapResult,.ideaMapAccordion{width:min(78vw,330px);min-height:0}.ideaMapResult.hasThumb{min-height:0}}
@@ -2375,9 +2372,6 @@
       .teamForm .teamActionBar{justify-content:center}
       .teamForm .teamActionBar .formButton.primary{justify-content:center}
       .teamForm .teamFormStatus{flex-basis:100%;margin-left:0;text-align:center}
-      #sourceAdditions .teamActionBar{justify-content:flex-start}
-      #sourceAdditions .teamActionBar .formButton.primary{justify-content:center}
-      #sourceAdditions .teamFormStatus{text-align:left}
     }
     @media (max-width:640px){
       .weekTitle{
@@ -3476,6 +3470,20 @@
 
     /* UIT-agenda: dezelfde warme, rustige bediening als de Inspiratiebank. */
     #tab-weken .filterBar{background:transparent}
+    #tab-weken .agendaDesktopControls > .filterBar{margin-top:0;margin-bottom:8px}
+    #tab-weken .agendaDesktopControls .agendaLegendBar{
+      justify-content:flex-start;padding:0 6px;margin:12px 0 10px;
+      background:transparent
+    }
+    #tab-weken .agendaDesktopControls #agendaThemeLegend{flex:1 1 auto;min-width:0}
+    #tab-weken .agendaDesktopControls .agendaLegendItem{
+      background:rgba(255,253,249,.62);
+      border-color:var(--theme-line,rgba(79,142,158,.10));
+      box-shadow:none
+    }
+    #tab-weken .agendaDesktopControls .agendaLegendItem:hover{
+      background:var(--theme-tint-strong,rgba(255,253,249,.86))
+    }
     #tab-weken .weekPanel,
     #tab-weken .agendaBoard,
     #tab-weken .agendaDay{background:#fffdf8}
@@ -3674,6 +3682,7 @@
           </a>
         </div>
       </section>
+      <div class="desktopStickyControls agendaDesktopControls">
       <div class="filterBar">
         <div class="filters agendaSearchFilters more" id="agendaFilters">
           <div class="filterSearch"><input id="agendaSearch" type="search" placeholder="Zoek in activiteiten..."></div>
@@ -3695,8 +3704,9 @@
           </div>
         </div>
       </div>
-      <div class="agendaLegendBar">
+      <div class="inspirationDesktopFilterRow agendaLegendBar">
         <div id="agendaThemeLegend"></div>
+      </div>
       </div>
       <div id="weekPanels" class="weekStack"></div>
       <section id="longerOffers" class="ongoingAccordion open">
@@ -3707,27 +3717,6 @@
           <div id="flexibleOffersWrap" class="tableWrap"></div>
         </div>
       </section>
-      <div id="sourceAdditions" class="sourceAdditionsBlock">
-        <div class="sectionHead teamHead"><div><h2>Agendabron insturen</h2><p>Stuur een officiële evenement- of agendalink in. We controleren de bron eerst; daarna kan passend aanbod in de UIT-agenda komen.</p></div></div>
-        <div class="teamFormBox linkAddBox">
-          <form id="linkAddForm" class="teamForm">
-            <label class="formTrap" aria-hidden="true">
-              <span>Laat dit veld leeg</span>
-              <input type="text" name="website" tabindex="-1" autocomplete="off" data-security-trap>
-            </label>
-            <div class="teamFormGrid">
-              <label class="teamField wide">
-                <span>Officiële evenement- of agendalink</span>
-                <input id="linkUrlInput" type="text" inputmode="url" placeholder="https://voorbeeld.nl/evenement/..." required>
-              </label>
-            </div>
-            <div class="teamActionBar">
-              <button class="formButton primary" type="submit">Bron insturen</button>
-              <div id="linkAddStatus" class="teamFormStatus" role="status" aria-live="polite"></div>
-            </div>
-          </form>
-        </div>
-      </div>
     </section>
 
     <section id="tab-inspiratie" class="tabPanel active" role="tabpanel">
@@ -3901,6 +3890,36 @@
           </div>
         </form>
       </div>
+          </div>
+        </aside>
+      </div>
+      <div class="ideaSubmitSheetLayer" id="agendaSourceSheetLayer" aria-hidden="true">
+        <button class="ideaSubmitSheetBackdrop" type="button" data-agenda-source-close aria-label="Formulier sluiten"></button>
+        <aside class="ideaSubmitSheet agendaSourceSheet" role="dialog" aria-modal="true" aria-labelledby="agendaSourceSheetTitle">
+          <header class="ideaSubmitSheetHeader">
+            <h2 id="agendaSourceSheetTitle">Inspiratie toevoegen</h2>
+            <button class="ideaSubmitSheetClose" type="button" data-agenda-source-close aria-label="Formulier sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
+          </header>
+          <div class="ideaSubmitSheetBody">
+            <p class="ideaSubmitSheetIntro">Ken je een activiteit die in de UIT-agenda past? Stuur de officiële evenement- of agendalink in. We controleren de bron voordat deze wordt toegevoegd.</p>
+            <div class="teamFormBox linkAddBox">
+              <form id="linkAddForm" class="teamForm">
+                <label class="formTrap" aria-hidden="true">
+                  <span>Laat dit veld leeg</span>
+                  <input type="text" name="website" tabindex="-1" autocomplete="off" data-security-trap>
+                </label>
+                <div class="teamFormGrid">
+                  <label class="teamField wide">
+                    <span>Officiële evenement- of agendalink</span>
+                    <input id="linkUrlInput" type="text" inputmode="url" placeholder="https://voorbeeld.nl/evenement/..." required>
+                  </label>
+                </div>
+                <div class="teamActionBar">
+                  <button class="formButton primary" type="submit">Bron insturen</button>
+                  <div id="linkAddStatus" class="teamFormStatus" role="status" aria-live="polite"></div>
+                </div>
+              </form>
+            </div>
           </div>
         </aside>
       </div>
@@ -7256,6 +7275,7 @@
   const IDEA_FILTER_RADIUS_STEPS = [3,5,10,25,50];
   let ideaFilterSheetReturnFocus = null;
   let ideaSubmitSheetReturnFocus = null;
+  let agendaSourceSheetReturnFocus = null;
   function buildIdeaFilterCategoryChips(){
     const container = $('#ideaFilterCategoryChips');
     const select = $('#ideaDomain');
@@ -7358,6 +7378,30 @@
     $$('[data-idea-submit-open]').forEach(button => button.setAttribute('aria-expanded','false'));
     if(restoreFocus && ideaSubmitSheetReturnFocus?.focus) ideaSubmitSheetReturnFocus.focus();
     ideaSubmitSheetReturnFocus = null;
+  }
+  function openAgendaSourceSheet(){
+    const layer = $('#agendaSourceSheetLayer');
+    const body = layer?.querySelector('.ideaSubmitSheetBody');
+    if(!layer || !body) return;
+    closeIdeaFilterSheet();
+    closeIdeaSubmitSheet({restoreFocus:false});
+    agendaSourceSheetReturnFocus = document.activeElement;
+    layer.classList.add('isOpen');
+    layer.setAttribute('aria-hidden','false');
+    document.body.classList.add('ideaSubmitSheetOpen');
+    $('#topbarAddButton')?.setAttribute('aria-expanded','true');
+    body.scrollTop = 0;
+    window.setTimeout(() => $('#linkUrlInput')?.focus({preventScroll:true}), 180);
+  }
+  function closeAgendaSourceSheet({restoreFocus=true}={}){
+    const layer = $('#agendaSourceSheetLayer');
+    if(!layer?.classList.contains('isOpen')) return;
+    layer.classList.remove('isOpen');
+    layer.setAttribute('aria-hidden','true');
+    document.body.classList.remove('ideaSubmitSheetOpen');
+    $('#topbarAddButton')?.setAttribute('aria-expanded','false');
+    if(restoreFocus && agendaSourceSheetReturnFocus?.focus) agendaSourceSheetReturnFocus.focus();
+    agendaSourceSheetReturnFocus = null;
   }
   function closeIdeaFilterSheet(){
     const layer = $('#ideaFilterSheetLayer');
@@ -7991,7 +8035,7 @@
       topbarAddButton.querySelector('span').textContent = label;
       topbarAddButton.setAttribute('aria-label', label);
       topbarAddButton.setAttribute('aria-haspopup', 'dialog');
-      topbarAddButton.setAttribute('aria-controls', 'ideaSubmitSheetLayer');
+      topbarAddButton.setAttribute('aria-controls', name === 'weken' ? 'agendaSourceSheetLayer' : 'ideaSubmitSheetLayer');
       topbarAddButton.setAttribute('aria-expanded', 'false');
     }
     const panel = $('#tab-'+name);
@@ -8072,13 +8116,13 @@
 	    refreshCollections();
 	  }
   function setupStickyControlsBackground(){
-    const controls = document.querySelector('.desktopStickyControls');
-    if(!controls) return;
+    const controlsList = [...document.querySelectorAll('.desktopStickyControls')];
+    if(!controlsList.length) return;
     const desktop = window.matchMedia('(min-width:981px)');
     let pending = false;
     const update = () => {
       pending = false;
-      controls.classList.toggle('isStuck', desktop.matches && controls.getClientRects().length > 0 && controls.getBoundingClientRect().top <= 0);
+      controlsList.forEach(controls => controls.classList.toggle('isStuck', desktop.matches && controls.getClientRects().length > 0 && controls.getBoundingClientRect().top <= 0));
     };
     const schedule = () => {
       if(pending) return;
@@ -8087,10 +8131,13 @@
     };
     window.addEventListener('scroll', schedule, {passive:true});
     window.addEventListener('resize', schedule);
-    new ResizeObserver(schedule).observe(controls);
+    const observer = new ResizeObserver(schedule);
+    controlsList.forEach(controls => observer.observe(controls));
     update();
   }
-	  async function init(){
+  async function init(){
+        const agendaSourceSheet = $('#agendaSourceSheetLayer');
+        if(agendaSourceSheet && agendaSourceSheet.parentElement !== document.body) document.body.appendChild(agendaSourceSheet);
         setupStickyControlsBackground();
 	    setupTopTabNavigation();
 	    setupDesktopSidebar();
@@ -8140,6 +8187,10 @@
     });
     document.addEventListener('keydown', event => {
       if(event.key === 'Escape'){
+        if($('#agendaSourceSheetLayer')?.classList.contains('isOpen')){
+          closeAgendaSourceSheet();
+          return;
+        }
         if($('#ideaSubmitSheetLayer')?.classList.contains('isOpen')){
           closeIdeaSubmitSheet();
           return;
@@ -8314,8 +8365,13 @@
     initPublicFormSecurity($('#linkAddForm'));
     $('#teamIdeaForm').addEventListener('submit', handleTeamIdeaSubmit);
     $$('[data-idea-submit-open]').forEach(button => button.addEventListener('click', openIdeaSubmitSheet));
-    $('#topbarAddButton')?.addEventListener('click',openIdeaSubmitSheet);
+    $('#topbarAddButton')?.addEventListener('click',()=>{
+      const agendaActive = $('#tab-weken')?.classList.contains('active');
+      if(agendaActive) openAgendaSourceSheet();
+      else openIdeaSubmitSheet();
+    });
     $$('[data-idea-submit-close]').forEach(button => button.addEventListener('click', () => closeIdeaSubmitSheet()));
+    $$('[data-agenda-source-close]').forEach(button => button.addEventListener('click', () => closeAgendaSourceSheet()));
     const teamIdeaImageInput = $('#teamIdeaImageInput');
     if(teamIdeaImageInput) teamIdeaImageInput.addEventListener('change', syncTeamIdeaImageName);
     $('#linkAddForm').addEventListener('submit', handleLinkAddSubmit);
@@ -8327,7 +8383,7 @@
       event.preventDefault();
       showRandomIdea();
     });
-    $$('a[href="#teamAdditions"],a[href="#sourceAdditions"],a[href="#weekPanels"]').forEach(link => {
+    $$('a[href="#teamAdditions"],a[href="#weekPanels"]').forEach(link => {
       link.addEventListener('click', event => {
         const id = link.getAttribute('href').slice(1);
         event.preventDefault();
