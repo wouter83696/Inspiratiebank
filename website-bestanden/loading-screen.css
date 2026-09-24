@@ -31,11 +31,15 @@ body.appLoading > :not(.appLoader){display:none !important}
 }
 .appLoaderMark{
   display:block;
-  width:76px;
-  height:76px;
+  width:82px;
+  height:82px;
   margin:0 0 18px;
-  border-radius:18px;
-  box-shadow:0 12px 30px rgba(49,95,107,.12);
+  padding:8px;
+  border:1px solid rgba(49,95,107,.12);
+  border-radius:19px;
+  background:rgba(255,255,255,.78);
+  box-shadow:0 10px 24px rgba(49,95,107,.08);
+  backdrop-filter:blur(8px);
   animation:appLoaderBreathe 1.55s var(--ease) infinite alternate;
 }
 .appLoaderTitle{
@@ -57,7 +61,7 @@ body.appLoading > :not(.appLoader){display:none !important}
 }
 @media (max-width:640px){
   .appLoader{padding:max(24px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left))}
-  .appLoaderMark{width:68px;height:68px;border-radius:16px;margin-bottom:16px}
+  .appLoaderMark{width:74px;height:74px;padding:7px;border-radius:17px;margin-bottom:16px}
   .appLoaderTitle{font-size:1.3rem}
   .appLoaderStatus{font-size:.86rem}
 }
