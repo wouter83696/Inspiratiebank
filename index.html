@@ -3670,6 +3670,18 @@
     #agendaFilterWeekChips .ideaFilterChip.active:hover{
       background:rgba(220,239,229,.62);border-color:rgba(54,135,93,.16);color:#326b52
     }
+    #ideaFilterPlaceChips .ideaFilterChip:hover,
+    #ideaFilterDurationChips .ideaFilterChip:hover{
+      transform:none;box-shadow:none
+    }
+    #ideaFilterPlaceChips .ideaFilterChip:not(.active):hover,
+    #ideaFilterDurationChips .ideaFilterChip:not(.active):hover{
+      background:rgba(255,255,255,.54);border-color:rgba(79,142,158,.12);color:rgba(49,95,107,.76)
+    }
+    #ideaFilterPlaceChips .ideaFilterChip.active:hover,
+    #ideaFilterDurationChips .ideaFilterChip.active:hover{
+      background:rgba(220,239,229,.62);border-color:rgba(54,135,93,.16);color:#326b52;box-shadow:inset 0 0 0 1px rgba(54,135,93,.07)
+    }
     @media(max-width:760px){
       #ideaList.sharedIdeaList .ideaThemeRow,
       #ideaList.sharedIdeaList .ideaSurpriseRow{background:#fffdf9}
