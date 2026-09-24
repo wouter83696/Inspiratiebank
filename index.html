@@ -64,8 +64,10 @@
       --ink:rgba(11,18,32,.84);
       --muted:rgba(11,18,32,.62);
       --line:rgba(64,45,20,.085);
-      --accent:#4f8e9e;
-      --accent-dark:#315f6b;
+      --teal-500:#4f8e9e;
+      --teal-700:#315f6b;
+      --accent:var(--teal-500);
+      --accent-dark:var(--teal-700);
       --accent-soft:#A8E1DD;
       --mint:#DDEFE8;
       --lavender:#EAE6F7;
@@ -1010,10 +1012,10 @@
     .viewIcon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .ideaAddButton{
       display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:40px;height:40px;padding:0;
-      border:1px solid rgba(79,142,158,.10);border-radius:14px;background:rgba(255,253,249,.64);color:#356f7b;
+      border:1.5px solid var(--teal-500);border-radius:14px;background:rgba(79,142,158,.05);color:var(--teal-700);
       box-shadow:0 6px 16px rgba(20,38,42,.04);cursor:pointer;transition:.18s var(--ease)
     }
-    .ideaAddButton:hover{background:#fff;color:var(--accent-dark);border-color:rgba(79,142,158,.18)}
+    .ideaAddButton:hover{background:var(--teal-500);color:#fff;border-color:var(--teal-500)}
     .ideaAddButton svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
     .ideaFilterAddButton{display:none}
     .desktopViewBar,.mobileViewBar{gap:7px}
@@ -1289,10 +1291,9 @@
       #ideaFilters .filterToggle svg{width:15px;height:15px}
       #ideaFilters .ideaFilterAddButton{
         display:inline-flex;grid-column:3;grid-row:1;align-self:center;justify-self:stretch;
-        width:42px;height:42px;border-color:rgba(79,142,158,.40);background:rgba(255,253,249,.70);
-        color:rgba(31,101,114,.92);box-shadow:0 8px 20px rgba(20,38,42,.04);backdrop-filter:blur(18px)
+        width:42px;height:42px;box-shadow:0 8px 20px rgba(20,38,42,.04);backdrop-filter:blur(18px)
       }
-      #ideaFilters .ideaFilterAddButton:hover{border-color:rgba(79,142,158,.54);background:rgba(255,253,249,.92)}
+      #ideaFilters .ideaFilterAddButton:hover{border-color:var(--teal-500);background:var(--teal-500);color:#fff}
       #ideaFilters .mobileViewBar{display:none}
       #agendaFilters .filterSearch{grid-column:1 / 13}
       #agendaFilters .filterToggle{
