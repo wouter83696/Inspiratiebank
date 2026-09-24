@@ -1672,11 +1672,13 @@
     .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock .cardMetaLine{display:contents}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock .pill,
     .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock .cardMetaPart{
-      min-width:0;white-space:nowrap;color:#356F7B;font-size:.7rem;gap:3px
+      min-width:0;white-space:nowrap;font-size:.7rem;gap:3px
     }
+    .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock .pill{color:#617573}
+    .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock .cardMetaPart{color:#697472}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock :is(.metaIcon,.stimulusIcon),
     .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock :is(.metaIcon,.stimulusIcon) svg{
-      width:12px;height:12px;flex-basis:12px
+      width:12px;height:12px;flex-basis:12px;color:#55777A
     }
     @keyframes ideaMapDetailIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     @media (prefers-reduced-motion:reduce){.ideaMapAccordionBody,.ideaMapSingleCard{animation:none}}
@@ -1940,7 +1942,8 @@
       .ideaMapResults::-webkit-scrollbar{display:none}
       .ideaMapResult{width:100%;scroll-snap-align:start}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 8.5}
-      .ideaMapPanel.isSingleDetail .sharedIdeaCard h3{padding-right:36px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+      .ideaMapPanel.isSingleDetail .sharedIdeaCard h3{padding-right:36px}
+      .ideaMapPanel.isSingleDetail .sharedIdeaCard h3 .ideaTitleText{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard > p:not(.fine){display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
       .ideaMapCanvas .leaflet-top.leaflet-right{right:auto;left:14px}
     }
