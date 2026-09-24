@@ -3627,7 +3627,13 @@
       box-shadow:none
     }
     .sharedDiscoveryChipRow .agendaLegendItem:hover{
-      background:var(--theme-tint-strong,rgba(255,253,249,.86))
+      background:color-mix(in srgb,var(--theme-tint) 58%,rgba(255,255,255,.72));
+      border-color:color-mix(in srgb,var(--theme-line) 82%,rgba(63,120,132,.22));
+      color:var(--theme-ink);box-shadow:0 4px 10px rgba(49,95,107,.07);transform:translateY(-1px)
+    }
+    .sharedDiscoveryChipRow .agendaLegendItem.active:hover{
+      background:var(--theme-tint);border-color:color-mix(in srgb,var(--theme-line) 52%,transparent);
+      color:var(--theme-ink);box-shadow:inset 0 0 0 1px var(--theme-line);transform:translateY(-1px)
     }
     /* De oude uitklapfilters blijven alleen als interne filterstaat bestaan. */
     #ideaFilters>.filterOptions,
@@ -3662,7 +3668,7 @@
     #ideaList.sharedIdeaList .ideaThemeRow td,
     #ideaList .ideaSurpriseRow td{background:#fffdf9}
     #agendaFilterWeekChips .ideaFilterChip:hover{
-      transform:none;box-shadow:none
+      transform:translateY(-1px);box-shadow:0 4px 10px rgba(49,95,107,.07)
     }
     #agendaFilterWeekChips .ideaFilterChip:not(.active):hover{
       background:rgba(255,255,255,.52);border-color:rgba(79,142,158,.12);color:rgba(49,95,107,.82)
