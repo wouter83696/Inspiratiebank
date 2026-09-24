@@ -92,7 +92,13 @@
       overflow-x:hidden;
       color:var(--ink);
       font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-      background:var(--page-background);
+      background:
+        radial-gradient(circle at 8% -4%,rgba(251,232,178,.14),transparent 22%),
+        radial-gradient(circle at 34% 10%,rgba(232,240,231,.18),transparent 29%),
+        radial-gradient(circle at 46% 102%,rgba(168,225,221,.10),transparent 28%),
+        radial-gradient(circle at 96% 2%,rgba(244,232,216,.24),transparent 26%),
+        var(--page-background);
+      background-attachment:fixed;
       min-height:100dvh;
     }
     a{color:inherit}
