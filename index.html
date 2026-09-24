@@ -3656,6 +3656,15 @@
       .sharedDiscoveryFilters>.filterToggle{display:none}
       #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{display:none}
     }
+    /* Lijstweergave volgt dezelfde warme witte vlakken als de tegels. */
+    #ideaList.sharedIdeaList{background:#fffdf9}
+    #ideaList.sharedIdeaList th{background:#fffdf8}
+    #ideaList.sharedIdeaList .ideaThemeRow td,
+    #ideaList .ideaSurpriseRow td{background:#fffdf9}
+    @media(max-width:760px){
+      #ideaList.sharedIdeaList .ideaThemeRow,
+      #ideaList.sharedIdeaList .ideaSurpriseRow{background:#fffdf9}
+    }
   </style>
 </head>
 <body class="appLoading">
