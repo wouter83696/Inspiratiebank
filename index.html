@@ -3631,6 +3631,17 @@
       background:var(--theme-tint);border-color:color-mix(in srgb,var(--theme-line) 52%,transparent);
       color:var(--theme-ink);box-shadow:inset 0 0 0 1px var(--theme-line);transform:translateY(-1px)
     }
+    /* De gedeelde Alles-chip gebruikt dezelfde neutrale filtervariant. */
+    :is(#ideaFilterCategoryChips,#agendaFilterCategoryChips) .ideaFilterChip:first-child,
+    .sharedDiscoveryChipRow .agendaLegendItem.themeDefault{
+      background:rgba(255,255,255,.52);border-color:var(--ink);color:var(--ink);
+      box-shadow:inset 0 0 0 1px rgba(54,135,93,.07)
+    }
+    :is(#ideaFilterCategoryChips,#agendaFilterCategoryChips) .ideaFilterChip:first-child:hover,
+    .sharedDiscoveryChipRow .agendaLegendItem.themeDefault:hover{
+      background:rgba(220,239,229,.42);border-color:rgba(63,120,132,.30);
+      color:var(--accent-dark);box-shadow:0 4px 10px rgba(49,95,107,.07);transform:translateY(-1px)
+    }
     /* De oude uitklapfilters blijven alleen als interne filterstaat bestaan. */
     #ideaFilters>.filterOptions,
     #agendaFilters>.filterOptions{display:none!important}
