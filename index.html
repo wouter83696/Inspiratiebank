@@ -57,7 +57,8 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
   <style>
     :root{
-      --bg:#FBFAF6;
+      --page-background:#FBFAF6;
+      --bg:var(--page-background);
       --paper:#FFFCF7;
       --paper-soft:rgba(255,252,247,.78);
       --white:rgba(255,253,249,.84);
@@ -245,9 +246,13 @@
     .tab{border:0;background:transparent;color:var(--muted);border-radius:999px;padding:8px 11px;white-space:nowrap;cursor:pointer;transition:.18s var(--ease)}
     .tab:hover{background:rgba(168,225,221,.20);color:var(--accent-dark)}
     .tab.active{background:rgba(168,225,221,.42);color:var(--accent-dark);box-shadow:inset 0 0 0 1px rgba(79,142,158,.08)}
-    .tabPanel{display:none;animation:in .25s var(--ease)}
+    .tabPanel{display:none;animation:in .25s var(--ease);background:var(--page-background)}
     .tabPanel.active{display:block;scroll-margin-top:92px}
-    #tab-weken{background:var(--bg)}
+    #tab-inspiratie,
+    #tab-weken,
+    #ideaCards,
+    #ideaList,
+    #ideaMap{background-color:var(--page-background)}
     @keyframes in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
     .sectionHead{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin:24px 0 12px}
     .sectionHead.updatedHead{display:block;position:relative}
