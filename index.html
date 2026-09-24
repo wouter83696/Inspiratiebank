@@ -1348,7 +1348,7 @@
       #ideaCards{margin-top:0}
     }
     #ideaFilters>.filterOptions{display:none!important}
-    .ideaFilterSheetLayer{position:fixed;inset:0;z-index:170;display:flex;justify-content:flex-end;visibility:hidden;pointer-events:none;transition:visibility 0s linear .34s}
+    .ideaFilterSheetLayer{position:fixed;inset:0;z-index:1200;display:flex;justify-content:flex-end;visibility:hidden;pointer-events:none;transition:visibility 0s linear .34s}
     .ideaFilterSheetLayer.isOpen{visibility:visible;pointer-events:auto;transition-delay:0s}
     .ideaFilterSheetBackdrop{position:absolute;inset:0;border:0;background:rgba(48,46,39,.18);opacity:0;transition:opacity .28s ease;cursor:default}
     .ideaFilterSheetLayer.isOpen .ideaFilterSheetBackdrop{opacity:1}
@@ -1432,7 +1432,12 @@
     .ideaFilterSheetAction.primary:hover{background:#356f7b}
     body.ideaFilterSheetOpen{overflow:hidden}
     @media (min-width:641px){
-      .ideaFilterSheet{width:min(520px,calc(100vw - 28px))}
+      .ideaFilterSheetLayer{align-items:center;padding:16px}
+      .ideaFilterSheet{
+        width:min(520px,calc(100vw - 32px));height:calc(100% - 32px);max-height:900px;
+        border:1px solid rgba(79,142,158,.08);border-radius:20px;
+        box-shadow:-12px 12px 40px rgba(56,49,36,.16),0 2px 8px rgba(20,38,42,.05)
+      }
       .ideaFilterSheetHeader{min-height:60px;padding:8px 18px}
       .ideaFilterSheetClose{width:38px;height:38px}
       .ideaFilterSheetBody{padding:14px 18px 18px}
