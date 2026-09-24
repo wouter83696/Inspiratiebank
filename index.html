@@ -1683,30 +1683,17 @@
     @keyframes ideaMapDetailIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     @media (prefers-reduced-motion:reduce){.ideaMapAccordionBody,.ideaMapSingleCard{animation:none}}
     .ideaMapDetailToolbar{
-      position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;
-      width:100%;padding:2px 0 9px;color:var(--accent-dark)
+      position:absolute;z-index:5;top:12px;right:12px;display:flex;align-items:center;
+      width:auto;padding:0;color:var(--accent-dark);pointer-events:none
     }
-    .ideaMapPanel.isSingleDetail .sharedIdeaCard.hasImage .ideaMapDetailToolbar{
-      position:absolute;top:12px;right:12px;left:12px;width:auto;padding:0;pointer-events:none
-    }
-    .ideaMapDetailReturn,.ideaMapDetailClose{border:0;color:inherit;cursor:pointer;background:transparent;pointer-events:auto}
-    .ideaMapDetailReturn{
-      display:inline-flex;align-items:center;gap:7px;min-width:0;padding:5px 2px;font:inherit;font-size:.78rem;font-weight:650;border-radius:999px
-    }
-    .ideaMapDetailReturn:hover{color:var(--accent)}
-    .ideaMapDetailReturn svg{width:15px;height:15px;flex:0 0 auto}
-    .ideaMapPanel.isSingleDetail .sharedIdeaCard.hasImage .ideaMapDetailReturn{
-      min-height:32px;padding:6px 12px 6px 9px;border:1px solid rgba(255,255,255,.82);
-      background:rgba(255,253,249,.94);box-shadow:0 7px 20px rgba(20,38,42,.13);backdrop-filter:blur(10px)
-    }
-    .ideaMapPanel.isSingleDetail .sharedIdeaCard.hasImage .ideaMapDetailReturn:hover{background:#fff;color:var(--accent-dark)}
     .ideaMapDetailClose{
-      display:grid;place-items:center;flex:0 0 auto;width:30px;height:30px;padding:0;border-radius:999px;
+      display:grid;place-items:center;flex:0 0 auto;width:30px;height:30px;padding:0;border:0;border-radius:999px;cursor:pointer;pointer-events:auto;
       background:#fff;color:var(--accent-dark);box-shadow:0 6px 18px rgba(20,38,42,.10)
     }
     .ideaMapPanel.isSingleDetail .sharedIdeaCard.hasImage .ideaMapDetailClose{
       border:1px solid rgba(255,255,255,.82);background:rgba(255,253,249,.94);backdrop-filter:blur(10px)
     }
+    .ideaMapPanel.isSingleDetail .sharedIdeaCard:not(.hasImage) h3{padding-right:36px}
     .ideaMapDetailClose:hover{background:#f5faf8;box-shadow:0 8px 20px rgba(20,38,42,.14)}
     .ideaMapDetailToolbar svg{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaMapDetailClose svg{width:13px;height:13px}
@@ -1962,7 +1949,6 @@
       .ideaMapResults::-webkit-scrollbar{display:none}
       .ideaMapResult{width:100%;scroll-snap-align:start}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 8.5}
-      .ideaMapPanel.isSingleDetail .sharedIdeaCard h3{padding-right:0}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard h3 .ideaTitleText{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard > p:not(.fine){display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
       .ideaMapCanvas .leaflet-top.leaflet-right{right:auto;left:14px}
@@ -6498,7 +6484,7 @@
       themeClass:domainThemeClass(item.domain), hasImage:Boolean(image),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       toolbar:mapDetailAction === 'close'
-        ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailReturn" type="button" data-map-detail-close><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span>Terug naar resultaten</span></button><button class="ideaMapDetailClose" type="button" data-map-detail-close aria-label="Tegel sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button></div>'
+        ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailClose" type="button" data-map-detail-close aria-label="Tegel sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button></div>'
         : '',
       image:image ? ideaImageMarkup(image, item.url) : '',
       title:cardTitle,
