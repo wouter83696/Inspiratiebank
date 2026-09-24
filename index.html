@@ -1686,15 +1686,26 @@
       position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;
       width:100%;padding:2px 0 9px;color:var(--accent-dark)
     }
-    .ideaMapDetailReturn,.ideaMapDetailClose{border:0;color:inherit;cursor:pointer;background:transparent}
+    .ideaMapPanel.isSingleDetail .sharedIdeaCard.hasImage .ideaMapDetailToolbar{
+      position:absolute;top:12px;right:12px;left:12px;width:auto;padding:0;pointer-events:none
+    }
+    .ideaMapDetailReturn,.ideaMapDetailClose{border:0;color:inherit;cursor:pointer;background:transparent;pointer-events:auto}
     .ideaMapDetailReturn{
-      display:inline-flex;align-items:center;gap:7px;min-width:0;padding:5px 2px;font:inherit;font-size:.78rem;font-weight:650
+      display:inline-flex;align-items:center;gap:7px;min-width:0;padding:5px 2px;font:inherit;font-size:.78rem;font-weight:650;border-radius:999px
     }
     .ideaMapDetailReturn:hover{color:var(--accent)}
     .ideaMapDetailReturn svg{width:15px;height:15px;flex:0 0 auto}
+    .ideaMapPanel.isSingleDetail .sharedIdeaCard.hasImage .ideaMapDetailReturn{
+      min-height:32px;padding:6px 12px 6px 9px;border:1px solid rgba(255,255,255,.82);
+      background:rgba(255,253,249,.94);box-shadow:0 7px 20px rgba(20,38,42,.13);backdrop-filter:blur(10px)
+    }
+    .ideaMapPanel.isSingleDetail .sharedIdeaCard.hasImage .ideaMapDetailReturn:hover{background:#fff;color:var(--accent-dark)}
     .ideaMapDetailClose{
       display:grid;place-items:center;flex:0 0 auto;width:30px;height:30px;padding:0;border-radius:999px;
       background:#fff;color:var(--accent-dark);box-shadow:0 6px 18px rgba(20,38,42,.10)
+    }
+    .ideaMapPanel.isSingleDetail .sharedIdeaCard.hasImage .ideaMapDetailClose{
+      border:1px solid rgba(255,255,255,.82);background:rgba(255,253,249,.94);backdrop-filter:blur(10px)
     }
     .ideaMapDetailClose:hover{background:#f5faf8;box-shadow:0 8px 20px rgba(20,38,42,.14)}
     .ideaMapDetailToolbar svg{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
