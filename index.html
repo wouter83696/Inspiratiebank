@@ -1279,33 +1279,8 @@
       #agendaFilters .filterOptions .filterReset{
         justify-content:center;
       }
-      #ideaFilters{
-        grid-template-columns:minmax(0,1fr) 260px;
-        column-gap:0;
-      }
-      #ideaFilters .filterSearch{grid-column:1 / 3;grid-row:1;margin:0}
-      #ideaFilters .filterSearch input{padding-right:268px}
-      #ideaFilters .desktopLocationBar{
-        grid-column:2;
-        grid-row:1;
-        align-self:stretch;
-        justify-self:stretch;
-        z-index:4;
-        width:100%;
-        height:48px;
-        padding:0;
-        transform:none;
-      }
-      #ideaFilters .desktopLocationBar{position:relative}
-      #ideaFilters .desktopLocationBar .locationLegendItem{
-        width:calc(100% - 16px);height:36px;min-height:36px;margin:6px 8px;
-        border:0;border-radius:12px;background:transparent;box-shadow:none;backdrop-filter:none;
-        justify-content:flex-end;padding:0 8px;
-        transition:background .18s var(--ease);
-      }
       #ideaFilters .desktopLocationBar .locationChevron{margin-left:8px}
       #ideaFilters .desktopLocationBar .locationFilterIcon{margin-left:7px}
-      #ideaFilters .desktopLocationBar .locationLegendItem:hover{background:transparent;box-shadow:none}
       #ideaFilters .filterToggle{
         display:none;
         grid-column:2;
@@ -3583,16 +3558,6 @@
         grid-template-columns:minmax(0,1fr) 260px;
         column-gap:0
       }
-      #agendaFilters .filterSearch{
-        grid-column:1 / 3;grid-row:1;
-        filter:drop-shadow(0 12px 25px rgba(20,38,42,.055))
-      }
-      #agendaFilters .filterSearch input{
-        height:48px;min-height:48px;padding-right:268px;
-        border:1px solid rgba(255,255,255,.78);
-        border-radius:18px;background:rgba(255,253,249,.94);
-        box-shadow:none
-      }
       #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{
         grid-column:2;grid-row:1;z-index:5;
         justify-self:stretch;align-self:center;
@@ -3618,18 +3583,6 @@
       #agendaFilters .filterToggle:hover{background:rgba(168,225,221,.14)}
       #agendaFilters .filterToggle svg{width:15px;height:15px}
       #agendaFilters .filterOptions{top:calc(100% + 9px)}
-      #agendaFilters .desktopLocationBar{
-        display:flex;grid-column:2;grid-row:1;z-index:5;
-        align-items:center;align-self:stretch;justify-self:stretch;width:100%;height:48px;padding:0
-      }
-      #agendaFilters .desktopLocationBar .locationLegendItem{
-        width:calc(100% - 16px);height:36px;min-height:36px;margin:6px 8px;
-        justify-content:flex-end;padding:0 8px;
-        border:0;border-radius:12px;background:transparent;
-        box-shadow:none;backdrop-filter:none;
-        transition:background .18s var(--ease)
-      }
-      #agendaFilters .desktopLocationBar .locationLegendItem:hover{background:transparent}
       #agendaThemeLegend .locationLegendItem{display:none}
     }
     /* Zoekbalk en chiprij delen in beide hoofdweergaven exact dezelfde componentbasis. */
@@ -3672,23 +3625,25 @@
       .sharedDiscoveryFilters{
         grid-template-columns:minmax(0,1fr) 260px;column-gap:0
       }
-      .sharedDiscoveryFilters .filterSearch{grid-column:1 / 3;grid-row:1;margin:0}
-      .sharedDiscoveryFilters .filterSearch input{
+      :is(#ideaFilters,#agendaFilters).sharedDiscoveryFilters .filterSearch{
+        grid-column:1 / 3;grid-row:1;margin:0;filter:none
+      }
+      :is(#ideaFilters,#agendaFilters).sharedDiscoveryFilters .filterSearch input{
         height:48px;min-height:48px;padding-right:268px;
         border:1px solid rgba(255,255,255,.78);border-radius:18px;
-        background:rgba(255,253,249,.94);box-shadow:none
+        background:rgba(255,253,249,.62);box-shadow:none;backdrop-filter:blur(7px)
       }
-      .sharedDiscoveryFilters .desktopLocationBar{
+      :is(#ideaFilters,#agendaFilters).sharedDiscoveryFilters .desktopLocationBar{
         display:flex;position:relative;grid-column:2;grid-row:1;z-index:5;
         align-items:center;align-self:stretch;justify-self:stretch;
         width:100%;height:48px;padding:0;transform:none
       }
-      .sharedDiscoveryFilters .desktopLocationBar .locationLegendItem{
+      :is(#ideaFilters,#agendaFilters).sharedDiscoveryFilters .desktopLocationBar .locationLegendItem{
         width:calc(100% - 16px);height:36px;min-height:36px;margin:6px 8px;
         justify-content:flex-end;padding:0 8px;border:0;border-radius:12px;
         background:transparent;box-shadow:none;backdrop-filter:none
       }
-      .sharedDiscoveryFilters .desktopLocationBar .locationLegendItem:hover{background:transparent}
+      :is(#ideaFilters,#agendaFilters).sharedDiscoveryFilters .desktopLocationBar .locationLegendItem:hover{background:transparent}
       .sharedDiscoveryFilters>.filterToggle{display:none}
       #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{display:none}
     }
