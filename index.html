@@ -1476,7 +1476,7 @@
       .ideaFilterSheetLayer{display:block}
       .ideaFilterSheet{
         position:fixed;top:0;right:0;bottom:0;width:min(480px,calc(100vw - 28px));height:100dvh;max-height:none;
-        border:1px solid rgba(79,142,158,.08);border-right:0;border-radius:0;
+        border:1px solid rgba(79,142,158,.08);border-right:0;border-radius:8px 0 0 8px;
         box-shadow:-18px 0 42px rgba(56,49,36,.15)
       }
       .ideaFilterSheetHeader{position:sticky;z-index:2;top:0;min-height:56px;padding:7px 18px;background:rgba(255,253,250,.97)}
@@ -1508,7 +1508,7 @@
     .ideaSubmitSheet{
       position:relative;z-index:1;display:grid;grid-template-rows:auto minmax(0,1fr);width:min(480px,calc(100vw - 28px));height:100dvh;
       overflow:hidden;background:linear-gradient(180deg,#fffdfa 0%,#faf7ef 100%);border-left:1px solid rgba(79,142,158,.08);
-      box-shadow:-18px 0 42px rgba(56,49,36,.15);transform:translate3d(100%,0,0);transition:transform .34s cubic-bezier(.32,.72,0,1)
+      border-radius:8px 0 0 8px;box-shadow:-18px 0 42px rgba(56,49,36,.15);transform:translate3d(100%,0,0);transition:transform .34s cubic-bezier(.32,.72,0,1)
     }
     .ideaSubmitSheetLayer.isOpen .ideaSubmitSheet{transform:translate3d(0,0,0)}
     .ideaSubmitSheetHeader{display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:7px 18px;border-bottom:1px solid rgba(123,112,88,.08);background:rgba(255,253,250,.97)}
