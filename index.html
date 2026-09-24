@@ -1554,10 +1554,10 @@
       box-shadow:0 13px 28px rgba(20,38,42,.17),0 0 0 8px rgba(168,225,221,.30)
     }
     .marker-cluster.active div{
-      border-color:rgba(79,142,158,.16);
+      border-color:rgba(49,95,107,.62);
       background:#fff;
       color:var(--accent-dark);
-      box-shadow:0 8px 18px rgba(20,38,42,.12)
+      box-shadow:0 13px 28px rgba(20,38,42,.17),0 0 0 8px rgba(168,225,221,.30)
     }
     .ideaMapHeader{
       position:absolute;z-index:4;left:16px;bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:calc(100% - 32px)
@@ -7558,6 +7558,7 @@
       },
       setActiveCluster(keys=[]){
         activeClusterSignature = clusterSignature(keys);
+        container.querySelectorAll('.ideaLeafletMarker.home.active,.ideaLeafletMarkerWrap.home.active').forEach(element => element.classList.remove('active'));
         markerLayer.refreshClusters();
         window.requestAnimationFrame(syncActiveCluster);
       },
