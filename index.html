@@ -7148,7 +7148,7 @@
     const detailPoint = ideaMapDetailKey ? visiblePoints.find(point => point.key === ideaMapDetailKey) : null;
     const singleDetail = Boolean(detailPoint);
     const listHtml = visiblePoints.map(point => {
-      const active = point.key === activeIdeaMapKey;
+      const active = !activeIdeaMapClusterKeys?.length && point.key === activeIdeaMapKey;
       const image = approvedIdeaImage(point.item);
       const thumb = image ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async"></span>` : '';
       const metadata = sharedIdeaMetadata(point.item, {point, map:true});
@@ -7211,7 +7211,8 @@
     }
     $$('[data-map-pin-key],[data-map-result-key],[data-map-detail-key]').forEach(node => {
       const nodeKey = node.dataset.mapPinKey || node.dataset.mapResultKey || node.dataset.mapDetailKey;
-      const active = nodeKey === activeIdeaMapKey;
+      const isClusterResult = Boolean(node.dataset.mapResultKey && activeIdeaMapClusterKeys?.length > 1 && !ideaMapDetailKey);
+      const active = !isClusterResult && nodeKey === activeIdeaMapKey;
       node.classList.toggle('active', active);
     });
     if(ideaMapProvider) ideaMapProvider.setActive(activeIdeaMapKey, {pan:false});
@@ -7259,7 +7260,11 @@
     activeIdeaMapClusterIsArea = area;
     activeIdeaMapKey = uniqueKeys.includes(activeIdeaMapKey) ? activeIdeaMapKey : uniqueKeys[0];
     ideaMapProvider?.setActiveCluster?.(uniqueKeys);
-    updateIdeaMapPanel({scroll:true, emphasize:true});
+    updateIdeaMapPanel();
+    window.requestAnimationFrame(() => {
+      const results = $('#ideaMap .ideaMapResults');
+      if(results) results.scrollTo({top:0,left:0,behavior:'auto'});
+    });
   }
   function clearActiveIdeaMapCluster(){
     if(!activeIdeaMapClusterKeys && !ideaMapDetailKey) return;
