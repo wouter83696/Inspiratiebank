@@ -1615,52 +1615,48 @@
     .ideaMapResultMeta strong{display:inline;color:var(--accent-dark);font-size:inherit;line-height:inherit;font-weight:600}
     .ideaMapResultMeta .metaIcon{width:12px;height:12px;flex-basis:12px;color:#00738D}
     .ideaMapResultMeta .metaIcon svg{display:block;width:12px;height:12px}
-    .ideaMapDetailCard{
-      position:relative;display:flex;flex:0 0 100%;flex-direction:column;width:100%;min-width:0;
-      scroll-snap-align:start
+    .ideaMapAccordion{
+      width:100%;flex:0 0 auto;scroll-snap-align:start;overflow:hidden;
+      border:1px solid rgba(79,142,158,.18);border-radius:16px;background:#fffdf8;
+      box-shadow:0 12px 28px rgba(20,38,42,.10)
     }
-    .ideaMapDetailCard.sharedIdeaCards{
-      display:flex;
-      grid-template-columns:none;
-      align-items:stretch;
-      align-self:flex-start;
-      gap:0;
-      flex:0 1 440px;
-      width:min(100%,440px);
-      height:auto;
-      max-height:100%;
-      margin-left:auto;
+    .ideaMapAccordionHeader{
+      display:grid;grid-template-columns:30px minmax(0,1fr) 28px;align-items:center;gap:9px;
+      width:100%;min-height:54px;padding:10px 11px;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer
     }
-    .ideaMapDetailCard > .card{
-      flex:0 0 auto;width:100%;max-width:none;height:auto !important;min-height:0 !important;max-height:100%;margin:0;overflow-x:hidden;overflow-y:auto
-    }
-    .ideaMapDetailCard > .card:hover{transform:none}
-    .ideaMapPanel.hasDetail .ideaMapDetailCard{animation:ideaMapDetailEnter .2s ease-out}
-    .ideaMapDetailCard .sharedIdeaCard:not(.hasImage){padding-top:50px}
-    .ideaMapDetailToolbar{
-      position:absolute;z-index:5;top:10px;left:10px;margin:0;padding:0;
-      pointer-events:none
-    }
+    .ideaMapAccordionHeader:hover{background:rgba(168,225,221,.08)}
+    .ideaMapAccordionHeader:focus-visible{outline:2px solid rgba(0,115,141,.34);outline-offset:-3px}
+    .ideaMapAccordionHeader .domainIcon{width:30px;height:30px;margin:0;background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink)}
+    .ideaMapAccordionHeader .domainIcon svg{width:15px;height:15px}
+    .ideaMapAccordionTitle{color:#006780;font-size:.92rem;line-height:1.2;font-weight:600}
+    .ideaMapAccordionChevron{display:grid;place-items:center;width:28px;height:28px;border-radius:999px;background:rgba(255,255,255,.82);color:var(--accent-dark)}
+    .ideaMapAccordionChevron svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+    .ideaMapAccordionBody{display:grid;grid-template-rows:1fr;animation:ideaMapAccordionOpen .26s cubic-bezier(.2,.7,.25,1) both}
+    .ideaMapAccordionBodyInner{min-height:0;overflow:hidden;display:grid;gap:9px;padding:0 11px 12px}
+    .ideaMapAccordionImage{width:100%;height:118px;overflow:hidden;border-radius:11px;background:#f7f4ee}
+    .ideaMapAccordionImage img{display:block;width:100%;height:100%;object-fit:cover}
+    .ideaMapAccordion .ideaMapResultInfo{flex-wrap:nowrap;width:max-content;max-width:100%;margin:0;padding:6px 8px;overflow-x:auto;border:1px solid rgba(112,94,63,.04);border-radius:10px;scrollbar-width:none}
+    .ideaMapAccordion .ideaMapResultInfo::-webkit-scrollbar{display:none}
+    .ideaMapAccordionDescription{margin:0;color:rgba(76,75,72,.78);font-size:.78rem;line-height:1.42;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .ideaMapAccordionPractical{color:var(--muted);font-size:.76rem}
+    .ideaMapAccordionPractical summary{width:max-content;color:#356f7b;font-weight:650;cursor:pointer;list-style:none}
+    .ideaMapAccordionPractical summary::-webkit-details-marker{display:none}
+    .ideaMapAccordionPractical summary::after{content:"⌄";display:inline-block;margin-left:6px;transition:transform .18s ease}
+    .ideaMapAccordionPractical[open] summary::after{transform:rotate(180deg)}
+    .ideaMapAccordionPractical p{margin:6px 0 0;line-height:1.4}
+    @keyframes ideaMapAccordionOpen{from{grid-template-rows:0fr;opacity:0}to{grid-template-rows:1fr;opacity:1}}
+    @media (prefers-reduced-motion:reduce){.ideaMapAccordionBody{animation:none}}
+    .ideaMapSingleCard{position:relative;display:flex;flex:0 0 100%;width:100%;min-width:0}
+    .ideaMapSingleCard > .card{width:100%;height:auto !important;min-height:0 !important;max-height:100%;margin:0;overflow:auto}
+    .ideaMapSingleCard > .card:hover{transform:none}
+    .ideaMapDetailToolbar{position:absolute;z-index:5;top:10px;right:10px;pointer-events:none}
     .ideaMapDetailBack{
-      display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;padding:0;
-      border:1px solid rgba(255,255,255,.96);border-radius:999px;background:rgba(255,255,255,.94);color:var(--accent-dark);
-      font:inherit;font-size:.72rem;font-weight:550;cursor:pointer;pointer-events:auto;
-      box-shadow:0 8px 22px rgba(20,38,42,.16);backdrop-filter:blur(10px)
+      display:grid;place-items:center;width:30px;height:30px;padding:0;border:1px solid rgba(255,255,255,.96);border-radius:999px;
+      background:rgba(255,255,255,.94);color:var(--accent-dark);cursor:pointer;pointer-events:auto;box-shadow:0 8px 22px rgba(20,38,42,.16);backdrop-filter:blur(10px)
     }
     .ideaMapDetailBack:hover{background:#fff;box-shadow:0 10px 24px rgba(20,38,42,.19)}
     .ideaMapDetailBack svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaMapDetailBack span{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    @keyframes ideaMapDetailEnter{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
-    @media (prefers-reduced-motion:reduce){.ideaMapPanel.hasDetail .ideaMapDetailCard{animation:none}}
-    .ideaMapDetailCard .sharedIdeaCard .sharedMetaBlock{
-      display:grid;grid-template-columns:repeat(5,max-content);align-items:center;column-gap:10px;
-      width:max-content;max-width:100%;padding:7px 9px;white-space:nowrap;overflow-x:auto;scrollbar-width:none
-    }
-    .ideaMapDetailCard .sharedIdeaCard .sharedMetaBlock::-webkit-scrollbar{display:none}
-    .ideaMapDetailCard .sharedIdeaCard .sharedMetaBlock > .cardPillGroup,
-    .ideaMapDetailCard .sharedIdeaCard .sharedMetaBlock > .cardMetaLine{
-      display:contents
-    }
     .ideaMapResultThumbWrap{
       position:relative;display:block;width:100%;height:80px;overflow:hidden;border-radius:11px;flex:0 0 auto;
       border:1px solid color-mix(in srgb,var(--theme-line) 48%,rgba(255,255,255,.55));box-shadow:0 8px 18px rgba(20,38,42,.045)
@@ -1892,6 +1888,7 @@
         width:min(380px,calc(100% - 96px));min-height:0;
         overflow:hidden;background:transparent;border:0;pointer-events:none;
       }
+      .ideaMapPanel.isSingleDetail{width:min(340px,calc(100% - 96px))}
       .ideaMapPanelHead,.ideaMapResults{pointer-events:auto}
       .ideaMapPanelHead{display:none}
       .ideaMapPanelHeadRow{justify-content:flex-end}
@@ -1910,16 +1907,15 @@
       }
       .ideaMapResults::-webkit-scrollbar{display:none}
       .ideaMapResult{width:100%;scroll-snap-align:start}
-      .ideaMapPanel.hasDetail .ideaMapDetailCard.sharedIdeaCards{width:100%;flex-basis:auto}
-      .ideaMapPanel.hasDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 8.5}
-      .ideaMapPanel.hasDetail .sharedIdeaCard h3{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-      .ideaMapPanel.hasDetail .sharedIdeaCard > p:not(.fine){display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+      .ideaMapPanel.isSingleDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 8.5}
+      .ideaMapPanel.isSingleDetail .sharedIdeaCard h3{padding-right:36px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+      .ideaMapPanel.isSingleDetail .sharedIdeaCard > p:not(.fine){display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
       .ideaMapCanvas .leaflet-top.leaflet-right{right:auto;left:14px}
     }
     @media (max-width:640px){.sourceAdditionsBlock{margin-top:28px}#teamAdditions{margin-top:28px}.sourceAdditionsBlock .sectionHead h2,#teamAdditions h2{font-size:1.35rem}}
     @media (min-width:1180px){#ideaCards.cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}#ideaCards .card{gap:9px}.sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 8.7}}
     @media (max-width:980px){.hero{grid-template-columns:1fr;gap:16px;padding-top:18px}.heroMain{min-height:auto}.quick{grid-template-columns:repeat(3,1fr)}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.filters,.filters.more,.teamFormGrid,.agendaSearchFilters{grid-template-columns:1fr 1fr}.filterSearch{grid-column:1/-1}.weekBody{padding:0 12px 18px}.agendaBoard{grid-template-columns:repeat(2,minmax(0,1fr));gap:0}.agendaDay{min-height:360px}.agendaDay:nth-child(odd){border-left:0}.agendaDay:nth-child(n+3){border-top:1px solid rgba(11,18,32,.06)}}
-    @media (max-width:980px){.ideaMap{grid-template-columns:1fr;grid-template-rows:minmax(420px,62vh) auto;height:auto;min-height:0;max-height:none}.ideaMapCanvas{min-height:420px}.ideaMapPanel{border-left:0}.ideaMapResult{width:min(78vw,330px);min-height:0}.ideaMapResult.hasThumb{min-height:0}.ideaMapDetailCard.sharedIdeaCards{flex-basis:100%;width:100%;max-width:none;margin-left:0}}
+    @media (max-width:980px){.ideaMap{grid-template-columns:1fr;grid-template-rows:minmax(420px,62vh) auto;height:auto;min-height:0;max-height:none}.ideaMapCanvas{min-height:420px}.ideaMapPanel{border-left:0}.ideaMapResult,.ideaMapAccordion{width:min(78vw,330px);min-height:0}.ideaMapResult.hasThumb{min-height:0}}
     @media (max-width:960px){.tabHeroTitle{font-size:5.05rem}.tabHeroLine{font-size:1.25rem}}
     @media (max-width:640px){body{padding-top:34px}.topbar{margin-top:0;padding:0 8px;gap:6px;align-items:flex-start}.topbar .tabs{position:relative;top:auto;left:auto;gap:3px;padding:4px}.topbar>.tabs .tab{min-height:44px;padding:10px 14px;font-size:.88rem;gap:0}.actions{display:none}.actions .tab,.actions .mini{min-height:44px;padding:8px 10px;font-size:.76rem}.mini{padding:8px 10px;font-size:.76rem}.hero{padding-top:44px}.heroTitle{font-size:clamp(2.7rem,16vw,4rem)}.quick{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.filterBar{padding:0;background:transparent;border:0;box-shadow:none}.filters,.teamFormGrid,.agendaSearchFilters{grid-template-columns:1fr}.teamAddressPair{grid-template-columns:1fr}.filters.more{grid-template-columns:minmax(0,1fr) auto;column-gap:8px;row-gap:0}.filterSearch{grid-column:auto}.filterToggle{display:inline-flex}.filters.more.expanded .filterToggle,.agendaSearchFilters.more.expanded .filterToggle{background:rgba(168,225,221,.30);border-color:rgba(79,142,158,.14)}.filters.more>select,.filters.more>.customSelect,.filters.more>.filterReset,.agendaSearchFilters.more>select,.agendaSearchFilters.more>.customSelect,.agendaSearchFilters.more>.filterReset{grid-column:1/-1}.filterReset{justify-content:center;min-height:44px}.agendaSearchStatus{white-space:normal}.cardMetaLine{margin:0;padding:4px 7px 4px 5px;font-size:.76rem;line-height:1.2}.weekTop{grid-template-columns:1fr;gap:16px}.weekTitle{gap:14px}.weekBadge{width:42px;height:42px;border-radius:10px;font-size:1.1rem}.weekTop h3{font-size:1.55rem}.weekMeta{justify-content:flex-start}.weekNav{margin-left:auto;padding-top:1px}.weekNavButton{width:44px;height:44px}.weekBody{padding:0}.weekTop{padding:18px 16px}.agendaBoard{grid-template-columns:1fr}.agendaDay{min-height:auto;padding:16px 12px 14px;gap:14px;border-left:0;border-top:1px solid rgba(11,18,32,.06)}.agendaDay:first-child{border-top:0}.agendaItem{min-height:0}.ongoingAccordionButton{grid-template-columns:minmax(0,1fr);align-items:flex-start}.ongoingAccordionButton .pill{justify-self:start}.sectionHead{align-items:flex-start;flex-direction:column}.sectionTitleRow{align-items:flex-start;flex-direction:column;gap:4px}.sectionUpdated{text-align:left}.sectionToolbar{grid-template-columns:1fr;align-items:flex-start}.agendaToolbar{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:10px}.agendaTools{grid-column:1/-1;justify-content:flex-start;width:100%;margin-left:0}.agendaToolbar .largeAction{padding:10px 14px;font-size:.86rem}.ideaToolbar,.ideaToolbar.viewOnly{justify-content:flex-start}.ideaToolbar .viewBar{width:100%;justify-content:flex-start}.siteFooter{margin-top:48px;padding-top:30px;padding-bottom:30px}.footerCard{grid-template-columns:1fr;justify-items:start;gap:18px}.footerLogo{width:132px}.footerContact{justify-self:start;margin-left:0;margin-right:0;padding:0}.backToTop{display:inline-flex;align-items:center;justify-content:center}}
     @media (max-width:640px){.ideaMap{border-radius:20px;gap:0}.ideaMapCanvas{min-height:360px;border-radius:19px 19px 0 0}.ideaMapHeader{left:10px;right:10px;bottom:10px;top:auto;max-width:none}.ideaMapBadge,.ideaMapLocation{min-height:31px;padding:6px 9px;font-size:.76rem}.ideaLeafletMarker{width:27px;height:27px}.ideaLeafletMarker.home{width:34px;height:34px}.ideaMapPanel{min-height:0;overflow:hidden;border-top:1px solid rgba(79,142,158,.12);background:#FFFEFC}.ideaMapPanelHead{padding:11px 12px;background:transparent}.ideaMapPanelHead h3{font-size:1rem}.ideaMapPanelHead p{display:none}.ideaMapResults{display:flex;flex-direction:row;padding:0 10px 12px;max-height:none;overflow-x:auto;overflow-y:hidden}.ideaMapResult{width:min(84vw,330px);height:auto;min-height:0;padding:10px;border-radius:15px}.ideaMapResult.hasThumb{grid-template-columns:108px minmax(0,1fr);column-gap:9px;min-height:0;padding:6px}.ideaMapResult.hasThumb .ideaMapResultText{min-height:90px}.ideaMapResultThumbWrap{width:100%;height:90px;min-height:0;border-radius:12px}}
@@ -6420,8 +6416,8 @@
     return IdeaViewShared.renderCard({
       themeClass:domainThemeClass(item.domain), hasImage:Boolean(image),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
-      toolbar:mapDetailAction === 'back'
-        ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailBack" type="button" data-map-detail-back aria-label="Tegel inklappen" title="Tegel inklappen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 14 6-6 6 6"></path></svg><span>Tegel inklappen</span></button></div>'
+      toolbar:mapDetailAction === 'close'
+        ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailBack" type="button" data-map-detail-close aria-label="Tegel sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg><span>Sluiten</span></button></div>'
         : '',
       image:image ? ideaImageMarkup(image, item.url) : '',
       title:cardTitle,
@@ -6431,6 +6427,34 @@
       website:'',
       actions:reportMenu('inspiratiebank', ideaDomKey(item), item.title)
     });
+  }
+  function ideaMapAccordionCard(point){
+    const {item} = point;
+    const image = approvedIdeaImage(item);
+    const metadata = sharedIdeaMetadata(item, {point, map:true});
+    const metadataBlock = IdeaViewShared.renderMetadata({
+      className:'ideaMapResultInfo',
+      pillsClass:'ideaMapResultPills',
+      pills:metadata.pills,
+      meta:metadata.meta
+    });
+    const description = audienceText(item.fit);
+    const practical = String(item.materials || '').trim();
+    return `<article class="ideaMapAccordion ${domainThemeClass(item.domain)}" data-map-detail-key="${escapeHtml(point.key)}">
+      <button class="ideaMapAccordionHeader" type="button" data-map-detail-back aria-expanded="true" aria-label="${escapeHtml(item.title)} inklappen">
+        <span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>
+        <span class="ideaMapAccordionTitle">${escapeHtml(item.title)}</span>
+        <span class="ideaMapAccordionChevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 14 6-6 6 6"></path></svg></span>
+      </button>
+      <div class="ideaMapAccordionBody">
+        <div class="ideaMapAccordionBodyInner">
+          ${image ? `<div class="ideaMapAccordionImage"><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || item.title || 'Activiteit')}" loading="lazy" decoding="async"></div>` : ''}
+          ${metadataBlock}
+          ${description ? `<p class="ideaMapAccordionDescription">${escapeHtml(description)}</p>` : ''}
+          ${practical ? `<details class="ideaMapAccordionPractical"><summary>Praktisch</summary><p>${escapeHtml(practical)}</p></details>` : ''}
+        </div>
+      </div>
+    </article>`;
   }
   function surpriseIdeaIcon(){
     return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.7 5.1L19 10l-5.3 1.9L12 17l-1.7-5.1L5 10l5.3-1.9L12 3Z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"></path></svg>`;
@@ -7040,9 +7064,11 @@
   function ideaMapPanelMarkup(points=[]){
     const visiblePoints = visibleIdeaMapPoints(points);
     const detailPoint = ideaMapDetailKey ? visiblePoints.find(point => point.key === ideaMapDetailKey) : null;
+    const inlineDetail = Boolean(detailPoint && activeIdeaMapClusterKeys?.length > 1);
+    const singleDetail = Boolean(detailPoint && !inlineDetail);
     const listHtml = visiblePoints.map(point => {
-      if(point.key === detailPoint?.key){
-        return `<div class="ideaMapDetailCard sharedIdeaCards" data-map-detail-key="${escapeHtml(point.key)}">${cardIdea(point.item, {mapDetailAction:'back'})}</div>`;
+      if(inlineDetail && point.key === detailPoint?.key){
+        return ideaMapAccordionCard(point);
       }
       const active = point.key === activeIdeaMapKey;
       const image = approvedIdeaImage(point.item);
@@ -7059,6 +7085,9 @@
         <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultBody">${metadataBlock}</span></span>
       </article>`;
     }).join('');
+    const resultsHtml = singleDetail
+      ? `<div class="ideaMapSingleCard sharedIdeaCards" data-map-detail-key="${escapeHtml(detailPoint.key)}">${cardIdea(detailPoint.item, {mapDetailAction:'close'})}</div>`
+      : listHtml;
     const sharedPlace = activeIdeaMapClusterKeys
       && visiblePoints.length
       && visiblePoints.every(point => point.precision === 'place' && point.place === visiblePoints[0].place)
@@ -7075,9 +7104,9 @@
     const toggleIcon = ideaMapPanelExpanded ? '<path d="m6 14 6-6 6 6"></path>' : '<path d="m6 10 6 6 6-6"></path>';
     const visibleTitle = ideaMapPanelExpanded ? panelTitle : 'Kies een marker op de kaart';
     const visibleText = ideaMapPanelExpanded ? panelText : 'De bijbehorende activiteiten verschijnen hier.';
-    return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${detailPoint ? ' hasDetail' : ''}">
+    return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${inlineDetail ? ' hasDetail' : ''}${singleDetail ? ' isSingleDetail' : ''}">
       <div class="ideaMapPanelHead"><div class="ideaMapPanelHeadRow"><div><h3>${escapeHtml(visibleTitle)}</h3><p>${escapeHtml(visibleText)}</p></div><div class="ideaMapPanelActions">${clearButton}<button class="ideaMapPanelToggle" type="button" data-map-panel-toggle aria-expanded="${ideaMapPanelExpanded ? 'true' : 'false'}" title="${toggleLabel}" aria-label="${toggleLabel}"><svg viewBox="0 0 24 24" aria-hidden="true">${toggleIcon}</svg></button></div></div></div>
-      <div class="ideaMapResults">${listHtml}</div>
+      <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
   }
   function updateIdeaMapPanel({scroll=false, emphasize=false}={}){
@@ -7691,6 +7720,12 @@
           const activeResult = document.querySelector(`[data-map-result-key="${CSS.escape(activeIdeaMapKey)}"]`);
           activeResult?.focus({preventScroll:true});
         });
+        return;
+      }
+      if(event.target.closest('[data-map-detail-close]')){
+        ideaMapDetailKey = '';
+        ideaMapPanelExpanded = false;
+        updateIdeaMapPanel();
         return;
       }
       const mapTarget = event.target.closest('[data-map-result-key]');
