@@ -3661,6 +3661,15 @@
     #ideaList.sharedIdeaList th{background:#fffdf8}
     #ideaList.sharedIdeaList .ideaThemeRow td,
     #ideaList .ideaSurpriseRow td{background:#fffdf9}
+    #agendaFilterWeekChips .ideaFilterChip:hover{
+      transform:none;box-shadow:none
+    }
+    #agendaFilterWeekChips .ideaFilterChip:not(.active):hover{
+      background:rgba(255,255,255,.52);border-color:rgba(79,142,158,.12);color:rgba(49,95,107,.82)
+    }
+    #agendaFilterWeekChips .ideaFilterChip.active:hover{
+      background:rgba(220,239,229,.62);border-color:rgba(54,135,93,.16);color:#326b52
+    }
     @media(max-width:760px){
       #ideaList.sharedIdeaList .ideaThemeRow,
       #ideaList.sharedIdeaList .ideaSurpriseRow{background:#fffdf9}
@@ -3766,7 +3775,6 @@
             <select id="agendaDomain" data-theme-select="true" aria-label="Categorie filteren"><option value="all">Categorie</option></select>
             <select id="agendaDistance" aria-label="Afstand filteren"><option value="all">Afstand</option></select>
             <select id="agendaCost" aria-label="Kosten filteren"><option value="all">Kosten</option></select>
-            <select id="agendaStimulus" aria-label="Prikkelbelasting filteren"><option value="all">Prikkelbelasting</option></select>
             <button class="filterReset" id="agendaResetBtn" type="button">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg>
               Reset
@@ -4148,10 +4156,6 @@
         <section class="ideaFilterSection">
           <div class="ideaFilterSectionHead"><h3>Prijs</h3></div>
           <div class="ideaFilterChips" id="agendaFilterPriceChips"></div>
-        </section>
-        <section class="ideaFilterSection">
-          <div class="ideaFilterSectionHead"><h3>Prikkelbelasting</h3></div>
-          <div class="ideaFilterChips" id="agendaFilterStimulusChips"></div>
         </section>
       </div>
       <footer class="ideaFilterSheetFooter">
@@ -6596,8 +6600,7 @@
       week:weekChoice === 'all' ? (selectedAgendaWeek || ACTIVE_WEEKS[0]?.id || '') : weekChoice,
       domain:$('#agendaDomain')?.value || 'all',
       distanceBand:$('#agendaDistance')?.value || 'all',
-      cost:$('#agendaCost')?.value || 'all',
-      stimulus:$('#agendaStimulus')?.value || 'all'
+      cost:$('#agendaCost')?.value || 'all'
     };
   }
   function agendaSearchText(item={}){
@@ -6624,7 +6627,6 @@
     const distance = itemDistanceKm(item);
     if(userLocationRadiusKm < 50 && Number.isFinite(distance) && distance > userLocationRadiusKm) return false;
     if(filters.cost && filters.cost !== 'all' && normalizeIdeaCost(item.cost) !== filters.cost) return false;
-    if(filters.stimulus && filters.stimulus !== 'all' && normalizeIdeaStimulus(item.stimulus) !== filters.stimulus) return false;
     return true;
   }
   function filterAgendaItems(items=[], filters={}){
@@ -6740,6 +6742,7 @@
   function setAgendaSection(section, options={}){
     const agendaPanel = $('#tab-weken');
     if(!agendaPanel) return;
+    if($('#agendaFilterSheetLayer')?.classList.contains('isOpen') && options.scroll) return;
     const nextSection = section === 'ongoing' ? 'ongoing' : 'weeks';
     if(nextSection === 'ongoing') setOngoingOpen(true, {scroll:false});
     if(!options.scroll) syncAgendaSectionState(nextSection);
@@ -6769,6 +6772,7 @@
   }
 
   function syncAgendaSectionHash(section){
+    if($('#agendaFilterSheetLayer')?.classList.contains('isOpen')) return;
     if(!['#weekPanels', '#longerOffers'].includes(window.location.hash)) return;
     const nextHash = section === 'ongoing' ? '#longerOffers' : '#weekPanels';
     if(window.location.hash === nextHash) return;
@@ -7205,19 +7209,17 @@
     fillSelect('#agendaDomain', unique(items.map(x=>domainDisplayLabel(x.domain))), 'Categorie');
     fillSelect('#agendaDistance', AGENDA_DISTANCE_OPTIONS, 'Afstand');
     fillSelect('#agendaCost', IDEA_COST_OPTIONS, 'Kosten');
-    fillSelect('#agendaStimulus', IDEA_STIMULUS_OPTIONS, 'Prikkelbelasting');
-    ['agendaWeekFilter','agendaDomain','agendaDistance','agendaCost','agendaStimulus'].forEach(id => enhanceCustomSelect($('#'+id)));
+    ['agendaWeekFilter','agendaDomain','agendaDistance','agendaCost'].forEach(id => enhanceCustomSelect($('#'+id)));
   }
   function hasActiveAgendaFilters(filters=agendaSearchState()){
     return Boolean(filters.query)
-      || ['domain','distanceBand','cost','stimulus'].some(key => filters[key] && filters[key] !== 'all');
+      || ['domain','distanceBand','cost'].some(key => filters[key] && filters[key] !== 'all');
   }
   function agendaEmptyMessage(filters=agendaSearchState()){
     if(!hasActiveAgendaFilters(filters)) return 'Geen items';
     const hints = [];
     if(filters.distanceBand && filters.distanceBand !== 'all') hints.push('een ruimere afstand');
     if(filters.cost && filters.cost !== 'all') hints.push('ruimere kosten');
-    if(filters.stimulus && filters.stimulus !== 'all') hints.push('een andere prikkelbelasting');
     if(filters.query) hints.push('een kortere zoekterm');
     return `Geen resultaat. Probeer ${hints.slice(0,2).join(' of ') || 'minder filters te gebruiken'}.`;
   }
@@ -7423,8 +7425,7 @@
     const groups = [
       ['agendaFilterWeekChips','agendaWeekFilter','Alle weken',false],
       ['agendaFilterCategoryChips','agendaDomain','Alles',true],
-      ['agendaFilterPriceChips','agendaCost','Alles',false],
-      ['agendaFilterStimulusChips','agendaStimulus','Alle niveaus',false]
+      ['agendaFilterPriceChips','agendaCost','Alles',false]
     ];
     groups.forEach(([containerId, selectId, allLabel, themed]) => {
       const container = $('#'+containerId);
@@ -7473,6 +7474,8 @@
   function openAgendaFilterSheet(){
     const layer = $('#agendaFilterSheetLayer');
     if(!layer) return;
+    const scrollPosition = {left:window.scrollX, top:window.scrollY};
+    const routeBeforeOpen = `${window.location.pathname}${window.location.search}${window.location.hash}`;
     closeIdeaFilterSheet();
     closeIdeaSubmitSheet({restoreFocus:false});
     agendaFilterSheetReturnFocus = document.activeElement;
@@ -7482,7 +7485,19 @@
     layer.setAttribute('aria-hidden','false');
     document.body.classList.add('ideaFilterSheetOpen');
     $('#agendaFilterToggle')?.setAttribute('aria-expanded','true');
-    window.setTimeout(() => layer.querySelector('.ideaFilterSheetClose')?.focus({preventScroll:true}), 180);
+    const restoreScroll = () => {
+      if(`${window.location.pathname}${window.location.search}${window.location.hash}` !== routeBeforeOpen){
+        window.history.replaceState(window.history.state, '', routeBeforeOpen);
+      }
+      window.scrollTo(scrollPosition.left, scrollPosition.top);
+    };
+    restoreScroll();
+    window.requestAnimationFrame(restoreScroll);
+    [60, 240, 600].forEach(delay => window.setTimeout(restoreScroll, delay));
+    window.setTimeout(() => {
+      layer.querySelector('.ideaFilterSheetClose')?.focus({preventScroll:true});
+      restoreScroll();
+    }, 180);
   }
   function closeAgendaFilterSheet({restoreFocus=true}={}){
     const layer = $('#agendaFilterSheetLayer');
@@ -8323,7 +8338,7 @@
 	    renderIdeas();
 	  }
 	  function resetAgendaFilters(){
-	    ['agendaSearch','agendaWeekFilter','agendaDomain','agendaDistance','agendaCost','agendaStimulus'].forEach(id => {
+	    ['agendaSearch','agendaWeekFilter','agendaDomain','agendaDistance','agendaCost'].forEach(id => {
 	      const el = $('#'+id);
 	      if(!el) return;
 	      if(id === 'agendaSearch') el.value = '';
@@ -8481,11 +8496,12 @@
     document.addEventListener('click', event => {
       if(event.target.closest('[data-location-settings-btn]')){
         event.preventDefault();
+        event.stopPropagation();
         const activeTab = $('.topbar .tab.active')?.dataset.tab || 'inspiratie';
         if(activeTab === 'inspiratie') openIdeaFilterSheet('location');
         else openAgendaFilterSheet();
       }
-    });
+    }, true);
     document.addEventListener('click', event => {
       if(event.target.closest('[data-map-panel-toggle]')){
         ideaMapPanelExpanded = !ideaMapPanelExpanded;
@@ -8584,7 +8600,7 @@
       if(week && week !== 'all') selectedAgendaWeek = week;
       renderAgenda();
     });
-    ['agendaDomain','agendaDistance','agendaCost','agendaStimulus'].forEach(id=>$('#'+id).addEventListener('change', renderAgenda));
+    ['agendaDomain','agendaDistance','agendaCost'].forEach(id=>$('#'+id).addEventListener('change', renderAgenda));
     $('#ideaDomain')?.addEventListener('input', event => {
       selectedIdeaCategories.clear();
       if(event.target.value !== 'all') selectedIdeaCategories.add(domainDisplayLabel(event.target.value));
