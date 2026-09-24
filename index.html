@@ -3617,8 +3617,45 @@
       #agendaFilters .desktopLocationBar .locationLegendItem:hover{background:rgba(168,225,221,.14)}
       #agendaThemeLegend .locationLegendItem{display:none}
     }
-    /* The agenda keeps native selects as filter state; only the shared sheet is visible. */
+    /* Zoekbalk en chiprij delen in beide hoofdweergaven exact dezelfde componentbasis. */
+    .sharedDiscoveryChipRow{
+      align-items:center;padding:0 6px;margin:12px 0 10px;background:transparent
+    }
+    .sharedDiscoveryChipRow .agendaLegendItem{
+      background:rgba(255,253,249,.62);
+      border-color:var(--theme-line,rgba(79,142,158,.10));
+      box-shadow:none
+    }
+    .sharedDiscoveryChipRow .agendaLegendItem:hover{
+      background:var(--theme-tint-strong,rgba(255,253,249,.86))
+    }
+    /* De oude uitklapfilters blijven alleen als interne filterstaat bestaan. */
+    #ideaFilters>.filterOptions,
     #agendaFilters>.filterOptions{display:none!important}
+    @media(min-width:641px){
+      .sharedDiscoveryFilters{
+        grid-template-columns:minmax(0,1fr) 260px;column-gap:0
+      }
+      .sharedDiscoveryFilters .filterSearch{grid-column:1 / 3;grid-row:1;margin:0}
+      .sharedDiscoveryFilters .filterSearch input{
+        height:48px;min-height:48px;padding-right:268px;
+        border:1px solid rgba(255,255,255,.78);border-radius:18px;
+        background:rgba(255,253,249,.94);box-shadow:none
+      }
+      .sharedDiscoveryFilters .desktopLocationBar{
+        display:flex;position:relative;grid-column:2;grid-row:1;z-index:5;
+        align-items:center;align-self:stretch;justify-self:stretch;
+        width:100%;height:48px;padding:0;transform:none
+      }
+      .sharedDiscoveryFilters .desktopLocationBar .locationLegendItem{
+        width:calc(100% - 16px);height:36px;min-height:36px;margin:6px 8px;
+        justify-content:flex-end;padding:0 8px;border:0;border-radius:12px;
+        background:transparent;box-shadow:none;backdrop-filter:none
+      }
+      .sharedDiscoveryFilters .desktopLocationBar .locationLegendItem:hover{background:rgba(168,225,221,.14)}
+      .sharedDiscoveryFilters>.filterToggle{display:none}
+      #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{display:none}
+    }
   </style>
 </head>
 <body class="appLoading">
@@ -3709,7 +3746,7 @@
       </section>
       <div class="desktopStickyControls agendaDesktopControls">
       <div class="filterBar">
-        <div class="filters agendaSearchFilters more" id="agendaFilters">
+        <div class="filters agendaSearchFilters more sharedDiscoveryFilters" id="agendaFilters">
           <div class="filterSearch"><input id="agendaSearch" type="search" placeholder="Zoek in activiteiten..."></div>
           <div class="desktopLocationBar" id="agendaDesktopLocation"></div>
           <button class="filterToggle" id="agendaFilterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-haspopup="dialog" aria-controls="agendaFilterSheetLayer">
@@ -3729,7 +3766,7 @@
           </div>
         </div>
       </div>
-      <div class="inspirationDesktopFilterRow agendaLegendBar">
+      <div class="inspirationDesktopFilterRow agendaLegendBar sharedDiscoveryChipRow">
         <div id="agendaThemeLegend"></div>
       </div>
       </div>
@@ -3761,7 +3798,7 @@
       </section>
       <div class="desktopStickyControls">
       <div class="filterBar">
-        <div class="filters more" id="ideaFilters">
+        <div class="filters more sharedDiscoveryFilters" id="ideaFilters">
           <div class="filterSearch"><input id="ideaSearch" type="search" placeholder="Zoek inspiratie..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ideaSearchSuggestions"><div class="ideaSearchSuggestions" id="ideaSearchSuggestions" role="listbox" aria-label="Zoeksuggesties"></div></div>
           <div class="desktopLocationBar" id="inspirationDesktopLocation"></div>
           <button class="filterToggle" id="filterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-haspopup="dialog" aria-controls="ideaFilterSheetLayer">
@@ -3798,7 +3835,7 @@
           </div>
         </div>
       </div>
-      <div class="inspirationDesktopFilterRow">
+      <div class="inspirationDesktopFilterRow sharedDiscoveryChipRow">
         <div id="inspirationThemeLegend"></div>
         <div class="viewBar desktopViewBar">
           <div class="viewSwitch" aria-label="Weergave inspiratiebank desktop">
@@ -4079,16 +4116,25 @@
       </header>
       <div class="ideaFilterSheetBody" id="agendaFilterSheetBody">
         <section class="ideaFilterSection">
+          <div class="ideaFilterSectionHead"><h3>Locatie</h3></div>
+          <label class="ideaFilterLocationField" for="agendaFilterLocationInput">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+            <input id="agendaFilterLocationInput" type="text" inputmode="text" autocomplete="postal-code" placeholder="Postcode of plaats">
+          </label>
+          <p class="ideaFilterSheetStatus" id="agendaFilterLocationStatus" role="status" aria-live="polite"></p>
+        </section>
+        <section class="ideaFilterSection">
+          <div class="ideaFilterSectionHead"><h3>Afstand</h3><span class="ideaFilterSectionValue" id="agendaFilterDistanceValue">50+ km</span></div>
+          <input class="ideaFilterRange" id="agendaFilterDistanceRange" type="range" min="0" max="4" step="1" value="4" aria-label="Maximale afstand">
+          <div class="ideaFilterRangeLabels" aria-hidden="true"><span>3 km</span><span>5 km</span><span>10 km</span><span>25 km</span><span>50+ km</span></div>
+        </section>
+        <section class="ideaFilterSection">
           <div class="ideaFilterSectionHead"><h3>Week</h3></div>
           <div class="ideaFilterChips" id="agendaFilterWeekChips"></div>
         </section>
         <section class="ideaFilterSection">
           <div class="ideaFilterSectionHead"><h3>Categorieën</h3></div>
           <div class="ideaFilterChips" id="agendaFilterCategoryChips"></div>
-        </section>
-        <section class="ideaFilterSection">
-          <div class="ideaFilterSectionHead"><h3>Afstand</h3></div>
-          <div class="ideaFilterChips" id="agendaFilterDistanceChips"></div>
         </section>
         <section class="ideaFilterSection">
           <div class="ideaFilterSectionHead"><h3>Prijs</h3></div>
@@ -6566,6 +6612,8 @@
     if(!agendaMatchesSearch(item, filters.query || '')) return false;
     if(filters.domain && filters.domain !== 'all' && domainDisplayLabel(item.domain) !== domainDisplayLabel(filters.domain)) return false;
     if(filters.distanceBand && filters.distanceBand !== 'all' && normalizeIdeaDistance(item.distanceBand, item, 'agenda') !== filters.distanceBand) return false;
+    const distance = itemDistanceKm(item);
+    if(userLocationRadiusKm < 50 && Number.isFinite(distance) && distance > userLocationRadiusKm) return false;
     if(filters.cost && filters.cost !== 'all' && normalizeIdeaCost(item.cost) !== filters.cost) return false;
     if(filters.stimulus && filters.stimulus !== 'all' && normalizeIdeaStimulus(item.stimulus) !== filters.stimulus) return false;
     return true;
@@ -7366,7 +7414,6 @@
     const groups = [
       ['agendaFilterWeekChips','agendaWeekFilter','Alle weken',false],
       ['agendaFilterCategoryChips','agendaDomain','Alles',true],
-      ['agendaFilterDistanceChips','agendaDistance','Alle afstanden',false],
       ['agendaFilterPriceChips','agendaCost','Alles',false],
       ['agendaFilterStimulusChips','agendaStimulus','Alle niveaus',false]
     ];
@@ -7397,6 +7444,7 @@
     if(button) button.textContent = count === 1 ? 'Toon 1 activiteit' : `Toon ${count} activiteiten`;
   }
   function syncAgendaFilterSheet(){
+    syncSharedFilterLocation('agenda');
     $$('[data-agenda-sheet-filter]').forEach(button => {
       const control = $('#'+button.dataset.agendaSheetFilter);
       const active = control && String(control.value) === String(button.dataset.value);
@@ -7444,8 +7492,24 @@
       if(!chip) return;
       setAgendaFilterValue(chip.dataset.agendaSheetFilter, chip.dataset.value);
     });
-    $('#agendaFilterClearBtn')?.addEventListener('click', resetAgendaFilters);
-    $('#agendaFilterApplyBtn')?.addEventListener('click', closeAgendaFilterSheet);
+    $('#agendaFilterDistanceRange')?.addEventListener('input', event => {
+      const radius = IDEA_FILTER_RADIUS_STEPS[Number(event.target.value)] || DEFAULT_LOCATION_RADIUS_KM;
+      saveUserLocationRadius(radius);
+      renderAgenda();
+    });
+    $('#agendaFilterClearBtn')?.addEventListener('click', () => {
+      resetAgendaFilters();
+      saveUserLocationRadius(DEFAULT_LOCATION_RADIUS_KM, {sync:false});
+      saveUserLocation(null);
+      syncAgendaFilterSheet();
+    });
+    $('#agendaFilterApplyBtn')?.addEventListener('click', applyAgendaFilterSheet);
+    $('#agendaFilterLocationInput')?.addEventListener('keydown', event => {
+      if(event.key === 'Enter'){
+        event.preventDefault();
+        applyAgendaFilterSheet();
+      }
+    });
   }
   function updateIdeaFilterSheetCount(count=filteredInspirationItems().length){
     const button = $('#ideaFilterApplyBtn');
@@ -7453,10 +7517,21 @@
     button.textContent = count === 1 ? 'Toon 1 activiteit' : `Toon ${count} activiteiten`;
   }
   function syncIdeaFilterSheet(){
-    const locationInput = $('#ideaFilterLocationInput');
-    const locationStatus = $('#ideaFilterLocationStatus');
-    const range = $('#ideaFilterDistanceRange');
-    const rangeValue = $('#ideaFilterDistanceValue');
+    syncSharedFilterLocation('idea');
+    $$('[data-sheet-filter]').forEach(button => {
+      const control = $('#'+button.dataset.sheetFilter);
+      const active = button.dataset.sheetFilter === 'ideaDomain'
+        ? isIdeaCategorySelected(button.dataset.value)
+        : control && String(control.value) === String(button.dataset.value);
+      button.classList.toggle('active', Boolean(active));
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+  function syncSharedFilterLocation(prefix){
+    const locationInput = $(`#${prefix}FilterLocationInput`);
+    const locationStatus = $(`#${prefix}FilterLocationStatus`);
+    const range = $(`#${prefix}FilterDistanceRange`);
+    const rangeValue = $(`#${prefix}FilterDistanceValue`);
     if(locationInput && document.activeElement !== locationInput){
       locationInput.value = userLocation?.isDefault ? '' : (cleanPostcode(userLocation.postcode || '') || userLocation.place || userLocation.label || '');
     }
@@ -7467,14 +7542,39 @@
     const radiusIndex = Math.max(0, IDEA_FILTER_RADIUS_STEPS.indexOf(userLocationRadiusKm));
     if(range) range.value = String(radiusIndex);
     if(rangeValue) rangeValue.textContent = userLocationRadiusKm >= 50 ? '50+ km' : `${userLocationRadiusKm} km`;
-    $$('[data-sheet-filter]').forEach(button => {
-      const control = $('#'+button.dataset.sheetFilter);
-      const active = button.dataset.sheetFilter === 'ideaDomain'
-        ? isIdeaCategorySelected(button.dataset.value)
-        : control && String(control.value) === String(button.dataset.value);
-      button.classList.toggle('active', Boolean(active));
-      button.setAttribute('aria-pressed', active ? 'true' : 'false');
-    });
+  }
+  async function applySharedFilterLocation(prefix, closeSheet){
+    const input = $(`#${prefix}FilterLocationInput`);
+    const status = $(`#${prefix}FilterLocationStatus`);
+    const query = String(input?.value || '').trim();
+    const current = userLocation?.isDefault ? '' : (cleanPostcode(userLocation.postcode || '') || userLocation.place || userLocation.label || '');
+    if(!query || normalize(query) === normalize(current)){
+      closeSheet();
+      return;
+    }
+    if(status){
+      status.dataset.busy = 'true';
+      status.classList.remove('warn');
+      status.textContent = 'Locatie opzoeken...';
+    }
+    try{
+      const location = await geocodeLocation(query);
+      if(!isSupportedLocation(location)){
+        status?.classList.add('warn');
+        if(status) status.textContent = 'Voor deze locatie staat nog geen lokale set klaar. Kies een locatie in de regio Nijmegen.';
+        return;
+      }
+      saveUserLocation(location);
+      closeSheet();
+    }catch(error){
+      status?.classList.add('warn');
+      if(status) status.textContent = error.message || 'De locatie kon niet worden gebruikt.';
+    }finally{
+      if(status) delete status.dataset.busy;
+    }
+  }
+  function applyAgendaFilterSheet(){
+    return applySharedFilterLocation('agenda', closeAgendaFilterSheet);
   }
   function openIdeaFilterSheet(section='top'){
     const layer = $('#ideaFilterSheetLayer');
@@ -7571,38 +7671,7 @@
     renderIdeas();
   }
   async function applyIdeaFilterSheet(){
-    const input = $('#ideaFilterLocationInput');
-    const status = $('#ideaFilterLocationStatus');
-    const query = String(input?.value || '').trim();
-    const current = userLocation?.isDefault ? '' : (cleanPostcode(userLocation.postcode || '') || userLocation.place || userLocation.label || '');
-    if(!query || normalize(query) === normalize(current)){
-      closeIdeaFilterSheet();
-      return;
-    }
-    if(status){
-      status.dataset.busy = 'true';
-      status.classList.remove('warn');
-      status.textContent = 'Locatie opzoeken...';
-    }
-    try{
-      const location = await geocodeLocation(query);
-      if(!isSupportedLocation(location)){
-        if(status){
-          status.classList.add('warn');
-          status.textContent = 'Voor deze locatie staat nog geen lokale set klaar. Kies een locatie in de regio Nijmegen.';
-        }
-        return;
-      }
-      saveUserLocation(location);
-      closeIdeaFilterSheet();
-    }catch(error){
-      if(status){
-        status.classList.add('warn');
-        status.textContent = error.message || 'De locatie kon niet worden gebruikt.';
-      }
-    }finally{
-      if(status) delete status.dataset.busy;
-    }
+    return applySharedFilterLocation('idea', closeIdeaFilterSheet);
   }
   function setupIdeaFilterSheet(){
     $$('[data-idea-filter-close]').forEach(button => button.addEventListener('click', closeIdeaFilterSheet));
@@ -8405,7 +8474,7 @@
         event.preventDefault();
         const activeTab = $('.topbar .tab.active')?.dataset.tab || 'inspiratie';
         if(activeTab === 'inspiratie') openIdeaFilterSheet('location');
-        else if(!openDesktopSidebar('location')) openLocationModal();
+        else openAgendaFilterSheet();
       }
     });
     document.addEventListener('click', event => {
