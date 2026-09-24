@@ -490,24 +490,24 @@
     .ongoingMetaLine{display:none}
     table{width:100%;border-collapse:separate;border-spacing:0;min-width:760px}
     #ideaList .ideaListMeta{margin-left:38px}
-    #ideaList .nameWithIcon{align-items:center;color:var(--accent-dark);font-size:1rem;line-height:1.18;font-weight:400}
-    #ideaList .nameWithIcon .domainIcon{align-self:center;margin-top:0}
+    #ideaList .nameWithIcon{align-items:flex-start;color:var(--accent-dark);font-size:1rem;line-height:1.18;font-weight:400}
+    #ideaList .nameWithIcon .domainIcon{align-self:flex-start;margin-top:0}
     #ideaList .ideaListVisual{display:block;flex:0 0 78px;width:78px;height:70px}
     #ideaList .ideaListThumb{display:block;width:100%;height:100%;object-fit:cover;border-radius:9px;border:1px solid rgba(79,142,158,.10);box-shadow:0 5px 12px rgba(20,38,42,.06)}
-    #ideaList .ideaListTitleRow{display:flex;align-items:center;gap:10px;min-width:0}
+    #ideaList .ideaListTitleRow{display:flex;align-items:flex-start;gap:10px;min-width:0}
     #ideaList .nameWithIcon.hasThumb{gap:12px}
     #ideaList .compactSummaryTable{min-width:820px}
     #ideaList .compactSummaryTable th:nth-child(1),#ideaList .compactSummaryTable td:nth-child(1){width:46%}
     #ideaList .compactSummaryTable th:nth-child(2),#ideaList .compactSummaryTable td:nth-child(2){width:32%}
     #ideaList .compactSummaryTable th:nth-child(3),#ideaList .compactSummaryTable td:nth-child(3){width:22%}
     #ideaList .ideaListSummary{min-width:0}
-    #ideaList .ideaListSummaryMeta{display:flex;margin:7px 0 0 90px}
+    #ideaList .ideaListSummaryMeta{display:flex;margin:7px 0 0 90px;padding:8px 11px;border-radius:11px;gap:6px 14px}
     #ideaList .ideaListSummary:not(:has(.ideaListVisual)) .ideaListSummaryMeta{margin-left:38px}
-    #ideaList .ideaListSummaryMeta .cardMetaLine{display:flex;flex-wrap:nowrap;gap:12px;white-space:nowrap}
-    #ideaList .ideaListSummaryMeta .cardPillGroup{display:none}
+    #ideaList .ideaListSummaryMeta .cardMetaLine{display:flex;flex-wrap:nowrap;gap:12px 14px;white-space:nowrap}
     #ideaList .nameWithIcon .ideaTitleText{font-weight:400}
     #ideaList .ideaListTitleLink{color:#006780;text-decoration:none;text-decoration-thickness:1px;text-underline-offset:3px}
-    #ideaList .ideaListTitleLink:hover,#ideaList .ideaListTitleLink:focus-visible{color:var(--accent-dark);text-decoration:underline}
+    #ideaList .ideaListTitleLink:hover{color:#168697;text-decoration:none}
+    #ideaList .ideaListTitleLink:focus-visible{color:#168697;outline:2px solid rgba(0,115,141,.34);outline-offset:4px;border-radius:5px;text-decoration:none}
     #ideaList td:nth-child(2) .cardPillGroup{flex-wrap:nowrap}
     #ideaList td:nth-child(2) .pill{flex:0 0 auto}
     th,td{text-align:left;vertical-align:top;border-bottom:1px solid rgba(11,18,32,.07);padding:11px 12px;font-size:.92rem;line-height:1.35}
@@ -2934,12 +2934,12 @@
     #ideaList.sharedIdeaList table{border-collapse:collapse;border-spacing:0}
     #ideaList.sharedIdeaList th{background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06);color:#74716E;padding:13px 16px;font-size:.8rem}
     #ideaList.sharedIdeaList .ideaThemeRow td{background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06);padding:12px 16px;vertical-align:middle}
-    #ideaList.sharedIdeaList .ideaThemeRow:hover td{background:#fffaf4}
+    #ideaList.sharedIdeaList .ideaThemeRow:hover td{background:#fffdf8}
     #ideaList .ideaListTheme{margin-bottom:5px}
     #ideaList .ideaListTheme .categoryPill{min-height:31px;padding:7px 11px;font-size:.76rem;box-shadow:0 3px 10px rgba(20,38,42,.045)}
     #ideaList .nameWithIcon .ideaTitleText{color:#006780;font-size:1.03rem;font-weight:500;line-height:1.25}
     #ideaList .ideaListMeta{margin:4px 0 0 38px}
-    #ideaList .cardMetaLine{color:#697472;gap:14px}
+    #ideaList .cardMetaLine{color:#697472;gap:12px 14px}
     #ideaList .cardMetaLine .metaIcon{color:#55777A}
     #ideaList td:nth-child(3) .small{color:#74716E;line-height:1.45}
     #ideaList td:nth-child(2) .cardPillGroup{flex-wrap:wrap}
@@ -3102,8 +3102,8 @@
     }
     #ideaList .cardPillGroup .stimulusIcon,
     .ideaMapResultPills .stimulusIcon,
-    #ideaList .cardMetaLine .metaIcon,
     .ideaMapResultMeta .metaIcon{color:#356F7B}
+    #ideaList .cardMetaLine .metaIcon{color:#55777A}
     .sharedMetaBlock,
     .ideaMapResultInfo,
     .ongoingBadgesCell .cardPillGroup{
