@@ -1266,7 +1266,7 @@
       #ideaFilters .desktopLocationBar .locationChevron{margin-left:8px}
       #ideaFilters .desktopLocationBar .locationLegendItem:hover{background:rgba(168,225,221,.14);box-shadow:none}
       #ideaFilters .filterToggle{
-        grid-column:3;
+        grid-column:4;
         grid-row:1;
         justify-self:stretch;
         align-self:center;
@@ -1288,11 +1288,11 @@
       #ideaFilters .filterToggle:hover{background:rgba(255,253,249,.84)}
       #ideaFilters .filterToggle svg{width:15px;height:15px}
       #ideaFilters .ideaFilterAddButton{
-        display:inline-flex;grid-column:4;grid-row:1;align-self:center;justify-self:stretch;
-        width:42px;height:42px;border-color:rgba(79,142,158,.26);background:rgba(255,253,249,.70);
+        display:inline-flex;grid-column:3;grid-row:1;align-self:center;justify-self:stretch;
+        width:42px;height:42px;border-color:rgba(79,142,158,.40);background:rgba(255,253,249,.70);
         color:rgba(31,101,114,.92);box-shadow:0 8px 20px rgba(20,38,42,.04);backdrop-filter:blur(18px)
       }
-      #ideaFilters .ideaFilterAddButton:hover{border-color:rgba(79,142,158,.38);background:rgba(255,253,249,.92)}
+      #ideaFilters .ideaFilterAddButton:hover{border-color:rgba(79,142,158,.54);background:rgba(255,253,249,.92)}
       #ideaFilters .mobileViewBar{display:none}
       #agendaFilters .filterSearch{grid-column:1 / 13}
       #agendaFilters .filterToggle{
@@ -3577,7 +3577,7 @@
     <section id="tab-inspiratie" class="tabPanel active" role="tabpanel">
       <section class="tabHero inspirationHero" aria-labelledby="inspirationHeroTitle">
         <h1 class="tabHeroTitle" id="inspirationHeroTitle"><span class="desktopHeroTitle">Ontdek iets nieuws</span><span class="mobileHeroTitle">Ontdek iets nieuws</span></h1>
-        <p class="tabHeroLine"><span class="desktopHeroSubtitle">Vind én deel activiteiten en inspiratie in jouw omgeving</span><span class="mobileHeroSubtitle">Vind én deel activiteiten en inspiratie in jouw omgeving</span></p>
+        <p class="tabHeroLine"><span class="desktopHeroSubtitle">Vind én deel inspiratie</span><span class="mobileHeroSubtitle">Vind én deel inspiratie</span></p>
         <div class="tabHeroActions">
           <button class="tabHeroButton primary" id="randomIdeaBtn" type="button">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.7 5.1L19 10l-5.3 1.9L12 17l-1.7-5.1L5 10l5.3-1.9L12 3Z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"></path></svg>
@@ -3594,10 +3594,10 @@
         <div class="filters more" id="ideaFilters">
           <div class="filterSearch"><input id="ideaSearch" type="search" placeholder="Zoek inspiratie..."></div>
           <div class="desktopLocationBar" id="inspirationDesktopLocation"></div>
+          <button class="ideaAddButton ideaFilterAddButton" type="button" data-idea-submit-open aria-label="Inspiratie toevoegen" title="Inspiratie toevoegen" aria-haspopup="dialog" aria-controls="ideaSubmitSheetLayer" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
           <button class="filterToggle" id="filterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-haspopup="dialog" aria-controls="ideaFilterSheetLayer">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><circle cx="15" cy="7" r="2"></circle><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="9" cy="17" r="2"></circle></svg>
           </button>
-          <button class="ideaAddButton ideaFilterAddButton" type="button" data-idea-submit-open aria-label="Inspiratie toevoegen" title="Inspiratie toevoegen" aria-haspopup="dialog" aria-controls="ideaSubmitSheetLayer" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
           <div class="viewBar mobileViewBar">
             <div class="viewSwitch" aria-label="Weergave inspiratiebank">
               <button class="viewBtn active" type="button" data-view-group="ideas" data-view="tiles" aria-label="Tegelweergave" title="Tegelweergave">
