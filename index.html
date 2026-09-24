@@ -1628,6 +1628,10 @@
     .ideaMapResultMeta strong{display:inline;color:var(--accent-dark);font-size:inherit;line-height:inherit;font-weight:600}
     .ideaMapResultMeta .metaIcon{width:12px;height:12px;flex-basis:12px;color:#00738D}
     .ideaMapResultMeta .metaIcon svg{display:block;width:12px;height:12px}
+    .ideaMapResult .ideaMapResultInfo .pill,
+    .ideaMapResult .ideaMapResultInfo .cardMetaPart,
+    .ideaMapPanel .sharedIdeaCard .cardMetaBlock .pill,
+    .ideaMapPanel .sharedIdeaCard .cardMetaBlock .cardMetaPart{color:#356F7B}
     .ideaMapAccordion{
       width:100%;flex:0 0 auto;scroll-snap-align:start;overflow:hidden;
       border:1px solid rgba(79,142,158,.18);border-radius:16px;background:#fffdf8;
@@ -1658,10 +1662,11 @@
     .ideaMapAccordionPractical[open] summary::after{transform:rotate(180deg)}
     .ideaMapAccordionPractical p{margin:6px 0 0;line-height:1.4}
     @keyframes ideaMapAccordionOpen{from{grid-template-rows:0fr;opacity:0}to{grid-template-rows:1fr;opacity:1}}
-    @media (prefers-reduced-motion:reduce){.ideaMapAccordionBody{animation:none}}
-    .ideaMapSingleCard{position:relative;display:flex;flex:0 0 100%;width:100%;min-width:0}
-    .ideaMapSingleCard > .card{width:100%;height:auto !important;min-height:0 !important;max-height:100%;margin:0;overflow:auto}
+    .ideaMapSingleCard{position:relative;display:flex;flex:0 0 auto;width:100%;min-width:100%;max-width:100%;animation:ideaMapDetailIn .22s cubic-bezier(.2,.7,.25,1) both}
+    .ideaMapSingleCard > .card{box-sizing:border-box;width:100%;min-width:100%;height:auto !important;min-height:0 !important;max-height:100%;margin:0;overflow:auto}
     .ideaMapSingleCard > .card:hover{transform:none}
+    @keyframes ideaMapDetailIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    @media (prefers-reduced-motion:reduce){.ideaMapAccordionBody,.ideaMapSingleCard{animation:none}}
     .ideaMapDetailToolbar{position:absolute;z-index:5;top:10px;right:10px;pointer-events:none}
     .ideaMapDetailBack{
       display:grid;place-items:center;width:30px;height:30px;padding:0;border:1px solid rgba(255,255,255,.96);border-radius:999px;
@@ -1918,6 +1923,7 @@
         overflow-x:hidden;overflow-y:auto;scroll-snap-type:y proximity;
         scrollbar-width:none
       }
+      .ideaMapPanel.isSingleDetail .ideaMapResults{align-items:stretch;overflow:hidden;scroll-snap-type:none}
       .ideaMapResults::-webkit-scrollbar{display:none}
       .ideaMapResult{width:100%;scroll-snap-align:start}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 8.5}
@@ -7081,12 +7087,8 @@
   function ideaMapPanelMarkup(points=[]){
     const visiblePoints = visibleIdeaMapPoints(points);
     const detailPoint = ideaMapDetailKey ? visiblePoints.find(point => point.key === ideaMapDetailKey) : null;
-    const inlineDetail = Boolean(detailPoint && activeIdeaMapClusterKeys?.length > 1);
-    const singleDetail = Boolean(detailPoint && !inlineDetail);
+    const singleDetail = Boolean(detailPoint);
     const listHtml = visiblePoints.map(point => {
-      if(inlineDetail && point.key === detailPoint?.key){
-        return ideaMapAccordionCard(point);
-      }
       const active = point.key === activeIdeaMapKey;
       const image = approvedIdeaImage(point.item);
       const thumb = image ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async"></span>` : '';
@@ -7121,7 +7123,7 @@
     const toggleIcon = ideaMapPanelExpanded ? '<path d="m6 14 6-6 6 6"></path>' : '<path d="m6 10 6 6 6-6"></path>';
     const visibleTitle = ideaMapPanelExpanded ? panelTitle : 'Kies een marker op de kaart';
     const visibleText = ideaMapPanelExpanded ? panelText : 'De bijbehorende activiteiten verschijnen hier.';
-    return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${inlineDetail ? ' hasDetail' : ''}${singleDetail ? ' isSingleDetail' : ''}">
+    return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${singleDetail ? ' isSingleDetail' : ''}">
       <div class="ideaMapPanelHead"><div class="ideaMapPanelHeadRow"><div><h3>${escapeHtml(visibleTitle)}</h3><p>${escapeHtml(visibleText)}</p></div><div class="ideaMapPanelActions">${clearButton}<button class="ideaMapPanelToggle" type="button" data-map-panel-toggle aria-expanded="${ideaMapPanelExpanded ? 'true' : 'false'}" title="${toggleLabel}" aria-label="${toggleLabel}"><svg viewBox="0 0 24 24" aria-hidden="true">${toggleIcon}</svg></button></div></div></div>
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
@@ -7153,7 +7155,7 @@
       const active = nodeKey === activeIdeaMapKey;
       node.classList.toggle('active', active);
     });
-    if(ideaMapProvider) ideaMapProvider.setActive(activeIdeaMapKey);
+    if(ideaMapProvider) ideaMapProvider.setActive(activeIdeaMapKey, {pan:false});
     const escapedActiveKey = CSS.escape(activeIdeaMapKey);
     const result = $(`[data-map-result-key="${escapedActiveKey}"],[data-map-detail-key="${escapedActiveKey}"]`);
     if(result && scroll){
@@ -7364,7 +7366,7 @@
       setActiveIdeaMapItem(activeIdeaMapKey, {scroll:false});
     });
     return {
-      setActive(key){
+      setActive(key, {pan=false}={}){
         markers.forEach(marker => {
           const active = marker.options.ideaKey === key;
           const element = marker.getElement();
@@ -7372,7 +7374,7 @@
             element.classList.toggle('active', active);
             element.querySelector('.ideaLeafletMarker')?.classList.toggle('active', active);
           }
-          if(active) map.panTo(marker.getLatLng(), {animate:true, duration:.35});
+          if(active && pan) map.panTo(marker.getLatLng(), {animate:true, duration:.35});
         });
         if(!activeIdeaMapClusterKeys) activeClusterSignature = '';
         window.requestAnimationFrame(syncActiveCluster);
@@ -7740,8 +7742,9 @@
         return;
       }
       if(event.target.closest('[data-map-detail-close]')){
+        const returnToList = Boolean(activeIdeaMapClusterKeys?.length > 1);
         ideaMapDetailKey = '';
-        ideaMapPanelExpanded = false;
+        ideaMapPanelExpanded = returnToList;
         updateIdeaMapPanel();
         return;
       }
