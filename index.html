@@ -1430,11 +1430,11 @@
     @media (min-width:641px){
       .ideaFilterSheetLayer{display:block}
       .ideaFilterSheet{
-        position:fixed;top:24px;right:0;bottom:24px;width:min(520px,calc(100vw - 28px));height:auto;max-height:none;
+        position:fixed;top:0;right:0;bottom:0;width:min(480px,calc(100vw - 28px));height:100dvh;max-height:none;
         border:1px solid rgba(79,142,158,.08);border-right:0;border-radius:24px 0 0 24px;
-        box-shadow:-16px 10px 42px rgba(56,49,36,.16),0 2px 8px rgba(20,38,42,.05)
+        box-shadow:-18px 0 42px rgba(56,49,36,.15)
       }
-      .ideaFilterSheetHeader{min-height:60px;padding:8px 18px}
+      .ideaFilterSheetHeader{position:sticky;z-index:2;top:0;min-height:60px;padding:8px 18px;background:rgba(255,253,250,.97)}
       .ideaFilterSheetClose{width:38px;height:38px}
       .ideaFilterSheetBody{padding:14px 18px 18px}
       .ideaFilterSection{gap:8px;padding-bottom:14px;margin-bottom:14px;scroll-margin-top:10px}
