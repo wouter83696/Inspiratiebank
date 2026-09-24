@@ -1616,6 +1616,9 @@
       background:#fff;border-color:rgba(79,142,158,.24);transform:translateY(-1px);
       box-shadow:0 10px 24px rgba(20,38,42,.10);outline:none
     }
+    #ideaMap.suppressResultHover .ideaMapResult:hover{
+      background:#fffdf8;border-color:#EFE9DE;transform:none;box-shadow:0 6px 18px rgba(92,65,33,.04)
+    }
     .ideaMapResult.active{background:#fffdf8;border-color:rgba(79,142,158,.16);transform:none;box-shadow:0 8px 20px rgba(92,65,33,.06)}
     .ideaMapResultTitle{display:flex;align-items:center;gap:8px;min-width:0}
     .ideaMapResult.hasThumb .ideaMapResultTitle{transform:translateY(4px)}
@@ -1678,6 +1681,7 @@
     }
     .ideaMapSingleCard > .card{box-sizing:border-box;width:100%;min-width:100%;height:auto !important;min-height:0 !important;max-height:100%;margin:0;overflow:auto}
     .ideaMapSingleCard > .card:hover{transform:none}
+    #ideaMap.suppressResultHover .ideaMapSingleCard > .sharedIdeaCard:hover{box-shadow:0 9px 24px rgba(92,65,33,.045)}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard{gap:5px}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard h3 + .cardMetaBlock{margin-top:2px}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard > p:not(.fine){margin-top:5px}
@@ -7251,7 +7255,7 @@
     if(uniqueKeys.length <= 1){
       if(uniqueKeys[0]){
         ideaMapDetailKey = uniqueKeys[0];
-        setActiveIdeaMapItem(uniqueKeys[0], {clearCluster:true, refreshPanel:true, emphasize:true});
+        setActiveIdeaMapItem(uniqueKeys[0], {clearCluster:true, refreshPanel:true});
       }
       return;
     }
@@ -7266,6 +7270,12 @@
       const results = $('#ideaMap .ideaMapResults');
       if(results) results.scrollTo({top:0,left:0,behavior:'auto'});
     });
+  }
+  function suppressIdeaMapResultHover(){
+    const map = $('#ideaMap');
+    if(!map) return;
+    map.classList.add('suppressResultHover');
+    window.addEventListener('pointermove', () => map.classList.remove('suppressResultHover'), {once:true});
   }
   function clearActiveIdeaMapCluster(){
     if(!activeIdeaMapClusterKeys && !ideaMapDetailKey) return;
@@ -7466,10 +7476,14 @@
       return createLeafletMapProvider(container, points, {
         userPoint:userLocation || DEFAULT_LOCATION,
         onSelect:key => {
+          suppressIdeaMapResultHover();
           ideaMapDetailKey = key;
-          setActiveIdeaMapItem(key, {clearCluster:true, refreshPanel:true, emphasize:true});
+          setActiveIdeaMapItem(key, {clearCluster:true, refreshPanel:true});
         },
-        onCluster:(keys, clusterOptions) => setActiveIdeaMapCluster(keys, clusterOptions)
+        onCluster:(keys, clusterOptions) => {
+          suppressIdeaMapResultHover();
+          setActiveIdeaMapCluster(keys, clusterOptions);
+        }
       });
     }
     return null;
