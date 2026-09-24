@@ -3659,6 +3659,24 @@
         justify-content:flex-end;padding:0 8px;border:0;border-radius:12px;
         background:transparent;box-shadow:none;backdrop-filter:none
       }
+      :is(#ideaFilters,#agendaFilters).sharedDiscoveryFilters .desktopLocationBar .locationControlGroup{
+        display:flex;align-items:stretch;justify-content:flex-end;
+        width:calc(100% - 16px);height:36px;margin:6px 8px
+      }
+      :is(#ideaFilters,#agendaFilters).sharedDiscoveryFilters .desktopLocationBar .locationControlGroup .locationLegendItem{
+        flex:1 1 auto;width:auto;height:36px;min-height:36px;margin:0;
+        padding:0 4px 0 8px;border-radius:12px 0 0 12px
+      }
+      .locationInlineFilterButton{
+        display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;
+        width:32px;height:36px;padding:0;border:0;border-radius:0 12px 12px 0;
+        background:transparent;color:rgba(31,87,99,.92);cursor:pointer
+      }
+      .locationInlineFilterButton:hover{background:transparent}
+      .locationInlineFilterButton svg{
+        width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;
+        stroke-linecap:round;stroke-linejoin:round
+      }
       :is(#ideaFilters,#agendaFilters).sharedDiscoveryFilters .desktopLocationBar .locationLegendItem:hover{background:transparent}
       .sharedDiscoveryFilters>.filterToggle{display:none}
       #agendaFilters .customSelect[data-select-id="agendaWeekFilter"]{display:none}
@@ -4772,10 +4790,11 @@
     'Actie & Amusement'
   ];
   function locationLegendButton({filterIcon=false}={}){
-    const endIcon = filterIcon
-      ? `<svg class="locationChevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg><svg class="locationFilterIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><circle cx="15" cy="7" r="2"></circle><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="9" cy="17" r="2"></circle></svg>`
-      : `<svg class="locationChevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>`;
-    return `<button class="agendaLegendItem locationLegendItem" data-location-settings-btn type="button" title="Locatie en afstand wijzigen"><span class="locationIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><span data-location-settings-label>Nijmegen</span> <span class="locationRadius" data-location-radius-label>10 km</span>${endIcon}</button>`;
+    const chevron = `<svg class="locationChevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>`;
+    const locationButton = `<button class="agendaLegendItem locationLegendItem" data-location-settings-btn type="button" title="Locatie en afstand wijzigen"><span class="locationIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><span data-location-settings-label>Nijmegen</span> <span class="locationRadius" data-location-radius-label>10 km</span>${chevron}</button>`;
+    if(!filterIcon) return locationButton;
+    const filterButton = `<button class="locationInlineFilterButton" data-filter-settings-btn type="button" title="Filters wijzigen" aria-label="Filters wijzigen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><circle cx="15" cy="7" r="2"></circle><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="9" cy="17" r="2"></circle></svg></button>`;
+    return `<span class="locationControlGroup">${locationButton}${filterButton}</span>`;
   }
   function agendaThemeLegend({interactive=false, includeLocation=false}={}){
     const allItem = interactive
@@ -8512,6 +8531,14 @@
       if(event.target.id === 'locationModal') closeLocationModal();
     });
     document.addEventListener('click', event => {
+      if(event.target.closest('[data-filter-settings-btn]')){
+        event.preventDefault();
+        event.stopPropagation();
+        const activeTab = $('.topbar .tab.active')?.dataset.tab || 'inspiratie';
+        if(activeTab === 'inspiratie') openIdeaFilterSheet('top');
+        else openAgendaFilterSheet();
+        return;
+      }
       if(event.target.closest('[data-location-settings-btn]')){
         event.preventDefault();
         event.stopPropagation();
