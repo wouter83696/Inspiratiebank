@@ -1398,7 +1398,8 @@
       }
       #ideaCards{margin-top:0}
     }
-    #ideaFilters>.filterOptions{display:none!important}
+    #ideaFilters>.filterOptions,
+    #agendaFilters>.filterOptions{display:none!important}
     .ideaFilterSheetLayer{position:fixed;inset:0;z-index:1200;display:flex;justify-content:flex-end;visibility:hidden;pointer-events:none;transition:visibility 0s linear .34s}
     .ideaFilterSheetLayer.isOpen{visibility:visible;pointer-events:auto;transition-delay:0s}
     .ideaFilterSheetBackdrop{position:absolute;inset:0;border:0;background:rgba(48,46,39,.18);opacity:0;transition:opacity .28s ease;cursor:default}
@@ -1442,35 +1443,44 @@
     #ideaFilterPlaceChips .ideaFilterChip svg{
       width:15px;height:15px;flex:0 0 15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round
     }
-    #ideaFilterCategoryChips .ideaFilterChip{
+    #ideaFilterCategoryChips .ideaFilterChip,
+    #agendaFilterCategoryChips .ideaFilterChip{
       gap:6px;min-height:32px;padding:6px 9px;
       border-color:color-mix(in srgb,var(--theme-line) 52%,transparent);
       background:rgba(255,255,255,.52);
       color:color-mix(in srgb,var(--theme-ink) 74%,var(--accent-dark));
       font-size:.76rem;font-weight:500;line-height:1.12
     }
-    #ideaFilterCategoryChips .ideaFilterChip:not(.active){background:rgba(255,255,255,.52)}
-    #ideaFilterCategoryChips .ideaFilterChip:not(.active):hover{
+    #ideaFilterCategoryChips .ideaFilterChip:not(.active),
+    #agendaFilterCategoryChips .ideaFilterChip:not(.active){background:rgba(255,255,255,.52)}
+    #ideaFilterCategoryChips .ideaFilterChip:not(.active):hover,
+    #agendaFilterCategoryChips .ideaFilterChip:not(.active):hover{
       background:color-mix(in srgb,var(--theme-tint) 58%,rgba(255,255,255,.72));
       border-color:color-mix(in srgb,var(--theme-line) 82%,rgba(63,120,132,.22));color:var(--theme-ink)
     }
-    #ideaFilterCategoryChips .ideaFilterChip.active:not(:first-child){
+    #ideaFilterCategoryChips .ideaFilterChip.active:not(:first-child),
+    #agendaFilterCategoryChips .ideaFilterChip.active:not(:first-child){
       background:var(--theme-tint);
       border-color:color-mix(in srgb,var(--theme-line) 52%,transparent);
       color:var(--theme-ink);box-shadow:inset 0 0 0 1px var(--theme-line)
     }
-    #ideaFilterCategoryChips .ideaFilterChip.active:not(:first-child)::after{content:none}
+    #ideaFilterCategoryChips .ideaFilterChip.active:not(:first-child)::after,
+    #agendaFilterCategoryChips .ideaFilterChip.active:not(:first-child)::after{content:none}
     .ideaFilterCategoryHint{margin:0;color:rgba(49,95,107,.72);font-size:.76rem;line-height:1.4}
-    #ideaFilterCategoryChips .ideaFilterChip .domainIcon{
+    #ideaFilterCategoryChips .ideaFilterChip .domainIcon,
+    #agendaFilterCategoryChips .ideaFilterChip .domainIcon{
       width:18px;height:18px;background:var(--theme-icon-bg);
       border-color:var(--theme-icon-line);
       color:var(--theme-ink)
     }
-    #ideaFilterCategoryChips .ideaFilterChip .domainIcon svg{width:11px;height:11px}
-    #ideaFilterPriceChips .ideaFilterChip:not(:first-child){
+    #ideaFilterCategoryChips .ideaFilterChip .domainIcon svg,
+    #agendaFilterCategoryChips .ideaFilterChip .domainIcon svg{width:11px;height:11px}
+    #ideaFilterPriceChips .ideaFilterChip:not(:first-child),
+    #agendaFilterPriceChips .ideaFilterChip:not(:first-child){
       background:rgba(255,255,255,.54);border-color:rgba(79,142,158,.10);color:rgba(49,95,107,.76)
     }
-    #ideaFilterPriceChips .ideaFilterChip.active:not(:first-child){
+    #ideaFilterPriceChips .ideaFilterChip.active:not(:first-child),
+    #agendaFilterPriceChips .ideaFilterChip.active:not(:first-child){
       background:rgba(228,244,248,.38);border-color:rgba(79,142,158,.14);color:#356F7B;
       box-shadow:inset 0 0 0 1px rgba(79,142,158,.06)
     }
@@ -3604,6 +3614,8 @@
       #agendaFilters .desktopLocationBar .locationLegendItem:hover{background:rgba(168,225,221,.14)}
       #agendaThemeLegend .locationLegendItem{display:none}
     }
+    /* The agenda keeps native selects as filter state; only the shared sheet is visible. */
+    #agendaFilters>.filterOptions{display:none!important}
   </style>
 </head>
 <body class="appLoading">
@@ -3697,7 +3709,7 @@
         <div class="filters agendaSearchFilters more" id="agendaFilters">
           <div class="filterSearch"><input id="agendaSearch" type="search" placeholder="Zoek in activiteiten..."></div>
           <div class="desktopLocationBar" id="agendaDesktopLocation"></div>
-          <button class="filterToggle" id="agendaFilterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-controls="agendaFilters">
+          <button class="filterToggle" id="agendaFilterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-haspopup="dialog" aria-controls="agendaFilterSheetLayer">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><circle cx="15" cy="7" r="2"></circle><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="9" cy="17" r="2"></circle></svg>
           </button>
           <select id="agendaWeekFilter" aria-label="Week filteren" data-include-placeholder-option="true"><option value="">Week</option></select>
@@ -4052,6 +4064,41 @@
       <footer class="ideaFilterSheetFooter">
         <button class="ideaFilterSheetAction secondary" id="ideaFilterClearBtn" type="button">Wissen</button>
         <button class="ideaFilterSheetAction primary" id="ideaFilterApplyBtn" type="button">Toon activiteiten</button>
+      </footer>
+    </aside>
+  </div>
+  <div class="ideaFilterSheetLayer" id="agendaFilterSheetLayer" aria-hidden="true">
+    <button class="ideaFilterSheetBackdrop" type="button" data-agenda-filter-close aria-label="Filters sluiten"></button>
+    <aside class="ideaFilterSheet" role="dialog" aria-modal="true" aria-labelledby="agendaFilterSheetTitle">
+      <header class="ideaFilterSheetHeader">
+        <h2 id="agendaFilterSheetTitle">Filters</h2>
+        <button class="ideaFilterSheetClose" type="button" data-agenda-filter-close aria-label="Filters sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
+      </header>
+      <div class="ideaFilterSheetBody" id="agendaFilterSheetBody">
+        <section class="ideaFilterSection">
+          <div class="ideaFilterSectionHead"><h3>Week</h3></div>
+          <div class="ideaFilterChips" id="agendaFilterWeekChips"></div>
+        </section>
+        <section class="ideaFilterSection">
+          <div class="ideaFilterSectionHead"><h3>Categorieën</h3></div>
+          <div class="ideaFilterChips" id="agendaFilterCategoryChips"></div>
+        </section>
+        <section class="ideaFilterSection">
+          <div class="ideaFilterSectionHead"><h3>Afstand</h3></div>
+          <div class="ideaFilterChips" id="agendaFilterDistanceChips"></div>
+        </section>
+        <section class="ideaFilterSection">
+          <div class="ideaFilterSectionHead"><h3>Prijs</h3></div>
+          <div class="ideaFilterChips" id="agendaFilterPriceChips"></div>
+        </section>
+        <section class="ideaFilterSection">
+          <div class="ideaFilterSectionHead"><h3>Prikkelbelasting</h3></div>
+          <div class="ideaFilterChips" id="agendaFilterStimulusChips"></div>
+        </section>
+      </div>
+      <footer class="ideaFilterSheetFooter">
+        <button class="ideaFilterSheetAction secondary" id="agendaFilterClearBtn" type="button">Wissen</button>
+        <button class="ideaFilterSheetAction primary" id="agendaFilterApplyBtn" type="button">Toon activiteiten</button>
       </footer>
     </aside>
   </div>
@@ -7118,6 +7165,7 @@
     renderWeekPanels();
     renderFlexibleOffers();
     updateAgendaThemeChips();
+    syncAgendaFilterSheet();
   }
   let ideaSearchSuggestionIndex = -1;
   function closeIdeaSearchSuggestions(){
@@ -7284,6 +7332,7 @@
   }
   const IDEA_FILTER_RADIUS_STEPS = [3,5,10,25,50];
   let ideaFilterSheetReturnFocus = null;
+  let agendaFilterSheetReturnFocus = null;
   let ideaSubmitSheetReturnFocus = null;
   let agendaSourceSheetReturnFocus = null;
   function buildIdeaFilterCategoryChips(){
@@ -7309,6 +7358,91 @@
         : `<span class="domainIcon" aria-hidden="true">${domainIcon(option.value)}</span><span>${escapeHtml(domainDisplayLabel(option.value))}</span>`;
       container.appendChild(button);
     });
+  }
+  function buildAgendaFilterChips(){
+    const groups = [
+      ['agendaFilterWeekChips','agendaWeekFilter','Alle weken',false],
+      ['agendaFilterCategoryChips','agendaDomain','Alles',true],
+      ['agendaFilterDistanceChips','agendaDistance','Alle afstanden',false],
+      ['agendaFilterPriceChips','agendaCost','Alles',false],
+      ['agendaFilterStimulusChips','agendaStimulus','Alle niveaus',false]
+    ];
+    groups.forEach(([containerId, selectId, allLabel, themed]) => {
+      const container = $('#'+containerId);
+      const select = $('#'+selectId);
+      if(!container || !select) return;
+      container.innerHTML = '';
+      [...select.options].forEach((option, index) => {
+        const button = document.createElement('button');
+        const isAll = option.value === 'all' || (!option.value && index === 0);
+        button.className = `ideaFilterChip ${themed && !isAll ? domainThemeClass(option.value) : ''}`.trim();
+        button.type = 'button';
+        button.dataset.agendaSheetFilter = selectId;
+        button.dataset.value = option.value;
+        button.innerHTML = themed && !isAll
+          ? `<span class="domainIcon" aria-hidden="true">${domainIcon(option.value)}</span><span>${escapeHtml(domainDisplayLabel(option.value))}</span>`
+          : escapeHtml(isAll ? allLabel : option.textContent);
+        container.appendChild(button);
+      });
+    });
+  }
+  function updateAgendaFilterSheetCount(){
+    const filters = agendaSearchState();
+    const source = filters.scope === 'all' ? allExternalItems() : byWeek(filters.week);
+    const count = filterAgendaItems(source, filters).length;
+    const button = $('#agendaFilterApplyBtn');
+    if(button) button.textContent = count === 1 ? 'Toon 1 activiteit' : `Toon ${count} activiteiten`;
+  }
+  function syncAgendaFilterSheet(){
+    $$('[data-agenda-sheet-filter]').forEach(button => {
+      const control = $('#'+button.dataset.agendaSheetFilter);
+      const active = control && String(control.value) === String(button.dataset.value);
+      button.classList.toggle('active', Boolean(active));
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    updateAgendaFilterSheetCount();
+  }
+  function setAgendaFilterValue(id, value){
+    const control = $('#'+id);
+    if(!control) return;
+    control.value = value;
+    if(id === 'agendaWeekFilter' && value !== 'all') selectedAgendaWeek = value;
+    syncCustomSelect(control);
+    renderAgenda();
+  }
+  function openAgendaFilterSheet(){
+    const layer = $('#agendaFilterSheetLayer');
+    if(!layer) return;
+    closeIdeaFilterSheet();
+    closeIdeaSubmitSheet({restoreFocus:false});
+    agendaFilterSheetReturnFocus = document.activeElement;
+    buildAgendaFilterChips();
+    syncAgendaFilterSheet();
+    layer.classList.add('isOpen');
+    layer.setAttribute('aria-hidden','false');
+    document.body.classList.add('ideaFilterSheetOpen');
+    $('#agendaFilterToggle')?.setAttribute('aria-expanded','true');
+    window.setTimeout(() => layer.querySelector('.ideaFilterSheetClose')?.focus({preventScroll:true}), 180);
+  }
+  function closeAgendaFilterSheet({restoreFocus=true}={}){
+    const layer = $('#agendaFilterSheetLayer');
+    if(!layer?.classList.contains('isOpen')) return;
+    layer.classList.remove('isOpen');
+    layer.setAttribute('aria-hidden','true');
+    document.body.classList.remove('ideaFilterSheetOpen');
+    $('#agendaFilterToggle')?.setAttribute('aria-expanded','false');
+    if(restoreFocus && agendaFilterSheetReturnFocus?.focus) agendaFilterSheetReturnFocus.focus();
+    agendaFilterSheetReturnFocus = null;
+  }
+  function setupAgendaFilterSheet(){
+    $$('[data-agenda-filter-close]').forEach(button => button.addEventListener('click', closeAgendaFilterSheet));
+    $('#agendaFilterSheetLayer')?.addEventListener('click', event => {
+      const chip = event.target.closest('[data-agenda-sheet-filter]');
+      if(!chip) return;
+      setAgendaFilterValue(chip.dataset.agendaSheetFilter, chip.dataset.value);
+    });
+    $('#agendaFilterClearBtn')?.addEventListener('click', resetAgendaFilters);
+    $('#agendaFilterApplyBtn')?.addEventListener('click', closeAgendaFilterSheet);
   }
   function updateIdeaFilterSheetCount(count=filteredInspirationItems().length){
     const button = $('#ideaFilterApplyBtn');
@@ -7343,6 +7477,7 @@
     const layer = $('#ideaFilterSheetLayer');
     const body = $('#ideaFilterSheetBody');
     if(!layer || !body) return;
+    closeAgendaFilterSheet({restoreFocus:false});
     closeIdeaSubmitSheet();
     ideaFilterSheetReturnFocus = document.activeElement;
     buildIdeaFilterCategoryChips();
@@ -8117,6 +8252,7 @@
 	    });
 	    if(ACTIVE_WEEKS[0]) selectedAgendaWeek = ACTIVE_WEEKS[0].id;
 	    renderAgenda();
+	    syncAgendaFilterSheet();
 	  }
 	  async function refreshFromCentral(){
 	    const loaded = await loadCentralStorage();
@@ -8152,6 +8288,7 @@
 	    setupTopTabNavigation();
 	    setupDesktopSidebar();
 	    setupIdeaFilterSheet();
+	    setupAgendaFilterSheet();
 	    const hasSiteData = await loadSiteData();
 	    if(!hasSiteData) return;
 	    refreshActiveWeeks();
@@ -8207,6 +8344,10 @@
         }
         if($('#ideaFilterSheetLayer')?.classList.contains('isOpen')){
           closeIdeaFilterSheet();
+          return;
+        }
+        if($('#agendaFilterSheetLayer')?.classList.contains('isOpen')){
+          closeAgendaFilterSheet();
           return;
         }
         if($('#desktopSidebarLayer')?.classList.contains('isOpen')){
@@ -8446,10 +8587,7 @@
 	    $('#resetBtn').addEventListener('click',resetFilters);
 	    $('#agendaResetBtn').addEventListener('click',resetAgendaFilters);
 	    $('#agendaFilterToggle').addEventListener('click',()=>{
-	      if(openDesktopSidebar('filters')) return;
-	      const filters = $('#agendaFilters');
-	      const expanded = filters.classList.toggle('expanded');
-	      $('#agendaFilterToggle').setAttribute('aria-expanded', expanded ? 'true' : 'false');
+	      openAgendaFilterSheet();
 	    });
 	    $('#filterToggle').addEventListener('click',()=>{
 	      openIdeaFilterSheet('top');
