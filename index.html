@@ -3075,11 +3075,6 @@
     }
 
     /* Public list uses the same quiet surfaces and typography as the tiles. */
-    #ideaList.sharedIdeaList{border:1px solid rgba(64,45,20,.055);border-radius:18px;background:#FFFEFC;box-shadow:0 8px 24px rgba(92,65,33,.04)}
-    #ideaList.sharedIdeaList table{border-collapse:collapse;border-spacing:0}
-    #ideaList.sharedIdeaList th{background:rgba(247,241,231,.42);border-bottom:1px solid rgba(64,45,20,.06);color:#74716E;padding:13px 16px;font-size:.8rem}
-    #ideaList.sharedIdeaList .ideaThemeRow td{background:#FFFEFC;border-bottom:1px solid rgba(64,45,20,.06);padding:10px 16px;vertical-align:middle}
-    #ideaList.sharedIdeaList .ideaThemeRow:hover td{background:#fffaf4}
     #ideaList.sharedIdeaList .ideaThemeRow:hover .ideaListTitleLink{color:#168697;text-decoration:none}
     #ideaList .ideaListTheme{margin-bottom:5px}
     #ideaList .ideaListTheme .categoryPill{min-height:31px;padding:7px 11px;font-size:.76rem;box-shadow:0 3px 10px rgba(20,38,42,.045)}
@@ -3535,12 +3530,27 @@
       #tab-weken .weekSectionNavigation{margin:0 -16px 18px!important;padding:0 16px!important}
     }
 
-    /* Doorlopend aanbod deelt exact dezelfde tabelvlakken als de lijstweergave. */
-    #ideaList.sharedIdeaList,
-    .ongoingAccordion{
+    /* De openbare lijst en Doorlopend aanbod delen een enkele tabelbasis. */
+    .sharedPublicList{
+      --shared-list-head-bg:rgba(247,241,231,.42);
+      --shared-list-row-bg:#fffdf9;
       border:1px solid rgba(64,45,20,.055);border-radius:18px;
       background:#fffdf9;box-shadow:0 8px 24px rgba(92,65,33,.04)
     }
+    .sharedPublicList table{border-collapse:collapse;border-spacing:0}
+    .sharedPublicList th{
+      padding:13px 16px;background:var(--shared-list-head-bg);
+      border-bottom:1px solid rgba(64,45,20,.06);
+      color:#74716E;font-size:.8rem;font-weight:500
+    }
+    .sharedPublicList .ideaThemeRow td{
+      padding:10px 16px;background:var(--shared-list-row-bg);
+      border-bottom:1px solid rgba(64,45,20,.06);
+      color:#74716E;vertical-align:middle
+    }
+    .sharedPublicList .ideaThemeRow:hover td{background:#fffaf4}
+    .sharedPublicList tbody tr:last-child td{border-bottom:0}
+    .ongoingAccordion{--shared-list-head-bg:#fffdf9}
     .ongoingAccordion.open,
     .ongoingAccordionBody,
     .ongoingAccordion .tableWrap{background:#fffdf9}
@@ -3558,20 +3568,6 @@
       background:rgba(247,241,231,.11);
       color:#617573;box-shadow:none
     }
-    #ideaList.sharedIdeaList table,
-    .ongoingAccordion table{border-collapse:collapse;border-spacing:0}
-    .ongoingAccordion th{
-      padding:13px 16px;background:#fffdf9;
-      border-bottom:1px solid rgba(64,45,20,.06);
-      color:#74716E;font-size:.8rem;font-weight:500
-    }
-    .ongoingAccordion td{
-      padding:10px 16px;background:#fffdf9;
-      border-bottom:1px solid rgba(64,45,20,.06);
-      color:#74716E;vertical-align:middle
-    }
-    .ongoingAccordion tbody tr:last-child td{border-bottom:0}
-    .ongoingAccordion tbody tr:hover td{background:#fffaf4}
     #flexibleOffersWrap th:nth-child(1),#flexibleOffersWrap td:nth-child(1){width:30%}
     #flexibleOffersWrap th:nth-child(2),#flexibleOffersWrap td:nth-child(2){width:9%}
     #flexibleOffersWrap th:nth-child(3),#flexibleOffersWrap td:nth-child(3){width:20%}
@@ -3835,7 +3831,7 @@
       </div>
       </div>
       <div id="weekPanels" class="weekStack"></div>
-      <section id="longerOffers" class="ongoingAccordion open">
+      <section id="longerOffers" class="ongoingAccordion sharedPublicList open">
         <div class="ongoingAccordionButton">
           <span class="ongoingAccordionText"><span class="ongoingTitleLine"><strong>Doorlopend aanbod</strong><span id="flexibleOfferCount" class="weekCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>0</strong> opties</span></span></span></span>
         </div>
@@ -3916,7 +3912,7 @@
         </div>
       </div>
       </div>
-      <div id="ideaList" class="tableWrap ideaView sharedIdeaList" hidden></div>
+      <div id="ideaList" class="tableWrap ideaView sharedIdeaList sharedPublicList" hidden></div>
       <div id="ideaMap" class="ideaMap ideaView" hidden></div>
       <div id="ideaCards" class="cards ideaView sharedIdeaCards active"></div>
       <div class="ideaSubmitSheetLayer" id="ideaSubmitSheetLayer" aria-hidden="true">
