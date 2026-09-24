@@ -1008,6 +1008,14 @@
     .viewBtn.active{background:rgba(168,225,221,.28);color:rgba(31,101,114,.92);box-shadow:inset 0 0 0 1px rgba(79,142,158,.06)}
     .viewIcon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px}
     .viewIcon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .ideaAddButton{
+      display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:40px;height:40px;padding:0;
+      border:1px solid rgba(79,142,158,.10);border-radius:14px;background:rgba(255,253,249,.64);color:#356f7b;
+      box-shadow:0 6px 16px rgba(20,38,42,.04);cursor:pointer;transition:.18s var(--ease)
+    }
+    .ideaAddButton:hover{background:#fff;color:var(--accent-dark);border-color:rgba(79,142,158,.18)}
+    .ideaAddButton svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+    .desktopViewBar,.mobileViewBar{gap:7px}
     .desktopViewBar{display:none}
     .desktopLocationBar{display:none}
     .desktopSidebarLayer{display:none}
@@ -1467,6 +1475,46 @@
       .ideaFilterSection{padding-bottom:19px;margin-bottom:19px}
       .ideaFilterSheetFooter{padding-left:16px;padding-right:16px}
       .ideaFilterChip{min-height:36px;padding:7px 12px;font-size:.76rem}
+    }
+    .ideaSubmitSheetLayer{position:fixed;inset:0;z-index:1210;display:flex;justify-content:flex-end;visibility:hidden;pointer-events:none;transition:visibility 0s linear .34s}
+    .ideaSubmitSheetLayer.isOpen{visibility:visible;pointer-events:auto;transition-delay:0s}
+    .ideaSubmitSheetBackdrop{position:absolute;inset:0;border:0;background:rgba(48,46,39,.18);opacity:0;transition:opacity .28s ease;cursor:default}
+    .ideaSubmitSheetLayer.isOpen .ideaSubmitSheetBackdrop{opacity:1}
+    .ideaSubmitSheet{
+      position:relative;z-index:1;display:grid;grid-template-rows:auto minmax(0,1fr);width:min(480px,calc(100vw - 28px));height:100dvh;
+      overflow:hidden;background:linear-gradient(180deg,#fffdfa 0%,#faf7ef 100%);border-left:1px solid rgba(79,142,158,.08);
+      box-shadow:-18px 0 42px rgba(56,49,36,.15);transform:translate3d(100%,0,0);transition:transform .34s cubic-bezier(.32,.72,0,1)
+    }
+    .ideaSubmitSheetLayer.isOpen .ideaSubmitSheet{transform:translate3d(0,0,0)}
+    .ideaSubmitSheetHeader{display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:7px 18px;border-bottom:1px solid rgba(123,112,88,.08);background:rgba(255,253,250,.97)}
+    .ideaSubmitSheetHeader h2{margin:0;color:var(--accent-dark);font-size:1.2rem;font-weight:650}
+    .ideaSubmitSheetClose{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;border:0;border-radius:12px;background:transparent;color:rgba(49,95,107,.72);cursor:pointer}
+    .ideaSubmitSheetClose:hover{background:rgba(217,231,214,.45);color:var(--accent-dark)}
+    .ideaSubmitSheetClose svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+    .ideaSubmitSheetBody{min-height:0;overflow:auto;padding:14px 18px 0;scrollbar-width:thin;scrollbar-color:rgba(49,95,107,.22) transparent}
+    .ideaSubmitSheetIntro{margin:0 0 14px;color:var(--muted);font-size:.84rem;line-height:1.45}
+    .ideaSubmitSheet .teamFormBox{margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+    .ideaSubmitSheet #teamAdditions{margin:0;padding:0}
+    .ideaSubmitSheet .teamFormGrid{grid-template-columns:1fr;gap:11px}
+    .ideaSubmitSheet .teamField.wide,.ideaSubmitSheet .teamAddressPair{grid-column:1}
+    .ideaSubmitSheet .teamField input,.ideaSubmitSheet .teamField select,.ideaSubmitSheet .teamField textarea{border-radius:12px;padding:10px 11px}
+    .ideaSubmitSheet .teamField .customSelectButton{min-height:44px;border-radius:12px;padding:10px 11px}
+    .ideaSubmitSheet .teamAddressPair{grid-template-columns:minmax(0,1fr) minmax(110px,.42fr);gap:10px}
+    .ideaSubmitSheet .teamActionBar{
+      position:sticky;z-index:3;bottom:0;display:grid;grid-template-columns:1fr;gap:7px;margin:4px -18px 0;padding:11px 18px calc(11px + env(safe-area-inset-bottom));
+      border-top:1px solid rgba(123,112,88,.09);background:rgba(255,253,249,.96);backdrop-filter:blur(14px)
+    }
+    .ideaSubmitSheet .teamActionBar .formButton.primary{width:100%;min-height:42px;justify-content:center}
+    .ideaSubmitSheet .teamFormStatus{min-height:0;margin:0;text-align:left}
+    body.ideaSubmitSheetOpen{overflow:hidden}
+    @media (max-width:640px){
+      .ideaSubmitSheetLayer{align-items:flex-end}
+      .ideaSubmitSheet{width:100%;height:min(94dvh,820px);border:0;border-radius:24px 24px 0 0;box-shadow:0 -16px 40px rgba(56,49,36,.16);transform:translate3d(0,100%,0)}
+      .ideaSubmitSheetLayer.isOpen .ideaSubmitSheet{transform:translate3d(0,0,0)}
+      .ideaSubmitSheetHeader{min-height:62px;padding:10px 16px}
+      .ideaSubmitSheetBody{padding:14px 16px 0}
+      .ideaSubmitSheet .teamActionBar{margin-right:-16px;margin-left:-16px;padding-right:16px;padding-left:16px}
+      .ideaAddButton{width:40px;height:40px}
     }
     .ideaView[hidden],.teamView[hidden]{display:none !important}
     .tableWrap.ideaView.active,.tableWrap.teamView.active{display:block}
@@ -3499,10 +3547,10 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.7 5.1L19 10l-5.3 1.9L12 17l-1.7-5.1L5 10l5.3-1.9L12 3Z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"></path></svg>
             <span>Verras me</span>
           </button>
-          <a class="tabHeroButton" href="#teamAdditions">
+          <button class="tabHeroButton" type="button" data-idea-submit-open aria-haspopup="dialog" aria-controls="ideaSubmitSheetLayer" aria-expanded="false">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
             <span>Inspiratie toevoegen</span>
-          </a>
+          </button>
         </div>
       </section>
       <div class="desktopStickyControls">
@@ -3525,6 +3573,7 @@
                 <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M2.5 5.5 7 3.5l6 2 4.5-2v11L13 16.5l-6-2-4.5 2Z"></path><path d="M7 3.5v11"></path><path d="M13 5.5v11"></path></svg></span>
               </button>
             </div>
+            <button class="ideaAddButton" type="button" data-idea-submit-open aria-label="Inspiratie toevoegen" title="Inspiratie toevoegen" aria-haspopup="dialog" aria-controls="ideaSubmitSheetLayer" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
           </div>
           <div class="filterOptions">
             <select id="ideaDomain"><option value="all">Categorie</option></select>
@@ -3558,14 +3607,23 @@
               <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M2.5 5.5 7 3.5l6 2 4.5-2v11L13 16.5l-6-2-4.5 2Z"></path><path d="M7 3.5v11"></path><path d="M13 5.5v11"></path></svg></span>
             </button>
           </div>
+          <button class="ideaAddButton" type="button" data-idea-submit-open aria-label="Inspiratie toevoegen" title="Inspiratie toevoegen" aria-haspopup="dialog" aria-controls="ideaSubmitSheetLayer" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
         </div>
       </div>
       </div>
       <div id="ideaList" class="tableWrap ideaView sharedIdeaList" hidden></div>
       <div id="ideaMap" class="ideaMap ideaView" hidden></div>
       <div id="ideaCards" class="cards ideaView sharedIdeaCards active"></div>
-      <div id="teamAdditions" class="sectionHead teamHead"><div><h2>Delen</h2><p>Heb je een idee, uitje of link dat ook anderen kan inspireren? Voeg het hier toe. Na beoordeling kan het tussen de andere inspiratie-items komen te staan.</p></div></div>
-      <div class="teamFormBox">
+      <div class="ideaSubmitSheetLayer" id="ideaSubmitSheetLayer" aria-hidden="true">
+        <button class="ideaSubmitSheetBackdrop" type="button" data-idea-submit-close aria-label="Formulier sluiten"></button>
+        <aside class="ideaSubmitSheet" role="dialog" aria-modal="true" aria-labelledby="ideaSubmitSheetTitle">
+          <header class="ideaSubmitSheetHeader">
+            <h2 id="ideaSubmitSheetTitle">Inspiratie toevoegen</h2>
+            <button class="ideaSubmitSheetClose" type="button" data-idea-submit-close aria-label="Formulier sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
+          </header>
+          <div class="ideaSubmitSheetBody">
+            <p class="ideaSubmitSheetIntro">Heb je een idee, uitje of link dat ook anderen kan inspireren? Na beoordeling kan het tussen de andere inspiratie-items komen te staan.</p>
+      <div id="teamAdditions" class="teamFormBox">
         <form id="teamIdeaForm" class="teamForm">
           <label class="formTrap" aria-hidden="true">
             <span>Laat dit veld leeg</span>
@@ -3652,6 +3710,9 @@
             <div id="teamIdeaStatus" class="teamFormStatus" role="status" aria-live="polite"></div>
           </div>
         </form>
+      </div>
+          </div>
+        </aside>
       </div>
     </section>
 
@@ -5938,6 +5999,7 @@
     $('#teamIdeaLonInput').value = '';
     setTeamIdeaAddressDistance(null);
     setTeamIdeaStatus('Dankjewel. Je idee en eventuele foto worden eerst beoordeeld voordat ze zichtbaar worden in de inspiratiebank.', 'ok');
+    closeIdeaSubmitSheet({restoreFocus:false});
     openTeamIdeaModal(item);
   }
 	  async function handleLinkAddSubmit(event){
@@ -6909,6 +6971,7 @@
   }
   const IDEA_FILTER_RADIUS_STEPS = [3,5,10,25,50];
   let ideaFilterSheetReturnFocus = null;
+  let ideaSubmitSheetReturnFocus = null;
   function buildIdeaFilterCategoryChips(){
     const container = $('#ideaFilterCategoryChips');
     const select = $('#ideaDomain');
@@ -6966,6 +7029,7 @@
     const layer = $('#ideaFilterSheetLayer');
     const body = $('#ideaFilterSheetBody');
     if(!layer || !body) return;
+    closeIdeaSubmitSheet();
     ideaFilterSheetReturnFocus = document.activeElement;
     buildIdeaFilterCategoryChips();
     syncIdeaFilterSheet();
@@ -6987,6 +7051,29 @@
         }, 180);
       }
     });
+  }
+  function openIdeaSubmitSheet(){
+    const layer = $('#ideaSubmitSheetLayer');
+    const body = layer?.querySelector('.ideaSubmitSheetBody');
+    if(!layer || !body) return;
+    closeIdeaFilterSheet();
+    ideaSubmitSheetReturnFocus = document.activeElement;
+    layer.classList.add('isOpen');
+    layer.setAttribute('aria-hidden','false');
+    document.body.classList.add('ideaSubmitSheetOpen');
+    $$('[data-idea-submit-open]').forEach(button => button.setAttribute('aria-expanded','true'));
+    body.scrollTop = 0;
+    window.setTimeout(() => $('#teamIdeaTitleInput')?.focus({preventScroll:true}), 180);
+  }
+  function closeIdeaSubmitSheet({restoreFocus=true}={}){
+    const layer = $('#ideaSubmitSheetLayer');
+    if(!layer?.classList.contains('isOpen')) return;
+    layer.classList.remove('isOpen');
+    layer.setAttribute('aria-hidden','true');
+    document.body.classList.remove('ideaSubmitSheetOpen');
+    $$('[data-idea-submit-open]').forEach(button => button.setAttribute('aria-expanded','false'));
+    if(restoreFocus && ideaSubmitSheetReturnFocus?.focus) ideaSubmitSheetReturnFocus.focus();
+    ideaSubmitSheetReturnFocus = null;
   }
   function closeIdeaFilterSheet(){
     const layer = $('#ideaFilterSheetLayer');
@@ -7741,6 +7828,10 @@
     });
     document.addEventListener('keydown', event => {
       if(event.key === 'Escape'){
+        if($('#ideaSubmitSheetLayer')?.classList.contains('isOpen')){
+          closeIdeaSubmitSheet();
+          return;
+        }
         if($('#ideaFilterSheetLayer')?.classList.contains('isOpen')){
           closeIdeaFilterSheet();
           return;
@@ -7909,6 +8000,8 @@
     initPublicFormSecurity($('#teamIdeaForm'));
     initPublicFormSecurity($('#linkAddForm'));
     $('#teamIdeaForm').addEventListener('submit', handleTeamIdeaSubmit);
+    $$('[data-idea-submit-open]').forEach(button => button.addEventListener('click', openIdeaSubmitSheet));
+    $$('[data-idea-submit-close]').forEach(button => button.addEventListener('click', () => closeIdeaSubmitSheet()));
     const teamIdeaImageInput = $('#teamIdeaImageInput');
     if(teamIdeaImageInput) teamIdeaImageInput.addEventListener('change', syncTeamIdeaImageName);
     $('#linkAddForm').addEventListener('submit', handleLinkAddSubmit);
