@@ -3530,17 +3530,20 @@
     }
     #tab-weken .agendaSectionTab:hover{background:rgba(168,225,221,.14)}
 
-    /* Doorlopend aanbod volgt de nieuwe openbare lijstweergave. */
+    /* Doorlopend aanbod deelt exact dezelfde tabelvlakken als de lijstweergave. */
+    #ideaList.sharedIdeaList,
     .ongoingAccordion{
-      border-radius:18px;
-      border-color:rgba(64,45,20,.055);
-      background:#FFFEFC;
-      box-shadow:0 8px 24px rgba(92,65,33,.04)
+      border:1px solid rgba(64,45,20,.055);border-radius:18px;
+      background:#fffdf9;box-shadow:0 8px 24px rgba(92,65,33,.04)
     }
     .ongoingAccordion.open,
     .ongoingAccordionBody,
-    .ongoingAccordion .tableWrap{background:#FFFEFC}
-    .ongoingAccordionButton{min-height:58px;padding:12px 16px;background:transparent}
+    .ongoingAccordion .tableWrap{background:#fffdf9}
+    .ongoingAccordionButton{
+      min-height:58px;padding:12px 16px;background:#fffdf8;
+      border-bottom:1px solid rgba(64,45,20,.06)
+    }
+    .ongoingAccordionButton:hover{background:#fffaf4}
     .ongoingAccordionText > strong,
     .ongoingTitleLine > strong{font-size:1rem;font-weight:500;color:#006780}
     .ongoingTitleLine #flexibleOfferCount{
@@ -3549,14 +3552,15 @@
       background:rgba(247,241,231,.11);
       color:#617573;box-shadow:none
     }
+    #ideaList.sharedIdeaList table,
     .ongoingAccordion table{border-collapse:collapse;border-spacing:0}
     .ongoingAccordion th{
-      padding:13px 16px;background:#FFFEFC;
+      padding:13px 16px;background:#fffdf8;
       border-bottom:1px solid rgba(64,45,20,.06);
       color:#74716E;font-size:.8rem;font-weight:500
     }
     .ongoingAccordion td{
-      padding:10px 16px;background:#FFFEFC;
+      padding:10px 16px;background:#fffdf9;
       border-bottom:1px solid rgba(64,45,20,.06);
       color:#74716E;vertical-align:middle
     }
