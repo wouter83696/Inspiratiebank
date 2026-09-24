@@ -3442,6 +3442,8 @@
     .ongoingAccordion tbody tr:hover td{background:#fffaf4}
     .ongoingTitleCell .name,
     .ongoingTitleCell .ideaTitleText{color:#006780;font-weight:500;line-height:1.25}
+    .ongoingTitleLink{color:#006780;text-decoration:none}
+    .ongoingTitleLink:hover,.ongoingTitleLink:focus-visible{color:#168697;text-decoration:none}
     .ongoingFitCell .small{color:#74716E}
     .ongoingBadgesCell .cardPillGroup{
       display:inline-flex;flex-direction:row;align-items:center;
@@ -3555,6 +3557,10 @@
     }
     .ongoingAccordion tbody tr:last-child td{border-bottom:0}
     .ongoingAccordion tbody tr:hover td{background:#fffaf4}
+    #flexibleOffersWrap th:nth-child(1),#flexibleOffersWrap td:nth-child(1){width:30%}
+    #flexibleOffersWrap th:nth-child(2),#flexibleOffersWrap td:nth-child(2){width:9%}
+    #flexibleOffersWrap th:nth-child(3),#flexibleOffersWrap td:nth-child(3){width:20%}
+    #flexibleOffersWrap th:nth-child(4),#flexibleOffersWrap td:nth-child(4){width:41%}
     .ongoingTitleCell .name,
     .ongoingTitleCell .ideaTitleText{color:#006780;font-size:1.03rem;font-weight:400;line-height:1.25}
     .ongoingWeeksCell,
@@ -6708,13 +6714,17 @@
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
     const costLabel = normalizeIdeaCost(item.cost);
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
+    const title = titleWithIcon(item.title, item.domain, 'nameWithIcon');
+    const linkedTitle = item.url
+      ? `<a class="ongoingTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="${escapeHtml(sourceButtonLabel(item))}">${title}</a>`
+      : title;
     return AgendaViewShared.renderOngoingRow({
-      themeClass:domainThemeClass(item.domain), title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
+      themeClass:domainThemeClass(item.domain), title:linkedTitle,
       review:`<div>${agendaReviewPill(item)}</div>`, date:`${escapeHtml(item.date)} • ${escapeHtml(item.time)}`,
       weeks:escapeHtml(compactWeekAvailabilityLabel(item, true)), place:placePills,
       cost:costPill(costLabel), stimulus:stimulusPill(stimulusLabel), meta:'',
       description:escapeHtml(publicOngoingDescription(item.fit)),
-      website:item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(sourceButtonLabel(item))}</span></a>` : '<span class="small">–</span>'
+      hideWebsite:true
     });
   }
   function renderFlexibleOffers(){
@@ -6725,7 +6735,7 @@
     const count = $('#flexibleOfferCount');
     if(count) count.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${escapeHtml(items.length)}</strong> optie${items.length === 1 ? '' : 's'}</span>`;
     $('#flexibleOffersWrap').innerHTML = items.length
-      ? AgendaViewShared.renderOngoingTable({rows:items.map(flexibleExternalRow).join('')})
+      ? AgendaViewShared.renderOngoingTable({rows:items.map(flexibleExternalRow).join(''),hideWebsite:true})
       : `<div class="empty">${escapeHtml(hasActiveAgendaFilters(filters) ? agendaEmptyMessage(filters) : 'Er is nog geen tijdelijk aanbod voor deze periode zichtbaar.')}</div>`;
   }
   function weekNavControls(currentId){
