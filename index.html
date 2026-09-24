@@ -7410,6 +7410,18 @@
     ideaMapProvider?.clearActiveCluster?.();
     updateIdeaMapPanel();
   }
+  function closeIdeaMapOverlay(){
+    if(!ideaMapPanelExpanded && !ideaMapDetailKey && !activeIdeaMapClusterKeys) return;
+    ideaMapPanelExpanded = false;
+    ideaMapDetailKey = '';
+    activeIdeaMapClusterKeys = null;
+    activeIdeaMapClusterIsArea = false;
+    pendingIdeaMapZoomTarget = null;
+    activeIdeaMapKey = '';
+    ideaMapProvider?.clearActiveCluster?.();
+    ideaMapProvider?.setActive?.('', {pan:false});
+    updateIdeaMapPanel();
+  }
   function destroyIdeaMapProvider(){
     if(ideaMapProvider) ideaMapProvider.destroy();
     ideaMapProvider = null;
@@ -7558,6 +7570,11 @@
       options.onCluster?.(keys, {area:true});
       markerLayer.refreshClusters();
     });
+    map.on('click', event => {
+      const target = event?.originalEvent?.target;
+      if(target?.closest?.('.leaflet-marker-icon,.leaflet-control')) return;
+      options.onMapClick?.();
+    });
     markerLayer.addTo(map);
     window.requestAnimationFrame(() => {
       map.invalidateSize();
@@ -7608,7 +7625,8 @@
         onCluster:(keys, clusterOptions) => {
           suppressIdeaMapResultHover();
           setActiveIdeaMapCluster(keys, clusterOptions);
-        }
+        },
+        onMapClick:closeIdeaMapOverlay
       });
     }
     return null;
