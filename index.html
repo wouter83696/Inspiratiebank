@@ -500,7 +500,7 @@
     #ideaList .ideaListVisual:not(.hasImage){background:transparent;border-color:transparent;box-shadow:none}
     #ideaList .ideaListVisual .domainIcon{
       position:absolute;right:-5px;bottom:-5px;display:inline-flex;width:27px;height:27px;min-width:27px;flex-basis:27px;margin:0;
-      border:1px solid var(--theme-icon-line);background:var(--theme-icon-bg);color:var(--theme-ink);opacity:1;
+      border:1px solid var(--theme-line);background:var(--theme-tint-strong);color:var(--theme-ink);opacity:1;
       box-shadow:0 4px 10px rgba(20,38,42,.10)
     }
     #ideaList .ideaListVisual:not(.hasImage) .domainIcon{
@@ -510,7 +510,7 @@
     #ideaList .ideaListTitleRow{display:flex;align-items:center;min-width:0}
     #ideaList .nameWithIcon .ideaTitleText{font-weight:400}
     #ideaList .ideaListTitleLink{color:#006780;text-decoration:none;text-decoration-thickness:1px;text-underline-offset:3px}
-    #ideaList .ideaListTitleLink:hover,#ideaList .ideaListTitleLink:focus-visible{color:var(--accent-dark);text-decoration:underline}
+    #ideaList .ideaListTitleLink:hover,#ideaList .ideaListTitleLink:focus-visible{color:#168697;text-decoration:none}
     #ideaList td:nth-child(2) .cardPillGroup{flex-wrap:nowrap}
     #ideaList td:nth-child(2) .pill{flex:0 0 auto}
     th,td{text-align:left;vertical-align:top;border-bottom:1px solid rgba(11,18,32,.07);padding:11px 12px;font-size:.92rem;line-height:1.35}
@@ -2948,6 +2948,7 @@
     #ideaList.sharedIdeaList th{background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06);color:#74716E;padding:13px 16px;font-size:.8rem}
     #ideaList.sharedIdeaList .ideaThemeRow td{background:#fffdf8;border-bottom:1px solid rgba(64,45,20,.06);padding:10px 16px;vertical-align:middle}
     #ideaList.sharedIdeaList .ideaThemeRow:hover td{background:#fffaf4}
+    #ideaList.sharedIdeaList .ideaThemeRow:hover .ideaListTitleLink{color:#168697;text-decoration:none}
     #ideaList .ideaListTheme{margin-bottom:5px}
     #ideaList .ideaListTheme .categoryPill{min-height:31px;padding:7px 11px;font-size:.76rem;box-shadow:0 3px 10px rgba(20,38,42,.045)}
     #ideaList .nameWithIcon .ideaTitleText{color:#006780;font-size:1.03rem;font-weight:500;line-height:1.25}
