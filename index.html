@@ -1658,7 +1658,10 @@
     .ideaMapAccordionPractical[open] summary::after{transform:rotate(180deg)}
     .ideaMapAccordionPractical p{margin:6px 0 0;line-height:1.4}
     @keyframes ideaMapAccordionOpen{from{grid-template-rows:0fr;opacity:0}to{grid-template-rows:1fr;opacity:1}}
-    .ideaMapSingleCard{position:relative;display:flex;flex:0 0 auto;width:100%;min-width:100%;max-width:100%;animation:ideaMapDetailIn .22s cubic-bezier(.2,.7,.25,1) both}
+    .ideaMapSingleCard.sharedIdeaCards{
+      position:relative;display:block;grid-template-columns:minmax(0,1fr);gap:0;align-items:initial;
+      flex:0 0 auto;width:100%;min-width:100%;max-width:100%;animation:ideaMapDetailIn .22s cubic-bezier(.2,.7,.25,1) both
+    }
     .ideaMapSingleCard > .card{box-sizing:border-box;width:100%;min-width:100%;height:auto !important;min-height:0 !important;max-height:100%;margin:0;overflow:auto}
     .ideaMapSingleCard > .card:hover{transform:none}
     @keyframes ideaMapDetailIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
