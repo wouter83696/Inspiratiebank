@@ -1682,14 +1682,23 @@
     }
     @keyframes ideaMapDetailIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     @media (prefers-reduced-motion:reduce){.ideaMapAccordionBody,.ideaMapSingleCard{animation:none}}
-    .ideaMapDetailToolbar{position:absolute;z-index:5;top:10px;right:10px;pointer-events:none}
-    .ideaMapDetailBack{
-      display:grid;place-items:center;width:30px;height:30px;padding:0;border:1px solid rgba(255,255,255,.96);border-radius:999px;
-      background:rgba(255,255,255,.94);color:var(--accent-dark);cursor:pointer;pointer-events:auto;box-shadow:0 8px 22px rgba(20,38,42,.16);backdrop-filter:blur(10px)
+    .ideaMapDetailToolbar{
+      position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;
+      width:100%;padding:2px 0 9px;color:var(--accent-dark)
     }
-    .ideaMapDetailBack:hover{background:#fff;box-shadow:0 10px 24px rgba(20,38,42,.19)}
-    .ideaMapDetailBack svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-    .ideaMapDetailBack span{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .ideaMapDetailReturn,.ideaMapDetailClose{border:0;color:inherit;cursor:pointer;background:transparent}
+    .ideaMapDetailReturn{
+      display:inline-flex;align-items:center;gap:7px;min-width:0;padding:5px 2px;font:inherit;font-size:.78rem;font-weight:650
+    }
+    .ideaMapDetailReturn:hover{color:var(--accent)}
+    .ideaMapDetailReturn svg{width:15px;height:15px;flex:0 0 auto}
+    .ideaMapDetailClose{
+      display:grid;place-items:center;flex:0 0 auto;width:30px;height:30px;padding:0;border-radius:999px;
+      background:#fff;color:var(--accent-dark);box-shadow:0 6px 18px rgba(20,38,42,.10)
+    }
+    .ideaMapDetailClose:hover{background:#f5faf8;box-shadow:0 8px 20px rgba(20,38,42,.14)}
+    .ideaMapDetailToolbar svg{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+    .ideaMapDetailClose svg{width:13px;height:13px}
     .ideaMapResultThumbWrap{
       position:relative;display:block;width:100%;height:80px;overflow:hidden;border-radius:11px;flex:0 0 auto;
       border:1px solid color-mix(in srgb,var(--theme-line) 48%,rgba(255,255,255,.55));box-shadow:0 8px 18px rgba(20,38,42,.045)
@@ -1942,7 +1951,7 @@
       .ideaMapResults::-webkit-scrollbar{display:none}
       .ideaMapResult{width:100%;scroll-snap-align:start}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 8.5}
-      .ideaMapPanel.isSingleDetail .sharedIdeaCard h3{padding-right:36px}
+      .ideaMapPanel.isSingleDetail .sharedIdeaCard h3{padding-right:0}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard h3 .ideaTitleText{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard > p:not(.fine){display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
       .ideaMapCanvas .leaflet-top.leaflet-right{right:auto;left:14px}
@@ -6478,7 +6487,7 @@
       themeClass:domainThemeClass(item.domain), hasImage:Boolean(image),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       toolbar:mapDetailAction === 'close'
-        ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailBack" type="button" data-map-detail-close aria-label="Tegel sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg><span>Sluiten</span></button></div>'
+        ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailReturn" type="button" data-map-detail-close><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg><span>Terug naar resultaten</span></button><button class="ideaMapDetailClose" type="button" data-map-detail-close aria-label="Tegel sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button></div>'
         : '',
       image:image ? ideaImageMarkup(image, item.url) : '',
       title:cardTitle,
