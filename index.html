@@ -140,6 +140,13 @@
       color:var(--accent-dark);
     }
     .topbar .brandTabMark{display:block;width:26px;height:26px;flex:0 0 26px;margin-right:7px}
+    .topbarAddButton{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;margin-left:auto;padding:9px 14px;
+      border:1px solid rgba(49,95,107,.14);border-radius:13px;background:#3f7f89;color:#fff;
+      box-shadow:0 8px 20px rgba(49,95,107,.12);font-size:.84rem;font-weight:500;line-height:1;pointer-events:auto;cursor:pointer
+    }
+    .topbarAddButton:hover{background:#356f7b}
+    .topbarAddButton svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
     .topbar>.tabs .tab.active{
       background:#005766;
       color:#fff;
@@ -1021,6 +1028,7 @@
     .desktopSidebarLayer{display:none}
     .mobileHeroTitle,.mobileHeroSubtitle{display:none}
     @media (max-width:980px){
+      .topbarAddButton{display:none}
       #tab-inspiratie .desktopHeroTitle,
       #tab-inspiratie .desktopHeroSubtitle{display:none}
       #tab-inspiratie .mobileHeroTitle,
@@ -3463,6 +3471,10 @@
       <button class="tab active" data-tab="inspiratie" type="button" aria-selected="true"><img class="brandTabMark" src="inspiratiebank-app-icon-180.png" alt="" aria-hidden="true"><span>Inspiratiebank</span></button>
       <button class="tab" data-tab="weken" type="button">UIT-agenda</button>
     </nav>
+    <button class="topbarAddButton" type="button" data-idea-submit-open aria-haspopup="dialog" aria-controls="ideaSubmitSheetLayer" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+      <span>Activiteit toevoegen</span>
+    </button>
   </header>
   <div class="desktopSidebarLayer" id="desktopSidebarLayer" aria-hidden="true">
     <button class="desktopSidebarBackdrop" type="button" data-sidebar-close aria-label="Menu sluiten"></button>
@@ -3634,7 +3646,6 @@
               <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M2.5 5.5 7 3.5l6 2 4.5-2v11L13 16.5l-6-2-4.5 2Z"></path><path d="M7 3.5v11"></path><path d="M13 5.5v11"></path></svg></span>
             </button>
           </div>
-          <button class="ideaAddButton" type="button" data-idea-submit-open aria-label="Inspiratie toevoegen" title="Inspiratie toevoegen" aria-haspopup="dialog" aria-controls="ideaSubmitSheetLayer" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
         </div>
       </div>
       </div>
