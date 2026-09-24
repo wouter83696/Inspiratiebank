@@ -73,6 +73,7 @@
       --accent-dark:#315f6b;
       --accent-soft:#A8E1DD;
       --mint:#DDEFE8;
+      --section-header-surface:#F3ECDD;
       --lavender:#EAE6F7;
       --peach:#F7DFCF;
       --yellow:#F8ECC2;
@@ -3496,7 +3497,7 @@
     }
     #tab-weken .weekSectionNavigation{
       margin:-8px -28px 18px;padding:0 28px;
-      background:rgba(247,241,231,.42);
+      background:var(--section-header-surface);
       border-bottom:1px solid rgba(64,45,20,.06)
     }
     #tab-weken .agendaSectionTab::after{content:none}
@@ -3507,7 +3508,7 @@
 
     /* De openbare lijst en Doorlopend aanbod delen een enkele tabelbasis. */
     .sharedPublicList{
-      --shared-list-head-bg:rgba(247,241,231,.42);
+      --shared-list-head-bg:var(--section-header-surface);
       --shared-list-row-bg:#fffdf9;
       border:1px solid rgba(64,45,20,.055);border-radius:18px;
       background:#fffdf9;box-shadow:0 8px 24px rgba(92,65,33,.04)
@@ -3530,11 +3531,11 @@
     .ongoingAccordionBody,
     .ongoingAccordion .tableWrap{background:#fffdf9}
     .ongoingAccordionButton{
-      min-height:58px;padding:12px 16px;background:rgba(247,241,231,.42);
+      min-height:58px;padding:12px 16px;background:var(--section-header-surface);
       border-bottom:1px solid rgba(64,45,20,.06);
       cursor:default;user-select:none
     }
-    .ongoingAccordionButton:hover{background:rgba(247,241,231,.42);color:var(--accent-dark)}
+    .ongoingAccordionButton:hover{background:var(--section-header-surface);color:var(--accent-dark)}
     .ongoingAccordionText > strong,
     .ongoingTitleLine > strong{font-size:1rem;font-weight:500;color:#006780}
     .ongoingTitleLine #flexibleOfferCount{
@@ -3649,7 +3650,7 @@
     }
     /* Lijstweergave volgt dezelfde warme witte vlakken als de tegels. */
     #ideaList.sharedIdeaList{background:#fffdf9}
-    #ideaList.sharedIdeaList th{background:rgba(247,241,231,.42)}
+    #ideaList.sharedIdeaList th{background:var(--section-header-surface)}
     #ideaList.sharedIdeaList .ideaThemeRow td,
     #ideaList .ideaSurpriseRow td{background:#fffdf9}
     #agendaFilterWeekChips .ideaFilterChip:hover{
