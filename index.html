@@ -494,8 +494,7 @@
     #ideaList .nameWithIcon .domainIcon{align-self:center;margin-top:0}
     #ideaList .ideaListVisual{display:block;flex:0 0 50px;width:50px;height:50px}
     #ideaList .ideaListThumb{display:block;width:100%;height:100%;object-fit:cover;border-radius:9px;border:1px solid rgba(79,142,158,.10);box-shadow:0 5px 12px rgba(20,38,42,.06)}
-    #ideaList .ideaListTitleRow{display:flex;align-items:center;gap:10px;min-width:0}
-    #ideaList .nameWithIcon.hasThumb{gap:12px}
+    #ideaList .ideaListTitleRow{display:flex;align-items:center;min-width:0}
     #ideaList .nameWithIcon .ideaTitleText{font-weight:400}
     #ideaList .ideaListTitleLink{color:#006780;text-decoration:none;text-decoration-thickness:1px;text-underline-offset:3px}
     #ideaList .ideaListTitleLink:hover,#ideaList .ideaListTitleLink:focus-visible{color:var(--accent-dark);text-decoration:underline}
@@ -6403,8 +6402,8 @@
     const visual = image
       ? `<span class="ideaListVisual" aria-hidden="true"><img class="ideaListThumb" src="${escapeHtml(image.src)}" alt="" loading="lazy" decoding="async"></span>`
       : '';
-    const titleRow = `<span class="ideaListTitleRow"><span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>${titleText}</span>`;
-    const linkedTitle = `<span class="nameWithIcon${image ? ' hasThumb' : ''}">${visual}${titleRow}</span>`;
+    const titleRow = `<span class="ideaListTitleRow">${titleText}</span>`;
+    const linkedTitle = `<span class="nameWithIcon"><span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>${visual}${titleRow}</span>`;
     return IdeaViewShared.renderDesktopRow({
       themeClass:domainThemeClass(item.domain),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
