@@ -7977,12 +7977,11 @@
     $$('[data-sidebar-tab]').forEach(button => button.classList.toggle('active', button.dataset.sidebarTab === name));
     const topbarAddButton = $('#topbarAddButton');
     if(topbarAddButton){
-      const inspirationActive = name === 'inspiratie';
-      const label = inspirationActive ? 'Inspiratie toevoegen' : 'Activiteit toevoegen';
+      const label = 'Inspiratie toevoegen';
       topbarAddButton.querySelector('span').textContent = label;
       topbarAddButton.setAttribute('aria-label', label);
-      topbarAddButton.setAttribute('aria-haspopup', inspirationActive ? 'dialog' : 'false');
-      topbarAddButton.setAttribute('aria-controls', inspirationActive ? 'ideaSubmitSheetLayer' : 'sourceAdditions');
+      topbarAddButton.setAttribute('aria-haspopup', 'dialog');
+      topbarAddButton.setAttribute('aria-controls', 'ideaSubmitSheetLayer');
       topbarAddButton.setAttribute('aria-expanded', 'false');
     }
     const panel = $('#tab-'+name);
@@ -8305,14 +8304,7 @@
     initPublicFormSecurity($('#linkAddForm'));
     $('#teamIdeaForm').addEventListener('submit', handleTeamIdeaSubmit);
     $$('[data-idea-submit-open]').forEach(button => button.addEventListener('click', openIdeaSubmitSheet));
-    $('#topbarAddButton')?.addEventListener('click',()=>{
-      const activeTab = $('.topbar .tab.active')?.dataset.tab || 'inspiratie';
-      if(activeTab === 'inspiratie'){
-        openIdeaSubmitSheet();
-        return;
-      }
-      window.requestAnimationFrame(()=>scrollToSection('sourceAdditions'));
-    });
+    $('#topbarAddButton')?.addEventListener('click',openIdeaSubmitSheet);
     $$('[data-idea-submit-close]').forEach(button => button.addEventListener('click', () => closeIdeaSubmitSheet()));
     const teamIdeaImageInput = $('#teamIdeaImageInput');
     if(teamIdeaImageInput) teamIdeaImageInput.addEventListener('change', syncTeamIdeaImageName);
