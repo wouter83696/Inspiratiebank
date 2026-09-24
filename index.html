@@ -1677,7 +1677,7 @@
     }
     .ideaMapResult.active{background:#fffdf8;border-color:#EFE9DE;transform:none;box-shadow:0 6px 18px rgba(92,65,33,.04)}
     .ideaMapResultTitle{display:flex;align-items:center;gap:8px;min-width:0}
-    .ideaMapResult.hasThumb .ideaMapResultTitle{transform:translateY(4px)}
+    .ideaMapResult.hasThumb .ideaMapResultTitle{transform:none}
     .ideaMapResult .domainIcon{width:30px;height:30px;margin:0;align-self:center;background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink)}
     .ideaMapResult .domainIcon svg{width:15px;height:15px}
     .ideaMapResultText{display:flex;flex-direction:column;align-items:stretch;min-width:0;padding:0}
@@ -1776,8 +1776,7 @@
     .ideaMapDetailClose svg{width:13px;height:13px}
     .ideaMapResultThumbWrap{
       position:relative;display:block;width:100%;height:72px;overflow:hidden;border-radius:11px;flex:0 0 auto;
-      border:1px solid color-mix(in srgb,var(--theme-line) 48%,rgba(255,255,255,.55));box-shadow:0 8px 18px rgba(20,38,42,.045);
-      transform:translateY(-6px)
+      align-self:center;border:1px solid color-mix(in srgb,var(--theme-line) 48%,rgba(255,255,255,.55));box-shadow:0 8px 18px rgba(20,38,42,.045)
     }
     .ideaMapResultThumbWrap::before{
       content:"";position:absolute;z-index:1;inset:auto 0 0;height:28px;
