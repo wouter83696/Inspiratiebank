@@ -24,6 +24,8 @@
       .desktopStickyControls.isStuck{
         background:var(--page-surface);
         background-attachment:fixed;
+        box-shadow:0 0 0 100vmax var(--page-background);
+        clip-path:inset(0 -100vmax);
       }
       #tab-inspiratie .desktopStickyControls > .filterBar{margin-top:0;margin-bottom:8px}
       .desktopStickyControls .inspirationDesktopFilterRow{margin-bottom:0}
