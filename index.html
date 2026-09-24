@@ -97,6 +97,7 @@
       --ease:cubic-bezier(.22,1,.36,1);
       --focus:0 0 0 4px rgba(127,207,201,.38);
       --control-surface:#fffdf9;
+      --control-hover-surface:rgba(168,225,221,.12);
     }
     *{box-sizing:border-box}
     html{background:var(--bg);scroll-behavior:auto;overflow-x:hidden}
@@ -147,7 +148,7 @@
       display:none !important;
     }
     .topbar>.tabs .tab:hover{
-      background:rgba(168,225,221,.16);
+      background:var(--control-hover-surface);
       color:var(--accent-dark);
     }
     .topbar .brandTabMark{display:block;width:26px;height:26px;flex:0 0 26px;margin-right:7px}
@@ -162,7 +163,7 @@
       font:inherit;font-size:.82rem;font-weight:600;line-height:1;white-space:nowrap;pointer-events:auto;cursor:pointer;
       transition:background .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease)
     }
-    .topbarAddButton:hover{border-color:rgba(79,142,158,.58);background:rgba(168,225,221,.24);color:#1f5763}
+    .topbarAddButton:hover{border-color:rgba(79,142,158,.58);background:var(--control-hover-surface);color:#1f5763}
     .topbarAddButton svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
     .actions{
       display:flex;align-items:center;gap:14px;margin-left:auto;padding:3px 0;min-height:40px;pointer-events:auto
@@ -1044,7 +1045,7 @@
       width:34px;height:34px;border-radius:13px;padding:0;cursor:pointer;transition:.18s var(--ease);
       display:inline-flex;align-items:center;justify-content:center;
     }
-    .viewBtn:hover{background:rgba(168,225,221,.12);color:rgba(49,95,107,.68)}
+    .viewBtn:hover{background:var(--control-hover-surface);color:rgba(49,95,107,.68)}
     .viewBtn.active{background:rgba(168,225,221,.28);color:rgba(31,101,114,.92);box-shadow:inset 0 0 0 1px rgba(79,142,158,.06)}
     .viewIcon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px}
     .viewIcon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -1171,7 +1172,7 @@
         display:none !important;
       }
       .topbar>.tabs .tab:hover{
-        background:rgba(168,225,221,.22);
+        background:var(--control-hover-surface);
         color:rgba(36,79,88,.94);
       }
       .topbar>.tabs .tab.active{
