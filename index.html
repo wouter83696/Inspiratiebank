@@ -3164,6 +3164,27 @@
     .ideaMapResult .ideaMapResultInfo .stimulusIcon,
     .ideaMapResult .ideaMapResultInfo .metaIcon svg,
     .ideaMapResult .ideaMapResultInfo .stimulusIcon svg{width:12px;height:12px;flex-basis:12px}
+    /* Keep compact map results visually identical to the metadata and hover of regular tiles. */
+    .ideaMapResult .ideaMapResultInfo{
+      padding:8px 11px;border:1px solid rgba(112,94,63,.035);border-radius:11px;
+      background:rgba(247,241,231,.11);column-gap:8px
+    }
+    .ideaMapResult .ideaMapResultInfo .pill,
+    .ideaMapResult .ideaMapResultInfo .cardMetaPart{
+      color:#617573 !important;font-size:.7rem;gap:4px
+    }
+    .ideaMapResult .ideaMapResultInfo .metaIcon,
+    .ideaMapResult .ideaMapResultInfo .stimulusIcon,
+    .ideaMapResult .ideaMapResultInfo .metaIcon svg,
+    .ideaMapResult .ideaMapResultInfo .stimulusIcon svg{
+      width:13px;height:13px;flex-basis:13px;color:#55777A !important
+    }
+    .ideaMapResult:hover,
+    .ideaMapResult:focus-visible{
+      background:#fffdf8;border-color:rgba(64,45,20,.10);transform:translateY(-2px);
+      box-shadow:0 16px 34px rgba(64,45,20,.065)
+    }
+    .ideaMapResult:focus-visible{outline:2px solid rgba(0,115,141,.34);outline-offset:2px}
     #ideaList .sharedMetaBlock{width:max-content}
     #ideaList .sharedMetaBlock .cardPillGroup{
       display:grid;
