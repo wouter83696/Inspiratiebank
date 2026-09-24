@@ -2588,10 +2588,6 @@
         font-weight:400;
         line-height:1.35;
       }
-      #inspirationThemeLegend .agendaLegendItem{
-        min-height:30px;
-        padding:5px 9px;
-      }
       .inspirationDesktopFilterRow .desktopViewBar{
         transform:translateY(-6px);
       }
@@ -3501,14 +3497,6 @@
       background:transparent
     }
     #tab-weken .agendaDesktopControls #agendaThemeLegend{flex:1 1 auto;min-width:0}
-    #tab-weken .agendaDesktopControls .agendaLegendItem{
-      background:rgba(255,253,249,.62);
-      border-color:var(--theme-line,rgba(79,142,158,.10));
-      box-shadow:none
-    }
-    #tab-weken .agendaDesktopControls .agendaLegendItem:hover{
-      background:var(--theme-tint-strong,rgba(255,253,249,.86))
-    }
     #tab-weken .weekPanel,
     #tab-weken .agendaBoard{background:#FFFEFC}
     #tab-weken .agendaDay,
@@ -3628,9 +3616,13 @@
     }
     /* Zoekbalk en chiprij delen in beide hoofdweergaven exact dezelfde componentbasis. */
     .sharedDiscoveryChipRow{
-      align-items:center;padding:0 6px;margin:12px 0 10px;background:transparent
+      align-items:center;padding:3px 6px 4px;margin:9px 0 6px;background:transparent
+    }
+    .sharedDiscoveryChipRow :is(#inspirationThemeLegend,#agendaThemeLegend) .agendaThemeLegend{
+      padding-top:4px;padding-bottom:6px
     }
     .sharedDiscoveryChipRow .agendaLegendItem{
+      min-height:32px;padding:6px 9px;
       background:rgba(255,253,249,.62);
       border-color:var(--theme-line,rgba(79,142,158,.10));
       box-shadow:none
@@ -8716,22 +8708,25 @@
 	    $('#filterToggle').addEventListener('click',()=>{
 	      openIdeaFilterSheet('top');
 	    });
-	    $('#agendaThemeLegend').addEventListener('click', event => {
-	      const chip = event.target.closest('[data-theme-filter]');
-	      if(!chip) return;
-	      const select = $('#agendaDomain');
-	      const current = domainDisplayLabel(select.value);
-	      const next = normalize(current) === normalize(chip.dataset.themeFilter) ? 'all' : chip.dataset.themeFilter;
-	      const matching = [...select.options].find(option => normalize(domainDisplayLabel(option.value)) === normalize(next));
-	      select.value = matching ? matching.value : 'all';
-	      if(select._syncCustomSelect) select._syncCustomSelect();
-	      renderAgenda();
-	    });
-	    $('#inspirationThemeLegend').addEventListener('click', event => {
-	      const chip = event.target.closest('[data-theme-filter]');
-	      if(!chip) return;
-	      toggleIdeaCategory(chip.dataset.themeFilter);
-	      renderIdeas();
+	    [
+	      {selector:'#agendaThemeLegend', apply(value){
+	        const select = $('#agendaDomain');
+	        const current = domainDisplayLabel(select.value);
+	        const next = normalize(current) === normalize(value) ? 'all' : value;
+	        const matching = [...select.options].find(option => normalize(domainDisplayLabel(option.value)) === normalize(next));
+	        select.value = matching ? matching.value : 'all';
+	        if(select._syncCustomSelect) select._syncCustomSelect();
+	        renderAgenda();
+	      }},
+	      {selector:'#inspirationThemeLegend', apply(value){
+	        toggleIdeaCategory(value);
+	        renderIdeas();
+	      }}
+	    ].forEach(({selector, apply}) => {
+	      $(selector)?.addEventListener('click', event => {
+	        const chip = event.target.closest('[data-theme-filter]');
+	        if(chip) apply(chip.dataset.themeFilter);
+	      });
 	    });
 	    const backToTopBtn = $('#backToTopBtn');
 	    if(backToTopBtn){
