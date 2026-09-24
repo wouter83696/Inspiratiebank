@@ -3515,11 +3515,13 @@
       color:#697472
     }
     #tab-weken .agendaSectionTabs{
-      border-color:rgba(79,142,158,.10);
+      width:100%;
+      border-color:rgba(79,142,158,.12);
       background:transparent;
       box-shadow:none
     }
-    #tab-weken .agendaSectionTab:hover{background:rgba(168,225,221,.14)}
+    #tab-weken .agendaSectionTab::after{content:none}
+    #tab-weken .agendaSectionTab:hover{background:transparent;color:#315f69}
 
     /* Doorlopend aanbod deelt exact dezelfde tabelvlakken als de lijstweergave. */
     #ideaList.sharedIdeaList,
