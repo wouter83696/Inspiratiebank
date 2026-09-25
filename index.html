@@ -3841,15 +3841,24 @@
         align-items:center;
         margin:8px 16px 10px 0
       }
-      #tab-weken .agendaSectionTabs{width:auto;max-width:none;border-bottom:0}
-      #tab-weken .agendaSectionTab::after{
-        display:block;
-        transform:scaleX(0);
-        transform-origin:center;
-        transition:transform var(--motion-fast) var(--motion-standard),background-color var(--motion-fast) var(--motion-standard)
+      #tab-weken .agendaSectionTabs{gap:8px;width:auto;max-width:none;border-bottom:0}
+      #tab-weken .agendaSectionTab{
+        min-height:34px;
+        padding:7px 12px;
+        border:1px solid rgba(79,142,158,.30);
+        border-radius:8px;
+        background:transparent;
+        color:#60777d;
+        transition:color var(--motion-fast) var(--motion-standard),border-color var(--motion-fast) var(--motion-standard)
       }
-      #tab-weken .agendaSectionTab:is(:hover,:focus-visible)::after,
-      #tab-weken .agendaSectionTab.active::after{transform:scaleX(1);background:var(--accent-dark)}
+      #tab-weken .agendaSectionTab::after{display:none}
+      #tab-weken .agendaSectionTab:hover{color:#2f7482}
+      #tab-weken .agendaSectionTab:focus-visible{color:#2f7482;border-color:rgba(47,116,130,.68)}
+      #tab-weken .agendaSectionTab.active{
+        color:#1f5966;
+        border-color:rgba(31,89,102,.52);
+        background:transparent
+      }
       #tab-weken .agendaDesktopControls .sharedDiscoveryChipRow,
       #tab-inspiratie .desktopStickyControls .sharedDiscoveryChipRow{
         padding-left:6px;
