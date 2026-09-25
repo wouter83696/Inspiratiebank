@@ -1823,6 +1823,15 @@
     .ideaMapDetailClose:hover{background:#f5faf8;border-color:rgba(61,126,136,.26);box-shadow:none}
     .ideaMapDetailToolbar svg{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaMapDetailClose svg{width:13px;height:13px}
+    .ideaMapPanel.isSingleDetail .cardFooter{position:static;order:6;align-self:flex-start;margin-top:7px}
+    .ideaRouteButton{
+      display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:36px;padding:8px 12px;
+      border:1px solid rgba(79,142,158,.14);border-radius:999px;background:rgba(255,253,249,.76);
+      color:var(--accent-dark);font:inherit;font-size:.78rem;font-weight:650;line-height:1;text-decoration:none;
+      box-shadow:none;transition:background .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease)
+    }
+    .ideaRouteButton:hover{background:#fff;border-color:rgba(79,142,158,.25);color:#168697;text-decoration:none}
+    .ideaRouteButton svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaMapResultThumbWrap{
       position:relative;display:block;width:100%;height:72px;overflow:hidden;border-radius:11px;flex:0 0 auto;
       align-self:center;border:1px solid color-mix(in srgb,var(--theme-line) 48%,rgba(255,255,255,.55));box-shadow:0 8px 18px rgba(20,38,42,.045)
@@ -7913,6 +7922,34 @@
     }
   }
 
+  function ideaRouteDestination(item={}){
+    if(itemIsHomeActivity(item)) return '';
+    const coordinate = itemCoordinate(item);
+    if(coordinate?.precision === 'exact') return `${coordinate.lat},${coordinate.lon}`;
+    const address = String(item.address || item.where || '').trim();
+    const postcode = cleanPostcode(item.postcode || postcodeFromText(address));
+    const place = String(item.place || item.location || '').trim();
+    if(address) return address;
+    if(postcode) return [postcode, place].filter(Boolean).join(' ');
+    return [item.title, place].filter(Boolean).join(', ');
+  }
+  function ideaRouteUrl(item={}){
+    const destination = ideaRouteDestination(item);
+    if(!destination) return '';
+    const params = new URLSearchParams({api:'1', destination, travelmode:'driving'});
+    if(!userLocation?.isDefault){
+      const origin = cleanPostcode(userLocation?.postcode || '')
+        || (Number.isFinite(userLocation?.lat) && Number.isFinite(userLocation?.lon) ? `${userLocation.lat},${userLocation.lon}` : '');
+      if(origin) params.set('origin', origin);
+    }
+    return `https://www.google.com/maps/dir/?${params.toString()}`;
+  }
+  function ideaRouteButton(item={}){
+    const url = ideaRouteUrl(item);
+    if(!url) return '';
+    return `<a class="ideaRouteButton" href="${escapeHtml(url)}" target="_blank" rel="noopener" aria-label="Route naar ${escapeHtml(item.title || 'deze activiteit')} openen in Google Maps"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l-5-5 5-5"></path><path d="M4 13h10a5 5 0 0 1 5 5v2"></path></svg><span>Route</span></a>`;
+  }
+
   function cardIdea(item, {mapDetailAction=''}={}){
     const metadata = sharedIdeaMetadata(item);
     const image = approvedIdeaImage(item);
@@ -7933,7 +7970,9 @@
       meta:metadata.meta, description:escapeHtml(fitText), practical:escapeHtml(item.materials || ''),
       practicalOpen:false,
       website:'',
-      actions:reportMenu('inspiratiebank', ideaDomKey(item), item.title)
+      actions:mapDetailAction === 'close'
+        ? ideaRouteButton(item)
+        : reportMenu('inspiratiebank', ideaDomKey(item), item.title)
     });
   }
   function ideaMapAccordionCard(point){
