@@ -399,6 +399,10 @@
     .agendaSectionTab:hover{color:#315f69}
     .agendaSectionTab.active{color:#245c68;font-weight:650}
     .agendaSectionTab.active::after{opacity:1;transform:scaleX(1)}
+    .agendaSectionSwitcher{margin:18px 0 12px;scroll-margin-top:96px}
+    .agendaSectionSwitcher .agendaSectionTabs{width:100%;margin:0}
+    .agendaSectionView[hidden]{display:none!important}
+    .agendaSectionView:not([hidden]){animation:viewSurfaceEnter var(--motion-base) var(--motion-enter) both}
     .agendaThemeLegend{display:flex;flex-wrap:wrap;gap:6px;margin:0}
     .agendaFreshness{
       display:inline-flex;align-items:center;gap:5px;max-width:100%;min-height:30px;margin:0;padding:6px 9px;
@@ -4281,8 +4285,9 @@
         <div id="agendaThemeLegend"></div>
       </div>
       </div>
-      <div id="weekPanels" class="weekStack"></div>
-      <section id="longerOffers" class="ongoingAccordion sharedPublicList open">
+      <div id="agendaSectionSwitcher" class="agendaSectionSwitcher"></div>
+      <div id="weekPanels" class="weekStack agendaSectionView" role="tabpanel" aria-labelledby="agenda-tab-weeks"></div>
+      <section id="longerOffers" class="ongoingAccordion sharedPublicList agendaSectionView open" role="tabpanel" aria-labelledby="agenda-tab-ongoing">
         <div class="ongoingAccordionButton">
           <span class="ongoingAccordionText"><span class="ongoingTitleLine"><strong>Doorlopend aanbod</strong><span id="flexibleOfferCount" class="weekCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>0</strong> opties</span></span></span></span>
         </div>
@@ -7246,15 +7251,14 @@
     if($('#agendaFilterSheetLayer')?.classList.contains('isOpen') && options.scroll) return;
     const nextSection = section === 'ongoing' ? 'ongoing' : 'weeks';
     if(nextSection === 'ongoing') setOngoingOpen(true, {scroll:false});
-    if(!options.scroll) syncAgendaSectionState(nextSection);
+    syncAgendaSectionState(nextSection);
     if(options.updateUrl !== false){
       const url = new URL(window.location.href);
       url.hash = nextSection === 'ongoing' ? 'longerOffers' : 'weekPanels';
       window.history.replaceState(null, '', url);
     }
     if(options.scroll){
-      const target = nextSection === 'ongoing' ? $('#longerOffers') : $('#weekPanels');
-      syncAgendaSectionFromScroll({immediate:true});
+      const target = $('#agendaSectionSwitcher');
       window.requestAnimationFrame(() => target?.scrollIntoView({behavior:'smooth', block:'start'}));
     }
   }
@@ -7264,49 +7268,18 @@
     if(!agendaPanel) return;
     const nextSection = section === 'ongoing' ? 'ongoing' : 'weeks';
     agendaPanel.dataset.agendaSection = nextSection;
+    const weekPanels = $('#weekPanels');
+    const longerOffers = $('#longerOffers');
+    if(weekPanels) weekPanels.hidden = nextSection !== 'weeks';
+    if(longerOffers) longerOffers.hidden = nextSection !== 'ongoing';
     $$('[data-agenda-section]').forEach(button => {
       const active = button.dataset.agendaSection === nextSection;
       button.classList.toggle('active', active);
-      if(active) button.setAttribute('aria-current', 'location');
+      button.setAttribute('aria-selected', active ? 'true' : 'false');
+      button.tabIndex = active ? 0 : -1;
+      if(active) button.setAttribute('aria-current', 'page');
       else button.removeAttribute('aria-current');
     });
-  }
-
-  function syncAgendaSectionHash(section){
-    if($('#agendaFilterSheetLayer')?.classList.contains('isOpen')) return;
-    if(!['#weekPanels', '#longerOffers'].includes(window.location.hash)) return;
-    const nextHash = section === 'ongoing' ? '#longerOffers' : '#weekPanels';
-    if(window.location.hash === nextHash) return;
-    const url = new URL(window.location.href);
-    url.hash = nextHash;
-    window.history.replaceState(null, '', url);
-  }
-
-  let agendaSectionScrollTicking = false;
-  function syncAgendaSectionFromScroll(options={}){
-    if(agendaSectionScrollTicking && !options.immediate) return;
-    agendaSectionScrollTicking = true;
-    const sync = () => {
-      agendaSectionScrollTicking = false;
-      const agendaPanel = $('#tab-weken');
-      const weekPanels = $('#weekPanels');
-      const longerOffers = $('#longerOffers');
-      if(!agendaPanel?.classList.contains('active') || !weekPanels || !longerOffers) return;
-      const checkpoint = Math.max(130, Math.min(window.innerHeight * .72, 620));
-      const ongoingTop = longerOffers.getBoundingClientRect().top;
-      const ongoingBottom = longerOffers.getBoundingClientRect().bottom;
-      const nextSection = ongoingTop <= checkpoint && ongoingBottom > 96 ? 'ongoing' : 'weeks';
-      syncAgendaSectionState(nextSection);
-      syncAgendaSectionHash(nextSection);
-    };
-    if(options.immediate) sync();
-    else window.requestAnimationFrame(sync);
-  }
-
-  function scheduleAgendaSectionSync(){
-    syncAgendaSectionFromScroll({immediate:true});
-    window.requestAnimationFrame(() => syncAgendaSectionFromScroll({immediate:true}));
-    window.setTimeout(() => syncAgendaSectionFromScroll({immediate:true}), 350);
   }
 
   function ideaRow(item){
@@ -7331,9 +7304,9 @@
 
   function agendaSectionNavigation(){
     const activeSection = $('#tab-weken')?.dataset.agendaSection === 'ongoing' ? 'ongoing' : 'weeks';
-    return `<nav class="agendaSectionTabs" aria-label="Agenda-onderdelen">
-      <a class="agendaSectionTab${activeSection === 'weeks' ? ' active' : ''}" href="#weekPanels" data-agenda-section="weeks"${activeSection === 'weeks' ? ' aria-current="location"' : ''}>Weekagenda</a>
-      <a class="agendaSectionTab${activeSection === 'ongoing' ? ' active' : ''}" href="#longerOffers" data-agenda-section="ongoing"${activeSection === 'ongoing' ? ' aria-current="location"' : ''}>Doorlopend aanbod</a>
+    return `<nav class="agendaSectionTabs" aria-label="Agendaweergave" role="tablist">
+      <a id="agenda-tab-weeks" class="agendaSectionTab${activeSection === 'weeks' ? ' active' : ''}" href="#weekPanels" role="tab" aria-controls="weekPanels" aria-selected="${activeSection === 'weeks'}" data-agenda-section="weeks"${activeSection === 'weeks' ? ' aria-current="page"' : ''}>Weekagenda</a>
+      <a id="agenda-tab-ongoing" class="agendaSectionTab${activeSection === 'ongoing' ? ' active' : ''}" href="#longerOffers" role="tab" aria-controls="longerOffers" aria-selected="${activeSection === 'ongoing'}" data-agenda-section="ongoing"${activeSection === 'ongoing' ? ' aria-current="page"' : ''}>Doorlopend aanbod</a>
     </nav>`;
   }
 
@@ -7366,6 +7339,8 @@
     const weeksToRender = scope === 'all' ? ACTIVE_WEEKS : ACTIVE_WEEKS.filter(w => w.id === week);
     let visibleCount = 0;
     parkAgendaWeekFilter();
+    const sectionSwitcher = $('#agendaSectionSwitcher');
+    if(sectionSwitcher) sectionSwitcher.innerHTML = agendaSectionNavigation();
     $('#weekPanels').innerHTML = weeksToRender.map((w,i)=>{
       const all = filterAgendaItems(byWeek(w.id), filters);
       const concrete = sortWeekItems(all.filter(isConcrete));
@@ -7374,7 +7349,7 @@
       const agendaHtml = renderAgendaBoard(w.id, concrete);
       return AgendaViewShared.renderWeek({
         id:escapeHtml(w.id), week:escapeHtml(w.week), title:escapeHtml(publicWeekDates(w)),
-        sectionNavigation:i === 0 ? agendaSectionNavigation() : '',
+        sectionNavigation:'', showWeekFilter:i === 0,
         freshness:agendaFreshnessBadge(), count:weekCountBadge(weekItemCount),
         navigation:weekNavControls(w.id), status:weekStatusText(w), days:agendaHtml,
         dayNavigation:mobileAgendaDayNavigation(w.id),
@@ -7382,6 +7357,7 @@
       });
     }).join('');
     placeAgendaWeekFilter();
+    syncAgendaSectionState($('#tab-weken')?.dataset.agendaSection || 'weeks');
     const status = $('#agendaSearchStatus');
     if(status){
       status.textContent = hasActiveAgendaFilters(filters)
@@ -8931,29 +8907,26 @@
     syncLocationUi();
     warmHeroBackgrounds();
     setOngoingOpen(true, {scroll:false});
-    setAgendaSection('weeks', {updateUrl:false});
+    setAgendaSection(window.location.hash === '#longerOffers' ? 'ongoing' : 'weeks', {updateUrl:false});
     const initialTab = tabFromLocation();
     if(initialTab){
       setTab(initialTab, {scroll:false, updateUrl:false});
     }
     else setTab('inspiratie', {scroll:false, updateUrl:false});
-    scheduleAgendaSectionSync();
     window.addEventListener('hashchange', () => {
       const nextTab = tabFromLocation();
       if(nextTab) setTab(nextTab, {updateUrl:false});
       else setTab('inspiratie', {scroll:false, updateUrl:false});
       if(window.location.hash === '#longerOffers') setAgendaSection('ongoing', {updateUrl:false});
       if(window.location.hash === '#weekPanels') setAgendaSection('weeks', {updateUrl:false});
-      scheduleAgendaSectionSync();
     });
     window.addEventListener('popstate', () => {
       const nextTab = tabFromLocation() || 'inspiratie';
       setTab(nextTab, {scroll:false, updateUrl:false});
       if(nextTab === 'inspiratie') setIdeaView(ideaViewFromLocation(), {updateUrl:false});
-      scheduleAgendaSectionSync();
+      if(window.location.hash === '#longerOffers') setAgendaSection('ongoing', {updateUrl:false});
+      if(window.location.hash === '#weekPanels') setAgendaSection('weeks', {updateUrl:false});
     });
-    window.addEventListener('scroll', syncAgendaSectionFromScroll, {passive:true});
-    window.addEventListener('resize', syncAgendaSectionFromScroll, {passive:true});
     $$('.tab').forEach(btn=>{
       if(!btn.closest('.topbar')) btn.addEventListener('click',()=>setTab(btn.dataset.tab));
     });
@@ -8967,6 +8940,14 @@
       if(!event.target.closest('[data-report-menu]')) closeReportMenus();
     });
     document.addEventListener('keydown', event => {
+      const agendaSectionLink = event.target.closest?.('[data-agenda-section]');
+      if(agendaSectionLink && ['ArrowLeft','ArrowRight'].includes(event.key)){
+        event.preventDefault();
+        const nextSection = event.key === 'ArrowRight' ? 'ongoing' : 'weeks';
+        setAgendaSection(nextSection, {scroll:false});
+        document.querySelector(`[data-agenda-section="${nextSection}"]`)?.focus();
+        return;
+      }
       keepDialogFocus(event);
       if(event.key === 'Escape'){
         if($('#agendaSourceSheetLayer')?.classList.contains('isOpen')){
@@ -9198,7 +9179,6 @@
         event.preventDefault();
         if(id === 'weekPanels') setAgendaSection('weeks', {updateUrl:true});
         scrollToSection(id);
-        syncAgendaSectionFromScroll();
       });
     });
     const mixIdeasBtn = $('#mixIdeasBtn');
