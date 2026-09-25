@@ -9909,11 +9909,10 @@
       event.preventDefault();
       showRandomIdea();
     });
-    $$('a[href="#teamAdditions"],a[href="#weekPanels"]').forEach(link => {
+    $$('a[href="#teamAdditions"]').forEach(link => {
       link.addEventListener('click', event => {
         const id = link.getAttribute('href').slice(1);
         event.preventDefault();
-        if(id === 'weekPanels') setAgendaSection('weeks', {updateUrl:true});
         scrollToSection(id);
       });
     });
