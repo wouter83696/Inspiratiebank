@@ -3829,7 +3829,7 @@
     }
 
     @media (max-width:640px){
-      #tab-weken .agendaSectionSwitcher{margin:4px 0 10px}
+      #tab-weken .agendaSectionSwitcher{margin:-2px 12px 10px}
       #tab-weken .agendaSectionTabs{gap:20px;overflow-x:auto;scrollbar-width:none}
       #tab-weken .agendaSectionTabs::-webkit-scrollbar{display:none}
       #tab-weken .agendaSectionTab{flex:0 0 auto;padding:8px 0 8px;font-size:.8rem}
@@ -4348,6 +4348,51 @@
         width:108px!important;min-width:108px!important;max-width:108px!important
       }
       .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectLabel{max-width:72px!important}
+    }
+
+    @media (max-width:640px){
+      #tab-weken .weekTitle{
+        grid-template-columns:48px minmax(0,1fr) 94px!important;
+        grid-template-areas:
+          "badge title controls"
+          "meta meta meta"!important;
+        column-gap:10px!important;
+        row-gap:10px!important;
+        width:100%!important;
+        min-width:0!important
+      }
+      #tab-weken .weekTitleContent,
+      #tab-weken .weekHeadingRow,
+      #tab-weken .weekHeadingMain,
+      #tab-weken .weekDateLine{min-width:0!important}
+      #tab-weken .weekTop h3{
+        width:100%!important;
+        min-width:0!important;
+        font-size:1.18rem!important;
+        white-space:nowrap!important
+      }
+      #tab-weken .weekHeadingActions{width:94px!important;min-width:94px!important}
+      #tab-weken .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{
+        width:94px!important;
+        min-width:94px!important;
+        max-width:94px!important
+      }
+      #tab-weken .weekHeaderMeta{
+        display:flex!important;
+        width:100%!important;
+        min-width:0!important;
+        justify-content:flex-start!important;
+        align-items:center!important;
+        gap:5px!important
+      }
+    }
+    @media (max-width:380px){
+      #tab-weken .weekTitle{grid-template-columns:40px minmax(0,1fr) 88px!important;column-gap:7px!important}
+      #tab-weken .weekTop h3{font-size:1.08rem!important}
+      #tab-weken .weekHeadingActions{width:88px!important;min-width:88px!important}
+      #tab-weken .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{
+        width:88px!important;min-width:88px!important;max-width:88px!important
+      }
     }
 
     @media (hover:hover) and (pointer:fine){
@@ -9189,7 +9234,7 @@
       const agendaSectionLink = event.target.closest('[data-agenda-section]');
       if(agendaSectionLink){
         event.preventDefault();
-        setAgendaSection(agendaSectionLink.dataset.agendaSection, {scroll:true});
+        setAgendaSection(agendaSectionLink.dataset.agendaSection, {scroll:false});
       }
       if(!event.target.closest('.customSelect')) closeCustomSelects();
       if(!event.target.closest('[data-report-menu]')) closeReportMenus();
