@@ -3535,6 +3535,33 @@
     .ongoingFitCell .small{color:#74716E;line-height:1.45}
     .ongoingMobileWeekPill{display:none}
 
+    /* Agenda-onderdelen zijn zelfstandige oppervlakken, niet één groot tabelvenster. */
+    #tab-weken .weekPanel{
+      overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none
+    }
+    #tab-weken .weekTop{padding:0;background:transparent}
+    #tab-weken .weekSectionNavigation{
+      margin:0 0 14px;padding:0 2px;background:transparent;border:0
+    }
+    #tab-weken .weekTitle{
+      margin:0 0 14px;padding:20px 22px;
+      border:1px solid rgba(64,45,20,.055);border-radius:18px;
+      background:#fffdf9;box-shadow:0 8px 24px rgba(92,65,33,.04)
+    }
+    #tab-weken .weekBody{padding:0;background:transparent}
+    #longerOffers{
+      overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none
+    }
+    #longerOffers .ongoingAccordionButton{
+      margin:0 0 12px;padding:14px 16px;border:1px solid rgba(64,45,20,.055);
+      border-radius:16px;background:#fffdf9;box-shadow:0 8px 24px rgba(92,65,33,.04)
+    }
+    #longerOffers .ongoingAccordionBody{border-top:0;background:transparent}
+    #longerOffers .tableWrap{
+      overflow:hidden;border:1px solid rgba(64,45,20,.055);border-radius:18px;
+      background:#fffdf9;box-shadow:0 8px 24px rgba(92,65,33,.04)
+    }
+
     @media(min-width:641px){
       #agendaFilters{
         --agenda-main-filter-height:48px;
@@ -3962,14 +3989,35 @@
       }
 
       /* Weekagenda: duidelijke dagblokken zonder desktopkolommen na te bootsen. */
+      #tab-weken .weekPanel{
+        overflow:visible!important;border:0!important;border-radius:0!important;
+        background:transparent!important;box-shadow:none!important;
+      }
+      #tab-weken .weekTop{padding:0!important;background:transparent!important}
+      #tab-weken .weekSectionNavigation{
+        margin:0 0 14px!important;padding:0 2px!important;
+        border:0!important;background:transparent!important;
+      }
+      #tab-weken .weekTitle{
+        margin:0 0 12px;padding:14px;
+        border:1px solid rgba(64,45,20,.06);border-radius:18px;
+        background:#fffdf9;box-shadow:0 8px 24px rgba(92,65,33,.04);
+      }
+      #tab-weken .weekBody{padding:0!important;background:transparent!important}
       .agendaBoard{
         display:grid!important;grid-template-columns:minmax(0,1fr)!important;
-        border-radius:16px!important;overflow:hidden!important;
+        gap:18px!important;overflow:visible!important;border:0!important;
+        border-radius:0!important;background:transparent!important;
       }
       .agendaDay{
-        min-width:0!important;min-height:0!important;padding:15px 12px 16px!important;
-        gap:11px!important;border-left:0!important;
+        min-width:0!important;min-height:0!important;padding:15px 2px 4px!important;
+        gap:11px!important;border:0!important;border-top:1px solid rgba(64,45,20,.075)!important;
+        border-radius:0!important;background:transparent!important;box-shadow:none!important;
       }
+      .agendaDay:first-child{border-top:0!important;padding-top:5px!important}
+      #tab-weken .agendaDay.today,
+      #tab-weken .agendaDay:nth-child(even),
+      #tab-weken .agendaDay.pastDay:not(.today){background:transparent!important;box-shadow:none!important}
       .agendaDayHead{position:static!important}
       .agendaItem{border-radius:14px!important}
       .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{
@@ -3980,7 +4028,7 @@
       }
       .mobileDayNavigation{
         display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;
-        width:100%;margin:-5px 0 12px;padding:0 16px 3px;
+        width:100%;margin:0 0 14px;padding:0 2px 3px;
         overflow:visible;
       }
       .mobileDayNavigation::-webkit-scrollbar{display:none}
@@ -4007,8 +4055,9 @@
         background:transparent!important;box-shadow:none!important;
       }
       #longerOffers .ongoingAccordionButton{
-        min-height:0;padding:4px 2px 13px;background:transparent!important;
-        border:0!important;
+        min-height:0;margin:0 0 12px;padding:14px;background:#fffdf9!important;
+        border:1px solid rgba(64,45,20,.06)!important;border-radius:16px!important;
+        box-shadow:0 8px 24px rgba(92,65,33,.04)!important;
       }
       #longerOffers .ongoingAccordionBody{
         overflow:visible;padding:0;background:transparent!important;border-top:0!important;
