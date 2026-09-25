@@ -4202,6 +4202,21 @@
       .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectLabel{max-width:72px!important}
     }
 
+    @media (hover:hover) and (pointer:fine){
+      :is(
+        button,
+        .button,
+        [role="button"],
+        .siteButton,
+        .ideaFilterChip,
+        .agendaLegendItem,
+        .categoryPill,
+        .pill
+      ):hover{
+        box-shadow:none!important;
+      }
+    }
+
     @media (prefers-reduced-motion:reduce){
       *,*::before,*::after{
         scroll-behavior:auto!important;animation-duration:.01ms!important;
