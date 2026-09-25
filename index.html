@@ -4735,6 +4735,34 @@
       }
     }
 
+    /* Compacte mobiele agenda-afwerking; desktop blijft bewust ongewijzigd. */
+    @media (max-width:640px){
+      #tab-weken > .agendaDesktopControls{
+        padding-bottom:3px!important
+      }
+      #tab-weken .agendaSectionTab{
+        padding-right:7px!important;
+        padding-left:7px!important
+      }
+      #weekPanels .weekHeaderMeta{
+        gap:6px!important;
+        min-height:30px!important;
+        margin-top:2px!important;
+        padding:6px 8px!important
+      }
+      #weekPanels .weekHeaderMeta .weekCountBadge,
+      #weekPanels .weekHeaderMeta .agendaFreshness{
+        font-size:.68rem!important
+      }
+    }
+    @media (max-width:360px){
+      #weekPanels .weekHeaderMeta{
+        width:100%!important;
+        flex-wrap:wrap!important;
+        row-gap:3px!important
+      }
+    }
+
     @media (hover:hover) and (pointer:fine){
       :is(
         button,
