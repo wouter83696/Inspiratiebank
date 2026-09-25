@@ -38,7 +38,7 @@
         ${view.sectionNavigation ? `<div class="weekSectionNavigation">${view.sectionNavigation}</div>` : ''}
         <div class="weekTitle">
           <div class="weekBadge"><span class="weekBadgeNumber">${view.week || ''}</span></div>
-          <div class="weekTitleContent"><div class="weekHeadingRow"><div class="weekHeadingMain"><div class="weekDateLine"><h3>${view.title || ''}</h3>${view.freshness || ''}</div><div class="weekHeaderMeta">${view.count || ''}</div></div><div class="weekHeadingActions">${view.showWeekFilter ? '<span id="agendaWeekFilterSlot" class="agendaWeekFilterSlot"></span>' : ''}${view.navigation || ''}</div></div>${view.status || ''}</div>
+          <div class="weekTitleContent"><div class="weekHeadingRow"><div class="weekHeadingMain"><div class="weekDateLine"><h3>${view.title || ''}</h3></div><div class="weekHeaderMeta">${view.count || ''}${view.freshness || ''}</div></div><div class="weekHeadingActions">${view.showWeekFilter ? '<span id="agendaWeekFilterSlot" class="agendaWeekFilterSlot"></span>' : ''}${view.navigation || ''}</div></div>${view.status || ''}</div>
         </div>
       </div>
       ${view.dayNavigation || ''}

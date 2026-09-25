@@ -2997,7 +2997,7 @@
         grid-template-columns:48px minmax(0,1fr) 98px !important;
         grid-template-areas:
           "badge title controls"
-          "count checked checked" !important;
+          "meta meta meta" !important;
         column-gap:12px !important;
         row-gap:12px !important;
         align-items:center !important
@@ -3010,10 +3010,10 @@
       .agendaWeekFilterSlot{display:flex !important;align-items:center !important;justify-content:flex-end !important;margin:0 !important}
       .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{width:98px !important;min-width:98px !important;max-width:98px !important}
       .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{padding:7px 7px !important}
-      .weekHeaderMeta{grid-area:count !important;justify-self:start !important;align-self:center !important;margin:0 !important;padding:0 !important}
-      .weekDateLine .agendaFreshness{grid-area:checked !important;justify-self:end !important;align-self:center !important;margin:0 !important;white-space:nowrap !important}
+      .weekHeaderMeta{grid-area:meta !important;justify-self:start !important;align-self:center !important;margin:0 !important;padding:0 !important}
+      .weekHeaderMeta .agendaFreshness{justify-self:start !important;align-self:center !important;margin:0 !important;white-space:nowrap !important}
       .weekHeaderMeta .weekCountBadge,
-      .weekDateLine .agendaFreshness{min-height:32px !important;border-radius:12px !important}
+      .weekHeaderMeta .agendaFreshness{min-height:32px !important;border-radius:12px !important}
     }
     @media (min-width:981px){
       #ideaCards.cards{gap:16px;align-items:stretch}
@@ -4826,7 +4826,7 @@
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20260923-map-detail-v1"></script>
-  <script src="website-bestanden/agenda-view-shared.js?v=20260925-mobile-cards-v2"></script>
+  <script src="website-bestanden/agenda-view-shared.js?v=20260925-week-meta-v1"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
