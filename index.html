@@ -3819,8 +3819,17 @@
     #weekPanels .weekHeaderMeta{gap:5px}
 
     @media (min-width:981px){
-      #tab-weken .agendaDesktopControls{padding-bottom:2px}
-      #tab-weken .agendaSectionSwitcher{margin:2px 18px 10px}
+      #tab-weken .agendaDesktopControls{
+        display:grid;
+        grid-template-columns:minmax(0,1fr) auto;
+        align-items:end;
+        column-gap:24px;
+        padding-bottom:2px
+      }
+      #tab-weken .agendaDesktopControls > .filterBar{grid-column:1 / -1}
+      #tab-weken .agendaDesktopControls > .agendaLegendBar{grid-column:1;margin-bottom:8px}
+      #tab-weken .agendaSectionSwitcher{grid-column:2;margin:0 6px 8px 0}
+      #tab-weken .agendaSectionTabs{width:max-content;max-width:none}
       #tab-weken .agendaDesktopControls .sharedDiscoveryChipRow,
       #tab-inspiratie .desktopStickyControls .sharedDiscoveryChipRow{
         padding-left:0;
@@ -3829,7 +3838,18 @@
     }
 
     @media (max-width:640px){
-      #tab-weken .agendaSectionSwitcher{margin:-2px 12px 10px}
+      #tab-weken .agendaDesktopControls{
+        display:block;position:sticky;top:0;z-index:25;
+        width:100%;min-width:0;padding-bottom:2px;
+        background:var(--page-background);
+        box-shadow:0 1px 0 rgba(79,142,158,.10)
+      }
+      #tab-weken .agendaSectionSwitcher{
+        position:static;
+        margin:-2px 0 10px;padding:0 12px;
+        background:var(--page-background);
+        box-shadow:none
+      }
       #tab-weken .agendaSectionTabs{gap:20px;overflow-x:auto;scrollbar-width:none}
       #tab-weken .agendaSectionTabs::-webkit-scrollbar{display:none}
       #tab-weken .agendaSectionTab{flex:0 0 auto;padding:8px 0 8px;font-size:.8rem}
@@ -4516,8 +4536,8 @@
       <div class="inspirationDesktopFilterRow agendaLegendBar sharedDiscoveryChipRow">
         <div id="agendaThemeLegend"></div>
       </div>
-      </div>
       <div id="agendaSectionSwitcher" class="agendaSectionSwitcher"></div>
+      </div>
       <div id="weekPanels" class="weekStack agendaSectionView" role="tabpanel" aria-labelledby="agenda-tab-weeks"></div>
       <section id="longerOffers" class="ongoingAccordion sharedPublicList agendaSectionView open" role="tabpanel" aria-labelledby="agenda-tab-ongoing">
         <div class="ongoingAccordionButton">
@@ -7499,18 +7519,6 @@
     const panel = $('#ongoingContent');
     setOngoingOpen(Boolean(panel && panel.hidden), options);
   }
-  function revealAgendaSectionNavigation(){
-    if(!window.matchMedia('(min-width:981px)').matches) return;
-    const target = $('#agendaSectionSwitcher');
-    if(!target) return;
-    const stickyControls = $('#tab-weken .agendaDesktopControls');
-    const stickyBottom = stickyControls?.getBoundingClientRect().bottom || 0;
-    const targetRect = target.getBoundingClientRect();
-    const minimumTop = stickyBottom + 6;
-    if(targetRect.top >= minimumTop) return;
-    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-    window.scrollTo({top:Math.max(0, window.scrollY + targetRect.top - minimumTop), behavior});
-  }
   function setAgendaSection(section, options={}){
     const agendaPanel = $('#tab-weken');
     if(!agendaPanel) return;
@@ -7522,9 +7530,6 @@
       const url = new URL(window.location.href);
       url.hash = nextSection === 'ongoing' ? 'longerOffers' : 'weekPanels';
       window.history.replaceState(null, '', url);
-    }
-    if(options.scroll){
-      window.requestAnimationFrame(revealAgendaSectionNavigation);
     }
   }
 
@@ -9245,7 +9250,7 @@
       const agendaSectionLink = event.target.closest('[data-agenda-section]');
       if(agendaSectionLink){
         event.preventDefault();
-        setAgendaSection(agendaSectionLink.dataset.agendaSection, {scroll:true});
+        setAgendaSection(agendaSectionLink.dataset.agendaSection, {scroll:false});
       }
       if(!event.target.closest('.customSelect')) closeCustomSelects();
       if(!event.target.closest('[data-report-menu]')) closeReportMenus();
