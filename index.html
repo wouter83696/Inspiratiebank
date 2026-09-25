@@ -386,7 +386,7 @@
     .agendaLegendBar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 0 10px}
     .agendaSectionTabs{
       display:flex;align-items:center;gap:22px;width:max-content;max-width:100%;margin:2px 0 14px;
-      border-bottom:1px solid rgba(79,142,158,.14);scroll-margin-top:12px
+      border-bottom:0;scroll-margin-top:12px
     }
     .agendaSectionTab{
       position:relative;appearance:none;min-height:40px;padding:8px 1px 10px;border:0;background:transparent;
@@ -397,8 +397,10 @@
       background:var(--accent-dark);opacity:0;transform:scaleX(.55);transition:opacity .16s var(--ease),transform .16s var(--ease)
     }
     .agendaSectionTab:hover{color:#315f69}
+    .agendaSectionTab:hover::after{opacity:.5;transform:scaleX(1)}
     .agendaSectionTab.active{color:#245c68;font-weight:650}
-    .agendaSectionTab.active::after{opacity:1;transform:scaleX(1)}
+    .agendaSectionTab.active::after,
+    .agendaSectionTab.active:hover::after{opacity:1;transform:scaleX(1)}
     .agendaSectionSwitcher{margin:18px 0 12px;scroll-margin-top:96px}
     .agendaSectionSwitcher .agendaSectionTabs{width:100%;margin:0}
     .agendaSectionView[hidden]{display:none!important}
