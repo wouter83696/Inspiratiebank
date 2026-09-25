@@ -3557,16 +3557,8 @@
       background:#fffdf9;box-shadow:0 8px 24px rgba(92,65,33,.04)
     }
 
-    /* Desktop: laat de volledige week de beschikbare viewportbreedte benutten. */
+    /* Desktop: behoud de vaste contentbreedte en schaal alleen de interne ruimte mee. */
     @media (min-width:981px){
-      #agendaSectionSwitcher,
-      #weekPanels,
-      #longerOffers{
-        --agenda-viewport-width:min(1680px,calc(100vw - 48px));
-        width:var(--agenda-viewport-width);
-        max-width:none;
-        margin-left:calc((100% - var(--agenda-viewport-width)) / 2);
-      }
       #weekPanels .weekBody{
         padding:0 clamp(12px,1vw,18px) clamp(14px,2vh,22px);
       }
