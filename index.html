@@ -3820,16 +3820,12 @@
 
     @media (min-width:981px){
       #tab-weken .agendaDesktopControls{
-        display:grid;
-        grid-template-columns:minmax(0,1fr) auto;
-        align-items:end;
-        column-gap:24px;
+        display:block;
         padding-bottom:2px
       }
-      #tab-weken .agendaDesktopControls > .filterBar{grid-column:1 / -1}
-      #tab-weken .agendaDesktopControls > .agendaLegendBar{grid-column:1;margin-bottom:8px}
-      #tab-weken .agendaSectionSwitcher{grid-column:2;margin:0 6px 8px 0}
-      #tab-weken .agendaSectionTabs{width:max-content;max-width:none}
+      #tab-weken .agendaDesktopControls > .agendaLegendBar{margin-bottom:2px}
+      #tab-weken .agendaSectionSwitcher{margin:0 18px 8px}
+      #tab-weken .agendaSectionTabs{width:100%;max-width:none}
       #tab-weken .agendaDesktopControls .sharedDiscoveryChipRow,
       #tab-inspiratie .desktopStickyControls .sharedDiscoveryChipRow{
         padding-left:0;
@@ -4422,32 +4418,30 @@
       }
     }
 
-    @media (max-width:640px){
-      #weekPanels .weekHeaderMeta{
-        gap:10px;
-        margin-top:5px
-      }
-      #weekPanels .weekHeaderMeta .weekCountBadge,
-      #weekPanels .weekHeaderMeta .agendaFreshness{
-        min-height:0!important;
-        margin:0!important;
-        padding:0!important;
-        border:0!important;
-        border-radius:0!important;
-        background:transparent!important;
-        box-shadow:none!important;
-        backdrop-filter:none!important;
-        color:rgba(49,72,76,.62)!important;
-        font-size:.72rem!important;
-        line-height:1.25!important
-      }
-      #weekPanels .weekHeaderMeta .agendaFreshness{
-        padding-left:10px!important;
-        border-left:1px solid rgba(79,142,158,.16)!important
-      }
-      #weekPanels .weekHeaderMeta :is(.weekCountBadge,.agendaFreshness) svg{
-        width:14px;height:14px;flex-basis:14px;opacity:.72
-      }
+    #weekPanels .weekHeaderMeta{
+      gap:10px;
+      margin-top:5px
+    }
+    #weekPanels .weekHeaderMeta .weekCountBadge,
+    #weekPanels .weekHeaderMeta .agendaFreshness{
+      min-height:0!important;
+      margin:0!important;
+      padding:0!important;
+      border:0!important;
+      border-radius:0!important;
+      background:transparent!important;
+      box-shadow:none!important;
+      backdrop-filter:none!important;
+      color:rgba(49,72,76,.62)!important;
+      font-size:.72rem!important;
+      line-height:1.25!important
+    }
+    #weekPanels .weekHeaderMeta .agendaFreshness{
+      padding-left:10px!important;
+      border-left:1px solid rgba(79,142,158,.16)!important
+    }
+    #weekPanels .weekHeaderMeta :is(.weekCountBadge,.agendaFreshness) svg{
+      width:14px;height:14px;flex-basis:14px;opacity:.72
     }
 
     @media (hover:hover) and (pointer:fine){
