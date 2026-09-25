@@ -4416,6 +4416,7 @@
     @media (max-width:640px){
       body.ideaMapMode{height:100dvh!important;overflow:hidden!important;background:#edf3e9!important}
       body.ideaMapMode .topbar{display:none!important}
+      body:has(#ideaMap.active) .topbar{display:none!important}
       body.ideaMapMode .shell{max-width:none!important;height:100dvh!important;margin:0!important;padding:0!important}
       body.ideaMapMode .siteFooter,body.ideaMapMode .backToTop{display:none!important}
       body.ideaMapMode #tab-inspiratie{height:100%!important;margin:0!important;padding:0!important}
@@ -4427,18 +4428,25 @@
       .ideaMapToolbarSearch input{height:38px;font-size:.8rem}
       .ideaMapCanvas{min-height:100%!important;border-radius:0!important}
       .ideaMapCanvas .leaflet-top.leaflet-right{top:calc(61px + env(safe-area-inset-top))!important;right:10px!important}
-      .ideaMapPanel{right:0!important;bottom:0!important;left:0!important;max-height:48%;border-right:0!important;border-left:0!important;border-radius:22px 22px 0 0!important}
-      .ideaMapPanel.isMinimized{height:78px!important;max-height:78px!important}
+      .ideaMapPanel{right:0!important;bottom:0!important;left:0!important;height:48%;max-height:48%;border-right:0!important;border-left:0!important;border-radius:22px 22px 0 0!important}
+      .ideaMapPanel.isMinimized{height:48%!important;max-height:48%!important;transform:translate3d(0,calc(100% - 78px),0)}
+      .ideaMapPanel.isDragging{transition:none!important;animation:none!important;touch-action:none}
       .ideaMapPanelHead{padding:17px 12px 10px!important}
       .ideaMapPanelHead p{font-size:.68rem!important}
       .ideaMapResults{padding:0 10px 10px!important}
       .ideaMapResult{flex-basis:min(82vw,330px)!important;width:min(82vw,330px)!important}
-      .ideaMapPanel.isSingleDetail{max-height:61%}
+      .ideaMapPanel.isSingleDetail{height:61%;max-height:61%}
       .ideaMapPanel.isSingleDetail .ideaMapSingleCard{width:100%!important;max-width:none!important}
       .ideaMapPanel.isSingleDetail .ideaMapResults{padding:0 16px 16px!important}
       .ideaMapPanel.isSingleDetail .ideaMapSingleCard > .card{
         border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:8px 0 0!important
       }
+      .ideaFilterSheetHeader::before,.ideaSubmitSheetHeader::before{
+        content:"";position:absolute;top:8px;left:50%;width:38px;height:4px;
+        border-radius:999px;background:rgba(49,95,107,.22);transform:translateX(-50%)
+      }
+      .ideaFilterSheetHeader,.ideaSubmitSheetHeader{touch-action:none;cursor:grab}
+      .ideaFilterSheet.isDragging,.ideaSubmitSheet.isDragging{transition:none!important;touch-action:none}
     }
 
     @media (max-width:640px){
@@ -8780,14 +8788,11 @@
     const panelText = activeIdeaMapClusterKeys
       ? (sharedPlace ? `Deze activiteiten liggen verspreid over ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}.` : activeIdeaMapClusterIsArea ? 'Zoom in voor losse markers of kies hieronder een tegel.' : 'Activiteiten op dezelfde locatie. Kies een tegel of toon alles.')
       : (userLocation?.isDefault ? 'Standaard rond Nijmegen.' : `Afstand vanaf ${locationDisplayText()}.`);
-    const clearButton = activeIdeaMapClusterKeys ? '<button class="ideaMapClear" type="button" data-map-clear-cluster>Alles tonen</button>' : '';
-    const toggleLabel = ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen';
-    const toggleIcon = ideaMapPanelExpanded ? '<path d="m6 14 6-6 6 6"></path>' : '<path d="m6 10 6 6 6-6"></path>';
     const minimized = !ideaMapPanelExpanded && !singleDetail && !activeIdeaMapClusterKeys;
     const visibleTitle = minimized ? `${visiblePoints.length} activiteiten in dit gebied` : panelTitle;
     const visibleText = minimized ? 'Kies een marker of open de resultaten.' : panelText;
     return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${singleDetail ? ' isSingleDetail' : ''}${minimized ? ' isMinimized' : ''}" aria-label="Activiteiten op de kaart">
-      <div class="ideaMapPanelHead"><div class="ideaMapPanelHeadRow"><div><h3>${escapeHtml(visibleTitle)}</h3><p>${escapeHtml(visibleText)}</p></div><div class="ideaMapPanelActions">${clearButton}<button class="ideaMapPanelToggle" type="button" data-map-panel-toggle aria-expanded="${ideaMapPanelExpanded ? 'true' : 'false'}" title="${toggleLabel}" aria-label="${toggleLabel}"><svg viewBox="0 0 24 24" aria-hidden="true">${toggleIcon}</svg></button></div></div></div>
+      <div class="ideaMapPanelHead" role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"><div class="ideaMapPanelHeadRow"><div><h3>${escapeHtml(visibleTitle)}</h3><p>${escapeHtml(visibleText)}</p></div></div></div>
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
   }
@@ -8903,6 +8908,75 @@
     ideaMapProvider?.clearActiveCluster?.();
     ideaMapProvider?.setActive?.('', {pan:false});
     updateIdeaMapPanel();
+  }
+  function setupBottomSheetGestures(){
+    let drag = null;
+    let suppressSheetClickUntil = 0;
+    const mobile = () => window.matchMedia('(max-width:640px)').matches;
+    const sheetHandle = target => target.closest('.ideaMapPanelHead,.ideaFilterSheetHeader,.ideaSubmitSheetHeader');
+    const resetDragStyle = sheet => {
+      sheet.classList.remove('isDragging');
+      sheet.style.removeProperty('transform');
+    };
+    document.addEventListener('pointerdown', event => {
+      if(!mobile() || event.button !== 0 || event.target.closest('button,a,input,select,textarea')) return;
+      const handle = sheetHandle(event.target);
+      const sheet = handle?.closest('.ideaMapPanel,.ideaFilterSheet,.ideaSubmitSheet');
+      if(!handle || !sheet) return;
+      const isMap = sheet.classList.contains('ideaMapPanel');
+      const minimized = isMap && sheet.classList.contains('isMinimized');
+      const collapsedOffset = minimized ? Math.max(0, sheet.getBoundingClientRect().height - 78) : 0;
+      drag = {sheet, handle, pointerId:event.pointerId, startY:event.clientY, lastY:event.clientY, isMap, minimized, collapsedOffset, moved:false};
+      sheet.classList.add('isDragging');
+      handle.setPointerCapture?.(event.pointerId);
+    });
+    document.addEventListener('pointermove', event => {
+      if(!drag || event.pointerId !== drag.pointerId) return;
+      const delta = event.clientY - drag.startY;
+      drag.lastY = event.clientY;
+      drag.moved ||= Math.abs(delta) > 5;
+      const offset = drag.isMap
+        ? Math.max(0, Math.min(drag.sheet.getBoundingClientRect().height - 78, drag.collapsedOffset + delta))
+        : Math.max(0, delta);
+      drag.sheet.style.setProperty('transform', `translate3d(0,${offset}px,0)`, 'important');
+      if(drag.moved) event.preventDefault();
+    }, {passive:false});
+    const finishDrag = event => {
+      if(!drag || event.pointerId !== drag.pointerId) return;
+      const current = drag;
+      const delta = current.lastY - current.startY;
+      resetDragStyle(current.sheet);
+      if(current.moved) suppressSheetClickUntil = performance.now() + 350;
+      if(current.isMap){
+        if(current.minimized && delta < -35){
+          ideaMapPanelExpanded = true;
+          updateIdeaMapPanel({scroll:true});
+        }else if(!current.minimized && delta > 50){
+          closeIdeaMapOverlay();
+        }else{
+          updateIdeaMapPanel();
+        }
+      }else if(delta > 70){
+        current.sheet.parentElement?.querySelector('.ideaFilterSheetBackdrop,.ideaSubmitSheetBackdrop')?.click();
+      }
+      drag = null;
+    };
+    document.addEventListener('pointerup', finishDrag);
+    document.addEventListener('pointercancel', finishDrag);
+    document.addEventListener('click', event => {
+      const head = event.target.closest('.ideaMapPanelHead');
+      if(!head || performance.now() < suppressSheetClickUntil) return;
+      ideaMapPanelExpanded = !ideaMapPanelExpanded;
+      if(!ideaMapPanelExpanded) closeIdeaMapOverlay();
+      else updateIdeaMapPanel({scroll:true});
+    });
+    document.addEventListener('keydown', event => {
+      if(!event.target.matches('.ideaMapPanelHead') || !['Enter',' '].includes(event.key)) return;
+      event.preventDefault();
+      ideaMapPanelExpanded = !ideaMapPanelExpanded;
+      if(!ideaMapPanelExpanded) closeIdeaMapOverlay();
+      else updateIdeaMapPanel({scroll:true});
+    });
   }
   function destroyIdeaMapProvider(){
     if(ideaMapProvider) ideaMapProvider.destroy();
@@ -9396,6 +9470,7 @@
 	    setupDesktopSidebar();
 	    setupIdeaFilterSheet();
 	    setupAgendaFilterSheet();
+	    setupBottomSheetGestures();
 	    const hasSiteData = await loadSiteData();
 	    if(!hasSiteData) return;
 	    refreshActiveWeeks();
