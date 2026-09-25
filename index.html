@@ -4569,6 +4569,26 @@
 
     @media (max-width:640px){
       .topbar{border-bottom:0!important}
+      :is(#tab-inspiratie,#tab-weken) .tabHeroHomeLink{
+        position:absolute!important;
+        top:calc(50% - 18px)!important;
+        right:24px!important;
+        left:24px!important;
+        width:auto!important;
+        max-width:none!important;
+        margin:0!important;
+        transform:translateY(-50%)!important
+      }
+      :is(#tab-inspiratie,#tab-weken) .tabHeroTitle{
+        margin:0!important;
+        padding:0!important;
+        transform:none!important
+      }
+      :is(#tab-inspiratie,#tab-weken) .tabHeroLine{
+        margin:8px 0 0!important;
+        padding:0!important;
+        transform:none!important
+      }
     }
 
     @media (hover:hover) and (pointer:fine){
