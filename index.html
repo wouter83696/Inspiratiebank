@@ -4563,8 +4563,8 @@
       .sharedDiscoveryChipRow{padding:3px 6px 4px!important;margin:6px 0 10px!important}
       .sharedDiscoveryChipRow :is(#inspirationThemeLegend,#agendaThemeLegend){margin:0!important}
 
-      /* De korte UIT-agenda-titel past rustig op een regel; inspiratie blijft tweeregelig. */
-      .agendaHero{
+      /* Beide mobiele onderdelen gebruiken exact hetzelfde hero-canvas. */
+      :is(.inspirationHero,.agendaHero){
         min-height:clamp(224px,35svh,258px)!important;
         padding-top:clamp(42px,6.5svh,54px)!important;
         padding-bottom:clamp(62px,8svh,74px)!important;
