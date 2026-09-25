@@ -4530,29 +4530,31 @@
     }
 
     #weekPanels .weekHeaderMeta{
-      gap:10px;
-      margin-top:5px
+      gap:8px;
+      margin-top:4px
     }
     #weekPanels .weekHeaderMeta .weekCountBadge,
     #weekPanels .weekHeaderMeta .agendaFreshness{
-      min-height:0!important;
+      display:inline-flex!important;
+      align-items:center!important;
+      min-height:32px!important;
       margin:0!important;
-      padding:0!important;
-      border:0!important;
-      border-radius:0!important;
-      background:transparent!important;
+      padding:7px 10px!important;
+      border:1px solid rgba(79,142,158,.08)!important;
+      border-radius:11px!important;
+      background:rgba(255,253,249,.72)!important;
       box-shadow:none!important;
       backdrop-filter:none!important;
       color:rgba(49,72,76,.62)!important;
       font-size:.72rem!important;
       line-height:1.25!important
     }
-    #weekPanels .weekHeaderMeta .agendaFreshness{
-      padding-left:0!important;
-      border-left:0!important
-    }
     #weekPanels .weekHeaderMeta :is(.weekCountBadge,.agendaFreshness) svg{
       width:14px;height:14px;flex-basis:14px;opacity:.72
+    }
+
+    @media (max-width:640px){
+      .topbar{border-bottom:0!important}
     }
 
     @media (hover:hover) and (pointer:fine){
