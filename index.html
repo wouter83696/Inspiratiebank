@@ -153,11 +153,11 @@
     }
     .topbarAddButton{
       display:inline-flex;align-items:center;justify-content:center;gap:8px;width:190px;min-width:190px;min-height:38px;margin-left:auto;padding:0 15px;
-      border:1.5px solid rgba(79,142,158,.38);border-radius:12px;background:rgba(255,253,249,.72);color:#236875;
+      border:1.5px solid rgba(23,79,93,.46);border-radius:12px;background:rgba(255,253,249,.72);color:#236875;
       font:inherit;font-size:.82rem;font-weight:600;line-height:1;white-space:nowrap;pointer-events:auto;cursor:pointer;
       transition:background .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease)
     }
-    .topbarAddButton:hover{border-color:rgba(79,142,158,.58);background:var(--control-hover-surface);color:#1f5763}
+    .topbarAddButton:hover{border-color:rgba(23,79,93,.68);background:var(--control-hover-surface);color:#1f5763}
     .topbarAddButton svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
     .actions{
       display:flex;align-items:center;gap:14px;margin-left:auto;padding:3px 0;min-height:40px;pointer-events:auto
@@ -207,6 +207,8 @@
     .tabHeroKicker{position:relative;z-index:1;display:block;margin:0 0 10px;color:var(--accent-dark);font-size:.78rem;font-weight:600;letter-spacing:.05em;line-height:1}
     .tabHeroTitle{position:relative;z-index:1;margin:0 0 0 -.025em;color:var(--accent-dark);font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:5.35rem;font-weight:500;line-height:.92;letter-spacing:-.045em}
     .tabHeroLine{position:relative;z-index:1;margin:10px 0 0;color:var(--accent);font-size:1.28rem;line-height:1.2;font-weight:400}
+    .tabHeroHomeLink{position:relative;z-index:1;display:block;width:fit-content;max-width:100%;color:inherit;text-decoration:none;border-radius:8px}
+    .tabHeroHomeLink:focus-visible{outline:2px solid rgba(23,79,93,.42);outline-offset:7px}
     .tabHeroStats{
       position:relative;z-index:1;display:flex;align-items:center;flex-wrap:wrap;gap:11px;width:fit-content;max-width:min(100%,620px);margin-top:20px;
       color:rgba(11,18,32,.60);font-size:.82rem;font-weight:500;line-height:1.1
@@ -3830,7 +3832,7 @@
         width:24px!important;height:24px!important;flex-basis:24px!important;margin-right:6px!important;
       }
       .topbar > .topbarAddButton{
-        border-color:rgba(79,142,158,.28)!important;border-radius:12px!important;
+        border-color:rgba(23,79,93,.52)!important;border-radius:12px!important;
         background:transparent!important;color:#236875!important;box-shadow:none!important;
       }
       .topbar > .topbarAddButton.showCoachmark::after{
@@ -4209,8 +4211,10 @@
   <main class="shell">
     <section id="tab-weken" class="tabPanel" role="tabpanel">
       <section class="tabHero agendaHero" aria-labelledby="agendaHeroTitle">
-        <h1 class="tabHeroTitle" id="agendaHeroTitle">UIT-agenda</h1>
-        <p class="tabHeroLine">Bekijk wat er te doen is</p>
+        <a class="tabHeroHomeLink" href="/uit-agenda/" aria-label="Naar het begin van de UIT-agenda">
+          <h1 class="tabHeroTitle" id="agendaHeroTitle">UIT-agenda</h1>
+          <p class="tabHeroLine">Bekijk wat er te doen is</p>
+        </a>
       </section>
       <div class="desktopStickyControls agendaDesktopControls">
       <div class="filterBar">
@@ -4250,8 +4254,10 @@
 
     <section id="tab-inspiratie" class="tabPanel active" role="tabpanel">
       <section class="tabHero inspirationHero" aria-labelledby="inspirationHeroTitle">
-        <h1 class="tabHeroTitle" id="inspirationHeroTitle">Ontdek iets nieuws</h1>
-        <p class="tabHeroLine">Vind én deel inspiratie</p>
+        <a class="tabHeroHomeLink" href="/" aria-label="Naar het begin van de Inspiratiebank">
+          <h1 class="tabHeroTitle" id="inspirationHeroTitle">Ontdek iets nieuws</h1>
+          <p class="tabHeroLine">Vind én deel inspiratie</p>
+        </a>
       </section>
       <div class="desktopStickyControls">
       <div class="filterBar">
