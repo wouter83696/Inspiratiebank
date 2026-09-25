@@ -4645,14 +4645,20 @@
       #tab-inspiratie > .desktopStickyControls,
       #tab-weken > .agendaDesktopControls{
         top:10px!important;
+        margin-top:-23px!important;
         padding-bottom:8px!important;
         background:transparent!important;
         box-shadow:none!important
       }
-      #tab-weken .agendaSectionTabs{border-bottom:0!important}
-      #tab-inspiratie > .desktopStickyControls{
-        margin-top:-54px!important
+      #tab-inspiratie > .desktopStickyControls.isStuck,
+      #tab-weken > .agendaDesktopControls.isStuck{
+        background:rgba(248,245,235,.97)!important;
+        box-shadow:0 0 0 100vmax rgba(248,245,235,.97)!important;
+        clip-path:inset(0 -100vmax);
+        -webkit-backdrop-filter:blur(14px);
+        backdrop-filter:blur(14px)
       }
+      #tab-weken .agendaSectionTabs{border-bottom:0!important}
       :is(#tab-inspiratie,#tab-weken) .tabHeroHomeLink{
         position:absolute!important;
         top:calc(50% - 18px)!important;
@@ -9548,6 +9554,7 @@
     const controlsList = [...document.querySelectorAll('.desktopStickyControls')];
     if(!controlsList.length) return;
     const desktop = window.matchMedia('(min-width:981px)');
+    const mobile = window.matchMedia('(max-width:640px)');
     let pending = false;
     const update = () => {
       pending = false;
@@ -9555,7 +9562,8 @@
       controlsList.forEach(controls => {
         const visible = controls.getClientRects().length > 0;
         const rect = visible ? controls.getBoundingClientRect() : null;
-        controls.classList.toggle('isStuck', desktop.matches && visible && rect.top <= 0);
+        const stickyTop = mobile.matches ? 10 : 0;
+        controls.classList.toggle('isStuck', visible && (desktop.matches || mobile.matches) && rect.top <= stickyTop + 1);
         if(desktop.matches && rect) activeHeight = Math.max(activeHeight, Math.ceil(rect.height));
       });
       if(desktop.matches && activeHeight){
