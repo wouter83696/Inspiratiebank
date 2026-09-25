@@ -3811,8 +3811,8 @@
     @media (min-width:641px){
       #longerOffers{margin-top:0}
       #longerOffers .ongoingAccordionButton{display:none}
-      .ongoingBadgesHeadInner{
-        display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;
+      .ongoingTitleHeadInner{
+        display:flex;align-items:center;justify-content:flex-start;gap:8px;width:100%;
       }
       .ongoingTableCount{
         display:inline-flex;align-items:center;gap:5px;min-height:24px;padding:4px 7px;
@@ -7303,7 +7303,8 @@
     $('#flexibleOffersWrap').innerHTML = items.length
       ? AgendaViewShared.renderOngoingTable({
           rows:items.map(flexibleExternalRow).join(''),hideWebsite:true,
-          badgesHeading:`<span class="ongoingBadgesHeadInner"><span>Kenmerken</span><span class="ongoingTableCount" data-flexible-offer-count aria-label="${escapeHtml(items.length)} activiteiten"></span></span>`
+          titleHeading:`<span class="ongoingTitleHeadInner"><span>Aanbod</span><span class="ongoingTableCount" data-flexible-offer-count aria-label="${escapeHtml(items.length)} activiteiten"></span></span>`,
+          badgesHeading:'Kenmerken'
         })
       : `<div class="empty">${escapeHtml(hasActiveAgendaFilters(filters) ? agendaEmptyMessage(filters) : 'Er is nog geen tijdelijk aanbod voor deze periode zichtbaar.')}</div>`;
     $$('[data-flexible-offer-count]').forEach(count => {
