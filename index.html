@@ -3819,10 +3819,23 @@
       .ongoingTableCount strong{font:inherit;font-weight:650}
     }
 
+    @media (min-width:981px){
+      #agendaSectionSwitcher{
+        scroll-margin-top:calc(var(--active-sticky-controls-height,148px) + 8px);
+      }
+      #weekPanels,
+      #longerOffers{
+        scroll-margin-top:calc(var(--active-sticky-controls-height,148px) + 54px);
+      }
+      #ideaMap{
+        scroll-margin-top:calc(var(--active-sticky-controls-height,148px) + 10px);
+      }
+    }
+
     /* Houd de volledige kaartviewer binnen de beschikbare schermhoogte. */
     @media (min-width:981px){
       .ideaMap.ideaView.active{
-        height:clamp(480px,calc(100dvh - 150px),760px);
+        height:clamp(480px,calc(100dvh - var(--active-sticky-controls-height,148px) - 18px),760px);
         min-height:0;
         grid-template-rows:minmax(0,1fr);
       }
@@ -8993,7 +9006,18 @@
     let pending = false;
     const update = () => {
       pending = false;
-      controlsList.forEach(controls => controls.classList.toggle('isStuck', desktop.matches && controls.getClientRects().length > 0 && controls.getBoundingClientRect().top <= 0));
+      let activeHeight = 0;
+      controlsList.forEach(controls => {
+        const visible = controls.getClientRects().length > 0;
+        const rect = visible ? controls.getBoundingClientRect() : null;
+        controls.classList.toggle('isStuck', desktop.matches && visible && rect.top <= 0);
+        if(desktop.matches && rect) activeHeight = Math.max(activeHeight, Math.ceil(rect.height));
+      });
+      if(desktop.matches && activeHeight){
+        document.documentElement.style.setProperty('--active-sticky-controls-height', `${activeHeight}px`);
+      }else{
+        document.documentElement.style.removeProperty('--active-sticky-controls-height');
+      }
     };
     const schedule = () => {
       if(pending) return;
