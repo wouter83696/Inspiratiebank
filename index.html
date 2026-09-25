@@ -4099,6 +4099,12 @@
       .weekDateLine .agendaFreshness{justify-self:start!important}
     }
 
+    @media (max-width:640px){
+      /* Houd dezelfde rustige verticale cadans tussen zoekbalk, chips en content. */
+      .sharedDiscoveryChipRow{padding:3px 6px 4px!important;margin:6px 0 10px!important}
+      .sharedDiscoveryChipRow :is(#inspirationThemeLegend,#agendaThemeLegend){margin:0!important}
+    }
+
     @media (prefers-reduced-motion:reduce){
       *,*::before,*::after{
         scroll-behavior:auto!important;animation-duration:.01ms!important;
