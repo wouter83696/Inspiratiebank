@@ -248,7 +248,7 @@
   height:64px;
   margin-top:0;
   border-radius:15px;
-  background:linear-gradient(145deg,rgba(168,225,221,.90),rgba(216,242,238,.76));
+  background:#DDF2EF;
   display:grid;
   place-items:center;
   color:#07345e;
