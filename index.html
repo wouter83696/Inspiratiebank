@@ -4112,6 +4112,9 @@
         height:auto!important;
         padding:12px 12px 14px!important;
         border-radius:var(--mobile-card-radius)!important;
+        border-color:rgba(64,45,20,.035)!important;
+        background:#fffdf8!important;
+        box-shadow:0 8px 24px rgba(92,65,33,.04)!important;
         overflow:hidden;
         animation:mobileSurfaceEnter var(--motion-slow) var(--motion-enter) both;
       }
@@ -4124,7 +4127,7 @@
       }
       .sharedIdeaCard h3{
         width:100%;min-width:0;margin:0!important;
-        font-size:1rem!important;line-height:1.24!important;
+        color:#006780!important;font-size:1rem!important;line-height:1.24!important;
       }
       .sharedIdeaCard h3 .ideaTitleText{overflow-wrap:anywhere;word-break:normal}
       .sharedIdeaCard .cardMetaBlock,
@@ -4150,9 +4153,11 @@
       .sharedIdeaCard .sharedMetaBlock .pill,
       .sharedIdeaCard .sharedMetaBlock .cardMetaPart{
         flex:0 0 auto!important;min-width:max-content!important;white-space:nowrap!important;
-        padding:0!important;font-size:.72rem!important;line-height:1.2!important;
+        padding:0!important;color:#697472!important;font-size:.72rem!important;line-height:1.2!important;
       }
-      .sharedIdeaCard > p:not(.fine){margin:0!important;font-size:.88rem!important;line-height:1.48!important}
+      .sharedIdeaCard .cardMetaBlock :is(.metaIcon,.stimulusIcon),
+      .sharedIdeaCard .sharedMetaBlock :is(.metaIcon,.stimulusIcon){color:#55777A!important}
+      .sharedIdeaCard > p:not(.fine){margin:0!important;color:#74716E!important;font-size:.88rem!important;line-height:1.48!important}
       .sharedIdeaCard .ideaPracticalDetails{margin:0!important}
 
       /* De kaartweergave voelt als een compacte mobiele carrousel. */
