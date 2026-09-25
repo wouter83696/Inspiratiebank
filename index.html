@@ -879,13 +879,15 @@
     .agendaWeekFilterSlot .customSelect.openUp .customSelectMenu{top:calc(100% + 7px) !important;bottom:auto !important}
     .customSelect.open .customSelectMenu{display:grid;gap:2px}
     .customSelectOption{border:0;border-radius:11px;background:transparent;color:var(--ink);padding:9px 11px;font:inherit;font-size:.86rem;text-align:left;white-space:nowrap;cursor:pointer}
-    .customSelectOption:hover,.customSelectOption.active{background:rgba(79,142,158,.10);color:var(--accent-dark)}
+    .customSelectOption:hover{background:rgba(168,225,221,.24);color:var(--accent-dark);box-shadow:none}
+    .customSelectOption.active{background:rgba(79,142,158,.10);color:var(--accent-dark)}
     .themeSelect .customSelectButton{background:var(--control-surface);border-color:var(--theme-line);color:var(--theme-ink)}
     .themeSelect.placeholder .customSelectButton{background:var(--control-surface);border-color:rgba(11,18,32,.07);color:var(--muted)}
     .themeSelect.placeholder .customSelectButton .domainIcon{display:none}
     .themeSelect .customSelectMenu{width:max-content;min-width:100%;max-width:min(360px,calc(100vw - 30px));border-color:rgba(11,18,32,.08);background:#fff}
     .themeSelect .customSelectOption{display:flex;align-items:center;gap:8px;color:var(--ink)}
-    .themeSelect .customSelectOption:hover,.themeSelect .customSelectOption.active{background:rgba(11,18,32,.035);box-shadow:inset 0 0 0 1px var(--theme-line);color:var(--theme-ink)}
+    .themeSelect .customSelectOption:hover{background:rgba(168,225,221,.24);box-shadow:none;color:var(--accent-dark)}
+    .themeSelect .customSelectOption.active{background:rgba(11,18,32,.035);box-shadow:inset 0 0 0 1px var(--theme-line);color:var(--theme-ink)}
     .themeSelect .customSelectButton .domainIcon,.themeSelect .customSelectOption .domainIcon{width:22px;height:22px;background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink)}
     .themeSelect .customSelectButton .domainIcon svg,.themeSelect .customSelectOption .domainIcon svg{width:12px;height:12px}
     .choiceSelect .customSelectButton,.choiceSelect .customSelectOption{gap:8px}
@@ -2007,9 +2009,8 @@
     .locationField .customSelectOption{
       min-height:42px;border-radius:13px;padding:10px 12px;color:var(--accent-dark);font-size:1rem
     }
-    .locationField .customSelectOption:hover,.locationField .customSelectOption.active{
-      background:rgba(168,225,221,.28);color:var(--accent-dark)
-    }
+    .locationField .customSelectOption:hover{background:rgba(168,225,221,.28);color:var(--accent-dark);box-shadow:none}
+    .locationField .customSelectOption.active{background:rgba(79,142,158,.10);color:var(--accent-dark)}
     .locationField input::placeholder{color:rgba(11,18,32,.38)}
     .locationToggle{
       display:flex;align-items:flex-start;gap:9px;padding:10px 11px;border-radius:14px;
