@@ -4185,13 +4185,13 @@
       }
       .mobileDayNavigation{
         display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;
-        width:calc(100% - 32px);margin:-3px 16px 14px;padding:6px 7px;
+        width:calc(100% - 32px);margin:7px 16px 18px;padding:9px 8px;
         overflow:hidden;border:1px solid rgba(79,142,158,.08);border-radius:18px;
-        background:#FFFEFC;box-shadow:0 10px 26px rgba(20,38,42,.055);
+        background:#FFFEFC;box-shadow:none;
       }
       .mobileDayNavigation::-webkit-scrollbar{display:none}
       .mobileDayButton{
-        position:relative;display:grid;place-items:center;width:100%;min-width:0;min-height:64px;
+        position:relative;display:grid;place-items:center;width:100%;min-width:0;min-height:68px;
         padding:8px 2px;border:0;border-radius:14px;
         background:transparent;color:rgba(49,95,107,.72);
         font:inherit;line-height:1;scroll-snap-align:start;cursor:pointer;
@@ -4524,8 +4524,8 @@
       line-height:1.25!important
     }
     #weekPanels .weekHeaderMeta .agendaFreshness{
-      padding-left:10px!important;
-      border-left:1px solid rgba(79,142,158,.16)!important
+      padding-left:0!important;
+      border-left:0!important
     }
     #weekPanels .weekHeaderMeta :is(.weekCountBadge,.agendaFreshness) svg{
       width:14px;height:14px;flex-basis:14px;opacity:.72
@@ -5676,7 +5676,7 @@
     const amount = Number(count);
     const label = amount === 1 ? 'activiteit' : 'activiteiten';
     const qualifier = amount === 1 ? '' : '<span class="weekCountWord">verschillende</span>';
-    return `<span class="weekCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${escapeHtml(count)}</strong>${qualifier}<span class="weekCountLabel">${label}</span></span></span>`;
+    return `<span class="weekCountBadge"><span><strong>${escapeHtml(count)}</strong>${qualifier}<span class="weekCountLabel">${label}</span></span></span>`;
   }
   function normalizeIdeaType(value=''){
     const v = normalize(value);
