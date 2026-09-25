@@ -7453,17 +7453,7 @@
   function bindAgendaSectionIndicator(){
     const tabList = $('#agendaSectionSwitcher .agendaSectionTabs');
     if(!tabList) return;
-    const restoreActive = () => syncAgendaSectionIndicator(tabList);
-    const hasPrecisePointer = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-    tabList.querySelectorAll('.agendaSectionTab').forEach(tab => {
-      if(hasPrecisePointer) tab.addEventListener('pointerenter', () => syncAgendaSectionIndicator(tabList, tab));
-      tab.addEventListener('focus', () => syncAgendaSectionIndicator(tabList, tab));
-    });
-    if(hasPrecisePointer) tabList.addEventListener('pointerleave', restoreActive);
-    tabList.addEventListener('focusout', () => window.requestAnimationFrame(() => {
-      if(!tabList.contains(document.activeElement)) restoreActive();
-    }));
-    window.requestAnimationFrame(restoreActive);
+    window.requestAnimationFrame(() => syncAgendaSectionIndicator(tabList));
   }
 
   function agendaWeekFilterControl(){
