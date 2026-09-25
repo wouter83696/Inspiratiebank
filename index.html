@@ -7775,6 +7775,9 @@
     const agendaPanel = $('#tab-weken');
     if(!agendaPanel) return;
     if($('#agendaFilterSheetLayer')?.classList.contains('isOpen') && options.scroll) return;
+    const preserveScroll = options.scroll !== true;
+    const scrollLeft = window.scrollX;
+    const scrollTop = window.scrollY;
     const nextSection = section === 'ongoing' ? 'ongoing' : 'weeks';
     if(nextSection === 'ongoing') setOngoingOpen(true, {scroll:false});
     syncAgendaSectionState(nextSection);
@@ -7782,6 +7785,10 @@
       const url = new URL(window.location.href);
       url.hash = nextSection === 'ongoing' ? 'longerOffers' : 'weekPanels';
       window.history.replaceState(null, '', url);
+    }
+    if(preserveScroll){
+      window.scrollTo(scrollLeft, scrollTop);
+      window.requestAnimationFrame(() => window.scrollTo(scrollLeft, scrollTop));
     }
   }
 
