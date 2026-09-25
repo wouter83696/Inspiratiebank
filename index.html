@@ -32,7 +32,7 @@
     }
   </style>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta name="theme-color" content="#0F6B6B">
+  <meta name="theme-color" content="#FFFDF9">
   <meta name="description" content="Een verzameling ideeën, uitjes en activiteiten om inspiratie op te doen, plannen te maken en samen te ontdekken.">
   <meta property="og:locale" content="nl_NL">
   <meta property="og:type" content="website">
@@ -54,7 +54,7 @@
   <link rel="icon" href="favicon-32x32.png?v=20260916-loader-icon-v1" type="image/png" sizes="32x32">
   <link rel="icon" href="favicon-16x16.png?v=20260916-loader-icon-v1" type="image/png" sizes="16x16">
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260916-loader-icon-v1" sizes="180x180">
-  <link rel="manifest" href="site.webmanifest?v=20260916-icon-v3">
+  <link rel="manifest" href="site.webmanifest?v=20260925-warm-ui-v4">
   <meta name="msapplication-config" content="browserconfig.xml?v=20260916-icon-v3">
   <meta name="apple-mobile-web-app-title" content="Inspiratiebank">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -211,11 +211,6 @@
     .tabHeroKicker{position:relative;z-index:1;display:block;margin:0 0 10px;color:var(--accent-dark);font-size:.78rem;font-weight:600;letter-spacing:.05em;line-height:1}
     .tabHeroTitle{position:relative;z-index:1;margin:0 0 0 -.025em;color:var(--accent-dark);font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:5.35rem;font-weight:500;line-height:.92;letter-spacing:-.045em}
     .tabHeroLine{position:relative;z-index:1;margin:10px 0 0;color:var(--accent);font-size:1.28rem;line-height:1.2;font-weight:400}
-    .tabHeroActions{position:relative;z-index:1;display:inline-flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:26px}
-    .tabHeroButton{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:48px;min-height:48px;padding:0 18px;border-radius:999px;border:1px solid rgba(79,142,158,.12);background:#fffdf9;box-shadow:0 6px 16px rgba(20,38,42,.04);color:rgba(49,95,107,.88);font-weight:500;line-height:1;text-decoration:none;white-space:nowrap;cursor:pointer}
-    .tabHeroButton.primary{background:#3F7884;color:#fff;border-color:rgba(63,120,132,.22);box-shadow:0 14px 32px rgba(63,120,132,.16)}
-    .tabHeroButton svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .tabHeroButton:hover{transform:translateY(-1px)}
     .tabHeroStats{
       position:relative;z-index:1;display:flex;align-items:center;flex-wrap:wrap;gap:11px;width:fit-content;max-width:min(100%,620px);margin-top:20px;
       color:rgba(11,18,32,.60);font-size:.82rem;font-weight:500;line-height:1.1
@@ -233,10 +228,9 @@
       backdrop-filter:blur(7px);
     }
     @media (min-width:641px){
-      .tabHeroTitle,.tabHeroLine,.tabHeroActions{transform:translateY(-14px)}
+      .tabHeroTitle,.tabHeroLine{transform:translateY(-14px)}
       .tabHeroKicker{transform:translateY(0)}
       .tabHeroLine{margin-top:15px}
-      .tabHeroActions{margin-top:36px}
       :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar){margin-top:calc(var(--hero-search-height) / -2)}
     }
     .quick{display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:10px}
@@ -1059,13 +1053,6 @@
     .desktopViewBar{display:none}
     .desktopLocationBar{display:none}
     .desktopSidebarLayer{display:none}
-    .mobileHeroTitle,.mobileHeroSubtitle{display:none}
-    @media (max-width:980px){
-      #tab-inspiratie .desktopHeroTitle,
-      #tab-inspiratie .desktopHeroSubtitle{display:none}
-      #tab-inspiratie .mobileHeroTitle,
-      #tab-inspiratie .mobileHeroSubtitle{display:inline}
-    }
     @media (min-width:981px){
       .desktopSidebarLayer{position:fixed;inset:0;z-index:120;display:block;pointer-events:none;visibility:hidden}
       .desktopSidebarLayer.isOpen{pointer-events:auto;visibility:visible}
@@ -1202,7 +1189,6 @@
       .tabHeroLine{
         transform:none;
       }
-      .tabHeroActions{display:none}
       :is(.tabHero + .filterBar, .desktopStickyControls > .filterBar){
         display:flex;
         align-items:flex-start;
@@ -2116,12 +2102,6 @@
       .tabHeroTitle{order:2;font-size:clamp(2.62rem,13.2vw,3.18rem);line-height:.94;letter-spacing:-.035em}
       .inspirationHero .tabHeroTitle{font-size:clamp(2.78rem,13.9vw,3.32rem);line-height:.94}
       .tabHeroLine{order:3;margin-top:clamp(11px,2.2svh,15px);font-size:clamp(1.04rem,4.2vw,1.14rem)}
-      .tabHeroActions{order:4;margin-top:clamp(28px,5svh,36px);gap:7px}
-      .inspirationHero .tabHeroActions,
-      .agendaHero .tabHeroActions{margin-left:-10px}
-      .tabHeroButton{height:44px;min-height:44px;padding:0 12px;font-size:clamp(.72rem,3.2vw,.78rem)}
-      .tabHeroButton.primary{padding:0 13px;font-size:clamp(.76rem,3.4vw,.82rem)}
-      .tabHeroButton svg{width:16px;height:16px}
       .tabHeroStats{
         order:5;position:relative;right:auto;top:auto;display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;
         width:100%;max-width:100%;min-height:0;margin-top:clamp(12px,2svh,16px);gap:8px 10px;
@@ -2311,13 +2291,6 @@
         display:block;order:3;margin-top:clamp(11px,2.2svh,15px);
         font-size:clamp(1.04rem,4.2vw,1.14rem);line-height:1.2;color:var(--accent)
       }
-      .agendaHero .tabHeroActions{
-        order:4;
-        width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-        align-items:center;gap:8px;margin-top:clamp(28px,5svh,36px)
-      }
-      .agendaHero .tabHeroButton{height:44px;min-height:44px;padding:0 12px;font-size:clamp(.72rem,3.2vw,.78rem);gap:8px}
-      .agendaHero .tabHeroButton.primary{padding:0 13px;font-size:clamp(.76rem,3.4vw,.82rem)}
       .agendaHero .tabHeroStats{
         order:5;
         width:100%;min-height:0;margin-top:clamp(12px,2svh,16px);justify-content:flex-start;gap:8px 10px;
@@ -3817,10 +3790,10 @@
       }
 
       .tabHero,.agendaHero{
-        min-height:clamp(300px,48svh,340px)!important;
+        min-height:clamp(248px,39svh,286px)!important;
         margin:0 calc(50% - 50vw)!important;
         padding-top:clamp(34px,6svh,46px)!important;
-        padding-bottom:clamp(82px,11svh,96px)!important;
+        padding-bottom:clamp(68px,9svh,82px)!important;
         background-position:57% 45%,center,center!important;
       }
       .agendaHero .tabHeroTitle,
@@ -3837,11 +3810,6 @@
       }
       .tabHeroLine{
         margin-top:10px!important;font-size:clamp(1rem,4.2vw,1.12rem)!important;line-height:1.25!important;
-      }
-      .tabHeroActions{margin-top:25px!important;gap:8px!important}
-      .tabHeroButton,.tabHeroButton.primary{
-        height:42px!important;min-height:42px!important;padding:0 13px!important;
-        border-radius:14px!important;font-size:.78rem!important;
       }
 
       /* Mobiel gebruikt alleen tegels en kaart; lijst blijft een desktopweergave. */
@@ -4102,12 +4070,6 @@
       <section class="tabHero agendaHero" aria-labelledby="agendaHeroTitle">
         <h1 class="tabHeroTitle" id="agendaHeroTitle">UIT-agenda</h1>
         <p class="tabHeroLine">Bekijk wat er te doen is</p>
-        <div class="tabHeroActions">
-          <a class="tabHeroButton primary" href="#weekPanels">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg>
-            <span>Bekijk activiteiten</span>
-          </a>
-        </div>
       </section>
       <div class="desktopStickyControls agendaDesktopControls">
       <div class="filterBar">
@@ -4147,18 +4109,8 @@
 
     <section id="tab-inspiratie" class="tabPanel active" role="tabpanel">
       <section class="tabHero inspirationHero" aria-labelledby="inspirationHeroTitle">
-        <h1 class="tabHeroTitle" id="inspirationHeroTitle"><span class="desktopHeroTitle">Ontdek iets nieuws</span><span class="mobileHeroTitle">Ontdek iets nieuws</span></h1>
-        <p class="tabHeroLine"><span class="desktopHeroSubtitle">Vind én deel inspiratie</span><span class="mobileHeroSubtitle">Vind én deel inspiratie</span></p>
-        <div class="tabHeroActions">
-          <button class="tabHeroButton primary" id="randomIdeaBtn" type="button">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.7 5.1L19 10l-5.3 1.9L12 17l-1.7-5.1L5 10l5.3-1.9L12 3Z"></path><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"></path></svg>
-            <span>Verras me</span>
-          </button>
-          <button class="tabHeroButton" type="button" data-idea-submit-open aria-haspopup="dialog" aria-controls="ideaSubmitSheetLayer" aria-expanded="false">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
-            <span>Inspiratie toevoegen</span>
-          </button>
-        </div>
+        <h1 class="tabHeroTitle" id="inspirationHeroTitle">Ontdek iets nieuws</h1>
+        <p class="tabHeroLine">Vind én deel inspiratie</p>
       </section>
       <div class="desktopStickyControls">
       <div class="filterBar">
@@ -9029,8 +8981,6 @@
     const teamIdeaImageInput = $('#teamIdeaImageInput');
     if(teamIdeaImageInput) teamIdeaImageInput.addEventListener('change', syncTeamIdeaImageName);
     $('#linkAddForm').addEventListener('submit', handleLinkAddSubmit);
-    const randomIdeaBtn = $('#randomIdeaBtn');
-    if(randomIdeaBtn) randomIdeaBtn.addEventListener('click', showRandomIdea);
     document.addEventListener('click', event => {
       const trigger = event.target.closest('[data-random-idea]');
       if(!trigger) return;
