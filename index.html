@@ -3533,6 +3533,7 @@
     .ongoingTitleCell .ideaTitleText{color:#006780;font-size:1.03rem;font-weight:400;line-height:1.25}
     .ongoingWeeksCell,
     .ongoingFitCell .small{color:#74716E;line-height:1.45}
+    .ongoingMobileWeekPill{display:none}
 
     @media(min-width:641px){
       #agendaFilters{
@@ -3999,7 +4000,17 @@
       .mobileDayButton:active{transform:scale(.96)}
 
       /* Doorlopend aanbod gebruikt op telefoon echte losse kaarten. */
-      #longerOffers .ongoingAccordionBody{padding:12px;background:transparent!important}
+      #longerOffers{
+        overflow:visible!important;border:0!important;border-radius:0!important;
+        background:transparent!important;box-shadow:none!important;
+      }
+      #longerOffers .ongoingAccordionButton{
+        min-height:0;padding:4px 2px 13px;background:transparent!important;
+        border:0!important;
+      }
+      #longerOffers .ongoingAccordionBody{
+        overflow:visible;padding:0;background:transparent!important;border-top:0!important;
+      }
       #longerOffers .tableWrap{background:transparent!important;overflow:visible}
       #longerOffers table,#longerOffers tbody{display:block;width:100%;min-width:0}
       #longerOffers thead{display:none}
@@ -4019,8 +4030,14 @@
         display:grid;grid-template-columns:30px minmax(0,1fr);gap:9px;align-items:center;
       }
       #longerOffers .ongoingTitleCell .small{display:block;margin:7px 0 0 39px;font-size:.76rem;line-height:1.35}
-      #longerOffers .ongoingWeeksCell{margin-left:39px;color:#697472;font-size:.75rem}
-      #longerOffers .ongoingWeeksCell:not(:empty)::before{content:"Week ";font-weight:600}
+      #longerOffers .ongoingWeeksCell{display:none!important}
+      #longerOffers .ongoingMobileWeekPill{
+        display:inline-flex;align-items:center;gap:4px;flex:0 0 auto;
+        min-height:28px;padding:5px 9px;border:1px solid rgba(79,142,158,.10);
+        border-radius:9px;background:rgba(239,247,245,.68);color:#526f72;
+        font-size:.73rem;font-weight:560;line-height:1;white-space:nowrap;
+      }
+      #longerOffers .ongoingMobileWeekPill strong{font-weight:680;color:#2f626d}
       #longerOffers .ongoingBadgesCell .cardPillGroup{
         width:max-content!important;max-width:100%!important;margin-left:39px!important;overflow-x:auto!important;
       }
@@ -7124,9 +7141,14 @@
     });
   }
   function flexibleExternalRow(item){
-	    const distanceLabel = normalizeIdeaDistance(item.distanceBand, item, 'agenda');
+    const distanceLabel = normalizeIdeaDistance(item.distanceBand, item, 'agenda');
     const locationLabel = normalizeIdeaLocation(item.locationType);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
+    const weekLabel = compactWeekAvailabilityLabel(item, true);
+    const mobileWeekLabel = weekLabel.replace(/(\d)\s*-\s*(\d)/g, '$1–$2');
+    const mobileWeekPill = weekLabel
+      ? `<span class="ongoingMobileWeekPill" aria-label="Week ${escapeHtml(mobileWeekLabel)}"><strong>Week</strong> ${escapeHtml(mobileWeekLabel)}</span>`
+      : '';
     const costLabel = normalizeIdeaCost(item.cost);
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const title = titleWithIcon(item.title, item.domain, 'nameWithIcon');
@@ -7136,7 +7158,7 @@
     return AgendaViewShared.renderOngoingRow({
       themeClass:domainThemeClass(item.domain), title:linkedTitle,
       review:`<div>${agendaReviewPill(item)}</div>`, date:`${escapeHtml(item.date)} • ${escapeHtml(item.time)}`,
-      weeks:escapeHtml(compactWeekAvailabilityLabel(item, true)), place:placePills,
+      weeks:escapeHtml(weekLabel), place:`${mobileWeekPill}${placePills}`,
       cost:costPill(costLabel), stimulus:stimulusPill(stimulusLabel), meta:'',
       description:escapeHtml(publicOngoingDescription(item.fit)),
       hideWebsite:true
