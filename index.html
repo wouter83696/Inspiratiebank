@@ -4099,6 +4099,38 @@
       /* Houd dezelfde rustige verticale cadans tussen zoekbalk, chips en content. */
       .sharedDiscoveryChipRow{padding:3px 6px 4px!important;margin:6px 0 10px!important}
       .sharedDiscoveryChipRow :is(#inspirationThemeLegend,#agendaThemeLegend){margin:0!important}
+
+      /* Geef de agenda meer nadruk en laat de volledige weeknaam zichtbaar. */
+      .agendaHero .tabHeroTitle{font-size:clamp(3rem,15vw,3.6rem)!important}
+      .weekTitle{grid-template-columns:44px minmax(0,1fr) 112px!important;column-gap:9px!important}
+      .weekHeadingActions{width:112px!important;min-width:112px!important}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{
+        width:112px!important;min-width:112px!important;max-width:112px!important
+      }
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{
+        padding-right:8px!important;padding-left:8px!important;font-size:.74rem!important
+      }
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectLabel{max-width:76px!important}
+
+      /* In tegelweergave is de verrasactie zelf voldoende uitleg. */
+      #ideaCards .ideaSurpriseCard{
+        display:block!important;min-height:0!important;padding:0!important;border:0!important;
+        border-radius:0!important;background:transparent!important
+      }
+      #ideaCards .ideaSurpriseMark,#ideaCards .ideaSurpriseText{display:none!important}
+      #ideaCards .ideaSurpriseButton{
+        width:100%!important;min-height:52px!important;padding:13px 22px!important;
+        border-color:#F1D99F!important;box-shadow:0 8px 22px rgba(128,91,8,.055)!important
+      }
+    }
+
+    @media (max-width:380px){
+      .weekTitle{grid-template-columns:40px minmax(0,1fr) 108px!important;column-gap:7px!important}
+      .weekHeadingActions{width:108px!important;min-width:108px!important}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{
+        width:108px!important;min-width:108px!important;max-width:108px!important
+      }
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectLabel{max-width:72px!important}
     }
 
     @media (prefers-reduced-motion:reduce){
