@@ -40,6 +40,7 @@
           <div class="weekTitleContent"><div class="weekHeadingRow"><div class="weekHeadingMain"><div class="weekDateLine"><h3>${view.title || ''}</h3>${view.freshness || ''}</div><div class="weekHeaderMeta">${view.count || ''}</div></div><div class="weekHeadingActions">${view.sectionNavigation ? '<span id="agendaWeekFilterSlot" class="agendaWeekFilterSlot"></span>' : ''}${view.navigation || ''}</div></div>${view.status || ''}</div>
         </div>
       </div>
+      ${view.dayNavigation || ''}
       <div class="weekBody"><div class="subBlock"><div class="agendaBoard"${view.boardAttribute || ''}>${view.days || ''}</div></div></div>
     </article>`;
   }
