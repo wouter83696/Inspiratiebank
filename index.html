@@ -56,7 +56,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="website-bestanden/hero-achtergronden/inspiratiebank-header.png" as="image" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Lora:wght@500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
@@ -2564,6 +2564,13 @@
         line-height:1.35;
         transform:translateY(24px);
       }
+      #tab-inspiratie .inspirationHero .tabHeroTitle{
+        font-family:"Lora",serif;
+        font-size:47px;
+        font-weight:500;
+        line-height:1.08;
+        letter-spacing:0;
+      }
       .inspirationDesktopFilterRow .desktopViewBar{
         transform:none;
       }
@@ -2572,9 +2579,10 @@
       #tab-inspiratie .tabHeroTitle{
         max-width:12em;
         margin-top:16px;
-        font-size:36px;
-        font-weight:600;
-        line-height:1.12;
+        font-family:"Lora",serif;
+        font-size:clamp(2.25rem,4.8vw,2.75rem);
+        font-weight:500;
+        line-height:1.08;
         letter-spacing:0;
       }
       #tab-inspiratie .tabHeroLine{
@@ -3988,6 +3996,10 @@
       }
       .tabHeroLine{
         margin-top:10px!important;font-size:clamp(1rem,4.2vw,1.12rem)!important;line-height:1.25!important;
+      }
+      #tab-inspiratie .inspirationHero .tabHeroTitle{
+        font-size:clamp(2.05rem,8.7vw,2.5rem)!important;
+        line-height:1.08!important;
       }
 
       /* Mobiel gebruikt alleen tegels en kaart; lijst blijft een desktopweergave. */
