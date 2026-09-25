@@ -3644,14 +3644,17 @@
       .desktopStickyControls > .filterBar > .sharedDiscoveryFilters{
         width:100%;min-width:0
       }
+      .desktopStickyControls > .filterBar > .sharedDiscoveryFilters{
+        flex:1 1 0;max-width:100%;box-sizing:border-box
+      }
       :is(#ideaFilters,#agendaFilters).sharedDiscoveryFilters{
-        grid-template-columns:minmax(0,1fr) 280px;column-gap:0
+        display:grid;grid-template-columns:minmax(0,1fr) 280px;column-gap:0
       }
       :is(#ideaFilters,#agendaFilters).sharedDiscoveryFilters .filterSearch{
         grid-column:1 / 3;grid-row:1;margin:0;filter:none
       }
       :is(#ideaFilters,#agendaFilters).sharedDiscoveryFilters .filterSearch input{
-        height:48px;min-height:48px;padding-right:288px;
+        width:100%;box-sizing:border-box;height:48px;min-height:48px;padding-right:288px;
         border:1px solid rgba(255,255,255,.78);border-radius:18px;
         background:rgba(255,253,249,.62);box-shadow:none;backdrop-filter:blur(7px)
       }
