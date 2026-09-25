@@ -3553,6 +3553,34 @@
       background:#fffdf9;box-shadow:0 8px 24px rgba(92,65,33,.04)
     }
 
+    /* Desktop: laat de volledige week de beschikbare viewportbreedte benutten. */
+    @media (min-width:981px){
+      #agendaSectionSwitcher,
+      #weekPanels,
+      #longerOffers{
+        --agenda-viewport-width:min(1680px,calc(100vw - 48px));
+        width:var(--agenda-viewport-width);
+        max-width:none;
+        margin-left:calc((100% - var(--agenda-viewport-width)) / 2);
+      }
+      #weekPanels .weekBody{
+        padding:0 clamp(12px,1vw,18px) clamp(14px,2vh,22px);
+      }
+      #weekPanels .agendaDay{
+        min-height:clamp(440px,52vh,520px);
+        padding:clamp(10px,1.5vh,16px) clamp(7px,.6vw,10px) clamp(10px,1.4vh,14px);
+        gap:clamp(11px,1.8vh,18px);
+      }
+      #weekPanels .agendaList,
+      #weekPanels .agendaGroup{
+        gap:clamp(7px,1.05vh,10px);
+      }
+      #weekPanels .agendaItem{
+        padding:clamp(8px,1.15vh,11px) clamp(8px,.65vw,11px) clamp(7px,1vh,9px);
+      }
+      #weekPanels .agendaItemMeta{margin-top:clamp(5px,.8vh,8px)}
+    }
+
     @media(min-width:641px){
       #agendaFilters{
         --agenda-main-filter-height:48px;
