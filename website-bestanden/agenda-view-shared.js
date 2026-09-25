@@ -33,7 +33,7 @@
   }
 
   function renderWeek(view){
-    return `<article class="weekPanel"${view.id ? ` id="${view.id}"` : ''}>
+    return `<article class="weekPanel${view.expanded ? ' expanded' : ''}"${view.id ? ` id="${view.id}"` : ''}>
       <div class="weekTop">
         ${view.sectionNavigation ? `<div class="weekSectionNavigation">${view.sectionNavigation}</div>` : ''}
         <div class="weekTitle">

@@ -3854,6 +3854,19 @@
         min-height:0;
         overflow:hidden;
       }
+      #tab-weken #weekPanels .weekPanel.expanded{
+        height:auto;
+        grid-template-rows:auto auto;
+      }
+      #tab-weken #weekPanels .weekPanel.expanded .agendaBoard{
+        height:auto;
+        align-items:stretch;
+      }
+      #tab-weken #weekPanels .weekPanel.expanded .agendaDay{
+        height:auto;
+        min-height:100%;
+        overflow:visible;
+      }
     }
 
     /* Houd de volledige kaartviewer binnen de beschikbare schermhoogte. */
@@ -4826,7 +4839,7 @@
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20260923-map-detail-v1"></script>
-  <script src="website-bestanden/agenda-view-shared.js?v=20260925-week-meta-v1"></script>
+  <script src="website-bestanden/agenda-view-shared.js?v=20260925-week-expand-v1"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
@@ -7513,6 +7526,7 @@
       const agendaHtml = renderAgendaBoard(w.id, concrete);
       return AgendaViewShared.renderWeek({
         id:escapeHtml(w.id), week:escapeHtml(w.week), title:escapeHtml(publicWeekDates(w)),
+        expanded:weekDays(w.id).some(day => expandedAgendaDays.has(`${w.id}:${day.iso}`)),
         sectionNavigation:'', showWeekFilter:i === 0,
         freshness:agendaFreshnessBadge(), count:weekCountBadge(weekItemCount),
         navigation:weekNavControls(w.id), status:weekStatusText(w), days:agendaHtml,
