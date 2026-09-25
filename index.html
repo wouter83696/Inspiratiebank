@@ -1543,6 +1543,11 @@
     .ideaSubmitSheet .teamField.wide,.ideaSubmitSheet .teamAddressPair{grid-column:1}
     .ideaSubmitSheet .teamField input,.ideaSubmitSheet .teamField select,.ideaSubmitSheet .teamField textarea{border-radius:12px;padding:10px 11px}
     .ideaSubmitSheet .teamField .customSelectButton{min-height:44px;border-radius:12px;padding:10px 11px}
+    .ideaSubmitSheet .customSelectOption:hover,
+    .ideaSubmitSheet .customSelectOption.active:hover,
+    .ideaSubmitSheet .customSelectOption:focus-visible{
+      background:rgba(168,225,221,.28);color:var(--accent-dark);box-shadow:none;outline:0
+    }
     .ideaSubmitSheet .teamAddressPair{grid-template-columns:minmax(0,1fr) minmax(110px,.42fr);gap:10px}
     .ideaSubmitSheet .teamActionBar{
       position:sticky;z-index:3;bottom:0;display:grid;grid-template-columns:1fr;gap:7px;margin:4px -18px 0;padding:11px 18px calc(11px + env(safe-area-inset-bottom));
