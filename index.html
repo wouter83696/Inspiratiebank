@@ -7499,6 +7499,18 @@
     const panel = $('#ongoingContent');
     setOngoingOpen(Boolean(panel && panel.hidden), options);
   }
+  function revealAgendaSectionNavigation(){
+    if(!window.matchMedia('(min-width:981px)').matches) return;
+    const target = $('#agendaSectionSwitcher');
+    if(!target) return;
+    const stickyControls = $('#tab-weken .agendaDesktopControls');
+    const stickyBottom = stickyControls?.getBoundingClientRect().bottom || 0;
+    const targetRect = target.getBoundingClientRect();
+    const minimumTop = stickyBottom + 6;
+    if(targetRect.top >= minimumTop) return;
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    window.scrollTo({top:Math.max(0, window.scrollY + targetRect.top - minimumTop), behavior});
+  }
   function setAgendaSection(section, options={}){
     const agendaPanel = $('#tab-weken');
     if(!agendaPanel) return;
@@ -7512,8 +7524,7 @@
       window.history.replaceState(null, '', url);
     }
     if(options.scroll){
-      const target = $('#agendaSectionSwitcher');
-      window.requestAnimationFrame(() => target?.scrollIntoView({behavior:'smooth', block:'start'}));
+      window.requestAnimationFrame(revealAgendaSectionNavigation);
     }
   }
 
@@ -9234,7 +9245,7 @@
       const agendaSectionLink = event.target.closest('[data-agenda-section]');
       if(agendaSectionLink){
         event.preventDefault();
-        setAgendaSection(agendaSectionLink.dataset.agendaSection, {scroll:false});
+        setAgendaSection(agendaSectionLink.dataset.agendaSection, {scroll:true});
       }
       if(!event.target.closest('.customSelect')) closeCustomSelects();
       if(!event.target.closest('[data-report-menu]')) closeReportMenus();
