@@ -323,7 +323,7 @@
       background:#FFFEFC;border:1px solid rgba(64,45,20,.065);border-radius:16px
     }
     .agendaDay{
-      min-height:520px;padding:16px 10px 14px;border-radius:0;
+      min-height:clamp(460px,calc(100dvh - var(--active-sticky-controls-height,148px) - 120px),520px);padding:16px 10px 14px;border-radius:0;
       background:var(--day-column-tint,#FFFEFC);border:0;border-left:1px solid rgba(64,45,20,.055);
       display:flex;flex-direction:column;gap:18px;cursor:pointer;transition:opacity .18s var(--ease), background .18s var(--ease), box-shadow .18s var(--ease), transform .18s var(--ease);
     }
