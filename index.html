@@ -3803,6 +3803,22 @@
     #tab-weken .agendaLegendBar{margin-bottom:6px}
     #tab-weken .agendaSectionSwitcher{margin-top:6px}
 
+    @media (min-width:641px){
+      #longerOffers{margin-top:0}
+      #longerOffers .ongoingAccordionButton{display:none}
+      .ongoingBadgesHeadInner{
+        display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;
+      }
+      .ongoingTableCount{
+        display:inline-flex;align-items:center;gap:5px;min-height:24px;padding:4px 7px;
+        border:1px solid rgba(79,142,158,.08);border-radius:9px;background:rgba(247,241,231,.16);
+        color:#617573;font-size:.68rem;font-weight:500;line-height:1;white-space:nowrap;
+      }
+      .ongoingTableCount svg{width:13px;height:13px;flex:0 0 13px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+      .ongoingTableCount span{display:inline-flex;align-items:baseline;gap:3px}
+      .ongoingTableCount strong{font:inherit;font-weight:650}
+    }
+
     /* Houd de volledige kaartviewer binnen de beschikbare schermhoogte. */
     @media (min-width:981px){
       .ideaMap.ideaView.active{
@@ -4358,7 +4374,7 @@
       <div id="weekPanels" class="weekStack agendaSectionView" role="tabpanel" aria-labelledby="agenda-tab-weeks"></div>
       <section id="longerOffers" class="ongoingAccordion sharedPublicList agendaSectionView open" role="tabpanel" aria-labelledby="agenda-tab-ongoing">
         <div class="ongoingAccordionButton">
-          <span class="ongoingAccordionText"><span class="ongoingTitleLine"><strong>Doorlopend aanbod</strong><span id="flexibleOfferCount" class="weekCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>0</strong> opties</span></span></span></span>
+          <span class="ongoingAccordionText"><span class="ongoingTitleLine"><strong>Doorlopend aanbod</strong><span id="flexibleOfferCount" class="weekCountBadge" data-flexible-offer-count><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>0</strong> activiteiten</span></span></span></span>
         </div>
         <div id="ongoingContent" class="ongoingAccordionBody">
           <div id="flexibleOffersWrap" class="tableWrap"></div>
@@ -7266,11 +7282,15 @@
     const {scope, week} = filters;
     const items = filterAgendaItems(sharedFlexibleOffers(), filters)
       .filter(item => !hasActiveAgendaFilters(filters) || scope === 'all' || splitWeeks(item.week).includes(week));
-    const count = $('#flexibleOfferCount');
-    if(count) count.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${escapeHtml(items.length)}</strong> optie${items.length === 1 ? '' : 's'}</span>`;
     $('#flexibleOffersWrap').innerHTML = items.length
-      ? AgendaViewShared.renderOngoingTable({rows:items.map(flexibleExternalRow).join(''),hideWebsite:true})
+      ? AgendaViewShared.renderOngoingTable({
+          rows:items.map(flexibleExternalRow).join(''),hideWebsite:true,
+          badgesHeading:`<span class="ongoingBadgesHeadInner"><span>Kenmerken</span><span class="ongoingTableCount" data-flexible-offer-count aria-label="${escapeHtml(items.length)} activiteiten"></span></span>`
+        })
       : `<div class="empty">${escapeHtml(hasActiveAgendaFilters(filters) ? agendaEmptyMessage(filters) : 'Er is nog geen tijdelijk aanbod voor deze periode zichtbaar.')}</div>`;
+    $$('[data-flexible-offer-count]').forEach(count => {
+      count.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${escapeHtml(items.length)}</strong> ${items.length === 1 ? 'activiteit' : 'activiteiten'}</span>`;
+    });
   }
   function weekNavControls(currentId){
     const index = ACTIVE_WEEKS.findIndex(week => week.id === currentId);
