@@ -4321,7 +4321,7 @@
     #tab-inspiratie.mapViewActive .desktopStickyControls{display:none!important}
     #tab-inspiratie.mapViewActive{padding-top:0}
     .ideaMapToolbar{
-      position:absolute;z-index:800;top:16px;left:16px;right:16px;
+      position:absolute;z-index:800;top:16px;left:16px;width:min(620px,calc(100% - 32px));
       display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:8px;pointer-events:none
     }
     .ideaMapToolbar > *{pointer-events:auto}
@@ -4349,11 +4349,15 @@
     .ideaMapToolbarButton:hover,.ideaMapToolbarView:hover{background:#fff;color:#168697}
     .ideaMapCanvas .leaflet-top.leaflet-right{top:70px!important}
     .ideaMapPanel{
-      position:absolute!important;z-index:790!important;top:auto!important;right:16px!important;bottom:16px!important;left:16px!important;
+      position:absolute!important;z-index:790!important;top:auto!important;right:16px!important;bottom:0!important;left:16px!important;
       width:auto!important;min-height:0!important;max-height:min(42%,330px);overflow:hidden!important;
-      border:1px solid rgba(61,126,136,.13)!important;border-radius:20px!important;background:rgba(255,253,249,.96)!important;
-      box-shadow:0 18px 46px rgba(20,38,42,.15)!important;backdrop-filter:blur(18px);pointer-events:auto!important
+      border:1px solid rgba(61,126,136,.13)!important;border-bottom:0!important;border-radius:20px 20px 0 0!important;background:rgba(255,253,249,.96)!important;
+      box-shadow:0 -16px 42px rgba(20,38,42,.15)!important;backdrop-filter:blur(18px);pointer-events:auto!important;
+      transform:translate3d(0,0,0);opacity:1;transition:transform .32s cubic-bezier(.2,.72,.24,1),opacity .2s ease
     }
+    .ideaMapPanel.isDormant{transform:translate3d(0,calc(100% + 24px),0);opacity:0;pointer-events:none!important}
+    .ideaMapPanel:not(.isDormant){animation:ideaMapSheetIn .34s cubic-bezier(.2,.72,.24,1) both}
+    @keyframes ideaMapSheetIn{from{transform:translate3d(0,calc(100% + 24px),0);opacity:.4}to{transform:translate3d(0,0,0);opacity:1}}
     .ideaMapPanelHead{display:block!important;padding:18px 18px 11px!important}
     .ideaMapPanelHead::before{content:"";display:block;width:34px;height:4px;margin:-9px auto 9px;border-radius:999px;background:rgba(49,95,107,.2)}
     .ideaMapPanelHeadRow{align-items:center!important;justify-content:space-between!important}
@@ -4376,13 +4380,13 @@
     @media (max-width:640px){
       #tab-inspiratie.mapViewActive{margin-inline:calc(clamp(14px,3vw,28px) * -1)}
       .ideaMap.ideaView.active{height:calc(100svh - var(--header-height,70px))!important;min-height:560px!important;border:0!important;border-radius:0!important;box-shadow:none!important}
-      .ideaMapToolbar{top:12px;left:10px;right:10px;grid-template-columns:38px minmax(0,1fr);gap:7px}
+      .ideaMapToolbar{top:12px;left:12px;width:min(340px,calc(100% - 28px));grid-template-columns:38px minmax(0,1fr);gap:7px}
       .ideaMapToolbarButton,.ideaMapToolbarView{width:38px;height:38px;border-radius:13px;padding:0}
       .ideaMapToolbarView span{display:none}
       .ideaMapToolbarSearch input{height:38px;font-size:.8rem}
       .ideaMapCanvas{min-height:100%!important;border-radius:0!important}
       .ideaMapCanvas .leaflet-top.leaflet-right{top:61px!important;right:10px!important}
-      .ideaMapPanel{right:10px!important;bottom:10px!important;left:10px!important;max-height:46%;border-radius:18px!important}
+      .ideaMapPanel{right:0!important;bottom:0!important;left:0!important;max-height:48%;border-right:0!important;border-left:0!important;border-radius:22px 22px 0 0!important}
       .ideaMapPanelHead{padding:17px 12px 10px!important}
       .ideaMapPanelHead p{font-size:.68rem!important}
       .ideaMapResults{padding:0 10px 10px!important}
@@ -8712,7 +8716,8 @@
     const toggleIcon = ideaMapPanelExpanded ? '<path d="m6 14 6-6 6 6"></path>' : '<path d="m6 10 6 6 6-6"></path>';
     const visibleTitle = ideaMapPanelExpanded ? panelTitle : 'Kies een marker op de kaart';
     const visibleText = ideaMapPanelExpanded ? panelText : 'De bijbehorende activiteiten verschijnen hier.';
-    return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${singleDetail ? ' isSingleDetail' : ''}">
+    const dormant = !ideaMapPanelExpanded && !singleDetail && !activeIdeaMapClusterKeys;
+    return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${singleDetail ? ' isSingleDetail' : ''}${dormant ? ' isDormant' : ''}" aria-label="Activiteiten op de kaart"${dormant ? ' aria-hidden="true" inert' : ''}>
       <div class="ideaMapPanelHead"><div class="ideaMapPanelHeadRow"><div><h3>${escapeHtml(visibleTitle)}</h3><p>${escapeHtml(visibleText)}</p></div><div class="ideaMapPanelActions">${clearButton}<button class="ideaMapPanelToggle" type="button" data-map-panel-toggle aria-expanded="${ideaMapPanelExpanded ? 'true' : 'false'}" title="${toggleLabel}" aria-label="${toggleLabel}"><svg viewBox="0 0 24 24" aria-hidden="true">${toggleIcon}</svg></button></div></div></div>
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
