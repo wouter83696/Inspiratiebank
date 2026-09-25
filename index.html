@@ -9407,9 +9407,22 @@
       const key = expandButton?.dataset.expandAgendaDay || collapseButton?.dataset.collapseAgendaDay;
       if(!key) return;
       event.preventDefault();
-      if(expandButton) expandedAgendaDays.add(key);
+      const expanding = Boolean(expandButton);
+      if(expanding) expandedAgendaDays.add(key);
       else expandedAgendaDays.delete(key);
       renderAgenda();
+      window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+        const day = [...document.querySelectorAll('[data-agenda-day]')]
+          .find(candidate => candidate.dataset.agendaDay === key);
+        if(!day) return;
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const firstRevealedItem = day.querySelectorAll('.agendaItem')[agendaDayVisibleLimit()];
+        const target = expanding ? (firstRevealedItem || day) : day;
+        target.scrollIntoView({
+          behavior:reducedMotion ? 'auto' : 'smooth',
+          block:expanding ? 'center' : 'nearest'
+        });
+      }));
     });
     document.addEventListener('click', event => {
       const dayTarget = event.target.closest('[data-agenda-day-target]');
