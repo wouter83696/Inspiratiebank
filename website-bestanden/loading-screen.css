@@ -47,13 +47,6 @@ body.appLoading > :not(.appLoader){display:none !important}
   font-weight:600;
   line-height:1.15;
 }
-.appLoaderStatus{
-  margin-top:8px;
-  color:var(--muted);
-  font-size:.9rem;
-  font-weight:400;
-  line-height:1.35;
-}
 @keyframes appLoaderBreathe{
   from{transform:translateY(0)}
   to{transform:translateY(-4px)}
@@ -62,7 +55,6 @@ body.appLoading > :not(.appLoader){display:none !important}
   .appLoader{padding:max(24px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left))}
   .appLoaderMark{width:76px;height:76px;padding:12px;border-radius:16px;margin-bottom:16px}
   .appLoaderTitle{font-size:1.3rem}
-  .appLoaderStatus{font-size:.86rem}
 }
 @media (prefers-reduced-motion:reduce){
   .appLoader{transition-duration:.01ms}

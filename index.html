@@ -9,9 +9,6 @@
     html.appLoading body{margin:0;overflow:hidden;background:#F8F5EB}
     html.appLoading body > :not(.appLoader){display:none !important}
     html.appLoading .appLoader{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;width:100%;min-height:100vh;padding:24px;background:#F8F5EB}
-    .appLoaderCopyAgenda{display:none}
-    html[data-loader-mode="agenda"] .appLoaderCopyIdeas{display:none}
-    html[data-loader-mode="agenda"] .appLoaderCopyAgenda{display:block}
     .desktopStickyControls{display:contents}
     @media (min-width:981px){
       html,body{overflow-x:clip !important;overflow-y:visible}
@@ -44,7 +41,6 @@
   <meta name="twitter:description" content="Een verzameling ideeën, uitjes en activiteiten om inspiratie op te doen, plannen te maken en samen te ontdekken.">
   <title>Inspiratiebank</title>
   <script>
-    document.documentElement.dataset.loaderMode = /^\/uit-agenda(?:\/|$)/.test(window.location.pathname) ? 'agenda' : 'ideas';
     if(window.location.pathname.endsWith('/index.html')){
       window.history.replaceState(null, '', window.location.pathname.replace(/index\.html$/, '') + window.location.search + window.location.hash);
     }
@@ -4117,16 +4113,12 @@
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
     <div class="appLoaderInner">
       <img class="appLoaderMark" src="inspiratiebank-app-icon-180.png?v=20260916-transparent-mark-v1" alt="">
-      <strong class="appLoaderTitle appLoaderCopyIdeas">Inspiratiebank</strong>
-      <span class="appLoaderStatus appLoaderCopyIdeas">Inspiratie verzamelen...</span>
-      <strong class="appLoaderTitle appLoaderCopyAgenda">UIT-agenda</strong>
-      <span class="appLoaderStatus appLoaderCopyAgenda">Activiteiten verzamelen...</span>
+      <strong class="appLoaderTitle">Inspiratiebank</strong>
     </div>
   </div>
   <script>
     (() => {
       const loader = document.getElementById('appLoader');
-      if(document.documentElement.dataset.loaderMode === 'agenda') loader?.setAttribute('aria-label', 'UIT-agenda laden');
       const showLoader = () => {
         document.documentElement.classList.add('appLoading');
         document.body.classList.add('appLoading');
