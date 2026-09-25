@@ -4152,32 +4152,26 @@
       }
       .mobileDayNavigation{
         display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;
-        width:calc(100% - 32px);margin:-5px 16px 12px;padding:4px;
-        overflow:hidden;border:1px solid rgba(79,142,158,.12);border-radius:15px;
-        background:rgba(255,253,249,.72);
+        width:calc(100% - 32px);margin:-3px 16px 14px;padding:6px 7px;
+        overflow:hidden;border:1px solid rgba(79,142,158,.08);border-radius:18px;
+        background:#FFFEFC;box-shadow:0 10px 26px rgba(20,38,42,.055);
       }
       .mobileDayNavigation::-webkit-scrollbar{display:none}
       .mobileDayButton{
-        position:relative;display:grid;place-items:center;width:100%;min-width:0;min-height:54px;
-        padding:6px 2px;border:0;border-radius:0;
+        position:relative;display:grid;place-items:center;width:100%;min-width:0;min-height:64px;
+        padding:8px 2px;border:0;border-radius:14px;
         background:transparent;color:rgba(49,95,107,.72);
         font:inherit;line-height:1;scroll-snap-align:start;cursor:pointer;
         transition:color var(--motion-fast) ease,background-color var(--motion-fast) ease,
           border-color var(--motion-fast) ease,box-shadow var(--motion-fast) ease,
           transform var(--motion-fast) var(--motion-enter);
       }
-      .mobileDayButton:not(:last-child)::after{
-        content:"";position:absolute;top:10px;right:0;bottom:10px;width:1px;
-        background:rgba(79,142,158,.10);
+      .mobileDayButton strong{font-size:.76rem;font-weight:650}
+      .mobileDayButton span{margin-top:5px;font-size:.67rem;color:inherit;opacity:.78;white-space:nowrap}
+      .mobileDayButton.active{
+        background:#DDF2EF;color:#245f6d;
+        box-shadow:inset 0 0 0 1px rgba(79,142,158,.055);
       }
-      .mobileDayButton strong{font-size:.69rem;font-weight:650}
-      .mobileDayButton span{margin-top:3px;font-size:.61rem;color:inherit;opacity:.78;white-space:nowrap}
-      .mobileDayButton.today{
-        border-radius:12px;background:rgba(221,242,239,.82);
-        color:#245f6d;box-shadow:inset 0 0 0 1px rgba(79,142,158,.06);
-      }
-      .mobileDayButton.today::after{display:none}
-      .mobileDayButton:has(+ .today)::after{display:none}
       .mobileDayButton:active{transform:scale(.96)}
 
       /* Doorlopend aanbod gebruikt op telefoon echte losse kaarten. */
@@ -5347,6 +5341,7 @@
     return window.matchMedia('(min-width:981px)').matches ? 3 : AGENDA_DAY_VISIBLE_LIMIT;
   }
   let selectedAgendaWeek = ACTIVE_WEEKS[0]?.id || '';
+  let selectedAgendaDayKey = '';
   const expandedAgendaDays = new Set();
   const DUTCH_MONTHS = {
     januari:'01',
@@ -7257,10 +7252,15 @@
   }
   function mobileAgendaDayNavigation(weekId){
     const todayIso = formatIsoDate(new Date());
-    const buttons = weekDays(weekId).map(day => {
-      const current = day.iso === todayIso;
+    const days = weekDays(weekId);
+    const defaultDay = days.some(day => day.iso === todayIso) ? todayIso : days[0]?.iso;
+    const selectedKey = selectedAgendaDayKey.startsWith(`${weekId}:`)
+      ? selectedAgendaDayKey
+      : `${weekId}:${defaultDay}`;
+    const buttons = days.map(day => {
       const key = `${weekId}:${day.iso}`;
-      return `<button class="mobileDayButton${current ? ' today' : ''}" type="button" data-agenda-day-target="${escapeHtml(key)}"${current ? ' aria-current="date"' : ''}><strong>${escapeHtml(day.shortLabel)}</strong><span>${escapeHtml(day.prettyDate)}</span></button>`;
+      const active = key === selectedKey;
+      return `<button class="mobileDayButton${active ? ' active' : ''}" type="button" data-agenda-day-target="${escapeHtml(key)}"${active ? ' aria-current="date"' : ''}><strong>${escapeHtml(day.shortLabel)}</strong><span>${escapeHtml(day.prettyDate)}</span></button>`;
     }).join('');
     return `<nav class="mobileDayNavigation" aria-label="Kies een dag">${buttons}</nav>`;
   }
@@ -9458,6 +9458,13 @@
     document.addEventListener('click', event => {
       const dayTarget = event.target.closest('[data-agenda-day-target]');
       if(dayTarget){
+        selectedAgendaDayKey = dayTarget.dataset.agendaDayTarget;
+        document.querySelectorAll('[data-agenda-day-target]').forEach(button => {
+          const active = button.dataset.agendaDayTarget === selectedAgendaDayKey;
+          button.classList.toggle('active', active);
+          if(active) button.setAttribute('aria-current', 'date');
+          else button.removeAttribute('aria-current');
+        });
         const day = [...document.querySelectorAll('[data-agenda-day]')]
           .find(candidate => candidate.dataset.agendaDay === dayTarget.dataset.agendaDayTarget);
         if(day){
