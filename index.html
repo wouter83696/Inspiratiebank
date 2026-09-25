@@ -1827,6 +1827,7 @@
     .ideaMapDetailToolbar svg{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaMapDetailClose svg{width:13px;height:13px}
     .ideaMapPanel.isSingleDetail .cardFooter{position:static;order:6;align-self:flex-start;margin-top:7px}
+    .ideaMapPanel.isSingleDetail .cardFooter:empty{display:none}
     .ideaRouteButton{
       display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:36px;padding:8px 12px;
       border:1px solid rgba(79,142,158,.14);border-radius:999px;background:rgba(255,253,249,.76);
@@ -7986,7 +7987,7 @@
       practicalOpen:mapDetailAction === 'close',
       website:'',
       actions:mapDetailAction === 'close'
-        ? ideaRouteButton(item)
+        ? ''
         : reportMenu('inspiratiebank', ideaDomKey(item), item.title)
     });
   }
