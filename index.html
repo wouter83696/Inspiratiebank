@@ -3931,6 +3931,16 @@
         transform:scale(.985)!important;transition-duration:var(--motion-instant)!important;
       }
       :is(.sharedIdeaCard,.ideaMapResult):hover{transition-duration:var(--motion-base)}
+      #weekPanels .agendaItem:hover{
+        background:#edf8f6;
+        border-color:rgba(79,142,158,.24);
+        box-shadow:0 12px 28px rgba(49,95,107,.08);
+      }
+    }
+    #weekPanels .agendaItem:focus-within{
+      background:#edf8f6;
+      border-color:rgba(79,142,158,.24);
+      box-shadow:0 12px 28px rgba(49,95,107,.08);
     }
     @media (pointer:coarse){
       :is(.topbarAddButton,.filterToggle,.viewBtn,.locationLegendItem,.agendaLegendItem,
