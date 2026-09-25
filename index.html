@@ -3930,13 +3930,31 @@
       }
       #tab-weken .agendaSectionSwitcher{
         position:relative;top:auto;z-index:auto;
+        display:flex;justify-content:flex-start;
         margin:0;padding:0 12px;
         background:transparent;
         box-shadow:none
       }
-      #tab-weken .agendaSectionTabs{gap:20px;overflow-x:auto;scrollbar-width:none}
+      #tab-weken .agendaSectionTabs{
+        gap:1px;width:max-content;max-width:100%;height:42px;margin:0;padding:3px;
+        overflow-x:auto;box-sizing:border-box;scrollbar-width:none;
+        border:1px solid rgba(255,255,255,.64);border-radius:16px;
+        background:rgba(255,255,255,.52);box-shadow:0 5px 14px rgba(20,38,42,.035);
+        backdrop-filter:blur(8px)
+      }
       #tab-weken .agendaSectionTabs::-webkit-scrollbar{display:none}
-      #tab-weken .agendaSectionTab{flex:0 0 auto;padding:8px 0 8px;font-size:.8rem}
+      #tab-weken .agendaSectionTabs::after,
+      #tab-weken .agendaSectionTab::after{display:none}
+      #tab-weken .agendaSectionTab{
+        flex:0 0 auto;min-height:34px!important;padding:6px 9px;border-radius:13px;
+        color:rgba(49,95,107,.48);font-family:inherit;font-size:.78rem;font-weight:500;line-height:1
+      }
+      #tab-weken .agendaSectionTab:is(:hover,:focus-visible){color:rgba(49,95,107,.68);background:var(--control-hover-surface)!important}
+      #tab-weken .agendaSectionTab.active{
+        color:rgba(31,101,114,.92);font-weight:600;
+        background:rgba(168,225,221,.28)!important;
+        box-shadow:inset 0 0 0 1px rgba(79,142,158,.06)!important
+      }
     }
 
     @media (min-width:641px){
@@ -4499,8 +4517,28 @@
       .ideaMapPanel.isDragging{transition:none!important;animation:none!important;touch-action:none}
       .ideaMapPanelHead{padding:17px 12px 10px!important;touch-action:none;cursor:grab}
       .ideaMapPanelHead p{display:none!important}
-      .ideaMapResults{align-items:flex-start!important;flex:0 1 auto!important;padding:0 10px 10px!important}
-      .ideaMapResult{flex-basis:min(82vw,330px)!important;width:min(82vw,330px)!important}
+      .ideaMapResults{
+        align-items:flex-start!important;flex:0 1 auto!important;gap:12px!important;
+        padding:0 16px 12px!important;scroll-padding-inline:16px!important;
+        scroll-snap-type:x mandatory!important;scrollbar-width:none!important;
+        -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x
+      }
+      .ideaMapResults::-webkit-scrollbar{display:none}
+      .ideaMapResult{
+        flex:0 0 min(86vw,356px)!important;width:min(86vw,356px)!important;
+        scroll-snap-align:start!important;scroll-snap-stop:always
+      }
+      .ideaMapResult.hasThumb{
+        grid-template-columns:100px minmax(0,1fr)!important;grid-template-rows:auto auto;
+        align-items:center!important;column-gap:10px!important;row-gap:7px!important;padding:8px!important
+      }
+      .ideaMapResult.hasThumb .ideaMapResultThumbWrap{grid-column:1;grid-row:1;width:100%!important;height:78px!important}
+      .ideaMapResult.hasThumb .ideaMapResultText{display:contents;min-height:0!important}
+      .ideaMapResult.hasThumb .ideaMapResultTitle{grid-column:2;grid-row:1;align-self:center}
+      .ideaMapResult.hasThumb .ideaMapResultBody{grid-column:1 / -1;grid-row:2;margin-top:0;min-width:0}
+      .ideaMapResult.hasThumb .ideaMapResultInfo{gap:7px;width:100%;margin-top:0;flex-wrap:nowrap;overflow:hidden}
+      .ideaMapResult.hasThumb .ideaMapResultPills{gap:5px;flex-wrap:nowrap}
+      .ideaMapResult.hasThumb .ideaMapResultMeta{gap:7px;overflow:visible}
       .ideaMapPanel.isSingleDetail{height:auto!important;max-height:min(72dvh,620px)!important}
       .ideaMapPanel.isSingleDetail .ideaMapSingleCard{width:100%!important;max-width:none!important}
       .ideaMapPanel.isSingleDetail .ideaMapResults{padding:0 16px 16px!important}
@@ -8977,6 +9015,8 @@
           const resultTop = resultRect.top - panelRect.top + panel.scrollTop;
           const centeredTop = resultTop - Math.max(8, (panel.clientHeight - result.offsetHeight) / 2);
           panel.scrollTo({top:Math.max(0, centeredTop), behavior:'smooth'});
+        }else if(activeIdeaMapClusterKeys?.length > 1 && !ideaMapDetailKey){
+          panel.scrollTo({left:0, behavior:'auto'});
         }else{
           const resultLeft = resultRect.left - panelRect.left + panel.scrollLeft;
           const centeredLeft = resultLeft - Math.max(12, (panel.clientWidth - result.offsetWidth) / 2);
