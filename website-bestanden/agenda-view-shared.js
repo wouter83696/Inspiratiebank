@@ -19,7 +19,8 @@
       ? `<a class="agendaItemLink" href="${view.href}" target="_blank" rel="noopener">${content}</a>`
       : `<div class="agendaItemLink">${content}</div>`;
     const actionsClass = view.admin ? 'agendaItemActions agendaReviewCardActions adminAgendaActions' : 'agendaItemActions';
-    return `<article class="${classes}">${main}${view.status || ''}<div class="${actionsClass}">${view.actions || ''}</div></article>`;
+    const actions = view.actions ? `<div class="${actionsClass}">${view.actions}</div>` : '';
+    return `<article class="${classes}">${main}${view.status || ''}${actions}</article>`;
   }
 
   function renderDay(view){

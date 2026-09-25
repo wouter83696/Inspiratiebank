@@ -3702,6 +3702,10 @@
       from{opacity:0;transform:translate3d(0,6px,0)}
       to{opacity:1;transform:translate3d(0,0,0)}
     }
+    @keyframes mobileCoachmarkIn{
+      from{opacity:0;transform:translate3d(0,-4px,0) scale(.98)}
+      to{opacity:1;transform:translate3d(0,0,0) scale(1)}
+    }
     .ideaView.active{animation:viewSurfaceEnter var(--motion-base) var(--motion-enter) both}
     .ideaFilterSheetBackdrop,.ideaSubmitSheetBackdrop{transition:opacity var(--motion-base) ease!important}
     .ideaFilterSheetClose,.ideaSubmitSheetClose,.viewBtn,.filterToggle,
@@ -3759,8 +3763,8 @@
       }
 
       .topbar > .topbarAddButton{
-        flex:0 0 40px!important;width:40px!important;min-width:40px!important;max-width:40px!important;
-        height:40px!important;min-height:40px!important;padding:0!important;
+        position:relative;flex:0 0 36px!important;width:36px!important;min-width:36px!important;max-width:36px!important;
+        height:36px!important;min-height:36px!important;padding:0!important;
       }
       .topbar{
         min-height:60px!important;padding:0 var(--mobile-page-gutter)!important;
@@ -3787,6 +3791,18 @@
       .topbar > .topbarAddButton{
         border-color:rgba(79,142,158,.28)!important;border-radius:12px!important;
         background:transparent!important;color:#236875!important;box-shadow:none!important;
+      }
+      .topbar > .topbarAddButton.showCoachmark::after{
+        content:"Activiteit toevoegen";position:absolute;z-index:20;top:calc(100% + 9px);right:0;
+        width:max-content;max-width:170px;padding:7px 10px;border:1px solid rgba(79,142,158,.12);
+        border-radius:10px;background:#fffdf9;color:#315f6b;box-shadow:0 10px 26px rgba(56,49,36,.12);
+        font-size:.7rem;font-weight:600;line-height:1.15;pointer-events:none;
+        animation:mobileCoachmarkIn var(--motion-base) var(--motion-enter) both;
+      }
+      .topbar > .topbarAddButton.showCoachmark::before{
+        content:"";position:absolute;z-index:21;right:11px;top:calc(100% + 4px);width:9px;height:9px;
+        border-left:1px solid rgba(79,142,158,.12);border-top:1px solid rgba(79,142,158,.12);
+        background:#fffdf9;transform:rotate(45deg);pointer-events:none;
       }
 
       .tabHero,.agendaHero{
@@ -3939,6 +3955,57 @@
       }
       .mobileDayButton:active{transform:scale(.96)}
 
+      /* Doorlopend aanbod gebruikt op telefoon echte losse kaarten. */
+      #longerOffers .ongoingAccordionBody{padding:12px;background:transparent!important}
+      #longerOffers .tableWrap{background:transparent!important;overflow:visible}
+      #longerOffers table,#longerOffers tbody{display:block;width:100%;min-width:0}
+      #longerOffers thead{display:none}
+      #longerOffers tbody{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+      #longerOffers tbody tr{
+        display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:9px!important;
+        width:100%;padding:14px!important;border:1px solid rgba(64,45,20,.065)!important;
+        border-radius:17px!important;background:#fffdf9!important;
+        box-shadow:0 7px 20px rgba(92,65,33,.045)!important;
+      }
+      #longerOffers tbody tr:last-child{border-bottom:1px solid rgba(64,45,20,.065)!important}
+      #longerOffers tbody td{
+        display:block!important;width:100%!important;padding:0!important;border:0!important;
+        background:transparent!important;white-space:normal!important;
+      }
+      #longerOffers .ongoingTitleCell .nameWithIcon{
+        display:grid;grid-template-columns:30px minmax(0,1fr);gap:9px;align-items:center;
+      }
+      #longerOffers .ongoingTitleCell .small{display:block;margin:7px 0 0 39px;font-size:.76rem;line-height:1.35}
+      #longerOffers .ongoingWeeksCell{margin-left:39px;color:#697472;font-size:.75rem}
+      #longerOffers .ongoingWeeksCell:not(:empty)::before{content:"Week ";font-weight:600}
+      #longerOffers .ongoingBadgesCell .cardPillGroup{
+        width:max-content!important;max-width:100%!important;margin-left:39px!important;overflow-x:auto!important;
+      }
+      #longerOffers .ongoingFitCell{padding-top:4px!important}
+      #longerOffers .ongoingFitCell .small{font-size:.86rem;line-height:1.45}
+
+      /* Compacte weekkop: weekkeuze blijft direct naast de datum. */
+      .weekTitle{
+        grid-template-columns:44px max-content minmax(0,1fr) 104px!important;
+        grid-template-areas:"badge title title controls" "count count checked checked"!important;
+        column-gap:9px!important;row-gap:9px!important;align-items:center!important;
+      }
+      .weekBadge{width:44px!important;height:44px!important;border-radius:11px!important;font-size:1.08rem!important}
+      .weekTop h3{
+        min-width:0!important;font-size:clamp(1.08rem,4.55vw,1.28rem)!important;
+        line-height:1.05!important;white-space:nowrap!important;
+      }
+      .weekHeadingActions{width:104px!important;min-width:104px!important}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{
+        width:104px!important;min-width:104px!important;max-width:104px!important;
+      }
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{
+        height:38px!important;min-height:38px!important;padding:6px!important;border-radius:13px!important;font-size:.72rem!important;
+      }
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectLabel{max-width:68px!important}
+      .weekHeaderMeta{justify-self:start!important}
+      .weekDateLine .agendaFreshness{justify-self:end!important;max-width:100%!important;font-size:.68rem!important}
+
       /* Bottom sheets zijn uitsluitend de telefoonvariant. */
       .ideaFilterSheetLayer,
       .ideaSubmitSheetLayer{align-items:flex-end}
@@ -3965,26 +4032,25 @@
 
     @media (max-width:460px){
       .weekTitle{
-        grid-template-columns:48px minmax(0,1fr)!important;
-        grid-template-areas:
-          "badge title"
-          "controls controls"
-          "count checked"!important;
-        row-gap:10px!important;
+        grid-template-columns:42px max-content minmax(0,1fr) 98px!important;
+        grid-template-areas:"badge title title controls" "count count checked checked"!important;
+        column-gap:8px!important;row-gap:9px!important;
       }
-      .weekTop h3{white-space:normal!important}
-      .weekHeadingActions{grid-area:controls!important;justify-self:end!important;width:auto!important}
-      .weekDateLine .agendaFreshness{max-width:100%!important}
+      .weekBadge{width:42px!important;height:42px!important}
+      .weekTop h3{font-size:clamp(1rem,4.4vw,1.16rem)!important;white-space:nowrap!important}
+      .weekHeadingActions{grid-area:controls!important;justify-self:end!important;width:98px!important;min-width:98px!important}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{width:98px!important;min-width:98px!important;max-width:98px!important}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectLabel{max-width:62px!important}
     }
 
     @media (max-width:380px){
       .weekTitle{
-        grid-template-areas:
-          "badge title"
-          "controls controls"
-          "count count"
-          "checked checked"!important;
+        grid-template-columns:40px max-content minmax(0,1fr) 92px!important;
+        grid-template-areas:"badge title title controls" "count count count count" "checked checked checked checked"!important;
       }
+      .weekBadge{width:40px!important;height:40px!important}
+      .weekHeadingActions{width:92px!important;min-width:92px!important}
+      .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{width:92px!important;min-width:92px!important;max-width:92px!important}
       .weekDateLine .agendaFreshness{justify-self:start!important}
     }
 
@@ -4503,7 +4569,7 @@
 
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20260923-map-detail-v1"></script>
-  <script src="website-bestanden/agenda-view-shared.js?v=20260925-mobile-day-nav-v1"></script>
+  <script src="website-bestanden/agenda-view-shared.js?v=20260925-mobile-cards-v2"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
@@ -6846,8 +6912,7 @@
 	    return AgendaViewShared.renderItem({
         themeClass, compact, href:escapeHtml(item.url),
         title:titleWithIcon(item.title, item.domain, 'agendaItemTitle'), review:agendaReviewPill(item),
-        meta:`${escapeHtml(timeLabel)} • ${escapeHtml(item.where)}`,
-        actions:reportMenu('agenda', agendaItemKey(item), item.title)
+        meta:`${escapeHtml(timeLabel)} • ${escapeHtml(item.where)}`
       });
 	  }
   function renderAgendaBoard(weekId, concrete){
@@ -8972,10 +9037,24 @@
     $('#teamIdeaForm').addEventListener('submit', handleTeamIdeaSubmit);
     $$('[data-idea-submit-open]').forEach(button => button.addEventListener('click', openIdeaSubmitSheet));
     $('#topbarAddButton')?.addEventListener('click',()=>{
+      $('#topbarAddButton')?.classList.remove('showCoachmark');
+      try{ localStorage.setItem('inspirationAddCoachmarkSeen','1'); }catch(error){}
       const agendaActive = $('#tab-weken')?.classList.contains('active');
       if(agendaActive) openAgendaSourceSheet();
       else openIdeaSubmitSheet();
     });
+    const topbarAddButton = $('#topbarAddButton');
+    if(topbarAddButton && window.matchMedia('(max-width:640px)').matches){
+      let coachmarkSeen = false;
+      try{ coachmarkSeen = localStorage.getItem('inspirationAddCoachmarkSeen') === '1'; }catch(error){}
+      if(!coachmarkSeen){
+        window.setTimeout(() => topbarAddButton.classList.add('showCoachmark'), 900);
+        window.setTimeout(() => {
+          topbarAddButton.classList.remove('showCoachmark');
+          try{ localStorage.setItem('inspirationAddCoachmarkSeen','1'); }catch(error){}
+        }, 5200);
+      }
+    }
     $$('[data-idea-submit-close]').forEach(button => button.addEventListener('click', () => closeIdeaSubmitSheet()));
     $$('[data-agenda-source-close]').forEach(button => button.addEventListener('click', () => closeAgendaSourceSheet()));
     const teamIdeaImageInput = $('#teamIdeaImageInput');
