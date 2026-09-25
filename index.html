@@ -385,22 +385,24 @@
     .agendaItem .domainIcon svg{width:14px;height:14px}
     .agendaLegendBar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 0 10px}
     .agendaSectionTabs{
-      display:flex;align-items:center;gap:22px;width:max-content;max-width:100%;margin:2px 0 14px;
+      --agenda-tab-indicator-x:0px;--agenda-tab-indicator-width:0px;
+      position:relative;display:flex;align-items:center;gap:22px;width:max-content;max-width:100%;margin:2px 0 14px;
       border-bottom:0;scroll-margin-top:12px
     }
+    .agendaSectionTabs::after{
+      content:"";position:absolute;bottom:0;left:0;width:var(--agenda-tab-indicator-width);height:2px;
+      border-radius:999px;background:var(--accent-dark);opacity:0;
+      transform:translate3d(var(--agenda-tab-indicator-x),0,0);
+      transition:width .28s var(--motion-enter),transform .28s var(--motion-enter),opacity .16s ease;
+      pointer-events:none
+    }
+    .agendaSectionTabs[data-indicator-ready="true"]::after{opacity:1}
     .agendaSectionTab{
       position:relative;appearance:none;min-height:40px;padding:8px 1px 10px;border:0;background:transparent;
       color:#718087;text-decoration:none;font:inherit;font-size:.86rem;font-weight:500;line-height:1.15;cursor:pointer
     }
-    .agendaSectionTab::after{
-      content:"";position:absolute;right:0;bottom:-1px;left:0;height:2px;border-radius:2px 2px 0 0;
-      background:var(--accent-dark);opacity:0;transform:scaleX(.55);transition:opacity .16s var(--ease),transform .16s var(--ease)
-    }
     .agendaSectionTab:hover{color:#315f69}
-    .agendaSectionTab:hover::after{opacity:.5;transform:scaleX(1)}
     .agendaSectionTab.active{color:#245c68;font-weight:650}
-    .agendaSectionTab.active::after,
-    .agendaSectionTab.active:hover::after{opacity:1;transform:scaleX(1)}
     .agendaSectionSwitcher{margin:18px 0 12px;scroll-margin-top:96px}
     .agendaSectionSwitcher .agendaSectionTabs{width:100%;margin:0}
     .agendaSectionView[hidden]{display:none!important}
@@ -7310,6 +7312,7 @@
       if(active) button.setAttribute('aria-current', 'page');
       else button.removeAttribute('aria-current');
     });
+    syncAgendaSectionIndicator($('#agendaSectionSwitcher .agendaSectionTabs'));
   }
 
   function ideaRow(item){
@@ -7338,6 +7341,30 @@
       <a id="agenda-tab-weeks" class="agendaSectionTab${activeSection === 'weeks' ? ' active' : ''}" href="#weekPanels" role="tab" aria-controls="weekPanels" aria-selected="${activeSection === 'weeks'}" data-agenda-section="weeks"${activeSection === 'weeks' ? ' aria-current="page"' : ''}>Weekagenda</a>
       <a id="agenda-tab-ongoing" class="agendaSectionTab${activeSection === 'ongoing' ? ' active' : ''}" href="#longerOffers" role="tab" aria-controls="longerOffers" aria-selected="${activeSection === 'ongoing'}" data-agenda-section="ongoing"${activeSection === 'ongoing' ? ' aria-current="page"' : ''}>Doorlopend aanbod</a>
     </nav>`;
+  }
+
+  function syncAgendaSectionIndicator(tabList, target){
+    if(!tabList) return;
+    const tab = target || tabList.querySelector('.agendaSectionTab.active');
+    if(!tab) return;
+    tabList.style.setProperty('--agenda-tab-indicator-x', `${tab.offsetLeft}px`);
+    tabList.style.setProperty('--agenda-tab-indicator-width', `${tab.offsetWidth}px`);
+    tabList.dataset.indicatorReady = 'true';
+  }
+
+  function bindAgendaSectionIndicator(){
+    const tabList = $('#agendaSectionSwitcher .agendaSectionTabs');
+    if(!tabList) return;
+    const restoreActive = () => syncAgendaSectionIndicator(tabList);
+    tabList.querySelectorAll('.agendaSectionTab').forEach(tab => {
+      tab.addEventListener('pointerenter', () => syncAgendaSectionIndicator(tabList, tab));
+      tab.addEventListener('focus', () => syncAgendaSectionIndicator(tabList, tab));
+    });
+    tabList.addEventListener('pointerleave', restoreActive);
+    tabList.addEventListener('focusout', () => window.requestAnimationFrame(() => {
+      if(!tabList.contains(document.activeElement)) restoreActive();
+    }));
+    window.requestAnimationFrame(restoreActive);
   }
 
   function agendaWeekFilterControl(){
@@ -7371,6 +7398,7 @@
     parkAgendaWeekFilter();
     const sectionSwitcher = $('#agendaSectionSwitcher');
     if(sectionSwitcher) sectionSwitcher.innerHTML = agendaSectionNavigation();
+    bindAgendaSectionIndicator();
     $('#weekPanels').innerHTML = weeksToRender.map((w,i)=>{
       const all = filterAgendaItems(byWeek(w.id), filters);
       const concrete = sortWeekItems(all.filter(isConcrete));
