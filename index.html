@@ -4645,7 +4645,7 @@
       .topbar{border-bottom:0!important}
       #tab-inspiratie > .desktopStickyControls,
       #tab-weken > .agendaDesktopControls{
-        top:10px!important;
+        top:0!important;
         margin-top:-23px!important;
         padding-bottom:8px!important;
         background:transparent!important;
@@ -9563,8 +9563,7 @@
       controlsList.forEach(controls => {
         const visible = controls.getClientRects().length > 0;
         const rect = visible ? controls.getBoundingClientRect() : null;
-        const stickyTop = mobile.matches ? 10 : 0;
-        controls.classList.toggle('isStuck', visible && (desktop.matches || mobile.matches) && rect.top <= stickyTop + 1);
+        controls.classList.toggle('isStuck', visible && (desktop.matches || mobile.matches) && rect.top <= 1);
         if(desktop.matches && rect) activeHeight = Math.max(activeHeight, Math.ceil(rect.height));
       });
       if(desktop.matches && activeHeight){
