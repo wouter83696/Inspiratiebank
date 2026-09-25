@@ -67,7 +67,7 @@
     </div>
   </div>
   <script>
-    fetch('/index.html', {cache:'no-cache'})
+    fetch('/index.html?v=20260925-agenda-text-nav-v1', {cache:'no-store'})
       .then(response => {
         if(!response.ok) throw new Error(`Laden gaf status ${response.status}`);
         return response.text();
