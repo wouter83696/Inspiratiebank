@@ -6289,7 +6289,7 @@
     const distanceLabel = map && point?.source === 'user' && point?.home ? '' : personalDistanceLabel(item);
     const placePills = compactPlacePills(locationLabel, distanceLabel)
       .filter(label => normalize(label) !== 'op pad')
-      .map((label, index) => locationPill(label, index === 0 && map ? {routeUrl:ideaRouteUrl(item), routeLabel:item.title} : {}))
+      .map((label, index) => locationPill(label, index === 0 ? {routeUrl:ideaRouteUrl(item), routeLabel:item.title} : {}))
       .join(' ');
     return {
       pills:`${placePills} ${costPill(normalizeIdeaCost(item.cost))} ${stimulusPill(normalizeIdeaStimulus(item.stimulus))}`.trim(),
