@@ -403,6 +403,12 @@
     }
     .agendaSectionTab:hover{color:#315f69}
     .agendaSectionTab.active{color:#245c68;font-weight:650}
+    .agendaSectionCount{
+      display:none;align-items:center;justify-content:center;min-width:20px;height:20px;
+      margin-left:6px;padding:0 6px;border:1px solid rgba(79,142,158,.12);border-radius:999px;
+      background:rgba(255,255,255,.48);color:#60777c;font-size:.68rem;font-weight:600;line-height:1
+    }
+    @media(max-width:640px){.agendaSectionCount{display:inline-flex}}
     .agendaSectionSwitcher{margin:18px 0 12px;scroll-margin-top:96px}
     .agendaSectionSwitcher .agendaSectionTabs{width:100%;margin:0}
     .agendaSectionView[hidden]{display:none!important}
@@ -4143,9 +4149,7 @@
         background:transparent!important;box-shadow:none!important;
       }
       #longerOffers .ongoingAccordionButton{
-        min-height:0;margin:0 0 12px;padding:14px;background:#fffdf9!important;
-        border:1px solid rgba(64,45,20,.06)!important;border-radius:16px!important;
-        box-shadow:0 8px 24px rgba(92,65,33,.04)!important;
+        display:none!important;
       }
       #longerOffers .ongoingAccordionBody{
         overflow:visible;padding:0;background:transparent!important;border-top:0!important;
@@ -7340,6 +7344,10 @@
     $$('[data-flexible-offer-count]').forEach(count => {
       count.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${escapeHtml(items.length)}</strong> ${items.length === 1 ? 'activiteit' : 'activiteiten'}</span>`;
     });
+    $$('[data-agenda-ongoing-count]').forEach(count => {
+      count.textContent = items.length;
+      count.setAttribute('aria-label', `${items.length} ${items.length === 1 ? 'activiteit' : 'activiteiten'}`);
+    });
   }
   function weekNavControls(currentId){
     const index = ACTIVE_WEEKS.findIndex(week => week.id === currentId);
@@ -7448,7 +7456,7 @@
     const activeSection = $('#tab-weken')?.dataset.agendaSection === 'ongoing' ? 'ongoing' : 'weeks';
     return `<nav class="agendaSectionTabs" aria-label="Agendaweergave" role="tablist">
       <a id="agenda-tab-weeks" class="agendaSectionTab${activeSection === 'weeks' ? ' active' : ''}" href="#weekPanels" role="tab" aria-controls="weekPanels" aria-selected="${activeSection === 'weeks'}" data-agenda-section="weeks"${activeSection === 'weeks' ? ' aria-current="page"' : ''}>Weekagenda</a>
-      <a id="agenda-tab-ongoing" class="agendaSectionTab${activeSection === 'ongoing' ? ' active' : ''}" href="#longerOffers" role="tab" aria-controls="longerOffers" aria-selected="${activeSection === 'ongoing'}" data-agenda-section="ongoing"${activeSection === 'ongoing' ? ' aria-current="page"' : ''}>Doorlopend aanbod</a>
+      <a id="agenda-tab-ongoing" class="agendaSectionTab${activeSection === 'ongoing' ? ' active' : ''}" href="#longerOffers" role="tab" aria-controls="longerOffers" aria-selected="${activeSection === 'ongoing'}" data-agenda-section="ongoing"${activeSection === 'ongoing' ? ' aria-current="page"' : ''}>Doorlopend aanbod <span class="agendaSectionCount" data-agenda-ongoing-count aria-label="Aantal activiteiten">0</span></a>
     </nav>`;
   }
 
@@ -7465,11 +7473,12 @@
     const tabList = $('#agendaSectionSwitcher .agendaSectionTabs');
     if(!tabList) return;
     const restoreActive = () => syncAgendaSectionIndicator(tabList);
+    const hasPrecisePointer = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
     tabList.querySelectorAll('.agendaSectionTab').forEach(tab => {
-      tab.addEventListener('pointerenter', () => syncAgendaSectionIndicator(tabList, tab));
+      if(hasPrecisePointer) tab.addEventListener('pointerenter', () => syncAgendaSectionIndicator(tabList, tab));
       tab.addEventListener('focus', () => syncAgendaSectionIndicator(tabList, tab));
     });
-    tabList.addEventListener('pointerleave', restoreActive);
+    if(hasPrecisePointer) tabList.addEventListener('pointerleave', restoreActive);
     tabList.addEventListener('focusout', () => window.requestAnimationFrame(() => {
       if(!tabList.contains(document.activeElement)) restoreActive();
     }));
