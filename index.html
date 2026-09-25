@@ -5300,6 +5300,9 @@
   const DAY_LABELS = ['Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag','Zondag'];
   const MONTH_LABELS = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
   const AGENDA_DAY_VISIBLE_LIMIT = 4;
+  function agendaDayVisibleLimit(){
+    return window.matchMedia('(min-width:981px)').matches ? 3 : AGENDA_DAY_VISIBLE_LIMIT;
+  }
   let selectedAgendaWeek = ACTIVE_WEEKS[0]?.id || '';
   const expandedAgendaDays = new Set();
   const DUTCH_MONTHS = {
@@ -7174,6 +7177,7 @@
 	  }
   function renderAgendaBoard(weekId, concrete){
     const todayIso = formatIsoDate(new Date());
+    const visibleLimit = agendaDayVisibleLimit();
     const days = weekDays(weekId).map(day => {
       const occurring = concrete.filter(item => itemOccursOnDay(item, day.iso));
       const items = occurring.filter(item => !isFlexiblePeriodOffer(item));
@@ -7184,7 +7188,7 @@
       ];
       const dayKey = `${weekId}:${day.iso}`;
       const expanded = expandedAgendaDays.has(dayKey);
-      const visibleEntries = expanded ? entries : entries.slice(0, AGENDA_DAY_VISIBLE_LIMIT);
+      const visibleEntries = expanded ? entries : entries.slice(0, visibleLimit);
       return {
         day,
         dayKey,
@@ -7203,7 +7207,7 @@
         key:escapeHtml(dayKey), label:escapeHtml(day.label), date:escapeHtml(day.prettyDate),
         past:isPastDay, today:isToday, expanded,
         items:visibleEntries.map(entry => agendaItem(entry.item, entry.compact)).join(''),
-        more:hiddenCount ? `<button class="agendaMore" type="button" data-expand-agenda-day="${escapeHtml(dayKey)}" aria-expanded="false">+ ${hiddenCount} meer optie${hiddenCount === 1 ? '' : 's'}</button>` : expanded && totalCount > AGENDA_DAY_VISIBLE_LIMIT ? `<button class="agendaMore" type="button" data-collapse-agenda-day="${escapeHtml(dayKey)}" aria-expanded="true">Minder tonen</button>` : '',
+        more:hiddenCount ? `<button class="agendaMore" type="button" data-expand-agenda-day="${escapeHtml(dayKey)}" aria-expanded="false">+ ${hiddenCount} meer optie${hiddenCount === 1 ? '' : 's'}</button>` : expanded && totalCount > visibleLimit ? `<button class="agendaMore" type="button" data-collapse-agenda-day="${escapeHtml(dayKey)}" aria-expanded="true">Minder tonen</button>` : '',
         empty:!items.length && !periods.length ? `<div class="agendaEmpty">${escapeHtml(agendaEmptyMessage())}</div>` : ''
       });
     }).join('');
