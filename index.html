@@ -4553,19 +4553,28 @@
     }
 
     #weekPanels .weekHeaderMeta{
+      display:inline-flex!important;
+      align-items:center!important;
       gap:8px;
-      margin-top:4px
+      width:fit-content!important;
+      max-width:100%;
+      min-height:32px;
+      margin-top:4px;
+      padding:7px 10px;
+      border:1px solid rgba(79,142,158,.08);
+      border-radius:11px;
+      background:rgba(255,253,249,.72)
     }
     #weekPanels .weekHeaderMeta .weekCountBadge,
     #weekPanels .weekHeaderMeta .agendaFreshness{
       display:inline-flex!important;
       align-items:center!important;
-      min-height:32px!important;
+      min-height:0!important;
       margin:0!important;
-      padding:7px 10px!important;
-      border:1px solid rgba(79,142,158,.08)!important;
-      border-radius:11px!important;
-      background:rgba(255,253,249,.72)!important;
+      padding:0!important;
+      border:0!important;
+      border-radius:0!important;
+      background:transparent!important;
       box-shadow:none!important;
       backdrop-filter:none!important;
       color:rgba(49,72,76,.62)!important;
@@ -4578,6 +4587,9 @@
 
     @media (max-width:640px){
       .topbar{border-bottom:0!important}
+      #tab-inspiratie > .desktopStickyControls,
+      #tab-weken > .agendaDesktopControls{box-shadow:none!important}
+      #tab-weken .agendaSectionTabs{border-bottom:0!important}
       #tab-inspiratie > .desktopStickyControls{
         margin-top:-54px!important
       }
