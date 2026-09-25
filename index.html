@@ -3799,6 +3799,32 @@
       transition:opacity var(--motion-base) var(--motion-standard),transform var(--motion-base) var(--motion-enter),
         background-color var(--motion-fast) var(--motion-standard)!important;
     }
+    /* Houd de volledige kaartviewer binnen de beschikbare schermhoogte. */
+    @media (min-width:981px){
+      .ideaMap.ideaView.active{
+        height:clamp(480px,calc(100dvh - 150px),760px);
+        min-height:0;
+        grid-template-rows:minmax(0,1fr);
+      }
+      .ideaMap.ideaView.active .ideaMapCanvas{min-height:0}
+    }
+    @media (min-width:641px) and (max-width:980px){
+      .ideaMap.ideaView.active{
+        height:clamp(460px,calc(100dvh - 140px),700px);
+        min-height:0;
+        grid-template-rows:minmax(0,1fr) auto;
+      }
+      .ideaMap.ideaView.active .ideaMapCanvas{min-height:0}
+    }
+    @media (max-width:640px){
+      .ideaMap.ideaView.active{
+        height:clamp(440px,calc(100svh - 112px),680px)!important;
+        min-height:0!important;
+        grid-template-rows:minmax(300px,1fr) auto!important;
+      }
+      .ideaMap.ideaView.active .ideaMapCanvas{min-height:0!important}
+    }
+
     @media (hover:hover) and (pointer:fine){
       :is(.topbarAddButton,.filterToggle,.ideaFilterSheetAction,.agendaLegendItem,.locationLegendItem,.weekNavButton):active{
         transform:scale(.985)!important;transition-duration:var(--motion-instant)!important;
