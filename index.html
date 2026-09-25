@@ -4401,17 +4401,18 @@
 
     @media (max-width:640px){
       body.ideaMapMode{height:100dvh!important;overflow:hidden!important;background:#edf3e9!important}
-      body.ideaMapMode .shell{max-width:none!important;height:calc(100dvh - 60px)!important;margin:0!important;padding:0!important}
+      body.ideaMapMode .topbar{display:none!important}
+      body.ideaMapMode .shell{max-width:none!important;height:100dvh!important;margin:0!important;padding:0!important}
       body.ideaMapMode .siteFooter,body.ideaMapMode .backToTop{display:none!important}
       body.ideaMapMode #tab-inspiratie{height:100%!important;margin:0!important;padding:0!important}
       #tab-inspiratie.mapViewActive{margin-inline:0!important}
-      .ideaMap.ideaView.active{position:fixed!important;z-index:20!important;inset:60px 0 0!important;width:100vw!important;height:auto!important;min-height:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}
-      .ideaMapToolbar{top:12px;left:12px;width:min(340px,calc(100% - 28px));grid-template-columns:38px minmax(0,1fr);gap:7px}
+      .ideaMap.ideaView.active{position:fixed!important;z-index:20!important;inset:0!important;width:100vw!important;height:auto!important;min-height:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+      .ideaMapToolbar{top:calc(12px + env(safe-area-inset-top));left:12px;width:min(340px,calc(100% - 28px));grid-template-columns:38px minmax(0,1fr);gap:7px}
       .ideaMapToolbarButton,.ideaMapToolbarView{width:38px;height:38px;border-radius:13px;padding:0}
       .ideaMapToolbarView span{display:none}
       .ideaMapToolbarSearch input{height:38px;font-size:.8rem}
       .ideaMapCanvas{min-height:100%!important;border-radius:0!important}
-      .ideaMapCanvas .leaflet-top.leaflet-right{top:61px!important;right:10px!important}
+      .ideaMapCanvas .leaflet-top.leaflet-right{top:calc(61px + env(safe-area-inset-top))!important;right:10px!important}
       .ideaMapPanel{right:0!important;bottom:0!important;left:0!important;max-height:48%;border-right:0!important;border-left:0!important;border-radius:22px 22px 0 0!important}
       .ideaMapPanel.isMinimized{height:78px!important;max-height:78px!important}
       .ideaMapPanelHead{padding:17px 12px 10px!important}
@@ -5199,14 +5200,15 @@
     const base = src.replace(/\.jpe?g($|\?)/i, '');
     return `${base}-480.jpg 480w, ${base}-800.jpg 800w, ${src} 1200w`;
   }
-  function ideaImageMarkup(image={}, url=''){
+  function ideaImageMarkup(image={}, url='', {eager=false}={}){
     const srcset = responsiveImageSrcset(image.src || '');
     const attrs = [
       `src="${escapeHtml(image.src || '')}"`,
       srcset ? `srcset="${escapeHtml(srcset)}"` : '',
       srcset ? 'sizes="(max-width: 640px) calc(100vw - 28px), (min-width: 1180px) 24vw, 33vw"' : '',
       `alt="${escapeHtml(image.alt || 'Activiteit')}"`,
-      'loading="lazy"',
+      `loading="${eager ? 'eager' : 'lazy'}"`,
+      eager ? 'fetchpriority="high"' : '',
       'decoding="async"'
     ].filter(Boolean).join(' ');
     const imageMarkup = `<img ${attrs}>`;
@@ -7807,7 +7809,7 @@
       toolbar:mapDetailAction === 'close'
         ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailClose" type="button" data-map-detail-close aria-label="Tegel sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button></div>'
         : '',
-      image:image ? ideaImageMarkup(image, item.url) : '',
+      image:image ? ideaImageMarkup(image, item.url, {eager:mapDetailAction === 'close'}) : '',
       title:cardTitle,
       pills:metadata.pills,
       meta:metadata.meta, description:escapeHtml(fitText), practical:escapeHtml(item.materials || ''),
