@@ -4369,11 +4369,11 @@
 
     @media (max-width:640px){
       #tab-weken .weekTitle{
-        grid-template-columns:48px minmax(0,1fr) 94px!important;
+        grid-template-columns:42px minmax(0,1fr) 112px!important;
         grid-template-areas:
           "badge title controls"
           "meta meta meta"!important;
-        column-gap:10px!important;
+        column-gap:8px!important;
         row-gap:10px!important;
         width:100%!important;
         min-width:0!important
@@ -4385,14 +4385,18 @@
       #tab-weken .weekTop h3{
         width:100%!important;
         min-width:0!important;
-        font-size:1.18rem!important;
+        font-size:1.12rem!important;
         white-space:nowrap!important
       }
-      #tab-weken .weekHeadingActions{width:94px!important;min-width:94px!important}
+      #tab-weken .weekBadge{width:42px!important;height:42px!important}
+      #tab-weken .weekHeadingActions{width:112px!important;min-width:112px!important}
       #tab-weken .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{
-        width:94px!important;
-        min-width:94px!important;
-        max-width:94px!important
+        width:112px!important;
+        min-width:112px!important;
+        max-width:112px!important
+      }
+      #tab-weken .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"] .customSelectButton{
+        box-shadow:none!important
       }
       #tab-weken .weekHeaderMeta{
         display:flex!important;
@@ -4404,11 +4408,11 @@
       }
     }
     @media (max-width:380px){
-      #tab-weken .weekTitle{grid-template-columns:40px minmax(0,1fr) 88px!important;column-gap:7px!important}
-      #tab-weken .weekTop h3{font-size:1.08rem!important}
-      #tab-weken .weekHeadingActions{width:88px!important;min-width:88px!important}
+      #tab-weken .weekTitle{grid-template-columns:40px minmax(0,1fr) 104px!important;column-gap:7px!important}
+      #tab-weken .weekTop h3{font-size:1rem!important}
+      #tab-weken .weekHeadingActions{width:104px!important;min-width:104px!important}
       #tab-weken .agendaWeekFilterSlot .customSelect[data-select-id="agendaWeekFilter"]{
-        width:88px!important;min-width:88px!important;max-width:88px!important
+        width:104px!important;min-width:104px!important;max-width:104px!important
       }
     }
 
