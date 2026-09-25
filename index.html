@@ -4740,6 +4740,10 @@
       #tab-weken > .agendaDesktopControls{
         padding-bottom:3px!important
       }
+      #tab-weken .agendaDay,
+      #tab-weken #longerOffers{
+        scroll-margin-top:calc(var(--active-sticky-controls-height,148px) + 12px)!important
+      }
       #tab-weken .agendaSectionTab{
         padding-right:7px!important;
         padding-left:7px!important
@@ -7888,6 +7892,12 @@
     if(preserveScroll){
       window.scrollTo(scrollLeft, scrollTop);
       window.requestAnimationFrame(() => window.scrollTo(scrollLeft, scrollTop));
+    }else if(options.scroll){
+      const target = nextSection === 'ongoing' ? $('#longerOffers') : $('#weekPanels');
+      window.requestAnimationFrame(() => target?.scrollIntoView({
+        behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block:'start'
+      }));
     }
   }
 
@@ -9727,7 +9737,9 @@
       const agendaSectionLink = event.target.closest('[data-agenda-section]');
       if(agendaSectionLink){
         event.preventDefault();
-        setAgendaSection(agendaSectionLink.dataset.agendaSection, {scroll:false});
+        const nextSection = agendaSectionLink.dataset.agendaSection;
+        const scrollToStart = nextSection === 'ongoing' && window.matchMedia('(max-width:640px)').matches;
+        setAgendaSection(nextSection, {scroll:scrollToStart});
       }
       if(!event.target.closest('.customSelect')) closeCustomSelects();
       if(!event.target.closest('[data-report-menu]')) closeReportMenus();
