@@ -3688,30 +3688,48 @@
 
     /* Canonieke telefoonlaag en gedeeld bewegingssysteem. */
     :root{
-      --motion-fast:160ms;
-      --motion-base:240ms;
-      --motion-slow:360ms;
-      --motion-enter:cubic-bezier(.22,.8,.24,1);
-      --motion-exit:cubic-bezier(.4,0,1,1);
+      --motion-instant:120ms;
+      --motion-fast:180ms;
+      --motion-base:280ms;
+      --motion-slow:420ms;
+      --motion-standard:cubic-bezier(.4,0,.2,1);
+      --motion-enter:cubic-bezier(.22,1,.36,1);
+      --motion-exit:cubic-bezier(.4,0,.7,.2);
     }
     @keyframes mobileSurfaceEnter{
-      from{opacity:0;transform:translate3d(0,8px,0)}
+      from{opacity:0;transform:translate3d(0,10px,0) scale(.995)}
       to{opacity:1;transform:translate3d(0,0,0)}
     }
     @keyframes viewSurfaceEnter{
-      from{opacity:0;transform:translate3d(0,6px,0)}
+      from{opacity:0;transform:translate3d(0,7px,0) scale(.998)}
       to{opacity:1;transform:translate3d(0,0,0)}
     }
     @keyframes mobileCoachmarkIn{
       from{opacity:0;transform:translate3d(0,-4px,0) scale(.98)}
       to{opacity:1;transform:translate3d(0,0,0) scale(1)}
     }
-    .ideaView.active{animation:viewSurfaceEnter var(--motion-base) var(--motion-enter) both}
-    .ideaFilterSheetBackdrop,.ideaSubmitSheetBackdrop{transition:opacity var(--motion-base) ease!important}
+    @keyframes controlPopoverIn{
+      from{opacity:0;transform:translate3d(0,-5px,0) scale(.985)}
+      to{opacity:1;transform:translate3d(0,0,0) scale(1)}
+    }
+    .tabPanel.active,.ideaView.active{animation:viewSurfaceEnter var(--motion-base) var(--motion-enter) both}
+    .ideaFilterSheetLayer,.ideaSubmitSheetLayer{transition:visibility 0s linear var(--motion-slow)!important}
+    .ideaFilterSheetLayer.isOpen,.ideaSubmitSheetLayer.isOpen{transition-delay:0s!important}
+    .ideaFilterSheetBackdrop,.ideaSubmitSheetBackdrop{
+      transition:opacity var(--motion-base) var(--motion-standard)!important;
+      will-change:opacity;
+    }
+    .ideaFilterSheet,.ideaSubmitSheet{
+      transition:transform var(--motion-slow) var(--motion-enter),opacity var(--motion-base) var(--motion-standard)!important;
+      will-change:transform,opacity;
+      backface-visibility:hidden;
+    }
     .ideaFilterSheetClose,.ideaSubmitSheetClose,.viewBtn,.filterToggle,
-    .agendaSectionTab,.agendaMore,.ideaPracticalDetails summary{
-      transition:color var(--motion-fast) ease,background-color var(--motion-fast) ease,
-        border-color var(--motion-fast) ease,box-shadow var(--motion-fast) ease,
+    .agendaSectionTab,.agendaMore,.ideaPracticalDetails summary,.topbarAddButton,
+    .locationLegendItem,.agendaLegendItem,.ideaFilterChip,.ideaFilterSheetAction,
+    .customSelectButton,.weekNavButton,.mobileDayButton{
+      transition:color var(--motion-fast) var(--motion-standard),background-color var(--motion-fast) var(--motion-standard),
+        border-color var(--motion-fast) var(--motion-standard),box-shadow var(--motion-fast) var(--motion-standard),
         opacity var(--motion-fast) ease,transform var(--motion-fast) var(--motion-enter);
     }
     .ideaMapResult,
@@ -3725,6 +3743,32 @@
     .sharedIdeaCard .ideaImageFrame img,
     #ideaList .ideaListThumb{
       transition:filter var(--motion-base) ease,transform var(--motion-slow) var(--motion-enter);
+    }
+    .customSelectButton::after,.ideaPracticalDetails summary::after,.ongoingIcon svg{
+      transition:transform var(--motion-base) var(--motion-enter)!important;
+    }
+    .customSelect.open .customSelectMenu,
+    .reportMenu[open] .reportMenuPopover{
+      transform-origin:top center;
+      animation:controlPopoverIn var(--motion-fast) var(--motion-enter) both;
+    }
+    .customSelect.openUp .customSelectMenu{transform-origin:bottom center}
+    .reportToast,.backToTop{
+      transition:opacity var(--motion-base) var(--motion-standard),transform var(--motion-base) var(--motion-enter),
+        background-color var(--motion-fast) var(--motion-standard)!important;
+    }
+    @media (hover:hover) and (pointer:fine){
+      :is(.topbarAddButton,.filterToggle,.ideaFilterSheetAction,.agendaLegendItem,.locationLegendItem,.weekNavButton):active{
+        transform:scale(.985)!important;transition-duration:var(--motion-instant)!important;
+      }
+      :is(.sharedIdeaCard,.ideaMapResult):hover{transition-duration:var(--motion-base)}
+    }
+    @media (pointer:coarse){
+      :is(.topbarAddButton,.filterToggle,.viewBtn,.locationLegendItem,.agendaLegendItem,
+      .ideaFilterChip,.ideaFilterSheetAction,.weekNavButton,.mobileDayButton):active{
+        transform:scale(.975)!important;
+        transition-duration:var(--motion-instant)!important;
+      }
     }
     @media (min-width:641px){
       .ideaMapResult.hasThumb .ideaMapResultText{transform:translate3d(0,6px,0)}
@@ -4015,7 +4059,7 @@
         border:0!important;border-radius:24px 24px 0 0!important;
         box-shadow:0 -18px 46px rgba(56,49,36,.17)!important;
         transform:translate3d(0,102%,0)!important;
-        transition:transform .3s cubic-bezier(.22,.8,.24,1)!important;
+        transition:transform var(--motion-slow) var(--motion-enter),opacity var(--motion-base) var(--motion-standard)!important;
       }
       .ideaFilterSheetLayer.isOpen .ideaFilterSheet,
       .ideaSubmitSheetLayer.isOpen .ideaSubmitSheet{transform:translate3d(0,0,0)!important}
