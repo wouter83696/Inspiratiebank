@@ -4035,13 +4035,16 @@
       #longerOffers .ongoingWeeksCell{display:none!important}
       #longerOffers .ongoingMobileWeekPill{
         display:inline-flex;align-items:center;gap:4px;flex:0 0 auto;
-        min-height:28px;padding:5px 9px;border:1px solid rgba(79,142,158,.10);
-        border-radius:9px;background:rgba(239,247,245,.68);color:#526f72;
-        font-size:.73rem;font-weight:560;line-height:1;white-space:nowrap;
+        min-height:0;padding:0;border:0;border-radius:0;background:transparent;
+        color:#607274;font-size:.74rem;font-weight:500;line-height:1;white-space:nowrap;
       }
-      #longerOffers .ongoingMobileWeekPill strong{font-weight:680;color:#2f626d}
+      #longerOffers .ongoingMobileWeekPill strong{font-weight:620;color:inherit}
+      #longerOffers .ongoingMobileWeekPill::after{
+        content:"";width:1px;height:15px;margin:0 2px 0 4px;background:rgba(79,142,158,.13)
+      }
       #longerOffers .ongoingBadgesCell .cardPillGroup{
-        width:max-content!important;max-width:100%!important;margin-left:39px!important;overflow-x:auto!important;
+        width:max-content!important;max-width:calc(100% - 39px)!important;margin-left:39px!important;
+        gap:7px!important;overflow-x:auto!important;
       }
       #longerOffers .ongoingFitCell{padding-top:4px!important}
       #longerOffers .ongoingFitCell .small{font-size:.86rem;line-height:1.45}
