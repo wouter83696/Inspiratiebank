@@ -3711,7 +3711,8 @@
       from{opacity:0;transform:translate3d(0,-5px,0) scale(.985)}
       to{opacity:1;transform:translate3d(0,0,0) scale(1)}
     }
-    .tabPanel.active,.ideaView.active{animation:viewSurfaceEnter var(--motion-base) var(--motion-enter) both}
+    .tabPanel.active{animation:viewSurfaceEnter var(--motion-base) var(--motion-enter) backwards}
+    .ideaView.active{animation:viewSurfaceEnter var(--motion-base) var(--motion-enter) both}
     .ideaFilterSheetLayer,.ideaSubmitSheetLayer{transition:visibility 0s linear var(--motion-slow)!important}
     .ideaFilterSheetLayer.isOpen,.ideaSubmitSheetLayer.isOpen{transition-delay:0s!important}
     .ideaFilterSheetBackdrop,.ideaSubmitSheetBackdrop{
