@@ -350,7 +350,7 @@
 }
 
 .agendaDay{
-  min-height:520px;
+  min-height:clamp(460px,calc(100dvh - var(--active-sticky-controls-height,148px) - 120px),520px);
   padding:16px 10px 14px;
   border:0;
   border-left:1px solid rgba(79,142,158,.085);
