@@ -4316,6 +4316,81 @@
       .weekDateLine .agendaFreshness{justify-self:start!important}
     }
 
+    /* Kaartweergave: de kaart is het canvas; bediening en resultaten liggen erboven. */
+    #tab-inspiratie.mapViewActive .inspirationHero,
+    #tab-inspiratie.mapViewActive .desktopStickyControls{display:none!important}
+    #tab-inspiratie.mapViewActive{padding-top:0}
+    .ideaMapToolbar{
+      position:absolute;z-index:800;top:16px;left:16px;right:16px;
+      display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:8px;pointer-events:none
+    }
+    .ideaMapToolbar > *{pointer-events:auto}
+    .ideaMapToolbarButton,.ideaMapToolbarView{
+      display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0;border:1px solid rgba(61,126,136,.16);
+      border-radius:14px;background:rgba(255,253,249,.94);color:var(--accent-dark);box-shadow:0 8px 22px rgba(20,38,42,.08);
+      backdrop-filter:blur(14px);cursor:pointer;font:inherit
+    }
+    .ideaMapToolbarButton{width:40px}
+    .ideaMapToolbarButton svg,.ideaMapToolbarView svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+    .ideaMapToolbarSearch{position:relative;min-width:0}
+    .ideaMapToolbarSearch > svg{position:absolute;z-index:1;left:14px;top:50%;width:17px;height:17px;transform:translateY(-50%);fill:none;stroke:rgba(49,95,107,.72);stroke-width:1.9;stroke-linecap:round;pointer-events:none}
+    .ideaMapToolbarSearch input{
+      display:block;width:100%;height:40px;padding:0 52px 0 42px;border:1px solid rgba(61,126,136,.13);border-radius:14px;
+      background:rgba(255,253,249,.94);color:var(--ink);box-shadow:0 8px 22px rgba(20,38,42,.08);backdrop-filter:blur(14px);
+      font:inherit;font-size:.88rem;outline:none
+    }
+    .ideaMapToolbarSearch input:focus{border-color:rgba(49,95,107,.38);box-shadow:0 0 0 3px rgba(168,225,221,.24),0 8px 22px rgba(20,38,42,.08)}
+    .ideaMapToolbarFilter{
+      position:absolute;z-index:2;top:50%;right:4px;width:34px;height:32px;transform:translateY(-50%);
+      border:0;border-radius:10px;background:transparent;color:var(--accent-dark);box-shadow:none
+    }
+    .ideaMapToolbarFilter:hover{background:rgba(168,225,221,.2)}
+    .ideaMapToolbarView{gap:7px;padding:0 13px;font-size:.78rem;font-weight:650;white-space:nowrap}
+    .ideaMapToolbarButton:hover,.ideaMapToolbarView:hover{background:#fff;color:#168697}
+    .ideaMapCanvas .leaflet-top.leaflet-right{top:70px!important}
+    .ideaMapPanel{
+      position:absolute!important;z-index:790!important;top:auto!important;right:16px!important;bottom:16px!important;left:16px!important;
+      width:auto!important;min-height:0!important;max-height:min(42%,330px);overflow:hidden!important;
+      border:1px solid rgba(61,126,136,.13)!important;border-radius:20px!important;background:rgba(255,253,249,.96)!important;
+      box-shadow:0 18px 46px rgba(20,38,42,.15)!important;backdrop-filter:blur(18px);pointer-events:auto!important
+    }
+    .ideaMapPanelHead{display:block!important;padding:18px 18px 11px!important}
+    .ideaMapPanelHead::before{content:"";display:block;width:34px;height:4px;margin:-9px auto 9px;border-radius:999px;background:rgba(49,95,107,.2)}
+    .ideaMapPanelHeadRow{align-items:center!important;justify-content:space-between!important}
+    .ideaMapPanelHeadRow > div:first-child{display:block!important;min-width:0}
+    .ideaMapPanelHead h3,.ideaMapPanelHead p{width:auto!important;max-width:none!important;padding:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important}
+    .ideaMapPanelHead h3{font-size:.98rem!important}
+    .ideaMapPanelHead p{display:block!important;margin-top:2px!important;font-size:.72rem!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .ideaMapPanelToggle{width:34px;height:34px;background:rgba(255,255,255,.84)}
+    .ideaMapResults{flex:1!important;display:flex!important;flex-direction:row!important;gap:10px!important;padding:0 16px 16px!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x proximity!important;scrollbar-width:none!important}
+    .ideaMapPanel:not(.isExpanded) .ideaMapResults{display:none!important}
+    .ideaMapResult{flex:0 0 min(330px,31vw)!important;width:min(330px,31vw)!important;scroll-snap-align:start!important}
+    .ideaMapPanel.isSingleDetail{max-height:min(58%,470px)}
+    .ideaMapPanel.isSingleDetail .ideaMapPanelHead{height:20px;padding:10px 16px 0!important}
+    .ideaMapPanel.isSingleDetail .ideaMapPanelHeadRow{display:none!important}
+    .ideaMapPanel.isSingleDetail .ideaMapPanelHead::before{margin:-3px auto 0}
+    .ideaMapPanel.isSingleDetail .ideaMapResults{justify-content:center;overflow-y:auto!important}
+    .ideaMapPanel.isSingleDetail .ideaMapSingleCard{width:min(100%,440px)!important;min-width:0!important;max-width:440px!important}
+    .ideaMapPanel.isSingleDetail .ideaMapSingleCard > .card{max-height:none!important}
+
+    @media (max-width:640px){
+      #tab-inspiratie.mapViewActive{margin-inline:calc(clamp(14px,3vw,28px) * -1)}
+      .ideaMap.ideaView.active{height:calc(100svh - var(--header-height,70px))!important;min-height:560px!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+      .ideaMapToolbar{top:12px;left:10px;right:10px;grid-template-columns:38px minmax(0,1fr);gap:7px}
+      .ideaMapToolbarButton,.ideaMapToolbarView{width:38px;height:38px;border-radius:13px;padding:0}
+      .ideaMapToolbarView span{display:none}
+      .ideaMapToolbarSearch input{height:38px;font-size:.8rem}
+      .ideaMapCanvas{min-height:100%!important;border-radius:0!important}
+      .ideaMapCanvas .leaflet-top.leaflet-right{top:61px!important;right:10px!important}
+      .ideaMapPanel{right:10px!important;bottom:10px!important;left:10px!important;max-height:46%;border-radius:18px!important}
+      .ideaMapPanelHead{padding:17px 12px 10px!important}
+      .ideaMapPanelHead p{font-size:.68rem!important}
+      .ideaMapResults{padding:0 10px 10px!important}
+      .ideaMapResult{flex-basis:min(82vw,330px)!important;width:min(82vw,330px)!important}
+      .ideaMapPanel.isSingleDetail{max-height:61%}
+      .ideaMapPanel.isSingleDetail .ideaMapSingleCard{width:100%!important;max-width:none!important}
+    }
+
     @media (max-width:640px){
       /* Houd dezelfde rustige verticale cadans tussen zoekbalk, chips en content. */
       .sharedDiscoveryChipRow{padding:3px 6px 4px!important;margin:6px 0 10px!important}
@@ -8642,6 +8717,13 @@
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
   }
+  function ideaMapToolbarMarkup(){
+    const searchValue = $('#ideaSearch')?.value || '';
+    return `<div class="ideaMapToolbar" role="search" aria-label="Zoeken en kaartweergave bedienen">
+      <button class="ideaMapToolbarButton" type="button" data-map-exit aria-label="Tegelweergave" title="Tegelweergave"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="5" height="5" rx="1"></rect><rect x="12" y="3" width="5" height="5" rx="1"></rect><rect x="3" y="12" width="5" height="5" rx="1"></rect><rect x="12" y="12" width="5" height="5" rx="1"></rect></svg></button>
+      <div class="ideaMapToolbarSearch"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input id="ideaMapSearch" type="search" value="${escapeHtml(searchValue)}" placeholder="Zoek in activiteiten..." aria-label="Zoek inspiratie op de kaart" autocomplete="off"><button class="ideaMapToolbarButton ideaMapToolbarFilter" type="button" data-map-filter aria-label="Filters openen" title="Filters"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><circle cx="15" cy="7" r="2"></circle><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="9" cy="17" r="2"></circle></svg></button></div>
+    </div>`;
+  }
   function updateIdeaMapPanel({scroll=false, emphasize=false}={}){
     const map = $('#ideaMap');
     const panel = map?.querySelector('.ideaMapPanel');
@@ -8975,6 +9057,7 @@
     map.innerHTML = `<div class="ideaMapCanvas" aria-label="Kaart met inspiratiepunten">
       <div id="ideaMapProviderCanvas"></div>
     </div>
+    ${ideaMapToolbarMarkup()}
     ${ideaMapPanelMarkup(points)}`;
     destroyIdeaMapProvider();
     ideaMapProvider = createIdeaMapProvider($('#ideaMapProviderCanvas'), points);
@@ -9111,6 +9194,7 @@
       : requestedView;
     const listOn = nextView === 'list';
     const mapOn = nextView === 'map';
+    $('#tab-inspiratie')?.classList.toggle('mapViewActive', mapOn);
     $$('[data-view-group="ideas"]').forEach(btn => {
       const active = btn.dataset.view === nextView;
       btn.classList.toggle('active', active);
@@ -9376,6 +9460,14 @@
       }
     }, true);
     document.addEventListener('click', event => {
+      if(event.target.closest('[data-map-exit]')){
+        setIdeaView('tiles', {scroll:true});
+        return;
+      }
+      if(event.target.closest('[data-map-filter]')){
+        openIdeaFilterSheet('top');
+        return;
+      }
       if(event.target.closest('[data-map-panel-toggle]')){
         ideaMapPanelExpanded = !ideaMapPanelExpanded;
         updateIdeaMapPanel({scroll:ideaMapPanelExpanded});
@@ -9406,6 +9498,14 @@
       pendingIdeaMapZoomTarget = null;
       ideaMapDetailKey = mapTarget.dataset.mapResultKey;
       setActiveIdeaMapItem(mapTarget.dataset.mapResultKey, {refreshPanel:true});
+    });
+    document.addEventListener('input', event => {
+      if(event.target.id !== 'ideaMapSearch') return;
+      const source = $('#ideaSearch');
+      if(!source) return;
+      source.value = event.target.value;
+      renderIdeas();
+      requestAnimationFrame(() => $('#ideaMapSearch')?.focus({preventScroll:true}));
     });
     document.addEventListener('keydown', event => {
       if(event.key !== 'Enter' && event.key !== ' ') return;
