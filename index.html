@@ -3848,6 +3848,22 @@
       #ideaMap{
         scroll-margin-top:calc(var(--active-sticky-controls-height,148px) + 10px);
       }
+      #tab-weken #weekPanels .weekPanel{
+        display:grid;
+        grid-template-rows:auto minmax(0,1fr);
+        height:min(820px,calc(100dvh - var(--active-sticky-controls-height,148px) - 18px));
+      }
+      #tab-weken #weekPanels .weekBody{
+        min-height:0;
+      }
+      #tab-weken #weekPanels .agendaBoard{
+        height:100%;
+      }
+      #tab-weken #weekPanels .agendaDay{
+        height:100%;
+        min-height:0;
+        overflow:hidden;
+      }
     }
 
     /* Houd de volledige kaartviewer binnen de beschikbare schermhoogte. */
