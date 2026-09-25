@@ -3798,6 +3798,28 @@
     /* UIT-agenda: houd chips, switcher en inhoud visueel bij elkaar. */
     #tab-weken .agendaLegendBar{margin-bottom:6px}
     #tab-weken .agendaSectionSwitcher{margin-top:6px}
+    #tab-weken .agendaSectionTabs{
+      display:flex;align-items:center;gap:30px;width:100%;max-width:none;margin:0;
+      border-bottom:1px solid rgba(79,142,158,.12)
+    }
+    #tab-weken .agendaSectionTabs::after{display:none}
+    #tab-weken .agendaSectionTab{
+      position:relative;min-height:42px;padding:8px 0 12px;color:#718087;
+      font-size:.86rem;font-weight:500
+    }
+    #tab-weken .agendaSectionTab::after{
+      content:"";position:absolute;right:0;bottom:-1px;left:0;height:2px;
+      border-radius:999px;background:transparent
+    }
+    #tab-weken .agendaSectionTab:hover{color:#315f69}
+    #tab-weken .agendaSectionTab.active{color:#245c68;font-weight:650}
+    #tab-weken .agendaSectionTab.active::after{background:var(--accent-dark)}
+    #tab-weken .agendaSectionCount{display:none}
+    #tab-weken .agendaSectionSummary{
+      display:inline-flex;align-items:baseline;gap:4px;margin-left:auto;padding-bottom:10px;
+      color:#789098;font-size:.78rem;font-weight:400;white-space:nowrap
+    }
+    #tab-weken .agendaSectionSummary strong{font:inherit;font-weight:500}
 
     @media (min-width:981px){
       #tab-weken .agendaDesktopControls{padding-bottom:2px}
@@ -3807,6 +3829,14 @@
         padding-left:0;
         padding-right:0;
       }
+    }
+
+    @media (max-width:640px){
+      #tab-weken .agendaSectionSwitcher{margin:4px 0 10px}
+      #tab-weken .agendaSectionTabs{gap:28px;overflow-x:auto;scrollbar-width:none}
+      #tab-weken .agendaSectionTabs::-webkit-scrollbar{display:none}
+      #tab-weken .agendaSectionTab{flex:0 0 auto;padding:8px 0 11px;font-size:.8rem}
+      #tab-weken .agendaSectionSummary{display:none}
     }
 
     @media (min-width:641px){
@@ -7463,11 +7493,12 @@
     });
   }
 
-  function agendaSectionNavigation(){
+  function agendaSectionNavigation(weekCount=0){
     const activeSection = $('#tab-weken')?.dataset.agendaSection === 'ongoing' ? 'ongoing' : 'weeks';
     return `<nav class="agendaSectionTabs" aria-label="Agendaweergave" role="tablist">
       <a id="agenda-tab-weeks" class="agendaSectionTab${activeSection === 'weeks' ? ' active' : ''}" href="#weekPanels" role="tab" aria-controls="weekPanels" aria-selected="${activeSection === 'weeks'}" data-agenda-section="weeks"${activeSection === 'weeks' ? ' aria-current="page"' : ''}>Weekagenda</a>
       <a id="agenda-tab-ongoing" class="agendaSectionTab${activeSection === 'ongoing' ? ' active' : ''}" href="#longerOffers" role="tab" aria-controls="longerOffers" aria-selected="${activeSection === 'ongoing'}" data-agenda-section="ongoing"${activeSection === 'ongoing' ? ' aria-current="page"' : ''}>Doorlopend aanbod <span class="agendaSectionCount" data-agenda-ongoing-count aria-label="Aantal activiteiten">0</span></a>
+      <span class="agendaSectionSummary"><strong>${escapeHtml(weekCount)}</strong> activiteiten deze week</span>
     </nav>`;
   }
 
@@ -7516,8 +7547,6 @@
     let visibleCount = 0;
     parkAgendaWeekFilter();
     const sectionSwitcher = $('#agendaSectionSwitcher');
-    if(sectionSwitcher) sectionSwitcher.innerHTML = agendaSectionNavigation();
-    bindAgendaSectionIndicator();
     $('#weekPanels').innerHTML = weeksToRender.map((w,i)=>{
       const all = filterAgendaItems(byWeek(w.id), filters);
       const concrete = sortWeekItems(all.filter(isConcrete));
@@ -7534,6 +7563,8 @@
         boardAttribute:` data-week-board="${escapeHtml(w.id)}"`
       });
     }).join('');
+    if(sectionSwitcher) sectionSwitcher.innerHTML = agendaSectionNavigation(visibleCount);
+    bindAgendaSectionIndicator();
     placeAgendaWeekFilter();
     syncAgendaSectionState($('#tab-weken')?.dataset.agendaSection || 'weeks');
     const status = $('#agendaSearchStatus');
