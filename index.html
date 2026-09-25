@@ -3737,6 +3737,28 @@
         border-color var(--motion-fast) ease,box-shadow var(--motion-fast) ease,
         opacity var(--motion-fast) ease,transform var(--motion-fast) var(--motion-enter);
     }
+    .ideaMapResult,
+    .sharedIdeaCard,
+    #ideaList .ideaThemeRow > td{
+      transition:color var(--motion-fast) ease,background-color var(--motion-base) ease,
+        border-color var(--motion-base) ease,box-shadow var(--motion-base) var(--motion-enter),
+        opacity var(--motion-base) ease,transform var(--motion-base) var(--motion-enter);
+    }
+    .ideaMapResultThumb,
+    .sharedIdeaCard .ideaImageFrame img,
+    #ideaList .ideaListThumb{
+      transition:filter var(--motion-base) ease,transform var(--motion-slow) var(--motion-enter);
+    }
+    @media (min-width:641px){
+      .ideaMapResult.hasThumb .ideaMapResultText{transform:translate3d(0,6px,0)}
+      #ideaList .nameWithIcon:has(.ideaListVisual.hasImage) .ideaListTitleRow{
+        transform:translate3d(0,5px,0);
+      }
+    }
+    @media (hover:hover) and (pointer:fine){
+      .ideaMapResult.hasThumb:hover .ideaMapResultThumb,
+      .sharedIdeaCard.hasImage:hover .ideaImageFrame img{transform:scale(1.012);filter:saturate(1) contrast(1)}
+    }
     .mobileDayNavigation{display:none}
 
     @media (max-width:980px){
