@@ -3854,32 +3854,33 @@
         gap:1px;
         width:auto;
         max-width:none;
-        height:38px;
+        height:42px;
         box-sizing:border-box;
-        padding:2px;
-        border:0;
-        border-radius:8px;
+        padding:3px;
+        border:1px solid rgba(255,255,255,.78);
+        border-radius:15px;
         background:rgba(255,253,249,.62);
-        box-shadow:none;
+        box-shadow:0 5px 14px rgba(20,38,42,.025);
         backdrop-filter:blur(18px)
       }
       #tab-weken .agendaSectionTab{
         min-height:34px;
         padding:6px 9px;
         border:0;
-        border-radius:5px;
+        border-radius:11px;
         background:transparent!important;
         color:#60777d;
         box-shadow:none!important;
-        transition:color var(--motion-fast) var(--motion-standard)
+        transition:color var(--motion-fast) var(--motion-standard),background-color var(--motion-fast) var(--motion-standard)
       }
       #tab-weken .agendaSectionTab::after{display:none}
       #tab-weken .agendaSectionTab:is(:hover,:focus-visible){color:#2f7482;background:transparent!important}
       #tab-weken .agendaSectionTab.active{
         color:#1f5966;
-        background:rgba(247,241,231,.18)!important;
+        background:rgba(168,225,221,.25)!important;
         box-shadow:none!important
       }
+      #tab-weken .weekBody{padding:0 28px 28px}
       #tab-weken .agendaDesktopControls .sharedDiscoveryChipRow,
       #tab-inspiratie .desktopStickyControls .sharedDiscoveryChipRow{
         padding-left:6px;
