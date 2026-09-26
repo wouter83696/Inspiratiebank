@@ -1849,6 +1849,20 @@
     .ideaMapResultThumb{
       position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:saturate(.96) contrast(.98)
     }
+    .ideaMapResultThumbWrap.isPlaceholder{
+      display:grid;place-items:center;background:var(--theme-icon-bg);box-shadow:none
+    }
+    .ideaMapResultThumbWrap.isPlaceholder::before{display:none}
+    .ideaMapResultMediaIcon{
+      position:absolute;z-index:2;left:6px;bottom:6px;display:grid;place-items:center;
+      width:25px;height:25px;border:1px solid var(--theme-icon-line);border-radius:50%;
+      background:rgba(255,253,249,.92);color:var(--theme-ink);box-shadow:0 3px 9px rgba(20,38,42,.08)
+    }
+    .ideaMapResultMediaIcon svg{width:13px;height:13px}
+    .ideaMapResultThumbWrap.isPlaceholder .ideaMapResultMediaIcon{
+      position:static;width:34px;height:34px;background:rgba(255,253,249,.58);box-shadow:none
+    }
+    .ideaMapResult.hasThumb .ideaMapResultTitle > .domainIcon{display:none}
     .ideaMapEmpty{grid-column:1/-1;padding:28px;border:1px dashed rgba(79,142,158,.16);border-radius:18px;color:var(--muted);background:rgba(255,255,255,.72)}
     .ideaTitle{display:flex;align-items:flex-start;gap:10px}
     .ideaTitleText{display:block}
@@ -9035,7 +9049,10 @@
     const listHtml = visiblePoints.map(point => {
       const active = !activeIdeaMapClusterKeys?.length && point.key === activeIdeaMapKey;
       const image = approvedIdeaImage(point.item);
-      const thumb = image ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async"></span>` : '';
+      const mediaIcon = `<span class="ideaMapResultMediaIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span>`;
+      const thumb = image
+        ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async">${mediaIcon}</span>`
+        : `<span class="ideaMapResultThumbWrap isPlaceholder" aria-hidden="true">${mediaIcon}</span>`;
       const metadata = sharedIdeaMetadata(point.item, {point, map:true});
       const metadataBlock = IdeaViewShared.renderMetadata({
         className:'ideaMapResultInfo',
@@ -9043,7 +9060,7 @@
         pills:metadata.pills,
         meta:metadata.meta
       });
-      return `<article class="ideaMapResult ${domainThemeClass(point.item.domain)}${image ? ' hasThumb' : ''}${active ? ' active' : ''}" role="button" tabindex="0" data-map-result-key="${escapeHtml(point.key)}" aria-label="Bekijk details van ${escapeHtml(point.item.title)}">
+      return `<article class="ideaMapResult ${domainThemeClass(point.item.domain)} hasThumb${image ? ' hasImage' : ' hasPlaceholder'}${active ? ' active' : ''}" role="button" tabindex="0" data-map-result-key="${escapeHtml(point.key)}" aria-label="Bekijk details van ${escapeHtml(point.item.title)}">
         ${thumb}
         <span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span><strong>${escapeHtml(point.item.title)}</strong></span>
         <span class="ideaMapResultBody">${metadataBlock}</span>
