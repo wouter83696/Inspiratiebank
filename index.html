@@ -1820,14 +1820,14 @@
       width:auto;padding:0;color:var(--accent-dark);pointer-events:none
     }
     .ideaMapDetailClose{
-      display:grid;place-items:center;flex:0 0 auto;width:30px;height:30px;padding:0;border:1px solid rgba(61,126,136,.18);border-radius:999px;cursor:pointer;pointer-events:auto;
-      background:#fffdfa;color:#315f66;box-shadow:none
+      display:grid;place-items:center;flex:0 0 auto;width:34px;height:34px;padding:0;border:1px solid rgba(61,126,136,.16);border-radius:999px;cursor:pointer;pointer-events:auto;
+      background:rgba(255,253,249,.96);color:#315f66;box-shadow:0 3px 10px rgba(20,38,42,.07)
     }
     .ideaMapPanel.isSingleDetail .sharedIdeaCard.hasImage .ideaMapDetailClose{
       border-color:rgba(61,126,136,.18);background:#fffdfa
     }
     .ideaMapPanel.isSingleDetail .sharedIdeaCard:not(.hasImage) h3{padding-right:36px}
-    .ideaMapDetailClose:hover{background:#f5faf8;border-color:rgba(61,126,136,.26);box-shadow:none}
+    .ideaMapDetailClose:hover{background:#fffdfa;border-color:rgba(61,126,136,.24);box-shadow:0 4px 12px rgba(20,38,42,.09)}
     .ideaMapDetailToolbar svg{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaMapDetailClose svg{width:13px;height:13px}
     .ideaMapPanel.isSingleDetail .cardFooter{position:static;order:6;align-self:flex-start;margin-top:7px}
@@ -2111,11 +2111,12 @@
       .ideaMapPanelHead h3 .ideaMapPanelCount{color:var(--accent-dark);font-size:.9rem;font-weight:700}
       .ideaMapPanelHead p{display:none}
       .ideaMapPanelClose{
-        display:grid;place-items:center;flex:0 0 28px;width:28px;height:28px;padding:0;
-        border:1px solid rgba(79,142,158,.09);border-radius:999px;background:rgba(255,255,255,.66);color:#597778;cursor:pointer
+        display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;padding:0;
+        border:1px solid rgba(61,126,136,.16);border-radius:999px;background:rgba(255,253,249,.96);color:#315f66;
+        box-shadow:0 3px 10px rgba(20,38,42,.07);cursor:pointer
       }
-      .ideaMapPanelClose:hover{background:rgba(168,225,221,.16);border-color:rgba(79,142,158,.20)}
-      .ideaMapPanelClose svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+      .ideaMapPanelClose:hover{background:#fffdfa;border-color:rgba(61,126,136,.24);box-shadow:0 4px 12px rgba(20,38,42,.09)}
+      .ideaMapPanelClose svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
       .ideaMapResults{
         flex:1;flex-direction:column;gap:10px;padding:0 2px 2px 0;
         overflow-x:hidden;overflow-y:auto;scroll-snap-type:y proximity;
@@ -4643,7 +4644,8 @@
         position:relative;width:44px;height:44px;border:0;background:transparent
       }
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose::before{
-        content:"";position:absolute;inset:5px;border:1px solid rgba(61,126,136,.18);border-radius:999px;background:rgba(255,253,249,.72)
+        content:"";position:absolute;inset:5px;border:1px solid rgba(61,126,136,.16);border-radius:999px;
+        background:rgba(255,253,249,.96);box-shadow:0 3px 10px rgba(20,38,42,.07)
       }
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose svg{width:14px;height:14px}
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose svg{position:relative;z-index:1}
