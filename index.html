@@ -1614,10 +1614,12 @@
       box-shadow:0 13px 28px rgba(20,38,42,.17),0 0 0 8px rgba(168,225,221,.30)
     }
     .marker-cluster.active div{
+      transform:scale(1.12);
+      border-width:2px;
       border-color:rgba(49,95,107,.62);
       background:#fff;
       color:var(--accent-dark);
-      box-shadow:0 13px 28px rgba(20,38,42,.17),0 0 0 8px rgba(168,225,221,.30)
+      box-shadow:0 15px 30px rgba(20,38,42,.2),0 0 0 10px rgba(168,225,221,.4)
     }
     .ideaMapHeader{
       position:absolute;z-index:4;left:16px;bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:calc(100% - 32px)
@@ -4516,7 +4518,7 @@
       .ideaMapCanvas .leaflet-top.leaflet-right{top:calc(61px + env(safe-area-inset-top))!important;right:10px!important}
       .ideaMapPanel{right:0!important;bottom:0!important;left:0!important;height:auto!important;max-height:min(34dvh,280px)!important;border-right:0!important;border-left:0!important;border-radius:22px 22px 0 0!important}
       .ideaMapPanel.isMinimized{height:64px!important;max-height:64px!important;transform:none}
-      .ideaMapPanel.isDragging{transition:none!important;animation:none!important;touch-action:none}
+      .ideaMapPanel.isDragging{transition:none!important;touch-action:none}
       .ideaMapPanelHead{padding:17px 12px 10px!important;touch-action:none;cursor:grab}
       .ideaMapPanelHead p{display:none!important}
       .ideaMapResults{
@@ -4547,6 +4549,17 @@
       .ideaMapResult.hasThumb .ideaMapResultPills{gap:5px;flex-wrap:nowrap}
       .ideaMapResult.hasThumb .ideaMapResultMeta{gap:7px;overflow:visible}
       .ideaMapPanel.isSingleDetail{height:auto!important;max-height:min(68dvh,590px)!important}
+      .ideaMapPanel.isTall:not(.isSingleDetail){
+        height:min(68dvh,590px)!important;max-height:min(68dvh,590px)!important
+      }
+      .ideaMapPanel.isTall:not(.isSingleDetail) .ideaMapResults{
+        flex:1 1 auto!important;flex-direction:column!important;align-items:stretch!important;
+        overflow-x:hidden!important;overflow-y:auto!important;scroll-snap-type:none!important;
+        overscroll-behavior-y:contain;touch-action:pan-y
+      }
+      .ideaMapPanel.isTall:not(.isSingleDetail) .ideaMapResult{
+        flex:0 0 auto!important;width:100%!important;max-width:none!important;scroll-snap-align:none!important
+      }
       .ideaMapPanel.isSingleDetail .ideaMapSingleCard{width:100%!important;max-width:none!important}
       .ideaMapPanel.isSingleDetail .ideaMapResults{padding:0 16px 16px!important}
       .ideaMapPanel.isSingleDetail .ideaMapSingleCard > .card{
@@ -5567,6 +5580,7 @@
 	  let activeIdeaMapClusterKeys = null;
 	  let ideaMapDetailKey = '';
 	  let ideaMapPanelExpanded = false;
+	  let ideaMapPanelTall = false;
 	  let activeIdeaMapClusterIsArea = false;
 	  let pendingIdeaMapZoomTarget = null;
 	  let ideaMapProvider = null;
@@ -9045,7 +9059,7 @@
     const minimized = !ideaMapPanelExpanded && !singleDetail && !activeIdeaMapClusterKeys;
     const visibleTitle = minimized ? `${visiblePoints.length} activiteiten in dit gebied` : panelTitle;
     const visibleText = minimized ? 'Kies een marker of open de resultaten.' : panelText;
-    return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${singleDetail ? ' isSingleDetail' : ''}${minimized ? ' isMinimized' : ''}" aria-label="Activiteiten op de kaart">
+    return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${ideaMapPanelTall && !singleDetail ? ' isTall' : ''}${singleDetail ? ' isSingleDetail' : ''}${minimized ? ' isMinimized' : ''}" aria-label="Activiteiten op de kaart">
       <div class="ideaMapPanelHead" role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"><div class="ideaMapPanelHeadRow"><div><h3>${escapeHtml(visibleTitle)}</h3><p>${escapeHtml(visibleText)}</p></div></div></div>
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
@@ -9129,6 +9143,7 @@
     activeIdeaMapClusterKeys = uniqueKeys;
     ideaMapDetailKey = '';
     ideaMapPanelExpanded = true;
+    ideaMapPanelTall = false;
     activeIdeaMapClusterIsArea = area;
     activeIdeaMapKey = uniqueKeys.includes(activeIdeaMapKey) ? activeIdeaMapKey : uniqueKeys[0];
     ideaMapProvider?.setActiveCluster?.(uniqueKeys);
@@ -9156,6 +9171,7 @@
   function closeIdeaMapOverlay(){
     if(!ideaMapPanelExpanded && !ideaMapDetailKey && !activeIdeaMapClusterKeys) return;
     ideaMapPanelExpanded = false;
+    ideaMapPanelTall = false;
     ideaMapDetailKey = '';
     activeIdeaMapClusterKeys = null;
     activeIdeaMapClusterIsArea = false;
@@ -9181,7 +9197,8 @@
       if(!handle || !sheet) return;
       const isMap = sheet.classList.contains('ideaMapPanel');
       const minimized = isMap && sheet.classList.contains('isMinimized');
-      drag = {sheet, handle, pointerId:event.pointerId, startY:event.clientY, lastY:event.clientY, isMap, minimized, moved:false};
+      const tall = isMap && sheet.classList.contains('isTall');
+      drag = {sheet, handle, pointerId:event.pointerId, startY:event.clientY, lastY:event.clientY, isMap, minimized, tall, moved:false};
       sheet.classList.add('isDragging');
       handle.setPointerCapture?.(event.pointerId);
     });
@@ -9191,7 +9208,11 @@
       drag.lastY = event.clientY;
       drag.moved ||= Math.abs(delta) > 5;
       const offset = drag.isMap
-        ? (drag.minimized ? Math.max(-110, Math.min(0, delta * .72)) : Math.max(0, delta * .82))
+        ? (drag.minimized
+          ? Math.max(-110, Math.min(0, delta * .72))
+          : drag.tall
+            ? Math.max(0, delta * .82)
+            : Math.max(-150, delta * .82))
         : Math.max(0, delta);
       drag.sheet.style.setProperty('transform', `translate3d(0,${offset}px,0)`, 'important');
       if(drag.moved) event.preventDefault();
@@ -9205,9 +9226,14 @@
       if(current.isMap){
         if(current.minimized && delta < -24){
           ideaMapPanelExpanded = true;
+          ideaMapPanelTall = false;
           updateIdeaMapPanel({scroll:true});
-        }else if(!current.minimized && delta < -24){
+        }else if(!current.minimized && !current.tall && !ideaMapDetailKey && delta < -42){
           ideaMapPanelExpanded = true;
+          ideaMapPanelTall = true;
+          updateIdeaMapPanel();
+        }else if(current.tall && delta > 42){
+          ideaMapPanelTall = false;
           updateIdeaMapPanel();
         }else if(!current.minimized && delta > 32){
           if(ideaMapDetailKey){
@@ -9217,8 +9243,6 @@
           }else{
             closeIdeaMapOverlay();
           }
-        }else{
-          updateIdeaMapPanel();
         }
       }else if(delta > 70){
         current.sheet.parentElement?.querySelector('.ideaFilterSheetBackdrop,.ideaSubmitSheetBackdrop')?.click();
@@ -9231,17 +9255,24 @@
       resetDragStyle(drag.sheet);
       drag = null;
     });
+    document.addEventListener('lostpointercapture', event => {
+      if(!drag || event.pointerId !== drag.pointerId) return;
+      resetDragStyle(drag.sheet);
+      drag = null;
+    });
     document.addEventListener('click', event => {
       const head = event.target.closest('.ideaMapPanelHead');
       if(!head || performance.now() < suppressSheetClickUntil) return;
-      ideaMapPanelExpanded = !ideaMapPanelExpanded;
+      if(ideaMapPanelTall) ideaMapPanelTall = false;
+      else ideaMapPanelExpanded = !ideaMapPanelExpanded;
       if(!ideaMapPanelExpanded) closeIdeaMapOverlay();
       else updateIdeaMapPanel({scroll:true});
     });
     document.addEventListener('keydown', event => {
       if(!event.target.matches('.ideaMapPanelHead') || !['Enter',' '].includes(event.key)) return;
       event.preventDefault();
-      ideaMapPanelExpanded = !ideaMapPanelExpanded;
+      if(ideaMapPanelTall) ideaMapPanelTall = false;
+      else ideaMapPanelExpanded = !ideaMapPanelExpanded;
       if(!ideaMapPanelExpanded) closeIdeaMapOverlay();
       else updateIdeaMapPanel({scroll:true});
     });
@@ -9915,7 +9946,8 @@
         return;
       }
       if(event.target.closest('[data-map-panel-toggle]')){
-        ideaMapPanelExpanded = !ideaMapPanelExpanded;
+        if(ideaMapPanelTall) ideaMapPanelTall = false;
+        else ideaMapPanelExpanded = !ideaMapPanelExpanded;
         updateIdeaMapPanel({scroll:ideaMapPanelExpanded});
         return;
       }
@@ -9942,6 +9974,7 @@
       const mapTarget = event.target.closest('[data-map-result-key]');
       if(!mapTarget) return;
       pendingIdeaMapZoomTarget = null;
+      ideaMapPanelTall = false;
       ideaMapDetailKey = mapTarget.dataset.mapResultKey;
       setActiveIdeaMapItem(mapTarget.dataset.mapResultKey, {refreshPanel:true});
     });
