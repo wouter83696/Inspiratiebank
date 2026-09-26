@@ -4530,6 +4530,10 @@
         flex:0 0 min(82vw,340px)!important;width:min(82vw,340px)!important;
         scroll-snap-align:start!important;scroll-snap-stop:always
       }
+      .ideaMapResult.active{
+        border-color:rgba(49,95,107,.22)!important;
+        box-shadow:inset 0 0 0 1px rgba(168,225,221,.2),0 6px 18px rgba(92,65,33,.04)!important
+      }
       .ideaMapResult.hasThumb{
         grid-template-columns:92px minmax(0,1fr)!important;grid-template-rows:auto auto;
         align-items:center!important;column-gap:10px!important;row-gap:7px!important;padding:8px!important
@@ -4542,7 +4546,7 @@
       .ideaMapResult.hasThumb .ideaMapResultInfo::-webkit-scrollbar{display:none}
       .ideaMapResult.hasThumb .ideaMapResultPills{gap:5px;flex-wrap:nowrap}
       .ideaMapResult.hasThumb .ideaMapResultMeta{gap:7px;overflow:visible}
-      .ideaMapPanel.isSingleDetail{height:auto!important;max-height:min(72dvh,620px)!important}
+      .ideaMapPanel.isSingleDetail{height:auto!important;max-height:min(68dvh,590px)!important}
       .ideaMapPanel.isSingleDetail .ideaMapSingleCard{width:100%!important;max-width:none!important}
       .ideaMapPanel.isSingleDetail .ideaMapResults{padding:0 16px 16px!important}
       .ideaMapPanel.isSingleDetail .ideaMapSingleCard > .card{
@@ -9033,7 +9037,7 @@
       : '';
     const panelTitle = activeIdeaMapClusterKeys
       ? (sharedPlace ? `${visiblePoints.length} activiteiten in ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}` : `${visiblePoints.length} activiteiten ${activeIdeaMapClusterIsArea ? 'in dit gebied' : 'op deze plek'}`)
-      : 'Activiteiten op kaart';
+      : `${visiblePoints.length} activiteiten in dit gebied`;
     const panelText = activeIdeaMapClusterKeys
       ? (sharedPlace ? `Deze activiteiten liggen verspreid over ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}.` : activeIdeaMapClusterIsArea ? 'Zoom in voor losse markers of kies hieronder een tegel.' : 'Activiteiten op dezelfde locatie. Kies een tegel of toon alles.')
       : (userLocation?.isDefault ? 'Standaard rond Nijmegen.' : `Afstand vanaf ${locationDisplayText()}.`);
