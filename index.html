@@ -9869,8 +9869,11 @@
       if(!window.matchMedia('(max-width:640px)').matches) return;
       const agendaPanel = $('#tab-weken');
       if(!agendaPanel?.classList.contains('active') || agendaPanel.dataset.agendaSection === 'ongoing') return;
-      const navigation = $('.mobileDayNavigation');
-      const days = [...document.querySelectorAll('#weekPanels .weekPanel.active .agendaDay')];
+      const navigations = [...document.querySelectorAll('#weekPanels .mobileDayNavigation')]
+        .filter(element => element.getClientRects().length > 0);
+      const navigation = navigations.find(element => element.classList.contains('isStuck')) || navigations[0];
+      const weekPanel = navigation?.closest('.weekPanel');
+      const days = weekPanel ? [...weekPanel.querySelectorAll('.agendaDay')] : [];
       if(!navigation || !days.length) return;
       const activationLine = navigation.getBoundingClientRect().bottom + 14;
       let current = days[0];
@@ -9889,6 +9892,16 @@
     window.addEventListener('resize', schedule, {passive:true});
     document.addEventListener('agenda:rendered', schedule);
     update();
+  }
+  function scrollToMobileAgendaDay(day, navigation, behavior='smooth'){
+    if(!day) return;
+    const stickyTop = navigation ? (Number.parseFloat(getComputedStyle(navigation).top) || 0) : 0;
+    const stickyOffset = stickyTop + (navigation?.offsetHeight || 0) + 12;
+    const targetTop = Math.max(0, window.scrollY + day.getBoundingClientRect().top - stickyOffset);
+    const scroller = document.scrollingElement || document.documentElement;
+    window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+      scroller.scrollTo({top:targetTop,behavior});
+    }));
   }
   async function init(){
         const agendaSourceSheet = $('#agendaSourceSheetLayer');
@@ -10254,16 +10267,14 @@
       const dayTarget = event.target.closest('[data-agenda-day-target]');
       if(dayTarget){
         setActiveMobileAgendaDay(dayTarget.dataset.agendaDayTarget);
-        const day = [...document.querySelectorAll('[data-agenda-day]')]
+        const weekPanel = dayTarget.closest('.weekPanel');
+        const day = [...(weekPanel || document).querySelectorAll('[data-agenda-day]')]
           .find(candidate => candidate.dataset.agendaDay === dayTarget.dataset.agendaDayTarget);
         if(day){
           event.preventDefault();
           const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-          const navigation = $('.mobileDayNavigation');
-          const stickyTop = navigation ? (Number.parseFloat(getComputedStyle(navigation).top) || 0) : 0;
-          const stickyOffset = stickyTop + (navigation?.offsetHeight || 0) + 12;
-          const targetTop = Math.max(0, window.scrollY + day.getBoundingClientRect().top - stickyOffset);
-          window.scrollTo({top:targetTop,behavior});
+          const navigation = weekPanel?.querySelector('.mobileDayNavigation') || $('.mobileDayNavigation');
+          scrollToMobileAgendaDay(day, navigation, behavior);
           day.focus({preventScroll:true});
         }
         return;
