@@ -4536,12 +4536,12 @@
       }
       .ideaMapResult.hasThumb{
         grid-template-columns:92px minmax(0,1fr)!important;grid-template-rows:auto auto;
-        align-items:center!important;column-gap:10px!important;row-gap:7px!important;padding:8px!important
+        align-items:start!important;column-gap:10px!important;row-gap:5px!important;padding:8px!important
       }
       .ideaMapResult.hasThumb .ideaMapResultThumbWrap{grid-column:1;grid-row:1 / span 2;width:100%!important;height:82px!important}
       .ideaMapResult.hasThumb .ideaMapResultText{display:contents;min-height:0!important}
-      .ideaMapResult.hasThumb .ideaMapResultTitle{grid-column:2;grid-row:1;align-self:end}
-      .ideaMapResult.hasThumb .ideaMapResultBody{grid-column:2;grid-row:2;align-self:start;margin-top:0;min-width:0;overflow:hidden}
+      .ideaMapResult.hasThumb .ideaMapResultTitle{grid-column:2;grid-row:1;align-self:start;padding-top:1px}
+      .ideaMapResult.hasThumb .ideaMapResultBody{grid-column:2;grid-row:2;align-self:end;margin-top:0;min-width:0;max-width:100%;overflow:hidden}
       .ideaMapResult.hasThumb .ideaMapResultInfo{gap:6px;width:100%;margin-top:0;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
       .ideaMapResult.hasThumb .ideaMapResultInfo::-webkit-scrollbar{display:none}
       .ideaMapResult.hasThumb .ideaMapResultPills{gap:5px;flex-wrap:nowrap}
@@ -9024,7 +9024,8 @@
       });
       return `<article class="ideaMapResult ${domainThemeClass(point.item.domain)}${image ? ' hasThumb' : ''}${active ? ' active' : ''}" role="button" tabindex="0" data-map-result-key="${escapeHtml(point.key)}" aria-label="Bekijk details van ${escapeHtml(point.item.title)}">
         ${thumb}
-        <span class="ideaMapResultText"><span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span><strong>${escapeHtml(point.item.title)}</strong></span><span class="ideaMapResultBody">${metadataBlock}</span></span>
+        <span class="ideaMapResultTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span><strong>${escapeHtml(point.item.title)}</strong></span>
+        <span class="ideaMapResultBody">${metadataBlock}</span>
       </article>`;
     }).join('');
     const resultsHtml = singleDetail
