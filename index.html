@@ -4812,13 +4812,15 @@
       #tab-inspiratie > .desktopStickyControls,
       #tab-weken > .agendaDesktopControls{
         top:0!important;
-        padding-top:6px!important
+        padding-top:6px!important;
+        padding-bottom:6px!important
       }
+      :is(#tab-inspiratie,#tab-weken) .sharedDiscoveryChipRow{margin-bottom:4px!important}
       #tab-weken > .agendaDesktopControls{
         position:relative!important;
         top:auto!important;
         z-index:auto!important;
-        padding-bottom:3px!important
+        padding-bottom:6px!important
       }
       #tab-weken > .agendaDesktopControls.isStuck{
         background:transparent!important;
@@ -4831,7 +4833,7 @@
         margin:8px 0 10px!important
       }
       #tab-weken .agendaContentSurface{
-        display:block;margin-top:1px;border:1px solid rgba(64,45,20,.055);
+        display:block;margin-top:0;border:1px solid rgba(64,45,20,.055);
         border-radius:22px;background:#FFFEFC;box-shadow:0 12px 34px rgba(64,45,20,.04)
       }
       #tab-weken .agendaContentSurface > .agendaSectionSwitcher{
@@ -4912,27 +4914,6 @@
         width:100%!important;
         flex-wrap:wrap!important;
         row-gap:3px!important
-      }
-    }
-
-    /* Houd beide producthero's op mobiel exact op dezelfde tekst- en beeldas. */
-    @media (max-width:640px){
-      :is(#tab-inspiratie,#tab-weken) :is(.inspirationHero,.agendaHero){
-        min-height:clamp(224px,35svh,258px)!important;
-        padding-top:clamp(42px,6.5svh,54px)!important;
-        padding-bottom:clamp(62px,8svh,74px)!important;
-        background-position:58% 44%,center,center!important
-      }
-      :is(#tab-inspiratie,#tab-weken) :is(.inspirationHero,.agendaHero) .tabHeroHomeLink{
-        top:calc(50% - 18px)!important;right:24px!important;left:24px!important
-      }
-      :is(#tab-inspiratie,#tab-weken) :is(.inspirationHero,.agendaHero) .tabHeroTitle{
-        max-width:100%!important;font-size:clamp(2.05rem,8.7vw,2.5rem)!important;
-        line-height:1.06!important;letter-spacing:0!important
-      }
-      #tab-weken .agendaHero .tabHeroTitle{white-space:nowrap!important}
-      :is(#tab-inspiratie,#tab-weken) :is(.inspirationHero,.agendaHero) .tabHeroLine{
-        margin-top:8px!important;font-size:clamp(1rem,4.2vw,1.12rem)!important;line-height:1.25!important
       }
     }
 
