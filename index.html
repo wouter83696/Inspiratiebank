@@ -4527,18 +4527,19 @@
       }
       .ideaMapResults::-webkit-scrollbar{display:none}
       .ideaMapResult{
-        flex:0 0 min(86vw,356px)!important;width:min(86vw,356px)!important;
+        flex:0 0 min(82vw,340px)!important;width:min(82vw,340px)!important;
         scroll-snap-align:start!important;scroll-snap-stop:always
       }
       .ideaMapResult.hasThumb{
-        grid-template-columns:100px minmax(0,1fr)!important;grid-template-rows:auto auto;
+        grid-template-columns:92px minmax(0,1fr)!important;grid-template-rows:auto auto;
         align-items:center!important;column-gap:10px!important;row-gap:7px!important;padding:8px!important
       }
-      .ideaMapResult.hasThumb .ideaMapResultThumbWrap{grid-column:1;grid-row:1;width:100%!important;height:78px!important}
+      .ideaMapResult.hasThumb .ideaMapResultThumbWrap{grid-column:1;grid-row:1 / span 2;width:100%!important;height:82px!important}
       .ideaMapResult.hasThumb .ideaMapResultText{display:contents;min-height:0!important}
-      .ideaMapResult.hasThumb .ideaMapResultTitle{grid-column:2;grid-row:1;align-self:center}
-      .ideaMapResult.hasThumb .ideaMapResultBody{grid-column:1 / -1;grid-row:2;margin-top:0;min-width:0}
-      .ideaMapResult.hasThumb .ideaMapResultInfo{gap:7px;width:100%;margin-top:0;flex-wrap:nowrap;overflow:hidden}
+      .ideaMapResult.hasThumb .ideaMapResultTitle{grid-column:2;grid-row:1;align-self:end}
+      .ideaMapResult.hasThumb .ideaMapResultBody{grid-column:2;grid-row:2;align-self:start;margin-top:0;min-width:0;overflow:hidden}
+      .ideaMapResult.hasThumb .ideaMapResultInfo{gap:6px;width:100%;margin-top:0;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+      .ideaMapResult.hasThumb .ideaMapResultInfo::-webkit-scrollbar{display:none}
       .ideaMapResult.hasThumb .ideaMapResultPills{gap:5px;flex-wrap:nowrap}
       .ideaMapResult.hasThumb .ideaMapResultMeta{gap:7px;overflow:visible}
       .ideaMapPanel.isSingleDetail{height:auto!important;max-height:min(72dvh,620px)!important}
@@ -9172,7 +9173,7 @@
       drag.lastY = event.clientY;
       drag.moved ||= Math.abs(delta) > 5;
       const offset = drag.isMap
-        ? (drag.minimized ? Math.min(0, delta) : Math.max(-120, delta))
+        ? (drag.minimized ? Math.max(-110, Math.min(0, delta * .72)) : Math.max(0, delta * .82))
         : Math.max(0, delta);
       drag.sheet.style.setProperty('transform', `translate3d(0,${offset}px,0)`, 'important');
       if(drag.moved) event.preventDefault();
@@ -9187,8 +9188,9 @@
         if(current.minimized && delta < -24){
           ideaMapPanelExpanded = true;
           updateIdeaMapPanel({scroll:true});
-        }else if(!current.minimized && !ideaMapDetailKey && delta < -96){
-          setIdeaView('tiles', {scroll:false});
+        }else if(!current.minimized && delta < -24){
+          ideaMapPanelExpanded = true;
+          updateIdeaMapPanel();
         }else if(!current.minimized && delta > 32){
           if(ideaMapDetailKey){
             ideaMapDetailKey = '';
@@ -9206,7 +9208,11 @@
       drag = null;
     };
     document.addEventListener('pointerup', finishDrag);
-    document.addEventListener('pointercancel', finishDrag);
+    document.addEventListener('pointercancel', event => {
+      if(!drag || event.pointerId !== drag.pointerId) return;
+      resetDragStyle(drag.sheet);
+      drag = null;
+    });
     document.addEventListener('click', event => {
       const head = event.target.closest('.ideaMapPanelHead');
       if(!head || performance.now() < suppressSheetClickUntil) return;
