@@ -4647,6 +4647,13 @@
       }
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose svg{width:14px;height:14px}
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose svg{position:relative;z-index:1}
+      .ideaMapPanel.isSingleDetail:has(.sharedIdeaCard.hasImage) .ideaMapPanelHead{height:28px}
+      .ideaMapPanel.isSingleDetail:has(.sharedIdeaCard.hasImage) .ideaMapPanelHead > .ideaMapDetailToolbar{
+        top:35px;right:20px
+      }
+      .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock{
+        border-color:rgba(112,94,63,.025);background:rgba(255,253,249,.28)
+      }
       .ideaMapPanel.isSingleDetail .ideaPracticalDetails[open]{padding-bottom:2px}
       .ideaFilterSheetHeader::before,.ideaSubmitSheetHeader::before{
         content:"";position:absolute;top:8px;left:50%;width:38px;height:4px;
