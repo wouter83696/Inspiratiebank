@@ -4839,7 +4839,18 @@
         border-bottom:1px solid rgba(64,45,20,.055)
       }
       #tab-weken .agendaContentSurface .agendaSectionTabs{
-        background:rgba(247,241,231,.22);border-color:rgba(79,142,158,.07);box-shadow:none
+        height:36px;padding:2px;background:#fff;border-color:rgba(79,142,158,.10);box-shadow:none;backdrop-filter:none
+      }
+      #tab-weken .agendaContentSurface .agendaSectionTab{
+        height:30px;min-height:30px!important;padding:0 8px!important;
+        background:transparent!important;line-height:30px;text-align:center;box-shadow:none!important
+      }
+      #tab-weken .agendaContentSurface .agendaSectionTab:not(.active){
+        background:transparent!important;color:rgba(49,95,107,.60)
+      }
+      #tab-weken .agendaContentSurface .agendaSectionTab.active{
+        background:rgba(168,225,221,.30)!important;color:rgba(31,101,114,.94);
+        box-shadow:inset 0 0 0 1px rgba(79,142,158,.055)!important
       }
       #tab-weken .agendaContentSurface #weekPanels,
       #tab-weken .agendaContentSurface #longerOffers{margin:0!important}
