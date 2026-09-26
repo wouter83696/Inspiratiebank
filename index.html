@@ -4569,19 +4569,24 @@
     @media (min-width:981px){
       .ideaMapToolbar{display:none!important}
       .ideaMapPanel.isList .ideaMapPanelHead{
-        min-height:38px!important;margin:0 2px 12px 0!important;padding:0!important;
-        border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important
+        box-sizing:border-box!important;width:100%!important;min-height:40px!important;margin:0 2px 12px 0!important;
+        padding:4px 6px 4px 13px!important;border:1px solid rgba(255,255,255,.9)!important;border-radius:999px!important;
+        background:rgba(255,253,249,.94)!important;box-shadow:none!important;backdrop-filter:blur(12px)!important
       }
       .ideaMapPanel.isList .ideaMapPanelHeadRow{
-        width:max-content!important;max-width:100%!important;justify-content:flex-start!important;gap:8px!important
+        width:100%!important;max-width:none!important;justify-content:space-between!important;gap:8px!important
       }
       .ideaMapPanel.isList .ideaMapPanelHeadRow > div:first-child{
-        display:flex!important;flex:0 0 auto!important;align-items:center!important;box-sizing:border-box!important;
-        width:max-content!important;max-width:calc(100% - 38px)!important;height:38px!important;padding:0 13px!important;
-        border:1px solid rgba(255,255,255,.92)!important;border-radius:999px!important;
-        background:rgba(255,253,249,.985)!important;box-shadow:0 8px 20px rgba(20,38,42,.06)!important;
-        backdrop-filter:blur(12px)
+        display:flex!important;flex:1 1 auto!important;align-items:center!important;box-sizing:border-box!important;
+        width:auto!important;max-width:none!important;height:30px!important;padding:0!important;
+        border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;
+        backdrop-filter:none!important
       }
+      .ideaMapPanel.isList .ideaMapPanelClose{
+        flex:0 0 30px!important;width:30px!important;height:30px!important;border:0!important;
+        background:transparent!important;box-shadow:none!important
+      }
+      .ideaMapPanel.isList .ideaMapPanelClose:hover{background:rgba(49,95,102,.06)!important;border:0!important;box-shadow:none!important}
       .ideaMapPanel.isSingleDetail .ideaMapPanelHead{
         box-sizing:border-box!important;width:100%!important;height:30px!important;min-height:30px!important;
         margin:0 2px 8px 0!important;padding:0!important;border:0!important;border-radius:0!important;
