@@ -4915,6 +4915,27 @@
       }
     }
 
+    /* Houd beide producthero's op mobiel exact op dezelfde tekst- en beeldas. */
+    @media (max-width:640px){
+      :is(#tab-inspiratie,#tab-weken) :is(.inspirationHero,.agendaHero){
+        min-height:clamp(224px,35svh,258px)!important;
+        padding-top:clamp(42px,6.5svh,54px)!important;
+        padding-bottom:clamp(62px,8svh,74px)!important;
+        background-position:58% 44%,center,center!important
+      }
+      :is(#tab-inspiratie,#tab-weken) :is(.inspirationHero,.agendaHero) .tabHeroHomeLink{
+        top:calc(50% - 18px)!important;right:24px!important;left:24px!important
+      }
+      :is(#tab-inspiratie,#tab-weken) :is(.inspirationHero,.agendaHero) .tabHeroTitle{
+        max-width:100%!important;font-size:clamp(2.05rem,8.7vw,2.5rem)!important;
+        line-height:1.06!important;letter-spacing:0!important
+      }
+      #tab-weken .agendaHero .tabHeroTitle{white-space:nowrap!important}
+      :is(#tab-inspiratie,#tab-weken) :is(.inspirationHero,.agendaHero) .tabHeroLine{
+        margin-top:8px!important;font-size:clamp(1rem,4.2vw,1.12rem)!important;line-height:1.25!important
+      }
+    }
+
     @media (hover:hover) and (pointer:fine){
       :is(
         button,
