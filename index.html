@@ -9898,7 +9898,10 @@
       const weekPanel = navigation?.closest('.weekPanel');
       const days = weekPanel ? [...weekPanel.querySelectorAll('.agendaDay')] : [];
       if(!navigation || !days.length) return;
-      const activationLine = navigation.getBoundingClientRect().bottom + 14;
+      const navigationBottom = navigation.getBoundingClientRect().bottom;
+      const visibleContentHeight = Math.max(0, window.innerHeight - navigationBottom);
+      const readingOffset = Math.min(180, Math.max(112, visibleContentHeight * .22));
+      const activationLine = navigationBottom + readingOffset;
       let current = days[0];
       for(const day of days){
         if(day.getBoundingClientRect().top <= activationLine) current = day;
