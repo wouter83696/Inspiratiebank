@@ -2150,10 +2150,10 @@
       .ideaMapResults::-webkit-scrollbar{display:none}
       .ideaMapResult{width:100%;scroll-snap-align:start}
       .ideaMapResult.hasThumb{
-        box-sizing:border-box;height:104px;min-height:104px;max-height:104px;
-        grid-template-columns:68px minmax(0,1fr);grid-template-rows:44px 36px;row-gap:6px
+        box-sizing:border-box;height:92px;min-height:92px;max-height:92px;
+        grid-template-columns:72px minmax(0,1fr);grid-template-rows:36px 36px;row-gap:4px
       }
-      .ideaMapResult.hasThumb .ideaMapResultThumbWrap{grid-column:1;grid-row:1 / span 2;height:86px}
+      .ideaMapResult.hasThumb .ideaMapResultThumbWrap{grid-column:1;grid-row:1 / span 2;width:72px;height:72px}
       .ideaMapResult.hasThumb .ideaMapResultText,
       .ideaMapResult.hasThumb .ideaMapResultTitle{transform:none!important}
       .ideaMapResult.hasThumb .ideaMapResultTitle{grid-column:2;grid-row:1;align-self:center}
@@ -4621,6 +4621,13 @@
     }
 
     @media (min-width:641px) and (max-width:980px){
+      .ideaMapPanel.isList .ideaMapResult.hasImage{
+        grid-template-columns:72px minmax(0,1fr)!important;grid-template-rows:34px 34px!important;
+        min-height:88px!important;column-gap:10px!important;row-gap:4px!important;padding:8px!important
+      }
+      .ideaMapPanel.isList .ideaMapResult.hasImage .ideaMapResultThumbWrap{
+        grid-column:1!important;grid-row:1 / span 2!important;width:72px!important;height:72px!important
+      }
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder{
         grid-template-columns:38px minmax(0,1fr)!important;grid-template-rows:auto auto!important;
         min-height:82px!important;column-gap:10px!important;row-gap:5px!important;padding:10px 12px!important
