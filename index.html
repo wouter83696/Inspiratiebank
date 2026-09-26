@@ -1858,7 +1858,9 @@
       width:25px;height:25px;border:1px solid var(--theme-icon-line);border-radius:50%;
       background:rgba(255,253,249,.92);color:var(--theme-ink);box-shadow:0 3px 9px rgba(20,38,42,.08)
     }
-    .ideaMapResultMediaIcon svg{width:13px;height:13px}
+    .ideaMapResultMediaIcon svg{
+      width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round
+    }
     .ideaMapResultThumbWrap.isPlaceholder .ideaMapResultMediaIcon{
       position:static;width:34px;height:34px;background:rgba(255,253,249,.58);box-shadow:none
     }
@@ -4491,7 +4493,8 @@
       width:auto!important;min-height:0!important;max-height:min(42%,330px);overflow:hidden!important;
       border:1px solid rgba(61,126,136,.13)!important;border-bottom:0!important;border-radius:20px 20px 0 0!important;background:rgba(255,253,249,.96)!important;
       box-shadow:0 -16px 42px rgba(20,38,42,.15)!important;backdrop-filter:blur(18px);pointer-events:auto!important;
-      transform:translate3d(0,0,0);opacity:1;transition:transform .32s cubic-bezier(.2,.72,.24,1),opacity .2s ease
+      transform:translate3d(0,0,0);opacity:1;
+      transition:max-height .3s cubic-bezier(.2,.72,.24,1),height .3s cubic-bezier(.2,.72,.24,1),transform .32s cubic-bezier(.2,.72,.24,1),opacity .2s ease
     }
     .ideaMapPanel.isMinimized{max-height:82px}
     .ideaMapPanelHead{display:block!important;padding:18px 18px 11px!important}
@@ -4540,7 +4543,7 @@
       .ideaMapToolbarFilter{right:5px;width:36px;height:34px;border-radius:999px}
       .ideaMapCanvas{min-height:100%!important;border-radius:0!important}
       .ideaMapCanvas .leaflet-top.leaflet-right{top:calc(61px + env(safe-area-inset-top))!important;right:10px!important}
-      .ideaMapPanel{right:0!important;bottom:0!important;left:0!important;height:auto!important;max-height:min(34dvh,280px)!important;border-right:0!important;border-left:0!important;border-radius:22px 22px 0 0!important}
+      .ideaMapPanel{right:0!important;bottom:0!important;left:0!important;height:min(34dvh,280px)!important;max-height:min(34dvh,280px)!important;border-right:0!important;border-left:0!important;border-radius:22px 22px 0 0!important;will-change:height,max-height}
       .ideaMapPanel.isMinimized{height:64px!important;max-height:64px!important;transform:none}
       .ideaMapPanel.isDragging{transition:none!important;touch-action:none}
       .ideaMapPanelHead{padding:17px 12px 10px!important;touch-action:none;cursor:grab}
@@ -4549,8 +4552,10 @@
         align-items:flex-start!important;flex:0 1 auto!important;gap:12px!important;
         padding:0 16px 12px!important;scroll-padding-inline:16px!important;
         scroll-snap-type:x mandatory!important;scrollbar-width:none!important;
-        -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x
+        -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x;
+        opacity:1;transition:opacity .16s ease
       }
+      .ideaMapPanel:not(.isExpanded) .ideaMapResults{display:flex!important;opacity:0;pointer-events:none}
       .ideaMapResults::-webkit-scrollbar{display:none}
       .ideaMapResult{
         flex:0 0 min(82vw,340px)!important;width:min(82vw,340px)!important;
@@ -9111,6 +9116,17 @@
     panel.outerHTML = ideaMapPanelMarkup(points);
     setActiveIdeaMapItem(activeIdeaMapKey, {scroll, emphasize});
   }
+  function syncIdeaMapPanelPresentation(){
+    const panel = $('#ideaMap .ideaMapPanel');
+    if(!panel || panel.classList.contains('isSingleDetail')) return false;
+    const minimized = !ideaMapPanelExpanded && !activeIdeaMapClusterKeys;
+    panel.classList.toggle('isExpanded', ideaMapPanelExpanded);
+    panel.classList.toggle('isTall', ideaMapPanelTall && ideaMapPanelExpanded);
+    panel.classList.toggle('isMinimized', minimized);
+    const head = panel.querySelector('.ideaMapPanelHead');
+    head?.setAttribute('aria-label', ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen');
+    return true;
+  }
   function setActiveIdeaMapItem(key, {scroll=true, clearCluster=false, refreshPanel=false, emphasize=false}={}){
     if(scroll || refreshPanel || emphasize) ideaMapPanelExpanded = true;
     const shouldRefreshPanel = refreshPanel || (clearCluster && activeIdeaMapClusterKeys);
@@ -9201,7 +9217,10 @@
     updateIdeaMapPanel();
   }
   function closeIdeaMapOverlay(){
-    if(!ideaMapPanelExpanded && !ideaMapDetailKey && !activeIdeaMapClusterKeys) return;
+    const panel = $('#ideaMap .ideaMapPanel');
+    const visuallyExpanded = panel?.classList.contains('isExpanded');
+    if(!ideaMapPanelExpanded && !visuallyExpanded && !ideaMapDetailKey && !activeIdeaMapClusterKeys) return;
+    const requiresRefresh = Boolean(ideaMapDetailKey || activeIdeaMapClusterKeys);
     ideaMapPanelExpanded = false;
     ideaMapPanelTall = false;
     ideaMapDetailKey = '';
@@ -9211,7 +9230,11 @@
     activeIdeaMapKey = '';
     ideaMapProvider?.clearActiveCluster?.();
     ideaMapProvider?.setActive?.('', {pan:false});
-    updateIdeaMapPanel();
+    if(requiresRefresh) updateIdeaMapPanel();
+    else{
+      $$('[data-map-pin-key],[data-map-result-key]').forEach(node => node.classList.remove('active'));
+      syncIdeaMapPanelPresentation();
+    }
   }
   function setupBottomSheetGestures(){
     let drag = null;
@@ -9286,14 +9309,14 @@
         if(current.minimized && delta < -24){
           ideaMapPanelExpanded = true;
           ideaMapPanelTall = false;
-          updateIdeaMapPanel({scroll:true});
+          syncIdeaMapPanelPresentation();
         }else if(!current.minimized && !current.tall && !ideaMapDetailKey && delta < -42){
           ideaMapPanelExpanded = true;
           ideaMapPanelTall = true;
-          updateIdeaMapPanel();
+          syncIdeaMapPanelPresentation();
         }else if(current.tall && delta > 42){
           ideaMapPanelTall = false;
-          updateIdeaMapPanel();
+          syncIdeaMapPanelPresentation();
         }else if(!current.minimized && delta > 32){
           if(ideaMapDetailKey){
             ideaMapDetailKey = '';
@@ -9330,7 +9353,7 @@
       if(ideaMapPanelTall) ideaMapPanelTall = false;
       else ideaMapPanelExpanded = !ideaMapPanelExpanded;
       if(!ideaMapPanelExpanded) closeIdeaMapOverlay();
-      else updateIdeaMapPanel({scroll:true});
+      else syncIdeaMapPanelPresentation();
     });
     document.addEventListener('keydown', event => {
       if(!event.target.matches('.ideaMapPanelHead') || !['Enter',' '].includes(event.key)) return;
@@ -9338,7 +9361,7 @@
       if(ideaMapPanelTall) ideaMapPanelTall = false;
       else ideaMapPanelExpanded = !ideaMapPanelExpanded;
       if(!ideaMapPanelExpanded) closeIdeaMapOverlay();
-      else updateIdeaMapPanel({scroll:true});
+      else syncIdeaMapPanelPresentation();
     });
   }
   function destroyIdeaMapProvider(){
@@ -10069,7 +10092,8 @@
       if(event.target.closest('[data-map-panel-toggle]')){
         if(ideaMapPanelTall) ideaMapPanelTall = false;
         else ideaMapPanelExpanded = !ideaMapPanelExpanded;
-        updateIdeaMapPanel({scroll:ideaMapPanelExpanded});
+        if(!ideaMapPanelExpanded) closeIdeaMapOverlay();
+        else syncIdeaMapPanelPresentation();
         return;
       }
       if(event.target.closest('[data-map-clear-cluster]')){
