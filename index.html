@@ -9200,28 +9200,55 @@
     document.addEventListener('pointerdown', event => {
       if(!mobile() || event.button !== 0 || event.target.closest('button,a,input,select,textarea')) return;
       const handle = sheetHandle(event.target);
-      const sheet = handle?.closest('.ideaMapPanel,.ideaFilterSheet,.ideaSubmitSheet');
-      if(!handle || !sheet) return;
+      const mapSheet = event.target.closest('.ideaMapPanel');
+      const resultsSurface = event.target.closest('.ideaMapResults');
+      const canDragMapResults = Boolean(mapSheet && resultsSurface
+        && !mapSheet.classList.contains('isMinimized')
+        && !mapSheet.classList.contains('isTall')
+        && !mapSheet.classList.contains('isSingleDetail'));
+      const sheet = handle?.closest('.ideaMapPanel,.ideaFilterSheet,.ideaSubmitSheet') || (canDragMapResults ? mapSheet : null);
+      if(!sheet || (!handle && !canDragMapResults)) return;
       const isMap = sheet.classList.contains('ideaMapPanel');
       const minimized = isMap && sheet.classList.contains('isMinimized');
       const tall = isMap && sheet.classList.contains('isTall');
-      drag = {sheet, handle, pointerId:event.pointerId, startY:event.clientY, lastY:event.clientY, isMap, minimized, tall, moved:false};
-      sheet.classList.add('isDragging');
-      handle.setPointerCapture?.(event.pointerId);
+      drag = {
+        sheet,
+        handle:handle || resultsSurface,
+        pointerId:event.pointerId,
+        startX:event.clientX,
+        startY:event.clientY,
+        lastY:event.clientY,
+        isMap,
+        minimized,
+        tall,
+        fromResults:canDragMapResults && !handle,
+        axis:null,
+        moved:false
+      };
+      if(!drag.fromResults) sheet.classList.add('isDragging');
+      if(handle) handle.setPointerCapture?.(event.pointerId);
     });
     document.addEventListener('pointermove', event => {
       if(!drag || event.pointerId !== drag.pointerId) return;
+      const deltaX = event.clientX - drag.startX;
       const delta = event.clientY - drag.startY;
+      if(drag.fromResults && !drag.axis && Math.max(Math.abs(deltaX),Math.abs(delta)) > 7){
+        drag.axis = Math.abs(delta) > Math.abs(deltaX) ? 'vertical' : 'horizontal';
+        if(drag.axis === 'horizontal'){
+          resetDragStyle(drag.sheet);
+          drag = null;
+          return;
+        }
+        drag.sheet.classList.add('isDragging');
+        drag.handle.setPointerCapture?.(event.pointerId);
+      }
+      if(drag.fromResults && drag.axis !== 'vertical') return;
       drag.lastY = event.clientY;
       drag.moved ||= Math.abs(delta) > 5;
-      const offset = drag.isMap
-        ? (drag.minimized
-          ? Math.max(-110, Math.min(0, delta * .72))
-          : drag.tall
-            ? Math.max(0, delta * .82)
-            : Math.max(-150, delta * .82))
-        : Math.max(0, delta);
-      drag.sheet.style.setProperty('transform', `translate3d(0,${offset}px,0)`, 'important');
+      if(!drag.isMap){
+        const offset = Math.max(0, delta);
+        drag.sheet.style.setProperty('transform', `translate3d(0,${offset}px,0)`, 'important');
+      }
       if(drag.moved) event.preventDefault();
     }, {passive:false});
     const finishDrag = event => {
@@ -9267,6 +9294,11 @@
       resetDragStyle(drag.sheet);
       drag = null;
     });
+    document.addEventListener('click', event => {
+      if(performance.now() >= suppressSheetClickUntil || !event.target.closest('.ideaMapPanel')) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }, true);
     document.addEventListener('click', event => {
       const head = event.target.closest('.ideaMapPanelHead');
       if(!head || performance.now() < suppressSheetClickUntil) return;
