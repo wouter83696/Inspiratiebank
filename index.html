@@ -1826,7 +1826,7 @@
     .ideaMapPanel.isSingleDetail .sharedIdeaCard.hasImage .ideaMapDetailClose{
       border-color:rgba(61,126,136,.18);background:#fffdfa
     }
-    .ideaMapPanel.isSingleDetail .sharedIdeaCard:not(.hasImage) h3{padding-right:48px}
+    .ideaMapPanel.isSingleDetail .sharedIdeaCard:not(.hasImage) h3{padding-right:0}
     .ideaMapDetailClose:hover{background:#fffdfa;border-color:rgba(61,126,136,.24);box-shadow:0 4px 12px rgba(20,38,42,.09)}
     .ideaMapDetailToolbar svg{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaMapDetailClose svg{width:13px;height:13px}
@@ -2152,7 +2152,7 @@
       .ideaMapPanel.isSingleDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 7.4}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard h3 .ideaTitleText{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard > p:not(.fine){display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-      .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:12px;right:12px}
+      .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:5px;right:6px}
       .ideaMapCanvas .leaflet-top.leaflet-right{right:14px;left:auto}
     }
     @media (max-width:640px){#teamAdditions{margin-top:28px}#teamAdditions h2{font-size:1.35rem}}
@@ -4548,7 +4548,7 @@
     .ideaMapPanel:not(.isExpanded) .ideaMapResults{display:none!important}
     .ideaMapResult{flex:0 0 min(330px,31vw)!important;width:min(330px,31vw)!important;scroll-snap-align:start!important}
     .ideaMapPanel.isSingleDetail{max-height:min(58%,470px)}
-    .ideaMapPanel.isSingleDetail .ideaMapPanelHead{height:20px;padding:10px 16px 0!important}
+    .ideaMapPanel.isSingleDetail .ideaMapPanelHead{height:48px;padding:10px 16px 0!important}
     .ideaMapPanel.isSingleDetail .ideaMapPanelHeadRow{display:none!important}
     .ideaMapPanel.isSingleDetail .ideaMapPanelHead::before{margin:-3px auto 0}
     .ideaMapPanel.isSingleDetail .ideaMapResults{justify-content:center;overflow-y:auto!important}
@@ -4672,8 +4672,7 @@
       }
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose svg{width:14px;height:14px}
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose svg{position:relative;z-index:1}
-      .ideaMapPanel.isSingleDetail:has(.sharedIdeaCard.hasImage) .ideaMapPanelHead{height:28px}
-      .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:12px;right:12px}
+      .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:2px;right:8px}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 7.55}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard h3 .ideaTitleText{
         display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden
@@ -9221,7 +9220,7 @@
       ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailClose" type="button" data-map-detail-close aria-label="Detail sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button></div>'
       : '';
     const resultsHtml = singleDetail
-      ? `<div class="ideaMapSingleCard sharedIdeaCards" data-map-detail-key="${escapeHtml(detailPoint.key)}">${detailClose}${cardIdea(detailPoint.item, {mapDetailAction:'close'})}</div>`
+      ? `<div class="ideaMapSingleCard sharedIdeaCards" data-map-detail-key="${escapeHtml(detailPoint.key)}">${cardIdea(detailPoint.item, {mapDetailAction:'close'})}</div>`
       : listHtml;
     const sharedPlace = activeIdeaMapClusterKeys
       && visiblePoints.length
@@ -9243,7 +9242,7 @@
       : '<button class="ideaMapPanelClose" type="button" data-map-panel-close aria-label="Resultaten sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button>';
     const detailStageClass = singleDetail ? ` isDetail${['Preview','Half','Full'][ideaMapDetailStage] || 'Half'}` : '';
     return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${ideaMapPanelTall && !singleDetail ? ' isTall' : ''}${singleDetail ? ' isSingleDetail' : ''}${detailStageClass}${minimized ? ' isMinimized' : ''}" aria-label="Activiteiten op de kaart">
-      <div class="ideaMapPanelHead" role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"><div class="ideaMapPanelHeadRow"><div><h3>${visibleTitleHtml}</h3><p>${escapeHtml(visibleText)}</p></div>${panelClose}</div></div>
+      <div class="ideaMapPanelHead" role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"><div class="ideaMapPanelHeadRow"><div><h3>${visibleTitleHtml}</h3><p>${escapeHtml(visibleText)}</p></div>${panelClose}</div>${detailClose}</div>
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
   }
