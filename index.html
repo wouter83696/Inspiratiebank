@@ -410,6 +410,7 @@
     }
     @media(max-width:640px){.agendaSectionCount{display:inline-flex}}
     .agendaSectionSwitcher{margin:18px 0 12px;scroll-margin-top:96px}
+    .agendaContentSurface{display:contents}
     .agendaSectionSwitcher .agendaSectionTabs{width:100%;margin:0}
     .agendaSectionView[hidden]{display:none!important}
     .agendaSectionView:not([hidden]){animation:viewSurfaceEnter var(--motion-base) var(--motion-enter) both}
@@ -4808,6 +4809,22 @@
       #tab-weken > .agendaDesktopControls + .agendaSectionSwitcher{
         margin:8px 0 10px!important
       }
+      #tab-weken .agendaContentSurface{
+        display:block;margin-top:10px;border:1px solid rgba(64,45,20,.055);
+        border-radius:22px;background:#FFFEFC;box-shadow:0 12px 34px rgba(64,45,20,.04)
+      }
+      #tab-weken .agendaContentSurface > .agendaSectionSwitcher{
+        margin:0!important;padding:12px 16px 10px!important;
+        border-bottom:1px solid rgba(64,45,20,.055)
+      }
+      #tab-weken .agendaContentSurface .agendaSectionTabs{
+        background:rgba(247,241,231,.22);border-color:rgba(79,142,158,.07);box-shadow:none
+      }
+      #tab-weken .agendaContentSurface #weekPanels,
+      #tab-weken .agendaContentSurface #longerOffers{margin:0!important}
+      #tab-weken .agendaContentSurface #weekPanels .weekPanel{
+        border:0!important;border-radius:0 0 22px 22px!important;background:transparent!important;box-shadow:none!important
+      }
       #tab-weken .mobileDayNavigation{
         position:sticky!important;
         top:6px!important;
@@ -4829,6 +4846,18 @@
       #tab-weken #longerOffers{
         scroll-margin-top:12px!important
       }
+      #tab-weken .agendaContentSurface #longerOffers{
+        padding:0 16px 4px!important;background:transparent!important
+      }
+      #tab-weken .agendaContentSurface #longerOffers tbody{
+        display:block!important
+      }
+      #tab-weken .agendaContentSurface #longerOffers tbody tr{
+        display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:9px!important;
+        width:100%;padding:16px 0!important;border:0!important;border-bottom:1px solid rgba(64,45,20,.065)!important;
+        border-radius:0!important;background:transparent!important;box-shadow:none!important
+      }
+      #tab-weken .agendaContentSurface #longerOffers tbody tr:last-child{border-bottom:0!important}
       #tab-weken .agendaSectionTab{
         padding-right:7px!important;
         padding-left:7px!important
@@ -4973,17 +5002,19 @@
       <div class="inspirationDesktopFilterRow agendaLegendBar sharedDiscoveryChipRow">
         <div id="agendaThemeLegend"></div>
       </div>
-      <div id="agendaSectionSwitcher" class="agendaSectionSwitcher"></div>
       </div>
-      <div id="weekPanels" class="weekStack agendaSectionView" role="tabpanel" aria-labelledby="agenda-tab-weeks"></div>
-      <section id="longerOffers" class="ongoingAccordion sharedPublicList agendaSectionView open" role="tabpanel" aria-labelledby="agenda-tab-ongoing">
-        <div class="ongoingAccordionButton">
-          <span class="ongoingAccordionText"><span class="ongoingTitleLine"><strong>Doorlopend aanbod</strong><span id="flexibleOfferCount" class="weekCountBadge" data-flexible-offer-count><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>0</strong> activiteiten</span></span></span></span>
-        </div>
-        <div id="ongoingContent" class="ongoingAccordionBody">
-          <div id="flexibleOffersWrap" class="tableWrap"></div>
-        </div>
-      </section>
+      <div id="agendaContentSurface" class="agendaContentSurface">
+        <div id="agendaSectionSwitcher" class="agendaSectionSwitcher"></div>
+        <div id="weekPanels" class="weekStack agendaSectionView" role="tabpanel" aria-labelledby="agenda-tab-weeks"></div>
+        <section id="longerOffers" class="ongoingAccordion sharedPublicList agendaSectionView open" role="tabpanel" aria-labelledby="agenda-tab-ongoing">
+          <div class="ongoingAccordionButton">
+            <span class="ongoingAccordionText"><span class="ongoingTitleLine"><strong>Doorlopend aanbod</strong><span id="flexibleOfferCount" class="weekCountBadge" data-flexible-offer-count><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>0</strong> activiteiten</span></span></span></span>
+          </div>
+          <div id="ongoingContent" class="ongoingAccordionBody">
+            <div id="flexibleOffersWrap" class="tableWrap"></div>
+          </div>
+        </section>
+      </div>
     </section>
 
     <section id="tab-inspiratie" class="tabPanel active" role="tabpanel">
@@ -9826,9 +9857,10 @@
   function syncAgendaSwitcherPlacement(){
     const controls = $('#tab-weken > .agendaDesktopControls');
     const switcher = $('#agendaSectionSwitcher');
+    const surface = $('#agendaContentSurface');
     if(!controls || !switcher) return;
     if(window.matchMedia('(max-width:640px)').matches){
-      if(switcher.previousElementSibling !== controls) controls.after(switcher);
+      if(surface && switcher.parentElement !== surface) surface.prepend(switcher);
     }else if(switcher.parentElement !== controls){
       controls.appendChild(switcher);
     }
