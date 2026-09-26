@@ -9957,8 +9957,7 @@
       if(agendaSectionLink){
         event.preventDefault();
         const nextSection = agendaSectionLink.dataset.agendaSection;
-        const scrollToStart = nextSection === 'ongoing' && window.matchMedia('(max-width:640px)').matches;
-        setAgendaSection(nextSection, {scroll:scrollToStart});
+        setAgendaSection(nextSection, {scroll:false});
       }
       if(!event.target.closest('.customSelect')) closeCustomSelects();
       if(!event.target.closest('[data-report-menu]')) closeReportMenus();
