@@ -4517,6 +4517,7 @@
       .ideaMap.ideaView.active{position:fixed!important;z-index:20!important;inset:0!important;width:100vw!important;height:auto!important;min-height:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}
       .ideaMapToolbar{top:calc(14px + env(safe-area-inset-top));left:16px;width:min(334px,calc(100% - 70px));grid-template-columns:44px minmax(0,1fr);gap:10px}
       .ideaMapToolbarButton,.ideaMapToolbarView{width:44px;height:44px;border-radius:999px;padding:0}
+      .ideaMapToolbarButton[data-map-exit] svg{width:20px;height:20px;stroke-width:2.1}
       .ideaMapToolbarView span{display:none}
       .ideaMapToolbarSearch input{height:44px;border-radius:999px;font-size:.84rem}
       .ideaMapToolbarFilter{right:5px;width:36px;height:34px;border-radius:999px}
@@ -4571,8 +4572,11 @@
       .ideaMapPanel.isSingleDetail .ideaMapSingleCard > .card{
         border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:8px 0 0!important
       }
-      .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:4px;right:0}
-      .ideaMapPanel.isSingleDetail .ideaMapDetailClose{width:34px;height:34px;background:rgba(255,253,249,.94)}
+      .ideaMapPanel.isSingleDetail .ideaMapPanelHead{position:relative;height:48px;padding:10px 16px 0!important}
+      .ideaMapPanel.isSingleDetail .ideaMapPanelHead::before{margin:0 auto}
+      .ideaMapPanel.isSingleDetail .ideaMapPanelHead > .ideaMapDetailToolbar{top:8px;right:16px}
+      .ideaMapPanel.isSingleDetail .ideaMapDetailClose{width:36px;height:36px;background:rgba(255,253,249,.94)}
+      .ideaMapPanel.isSingleDetail .ideaMapDetailClose svg{width:14px;height:14px}
       .ideaMapPanel.isSingleDetail .ideaPracticalDetails[open]{padding-bottom:2px}
       .ideaFilterSheetHeader::before,.ideaSubmitSheetHeader::before{
         content:"";position:absolute;top:8px;left:50%;width:38px;height:4px;
@@ -8121,9 +8125,7 @@
     return IdeaViewShared.renderCard({
       themeClass:domainThemeClass(item.domain), hasImage:Boolean(image),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
-      toolbar:mapDetailAction === 'close'
-        ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailClose" type="button" data-map-detail-close aria-label="Tegel sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button></div>'
-        : '',
+      toolbar:'',
       image:image ? ideaImageMarkup(image, item.url, {eager:mapDetailAction === 'close'}) : '',
       title:cardTitle,
       pills:metadata.pills,
@@ -9066,8 +9068,11 @@
     const minimized = !ideaMapPanelExpanded && !singleDetail && !activeIdeaMapClusterKeys;
     const visibleTitle = minimized ? `${visiblePoints.length} activiteiten in dit gebied` : panelTitle;
     const visibleText = minimized ? 'Kies een marker of open de resultaten.' : panelText;
+    const detailClose = singleDetail
+      ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailClose" type="button" data-map-detail-close aria-label="Detail sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button></div>'
+      : '';
     return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${ideaMapPanelTall && !singleDetail ? ' isTall' : ''}${singleDetail ? ' isSingleDetail' : ''}${minimized ? ' isMinimized' : ''}" aria-label="Activiteiten op de kaart">
-      <div class="ideaMapPanelHead" role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"><div class="ideaMapPanelHeadRow"><div><h3>${escapeHtml(visibleTitle)}</h3><p>${escapeHtml(visibleText)}</p></div></div></div>
+      <div class="ideaMapPanelHead" role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"><div class="ideaMapPanelHeadRow"><div><h3>${escapeHtml(visibleTitle)}</h3><p>${escapeHtml(visibleText)}</p></div></div>${detailClose}</div>
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
   }
@@ -9301,7 +9306,7 @@
     }, true);
     document.addEventListener('click', event => {
       const head = event.target.closest('.ideaMapPanelHead');
-      if(!head || performance.now() < suppressSheetClickUntil) return;
+      if(!head || event.target.closest('button,a,input,select,textarea') || performance.now() < suppressSheetClickUntil) return;
       if(ideaMapPanelTall) ideaMapPanelTall = false;
       else ideaMapPanelExpanded = !ideaMapPanelExpanded;
       if(!ideaMapPanelExpanded) closeIdeaMapOverlay();
