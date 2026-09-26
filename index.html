@@ -4525,8 +4525,13 @@
       body.ideaMapMode .shell{max-width:none!important;height:100dvh!important;margin:0!important;padding:0!important}
       body.ideaMapMode .siteFooter,body.ideaMapMode .backToTop{display:none!important}
       body.ideaMapMode #tab-inspiratie{height:100%!important;margin:0!important;padding:0!important}
+      body.ideaMapMode .tabPanel:not(#tab-inspiratie),
+      body.ideaMapMode #tab-weken,
+      body.ideaMapMode #tab-weken .mobileDayNavigation{
+        display:none!important;visibility:hidden!important;pointer-events:none!important
+      }
       #tab-inspiratie.mapViewActive{margin-inline:0!important}
-      .ideaMap.ideaView.active{position:fixed!important;z-index:20!important;inset:0!important;width:100vw!important;height:auto!important;min-height:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+      .ideaMap.ideaView.active{position:fixed!important;z-index:500!important;inset:0!important;width:100vw!important;height:auto!important;min-height:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}
       .ideaMapToolbar{top:calc(14px + env(safe-area-inset-top));left:16px;width:min(334px,calc(100% - 70px));grid-template-columns:44px minmax(0,1fr);gap:10px}
       .ideaMapToolbarButton,.ideaMapToolbarView{width:44px;height:44px;border-radius:999px;padding:0}
       .ideaMapToolbarButton[data-map-exit] svg{width:20px;height:20px;stroke-width:2.1}
@@ -9653,6 +9658,9 @@
     $$('.tab').forEach(b=>{ const on=b.dataset.tab===name; b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
     syncTopTabIndicator();
     $$('.tabPanel').forEach(p=>p.classList.toggle('active',p.id === 'tab-'+name));
+    if(name !== 'weken'){
+      $$('#tab-weken .mobileDayNavigation,#tab-weken .agendaDesktopControls').forEach(element => element.classList.remove('isStuck'));
+    }
     document.body.classList.toggle('ideaMapMode', name === 'inspiratie' && $('#tab-inspiratie')?.classList.contains('mapViewActive'));
     $$('[data-sidebar-tab]').forEach(button => button.classList.toggle('active', button.dataset.sidebarTab === name));
     const topbarAddButton = $('#topbarAddButton');
@@ -9703,6 +9711,9 @@
     const mapOn = nextView === 'map';
     $('#tab-inspiratie')?.classList.toggle('mapViewActive', mapOn);
     document.body.classList.toggle('ideaMapMode', mapOn && $('#tab-inspiratie')?.classList.contains('active'));
+    if(mapOn){
+      $$('#tab-weken .mobileDayNavigation,#tab-weken .agendaDesktopControls').forEach(element => element.classList.remove('isStuck'));
+    }
     $$('[data-view-group="ideas"]').forEach(btn => {
       const active = btn.dataset.view === nextView;
       btn.classList.toggle('active', active);
