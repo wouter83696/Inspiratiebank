@@ -8279,12 +8279,6 @@
     if(!url) return '';
     return `<a class="ideaRouteButton" href="${escapeHtml(url)}" target="_blank" rel="noopener" aria-label="Route naar ${escapeHtml(item.title || 'deze activiteit')} openen in Google Maps"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l-5-5 5-5"></path><path d="M4 13h10a5 5 0 0 1 5 5v2"></path></svg><span>Route</span></a>`;
   }
-  function ideaMapPrimaryAction(item={}){
-    if(item.url) return `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">Bekijk activiteit</span></a>`;
-    const route = ideaRouteUrl(item);
-    return route ? `<a class="siteButton" href="${escapeHtml(route)}" target="_blank" rel="noopener"><span class="siteButtonText">Route bekijken</span></a>` : '';
-  }
-
   function cardIdea(item, {mapDetailAction=''}={}){
     const metadata = sharedIdeaMetadata(item, {map:mapDetailAction === 'close'});
     const image = approvedIdeaImage(item);
@@ -8302,7 +8296,7 @@
       pills:metadata.pills,
       meta:metadata.meta, description:escapeHtml(fitText), practical:escapeHtml(item.materials || ''),
       practicalOpen:mapDetailAction === 'close',
-      website:mapDetailAction === 'close' ? ideaMapPrimaryAction(item) : '',
+      website:'',
       actions:mapDetailAction === 'close'
         ? ''
         : reportMenu('inspiratiebank', ideaDomKey(item), item.title)
