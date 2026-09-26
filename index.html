@@ -4744,28 +4744,41 @@
         padding-top:6px!important
       }
       #tab-weken > .agendaDesktopControls{
+        position:relative!important;
+        top:auto!important;
+        z-index:auto!important;
         padding-bottom:3px!important
+      }
+      #tab-weken > .agendaDesktopControls.isStuck{
+        background:transparent!important;
+        box-shadow:none!important;
+        clip-path:none!important;
+        -webkit-backdrop-filter:none!important;
+        backdrop-filter:none!important
       }
       #tab-weken > .agendaDesktopControls + .agendaSectionSwitcher{
         margin:8px 0 10px!important
       }
       #tab-weken .mobileDayNavigation{
         position:sticky!important;
-        top:calc(var(--active-sticky-controls-height,148px) + 6px)!important;
+        top:6px!important;
         z-index:24!important;
         box-shadow:none!important
       }
       #tab-weken .mobileDayNavigation.isStuck{
-        box-shadow:0 0 0 8px var(--page-background)!important
+        box-shadow:0 0 0 100vmax rgba(248,245,235,.97),0 8px 20px rgba(20,38,42,.06)!important;
+        clip-path:inset(-8px -100vmax -12px)!important;
+        -webkit-backdrop-filter:blur(14px);
+        backdrop-filter:blur(14px)
       }
       #tab-weken #weekPanels .weekPanel{
         overflow:visible!important
       }
       #tab-weken .agendaDay{
-        scroll-margin-top:calc(var(--active-sticky-controls-height,148px) + 112px)!important
+        scroll-margin-top:112px!important
       }
       #tab-weken #longerOffers{
-        scroll-margin-top:calc(var(--active-sticky-controls-height,148px) + 12px)!important
+        scroll-margin-top:12px!important
       }
       #tab-weken .agendaSectionTab{
         padding-right:7px!important;
