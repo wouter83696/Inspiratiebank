@@ -4589,12 +4589,11 @@
       }
       .ideaMapPanel.isList .ideaMapPanelClose:hover{background:rgba(49,95,102,.06)!important;border:0!important;box-shadow:none!important}
       .ideaMapPanel.isSingleDetail .ideaMapPanelHead{
-        box-sizing:border-box!important;width:100%!important;height:30px!important;min-height:30px!important;
-        margin:0 2px 8px 0!important;padding:0!important;border:0!important;border-radius:0!important;
-        background:transparent!important;box-shadow:none!important;backdrop-filter:none!important
+        display:none!important
       }
       .ideaMapPanel.isSingleDetail .ideaMapPanelHeadRow{display:none!important}
-      .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:0!important;right:0!important}
+      .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:10px!important;right:10px!important}
+      .ideaMapPanel.isSingleDetail .sharedIdeaCard h3{padding-right:34px}
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder{
         box-sizing:border-box;height:auto;min-height:82px;max-height:none;
         grid-template-columns:38px minmax(0,1fr)!important;grid-template-rows:auto auto!important;
@@ -9327,7 +9326,7 @@
       ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailClose" type="button" data-map-detail-close aria-label="Detail sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button></div>'
       : '';
     const resultsHtml = singleDetail
-      ? `<div class="ideaMapSingleCard sharedIdeaCards" data-map-detail-key="${escapeHtml(detailPoint.key)}">${cardIdea(detailPoint.item, {mapDetailAction:'close'})}</div>`
+      ? `<div class="ideaMapSingleCard sharedIdeaCards" data-map-detail-key="${escapeHtml(detailPoint.key)}">${cardIdea(detailPoint.item, {mapDetailAction:'close'})}${detailClose}</div>`
       : listHtml;
     const sharedPlace = activeIdeaMapClusterKeys
       && visiblePoints.length
@@ -9349,7 +9348,7 @@
       : '<button class="ideaMapPanelClose" type="button" data-map-panel-close aria-label="Resultaten sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button>';
     const detailStageClass = singleDetail ? ` isDetail${['Preview','Half','Full'][ideaMapDetailStage] || 'Half'}` : '';
     return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${ideaMapPanelTall && !singleDetail ? ' isTall' : ''}${singleDetail ? ' isSingleDetail' : ''}${detailStageClass}${minimized ? ' isMinimized' : ''}" aria-label="Activiteiten op de kaart">
-      <div class="ideaMapPanelHead" role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"><div class="ideaMapPanelHeadRow"><div><h3>${visibleTitleHtml}</h3><p>${escapeHtml(visibleText)}</p></div>${panelClose}</div>${detailClose}</div>
+      <div class="ideaMapPanelHead" role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"><div class="ideaMapPanelHeadRow"><div><h3>${visibleTitleHtml}</h3><p>${escapeHtml(visibleText)}</p></div>${panelClose}</div></div>
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
   }
@@ -9799,12 +9798,21 @@
           }
           if(active && pan) map.panTo(marker.getLatLng(), {animate:true, duration:.35});
         });
-        if(!activeIdeaMapClusterKeys) activeClusterSignature = '';
+        if(!activeIdeaMapClusterKeys){
+          activeClusterSignature = '';
+          container.querySelectorAll('.marker-cluster.active,.ideaLeafletMarkerWrap.home.active,.ideaLeafletMarker.home.active').forEach(element => element.classList.remove('active'));
+          markerLayer.refreshClusters();
+        }
         window.requestAnimationFrame(syncActiveCluster);
       },
       setActiveCluster(keys=[]){
         activeClusterSignature = clusterSignature(keys);
-        container.querySelectorAll('.ideaLeafletMarker.home.active,.ideaLeafletMarkerWrap.home.active').forEach(element => element.classList.remove('active'));
+        markers.forEach(marker => {
+          const element = marker.getElement();
+          element?.classList.remove('active');
+          element?.querySelector('.ideaLeafletMarker')?.classList.remove('active');
+        });
+        container.querySelectorAll('.ideaLeafletMarker.active,.ideaLeafletMarkerWrap.active').forEach(element => element.classList.remove('active'));
         markerLayer.refreshClusters();
         window.requestAnimationFrame(syncActiveCluster);
       },
