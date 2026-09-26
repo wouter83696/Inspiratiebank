@@ -4590,12 +4590,12 @@
       .ideaMapPanel.isSingleDetail .ideaMapPanelHeadRow{display:none!important}
       .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:0!important;right:0!important}
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder{
-        box-sizing:border-box;height:auto;min-height:92px;max-height:none;
+        box-sizing:border-box;height:auto;min-height:82px;max-height:none;
         grid-template-columns:38px minmax(0,1fr)!important;grid-template-rows:auto auto!important;
-        align-items:start!important;column-gap:10px!important;row-gap:8px!important;padding:10px 12px!important
+        align-items:start!important;column-gap:10px!important;row-gap:5px!important;padding:10px 12px!important
       }
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultThumbWrap{
-        grid-column:1!important;grid-row:1!important;width:38px!important;height:38px!important;
+        grid-column:1!important;grid-row:1 / span 2!important;width:38px!important;height:38px!important;
         align-self:start!important;border:0!important;background:transparent!important;box-shadow:none!important
       }
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultMediaIcon{
@@ -4607,16 +4607,36 @@
         grid-column:2!important;grid-row:1!important;align-self:center!important
       }
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultBody{
-        grid-column:1 / -1!important;grid-row:2!important;min-width:0
+        grid-column:2!important;grid-row:2!important;min-width:0
       }
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultInfo{
-        width:100%;box-sizing:border-box
+        width:100%;box-sizing:border-box;padding:6px 8px
       }
       .ideaMapResult:hover,.ideaMapResult:focus-visible,
       .ideaMapSingleCard > .card:hover{transform:none!important}
       .ideaMapSingleCard .sharedIdeaCard.hasImage:hover .ideaImageFrame img,
       .ideaMapSingleCard .ideaImageFrame:hover img{
         transform:none!important;filter:saturate(.96) contrast(.98)!important
+      }
+    }
+
+    @media (min-width:641px) and (max-width:980px){
+      .ideaMapPanel.isList .ideaMapResult.hasPlaceholder{
+        grid-template-columns:38px minmax(0,1fr)!important;grid-template-rows:auto auto!important;
+        min-height:82px!important;column-gap:10px!important;row-gap:5px!important;padding:10px 12px!important
+      }
+      .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultThumbWrap{
+        grid-column:1!important;grid-row:1 / span 2!important;width:38px!important;height:38px!important;
+        border:0!important;background:transparent!important;box-shadow:none!important
+      }
+      .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultTitle{
+        grid-column:2!important;grid-row:1!important;align-self:center!important
+      }
+      .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultBody{
+        grid-column:2!important;grid-row:2!important;min-width:0
+      }
+      .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultInfo{
+        width:100%;box-sizing:border-box;padding:6px 8px
       }
     }
 
