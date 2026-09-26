@@ -8072,6 +8072,7 @@
       else button.removeAttribute('aria-current');
     });
     syncAgendaSectionIndicator($('#agendaSectionSwitcher .agendaSectionTabs'));
+    document.dispatchEvent(new CustomEvent('agenda:section-changed', {detail:{section:nextSection}}));
   }
 
   function ideaRow(item){
@@ -9925,8 +9926,14 @@
       }
       const dayNavigation = mobile.matches ? $('.mobileDayNavigation') : null;
       if(dayNavigation){
+        const dayNavigationVisible = dayNavigation.getClientRects().length > 0
+          && $('#tab-weken')?.classList.contains('active')
+          && $('#tab-weken')?.dataset.agendaSection !== 'ongoing';
         const dayTop = Number.parseFloat(getComputedStyle(dayNavigation).top) || 0;
-        dayNavigation.classList.toggle('isStuck', dayNavigation.getBoundingClientRect().top <= dayTop + 1);
+        dayNavigation.classList.toggle(
+          'isStuck',
+          dayNavigationVisible && dayNavigation.getBoundingClientRect().top <= dayTop + 1
+        );
       }
     };
     const schedule = () => {
@@ -9939,6 +9946,7 @@
       syncAgendaSwitcherPlacement();
       schedule();
     });
+    document.addEventListener('agenda:section-changed', schedule);
     const observer = new ResizeObserver(schedule);
     controlsList.forEach(controls => observer.observe(controls));
     update();
