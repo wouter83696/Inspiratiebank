@@ -4664,6 +4664,9 @@
       .ideaMapPanel.isSingleDetail.isDetailPreview{height:42dvh!important;max-height:42dvh!important}
       .ideaMapPanel.isSingleDetail.isDetailHalf{height:68dvh!important;max-height:68dvh!important}
       .ideaMapPanel.isSingleDetail.isDetailFull{height:calc(100dvh - 20px)!important;max-height:calc(100dvh - 20px)!important}
+      .ideaMapPanel.isSingleDetail:not(:has(.sharedIdeaCard.hasImage)):is(.isDetailPreview,.isDetailHalf){
+        height:auto!important;max-height:min(68dvh,590px)!important
+      }
       .ideaMapPanel.isTall:not(.isSingleDetail){
         height:min(68dvh,590px)!important;max-height:min(68dvh,590px)!important
       }
@@ -4686,6 +4689,9 @@
       .ideaMapPanel.isSingleDetail .ideaMapPanelHead::before{
         position:absolute;top:10px;left:50%;margin:0;transform:translateX(-50%)
       }
+      .ideaMapPanel.isSingleDetail:has(.sharedIdeaCard.hasImage) .ideaMapPanelHead{
+        height:32px
+      }
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose{
         position:relative;width:44px;height:44px;border:0;background:transparent;box-shadow:none
       }
@@ -4696,7 +4702,11 @@
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose:hover{border:0;background:transparent;box-shadow:none}
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose svg{position:relative;z-index:1;width:12px;height:12px}
       .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:2px;right:8px}
-      .ideaMapPanel.isSingleDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 7.55}
+      .ideaMapPanel.isSingleDetail:has(.sharedIdeaCard.hasImage) .ideaMapDetailToolbar{
+        top:34px
+      }
+      .ideaMapPanel.isSingleDetail .sharedIdeaCard{gap:8px!important}
+      .ideaMapPanel.isSingleDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 6.8}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard h3 .ideaTitleText{
         display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden
       }
