@@ -4544,7 +4544,7 @@
       .ideaMapToolbarFilter{right:5px;width:36px;height:34px;border-radius:999px}
       .ideaMapCanvas{min-height:100%!important;border-radius:0!important}
       .ideaMapCanvas .leaflet-top.leaflet-right{top:calc(61px + env(safe-area-inset-top))!important;right:10px!important}
-      .ideaMapPanel{right:0!important;bottom:0!important;left:0!important;height:min(34dvh,280px)!important;max-height:min(34dvh,280px)!important;border-right:0!important;border-left:0!important;border-radius:22px 22px 0 0!important;will-change:height,max-height}
+      .ideaMapPanel{right:0!important;bottom:0!important;left:0!important;height:auto!important;max-height:min(34dvh,280px)!important;border-right:0!important;border-left:0!important;border-radius:22px 22px 0 0!important;will-change:max-height}
       .ideaMapPanel.isMinimized{height:64px!important;max-height:64px!important;transform:none}
       .ideaMapPanel.isDragging{transition:none!important;touch-action:none}
       .ideaMapPanelHead{padding:17px 12px 10px!important;touch-action:none;cursor:grab}
@@ -4578,6 +4578,21 @@
       .ideaMapResult.hasThumb .ideaMapResultInfo::-webkit-scrollbar{display:none}
       .ideaMapResult.hasThumb .ideaMapResultPills{gap:5px;flex-wrap:nowrap}
       .ideaMapResult.hasThumb .ideaMapResultMeta{gap:7px;overflow:visible}
+      .ideaMapResult.hasPlaceholder{
+        grid-template-columns:38px minmax(0,1fr)!important;grid-template-rows:auto auto!important;
+        min-height:0!important;column-gap:9px!important;row-gap:7px!important
+      }
+      .ideaMapResult.hasPlaceholder .ideaMapResultThumbWrap{
+        grid-column:1!important;grid-row:1!important;width:38px!important;height:38px!important;
+        align-self:start!important;border:0!important;background:transparent!important
+      }
+      .ideaMapResult.hasPlaceholder .ideaMapResultMediaIcon{
+        width:36px!important;height:36px!important;background:var(--theme-icon-bg)!important;
+        border-color:var(--theme-icon-line)!important
+      }
+      .ideaMapResult.hasPlaceholder .ideaMapResultMediaIcon svg{width:16px;height:16px}
+      .ideaMapResult.hasPlaceholder .ideaMapResultTitle{grid-column:2!important;grid-row:1!important;align-self:center!important}
+      .ideaMapResult.hasPlaceholder .ideaMapResultBody{grid-column:1 / -1!important;grid-row:2!important;min-width:0}
       .ideaMapPanel.isSingleDetail{height:auto!important;max-height:min(68dvh,590px)!important}
       .ideaMapPanel.isTall:not(.isSingleDetail){
         height:min(68dvh,590px)!important;max-height:min(68dvh,590px)!important
