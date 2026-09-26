@@ -2096,7 +2096,7 @@
       .ideaMapPanel.isSingleDetail{width:min(320px,calc(100% - 96px))}
       .ideaMapPanelHead,.ideaMapResults{pointer-events:auto}
       .ideaMapPanelHead{
-        display:block;margin:0 2px 10px 0;padding:9px 9px 9px 13px;
+        display:block;box-sizing:border-box;min-height:44px;margin:0 2px 10px 0;padding:6px 8px 6px 12px;
         border:1px solid rgba(79,142,158,.10);border-radius:14px;
         background:rgba(255,253,249,.94);box-shadow:0 8px 22px rgba(20,38,42,.08);
         backdrop-filter:blur(12px)
@@ -2107,11 +2107,12 @@
       .ideaMapPanelHead h3,.ideaMapPanelHead p{
         width:auto;max-width:100%;padding:0;background:transparent;box-shadow:none;backdrop-filter:none
       }
-      .ideaMapPanelHead h3{font-size:.9rem}
+      .ideaMapPanelHead h3{color:#6d807f;font-size:.78rem;font-weight:450;line-height:1.2}
+      .ideaMapPanelHead h3 .ideaMapPanelCount{color:var(--accent-dark);font-size:.9rem;font-weight:700}
       .ideaMapPanelHead p{display:none}
       .ideaMapPanelClose{
-        display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;padding:0;
-        border:1px solid rgba(79,142,158,.11);border-radius:999px;background:#fff;color:var(--accent-dark);cursor:pointer
+        display:grid;place-items:center;flex:0 0 28px;width:28px;height:28px;padding:0;
+        border:1px solid rgba(79,142,158,.09);border-radius:999px;background:rgba(255,255,255,.66);color:#597778;cursor:pointer
       }
       .ideaMapPanelClose:hover{background:rgba(168,225,221,.16);border-color:rgba(79,142,158,.20)}
       .ideaMapPanelClose svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
@@ -2123,7 +2124,8 @@
       .ideaMapPanel.isSingleDetail .ideaMapResults{align-items:stretch;overflow:hidden;scroll-snap-type:none}
       .ideaMapResults::-webkit-scrollbar{display:none}
       .ideaMapResult{width:100%;scroll-snap-align:start}
-      .ideaMapResult.hasThumb .ideaMapResultThumbWrap{grid-column:1;grid-row:1 / span 2}
+      .ideaMapResult.hasThumb{grid-template-columns:58px minmax(0,1fr)}
+      .ideaMapResult.hasThumb .ideaMapResultThumbWrap{grid-column:1;grid-row:1 / span 2;height:64px}
       .ideaMapResult.hasThumb .ideaMapResultTitle{grid-column:2;grid-row:1;align-self:end}
       .ideaMapResult.hasThumb .ideaMapResultBody{grid-column:2;grid-row:2;align-self:start;margin-top:4px}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 7.4}
@@ -9185,6 +9187,7 @@
       : (userLocation?.isDefault ? 'Standaard rond Nijmegen.' : `Afstand vanaf ${locationDisplayText()}.`);
     const minimized = !ideaMapPanelExpanded && !singleDetail && !activeIdeaMapClusterKeys;
     const visibleTitle = minimized ? `${visiblePoints.length} activiteiten in dit gebied` : panelTitle;
+    const visibleTitleHtml = escapeHtml(visibleTitle).replace(/^(\d+)/, '<strong class="ideaMapPanelCount">$1</strong>');
     const visibleText = minimized ? 'Kies een marker of open de resultaten.' : panelText;
     const detailClose = singleDetail
       ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailClose" type="button" data-map-detail-close aria-label="Detail sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button></div>'
@@ -9193,7 +9196,7 @@
       ? ''
       : '<button class="ideaMapPanelClose" type="button" data-map-panel-close aria-label="Resultaten sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button>';
     return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${ideaMapPanelTall && !singleDetail ? ' isTall' : ''}${singleDetail ? ' isSingleDetail' : ''}${minimized ? ' isMinimized' : ''}" aria-label="Activiteiten op de kaart">
-      <div class="ideaMapPanelHead" role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"><div class="ideaMapPanelHeadRow"><div><h3>${escapeHtml(visibleTitle)}</h3><p>${escapeHtml(visibleText)}</p></div>${panelClose}</div>${detailClose}</div>
+      <div class="ideaMapPanelHead" role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"><div class="ideaMapPanelHeadRow"><div><h3>${visibleTitleHtml}</h3><p>${escapeHtml(visibleText)}</p></div>${panelClose}</div>${detailClose}</div>
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
   }
