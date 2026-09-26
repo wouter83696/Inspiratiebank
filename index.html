@@ -8452,6 +8452,7 @@
     renderFlexibleOffers();
     updateAgendaThemeChips();
     syncAgendaFilterSheet();
+    document.dispatchEvent(new CustomEvent('agenda:rendered'));
   }
   let ideaSearchSuggestionIndex = -1;
   function closeIdeaSearchSuggestions(){
@@ -9788,10 +9789,49 @@
     controlsList.forEach(controls => observer.observe(controls));
     update();
   }
+  function setActiveMobileAgendaDay(key){
+    if(!key || selectedAgendaDayKey === key) return;
+    selectedAgendaDayKey = key;
+    document.querySelectorAll('[data-agenda-day-target]').forEach(button => {
+      const active = button.dataset.agendaDayTarget === key;
+      button.classList.toggle('active', active);
+      if(active) button.setAttribute('aria-current', 'date');
+      else button.removeAttribute('aria-current');
+    });
+  }
+  function setupMobileAgendaDaySync(){
+    let pending = false;
+    const update = () => {
+      pending = false;
+      if(!window.matchMedia('(max-width:640px)').matches) return;
+      const agendaPanel = $('#tab-weken');
+      if(!agendaPanel?.classList.contains('active') || agendaPanel.dataset.agendaSection === 'ongoing') return;
+      const navigation = $('.mobileDayNavigation');
+      const days = [...document.querySelectorAll('#weekPanels .weekPanel.active .agendaDay')];
+      if(!navigation || !days.length) return;
+      const activationLine = navigation.getBoundingClientRect().bottom + 14;
+      let current = days[0];
+      for(const day of days){
+        if(day.getBoundingClientRect().top <= activationLine) current = day;
+        else break;
+      }
+      setActiveMobileAgendaDay(current.dataset.agendaDay);
+    };
+    const schedule = () => {
+      if(pending) return;
+      pending = true;
+      requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', schedule, {passive:true});
+    window.addEventListener('resize', schedule, {passive:true});
+    document.addEventListener('agenda:rendered', schedule);
+    update();
+  }
   async function init(){
         const agendaSourceSheet = $('#agendaSourceSheetLayer');
         if(agendaSourceSheet && agendaSourceSheet.parentElement !== document.body) document.body.appendChild(agendaSourceSheet);
         setupStickyControlsBackground();
+	    setupMobileAgendaDaySync();
 	    setupTopTabNavigation();
 	    setupDesktopSidebar();
 	    setupIdeaFilterSheet();
@@ -10150,19 +10190,17 @@
     document.addEventListener('click', event => {
       const dayTarget = event.target.closest('[data-agenda-day-target]');
       if(dayTarget){
-        selectedAgendaDayKey = dayTarget.dataset.agendaDayTarget;
-        document.querySelectorAll('[data-agenda-day-target]').forEach(button => {
-          const active = button.dataset.agendaDayTarget === selectedAgendaDayKey;
-          button.classList.toggle('active', active);
-          if(active) button.setAttribute('aria-current', 'date');
-          else button.removeAttribute('aria-current');
-        });
+        setActiveMobileAgendaDay(dayTarget.dataset.agendaDayTarget);
         const day = [...document.querySelectorAll('[data-agenda-day]')]
           .find(candidate => candidate.dataset.agendaDay === dayTarget.dataset.agendaDayTarget);
         if(day){
           event.preventDefault();
           const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-          day.scrollIntoView({behavior,block:'start'});
+          const navigation = $('.mobileDayNavigation');
+          const stickyTop = navigation ? (Number.parseFloat(getComputedStyle(navigation).top) || 0) : 0;
+          const stickyOffset = stickyTop + (navigation?.offsetHeight || 0) + 12;
+          const targetTop = Math.max(0, window.scrollY + day.getBoundingClientRect().top - stickyOffset);
+          window.scrollTo({top:targetTop,behavior});
           day.focus({preventScroll:true});
         }
         return;
