@@ -4664,14 +4664,10 @@
         position:absolute;top:10px;left:50%;margin:0;transform:translateX(-50%)
       }
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose{
-        position:relative;width:44px;height:44px;border:0;background:transparent
-      }
-      .ideaMapPanel.isSingleDetail .ideaMapDetailClose::before{
-        content:"";position:absolute;inset:5px;border:1px solid rgba(61,126,136,.16);border-radius:999px;
-        background:rgba(255,253,249,.96);box-shadow:0 3px 10px rgba(20,38,42,.07)
+        position:relative;width:44px;height:44px;border:1px solid rgba(61,126,136,.16);
+        background:rgba(255,253,249,.98);box-shadow:0 3px 10px rgba(20,38,42,.07)
       }
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose svg{width:14px;height:14px}
-      .ideaMapPanel.isSingleDetail .ideaMapDetailClose svg{position:relative;z-index:1}
       .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:2px;right:8px}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 7.55}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard h3 .ideaTitleText{
@@ -6579,10 +6575,18 @@
   }
   function sharedIdeaMetadata(item={}, {point=null, map=false}={}){
     const locationLabel = point?.home ? 'Thuis' : normalizeIdeaLocation(item.locationType);
-    const distanceLabel = map && point?.source === 'user' && point?.home ? '' : personalDistanceLabel(item);
-    const placePills = compactPlacePills(locationLabel, distanceLabel)
-      .filter(label => normalize(label) !== 'op pad')
-      .map((label, index) => locationPill(label, index === 0 ? {routeUrl:ideaRouteUrl(item), routeLabel:item.title} : {}))
+    const routeUrl = map ? ideaRouteUrl(item) : '';
+    const measuredKm = map && routeUrl ? itemDistanceKm(item) : NaN;
+    const distanceLabel = map && point?.source === 'user' && point?.home
+      ? ''
+      : Number.isFinite(measuredKm)
+        ? (measuredKm < .8 ? '1 km' : `${Math.round(measuredKm)} km`)
+        : personalDistanceLabel(item);
+    const labels = compactPlacePills(locationLabel, distanceLabel)
+      .filter(label => normalize(label) !== 'op pad');
+    const routeLabelIndex = labels.findIndex(label => /\bkm\b/i.test(label));
+    const placePills = labels
+      .map((label, index) => locationPill(label, index === routeLabelIndex ? {routeUrl, routeLabel:item.title} : {}))
       .join(' ');
     return {
       pills:`${placePills} ${costPill(normalizeIdeaCost(item.cost))} ${stimulusPill(normalizeIdeaStimulus(item.stimulus))}`.trim(),
