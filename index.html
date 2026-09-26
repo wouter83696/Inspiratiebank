@@ -4569,15 +4569,18 @@
     @media (min-width:981px){
       .ideaMapToolbar{display:none!important}
       .ideaMapPanel.isList .ideaMapPanelHead{
-        min-height:38px!important;margin:0 2px 10px 0!important;padding:0!important;
+        min-height:38px!important;margin:0 2px 12px 0!important;padding:0!important;
         border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important
       }
-      .ideaMapPanel.isList .ideaMapPanelHeadRow{gap:10px!important}
+      .ideaMapPanel.isList .ideaMapPanelHeadRow{
+        width:max-content!important;max-width:100%!important;justify-content:flex-start!important;gap:8px!important
+      }
       .ideaMapPanel.isList .ideaMapPanelHeadRow > div:first-child{
         display:flex!important;flex:0 0 auto!important;align-items:center!important;box-sizing:border-box!important;
-        width:max-content!important;max-width:calc(100% - 48px)!important;height:38px!important;padding:0 13px!important;
-        border:1px solid rgba(255,255,255,.88)!important;border-radius:999px!important;
-        background:rgba(255,253,249,.96)!important;box-shadow:0 5px 16px rgba(20,38,42,.075)!important
+        width:max-content!important;max-width:calc(100% - 38px)!important;height:38px!important;padding:0 13px!important;
+        border:1px solid rgba(255,255,255,.92)!important;border-radius:999px!important;
+        background:rgba(255,253,249,.985)!important;box-shadow:0 8px 20px rgba(20,38,42,.06)!important;
+        backdrop-filter:blur(12px)
       }
       .ideaMapResult:hover,.ideaMapResult:focus-visible,
       .ideaMapSingleCard > .card:hover{transform:none!important}
