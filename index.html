@@ -509,6 +509,16 @@
     .ongoingAccordion th:nth-child(2),.ongoingWeeksCell{white-space:nowrap}
     .ongoingTitleCell .nameWithIcon{align-items:center}
     .ongoingTitleCell .nameWithIcon .domainIcon{margin-top:0}
+    .ongoingTitleLink{display:block}
+    .ongoingTitleVisual{
+      position:relative;display:grid;place-items:center;flex:0 0 64px;width:64px;height:64px;
+      border:1px solid var(--theme-line);border-radius:11px;background:transparent;box-shadow:none
+    }
+    .ongoingTitleVisual .domainIcon{
+      width:32px!important;height:32px!important;min-width:32px!important;margin:0!important;
+      background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink)
+    }
+    .ongoingTitleVisual .domainIcon svg{width:14px;height:14px}
     .ongoingAccordion table{min-width:760px;table-layout:fixed}
     .ongoingAccordion th:nth-child(1),.ongoingAccordion td:nth-child(1){width:27%}
     .ongoingAccordion th:nth-child(2),.ongoingAccordion td:nth-child(2){width:7%}
@@ -4501,9 +4511,10 @@
         background:transparent!important;white-space:normal!important;
       }
       #longerOffers .ongoingTitleCell .nameWithIcon{
-        display:grid;grid-template-columns:30px minmax(0,1fr);gap:9px;align-items:center;
+        display:grid;grid-template-columns:56px minmax(0,1fr);gap:10px;align-items:center;
       }
-      #longerOffers .ongoingTitleCell .small{display:block;margin:7px 0 0 39px;font-size:.76rem;line-height:1.35}
+      #longerOffers .ongoingTitleVisual{width:56px;height:56px;min-width:56px}
+      #longerOffers .ongoingTitleCell .small{display:block;margin:7px 0 0 66px;font-size:.76rem;line-height:1.35}
       #longerOffers .ongoingWeeksCell{display:none!important}
       #longerOffers .ongoingMobileWeekPill{
         display:inline-flex;align-items:center;gap:4px;flex:0 0 auto;
@@ -4515,7 +4526,7 @@
         content:"";width:1px;height:15px;margin:0 2px 0 4px;background:rgba(79,142,158,.13)
       }
       #longerOffers .ongoingBadgesCell .cardPillGroup{
-        width:max-content!important;max-width:calc(100% - 39px)!important;margin-left:39px!important;
+        width:max-content!important;max-width:calc(100% - 66px)!important;margin-left:66px!important;
         gap:7px!important;overflow-x:auto!important;
       }
       #longerOffers .ongoingFitCell{padding-top:4px!important}
@@ -4989,11 +5000,9 @@
         box-shadow:0 14px 30px rgba(92,65,33,.065)!important
       }
       #ideaList.sharedIdeaList .ideaThemeRow:hover td{
-        background:linear-gradient(
-          color-mix(in srgb,var(--theme-tint-strong) 58%,transparent),
-          color-mix(in srgb,var(--theme-tint-strong) 58%,transparent)
-        ),rgba(255,255,255,.97)
+        background:#fffaf4!important
       }
+      #ideaList.sharedIdeaList .ideaThemeRow:focus-within td{background:#fffaf4!important}
       #ideaList.sharedIdeaList .ideaThemeRow .ideaTitleText{transition:color .16s ease}
       #ideaList.sharedIdeaList .ideaThemeRow:hover .ideaTitleText{color:#168697}
       .ideaMapPanel.isList:not(.isSingleDetail) .ideaMapResult:hover,
@@ -8229,7 +8238,7 @@
       : '';
     const costLabel = normalizeIdeaCost(item.cost);
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
-    const title = titleWithIcon(item.title, item.domain, 'nameWithIcon');
+    const title = `<span class="nameWithIcon"><span class="ongoingTitleVisual" aria-hidden="true"><span class="domainIcon">${domainIcon(item.domain)}</span></span><span class="ideaTitleText">${escapeHtml(item.title)}</span></span>`;
     const linkedTitle = item.url
       ? `<a class="ongoingTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${title}</a>`
       : title;
