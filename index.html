@@ -1797,7 +1797,8 @@
     .ideaMapSingleCard > .card:hover{transform:none}
     #ideaMap.suppressResultHover .ideaMapSingleCard > .sharedIdeaCard:hover{box-shadow:0 9px 24px rgba(92,65,33,.045)}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard{gap:5px}
-    .ideaMapPanel.isSingleDetail .sharedIdeaCard h3 + .cardMetaBlock{margin-top:2px}
+    .ideaMapPanel.isSingleDetail .sharedIdeaCard h3{line-height:1.18}
+    .ideaMapPanel.isSingleDetail .sharedIdeaCard h3 + .cardMetaBlock{margin-top:-2px}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard > p:not(.fine){margin-top:5px}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock{
       display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:max-content;
@@ -2766,6 +2767,12 @@
       font-size:1rem;
       line-height:1.24;
     }
+    .sharedIdeaCard h3 .ideaTitleText{
+      display:-webkit-box;
+      -webkit-box-orient:vertical;
+      -webkit-line-clamp:2;
+      overflow:hidden;
+    }
     .sharedIdeaCard .ideaTitleLink{
       display:flex;
       align-items:center;
@@ -3137,7 +3144,9 @@
     }
     @media (min-width:981px){
       #ideaCards.cards{gap:16px;align-items:stretch}
-      #ideaCards .sharedIdeaCard.hasImage h3{margin-top:6px}
+      #ideaCards .sharedIdeaCard.hasImage h3{margin-top:2px}
+      #ideaCards .sharedIdeaCard h3{line-height:1.18}
+      #ideaCards .sharedIdeaCard h3 + .cardMetaBlock{margin-top:-4px}
       #ideaCards .sharedIdeaCard.hasImage .cardMetaBlock{
         width:fit-content;
         max-width:100%;
@@ -4360,9 +4369,10 @@
       }
       .sharedIdeaCard h3{
         width:100%;min-width:0;margin:0!important;
-        font-size:1rem!important;line-height:1.24!important;
+        font-size:1rem!important;line-height:1.2!important;
       }
-      .sharedIdeaCard.hasImage h3{margin-top:8px!important}
+      .sharedIdeaCard.hasImage h3{margin-top:6px!important}
+      .sharedIdeaCard h3 + .cardMetaBlock{margin-top:-2px!important}
       .sharedIdeaCard h3 .ideaTitleText{overflow-wrap:anywhere;word-break:normal}
       .sharedIdeaCard .cardMetaBlock,
       .sharedIdeaCard .sharedMetaBlock{
@@ -4847,7 +4857,7 @@
       .ideaMapPanel.isSingleDetail .sharedIdeaCard h3{padding-right:44px}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 6.8}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard h3 .ideaTitleText{
-        display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden
+        display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden
       }
       .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock{
         border-color:rgba(112,94,63,.025);background:rgba(255,253,249,.28)
