@@ -1865,7 +1865,7 @@
     }
     .ideaMapResultThumbWrap.isPlaceholder::before{display:none}
     .ideaMapResultMediaIcon{
-      position:absolute;z-index:2;right:-5px;bottom:-5px;display:grid;place-items:center;
+      position:absolute;z-index:2;right:-5px;bottom:10px;display:grid;place-items:center;
       width:27px;height:27px;border:1px solid var(--theme-icon-line);border-radius:50%;
       background:var(--theme-icon-bg);color:var(--theme-ink);box-shadow:0 4px 10px rgba(20,38,42,.10)
     }
@@ -4615,22 +4615,23 @@
       .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:10px!important;right:10px!important}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard h3{padding-right:34px}
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder{
-        box-sizing:border-box;height:auto;min-height:82px;max-height:none;
-        grid-template-columns:38px minmax(0,1fr)!important;grid-template-rows:auto auto!important;
-        align-items:start!important;column-gap:10px!important;row-gap:5px!important;padding:10px 12px!important
+        box-sizing:border-box;height:auto;min-height:88px;max-height:none;
+        grid-template-columns:72px minmax(0,1fr)!important;grid-template-rows:34px 34px!important;
+        align-items:start!important;column-gap:10px!important;row-gap:4px!important;padding:8px!important
       }
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultThumbWrap{
-        grid-column:1!important;grid-row:1 / span 2!important;width:38px!important;height:38px!important;
-        align-self:start!important;border:0!important;background:transparent!important;box-shadow:none!important
+        grid-column:1!important;grid-row:1 / span 2!important;width:72px!important;height:72px!important;
+        align-self:start!important;border:1px solid var(--theme-line)!important;
+        background:var(--theme-icon-bg)!important;box-shadow:none!important
       }
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultMediaIcon{
         position:static!important;width:36px!important;height:36px!important;
-        border-color:var(--theme-icon-line)!important;background:var(--theme-icon-bg)!important;box-shadow:none!important
+        border-color:var(--theme-icon-line)!important;background:rgba(255,253,249,.58)!important;box-shadow:none!important
       }
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultMediaIcon svg{width:16px;height:16px}
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultTitle{
         grid-column:2!important;grid-row:1!important;align-self:center!important;
-        position:relative!important;left:-2px!important;top:3px!important
+        position:relative!important;left:0!important;top:0!important
       }
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultBody{
         grid-column:2!important;grid-row:2!important;min-width:0
@@ -4655,12 +4656,12 @@
         grid-column:1!important;grid-row:1 / span 2!important;width:72px!important;height:72px!important
       }
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder{
-        grid-template-columns:38px minmax(0,1fr)!important;grid-template-rows:auto auto!important;
-        min-height:82px!important;column-gap:10px!important;row-gap:5px!important;padding:10px 12px!important
+        grid-template-columns:72px minmax(0,1fr)!important;grid-template-rows:34px 34px!important;
+        min-height:88px!important;column-gap:10px!important;row-gap:4px!important;padding:8px!important
       }
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultThumbWrap{
-        grid-column:1!important;grid-row:1 / span 2!important;width:38px!important;height:38px!important;
-        border:0!important;background:transparent!important;box-shadow:none!important
+        grid-column:1!important;grid-row:1 / span 2!important;width:72px!important;height:72px!important;
+        border:1px solid var(--theme-line)!important;background:var(--theme-icon-bg)!important;box-shadow:none!important
       }
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultTitle{
         grid-column:2!important;grid-row:1!important;align-self:center!important;
@@ -4733,20 +4734,20 @@
       .ideaMapResult.hasThumb .ideaMapResultPills{gap:5px;flex-wrap:nowrap}
       .ideaMapResult.hasThumb .ideaMapResultMeta{gap:7px;overflow:visible}
       .ideaMapResult.hasPlaceholder{
-        grid-template-columns:38px minmax(0,1fr)!important;grid-template-rows:auto auto!important;
-        min-height:0!important;column-gap:9px!important;row-gap:7px!important
+        grid-template-columns:92px minmax(0,1fr)!important;grid-template-rows:auto auto!important;
+        min-height:0!important;column-gap:10px!important;row-gap:5px!important;padding:8px!important
       }
       .ideaMapResult.hasPlaceholder .ideaMapResultThumbWrap{
-        grid-column:1!important;grid-row:1!important;width:38px!important;height:38px!important;
-        align-self:start!important;border:0!important;background:transparent!important
+        grid-column:1!important;grid-row:1 / span 2!important;width:100%!important;height:82px!important;
+        align-self:start!important;border:1px solid var(--theme-line)!important;background:var(--theme-icon-bg)!important
       }
       .ideaMapResult.hasPlaceholder .ideaMapResultMediaIcon{
-        width:36px!important;height:36px!important;background:var(--theme-icon-bg)!important;
+        position:static!important;width:36px!important;height:36px!important;background:rgba(255,253,249,.58)!important;
         border-color:var(--theme-icon-line)!important
       }
       .ideaMapResult.hasPlaceholder .ideaMapResultMediaIcon svg{width:16px;height:16px}
-      .ideaMapResult.hasPlaceholder .ideaMapResultTitle{grid-column:2!important;grid-row:1!important;align-self:center!important}
-      .ideaMapResult.hasPlaceholder .ideaMapResultBody{grid-column:1 / -1!important;grid-row:2!important;min-width:0}
+      .ideaMapResult.hasPlaceholder .ideaMapResultTitle{grid-column:2!important;grid-row:1!important;align-self:start!important;padding-top:1px}
+      .ideaMapResult.hasPlaceholder .ideaMapResultBody{grid-column:2!important;grid-row:2!important;align-self:end!important;min-width:0}
       .ideaMapPanel.isSingleDetail{height:auto!important;max-height:min(68dvh,590px)!important}
       .ideaMapPanel.isTall:not(.isSingleDetail){
         height:min(68dvh,590px)!important;max-height:min(68dvh,590px)!important
