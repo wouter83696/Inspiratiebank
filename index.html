@@ -2713,12 +2713,15 @@
     #ideaCards .sharedIdeaCard.hasImage h3 .domainIcon{display:none}
     #ideaCards .sharedIdeaCard.hasImage h3{padding-left:0}
     #ideaCards .sharedIdeaCard.hasImage .ideaImageFrame{overflow:visible}
-    #ideaCards .sharedIdeaCard .ideaImagePlaceholder{
+    #ideaCards .sharedIdeaCard .ideaImagePlaceholder,
+    .ideaMapResultThumbWrap.isPlaceholder{
       display:grid;place-items:center;background:transparent;
       border:1px solid var(--theme-line);box-shadow:none
     }
-    #ideaCards .sharedIdeaCard .ideaImagePlaceholder .ideaImageDomainBadge{
-      position:static;width:34px;height:34px;background:var(--theme-icon-bg)
+    #ideaCards .sharedIdeaCard .ideaImagePlaceholder .ideaImageDomainBadge,
+    .ideaMapResultThumbWrap.isPlaceholder .ideaMapResultMediaIcon{
+      position:static;width:34px;height:34px;border-color:var(--theme-icon-line);
+      background:var(--theme-icon-bg);color:var(--theme-ink);box-shadow:none
     }
     #ideaCards .sharedIdeaCard .ideaImageDomainBadge{
       position:absolute;
@@ -4788,8 +4791,8 @@
         align-self:start!important;border:1px solid var(--theme-line)!important;background:transparent!important
       }
       .ideaMapResult.hasPlaceholder .ideaMapResultMediaIcon{
-        position:static!important;width:36px!important;height:36px!important;background:rgba(255,253,249,.58)!important;
-        border-color:var(--theme-icon-line)!important
+        position:static!important;width:36px!important;height:36px!important;background:var(--theme-icon-bg)!important;
+        border-color:var(--theme-icon-line)!important;color:var(--theme-ink)!important
       }
       .ideaMapResult.hasPlaceholder .ideaMapResultMediaIcon svg{width:16px;height:16px}
       .ideaMapResult.hasPlaceholder .ideaMapResultTitle{grid-column:2!important;grid-row:1!important;align-self:start!important;padding-top:1px}
