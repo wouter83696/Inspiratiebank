@@ -1799,7 +1799,7 @@
     .ideaMapPanel.isSingleDetail .sharedIdeaCard{gap:5px}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard h3{line-height:1.18}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard h3 + .cardMetaBlock{margin-top:-2px}
-    .ideaMapPanel.isSingleDetail .sharedIdeaCard > p:not(.fine){margin-top:5px}
+    .ideaMapPanel.isSingleDetail .sharedIdeaCard > p:not(.fine){margin-top:1px}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock{
       display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:max-content;
       align-items:center;column-gap:9px;width:max-content;max-width:100%;padding:7px 9px;
@@ -2716,6 +2716,10 @@
     .sharedIdeaCard.hasImage h3 .domainIcon{display:none}
     .sharedIdeaCard.hasImage h3{padding-left:0}
     .sharedIdeaCard.hasPhoto h3{padding-left:44px}
+    .sharedIdeaCard.hasPhoto h3 + .cardMetaBlock{
+      margin-left:44px;
+      max-width:calc(100% - 44px);
+    }
     .sharedIdeaCard.hasImage .ideaImageFrame{overflow:visible}
     .sharedIdeaCard .ideaImagePlaceholder,
     .ideaMapResultThumbWrap.isPlaceholder{
@@ -3150,9 +3154,10 @@
       #ideaCards .sharedIdeaCard h3 + .cardMetaBlock{margin-top:-4px}
       #ideaCards .sharedIdeaCard.hasImage .cardMetaBlock{
         width:fit-content;
-        max-width:100%;
-        margin-left:0;
+        max-width:calc(100% - 44px);
+        margin-left:44px;
       }
+      #ideaCards .sharedIdeaCard.hasImage:not(.hasPhoto) .cardMetaBlock{max-width:100%;margin-left:0}
       #ideaCards .sharedIdeaCard .ideaImageDomainBadge{width:32px;height:32px;bottom:-16px}
       #ideaCards .sharedIdeaCard .ideaImageDomainBadge svg{width:14px;height:14px}
       .sharedIdeaCard{
@@ -4374,6 +4379,10 @@
       }
       .sharedIdeaCard.hasImage h3{margin-top:6px!important}
       .sharedIdeaCard h3 + .cardMetaBlock{margin-top:-2px!important}
+      .sharedIdeaCard.hasPhoto h3 + .cardMetaBlock{
+        width:calc(100% - 44px)!important;max-width:calc(100% - 44px)!important;
+        margin-right:0!important;margin-left:44px!important
+      }
       .sharedIdeaCard h3 .ideaTitleText{overflow-wrap:anywhere;word-break:normal}
       .sharedIdeaCard .cardMetaBlock,
       .sharedIdeaCard .sharedMetaBlock{
