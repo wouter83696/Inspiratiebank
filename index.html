@@ -2694,6 +2694,7 @@
       box-shadow:0 14px 30px rgba(92,65,33,.065);
     }
     .sharedIdeaCard .ideaImageFrame{
+      position:relative;
       background:#f7f4ee;
       margin:0;
       border:0;
@@ -2707,6 +2708,24 @@
     .sharedIdeaCard .ideaImageFrame img{
       border-radius:inherit;
     }
+    #ideaCards .sharedIdeaCard.hasImage h3 .domainIcon{display:none}
+    #ideaCards .sharedIdeaCard .ideaImageDomainBadge{
+      position:absolute;
+      right:10px;
+      bottom:10px;
+      z-index:2;
+      display:grid;
+      place-items:center;
+      width:34px;
+      height:34px;
+      border:1px solid var(--theme-icon-line);
+      border-radius:50%;
+      background:var(--theme-icon-bg);
+      color:var(--theme-ink);
+      box-shadow:none;
+      pointer-events:none;
+    }
+    #ideaCards .sharedIdeaCard .ideaImageDomainBadge svg{width:17px;height:17px}
     .sharedIdeaCard .ideaImageLink{
       display:block;
       width:100%;
@@ -5732,7 +5751,7 @@
     const base = src.replace(/\.jpe?g($|\?)/i, '');
     return `${base}-480.jpg 480w, ${base}-800.jpg 800w, ${src} 1200w`;
   }
-  function ideaImageMarkup(image={}, url='', {eager=false}={}){
+  function ideaImageMarkup(image={}, url='', {eager=false, badge=''}={}){
     const srcset = responsiveImageSrcset(image.src || '');
     const attrs = [
       `src="${escapeHtml(image.src || '')}"`,
@@ -5747,7 +5766,7 @@
     const linkedImage = url
       ? `<a class="ideaImageLink" href="${escapeHtml(url)}" target="_blank" rel="noopener" aria-label="Open website van ${escapeHtml(image.alt || 'deze activiteit')}">${imageMarkup}</a>`
       : imageMarkup;
-    return `<figure class="ideaImageFrame">${linkedImage}</figure>`;
+    return `<figure class="ideaImageFrame">${linkedImage}${badge}</figure>`;
   }
   function approvedIdeaImage(item={}){
     if(item.image && (item.imageStatus === 'approved' || item.imageApproved === true)){
@@ -8391,7 +8410,10 @@
       themeClass:domainThemeClass(item.domain), hasImage:Boolean(image),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       toolbar:'',
-      image:image ? ideaImageMarkup(image, item.url, {eager:mapDetailAction === 'close'}) : '',
+      image:image ? ideaImageMarkup(image, item.url, {
+        eager:mapDetailAction === 'close',
+        badge:mapDetailAction ? '' : `<span class="ideaImageDomainBadge" aria-hidden="true">${domainIcon(item.domain)}</span>`
+      }) : '',
       title:cardTitle,
       pills:metadata.pills,
       meta:metadata.meta, description:escapeHtml(fitText), practical:escapeHtml(item.materials || ''),
