@@ -2935,7 +2935,7 @@ window.BCJN_BEHEER_BASE = {
       "materials": "Verrekijker, checklist met vogels, insecten of sporen en een korte looproute.",
       "fit": "Rustig en verrassend voor jongeren die graag observeren en details opmerken.",
       "distanceBand": "Dichtbij (0-10 km)",
-      "image": "website-bestanden/afbeeldingen/inspiratie/063-spoorzoeken-of-dierenspotten-in-uiterwaarden.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/063-spoorzoeken-of-dierenspotten-in-uiterwaarden-verified.jpg",
       "imageAlt": "Foto bij Spoorzoeken of dierenspotten in uiterwaarden",
       "imageStatus": "approved"
     },
@@ -3038,7 +3038,7 @@ window.BCJN_BEHEER_BASE = {
         "natuur"
       ],
       "distanceBand": "Dichtbij (0-10 km)",
-      "image": "website-bestanden/afbeeldingen/inspiratie/068-wandeling-duivelsberg-n70.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/068-wandeling-duivelsberg-n70-verified.jpg",
       "imageAlt": "Foto bij Wandeling Duivelsberg / N70",
       "imageStatus": "approved"
     },
@@ -3059,7 +3059,7 @@ window.BCJN_BEHEER_BASE = {
         "natuur"
       ],
       "distanceBand": "In de regio (10-30 km)",
-      "image": "website-bestanden/afbeeldingen/inspiratie/069-wandeling-hatertse-en-overasseltse-vennen.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/069-wandeling-hatertse-en-overasseltse-vennen-verified.jpg",
       "imageAlt": "Foto bij Wandeling Hatertse en Overasseltse Vennen",
       "imageStatus": "approved"
     },
@@ -3104,7 +3104,7 @@ window.BCJN_BEHEER_BASE = {
         "route"
       ],
       "distanceBand": "In de regio (10-30 km)",
-      "image": "website-bestanden/afbeeldingen/inspiratie/071-watermuseum-waterwandeling-arnhem.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/071-watermuseum-waterwandeling-arnhem-verified.jpg",
       "imageAlt": "Foto bij Watermuseum waterwandeling Arnhem",
       "imageStatus": "approved"
     },
@@ -3968,7 +3968,7 @@ window.BCJN_BEHEER_BASE = {
       "fit": "Voor jongeren die liever doen dan praten. Ook meekijken, filmen of fotograferen kan een volwaardige deelname zijn.",
       "source": "Waalhalla / NYMA / openbare skateplekken",
       "url": "https://www.waalhalla-centrum.nl/",
-      "image": "website-bestanden/afbeeldingen/inspiratie/113-skatepark-pumptrack-of-urban-sports-sessie.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/113-skatepark-pumptrack-of-urban-sports-sessie-verified.jpg",
       "imageAlt": "Foto bij Skatepark, pumptrack of urban sports sessie",
       "imageStatus": "approved"
     },
@@ -4276,7 +4276,7 @@ window.BCJN_BEHEER_BASE = {
         "attracties",
         "berg en dal"
       ],
-      "image": "website-bestanden/afbeeldingen/inspiratie/124-pretpark-tivoli-berg-en-dal-attracties-in-compact-park.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/124-pretpark-tivoli-berg-en-dal-attracties-in-compact-park-verified.jpg",
       "imageAlt": "Foto bij Pretpark Tivoli Berg en Dal - attracties in compact park",
       "imageStatus": "approved"
     },
@@ -4350,7 +4350,7 @@ window.BCJN_BEHEER_BASE = {
         "bewegen",
         "nijmegen"
       ],
-      "image": "website-bestanden/afbeeldingen/inspiratie/127-you-jump-nijmegen-trampolinepark-en-jumpactiviteiten.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/127-you-jump-nijmegen-trampolinepark-en-jumpactiviteiten-verified.jpg",
       "imageAlt": "Foto bij You Jump Nijmegen - trampolinepark en jumpactiviteiten",
       "imageStatus": "approved"
     },
@@ -4406,7 +4406,7 @@ window.BCJN_BEHEER_BASE = {
         "nyma",
         "nijmegen"
       ],
-      "image": "website-bestanden/afbeeldingen/inspiratie/129-rox-escape-nijmegen-escaperooms-op-nyma.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/129-rox-escape-nijmegen-escaperooms-op-nyma-verified.jpg",
       "imageAlt": "Foto bij ROX Escape Nijmegen - escaperooms op NYMA",
       "imageStatus": "approved"
     },
@@ -4528,7 +4528,7 @@ window.BCJN_BEHEER_BASE = {
         "hindernis",
         "ewijk"
       ],
-      "image": "website-bestanden/afbeeldingen/inspiratie/134-fundustry-nijmegen-ewijk-klimpark-paintball-en-outdoor-cha.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/134-fundustry-nijmegen-ewijk-klimpark-paintball-en-outdoor-cha-verified.jpg",
       "imageAlt": "Foto bij Fundustry Nijmegen/Ewijk - klimpark, paintball en outdoor challenges",
       "imageStatus": "approved"
     }
