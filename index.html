@@ -1832,7 +1832,6 @@
       position:absolute;z-index:5;top:18px;right:18px;display:flex;align-items:center;
       width:auto;padding:0;color:var(--accent-dark);pointer-events:none
     }
-    .ideaMapDetailToolbarMobile{display:none}
     .ideaMapDetailClose{
       display:grid;place-items:center;flex:0 0 auto;width:30px;height:30px;padding:0;border:1px solid rgba(61,126,136,.16);border-radius:999px;cursor:pointer;pointer-events:auto;
       background:rgba(255,253,249,.96);color:#315f66;box-shadow:none
@@ -2739,7 +2738,7 @@
     .sharedIdeaCard .ideaImageDomainBadge{
       position:absolute;
       right:auto;
-      left:10px;
+      left:0;
       bottom:-17px;
       z-index:2;
       display:grid;
@@ -4846,7 +4845,7 @@
       }
       .ideaMapPanel.isSingleDetail .ideaMapPanelHead{
         position:relative!important;display:block!important;box-sizing:border-box!important;
-        height:48px!important;padding:0!important;touch-action:none!important;cursor:grab
+        height:24px!important;padding:0!important;touch-action:none!important;cursor:grab
       }
       .ideaMapPanel.isSingleDetail .ideaMapPanelHead::before{
         content:""!important;position:absolute!important;top:10px!important;left:50%!important;
@@ -4862,8 +4861,7 @@
       }
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose:hover{border:0;background:transparent;box-shadow:none}
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose svg{position:relative;z-index:1;width:12px;height:12px}
-      .ideaMapPanel.isSingleDetail .ideaMapDetailToolbarCard{display:none}
-      .ideaMapPanel.isSingleDetail .ideaMapDetailToolbarMobile{display:flex;top:2px;right:6px}
+      .ideaMapPanel.isSingleDetail .ideaMapDetailToolbarCard{display:flex;top:6px;right:6px}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard{gap:8px!important}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard h3{padding-right:0}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard .ideaImageFrame{aspect-ratio:16 / 6.8}
@@ -9455,9 +9453,6 @@
     const detailClose = singleDetail
       ? `<div class="ideaMapDetailToolbar ideaMapDetailToolbarCard">${detailCloseButton}</div>`
       : '';
-    const mobileDetailClose = singleDetail
-      ? `<div class="ideaMapDetailToolbar ideaMapDetailToolbarMobile">${detailCloseButton}</div>`
-      : '';
     const detailHasMedia = Boolean(singleDetail);
     const resultsHtml = singleDetail
       ? `<div class="ideaMapSingleCard sharedIdeaCards" data-map-detail-key="${escapeHtml(detailPoint.key)}">${cardIdea(detailPoint.item, {mapDetailAction:'close'})}${detailHasMedia ? detailClose : ''}</div>`
@@ -9484,7 +9479,7 @@
       ? 'aria-label="Sleep omlaag om terug te gaan naar de resultaten"'
       : `role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"`;
     return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${ideaMapPanelTall && !singleDetail ? ' isTall' : ''}${singleDetail ? ' isSingleDetail' : ''}${minimized ? ' isMinimized' : ''}" aria-label="Activiteiten op de kaart">
-      <div class="ideaMapPanelHead" ${panelHeadAttributes}><div class="ideaMapPanelHeadRow"><div><h3>${visibleTitleHtml}</h3><p>${escapeHtml(visibleText)}</p></div>${panelClose}</div>${mobileDetailClose}</div>
+      <div class="ideaMapPanelHead" ${panelHeadAttributes}><div class="ideaMapPanelHeadRow"><div><h3>${visibleTitleHtml}</h3><p>${escapeHtml(visibleText)}</p></div>${panelClose}</div></div>
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
   }
