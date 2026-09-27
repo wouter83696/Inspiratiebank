@@ -2074,7 +2074,7 @@ window.BCJN_BEHEER_BASE = {
         "rustig"
       ],
       "distanceBand": "In de regio (10-30 km)",
-      "image": "website-bestanden/afbeeldingen/inspiratie/022-rozet-arnhem-bibliotheek-expo-en-maakplekken.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/022-rozet-arnhem-bibliotheek-expo-en-maakplekken-verified.jpg",
       "imageAlt": "Foto bij Rozet Arnhem – bibliotheek, expo en maakplekken",
       "imageStatus": "approved"
     },
@@ -2512,7 +2512,7 @@ window.BCJN_BEHEER_BASE = {
         "verhalen"
       ],
       "distanceBand": "Dichtbij (0-10 km)",
-      "image": "website-bestanden/afbeeldingen/inspiratie/043-museumpark-orientalis.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/043-museumpark-orientalis-verified.jpg",
       "imageAlt": "Foto bij Museumpark Orientalis",
       "imageStatus": "approved"
     },
@@ -2799,7 +2799,7 @@ window.BCJN_BEHEER_BASE = {
         "vrijheid"
       ],
       "distanceBand": "Verder weg (30-50 km)",
-      "image": "website-bestanden/afbeeldingen/inspiratie/056-nationaal-park-de-hoge-veluwe-fietsen-en-route-kiezen.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/056-nationaal-park-de-hoge-veluwe-fietsen-en-route-kiezen-verified.jpg",
       "imageAlt": "Foto bij Nationaal Park De Hoge Veluwe – fietsen en route kiezen",
       "imageStatus": "approved"
     },
@@ -2820,7 +2820,7 @@ window.BCJN_BEHEER_BASE = {
         "opdracht"
       ],
       "distanceBand": "Op terrein",
-      "image": "website-bestanden/afbeeldingen/inspiratie/057-natuurbingo.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/057-natuurbingo-verified.jpg",
       "imageAlt": "Foto bij Natuurbingo",
       "imageStatus": "approved"
     },
@@ -2844,7 +2844,7 @@ window.BCJN_BEHEER_BASE = {
         "rustig"
       ],
       "distanceBand": "Dichtbij (0-10 km)",
-      "image": "website-bestanden/afbeeldingen/inspiratie/058-ooijpolder-wandelroute-met-foto-opdrachten.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/058-ooijpolder-wandelroute-met-foto-opdrachten-verified.jpg",
       "imageAlt": "Foto bij Ooijpolder – wandelroute met foto-opdrachten",
       "imageStatus": "approved"
     },
@@ -2866,7 +2866,7 @@ window.BCJN_BEHEER_BASE = {
         "natuur"
       ],
       "distanceBand": "Dichtbij (0-10 km)",
-      "image": "website-bestanden/afbeeldingen/inspiratie/059-park-sonsbeek-of-meinerswijk-met-natuurmissie.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/059-park-sonsbeek-of-meinerswijk-met-natuurmissie-verified.jpg",
       "imageAlt": "Foto bij Park Sonsbeek of Meinerswijk met natuurmissie",
       "imageStatus": "approved"
     },
@@ -3080,7 +3080,7 @@ window.BCJN_BEHEER_BASE = {
         "natuur"
       ],
       "distanceBand": "Dichtbij (0-10 km)",
-      "image": "website-bestanden/afbeeldingen/inspiratie/070-wandeling-ooijpolder.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/070-wandeling-ooijpolder-verified.jpg",
       "imageAlt": "Foto bij Wandeling Ooijpolder",
       "imageStatus": "approved"
     },
@@ -3339,7 +3339,7 @@ window.BCJN_BEHEER_BASE = {
         "talent"
       ],
       "distanceBand": "Dichtbij (0-10 km)",
-      "image": "website-bestanden/afbeeldingen/inspiratie/082-jongerenlab-nijmegen.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/082-jongerenlab-nijmegen-verified.jpg",
       "imageAlt": "Foto bij JongerenLab Nijmegen",
       "imageStatus": "approved"
     },
@@ -4378,7 +4378,7 @@ window.BCJN_BEHEER_BASE = {
         "samenwerken",
         "nijmegen"
       ],
-      "image": "website-bestanden/afbeeldingen/inspiratie/128-escape-boot-nijmegen-escaperooms-en-escape-arena.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/128-escape-boot-nijmegen-escaperooms-en-escape-arena-verified.jpg",
       "imageAlt": "Foto bij Escape Boot Nijmegen - escaperooms en Escape Arena",
       "imageStatus": "approved"
     },
