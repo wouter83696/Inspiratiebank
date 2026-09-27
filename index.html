@@ -9430,7 +9430,7 @@
       ? 'aria-label="Sleep omlaag om terug te gaan naar de resultaten"'
       : `role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"`;
     return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${ideaMapPanelTall && !singleDetail ? ' isTall' : ''}${singleDetail ? ' isSingleDetail' : ''}${minimized ? ' isMinimized' : ''}" aria-label="Activiteiten op de kaart">
-      <div class="ideaMapPanelHead" ${panelHeadAttributes}><div class="ideaMapPanelHeadRow"><div><h3>${visibleTitleHtml}</h3><p>${escapeHtml(visibleText)}</p></div>${panelClose}</div>${singleDetail && !detailHasImage ? detailClose : ''}</div>
+      <div class="ideaMapPanelHead" ${panelHeadAttributes}><div class="ideaMapPanelHeadRow"><div><h3>${visibleTitleHtml}</h3><p>${escapeHtml(visibleText)}</p></div>${panelClose}</div></div>
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
   }
