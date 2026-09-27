@@ -2711,6 +2711,13 @@
     #ideaCards .sharedIdeaCard.hasImage h3 .domainIcon{display:none}
     #ideaCards .sharedIdeaCard.hasImage h3{padding-left:0}
     #ideaCards .sharedIdeaCard.hasImage .ideaImageFrame{overflow:visible}
+    #ideaCards .sharedIdeaCard .ideaImagePlaceholder{
+      display:grid;place-items:center;background:transparent;
+      border:1px solid var(--theme-line);box-shadow:none
+    }
+    #ideaCards .sharedIdeaCard .ideaImagePlaceholder .ideaImageDomainBadge{
+      position:static;width:34px;height:34px;background:var(--theme-icon-bg)
+    }
     #ideaCards .sharedIdeaCard .ideaImageDomainBadge{
       position:absolute;
       right:auto;
@@ -3123,6 +3130,7 @@
     }
     @media (min-width:981px){
       #ideaCards.cards{gap:16px;align-items:stretch}
+      #ideaCards .sharedIdeaCard.hasImage h3{margin-top:6px}
       #ideaCards .sharedIdeaCard.hasImage .cardMetaBlock{
         width:fit-content;
         max-width:100%;
@@ -3810,6 +3818,13 @@
     #ideaList.sharedIdeaList th{background:var(--section-header-surface)}
     #ideaList.sharedIdeaList .ideaThemeRow td,
     #ideaList .ideaSurpriseRow td{background:#fffdf9}
+    #ideaList.sharedIdeaList .ideaThemeRow:hover td{
+      background:linear-gradient(
+        color-mix(in srgb,var(--theme-tint-strong) 42%,transparent),
+        color-mix(in srgb,var(--theme-tint-strong) 42%,transparent)
+      ),rgba(255,255,255,.97)
+    }
+    .sharedIdeaCard:hover{background:#fffefb}
     #agendaFilterWeekChips .ideaFilterChip:hover{
       transform:translateY(-1px);box-shadow:0 4px 10px rgba(49,95,107,.07)
     }
@@ -8426,19 +8441,25 @@
   function cardIdea(item, {mapDetailAction=''}={}){
     const metadata = sharedIdeaMetadata(item, {map:mapDetailAction === 'close'});
     const image = approvedIdeaImage(item);
+    const showImagePlaceholder = !image && !mapDetailAction;
+    const imageContent = image
+      ? ideaImageMarkup(image, item.url, {
+          eager:mapDetailAction === 'close',
+          badge:mapDetailAction ? '' : `<span class="ideaImageDomainBadge domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>`
+        })
+      : showImagePlaceholder
+        ? `<span class="ideaImageFrame ideaImagePlaceholder" aria-hidden="true"><span class="ideaImageDomainBadge domainIcon">${domainIcon(item.domain)}</span></span>`
+        : '';
     const fitText = audienceText(item.fit);
     const titleContents = `<span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
     const cardTitle = item.url
       ? `<a class="ideaTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="Open website van ${escapeHtml(item.title)}">${titleContents}</a>`
       : titleContents;
     return IdeaViewShared.renderCard({
-      themeClass:domainThemeClass(item.domain), hasImage:Boolean(image),
+      themeClass:domainThemeClass(item.domain), hasImage:Boolean(image || showImagePlaceholder),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       toolbar:'',
-      image:image ? ideaImageMarkup(image, item.url, {
-        eager:mapDetailAction === 'close',
-        badge:mapDetailAction ? '' : `<span class="ideaImageDomainBadge domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>`
-      }) : '',
+      image:imageContent,
       title:cardTitle,
       pills:metadata.pills,
       meta:metadata.meta, description:escapeHtml(fitText), practical:escapeHtml(item.materials || ''),
