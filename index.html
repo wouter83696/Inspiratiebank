@@ -1873,7 +1873,7 @@
       width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round
     }
     .ideaMapResultThumbWrap.isPlaceholder .ideaMapResultMediaIcon{
-      position:static;width:34px;height:34px;background:rgba(255,253,249,.58);box-shadow:none
+      position:static;width:34px;height:34px;background:var(--theme-icon-bg);box-shadow:none
     }
     .ideaMapResult.hasThumb .ideaMapResultTitle > .domainIcon{display:none}
     .ideaMapEmpty{grid-column:1/-1;padding:28px;border:1px dashed rgba(79,142,158,.16);border-radius:18px;color:var(--muted);background:rgba(255,255,255,.72)}
@@ -4646,8 +4646,8 @@
       }
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultMediaIcon{
         position:static!important;width:32px!important;height:32px!important;
-        border-color:var(--theme-icon-line)!important;background:rgba(255,253,249,.58)!important;
-        color:color-mix(in srgb,var(--theme-ink) 68%,#173f46)!important;box-shadow:none!important
+        border-color:var(--theme-icon-line)!important;background:var(--theme-icon-bg)!important;
+        color:var(--theme-ink)!important;box-shadow:none!important
       }
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultMediaIcon svg{width:14px;height:14px}
       .ideaMapPanel.isList .ideaMapResult.hasImage .ideaMapResultMediaIcon{width:25px;height:25px}
@@ -8437,7 +8437,7 @@
       toolbar:'',
       image:image ? ideaImageMarkup(image, item.url, {
         eager:mapDetailAction === 'close',
-        badge:mapDetailAction ? '' : `<span class="ideaImageDomainBadge" aria-hidden="true">${domainIcon(item.domain)}</span>`
+        badge:mapDetailAction ? '' : `<span class="ideaImageDomainBadge domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>`
       }) : '',
       title:cardTitle,
       pills:metadata.pills,
@@ -9349,7 +9349,7 @@
     const listHtml = visiblePoints.map(point => {
       const active = !activeIdeaMapClusterKeys?.length && point.key === activeIdeaMapKey;
       const image = approvedIdeaImage(point.item);
-      const mediaIcon = `<span class="ideaMapResultMediaIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span>`;
+      const mediaIcon = `<span class="ideaMapResultMediaIcon domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span>`;
       const thumb = image
         ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async">${mediaIcon}</span>`
         : `<span class="ideaMapResultThumbWrap isPlaceholder" aria-hidden="true">${mediaIcon}</span>`;
