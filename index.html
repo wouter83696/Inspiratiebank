@@ -4988,6 +4988,38 @@
         gap:5px!important
       }
     }
+
+    /* Definitieve hoverhiërarchie voor de inspiratiekaarten op desktop. */
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){
+      #ideaCards .sharedIdeaCard:hover{
+        transform:translateY(-2px)!important;
+        background:#fffefb!important;
+        border-color:rgba(64,45,20,.09)!important;
+        box-shadow:0 14px 30px rgba(92,65,33,.065)!important
+      }
+      #ideaList.sharedIdeaList .ideaThemeRow:hover td{
+        background:linear-gradient(
+          color-mix(in srgb,var(--theme-tint-strong) 58%,transparent),
+          color-mix(in srgb,var(--theme-tint-strong) 58%,transparent)
+        ),rgba(255,255,255,.97)
+      }
+      #ideaList.sharedIdeaList .ideaThemeRow .ideaTitleText{transition:color .16s ease}
+      #ideaList.sharedIdeaList .ideaThemeRow:hover .ideaTitleText{color:#168697}
+      .ideaMapPanel.isList:not(.isSingleDetail) .ideaMapResult:hover,
+      .ideaMapPanel.isList:not(.isSingleDetail) .ideaMapResult:focus-visible{
+        transform:translateY(-1px)!important;
+        background:linear-gradient(
+          color-mix(in srgb,var(--theme-tint-strong) 52%,transparent),
+          color-mix(in srgb,var(--theme-tint-strong) 52%,transparent)
+        ),#fffdf8!important;
+        border-color:color-mix(in srgb,var(--theme-line) 72%,rgba(79,142,158,.18))!important;
+        box-shadow:0 11px 24px rgba(20,38,42,.09)!important
+      }
+      .ideaMapPanel.isSingleDetail .sharedIdeaCard:hover{
+        transform:none!important;
+        box-shadow:0 9px 24px rgba(92,65,33,.045)!important
+      }
+    }
     @media (max-width:380px){
       #tab-weken .weekTitle{grid-template-columns:40px minmax(0,1fr) 104px!important;column-gap:7px!important}
       #tab-weken .weekTop h3{font-size:1rem!important}
