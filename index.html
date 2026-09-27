@@ -3831,6 +3831,14 @@
     #ideaFilterDurationChips .ideaFilterChip.active:hover{
       background:rgba(168,225,221,.28);border-color:rgba(79,142,158,.16);color:rgba(31,101,114,.92);box-shadow:inset 0 0 0 1px rgba(79,142,158,.06)
     }
+    /* Houd badges en hun pictogrammen geometrisch stabiel tijdens hover. */
+    :is(.ideaFilterChip,.agendaLegendItem):hover{
+      transform:none!important
+    }
+    :is(.ideaFilterChip,.agendaLegendItem) .domainIcon,
+    :is(.ideaFilterChip,.agendaLegendItem) .domainIcon svg{
+      box-sizing:border-box;transform:none!important
+    }
     @media(max-width:760px){
       #ideaList.sharedIdeaList .ideaThemeRow,
       #ideaList.sharedIdeaList .ideaSurpriseRow{background:#fffdf9}
