@@ -4741,7 +4741,7 @@
       }
       .ideaMapPanel.isSingleDetail .ideaMapSingleCard{width:100%!important;max-width:none!important}
       .ideaMapPanel.isSingleDetail .ideaMapResults{
-        flex:0 1 auto!important;justify-content:flex-start!important;padding:16px!important;
+        flex:0 1 auto!important;justify-content:flex-start!important;padding:0 16px 16px!important;
         overflow-x:hidden!important;overflow-y:auto!important;scroll-snap-type:none!important;
         overscroll-behavior-y:contain;touch-action:pan-y
       }
@@ -4749,7 +4749,16 @@
         border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:0!important
       }
       .ideaMapPanel.isSingleDetail .ideaMapPanelHead{
-        display:none!important
+        position:relative!important;display:block!important;box-sizing:border-box!important;
+        height:40px!important;padding:0!important;touch-action:none!important;cursor:grab
+      }
+      .ideaMapPanel.isSingleDetail .ideaMapPanelHead::before{
+        content:""!important;position:absolute!important;top:10px!important;left:50%!important;
+        width:38px!important;height:4px!important;margin:0!important;border-radius:999px!important;
+        background:rgba(49,95,107,.22)!important;transform:translateX(-50%)!important
+      }
+      .ideaMapPanel.isSingleDetail:has(.sharedIdeaCard.hasImage) .ideaMapPanelHead{
+        height:24px!important
       }
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose{
         position:relative;width:44px;height:44px;border:0;background:transparent;box-shadow:none
@@ -4760,7 +4769,7 @@
       }
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose:hover{border:0;background:transparent;box-shadow:none}
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose svg{position:relative;z-index:1;width:12px;height:12px}
-      .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:2px;right:8px}
+      .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:0;right:8px}
       .ideaMapPanel.isSingleDetail:has(.sharedIdeaCard.hasImage) .ideaMapDetailToolbar{
         top:3px
       }
@@ -9313,8 +9322,9 @@
     const detailClose = singleDetail
       ? '<div class="ideaMapDetailToolbar"><button class="ideaMapDetailClose" type="button" data-map-detail-close aria-label="Detail sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button></div>'
       : '';
+    const detailHasImage = Boolean(singleDetail && approvedIdeaImage(detailPoint.item));
     const resultsHtml = singleDetail
-      ? `<div class="ideaMapSingleCard sharedIdeaCards" data-map-detail-key="${escapeHtml(detailPoint.key)}">${cardIdea(detailPoint.item, {mapDetailAction:'close'})}${detailClose}</div>`
+      ? `<div class="ideaMapSingleCard sharedIdeaCards" data-map-detail-key="${escapeHtml(detailPoint.key)}">${cardIdea(detailPoint.item, {mapDetailAction:'close'})}${detailHasImage ? detailClose : ''}</div>`
       : listHtml;
     const sharedPlace = activeIdeaMapClusterKeys
       && visiblePoints.length
@@ -9334,8 +9344,11 @@
     const panelClose = singleDetail
       ? ''
       : '<button class="ideaMapPanelClose" type="button" data-map-panel-close aria-label="Resultaten sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button>';
+    const panelHeadAttributes = singleDetail
+      ? 'aria-label="Sleep omlaag om terug te gaan naar de resultaten"'
+      : `role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"`;
     return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${ideaMapPanelTall && !singleDetail ? ' isTall' : ''}${singleDetail ? ' isSingleDetail' : ''}${minimized ? ' isMinimized' : ''}" aria-label="Activiteiten op de kaart">
-      <div class="ideaMapPanelHead" role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"><div class="ideaMapPanelHeadRow"><div><h3>${visibleTitleHtml}</h3><p>${escapeHtml(visibleText)}</p></div>${panelClose}</div></div>
+      <div class="ideaMapPanelHead" ${panelHeadAttributes}><div class="ideaMapPanelHeadRow"><div><h3>${visibleTitleHtml}</h3><p>${escapeHtml(visibleText)}</p></div>${panelClose}</div>${singleDetail && !detailHasImage ? detailClose : ''}</div>
       <div class="ideaMapResults">${resultsHtml}</div>
     </aside>`;
   }
@@ -9495,7 +9508,7 @@
       const sheet = handle?.closest('.ideaMapPanel,.ideaFilterSheet,.ideaSubmitSheet') || (canDragMapResults ? mapSheet : null);
       if(!sheet || (!handle && !canDragMapResults)) return;
       const isMap = sheet.classList.contains('ideaMapPanel');
-      if(isMap && sheet.classList.contains('isSingleDetail')) return;
+      const detail = isMap && sheet.classList.contains('isSingleDetail');
       const minimized = isMap && sheet.classList.contains('isMinimized');
       const tall = isMap && sheet.classList.contains('isTall');
       drag = {
@@ -9506,6 +9519,7 @@
         startY:event.clientY,
         lastY:event.clientY,
         isMap,
+        detail,
         minimized,
         tall,
         fromResults:canDragMapResults && !handle,
@@ -9532,7 +9546,7 @@
       if(drag.fromResults && drag.axis !== 'vertical') return;
       drag.lastY = event.clientY;
       drag.moved ||= Math.abs(delta) > 5;
-      if(!drag.isMap){
+      if(!drag.isMap || drag.detail){
         const offset = Math.max(0, delta);
         drag.sheet.style.setProperty('transform', `translate3d(0,${offset}px,0)`, 'important');
       }
@@ -9545,7 +9559,11 @@
       resetDragStyle(current.sheet);
       if(current.moved) suppressSheetClickUntil = performance.now() + 350;
       if(current.isMap){
-        if(current.minimized && delta < -24){
+        if(current.detail && delta > 44){
+          ideaMapDetailKey = '';
+          ideaMapPanelExpanded = true;
+          updateIdeaMapPanel();
+        }else if(current.minimized && delta < -24){
           ideaMapPanelExpanded = true;
           ideaMapPanelTall = false;
           syncIdeaMapPanelPresentation();
