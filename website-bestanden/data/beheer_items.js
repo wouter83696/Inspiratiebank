@@ -1,5 +1,4 @@
 window.BCJN_BEHEER_BASE = {
-  "generated": "25 september 2026",
   "weeks": [
     {
       "id": "w29",
@@ -1647,7 +1646,10 @@ window.BCJN_BEHEER_BASE = {
         "creatief",
         "prikkelend"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Beatmaking / DJ sessie",
+      "imageStatus": "approved"
     },
     {
       "title": "Dromenvangers maken",
@@ -1665,7 +1667,10 @@ window.BCJN_BEHEER_BASE = {
         "rustig",
         "maken"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Dromenvangers maken",
+      "imageStatus": "approved"
     },
     {
       "title": "Drum- of percussiesessie",
@@ -1684,7 +1689,10 @@ window.BCJN_BEHEER_BASE = {
         "ontlading",
         "prikkelend"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Drum- of percussiesessie",
+      "imageStatus": "approved"
     },
     {
       "title": "Fotowandeling",
@@ -1702,7 +1710,10 @@ window.BCJN_BEHEER_BASE = {
         "wandelen",
         "creatief"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Fotowandeling",
+      "imageStatus": "approved"
     },
     {
       "title": "Graffiti op doek of houten panelen",
@@ -1720,7 +1731,10 @@ window.BCJN_BEHEER_BASE = {
         "creatief",
         "buiten"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Graffiti op doek of houten panelen",
+      "imageStatus": "approved"
     },
     {
       "title": "Kleding pimpen of upcyclen",
@@ -1739,7 +1753,10 @@ window.BCJN_BEHEER_BASE = {
         "creatief",
         "identiteit"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Kleding pimpen of upcyclen",
+      "imageStatus": "approved"
     },
     {
       "title": "Klei / keramiek",
@@ -1757,7 +1774,10 @@ window.BCJN_BEHEER_BASE = {
         "klei",
         "sensorisch"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Klei / keramiek",
+      "imageStatus": "approved"
     },
     {
       "title": "Kröller-Müller Museum – kunst en beeldentuin",
@@ -1778,7 +1798,10 @@ window.BCJN_BEHEER_BASE = {
         "veluwe",
         "creatief"
       ],
-      "distanceBand": "Verder weg (30-50 km)"
+      "distanceBand": "Verder weg (30-50 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-krollermuller-nl.jpg",
+      "imageAlt": "Foto bij Kröller-Müller Museum – kunst en beeldentuin",
+      "imageStatus": "approved"
     },
     {
       "title": "Kunstmarkt of makerfair met favorietenkaart",
@@ -1791,7 +1814,10 @@ window.BCJN_BEHEER_BASE = {
       "group": "1-6",
       "materials": "Laat jongeren drie favorieten kiezen: iets slim bedacht, iets mooi gemaakt en iets dat ze vreemd vinden.",
       "fit": "Geeft structuur aan drukke creatieve plekken en helpt jongeren verwoorden wat ze wel of niet aanspreekt.",
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Kunstmarkt of makerfair met favorietenkaart",
+      "imageStatus": "approved"
     },
     {
       "title": "Lego- of bouwchallenge",
@@ -1810,7 +1836,10 @@ window.BCJN_BEHEER_BASE = {
         "structuur",
         "challenge"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Lego- of bouwchallenge",
+      "imageStatus": "approved"
     },
     {
       "title": "Lichtfotografie of schemerroute",
@@ -1829,7 +1858,10 @@ window.BCJN_BEHEER_BASE = {
         "buiten",
         "taakgericht"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Lichtfotografie of schemerroute",
+      "imageStatus": "approved"
     },
     {
       "title": "Lindenberg Cultuurhuis – workshops en cultuur",
@@ -1850,7 +1882,10 @@ window.BCJN_BEHEER_BASE = {
         "cultuur",
         "nijmegen"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Lindenberg Cultuurhuis – workshops en cultuur",
+      "imageStatus": "approved"
     },
     {
       "title": "Makersmarkt of designdag als speurtocht",
@@ -1863,7 +1898,10 @@ window.BCJN_BEHEER_BASE = {
       "stimulus": "Middel",
       "materials": "Kaart met “zoek een maker”, “vind iets onverwachts” of “kies een favoriet ontwerp”.",
       "fit": "Prikkelt nieuwsgierigheid en creativiteit zonder dat jongeren meteen zelf actief hoeven mee te doen.",
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Makersmarkt of designdag als speurtocht",
+      "imageStatus": "approved"
     },
     {
       "title": "Makersmiddag karton / maquette bouwen",
@@ -1882,7 +1920,10 @@ window.BCJN_BEHEER_BASE = {
         "creatief",
         "structuur"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Makersmiddag karton / maquette bouwen",
+      "imageStatus": "approved"
     },
     {
       "title": "Makerspace of creatieve werkplaats verkennen",
@@ -1901,7 +1942,10 @@ window.BCJN_BEHEER_BASE = {
         "creatief",
         "techniek"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Makerspace of creatieve werkplaats verkennen",
+      "imageStatus": "approved"
     },
     {
       "title": "Mini-docu of straatinterview met telefoon",
@@ -1914,7 +1958,10 @@ window.BCJN_BEHEER_BASE = {
       "stimulus": "Middel",
       "materials": "Telefoon, vragenkaart, eenvoudige montage-app en rolverdeling.",
       "fit": "Prikkelend en activerend voor jongeren die graag filmen, presenteren of de wereld observeren via hun camera.",
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Mini-docu of straatinterview met telefoon",
+      "imageStatus": "approved"
     },
     {
       "title": "Mini-fotoboekje maken van een uitje",
@@ -1927,7 +1974,10 @@ window.BCJN_BEHEER_BASE = {
       "group": "1-6",
       "materials": "Printjes of telefoonfoto's, nietmachine, papier, stiften en simpele captions.",
       "fit": "Werkt goed als rustige verwerking na een uitje en helpt jongeren het positieve nog eens terug te zien.",
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Mini-fotoboekje maken van een uitje",
+      "imageStatus": "approved"
     },
     {
       "title": "Mini-podcast of interview opnemen",
@@ -1940,7 +1990,10 @@ window.BCJN_BEHEER_BASE = {
       "group": "1-4",
       "materials": "Telefoon of recorder, rustige ruimte, vragenkaartjes en een vaste structuur: intro, midden, afsluiting.",
       "fit": "Past bij jongeren die liever inspreken dan schrijven. Kan als audioverhaal of kort interview zonder publicatiedruk.",
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Mini-podcast of interview opnemen",
+      "imageStatus": "approved"
     },
     {
       "title": "Modelbouw of miniatuur schilderen",
@@ -1959,7 +2012,10 @@ window.BCJN_BEHEER_BASE = {
         "focus",
         "creatief"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Modelbouw of miniatuur schilderen",
+      "imageStatus": "approved"
     },
     {
       "title": "Muziek maken met apps",
@@ -1977,7 +2033,10 @@ window.BCJN_BEHEER_BASE = {
         "media",
         "creatief"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Muziek maken met apps",
+      "imageStatus": "approved"
     },
     {
       "title": "Reparatie- of makerchallenge",
@@ -1990,7 +2049,10 @@ window.BCJN_BEHEER_BASE = {
       "stimulus": "Laag/middel",
       "materials": "Kapotte spullen, tape, lijm, schroevendraaiers, handschoenen en veiligheidsspelregels.",
       "fit": "Past bij jongeren die graag sleutelen, oplossen of praktisch bezig zijn zonder veel praat eromheen.",
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Reparatie- of makerchallenge",
+      "imageStatus": "approved"
     },
     {
       "title": "Rozet Arnhem – bibliotheek, expo en maakplekken",
@@ -2011,7 +2073,10 @@ window.BCJN_BEHEER_BASE = {
         "creatief",
         "rustig"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-rozet-nl.jpg",
+      "imageAlt": "Foto bij Rozet Arnhem – bibliotheek, expo en maakplekken",
+      "imageStatus": "approved"
     },
     {
       "title": "Sneaker custom of pet design",
@@ -2030,7 +2095,10 @@ window.BCJN_BEHEER_BASE = {
         "creatief",
         "stijl"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Sneaker custom of pet design",
+      "imageStatus": "approved"
     },
     {
       "title": "Stickerlab of label-design",
@@ -2043,7 +2111,10 @@ window.BCJN_BEHEER_BASE = {
       "group": "1-6",
       "materials": "Stickerpapier, pennen, laptop/tablet of sjablonen met letters en pictogrammen.",
       "fit": "Concreet, kort en motiverend voor jongeren die van kleine grafische opdrachten of fandoms houden.",
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Stickerlab of label-design",
+      "imageStatus": "approved"
     },
     {
       "title": "Stop-motion of mini-film maken",
@@ -2062,7 +2133,10 @@ window.BCJN_BEHEER_BASE = {
         "rollen",
         "creatief"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Stop-motion of mini-film maken",
+      "imageStatus": "approved"
     },
     {
       "title": "Street-art route met fotomissie",
@@ -2081,7 +2155,10 @@ window.BCJN_BEHEER_BASE = {
         "foto",
         "visueel"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Street-art route met fotomissie",
+      "imageStatus": "approved"
     },
     {
       "title": "Street-photo + edit challenge",
@@ -2100,7 +2177,10 @@ window.BCJN_BEHEER_BASE = {
         "edit",
         "opdracht"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Street-photo + edit challenge",
+      "imageStatus": "approved"
     },
     {
       "title": "T-shirts of totebags ontwerpen",
@@ -2118,7 +2198,10 @@ window.BCJN_BEHEER_BASE = {
         "textiel",
         "maken"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij T-shirts of totebags ontwerpen",
+      "imageStatus": "approved"
     },
     {
       "title": "Tegeltjes beschilderen",
@@ -2136,7 +2219,10 @@ window.BCJN_BEHEER_BASE = {
         "rustig",
         "maken"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Tegeltjes beschilderen",
+      "imageStatus": "approved"
     },
     {
       "title": "Urban sketching op locatie",
@@ -2155,7 +2241,10 @@ window.BCJN_BEHEER_BASE = {
         "stad",
         "creatief"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Urban sketching op locatie",
+      "imageStatus": "approved"
     },
     {
       "title": "Zeefdruk of totebag-printlab",
@@ -2168,7 +2257,10 @@ window.BCJN_BEHEER_BASE = {
       "stimulus": "Laag/middel",
       "materials": "Textieltas, textielverf, sjablonen, karton en droogplek.",
       "fit": "Concreet en stoer creatief werk met een bruikbaar eindproduct. Jongeren kunnen zelfstandig of stap voor stap werken.",
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Zeefdruk of totebag-printlab",
+      "imageStatus": "approved"
     },
     {
       "title": "Zine of mini-magazine over de zomer maken",
@@ -2181,7 +2273,10 @@ window.BCJN_BEHEER_BASE = {
       "group": "1-6",
       "materials": "Oud papier, printjes, schaar, lijm, stiften en een simpele indeling per pagina.",
       "fit": "Goed voor jongeren die graag verzamelen, ordenen of iets persoonlijks willen maken zonder veel verbale druk.",
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg",
+      "imageAlt": "Foto bij Zine of mini-magazine over de zomer maken",
+      "imageStatus": "approved"
     },
     {
       "title": "Architectuurroute of bruggen/foto-opdracht",
@@ -2200,7 +2295,10 @@ window.BCJN_BEHEER_BASE = {
         "stad",
         "observatie"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg",
+      "imageAlt": "Foto bij Architectuurroute of bruggen/foto-opdracht",
+      "imageStatus": "approved"
     },
     {
       "title": "Audiotour door Nijmegen met fotostops",
@@ -2215,7 +2313,10 @@ window.BCJN_BEHEER_BASE = {
       "fit": "Fijn voor jongeren die liever in hun eigen tempo door de stad gaan dan met een gids of grote groep meelopen.",
       "source": "Visit Nijmegen",
       "url": "https://www.visitnijmegen.com/evenementen/334127498/de-stem-van-nijmegen-audiotour-1",
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-visitnijmegen-com.jpg",
+      "imageAlt": "Foto bij Audiotour door Nijmegen met fotostops",
+      "imageStatus": "approved"
     },
     {
       "title": "Dakterrasbios of openluchtfilm",
@@ -2234,7 +2335,10 @@ window.BCJN_BEHEER_BASE = {
         "avond",
         "prikkelend"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg",
+      "imageAlt": "Foto bij Dakterrasbios of openluchtfilm",
+      "imageStatus": "approved"
     },
     {
       "title": "Focus Filmtheater Arnhem",
@@ -2255,7 +2359,10 @@ window.BCJN_BEHEER_BASE = {
         "cultuur",
         "structuur"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg",
+      "imageAlt": "Foto bij Focus Filmtheater Arnhem",
+      "imageStatus": "approved"
     },
     {
       "title": "Historische stadswandeling Nijmegen",
@@ -2273,7 +2380,10 @@ window.BCJN_BEHEER_BASE = {
         "geschiedenis",
         "wandelen"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg",
+      "imageAlt": "Foto bij Historische stadswandeling Nijmegen",
+      "imageStatus": "approved"
     },
     {
       "title": "Kringloop- of vintageroute met budget",
@@ -2292,7 +2402,10 @@ window.BCJN_BEHEER_BASE = {
         "budget",
         "zoeken"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg",
+      "imageAlt": "Foto bij Kringloop- of vintageroute met budget",
+      "imageStatus": "approved"
     },
     {
       "title": "LUX kieskaart: film, expo of nagesprek",
@@ -2307,7 +2420,10 @@ window.BCJN_BEHEER_BASE = {
       "fit": "Helpt jongeren kiezen op niveau van energie en sociale ruimte, niet alleen op inhoud. Cultureel uitje in een afgebakend tijdsblok.",
       "source": "LUX programma",
       "url": "https://www.lux-nijmegen.nl/programma/",
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-lux-nijmegen-nl.jpg",
+      "imageAlt": "Foto bij LUX kieskaart: film, expo of nagesprek",
+      "imageStatus": "approved"
     },
     {
       "title": "Manga / graphic novel club",
@@ -2326,7 +2442,10 @@ window.BCJN_BEHEER_BASE = {
         "rustig",
         "beeld"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg",
+      "imageAlt": "Foto bij Manga / graphic novel club",
+      "imageStatus": "approved"
     },
     {
       "title": "Museum De Bastei – natuur en Waalverhalen",
@@ -2347,7 +2466,10 @@ window.BCJN_BEHEER_BASE = {
         "waal",
         "nijmegen"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg",
+      "imageAlt": "Foto bij Museum De Bastei – natuur en Waalverhalen",
+      "imageStatus": "approved"
     },
     {
       "title": "Museumbezoek met opdrachtkaart",
@@ -2365,7 +2487,10 @@ window.BCJN_BEHEER_BASE = {
         "cultuur",
         "opdracht"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg",
+      "imageAlt": "Foto bij Museumbezoek met opdrachtkaart",
+      "imageStatus": "approved"
     },
     {
       "title": "Museumpark Orientalis",
@@ -2386,7 +2511,10 @@ window.BCJN_BEHEER_BASE = {
         "berg en dal",
         "verhalen"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-museumparkorientalis-nl.jpg",
+      "imageAlt": "Foto bij Museumpark Orientalis",
+      "imageStatus": "approved"
     },
     {
       "title": "muZIEum – zintuiglijke museumervaring",
@@ -2407,7 +2535,10 @@ window.BCJN_BEHEER_BASE = {
         "nijmegen",
         "zintuigen"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-muzieum-nl.jpg",
+      "imageAlt": "Foto bij muZIEum – zintuiglijke museumervaring",
+      "imageStatus": "approved"
     },
     {
       "title": "Nederlands Openluchtmuseum Arnhem",
@@ -2428,7 +2559,10 @@ window.BCJN_BEHEER_BASE = {
         "buiten",
         "route"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-openluchtmuseum-nl.jpg",
+      "imageAlt": "Foto bij Nederlands Openluchtmuseum Arnhem",
+      "imageStatus": "approved"
     },
     {
       "title": "Nederlands Watermuseum Arnhem",
@@ -2449,7 +2583,10 @@ window.BCJN_BEHEER_BASE = {
         "interactief",
         "techniek"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg",
+      "imageAlt": "Foto bij Nederlands Watermuseum Arnhem",
+      "imageStatus": "approved"
     },
     {
       "title": "Nijmegen-quiz op het terrein",
@@ -2467,7 +2604,10 @@ window.BCJN_BEHEER_BASE = {
         "quiz",
         "terrein"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg",
+      "imageAlt": "Foto bij Nijmegen-quiz op het terrein",
+      "imageStatus": "approved"
     },
     {
       "title": "Podcast luisteren en recensie maken",
@@ -2486,7 +2626,10 @@ window.BCJN_BEHEER_BASE = {
         "rustig",
         "reflectie"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg",
+      "imageAlt": "Foto bij Podcast luisteren en recensie maken",
+      "imageStatus": "approved"
     },
     {
       "title": "Special interest route: strips, games of platenzaken",
@@ -2505,7 +2648,10 @@ window.BCJN_BEHEER_BASE = {
         "games",
         "muziek"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg",
+      "imageAlt": "Foto bij Special interest route: strips, games of platenzaken",
+      "imageStatus": "approved"
     },
     {
       "title": "Terrasje plus peoplewatch-bingo",
@@ -2518,7 +2664,10 @@ window.BCJN_BEHEER_BASE = {
       "group": "1-4",
       "materials": "Bingokaart met onschuldige observaties zoals hond, zonnebril, opvallende tas of fiets met krat.",
       "fit": "Sociaal maar overzichtelijk; jongeren hoeven niet zelf op de voorgrond te staan om toch lol te hebben.",
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg",
+      "imageAlt": "Foto bij Terrasje plus peoplewatch-bingo",
+      "imageStatus": "approved"
     },
     {
       "title": "Vierdaagsefeesten met persoonlijk blokkenschema",
@@ -2533,7 +2682,10 @@ window.BCJN_BEHEER_BASE = {
       "fit": "Werkt beter dan \"gewoon gaan\" omdat jongeren meer grip houden op prikkels, route en verwachtingen.",
       "source": "Vierdaagsefeesten 2026",
       "url": "https://www.vierdaagsefeesten.nl/",
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-vierdaagsefeesten-nl.jpg",
+      "imageAlt": "Foto bij Vierdaagsefeesten met persoonlijk blokkenschema",
+      "imageStatus": "approved"
     },
     {
       "title": "Vrijheidsmuseum Groesbeek",
@@ -2554,7 +2706,10 @@ window.BCJN_BEHEER_BASE = {
         "museum",
         "thema"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg",
+      "imageAlt": "Foto bij Vrijheidsmuseum Groesbeek",
+      "imageStatus": "approved"
     },
     {
       "title": "Burgers' Zoo Arnhem",
@@ -2575,7 +2730,10 @@ window.BCJN_BEHEER_BASE = {
         "observatie",
         "uitdagend"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-burgerszoo-nl.jpg",
+      "imageAlt": "Foto bij Burgers' Zoo Arnhem",
+      "imageStatus": "approved"
     },
     {
       "title": "Dierenzorg of stadsboerderij-helpblok",
@@ -2594,7 +2752,10 @@ window.BCJN_BEHEER_BASE = {
         "rustig",
         "buiten"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Dierenzorg of stadsboerderij-helpblok",
+      "imageStatus": "approved"
     },
     {
       "title": "Geocaching / GPS-speurtocht",
@@ -2613,7 +2774,10 @@ window.BCJN_BEHEER_BASE = {
         "buiten",
         "puzzel"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Geocaching / GPS-speurtocht",
+      "imageStatus": "approved"
     },
     {
       "title": "Nationaal Park De Hoge Veluwe – fietsen en route kiezen",
@@ -2634,7 +2798,10 @@ window.BCJN_BEHEER_BASE = {
         "arnhem",
         "vrijheid"
       ],
-      "distanceBand": "Verder weg (30-50 km)"
+      "distanceBand": "Verder weg (30-50 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Nationaal Park De Hoge Veluwe – fietsen en route kiezen",
+      "imageStatus": "approved"
     },
     {
       "title": "Natuurbingo",
@@ -2652,7 +2819,10 @@ window.BCJN_BEHEER_BASE = {
         "bingo",
         "opdracht"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Natuurbingo",
+      "imageStatus": "approved"
     },
     {
       "title": "Ooijpolder – wandelroute met foto-opdrachten",
@@ -2673,7 +2843,10 @@ window.BCJN_BEHEER_BASE = {
         "foto",
         "rustig"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-visitnijmegen-com.jpg",
+      "imageAlt": "Foto bij Ooijpolder – wandelroute met foto-opdrachten",
+      "imageStatus": "approved"
     },
     {
       "title": "Park Sonsbeek of Meinerswijk met natuurmissie",
@@ -2692,7 +2865,10 @@ window.BCJN_BEHEER_BASE = {
         "arnhem",
         "natuur"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Park Sonsbeek of Meinerswijk met natuurmissie",
+      "imageStatus": "approved"
     },
     {
       "title": "Podcastwandeling of audio-opdracht",
@@ -2705,7 +2881,10 @@ window.BCJN_BEHEER_BASE = {
       "stimulus": "Laag",
       "materials": "Telefoon, koptelefoon, vooraf gedownloade audio en een korte nabespreekvraag.",
       "fit": "Sterk voor jongeren die liever naast elkaar lopen dan tegenover elkaar zitten en toch iets gezamenlijk willen beleven.",
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Podcastwandeling of audio-opdracht",
+      "imageStatus": "approved"
     },
     {
       "title": "Prikkelarm avondrondje",
@@ -2723,7 +2902,10 @@ window.BCJN_BEHEER_BASE = {
         "rust",
         "kort"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Prikkelarm avondrondje",
+      "imageStatus": "approved"
     },
     {
       "title": "Silent walk met eigen playlist en fotostops",
@@ -2736,7 +2918,10 @@ window.BCJN_BEHEER_BASE = {
       "group": "1-6",
       "materials": "Telefoon, oortjes, routekaart en drie fotopunten: mooi, vreemd en rustig.",
       "fit": "Fijn voor jongeren die wel op pad willen, maar minder behoefte hebben aan veel praten of groepsdruk.",
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Silent walk met eigen playlist en fotostops",
+      "imageStatus": "approved"
     },
     {
       "title": "Spoorzoeken of dierenspotten in uiterwaarden",
@@ -2749,7 +2934,10 @@ window.BCJN_BEHEER_BASE = {
       "group": "1-6",
       "materials": "Verrekijker, checklist met vogels, insecten of sporen en een korte looproute.",
       "fit": "Rustig en verrassend voor jongeren die graag observeren en details opmerken.",
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Spoorzoeken of dierenspotten in uiterwaarden",
+      "imageStatus": "approved"
     },
     {
       "title": "Terrarium, stekjes of plantlab",
@@ -2768,7 +2956,10 @@ window.BCJN_BEHEER_BASE = {
         "sensorisch",
         "rustig"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Terrarium, stekjes of plantlab",
+      "imageStatus": "approved"
     },
     {
       "title": "Terreinwandeling met opdracht",
@@ -2786,7 +2977,10 @@ window.BCJN_BEHEER_BASE = {
         "laag prikkel",
         "terrein"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Terreinwandeling met opdracht",
+      "imageStatus": "approved"
     },
     {
       "title": "Treinspottour of stationschallenge",
@@ -2805,7 +2999,10 @@ window.BCJN_BEHEER_BASE = {
         "observatie",
         "ov"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Treinspottour of stationschallenge",
+      "imageStatus": "approved"
     },
     {
       "title": "Uitzichtpunt- of bruggenroute met fotostops",
@@ -2819,7 +3016,10 @@ window.BCJN_BEHEER_BASE = {
       "materials": "Route, fotolijst-opdracht, tussenstops en een rustige afsluitplek.",
       "fit": "Rustige beweegoptie met een doel. Jongeren kijken, lopen en maken iets tastbaars van de route.",
       "source": "Eigen routekeuze",
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Uitzichtpunt- of bruggenroute met fotostops",
+      "imageStatus": "approved"
     },
     {
       "title": "Wandeling Duivelsberg / N70",
@@ -2837,7 +3037,10 @@ window.BCJN_BEHEER_BASE = {
         "hoogteverschil",
         "natuur"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Wandeling Duivelsberg / N70",
+      "imageStatus": "approved"
     },
     {
       "title": "Wandeling Hatertse en Overasseltse Vennen",
@@ -2855,7 +3058,10 @@ window.BCJN_BEHEER_BASE = {
         "vennen",
         "natuur"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Wandeling Hatertse en Overasseltse Vennen",
+      "imageStatus": "approved"
     },
     {
       "title": "Wandeling Ooijpolder",
@@ -2873,7 +3079,10 @@ window.BCJN_BEHEER_BASE = {
         "ooijpolder",
         "natuur"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Wandeling Ooijpolder",
+      "imageStatus": "approved"
     },
     {
       "title": "Watermuseum waterwandeling Arnhem",
@@ -2894,7 +3103,10 @@ window.BCJN_BEHEER_BASE = {
         "water",
         "route"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg",
+      "imageAlt": "Foto bij Watermuseum waterwandeling Arnhem",
+      "imageStatus": "approved"
     },
     {
       "title": "Barista- of ijskoffielab",
@@ -2913,7 +3125,10 @@ window.BCJN_BEHEER_BASE = {
         "sociaal",
         "keuze"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Barista- of ijskoffielab",
+      "imageStatus": "approved"
     },
     {
       "title": "Bordspellenmiddag",
@@ -2931,7 +3146,10 @@ window.BCJN_BEHEER_BASE = {
         "sociaal",
         "laag prikkel"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Bordspellenmiddag",
+      "imageStatus": "approved"
     },
     {
       "title": "Budgetproof uitje plannen",
@@ -2949,7 +3167,10 @@ window.BCJN_BEHEER_BASE = {
         "plannen",
         "zelfstandigheid"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Budgetproof uitje plannen",
+      "imageStatus": "approved"
     },
     {
       "title": "DoeNijmegen – stadsspellen en groepsuitjes",
@@ -2970,7 +3191,10 @@ window.BCJN_BEHEER_BASE = {
         "samenwerken",
         "uitje"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij DoeNijmegen – stadsspellen en groepsuitjes",
+      "imageStatus": "approved"
     },
     {
       "title": "Dungeons & Dragons one-shot",
@@ -2988,7 +3212,10 @@ window.BCJN_BEHEER_BASE = {
         "fantasie",
         "samenwerken"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Dungeons & Dragons one-shot",
+      "imageStatus": "approved"
     },
     {
       "title": "Escape room op de groep",
@@ -3006,7 +3233,10 @@ window.BCJN_BEHEER_BASE = {
         "puzzel",
         "samenwerken"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-actie-amusement.jpg",
+      "imageAlt": "Foto bij Escape room op de groep",
+      "imageStatus": "approved"
     },
     {
       "title": "Esports of game-toernooi op kleine schaal",
@@ -3025,7 +3255,10 @@ window.BCJN_BEHEER_BASE = {
         "toernooi",
         "sociaal"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Esports of game-toernooi op kleine schaal",
+      "imageStatus": "approved"
     },
     {
       "title": "Fietsreparatie-basis",
@@ -3043,7 +3276,10 @@ window.BCJN_BEHEER_BASE = {
         "vaardigheid",
         "praktisch"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Fietsreparatie-basis",
+      "imageStatus": "approved"
     },
     {
       "title": "Filmavond met nagesprek",
@@ -3061,7 +3297,10 @@ window.BCJN_BEHEER_BASE = {
         "rustig",
         "avond"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Filmavond met nagesprek",
+      "imageStatus": "approved"
     },
     {
       "title": "Foodhall of streetfood-proefroute met keuzekaart",
@@ -3075,7 +3314,10 @@ window.BCJN_BEHEER_BASE = {
       "materials": "Budget per persoon, 2 of 3 eetopties, vaste eindtijd, rustige zitplek en een simpele beoordelingskaart.",
       "fit": "Maakt eten sociaal en concreet. Werkt goed als jongeren mogen proeven, vergelijken en kiezen binnen vaste kaders.",
       "source": "Eigen keuze in stad",
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Foodhall of streetfood-proefroute met keuzekaart",
+      "imageStatus": "approved"
     },
     {
       "title": "JongerenLab Nijmegen",
@@ -3096,7 +3338,10 @@ window.BCJN_BEHEER_BASE = {
         "ontmoeten",
         "talent"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-bindkracht10-nl.jpg",
+      "imageAlt": "Foto bij JongerenLab Nijmegen",
+      "imageStatus": "approved"
     },
     {
       "title": "Kleine vrijwilligersactie in de buurt",
@@ -3109,7 +3354,10 @@ window.BCJN_BEHEER_BASE = {
       "stimulus": "Laag/middel",
       "materials": "Vuilniszakken, grijpers, plantjes, kaartjes of kleine helpopdracht voor buurtplek.",
       "fit": "Geeft betekenis en een duidelijk doel. Past goed bij jongeren die iets praktisch voor een ander willen doen zonder grote sociale druk.",
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Kleine vrijwilligersactie in de buurt",
+      "imageStatus": "approved"
     },
     {
       "title": "Mini-onderneming: zomerpop-upkraam",
@@ -3128,7 +3376,10 @@ window.BCJN_BEHEER_BASE = {
         "rollen",
         "samenwerken"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Mini-onderneming: zomerpop-upkraam",
+      "imageStatus": "approved"
     },
     {
       "title": "Mocktail-workshop met kleine tapasplank",
@@ -3147,7 +3398,10 @@ window.BCJN_BEHEER_BASE = {
         "sociaal",
         "eten"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Mocktail-workshop met kleine tapasplank",
+      "imageStatus": "approved"
     },
     {
       "title": "Openluchtspel in park met rollenkaart",
@@ -3160,7 +3414,10 @@ window.BCJN_BEHEER_BASE = {
       "stimulus": "Middel",
       "materials": "Rollenkaart, scorekaart, pionnen, krijt of lint en een start-stopstructuur.",
       "fit": "Fijn voor jongeren die willen meedoen, maar ook houvast nodig hebben over hun rol, taak of moment van rust.",
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Openluchtspel in park met rollenkaart",
+      "imageStatus": "approved"
     },
     {
       "title": "Oude elektronica openmaken / repairlab",
@@ -3173,7 +3430,10 @@ window.BCJN_BEHEER_BASE = {
       "group": "1-4",
       "materials": "Oude apparaten, kleine schroevendraaiers, bakjes voor onderdelen en handschoenen indien nodig.",
       "fit": "Trekt jongeren die willen ontdekken hoe dingen in elkaar zitten en liever doen dan praten.",
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Oude elektronica openmaken / repairlab",
+      "imageStatus": "approved"
     },
     {
       "title": "OV-oefenuitje met planner en mini-missie",
@@ -3193,7 +3453,10 @@ window.BCJN_BEHEER_BASE = {
         "plannen",
         "vaardigheden"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij OV-oefenuitje met planner en mini-missie",
+      "imageStatus": "approved"
     },
     {
       "title": "Pubquiz / zomerquiz",
@@ -3211,7 +3474,10 @@ window.BCJN_BEHEER_BASE = {
         "groep",
         "terrein"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Pubquiz / zomerquiz",
+      "imageStatus": "approved"
     },
     {
       "title": "Route kiezen met maximaal drie haltes",
@@ -3224,7 +3490,10 @@ window.BCJN_BEHEER_BASE = {
       "group": "1-6",
       "materials": "Kaartje met precies drie keuzes: iets zien, iets doen, iets eten.",
       "fit": "Geeft autonomie zonder dat de hoeveelheid opties overweldigend wordt.",
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Route kiezen met maximaal drie haltes",
+      "imageStatus": "approved"
     },
     {
       "title": "Samen koken – wereldkeuken",
@@ -3242,7 +3511,10 @@ window.BCJN_BEHEER_BASE = {
         "vaardigheid",
         "sociaal"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Samen koken – wereldkeuken",
+      "imageStatus": "approved"
     },
     {
       "title": "Techlab met stroom, licht en kleine proefjes",
@@ -3261,7 +3533,10 @@ window.BCJN_BEHEER_BASE = {
         "proefjes",
         "special interest"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Techlab met stroom, licht en kleine proefjes",
+      "imageStatus": "approved"
     },
     {
       "title": "Sushirollen of snacklab",
@@ -3280,7 +3555,10 @@ window.BCJN_BEHEER_BASE = {
         "proeven",
         "stappenplan"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Sushirollen of snacklab",
+      "imageStatus": "approved"
     },
     {
       "title": "TCG / kaartspeltoernooi",
@@ -3299,7 +3577,10 @@ window.BCJN_BEHEER_BASE = {
         "toernooi",
         "structuur"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij TCG / kaartspeltoernooi",
+      "imageStatus": "approved"
     },
     {
       "title": "Vlooienmarkt of rommelmarkt speurmissie",
@@ -3318,7 +3599,10 @@ window.BCJN_BEHEER_BASE = {
         "budget",
         "kiezen"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Vlooienmarkt of rommelmarkt speurmissie",
+      "imageStatus": "approved"
     },
     {
       "title": "Vrijwilligerswerk verkennen op papier",
@@ -3336,7 +3620,10 @@ window.BCJN_BEHEER_BASE = {
         "vaardigheid",
         "toekomst"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Vrijwilligerswerk verkennen op papier",
+      "imageStatus": "approved"
     },
     {
       "title": "Waterproefjes met bouwen en testen",
@@ -3355,7 +3642,10 @@ window.BCJN_BEHEER_BASE = {
         "proefjes",
         "doen"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg",
+      "imageAlt": "Foto bij Waterproefjes met bouwen en testen",
+      "imageStatus": "approved"
     },
     {
       "title": "Badmintontoernooi",
@@ -3373,7 +3663,10 @@ window.BCJN_BEHEER_BASE = {
         "terrein",
         "toernooi"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-sport-bewegen.jpg",
+      "imageAlt": "Foto bij Badmintontoernooi",
+      "imageStatus": "approved"
     },
     {
       "title": "Bootcamp",
@@ -3391,7 +3684,10 @@ window.BCJN_BEHEER_BASE = {
         "conditie",
         "terrein"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-sport-bewegen.jpg",
+      "imageAlt": "Foto bij Bootcamp",
+      "imageStatus": "approved"
     },
     {
       "title": "Fietscheck en korte fietstocht",
@@ -3409,7 +3705,10 @@ window.BCJN_BEHEER_BASE = {
         "vaardigheid",
         "bewegen"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-sport-bewegen.jpg",
+      "imageAlt": "Foto bij Fietscheck en korte fietstocht",
+      "imageStatus": "approved"
     },
     {
       "title": "Kubb / frisbee / spikeball",
@@ -3427,7 +3726,10 @@ window.BCJN_BEHEER_BASE = {
         "buiten",
         "sport"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-sport-bewegen.jpg",
+      "imageAlt": "Foto bij Kubb / frisbee / spikeball",
+      "imageStatus": "approved"
     },
     {
       "title": "Silent disco of koptelefoonplaylist wandeling",
@@ -3446,7 +3748,10 @@ window.BCJN_BEHEER_BASE = {
         "bewegen",
         "doseerbaar"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-sport-bewegen.jpg",
+      "imageAlt": "Foto bij Silent disco of koptelefoonplaylist wandeling",
+      "imageStatus": "approved"
     },
     {
       "title": "Tafeltennischallenge",
@@ -3464,7 +3769,10 @@ window.BCJN_BEHEER_BASE = {
         "spel",
         "kort"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-sport-bewegen.jpg",
+      "imageAlt": "Foto bij Tafeltennischallenge",
+      "imageStatus": "approved"
     },
     {
       "title": "Volleybal / beachvolleybal",
@@ -3482,7 +3790,10 @@ window.BCJN_BEHEER_BASE = {
         "team",
         "bal"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-sport-bewegen.jpg",
+      "imageAlt": "Foto bij Volleybal / beachvolleybal",
+      "imageStatus": "approved"
     },
     {
       "title": "Waalhalla / NYMA – urban sports en graffiti",
@@ -3503,7 +3814,10 @@ window.BCJN_BEHEER_BASE = {
         "graffiti",
         "prikkelend"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-waalhalla-centrum-nl.jpg",
+      "imageAlt": "Foto bij Waalhalla / NYMA – urban sports en graffiti",
+      "imageStatus": "approved"
     },
     {
       "title": "Watermiddag op het terrein",
@@ -3521,7 +3835,10 @@ window.BCJN_BEHEER_BASE = {
         "terrein",
         "zomer"
       ],
-      "distanceBand": "Op terrein"
+      "distanceBand": "Op terrein",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-sport-bewegen.jpg",
+      "imageAlt": "Foto bij Watermiddag op het terrein",
+      "imageStatus": "approved"
     },
     {
       "title": "Zwemmen Berendonck",
@@ -3539,7 +3856,10 @@ window.BCJN_BEHEER_BASE = {
         "berendonck",
         "water"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-sport-bewegen.jpg",
+      "imageAlt": "Foto bij Zwemmen Berendonck",
+      "imageStatus": "approved"
     },
     {
       "title": "Zwemmen Goffertbad / zwembad",
@@ -3557,7 +3877,10 @@ window.BCJN_BEHEER_BASE = {
         "zwembad",
         "water"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-sport-bewegen.jpg",
+      "imageAlt": "Foto bij Zwemmen Goffertbad / zwembad",
+      "imageStatus": "approved"
     },
     {
       "title": "Poolen, snooker of darts in Nijmegen",
@@ -3572,7 +3895,10 @@ window.BCJN_BEHEER_BASE = {
       "materials": "Leeftijd, openingstijden en reserveren checken.",
       "fit": "Laagdrempelig voor oudere jongeren die een volwassen uitje willen zonder groot programma.",
       "source": "Actueel zoeken in Nijmegen",
-      "url": ""
+      "url": "",
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-actie-amusement.jpg",
+      "imageAlt": "Foto bij Poolen, snooker of darts in Nijmegen",
+      "imageStatus": "approved"
     },
     {
       "title": "Karaoke-room of muziekchallenge",
@@ -3587,7 +3913,10 @@ window.BCJN_BEHEER_BASE = {
       "materials": "Kamer, tijdsduur en prijs checken.",
       "fit": "Leuk voor jongeren die muziek, performance of humor zoeken. Meedoen kan ook als DJ, jurylid of playlistmaker.",
       "source": "Planet Awesome / eigen aanbod",
-      "url": "https://planet-awesome.com/"
+      "url": "https://planet-awesome.com/",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-planet-awesome-com.jpg",
+      "imageAlt": "Foto bij Karaoke-room of muziekchallenge",
+      "imageStatus": "approved"
     },
     {
       "title": "Bijlwerpen, archery tag of schietspel",
@@ -3602,7 +3931,10 @@ window.BCJN_BEHEER_BASE = {
       "materials": "Leeftijd, begeleiding en veiligheidsmateriaal checken.",
       "fit": "Past bij jongeren die actie en focus willen.",
       "source": "Fundustry / regio-aanbod",
-      "url": "https://www.fundustry.nl/locaties/nijmegen/"
+      "url": "https://www.fundustry.nl/locaties/nijmegen/",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-fundustry-nl.jpg",
+      "imageAlt": "Foto bij Bijlwerpen, archery tag of schietspel",
+      "imageStatus": "approved"
     },
     {
       "title": "Escape walk, citygame of telefoonmissie",
@@ -3617,7 +3949,10 @@ window.BCJN_BEHEER_BASE = {
       "materials": "Telefoon, powerbank en route-informatie.",
       "fit": "Fijn voor 15-25 omdat het spel, stad en zelfstandigheid combineert.",
       "source": "Nijmegen Outdoor / DoeNijmegen / eigen route",
-      "url": "https://nijmegenoutdoor.nl/"
+      "url": "https://nijmegenoutdoor.nl/",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-nijmegenoutdoor-nl.jpg",
+      "imageAlt": "Foto bij Escape walk, citygame of telefoonmissie",
+      "imageStatus": "approved"
     },
     {
       "title": "Skatepark, pumptrack of urban sports sessie",
@@ -3632,7 +3967,10 @@ window.BCJN_BEHEER_BASE = {
       "materials": "Materiaal, helm/bescherming en locatie checken.",
       "fit": "Voor jongeren die liever doen dan praten. Ook meekijken, filmen of fotograferen kan een volwaardige deelname zijn.",
       "source": "Waalhalla / NYMA / openbare skateplekken",
-      "url": "https://www.waalhalla-centrum.nl/"
+      "url": "https://www.waalhalla-centrum.nl/",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-waalhalla-centrum-nl.jpg",
+      "imageAlt": "Foto bij Skatepark, pumptrack of urban sports sessie",
+      "imageStatus": "approved"
     },
     {
       "title": "Planet Awesome Nijmegen - karten, lasergamen, bowling en arcade",
@@ -3660,7 +3998,10 @@ window.BCJN_BEHEER_BASE = {
         "glowgolf",
         "karaoke",
         "nijmegen"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-planet-awesome-com.jpg",
+      "imageAlt": "Foto bij Planet Awesome Nijmegen - karten, lasergamen, bowling en arcade",
+      "imageStatus": "approved"
     },
     {
       "title": "Olround Nijmegen - bowlen en Prison Island",
@@ -3685,7 +4026,10 @@ window.BCJN_BEHEER_BASE = {
         "prison island",
         "samenwerken",
         "nijmegen"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-actie-amusement.jpg",
+      "imageAlt": "Foto bij Olround Nijmegen - bowlen en Prison Island",
+      "imageStatus": "approved"
     },
     {
       "title": "LaserQuest Nijmegen - lasergamen, Mystic Golf en StepZone",
@@ -3711,7 +4055,10 @@ window.BCJN_BEHEER_BASE = {
         "stepzone",
         "lasersquash",
         "nijmegen"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-actie-amusement.jpg",
+      "imageAlt": "Foto bij LaserQuest Nijmegen - lasergamen, Mystic Golf en StepZone",
+      "imageStatus": "approved"
     },
     {
       "title": "Pop Culture Arcade Nijmegen - vrij spelen en challenges",
@@ -3736,7 +4083,10 @@ window.BCJN_BEHEER_BASE = {
         "gaming",
         "challenge",
         "nijmegen"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-popculturearcade-nl.jpg",
+      "imageAlt": "Foto bij Pop Culture Arcade Nijmegen - vrij spelen en challenges",
+      "imageStatus": "approved"
     },
     {
       "title": "Pathe Nijmegen - film, Pathe Games en X-Cube",
@@ -3763,7 +4113,10 @@ window.BCJN_BEHEER_BASE = {
         "x-cube",
         "escape",
         "lent"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-pathe-nl.jpg",
+      "imageAlt": "Foto bij Pathe Nijmegen - film, Pathe Games en X-Cube",
+      "imageStatus": "approved"
     },
     {
       "title": "Vue Nijmegen Plein - reguliere bioscoopfilm",
@@ -3788,7 +4141,10 @@ window.BCJN_BEHEER_BASE = {
         "film",
         "nijmegen",
         "binnen"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-actie-amusement.jpg",
+      "imageAlt": "Foto bij Vue Nijmegen Plein - reguliere bioscoopfilm",
+      "imageStatus": "approved"
     },
     {
       "title": "EnjoyVR Nijmegen - virtual reality in een eigen tijdsblok",
@@ -3813,7 +4169,10 @@ window.BCJN_BEHEER_BASE = {
         "gaming",
         "immersief",
         "nijmegen"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-enjoyvr-nl.jpg",
+      "imageAlt": "Foto bij EnjoyVR Nijmegen - virtual reality in een eigen tijdsblok",
+      "imageStatus": "approved"
     },
     {
       "title": "GRIP Boulderhal Nijmegen - boulderen op eigen niveau",
@@ -3838,7 +4197,10 @@ window.BCJN_BEHEER_BASE = {
         "klimmen",
         "sport",
         "nijmegen"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-gripnijmegen-nl.jpg",
+      "imageAlt": "Foto bij GRIP Boulderhal Nijmegen - boulderen op eigen niveau",
+      "imageStatus": "approved"
     },
     {
       "title": "Waalhalla Nijmegen - skateboard, BMX, step en urban sport",
@@ -3864,7 +4226,10 @@ window.BCJN_BEHEER_BASE = {
         "step",
         "urban",
         "nijmegen"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-waalhalla-centrum-nl.jpg",
+      "imageAlt": "Foto bij Waalhalla Nijmegen - skateboard, BMX, step en urban sport",
+      "imageStatus": "approved"
     },
     {
       "title": "De Wijchense Berg - skiën, snowboarden, tuben en outdoor",
@@ -3887,7 +4252,10 @@ window.BCJN_BEHEER_BASE = {
         "outdoor",
         "wijchen",
         "bijzonder"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-dewijchenseberg-nl.jpg",
+      "imageAlt": "Foto bij De Wijchense Berg - skiën, snowboarden, tuben en outdoor",
+      "imageStatus": "approved"
     },
     {
       "title": "Pretpark Tivoli Berg en Dal - attracties in compact park",
@@ -3907,7 +4275,10 @@ window.BCJN_BEHEER_BASE = {
         "pretpark",
         "attracties",
         "berg en dal"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-parktivoli-nl.jpg",
+      "imageAlt": "Foto bij Pretpark Tivoli Berg en Dal - attracties in compact park",
+      "imageStatus": "approved"
     },
     {
       "title": "Gamestate Arnhem - arcadehal met meer dan 50 games",
@@ -3927,7 +4298,10 @@ window.BCJN_BEHEER_BASE = {
         "arcade",
         "gaming",
         "arnhem"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-actie-amusement.jpg",
+      "imageAlt": "Foto bij Gamestate Arnhem - arcadehal met meer dan 50 games",
+      "imageStatus": "approved"
     },
     {
       "title": "VR SO Real Arnhem - virtual reality kiezen op niveau",
@@ -3947,7 +4321,10 @@ window.BCJN_BEHEER_BASE = {
         "vr",
         "gaming",
         "arnhem"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-actie-amusement.jpg",
+      "imageAlt": "Foto bij VR SO Real Arnhem - virtual reality kiezen op niveau",
+      "imageStatus": "approved"
     },
     {
       "title": "You Jump Nijmegen - trampolinepark en jumpactiviteiten",
@@ -3972,7 +4349,10 @@ window.BCJN_BEHEER_BASE = {
         "jump",
         "bewegen",
         "nijmegen"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-trampolinepark-nl.jpg",
+      "imageAlt": "Foto bij You Jump Nijmegen - trampolinepark en jumpactiviteiten",
+      "imageStatus": "approved"
     },
     {
       "title": "Escape Boot Nijmegen - escaperooms en Escape Arena",
@@ -3997,7 +4377,10 @@ window.BCJN_BEHEER_BASE = {
         "puzzels",
         "samenwerken",
         "nijmegen"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-escapebootnijmegen-nl.jpg",
+      "imageAlt": "Foto bij Escape Boot Nijmegen - escaperooms en Escape Arena",
+      "imageStatus": "approved"
     },
     {
       "title": "ROX Escape Nijmegen - escaperooms op NYMA",
@@ -4022,7 +4405,10 @@ window.BCJN_BEHEER_BASE = {
         "puzzels",
         "nyma",
         "nijmegen"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-roxescape-nl.jpg",
+      "imageAlt": "Foto bij ROX Escape Nijmegen - escaperooms op NYMA",
+      "imageStatus": "approved"
     },
     {
       "title": "Nijmegen Outdoor - stadsspellen en actieve groepsuitjes",
@@ -4043,7 +4429,10 @@ window.BCJN_BEHEER_BASE = {
         "stadsspel",
         "groepsuitje",
         "nijmegen"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-nijmegenoutdoor-nl.jpg",
+      "imageAlt": "Foto bij Nijmegen Outdoor - stadsspellen en actieve groepsuitjes",
+      "imageStatus": "approved"
     },
     {
       "title": "SUP & SURF Nijmegen - suppen en watersport",
@@ -4064,7 +4453,10 @@ window.BCJN_BEHEER_BASE = {
         "watersport",
         "buiten",
         "nijmegen"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-actie-amusement.jpg",
+      "imageAlt": "Foto bij SUP & SURF Nijmegen - suppen en watersport",
+      "imageStatus": "approved"
     },
     {
       "title": "Rage room / smashactiviteit in de regio checken",
@@ -4086,7 +4478,10 @@ window.BCJN_BEHEER_BASE = {
         "actie",
         "veiligheid",
         "hoog prikkel"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/thema-actie-amusement.jpg",
+      "imageAlt": "Foto bij Rage room / smashactiviteit in de regio checken",
+      "imageStatus": "approved"
     },
     {
       "title": "Hindernis- of Expeditie Robinson challenge in Ewijk",
@@ -4101,7 +4496,10 @@ window.BCJN_BEHEER_BASE = {
       "materials": "Activiteit, leeftijd, kleding, begeleiding en groepsgrootte checken.",
       "fit": "Voor jongeren die fysieke actie, samenwerken en competitie leuk vinden. Goed alternatief als je iets zoekt richting hindernisbaan of Wipeout, maar dan realistischer in de regio.",
       "source": "Fundustry Nijmegen/Ewijk",
-      "url": "https://www.fundustry.nl/locaties/nijmegen/"
+      "url": "https://www.fundustry.nl/locaties/nijmegen/",
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-fundustry-nl.jpg",
+      "imageAlt": "Foto bij Hindernis- of Expeditie Robinson challenge in Ewijk",
+      "imageStatus": "approved"
     },
     {
       "title": "Fundustry Nijmegen/Ewijk - klimpark, paintball en outdoor challenges",
@@ -4129,10 +4527,12 @@ window.BCJN_BEHEER_BASE = {
         "outdoor",
         "hindernis",
         "ewijk"
-      ]
+      ],
+      "image": "website-bestanden/afbeeldingen/inspiratie/locatie-fundustry-nl.jpg",
+      "imageAlt": "Foto bij Fundustry Nijmegen/Ewijk - klimpark, paintball en outdoor challenges",
+      "imageStatus": "approved"
     }
   ],
-  "teamIdeas": [],
   "links": [
     {
       "name": "Beuningen Samen agenda",
@@ -4639,6 +5039,7 @@ window.BCJN_BEHEER_BASE = {
       "note": "Lasergamen, Mystic Golf, LaserSquash en StepZone in het centrum van Nijmegen."
     }
   ],
+  "generated": "25 september 2026",
   "sourceCheck": {
     "lastCheckedAt": "2026-09-25T18:01:44.054Z",
     "reviewFile": "website-bestanden/data/offers_pending_review.json",
@@ -4646,6 +5047,7 @@ window.BCJN_BEHEER_BASE = {
     "sourcesWithChanges": 26,
     "newCandidateCount": 10
   },
+  "teamIdeas": [],
   "sourceReview": {
     "generatedAt": "2026-09-25T18:01:44.054Z",
     "pendingCount": 388,

@@ -5746,7 +5746,7 @@
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script>
-  const SITE_DATA_URL = 'website-bestanden/data/zomerprogramma_data.json?v=2026-09-25T18%3A01%3A44.054Z';
+  const SITE_DATA_URL = 'website-bestanden/data/zomerprogramma_data.json?v=2026-09-27T20%3A35%3A00.000Z';
   const EMPTY_SITE_DATA = {
     weeks:[],
     external:[],
@@ -5823,31 +5823,14 @@
     .replace(/\s{2,}/g, ' ')
     .trim();
   const IDEA_IMAGE_MAX_BYTES = 1500000;
-  const DEMO_IDEA_IMAGES = [
-    {keywords:['bijlwerpen','archery','fundustry'], image:'website-bestanden/afbeeldingen/activiteiten/archery-outdoor-foto.jpg', alt:'Buitenactiviteit met doelen in het groen'},
-    {keywords:['waterwandeling','watermuseum','watermuseum.nl'], image:'website-bestanden/afbeeldingen/activiteiten/watermuseum-foto.jpg', alt:'Museumachtige binnenruimte als sfeerbeeld bij het Watermuseum'},
-    {keywords:['lindenberg','lindenberg.nl'], image:'website-bestanden/afbeeldingen/activiteiten/creatieve-workshop-foto.jpg', alt:'Creatieve bijeenkomst of workshop als sfeerbeeld'}
-  ];
-  function ideaImageMatchText(item={}){
-    return normalize([
-      item.title,
-      item.source,
-      item.url,
-      item.where,
-      item.domain,
-      Array.isArray(item.tags) ? item.tags.join(' ') : item.tags
-    ].filter(Boolean).join(' '));
-  }
-  function imageMatchScore(entry={}, item={}){
-    const text = ideaImageMatchText(item);
-    return (entry.keywords || []).reduce((score, keyword) => score + (text.includes(normalize(keyword)) ? 1 : 0), 0);
-  }
-  function suggestedIdeaImage(item={}){
-    return DEMO_IDEA_IMAGES
-      .map(entry => ({...entry, score:imageMatchScore(entry, item)}))
-      .filter(entry => entry.score > 0)
-      .sort((a,b)=>b.score - a.score)[0] || null;
-  }
+  const IDEA_THEME_IMAGES = {
+    'Creatief & Expressie':'website-bestanden/afbeeldingen/inspiratie/thema-creatief-expressie.jpg',
+    'Cultuur & Ontdekken':'website-bestanden/afbeeldingen/inspiratie/thema-cultuur-ontdekken.jpg',
+    'Natuur & Buiten':'website-bestanden/afbeeldingen/inspiratie/thema-natuur-buiten.jpg',
+    'Ontmoeten, Spel & Vaardigheden':'website-bestanden/afbeeldingen/inspiratie/thema-ontmoeten-spel-vaardigheden.jpg',
+    'Actie & Amusement':'website-bestanden/afbeeldingen/inspiratie/thema-actie-amusement.jpg',
+    'Sport & Bewegen':'website-bestanden/afbeeldingen/inspiratie/thema-sport-bewegen.jpg'
+  };
   function responsiveImageSrcset(src=''){
     if(!src || src.startsWith('data:') || !/\.jpe?g($|\?)/i.test(src)) return '';
     const base = src.replace(/\.jpe?g($|\?)/i, '');
@@ -5874,8 +5857,8 @@
     if(item.image && (item.imageStatus === 'approved' || item.imageApproved === true)){
       return {src:item.image, alt:item.imageAlt || item.title || 'Activiteit'};
     }
-    const demo = suggestedIdeaImage(item);
-    return demo ? {src:demo.image, alt:demo.alt} : null;
+    const themeImage = IDEA_THEME_IMAGES[item.domain];
+    return themeImage ? {src:themeImage, alt:`Passend beeld bij ${item.title || 'deze activiteit'}`} : null;
   }
   function readIdeaImageFile(file){
     return new Promise((resolve, reject) => {
