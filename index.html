@@ -2709,7 +2709,7 @@
       border-radius:inherit;
     }
     #ideaCards .sharedIdeaCard.hasImage h3 .domainIcon{display:none}
-    #ideaCards .sharedIdeaCard.hasImage h3{padding-left:44px}
+    #ideaCards .sharedIdeaCard.hasImage h3{padding-left:0}
     #ideaCards .sharedIdeaCard.hasImage .ideaImageFrame{overflow:visible}
     #ideaCards .sharedIdeaCard .ideaImageDomainBadge{
       position:absolute;
@@ -2728,7 +2728,10 @@
       box-shadow:none;
       pointer-events:none;
     }
-    #ideaCards .sharedIdeaCard .ideaImageDomainBadge svg{width:17px;height:17px}
+    #ideaCards .sharedIdeaCard .ideaImageDomainBadge svg{
+      width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;
+      stroke-linecap:round;stroke-linejoin:round
+    }
     .sharedIdeaCard .ideaImageLink{
       display:block;
       width:100%;
@@ -3122,8 +3125,8 @@
       #ideaCards.cards{gap:16px;align-items:stretch}
       #ideaCards .sharedIdeaCard.hasImage .cardMetaBlock{
         width:fit-content;
-        max-width:calc(100% - 44px);
-        margin-left:44px;
+        max-width:100%;
+        margin-left:0;
       }
       #ideaCards .sharedIdeaCard .ideaImageDomainBadge{width:32px;height:32px;bottom:-16px}
       #ideaCards .sharedIdeaCard .ideaImageDomainBadge svg{width:14px;height:14px}
