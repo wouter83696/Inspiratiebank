@@ -2820,7 +2820,7 @@ window.BCJN_BEHEER_BASE = {
         "opdracht"
       ],
       "distanceBand": "Op terrein",
-      "image": "website-bestanden/afbeeldingen/inspiratie/057-natuurbingo-verified.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/057-natuurbingo-verified-v2.jpg",
       "imageAlt": "Foto bij Natuurbingo",
       "imageStatus": "approved"
     },
@@ -3168,7 +3168,7 @@ window.BCJN_BEHEER_BASE = {
         "zelfstandigheid"
       ],
       "distanceBand": "Op terrein",
-      "image": "website-bestanden/afbeeldingen/inspiratie/074-budgetproof-uitje-plannen.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/074-budgetproof-uitje-plannen-verified.jpg",
       "imageAlt": "Foto bij Budgetproof uitje plannen",
       "imageStatus": "approved"
     },
@@ -3355,7 +3355,7 @@ window.BCJN_BEHEER_BASE = {
       "materials": "Vuilniszakken, grijpers, plantjes, kaartjes of kleine helpopdracht voor buurtplek.",
       "fit": "Geeft betekenis en een duidelijk doel. Past goed bij jongeren die iets praktisch voor een ander willen doen zonder grote sociale druk.",
       "distanceBand": "Op terrein",
-      "image": "website-bestanden/afbeeldingen/inspiratie/083-kleine-vrijwilligersactie-in-de-buurt.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/083-kleine-vrijwilligersactie-in-de-buurt-verified.jpg",
       "imageAlt": "Foto bij Kleine vrijwilligersactie in de buurt",
       "imageStatus": "approved"
     },
@@ -3727,7 +3727,7 @@ window.BCJN_BEHEER_BASE = {
         "sport"
       ],
       "distanceBand": "Op terrein",
-      "image": "website-bestanden/afbeeldingen/inspiratie/101-kubb-frisbee-spikeball.jpg",
+      "image": "website-bestanden/afbeeldingen/inspiratie/101-kubb-frisbee-spikeball-verified.jpg",
       "imageAlt": "Foto bij Kubb / frisbee / spikeball",
       "imageStatus": "approved"
     },
