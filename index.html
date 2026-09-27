@@ -2715,6 +2715,7 @@
     }
     .sharedIdeaCard.hasImage h3 .domainIcon{display:none}
     .sharedIdeaCard.hasImage h3{padding-left:0}
+    .sharedIdeaCard.hasPhoto h3{padding-left:44px}
     .sharedIdeaCard.hasImage .ideaImageFrame{overflow:visible}
     .sharedIdeaCard .ideaImagePlaceholder,
     .ideaMapResultThumbWrap.isPlaceholder{
@@ -8477,7 +8478,7 @@
       ? `<a class="ideaTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="Open website van ${escapeHtml(item.title)}">${titleContents}</a>`
       : titleContents;
     return IdeaViewShared.renderCard({
-      themeClass:domainThemeClass(item.domain), hasImage:Boolean(image || showImagePlaceholder),
+      themeClass:`${domainThemeClass(item.domain)}${image ? ' hasPhoto' : ''}`, hasImage:Boolean(image || showImagePlaceholder),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
       toolbar:'',
       image:imageContent,
