@@ -1798,9 +1798,11 @@
     .ideaMapPanel.isSingleDetail .sharedIdeaCard h3 + .cardMetaBlock{margin-top:2px}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard > p:not(.fine){margin-top:5px}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock{
-      display:grid;grid-template-columns:repeat(5,max-content);align-items:center;column-gap:9px;
-      width:max-content;max-width:100%;padding:7px 9px;overflow:hidden;white-space:nowrap
+      display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:max-content;
+      align-items:center;column-gap:9px;width:max-content;max-width:100%;padding:7px 9px;
+      overflow-x:auto;overflow-y:hidden;white-space:nowrap;scrollbar-width:none
     }
+    .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock::-webkit-scrollbar{display:none}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock .cardLabels,
     .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock .cardMetaLine{display:contents}
     .ideaMapPanel.isSingleDetail .sharedIdeaCard .cardMetaBlock .pill,
@@ -3378,7 +3380,9 @@
     }
     .sharedMetaBlock .cardPillGroup{
       display:grid;
-      grid-template-columns:repeat(3,max-content);
+      grid-template-columns:none;
+      grid-auto-flow:column;
+      grid-auto-columns:max-content;
       align-items:center;
       column-gap:12px;
       width:max-content !important;
@@ -3406,7 +3410,8 @@
       background:transparent;
     }
     .ideaMapResult .ideaMapResultInfo{
-      display:grid;grid-template-columns:repeat(5,max-content);align-items:center;column-gap:8px;
+      display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:max-content;
+      align-items:center;column-gap:8px;
       width:max-content;max-width:100%;padding:6px 8px;overflow:hidden;white-space:nowrap
     }
     .ideaMapResult .ideaMapResultInfo > .ideaMapResultPills,
@@ -3457,7 +3462,9 @@
     #ideaList .sharedMetaBlock{width:max-content}
     #ideaList .sharedMetaBlock .cardPillGroup{
       display:grid;
-      grid-template-columns:repeat(3,max-content);
+      grid-template-columns:none;
+      grid-auto-flow:column;
+      grid-auto-columns:max-content;
       align-items:center;
       column-gap:12px;
       width:max-content !important;
@@ -4623,9 +4630,7 @@
 
     @media (min-width:981px){
       .ideaMapToolbar{display:none!important}
-      .ideaMapPanel.isList .ideaMapResult .ideaMapResultInfo{
-        grid-template-columns:repeat(6,max-content);column-gap:7px
-      }
+      .ideaMapPanel.isList .ideaMapResult .ideaMapResultInfo{column-gap:7px}
       .ideaMapPanel.isList .ideaMapPanelHead{
         box-sizing:border-box!important;width:100%!important;min-height:40px!important;margin:0 2px 12px 0!important;
         padding:4px 6px 4px 13px!important;border:1px solid rgba(255,255,255,.78)!important;border-radius:18px!important;
