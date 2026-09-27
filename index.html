@@ -5840,6 +5840,9 @@
     'Actie & Amusement':'website-bestanden/afbeeldingen/inspiratie/thema-actie-amusement.jpg',
     'Sport & Bewegen':'website-bestanden/afbeeldingen/inspiratie/thema-sport-bewegen.jpg'
   };
+  const IDEA_TITLE_IMAGES = {
+    'OoijMooiks zelfoogstboerderij':'website-bestanden/afbeeldingen/inspiratie/135-ooijmooiks-zelfoogstboerderij.jpg'
+  };
   function responsiveImageSrcset(src=''){
     if(!src || src.startsWith('data:') || !/\.jpe?g($|\?)/i.test(src)) return '';
     const base = src.replace(/\.jpe?g($|\?)/i, '');
@@ -5866,6 +5869,8 @@
     if(item.image && (item.imageStatus === 'approved' || item.imageApproved === true)){
       return {src:item.image, alt:item.imageAlt || item.title || 'Activiteit'};
     }
+    const titleImage = IDEA_TITLE_IMAGES[item.title];
+    if(titleImage) return {src:titleImage, alt:item.imageAlt || item.title || 'Activiteit'};
     const themeImage = IDEA_THEME_IMAGES[item.domain];
     return themeImage ? {src:themeImage, alt:`Passend beeld bij ${item.title || 'deze activiteit'}`} : null;
   }
