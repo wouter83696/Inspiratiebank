@@ -2723,11 +2723,7 @@
     }
     .sharedIdeaCard.hasImage h3 .domainIcon{display:none}
     .sharedIdeaCard.hasImage h3{padding-left:0}
-    .sharedIdeaCard.hasPhoto h3{padding-left:44px}
-    .sharedIdeaCard.hasPhoto h3 + .cardMetaBlock{
-      margin-left:44px;
-      max-width:calc(100% - 44px);
-    }
+    .sharedIdeaCard.hasPhoto h3{padding-left:0}
     .sharedIdeaCard.hasImage .ideaImageFrame{overflow:visible}
     .sharedIdeaCard .ideaImagePlaceholder,
     .ideaMapResultThumbWrap.isPlaceholder{
@@ -3157,15 +3153,14 @@
     }
     @media (min-width:981px){
       #ideaCards.cards{gap:16px;align-items:stretch}
-      #ideaCards .sharedIdeaCard.hasImage h3{margin-top:2px}
+      #ideaCards .sharedIdeaCard.hasPhoto h3{margin-top:6px}
       #ideaCards .sharedIdeaCard h3{line-height:1.18}
       #ideaCards .sharedIdeaCard h3 + .cardMetaBlock{margin-top:-4px}
       #ideaCards .sharedIdeaCard.hasImage .cardMetaBlock{
         width:fit-content;
-        max-width:calc(100% - 44px);
-        margin-left:44px;
+        max-width:100%;
+        margin-left:0;
       }
-      #ideaCards .sharedIdeaCard.hasImage:not(.hasPhoto) .cardMetaBlock{max-width:100%;margin-left:0}
       #ideaCards .sharedIdeaCard .ideaImageDomainBadge{width:32px;height:32px;bottom:-16px}
       #ideaCards .sharedIdeaCard .ideaImageDomainBadge svg{width:14px;height:14px}
       .sharedIdeaCard{
@@ -4385,12 +4380,8 @@
         width:100%;min-width:0;margin:0!important;
         font-size:1rem!important;line-height:1.2!important;
       }
-      .sharedIdeaCard.hasImage h3{margin-top:6px!important}
+      .sharedIdeaCard.hasPhoto h3{margin-top:9px!important}
       .sharedIdeaCard h3 + .cardMetaBlock{margin-top:-2px!important}
-      .sharedIdeaCard.hasPhoto h3 + .cardMetaBlock{
-        width:calc(100% - 44px)!important;max-width:calc(100% - 44px)!important;
-        margin-right:0!important;margin-left:44px!important
-      }
       .sharedIdeaCard h3 .ideaTitleText{overflow-wrap:anywhere;word-break:normal}
       .sharedIdeaCard .cardMetaBlock,
       .sharedIdeaCard .sharedMetaBlock{
@@ -4691,6 +4682,7 @@
       .ideaMapPanel.isSingleDetail .ideaMapPanelHeadRow{display:none!important}
       .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:12px!important;right:12px!important}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard h3{padding-right:34px}
+      .ideaMapPanel.isSingleDetail .sharedIdeaCard.hasPhoto h3{margin-top:12px}
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder{
         box-sizing:border-box;height:auto;min-height:88px;max-height:none;
         grid-template-columns:72px minmax(0,1fr)!important;grid-template-rows:34px 34px!important;
