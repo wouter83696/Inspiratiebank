@@ -6144,6 +6144,7 @@
 	  const VERIFIED_AGENDA_KEY = 'zomerprogramma_verified_agenda_items_v1';
 	  const BLOCKED_AGENDA_RULES_KEY = 'zomerprogramma_blocked_agenda_rules_v1';
 	  const REPORTS_KEY = 'zomerprogramma_item_reports_v1';
+	  const FEATURED_IDEA_KEY = 'zomerprogramma_featured_idea_key_v1';
 	  const USER_LOCATION_KEY = 'zomerprogramma_user_location_v1';
 	  const USER_LOCATION_RADIUS_KEY = 'zomerprogramma_user_location_radius_v1';
 	  const SECURITY_CLIENT_ID_KEY = 'inspiratiebank_client_id_v1';
@@ -6210,6 +6211,7 @@
 	      deletedAgendaItemIds:Array.isArray(value.deletedAgendaItemIds) ? value.deletedAgendaItemIds : [],
 	      verifiedAgendaItemIds:Array.isArray(value.verifiedAgendaItemIds) ? value.verifiedAgendaItemIds : [],
 	      blockedAgendaRules:Array.isArray(value.blockedAgendaRules) ? value.blockedAgendaRules : [],
+	      featuredIdeaKey:typeof value.featuredIdeaKey === 'string' ? value.featuredIdeaKey : '',
 	      reports:Array.isArray(value.reports) ? value.reports : []
 	    };
 	  }
@@ -7610,6 +7612,10 @@
   function ideaDomKey(item={}){
     return `${normalize(item.title || '')}|${normalize(item.domain || '')}`;
   }
+  function selectedFeaturedIdeaKey(){
+    if(centralStorageActive()) return String(centralStorage.featuredIdeaKey || '');
+    try{ return String(localStorage.getItem(FEATURED_IDEA_KEY) || ''); }catch(error){ return ''; }
+  }
   function mergeImportedTeamIdeas(existingItems, importedItems){
     const merged = [...existingItems];
     const seen = new Set([...baseTeamIdeas(), ...existingItems].map(teamIdeaKey));
@@ -8996,6 +9002,9 @@
     if(items.length < 5) return null;
     const eligible = items.filter(item => approvedIdeaImage(item));
     if(!eligible.length) return null;
+    const selectedKey = selectedFeaturedIdeaKey();
+    const selected = selectedKey ? eligible.find(item => ideaDomKey(item) === selectedKey) : null;
+    if(selected) return selected;
     const now = new Date();
     const yearStart = new Date(now.getFullYear(), 0, 1);
     const week = Math.floor((now - yearStart) / 604800000);

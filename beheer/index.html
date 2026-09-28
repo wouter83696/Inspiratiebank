@@ -1567,6 +1567,7 @@
 	  const TRASH_KEY = 'zomerprogramma_trash_items_v1';
 	  const ADMIN_SIDEBAR_COLLAPSED_KEY = 'zomerprogramma_admin_sidebar_collapsed_v1';
 	  const REPORTS_KEY = 'zomerprogramma_item_reports_v1';
+	  const FEATURED_IDEA_KEY = 'zomerprogramma_featured_idea_key_v1';
 	  const TRASH_RETENTION_DAYS = 30;
 	  const EMPTY_ADMIN_BASE = {weeks:[], external:[], inspiration:[], teamIdeas:[], links:[], sourceCheck:{}, sourceReview:{}};
 	  let BASE = window.BCJN_BEHEER_BASE || {...EMPTY_ADMIN_BASE};
@@ -1726,6 +1727,7 @@
 	      deletedAgendaItemIds:Array.isArray(value.deletedAgendaItemIds) ? value.deletedAgendaItemIds : [],
 	      verifiedAgendaItemIds:Array.isArray(value.verifiedAgendaItemIds) ? value.verifiedAgendaItemIds : [],
 	      blockedAgendaRules:Array.isArray(value.blockedAgendaRules) ? value.blockedAgendaRules : [],
+	      featuredIdeaKey:typeof value.featuredIdeaKey === 'string' ? value.featuredIdeaKey : '',
 	      agendaManualCheckedAt:typeof value.agendaManualCheckedAt === 'string' ? value.agendaManualCheckedAt : '',
 	      agendaSourceCheckRequestedAt:typeof value.agendaSourceCheckRequestedAt === 'string' ? value.agendaSourceCheckRequestedAt : '',
 	      agendaSourceCheckStartedAt:typeof value.agendaSourceCheckStartedAt === 'string' ? value.agendaSourceCheckStartedAt : '',
@@ -2965,6 +2967,28 @@
       || String(a.title || '').localeCompare(String(b.title || ''), 'nl')
     );
   }
+  function adminFeaturedIdeaKey(item={}){
+    return `${normalize(item.title || '')}|${normalize(item.domain || '')}`;
+  }
+  function featuredIdeaKey(){
+    if(centralStorageActive()) return String(centralStorage.featuredIdeaKey || '');
+    try{ return String(localStorage.getItem(FEATURED_IDEA_KEY) || ''); }catch(error){ return ''; }
+  }
+  async function toggleFeaturedIdea(key=''){
+    const current = featuredIdeaKey();
+    const next = current === key ? '' : String(key);
+    if(centralStorageActive()) centralStorage.featuredIdeaKey = next;
+    try{
+      if(next) localStorage.setItem(FEATURED_IDEA_KEY, next);
+      else localStorage.removeItem(FEATURED_IDEA_KEY);
+    }catch(error){}
+    if(!(await saveCentralStorage())){
+      setStatus('#adminStatus', storageErrorMessage('Uitgelichte activiteit opslaan lukte niet.'), 'warn');
+      return;
+    }
+    renderIdeas();
+    setStatus('#adminStatus', next ? 'Deze activiteit staat nu uitgelicht.' : 'Uitgelicht wordt weer automatisch gekozen.', 'ok');
+  }
   function ideaFilterValues(){
     return {
       domain:$('#ideaDomainFilter').value,
@@ -3218,8 +3242,10 @@
       ? `<button class="button iconAction visibilityIdeaAction ${item.hidden ? '' : 'warn'}" data-title-action="${item.hidden ? 'show' : 'hide'}" data-key="${escapeHtml(item.key)}" type="button" aria-label="${escapeHtml(statusLabel)}" title="${escapeHtml(statusLabel)}">${statusIcon}</button>`
       : `<button class="button iconAction visibilityIdeaAction ${item.hidden ? '' : 'warn'}" data-team-action="${item.hidden ? 'show' : 'hide'}" data-key="${escapeHtml(item.key)}" type="button" aria-label="${escapeHtml(statusLabel)}" title="${escapeHtml(statusLabel)}">${statusIcon}</button>`;
     const editAction = `<button class="button iconAction editIdeaAction" data-edit-idea="${escapeHtml(item.key)}" data-kind="${escapeHtml(item.kind)}" type="button" aria-label="Wijzig" title="Wijzig">${actionIcon('edit')}</button>`;
+    const featured = featuredIdeaKey() === adminFeaturedIdeaKey(item);
+    const featureAction = `<button class="button iconAction ${featured ? 'primary' : ''}" data-feature-idea="${escapeHtml(adminFeaturedIdeaKey(item))}" type="button" aria-label="${featured ? 'Uitgelicht automatisch laten kiezen' : 'Uitlichten'}" title="${featured ? 'Uitgelicht: klik voor automatisch kiezen' : 'Uitlichten'}">${actionIcon('spark')}</button>`;
     const deleteAction = `<button class="button iconAction hot" data-delete-idea="${escapeHtml(item.key)}" data-kind="${escapeHtml(item.kind)}" data-title="${escapeHtml(item.title)}" type="button" aria-label="Verwijder" title="Verwijder">${actionIcon('trash')}</button>`;
-    return `<div class="ideaActions">${approveAction}${editAction}${hideAction}${deleteAction}</div>`;
+    return `<div class="ideaActions">${approveAction}${featureAction}${editAction}${hideAction}${deleteAction}</div>`;
   }
   function adminIdeaCard(item){
     const image = adminIdeaImage(item);
@@ -3239,7 +3265,7 @@
       themeClass:domainThemeClass(item.domain), hidden:item.hidden, hasImage:Boolean(image),
       attributes:`data-idea-key="${escapeHtml(item.key)}"`, image:imageMarkup,
       title:titleWithIcon(item.title, item.domain, 'ideaTitle'),
-      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)} ${item.kind === 'collega-toegevoegd' && !item.approved ? '<span class="pill warn">Wacht op goedkeuring</span>' : ''}${item.hidden ? '<span class="pill warn">Verborgen</span>' : ''}`,
+      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)} ${featuredIdeaKey() === adminFeaturedIdeaKey(item) ? '<span class="pill ok">Uitgelicht</span>' : ''}${item.kind === 'collega-toegevoegd' && !item.approved ? '<span class="pill warn">Wacht op goedkeuring</span>' : ''}${item.hidden ? '<span class="pill warn">Verborgen</span>' : ''}`,
       meta:cardMetaLine(item),
       description:escapeHtml(description), practical:escapeHtml(practical), website,
       manageActions:adminIdeaActions(item)
@@ -4223,6 +4249,7 @@
 	      exportedAt:new Date().toISOString(),
 	      hiddenInspirationTitles:loadArray(ADMIN_HIDDEN_INSPIRATION_KEY),
 	      deletedInspirationKeys:loadArray(ADMIN_DELETED_INSPIRATION_KEY),
+	      featuredIdeaKey:featuredIdeaKey(),
 	      hiddenTeamIdeaIds:loadArray(COLLEAGUE_HIDDEN_KEY),
 	      hiddenAgendaItemIds:loadArray(HIDDEN_AGENDA_KEY),
 	      deletedAgendaItemIds:loadArray(DELETED_AGENDA_KEY),
@@ -4289,6 +4316,11 @@
 	      const parsed = JSON.parse(await file.text());
 	      saveArray(ADMIN_HIDDEN_INSPIRATION_KEY, uniqueNormalized([...loadArray(ADMIN_HIDDEN_INSPIRATION_KEY), ...(parsed.hiddenInspirationTitles || [])]));
 	      saveArray(ADMIN_DELETED_INSPIRATION_KEY, [...new Set([...loadArray(ADMIN_DELETED_INSPIRATION_KEY), ...(parsed.deletedInspirationKeys || [])].map(String))]);
+	      if(typeof parsed.featuredIdeaKey === 'string'){
+	        if(centralStorageActive()) centralStorage.featuredIdeaKey = parsed.featuredIdeaKey;
+	        if(parsed.featuredIdeaKey) localStorage.setItem(FEATURED_IDEA_KEY, parsed.featuredIdeaKey);
+	        else localStorage.removeItem(FEATURED_IDEA_KEY);
+	      }
 	      saveArray(COLLEAGUE_HIDDEN_KEY, [...new Set([...loadArray(COLLEAGUE_HIDDEN_KEY), ...(parsed.hiddenTeamIdeaIds || [])])]);
 	      saveArray(HIDDEN_AGENDA_KEY, [...new Set([...loadArray(HIDDEN_AGENDA_KEY), ...(parsed.hiddenAgendaItemIds || [])])]);
 	      saveArray(DELETED_AGENDA_KEY, [...new Set([...loadArray(DELETED_AGENDA_KEY), ...(parsed.deletedAgendaItemIds || [])])]);
@@ -4977,6 +5009,8 @@
       if(editIdeaButton) startAdminIdeaEdit(editIdeaButton.dataset.kind, editIdeaButton.dataset.editIdea);
       const deleteIdeaButton = event.target.closest('[data-delete-idea]');
       if(deleteIdeaButton) deleteIdea(deleteIdeaButton.dataset.deleteIdea, deleteIdeaButton.dataset.kind, deleteIdeaButton.dataset.title);
+	      const featureIdeaButton = event.target.closest('[data-feature-idea]');
+	      if(featureIdeaButton) toggleFeaturedIdea(featureIdeaButton.dataset.featureIdea);
 	      const linkButton = event.target.closest('[data-remove-link]');
 	      if(linkButton) removeCustomLink(linkButton.dataset.removeLink);
 	      const editLinkButton = event.target.closest('[data-edit-link-kind]');
