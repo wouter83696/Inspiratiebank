@@ -56,7 +56,7 @@
       : '';
     return `<tr class="${classes}">
       ${manageCell}
-      <td class="ongoingTitleCell"><span class="name">${view.title || ''}</span>${view.review || ''}<div class="small">${view.date || ''}</div>${titleActions}</td>
+      <td class="ongoingTitleCell"><span class="name">${view.title || ''}</span>${view.review || ''}<div class="small ongoingDateMeta">${view.date || ''}</div>${titleActions}</td>
       <td class="ongoingWeeksCell">${view.weeks || ''}</td>
       <td class="ongoingBadgesCell"><div class="cardPillGroup ongoingBadges">${view.place || ''}${view.cost || ''}${view.stimulus || ''}</div></td>
       <td class="ongoingFitCell">${view.meta || ''}<div class="small ongoingAdminDescription">${view.description || ''}</div></td>
@@ -106,7 +106,7 @@
   function renderAgendaRow(view){
     const classes = ['ideaThemeRow', view.themeClass || '', view.hidden ? 'hiddenItem' : '', view.isNew ? 'newItem' : ''].filter(Boolean).join(' ');
     return `<tr class="${classes}">
-      <td data-label="Activiteit"><span class="name">${view.title || ''}</span>${view.review || ''}<div class="small">${view.date || ''}</div></td>
+      <td data-label="Activiteit"><span class="name">${view.title || ''}</span>${view.review || ''}<div class="small agendaDateMeta">${view.date || ''}</div></td>
       <td data-label="Categorie">${view.domain || ''}</td>
       <td data-label="Locatie en afstand">${view.location || ''}</td>
       <td data-label="Kosten">${view.cost || ''}</td>
