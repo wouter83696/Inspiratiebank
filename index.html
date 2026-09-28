@@ -700,19 +700,20 @@
     .cardFooter .siteButton::after{margin-left:auto}
     .cardFooter .reportMenu{margin-left:auto}
     .ideaFeaturedCard{
-      grid-column:span 2;align-self:stretch;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(220px,.86fr);
-      min-width:0;overflow:hidden;border:1px solid #EADFCB;border-radius:14px;background:#FFFBF3;
-      box-shadow:0 12px 28px rgba(92,65,33,.055);transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s var(--ease)
+      grid-column:1 / -1;align-self:stretch;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+      min-width:0;min-height:290px;overflow:hidden;border:1px solid rgba(64,45,20,.075);border-radius:16px;background:#FFFEFC;
+      box-shadow:0 9px 24px rgba(92,65,33,.045);transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s var(--ease)
     }
-    .ideaFeaturedMedia{position:relative;min-width:0;min-height:248px;background:var(--theme-tint)}
+    .ideaFeaturedMedia{position:relative;min-width:0;min-height:0;background:var(--theme-tint)}
     .ideaFeaturedMedia > a{display:block;width:100%;height:100%}
     .ideaFeaturedMedia img{display:block;width:100%;height:100%;object-fit:cover}
     .ideaFeaturedMedia .ideaImagePlaceholder{display:grid;width:100%;height:100%;min-height:248px;margin:0;border:0;border-radius:0;place-items:center}
     .ideaFeaturedMedia .ideaImageDomainBadge{position:absolute;left:14px;bottom:14px;width:40px;height:40px}
-    .ideaFeaturedContent{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:24px}
-    .ideaFeaturedKicker{display:inline-flex;align-items:center;gap:7px;width:fit-content;margin:0 0 11px;color:#805B08;font-size:.78rem;font-weight:650;line-height:1}
-    .ideaFeaturedKicker svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-    .ideaFeaturedCard h3{margin:0;color:var(--accent-dark);font-size:1.42rem;font-weight:500;line-height:1.16}
+    .ideaFeaturedContent{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:26px 32px}
+    .ideaFeaturedKicker{display:inline-flex;align-items:center;gap:7px;width:fit-content;margin:0 0 12px;color:var(--theme-ink);font-size:.78rem;font-weight:650;line-height:1}
+    .ideaFeaturedKicker .domainIcon{width:24px;height:24px;border-color:var(--theme-icon-line);background:var(--theme-icon-bg);color:var(--theme-ink)}
+    .ideaFeaturedKicker .domainIcon svg{width:12px;height:12px}
+    .ideaFeaturedCard h3{margin:0;color:var(--accent-dark);font-size:1.45rem;font-weight:500;line-height:1.18}
     .ideaFeaturedCard .ideaTitleLink{color:inherit;text-decoration:none}
     .ideaFeaturedCard .cardMetaBlock{margin-top:14px}
     .ideaFeaturedCard .cardMetaLine{width:fit-content;max-width:100%;margin:0}
@@ -721,7 +722,7 @@
       .ideaFeaturedCard:hover{transform:translateY(-2px);border-color:rgba(128,91,8,.20);box-shadow:0 16px 34px rgba(92,65,33,.075)}
     }
     @media (max-width:640px){
-      #ideaCards .ideaFeaturedCard{grid-column:1 / -1;grid-template-columns:1fr}
+      #ideaCards .ideaFeaturedCard{grid-column:1 / -1;grid-template-columns:1fr;min-height:0}
       #ideaCards .ideaFeaturedMedia{min-height:0;aspect-ratio:16 / 9}
       #ideaCards .ideaFeaturedMedia .ideaImagePlaceholder{min-height:0}
       #ideaCards .ideaFeaturedContent{padding:17px 16px 19px}
@@ -8946,7 +8947,7 @@
     return `<article class="ideaFeaturedCard ${domainThemeClass(item.domain)}" data-idea-key="${escapeHtml(ideaDomKey(item))}" aria-label="Uitgelicht: ${escapeHtml(item.title)}">
       <div class="ideaFeaturedMedia">${imageContent}</div>
       <div class="ideaFeaturedContent">
-        <p class="ideaFeaturedKicker">${surpriseIdeaIcon()}<span>Uitgelicht</span></p>
+        <p class="ideaFeaturedKicker"><span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span>Uitgelicht</span></p>
         <h3>${title}</h3>
         ${metadataBlock}
         <p class="ideaFeaturedDescription">${escapeHtml(audienceText(item.fit))}</p>
