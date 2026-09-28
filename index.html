@@ -255,6 +255,20 @@
     #ideaCards,
     #ideaList,
     #ideaMap{background-color:transparent}
+    .ideaActiveFilterBar{
+      display:flex;align-items:center;min-height:34px;margin:10px 0 12px
+    }
+    .ideaActiveFilterBar[hidden]{display:none}
+    .ideaActiveFilterChip{
+      display:inline-flex;align-items:center;gap:7px;min-height:32px;padding:6px 8px 6px 11px;
+      border:1px solid rgba(79,142,158,.14);border-radius:999px;background:rgba(255,253,249,.78);
+      color:#356F7B;font:inherit;font-size:.76rem;font-weight:550;cursor:pointer;
+      box-shadow:0 4px 12px rgba(49,95,107,.045);
+      transition:background-color .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease)
+    }
+    .ideaActiveFilterChip:hover{background:#fffaf4;border-color:rgba(79,142,158,.24);transform:translateY(-1px)}
+    .ideaActiveFilterChip:focus-visible{outline:2px solid rgba(63,120,132,.40);outline-offset:2px}
+    .ideaActiveFilterChip svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
     @keyframes in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
     .sectionHead{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin:24px 0 12px}
     .sectionHead.updatedHead{display:block;position:relative}
@@ -5463,6 +5477,7 @@
         </div>
       </div>
       </div>
+      <div class="ideaActiveFilterBar" id="ideaActiveFilterBar" hidden aria-label="Actieve filters"></div>
       <div id="ideaList" class="tableWrap ideaView sharedIdeaList sharedPublicList" hidden></div>
       <div id="ideaMap" class="ideaMap ideaView" hidden></div>
       <div id="ideaCards" class="cards ideaView sharedIdeaCards active"></div>
@@ -9370,6 +9385,11 @@
   }
   function setupIdeaFilterSheet(){
     $$('[data-idea-filter-close]').forEach(button => button.addEventListener('click', closeIdeaFilterSheet));
+    $('#ideaActiveFilterBar')?.addEventListener('click', event => {
+      if(!event.target.closest('.ideaActiveFilterChip')) return;
+      setIdeaFilterValue('ideaLocation','all');
+      renderIdeas();
+    });
     $('#ideaFilterSheetLayer')?.addEventListener('click', event => {
       const chip = event.target.closest('[data-sheet-filter]');
       if(!chip) return;
@@ -9407,6 +9427,7 @@
     updateInspirationThemeChips();
     syncIdeaFilterSheet();
     updateIdeaFilterSheetCount(items.length);
+    renderIdeaLocationActiveChip();
     const empty = `<div class="empty">${escapeHtml(inspirationEmptyMessage())}</div>`;
     const surpriseAfter = window.matchMedia('(min-width:1180px)').matches ? 4 : window.matchMedia('(min-width:641px)').matches ? 3 : 2;
     $('#ideaCards').innerHTML = items.length ? withSurpriseMarkup(items, cardIdea, surpriseIdeaCard, surpriseAfter) : empty;
@@ -9414,6 +9435,19 @@
       ? IdeaViewShared.renderDesktopTable({rows:withSurpriseMarkup(items, ideaRow, surpriseIdeaRow, 3)})
       : empty;
     renderIdeaMap(items);
+  }
+  function renderIdeaLocationActiveChip(){
+    const bar = $('#ideaActiveFilterBar');
+    const value = $('#ideaLocation')?.value || 'all';
+    if(!bar) return;
+    if(value === 'all'){
+      bar.hidden = true;
+      bar.innerHTML = '';
+      return;
+    }
+    const label = ideaLocationDisplayLabel(value);
+    bar.hidden = false;
+    bar.innerHTML = `<button class="ideaActiveFilterChip" type="button" aria-label="Filter ${escapeHtml(label)} verwijderen"><span>${escapeHtml(label)}</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 6l8 8M14 6l-8 8"></path></svg></button>`;
   }
   function mapBounds(points=[]){
     const values = points.filter(point => Number.isFinite(point.lat) && Number.isFinite(point.lon));
