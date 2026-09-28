@@ -4686,22 +4686,22 @@
       .ideaMapToolbar{display:none!important}
       .ideaMapPanel.isList .ideaMapResult .ideaMapResultInfo{column-gap:7px}
       .ideaMapPanel.isList .ideaMapPanelHead{
-        box-sizing:border-box!important;width:100%!important;min-height:40px!important;margin:0 2px 12px 0!important;
-        padding:4px 6px 4px 13px!important;border:1px solid rgba(255,255,255,.78)!important;border-radius:18px!important;
-        background:rgba(255,253,249,.62)!important;box-shadow:none!important;
-        -webkit-backdrop-filter:blur(7px)!important;backdrop-filter:blur(7px)!important
+        box-sizing:border-box!important;width:100%!important;min-height:34px!important;margin:0 0 6px!important;
+        padding:2px 4px 2px 10px!important;border:0!important;border-radius:0!important;
+        background:transparent!important;box-shadow:none!important;
+        -webkit-backdrop-filter:none!important;backdrop-filter:none!important
       }
       .ideaMapPanel.isList .ideaMapPanelHeadRow{
         width:100%!important;max-width:none!important;justify-content:space-between!important;gap:8px!important
       }
       .ideaMapPanel.isList .ideaMapPanelHeadRow > div:first-child{
         display:flex!important;flex:1 1 auto!important;align-items:center!important;box-sizing:border-box!important;
-        width:auto!important;max-width:none!important;height:30px!important;padding:0!important;
+        width:auto!important;max-width:none!important;height:28px!important;padding:0!important;
         border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;
         backdrop-filter:none!important
       }
       .ideaMapPanel.isList .ideaMapPanelClose{
-        flex:0 0 30px!important;width:30px!important;height:30px!important;border:0!important;
+        flex:0 0 28px!important;width:28px!important;height:28px!important;border:0!important;
         background:transparent!important;box-shadow:none!important
       }
       .ideaMapPanel.isList .ideaMapPanelClose:hover{background:rgba(49,95,102,.06)!important;border:0!important;box-shadow:none!important}
@@ -4714,13 +4714,15 @@
       .ideaMapPanel.isSingleDetail .ideaMapDetailClose svg{width:11px;height:11px}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard h3{padding-right:34px}
       .ideaMapPanel.isSingleDetail .sharedIdeaCard.hasPhoto h3{margin-top:20px}
+      .ideaMapPanel.isList .ideaMapResult.hasImage,
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder{
-        box-sizing:border-box;height:auto;min-height:88px;max-height:none;
-        grid-template-columns:72px minmax(0,1fr)!important;grid-template-rows:34px 34px!important;
-        align-items:start!important;column-gap:10px!important;row-gap:4px!important;padding:8px!important
+        box-sizing:border-box;height:auto;min-height:78px;max-height:none;
+        grid-template-columns:64px minmax(0,1fr)!important;grid-template-rows:minmax(28px,auto) 30px!important;
+        align-items:start!important;column-gap:9px!important;row-gap:3px!important;padding:7px!important
       }
+      .ideaMapPanel.isList .ideaMapResult.hasImage .ideaMapResultThumbWrap,
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultThumbWrap{
-        grid-column:1!important;grid-row:1 / span 2!important;width:72px!important;height:72px!important;
+        grid-column:1!important;grid-row:1 / span 2!important;width:64px!important;height:64px!important;
         align-self:start!important;border:1px solid var(--theme-line)!important;
         background:transparent!important;box-shadow:none!important
       }
@@ -4732,15 +4734,18 @@
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultMediaIcon svg{width:14px;height:14px}
       .ideaMapPanel.isList .ideaMapResult.hasImage .ideaMapResultMediaIcon{width:25px;height:25px}
       .ideaMapPanel.isList .ideaMapResult.hasImage .ideaMapResultMediaIcon svg{width:12px;height:12px}
+      .ideaMapPanel.isList .ideaMapResult.hasImage .ideaMapResultTitle,
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultTitle{
-        grid-column:2!important;grid-row:1!important;align-self:center!important;
-        position:relative!important;left:0!important;top:8px!important
+        grid-column:2!important;grid-row:1!important;align-self:end!important;
+        position:static!important;padding:0 1px!important
       }
+      .ideaMapPanel.isList .ideaMapResult.hasImage .ideaMapResultBody,
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultBody{
-        grid-column:2!important;grid-row:2!important;min-width:0
+        grid-column:2!important;grid-row:2!important;align-self:start!important;min-width:0
       }
+      .ideaMapPanel.isList .ideaMapResult.hasImage .ideaMapResultInfo,
       .ideaMapPanel.isList .ideaMapResult.hasPlaceholder .ideaMapResultInfo{
-        width:100%;box-sizing:border-box;padding:6px 8px
+        width:100%;box-sizing:border-box;padding:5px 7px
       }
       .ideaMapResult:hover,.ideaMapResult:focus-visible,
       .ideaMapSingleCard > .card:hover{transform:none!important}
@@ -5027,12 +5032,9 @@
       .ideaMapPanel.isList:not(.isSingleDetail) .ideaMapResult:hover,
       .ideaMapPanel.isList:not(.isSingleDetail) .ideaMapResult:focus-visible{
         transform:translateY(-1px)!important;
-        background:linear-gradient(
-          color-mix(in srgb,var(--theme-tint-strong) 52%,transparent),
-          color-mix(in srgb,var(--theme-tint-strong) 52%,transparent)
-        ),#fffdf8!important;
-        border-color:color-mix(in srgb,var(--theme-line) 72%,rgba(79,142,158,.18))!important;
-        box-shadow:0 11px 24px rgba(20,38,42,.09)!important
+        background:#fffefb!important;
+        border-color:rgba(64,45,20,.09)!important;
+        box-shadow:0 14px 30px rgba(92,65,33,.065)!important
       }
       .ideaMapPanel.isSingleDetail .sharedIdeaCard:hover{
         transform:none!important;
@@ -5773,7 +5775,7 @@
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script>
-  const SITE_DATA_URL = 'website-bestanden/data/zomerprogramma_data.json?v=2026-09-27T21%3A32%3A00.000Z';
+  const SITE_DATA_URL = 'website-bestanden/data/zomerprogramma_data.json?v=2026-09-28T05%3A59%3A22.000Z';
   const EMPTY_SITE_DATA = {
     weeks:[],
     external:[],
@@ -9484,7 +9486,7 @@
       : (userLocation?.isDefault ? 'Standaard rond Nijmegen.' : `Afstand vanaf ${locationDisplayText()}.`);
     const minimized = !ideaMapPanelExpanded && !singleDetail && !activeIdeaMapClusterKeys;
     const visibleTitle = minimized ? `${visiblePoints.length} activiteiten in dit gebied` : panelTitle;
-    const visibleTitleHtml = escapeHtml(visibleTitle).replace(/^(\d+)/, '<strong class="ideaMapPanelCount">$1</strong>');
+    const visibleTitleHtml = escapeHtml(visibleTitle);
     const visibleText = minimized ? 'Kies een marker of open de resultaten.' : panelText;
     const panelClose = singleDetail
       ? ''
@@ -9632,6 +9634,17 @@
       $$('[data-map-pin-key],[data-map-result-key]').forEach(node => node.classList.remove('active'));
       syncIdeaMapPanelPresentation();
     }
+  }
+  function resetIdeaMapTransientState(){
+    activeIdeaMapKey = '';
+    activeIdeaMapClusterKeys = null;
+    ideaMapDetailKey = '';
+    ideaMapPanelExpanded = false;
+    ideaMapPanelTall = false;
+    activeIdeaMapClusterIsArea = false;
+    pendingIdeaMapZoomTarget = null;
+    ideaMapProvider?.clearActiveCluster?.();
+    ideaMapProvider?.setActive?.('', {pan:false});
   }
   function setupBottomSheetGestures(){
     let drag = null;
@@ -10086,6 +10099,10 @@
     setTab(tabFromLocation() || 'inspiratie', {scroll:false, updateUrl:false});
   }
   function setTab(name, options={}){
+    const inspirationPanelWasActive = $('#tab-inspiratie')?.classList.contains('active');
+    const leavingInspiration = name !== 'inspiratie' && inspirationPanelWasActive;
+    const returningToInspiration = name === 'inspiratie' && !inspirationPanelWasActive;
+    if(leavingInspiration || returningToInspiration) resetIdeaMapTransientState();
     $$('.tab').forEach(b=>{ const on=b.dataset.tab===name; b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
     syncTopTabIndicator();
     $$('.tabPanel').forEach(p=>p.classList.toggle('active',p.id === 'tab-'+name));
@@ -10093,6 +10110,9 @@
       $$('#tab-weken .mobileDayNavigation,#tab-weken .agendaDesktopControls').forEach(element => element.classList.remove('isStuck'));
     }
     document.body.classList.toggle('ideaMapMode', name === 'inspiratie' && $('#tab-inspiratie')?.classList.contains('mapViewActive'));
+    if(returningToInspiration && $('#tab-inspiratie')?.classList.contains('mapViewActive')){
+      renderIdeaMap(filteredInspirationItems());
+    }
     $$('[data-sidebar-tab]').forEach(button => button.classList.toggle('active', button.dataset.sidebarTab === name));
     const topbarAddButton = $('#topbarAddButton');
     if(topbarAddButton){
