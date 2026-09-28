@@ -704,12 +704,14 @@
     }
     .ideaFeaturedCard{
       grid-column:span 2;align-self:stretch;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-      min-width:0;min-height:370px;overflow:hidden;border:2px solid #E7D2A5;border-radius:16px;background:#FFFEFC;
+      min-width:0;min-height:370px;padding:8px;overflow:hidden;border:2px solid #E7D2A5;border-radius:16px;background:#FFFEFC;
       box-shadow:0 10px 26px rgba(128,91,8,.075),inset 0 0 0 1px rgba(255,255,255,.7);transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s var(--ease)
     }
-    .ideaFeaturedMedia{position:relative;min-width:0;min-height:0;background:var(--theme-tint)}
+    .ideaFeaturedMedia{
+      position:relative;min-width:0;min-height:0;overflow:hidden;border:1px solid #F1D99F;border-radius:12px;background:var(--theme-tint)
+    }
     .ideaFeaturedMedia > a{display:block;width:100%;height:100%}
-    .ideaFeaturedMedia img{display:block;width:100%;height:100%;object-fit:cover}
+    .ideaFeaturedMedia img{display:block;width:100%;height:100%;object-fit:cover;border-radius:11px}
     .ideaFeaturedMedia .ideaImagePlaceholder{display:grid;width:100%;height:100%;min-height:248px;margin:0;border:0;border-radius:0;place-items:center}
     .ideaFeaturedMedia .ideaImageDomainBadge{position:absolute;left:14px;bottom:14px;width:40px;height:40px}
     .ideaFeaturedContent{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:22px}
