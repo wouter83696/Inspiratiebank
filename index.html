@@ -2009,6 +2009,32 @@
     }
     .teamFileName:empty{display:none}
     .teamFieldHint{font-size:.78rem;line-height:1.35;color:rgba(11,18,32,.55)}
+    .ideaImageSuggest{
+      grid-column:1/-1;display:grid;gap:10px;padding:12px;border:1px solid rgba(79,142,158,.12);
+      border-radius:15px;background:rgba(255,255,255,.58)
+    }
+    .ideaImageSuggest[hidden]{display:none}
+    .ideaImageSuggestTop{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .ideaImageSuggestTop .ideaImageSuggestStatus{flex:1 1 220px}
+    .ideaImageSuggestTop .formButton{min-height:34px;padding:7px 11px;font-size:.79rem}
+    .ideaImageSuggestStatus{display:flex;align-items:center;gap:9px;min-height:22px;color:rgba(11,18,32,.62);font-size:.84rem}
+    .ideaImageSuggestSpinner{width:16px;height:16px;border:2px solid rgba(79,142,158,.2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .ideaImageSuggestPreview{display:grid;grid-template-columns:132px minmax(0,1fr);gap:12px;align-items:start}
+    .ideaImageSuggestPreview[hidden]{display:none}
+    .ideaImageSuggestPreview img{width:132px;aspect-ratio:16/10;object-fit:cover;border-radius:11px;background:rgba(11,18,32,.04)}
+    .ideaImageSuggestBody{display:grid;gap:5px;min-width:0}
+    .ideaImageSuggestTitle{margin:0;color:var(--accent-dark);font-size:.94rem;font-weight:700;line-height:1.3}
+    .ideaImageSuggestMeta{margin:0;color:rgba(11,18,32,.58);font-size:.78rem;line-height:1.4;overflow-wrap:anywhere}
+    .ideaImageSuggestWarning{margin:0;padding:8px 10px;border-radius:10px;background:rgba(241,208,124,.16);color:#765d21;font-size:.76rem;line-height:1.4}
+    .ideaImageSuggestActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:3px}
+    .ideaImageSuggestActions .formButton{min-height:36px;padding:7px 11px;font-size:.8rem}
+    .ideaImageSuggestActions .formButton.primary{background:var(--accent-dark);color:#fff}
+    .ideaImageSuggestAccepted{border-color:rgba(55,142,96,.24);box-shadow:0 0 0 2px rgba(55,142,96,.06)}
+    @media (max-width:520px){
+      .ideaImageSuggestPreview{grid-template-columns:96px minmax(0,1fr)}
+      .ideaImageSuggestPreview img{width:96px;aspect-ratio:1/1}
+    }
     .formTrap{position:absolute;left:-10000px;top:auto;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
     .teamActionBar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
     .teamActionButtons{display:flex;gap:10px;flex-wrap:wrap}
@@ -5550,7 +5576,28 @@
             <label class="teamField wide">
               <span>Website of bronlink (optioneel)</span>
               <input id="teamIdeaUrlInput" name="url" type="url" placeholder="https://">
+              <small class="teamFieldHint">Na het invullen zoeken we automatisch naar een passende websitefoto.</small>
             </label>
+            <section class="ideaImageSuggest" id="teamIdeaImageSuggest" aria-live="polite">
+              <div class="ideaImageSuggestTop">
+                <div class="ideaImageSuggestStatus" id="teamIdeaImageSuggestStatus"><span>Geen website? Zoek een rechtenvrije beeldsuggestie.</span></div>
+                <button class="formButton" id="teamIdeaStartFreeImage" type="button">Zoek rechtenvrije foto</button>
+              </div>
+              <div class="ideaImageSuggestPreview" id="teamIdeaImageSuggestPreview" hidden>
+                <img id="teamIdeaSuggestedImage" alt="Voorgestelde afbeelding">
+                <div class="ideaImageSuggestBody">
+                  <p class="ideaImageSuggestTitle" id="teamIdeaImageSuggestTitle"></p>
+                  <p class="ideaImageSuggestMeta" id="teamIdeaImageSuggestMeta"></p>
+                  <p class="ideaImageSuggestWarning" id="teamIdeaImageSuggestWarning"></p>
+                  <div class="ideaImageSuggestActions">
+                    <button class="formButton primary" id="teamIdeaAcceptImage" type="button">Gebruik deze foto</button>
+                    <button class="formButton" id="teamIdeaFindFreeImage" type="button">Zoek rechtenvrije foto</button>
+                    <button class="formButton" id="teamIdeaReplaceImage" type="button">Eigen foto kiezen</button>
+                    <button class="formButton" id="teamIdeaSkipImage" type="button">Zonder foto</button>
+                  </div>
+                </div>
+              </div>
+            </section>
             <label class="teamField wide teamFileField">
               <span>Foto meesturen (optioneel)</span>
               <input id="teamIdeaImageInput" name="image" type="file" accept="image/*">
@@ -6952,6 +6999,12 @@
       image: String(item.image || '').trim(),
       imageAlt: String(item.imageAlt || item.title || '').trim(),
       imageStatus: item.image ? String(item.imageStatus || (item.imageApproved === true ? 'approved' : 'pending')).trim() : '',
+      imageSourceType: String(item.imageSourceType || '').trim(),
+      imageSourceUrl: String(item.imageSourceUrl || '').trim(),
+      imageSourceLabel: String(item.imageSourceLabel || '').trim(),
+      imageLicense: String(item.imageLicense || '').trim(),
+      imageLicenseUrl: String(item.imageLicenseUrl || '').trim(),
+      imageAttribution: String(item.imageAttribution || '').trim(),
       source: String(item.source || by).replace(/^Ingebracht door\s+/i, ''),
       createdAt: item.createdAt || ''
     };
@@ -7668,6 +7721,197 @@
     if(!input || !name) return;
     name.textContent = input.files && input.files[0] ? input.files[0].name : '';
   }
+  let teamIdeaImageSuggestion = null;
+  let teamIdeaImageSuggestTimer = 0;
+  let teamIdeaImageSuggestRequest = 0;
+  function validRemoteImageUrl(value=''){
+    try{
+      const raw = String(value || '').trim();
+      const url = new URL(raw.startsWith('//') ? `https:${raw}` : raw);
+      return /^https?:$/.test(url.protocol) ? url.href : '';
+    }catch(error){
+      return '';
+    }
+  }
+  function plainMetadataText(value=''){
+    const element = document.createElement('div');
+    element.innerHTML = String(value || '');
+    return (element.textContent || '').replace(/\s+/g,' ').trim();
+  }
+  function setTeamIdeaImageSuggestStatus(message='', loading=false){
+    const box = $('#teamIdeaImageSuggest');
+    const status = $('#teamIdeaImageSuggestStatus');
+    if(!box || !status) return;
+    box.hidden = false;
+    const text = message || 'Geen website? Zoek een rechtenvrije beeldsuggestie.';
+    status.innerHTML = `${loading ? '<span class="ideaImageSuggestSpinner" aria-hidden="true"></span>' : ''}<span>${escapeHtml(text)}</span>`;
+  }
+  function renderTeamIdeaImageSuggestion(){
+    const box = $('#teamIdeaImageSuggest');
+    const preview = $('#teamIdeaImageSuggestPreview');
+    if(!box || !preview) return;
+    const suggestion = teamIdeaImageSuggestion;
+    box.classList.toggle('ideaImageSuggestAccepted', Boolean(suggestion?.accepted));
+    if(!suggestion){
+      preview.hidden = true;
+      return;
+    }
+    box.hidden = false;
+    preview.hidden = false;
+    $('#teamIdeaSuggestedImage').src = suggestion.url;
+    $('#teamIdeaSuggestedImage').alt = suggestion.alt || 'Voorgestelde afbeelding';
+    $('#teamIdeaImageSuggestTitle').textContent = suggestion.accepted ? 'Gekozen foto' : suggestion.title;
+    $('#teamIdeaImageSuggestMeta').textContent = suggestion.meta;
+    $('#teamIdeaImageSuggestWarning').textContent = suggestion.warning;
+    const accept = $('#teamIdeaAcceptImage');
+    accept.textContent = suggestion.accepted ? 'Foto gekozen' : 'Gebruik deze foto';
+    accept.disabled = Boolean(suggestion.accepted);
+  }
+  function setTeamIdeaImageSuggestion(suggestion){
+    teamIdeaImageSuggestion = suggestion ? {...suggestion, accepted:false} : null;
+    setTeamIdeaImageSuggestStatus('');
+    renderTeamIdeaImageSuggestion();
+  }
+  async function fetchWebsiteImageSuggestion(rawUrl){
+    if(!hasUsefulPublicUrl(rawUrl)) return null;
+    const url = normalizeUrl(rawUrl);
+    const endpoint = new URL('https://api.microlink.io/');
+    endpoint.searchParams.set('url', url);
+    endpoint.searchParams.set('meta.image', 'true');
+    endpoint.searchParams.set('meta.title', 'true');
+    endpoint.searchParams.set('filter', 'title,image,url');
+    endpoint.searchParams.set('ping', 'false');
+    const response = await fetch(endpoint, {headers:{Accept:'application/json'}});
+    if(!response.ok) throw new Error('Websitefoto ophalen lukte niet.');
+    const payload = await response.json();
+    const imageUrl = validRemoteImageUrl(payload?.data?.image?.url || payload?.data?.image);
+    if(!imageUrl) return null;
+    let host = '';
+    try{ host = new URL(url).hostname.replace(/^www\./i,''); }catch(error){}
+    return {
+      url:imageUrl,
+      alt:$('#teamIdeaTitleInput')?.value.trim() || plainMetadataText(payload?.data?.title) || 'Activiteit',
+      title:'Foto van de opgegeven website',
+      meta:host ? `Bron: ${host}` : 'Bron: opgegeven website',
+      warning:'Deze foto kan auteursrechtelijk beschermd zijn. Controleer toestemming en gebruiksvoorwaarden voordat de inzending wordt goedgekeurd.',
+      sourceType:'website',
+      sourceUrl:url,
+      sourceLabel:host || 'Opgegeven website',
+      license:'Onbekend',
+      attribution:''
+    };
+  }
+  async function fetchCommonsImageSuggestion(){
+    const title = $('#teamIdeaTitleInput')?.value.trim() || '';
+    const address = $('#teamIdeaAddressInput')?.value.trim() || '';
+    const domain = domainDisplayLabel($('#teamIdeaDomainInput')?.value || '');
+    if(title.length < 3) throw new Error('Vul eerst een duidelijke titel in.');
+    const place = address || 'Nijmegen';
+    const titleWords = title.split(/\s+/).filter(word => word.length > 3);
+    const broadTitle = titleWords.slice(0, 4).join(' ');
+    const subjectAliases = [
+      [/film|bioscoop|cinema/i, 'cinema'], [/foto|fotografie/i, 'photography'],
+      [/wandel|route|pad/i, 'hiking'], [/fiets|fietsen/i, 'cycling'],
+      [/museum|expo|tentoonstelling/i, 'museum'], [/theater|toneel/i, 'theatre'],
+      [/muziek|concert/i, 'music'], [/creatief|knutsel|atelier|schilder/i, 'arts and crafts'],
+      [/natuur|bos|park/i, 'nature'], [/dier|zoo|wildlife/i, 'wildlife'],
+      [/boerderij|oogst|tuin/i, 'farm garden'], [/sport|bewegen/i, 'sports'],
+      [/zwem|water|sup|surf/i, 'water sports'], [/spel|game|kubb|frisbee/i, 'outdoor games'],
+      [/escape/i, 'escape room'], [/laser/i, 'laser tag'], [/kook|bakken/i, 'cooking']
+    ].filter(([pattern]) => pattern.test(title)).map(([,alias]) => alias).join(' ');
+    const queries = [
+      [title, place].filter(Boolean).join(' '),
+      [broadTitle, domain, place].filter(Boolean).join(' '),
+      [subjectAliases, place].filter(Boolean).join(' '),
+      [broadTitle, domain].filter(Boolean).join(' '),
+      [subjectAliases, domain].filter(Boolean).join(' ')
+    ].filter((query, index, all) => query.length >= 3 && all.indexOf(query) === index);
+    const allowed = /^(?:CC0|Public domain|CC BY(?:-SA)?(?: \d(?:\.\d)?)?)$/i;
+    const relevanceTokens = [...titleWords, ...subjectAliases.split(/\s+/), ...place.split(/\s+/)]
+      .map(token => normalize(token)).filter(token => token.length > 3);
+    let bestMatch = null;
+    for(const query of queries){
+      const endpoint = new URL('https://commons.wikimedia.org/w/api.php');
+      const params = {
+        action:'query', generator:'search', gsrsearch:`${query} filetype:bitmap`, gsrnamespace:'6', gsrlimit:'12',
+        prop:'imageinfo', iiprop:'url|extmetadata', iiurlwidth:'1200',
+        iiextmetadatafilter:'LicenseShortName|LicenseUrl|Artist|Credit|ImageDescription', format:'json', origin:'*'
+      };
+      Object.entries(params).forEach(([key,value]) => endpoint.searchParams.set(key,value));
+      const response = await fetch(endpoint, {headers:{Accept:'application/json'}});
+      if(!response.ok) throw new Error('Rechtenvrije foto zoeken lukte niet.');
+      const payload = await response.json();
+      const pages = Object.values(payload?.query?.pages || {});
+      for(const page of pages){
+        const info = page?.imageinfo?.[0];
+        const meta = info?.extmetadata || {};
+        const license = plainMetadataText(meta.LicenseShortName?.value);
+        const imageUrl = validRemoteImageUrl(info?.thumburl || info?.url);
+        if(!imageUrl || !allowed.test(license)) continue;
+        const artist = plainMetadataText(meta.Artist?.value || meta.Credit?.value) || 'Onbekende maker';
+        const description = plainMetadataText(meta.ImageDescription?.value);
+        const haystack = normalize(`${page?.title || ''} ${description}`);
+        const score = relevanceTokens.reduce((total, token) => total + (haystack.includes(token) ? 1 : 0), 0);
+        if(score < 1 || (bestMatch && bestMatch.score >= score)) continue;
+        bestMatch = {score, suggestion:{
+          url:imageUrl,
+          alt:description || title || 'Activiteit',
+          title:'Rechtenvrije beeldsuggestie',
+          meta:`${license} · ${artist} · Wikimedia Commons`,
+          warning:'Controleer vóór goedkeuring of het beeld echt bij de activiteit past. Naamsvermelding en een licentielink kunnen verplicht zijn.',
+          sourceType:'commons',
+          sourceUrl:validRemoteImageUrl(info?.descriptionurl) || 'https://commons.wikimedia.org/',
+          sourceLabel:'Wikimedia Commons',
+          license,
+          licenseUrl:validRemoteImageUrl(meta.LicenseUrl?.value),
+          attribution:artist
+        }};
+      }
+    }
+    return bestMatch?.suggestion || null;
+  }
+  async function suggestTeamIdeaImage(options={}){
+    const request = ++teamIdeaImageSuggestRequest;
+    const freeOnly = Boolean(options.freeOnly);
+    const url = $('#teamIdeaUrlInput')?.value.trim() || '';
+    setTeamIdeaImageSuggestion(null);
+    setTeamIdeaImageSuggestStatus(freeOnly ? 'Rechtenvrije foto zoeken...' : 'Websitefoto zoeken...', true);
+    try{
+      let suggestion = freeOnly ? null : await fetchWebsiteImageSuggestion(url);
+      if(request !== teamIdeaImageSuggestRequest) return;
+      if(!suggestion){
+        setTeamIdeaImageSuggestStatus('Geen geschikte websitefoto gevonden. Rechtenvrije foto zoeken...', true);
+        suggestion = await fetchCommonsImageSuggestion();
+      }
+      if(request !== teamIdeaImageSuggestRequest) return;
+      if(!suggestion){
+        setTeamIdeaImageSuggestStatus('Geen betrouwbare fotosuggestie gevonden. Kies eventueel zelf een foto.');
+        return;
+      }
+      setTeamIdeaImageSuggestion(suggestion);
+    }catch(error){
+      if(request !== teamIdeaImageSuggestRequest) return;
+      setTeamIdeaImageSuggestStatus(error.message || 'Een fotosuggestie ophalen lukte niet. Kies eventueel zelf een foto.');
+    }
+  }
+  function scheduleTeamIdeaImageSuggestion(){
+    window.clearTimeout(teamIdeaImageSuggestTimer);
+    const url = $('#teamIdeaUrlInput')?.value.trim() || '';
+    if(!url){
+      teamIdeaImageSuggestRequest += 1;
+      setTeamIdeaImageSuggestion(null);
+      setTeamIdeaImageSuggestStatus('');
+      return;
+    }
+    if(!hasUsefulPublicUrl(url)) return;
+    teamIdeaImageSuggestTimer = window.setTimeout(() => suggestTeamIdeaImage(), 650);
+  }
+  function resetTeamIdeaImageSuggestion(){
+    teamIdeaImageSuggestRequest += 1;
+    window.clearTimeout(teamIdeaImageSuggestTimer);
+    setTeamIdeaImageSuggestion(null);
+    setTeamIdeaImageSuggestStatus('');
+  }
   function setTeamIdeaAddressDistance(km){
     const form = $('#teamIdeaForm');
     if(!form) return;
@@ -7851,6 +8095,7 @@
     const domain = $('#teamIdeaDomainInput').value;
     const imageFile = $('#teamIdeaImageInput')?.files?.[0] || null;
     let imageData = '';
+    let imageProvenance = {};
     if(imageFile){
       if(imageFile.size > IDEA_IMAGE_MAX_BYTES){
         setTeamIdeaStatus('Kies een foto kleiner dan 1,5 MB.', 'warn');
@@ -7862,6 +8107,16 @@
         setTeamIdeaStatus('De foto kon niet worden gelezen. Probeer een andere afbeelding.', 'warn');
         return;
       }
+    }else if(teamIdeaImageSuggestion?.accepted){
+      imageData = teamIdeaImageSuggestion.url;
+      imageProvenance = {
+        imageSourceType:teamIdeaImageSuggestion.sourceType || '',
+        imageSourceUrl:teamIdeaImageSuggestion.sourceUrl || '',
+        imageSourceLabel:teamIdeaImageSuggestion.sourceLabel || '',
+        imageLicense:teamIdeaImageSuggestion.license || '',
+        imageLicenseUrl:teamIdeaImageSuggestion.licenseUrl || '',
+        imageAttribution:teamIdeaImageSuggestion.attribution || ''
+      };
     }
     const item = normalizeTeamIdea({
       id:`user-${Date.now()}`,
@@ -7887,6 +8142,7 @@
       image:imageData,
       imageAlt:$('#teamIdeaTitleInput').value.trim(),
       imageStatus:imageData ? 'pending' : '',
+      ...imageProvenance,
       source:by || 'Inzending',
       createdAt:new Date().toISOString()
     });
@@ -7940,6 +8196,7 @@
     syncCustomSelect($('#teamIdeaDurationInput'));
     syncTeamIdeaLocationRequirements();
     syncTeamIdeaImageName();
+    resetTeamIdeaImageSuggestion();
     $('#teamIdeaAddressStatus').textContent = '';
     $('#teamIdeaLatInput').value = '';
     $('#teamIdeaLonInput').value = '';
@@ -10742,7 +10999,36 @@
     $$('[data-idea-submit-close]').forEach(button => button.addEventListener('click', () => closeIdeaSubmitSheet()));
     $$('[data-agenda-source-close]').forEach(button => button.addEventListener('click', () => closeAgendaSourceSheet()));
     const teamIdeaImageInput = $('#teamIdeaImageInput');
-    if(teamIdeaImageInput) teamIdeaImageInput.addEventListener('change', syncTeamIdeaImageName);
+    if(teamIdeaImageInput) teamIdeaImageInput.addEventListener('change', () => {
+      syncTeamIdeaImageName();
+      if(teamIdeaImageInput.files?.[0]){
+        teamIdeaImageSuggestRequest += 1;
+        setTeamIdeaImageSuggestion(null);
+        setTeamIdeaImageSuggestStatus('Je eigen foto is gekozen en wordt eerst beoordeeld.');
+      }
+    });
+    $('#teamIdeaUrlInput')?.addEventListener('input', scheduleTeamIdeaImageSuggestion);
+    $('#teamIdeaUrlInput')?.addEventListener('blur', () => {
+      window.clearTimeout(teamIdeaImageSuggestTimer);
+      if(hasUsefulPublicUrl($('#teamIdeaUrlInput').value)) suggestTeamIdeaImage();
+    });
+    $('#teamIdeaAcceptImage')?.addEventListener('click', () => {
+      if(!teamIdeaImageSuggestion) return;
+      teamIdeaImageSuggestion.accepted = true;
+      if(teamIdeaImageInput) teamIdeaImageInput.value = '';
+      syncTeamIdeaImageName();
+      renderTeamIdeaImageSuggestion();
+    });
+    $('#teamIdeaFindFreeImage')?.addEventListener('click', () => suggestTeamIdeaImage({freeOnly:true}));
+    $('#teamIdeaStartFreeImage')?.addEventListener('click', () => suggestTeamIdeaImage({freeOnly:true}));
+    $('#teamIdeaReplaceImage')?.addEventListener('click', () => teamIdeaImageInput?.click());
+    $('#teamIdeaSkipImage')?.addEventListener('click', () => {
+      if(teamIdeaImageInput) teamIdeaImageInput.value = '';
+      syncTeamIdeaImageName();
+      teamIdeaImageSuggestRequest += 1;
+      setTeamIdeaImageSuggestion(null);
+      setTeamIdeaImageSuggestStatus('Geen foto gekozen. Je kunt de inzending gewoon versturen.');
+    });
     $('#linkAddForm').addEventListener('submit', handleLinkAddSubmit);
     document.addEventListener('click', event => {
       const trigger = event.target.closest('[data-random-idea]');
