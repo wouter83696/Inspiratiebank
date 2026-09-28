@@ -730,14 +730,14 @@
     .ideaFeaturedMedia .ideaImageDomainBadge svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .ideaFeaturedContent{
       position:relative;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;min-width:0;padding:24px 24px 20px;
-      border-radius:0 11px 11px 0;background:color-mix(in srgb,var(--theme-tint-strong) 48%,#fff);
-      box-shadow:inset 4px 0 0 color-mix(in srgb,var(--theme-line) 72%,transparent)
+      overflow:hidden;border-radius:0 11px 11px 0;background:color-mix(in srgb,var(--theme-tint-strong) 38%,#fff)
     }
-    .ideaFeaturedContent > :not(.ideaFeaturedWatermark){position:relative;z-index:1}
-    .ideaFeaturedWatermark{
-      position:absolute;z-index:0;right:-25px;bottom:-31px;width:155px;height:155px;color:var(--theme-ink);opacity:.055;pointer-events:none
+    .ideaFeaturedContent > :not(.ideaFeaturedBackdrop){position:relative;z-index:1}
+    .ideaFeaturedBackdrop{
+      position:absolute;z-index:0;inset:0;overflow:hidden;pointer-events:none
     }
-    .ideaFeaturedWatermark svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:.8;stroke-linecap:round;stroke-linejoin:round}
+    .ideaFeaturedBackdrop img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.105;filter:saturate(.72) contrast(.88);transform:scale(1.04)}
+    .ideaFeaturedBackdrop::after{content:"";position:absolute;inset:0;background:rgba(255,253,247,.66)}
     .ideaFeaturedKicker{
       display:inline-flex;align-items:center;gap:7px;width:fit-content;margin:0 0 13px;padding:7px 10px;
       border:1px solid rgba(213,177,93,.32);border-radius:999px;background:#FCEBB8;color:#765200;font-size:.76rem;font-weight:700;line-height:1
@@ -783,13 +783,13 @@
       #ideaCards .ideaFeaturedMedia .ideaImagePlaceholder{min-height:0}
       #ideaCards .ideaFeaturedMedia .ideaImageDomainBadge{left:14px;bottom:-17px}
       #ideaCards .ideaFeaturedContent{padding:12px 16px 19px}
-      #ideaCards .ideaFeaturedContent{border-radius:0;background:color-mix(in srgb,var(--theme-tint-strong) 34%,#fff);box-shadow:none}
+      #ideaCards .ideaFeaturedContent{border-radius:0;background:color-mix(in srgb,var(--theme-tint-strong) 32%,#fff)}
       #ideaCards .ideaFeaturedKicker{min-height:32px;margin:0 0 12px 45px;padding:6px 9px}
       #ideaCards .ideaFeaturedCard h3{font-size:1.32rem;line-height:1.2}
       #ideaCards .ideaFeaturedLead{margin-top:14px}
       #ideaCards .ideaFeaturedDescription{margin-top:13px;font-size:.92rem}
       #ideaCards .ideaFeaturedPractical{margin:16px 0 0}
-      #ideaCards .ideaFeaturedWatermark{right:-18px;bottom:-22px;width:125px;height:125px}
+      #ideaCards .ideaFeaturedBackdrop img{opacity:.075}
     }
     .ideaSurpriseCard{
       grid-column:1 / -1;align-self:start;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px 14px;
@@ -9040,7 +9040,7 @@
     return `<article class="ideaFeaturedCard ${domainThemeClass(item.domain)}" data-idea-key="${escapeHtml(ideaDomKey(item))}" aria-label="Uitgelicht: ${escapeHtml(item.title)}">
       <div class="ideaFeaturedMedia">${imageContent}</div>
       <div class="ideaFeaturedContent">
-        <span class="ideaFeaturedWatermark" aria-hidden="true">${domainIcon(item.domain)}</span>
+        ${image ? `<span class="ideaFeaturedBackdrop" aria-hidden="true"><img src="${escapeHtml(image.src)}" alt="" loading="lazy" decoding="async"></span>` : ''}
         <p class="ideaFeaturedKicker">${surpriseIdeaIcon()}<span>Uitgelicht</span></p>
         <h3>${title}</h3>
         ${metadataBlock}
