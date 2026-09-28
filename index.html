@@ -729,10 +729,15 @@
     }
     .ideaFeaturedMedia .ideaImageDomainBadge svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .ideaFeaturedContent{
-      display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;min-width:0;padding:24px 24px 20px;
+      position:relative;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;min-width:0;padding:24px 24px 20px;
       border-radius:0 11px 11px 0;background:color-mix(in srgb,var(--theme-tint-strong) 48%,#fff);
       box-shadow:inset 4px 0 0 color-mix(in srgb,var(--theme-line) 72%,transparent)
     }
+    .ideaFeaturedContent > :not(.ideaFeaturedWatermark){position:relative;z-index:1}
+    .ideaFeaturedWatermark{
+      position:absolute;z-index:0;right:-25px;bottom:-31px;width:155px;height:155px;color:var(--theme-ink);opacity:.055;pointer-events:none
+    }
+    .ideaFeaturedWatermark svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:.8;stroke-linecap:round;stroke-linejoin:round}
     .ideaFeaturedKicker{
       display:inline-flex;align-items:center;gap:7px;width:fit-content;margin:0 0 13px;padding:7px 10px;
       border:1px solid rgba(213,177,93,.32);border-radius:999px;background:#FCEBB8;color:#765200;font-size:.76rem;font-weight:700;line-height:1
@@ -760,14 +765,8 @@
     .ideaFeaturedCard .cardMetaLine .metaIcon{width:16px;height:16px;color:#55777A}
     .ideaFeaturedLead{margin:15px 0 0;color:#225F6D;font-size:.88rem;font-weight:600;line-height:1.42}
     .ideaFeaturedDescription{margin:13px 0 0;color:rgba(11,18,32,.62);font-size:.92rem;line-height:1.46}
-    .ideaFeaturedAction{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;margin-top:auto;padding:9px 13px;
-      border:0;border-radius:9px;background:#006B7D;color:#fff;font:inherit;font-size:.8rem;font-weight:650;line-height:1;text-decoration:none;cursor:pointer
-    }
-    .ideaFeaturedAction:hover{background:#005968;color:#fff;text-decoration:none}
-    .ideaFeaturedAction svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .ideaFeaturedPractical{
-      width:100%;margin:15px 0 14px;padding-top:13px;border-top:1px solid color-mix(in srgb,var(--theme-line) 36%,transparent);
+      width:100%;margin:auto 0 0;padding-top:15px;border-top:1px solid color-mix(in srgb,var(--theme-line) 36%,transparent);
       color:#667674;font-size:.78rem;line-height:1.4
     }
     .ideaFeaturedPractical strong{display:block;margin-bottom:3px;color:#356F7B;font-size:.72rem;font-weight:650}
@@ -789,8 +788,8 @@
       #ideaCards .ideaFeaturedCard h3{font-size:1.32rem;line-height:1.2}
       #ideaCards .ideaFeaturedLead{margin-top:14px}
       #ideaCards .ideaFeaturedDescription{margin-top:13px;font-size:.92rem}
-      #ideaCards .ideaFeaturedPractical{margin:16px 0 14px}
-      #ideaCards .ideaFeaturedAction{width:100%;margin-top:0}
+      #ideaCards .ideaFeaturedPractical{margin:16px 0 0}
+      #ideaCards .ideaFeaturedWatermark{right:-18px;bottom:-22px;width:125px;height:125px}
     }
     .ideaSurpriseCard{
       grid-column:1 / -1;align-self:start;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px 14px;
@@ -9041,15 +9040,13 @@
     return `<article class="ideaFeaturedCard ${domainThemeClass(item.domain)}" data-idea-key="${escapeHtml(ideaDomKey(item))}" aria-label="Uitgelicht: ${escapeHtml(item.title)}">
       <div class="ideaFeaturedMedia">${imageContent}</div>
       <div class="ideaFeaturedContent">
+        <span class="ideaFeaturedWatermark" aria-hidden="true">${domainIcon(item.domain)}</span>
         <p class="ideaFeaturedKicker">${surpriseIdeaIcon()}<span>Uitgelicht</span></p>
         <h3>${title}</h3>
         ${metadataBlock}
         ${lead ? `<p class="ideaFeaturedLead">${escapeHtml(lead)}</p>` : ''}
         ${description ? `<p class="ideaFeaturedDescription">${escapeHtml(description)}</p>` : ''}
         ${item.materials ? `<p class="ideaFeaturedPractical"><strong>Praktisch</strong>${escapeHtml(item.materials)}</p>` : ''}
-        ${item.url
-          ? `<a class="ideaFeaturedAction" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span>Bekijk activiteit</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="m14 7 5 5-5 5"></path></svg></a>`
-          : `<button class="ideaFeaturedAction" type="button" data-featured-details="${escapeHtml(ideaDomKey(item))}"><span>Bekijk activiteit</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"></path><path d="m14 7 5 5-5 5"></path></svg></button>`}
       </div>
     </article>`;
   }
@@ -11212,16 +11209,6 @@
     });
     $('#linkAddForm').addEventListener('submit', handleLinkAddSubmit);
     document.addEventListener('click', event => {
-      const featuredDetails = event.target.closest('[data-featured-details]');
-      if(featuredDetails){
-        event.preventDefault();
-        const key = featuredDetails.dataset.featuredDetails;
-        activeIdeaMapKey = key;
-        ideaMapDetailKey = key;
-        ideaMapPanelExpanded = true;
-        setIdeaView('map', {scroll:true});
-        return;
-      }
       const trigger = event.target.closest('[data-random-idea]');
       if(!trigger) return;
       event.preventDefault();
