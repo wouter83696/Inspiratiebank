@@ -731,14 +731,26 @@
     .ideaFeaturedContent{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-width:0;padding:22px 22px 20px}
     .ideaFeaturedKicker{display:inline-flex;align-items:center;gap:7px;width:fit-content;margin:0 0 13px;color:#805B08;font-size:.76rem;font-weight:650;line-height:1}
     .ideaFeaturedKicker svg{width:16px;height:16px;fill:none;stroke:#805B08;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-    .ideaFeaturedCard h3{margin:0;color:var(--accent-dark);font-size:1.32rem;font-weight:500;line-height:1.18}
+    .ideaFeaturedCard h3{margin:0;color:#006780;font-size:1.48rem;font-weight:600;line-height:1.18}
     .ideaFeaturedCard .ideaTitleLink{color:inherit;text-decoration:none}
     .ideaFeaturedCard .cardMetaBlock{
-      display:flex;flex-direction:column;align-items:flex-start;gap:5px;width:fit-content;max-width:100%;
-      margin-top:13px;padding:7px 10px;border:1px solid rgba(112,94,63,.035);border-radius:10px;background:rgba(247,241,231,.11);box-sizing:border-box
+      display:flex;flex-direction:column;align-items:flex-start;gap:6px;width:fit-content;max-width:100%;
+      margin-top:14px;padding:8px 11px;border:1px solid rgba(112,94,63,.035);border-radius:11px;background:rgba(247,241,231,.11);box-sizing:border-box
     }
-    .ideaFeaturedCard .cardMetaBlock .cardLabels{display:flex;gap:6px;margin:0;padding:0;border:0;background:transparent}
-    .ideaFeaturedCard .cardMetaLine{width:fit-content;max-width:100%;margin:0;padding:0;border:0;background:transparent}
+    .ideaFeaturedCard .cardMetaBlock .cardLabels{
+      display:inline-flex;width:auto;max-width:100%;min-height:0;align-self:flex-start;gap:7px;
+      margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:visible
+    }
+    .ideaFeaturedCard .cardMetaBlock .cardLabels .pill{
+      min-height:22px;flex:0 0 auto;gap:4px;padding:3px 2px;border:0!important;background:transparent!important;
+      color:#617573;font-size:.7rem;font-weight:500
+    }
+    .ideaFeaturedCard .cardMetaBlock .cardLabels .pill + .pill{margin-left:0;padding-left:2px;border-left:0!important}
+    .ideaFeaturedCard .cardMetaLine{
+      display:flex;align-items:center;gap:12px;width:auto;max-width:100%;align-self:flex-start;
+      margin:0;padding:0;border:0;border-radius:0;background:transparent;color:#697472;font-size:.79rem;white-space:nowrap
+    }
+    .ideaFeaturedCard .cardMetaLine .metaIcon{width:16px;height:16px;color:#55777A}
     .ideaFeaturedDescription{margin:14px 0 0;color:rgba(11,18,32,.66);font-size:.94rem;line-height:1.46}
     @media (min-width:981px) and (hover:hover) and (pointer:fine){
       .ideaFeaturedCard:hover{transform:translateY(-2px);border-color:rgba(196,157,75,.62);box-shadow:0 15px 32px rgba(92,65,33,.08)}
@@ -753,7 +765,7 @@
       #ideaCards .ideaFeaturedMedia .ideaImagePlaceholder{min-height:0}
       #ideaCards .ideaFeaturedContent{padding:18px 16px 19px}
       #ideaCards .ideaFeaturedKicker{margin-bottom:11px}
-      #ideaCards .ideaFeaturedCard h3{font-size:1.22rem}
+      #ideaCards .ideaFeaturedCard h3{font-size:1.32rem;line-height:1.2}
       #ideaCards .ideaFeaturedDescription{margin-top:13px;font-size:.92rem}
     }
     .ideaSurpriseCard{
