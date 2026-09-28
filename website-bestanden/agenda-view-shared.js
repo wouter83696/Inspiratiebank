@@ -56,7 +56,7 @@
       : '';
     return `<tr class="${classes}">
       ${manageCell}
-      <td class="ongoingTitleCell"><span class="name">${view.title || ''}</span>${view.review || ''}<div class="small ongoingDateMeta">${view.date || ''}</div>${titleActions}</td>
+      <td class="ongoingTitleCell"><span class="name">${view.title || ''}</span>${view.review || ''}${view.date ? `<div class="small ongoingDateMeta">${view.date}</div>` : ''}${titleActions}</td>
       <td class="ongoingWeeksCell">${view.weeks || ''}</td>
       <td class="ongoingBadgesCell"><div class="cardPillGroup ongoingBadges">${view.place || ''}${view.cost || ''}${view.stimulus || ''}</div></td>
       <td class="ongoingFitCell">${view.meta || ''}<div class="small ongoingAdminDescription">${view.description || ''}</div></td>

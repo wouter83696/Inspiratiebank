@@ -3594,8 +3594,8 @@
     .ongoingFitCell .small{color:#74716E}
     .ongoingBadgesCell .cardPillGroup{
       display:inline-flex;flex-direction:row;align-items:center;
-      justify-content:flex-start;width:fit-content !important;max-width:100%;gap:7px;margin:0;
-      padding:7px 10px;border:1px solid rgba(112,94,63,.035);border-radius:10px;
+      justify-content:flex-start;width:fit-content !important;max-width:100%;gap:10px;margin:0;
+      padding:8px 11px;border:1px solid rgba(112,94,63,.035);border-radius:11px;
       background:rgba(247,241,231,.11);overflow:visible
     }
     .ongoingBadgesCell .cardPillGroup .pill{
@@ -3606,9 +3606,17 @@
     .ongoingBadgesCell .cardPillGroup .pill + .pill{
       margin-left:3px;padding-left:2px;border-left:0 !important
     }
+    #longerOffers .ongoingTitleTextStack{
+      display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-width:0
+    }
+    #longerOffers .ongoingTitleTextStack .ongoingDateMeta{
+      display:block;width:fit-content;max-width:100%;margin:0;
+      padding:8px 11px;border:1px solid rgba(112,94,63,.035);border-radius:11px;
+      background:rgba(247,241,231,.11);color:#697472;font-size:.72rem;line-height:1.2;
+      white-space:normal
+    }
     @media(min-width:641px){
-      .agendaDateMeta,
-      #longerOffers .ongoingTitleCell .ongoingDateMeta{
+      .agendaDateMeta{
         display:table;width:auto;max-width:calc(100% - 74px);margin:7px 0 0 74px;
         padding:7px 10px;border:1px solid rgba(112,94,63,.035);border-radius:10px;
         background:rgba(247,241,231,.11);color:#697472;font-size:.72rem;line-height:1.2;
@@ -4533,6 +4541,7 @@
       }
       #longerOffers .ongoingTitleVisual{width:56px;height:56px;min-width:56px}
       #longerOffers .ongoingTitleCell .small{display:block;margin:7px 0 0 66px;font-size:.76rem;line-height:1.35}
+      #longerOffers .ongoingTitleTextStack .ongoingDateMeta{margin:0;font-size:.72rem;line-height:1.2}
       #longerOffers .ongoingWeeksCell{display:none!important}
       #longerOffers .ongoingMobileWeekPill{
         display:inline-flex;align-items:center;gap:4px;flex:0 0 auto;
@@ -8263,13 +8272,14 @@
       : '';
     const costLabel = normalizeIdeaCost(item.cost);
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
-    const title = `<span class="nameWithIcon"><span class="ongoingTitleVisual" aria-hidden="true"><span class="domainIcon">${domainIcon(item.domain)}</span></span><span class="ideaTitleText">${escapeHtml(item.title)}</span></span>`;
-    const linkedTitle = item.url
-      ? `<a class="ongoingTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${title}</a>`
-      : title;
+    const titleText = item.url
+      ? `<a class="ongoingTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="ideaTitleText">${escapeHtml(item.title)}</span></a>`
+      : `<span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
+    const dateMeta = `<span class="small ongoingDateMeta">${escapeHtml(item.date)} • ${escapeHtml(item.time)}</span>`;
+    const title = `<span class="nameWithIcon"><span class="ongoingTitleVisual" aria-hidden="true"><span class="domainIcon">${domainIcon(item.domain)}</span></span><span class="ongoingTitleTextStack">${titleText}${dateMeta}</span></span>`;
     return AgendaViewShared.renderOngoingRow({
-      themeClass:domainThemeClass(item.domain), title:linkedTitle,
-      review:`<div>${agendaReviewPill(item)}</div>`, date:`${escapeHtml(item.date)} • ${escapeHtml(item.time)}`,
+      themeClass:domainThemeClass(item.domain), title,
+      review:`<div>${agendaReviewPill(item)}</div>`, date:'',
       weeks:escapeHtml(weekLabel), place:`${mobileWeekPill}${placePills}`,
       cost:costPill(costLabel), stimulus:stimulusPill(stimulusLabel), meta:'',
       description:escapeHtml(publicOngoingDescription(item.fit)),
