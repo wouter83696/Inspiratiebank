@@ -620,6 +620,16 @@
       box-shadow:0 8px 18px rgba(20,38,42,.045)
     }
     .ideaImageFrame img{width:100%;height:100%;object-fit:cover;display:block;border-radius:12px}
+    .ideaImageFrame img.ideaImageContain,
+    .ideaFeaturedMedia img.ideaImageContain,
+    #ideaList .ideaListThumb.ideaImageContain,
+    .ideaMapResultThumb.ideaImageContain{
+      object-fit:contain;background:#f6f2e9
+    }
+    .ideaImageFrame img.ideaImageFocusUpper,
+    .ideaFeaturedMedia img.ideaImageFocusUpper,
+    #ideaList .ideaListThumb.ideaImageFocusUpper,
+    .ideaMapResultThumb.ideaImageFocusUpper{object-position:center 32%}
     .ideaThemeRow td{background:linear-gradient(color-mix(in srgb,var(--theme-tint) 38%,transparent),color-mix(in srgb,var(--theme-tint) 38%,transparent)),rgba(255,255,255,.96)}
     .ideaThemeRow:hover td{background:linear-gradient(color-mix(in srgb,var(--theme-tint-strong) 42%,transparent),color-mix(in srgb,var(--theme-tint-strong) 42%,transparent)),rgba(255,255,255,.97)}
     .ideaThemeCard .domainIcon,.ideaThemeRow .domainIcon{background:var(--theme-icon-bg);border-color:var(--theme-icon-line);color:var(--theme-ink)}
@@ -5995,6 +6005,24 @@
   const IDEA_TITLE_IMAGES = {
     'OoijMooiks zelfoogstboerderij':'website-bestanden/afbeeldingen/inspiratie/135-ooijmooiks-zelfoogstboerderij.jpg'
   };
+  const IDEA_CONTAIN_IMAGE_NAMES = new Set([
+    '129-rox-escape-nijmegen-escaperooms-op-nyma-verified.jpg',
+    '155-huis-van-de-nijmeegse-geschiedenis-gratis-stadsverhalen.png',
+    'locatie-popculturearcade-nl.jpg',
+    'locatie-roxescape-nl.jpg'
+  ]);
+  const IDEA_UPPER_FOCUS_IMAGE_NAMES = new Set([
+    '142-museum-arnhem-kunst-tuin-en-uitzicht.jpg'
+  ]);
+  function ideaImageClass(src=''){
+    const filename = String(src).split('/').pop()?.split('?')[0] || '';
+    if(IDEA_CONTAIN_IMAGE_NAMES.has(filename)) return 'ideaImageContain';
+    if(IDEA_UPPER_FOCUS_IMAGE_NAMES.has(filename)) return 'ideaImageFocusUpper';
+    return '';
+  }
+  function ideaImageData(src='', alt='Activiteit'){
+    return {src, alt, className:ideaImageClass(src)};
+  }
   function responsiveImageSrcset(src=''){
     if(!src || src.startsWith('data:') || !/\.jpe?g($|\?)/i.test(src)) return '';
     const base = src.replace(/\.jpe?g($|\?)/i, '');
@@ -6004,6 +6032,7 @@
     const srcset = responsiveImageSrcset(image.src || '');
     const attrs = [
       `src="${escapeHtml(image.src || '')}"`,
+      image.className ? `class="${escapeHtml(image.className)}"` : '',
       srcset ? `srcset="${escapeHtml(srcset)}"` : '',
       srcset ? 'sizes="(max-width: 640px) calc(100vw - 28px), (min-width: 1180px) 24vw, 33vw"' : '',
       `alt="${escapeHtml(image.alt || 'Activiteit')}"`,
@@ -6019,12 +6048,12 @@
   }
   function approvedIdeaImage(item={}){
     if(item.image && (item.imageStatus === 'approved' || item.imageApproved === true)){
-      return {src:item.image, alt:item.imageAlt || item.title || 'Activiteit'};
+      return ideaImageData(item.image, item.imageAlt || item.title || 'Activiteit');
     }
     const titleImage = IDEA_TITLE_IMAGES[item.title];
-    if(titleImage) return {src:titleImage, alt:item.imageAlt || item.title || 'Activiteit'};
+    if(titleImage) return ideaImageData(titleImage, item.imageAlt || item.title || 'Activiteit');
     const themeImage = IDEA_THEME_IMAGES[item.domain];
-    return themeImage ? {src:themeImage, alt:`Passend beeld bij ${item.title || 'deze activiteit'}`} : null;
+    return themeImage ? ideaImageData(themeImage, `Passend beeld bij ${item.title || 'deze activiteit'}`) : null;
   }
   function readIdeaImageFile(file){
     return new Promise((resolve, reject) => {
@@ -8738,7 +8767,7 @@
     const titleText = item.url
       ? `<a class="ideaListTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.title)}</a>`
       : `<span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
-    const visual = `<span class="ideaListVisual${image ? ' hasImage' : ''}" aria-hidden="true">${image ? `<img class="ideaListThumb" src="${escapeHtml(image.src)}" alt="" loading="lazy" decoding="async">` : ''}<span class="domainIcon">${domainIcon(item.domain)}</span></span>`;
+    const visual = `<span class="ideaListVisual${image ? ' hasImage' : ''}" aria-hidden="true">${image ? `<img class="ideaListThumb${image.className ? ` ${escapeHtml(image.className)}` : ''}" src="${escapeHtml(image.src)}" alt="" loading="lazy" decoding="async">` : ''}<span class="domainIcon">${domainIcon(item.domain)}</span></span>`;
     const titleRow = `<span class="ideaListTitleRow">${titleText}</span>`;
     const linkedTitle = `<span class="nameWithIcon">${visual}${titleRow}</span>`;
     return IdeaViewShared.renderDesktopRow({
@@ -8944,7 +8973,7 @@
       meta:metadata.meta
     });
     const featuredImage = image
-      ? `<img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || `Foto bij ${item.title}`)}" loading="lazy" decoding="async">`
+      ? `<img${image.className ? ` class="${escapeHtml(image.className)}"` : ''} src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || `Foto bij ${item.title}`)}" loading="lazy" decoding="async">`
       : '';
     const imageContent = image
       ? `${item.url ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener" aria-label="Open website van ${escapeHtml(item.title)}">${featuredImage}</a>` : featuredImage}<span class="ideaImageDomainBadge domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>`
@@ -9864,7 +9893,7 @@
       const image = approvedIdeaImage(point.item);
       const mediaIcon = `<span class="ideaMapResultMediaIcon domainIcon" aria-hidden="true">${domainIcon(point.item.domain)}</span>`;
       const thumb = image
-        ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async">${mediaIcon}</span>`
+        ? `<span class="ideaMapResultThumbWrap"><img class="ideaMapResultThumb${image.className ? ` ${escapeHtml(image.className)}` : ''}" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || point.item.title || 'Activiteit')}" loading="lazy" decoding="async">${mediaIcon}</span>`
         : `<span class="ideaMapResultThumbWrap isPlaceholder" aria-hidden="true">${mediaIcon}</span>`;
       const metadata = sharedIdeaMetadata(point.item, {point, map:true});
       const metadataBlock = IdeaViewShared.renderMetadata({
