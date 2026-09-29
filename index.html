@@ -713,14 +713,14 @@
       grid-column:1 / -1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;min-width:0
     }
     .ideaFeaturedCard{
-      position:relative;grid-column:span 2;align-self:stretch;display:block;
-      min-width:0;min-height:370px;padding:8px;overflow:hidden;border:1px solid rgba(196,157,75,.42);border-radius:18px;background:#FFFEFC;
+      position:relative;grid-column:span 2;align-self:stretch;display:grid;grid-template-columns:minmax(0,1fr) minmax(190px,34%);
+      width:100%;min-width:0;min-height:370px;padding:8px;overflow:hidden;border:1px solid rgba(196,157,75,.42);border-radius:18px;
+      background:#FFFEFC;color:inherit;font:inherit;text-align:left;cursor:pointer;
       box-shadow:0 16px 36px rgba(29,65,69,.13);transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s var(--ease)
     }
     .ideaFeaturedMedia{
-      position:absolute;inset:8px;min-width:0;min-height:0;overflow:visible;border:1px solid color-mix(in srgb,var(--theme-line) 44%,rgba(196,157,75,.28));border-radius:12px;background:var(--theme-tint)
+      position:relative;min-width:0;min-height:354px;overflow:visible;border:1px solid color-mix(in srgb,var(--theme-line) 44%,rgba(196,157,75,.28));border-radius:12px 0 0 12px;background:var(--theme-tint)
     }
-    .ideaFeaturedMedia > a{display:block;width:100%;height:100%;overflow:hidden;border-radius:inherit}
     .ideaFeaturedMedia img{display:block;width:100%;height:100%;object-fit:cover;border-radius:11px}
     .ideaFeaturedMedia .ideaImagePlaceholder{display:grid;width:100%;height:100%;min-height:248px;margin:0;border:0;border-radius:0;place-items:center}
     .ideaFeaturedMedia .ideaImageDomainBadge{
@@ -729,48 +729,16 @@
     }
     .ideaFeaturedMedia .ideaImageDomainBadge svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .ideaFeaturedContent{
-      position:relative;z-index:3;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;
-      width:47%;min-width:0;min-height:354px;margin-left:auto;padding:26px 25px 21px;overflow:hidden;
-      border-radius:11px;background:rgba(255,248,226,.94);box-shadow:-16px 0 32px rgba(92,65,33,.10)
+      position:relative;z-index:3;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+      min-width:0;min-height:354px;padding:24px 22px;overflow:hidden;border-radius:0 11px 11px 0;
+      background:color-mix(in srgb,var(--theme-tint-strong) 38%,#fff);box-shadow:-12px 0 28px rgba(92,65,33,.09)
     }
-    .ideaFeaturedContent > :not(.ideaFeaturedBackdrop){position:relative;z-index:1}
-    .ideaFeaturedBackdrop{
-      position:absolute;z-index:0;inset:0;overflow:hidden;pointer-events:none
-    }
-    .ideaFeaturedBackdrop img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.07;filter:saturate(.62) contrast(.88);transform:scale(1.04)}
-    .ideaFeaturedBackdrop::after{content:"";position:absolute;inset:0;background:rgba(255,248,226,.68)}
     .ideaFeaturedKicker{
       display:inline-flex;align-items:center;gap:7px;width:fit-content;margin:0 0 13px;padding:7px 10px;
       border:1px solid rgba(213,177,93,.32);border-radius:999px;background:#FCEBB8;color:#765200;font-size:.76rem;font-weight:700;line-height:1
     }
     .ideaFeaturedKicker svg{width:16px;height:16px;fill:none;stroke:#805B08;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-    .ideaFeaturedCard h3{margin:0;color:#005F73;font-size:1.58rem;font-weight:650;line-height:1.14}
-    .ideaFeaturedCard .ideaTitleLink{color:inherit;text-decoration:none}
-    .ideaFeaturedCard .cardMetaBlock{
-      display:flex;flex-direction:column;align-items:flex-start;gap:6px;width:fit-content;max-width:100%;
-      margin-top:14px;padding:8px 11px;border:1px solid rgba(112,94,63,.035);border-radius:11px;background:rgba(247,241,231,.11);box-sizing:border-box
-    }
-    .ideaFeaturedCard .cardMetaBlock .cardLabels{
-      display:inline-flex;width:auto;max-width:100%;min-height:0;align-self:flex-start;gap:7px;
-      margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:visible
-    }
-    .ideaFeaturedCard .cardMetaBlock .cardLabels .pill{
-      min-height:22px;flex:0 0 auto;gap:4px;padding:3px 2px;border:0!important;background:transparent!important;
-      color:#617573;font-size:.7rem;font-weight:500
-    }
-    .ideaFeaturedCard .cardMetaBlock .cardLabels .pill + .pill{margin-left:0;padding-left:2px;border-left:0!important}
-    .ideaFeaturedCard .cardMetaLine{
-      display:flex;align-items:center;gap:12px;width:auto;max-width:100%;align-self:flex-start;
-      margin:0;padding:0;border:0;border-radius:0;background:transparent;color:#697472;font-size:.79rem;white-space:nowrap
-    }
-    .ideaFeaturedCard .cardMetaLine .metaIcon{width:16px;height:16px;color:#55777A}
-    .ideaFeaturedLead{margin:15px 0 0;color:#225F6D;font-size:.88rem;font-weight:600;line-height:1.42}
-    .ideaFeaturedDescription{margin:13px 0 0;color:rgba(11,18,32,.62);font-size:.92rem;line-height:1.46}
-    .ideaFeaturedPractical{
-      width:100%;margin:auto 0 0;padding-top:15px;border-top:1px solid color-mix(in srgb,var(--theme-line) 36%,transparent);
-      color:#667674;font-size:.78rem;line-height:1.4
-    }
-    .ideaFeaturedPractical strong{display:block;margin-bottom:3px;color:#356F7B;font-size:.72rem;font-weight:650}
+    .ideaFeaturedCard h3{margin:0;color:#005F73;font-size:1.48rem;font-weight:650;line-height:1.16}
     @media (min-width:981px) and (hover:hover) and (pointer:fine){
       .ideaFeaturedCard:hover{transform:translateY(-2px);border-color:rgba(196,157,75,.62);box-shadow:0 15px 32px rgba(92,65,33,.08)}
     }
@@ -779,26 +747,13 @@
     }
     @media (max-width:640px){
       #ideaCards .ideaFeaturedGroup{grid-template-columns:1fr}
-      #ideaCards .ideaFeaturedCard{grid-column:1 / -1;display:grid;grid-template-columns:1fr;min-height:0}
-      #ideaCards .ideaFeaturedMedia{position:relative;inset:auto;min-height:0;aspect-ratio:16 / 9}
+      #ideaCards .ideaFeaturedCard{grid-column:1 / -1;grid-template-columns:1fr;min-height:0}
+      #ideaCards .ideaFeaturedMedia{min-height:0;aspect-ratio:16 / 9;border-radius:12px 12px 0 0}
       #ideaCards .ideaFeaturedMedia .ideaImagePlaceholder{min-height:0}
       #ideaCards .ideaFeaturedMedia .ideaImageDomainBadge{left:14px;bottom:-17px}
-      #ideaCards .ideaFeaturedContent{width:auto;min-height:0;margin:0;padding:12px 16px 19px}
-      #ideaCards .ideaFeaturedContent{border-radius:0;background:color-mix(in srgb,var(--theme-tint-strong) 32%,#fff);box-shadow:none}
-      #ideaCards .ideaFeaturedKicker{min-height:32px;margin:0 0 12px 45px;padding:6px 9px}
-      #ideaCards .ideaFeaturedCard h3{font-size:1.32rem;line-height:1.2}
-      #ideaCards .ideaFeaturedCard h3{color:#005F73}
-      #ideaCards .ideaFeaturedCard .cardMetaBlock .cardLabels .pill{color:#617573}
-      #ideaCards .ideaFeaturedCard .cardMetaLine{color:#697472}
-      #ideaCards .ideaFeaturedCard .cardMetaLine .metaIcon{color:#55777A}
-      #ideaCards .ideaFeaturedLead{margin-top:14px}
-      #ideaCards .ideaFeaturedLead{color:#225F6D}
-      #ideaCards .ideaFeaturedDescription{margin-top:13px;font-size:.92rem}
-      #ideaCards .ideaFeaturedDescription{color:rgba(11,18,32,.62)}
-      #ideaCards .ideaFeaturedPractical{margin:16px 0 0}
-      #ideaCards .ideaFeaturedPractical{color:#667674}
-      #ideaCards .ideaFeaturedPractical strong{color:#356F7B}
-      #ideaCards .ideaFeaturedBackdrop img{opacity:.075}
+      #ideaCards .ideaFeaturedContent{min-height:0;padding:12px 15px 14px 57px;border-radius:0 0 11px 11px;box-shadow:none}
+      #ideaCards .ideaFeaturedKicker{min-height:0;margin:0 0 7px;padding:5px 8px;font-size:.7rem}
+      #ideaCards .ideaFeaturedCard h3{font-size:1.2rem;line-height:1.2;color:#005F73}
     }
     .ideaSurpriseCard{
       grid-column:1 / -1;align-self:start;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px 14px;
@@ -7684,7 +7639,18 @@
     const baseItems = DATA.inspiration.filter(item => !hiddenTitles.has(inspirationKey(item)) && !deleted.has(inspirationKey(item)));
     return [...baseItems, ...allTeamIdeas().map(teamIdeaToInspiration)];
   }
-  let ideaMixSeed = Number(localStorage.getItem('zomerprogramma_idea_mix_seed_v1') || '0');
+  const IDEA_SESSION_MIX_KEY = 'zomerprogramma_idea_session_mix_seed_v1';
+  let ideaMixSeed = (() => {
+    try{
+      const stored = sessionStorage.getItem(IDEA_SESSION_MIX_KEY);
+      if(stored !== null) return Number(stored) || 0;
+      const seed = Math.floor(Math.random() * 2147483647);
+      sessionStorage.setItem(IDEA_SESSION_MIX_KEY, String(seed));
+      return seed;
+    }catch(error){
+      return Math.floor(Math.random() * 2147483647);
+    }
+  })();
   function stableHash(value=''){
     let hash = 2166136261;
     const text = String(value);
@@ -7695,8 +7661,7 @@
     return hash >>> 0;
   }
   function ideaMixJitter(item){
-    const day = new Date().toISOString().slice(0,10);
-    return stableHash(`${day}|${ideaMixSeed}|${ideaDomKey(item)}`) / 4294967295;
+    return (stableHash(`${ideaMixSeed}|${ideaDomKey(item)}`) / 4294967295) * 12;
   }
   function ideaStrengthScore(item={}){
     let score = 0;
@@ -9027,37 +8992,19 @@
   }
   function featuredIdeaCard(item){
     const image = approvedIdeaImage(item);
-    const metadata = sharedIdeaMetadata(item);
-    const copy = audienceText(item.fit).trim();
-    const copyParts = copy.match(/[^.!?]+[.!?]+|[^.!?]+$/g)?.map(part => part.trim()).filter(Boolean) || [];
-    const lead = copyParts.shift() || '';
-    const description = copyParts.join(' ');
-    const metadataBlock = IdeaViewShared.renderMetadata({
-      className:'cardMetaBlock',
-      pills:metadata.pills,
-      meta:metadata.meta
-    });
     const featuredImage = image
       ? `<img${image.className ? ` class="${escapeHtml(image.className)}"` : ''} src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || `Foto bij ${item.title}`)}" loading="lazy" decoding="async">`
       : '';
     const imageContent = image
-      ? `${item.url ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noopener" aria-label="Open website van ${escapeHtml(item.title)}">${featuredImage}</a>` : featuredImage}<span class="ideaImageDomainBadge domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>`
+      ? `${featuredImage}<span class="ideaImageDomainBadge domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>`
       : `<span class="ideaImagePlaceholder" aria-hidden="true"><span class="ideaImageDomainBadge domainIcon">${domainIcon(item.domain)}</span></span>`;
-    const title = item.url
-      ? `<a class="ideaTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.title)}</a>`
-      : escapeHtml(item.title);
-    return `<article class="ideaFeaturedCard ${domainThemeClass(item.domain)}" data-idea-key="${escapeHtml(ideaDomKey(item))}" aria-label="Uitgelicht: ${escapeHtml(item.title)}">
+    return `<button class="ideaFeaturedCard ${domainThemeClass(item.domain)}" type="button" data-featured-target="${escapeHtml(ideaDomKey(item))}" aria-label="Bekijk de gewone tegel van ${escapeHtml(item.title)}">
       <div class="ideaFeaturedMedia">${imageContent}</div>
       <div class="ideaFeaturedContent">
-        ${image ? `<span class="ideaFeaturedBackdrop" aria-hidden="true"><img src="${escapeHtml(image.src)}" alt="" loading="lazy" decoding="async"></span>` : ''}
         <p class="ideaFeaturedKicker">${surpriseIdeaIcon()}<span>Uitgelicht</span></p>
-        <h3>${title}</h3>
-        ${metadataBlock}
-        ${lead ? `<p class="ideaFeaturedLead">${escapeHtml(lead)}</p>` : ''}
-        ${description ? `<p class="ideaFeaturedDescription">${escapeHtml(description)}</p>` : ''}
-        ${item.materials ? `<p class="ideaFeaturedPractical"><strong>Praktisch</strong>${escapeHtml(item.materials)}</p>` : ''}
+        <h3>${escapeHtml(item.title)}</h3>
       </div>
-    </article>`;
+    </button>`;
   }
   function surpriseIdeaCard(){
     return `<article class="ideaSurpriseCard" aria-label="Laat een willekeurig idee kiezen">
@@ -9084,7 +9031,7 @@
     const remaining = regularItems.slice(columns);
     const companionCount = window.matchMedia('(max-width:640px)').matches ? 0 : Math.max(0, columns - 2);
     const companions = remaining.slice(0, companionCount).map(cardIdea).join('');
-    const rest = remaining.slice(companionCount);
+    const rest = [featured, ...remaining.slice(companionCount)];
     const featuredGroup = `<div class="ideaFeaturedGroup">${featuredIdeaCard(featured)}${companions}</div>`;
     return `${firstRow}${featuredGroup}${withSurpriseMarkup(rest, cardIdea, surpriseIdeaCard, columns)}`;
   }
@@ -11233,8 +11180,22 @@
     const mixIdeasBtn = $('#mixIdeasBtn');
     if(mixIdeasBtn) mixIdeasBtn.addEventListener('click', () => {
       ideaMixSeed += 1;
-      localStorage.setItem('zomerprogramma_idea_mix_seed_v1', String(ideaMixSeed));
+      try{ sessionStorage.setItem(IDEA_SESSION_MIX_KEY, String(ideaMixSeed)); }catch(error){}
       renderIdeas();
+    });
+    document.addEventListener('click', event => {
+      const featured = event.target.closest('[data-featured-target]');
+      if(!featured) return;
+      const key = featured.dataset.featuredTarget || '';
+      const target = [...document.querySelectorAll('#ideaCards [data-idea-key]')]
+        .find(card => card.dataset.ideaKey === key);
+      if(!target) return;
+      target.scrollIntoView({
+        behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block:'center'
+      });
+      target.classList.add('ideaRandomFocus');
+      window.setTimeout(() => target.classList.remove('ideaRandomFocus'), 2200);
     });
     const ongoingToggle = $('#ongoingToggle');
     if(ongoingToggle) ongoingToggle.addEventListener('click', () => toggleOngoing({scroll:false}));
