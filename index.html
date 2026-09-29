@@ -716,7 +716,7 @@
       position:relative;grid-column:span 2;align-self:stretch;display:block;
       width:100%;min-width:0;min-height:370px;padding:8px;overflow:hidden;border:1px solid rgba(196,157,75,.42);border-radius:18px;
       background:#FFFEFC;color:inherit;font:inherit;text-align:left;cursor:pointer;
-      box-shadow:0 16px 36px rgba(29,65,69,.13);transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s var(--ease)
+      box-shadow:none;transition:transform .18s var(--ease),border-color .18s var(--ease)
     }
     .ideaFeaturedMedia{
       position:absolute;inset:8px;min-width:0;min-height:0;overflow:visible;border:1px solid color-mix(in srgb,var(--theme-line) 44%,rgba(196,157,75,.28));border-radius:12px;background:var(--theme-tint)
@@ -732,7 +732,7 @@
       position:absolute;z-index:3;right:24px;bottom:24px;display:flex;flex-direction:column;align-items:flex-start;
       width:clamp(205px,38%,285px);min-width:0;padding:18px 19px;overflow:hidden;border:1px solid rgba(213,177,93,.42);border-radius:13px;
       background:rgba(255,248,226,.93);
-      -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 13px 30px rgba(92,65,33,.15)
+      -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:none
     }
     .ideaFeaturedKicker{
       display:inline-flex;align-items:center;gap:7px;width:fit-content;margin:0 0 12px;padding:0;
@@ -741,7 +741,7 @@
     .ideaFeaturedKicker svg{width:16px;height:16px;fill:none;stroke:#805B08;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaFeaturedCard h3{margin:0;color:#005F73;font-size:1.32rem;font-weight:650;line-height:1.18}
     @media (min-width:981px) and (hover:hover) and (pointer:fine){
-      .ideaFeaturedCard:hover{transform:translateY(-2px);border-color:rgba(196,157,75,.62);box-shadow:0 15px 32px rgba(92,65,33,.08)}
+      .ideaFeaturedCard:hover{transform:translateY(-2px);border-color:rgba(196,157,75,.62);box-shadow:none}
     }
     @media (min-width:641px) and (max-width:1179px){
       .ideaFeaturedGroup{grid-template-columns:repeat(3,minmax(0,1fr))}
