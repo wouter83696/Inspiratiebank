@@ -9045,7 +9045,13 @@
     const remaining = regularItems.slice(columns);
     const companionCount = window.matchMedia('(max-width:640px)').matches ? 0 : Math.max(0, columns - 2);
     const companions = remaining.slice(0, companionCount).map(cardIdea).join('');
-    const rest = [featured, ...remaining.slice(companionCount)];
+    const restWithoutFeatured = remaining.slice(companionCount);
+    const featuredInsertIndex = Math.min(restWithoutFeatured.length, columns * 2);
+    const rest = [
+      ...restWithoutFeatured.slice(0, featuredInsertIndex),
+      featured,
+      ...restWithoutFeatured.slice(featuredInsertIndex)
+    ];
     const featuredGroup = `<div class="ideaFeaturedGroup">${featuredIdeaCard(featured)}${companions}</div>`;
     return `${firstRow}${featuredGroup}${withSurpriseMarkup(rest, cardIdea, surpriseIdeaCard, columns)}`;
   }
