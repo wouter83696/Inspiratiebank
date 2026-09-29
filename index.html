@@ -714,12 +714,12 @@
     }
     .ideaFeaturedCard{
       position:relative;grid-column:span 2;align-self:stretch;display:block;
-      width:100%;min-width:0;min-height:370px;padding:8px;overflow:hidden;border:1px solid rgba(196,157,75,.42);border-radius:18px;
+      width:100%;min-width:0;min-height:370px;padding:8px;overflow:hidden;border:1px solid rgba(196,157,75,.30);border-radius:18px;
       background:#FFFEFC;color:inherit;font:inherit;text-align:left;cursor:pointer;
       box-shadow:none;transition:transform .18s var(--ease),border-color .18s var(--ease)
     }
     .ideaFeaturedMedia{
-      position:absolute;inset:8px;min-width:0;min-height:0;overflow:visible;border:1px solid color-mix(in srgb,var(--theme-line) 44%,rgba(196,157,75,.28));border-radius:12px;background:var(--theme-tint)
+      position:absolute;inset:8px;min-width:0;min-height:0;overflow:visible;border:0;border-radius:12px;background:var(--theme-tint)
     }
     .ideaFeaturedMedia img{display:block;width:100%;height:100%;object-fit:cover;border-radius:11px}
     .ideaFeaturedMedia .ideaImagePlaceholder{display:grid;width:100%;height:100%;min-height:248px;margin:0;border:0;border-radius:0;place-items:center}
@@ -729,19 +729,19 @@
     }
     .ideaFeaturedMedia .ideaImageDomainBadge svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .ideaFeaturedContent{
-      position:absolute;z-index:3;right:24px;bottom:24px;display:flex;flex-direction:column;align-items:flex-start;
-      width:clamp(205px,38%,285px);min-width:0;padding:18px 19px;overflow:hidden;border:1px solid rgba(213,177,93,.42);border-radius:13px;
-      background:rgba(255,248,226,.84);
+      position:absolute;z-index:3;right:24px;bottom:24px;display:flex;flex-direction:column;align-items:flex-start;gap:14px;
+      width:clamp(205px,38%,285px);min-width:0;padding:20px;overflow:hidden;border:1px solid rgba(213,177,93,.38);border-radius:13px;
+      background:rgba(255,253,247,.80);
       -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:none
     }
     .ideaFeaturedKicker{
-      display:inline-flex;align-items:center;gap:7px;width:fit-content;margin:0 0 12px;padding:0;
+      display:inline-flex;align-items:center;gap:7px;width:fit-content;margin:0;padding:0;
       border:0;background:transparent;color:#765200;font-size:.76rem;font-weight:750;line-height:1;text-transform:uppercase
     }
     .ideaFeaturedKicker svg{width:16px;height:16px;fill:none;stroke:#805B08;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .ideaFeaturedCard h3{margin:0;color:#005F73;font-size:1.32rem;font-weight:650;line-height:1.18}
     @media (min-width:981px) and (hover:hover) and (pointer:fine){
-      .ideaFeaturedCard:hover{transform:translateY(-2px);border-color:rgba(196,157,75,.62);box-shadow:none}
+      .ideaFeaturedCard:hover{transform:translateY(-2px);border-color:rgba(196,157,75,.48);box-shadow:none}
     }
     @media (min-width:641px) and (max-width:1179px){
       .ideaFeaturedGroup{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -752,8 +752,8 @@
       #ideaCards .ideaFeaturedMedia{position:relative;inset:auto;min-height:0;aspect-ratio:16 / 9;border-radius:12px 12px 0 0}
       #ideaCards .ideaFeaturedMedia .ideaImagePlaceholder{min-height:0}
       #ideaCards .ideaFeaturedMedia .ideaImageDomainBadge{left:14px;bottom:-17px}
-      #ideaCards .ideaFeaturedContent{position:relative;right:auto;bottom:auto;width:auto;min-height:0;padding:12px 15px 14px 57px;border:0;border-radius:0 0 11px 11px;background:#FFF8E9;box-shadow:none;backdrop-filter:none}
-      #ideaCards .ideaFeaturedKicker{min-height:0;margin:0 0 7px;padding:0;font-size:.7rem}
+      #ideaCards .ideaFeaturedContent{position:relative;right:auto;bottom:auto;width:auto;min-height:0;gap:8px;padding:13px 15px 15px 57px;border:0;border-radius:0 0 11px 11px;background:#FFFCF5;box-shadow:none;backdrop-filter:none}
+      #ideaCards .ideaFeaturedKicker{min-height:0;margin:0;padding:0;font-size:.7rem}
       #ideaCards .ideaFeaturedCard h3{font-size:1.2rem;line-height:1.2;color:#005F73}
     }
     .ideaSurpriseCard{
