@@ -712,6 +712,17 @@
     .adminCheckField input{width:auto;min-width:18px;height:18px}
     .adminIdeaDescription{display:block;margin-top:5px;color:rgba(11,18,32,.70);font-size:.86rem;line-height:1.38}
     .card .adminIdeaDescription{margin-top:-2px;font-size:.9rem}
+    .featuredAdminPanel{display:grid;gap:12px;margin:0 0 18px;padding:14px 16px;border:1px solid rgba(218,187,93,.32);border-radius:14px;background:rgba(255,252,241,.72)}
+    .featuredAdminHead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+    .featuredAdminHead h3{margin:0 0 3px;color:var(--accent-dark);font-size:1rem}
+    .featuredAdminHead p{margin:0;color:var(--muted);font-size:.82rem}
+    .featuredAdminCount{white-space:nowrap;color:#8f7000;font-size:.78rem;font-weight:700}
+    .featuredAdminList{display:grid;gap:7px}
+    .featuredAdminItem{display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:9px;padding:8px 9px;border:1px solid rgba(218,187,93,.25);border-radius:10px;background:rgba(255,255,255,.76)}
+    .featuredAdminIndex{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:#FFF3C7;color:#806300;font-size:.78rem;font-weight:750}
+    .featuredAdminTitle{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--accent-dark);font-size:.86rem;font-weight:600}
+    .featuredAdminActions{display:flex;gap:5px}
+    .featuredAdminActions .button{width:30px;height:30px;padding:0;border-radius:9px}
     .rowActions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
     .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
     .card{padding:16px;min-height:215px;display:flex;flex-direction:column;gap:10px;border:1px solid rgba(255,255,255,.72);border-radius:18px;background:rgba(250,250,248,.90);box-shadow:0 12px 34px rgba(20,38,42,.07);transition:.2s cubic-bezier(.22,1,.36,1)}
@@ -1282,6 +1293,16 @@
                 <p>Ruim inspiratie-items op, beheer foto’s en pas activiteiten aan.</p>
               </div>
             </div>
+        <section class="featuredAdminPanel" aria-labelledby="featuredAdminTitle">
+          <div class="featuredAdminHead">
+            <div>
+              <h3 id="featuredAdminTitle">Uitgelicht</h3>
+              <p>Selecteer maximaal vijf activiteiten met de sterknop. De volgorde hieronder is de volgorde van de carrousel.</p>
+            </div>
+            <span class="featuredAdminCount" id="featuredAdminCount">0 / 5</span>
+          </div>
+          <div class="featuredAdminList" id="featuredAdminList"></div>
+        </section>
         <div class="adminIdeaToolbar">
           <div></div>
           <div class="viewBar">
@@ -1568,6 +1589,7 @@
 	  const ADMIN_SIDEBAR_COLLAPSED_KEY = 'zomerprogramma_admin_sidebar_collapsed_v1';
 	  const REPORTS_KEY = 'zomerprogramma_item_reports_v1';
 	  const FEATURED_IDEA_KEY = 'zomerprogramma_featured_idea_key_v1';
+	  const FEATURED_IDEAS_KEY = 'zomerprogramma_featured_idea_keys_v2';
 	  const TRASH_RETENTION_DAYS = 30;
 	  const EMPTY_ADMIN_BASE = {weeks:[], external:[], inspiration:[], teamIdeas:[], links:[], sourceCheck:{}, sourceReview:{}};
 	  let BASE = window.BCJN_BEHEER_BASE || {...EMPTY_ADMIN_BASE};
@@ -1728,6 +1750,9 @@
 	      verifiedAgendaItemIds:Array.isArray(value.verifiedAgendaItemIds) ? value.verifiedAgendaItemIds : [],
 	      blockedAgendaRules:Array.isArray(value.blockedAgendaRules) ? value.blockedAgendaRules : [],
 	      featuredIdeaKey:typeof value.featuredIdeaKey === 'string' ? value.featuredIdeaKey : '',
+	      featuredIdeaKeys:Array.isArray(value.featuredIdeaKeys)
+	        ? value.featuredIdeaKeys.map(String).filter(Boolean).slice(0,5)
+	        : (typeof value.featuredIdeaKey === 'string' && value.featuredIdeaKey ? [value.featuredIdeaKey] : []),
 	      agendaManualCheckedAt:typeof value.agendaManualCheckedAt === 'string' ? value.agendaManualCheckedAt : '',
 	      agendaSourceCheckRequestedAt:typeof value.agendaSourceCheckRequestedAt === 'string' ? value.agendaSourceCheckRequestedAt : '',
 	      agendaSourceCheckStartedAt:typeof value.agendaSourceCheckStartedAt === 'string' ? value.agendaSourceCheckStartedAt : '',
@@ -2970,24 +2995,59 @@
   function adminFeaturedIdeaKey(item={}){
     return `${normalize(item.title || '')}|${normalize(item.domain || '')}`;
   }
-  function featuredIdeaKey(){
-    if(centralStorageActive()) return String(centralStorage.featuredIdeaKey || '');
-    try{ return String(localStorage.getItem(FEATURED_IDEA_KEY) || ''); }catch(error){ return ''; }
-  }
-  async function toggleFeaturedIdea(key=''){
-    const current = featuredIdeaKey();
-    const next = current === key ? '' : String(key);
-    if(centralStorageActive()) centralStorage.featuredIdeaKey = next;
+  function featuredIdeaKeys(){
+    if(centralStorageActive()){
+      const keys = Array.isArray(centralStorage.featuredIdeaKeys) ? centralStorage.featuredIdeaKeys : [];
+      return keys.length ? keys.map(String).filter(Boolean).slice(0,5) : (centralStorage.featuredIdeaKey ? [String(centralStorage.featuredIdeaKey)] : []);
+    }
     try{
-      if(next) localStorage.setItem(FEATURED_IDEA_KEY, next);
+      const stored = JSON.parse(localStorage.getItem(FEATURED_IDEAS_KEY) || '[]');
+      if(Array.isArray(stored) && stored.length) return stored.map(String).filter(Boolean).slice(0,5);
+      const legacy = String(localStorage.getItem(FEATURED_IDEA_KEY) || '');
+      return legacy ? [legacy] : [];
+    }catch(error){ return []; }
+  }
+  function featuredIdeaKey(){ return featuredIdeaKeys()[0] || ''; }
+  async function saveFeaturedIdeaKeys(keys=[]){
+    const next = [...new Set(keys.map(String).filter(Boolean))].slice(0,5);
+    if(centralStorageActive()){
+      centralStorage.featuredIdeaKeys = next;
+      centralStorage.featuredIdeaKey = next[0] || '';
+    }
+    try{
+      localStorage.setItem(FEATURED_IDEAS_KEY, JSON.stringify(next));
+      if(next[0]) localStorage.setItem(FEATURED_IDEA_KEY, next[0]);
       else localStorage.removeItem(FEATURED_IDEA_KEY);
     }catch(error){}
-    if(!(await saveCentralStorage())){
+    return await saveCentralStorage();
+  }
+  async function toggleFeaturedIdea(key=''){
+    const current = featuredIdeaKeys();
+    const selected = current.includes(String(key));
+    if(!selected && current.length >= 5){
+      setStatus('#adminStatus', 'Je kunt maximaal vijf activiteiten uitlichten.', 'warn');
+      return;
+    }
+    const next = selected ? current.filter(item => item !== String(key)) : [...current, String(key)];
+    if(!(await saveFeaturedIdeaKeys(next))){
       setStatus('#adminStatus', storageErrorMessage('Uitgelichte activiteit opslaan lukte niet.'), 'warn');
       return;
     }
     renderIdeas();
-    setStatus('#adminStatus', next ? 'Deze activiteit staat nu uitgelicht.' : 'Uitgelicht wordt weer automatisch gekozen.', 'ok');
+    setStatus('#adminStatus', selected ? 'Activiteit uit de carrousel verwijderd.' : 'Activiteit aan de carrousel toegevoegd.', 'ok');
+  }
+  async function moveFeaturedIdea(key='', direction=0){
+    const keys = featuredIdeaKeys();
+    const index = keys.indexOf(String(key));
+    const target = index + Number(direction);
+    if(index < 0 || target < 0 || target >= keys.length) return;
+    [keys[index], keys[target]] = [keys[target], keys[index]];
+    if(!(await saveFeaturedIdeaKeys(keys))){
+      setStatus('#adminStatus', storageErrorMessage('Volgorde opslaan lukte niet.'), 'warn');
+      return;
+    }
+    renderIdeas();
+    setStatus('#adminStatus', 'Volgorde van Uitgelicht aangepast.', 'ok');
   }
   function ideaFilterValues(){
     return {
@@ -3242,8 +3302,8 @@
       ? `<button class="button iconAction visibilityIdeaAction ${item.hidden ? '' : 'warn'}" data-title-action="${item.hidden ? 'show' : 'hide'}" data-key="${escapeHtml(item.key)}" type="button" aria-label="${escapeHtml(statusLabel)}" title="${escapeHtml(statusLabel)}">${statusIcon}</button>`
       : `<button class="button iconAction visibilityIdeaAction ${item.hidden ? '' : 'warn'}" data-team-action="${item.hidden ? 'show' : 'hide'}" data-key="${escapeHtml(item.key)}" type="button" aria-label="${escapeHtml(statusLabel)}" title="${escapeHtml(statusLabel)}">${statusIcon}</button>`;
     const editAction = `<button class="button iconAction editIdeaAction" data-edit-idea="${escapeHtml(item.key)}" data-kind="${escapeHtml(item.kind)}" type="button" aria-label="Wijzig" title="Wijzig">${actionIcon('edit')}</button>`;
-    const featured = featuredIdeaKey() === adminFeaturedIdeaKey(item);
-    const featureAction = `<button class="button iconAction ${featured ? 'primary' : ''}" data-feature-idea="${escapeHtml(adminFeaturedIdeaKey(item))}" type="button" aria-label="${featured ? 'Uitgelicht automatisch laten kiezen' : 'Uitlichten'}" title="${featured ? 'Uitgelicht: klik voor automatisch kiezen' : 'Uitlichten'}">${actionIcon('spark')}</button>`;
+    const featured = featuredIdeaKeys().includes(adminFeaturedIdeaKey(item));
+    const featureAction = `<button class="button iconAction ${featured ? 'primary' : ''}" data-feature-idea="${escapeHtml(adminFeaturedIdeaKey(item))}" type="button" aria-label="${featured ? 'Uit Uitgelicht verwijderen' : 'Aan Uitgelicht toevoegen'}" title="${featured ? 'Uit Uitgelicht verwijderen' : 'Aan Uitgelicht toevoegen'}">${actionIcon('spark')}</button>`;
     const deleteAction = `<button class="button iconAction hot" data-delete-idea="${escapeHtml(item.key)}" data-kind="${escapeHtml(item.kind)}" data-title="${escapeHtml(item.title)}" type="button" aria-label="Verwijder" title="Verwijder">${actionIcon('trash')}</button>`;
     return `<div class="ideaActions">${approveAction}${featureAction}${editAction}${hideAction}${deleteAction}</div>`;
   }
@@ -3265,7 +3325,7 @@
       themeClass:domainThemeClass(item.domain), hidden:item.hidden, hasImage:Boolean(image),
       attributes:`data-idea-key="${escapeHtml(item.key)}"`, image:imageMarkup,
       title:titleWithIcon(item.title, item.domain, 'ideaTitle'),
-      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)} ${featuredIdeaKey() === adminFeaturedIdeaKey(item) ? '<span class="pill ok">Uitgelicht</span>' : ''}${item.kind === 'collega-toegevoegd' && !item.approved ? '<span class="pill warn">Wacht op goedkeuring</span>' : ''}${item.hidden ? '<span class="pill warn">Verborgen</span>' : ''}`,
+      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)} ${featuredIdeaKeys().includes(adminFeaturedIdeaKey(item)) ? '<span class="pill ok">Uitgelicht</span>' : ''}${item.kind === 'collega-toegevoegd' && !item.approved ? '<span class="pill warn">Wacht op goedkeuring</span>' : ''}${item.hidden ? '<span class="pill warn">Verborgen</span>' : ''}`,
       meta:cardMetaLine(item),
       description:escapeHtml(description), practical:escapeHtml(practical), website,
       manageActions:adminIdeaActions(item)
@@ -3294,6 +3354,7 @@
   }
   function renderIdeas(){
     renderSubmittedIdeas();
+    renderFeaturedIdeaManager();
     const query = $('#ideaSearch').value;
     const filters = ideaFilterValues();
     const items = sortAdminIdeas(allAdminIdeas().filter(item => ideaMatches(item, query)).filter(item => passesIdeaFilters(item, filters)));
@@ -3305,6 +3366,21 @@
       ? IdeaViewShared.renderDesktopTable({admin:true, rows:items.map(adminIdeaRow).join('')})
       : empty;
     $('#adminIdeaCards').innerHTML = items.length ? items.map(adminIdeaCard).join('') : empty;
+  }
+  function renderFeaturedIdeaManager(){
+    const keys = featuredIdeaKeys();
+    const byKey = new Map(allAdminIdeas().map(item => [adminFeaturedIdeaKey(item), item]));
+    const selected = keys.map(key => ({key, item:byKey.get(key)})).filter(entry => entry.item);
+    $('#featuredAdminCount').textContent = `${selected.length} / 5`;
+    $('#featuredAdminList').innerHTML = selected.length ? selected.map(({key,item}, index) => `<div class="featuredAdminItem">
+      <span class="featuredAdminIndex">${index + 1}</span>
+      <span class="featuredAdminTitle">${escapeHtml(item.title)}</span>
+      <span class="featuredAdminActions">
+        <button class="button" type="button" data-move-featured="${escapeHtml(key)}" data-featured-direction="-1" aria-label="Omhoog" title="Omhoog"${index === 0 ? ' disabled' : ''}>↑</button>
+        <button class="button" type="button" data-move-featured="${escapeHtml(key)}" data-featured-direction="1" aria-label="Omlaag" title="Omlaag"${index === selected.length - 1 ? ' disabled' : ''}>↓</button>
+        <button class="button hot" type="button" data-feature-idea="${escapeHtml(key)}" aria-label="Verwijderen" title="Verwijderen">×</button>
+      </span>
+    </div>`).join('') : '<div class="empty">Nog niets gekozen. Zonder selectie kiest de site automatisch één activiteit.</div>';
   }
   function setAdminIdeaView(view){
     const listOn = view === 'list';
@@ -4250,6 +4326,7 @@
 	      hiddenInspirationTitles:loadArray(ADMIN_HIDDEN_INSPIRATION_KEY),
 	      deletedInspirationKeys:loadArray(ADMIN_DELETED_INSPIRATION_KEY),
 	      featuredIdeaKey:featuredIdeaKey(),
+	      featuredIdeaKeys:featuredIdeaKeys(),
 	      hiddenTeamIdeaIds:loadArray(COLLEAGUE_HIDDEN_KEY),
 	      hiddenAgendaItemIds:loadArray(HIDDEN_AGENDA_KEY),
 	      deletedAgendaItemIds:loadArray(DELETED_AGENDA_KEY),
@@ -4321,6 +4398,7 @@
 	        if(parsed.featuredIdeaKey) localStorage.setItem(FEATURED_IDEA_KEY, parsed.featuredIdeaKey);
 	        else localStorage.removeItem(FEATURED_IDEA_KEY);
 	      }
+	      if(Array.isArray(parsed.featuredIdeaKeys)) await saveFeaturedIdeaKeys(parsed.featuredIdeaKeys);
 	      saveArray(COLLEAGUE_HIDDEN_KEY, [...new Set([...loadArray(COLLEAGUE_HIDDEN_KEY), ...(parsed.hiddenTeamIdeaIds || [])])]);
 	      saveArray(HIDDEN_AGENDA_KEY, [...new Set([...loadArray(HIDDEN_AGENDA_KEY), ...(parsed.hiddenAgendaItemIds || [])])]);
 	      saveArray(DELETED_AGENDA_KEY, [...new Set([...loadArray(DELETED_AGENDA_KEY), ...(parsed.deletedAgendaItemIds || [])])]);
@@ -5011,6 +5089,8 @@
       if(deleteIdeaButton) deleteIdea(deleteIdeaButton.dataset.deleteIdea, deleteIdeaButton.dataset.kind, deleteIdeaButton.dataset.title);
 	      const featureIdeaButton = event.target.closest('[data-feature-idea]');
 	      if(featureIdeaButton) toggleFeaturedIdea(featureIdeaButton.dataset.featureIdea);
+	      const moveFeaturedButton = event.target.closest('[data-move-featured]');
+	      if(moveFeaturedButton) moveFeaturedIdea(moveFeaturedButton.dataset.moveFeatured, moveFeaturedButton.dataset.featuredDirection);
 	      const linkButton = event.target.closest('[data-remove-link]');
 	      if(linkButton) removeCustomLink(linkButton.dataset.removeLink);
 	      const editLinkButton = event.target.closest('[data-edit-link-kind]');
