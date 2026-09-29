@@ -10815,11 +10815,18 @@
       const visibleContentHeight = Math.max(0, window.innerHeight - navigationBottom);
       const readingOffset = Math.min(180, Math.max(112, visibleContentHeight * .22));
       const activationLine = navigationBottom + readingOffset;
-      let current = days[0];
+      const todayIso = formatIsoDate(new Date());
+      const today = days.find(day => day.dataset.agendaDay?.endsWith(`:${todayIso}`));
+      let current = today || days[0];
+      let passedDay = false;
       for(const day of days){
-        if(day.getBoundingClientRect().top <= activationLine) current = day;
+        if(day.getBoundingClientRect().top <= activationLine){
+          current = day;
+          passedDay = true;
+        }
         else break;
       }
+      if(!passedDay) current = today || days[0];
       setActiveMobileAgendaDay(current.dataset.agendaDay);
     };
     const schedule = () => {
