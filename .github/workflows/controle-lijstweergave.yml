@@ -1,0 +1,27 @@
+name: Controle gedeelde lijstweergave
+on:
+  push:
+    paths:
+      - 'index.html'
+      - 'beheer/index.html'
+      - 'website-bestanden/idea-view-shared.js'
+      - 'website-bestanden/tests/**'
+      - '.github/workflows/controle-lijstweergave.yml'
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'beheer/index.html'
+      - 'website-bestanden/idea-view-shared.js'
+      - 'website-bestanden/tests/**'
+      - '.github/workflows/controle-lijstweergave.yml'
+permissions:
+  contents: read
+jobs:
+  lijstweergave:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test website-bestanden/tests/idea-list-parity.test.cjs

@@ -5990,7 +5990,7 @@
 
   <script src="website-bestanden/site-settings-shared.js?v=20260930-settings-v1"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20260923-map-detail-v1"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20260930-list-parity-v2"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20260925-week-expand-v1"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
@@ -8885,20 +8885,12 @@
   function ideaRow(item){
     const metadata = sharedIdeaMetadata(item);
     const image = approvedIdeaImage(item);
-    const titleText = item.url
-      ? `<a class="ideaListTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.title)}</a>`
-      : `<span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
-    const visual = `<span class="ideaListVisual${image ? ' hasImage' : ''}" aria-hidden="true">${image ? `<img class="ideaListThumb${image.className ? ` ${escapeHtml(image.className)}` : ''}" src="${escapeHtml(image.src)}" alt="" loading="lazy" decoding="async">` : ''}<span class="domainIcon">${domainIcon(item.domain)}</span></span>`;
-    const titleRow = `<span class="ideaListTitleRow">${titleText}</span>`;
-    const linkedTitle = `<span class="nameWithIcon">${visual}${titleRow}</span>`;
-    return IdeaViewShared.renderDesktopRow({
+    return IdeaViewShared.renderActivityRow(item, {
       themeClass:domainThemeClass(item.domain),
       attributes:`data-idea-key="${escapeHtml(ideaDomKey(item))}"`,
-      title:linkedTitle,
+      image, icon:domainIcon(item.domain), formatDescription:audienceText,
       meta:metadata.meta,
-      pills:metadata.pills,
-      description:escapeHtml(audienceText(item.fit)),
-      practical:escapeHtml(item.materials || '')
+      pills:metadata.pills
     });
   }
 

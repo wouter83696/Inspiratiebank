@@ -1776,6 +1776,7 @@
     .leaflet-marker-icon.active,.ideaLeafletMarkerWrap.active{z-index:1000 !important}
     .ideaMapPanel{
       --map-close-surface:rgba(255,253,249,.78);
+      --map-close-hover:rgba(245,243,238,.82);
       --map-close-border:rgba(61,126,136,.10);
       --map-close-radius:9px;
       display:flex;flex-direction:column;min-width:0;min-height:0;background:#FFFEFC;
@@ -1931,7 +1932,7 @@
       border-color:var(--map-close-border);background:var(--map-close-surface)
     }
     .ideaMapPanel.isSingleDetail .sharedIdeaCard:not(.hasImage) h3{padding-right:0}
-    .ideaMapDetailClose:hover{background:#fffdfa;border-color:rgba(61,126,136,.24);box-shadow:none}
+    .ideaMapDetailClose:hover{background:var(--map-close-hover);border-color:rgba(61,126,136,.16);box-shadow:none}
     .ideaMapDetailToolbar svg{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     :is(.ideaMapDetailClose,.ideaMapPanelClose) svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     :is(.ideaMapDetailClose,.ideaMapPanelClose):focus-visible{outline:2px solid #315f66;outline-offset:3px}
@@ -2282,7 +2283,7 @@
         border:1px solid var(--map-close-border);border-radius:var(--map-close-radius);background:var(--map-close-surface);color:#315f66;
         box-shadow:none;cursor:pointer
       }
-      .ideaMapPanelClose:hover{background:#fffdfa;border-color:rgba(61,126,136,.24);box-shadow:none}
+      .ideaMapPanelClose:hover{background:var(--map-close-hover);border-color:rgba(61,126,136,.16);box-shadow:none}
       .ideaMapResults{
         flex:1;flex-direction:column;gap:10px;padding:0 2px 2px 0;
         overflow-x:hidden;overflow-y:auto;scroll-snap-type:y proximity;
@@ -5792,7 +5793,7 @@
         border:1px solid var(--map-close-border);border-radius:var(--map-close-radius);
         background:var(--map-close-surface);box-shadow:none
       }
-      .ideaMapPanel.isList .ideaMapPanelClose:hover{background:#fffdfa;border-color:rgba(61,126,136,.24);box-shadow:none}
+      .ideaMapPanel.isList .ideaMapPanelClose:hover{background:var(--map-close-hover);border-color:rgba(61,126,136,.16);box-shadow:none}
       .ideaMapPanel.isSingleDetail .ideaMapPanelHead{
         display:none!important
       }

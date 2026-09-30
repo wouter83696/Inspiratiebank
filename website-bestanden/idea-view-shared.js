@@ -39,9 +39,36 @@
     return `<tr class="${classes}"${attributes ? ` ${attributes}` : ''}>${cells}</tr>`;
   }
 
+  function escape(value=''){
+    return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
+  }
+
+  // Both pages supply data; the thumbnail, category badge and website link have
+  // one renderer so the management list cannot drift from the public list.
+  function renderListActivity(activity={}){
+    const image = activity.image;
+    const title = activity.url
+      ? `<a class="ideaListTitleLink" href="${escape(activity.url)}" target="_blank" rel="noopener">${escape(activity.title)}</a>`
+      : `<span class="ideaTitleText">${escape(activity.title)}</span>`;
+    const visual = `<span class="ideaListVisual${image ? ' hasImage' : ''}" aria-hidden="true">${image ? `<img class="ideaListThumb${image.className ? ` ${escape(image.className)}` : ''}" src="${escape(image.src)}" alt="" loading="lazy" decoding="async">` : ''}<span class="domainIcon">${activity.icon || ''}</span></span>`;
+    return `<span class="nameWithIcon">${visual}<span class="ideaListTitleRow">${title}</span></span>`;
+  }
+
+  // Canonical content contract: callers pass the activity, never separate
+  // description/practical/title fields. Management adds selection attributes only.
+  function renderActivityRow(item, view={}){
+    const describe = view.formatDescription || (text => text);
+    return renderDesktopRow({
+      ...view,
+      activity:{title:item.title, url:item.url, image:view.image, icon:view.icon},
+      description:escape(describe(item.fit || item.description || '')),
+      practical:escape(item.materials || item.rules || '')
+    });
+  }
+
   function renderDesktopRow(view){
     const cells = [
-      {label:'Activiteit', html:`${view.title || ''}`},
+      {label:'Activiteit', html:view.activity ? renderListActivity(view.activity) : (view.title || '')},
       {label:'Kenmerken', html:renderMetadata({pills:view.pills, meta:view.meta})},
       {label:'Beschrijving', html:renderPracticalList(view.description)},
       {label:'Praktisch', html:renderPracticalList(view.practical)}
@@ -62,5 +89,5 @@
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
-  window.IdeaViewShared = Object.freeze({renderMetadata, renderCard, renderRow, renderDesktopRow, renderDesktopTable});
+  window.IdeaViewShared = Object.freeze({renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
 })();
