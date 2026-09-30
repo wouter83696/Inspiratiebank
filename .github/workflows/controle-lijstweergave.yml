@@ -1,10 +1,14 @@
-name: Controle gedeelde lijstweergave
+name: Controle gedeelde publieke weergaven
 on:
   push:
     paths:
       - 'index.html'
       - 'beheer/index.html'
       - 'website-bestanden/idea-view-shared.js'
+      - 'website-bestanden/discovery-view-shared.js'
+      - 'website-bestanden/admin-discovery.js'
+      - 'website-bestanden/*css'
+      - 'website-bestanden/scripts/build-admin-public-view.js'
       - 'website-bestanden/tests/**'
       - '.github/workflows/controle-lijstweergave.yml'
   pull_request:
@@ -12,6 +16,10 @@ on:
       - 'index.html'
       - 'beheer/index.html'
       - 'website-bestanden/idea-view-shared.js'
+      - 'website-bestanden/discovery-view-shared.js'
+      - 'website-bestanden/admin-discovery.js'
+      - 'website-bestanden/*css'
+      - 'website-bestanden/scripts/build-admin-public-view.js'
       - 'website-bestanden/tests/**'
       - '.github/workflows/controle-lijstweergave.yml'
 permissions:
@@ -25,3 +33,10 @@ jobs:
         with:
           node-version: 22
       - run: node --test website-bestanden/tests/idea-list-parity.test.cjs
+      - run: node website-bestanden/scripts/build-admin-public-view.js --check
+      - run: npm install --no-save playwright
+      - run: npx playwright install --with-deps chromium
+      - name: Vergelijk zoekbalk en filters op desktop en mobiel
+        run: |
+          python3 -m http.server 8765 >/tmp/discovery-server.log 2>&1 &
+          node website-bestanden/tests/discovery-parity.browser.cjs

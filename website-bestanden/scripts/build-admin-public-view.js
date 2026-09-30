@@ -7,8 +7,8 @@ const root = path.resolve(__dirname, '../..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const ids = {
   'tab-inspiratie':'inspirationAdminPanel', 'tab-weken':'agendaReviewPanel',
-  ideaCards:'adminIdeaCards', ideaList:'adminIdeaList', ideaFilters:'adminIdeaFilters',
-  inspirationThemeLegend:'adminThemeLegend', agendaThemeLegend:'agendaAdminThemeLegend',
+  ideaCards:'adminIdeaCards', ideaList:'adminIdeaList',
+  agendaThemeLegend:'agendaAdminThemeLegend',
   weekPanels:'agendaReviewList', longerOffers:'ongoingAdminSection', flexibleOffersWrap:'ongoingAdminList',
   agendaFilters:'agendaAdminFilters', agendaSearch:'agendaAdminSearch',
 };

@@ -12,18 +12,18 @@ body.adminMode .shell{padding-bottom:0}
 #adminApp .adminPublicSurface .tabHeroTitle{transform:none!important;margin:0!important;font-family:Lora,serif;font-size:44px!important;line-height:1.12!important;font-weight:500}
 #adminApp .adminPublicSurface .tabHeroLine{transform:none!important;margin:10px 0 0!important;font-size:19px!important}
 .adminModeBadge{position:absolute;top:24px;left:30px;padding:7px 12px;border:1px solid rgba(49,95,107,.1);border-radius:999px;background:rgba(255,253,249,.75);font-size:12px;font-weight:600;color:#315f6b}
-#adminApp .adminPublicSurface .filterBar{width:100%;max-width:none;margin:0 0 12px;padding:0;background:transparent;border:0;box-shadow:none;position:relative;z-index:46}
-#adminApp .adminPublicSurface .filters{display:flex!important;flex-wrap:wrap;gap:10px;width:100%;max-width:none;padding:0;align-items:center;background:transparent;border:0;box-shadow:none}
-#adminApp .adminPublicSurface .filterSearch{flex:1 1 220px;min-width:0}
-#adminApp .adminPublicSurface .filterSearch input{width:100%;min-height:48px;border-radius:16px;background:#fffdf9;border:1px solid rgba(49,95,107,.1)}
-#adminApp .adminPublicSurface .filterToggle{display:inline-flex!important;align-items:center;justify-content:center;width:auto;min-width:48px;height:48px;gap:8px;padding:12px 16px;border:1px solid rgba(49,95,107,.1);border-radius:16px;background:#fffdf9;color:#315f6b;cursor:pointer}
-#adminApp .adminPublicSurface .filterToggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7}
+#adminApp #agendaReviewPanel .filterBar{width:100%;max-width:none;margin:0 0 12px;padding:0;background:transparent;border:0;box-shadow:none;position:relative;z-index:46}
+#adminApp #agendaReviewPanel .filters{display:flex!important;flex-wrap:wrap;gap:10px;width:100%;max-width:none;padding:0;align-items:center;background:transparent;border:0;box-shadow:none}
+#adminApp #agendaReviewPanel .filterSearch{flex:1 1 220px;min-width:0}
+#adminApp #agendaReviewPanel .filterSearch input{width:100%;min-height:48px;border-radius:16px;background:#fffdf9;border:1px solid rgba(49,95,107,.1)}
+#adminApp #agendaReviewPanel .filterToggle{display:inline-flex!important;align-items:center;justify-content:center;width:auto;min-width:48px;height:48px;gap:8px;padding:12px 16px;border:1px solid rgba(49,95,107,.1);border-radius:16px;background:#fffdf9;color:#315f6b;cursor:pointer}
+#adminApp #agendaReviewPanel .filterToggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7}
 #adminApp .adminPublicSurface .adminFilterOptions{display:none;width:100%;padding:14px;border:1px solid rgba(49,95,107,.09);border-radius:18px;background:#fffdf9;gap:10px;flex-wrap:wrap}
 #adminApp .adminPublicSurface .expanded>.adminFilterOptions{display:flex}
 #adminApp .adminPublicSurface .adminFilterOptions>.customSelect{display:block!important;flex:1 1 155px;min-width:0}
 #adminApp .adminPublicSurface .adminFilterOptions .filterReset{display:inline-flex!important;align-items:center;gap:6px}
-#adminApp .adminPublicSurface .sharedDiscoveryChipRow{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:6px 0 14px;margin:0;position:static}
-#adminApp .adminPublicSurface .sharedDiscoveryChipRow>.viewBar{margin-left:auto}
+#adminApp #agendaReviewPanel .sharedDiscoveryChipRow{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:6px 0 14px;margin:0;position:static}
+#adminApp #agendaReviewPanel .sharedDiscoveryChipRow>.viewBar{margin-left:auto}
 #adminApp .adminPublicSurface .adminCountBadge{font-size:12px}
 #adminApp .adminPublicSurface .adminSelectionToolbar{position:sticky;top:10px;z-index:44;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:62px;margin:12px 0 14px;padding:10px 14px;border:1px solid rgba(49,95,107,.12);border-radius:16px;background:rgba(255,253,249,.96);box-shadow:0 8px 24px rgba(49,95,107,.06);backdrop-filter:blur(16px)}
 .adminSelectionSummary{display:grid;gap:3px;min-width:0}
@@ -37,8 +37,6 @@ body.adminMode .shell{padding-bottom:0}
 #adminApp #adminIdeaList tr.isSelected > td{background:#e0f1fa!important}
 #adminApp #adminIdeaList tr.isSelected > td:first-child{box-shadow:inset 3px 0 #1686ae}
 #adminApp #adminIdeaList tr.isSelected:hover > td{background:#d6ebf7!important}
-#adminApp .adminPublicSurface .viewBtn[aria-pressed="true"]{background:#d9eef5!important;color:#006f88!important;box-shadow:inset 0 0 0 1px rgba(0,111,136,.16)!important;opacity:1}
-#adminApp .adminPublicSurface .viewBtn[aria-pressed="true"] .viewIcon{opacity:1}
 #adminApp .adminPublicSurface .adminSelectableCard.isSelected{outline-color:#1686ae!important;background:#eef8fd!important}
 .adminSelectableCard:focus-visible,.adminSelectableAgendaItem:focus-visible{outline:2px solid #4f8e9e;outline-offset:3px}
 #adminApp .adminPublicSurface .adminIdeaView[hidden]{display:none!important}
@@ -70,35 +68,17 @@ body.adminMode .shell{padding-bottom:0}
  .adminSelectionActions{max-width:100%;overflow-x:auto}
  #adminApp .adminPublicSurface .adminAgendaUtilities{align-items:flex-start;flex-wrap:wrap}
 }
-#adminApp .adminPublicSurface .filterToggle{position:static!important;inset:auto!important;transform:none!important;flex:0 0 48px}
-#adminApp .adminPublicSurface .filterSearch{max-width:none!important;width:auto!important}
-#adminApp .adminPublicSurface .sharedDiscoveryFilters{position:relative!important;min-height:48px!important}
+#adminApp #agendaReviewPanel .filterToggle{position:static!important;inset:auto!important;transform:none!important;flex:0 0 48px}
+#adminApp #agendaReviewPanel .filterSearch{max-width:none!important;width:auto!important}
+#adminApp #agendaReviewPanel .sharedDiscoveryFilters{position:relative!important;min-height:48px!important}
 #adminApp .adminPublicSurface .featuredAdminPanel{margin:0 0 16px;padding:12px 16px}
 #adminApp .adminPublicSurface .agendaCheckNotice{margin:0 0 18px}
 @media(max-width:640px){
- #adminApp .adminPublicSurface .filterSearch{flex-basis:180px}
- #adminApp .adminPublicSurface .sharedDiscoveryChipRow{gap:8px}
- #adminApp .adminPublicSurface .sharedDiscoveryChipRow>.viewBar{margin:0 0 0 auto;padding:0}
+ #adminApp #agendaReviewPanel .filterSearch{flex-basis:180px}
+ #adminApp #agendaReviewPanel .sharedDiscoveryChipRow{gap:8px}
+ #adminApp #agendaReviewPanel .sharedDiscoveryChipRow>.viewBar{margin:0 0 0 auto;padding:0}
  #adminApp .adminPublicSurface .adminCountBadge{margin:0}
- #adminApp .adminPublicSurface #adminThemeLegend{width:100%;overflow-x:auto;padding-bottom:4px}
- #adminApp .adminPublicSurface #adminThemeLegend .agendaThemeLegend{flex-wrap:nowrap;width:max-content;max-width:none}
 }
-/* The same filter sheet used by discovery, hosted in a native modal for focus containment. */
-#adminDiscoveryDialog:not([open]){display:none!important}
-#adminDiscoveryDialog[open]{display:flex!important;position:fixed!important;inset:0!important;align-items:stretch;justify-content:flex-end;width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:0;border:0;background:transparent;visibility:visible!important;pointer-events:auto;overflow:hidden;z-index:1300}
-#adminDiscoveryDialog::backdrop{background:rgba(48,46,39,.2)}
-#adminDiscoveryDialog .ideaFilterSheetBackdrop{background:transparent;opacity:1}
-#adminDiscoveryDialog .ideaFilterSheet{position:relative!important;display:flex!important;flex-direction:column!important;inset:auto!important;width:min(480px,100vw)!important;height:100%;max-height:none;min-width:0;margin:0;padding:0;transform:none!important;opacity:1!important;visibility:visible!important;border-radius:24px 0 0 24px;background:#fffdf9;box-shadow:-12px 0 50px rgba(49,95,107,.12)}
-#adminDiscoveryDialog .ideaFilterSheetBody{display:block!important;flex:1;min-height:0;overflow:auto}
-#adminDiscoveryDialog .ideaFilterSheetFooter{display:grid!important;flex-shrink:0}
-#adminDiscoveryDialog .ideaFilterSection{display:block!important}
-#adminDiscoveryDialog .ideaFilterSheetHeader{display:flex!important;flex-shrink:0}
-#adminDiscoveryDialog .ideaFilterChip.active{border-color:#629c9a;background:#e2f1ec;color:#315f6b;box-shadow:inset 0 0 0 1px #629c9a}
-#adminDiscoveryDialog .ideaFilterSheetAction:disabled{opacity:.6;cursor:wait}
-body.adminDiscoveryOpen{overflow:hidden}
-.adminDiscoveryActive{display:flex;align-items:center;gap:12px;min-height:0;margin-bottom:12px;color:#617573;font-size:12px}
-.adminDiscoveryActive:has(span:empty){margin:0}
-.adminDiscoveryActive [hidden]{display:none!important}
 .adminSettingsWorkspace{padding-top:32px;max-width:1000px;margin-inline:auto}
 .siteSettingsForm .panel{margin-top:18px;background:#fffdf9;border:1px solid #e6e9e3;box-shadow:none}
 .siteSettingsForm h3{margin:0;color:#315f6b;font-size:20px;font-weight:600}
@@ -117,13 +97,16 @@ body.adminDiscoveryOpen{overflow:hidden}
 .siteSettingsSaveBar p:empty{display:none}
 .siteSettingsSaveBar .warn{color:#9a5b32}
 @media(max-width:640px){
- #adminDiscoveryDialog[open]{align-items:flex-end}
- #adminDiscoveryDialog .ideaFilterSheet{width:100%!important;height:min(94dvh,820px);border-radius:24px 24px 0 0}
  .siteSettingsFields{grid-template-columns:1fr}
  .siteHeaderPreview{height:190px}
  .siteHeaderPreview span{font-size:26px}
  .siteSettingsSaveBar{bottom:6px}
 }
-#adminDiscoveryDialog .ideaFilterSheetBody{padding:18px 20px 24px}
-#adminDiscoveryDialog .ideaFilterCategoryHint{margin:0 0 12px;font-size:12px;line-height:1.5}
-@media(max-width:640px){#adminDiscoveryDialog .ideaFilterSheetBody{padding:16px}}
+.adminDiscoveryOverlay{display:contents}
+body.ideaFilterSheetOpen{overflow:hidden}
+
+/* Legacy form defaults must never style the shared discovery component. */
+@layer adminLegacy {
+  #adminApp .desktopStickyControls :where(*),
+  .adminDiscoveryOverlay #ideaFilterSheetLayer :where(*) { all:revert-layer; }
+}
