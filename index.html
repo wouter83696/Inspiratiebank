@@ -5855,8 +5855,8 @@
         </section>
         <section class="ideaFilterSection" id="ideaFilterDistanceSection">
           <div class="ideaFilterSectionHead"><h3>Afstand</h3><span class="ideaFilterSectionValue" id="ideaFilterDistanceValue">10 km</span></div>
-          <input class="ideaFilterRange" id="ideaFilterDistanceRange" type="range" min="0" max="4" step="1" value="2" aria-label="Maximale afstand">
-          <div class="ideaFilterRangeLabels" aria-hidden="true"><span>3 km</span><span>5 km</span><span>10 km</span><span>25 km</span><span>50+ km</span></div>
+          <input class="ideaFilterRange" id="ideaFilterDistanceRange" type="range" min="0" max="5" step="1" value="2" aria-label="Maximale afstand">
+          <div class="ideaFilterRangeLabels" aria-hidden="true"><span>3 km</span><span>5 km</span><span>10 km</span><span>15 km</span><span>25 km</span><span>50+ km</span></div>
         </section>
         <section class="ideaFilterSection">
           <div class="ideaFilterSectionHead"><h3>Waar</h3></div>
@@ -5921,9 +5921,9 @@
           <p class="ideaFilterSheetStatus" id="agendaFilterLocationStatus" role="status" aria-live="polite"></p>
         </section>
         <section class="ideaFilterSection">
-          <div class="ideaFilterSectionHead"><h3>Afstand</h3><span class="ideaFilterSectionValue" id="agendaFilterDistanceValue">10 km</span></div>
-          <input class="ideaFilterRange" id="agendaFilterDistanceRange" type="range" min="0" max="4" step="1" value="2" aria-label="Maximale afstand">
-          <div class="ideaFilterRangeLabels" aria-hidden="true"><span>3 km</span><span>5 km</span><span>10 km</span><span>25 km</span><span>50+ km</span></div>
+          <div class="ideaFilterSectionHead"><h3>Afstand</h3><span class="ideaFilterSectionValue" id="agendaFilterDistanceValue">25 km</span></div>
+          <input class="ideaFilterRange" id="agendaFilterDistanceRange" type="range" min="0" max="5" step="1" value="4" aria-label="Maximale afstand">
+          <div class="ideaFilterRangeLabels" aria-hidden="true"><span>3 km</span><span>5 km</span><span>10 km</span><span>15 km</span><span>25 km</span><span>50+ km</span></div>
         </section>
         <section class="ideaFilterSection">
           <div class="ideaFilterSectionHead"><h3>Week</h3></div>
@@ -5975,6 +5975,7 @@
               <option value="3">3 km</option>
               <option value="5">5 km</option>
               <option value="10">10 km</option>
+              <option value="15">15 km</option>
               <option value="25">25 km</option>
               <option value="50">50+ km</option>
             </select>
@@ -5989,7 +5990,7 @@
     </div>
   </div>
 
-  <script src="website-bestanden/site-settings-shared.js?v=20260930-settings-v1"></script>
+  <script src="website-bestanden/site-settings-shared.js?v=20260930-radius-v2"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20260930-list-parity-v2"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20260925-week-expand-v1"></script>
@@ -6758,16 +6759,25 @@
     }catch(error){}
     return {...DEFAULT_LOCATION};
   }
-  function loadUserLocationRadius(){
-    if(typeof localStorage === 'undefined') return DEFAULT_LOCATION_RADIUS_KM;
-    const saved = Number(localStorage.getItem(USER_LOCATION_RADIUS_KEY));
-    return [3,5,10,25,50].includes(saved) ? saved : DEFAULT_LOCATION_RADIUS_KM;
+  function locationRadiusContext(){
+    return $('.topbar .tab.active')?.dataset.tab === 'weken' ? 'agenda' : 'inspiration';
+  }
+  function defaultLocationRadius(context=locationRadiusContext()){
+    return context === 'agenda' ? SiteSettings.normalize(centralStorage?.siteSettings).agendaRadiusKm : DEFAULT_LOCATION_RADIUS_KM;
+  }
+  function loadUserLocationRadius(context=locationRadiusContext()){
+    const fallback = defaultLocationRadius(context);
+    if(typeof localStorage === 'undefined') return fallback;
+    const key = context === 'agenda' ? `${USER_LOCATION_RADIUS_KEY}_agenda` : USER_LOCATION_RADIUS_KEY;
+    const saved = Number(localStorage.getItem(key));
+    return SiteSettings.radii.includes(saved) ? saved : fallback;
   }
   function saveUserLocationRadius(value, {sync=true}={}){
     const next = Number(value);
-    userLocationRadiusKm = [3,5,10,25,50].includes(next) ? next : DEFAULT_LOCATION_RADIUS_KM;
+    userLocationRadiusKm = SiteSettings.radii.includes(next) ? next : defaultLocationRadius();
     if(typeof localStorage !== 'undefined'){
-      localStorage.setItem(USER_LOCATION_RADIUS_KEY, String(userLocationRadiusKm));
+      const key = locationRadiusContext() === 'agenda' ? `${USER_LOCATION_RADIUS_KEY}_agenda` : USER_LOCATION_RADIUS_KEY;
+      localStorage.setItem(key, String(userLocationRadiusKm));
     }
     if(sync) syncLocationRadiusUi();
   }
@@ -6828,7 +6838,7 @@
     if(input) input.value = userLocation?.isDefault ? '' : (cleanPostcode(userLocation.postcode || '') || userLocation.place || userLocation.label || '');
     if(status){
       status.classList.remove('warn');
-      status.textContent = userLocation?.isDefault ? `Standaard: ${DEFAULT_LOCATION.label} binnen ${DEFAULT_LOCATION_RADIUS_KM >= 50 ? '50+' : DEFAULT_LOCATION_RADIUS_KM} km.` : `${locationDisplayText()} binnen ${userLocationRadiusKm} km is lokaal bewaard op dit apparaat.`;
+      status.textContent = userLocation?.isDefault ? `Standaard: ${DEFAULT_LOCATION.label} binnen ${defaultLocationRadius() >= 50 ? '50+' : defaultLocationRadius()} km.` : `${locationDisplayText()} binnen ${userLocationRadiusKm} km is lokaal bewaard op dit apparaat.`;
     }
   }
   function openLocationModal(){
@@ -8699,7 +8709,8 @@
     if(filters.domain && filters.domain !== 'all' && domainDisplayLabel(item.domain) !== domainDisplayLabel(filters.domain)) return false;
     if(filters.distanceBand && filters.distanceBand !== 'all' && normalizeIdeaDistance(item.distanceBand, item, 'agenda') !== filters.distanceBand) return false;
     const distance = itemDistanceKm(item);
-    if(userLocationRadiusKm < 50 && Number.isFinite(distance) && distance > userLocationRadiusKm) return false;
+    const agendaRadius = loadUserLocationRadius('agenda');
+    if(agendaRadius < 50 && Number.isFinite(distance) && distance > agendaRadius) return false;
     if(filters.cost && filters.cost !== 'all' && normalizeIdeaCost(item.cost) !== filters.cost) return false;
     return true;
   }
@@ -9544,7 +9555,8 @@
       if(selectedIdeaCategories.size && !selectedIdeaCategories.has(domainDisplayLabel(item.domain))) return false;
       if(!matches(item,q,filters) || !matchesIdeaDuration(item,duration)) return false;
       const distance = itemDistanceKm(item);
-      return userLocationRadiusKm >= 50 || !Number.isFinite(distance) || distance <= userLocationRadiusKm;
+      const inspirationRadius = loadUserLocationRadius('inspiration');
+      return inspirationRadius >= 50 || !Number.isFinite(distance) || distance <= inspirationRadius;
     });
     return selectedIdeaCategories.size ? sortIdeasAlphabetically(items) : smartMixedIdeas(items);
   }
@@ -9596,7 +9608,7 @@
     const band = ideaDurationBand(item);
     return band === 'flexible' || band === value;
   }
-  const IDEA_FILTER_RADIUS_STEPS = [3,5,10,25,50];
+  const IDEA_FILTER_RADIUS_STEPS = SiteSettings.radii;
   let ideaFilterSheetReturnFocus = null;
   let agendaFilterSheetReturnFocus = null;
   let ideaSubmitSheetReturnFocus = null;
@@ -9727,7 +9739,7 @@
     });
     $('#agendaFilterClearBtn')?.addEventListener('click', () => {
       resetAgendaFilters();
-      saveUserLocationRadius(DEFAULT_LOCATION_RADIUS_KM, {sync:false});
+      saveUserLocationRadius(defaultLocationRadius('agenda'), {sync:false});
       saveUserLocation(null);
       syncAgendaFilterSheet();
     });
@@ -10690,6 +10702,10 @@
     $$('.tab').forEach(b=>{ const on=b.dataset.tab===name; b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
     syncTopTabIndicator();
     $$('.tabPanel').forEach(p=>p.classList.toggle('active',p.id === 'tab-'+name));
+    userLocationRadiusKm = loadUserLocationRadius();
+    syncLocationRadiusUi();
+    if(name === 'weken') renderAgenda();
+    else if(name === 'inspiratie') renderIdeas();
     if(name !== 'weken'){
       $$('#tab-weken .mobileDayNavigation,#tab-weken .agendaDesktopControls').forEach(element => element.classList.remove('isStuck'));
     }
@@ -11177,7 +11193,7 @@
       setActiveIdeaMapItem(mapTarget.dataset.mapResultKey, {refreshPanel:true, emphasize:true});
     });
     $('#locationResetBtn').addEventListener('click', () => {
-      saveUserLocationRadius(DEFAULT_LOCATION_RADIUS_KM, {sync:false});
+      saveUserLocationRadius(defaultLocationRadius(), {sync:false});
       saveUserLocation(null);
       closeLocationModal();
       closeDesktopSidebar();

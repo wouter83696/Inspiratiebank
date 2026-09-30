@@ -1,7 +1,7 @@
 /* Public site defaults, shared by the visitor page and authenticated management. */
 (function(){
   const fallbackRegion = {label:'Nijmegen', lat:51.8240, lon:5.8040, radiusKm:10};
-  const radii = [3,5,10,25,50];
+  const radii = [3,5,10,15,25,50];
   function imageUrl(value){
     const text = typeof value === 'string' ? value.trim() : '';
     if(!text || text.length > 1800000) return '';
@@ -20,6 +20,7 @@
       && typeof region.label === 'string' && region.label.trim();
     return {
       headerImage:imageUrl(value.headerImage),
+      agendaRadiusKm:radii.includes(value.agendaRadiusKm) ? value.agendaRadiusKm : 25,
       headerPosition:Number.isFinite(value.headerPosition) ? Math.max(0,Math.min(100,value.headerPosition)) : 30,
       region:valid ? {label:region.label.trim().slice(0,120),lat:region.lat,lon:region.lon,radiusKm:radii.includes(region.radiusKm) ? region.radiusKm : 10} : {...fallbackRegion}
     };

@@ -24,6 +24,7 @@
     regionInputValue = draft.region.label;
     $('siteRegionInput').value = regionInputValue;
     $('siteRegionRadius').value = String(draft.region.radiusKm);
+    $('siteAgendaRadius').value = String(draft.agendaRadiusKm);
     $('siteHeaderPosition').value = String(draft.headerPosition);
     $('siteHeaderFile').value = '';
     $('siteHeaderUrl').setCustomValidity('');
@@ -91,6 +92,7 @@
     $('siteHeaderReset').addEventListener('click',()=>{generation++;draft.headerImage='';draft.headerPosition=30;$('siteHeaderUrl').setCustomValidity('');$('siteHeaderPosition').value='30';preview();status('Standaardheader gekozen. Sla op om deze te gebruiken.');});
     $('siteHeaderPosition').addEventListener('input',event=>{draft.headerPosition=Number(event.target.value);preview();});
     $('siteRegionRadius').addEventListener('change',event=>{draft.region.radiusKm=Number(event.target.value);preview();});
+    $('siteAgendaRadius').addEventListener('change',event=>{draft.agendaRadiusKm=Number(event.target.value);preview();});
     $('siteHeaderPreview').addEventListener('error',()=>status('De afbeelding kan niet worden geladen. Controleer het webadres of kies een bestand.',true));
   }
   window.AdminSiteSettings = {setup,load,current};
