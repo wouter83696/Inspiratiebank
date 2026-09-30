@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    html.appLoading{overflow:hidden;background:#F8FAF9}
-    html.appLoading body{margin:0;overflow:hidden;background:#F8FAF9}
+    html.appLoading{overflow:hidden;background:#F8F5EB}
+    html.appLoading body{margin:0;overflow:hidden;background:#F8F5EB}
     html.appLoading body > :not(.appLoader){display:none !important}
-    html.appLoading .appLoader{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;width:100%;min-height:100vh;padding:24px;background:#F8FAF9}
+    html.appLoading .appLoader{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;width:100%;min-height:100vh;padding:24px;background:#F8F5EB}
   </style>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta name="theme-color" content="#FFFDF9">
@@ -29,19 +29,21 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#F8FAF9;
-      --paper:#FFFFFF;
+      --page-background:#F8F5EB;
+      --page-surface:var(--page-background);
+      --bg:var(--page-background);
+      --paper:#FFFCF7;
       --ink:rgba(11,18,32,.84);
       --muted:rgba(11,18,32,.62);
-      --line:rgba(11,18,32,.09);
+      --line:rgba(64,45,20,.085);
       --accent:#4f8e9e;
       --accent-dark:#315f6b;
       --accent-soft:#A8E1DD;
       --yellow:#F8ECC2;
       --rose:#F6DFE7;
-      --shadow:0 18px 50px rgba(20,38,42,.08);
+      --shadow:0 18px 50px rgba(64,45,20,.07);
       --radius:24px;
-      --max:1200px;
+      --max:1280px;
       --ease:cubic-bezier(.22,1,.36,1);
       --focus:0 0 0 4px rgba(127,207,201,.38);
     }
@@ -53,11 +55,7 @@
       overflow-x:hidden;
       color:var(--ink);
       font-family:"IBM Plex Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-      background:
-        radial-gradient(circle at 30% 8%, rgba(214,236,242,.16), transparent 30%),
-        radial-gradient(circle at 48% 104%, rgba(168,225,221,.08), transparent 30%),
-        radial-gradient(circle at 96% 2%, rgba(234,230,247,.10), transparent 25%),
-        var(--bg);
+      background:var(--page-background);
       min-height:100dvh;
     }
     body.adminMode{padding-top:0}
@@ -992,6 +990,7 @@
   <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260911-first-paint-v4">
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260911-ongoing-light-cards-v39">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260923-warm-cards-v1">
+  <link rel="stylesheet" href="../website-bestanden/admin-public-parity.css?v=20260930-public-parity-v1">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -1307,10 +1306,10 @@
           <div></div>
           <div class="viewBar">
             <div class="viewSwitch" aria-label="Weergave inspiratiebank beheer">
-              <button class="viewBtn" type="button" data-admin-view="tiles" aria-label="Tegelweergave" title="Tegelweergave">
+              <button class="viewBtn active" type="button" data-admin-view="tiles" aria-label="Tegelweergave" title="Tegelweergave">
                 <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><rect x="3" y="3" width="5" height="5" rx="1"></rect><rect x="12" y="3" width="5" height="5" rx="1"></rect><rect x="3" y="12" width="5" height="5" rx="1"></rect><rect x="12" y="12" width="5" height="5" rx="1"></rect></svg></span>
               </button>
-              <button class="viewBtn active" type="button" data-admin-view="list" aria-label="Lijstweergave" title="Lijstweergave">
+              <button class="viewBtn" type="button" data-admin-view="list" aria-label="Lijstweergave" title="Lijstweergave">
                 <span class="viewIcon" aria-hidden="true"><svg viewBox="0 0 20 20"><circle cx="4" cy="5" r="1"></circle><circle cx="4" cy="10" r="1"></circle><circle cx="4" cy="15" r="1"></circle><path d="M8 5h9"></path><path d="M8 10h9"></path><path d="M8 15h9"></path></svg></span>
               </button>
             </div>
@@ -1337,8 +1336,8 @@
           <div id="adminThemeLegend"></div>
           <span id="ideaCount" class="adminCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span><strong id="ideaCountValue">0</strong><span id="ideaCountLabel">activiteiten</span></span></span>
         </div>
-        <div id="adminIdeaList" class="tableWrap adminIdeaView sharedIdeaList isAdmin active"></div>
-        <div id="adminIdeaCards" class="cards adminIdeaView sharedIdeaCards isAdmin" hidden></div>
+        <div id="adminIdeaList" class="tableWrap adminIdeaView sharedIdeaList isAdmin" hidden></div>
+        <div id="adminIdeaCards" class="cards adminIdeaView sharedIdeaCards isAdmin active"></div>
         <div id="adminIdeaEditPanel" class="adminIdeaEditPanel" hidden>
           <div class="panelHead">
             <div>
@@ -2337,11 +2336,11 @@
     }).join('');
     return `<span class="pill stimulusPill ${kind}" title="Prikkelbelasting: ${escapeHtml(label)}" aria-label="Prikkelbelasting: ${escapeHtml(label)}"><span class="stimulusIcon" aria-hidden="true"><svg viewBox="0 0 22 18">${paths}</svg></span><span class="stimulusPillText">${escapeHtml(label)}</span></span>`;
   }
-  function cardMetaLine(item={}){
+  function cardMetaLine(item={}, {compact=false}={}){
     const groupValue = String(item.group || 'Op maat').trim();
     const durationValue = String(item.duration || 'Op maat').trim();
-    const groupLabel = normalize(groupValue) === 'op maat' ? 'Groep flexibel' : groupValue;
-    const durationLabel = normalize(durationValue) === 'op maat' ? 'Duur flexibel' : durationValue;
+    const groupLabel = normalize(groupValue) === 'op maat' ? (compact ? 'Flexibel' : 'Groep flexibel') : groupValue;
+    const durationLabel = normalize(durationValue) === 'op maat' ? (compact ? 'Flexibel' : 'Duur flexibel') : durationValue;
     return `<span class="cardMetaLine"><span class="cardMetaPart" title="Groepsgrootte: ${escapeHtml(groupValue)}" aria-label="Groepsgrootte: ${escapeHtml(groupValue)}"><span class="metaIcon" aria-hidden="true">${ICONS.people}</span>${escapeHtml(groupLabel)}</span><span class="cardMetaPart" title="Duur: ${escapeHtml(durationValue)}" aria-label="Duur: ${escapeHtml(durationValue)}"><span class="metaIcon" aria-hidden="true">${ICONS.clock}</span>${escapeHtml(durationLabel)}</span></span>`;
   }
   function distanceLabelForKm(km, context='inspiration'){
@@ -3314,21 +3313,25 @@
     const costLabel = normalizeIdeaCost(item.cost);
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
+    const imageStatus = image?.suggested ? '<span class="adminIdeaImageBadge">Foto voorstel</span>' : image?.pending ? '<span class="adminIdeaImageBadge">Wacht op goedkeuring</span>' : '';
     const imageMarkup = image
-      ? `<figure class="ideaImageFrame"><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || item.title || 'Activiteit')}" loading="lazy" decoding="async">${image.suggested ? '<span class="adminIdeaImageBadge">Foto voorstel</span>' : image.pending ? '<span class="adminIdeaImageBadge">Wacht op goedkeuring</span>' : ''}</figure>`
-      : '';
+      ? `<figure class="ideaImageFrame"><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || item.title || 'Activiteit')}" loading="lazy" decoding="async"><span class="ideaImageDomainBadge domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>${imageStatus}</figure>`
+      : `<span class="ideaImageFrame ideaImagePlaceholder" aria-hidden="true"><span class="ideaImageDomainBadge domainIcon">${domainIcon(item.domain)}</span></span>`;
     const description = item.description || item.fit || '';
     const practical = item.materials || 'Nog bepalen';
-    const websiteLabel = AgendaViewShared.sourceButtonLabel(item);
-    const website = item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(websiteLabel)}</span></a>` : '';
+    const titleContents = `<span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
+    const cardTitle = item.url
+      ? `<a class="ideaTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="Open website van ${escapeHtml(item.title)}">${titleContents}</a>`
+      : titleContents;
+    const status = `${featuredIdeaKeys().includes(adminFeaturedIdeaKey(item)) ? '<span class="pill ok">Uitgelicht</span>' : ''}${item.kind === 'collega-toegevoegd' && !item.approved ? '<span class="pill warn">Wacht op goedkeuring</span>' : ''}${item.hidden ? '<span class="pill warn">Verborgen</span>' : ''}`;
     return IdeaViewShared.renderCard({
-      themeClass:domainThemeClass(item.domain), hidden:item.hidden, hasImage:Boolean(image),
+      themeClass:`${domainThemeClass(item.domain)}${image ? ' hasPhoto' : ''}`, hidden:item.hidden, hasImage:true,
       attributes:`data-idea-key="${escapeHtml(item.key)}"`, image:imageMarkup,
-      title:titleWithIcon(item.title, item.domain, 'ideaTitle'),
-      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)} ${featuredIdeaKeys().includes(adminFeaturedIdeaKey(item)) ? '<span class="pill ok">Uitgelicht</span>' : ''}${item.kind === 'collega-toegevoegd' && !item.approved ? '<span class="pill warn">Wacht op goedkeuring</span>' : ''}${item.hidden ? '<span class="pill warn">Verborgen</span>' : ''}`,
-      meta:cardMetaLine(item),
-      description:escapeHtml(description), practical:escapeHtml(practical), website,
-      manageActions:adminIdeaActions(item)
+      title:cardTitle,
+      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
+      meta:cardMetaLine(item, {compact:true}),
+      description:escapeHtml(description), practical:escapeHtml(practical), website:'',
+      manageActions:`${status ? `<div class="adminCardStatus">${status}</div>` : ''}${adminIdeaActions(item)}`
     });
   }
   function adminIdeaRow(item){
@@ -4903,7 +4906,7 @@
 	    renderAdminThemeLegend();
 	    setupIdeaFilters();
 	    renderIdeas();
-	    setAdminIdeaView('list');
+	    setAdminIdeaView('tiles');
 	    renderLinks();
 	    renderReports();
 	    setupAgendaReviewControls();
