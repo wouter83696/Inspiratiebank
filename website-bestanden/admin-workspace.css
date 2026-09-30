@@ -90,7 +90,7 @@ body.ideaFilterSheetOpen{overflow:hidden}
 @layer adminLegacy {
   #adminApp .desktopStickyControls :where(*),
   .adminDiscoveryOverlay .ideaFilterSheetLayer :where(*),
-  #agendaContentSurface :where(*) { all:revert-layer; }
+  #agendaContentSurface :where(:not(.ongoingAdminPicker, .ongoingAdminPicker *)) { all:revert-layer; }
 }
 #adminApp .adminManagementFilterFields{display:flex;flex-wrap:wrap;gap:12px;padding:12px 0}
 .adminAgendaManagementFilters{margin:0 0 16px;padding:12px 16px;border:1px solid #e6e9e3;border-radius:16px;background:#fffdf9}

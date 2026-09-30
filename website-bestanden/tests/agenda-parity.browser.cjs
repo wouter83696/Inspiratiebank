@@ -18,7 +18,7 @@ const base=process.env.DISCOVERY_BASE_URL||'http://127.0.0.1:8765';
   const style=async(p,s)=>p.locator(s).evaluateAll(es=>es.map(e=>{const c=getComputedStyle(e);return Object.fromEntries(['fontFamily','fontSize','fontWeight','lineHeight','padding','color','backgroundColor','borderRadius','borderWidth','display','gap','boxSizing'].map(k=>[k,c[k]]))}));
   for(const width of [1440,820,390]){
    console.log('Agenda viewport',width);
-   for(const p of pages)await p.setViewportSize({width,height:1000});
+   for(const p of pages){await p.setViewportSize({width,height:1000});await p.waitForFunction(w=>innerWidth===w,width);await p.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));}
    for(const s of ['#agendaSearch','#agendaFilterToggle','#agendaThemeLegend [data-theme-filter]','.agendaSectionTab','.weekBadge','.weekTop h3','.weekHeaderMeta .weekCountBadge','.agendaHead','.agendaItemMeta']){
     assert.deepEqual(await style(pages[1],s),await style(pages[0],s),`${width}: ${s}`);
    }
