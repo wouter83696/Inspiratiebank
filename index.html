@@ -7723,18 +7723,16 @@
     const baseItems = DATA.inspiration.filter(item => !hiddenTitles.has(inspirationKey(item)) && !deleted.has(inspirationKey(item)));
     return [...baseItems, ...allTeamIdeas().map(teamIdeaToInspiration)];
   }
-  const IDEA_SESSION_MIX_KEY = 'zomerprogramma_idea_session_mix_seed_v1';
-  let ideaMixSeed = (() => {
+  function freshIdeaMixSeed(){
     try{
-      const stored = sessionStorage.getItem(IDEA_SESSION_MIX_KEY);
-      if(stored !== null) return Number(stored) || 0;
-      const seed = Math.floor(Math.random() * 2147483647);
-      sessionStorage.setItem(IDEA_SESSION_MIX_KEY, String(seed));
-      return seed;
+      const values = new Uint32Array(1);
+      crypto.getRandomValues(values);
+      return values[0];
     }catch(error){
-      return Math.floor(Math.random() * 2147483647);
+      return Math.floor(Math.random() * 4294967295);
     }
-  })();
+  }
+  let ideaMixSeed = freshIdeaMixSeed();
   function stableHash(value=''){
     let hash = 2166136261;
     const text = String(value);
@@ -7745,18 +7743,7 @@
     return hash >>> 0;
   }
   function ideaMixJitter(item){
-    return (stableHash(`${ideaMixSeed}|${ideaDomKey(item)}`) / 4294967295) * 12;
-  }
-  function ideaStrengthScore(item={}){
-    let score = 0;
-    if(item.teamIdeaId) score += 32;
-    if(item.url) score += 10;
-    if(item.source) score += 4;
-    if(item.fit && String(item.fit).length > 45) score += 5;
-    if(item.materials && String(item.materials).length > 20) score += 3;
-    if(/gratis|laag/i.test(String(item.cost || ''))) score += 3;
-    if(/laag/i.test(String(item.stimulus || ''))) score += 2;
-    return score;
+    return stableHash(`${ideaMixSeed}|${ideaDomKey(item)}`) / 4294967295;
   }
   function sortIdeasAlphabetically(items=[]){
     return [...items].sort((a,b) => String(a.domain || '').localeCompare(String(b.domain || ''), 'nl') || String(a.title || '').localeCompare(String(b.title || ''), 'nl'));
@@ -7779,7 +7766,7 @@
       if(!groups.has(key)) groups.set(key, []);
       groups.get(key).push(item);
     }
-    [...groups.values()].forEach(group => group.sort((a,b) => (ideaStrengthScore(b) + ideaMixJitter(b)) - (ideaStrengthScore(a) + ideaMixJitter(a))));
+    [...groups.values()].forEach(group => group.sort((a,b) => ideaMixJitter(b) - ideaMixJitter(a)));
     const result = [];
     const recent = [];
     while(groups.size){
@@ -7788,8 +7775,8 @@
         .sort((a,b) => {
           const [keyA, groupA] = a;
           const [keyB, groupB] = b;
-          const scoreA = ideaStrengthScore(groupA[0]) + ideaMixJitter(groupA[0]) + Math.min(groupA.length, 5) * .18 - (recent.includes(keyA) ? 1.2 : 0);
-          const scoreB = ideaStrengthScore(groupB[0]) + ideaMixJitter(groupB[0]) + Math.min(groupB.length, 5) * .18 - (recent.includes(keyB) ? 1.2 : 0);
+          const scoreA = ideaMixJitter(groupA[0]) + Math.min(groupA.length, 5) * .03 - (recent.includes(keyA) ? .25 : 0);
+          const scoreB = ideaMixJitter(groupB[0]) + Math.min(groupB.length, 5) * .03 - (recent.includes(keyB) ? .25 : 0);
           return scoreB - scoreA;
         });
       const [key, group] = candidates[0] || [...groups.entries()][0];
@@ -11314,8 +11301,7 @@
     });
     const mixIdeasBtn = $('#mixIdeasBtn');
     if(mixIdeasBtn) mixIdeasBtn.addEventListener('click', () => {
-      ideaMixSeed += 1;
-      try{ sessionStorage.setItem(IDEA_SESSION_MIX_KEY, String(ideaMixSeed)); }catch(error){}
+      ideaMixSeed = freshIdeaMixSeed();
       renderIdeas();
     });
     document.addEventListener('click', event => {
