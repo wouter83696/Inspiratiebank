@@ -756,7 +756,7 @@
     .ideaFeaturedMeta .cardLabels .stimulusPill{width:auto;min-width:20px;height:22px;min-height:22px;padding-right:2px}
     .ideaFeaturedMeta .cardMetaLine{width:auto;flex:0 0 auto;flex-wrap:nowrap;white-space:nowrap;margin:0;padding:0;border:0;border-radius:0;background:transparent;color:#697472;font-size:.76rem;overflow:visible}
     .ideaFeaturedMeta .cardMetaLine .metaIcon{width:16px;height:16px;color:#55777A}
-    .ideaFeaturedArrow{position:static;display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;margin-left:auto;border:1px solid rgba(79,142,158,.10);border-radius:50%;background:rgba(255,253,249,.94);color:var(--accent-dark)}
+    .ideaFeaturedArrow{position:static;display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;margin-left:auto;border:1px solid rgba(79,142,158,.04);border-radius:50%;background:rgba(255,254,252,.68);color:#527D86}
     .ideaFeaturedArrow svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
     @media (min-width:981px) and (hover:hover) and (pointer:fine){
       .ideaFeaturedCard:hover{transform:translateY(-2px);border-color:rgba(218,187,93,.58);box-shadow:none}
@@ -861,19 +861,19 @@
       right:max(16px,env(safe-area-inset-right));
       bottom:max(18px,calc(env(safe-area-inset-bottom) + 18px));
       z-index:70;
-      width:44px;height:44px;border:1px solid rgba(79,142,158,.10);border-radius:999px;
-      background:rgba(255,255,255,.78);color:var(--accent-dark);
-      box-shadow:0 12px 30px rgba(20,38,42,.12);
+      width:44px;height:44px;border:1px solid rgba(79,142,158,.04);border-radius:999px;
+      background:rgba(255,254,252,.68);color:#527D86;
+      box-shadow:0 4px 16px rgba(20,38,42,.08);
       backdrop-filter:blur(18px);
       cursor:pointer;
       opacity:0;pointer-events:none;transform:translateY(10px);
       transition:opacity .2s var(--ease),transform .2s var(--ease),background .18s var(--ease)
     }
     .backToTop svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-    .backToTop:hover{background:#fff}
+    .backToTop:hover,.ideaFeaturedArrow:hover{background:rgba(255,254,252,.80)}
     .backToTop.show{opacity:1;pointer-events:auto;transform:translateY(0)}
     @media (min-width:981px){
-      .backToTop{display:inline-flex;align-items:center;justify-content:center;right:24px;bottom:24px;background:rgba(255,253,249,.94);box-shadow:0 4px 16px rgba(20,38,42,.08);visibility:hidden}
+      .backToTop{display:inline-flex;align-items:center;justify-content:center;right:24px;bottom:24px;visibility:hidden}
       .backToTop.show{visibility:visible}
     }
     .ideaModal{
