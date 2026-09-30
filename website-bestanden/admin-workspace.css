@@ -103,3 +103,7 @@ body.ideaFilterSheetOpen{overflow:hidden}
 #adminApp #agendaContentSurface .ongoingAdminPicker select{max-width:100%;padding:10px;border:1px solid #dce4df;border-radius:10px}
 /* Workspace destinations must stay hidden despite legacy display:grid rules. */
 #adminApp .adminStack > [hidden]{display:none!important}
+@media(max-width:640px){
+ #adminApp #agendaContentSurface .ongoingAdminPicker label{flex-basis:100%}
+ #adminApp #agendaContentSurface .ongoingAdminPicker .button{width:100%;white-space:normal}
+}
