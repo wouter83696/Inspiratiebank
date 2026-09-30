@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="nl" class="appLoading" data-ui-build="single-desktop-source-v18">
+<html lang="nl" class="appLoading" data-ui-build="admin-current-public-v1">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,8 +26,9 @@
   <link rel="manifest" href="../site.webmanifest?v=20260925-warm-ui-v4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Lora:wght@500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    @layer adminLegacy {
     :root{
       --page-background:#F8F5EB;
       --page-surface:var(--page-background);
@@ -986,11 +987,13 @@
       #agendaReviewList .agendaTableActions{grid-template-columns:repeat(7,32px)}
       #agendaReviewList .agendaTableActions .button.iconAction{width:32px;height:32px}
     }
+    }
   </style>
   <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260911-first-paint-v4">
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260911-ongoing-light-cards-v39">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260923-warm-cards-v1">
-  <link rel="stylesheet" href="../website-bestanden/admin-public-parity.css?v=20260930-public-parity-v3">
+  <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20260930-rebuild-v1">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20260930-rebuild-v1">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -1159,24 +1162,8 @@
           </section>
 
           <section class="adminWorkspace" data-admin-workspace="agenda" hidden>
-            <div class="workspaceHeader">
-              <div>
-                <h2>UIT-agenda</h2>
-                <p>Controleer agenda-items en blokkeer bronnen of woorden die niet passen bij rustig, bruikbaar aanbod.</p>
-              </div>
-            </div>
             <div class="adminStack">
-        <section class="agendaCheckNotice" aria-labelledby="agendaCheckStatusTitle">
-          <div class="agendaCheckNoticeText">
-            <span class="agendaCheckEyebrow">Agenda-check</span>
-            <strong id="agendaCheckStatusTitle" data-agenda-check-title>Laatste check laden...</strong>
-            <span class="agendaCheckDetail" id="agendaCheckStatusText" data-agenda-check-text>We halen de status uit de beheerdata.</span>
-          </div>
-          <div class="agendaCheckActions">
-            <button class="button small primary" type="button" data-request-agenda-source-check>Controleer nu</button>
-            <button class="button small white" id="markAgendaCheckedBtn" type="button">Als gecheckt markeren</button>
-          </div>
-        </section>
+
         <section class="panel tintedPanel toneAgenda agendaRulesPanel" id="agendaRulesPanel">
           <div class="panelHead agendaRulesHead">
             <div>
@@ -1234,10 +1221,25 @@
         </section>
       </div>
 
-        <section class="panel tintedPanel toneAgenda agendaReviewPanel" id="agendaReviewPanel">
-          <div class="panelHead" id="agendaAdminSection">
+        <section class="adminPublicSurface" id="agendaReviewPanel">
+          <section class="tabHero agendaHero" aria-labelledby="adminAgendaTitle">
+            <div class="tabHeroHomeLink"><h1 class="tabHeroTitle" id="adminAgendaTitle">UIT-agenda</h1><p class="tabHeroLine">Bekijk én beheer wat er te doen is</p></div>
+            <span class="adminModeBadge">Beheer · UIT-agenda</span>
+          </section>
+        <section class="agendaCheckNotice" aria-labelledby="agendaCheckStatusTitle">
+          <div class="agendaCheckNoticeText">
+            <span class="agendaCheckEyebrow">Agenda-check</span>
+            <strong id="agendaCheckStatusTitle" data-agenda-check-title>Laatste check laden...</strong>
+            <span class="agendaCheckDetail" id="agendaCheckStatusText" data-agenda-check-text>We halen de status uit de beheerdata.</span>
+          </div>
+          <div class="agendaCheckActions">
+            <button class="button small primary" type="button" data-request-agenda-source-check>Controleer nu</button>
+            <button class="button small white" id="markAgendaCheckedBtn" type="button">Als gecheckt markeren</button>
+          </div>
+        </section>
+          <div class="adminAgendaUtilities panelHead" id="agendaAdminSection">
             <div>
-              <h2>Agenda-items</h2>
+              <h2>Agenda beheren</h2>
               <p>Controleer vaste en automatisch gevonden agenda-items. Verberg tijdelijk of verwijder wat niet passend is.</p>
             </div>
             <div class="rowActions">
@@ -1246,8 +1248,10 @@
             </div>
           </div>
           <div class="filterBar">
-            <div class="filters agendaAdminFilters" id="agendaAdminFilters">
+            <div class="filters agendaAdminFilters sharedDiscoveryFilters" id="agendaAdminFilters">
               <div class="filterSearch"><input id="agendaAdminSearch" type="search" placeholder="Zoek titel, plek, bron..."></div>
+              <button class="filterToggle" id="adminAgendaFilterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-controls="agendaAdminFilterOptions"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></button>
+              <div class="adminFilterOptions" id="agendaAdminFilterOptions">
               <select id="agendaAdminWeekSelect" aria-label="Week kiezen"></select>
               <select id="agendaAdminKindFilter" aria-label="Soort filteren">
                 <option value="all">Soort</option>
@@ -1264,14 +1268,15 @@
                 <option value="verified">Gecheckt</option>
                 <option value="hidden">Verborgen</option>
               </select>
-              <button class="filterReset" id="agendaAdminResetBtn" type="button">Reset</button>
+              <button class="filterReset" id="agendaAdminResetBtn" type="button">Filters wissen</button>
+              </div>
             </div>
 	          </div>
 	          <div class="adminSelectionToolbar" id="agendaSelectionToolbar" aria-live="polite">
 	            <div class="adminSelectionSummary"><span class="adminSelectionKicker">Geselecteerd</span><strong id="agendaSelectionTitle">Klik op een agenda-item om het te beheren</strong></div>
 	            <div class="adminSelectionActions" id="agendaSelectionActions"></div>
 	          </div>
-	          <div id="agendaAdminThemeLegend" class="agendaAdminThemeLegend"></div>
+	          <div id="agendaAdminThemeLegend" class="agendaAdminThemeLegend inspirationDesktopFilterRow sharedDiscoveryChipRow"></div>
           <div id="agendaReviewList" class="agendaReviewList weekStack"></div>
           <div class="sectionDivider"></div>
           <section class="ongoingAccordion adminOngoingAccordion" id="ongoingAdminSection">
@@ -1289,14 +1294,12 @@
           </section>
 
           <section class="adminWorkspace" data-admin-workspace="inspiration" hidden>
-      <section class="panel tintedPanel toneClean" id="inspirationAdminPanel">
-            <div class="workspaceHeader">
-              <div>
-                <h2>Inspiratiebank</h2>
-                <p>Ruim inspiratie-items op, beheer foto’s en pas activiteiten aan.</p>
-              </div>
-            </div>
-        <section class="featuredAdminPanel" aria-labelledby="featuredAdminTitle">
+      <section class="adminPublicSurface" id="inspirationAdminPanel" data-public-view="inspiration">
+        <section class="tabHero inspirationHero" aria-labelledby="adminInspirationTitle">
+          <div class="tabHeroHomeLink"><h1 class="tabHeroTitle" id="adminInspirationTitle">Ontdek iets nieuws</h1><p class="tabHeroLine">Vind én beheer inspiratie</p></div>
+          <span class="adminModeBadge">Beheer · Inspiratiebank</span>
+        </section>
+        <details class="featuredAdminPanel"><summary>Uitgelicht beheren</summary>
           <div class="featuredAdminHead">
             <div>
               <h3 id="featuredAdminTitle">Uitgelicht</h3>
@@ -1305,9 +1308,32 @@
             <span class="featuredAdminCount" id="featuredAdminCount">0 / 5</span>
           </div>
           <div class="featuredAdminList" id="featuredAdminList"></div>
-        </section>
-        <div class="adminIdeaToolbar">
-          <div></div>
+        </details>
+        <div class="filterBar">
+          <div class="filters more sharedDiscoveryFilters" id="adminIdeaFilters" aria-label="Inspiratiebank filters">
+            <div class="filterSearch"><input id="ideaSearch" type="search" placeholder="Zoek inspiratie..."></div>
+            <button class="filterToggle" id="adminFilterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-controls="adminIdeaFilters">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16l-6 7v5l-4 2v-7Z"></path></svg>
+            </button>
+            <div class="adminFilterOptions">
+            <select id="ideaDomainFilter"><option value="all">Categorie</option></select>
+            <select id="ideaLocationFilter"><option value="all">Locatie</option></select>
+            <select id="ideaDistanceFilter"><option value="all">Afstand</option></select>
+            <select id="ideaCostFilter"><option value="all">Kosten</option></select>
+            <select id="ideaStimulusFilter"><option value="all">Prikkelbelasting</option></select>
+            <button class="filterReset" id="adminResetBtn" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg>
+              <span>Filters wissen</span>
+            </button>
+            </div>
+          </div>
+	        </div>
+	        <div class="adminSelectionToolbar" id="ideaSelectionToolbar" aria-live="polite">
+	          <div class="adminSelectionSummary"><span class="adminSelectionKicker">Geselecteerd</span><strong id="ideaSelectionTitle">Klik op een tegel om deze te beheren</strong></div>
+	          <div class="adminSelectionActions" id="ideaSelectionActions"></div>
+	        </div>
+	        <div class="adminThemeLegendRow inspirationDesktopFilterRow sharedDiscoveryChipRow">
+          <div id="adminThemeLegend"></div>
           <div class="viewBar">
             <div class="viewSwitch" aria-label="Weergave inspiratiebank beheer">
               <button class="viewBtn active" type="button" data-admin-view="tiles" aria-label="Tegelweergave" title="Tegelweergave">
@@ -1318,34 +1344,13 @@
               </button>
             </div>
           </div>
-        </div>
-        <div class="filterBar">
-          <div class="filters more" id="adminIdeaFilters" aria-label="Inspiratiebank filters">
-            <div class="filterSearch"><input id="ideaSearch" type="search" placeholder="Zoek activiteit, materiaal of thema..."></div>
-            <button class="filterToggle" id="adminFilterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-controls="adminIdeaFilters">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16l-6 7v5l-4 2v-7Z"></path></svg>
-            </button>
-            <select id="ideaDomainFilter"><option value="all">Categorie</option></select>
-            <select id="ideaLocationFilter"><option value="all">Locatie</option></select>
-            <select id="ideaDistanceFilter"><option value="all">Afstand</option></select>
-            <select id="ideaCostFilter"><option value="all">Kosten</option></select>
-            <select id="ideaStimulusFilter"><option value="all">Prikkelbelasting</option></select>
-            <button class="filterReset" id="adminResetBtn" type="button">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg>
-              <span>Filters wissen</span>
-            </button>
-          </div>
-	        </div>
-	        <div class="adminSelectionToolbar" id="ideaSelectionToolbar" aria-live="polite">
-	          <div class="adminSelectionSummary"><span class="adminSelectionKicker">Geselecteerd</span><strong id="ideaSelectionTitle">Klik op een tegel om deze te beheren</strong></div>
-	          <div class="adminSelectionActions" id="ideaSelectionActions"></div>
-	        </div>
-	        <div class="adminThemeLegendRow">
-          <div id="adminThemeLegend"></div>
+
           <span id="ideaCount" class="adminCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span><strong id="ideaCountValue">0</strong><span id="ideaCountLabel">activiteiten</span></span></span>
         </div>
         <div id="adminIdeaList" class="tableWrap adminIdeaView sharedIdeaList isAdmin" hidden></div>
         <div id="adminIdeaCards" class="cards adminIdeaView sharedIdeaCards isAdmin active"></div>
+
+
         <div id="adminIdeaEditPanel" class="adminIdeaEditPanel" hidden>
           <div class="panelHead">
             <div>
@@ -5016,6 +5021,10 @@
     ['#ideaDomainFilter','#ideaLocationFilter','#ideaDistanceFilter','#ideaCostFilter','#ideaStimulusFilter']
       .forEach(selector => $(selector).addEventListener('change', renderIdeas));
     $('#adminResetBtn').addEventListener('click', resetIdeaFilters);
+    $('#adminAgendaFilterToggle').addEventListener('click', () => {
+      const expanded = $('#agendaAdminFilters').classList.toggle('expanded');
+      $('#adminAgendaFilterToggle').setAttribute('aria-expanded', String(expanded));
+    });
     $('#adminFilterToggle').addEventListener('click', () => {
       const filters = $('#adminIdeaFilters');
       const expanded = filters.classList.toggle('expanded');
@@ -5197,7 +5206,7 @@
 	    });
     document.addEventListener('keydown', event => {
       const selectable = event.target.closest?.('#adminIdeaCards [data-idea-key], #adminIdeaList [data-idea-key], #agendaReviewList [data-agenda-select]');
-      if(selectable && (event.key === 'Enter' || event.key === ' ')){
+      if(selectable && event.target === selectable && (event.key === 'Enter' || event.key === ' ')){
         event.preventDefault();
         if(selectable.dataset.ideaKey) selectAdminIdea(selectable.dataset.ideaKey);
         else selectAgendaItem(selectable.dataset.agendaSelect);
