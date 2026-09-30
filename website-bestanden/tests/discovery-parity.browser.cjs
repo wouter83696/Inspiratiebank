@@ -31,6 +31,10 @@ const base=process.env.DISCOVERY_BASE_URL || 'http://127.0.0.1:8765';
      if(width>640)await page.locator('#inspirationDesktopLocation [data-filter-settings-btn]').click();
      else await page.locator('#filterToggle').click();
      await page.locator('#ideaFilterSheetLayer.isOpen').waitFor();
+     // Compare final styles, not a colour halfway through its opening transition.
+     await page.locator('#ideaFilterSheetLayer').evaluate(async el=>{
+       await Promise.all(el.getAnimations({subtree:true}).map(animation=>animation.finished.catch(()=>{})));
+     });
    }
    assert.deepEqual(await styles(pages[0],'#ideaFilterSheetLayer *'),await styles(pages[1],'#ideaFilterSheetLayer *'),`${width}: complete filter sheet`);
    for(const page of pages){
