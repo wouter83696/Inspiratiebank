@@ -78,3 +78,47 @@ body.adminMode .shell{padding-bottom:0}
  #adminApp .adminPublicSurface #adminThemeLegend{width:100%;overflow-x:auto;padding-bottom:4px}
  #adminApp .adminPublicSurface #adminThemeLegend .agendaThemeLegend{flex-wrap:nowrap;width:max-content;max-width:none}
 }
+/* The same filter sheet used by discovery, hosted in a native modal for focus containment. */
+#adminDiscoveryDialog:not([open]){display:none!important}
+#adminDiscoveryDialog[open]{display:flex!important;position:fixed!important;inset:0!important;align-items:stretch;justify-content:flex-end;width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:0;border:0;background:transparent;visibility:visible!important;pointer-events:auto;overflow:hidden;z-index:1300}
+#adminDiscoveryDialog::backdrop{background:rgba(48,46,39,.2)}
+#adminDiscoveryDialog .ideaFilterSheetBackdrop{background:transparent;opacity:1}
+#adminDiscoveryDialog .ideaFilterSheet{position:relative!important;display:flex!important;flex-direction:column!important;inset:auto!important;width:min(480px,100vw)!important;height:100%;max-height:none;min-width:0;margin:0;padding:0;transform:none!important;opacity:1!important;visibility:visible!important;border-radius:24px 0 0 24px;background:#fffdf9;box-shadow:-12px 0 50px rgba(49,95,107,.12)}
+#adminDiscoveryDialog .ideaFilterSheetBody{display:block!important;flex:1;min-height:0;overflow:auto}
+#adminDiscoveryDialog .ideaFilterSheetFooter{display:grid!important;flex-shrink:0}
+#adminDiscoveryDialog .ideaFilterSection{display:block!important}
+#adminDiscoveryDialog .ideaFilterSheetHeader{display:flex!important;flex-shrink:0}
+#adminDiscoveryDialog .ideaFilterChip.active{border-color:#629c9a;background:#e2f1ec;color:#315f6b;box-shadow:inset 0 0 0 1px #629c9a}
+#adminDiscoveryDialog .ideaFilterSheetAction:disabled{opacity:.6;cursor:wait}
+body.adminDiscoveryOpen{overflow:hidden}
+.adminDiscoveryActive{display:flex;align-items:center;gap:12px;min-height:0;margin-bottom:12px;color:#617573;font-size:12px}
+.adminDiscoveryActive:has(span:empty){margin:0}
+.adminDiscoveryActive [hidden]{display:none!important}
+.adminSettingsWorkspace{padding-top:32px;max-width:1000px;margin-inline:auto}
+.siteSettingsForm .panel{margin-top:18px;background:#fffdf9;border:1px solid #e6e9e3;box-shadow:none}
+.siteSettingsForm h3{margin:0;color:#315f6b;font-size:20px;font-weight:600}
+.siteSettingsForm p{margin:8px 0 18px;font-size:14px}
+.siteSettingsFields{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0}
+.siteSettingsFields label{display:grid;align-content:start;gap:8px;color:#315f6b;font-size:14px}
+.siteSettingsFields .wide{grid-column:1/-1}
+.siteSettingsFields small{color:#74817d;font-size:12px}
+.siteSettingsFields input:not([type=range]),.siteSettingsFields select{width:100%;min-width:0;border:1px solid #dce4df;border-radius:12px;padding:12px;background:#fff;color:#315f6b}
+.siteSettingsFields input[type=range]{width:100%;accent-color:#4f8e9e}
+.siteHeaderPreview{position:relative;height:230px;overflow:hidden;border-radius:16px;background:#f7f4ee}
+.siteHeaderPreview img{width:100%;height:100%;object-fit:cover;display:block}
+.siteHeaderPreview span{position:absolute;bottom:28px;left:24px;color:#315f6b;font:500 32px Lora,serif;text-shadow:0 1px 12px #fff}
+.siteSettingsSaveBar{position:sticky;bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:20px;padding:16px;border:1px solid #e6e9e3;border-radius:16px;background:rgba(255,253,249,.97);box-shadow:0 8px 28px rgba(49,95,107,.08)}
+.siteSettingsSaveBar p{flex-basis:100%;margin:0;font-size:13px}
+.siteSettingsSaveBar p:empty{display:none}
+.siteSettingsSaveBar .warn{color:#9a5b32}
+@media(max-width:640px){
+ #adminDiscoveryDialog[open]{align-items:flex-end}
+ #adminDiscoveryDialog .ideaFilterSheet{width:100%!important;height:min(94dvh,820px);border-radius:24px 24px 0 0}
+ .siteSettingsFields{grid-template-columns:1fr}
+ .siteHeaderPreview{height:190px}
+ .siteHeaderPreview span{font-size:26px}
+ .siteSettingsSaveBar{bottom:6px}
+}
+#adminDiscoveryDialog .ideaFilterSheetBody{padding:18px 20px 24px}
+#adminDiscoveryDialog .ideaFilterCategoryHint{margin:0 0 12px;font-size:12px;line-height:1.5}
+@media(max-width:640px){#adminDiscoveryDialog .ideaFilterSheetBody{padding:16px}}

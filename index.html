@@ -5987,6 +5987,7 @@
     </div>
   </div>
 
+  <script src="website-bestanden/site-settings-shared.js?v=20260930-settings-v1"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20260923-map-detail-v1"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20260925-week-expand-v1"></script>
@@ -6191,8 +6192,8 @@
 	  const PUBLIC_FORM_MIN_MS = 2500;
 	  const PUBLIC_SUBMIT_COOLDOWN_MS = 12000;
 	  const PUBLIC_REPORT_COOLDOWN_MS = 3000;
-	  const DEFAULT_LOCATION = {label:'Nijmegen', lat:51.8240, lon:5.8040, isDefault:true};
-	  const DEFAULT_LOCATION_RADIUS_KM = 10;
+	  let DEFAULT_LOCATION = {label:'Nijmegen', lat:51.8240, lon:5.8040, isDefault:true};
+	  let DEFAULT_LOCATION_RADIUS_KM = 10;
 	  const SUPPORTED_REGION_RADIUS_KM = 70;
 	  const KNOWN_PLACE_COORDS = {
 	    nijmegen:[51.8126,5.8372], dukenburg:[51.8130,5.7840], lent:[51.8610,5.8660], wijchen:[51.8090,5.7250],
@@ -6233,6 +6234,7 @@
 
 	  function normalizeCentralStorage(value={}){
 	    return {
+	      siteSettings:SiteSettings.normalize(value.siteSettings),
 	      version:1,
 	      updatedAt:value.updatedAt || null,
 	      colleagueIdeas:Array.isArray(value.colleagueIdeas) ? value.colleagueIdeas : [],
@@ -6734,6 +6736,16 @@
     const location = normalizeIdeaLocation(value);
     return location === 'Buiten' || location === 'Op pad';
   }
+  function applyPublicSiteSettings(){
+    const settings = SiteSettings.normalize(centralStorage?.siteSettings);
+    DEFAULT_LOCATION = {...settings.region, isDefault:true};
+    DEFAULT_LOCATION_RADIUS_KM = settings.region.radiusKm;
+    if(userLocation?.isDefault){
+      userLocation = {...DEFAULT_LOCATION};
+      userLocationRadiusKm = loadUserLocationRadius();
+    }
+    SiteSettings.applyHeader(settings);
+  }
   function loadUserLocation(){
     if(typeof localStorage === 'undefined') return {...DEFAULT_LOCATION};
     try{
@@ -6746,7 +6758,6 @@
   }
   function loadUserLocationRadius(){
     if(typeof localStorage === 'undefined') return DEFAULT_LOCATION_RADIUS_KM;
-    if(userLocation?.isDefault) return DEFAULT_LOCATION_RADIUS_KM;
     const saved = Number(localStorage.getItem(USER_LOCATION_RADIUS_KEY));
     return [3,5,10,25,50].includes(saved) ? saved : DEFAULT_LOCATION_RADIUS_KM;
   }
@@ -6754,8 +6765,7 @@
     const next = Number(value);
     userLocationRadiusKm = [3,5,10,25,50].includes(next) ? next : DEFAULT_LOCATION_RADIUS_KM;
     if(typeof localStorage !== 'undefined'){
-      if(userLocationRadiusKm === DEFAULT_LOCATION_RADIUS_KM) localStorage.removeItem(USER_LOCATION_RADIUS_KEY);
-      else localStorage.setItem(USER_LOCATION_RADIUS_KEY, String(userLocationRadiusKm));
+      localStorage.setItem(USER_LOCATION_RADIUS_KEY, String(userLocationRadiusKm));
     }
     if(sync) syncLocationRadiusUi();
   }
@@ -6772,7 +6782,7 @@
     renderAgenda();
   }
   function locationDisplayText(){
-    if(userLocation?.isDefault) return 'Nijmegen';
+    if(userLocation?.isDefault) return DEFAULT_LOCATION.label;
     return userLocation.place || userLocation.label || cleanPostcode(userLocation.postcode || '') || 'Postcode';
   }
   function selectLocationPreset(city){
@@ -6816,7 +6826,7 @@
     if(input) input.value = userLocation?.isDefault ? '' : (cleanPostcode(userLocation.postcode || '') || userLocation.place || userLocation.label || '');
     if(status){
       status.classList.remove('warn');
-      status.textContent = userLocation?.isDefault ? 'Standaard: Nijmegen binnen 10 km.' : `${locationDisplayText()} binnen ${userLocationRadiusKm} km is lokaal bewaard op dit apparaat.`;
+      status.textContent = userLocation?.isDefault ? `Standaard: ${DEFAULT_LOCATION.label} binnen ${DEFAULT_LOCATION_RADIUS_KM >= 50 ? '50+' : DEFAULT_LOCATION_RADIUS_KM} km.` : `${locationDisplayText()} binnen ${userLocationRadiusKm} km is lokaal bewaard op dit apparaat.`;
     }
   }
   function openLocationModal(){
@@ -9761,7 +9771,7 @@
     }
     if(locationStatus && !locationStatus.dataset.busy){
       locationStatus.classList.remove('warn');
-      locationStatus.textContent = userLocation?.isDefault ? 'Standaardlocatie: Nijmegen' : `Ingesteld op ${locationDisplayText()}`;
+      locationStatus.textContent = userLocation?.isDefault ? `Standaardlocatie: ${DEFAULT_LOCATION.label}` : `Ingesteld op ${locationDisplayText()}`;
     }
     const radiusIndex = Math.max(0, IDEA_FILTER_RADIUS_STEPS.indexOf(userLocationRadiusKm));
     if(range) range.value = String(radiusIndex);
@@ -9785,7 +9795,7 @@
       const location = await geocodeLocation(query);
       if(!isSupportedLocation(location)){
         status?.classList.add('warn');
-        if(status) status.textContent = 'Voor deze locatie staat nog geen lokale set klaar. Kies Nijmegen, Arnhem of een plaats in de directe omgeving.';
+        if(status) status.textContent = `Voor deze locatie staat nog geen lokale set klaar. Kies een plaats rond ${DEFAULT_LOCATION.label}.`;
         return;
       }
       saveUserLocation(location);
@@ -10063,7 +10073,7 @@
       : `${visiblePoints.length} activiteiten in dit gebied`;
     const panelText = activeIdeaMapClusterKeys
       ? (sharedPlace ? `Deze activiteiten liggen verspreid over ${sharedPlace.charAt(0).toUpperCase() + sharedPlace.slice(1)}.` : activeIdeaMapClusterIsArea ? 'Zoom in voor losse markers of kies hieronder een tegel.' : 'Activiteiten op dezelfde locatie. Kies een tegel of toon alles.')
-      : (userLocation?.isDefault ? 'Standaard rond Nijmegen.' : `Afstand vanaf ${locationDisplayText()}.`);
+      : (userLocation?.isDefault ? `Standaard rond ${DEFAULT_LOCATION.label}.` : `Afstand vanaf ${locationDisplayText()}.`);
     const minimized = !ideaMapPanelExpanded && !singleDetail && !activeIdeaMapClusterKeys;
     const visibleTitle = minimized ? `${visiblePoints.length} activiteiten in dit gebied` : panelTitle;
     const visibleTitleHtml = escapeHtml(visibleTitle);
@@ -10827,6 +10837,8 @@
 	  async function refreshFromCentral(){
 	    const loaded = await loadCentralStorage();
 	    if(!loaded) return;
+      applyPublicSiteSettings();
+      syncLocationUi();
 	    setupAgendaFilters();
 	    renderAgenda();
 	    refreshCollections();
@@ -10966,6 +10978,7 @@
 	    if(!hasSiteData) return;
 	    refreshActiveWeeks();
 	    await loadCentralStorage();
+      applyPublicSiteSettings();
 	    setupAgendaFilters(); renderAgenda(); refreshCollections(); setIdeaView(ideaViewFromLocation(), {updateUrl:false});
     syncLocationUi();
     warmHeroBackgrounds();
@@ -11199,7 +11212,7 @@
           const km = Math.round(supportedRegionDistanceKm(location));
           if(status){
             status.classList.add('warn');
-            status.textContent = `Voor deze locatie staat nog geen lokale set klaar (${km} km vanaf Nijmegen). Kies Nijmegen of Arnhem om het lokale aanbod te bekijken.`;
+            status.textContent = `Voor deze locatie staat nog geen lokale set klaar (${km} km vanaf ${DEFAULT_LOCATION.label}). Kies een plaats in de omgeving om het lokale aanbod te bekijken.`;
           }
           return;
         }
