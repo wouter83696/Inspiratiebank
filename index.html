@@ -5829,11 +5829,15 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
             <input id="ideaFilterLocationInput" type="text" inputmode="text" autocomplete="postal-code" placeholder="Postcode of plaats">
           </label>
+          <div class="ideaFilterChips locationPresetChips" aria-label="Kies een stad">
+            <button class="ideaFilterChip" type="button" data-location-preset="nijmegen">Nijmegen</button>
+            <button class="ideaFilterChip" type="button" data-location-preset="arnhem">Arnhem</button>
+          </div>
           <p class="ideaFilterSheetStatus" id="ideaFilterLocationStatus" role="status" aria-live="polite"></p>
         </section>
         <section class="ideaFilterSection" id="ideaFilterDistanceSection">
-          <div class="ideaFilterSectionHead"><h3>Afstand</h3><span class="ideaFilterSectionValue" id="ideaFilterDistanceValue">50+ km</span></div>
-          <input class="ideaFilterRange" id="ideaFilterDistanceRange" type="range" min="0" max="4" step="1" value="4" aria-label="Maximale afstand">
+          <div class="ideaFilterSectionHead"><h3>Afstand</h3><span class="ideaFilterSectionValue" id="ideaFilterDistanceValue">10 km</span></div>
+          <input class="ideaFilterRange" id="ideaFilterDistanceRange" type="range" min="0" max="4" step="1" value="2" aria-label="Maximale afstand">
           <div class="ideaFilterRangeLabels" aria-hidden="true"><span>3 km</span><span>5 km</span><span>10 km</span><span>25 km</span><span>50+ km</span></div>
         </section>
         <section class="ideaFilterSection">
@@ -5892,11 +5896,15 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
             <input id="agendaFilterLocationInput" type="text" inputmode="text" autocomplete="postal-code" placeholder="Postcode of plaats">
           </label>
+          <div class="ideaFilterChips locationPresetChips" aria-label="Kies een stad">
+            <button class="ideaFilterChip" type="button" data-location-preset="nijmegen">Nijmegen</button>
+            <button class="ideaFilterChip" type="button" data-location-preset="arnhem">Arnhem</button>
+          </div>
           <p class="ideaFilterSheetStatus" id="agendaFilterLocationStatus" role="status" aria-live="polite"></p>
         </section>
         <section class="ideaFilterSection">
-          <div class="ideaFilterSectionHead"><h3>Afstand</h3><span class="ideaFilterSectionValue" id="agendaFilterDistanceValue">50+ km</span></div>
-          <input class="ideaFilterRange" id="agendaFilterDistanceRange" type="range" min="0" max="4" step="1" value="4" aria-label="Maximale afstand">
+          <div class="ideaFilterSectionHead"><h3>Afstand</h3><span class="ideaFilterSectionValue" id="agendaFilterDistanceValue">10 km</span></div>
+          <input class="ideaFilterRange" id="agendaFilterDistanceRange" type="range" min="0" max="4" step="1" value="2" aria-label="Maximale afstand">
           <div class="ideaFilterRangeLabels" aria-hidden="true"><span>3 km</span><span>5 km</span><span>10 km</span><span>25 km</span><span>50+ km</span></div>
         </section>
         <section class="ideaFilterSection">
@@ -5932,8 +5940,12 @@
           <h2 id="locationModalTitle" class="ideaModalTitle">Vanaf jouw postcode</h2>
         </div>
       </div>
-      <p id="locationModalText" class="ideaModalText">Vul je postcode in om de afstand tot activiteiten beter te bepalen. Betaalde activiteiten zijn er voor nu vooral in regio Nijmegen.</p>
+      <p id="locationModalText" class="ideaModalText">Kies Nijmegen of Arnhem, of vul je eigen postcode in om de afstand tot activiteiten te bepalen.</p>
       <form id="locationForm" class="locationForm">
+        <div class="ideaFilterChips locationPresetChips" aria-label="Kies een stad">
+          <button class="ideaFilterChip" type="button" data-location-preset="nijmegen">Nijmegen</button>
+          <button class="ideaFilterChip" type="button" data-location-preset="arnhem">Arnhem</button>
+        </div>
         <div class="locationFieldsRow">
           <div class="locationField">
             <label for="locationPostcodeInput">Postcode of plaats</label>
@@ -5967,7 +5979,7 @@
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script>
-  const SITE_DATA_URL = 'website-bestanden/data/zomerprogramma_data.json?v=2026-09-29T18%3A47%3A54.745Z';
+  const SITE_DATA_URL = 'website-bestanden/data/zomerprogramma_data.json?v=2026-09-30T07%3A58%3A27.039Z';
   const EMPTY_SITE_DATA = {
     weeks:[],
     external:[],
@@ -6164,7 +6176,7 @@
 	  const PUBLIC_SUBMIT_COOLDOWN_MS = 12000;
 	  const PUBLIC_REPORT_COOLDOWN_MS = 3000;
 	  const DEFAULT_LOCATION = {label:'Nijmegen', lat:51.8240, lon:5.8040, isDefault:true};
-	  const DEFAULT_LOCATION_RADIUS_KM = 50;
+	  const DEFAULT_LOCATION_RADIUS_KM = 10;
 	  const SUPPORTED_REGION_RADIUS_KM = 70;
 	  const KNOWN_PLACE_COORDS = {
 	    nijmegen:[51.8126,5.8372], dukenburg:[51.8130,5.7840], lent:[51.8610,5.8660], wijchen:[51.8090,5.7250],
@@ -6747,6 +6759,17 @@
     if(userLocation?.isDefault) return 'Nijmegen';
     return userLocation.place || userLocation.label || cleanPostcode(userLocation.postcode || '') || 'Postcode';
   }
+  function selectLocationPreset(city){
+    const key = normalize(city);
+    saveUserLocationRadius(10, {sync:false});
+    if(key === 'arnhem'){
+      saveUserLocation({label:'Arnhem', place:'Arnhem', lat:51.9851, lon:5.8987});
+    }else{
+      saveUserLocation(null);
+    }
+    syncIdeaFilterSheet();
+    syncAgendaFilterSheet();
+  }
   function syncLocationRadiusUi(){
     const radiusInput = $('#locationRadiusInput');
     const radiusText = userLocationRadiusKm >= 50 ? '50+ km' : `${userLocationRadiusKm} km`;
@@ -6768,10 +6791,16 @@
     $$('[data-location-settings-btn]').forEach(button => {
       button.classList.toggle('locationSet', !userLocation?.isDefault);
     });
+    const activeCity = normalize(locationDisplayText());
+    $$('[data-location-preset]').forEach(button => {
+      const active = normalize(button.dataset.locationPreset) === activeCity;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
     if(input) input.value = userLocation?.isDefault ? '' : (cleanPostcode(userLocation.postcode || '') || userLocation.place || userLocation.label || '');
     if(status){
       status.classList.remove('warn');
-      status.textContent = userLocation?.isDefault ? 'Standaard: Nijmegen binnen 50+ km.' : 'Je postcode en afstand zijn lokaal bewaard op dit apparaat.';
+      status.textContent = userLocation?.isDefault ? 'Standaard: Nijmegen binnen 10 km.' : `${locationDisplayText()} binnen ${userLocationRadiusKm} km is lokaal bewaard op dit apparaat.`;
     }
   }
   function openLocationModal(){
@@ -9754,7 +9783,7 @@
       const location = await geocodeLocation(query);
       if(!isSupportedLocation(location)){
         status?.classList.add('warn');
-        if(status) status.textContent = 'Voor deze locatie staat nog geen lokale set klaar. Kies een locatie in de regio Nijmegen.';
+        if(status) status.textContent = 'Voor deze locatie staat nog geen lokale set klaar. Kies Nijmegen, Arnhem of een plaats in de directe omgeving.';
         return;
       }
       saveUserLocation(location);
@@ -11144,6 +11173,13 @@
       closeLocationModal();
       closeDesktopSidebar();
     });
+    $$('[data-location-preset]').forEach(button => button.addEventListener('click', () => {
+      selectLocationPreset(button.dataset.locationPreset);
+      if(button.closest('#locationModal')){
+        closeLocationModal();
+        closeDesktopSidebar();
+      }
+    }));
     enhanceCustomSelect($('#locationRadiusInput'));
     $('#locationRadiusInput')?.addEventListener('change', event => {
       saveUserLocationRadius(event.target.value);
@@ -11161,7 +11197,7 @@
           const km = Math.round(supportedRegionDistanceKm(location));
           if(status){
             status.classList.add('warn');
-            status.textContent = `Voor deze locatie staat nog geen lokale set klaar. De huidige inspiratie is vooral voor de regio Nijmegen (${km} km vanaf jouw postcode). Kies 'Standaard gebruiken' om die set te bekijken.`;
+            status.textContent = `Voor deze locatie staat nog geen lokale set klaar (${km} km vanaf Nijmegen). Kies Nijmegen of Arnhem om het lokale aanbod te bekijken.`;
           }
           return;
         }

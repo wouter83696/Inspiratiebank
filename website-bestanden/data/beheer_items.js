@@ -1,4 +1,5 @@
 window.BCJN_BEHEER_BASE = {
+  "generated": "30 september 2026",
   "weeks": [
     {
       "id": "w29",
@@ -1626,6 +1627,519 @@ window.BCJN_BEHEER_BASE = {
         "regio",
         "uitje"
       ]
+    },
+    {
+      "title": "Alle kinderen stinken (6+)",
+      "date": "Zaterdag 3 oktober 2026",
+      "time": "16.00",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel/hoog",
+      "fit": "Interactieve familievoorstelling met humor, tempo en onverwachte wendingen.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "familie",
+        "theater",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "OPA presenteert Arnhemse Nieuwe 2026",
+      "date": "Woensdag 7 oktober 2026",
+      "time": "19.00",
+      "domain": "Creatief & Expressie",
+      "where": "Focus Filmtheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "€",
+      "stimulus": "Middel",
+      "fit": "Avond met korte presentaties en werk van nieuwe Arnhemse makers.",
+      "source": "Focus Filmtheater",
+      "url": "https://www.focusarnhem.nl/agenda/opa-presenteert-arnhemse-nieuwe-2026/",
+      "tags": [
+        "film",
+        "design",
+        "makers",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Yentl en de Boer – Rekhalzen",
+      "date": "Woensdag 7 oktober 2026",
+      "time": "20.00",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel",
+      "fit": "Muzikaal cabaret met liedjes, verhalen en een vaste zitplaats.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "cabaret",
+        "muziek",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Komt voor de bakker",
+      "date": "Donderdag 8 oktober 2026",
+      "time": "14.30",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Laag/middel",
+      "fit": "Middagvoorstelling met herkenbare muziek, humor en herinneringen uit de jaren vijftig en zestig.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "matinee",
+        "muziektheater",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Go Short Arnhem 2026",
+      "date": "9 t/m 11 oktober 2026",
+      "time": "diverse tijden",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Focus Filmtheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel/hoog",
+      "fit": "Driedaags kortfilmfestival met losse programma’s, waaronder familie, sciencefiction en regionale films.",
+      "source": "Focus Filmtheater",
+      "url": "https://www.focusarnhem.nl/agenda/go-short-2026-late-night-sci-fi/",
+      "tags": [
+        "filmfestival",
+        "kortfilm",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Margriet van der Linden – Annie, are you ok?",
+      "date": "Zaterdag 10 oktober 2026",
+      "time": "20.00",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel",
+      "fit": "Solovoorstelling met stand-up, persoonlijke verhalen en scherpe observaties.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "cabaret",
+        "theater",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Pride concert",
+      "date": "Zondag 11 oktober 2026",
+      "time": "20.00",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel/hoog",
+      "fit": "Klassieke muziek en muziektheater rond identiteit en queer geschiedenis.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "klassiek",
+        "muziektheater",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Het Debuut 2026",
+      "date": "Donderdag 15 oktober 2026",
+      "time": "20.30",
+      "domain": "Cultuur & Ontdekken",
+      "where": "LUX, Nijmegen",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel",
+      "fit": "Drie korte voorstellingen van nieuw theatertalent op één avond.",
+      "source": "LUX Nijmegen",
+      "url": "https://www.lux-nijmegen.nl/programma/het-debuut-2026/",
+      "tags": [
+        "theater",
+        "talent",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Over de liefde",
+      "date": "Donderdag 15 oktober 2026",
+      "time": "20.00",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel",
+      "fit": "Theatervoorstelling van Aaf Brandt Corstius en Lies Visschedijk over liefde en relaties.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "toneel",
+        "podcast",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Arnhem, mijn stadje",
+      "date": "Zaterdag 17 oktober 2026",
+      "time": "20.00",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "€€",
+      "stimulus": "Middel/hoog",
+      "fit": "Muzikale rondleiding door Arnhem met orkest, zang en lokale verhalen.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/arnhems-promenade-orkest/10074",
+      "tags": [
+        "orkest",
+        "arnhem",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Cinekid 2026",
+      "date": "17 t/m 25 oktober 2026",
+      "time": "diverse tijden",
+      "domain": "Cultuur & Ontdekken",
+      "where": "LUX, Nijmegen",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel",
+      "fit": "Film- en mediafestival met losse films en workshops voor kinderen van 3 tot 12 jaar.",
+      "source": "LUX Nijmegen",
+      "url": "https://www.lux-nijmegen.nl/festival/cinekid-2026/",
+      "tags": [
+        "film",
+        "familie",
+        "workshop",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Organ & Film Festival – Animatieplaats (6+)",
+      "date": "17 en 18 oktober 2026",
+      "time": "zie programma",
+      "domain": "Creatief & Expressie",
+      "where": "Stevenskerk, Nijmegen",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel",
+      "fit": "Animatie en orgelmuziek komen samen in de Stevenskerk.",
+      "source": "LUX Nijmegen",
+      "url": "https://www.lux-nijmegen.nl/programma/organ-film-festival-animatieplaats-6/",
+      "tags": [
+        "animatie",
+        "muziek",
+        "familie",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Gestrand op Mars (8+)",
+      "date": "Zondag 18 oktober 2026",
+      "time": "14.30",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel",
+      "fit": "Familievoorstelling waarin nieuwsgierigheid en ruimtevaart centraal staan.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "familie",
+        "ruimtevaart",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Eva Eikhout – Het leven is kort, net als ik!",
+      "date": "Maandag 19 oktober 2026",
+      "time": "20.00",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel",
+      "fit": "Theatercollege met humor, zelfspot en verhalen over veerkracht.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "theatercollege",
+        "humor",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Nederlands Blazers Ensemble – Broze Aarde",
+      "date": "Dinsdag 20 oktober 2026",
+      "time": "20.00",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel",
+      "fit": "Muziektheater over mens, aarde, kwetsbaarheid en hoop.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "klassiek",
+        "muziektheater",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Marcel van Roosmalen – Ik mag niet klagen",
+      "date": "Dinsdag 20 oktober 2026",
+      "time": "20.30",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel",
+      "fit": "Cabaret en observaties over leven, afkomst en Arnhem.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "cabaret",
+        "arnhem",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Next to Normal",
+      "date": "Woensdag 21 oktober 2026",
+      "time": "20.00",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Hoog",
+      "fit": "Intense musical over een gezin dat probeert houvast te vinden.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "musical",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Juf Braaksel De Musical (6+)",
+      "date": "Donderdag 22 oktober 2026",
+      "time": "13.30 en 16.00",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel/hoog",
+      "fit": "Familiemusical gebaseerd op de boeken van Carry Slee.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "familie",
+        "musical",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Roodkapje (3+)",
+      "date": "Vrijdag 23 oktober 2026",
+      "time": "11.00 en 13.30",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel",
+      "fit": "Muzikale familievoorstelling voor jonge kinderen.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "familie",
+        "muziek",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Eldorado",
+      "date": "Vrijdag 23 oktober 2026",
+      "time": "20.00",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel",
+      "fit": "Actuele solovoorstelling over bewoners die hun vertrouwde plek proberen te behouden.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "toneel",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Folk",
+      "date": "Zaterdag 24 oktober 2026",
+      "time": "zie programma",
+      "domain": "Sport & Bewegen",
+      "where": "LUX, Nijmegen",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel/hoog",
+      "fit": "Hedendaagse dansvoorstelling met veel beweging, ritme en visuele energie.",
+      "source": "LUX Nijmegen",
+      "url": "https://www.lux-nijmegen.nl/programma/",
+      "tags": [
+        "dans",
+        "podium",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Liefdesbrieven",
+      "date": "Zaterdag 24 oktober 2026",
+      "time": "20.00",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Laag/middel",
+      "fit": "Toneel met Anne Wil Blankers en Hans Croiset rond een levenslange briefwisseling.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "toneel",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Mus & Kapitein Kwaadbaard (8+)",
+      "date": "Zondag 25 oktober 2026",
+      "time": "13.30 en 16.00",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel/hoog",
+      "fit": "Muzikale familievoorstelling vol avontuur, piraten en fantasie.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "familie",
+        "muziek",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Raymond Mens – De Tussenstand in Amerika",
+      "date": "Dinsdag 27 oktober 2026",
+      "time": "21.00",
+      "domain": "Cultuur & Ontdekken",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Laag/middel",
+      "fit": "Theatercollege over de Amerikaanse politiek richting de tussentijdse verkiezingen.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "theatercollege",
+        "actualiteit",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Energy – Introdans",
+      "date": "29 en 30 oktober 2026",
+      "time": "20.30",
+      "domain": "Sport & Bewegen",
+      "where": "Musis & Stadstheater, Arnhem",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Hoog",
+      "fit": "Dansprogramma met dynamiek, contrast en hedendaagse choreografie.",
+      "source": "Musis & Stadstheater",
+      "url": "https://www.musisenstadstheater.nl/nl/agenda/theatervoorstellingen",
+      "tags": [
+        "dans",
+        "arnhem",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "ROOM IN OUR HOUSE",
+      "date": "Vrijdag 30 oktober 2026",
+      "time": "zie programma",
+      "domain": "Cultuur & Ontdekken",
+      "where": "LUX, Nijmegen",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Middel/hoog",
+      "fit": "Hedendaagse podiumvoorstelling van Nicole Beutler Projects & Rematriation.",
+      "source": "LUX Nijmegen",
+      "url": "https://www.lux-nijmegen.nl/programma/",
+      "tags": [
+        "dans",
+        "podium",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
+    },
+    {
+      "title": "Halloweenfilm – Carrie",
+      "date": "Zaterdag 31 oktober 2026",
+      "time": "zie programma",
+      "domain": "Cultuur & Ontdekken",
+      "where": "LUX, Nijmegen",
+      "locationType": "Buiten de deur",
+      "cost": "Betaald",
+      "stimulus": "Hoog",
+      "fit": "Speciale Halloweenvertoning van de klassieker Carrie.",
+      "source": "LUX Nijmegen",
+      "url": "https://www.lux-nijmegen.nl/programma/",
+      "tags": [
+        "film",
+        "halloween",
+        "najaar 2026"
+      ],
+      "distanceBand": "Dichtbij (0-10 km)"
     }
   ],
   "inspiration": [
@@ -5376,6 +5890,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     }
   ],
+  "teamIdeas": [],
   "links": [
     {
       "name": "Beuningen Samen agenda",
@@ -5882,21 +6397,30 @@ window.BCJN_BEHEER_BASE = {
       "note": "Lasergamen, Mystic Golf, LaserSquash en StepZone in het centrum van Nijmegen."
     }
   ],
-  "generated": "30-09-2026",
   "sourceCheck": {
-    "lastCheckedAt": "2026-09-29T18:47:54.745Z",
+    "lastCheckedAt": "2026-09-30T07:58:27.039Z",
     "reviewFile": "website-bestanden/data/offers_pending_review.json",
     "sourcesChecked": 41,
-    "sourcesWithChanges": 26,
-    "newCandidateCount": 0
+    "sourcesWithChanges": 33,
+    "newCandidateCount": 1
   },
-  "teamIdeas": [],
   "sourceReview": {
-    "generatedAt": "2026-09-29T18:47:54.745Z",
-    "pendingCount": 397,
-    "newCount": 0,
-    "changedSourceCount": 26,
+    "generatedAt": "2026-09-30T07:58:27.039Z",
+    "pendingCount": 398,
+    "newCount": 1,
+    "changedSourceCount": 33,
     "changedSources": [
+      {
+        "id": "land-van-cuijk-2026-11",
+        "name": "Land van Cuijk Uitagenda 11-2026",
+        "url": "https://www.landvancuijk.nl/agenda/2026/11/",
+        "region": "Land van Cuijk",
+        "mode": "agenda-events",
+        "newItemCount": 1,
+        "itemCount": 36,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
+      },
       {
         "id": "beuningen-samen-jongeren",
         "name": "Beuningen Samen agenda jongeren",
@@ -5906,18 +6430,29 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 32,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
-        "id": "debastei-agenda",
-        "name": "De Bastei agenda",
-        "url": "https://www.debastei.nl/nl/agenda",
-        "region": "Nijmegen",
+        "id": "de-wijchense-berg",
+        "name": "De Wijchense Berg",
+        "url": "https://www.dewijchenseberg.nl/",
+        "region": "In de regio (10-30 km)",
         "mode": "fingerprint",
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
+      },
+      {
+        "id": "escape-boot-nijmegen",
+        "name": "Escape Boot Nijmegen",
+        "url": "https://escapebootnijmegen.nl/",
+        "region": "Dichtbij (0-10 km)",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "focus-arnhem-agenda",
@@ -5928,7 +6463,18 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
+      },
+      {
+        "id": "fundustry-nijmegen",
+        "name": "Fundustry Nijmegen/Ewijk",
+        "url": "https://www.fundustry.nl/locaties/nijmegen/",
+        "region": "In de regio (10-30 km)",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "beuningen-events",
@@ -5939,7 +6485,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "gemeente-nijmegen-events",
@@ -5950,7 +6496,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "grip-boulderhal",
@@ -5961,7 +6507,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "into-nijmegen-agenda",
@@ -5972,7 +6518,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "land-van-cuijk-2026-09",
@@ -5983,7 +6529,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 181,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "land-van-cuijk-2026-10",
@@ -5994,18 +6540,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 144,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
-      },
-      {
-        "id": "land-van-cuijk-2026-11",
-        "name": "Land van Cuijk Uitagenda 11-2026",
-        "url": "https://www.landvancuijk.nl/agenda/2026/11/",
-        "region": "Land van Cuijk",
-        "mode": "agenda-events",
-        "newItemCount": 0,
-        "itemCount": 35,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "lux-programma",
@@ -6016,7 +6551,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "museumpark-orientalis-agenda",
@@ -6027,7 +6562,18 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
+      },
+      {
+        "id": "musis-stadstheater-agenda",
+        "name": "Musis & Stadstheater agenda",
+        "url": "https://www.musisenstadstheater.nl/nl/agenda",
+        "region": "Arnhem",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "natuurmonumenten-agenda",
@@ -6038,7 +6584,18 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
+      },
+      {
+        "id": "nijmegen-outdoor",
+        "name": "Nijmegen Outdoor",
+        "url": "https://nijmegenoutdoor.nl/",
+        "region": "Dichtbij (0-10 km)",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "nimma-sportzomer",
@@ -6049,7 +6606,29 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 5,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
+      },
+      {
+        "id": "olround-nijmegen",
+        "name": "Olround Nijmegen",
+        "url": "https://www.olroundnijmegen.nl/",
+        "region": "Dichtbij (0-10 km)",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
+      },
+      {
+        "id": "ouwehands-dierenpark",
+        "name": "Ouwehands Dierenpark",
+        "url": "https://www.ouwehand.nl/",
+        "region": "Verder weg (30-50 km)",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "planet-awesome",
@@ -6060,7 +6639,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "pretpark-tivoli",
@@ -6071,7 +6650,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "rozet-agenda",
@@ -6082,7 +6661,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "staatsbosbeheer-activiteiten",
@@ -6093,7 +6672,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "sup-surf-nijmegen",
@@ -6104,7 +6683,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "visit-arnhem-events",
@@ -6115,7 +6694,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "visit-arnhem-zomertips",
@@ -6126,7 +6705,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "visit-nijmegen-events",
@@ -6137,7 +6716,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "visit-nijmegen-zomertips",
@@ -6148,7 +6727,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "vue-nijmegen",
@@ -6159,7 +6738,18 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
+      },
+      {
+        "id": "watermuseum-activiteiten",
+        "name": "Watermuseum activiteiten",
+        "url": "https://watermuseum.nl/activiteiten/",
+        "region": "Arnhem",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "you-jump-nijmegen",
@@ -6170,7 +6760,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       },
       {
         "id": "zooparc-overloon",
@@ -6181,7 +6771,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-29T18:47:54.745Z"
+        "lastCheckedAt": "2026-09-30T07:58:27.039Z"
       }
     ]
   }
