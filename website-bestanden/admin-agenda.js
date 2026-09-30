@@ -125,7 +125,7 @@
      if(event.target.closest('[data-location-settings-btn]'))open('location');
      const theme=event.target.closest('#agendaThemeLegend [data-theme-filter]');
      if(theme)setFilter('agendaDomain',$('agendaDomain').value===theme.dataset.themeFilter?'all':theme.dataset.themeFilter);
-     const tab=event.target.closest('[data-agenda-section]');if(tab){event.preventDefault();section(tab.dataset.agendaSection);}
+     const tab=event.target.closest('[data-agenda-section][role="tab"]');if(tab){event.preventDefault();section(tab.dataset.agendaSection);}
      const jump=event.target.closest('[data-week-jump]');if(jump?.dataset.weekJump)setFilter('agendaWeekFilter',jump.dataset.weekJump);
      const expand=event.target.closest('[data-expand-agenda-day]'),collapse=event.target.closest('[data-collapse-agenda-day]');
      if(expand||collapse){const key=expand?.dataset.expandAgendaDay || collapse.dataset.collapseAgendaDay;if(expand)state.expanded.add(key);else state.expanded.delete(key);renderAgendaReview();}

@@ -993,7 +993,7 @@
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260930-agenda-rebuild-v1">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260923-warm-cards-v1">
   <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20260930-agenda-rebuild-v1">
-  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20260930-agenda-rebuild-v1">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20260930-management-polish-v2">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -1093,9 +1093,6 @@
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M7 12h10"></path><path d="M10 17h4"></path></svg></span>
               <span class="adminNavText">Uitsluitingen</span>
             </button>
-            <button class="adminNavButton" type="button" data-admin-target="settings" title="Instellingen">
-              <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></span><span class="adminNavText">Instellingen</span>
-            </button>
             <button class="adminNavButton" type="button" data-admin-target="backup" title="Herstel">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.2"></circle><path d="M12 8v4.2l2.8 1.7"></path><path d="M8.2 4.8 6.4 3"></path><path d="M15.8 4.8 17.6 3"></path></svg></span>
               <span class="adminNavText">Herstel</span>
@@ -1113,8 +1110,13 @@
           </div>
         </aside>
         <main class="adminWorkspaceShell">
-          <section class="adminWorkspace adminSettingsWorkspace" data-admin-workspace="settings" hidden>
-            <div class="workspaceHeader"><div><h2>Instellingen</h2><p>Pas de header en de standaardregio van de inspiratiebank en UIT-agenda aan.</p></div></div>
+          <section class="adminWorkspace" data-admin-workspace="meldkamer">
+            <div class="workspaceHeader">
+              <div>
+                <h2>Dashboard</h2>
+              </div>
+            </div>
+            <details id="dashboardSettings" class="adminSettingsWorkspace adminSettingsDisclosure"><summary>Instellingen<span>Headerafbeelding en standaardregio</span></summary>
             <form id="siteSettingsForm" class="siteSettingsForm">
               <section class="panel"><h3>Headerafbeelding</h3><p>Deze afbeelding verschijnt bovenaan de inspiratiebank en UIT-agenda.</p>
                 <div class="siteHeaderPreview"><img id="siteHeaderPreview" alt="Voorbeeld van de header" src="../website-bestanden/hero-achtergronden/inspiratiebank-header.png"><span>Ontdek iets nieuws</span></div>
@@ -1134,13 +1136,7 @@
               </section>
               <div class="siteSettingsSaveBar"><button class="button primary" id="siteSettingsSave" type="submit">Instellingen opslaan</button><button class="button" id="siteSettingsCancel" type="button">Wijzigingen annuleren</button><p id="siteSettingsStatus" class="status" role="status" aria-live="polite"></p></div>
             </form>
-          </section>
-          <section class="adminWorkspace" data-admin-workspace="meldkamer">
-            <div class="workspaceHeader">
-              <div>
-                <h2>Dashboard</h2>
-              </div>
-            </div>
+            </details>
             <section class="agendaCheckNotice" aria-labelledby="dashboardAgendaCheckTitle">
               <div class="agendaCheckNoticeText">
                 <span class="agendaCheckEyebrow">Agenda-check</span>
@@ -1252,7 +1248,7 @@
             <span class="adminModeBadge">Beheer · UIT-agenda</span>
           </section>
           <div data-agenda-controls></div>
-          <details class="adminAgendaManagementFilters"><summary>Agenda controleren en beheerfilters</summary>        <section class="agendaCheckNotice" aria-labelledby="agendaCheckStatusTitle">
+          <details class="adminAgendaManagementFilters"><summary>Agendabeheer <span>Controle en beheerfilters</span></summary>        <section class="agendaCheckNotice" aria-labelledby="agendaCheckStatusTitle">
           <div class="agendaCheckNoticeText">
             <span class="agendaCheckEyebrow">Agenda-check</span>
             <strong id="agendaCheckStatusTitle" data-agenda-check-title>Laatste check laden...</strong>
@@ -1560,7 +1556,7 @@
   <script src="../website-bestanden/select-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script src="../website-bestanden/agenda-discovery-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script>DiscoveryViewShared.mount({admin:true});AgendaDiscoveryShared.mount();</script>
-  <script src="../website-bestanden/admin-agenda.js?v=20260930-agenda-rebuild-v1"></script>
+  <script src="../website-bestanden/admin-agenda.js?v=20260930-management-polish-v2"></script>
   <script src="../website-bestanden/site-settings-shared.js?v=20260930-radius-v2"></script>
   <script src="../website-bestanden/admin-site-settings.js?v=20260930-radius-v2"></script>
   <script src="../website-bestanden/admin-discovery.js?v=20260930-agenda-rebuild-v1"></script>
@@ -4573,7 +4569,8 @@
     return ['ongoingAdminSection','agendaAdminSection','agendaRulesPanel','sourceOwnPanel'].includes(hash) ? hash : '';
   }
   function setAdminWorkspace(target='meldkamer', options={}){
-    const next = ['meldkamer','agenda','inspiration','settings','backup'].includes(target) ? target : 'meldkamer';
+    const next = target==='settings' ? 'meldkamer' : ['meldkamer','agenda','inspiration','backup'].includes(target) ? target : 'meldkamer';
+    if(target==='settings') $('#dashboardSettings').open=true;
     const scrollTarget = options.scrollTarget || '';
     document.querySelectorAll('[data-admin-workspace]').forEach(panel => {
       panel.hidden = panel.dataset.adminWorkspace !== next;
@@ -4588,7 +4585,7 @@
     if(next==='agenda') AdminAgenda.navigate(scrollTarget);
     if(options.hash) history.replaceState(null, '', `#${scrollTarget || next}`);
     if(options.scroll !== false){
-      const scrollNode = scrollTarget ? document.getElementById(scrollTarget) : document.querySelector('[data-admin-workspace]:not([hidden])');
+      const scrollNode = scrollTarget ? document.getElementById(scrollTarget==='agendaAdminSection'?'agendaReviewPanel':scrollTarget) : document.querySelector('[data-admin-workspace]:not([hidden])');
       scrollNode?.scrollIntoView({behavior:'smooth', block:'start'});
     }
   }
@@ -4804,6 +4801,13 @@
 	  }
   async function init(){
     AdminSiteSettings.setup();
+    document.querySelectorAll('.adminPublicSurface').forEach(surface=>{
+      const controls=surface.querySelector('.desktopStickyControls');
+      if(!controls)return;
+      const measure=()=>{const css=getComputedStyle(controls);surface.style.setProperty('--admin-controls-height',`${css.position==='sticky'?controls.offsetHeight+(parseFloat(css.top)||0):0}px`);};
+      new ResizeObserver(measure).observe(controls);
+      window.addEventListener('resize',measure);
+    });
     await loadAdminBaseData();
     await loadCentralStorage();
     if(await resumeAdminSession()) showAdmin();

@@ -65,7 +65,8 @@ const base=process.env.DISCOVERY_BASE_URL||'http://127.0.0.1:8765';
    }
   }
   const admin=pages[1];await admin.setViewportSize({width:1440,height:1000});
-  await admin.locator('.agendaItem').first().click();assert(await admin.locator('#agendaSelectionActions [data-edit-agenda]').isVisible());assert.equal(await admin.locator('.agendaItem.isSelected').evaluate(e=>getComputedStyle(e).backgroundColor),'rgb(224, 241, 250)');
+  await admin.locator('.adminAgendaManagementFilters>summary').click();assert(await admin.locator('.adminAgendaManagementFilters').evaluate(e=>e.open),'management disclosure opens');await admin.locator('.adminAgendaManagementFilters>summary').click();assert(!await admin.locator('.adminAgendaManagementFilters').evaluate(e=>e.open),'management disclosure closes');
+  await admin.locator('.agendaItem').first().click();assert(await admin.locator('#agendaSelectionActions [data-edit-agenda]').isVisible());assert.equal(await admin.locator('.agendaItem.isSelected').evaluate(e=>getComputedStyle(e).backgroundColor),'rgb(246, 239, 223)');
   await admin.locator('[data-admin-scroll="ongoingAdminSection"]').click();assert(await admin.locator('#ongoingAdminSection').isVisible());
   await admin.locator('[data-admin-scroll="sourceOwnPanel"]').click();assert(await admin.locator('#sourceOwnPanel').isVisible());
   await admin.locator('[data-admin-scroll="agendaRulesPanel"]').click();assert(await admin.locator('#agendaRulesPanel').isVisible());

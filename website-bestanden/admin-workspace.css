@@ -25,12 +25,12 @@ body.adminMode .shell{padding-bottom:0}
 .adminSelectionActions>.ideaActions{display:contents}
 .adminSelectionActions .button.iconAction{display:inline-grid;place-items:center;width:36px;height:36px;min-width:36px;padding:0;border-radius:10px}
 .adminSelectableCard,.adminSelectableAgendaItem,.adminSelectableIdeaRow{cursor:pointer}
-.adminSelectableCard.isSelected,.adminSelectableAgendaItem.isSelected{outline:2px solid #4f8e9e!important;outline-offset:3px;box-shadow:0 0 0 5px rgba(79,142,158,.1)!important}
-#adminApp #adminIdeaList tr.isSelected > td{background:#e0f1fa!important}
-#adminApp #adminIdeaList tr.isSelected > td:first-child{box-shadow:inset 3px 0 #1686ae}
-#adminApp #adminIdeaList tr.isSelected:hover > td{background:#d6ebf7!important}
-#adminApp .adminPublicSurface .adminSelectableCard.isSelected{outline-color:#1686ae!important;background:#eef8fd!important}
-.adminSelectableCard:focus-visible,.adminSelectableAgendaItem:focus-visible{outline:2px solid #4f8e9e;outline-offset:3px}
+.adminSelectableCard.isSelected,.adminSelectableAgendaItem.isSelected{outline:2px solid #c4ad83!important;outline-offset:3px;box-shadow:0 0 0 5px rgba(196,173,131,.14)!important}
+#adminApp #adminIdeaList tr.isSelected > td{background:#f6efdf!important}
+#adminApp #adminIdeaList tr.isSelected > td:first-child{box-shadow:inset 3px 0 #c4ad83}
+#adminApp #adminIdeaList tr.isSelected:hover > td{background:#f1e6d2!important}
+#adminApp .adminPublicSurface .adminSelectableCard.isSelected{outline-color:#c4ad83!important;background:#fffaf1!important}
+.adminSelectableCard:focus-visible,.adminSelectableAgendaItem:focus-visible{outline:2px solid #c4ad83;outline-offset:3px}
 #adminApp .adminPublicSurface .adminIdeaView[hidden]{display:none!important}
 #adminApp .adminPublicSurface .adminIdeaView.active{display:grid}
 #adminApp .adminPublicSurface .tableWrap.adminIdeaView.active{display:block}
@@ -96,8 +96,8 @@ body.ideaFilterSheetOpen{overflow:hidden}
 .adminAgendaManagementFilters{margin:0 0 16px;padding:12px 16px;border:1px solid #e6e9e3;border-radius:16px;background:#fffdf9}
 .adminAgendaManagementFilters>summary{cursor:pointer;font-weight:600}
 #adminApp #agendaContentSurface .agendaSectionView[hidden]{display:none!important}
-#adminApp #agendaContentSurface .isSelected{outline-color:#1686ae!important;background:#e0f1fa!important}
-#adminApp #agendaContentSurface tr.isSelected>td{background:#e0f1fa!important}
+#adminApp #agendaContentSurface .isSelected{outline-color:#c4ad83!important;background:#f6efdf!important}
+#adminApp #agendaContentSurface tr.isSelected>td{background:#f6efdf!important}
 #adminApp #agendaContentSurface .ongoingAdminPicker{display:flex;align-items:end;gap:12px;margin:12px 20px;flex-wrap:wrap}
 #adminApp #agendaContentSurface .ongoingAdminPicker label{display:grid;gap:6px;flex:1;min-width:0}
 #adminApp #agendaContentSurface .ongoingAdminPicker select{max-width:100%;padding:10px;border:1px solid #dce4df;border-radius:10px}
@@ -107,3 +107,68 @@ body.ideaFilterSheetOpen{overflow:hidden}
  #adminApp #agendaContentSurface .ongoingAdminPicker label{flex-basis:100%}
  #adminApp #agendaContentSurface .ongoingAdminPicker .button{width:100%;white-space:normal}
 }
+/* Management uses the warm surfaces and restrained controls of the public page. */
+#adminApp{--manage-border:rgba(117,94,62,.16);--manage-paper:#fffdf9;--manage-ink:#315f6b}
+#adminApp [hidden]{display:none!important}
+#adminApp .adminWorkspaceShell{box-sizing:border-box;min-width:0}
+#adminApp .adminWorkspace,#adminApp .adminStack,#adminApp .sourceGrid{min-width:0;max-width:100%}
+#adminApp .panel,#adminApp .agendaCheckNotice{background:var(--manage-paper);border:1px solid var(--manage-border);box-shadow:none;border-radius:18px}
+#adminApp .button{border:1px solid var(--manage-border);background:var(--manage-paper);color:var(--manage-ink);box-shadow:none;border-radius:12px;font:500 13px/1.25 Manrope,system-ui,sans-serif;min-height:36px;padding:9px 13px}
+#adminApp .button:hover{background:#f5efE3;border-color:#c4ad83}
+#adminApp .button.primary{background:#f0e7d5;border-color:#dfceb0;color:#635333}
+#adminApp .button.hot{background:#fffaf6;color:#986452;border-color:#e7d8cb}
+#adminApp .button:disabled{opacity:.55;cursor:default}
+#adminApp .adminSelectionActions .button.iconAction{width:34px;height:34px;min-width:34px;min-height:34px;padding:8px;background:#fffcf7;border-color:var(--manage-border);color:#597371;box-shadow:none;border-radius:11px}
+#adminApp .adminSelectionActions .button.iconAction:hover{background:#f0e7d5;border-color:#c4ad83}
+#adminApp .adminSelectionActions .button.iconAction.hot{color:#996958}
+#adminApp .adminPublicSurface .adminSelectionToolbar{min-height:52px;padding:8px 12px;margin:8px 0 12px;border-color:var(--manage-border);box-shadow:0 4px 14px rgba(92,65,33,.035)}
+#adminApp .adminSelectionSummary strong{max-width:100%;font-size:13px}
+#adminApp .adminSelectionActions{flex-wrap:wrap;flex-shrink:1;justify-content:flex-end}
+#adminApp .adminSelectionSummary{flex:1;min-width:80px}
+#adminApp .adminPublicSurface>.tabHero{height:180px;min-height:180px;margin-bottom:16px}
+#adminApp .adminPublicSurface .tabHeroHomeLink{bottom:34px!important}
+#adminApp .adminPublicSurface .tabHeroTitle{font-size:36px!important}
+#adminApp .adminPublicSurface .tabHeroLine{font-size:16px!important;margin-top:6px!important}
+#adminApp .adminModeBadge{top:16px;padding:5px 10px;font-size:11px}
+#adminApp .adminAgendaManagementFilters,#adminApp .featuredAdminPanel,#adminApp .adminSettingsDisclosure{border:1px solid var(--manage-border);background:var(--manage-paper);border-radius:16px;box-shadow:none;padding:0;margin:0 0 12px}
+#adminApp :is(.adminAgendaManagementFilters,.featuredAdminPanel,.adminSettingsDisclosure)>summary{display:flex;align-items:center;gap:10px;padding:12px 15px;cursor:pointer;list-style:none;font-size:13px;font-weight:600;color:#496866}
+#adminApp :is(.adminAgendaManagementFilters,.featuredAdminPanel,.adminSettingsDisclosure)>summary::-webkit-details-marker{display:none}
+#adminApp :is(.adminAgendaManagementFilters,.featuredAdminPanel,.adminSettingsDisclosure)>summary::before{content:'›';font-size:20px;font-weight:400;line-height:1;transition:transform .15s}
+#adminApp :is(.adminAgendaManagementFilters,.featuredAdminPanel,.adminSettingsDisclosure)[open]>summary::before{transform:rotate(90deg)}
+#adminApp :is(.adminAgendaManagementFilters,.adminSettingsDisclosure)>summary>span{margin-left:auto;font-size:12px;font-weight:400;color:#8a8c82}
+#adminApp .adminAgendaManagementFilters[open]>summary{border-bottom:1px solid var(--manage-border);margin-bottom:12px}
+#adminApp .adminAgendaManagementFilters> :not(summary){margin-left:14px;margin-right:14px}
+#adminApp .adminManagementFilterFields>.customSelect{flex:1 1 150px;min-width:0}
+#adminApp .featuredAdminPanel> :not(summary){margin:0 14px 12px}
+#adminApp .featuredAdminHead h3{display:none}
+#adminApp .featuredAdminHead p,#adminApp .featuredAdminList .empty{font-size:12px;line-height:1.5}
+#adminApp .adminSettingsWorkspace{max-width:none;padding:0}
+#adminApp .adminSettingsDisclosure>form{padding:0 16px 16px}
+#adminApp .siteSettingsForm .panel{background:transparent;padding:16px 0;border:0;border-top:1px solid var(--manage-border);border-radius:0}
+#adminApp .siteSettingsSaveBar{box-shadow:none;background:var(--manage-paper);border-color:var(--manage-border)}
+#adminApp #sourceOwnPanel{padding:24px;margin-top:22px}
+#adminApp #sourceOwnPanel .panelHead h2{font:500 28px Lora,serif;color:var(--manage-ink)}
+#adminApp #sourceOwnPanel .panelHead p{font-size:13px;line-height:1.6;max-width:75ch}
+#adminApp #linkForm{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) minmax(0,1fr);gap:14px;align-items:end;margin-top:20px}
+#adminApp #linkForm label{min-width:0;font-size:12px;gap:7px}
+#adminApp #linkForm input,#adminApp #linkForm .customSelectButton{min-height:42px;border:1px solid var(--manage-border);background:#fffcf7;border-radius:12px;font-size:13px;box-shadow:none}
+#adminApp #linkForm .linkFormActions,#adminApp #linkStatus{grid-column:1/-1}
+#adminApp .sharedSourceRow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;padding:15px 0;border:0;border-bottom:1px solid var(--manage-border);border-radius:0;background:transparent;box-shadow:none}
+#adminApp .sharedSourceMain{min-width:0;overflow-wrap:anywhere}
+#adminApp .sharedSourceMain strong{font-size:14px;font-weight:600}
+#adminApp .sharedSourceMain>span{font-size:12px;line-height:1.5;color:#7d817b}
+#adminApp .sharedSourceActions{gap:6px;flex-wrap:wrap}
+#adminApp .sharedSourceActions .pill{font-size:11px;background:#f5f0e5;color:#8a806a;border:0}
+@media(max-width:1100px){#adminApp .sharedSourceRow{grid-template-columns:minmax(0,1fr)}#adminApp .sharedSourceActions{justify-content:flex-start}}
+@media(max-width:820px){
+ #adminApp .adminLayout,#adminApp .adminWorkspaceShell{overflow:visible}
+ #adminApp .adminPublicSurface>.tabHero{height:150px;min-height:150px}
+ #adminApp .adminPublicSurface .tabHeroTitle{font-size:30px!important}
+ #adminApp #linkForm{grid-template-columns:1fr}
+ #adminApp #sourceOwnPanel{padding:16px}
+ #adminApp :is(.adminAgendaManagementFilters,.adminSettingsDisclosure)>summary>span{display:none}
+}
+
+#adminApp .adminPublicSurface .adminSelectionToolbar{top:calc(var(--admin-controls-height,0px) + 8px)}
+#adminApp .adminPublicSurface .isSelected{outline-offset:-2px;box-shadow:none!important}
+#adminApp [data-admin-workspace="meldkamer"]>.workspaceHeader{padding-top:22px}
