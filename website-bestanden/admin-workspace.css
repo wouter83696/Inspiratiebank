@@ -171,3 +171,5 @@ body.ideaFilterSheetOpen{overflow:hidden}
 #adminApp .adminPublicSurface .adminSelectionToolbar{top:calc(var(--admin-controls-height,0px) + 8px)}
 #adminApp .adminPublicSurface .isSelected{outline-offset:-2px;box-shadow:none!important}
 #adminApp :is([data-admin-workspace="meldkamer"],[data-admin-workspace="settings"])>.workspaceHeader{padding-top:22px}
+
+#adminApp input::file-selector-button{font:inherit;color:var(--manage-ink);background:#f5eddd;border:1px solid var(--manage-border);border-radius:8px;padding:6px 10px;margin-right:8px;cursor:pointer}
