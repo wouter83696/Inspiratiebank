@@ -990,7 +990,7 @@
   <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260911-first-paint-v4">
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260911-ongoing-light-cards-v39">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260923-warm-cards-v1">
-  <link rel="stylesheet" href="../website-bestanden/admin-public-parity.css?v=20260930-public-parity-v1">
+  <link rel="stylesheet" href="../website-bestanden/admin-public-parity.css?v=20260930-selection-toolbar-v2">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -1051,7 +1051,7 @@
         <aside class="adminSidebar" aria-label="Beheernavigatie">
           <div class="adminSidebarBrand">
             <div class="adminSidebarIdentity">
-              <span class="adminSidebarMark"><img src="../assets/inspiratiebank-icon/inspiratiebank-icon-128x128.png?v=20260916-icon-v3" alt=""></span>
+              <span class="adminSidebarMark"><img src="../inspiratiebank-app-icon-180.png?v=20260930-admin-parity-v1" alt=""></span>
               <div class="adminSidebarText">
                 <div class="adminSidebarTitle">Beheer</div>
                 <div class="adminSidebarSub">Inspiratiebank</div>
@@ -1266,8 +1266,12 @@
               </select>
               <button class="filterReset" id="agendaAdminResetBtn" type="button">Reset</button>
             </div>
-          </div>
-          <div id="agendaAdminThemeLegend" class="agendaAdminThemeLegend"></div>
+	          </div>
+	          <div class="adminSelectionToolbar" id="agendaSelectionToolbar" aria-live="polite">
+	            <div class="adminSelectionSummary"><span class="adminSelectionKicker">Geselecteerd</span><strong id="agendaSelectionTitle">Klik op een agenda-item om het te beheren</strong></div>
+	            <div class="adminSelectionActions" id="agendaSelectionActions"></div>
+	          </div>
+	          <div id="agendaAdminThemeLegend" class="agendaAdminThemeLegend"></div>
           <div id="agendaReviewList" class="agendaReviewList weekStack"></div>
           <div class="sectionDivider"></div>
           <section class="ongoingAccordion adminOngoingAccordion" id="ongoingAdminSection">
@@ -1331,8 +1335,12 @@
               <span>Filters wissen</span>
             </button>
           </div>
-        </div>
-        <div class="adminThemeLegendRow">
+	        </div>
+	        <div class="adminSelectionToolbar" id="ideaSelectionToolbar" aria-live="polite">
+	          <div class="adminSelectionSummary"><span class="adminSelectionKicker">Geselecteerd</span><strong id="ideaSelectionTitle">Klik op een tegel om deze te beheren</strong></div>
+	          <div class="adminSelectionActions" id="ideaSelectionActions"></div>
+	        </div>
+	        <div class="adminThemeLegendRow">
           <div id="adminThemeLegend"></div>
           <span id="ideaCount" class="adminCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span><strong id="ideaCountValue">0</strong><span id="ideaCountLabel">activiteiten</span></span></span>
         </div>
@@ -1563,7 +1571,7 @@
 
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
   <script src="../website-bestanden/idea-view-shared.js?v=20260923-map-detail-v1"></script>
-  <script src="../website-bestanden/agenda-view-shared.js?v=20260925-mobile-cards-v2"></script>
+  <script src="../website-bestanden/agenda-view-shared.js?v=20260930-selection-toolbar-v1"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
   const ADMIN_SESSION_KEY = 'bcjn_zomer_beheer_open_v1';
@@ -1653,7 +1661,9 @@
   let editingAgendaItemId = '';
   let editingAgendaItemIds = [];
   let editingAgendaSource = null;
-  let ongoingAdminGroups = new Map();
+	  let ongoingAdminGroups = new Map();
+  let selectedAdminIdeaKey = '';
+  let selectedAgendaItemId = '';
   const ICONS = {
     creative:`<svg viewBox="0 0 20 20"><path d="M10 3l1.8 4.2L16 9l-4.2 1.8L10 15l-1.8-4.2L4 9l4.2-1.8L10 3z"></path></svg>`,
     culture:`<svg viewBox="0 0 20 20"><path d="M4 7l6-3 6 3"></path><path d="M5 8h10"></path><path d="M6 8v6"></path><path d="M10 8v6"></path><path d="M14 8v6"></path><path d="M4 15h12"></path></svg>`,
@@ -3320,18 +3330,15 @@
     const description = item.description || item.fit || '';
     const practical = item.materials || 'Nog bepalen';
     const titleContents = `<span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
-    const cardTitle = item.url
-      ? `<a class="ideaTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="Open website van ${escapeHtml(item.title)}">${titleContents}</a>`
-      : titleContents;
-    const status = `${featuredIdeaKeys().includes(adminFeaturedIdeaKey(item)) ? '<span class="pill ok">Uitgelicht</span>' : ''}${item.kind === 'collega-toegevoegd' && !item.approved ? '<span class="pill warn">Wacht op goedkeuring</span>' : ''}${item.hidden ? '<span class="pill warn">Verborgen</span>' : ''}`;
+    const cardTitle = titleContents;
+    const selected = selectedAdminIdeaKey === item.key;
     return IdeaViewShared.renderCard({
-      themeClass:`${domainThemeClass(item.domain)}${image ? ' hasPhoto' : ''}`, hidden:item.hidden, hasImage:true,
-      attributes:`data-idea-key="${escapeHtml(item.key)}"`, image:imageMarkup,
+      themeClass:`${domainThemeClass(item.domain)}${image ? ' hasPhoto' : ''} adminSelectableCard${selected ? ' isSelected' : ''}`, hidden:item.hidden, hasImage:true,
+      attributes:`data-idea-key="${escapeHtml(item.key)}" tabindex="0" role="button" aria-pressed="${selected ? 'true' : 'false'}"`, image:imageMarkup,
       title:cardTitle,
       pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
       meta:cardMetaLine(item, {compact:true}),
-      description:escapeHtml(description), practical:escapeHtml(practical), website:'',
-      manageActions:`${status ? `<div class="adminCardStatus">${status}</div>` : ''}${adminIdeaActions(item)}`
+      description:escapeHtml(description), practical:escapeHtml(practical), website:''
     });
   }
   function adminIdeaRow(item){
@@ -3340,19 +3347,17 @@
     const costLabel = normalizeIdeaCost(item.cost);
     const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
     const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
-    const approvalMeta = item.kind === 'collega-toegevoegd' && !item.approved ? 'Wacht op goedkeuring' : '';
+    const selected = selectedAdminIdeaKey === item.key;
     const websiteLabel = AgendaViewShared.sourceButtonLabel(item);
     const website = item.url ? `<a class="siteButton secondary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="${escapeHtml(websiteLabel)}"><span class="siteButtonText">${escapeHtml(websiteLabel)}</span></a>` : '<span class="small">-</span>';
     return IdeaViewShared.renderDesktopRow({
-      themeClass:domainThemeClass(item.domain), hidden:item.hidden,
-      attributes:`data-idea-key="${escapeHtml(item.key)}"`,
+      themeClass:`${domainThemeClass(item.domain)} adminSelectableIdeaRow${selected ? ' isSelected' : ''}`, hidden:item.hidden,
+      attributes:`data-idea-key="${escapeHtml(item.key)}" tabindex="0" role="button" aria-pressed="${selected ? 'true' : 'false'}"`,
       title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
       meta:cardMetaLine(item),
       pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel || item.stimulus)}`,
       practical:escapeHtml(item.materials || item.description || '-'),
-      website,
-      actions:`${approvalMeta ? `<span class="activityStatusIcon auto" title="Wacht op goedkeuring" aria-label="Wacht op goedkeuring">${actionIcon('spark')}</span>` : ''}${item.hidden ? `<span class="activityStatusIcon" title="Verborgen" aria-label="Verborgen">${actionIcon('eyeOff')}</span>` : ''}`,
-      manageActions:adminIdeaActions(item)
+      website
     });
   }
   function renderIdeas(){
@@ -3366,9 +3371,30 @@
     $('#ideaCountLabel').textContent = items.length === 1 ? 'activiteit' : 'activiteiten';
     const empty = `<div class="empty">${escapeHtml(adminIdeaEmptyMessage(query, filters))}</div>`;
     $('#adminIdeaList').innerHTML = items.length
-      ? IdeaViewShared.renderDesktopTable({admin:true, rows:items.map(adminIdeaRow).join('')})
+      ? IdeaViewShared.renderDesktopTable({admin:false, rows:items.map(adminIdeaRow).join('')})
       : empty;
     $('#adminIdeaCards').innerHTML = items.length ? items.map(adminIdeaCard).join('') : empty;
+    renderIdeaSelectionToolbar();
+  }
+  function renderIdeaSelectionToolbar(){
+    const item = allAdminIdeas().find(candidate => candidate.key === selectedAdminIdeaKey);
+    const title = $('#ideaSelectionTitle');
+    const actions = $('#ideaSelectionActions');
+    if(!title || !actions) return;
+    if(!item){
+      selectedAdminIdeaKey = '';
+      title.textContent = 'Klik op een tegel om deze te beheren';
+      actions.innerHTML = '';
+      $('#ideaSelectionToolbar')?.classList.remove('hasSelection');
+      return;
+    }
+    title.textContent = item.title;
+    actions.innerHTML = `${item.url ? `<a class="button iconAction adminOpenAction" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" aria-label="Open website" title="Open website">${actionIcon('external')}</a>` : ''}${adminIdeaActions(item)}`;
+    $('#ideaSelectionToolbar')?.classList.add('hasSelection');
+  }
+  function selectAdminIdea(key){
+    selectedAdminIdeaKey = selectedAdminIdeaKey === key ? '' : key;
+    renderIdeas();
   }
   function renderFeaturedIdeaManager(){
     const keys = featuredIdeaKeys();
@@ -3679,16 +3705,18 @@
 	    return itemDisplayDayIso(item, weekId) === day.iso;
 	  }
 	  function renderAgendaAdminCard(item, state, compact=false){
+	    const selected = selectedAgendaItemId === String(item.id);
 	    return AgendaViewShared.renderItem({
 	      admin:true,
 	      compact,
-	      themeClass:domainThemeClass(item.domain),
+	      themeClass:`${domainThemeClass(item.domain)} adminSelectableAgendaItem${selected ? ' isSelected' : ''}`,
 	      hidden:state.isHidden,
 	      isNew:state.isNew,
-	      href:item.url ? escapeHtml(item.url) : '',
+	      href:'',
+	      attributes:`data-agenda-select="${escapeHtml(item.id)}" tabindex="0" role="button" aria-pressed="${selected ? 'true' : 'false'}"`,
 	      title:titleWithIcon(item.title, item.domain, 'agendaItemTitle'),
 	      meta:escapeHtml([item.time, item.where].filter(Boolean).join(' · ') || 'Tijd en plek nog checken'),
-	      actions:agendaReviewActions(item, state, true)
+	      status:agendaReviewPills(item, state, true)
 	    });
 	  }
 	  function visibleAgendaAdminWeekCount(weekId, items=[]){
@@ -3843,10 +3871,33 @@
 	    }).join('') : '<div class="empty">Nog geen regels ingesteld.</div>';
 	    if(!items.length){
 	      $('#agendaReviewList').innerHTML = '<div class="empty">Geen agenda-items om te beheren.</div>';
+	      renderAgendaSelectionToolbar(reviewItems, states);
 	      return;
 	    }
 	    $('#agendaReviewList').innerHTML = renderAgendaAdminWeeks(items, states);
+	    renderAgendaSelectionToolbar(reviewItems, states);
 	  }
+  function renderAgendaSelectionToolbar(items=agendaReviewItems(), states){
+    const item = items.find(candidate => String(candidate.id) === selectedAgendaItemId);
+    const title = $('#agendaSelectionTitle');
+    const actions = $('#agendaSelectionActions');
+    if(!title || !actions) return;
+    if(!item){
+      selectedAgendaItemId = '';
+      title.textContent = 'Klik op een agenda-item om het te beheren';
+      actions.innerHTML = '';
+      $('#agendaSelectionToolbar')?.classList.remove('hasSelection');
+      return;
+    }
+    const state = states?.get(item.id) || agendaReviewState(item, hiddenAgendaIds(), verifiedAgendaIds());
+    title.textContent = item.title;
+    actions.innerHTML = `${item.url ? `<a class="button iconAction adminOpenAction" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" aria-label="Open website" title="Open website">${actionIcon('external')}</a>` : ''}${agendaReviewActions(item, state, true)}`;
+    $('#agendaSelectionToolbar')?.classList.add('hasSelection');
+  }
+  function selectAgendaItem(id){
+    selectedAgendaItemId = selectedAgendaItemId === String(id) ? '' : String(id);
+    renderAgendaReview();
+  }
   async function updateTitleVisibility(key, action){
     const titles = new Set(loadArray(ADMIN_HIDDEN_INSPIRATION_KEY).map(normalize));
     if(action === 'hide') titles.add(normalize(key));
@@ -5080,6 +5131,10 @@
     document.addEventListener('click', event => {
       if(!event.target.closest('.customSelect')) closeCustomSelects();
       if(!event.target.closest('#adminMenu')) $('#adminMenu').open = false;
+      const ideaCard = event.target.closest('#adminIdeaCards [data-idea-key], #adminIdeaList [data-idea-key]');
+      if(ideaCard && !event.target.closest('a,button,details,summary,input,select,textarea')) selectAdminIdea(ideaCard.dataset.ideaKey);
+      const agendaCard = event.target.closest('#agendaReviewList [data-agenda-select]');
+      if(agendaCard && !event.target.closest('a,button,details,summary,input,select,textarea')) selectAgendaItem(agendaCard.dataset.agendaSelect);
       const titleButton = event.target.closest('[data-title-action]');
       if(titleButton) updateTitleVisibility(titleButton.dataset.key, titleButton.dataset.titleAction);
       const teamButton = event.target.closest('[data-team-action]');
@@ -5136,6 +5191,13 @@
 	      if(removeTrashButton) removeTrashItem(removeTrashButton.dataset.removeTrash);
 	    });
     document.addEventListener('keydown', event => {
+      const selectable = event.target.closest?.('#adminIdeaCards [data-idea-key], #adminIdeaList [data-idea-key], #agendaReviewList [data-agenda-select]');
+      if(selectable && (event.key === 'Enter' || event.key === ' ')){
+        event.preventDefault();
+        if(selectable.dataset.ideaKey) selectAdminIdea(selectable.dataset.ideaKey);
+        else selectAgendaItem(selectable.dataset.agendaSelect);
+        return;
+      }
       if(event.key !== 'Escape') return;
       if(!$('#confirmModal').hidden){
         closeConfirmDialog(false);
