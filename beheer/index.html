@@ -55,7 +55,7 @@
       padding-top:36px;
       overflow-x:hidden;
       color:var(--ink);
-      font-family:"IBM Plex Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
       background:var(--page-background);
       min-height:100dvh;
     }
@@ -993,7 +993,7 @@
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260930-agenda-rebuild-v1">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260923-warm-cards-v1">
   <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20260930-agenda-rebuild-v1">
-  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20260930-management-polish-v2">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20260930-settings-fonts-v1">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -1093,6 +1093,10 @@
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"></path><path d="M7 12h10"></path><path d="M10 17h4"></path></svg></span>
               <span class="adminNavText">Uitsluitingen</span>
             </button>
+            <button class="adminNavButton" type="button" data-admin-target="settings" title="Instellingen">
+              <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"></path><circle cx="15" cy="7" r="2"></circle><circle cx="9" cy="17" r="2"></circle></svg></span>
+              <span class="adminNavText">Instellingen</span>
+            </button>
             <button class="adminNavButton" type="button" data-admin-target="backup" title="Herstel">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.2"></circle><path d="M12 8v4.2l2.8 1.7"></path><path d="M8.2 4.8 6.4 3"></path><path d="M15.8 4.8 17.6 3"></path></svg></span>
               <span class="adminNavText">Herstel</span>
@@ -1116,27 +1120,6 @@
                 <h2>Dashboard</h2>
               </div>
             </div>
-            <details id="dashboardSettings" class="adminSettingsWorkspace adminSettingsDisclosure"><summary>Instellingen<span>Headerafbeelding en standaardregio</span></summary>
-            <form id="siteSettingsForm" class="siteSettingsForm">
-              <section class="panel"><h3>Headerafbeelding</h3><p>Deze afbeelding verschijnt bovenaan de inspiratiebank en UIT-agenda.</p>
-                <div class="siteHeaderPreview"><img id="siteHeaderPreview" alt="Voorbeeld van de header" src="../website-bestanden/hero-achtergronden/inspiratiebank-header.png"><span>Ontdek iets nieuws</span></div>
-                <div class="siteSettingsFields">
-                  <label>Afbeelding kiezen<input id="siteHeaderFile" type="file" accept="image/jpeg,image/png,image/webp"><small id="siteHeaderFileLabel">Standaardafbeelding</small></label>
-                  <label>Of een webadres<input id="siteHeaderUrl" type="url" placeholder="https://voorbeeld.nl/header.jpg"><small>Een rechtstreeks HTTPS-adres naar een afbeelding.</small></label>
-                  <label class="wide">Uitsnede — verticale positie <output id="siteHeaderPositionValue">30%</output><input id="siteHeaderPosition" type="range" min="0" max="100" value="30"></label>
-                </div>
-                <button class="button" id="siteHeaderReset" type="button">Standaardafbeelding terugzetten</button>
-              </section>
-              <section class="panel"><h3>Standaardregio</h3><p>Nieuwe bezoekers beginnen op deze locatie en zoekafstand. Hun eigen locatiekeuze blijft behouden.</p>
-                <div class="siteSettingsFields">
-                  <label>Plaats of postcode<input id="siteRegionInput" type="text" required autocomplete="off" placeholder="Bijvoorbeeld Nijmegen of 6525 AB"></label>
-                  <label>Zoekafstand inspiratiebank<select id="siteRegionRadius"><option value="3">3 km</option><option value="5">5 km</option><option value="10">10 km</option><option value="15">15 km</option><option value="25">25 km</option><option value="50">50+ km (alle afstanden)</option></select></label>
-                  <label>Zoekafstand UIT-agenda<select id="siteAgendaRadius"><option value="3">3 km</option><option value="5">5 km</option><option value="10">10 km</option><option value="15">15 km</option><option value="25">25 km</option><option value="50">50+ km (alle afstanden)</option></select></label>
-                </div><p id="siteRegionPreview" class="small"></p>
-              </section>
-              <div class="siteSettingsSaveBar"><button class="button primary" id="siteSettingsSave" type="submit">Instellingen opslaan</button><button class="button" id="siteSettingsCancel" type="button">Wijzigingen annuleren</button><p id="siteSettingsStatus" class="status" role="status" aria-live="polite"></p></div>
-            </form>
-            </details>
             <section class="agendaCheckNotice" aria-labelledby="dashboardAgendaCheckTitle">
               <div class="agendaCheckNoticeText">
                 <span class="agendaCheckEyebrow">Agenda-check</span>
@@ -1180,6 +1163,29 @@
           <div id="submittedIdeaList" class="list"></div>
         </section>
             </div>
+          </section>
+
+          <section class="adminWorkspace adminSettingsWorkspace" data-admin-workspace="settings" hidden>
+            <div class="workspaceHeader"><div><h2>Instellingen</h2><p>Beheer de headerafbeelding en de standaardregio voor bezoekers.</p></div></div>
+            <form id="siteSettingsForm" class="siteSettingsForm">
+              <section class="panel"><h3>Headerafbeelding</h3><p>Deze afbeelding verschijnt bovenaan de inspiratiebank en UIT-agenda.</p>
+                <div class="siteHeaderPreview"><img id="siteHeaderPreview" alt="Voorbeeld van de header" src="../website-bestanden/hero-achtergronden/inspiratiebank-header.png"><span>Ontdek iets nieuws</span></div>
+                <div class="siteSettingsFields">
+                  <label>Afbeelding kiezen<input id="siteHeaderFile" type="file" accept="image/jpeg,image/png,image/webp"><small id="siteHeaderFileLabel">Standaardafbeelding</small></label>
+                  <label>Of een webadres<input id="siteHeaderUrl" type="url" placeholder="https://voorbeeld.nl/header.jpg"><small>Een rechtstreeks HTTPS-adres naar een afbeelding.</small></label>
+                  <label class="wide">Uitsnede — verticale positie <output id="siteHeaderPositionValue">30%</output><input id="siteHeaderPosition" type="range" min="0" max="100" value="30"></label>
+                </div>
+                <button class="button" id="siteHeaderReset" type="button">Standaardafbeelding terugzetten</button>
+              </section>
+              <section class="panel"><h3>Standaardregio</h3><p>Nieuwe bezoekers beginnen op deze locatie en zoekafstand. Hun eigen locatiekeuze blijft behouden.</p>
+                <div class="siteSettingsFields">
+                  <label>Plaats of postcode<input id="siteRegionInput" type="text" required autocomplete="off" placeholder="Bijvoorbeeld Nijmegen of 6525 AB"></label>
+                  <label>Zoekafstand inspiratiebank<select id="siteRegionRadius"><option value="3">3 km</option><option value="5">5 km</option><option value="10">10 km</option><option value="15">15 km</option><option value="25">25 km</option><option value="50">50+ km (alle afstanden)</option></select></label>
+                  <label>Zoekafstand UIT-agenda<select id="siteAgendaRadius"><option value="3">3 km</option><option value="5">5 km</option><option value="10">10 km</option><option value="15">15 km</option><option value="25">25 km</option><option value="50">50+ km (alle afstanden)</option></select></label>
+                </div><p id="siteRegionPreview" class="small"></p>
+              </section>
+              <div class="siteSettingsSaveBar"><button class="button primary" id="siteSettingsSave" type="submit">Instellingen opslaan</button><button class="button" id="siteSettingsCancel" type="button">Wijzigingen annuleren</button><p id="siteSettingsStatus" class="status" role="status" aria-live="polite"></p></div>
+            </form>
           </section>
 
           <section class="adminWorkspace" data-admin-workspace="agenda" hidden>
@@ -4569,8 +4575,7 @@
     return ['ongoingAdminSection','agendaAdminSection','agendaRulesPanel','sourceOwnPanel'].includes(hash) ? hash : '';
   }
   function setAdminWorkspace(target='meldkamer', options={}){
-    const next = target==='settings' ? 'meldkamer' : ['meldkamer','agenda','inspiration','backup'].includes(target) ? target : 'meldkamer';
-    if(target==='settings') $('#dashboardSettings').open=true;
+    const next = ['meldkamer','agenda','inspiration','settings','backup'].includes(target) ? target : 'meldkamer';
     const scrollTarget = options.scrollTarget || '';
     document.querySelectorAll('[data-admin-workspace]').forEach(panel => {
       panel.hidden = panel.dataset.adminWorkspace !== next;

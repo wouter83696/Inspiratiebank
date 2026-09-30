@@ -27,7 +27,7 @@ const base=process.env.DISCOVERY_BASE_URL||'http://127.0.0.1:8765';
  await p.goto(base+'/beheer/');await p.waitForFunction(()=>!document.documentElement.classList.contains('appLoading'),{},{timeout:90000});
  const click=async s=>p.locator(s).click();
  const saved=async action=>{const before=writes;const pending=p.waitForResponse(r=>r.url().includes('bcjn_save_state_admin'));await action();const response=await pending;await response.finished();await p.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));assert(writes>before,'action must persist via authenticated RPC');};
- const nav=async target=>{await click(`[data-admin-target="${target==='settings'?'meldkamer':target}"]:not([data-admin-scroll])`);if(target==='settings'&&!await p.locator('#dashboardSettings').evaluate(e=>e.open))await click('#dashboardSettings>summary');};
+ const nav=async target=>{await click(`[data-admin-target="${target}"]:not([data-admin-scroll])`);};
  const sub=async target=>click(`[data-admin-scroll="${target}"]`);
  await p.locator('#passwordInput').fill('wrong');await click('#loginForm button[type="submit"]');await p.locator('#loginStatus').filter({hasText:'Wachtwoord klopt niet'}).waitFor();
  await p.locator('#passwordInput').fill('test-only-password');await click('#loginForm button[type="submit"]');await p.locator('#adminApp').waitFor({state:'visible'});
