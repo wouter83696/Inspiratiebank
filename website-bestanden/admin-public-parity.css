@@ -30,13 +30,13 @@ body.adminMode .adminWorkspaceShell{
 
 #adminIdeaCards.sharedIdeaCards .ideaThemeCard{
   position:relative;
-  gap:10px;
+  gap:9px;
   min-height:370px;
-  padding:12px 20px 20px;
-  border:1px solid rgba(64,45,20,.035);
-  border-radius:18px;
-  background:#fffdf8;
-  box-shadow:0 8px 24px rgba(92,65,33,.04);
+  padding:13px 14px 14px;
+  border:1px solid rgba(64,45,20,.075);
+  border-radius:16px;
+  background:#FFFEFC;
+  box-shadow:0 9px 24px rgba(92,65,33,.045);
 }
 
 .adminSelectionToolbar{
@@ -98,12 +98,12 @@ body.adminMode .adminWorkspaceShell{
 #adminIdeaCards .ideaImageDomainBadge{
   position:absolute;
   left:0;
-  bottom:-16px;
+  bottom:-17px;
   z-index:2;
   display:grid;
   place-items:center;
-  width:32px;
-  height:32px;
+  width:34px;
+  height:34px;
   border:1px solid var(--theme-icon-line);
   border-radius:50%;
   background:var(--theme-icon-bg);
@@ -113,8 +113,8 @@ body.adminMode .adminWorkspaceShell{
 }
 
 #adminIdeaCards .ideaImageDomainBadge svg{
-  width:14px;
-  height:14px;
+  width:17px;
+  height:17px;
 }
 
 #adminIdeaCards .ideaImageFrame{
@@ -141,7 +141,52 @@ body.adminMode .adminWorkspaceShell{
   height:34px;
 }
 
-#adminIdeaCards .hasPhoto h3{margin-top:14px}
+#adminIdeaCards .sharedIdeaCard h3{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  min-height:0;
+  margin:0;
+  color:#005F73;
+  font-size:1rem;
+  font-weight:500;
+  line-height:1.24;
+}
+#adminIdeaCards .sharedIdeaCard h3 .ideaTitleText{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+}
+#adminIdeaCards .sharedIdeaCard .cardMetaBlock{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:5px;
+  width:fit-content;
+  max-width:100%;
+  padding:7px 10px;
+  border:1px solid rgba(112,94,63,.035);
+  border-radius:10px;
+  background:rgba(247,241,231,.11);
+}
+#adminIdeaCards .sharedIdeaCard .cardMetaLine{
+  width:auto;
+  margin:0;
+  padding:0;
+  border:0;
+  background:transparent;
+}
+#adminIdeaCards .sharedIdeaCard>p:not(.fine){
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:4;
+  overflow:hidden;
+  margin-top:2px;
+  font-size:.86rem;
+  line-height:1.45;
+}
+#adminIdeaCards .sharedIdeaCard .ideaPracticalDetails{margin-top:auto}
 
 #adminIdeaCards .adminIdeaImageBadge{
   left:auto;
@@ -199,7 +244,6 @@ body.adminMode .adminWorkspaceShell{
   #adminApp #inspirationAdminPanel,
   #adminApp #agendaReviewPanel{padding-inline:0}
   #adminIdeaCards .ideaImageFrame{margin:-4px -4px 0}
-  #adminIdeaCards .hasPhoto h3{margin-top:13px}
   .adminSelectionToolbar{top:8px;align-items:flex-start;flex-direction:column;gap:8px}
   .adminSelectionActions{width:100%;justify-content:flex-start;overflow-x:auto;padding-bottom:2px}
 }

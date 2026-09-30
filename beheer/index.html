@@ -990,7 +990,7 @@
   <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260911-first-paint-v4">
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260911-ongoing-light-cards-v39">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260923-warm-cards-v1">
-  <link rel="stylesheet" href="../website-bestanden/admin-public-parity.css?v=20260930-selection-toolbar-v2">
+  <link rel="stylesheet" href="../website-bestanden/admin-public-parity.css?v=20260930-public-parity-v3">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -3249,10 +3249,15 @@
       .filter(entry => entry.score > 0)
       .sort((a,b)=>b.score - a.score)[0] || null;
   }
+  function adminAssetUrl(value=''){
+    const src = String(value || '').trim();
+    if(!src || /^(?:[a-z]+:|\/\/|\/|\.\.\/|\.\/)/i.test(src)) return src;
+    return `../${src}`;
+  }
   function adminIdeaImage(item={}){
     if(item.image){
       const approved = item.imageStatus === 'approved' || item.imageApproved === true;
-      return {src:item.image, publicSrc:item.image, alt:item.imageAlt || item.title || 'Activiteit', approved, pending:!approved};
+      return {src:adminAssetUrl(item.image), publicSrc:item.image, alt:item.imageAlt || item.title || 'Activiteit', approved, pending:!approved};
     }
     const demo = suggestedAdminIdeaImage(item);
     return demo ? {src:demo.image, publicSrc:demo.publicImage, alt:demo.alt, approved:true, pending:false, suggested:true} : null;
