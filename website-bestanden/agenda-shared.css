@@ -747,3 +747,7 @@
     min-height:0;
   }
 }
+
+/* Long category labels must wrap to the next chip row in both filter sheets. */
+#agendaFilterCategoryChips{display:flex!important;flex-wrap:wrap;gap:6px}
+#agendaFilterCategoryChips .ideaFilterChip{flex:0 0 auto;max-width:100%}

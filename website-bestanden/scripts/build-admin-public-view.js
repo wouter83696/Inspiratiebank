@@ -8,9 +8,7 @@ const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const ids = {
   'tab-inspiratie':'inspirationAdminPanel', 'tab-weken':'agendaReviewPanel',
   ideaCards:'adminIdeaCards', ideaList:'adminIdeaList',
-  agendaThemeLegend:'agendaAdminThemeLegend',
   weekPanels:'agendaReviewList', longerOffers:'ongoingAdminSection', flexibleOffersWrap:'ongoingAdminList',
-  agendaFilters:'agendaAdminFilters', agendaSearch:'agendaAdminSearch',
 };
 const chunks = [];
 for (const match of html.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>|<link\b[^>]*rel="stylesheet"[^>]*>/g)) {
@@ -22,6 +20,8 @@ for (const match of html.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>|<link\b[^>]
 }
 let css = chunks.join('\n');
 css = css.replace(/#([\w-]+)/g, (all, id) => ids[id] ? `#${ids[id]}` : all);
+// Explicit :scope lets public tab selectors match the scope root itself.
+css = css.replace(/#(inspirationAdminPanel|agendaReviewPanel)\b/g, ':scope#$1');
 css = css.replace(/:root\b/g, ':scope');
 css = css.replace(/\b(?:html|body)(?=[\s.{:#>,])/g, ':scope');
 css = css.replace(/url\((['"]?)website-bestanden\//g, 'url($1');

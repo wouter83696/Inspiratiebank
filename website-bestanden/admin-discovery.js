@@ -5,12 +5,12 @@
   let mixOrder=null;
   const $ = id=>document.getElementById(id);
   function values(){return {...state,domain:state.domains.size ? [...state.domains].join(',') : 'all'};}
-  function distance(item){
+  function distance(item,originOverride){
     if(item.distanceBand === 'Op locatie' || item.locationType === 'Binnen' && !item.url) return 0;
-    const origin=state.region || AdminSiteSettings.current().region;
+    const origin=originOverride || state.region || AdminSiteSettings.current().region;
     let lat=Number(item.lat),lon=Number(item.lon ?? item.lng);
     if(!item.lat || !(item.lon ?? item.lng)){
-      const text=normalize(`${item.address || ''} ${item.place || ''} ${item.title || ''}`);
+      const text=normalize(`${item.address || ''} ${item.where || ''} ${item.place || ''} ${item.title || ''}`);
       const known=PLACE_DISTANCE_COORDS.find(([name])=>text.includes(normalize(name)));
       if(!known) return NaN;
       [,lat,lon]=known;
@@ -57,8 +57,8 @@
     DiscoveryViewShared.activeLocation(state.locationType,state.locationType==='Binnen'?'Thuis':'Op pad');
     const active=state.domains.size+['locationType','cost','stimulus','duration'].filter(k=>state[k]!=='all').length+(state.radius<50?1:0);
     $('filterToggle').setAttribute('aria-label',active?`Filters (${active} actief)`:'Filters');
-    document.querySelectorAll('[data-location-settings-label]').forEach(el=>el.textContent=(state.region || AdminSiteSettings.current().region).label);
-    document.querySelectorAll('[data-location-radius-label]').forEach(el=>el.textContent=state.radius>=50?'50+ km':state.radius+' km');
+    document.querySelectorAll('#inspirationAdminPanel [data-location-settings-label]').forEach(el=>el.textContent=(state.region || AdminSiteSettings.current().region).label);
+    document.querySelectorAll('#inspirationAdminPanel [data-location-radius-label]').forEach(el=>el.textContent=state.radius>=50?'50+ km':state.radius+' km');
 
   }
   function reset(){
@@ -97,8 +97,8 @@
     const categories=ADMIN_THEME_LEGEND.map(value=>({value:domainDisplayLabel(value),label:domainDisplayLabel(value),theme:domainThemeClass(value),icon:domainIcon(value)}));
     $('ideaFilterCategoryChips').innerHTML=DiscoveryViewShared.categoryChips(categories);
     DiscoveryViewShared.setupSearch({items:allAdminIdeas,render:renderIdeas,normalize,label:domainDisplayLabel,theme:domainThemeClass,icon:domainIcon});
-    document.querySelectorAll('[data-location-settings-btn]').forEach(button=>button.addEventListener('click',()=>open('location')));
-    document.querySelectorAll('[data-filter-settings-btn]').forEach(button=>button.addEventListener('click',()=>open()));
+    document.querySelectorAll('#inspirationAdminPanel [data-location-settings-btn]').forEach(button=>button.addEventListener('click',()=>open('location')));
+    document.querySelectorAll('#inspirationAdminPanel [data-filter-settings-btn]').forEach(button=>button.addEventListener('click',()=>open()));
     $('ideaActiveFilterBar').addEventListener('click',()=>{state.locationType='all';renderIdeas();});
     $('filterToggle').addEventListener('click',()=>open());
     $('ideaFilterSheetLayer').querySelectorAll('[data-idea-filter-close]').forEach(button=>button.addEventListener('click',close));
@@ -118,5 +118,5 @@
     $('ideaFilterMixBtn').addEventListener('click',()=>{mixOrder=new Map(allAdminIdeas().map(item=>[item.key,Math.random()]));renderIdeas();});
   }
   function sort(items){return mixOrder ? [...items].sort((a,b)=>(mixOrder.get(a.key)||0)-(mixOrder.get(b.key)||0)) : sortAdminIdeas(items);}
-  window.AdminDiscovery={setup,values,matches,toggleDomain,sync,reset,sort};
+  window.AdminDiscovery={distance,setup,values,matches,toggleDomain,sync,reset,sort};
 })();

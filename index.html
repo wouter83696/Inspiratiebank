@@ -2804,7 +2804,7 @@
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
   <link rel="stylesheet" href="website-bestanden/loading-screen.css?v=20260926-transparent-loader-v8">
-  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260925-solid-week-badge-v3">
+  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260930-agenda-rebuild-v1">
   <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20260923-warm-cards-v1">
   <style>
     /* De kaart zelf blijft rustig; categorieaccenten zitten alleen in iconen en badges. */
@@ -5521,31 +5521,7 @@
           <p class="tabHeroLine">Bekijk wat er te doen is</p>
         </a>
       </section>
-      <div class="desktopStickyControls agendaDesktopControls">
-      <div class="filterBar">
-        <div class="filters agendaSearchFilters more sharedDiscoveryFilters" id="agendaFilters">
-          <div class="filterSearch"><input id="agendaSearch" type="search" placeholder="Zoek in activiteiten..."></div>
-          <div class="desktopLocationBar" id="agendaDesktopLocation"></div>
-          <button class="filterToggle" id="agendaFilterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-haspopup="dialog" aria-controls="agendaFilterSheetLayer">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9"></path><path d="M17 7h3"></path><circle cx="15" cy="7" r="2"></circle><path d="M4 17h3"></path><path d="M11 17h9"></path><circle cx="9" cy="17" r="2"></circle></svg>
-          </button>
-          <select id="agendaWeekFilter" aria-label="Week filteren" data-include-placeholder-option="true"><option value="">Week</option></select>
-          <div class="filterOptions">
-            <select id="agendaDomain" data-theme-select="true" aria-label="Categorie filteren"><option value="all">Categorie</option></select>
-            <select id="agendaDistance" aria-label="Afstand filteren"><option value="all">Afstand</option></select>
-            <select id="agendaCost" aria-label="Kosten filteren"><option value="all">Kosten</option></select>
-            <button class="filterReset" id="agendaResetBtn" type="button">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg>
-              Reset
-            </button>
-            <span id="agendaSearchStatus" class="agendaSearchStatus"></span>
-          </div>
-        </div>
-      </div>
-      <div class="inspirationDesktopFilterRow agendaLegendBar sharedDiscoveryChipRow">
-        <div id="agendaThemeLegend"></div>
-      </div>
-      </div>
+      <div data-agenda-controls></div>
       <div id="agendaContentSurface" class="agendaContentSurface">
         <div id="agendaSectionSwitcher" class="agendaSectionSwitcher"></div>
         <div id="weekPanels" class="weekStack agendaSectionView" role="tabpanel" aria-labelledby="agenda-tab-weeks"></div>
@@ -5781,50 +5757,7 @@
     </div>
   </div>
   <div data-discovery-sheet></div>
-  <div class="ideaFilterSheetLayer" id="agendaFilterSheetLayer" aria-hidden="true">
-    <button class="ideaFilterSheetBackdrop" type="button" data-agenda-filter-close aria-label="Filters sluiten"></button>
-    <aside class="ideaFilterSheet" role="dialog" aria-modal="true" aria-labelledby="agendaFilterSheetTitle">
-      <header class="ideaFilterSheetHeader">
-        <h2 id="agendaFilterSheetTitle">Filters</h2>
-        <button class="ideaFilterSheetClose" type="button" data-agenda-filter-close aria-label="Filters sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
-      </header>
-      <div class="ideaFilterSheetBody" id="agendaFilterSheetBody">
-        <section class="ideaFilterSection">
-          <div class="ideaFilterSectionHead"><h3>Locatie</h3></div>
-          <label class="ideaFilterLocationField" for="agendaFilterLocationInput">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-            <input id="agendaFilterLocationInput" type="text" inputmode="text" autocomplete="postal-code" placeholder="Postcode of plaats">
-          </label>
-          <div class="ideaFilterChips locationPresetChips" aria-label="Kies een stad">
-            <button class="ideaFilterChip" type="button" data-location-preset="nijmegen">Nijmegen</button>
-            <button class="ideaFilterChip" type="button" data-location-preset="arnhem">Arnhem</button>
-          </div>
-          <p class="ideaFilterSheetStatus" id="agendaFilterLocationStatus" role="status" aria-live="polite"></p>
-        </section>
-        <section class="ideaFilterSection">
-          <div class="ideaFilterSectionHead"><h3>Afstand</h3><span class="ideaFilterSectionValue" id="agendaFilterDistanceValue">25 km</span></div>
-          <input class="ideaFilterRange" id="agendaFilterDistanceRange" type="range" min="0" max="5" step="1" value="4" aria-label="Maximale afstand">
-          <div class="ideaFilterRangeLabels" aria-hidden="true"><span>3 km</span><span>5 km</span><span>10 km</span><span>15 km</span><span>25 km</span><span>50+ km</span></div>
-        </section>
-        <section class="ideaFilterSection">
-          <div class="ideaFilterSectionHead"><h3>Week</h3></div>
-          <div class="ideaFilterChips" id="agendaFilterWeekChips"></div>
-        </section>
-        <section class="ideaFilterSection">
-          <div class="ideaFilterSectionHead"><h3>Categorieën</h3></div>
-          <div class="ideaFilterChips" id="agendaFilterCategoryChips"></div>
-        </section>
-        <section class="ideaFilterSection">
-          <div class="ideaFilterSectionHead"><h3>Prijs</h3></div>
-          <div class="ideaFilterChips" id="agendaFilterPriceChips"></div>
-        </section>
-      </div>
-      <footer class="ideaFilterSheetFooter">
-        <button class="ideaFilterSheetAction secondary" id="agendaFilterClearBtn" type="button">Wissen</button>
-        <button class="ideaFilterSheetAction primary" id="agendaFilterApplyBtn" type="button">Toon activiteiten</button>
-      </footer>
-    </aside>
-  </div>
+  <div data-agenda-sheet></div>
   <div id="locationModal" class="ideaModal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="locationModalTitle" aria-describedby="locationModalText">
     <div class="ideaModalCard">
       <div class="ideaModalTop">
@@ -5871,12 +5804,14 @@
     </div>
   </div>
 
-  <script src="website-bestanden/discovery-view-shared.js?v=20260930-shared-controls-v1"></script>
-  <script>DiscoveryViewShared.mount();</script>
+  <script src="website-bestanden/discovery-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
+  <script src="website-bestanden/select-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
+  <script src="website-bestanden/agenda-discovery-shared.js?v=20260930-agenda-rebuild-v1"></script>
+  <script>DiscoveryViewShared.mount();AgendaDiscoveryShared.mount();</script>
   <script src="website-bestanden/site-settings-shared.js?v=20260930-radius-v2"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20260930-list-parity-v2"></script>
-  <script src="website-bestanden/agenda-view-shared.js?v=20260925-week-expand-v1"></script>
+  <script src="website-bestanden/agenda-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
@@ -6464,7 +6399,7 @@
   }
   function renderThemeLegends(){
     const agendaLegend = $('#agendaThemeLegend');
-    if(agendaLegend) agendaLegend.innerHTML = agendaThemeLegend({interactive:true, includeLocation:true});
+    if(agendaLegend) agendaLegend.innerHTML = DiscoveryViewShared.legend(AGENDA_THEME_LEGEND.map(value=>({value:domainDisplayLabel(value),label:domainDisplayLabel(value),theme:domainThemeClass(value),icon:domainIcon(value)})));
     const inspirationLegend = $('#inspirationThemeLegend');
     if(inspirationLegend) inspirationLegend.innerHTML = DiscoveryViewShared.legend(AGENDA_THEME_LEGEND.map(value => ({value:domainDisplayLabel(value),label:domainDisplayLabel(value),theme:domainThemeClass(value),icon:domainIcon(value)})));
     const inspirationLocation = $('#inspirationDesktopLocation');
@@ -6495,12 +6430,7 @@
   function publicWeekDates(week){
     return String(week?.dates || '').replace(/\s+2026\b/g, '').trim();
   }
-  function weekCountBadge(count){
-    const amount = Number(count);
-    const label = amount === 1 ? 'activiteit' : 'activiteiten';
-    const qualifier = amount === 1 ? '' : '<span class="weekCountWord">verschillende</span>';
-    return `<span class="weekCountBadge"><span><strong>${escapeHtml(count)}</strong>${qualifier}<span class="weekCountLabel">${label}</span></span></span>`;
-  }
+  function weekCountBadge(count){return AgendaViewShared.renderWeekCount(count);}
   function normalizeIdeaType(value=''){
     const v = normalize(value);
     if(!v) return 'Eigen aanbod';
@@ -8500,55 +8430,12 @@
       });
 	  }
   function renderAgendaBoard(weekId, concrete){
-    const todayIso = formatIsoDate(new Date());
-    const visibleLimit = agendaDayVisibleLimit();
-    const days = weekDays(weekId).map(day => {
-      const occurring = concrete.filter(item => itemOccursOnDay(item, day.iso));
-      const items = occurring.filter(item => !isFlexiblePeriodOffer(item));
-      const periods = sortAgendaPeriods(occurring.filter(item => isFlexiblePeriodOffer(item) && showPeriodInAgenda(item)));
-      const entries = [
-        ...periods.map(item => ({item, compact:true})),
-        ...items.map(item => ({item, compact:false}))
-      ];
-      const dayKey = `${weekId}:${day.iso}`;
-      const expanded = expandedAgendaDays.has(dayKey);
-      const visibleEntries = expanded ? entries : entries.slice(0, visibleLimit);
-      return {
-        day,
-        dayKey,
-        expanded,
-        totalCount:entries.length,
-        items,
-        periods,
-        visibleEntries,
-        hiddenCount:Math.max(0, entries.length - visibleEntries.length)
-      };
-    });
-    return days.map(({day, dayKey, expanded, totalCount, items, periods, visibleEntries, hiddenCount}) => {
-      const isToday = day.iso === todayIso;
-      const isPastDay = day.iso < todayIso;
-      return AgendaViewShared.renderDay({
-        key:escapeHtml(dayKey), label:escapeHtml(day.label), date:escapeHtml(day.prettyDate),
-        past:isPastDay, today:isToday, expanded,
-        items:visibleEntries.map(entry => agendaItem(entry.item, entry.compact)).join(''),
-        more:hiddenCount ? `<button class="agendaMore" type="button" data-expand-agenda-day="${escapeHtml(dayKey)}" aria-expanded="false">+ ${hiddenCount} meer optie${hiddenCount === 1 ? '' : 's'}</button>` : expanded && totalCount > visibleLimit ? `<button class="agendaMore" type="button" data-collapse-agenda-day="${escapeHtml(dayKey)}" aria-expanded="true">Minder tonen</button>` : '',
-        empty:!items.length && !periods.length ? `<div class="agendaEmpty">${escapeHtml(agendaEmptyMessage())}</div>` : ''
-      });
-    }).join('');
+    return AgendaViewShared.renderBoard({weekId,concrete,days:weekDays(weekId),expandedAgendaDays,
+      todayIso:formatIsoDate(new Date()),visibleLimit:agendaDayVisibleLimit(),itemOccursOnDay,
+      isFlexiblePeriodOffer,showPeriodInAgenda,sortAgendaPeriods,agendaItem,emptyMessage:agendaEmptyMessage()});
   }
   function mobileAgendaDayNavigation(weekId){
-    const todayIso = formatIsoDate(new Date());
-    const days = weekDays(weekId);
-    const defaultDay = days.some(day => day.iso === todayIso) ? todayIso : days[0]?.iso;
-    const selectedKey = selectedAgendaDayKey.startsWith(`${weekId}:`)
-      ? selectedAgendaDayKey
-      : `${weekId}:${defaultDay}`;
-    const buttons = days.map(day => {
-      const key = `${weekId}:${day.iso}`;
-      const active = key === selectedKey;
-      return `<button class="mobileDayButton${active ? ' active' : ''}" type="button" data-agenda-day-target="${escapeHtml(key)}"${active ? ' aria-current="date"' : ''}><strong>${escapeHtml(day.shortLabel)}</strong><span>${escapeHtml(day.prettyDate)}</span></button>`;
-    }).join('');
-    return `<nav class="mobileDayNavigation" aria-label="Kies een dag">${buttons}</nav>`;
+    return AgendaViewShared.renderDayNavigation(weekId,weekDays(weekId),selectedAgendaDayKey,formatIsoDate(new Date()));
   }
 	  function byWeek(weekId){
 	    return allExternalItems().filter(item => weekDays(weekId).some(day => itemOccursOnDay(item, day.iso)));
@@ -8634,28 +8521,13 @@
     });
   }
   function flexibleExternalRow(item){
-    const distanceLabel = normalizeIdeaDistance(item.distanceBand, item, 'agenda');
-    const locationLabel = normalizeIdeaLocation(item.locationType);
-    const placePills = compactPlacePills(locationLabel, distanceLabel).map(locationPill).join(' ');
-    const weekLabel = compactWeekAvailabilityLabel(item, true);
-    const mobileWeekLabel = weekLabel.replace(/(\d)\s*-\s*(\d)/g, '$1–$2');
-    const mobileWeekPill = weekLabel
-      ? `<span class="ongoingMobileWeekPill" aria-label="Week ${escapeHtml(mobileWeekLabel)}"><strong>Week</strong> ${escapeHtml(mobileWeekLabel)}</span>`
-      : '';
-    const costLabel = normalizeIdeaCost(item.cost);
-    const stimulusLabel = normalizeIdeaStimulus(item.stimulus);
-    const titleText = item.url
-      ? `<a class="ongoingTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="ideaTitleText">${escapeHtml(item.title)}</span></a>`
-      : `<span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
-    const dateMeta = `<span class="small ongoingDateMeta">${escapeHtml(item.date)} • ${escapeHtml(item.time)}</span>`;
-    const title = `<span class="nameWithIcon"><span class="ongoingTitleVisual" aria-hidden="true"><span class="domainIcon">${domainIcon(item.domain)}</span></span><span class="ongoingTitleTextStack">${titleText}${dateMeta}</span></span>`;
-    return AgendaViewShared.renderOngoingRow({
-      themeClass:domainThemeClass(item.domain), title,
-      review:`<div>${agendaReviewPill(item)}</div>`, date:'',
-      weeks:escapeHtml(weekLabel), place:`${mobileWeekPill}${placePills}`,
-      cost:costPill(costLabel), stimulus:stimulusPill(stimulusLabel), meta:'',
-      description:escapeHtml(publicOngoingDescription(item.fit)),
-      hideWebsite:true
+    const distanceLabel=normalizeIdeaDistance(item.distanceBand,item,'agenda');
+    return AgendaViewShared.renderOngoingActivity(item,{
+      themeClass:domainThemeClass(item.domain),icon:domainIcon(item.domain),
+      weekLabel:compactWeekAvailabilityLabel(item,true),
+      placePills:compactPlacePills(normalizeIdeaLocation(item.locationType),distanceLabel).map(locationPill).join(' '),
+      costLabel:costPill(normalizeIdeaCost(item.cost)),stimulusLabel:stimulusPill(normalizeIdeaStimulus(item.stimulus)),
+      review:`<div>${agendaReviewPill(item)}</div>`,description:publicOngoingDescription(item.fit)
     });
   }
   function renderFlexibleOffers(){
@@ -8678,19 +8550,7 @@
       count.setAttribute('aria-label', `${items.length} ${items.length === 1 ? 'activiteit' : 'activiteiten'}`);
     });
   }
-  function weekNavControls(currentId){
-    const index = ACTIVE_WEEKS.findIndex(week => week.id === currentId);
-    const previous = index > 0 ? ACTIVE_WEEKS[index - 1] : null;
-    const next = index >= 0 && index < ACTIVE_WEEKS.length - 1 ? ACTIVE_WEEKS[index + 1] : null;
-    return `<div class="weekNav" aria-label="Door weken bladeren">
-      <button class="weekNavButton" type="button" data-week-jump="${escapeHtml(previous?.id || '')}" aria-label="Vorige week" title="Vorige week"${previous ? '' : ' disabled'}>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
-      </button>
-      <button class="weekNavButton" type="button" data-week-jump="${escapeHtml(next?.id || '')}" aria-label="Volgende week" title="Volgende week"${next ? '' : ' disabled'}>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
-      </button>
-    </div>`;
-  }
+  function weekNavControls(currentId){ return AgendaViewShared.renderWeekNavigation(ACTIVE_WEEKS,currentId); }
   function setAgendaWeek(weekId, options={}){
     if(!ACTIVE_WEEKS.some(week => week.id === weekId)) return;
     selectedAgendaWeek = weekId;
@@ -8784,13 +8644,8 @@
   }
 
   function agendaSectionNavigation(){
-    const activeSection = $('#tab-weken')?.dataset.agendaSection === 'ongoing' ? 'ongoing' : 'weeks';
-    return `<nav class="agendaSectionTabs" aria-label="Agendaweergave" role="tablist">
-      <a id="agenda-tab-weeks" class="agendaSectionTab${activeSection === 'weeks' ? ' active' : ''}" href="#weekPanels" role="tab" aria-controls="weekPanels" aria-selected="${activeSection === 'weeks'}" data-agenda-section="weeks"${activeSection === 'weeks' ? ' aria-current="page"' : ''}>Weekagenda</a>
-      <a id="agenda-tab-ongoing" class="agendaSectionTab${activeSection === 'ongoing' ? ' active' : ''}" href="#longerOffers" role="tab" aria-controls="longerOffers" aria-selected="${activeSection === 'ongoing'}" data-agenda-section="ongoing"${activeSection === 'ongoing' ? ' aria-current="page"' : ''}>Doorlopend aanbod <span class="agendaSectionCount" data-agenda-ongoing-count aria-label="Aantal activiteiten">0</span></a>
-    </nav>`;
+    return AgendaViewShared.renderSectionNavigation($('#tab-weken')?.dataset.agendaSection);
   }
-
   function syncAgendaSectionIndicator(tabList, target){
     if(!tabList) return;
     const tab = target || tabList.querySelector('.agendaSectionTab.active');
@@ -9079,142 +8934,7 @@
   function syncCustomSelect(select){
     if(select && typeof select._syncCustomSelect === 'function') select._syncCustomSelect();
   }
-  function customSelectChoiceIcon(type='', value=''){
-    const raw = String(value || '');
-    const normalized = normalize(raw);
-    if(type === 'cost'){
-      const label = normalizeIdeaCost(raw);
-      const iconClass = label === 'Gratis' ? 'costFree' : label === '€€€' ? 'costHigh' : label === '€€' ? 'costMid' : 'costLow';
-      return `<span class="choiceIcon ${iconClass}" aria-hidden="true">${label === 'Gratis' ? '€' : escapeHtml(label)}</span>`;
-    }
-    if(type === 'stimulus'){
-      const label = normalizeIdeaStimulus(raw);
-      const lines = label === 'Hoog' ? 3 : label === 'Middel' ? 2 : 1;
-      const iconClass = label === 'Hoog' ? 'stimulusHigh' : label === 'Middel' ? 'stimulusMedium' : 'stimulusLow';
-      const yPositions = lines === 1 ? [9] : lines === 2 ? [6,12] : [4,9,14];
-      const paths = Array.from({length:lines}, (_, index) => {
-        const y = yPositions[index];
-        return `<path d="M1.5 ${y}c2.9-2.7 5.8 2.7 8.7 0S17.6 ${y - 2.7} 20.5 ${y}"></path>`;
-      }).join('');
-      return `<span class="choiceIcon ${iconClass}" aria-hidden="true"><svg viewBox="0 0 22 18">${paths}</svg></span>`;
-    }
-    if(normalized) return '';
-    return '';
-  }
-  function enhanceCustomSelect(select){
-    if(!select) return;
-    const previous = select.closest('.customSelect');
-    if(previous){
-      previous.parentNode.insertBefore(select, previous);
-      previous.remove();
-    }
-    select.classList.add('customNativeSelect');
-    const themed = select.dataset.themeSelect === 'true';
-    const choiceType = select.dataset.choiceSelect || '';
-    const control = document.createElement('div');
-    control.className = themed ? 'customSelect themeSelect' : choiceType ? 'customSelect choiceSelect' : 'customSelect';
-    control.dataset.selectId = select.id || '';
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'customSelectButton';
-    button.setAttribute('aria-haspopup','listbox');
-    button.setAttribute('aria-expanded','false');
-    const icon = document.createElement('span');
-    icon.className = 'domainIcon';
-    icon.setAttribute('aria-hidden','true');
-    const choiceIcon = document.createElement('span');
-    choiceIcon.className = 'choiceIconSlot';
-    choiceIcon.setAttribute('aria-hidden','true');
-    const label = document.createElement('span');
-    label.className = 'customSelectLabel';
-    if(themed) button.appendChild(icon);
-    if(choiceType) button.appendChild(choiceIcon);
-    button.appendChild(label);
-    const menu = document.createElement('div');
-    menu.className = 'customSelectMenu';
-    menu.setAttribute('role','listbox');
-    [...select.options].forEach(option => {
-      if((option.value === 'all' || option.value === '') && select.dataset.includePlaceholderOption !== 'true') return;
-      const item = document.createElement('button');
-      item.type = 'button';
-      item.className = 'customSelectOption';
-      item.dataset.value = option.value;
-      item.setAttribute('role','option');
-      if(themed){
-        item.classList.add(domainThemeClass(option.value));
-        const itemIcon = document.createElement('span');
-        itemIcon.className = 'domainIcon';
-        itemIcon.setAttribute('aria-hidden','true');
-        itemIcon.innerHTML = domainIcon(option.value);
-        const itemLabel = document.createElement('span');
-        itemLabel.textContent = option.textContent;
-        item.append(itemIcon, itemLabel);
-      }else if(choiceType){
-        const itemIconWrap = document.createElement('span');
-        itemIconWrap.innerHTML = customSelectChoiceIcon(choiceType, option.value);
-        const itemIcon = itemIconWrap.firstElementChild;
-        const itemLabel = document.createElement('span');
-        itemLabel.textContent = option.textContent;
-        if(itemIcon) item.append(itemIcon);
-        item.append(itemLabel);
-      }else{
-        item.textContent = option.textContent;
-      }
-      item.addEventListener('click', () => {
-        select.value = option.value;
-        select._syncCustomSelect();
-        select.dispatchEvent(new Event('input',{bubbles:true}));
-        select.dispatchEvent(new Event('change',{bubbles:true}));
-        closeCustomSelects();
-      });
-      menu.appendChild(item);
-    });
-    select.parentNode.insertBefore(control, select);
-    control.append(select, button, menu);
-    select._syncCustomSelect = () => {
-      const selected = select.options[select.selectedIndex] || select.options[0];
-      const isPlaceholder = !selected || selected.value === '' || selected.value === 'all';
-      label.textContent = selected ? selected.textContent : '';
-      if(themed){
-        control.classList.remove('themeCreative','themeCulture','themeNature','themeSocial','themeSport','themeAction','themeDefault');
-        control.classList.toggle('placeholder', isPlaceholder);
-      }
-      if(themed && selected && !isPlaceholder){
-        control.classList.add(domainThemeClass(selected.value));
-        icon.innerHTML = domainIcon(selected.value);
-      }else if(themed){
-        icon.innerHTML = '';
-      }
-      if(choiceType){
-        choiceIcon.innerHTML = customSelectChoiceIcon(choiceType, selected ? selected.value : '');
-      }
-      menu.querySelectorAll('.customSelectOption').forEach(item => {
-        const active = item.dataset.value === select.value;
-        item.classList.toggle('active', active);
-        item.setAttribute('aria-selected', active ? 'true' : 'false');
-      });
-    };
-    select._syncCustomSelect();
-    button.addEventListener('click', () => {
-      const willOpen = !control.classList.contains('open');
-      closeCustomSelects(control);
-      control.classList.toggle('open', willOpen);
-      button.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-      control.classList.remove('openUp');
-      if(willOpen){
-        if(control.closest('.agendaWeekFilterSlot')) return;
-        const buttonRect = button.getBoundingClientRect();
-        const menuHeight = Math.min(menu.scrollHeight || 0, 280);
-        const modalCard = control.closest('.ideaModalCard');
-        const clipsToCard = modalCard && getComputedStyle(modalCard).overflow !== 'visible';
-        const modalBottom = clipsToCard ? modalCard.getBoundingClientRect().bottom : window.innerHeight;
-        const lowerBoundary = Math.min(window.innerHeight, modalBottom);
-        const spaceBelow = lowerBoundary - buttonRect.bottom;
-        const spaceAbove = buttonRect.top;
-        control.classList.toggle('openUp', spaceBelow < menuHeight + 18 && spaceAbove > spaceBelow);
-      }
-    });
-  }
+  function enhanceCustomSelect(select){ SelectViewShared.enhanceCustomSelect(select); }
   function fillSelect(id, values, label, labeler=value => value){
     const el = $(id); if(!el) return;
     const current = el.value || 'all';
@@ -9408,31 +9128,7 @@
   function buildIdeaFilterCategoryChips(){
     $('#ideaFilterCategoryChips').innerHTML = DiscoveryViewShared.categoryChips(AGENDA_THEME_LEGEND.map(value => ({value,label:domainDisplayLabel(value),theme:domainThemeClass(value),icon:domainIcon(value)})));
   }
-  function buildAgendaFilterChips(){
-    const groups = [
-      ['agendaFilterWeekChips','agendaWeekFilter','Alle weken',false],
-      ['agendaFilterCategoryChips','agendaDomain','Alles',true],
-      ['agendaFilterPriceChips','agendaCost','Alles',false]
-    ];
-    groups.forEach(([containerId, selectId, allLabel, themed]) => {
-      const container = $('#'+containerId);
-      const select = $('#'+selectId);
-      if(!container || !select) return;
-      container.innerHTML = '';
-      [...select.options].forEach((option, index) => {
-        const button = document.createElement('button');
-        const isAll = option.value === 'all' || (!option.value && index === 0);
-        button.className = `ideaFilterChip ${themed && !isAll ? domainThemeClass(option.value) : ''}`.trim();
-        button.type = 'button';
-        button.dataset.agendaSheetFilter = selectId;
-        button.dataset.value = option.value;
-        button.innerHTML = themed && !isAll
-          ? `<span class="domainIcon" aria-hidden="true">${domainIcon(option.value)}</span><span>${escapeHtml(domainDisplayLabel(option.value))}</span>`
-          : escapeHtml(isAll ? allLabel : option.textContent);
-        container.appendChild(button);
-      });
-    });
-  }
+  function buildAgendaFilterChips(){ AgendaDiscoveryShared.buildFilterChips(); }
   function updateAgendaFilterSheetCount(){
     const filters = agendaSearchState();
     const source = filters.scope === 'all' ? allExternalItems() : byWeek(filters.week);
@@ -10583,17 +10279,7 @@
 	    renderAgenda();
 	    refreshCollections();
   }
-  function syncAgendaSwitcherPlacement(){
-    const controls = $('#tab-weken > .agendaDesktopControls');
-    const switcher = $('#agendaSectionSwitcher');
-    const surface = $('#agendaContentSurface');
-    if(!controls || !switcher) return;
-    if(window.matchMedia('(max-width:640px)').matches){
-      if(surface && switcher.parentElement !== surface) surface.prepend(switcher);
-    }else if(switcher.parentElement !== controls){
-      controls.appendChild(switcher);
-    }
-  }
+  function syncAgendaSwitcherPlacement(){ AgendaDiscoveryShared.placeSwitcher($('#tab-weken')); }
   function setupStickyControlsBackground(){
     syncAgendaSwitcherPlacement();
     const controlsList = [...document.querySelectorAll('.desktopStickyControls')];

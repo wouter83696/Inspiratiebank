@@ -166,18 +166,18 @@
     bar.hidden=value==='all';
     bar.innerHTML=value==='all'?'':`<button class="ideaActiveFilterChip" type="button" aria-label="Filter ${escapeHtml(label)} verwijderen"><span>${escapeHtml(label)}</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 6l8 8M14 6l-8 8"></path></svg></button>`;
   }
-  function createSheet(){
+  function createSheet({prefix='idea'}={}){
     let returnFocus=null,timer;
-    const layer=document.getElementById('ideaFilterSheetLayer');
+    const layer=document.getElementById(prefix+'FilterSheetLayer');
     const panel=layer.querySelector('.ideaFilterSheet');
-    const trigger=document.getElementById('filterToggle');
+    const trigger=document.getElementById(prefix==='idea'?'filterToggle':'agendaFilterToggle');
     function close(){
       if(!layer.classList.contains('isOpen'))return;
       clearTimeout(timer);layer.classList.remove('isOpen');layer.setAttribute('aria-hidden','true');document.body.classList.remove('ideaFilterSheetOpen');trigger?.setAttribute('aria-expanded','false');returnFocus?.focus({preventScroll:true});returnFocus=null;
     }
     function open(section='top'){
       returnFocus=document.activeElement;layer.classList.add('isOpen');layer.setAttribute('aria-hidden','false');document.body.classList.add('ideaFilterSheetOpen');trigger?.setAttribute('aria-expanded','true');
-      clearTimeout(timer);timer=setTimeout(()=>{document.getElementById('ideaFilterSheetBody').scrollTop=0;(section==='location'?document.getElementById('ideaFilterLocationInput'):layer.querySelector('.ideaFilterSheetClose')).focus({preventScroll:true});},180);
+      clearTimeout(timer);timer=setTimeout(()=>{document.getElementById(prefix+'FilterSheetBody').scrollTop=0;(section==='location'?document.getElementById(prefix+'FilterLocationInput'):layer.querySelector('.ideaFilterSheetClose')).focus({preventScroll:true});},180);
     }
     layer.addEventListener('keydown',event=>{
       if(event.key==='Escape'){event.preventDefault();close();}

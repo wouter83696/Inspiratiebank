@@ -1,4 +1,5 @@
 (function(){
+  const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function sourceButtonLabel(item={}){
     const source = String(item.source || '').trim();
     if(source && !/^ingebracht door\b/i.test(source) && source.toLocaleLowerCase('nl-NL') !== 'inzending') return source;
@@ -55,7 +56,7 @@
     const manageCell = view.actions !== undefined && view.manageFirst
       ? `<td class="ongoingManageCell" data-label="Beheer"><div class="ongoingAdminActions">${view.actions || ''}</div></td>`
       : '';
-    return `<tr class="${classes}">
+    return `<tr class="${classes}"${view.attributes ? ` ${view.attributes}` : ''}>
       ${manageCell}
       <td class="ongoingTitleCell"><span class="name">${view.title || ''}</span>${view.review || ''}${view.date ? `<div class="small ongoingDateMeta">${view.date}</div>` : ''}${titleActions}</td>
       <td class="ongoingWeeksCell">${view.weeks || ''}</td>
@@ -211,5 +212,98 @@
     return options.sort ? options.sort(result) : result;
   }
 
-  window.AgendaViewShared = Object.freeze({sourceButtonLabel, renderItem, renderDay, renderWeek, renderOngoingRow, renderOngoingTable, renderAgendaRow, renderSourceRow, mergeSourceLinks, buildOngoingOffers, isFlexiblePeriodOffer, sortAgendaItems, compactWeekLabel});
+  function renderWeekNavigation(weeks,currentId){
+    const index = weeks.findIndex(week => week.id === currentId);
+    const previous = index > 0 ? weeks[index - 1] : null;
+    const next = index >= 0 && index < weeks.length - 1 ? weeks[index + 1] : null;
+    return `<div class="weekNav" aria-label="Door weken bladeren">
+      <button class="weekNavButton" type="button" data-week-jump="${escapeHtml(previous?.id || '')}" aria-label="Vorige week" title="Vorige week"${previous ? '' : ' disabled'}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+      </button>
+      <button class="weekNavButton" type="button" data-week-jump="${escapeHtml(next?.id || '')}" aria-label="Volgende week" title="Volgende week"${next ? '' : ' disabled'}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+      </button>
+    </div>`;
+  }
+  function renderDayNavigation(weekId,days,selectedAgendaDayKey,todayIso){
+    const defaultDay = days.some(day => day.iso === todayIso) ? todayIso : days[0]?.iso;
+    const selectedKey = selectedAgendaDayKey.startsWith(`${weekId}:`)
+      ? selectedAgendaDayKey
+      : `${weekId}:${defaultDay}`;
+    const buttons = days.map(day => {
+      const key = `${weekId}:${day.iso}`;
+      const active = key === selectedKey;
+      return `<button class="mobileDayButton${active ? ' active' : ''}" type="button" data-agenda-day-target="${escapeHtml(key)}"${active ? ' aria-current="date"' : ''}><strong>${escapeHtml(day.shortLabel)}</strong><span>${escapeHtml(day.prettyDate)}</span></button>`;
+    }).join('');
+    return `<nav class="mobileDayNavigation" aria-label="Kies een dag">${buttons}</nav>`;
+  }
+  function renderSectionNavigation(activeSection='weeks', weekTarget='weekPanels', ongoingTarget='longerOffers'){
+    return `<nav class="agendaSectionTabs" aria-label="Agendaweergave" role="tablist">
+      <a id="agenda-tab-weeks" class="agendaSectionTab${activeSection === 'weeks' ? ' active' : ''}" href="#${weekTarget}" role="tab" aria-controls="${weekTarget}" aria-selected="${activeSection === 'weeks'}" data-agenda-section="weeks"${activeSection === 'weeks' ? ' aria-current="page"' : ''}>Weekagenda</a>
+      <a id="agenda-tab-ongoing" class="agendaSectionTab${activeSection === 'ongoing' ? ' active' : ''}" href="#${ongoingTarget}" role="tab" aria-controls="${ongoingTarget}" aria-selected="${activeSection === 'ongoing'}" data-agenda-section="ongoing"${activeSection === 'ongoing' ? ' aria-current="page"' : ''}>Doorlopend aanbod <span class="agendaSectionCount" data-agenda-ongoing-count aria-label="Aantal activiteiten">0</span></a>
+    </nav>`;
+  }
+
+  function renderBoard({weekId,concrete,days,expandedAgendaDays,todayIso,visibleLimit,itemOccursOnDay,isFlexiblePeriodOffer,showPeriodInAgenda,sortAgendaPeriods,agendaItem,emptyMessage}){
+    const entriesByDay = days.map(day => {
+      const occurring = concrete.filter(item => itemOccursOnDay(item, day.iso));
+      const items = occurring.filter(item => !isFlexiblePeriodOffer(item));
+      const periods = sortAgendaPeriods(occurring.filter(item => isFlexiblePeriodOffer(item) && showPeriodInAgenda(item)));
+      const entries = [
+        ...periods.map(item => ({item, compact:true})),
+        ...items.map(item => ({item, compact:false}))
+      ];
+      const dayKey = `${weekId}:${day.iso}`;
+      const expanded = expandedAgendaDays.has(dayKey);
+      const visibleEntries = expanded ? entries : entries.slice(0, visibleLimit);
+      return {
+        day,
+        dayKey,
+        expanded,
+        totalCount:entries.length,
+        items,
+        periods,
+        visibleEntries,
+        hiddenCount:Math.max(0, entries.length - visibleEntries.length)
+      };
+    });
+    return entriesByDay.map(({day, dayKey, expanded, totalCount, items, periods, visibleEntries, hiddenCount}) => {
+      const isToday = day.iso === todayIso;
+      const isPastDay = day.iso < todayIso;
+      return renderDay({
+        key:escapeHtml(dayKey), label:escapeHtml(day.label), date:escapeHtml(day.prettyDate),
+        past:isPastDay, today:isToday, expanded,
+        items:visibleEntries.map(entry => agendaItem(entry.item, entry.compact)).join(''),
+        more:hiddenCount ? `<button class="agendaMore" type="button" data-expand-agenda-day="${escapeHtml(dayKey)}" aria-expanded="false">+ ${hiddenCount} meer optie${hiddenCount === 1 ? '' : 's'}</button>` : expanded && totalCount > visibleLimit ? `<button class="agendaMore" type="button" data-collapse-agenda-day="${escapeHtml(dayKey)}" aria-expanded="true">Minder tonen</button>` : '',
+        empty:!items.length && !periods.length ? `<div class="agendaEmpty">${escapeHtml(emptyMessage)}</div>` : ''
+      });
+    }).join('');
+  }
+  function renderOngoingActivity(item,view){
+    const {placePills,weekLabel,costLabel,stimulusLabel,icon,description,review='',themeClass='',attributes='',hidden=false}=view;
+    const mobileWeekLabel = weekLabel.replace(/(\d)\s*-\s*(\d)/g, '$1–$2');
+    const mobileWeekPill = weekLabel
+      ? `<span class="ongoingMobileWeekPill" aria-label="Week ${escapeHtml(mobileWeekLabel)}"><strong>Week</strong> ${escapeHtml(mobileWeekLabel)}</span>`
+      : '';
+    const titleText = item.url
+      ? `<a class="ongoingTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="ideaTitleText">${escapeHtml(item.title)}</span></a>`
+      : `<span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
+    const dateMeta = `<span class="small ongoingDateMeta">${escapeHtml(item.date)} • ${escapeHtml(item.time)}</span>`;
+    const title = `<span class="nameWithIcon"><span class="ongoingTitleVisual" aria-hidden="true"><span class="domainIcon">${icon}</span></span><span class="ongoingTitleTextStack">${titleText}${dateMeta}</span></span>`;
+    return renderOngoingRow({
+      themeClass, attributes, hidden, title,
+      review, date:'',
+      weeks:escapeHtml(weekLabel), place:`${mobileWeekPill}${placePills}`,
+      cost:costLabel, stimulus:stimulusLabel, meta:'',
+      description:escapeHtml(description),
+      hideWebsite:true
+    });
+  }
+  function renderWeekCount(count){
+    const amount = Number(count);
+    const label = amount === 1 ? 'activiteit' : 'activiteiten';
+    const qualifier = amount === 1 ? '' : '<span class="weekCountWord">verschillende</span>';
+    return `<span class="weekCountBadge"><span><strong>${escapeHtml(count)}</strong>${qualifier}<span class="weekCountLabel">${label}</span></span></span>`;
+  }
+  window.AgendaViewShared = Object.freeze({renderWeekCount,renderBoard,renderWeekNavigation,renderDayNavigation,renderSectionNavigation,renderOngoingActivity,sourceButtonLabel, renderItem, renderDay, renderWeek, renderOngoingRow, renderOngoingTable, renderAgendaRow, renderSourceRow, mergeSourceLinks, buildOngoingOffers, isFlexiblePeriodOffer, sortAgendaItems, compactWeekLabel});
 })();

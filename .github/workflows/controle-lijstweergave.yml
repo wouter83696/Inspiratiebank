@@ -7,6 +7,8 @@ on:
       - 'website-bestanden/idea-view-shared.js'
       - 'website-bestanden/discovery-view-shared.js'
       - 'website-bestanden/admin-discovery.js'
+      - 'website-bestanden/*agenda*.js'
+      - 'website-bestanden/select-view-shared.js'
       - 'website-bestanden/*css'
       - 'website-bestanden/scripts/build-admin-public-view.js'
       - 'website-bestanden/tests/**'
@@ -18,6 +20,8 @@ on:
       - 'website-bestanden/idea-view-shared.js'
       - 'website-bestanden/discovery-view-shared.js'
       - 'website-bestanden/admin-discovery.js'
+      - 'website-bestanden/*agenda*.js'
+      - 'website-bestanden/select-view-shared.js'
       - 'website-bestanden/*css'
       - 'website-bestanden/scripts/build-admin-public-view.js'
       - 'website-bestanden/tests/**'
@@ -27,6 +31,7 @@ permissions:
 jobs:
   lijstweergave:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -40,3 +45,5 @@ jobs:
         run: |
           python3 -m http.server 8765 >/tmp/discovery-server.log 2>&1 &
           node website-bestanden/tests/discovery-parity.browser.cjs
+          node website-bestanden/tests/agenda-parity.browser.cjs
+          node website-bestanden/tests/admin-workflows.browser.cjs

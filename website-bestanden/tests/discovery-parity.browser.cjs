@@ -7,6 +7,7 @@ const base=process.env.DISCOVERY_BASE_URL || 'http://127.0.0.1:8765';
  const browser=await chromium.launch({headless:true,...(process.env.CHROME_CHANNEL?{channel:process.env.CHROME_CHANNEL}:{})});
  try {
  const context=await browser.newContext({viewport:{width:1440,height:1000}});
+ context.setDefaultTimeout(60000);
  await context.route('**/*',r=>r.request().url().startsWith(base+'/')?r.continue():r.abort());
  const pages=[],errors=[];
  for(const path of ['/','/beheer/#inspiration']){

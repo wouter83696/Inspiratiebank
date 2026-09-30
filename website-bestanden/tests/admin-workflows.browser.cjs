@@ -1,0 +1,82 @@
+/* All remote traffic is intercepted. These tests never mutate the live database. */
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const base=process.env.DISCOVERY_BASE_URL||'http://127.0.0.1:8765';
+(async()=>{
+ const browser=await chromium.launch({headless:true,...(process.env.CHROME_CHANNEL?{channel:process.env.CHROME_CHANNEL}:{})});
+ try{
+ const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
+ context.setDefaultTimeout(60000);
+ let stored={reports:[{id:'test-report',title:'Testmelding',message:'Controleer deze activiteit',createdAt:'2026-09-30T10:00:00Z',status:'open'}]},writes=0,failSave=false;
+ await context.route('**/*',async r=>{
+  const url=r.request().url();
+  if(url.includes('/rest/v1/')){
+   if(url.includes('bcjn_verify_admin_password'))return r.fulfill({json:r.request().postDataJSON().password==='test-only-password'});
+   if(url.includes('bcjn_save_state_admin')){
+    if(failSave)return r.fulfill({status:403,json:{message:'Test refusal'}});
+    stored=structuredClone(r.request().postDataJSON().next_data);writes++;return r.fulfill({json:stored});
+   }
+   return r.fulfill({json:[{data:stored}]});
+  }
+  if(url.includes('api.pdok.nl'))return r.fulfill({json:{response:{docs:[{centroide_ll:'POINT(5.91 51.98)',woonplaatsnaam:'Arnhem',weergavenaam:'Arnhem',type:'woonplaats'}]}}});
+  if(url.startsWith(base+'/'))return r.continue();
+  return r.abort();
+ });
+ await require('./admin-fixture.cjs')(context,base);
+ const p=await context.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
+ await p.goto(base+'/beheer/');await p.waitForFunction(()=>!document.documentElement.classList.contains('appLoading'),{},{timeout:90000});
+ const click=async s=>p.locator(s).click();
+ const saved=async action=>{const before=writes;const pending=p.waitForResponse(r=>r.url().includes('bcjn_save_state_admin'));await action();const response=await pending;await response.finished();await p.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));assert(writes>before,'action must persist via authenticated RPC');};
+ const nav=async target=>click(`[data-admin-target="${target}"]:not([data-admin-scroll])`);
+ const sub=async target=>click(`[data-admin-scroll="${target}"]`);
+ await p.locator('#passwordInput').fill('wrong');await click('#loginForm button[type="submit"]');await p.locator('#loginStatus').filter({hasText:'Wachtwoord klopt niet'}).waitFor();
+ await p.locator('#passwordInput').fill('test-only-password');await click('#loginForm button[type="submit"]');await p.locator('#adminApp').waitFor({state:'visible'});
+ console.log('PASS login: invalid and valid password');
+ await saved(()=>click('[data-resolve-report="test-report"]'));assert.equal(stored.reports[0].status,'resolved');
+ await nav('inspiration');await p.locator('#ideaSearch').fill('Beatmaking');
+ await click('#adminIdeaCards [data-idea-key]');
+ await click('#ideaSelectionActions [data-edit-idea]');
+ assert((await p.locator('#adminEditIdeaDescription').inputValue()).length>10,'existing description must survive edit');
+ assert((await p.locator('#adminEditIdeaRules').inputValue()).length>10,'existing practical text must survive edit');
+ await click('#adminIdeaEditCancelBtn');
+ await saved(()=>click('#ideaSelectionActions [data-feature-idea]'));assert.equal(stored.featuredIdeaKeys.length,1);
+ await saved(()=>click('#ideaSelectionActions [data-title-action="hide"]'));assert(stored.hiddenInspirationTitles.length>0);
+ await saved(()=>click('#ideaSelectionActions [data-title-action="show"]'));assert.equal(stored.hiddenInspirationTitles.length,0);
+ await click('#ideaSelectionActions [data-delete-idea]');await saved(()=>click('#confirmModalConfirm'));assert(stored.trashItems.length>0);
+ await nav('backup');await saved(()=>click('[data-restore-trash]'));assert.equal(stored.trashItems.length,0);
+ console.log('PASS inspiration: original description/practical fields, feature, hide/show, delete/restore');
+ await nav('inspiration');await p.locator('#ideaSearch').fill('Beatmaking');await click('#adminIdeaCards [data-idea-key]');await click('#ideaSelectionActions [data-edit-idea]');await p.locator('#adminEditIdeaDescription').fill('Test beschrijving behouden');await p.locator('#adminEditIdeaRules').fill('Test praktische informatie');assert.equal(await p.locator('#adminEditIdeaRules').inputValue(),'Test praktische informatie');await saved(()=>click('#adminIdeaEditSubmitBtn'));assert(stored.colleagueIdeas.some(x=>x.fit==='Test beschrijving behouden'&&x.materials==='Test praktische informatie'),JSON.stringify(stored.colleagueIdeas.map(x=>({fit:x.fit,materials:x.materials}))));
+ console.log('PASS inspiration edit: description and practical content saved');
+ await nav('agenda');await p.locator('.agendaItem').first().click();const agendaId=await p.locator('#agendaSelectionActions [data-edit-agenda]').getAttribute('data-edit-agenda');
+ await saved(()=>click('#agendaSelectionActions [data-verify-agenda]'));assert(stored.verifiedAgendaItemIds.includes(agendaId));
+ await click('#agendaSelectionActions [data-edit-agenda]');await p.locator('#agendaEditItemTitle').fill('Test bewerkte agenda');
+ await saved(()=>click('#agendaEditForm button[type="submit"]'));assert(stored.agendaItemOverrides.some(x=>x.id===agendaId&&x.title==='Test bewerkte agenda'));
+ await saved(()=>click('#agendaSelectionActions [data-hide-agenda]'));assert(stored.hiddenAgendaItemIds.includes(agendaId));
+ await saved(()=>click('#agendaSelectionActions [data-hide-agenda]'));assert(!stored.hiddenAgendaItemIds.includes(agendaId));
+ await click('#agendaSelectionActions [data-delete-agenda]');await saved(()=>click('#confirmModalConfirm'));assert(stored.deletedAgendaItemIds.includes(agendaId));
+ await nav('backup');await saved(()=>click('[data-restore-trash]'));assert(!stored.deletedAgendaItemIds.includes(agendaId));
+ console.log('PASS agenda: edit, hide/show, delete/restore and RPC payloads');
+ await sub('ongoingAdminSection');await p.locator('#ongoingAdminList tbody tr').first().locator('td').nth(3).click();
+ await click('#agendaSelectionActions [data-edit-ongoing]');assert(await p.locator('#agendaEditModal').isVisible());
+ const groupTitle=await p.locator('#agendaEditItemTitle').inputValue();await p.locator('#agendaEditFit').fill('Test doorlopend beschrijving');
+ await saved(()=>click('#agendaEditForm button[type="submit"]'));assert(stored.agendaItemOverrides.some(x=>x.fit==='Test doorlopend beschrijving'));
+ console.log('PASS ongoing: selection and grouped edit',groupTitle);
+ await sub('sourceOwnPanel');await p.locator('#linkName').fill('Testbron');await p.locator('#linkUrl').fill('https://example.org/test-source');
+ await p.locator('#linkCategory').selectOption({index:1});await saved(()=>click('#linkSubmitBtn'));assert(stored.customLinks.some(x=>x.name==='Testbron'));
+ await click('[data-edit-link-kind="custom"]');await p.locator('#linkName').fill('Testbron gewijzigd');await saved(()=>click('#linkSubmitBtn'));assert(stored.customLinks.some(x=>x.name==='Testbron gewijzigd'));
+ await click('[data-remove-link]');await saved(()=>click('#confirmModalConfirm'));assert.equal(stored.customLinks.length,0);
+ await sub('agendaRulesPanel');await p.locator('#agendaBlockInput').fill('test ongewenste titel');await saved(()=>click('#addAgendaBlockRuleBtn'));assert(stored.blockedAgendaRules.length>0);
+ await saved(()=>click('[data-remove-agenda-rule]'));assert.equal(stored.blockedAgendaRules.length,0);
+ console.log('PASS sources and exclusions: add/edit/remove');
+ await nav('settings');await p.locator('#siteHeaderFile').setInputFiles({name:'header.png',mimeType:'image/png',buffer:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAEElEQVR4nGMImNAARwzEcQA5UhYBupNzKwAAAABJRU5ErkJggg==','base64')});await p.locator('#siteHeaderFileLabel').filter({hasText:'Eigen afbeelding'}).waitFor();await p.locator('#siteRegionInput').fill('Arnhem');await p.locator('#siteRegionRadius').selectOption('15');await p.locator('#siteAgendaRadius').selectOption('50');
+ await p.locator('#siteHeaderPosition').fill('60');await saved(()=>click('#siteSettingsSave'));assert(stored.siteSettings.headerImage.startsWith('data:image/webp'));assert.equal(stored.siteSettings.region.label,'Arnhem');assert.equal(stored.siteSettings.region.radiusKm,15);assert.equal(stored.siteSettings.agendaRadiusKm,50);assert.equal(stored.siteSettings.headerPosition,60);
+ await p.reload();await p.locator('#adminApp').waitFor({state:'visible'});await nav('settings');assert.equal(await p.locator('#siteRegionInput').inputValue(),'Arnhem');assert.equal(await p.locator('#siteAgendaRadius').inputValue(),'50');
+ console.log('PASS settings: region/radii/header position persist after reload');
+ await nav('backup');const downloadPromise=p.waitForEvent('download');await click('#exportBtn');const download=await downloadPromise;const stream=await download.createReadStream();const chunks=[];for await(const chunk of stream)chunks.push(chunk);const backup=JSON.parse(Buffer.concat(chunks));assert.equal(backup.siteSettings.region.label,'Arnhem');assert(backup.colleagueIdeas.some(x=>x.fit==='Test beschrijving behouden'));assert(backup.approvedColleagueIdeaIds.includes(backup.colleagueIdeas[0].id));
+ console.log('PASS header upload and backup export');
+ const visitor=await context.newPage();await visitor.goto(base+'/');await visitor.waitForFunction(()=>!document.documentElement.classList.contains('appLoading'),{},{timeout:90000});await visitor.locator('#ideaSearch').fill('Beatmaking');assert((await visitor.locator('#ideaCards').innerText()).includes('Test beschrijving behouden'));assert.equal(await visitor.locator('#inspirationDesktopLocation [data-location-settings-label]').innerText(),'Arnhem');await visitor.close();console.log('PASS visitor reload: edited content and default region');
+ await nav('settings');failSave=true;const previous=structuredClone(stored);await p.locator('#siteRegionRadius').selectOption('5');await click('#siteSettingsSave');await p.locator('#siteSettingsStatus').filter({hasText:'geweigerd'}).waitFor();assert.deepEqual(stored,previous);
+ await click('#logoutBtn');assert(await p.locator('#loginPanel').isVisible());assert.deepEqual(errors,[]);
+ console.log(`PASS failed save and logout; ${writes} isolated writes; no live data modified.`);
+ }finally{await browser.close()}
+})().catch(e=>{console.error(e);process.exit(1)});

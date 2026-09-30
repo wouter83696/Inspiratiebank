@@ -487,10 +487,10 @@
     .agendaAdminFilters .customSelectButton{min-height:38px;padding:7px 10px;font-size:.82rem;gap:6px}
     .agendaAdminFilters .customSelectButton::after{flex-basis:12px;width:12px;height:12px}
     .agendaAdminFilters .themeSelect{flex-basis:116px;min-width:102px}
-    .agendaAdminFilters .customSelect[data-select-id="agendaAdminWeekSelect"]{flex-basis:102px;min-width:92px}
+    .agendaAdminFilters .customSelect[data-select-id="agendaWeekFilter"]{flex-basis:102px;min-width:92px}
     .agendaAdminFilters .customSelect[data-select-id="agendaAdminKindFilter"]{flex-basis:96px;min-width:84px}
-    .agendaAdminFilters .customSelect[data-select-id="agendaAdminDistanceFilter"]{flex-basis:102px;min-width:90px}
-    .agendaAdminFilters .customSelect[data-select-id="agendaAdminCostFilter"]{flex-basis:92px;min-width:82px}
+    .agendaAdminFilters .customSelect[data-select-id="agendaDistance"]{flex-basis:102px;min-width:90px}
+    .agendaAdminFilters .customSelect[data-select-id="agendaCost"]{flex-basis:92px;min-width:82px}
     .agendaAdminFilters .customSelect[data-select-id="agendaAdminStimulusFilter"]{flex-basis:126px;min-width:108px}
     .agendaAdminFilters .customSelect[data-select-id="agendaAdminStatusFilter"]{flex-basis:104px;min-width:90px}
     .agendaAdminFilters .filterReset{flex:0 0 42px;margin-left:0;min-height:38px;padding:7px 0;font-size:.82rem}
@@ -990,10 +990,10 @@
     }
   </style>
   <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260911-first-paint-v4">
-  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260911-ongoing-light-cards-v39">
+  <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260930-agenda-rebuild-v1">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260923-warm-cards-v1">
-  <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20260930-shared-controls-v4">
-  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20260930-shared-controls-v4">
+  <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20260930-agenda-rebuild-v1">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20260930-agenda-rebuild-v1">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -1251,7 +1251,8 @@
             <div class="tabHeroHomeLink"><h1 class="tabHeroTitle" id="adminAgendaTitle">UIT-agenda</h1><p class="tabHeroLine">Bekijk én beheer wat er te doen is</p></div>
             <span class="adminModeBadge">Beheer · UIT-agenda</span>
           </section>
-        <section class="agendaCheckNotice" aria-labelledby="agendaCheckStatusTitle">
+          <div data-agenda-controls></div>
+          <details class="adminAgendaManagementFilters"><summary>Agenda controleren en beheerfilters</summary>        <section class="agendaCheckNotice" aria-labelledby="agendaCheckStatusTitle">
           <div class="agendaCheckNoticeText">
             <span class="agendaCheckEyebrow">Agenda-check</span>
             <strong id="agendaCheckStatusTitle" data-agenda-check-title>Laatste check laden...</strong>
@@ -1272,39 +1273,25 @@
               <span id="agendaReviewCount" class="pill">0 items</span>
             </div>
           </div>
-          <div class="filterBar">
-            <div class="filters agendaAdminFilters sharedDiscoveryFilters" id="agendaAdminFilters">
-              <div class="filterSearch"><input id="agendaAdminSearch" type="search" placeholder="Zoek titel, plek, bron..."></div>
-              <button class="filterToggle" id="adminAgendaFilterToggle" type="button" aria-label="Filters" aria-expanded="false" aria-controls="agendaAdminFilterOptions"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></button>
-              <div class="adminFilterOptions" id="agendaAdminFilterOptions">
-              <select id="agendaAdminWeekSelect" aria-label="Week kiezen"></select>
-              <select id="agendaAdminKindFilter" aria-label="Soort filteren">
+<div class="adminManagementFilterFields"><select id="agendaAdminKindFilter" aria-label="Soort filteren">
                 <option value="all">Soort</option>
                 <option value="auto">Automatisch</option>
                 <option value="base">Vast item</option>
-              </select>
-              <select id="agendaAdminDomainFilter" data-theme-select="true" aria-label="Categorie filteren"></select>
-              <select id="agendaAdminDistanceFilter" aria-label="Afstand filteren"><option value="all">Afstand</option></select>
-              <select id="agendaAdminCostFilter" aria-label="Kosten filteren"><option value="all">Kosten</option></select>
-              <select id="agendaAdminStimulusFilter" aria-label="Prikkelbelasting filteren"><option value="all">Prikkelbelasting</option></select>
-              <select id="agendaAdminStatusFilter" aria-label="Status filteren">
+              </select><select id="agendaAdminStimulusFilter" aria-label="Prikkelbelasting filteren"><option value="all">Prikkelbelasting</option></select><select id="agendaAdminStatusFilter" aria-label="Status filteren">
                 <option value="all">Status</option>
                 <option value="new">Nieuw</option>
                 <option value="verified">Gecheckt</option>
                 <option value="hidden">Verborgen</option>
-              </select>
-              <button class="filterReset" id="agendaAdminResetBtn" type="button">Filters wissen</button>
-              </div>
-            </div>
-	          </div>
+              </select><button class="button small" id="agendaAdminResetBtn" type="button">Beheerfilters wissen</button></div></details>
 	          <div class="adminSelectionToolbar" id="agendaSelectionToolbar" aria-live="polite">
 	            <div class="adminSelectionSummary"><span class="adminSelectionKicker">Geselecteerd</span><strong id="agendaSelectionTitle">Klik op een agenda-item om het te beheren</strong></div>
 	            <div class="adminSelectionActions" id="agendaSelectionActions"></div>
 	          </div>
-	          <div id="agendaAdminThemeLegend" class="agendaAdminThemeLegend inspirationDesktopFilterRow sharedDiscoveryChipRow"></div>
-          <div id="agendaReviewList" class="agendaReviewList weekStack"></div>
-          <div class="sectionDivider"></div>
-          <section class="ongoingAccordion adminOngoingAccordion" id="ongoingAdminSection">
+
+          <div id="agendaContentSurface" class="agendaContentSurface">
+          <div id="agendaSectionSwitcher" class="agendaSectionSwitcher"></div>
+          <div id="agendaReviewList" class="weekStack agendaSectionView" role="tabpanel" aria-labelledby="agenda-tab-weeks"></div>
+          <section class="ongoingAccordion sharedPublicList agendaSectionView open" id="ongoingAdminSection" role="tabpanel" aria-labelledby="agenda-tab-ongoing">
             <div class="ongoingAccordionButton">
               <span class="ongoingAccordionText"><span class="ongoingTitleLine"><strong>Doorlopend aanbod</strong><span id="ongoingAdminCount" class="weekCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>0</strong> opties</span></span></span></span>
             </div>
@@ -1312,8 +1299,9 @@
               <label>Agenda-item toevoegen<select id="ongoingAdminSelect"></select></label>
               <button class="button small primary" id="ongoingAdminAddBtn" type="button">Als doorlopend instellen</button>
             </div>
-            <div id="ongoingAdminList" class="ongoingAdminList ongoingAccordionBody"></div>
+            <div id="ongoingAdminList" class="tableWrap ongoingAccordionBody"></div>
           </section>
+          </div>
         </section>
             </div>
           </section>
@@ -1567,15 +1555,18 @@
     </div>
   </div>
 
-  <div class="adminPublicSurface adminDiscoveryOverlay"><div data-discovery-sheet></div></div>
-  <script src="../website-bestanden/discovery-view-shared.js?v=20260930-shared-controls-v1"></script>
-  <script>DiscoveryViewShared.mount({admin:true});</script>
+  <div class="adminPublicSurface adminDiscoveryOverlay"><div data-discovery-sheet></div><div data-agenda-sheet></div></div>
+  <script src="../website-bestanden/discovery-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
+  <script src="../website-bestanden/select-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
+  <script src="../website-bestanden/agenda-discovery-shared.js?v=20260930-agenda-rebuild-v1"></script>
+  <script>DiscoveryViewShared.mount({admin:true});AgendaDiscoveryShared.mount();</script>
+  <script src="../website-bestanden/admin-agenda.js?v=20260930-agenda-rebuild-v1"></script>
   <script src="../website-bestanden/site-settings-shared.js?v=20260930-radius-v2"></script>
   <script src="../website-bestanden/admin-site-settings.js?v=20260930-radius-v2"></script>
-  <script src="../website-bestanden/admin-discovery.js?v=20260930-shared-controls-v4"></script>
+  <script src="../website-bestanden/admin-discovery.js?v=20260930-agenda-rebuild-v1"></script>
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
   <script src="../website-bestanden/idea-view-shared.js?v=20260930-list-parity-v2"></script>
-  <script src="../website-bestanden/agenda-view-shared.js?v=20260930-selection-toolbar-v1"></script>
+  <script src="../website-bestanden/agenda-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
   const ADMIN_SESSION_KEY = 'bcjn_zomer_beheer_open_v1';
@@ -3084,90 +3075,7 @@
   function syncCustomSelect(select){
     if(select && typeof select._syncCustomSelect === 'function') select._syncCustomSelect();
   }
-  function enhanceCustomSelect(select){
-    if(!select) return;
-    const previous = select.closest('.customSelect');
-    if(previous){
-      previous.parentNode.insertBefore(select, previous);
-      previous.remove();
-    }
-    select.classList.add('customNativeSelect');
-    const themed = select.dataset.themeSelect === 'true';
-    const control = document.createElement('div');
-    control.className = themed ? 'customSelect themeSelect' : 'customSelect';
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'customSelectButton';
-    button.setAttribute('aria-haspopup','listbox');
-    button.setAttribute('aria-expanded','false');
-    const icon = document.createElement('span');
-    icon.className = 'domainIcon';
-    icon.setAttribute('aria-hidden','true');
-    const label = document.createElement('span');
-    label.className = 'customSelectLabel';
-    if(themed) button.appendChild(icon);
-    button.appendChild(label);
-    const menu = document.createElement('div');
-    menu.className = 'customSelectMenu';
-    menu.setAttribute('role','listbox');
-    [...select.options].forEach(option => {
-      if(option.value === 'all' || option.value === '') return;
-      const item = document.createElement('button');
-      item.type = 'button';
-      item.className = 'customSelectOption';
-      item.dataset.value = option.value;
-      item.setAttribute('role','option');
-      if(themed){
-        item.classList.add(domainThemeClass(option.value));
-        const itemIcon = document.createElement('span');
-        itemIcon.className = 'domainIcon';
-        itemIcon.setAttribute('aria-hidden','true');
-        itemIcon.innerHTML = domainIcon(option.value);
-        const itemLabel = document.createElement('span');
-        itemLabel.textContent = option.textContent;
-        item.append(itemIcon, itemLabel);
-      }else{
-        item.textContent = option.textContent;
-      }
-      item.addEventListener('click', () => {
-        select.value = option.value;
-        select._syncCustomSelect();
-        select.dispatchEvent(new Event('change',{bubbles:true}));
-        closeCustomSelects();
-      });
-      menu.appendChild(item);
-    });
-    select.parentNode.insertBefore(control, select);
-    control.append(select, button, menu);
-    select._syncCustomSelect = () => {
-      const selected = select.options[select.selectedIndex] || select.options[0];
-      const isPlaceholder = !selected || selected.value === '' || selected.value === 'all';
-      label.textContent = selected ? selected.textContent : '';
-      if(themed){
-        control.classList.remove('themeCreative','themeCulture','themeNature','themeSocial','themeSport','themeAction','themeDefault');
-        control.classList.toggle('placeholder', isPlaceholder);
-      }
-      if(themed && selected && !isPlaceholder){
-        control.classList.add(domainThemeClass(selected.value));
-        icon.innerHTML = domainIcon(selected.value);
-      }else if(themed){
-        icon.innerHTML = '';
-      }
-      menu.querySelectorAll('.customSelectOption').forEach(item => {
-        const active = item.dataset.value === select.value;
-        item.classList.toggle('active', active);
-        item.setAttribute('aria-selected', active ? 'true' : 'false');
-      });
-    };
-    select._syncCustomSelect();
-    button.addEventListener('click', () => {
-      const willOpen = !control.classList.contains('open');
-      closeCustomSelects(control);
-      control.classList.toggle('open', willOpen);
-      button.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-      control.classList.remove('openUp');
-    });
-  }
+  function enhanceCustomSelect(select){ SelectViewShared.enhanceCustomSelect(select); }
   function setupIdeaFilters(){ AdminDiscovery.setup(); }
   function resetIdeaFilters(){ AdminDiscovery.reset(); }
   function setStatus(selector, message, kind=''){
@@ -3490,25 +3398,10 @@
 	    const note = week.note || '';
 	    return status || note ? `<p>${status}${escapeHtml(note)}</p>` : '';
 	  }
-	  function agendaThemeLegendHtml(){
-	    const allItem = `<button class="agendaLegendItem themeDefault active" type="button" data-admin-agenda-theme-filter="all" aria-pressed="true">Alles</button>`;
-	    const items = ADMIN_THEME_LEGEND.map(domain => {
-	      const label = domainDisplayLabel(domain);
-	      return `<button class="agendaLegendItem ${domainThemeClass(domain)}" type="button" data-admin-agenda-theme-filter="${escapeHtml(label)}" aria-pressed="false"><span class="domainIcon" aria-hidden="true">${domainIcon(domain)}</span>${escapeHtml(label)}</button>`;
-	    }).join('');
-	    return `<div class="agendaThemeLegend" aria-label="Filter op categorie">${allItem}${items}</div>`;
-	  }
-	  function updateAgendaAdminThemeChips(){
-	    const select = $('#agendaAdminDomainFilter');
-	    const active = domainDisplayLabel(select?.value || 'all');
-	    $$('#agendaAdminThemeLegend [data-admin-agenda-theme-filter]').forEach(button => {
-	      const selected = active === 'all'
-	        ? button.dataset.adminAgendaThemeFilter === 'all'
-	        : normalize(button.dataset.adminAgendaThemeFilter) === normalize(active);
-	      button.classList.toggle('active', selected);
-	      button.setAttribute('aria-pressed', selected ? 'true' : 'false');
-	    });
-	  }
+  function agendaThemeLegendHtml(){
+    return DiscoveryViewShared.legend(ADMIN_THEME_LEGEND.map(value=>({value:domainDisplayLabel(value),label:domainDisplayLabel(value),theme:domainThemeClass(value),icon:domainIcon(value)})));
+  }
+  function updateAgendaAdminThemeChips(){ AdminAgenda.sync(); }
 	  function agendaDisplayHost(value=''){
 	    try{
 	      return new URL(value).hostname.replace(/^www\./,'');
@@ -3559,14 +3452,14 @@
 	    return ADMIN_WEEK_START[weekId] || '9999-12-31';
 	  }
 	  function setupAgendaReviewControls(){
-	    const weekSelect = $('#agendaAdminWeekSelect');
+	    const weekSelect = $('#agendaWeekFilter');
 	    if(weekSelect){
-	      const currentWeek = weekSelect.value || 'all';
+	      const currentWeek = weekSelect.value || ADMIN_WEEKS[0]?.id || 'all';
 	      weekSelect.innerHTML = `<option value="all">Alle weken</option>` + Object.keys(ADMIN_WEEK_START).map(weekId => `<option value="${escapeHtml(weekId)}">${escapeHtml(agendaWeekLabel(weekId))}</option>`).join('');
 	      weekSelect.value = currentWeek === 'all' || ADMIN_WEEK_START[currentWeek] ? currentWeek : 'all';
 	      enhanceCustomSelect(weekSelect);
 	    }
-	    const domainSelect = $('#agendaAdminDomainFilter');
+	    const domainSelect = $('#agendaDomain');
 	    if(domainSelect){
 	      const currentDomain = domainSelect.value || 'all';
 	      const domains = [...new Set(agendaReviewItems().map(item => domainDisplayLabel(item.domain)).filter(Boolean))].sort((a,b) => a.localeCompare(b, 'nl'));
@@ -3574,20 +3467,21 @@
 	      domainSelect.value = domains.includes(currentDomain) ? currentDomain : 'all';
 	      enhanceCustomSelect(domainSelect);
 	    }
-	    fillIdeaFilter('#agendaAdminDistanceFilter', AGENDA_DISTANCE_OPTIONS, 'Afstand');
-	    fillIdeaFilter('#agendaAdminCostFilter', IDEA_COST_OPTIONS, 'Kosten');
+	    fillIdeaFilter('#agendaDistance', AGENDA_DISTANCE_OPTIONS, 'Afstand');
+	    fillIdeaFilter('#agendaCost', IDEA_COST_OPTIONS, 'Kosten');
 	    fillIdeaFilter('#agendaAdminStimulusFilter', IDEA_STIMULUS_OPTIONS, 'Prikkelbelasting');
-	    ['#agendaAdminStatusFilter','#agendaAdminKindFilter','#agendaAdminDistanceFilter','#agendaAdminCostFilter','#agendaAdminStimulusFilter'].forEach(selector => enhanceCustomSelect($(selector)));
-	    $('#agendaAdminThemeLegend').innerHTML = agendaThemeLegendHtml();
-	    updateAgendaAdminThemeChips();
+	    ['#agendaAdminStatusFilter','#agendaAdminKindFilter','#agendaDistance','#agendaCost','#agendaAdminStimulusFilter'].forEach(selector => enhanceCustomSelect($(selector)));
+	    $('#agendaThemeLegend').innerHTML = agendaThemeLegendHtml();
+	    AdminAgenda.setup();
+    updateAgendaAdminThemeChips();
 	  }
 	  function agendaAdminFilters(){
 	    return {
-	      query:$('#agendaAdminSearch')?.value || '',
-	      week:$('#agendaAdminWeekSelect')?.value || 'all',
-	      domain:$('#agendaAdminDomainFilter')?.value || 'all',
-	      distanceBand:$('#agendaAdminDistanceFilter')?.value || 'all',
-	      cost:$('#agendaAdminCostFilter')?.value || 'all',
+	      query:$('#agendaSearch')?.value || '',
+	      week:$('#agendaWeekFilter')?.value || 'all',
+	      domain:$('#agendaDomain')?.value || 'all',
+	      distanceBand:$('#agendaDistance')?.value || 'all',
+	      cost:$('#agendaCost')?.value || 'all',
 	      stimulus:$('#agendaAdminStimulusFilter')?.value || 'all',
 	      status:$('#agendaAdminStatusFilter')?.value || 'all',
 	      kind:$('#agendaAdminKindFilter')?.value || 'all',
@@ -3602,6 +3496,7 @@
 	    return {isHidden, isVerified, isNew:!isHidden && !isVerified};
 	  }
 	  function agendaMatchesFilters(item, state, filters){
+	    if(!AdminAgenda.matchesRadius(item)) return false;
 	    if(filters.query && !normalize([item.title, item.where, item.source, item.fit, item.url, item.domain, item.distanceBand, item.cost, item.stimulus, item.tags?.join(' ')].filter(Boolean).join(' ')).includes(normalize(filters.query))) return false;
 	    if(filters.week !== 'all' && !itemWeekIds(item).includes(filters.week)) return false;
 	    if(filters.domain !== 'all' && domainDisplayLabel(item.domain) !== domainDisplayLabel(filters.domain)) return false;
@@ -3681,9 +3576,9 @@
 	      isNew:state.isNew,
 	      href:'',
 	      attributes:`data-agenda-select="${escapeHtml(item.id)}" tabindex="0" role="button" aria-pressed="${selected ? 'true' : 'false'}"`,
-	      title:titleWithIcon(item.title, item.domain, 'agendaItemTitle'),
-	      meta:escapeHtml([item.time, item.where].filter(Boolean).join(' · ') || 'Tijd en plek nog checken'),
-	      status:agendaReviewPills(item, state, true)
+	      title:titleWithIcon(item.title,item.domain,'agendaItemTitle').replace('ideaTitleText adminIdeaTitleText','ideaTitleText'),
+	      meta:escapeHtml(item.time || '')+' • '+escapeHtml(item.where || ''),
+	      status:''
 	    });
 	  }
 	  function visibleAgendaAdminWeekCount(weekId, items=[]){
@@ -3696,75 +3591,18 @@
 	    });
 	    return seen.size;
 	  }
-	  function renderAgendaAdminWeeks(items, states){
-	    const todayIso = formatIsoDate(new Date());
-	    const weeks = ADMIN_WEEKS.map(week => {
-	      const weekItems = sortAgendaAdminItems(items.filter(item => itemWeekIds(item).includes(week.id)));
-	      if(!weekItems.length) return '';
-	      const days = weekDays(week.id).map(day => {
-	        const occurring = weekItems.filter(item => agendaAdminItemOccursOnDay(item, day, week.id));
-	        const dayItems = [
-	          ...occurring.filter(item => isAgendaFlexiblePeriod(item) && showAgendaPeriodInWeek(item)).map(item => ({item, compact:true})),
-	          ...occurring.filter(item => !isAgendaFlexiblePeriod(item)).map(item => ({item, compact:false}))
-	        ];
-	        const visibleItems = dayItems.slice(0, 4);
-	        const hiddenItems = dayItems.slice(4);
-	        const more = hiddenItems.length ? `<details class="agendaAdminMore"><summary class="agendaMore">+ ${hiddenItems.length} meer optie${hiddenItems.length === 1 ? '' : 's'}</summary><div class="agendaAdminMoreItems">${hiddenItems.map(entry => renderAgendaAdminCard(entry.item, states.get(entry.item.id), entry.compact)).join('')}</div></details>` : '';
-	        return AgendaViewShared.renderDay({
-	          admin:true,
-	          key:escapeHtml(`${week.id}:${day.iso}`),
-	          label:escapeHtml(day.label),
-	          date:escapeHtml(formatCompactAgendaDate(parseIsoDate(day.iso))),
-	          past:day.iso < todayIso,
-	          today:day.iso === todayIso,
-	          items:visibleItems.map(entry => renderAgendaAdminCard(entry.item, states.get(entry.item.id), entry.compact)).join(''),
-	          more,
-	          empty:''
-	        });
-	      }).join('');
-	      const weekStart = parseIsoDate(week.startIso);
-	      const weekEnd = addDays(weekStart, 6);
-	      const weekTitle = `${formatCompactAgendaDate(weekStart)} t/m ${formatCompactAgendaDate(weekEnd)}`;
-	      const weekItemCount = visibleAgendaAdminWeekCount(week.id, weekItems);
-	      const countLabel = weekItemCount === 1 ? 'activiteit' : 'activiteiten';
-	      return AgendaViewShared.renderWeek({
-	        admin:true,
-	        id:`admin-${escapeHtml(week.id)}`,
-	        week:escapeHtml(week.week),
-	        title:escapeHtml(weekTitle),
-	        freshness:agendaAdminFreshnessBadge(),
-	        count:`<span class="weekCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${weekItemCount}</strong>${weekItemCount === 1 ? '' : '<span class="weekCountWord">verschillende</span>'}<span class="weekCountLabel">${countLabel}</span></span></span>`,
-	        days
-	      });
-	    }).filter(Boolean);
-	    return weeks.join('');
-	  }
-	  function renderOngoingAdminRow(item, state){
-	    const weekIds = orderedAdminWeekIds(itemWeekIds(item));
-	    const weeks = AgendaViewShared.compactWeekLabel(weekIds, ADMIN_WEEKS, true) || '–';
-	    const distance = normalizeIdeaDistance(item.distanceBand, item, 'agenda');
-	    const location = normalizeIdeaLocation(item.locationType || item.location || '');
-	    const cost = normalizeIdeaCost(item.cost);
-	    const stimulus = normalizeIdeaStimulus(item.stimulus);
-	    const placeLabels = compactPlacePills(location, distance);
-	    const placePills = placeLabels.length ? placeLabels.map(locationPill).join(' ') : `<span class="small">${escapeHtml(item.where || '–')}</span>`;
-	    const websiteLabel = AgendaViewShared.sourceButtonLabel(item);
-	    const website = item.url ? `<a class="siteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="siteButtonText">${escapeHtml(websiteLabel)}</span></a>` : '<span class="small">–</span>';
-	    const actions = agendaReviewActions(item, state, true)
-	      .replaceAll('data-edit-agenda=', 'data-edit-ongoing=')
-	      .replaceAll('data-verify-agenda=', 'data-verify-ongoing=')
-	      .replaceAll('data-hide-agenda=', 'data-hide-ongoing=')
-	      .replaceAll('data-delete-agenda=', 'data-delete-ongoing=');
-	    return AgendaViewShared.renderOngoingRow({
-        themeClass:domainThemeClass(item.domain), hidden:state.isHidden,
-        title:titleWithIcon(item.title, item.domain, 'nameWithIcon'),
-	        date:escapeHtml([item.date, item.time].filter(Boolean).join(' · ') || 'Datum nog checken'),
-        weeks:escapeHtml(weeks), place:placePills,
-	        cost:costPill(cost), stimulus:stimulusPill(stimulus),
-        meta:`<div class="ongoingMetaLine"><strong>Beschikbaar:</strong> ${escapeHtml(weeks)}</div>`,
-	        description:escapeHtml(ongoingDescription(item.fit) || '–'), website, actions
-      });
-	  }
+  function renderAgendaAdminWeeks(items,states){return AdminAgenda.renderWeeks(items,states);}
+  function renderOngoingAdminRow(item,state){
+    return AgendaViewShared.renderOngoingActivity(item,{
+      themeClass:`${domainThemeClass(item.domain)} adminSelectableAgendaItem${selectedAgendaItemId===String(item.id)?' isSelected':''}`,
+      attributes:`data-agenda-select="${escapeHtml(item.id)}" data-agenda-ongoing="true" tabindex="0" role="button" aria-pressed="${selectedAgendaItemId===String(item.id)}"`,
+      hidden:state.isHidden,icon:domainIcon(item.domain),
+      weekLabel:AgendaViewShared.compactWeekLabel(orderedAdminWeekIds(itemWeekIds(item)),ADMIN_WEEKS,true),
+      placePills:compactPlacePills(normalizeIdeaLocation(item.locationType),normalizeIdeaDistance(item.distanceBand,item,'agenda')).map(locationPill).join(' '),
+      costLabel:costPill(normalizeIdeaCost(item.cost)),stimulusLabel:stimulusPill(normalizeIdeaStimulus(item.stimulus)),
+      description:ongoingDescription(item.fit),review:''
+    });
+  }
 	  function orderedAdminWeekIds(ids=[]){
 	    return [...new Set(ids.filter(weekId => ADMIN_WEEK_START[weekId]))].sort((a,b) => ADMIN_WEEKS.findIndex(week => week.id === a) - ADMIN_WEEKS.findIndex(week => week.id === b));
 	  }
@@ -3810,13 +3648,14 @@
 	          || normalize(a.title).localeCompare(normalize(b.title));
 	      });
 	    const states = new Map(reviewItems.map(item => [item.id, agendaReviewState(item, hidden, verified)]));
-	    const ongoingItems = adminOngoingOffers(reviewItems);
-	    ongoingAdminGroups = new Map(ongoingItems.map(item => [String(item.id), item]));
-	    const ongoingIds = new Set(ongoingItems.flatMap(item => item.groupIds || [String(item.id)]));
+	    const allOngoingItems = adminOngoingOffers(reviewItems);
+        const ongoingItems = allOngoingItems.filter(item=>agendaMatchesFilters(item,states.get(item.id) || agendaReviewState(item,hidden,verified),{...filters,week:'all'}));
+	    ongoingAdminGroups = new Map(allOngoingItems.map(item => [String(item.id), item]));
+	    const ongoingIds = new Set(allOngoingItems.flatMap(item => item.groupIds || [String(item.id)]));
 	    const ongoingCandidates = reviewItems.filter(item => !ongoingIds.has(String(item.id)));
 	    $('#ongoingAdminCount').innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="M4 10h16"></path></svg><span><strong>${escapeHtml(ongoingItems.length)}</strong> optie${ongoingItems.length === 1 ? '' : 's'}</span>`;
 	    $('#ongoingAdminList').innerHTML = ongoingItems.length
-	      ? `<div class="tableWrap">${AgendaViewShared.renderOngoingTable({admin:true, rows:ongoingItems.map(item => renderOngoingAdminRow(item, states.get(item.id) || agendaReviewState(item, hidden, verified))).join('')})}</div>`
+	      ? AgendaViewShared.renderOngoingTable({hideWebsite:true,badgesHeading:'Kenmerken',rows:ongoingItems.map(item => renderOngoingAdminRow(item,states.get(item.id) || agendaReviewState(item,hidden,verified))).join('')})
 	      : '<div class="empty">Nog geen doorlopend aanbod. Kies hierboven een agenda-item om het toe te voegen.</div>';
 	    $('#ongoingAdminSelect').innerHTML = ongoingCandidates.length
 	      ? `<option value="">Kies een agenda-item</option>${ongoingCandidates.map(item => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.title)} · ${escapeHtml(item.date || 'geen datum')}</option>`).join('')}`
@@ -3836,16 +3675,14 @@
 	        <button class="button iconAction hot" type="button" data-remove-agenda-rule="${escapeHtml(rule.id)}" aria-label="Weigerregel verwijderen" title="Weigerregel verwijderen">${actionIcon('trash')}</button>
 	      </article>`;
 	    }).join('') : '<div class="empty">Nog geen regels ingesteld.</div>';
-	    if(!items.length){
-	      $('#agendaReviewList').innerHTML = '<div class="empty">Geen agenda-items om te beheren.</div>';
-	      renderAgendaSelectionToolbar(reviewItems, states);
-	      return;
-	    }
-	    $('#agendaReviewList').innerHTML = renderAgendaAdminWeeks(items, states);
+    AdminAgenda.parkWeekFilter();
+    $('#agendaReviewList').innerHTML = renderAgendaAdminWeeks(items,states);
+    AdminAgenda.afterRender(ongoingItems.length,items.length);
+
 	    renderAgendaSelectionToolbar(reviewItems, states);
 	  }
   function renderAgendaSelectionToolbar(items=agendaReviewItems(), states){
-    const item = items.find(candidate => String(candidate.id) === selectedAgendaItemId);
+    const item = ongoingAdminGroups.get(selectedAgendaItemId) || items.find(candidate => String(candidate.id) === selectedAgendaItemId);
     const title = $('#agendaSelectionTitle');
     const actions = $('#agendaSelectionActions');
     if(!title || !actions) return;
@@ -3859,6 +3696,7 @@
     const state = states?.get(item.id) || agendaReviewState(item, hiddenAgendaIds(), verifiedAgendaIds());
     title.textContent = item.title;
     actions.innerHTML = `${item.url ? `<a class="button iconAction adminOpenAction" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" aria-label="Open website" title="Open website">${actionIcon('external')}</a>` : ''}${agendaReviewActions(item, state, true)}`;
+    if(ongoingAdminGroups.has(selectedAgendaItemId)) actions.innerHTML=actions.innerHTML.replaceAll('data-edit-agenda=','data-edit-ongoing=').replaceAll('data-verify-agenda=','data-verify-ongoing=').replaceAll('data-hide-agenda=','data-hide-ongoing=').replaceAll('data-delete-agenda=','data-delete-ongoing=');
     $('#agendaSelectionToolbar')?.classList.add('hasSelection');
   }
   function selectAgendaItem(id){
@@ -4345,6 +4183,7 @@
       version:1,
 	      exportedAt:new Date().toISOString(),
       siteSettings:AdminSiteSettings.current(),
+      approvedColleagueIdeaIds:[...approvedTeamIds()],
 	      hiddenInspirationTitles:loadArray(ADMIN_HIDDEN_INSPIRATION_KEY),
 	      deletedInspirationKeys:loadArray(ADMIN_DELETED_INSPIRATION_KEY),
 	      featuredIdeaKey:featuredIdeaKey(),
@@ -4414,6 +4253,7 @@
     try{
 	      const parsed = JSON.parse(await file.text());
       if(parsed.siteSettings && centralStorageActive()) centralStorage.siteSettings = SiteSettings.normalize(parsed.siteSettings);
+      saveArray(COLLEAGUE_APPROVED_KEY, [...new Set([...approvedTeamIds(), ...(parsed.approvedColleagueIdeaIds || []).map(String)])]);
 	      saveArray(ADMIN_HIDDEN_INSPIRATION_KEY, uniqueNormalized([...loadArray(ADMIN_HIDDEN_INSPIRATION_KEY), ...(parsed.hiddenInspirationTitles || [])]));
 	      saveArray(ADMIN_DELETED_INSPIRATION_KEY, [...new Set([...loadArray(ADMIN_DELETED_INSPIRATION_KEY), ...(parsed.deletedInspirationKeys || [])].map(String))]);
 	      if(typeof parsed.featuredIdeaKey === 'string'){
@@ -4745,6 +4585,7 @@
       button.classList.toggle('active', active);
       button.setAttribute('aria-current', active ? 'page' : 'false');
     });
+    if(next==='agenda') AdminAgenda.navigate(scrollTarget);
     if(options.hash) history.replaceState(null, '', `#${scrollTarget || next}`);
     if(options.scroll !== false){
       const scrollNode = scrollTarget ? document.getElementById(scrollTarget) : document.querySelector('[data-admin-workspace]:not([hidden])');
@@ -4822,11 +4663,11 @@
     $('#adminEditIdeaImageApproved').checked = image ? image.approved : false;
     syncAdminIdeaImagePreview();
     syncAdminIdeaImageSuggestion();
-    $('#adminEditIdeaDescription').value = item.description || '';
-    $('#adminEditIdeaRules').value = item.rules || '';
+    $('#adminEditIdeaDescription').value = item.fit || item.description || '';
+    $('#adminEditIdeaRules').value = item.materials || item.rules || item.note || '';
     setStatus('#adminIdeaEditStatus', item.kind === 'collega-toegevoegd' ? 'Pas de velden aan en sla de wijziging op.' : 'Bij opslaan komt er een bewerkte online versie en wordt het vaste origineel verborgen.', 'ok');
     $('#adminIdeaEditPanel').scrollIntoView({behavior:'smooth', block:'start'});
-    window.setTimeout(() => $('#adminEditIdeaTitle')?.focus(), 250);
+    $('#adminEditIdeaTitle')?.focus({preventScroll:true});
   }
   function editedIdeaPayload(original){
     const title = $('#adminEditIdeaTitle').value.trim();
@@ -4892,6 +4733,17 @@
       }else{
         const hidden = hiddenTeamIds();
         hidden.add(original.key);
+        saveArray(COLLEAGUE_HIDDEN_KEY, [...hidden]);
+      }
+    }
+    // A replacement of already published content must retain its publication state.
+    if(original.kind !== 'collega-toegevoegd'){
+      const approved = approvedTeamIds();
+      approved.add(next.id);
+      saveArray(COLLEAGUE_APPROVED_KEY, [...approved]);
+      if(original.hidden){
+        const hidden = hiddenTeamIds();
+        hidden.add(next.id);
         saveArray(COLLEAGUE_HIDDEN_KEY, [...hidden]);
       }
     }
@@ -4980,10 +4832,6 @@
       }
     });
     $('#ideaSearch').addEventListener('input', renderIdeas);
-    $('#adminAgendaFilterToggle').addEventListener('click', () => {
-      const expanded = $('#agendaAdminFilters').classList.toggle('expanded');
-      $('#adminAgendaFilterToggle').setAttribute('aria-expanded', String(expanded));
-    });
     $('#inspirationThemeLegend').addEventListener('click', event => {
       const chip = event.target.closest('[data-theme-filter]');
       if(chip) AdminDiscovery.toggleDomain(chip.dataset.themeFilter);
@@ -4998,31 +4846,9 @@
       if($('#adminApp') && !$('#adminApp').hidden) setAdminWorkspace(adminWorkspaceFromHash(), {scroll:false, scrollTarget:adminScrollTargetFromHash()});
     });
     document.querySelectorAll('[data-admin-view]').forEach(btn => btn.addEventListener('click', () => setAdminIdeaView(btn.dataset.adminView)));
-    ['#agendaAdminSearch','#agendaAdminWeekSelect','#agendaAdminKindFilter','#agendaAdminDomainFilter','#agendaAdminDistanceFilter','#agendaAdminCostFilter','#agendaAdminStimulusFilter','#agendaAdminStatusFilter']
-      .forEach(selector => $(selector).addEventListener(selector === '#agendaAdminSearch' ? 'input' : 'change', renderAgendaReview));
-    $('#agendaAdminThemeLegend').addEventListener('click', event => {
-      const chip = event.target.closest('[data-admin-agenda-theme-filter]');
-      if(!chip) return;
-      const select = $('#agendaAdminDomainFilter');
-      const current = domainDisplayLabel(select.value);
-      const next = normalize(current) === normalize(chip.dataset.adminAgendaThemeFilter) ? 'all' : chip.dataset.adminAgendaThemeFilter;
-      const matching = [...select.options].find(option => normalize(domainDisplayLabel(option.value)) === normalize(next));
-      select.value = matching ? matching.value : 'all';
-      syncCustomSelect(select);
-      renderAgendaReview();
-    });
-    $('#agendaAdminResetBtn').addEventListener('click', () => {
-      $('#agendaAdminSearch').value = '';
-      $('#agendaAdminWeekSelect').value = 'all';
-      $('#agendaAdminDomainFilter').value = 'all';
-      $('#agendaAdminDistanceFilter').value = 'all';
-      $('#agendaAdminCostFilter').value = 'all';
-      $('#agendaAdminStimulusFilter').value = 'all';
-      $('#agendaAdminStatusFilter').value = 'all';
-      $('#agendaAdminKindFilter').value = 'all';
-      ['#agendaAdminWeekSelect','#agendaAdminKindFilter','#agendaAdminDomainFilter','#agendaAdminDistanceFilter','#agendaAdminCostFilter','#agendaAdminStimulusFilter','#agendaAdminStatusFilter'].forEach(selector => syncCustomSelect($(selector)));
-      renderAgendaReview();
-    });
+    ['#agendaSearch','#agendaWeekFilter','#agendaAdminKindFilter','#agendaDomain','#agendaDistance','#agendaCost','#agendaAdminStimulusFilter','#agendaAdminStatusFilter']
+      .forEach(selector => $(selector).addEventListener(selector === '#agendaSearch' ? 'input' : 'change', renderAgendaReview));
+    $('#agendaAdminResetBtn').addEventListener('click',()=>{['agendaAdminKindFilter','agendaAdminStimulusFilter','agendaAdminStatusFilter'].forEach(id=>{document.getElementById(id).value='all';syncCustomSelect(document.getElementById(id));});renderAgendaReview();});
     enhanceCustomSelect($('#linkCategory'));
     resetLinkForm();
     $('#linkForm').addEventListener('submit', addCustomLink);
@@ -5094,7 +4920,7 @@
       if(!event.target.closest('#adminMenu')) $('#adminMenu').open = false;
       const ideaCard = event.target.closest('#adminIdeaCards [data-idea-key], #adminIdeaList [data-idea-key]');
       if(ideaCard && !event.target.closest('a,button,details,summary,input,select,textarea')) selectAdminIdea(ideaCard.dataset.ideaKey);
-      const agendaCard = event.target.closest('#agendaReviewList [data-agenda-select]');
+      const agendaCard = event.target.closest('#agendaContentSurface [data-agenda-select]');
       if(agendaCard && !event.target.closest('a,button,details,summary,input,select,textarea')) selectAgendaItem(agendaCard.dataset.agendaSelect);
       const titleButton = event.target.closest('[data-title-action]');
       if(titleButton) updateTitleVisibility(titleButton.dataset.key, titleButton.dataset.titleAction);
@@ -5152,7 +4978,7 @@
 	      if(removeTrashButton) removeTrashItem(removeTrashButton.dataset.removeTrash);
 	    });
     document.addEventListener('keydown', event => {
-      const selectable = event.target.closest?.('#adminIdeaCards [data-idea-key], #adminIdeaList [data-idea-key], #agendaReviewList [data-agenda-select]');
+      const selectable = event.target.closest?.('#adminIdeaCards [data-idea-key], #adminIdeaList [data-idea-key], #agendaContentSurface [data-agenda-select]');
       if(selectable && event.target === selectable && (event.key === 'Enter' || event.key === ' ')){
         event.preventDefault();
         if(selectable.dataset.ideaKey) selectAdminIdea(selectable.dataset.ideaKey);

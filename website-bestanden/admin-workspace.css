@@ -12,18 +12,10 @@ body.adminMode .shell{padding-bottom:0}
 #adminApp .adminPublicSurface .tabHeroTitle{transform:none!important;margin:0!important;font-family:Lora,serif;font-size:44px!important;line-height:1.12!important;font-weight:500}
 #adminApp .adminPublicSurface .tabHeroLine{transform:none!important;margin:10px 0 0!important;font-size:19px!important}
 .adminModeBadge{position:absolute;top:24px;left:30px;padding:7px 12px;border:1px solid rgba(49,95,107,.1);border-radius:999px;background:rgba(255,253,249,.75);font-size:12px;font-weight:600;color:#315f6b}
-#adminApp #agendaReviewPanel .filterBar{width:100%;max-width:none;margin:0 0 12px;padding:0;background:transparent;border:0;box-shadow:none;position:relative;z-index:46}
-#adminApp #agendaReviewPanel .filters{display:flex!important;flex-wrap:wrap;gap:10px;width:100%;max-width:none;padding:0;align-items:center;background:transparent;border:0;box-shadow:none}
-#adminApp #agendaReviewPanel .filterSearch{flex:1 1 220px;min-width:0}
-#adminApp #agendaReviewPanel .filterSearch input{width:100%;min-height:48px;border-radius:16px;background:#fffdf9;border:1px solid rgba(49,95,107,.1)}
-#adminApp #agendaReviewPanel .filterToggle{display:inline-flex!important;align-items:center;justify-content:center;width:auto;min-width:48px;height:48px;gap:8px;padding:12px 16px;border:1px solid rgba(49,95,107,.1);border-radius:16px;background:#fffdf9;color:#315f6b;cursor:pointer}
-#adminApp #agendaReviewPanel .filterToggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7}
 #adminApp .adminPublicSurface .adminFilterOptions{display:none;width:100%;padding:14px;border:1px solid rgba(49,95,107,.09);border-radius:18px;background:#fffdf9;gap:10px;flex-wrap:wrap}
 #adminApp .adminPublicSurface .expanded>.adminFilterOptions{display:flex}
 #adminApp .adminPublicSurface .adminFilterOptions>.customSelect{display:block!important;flex:1 1 155px;min-width:0}
 #adminApp .adminPublicSurface .adminFilterOptions .filterReset{display:inline-flex!important;align-items:center;gap:6px}
-#adminApp #agendaReviewPanel .sharedDiscoveryChipRow{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:6px 0 14px;margin:0;position:static}
-#adminApp #agendaReviewPanel .sharedDiscoveryChipRow>.viewBar{margin-left:auto}
 #adminApp .adminPublicSurface .adminCountBadge{font-size:12px}
 #adminApp .adminPublicSurface .adminSelectionToolbar{position:sticky;top:10px;z-index:44;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:62px;margin:12px 0 14px;padding:10px 14px;border:1px solid rgba(49,95,107,.12);border-radius:16px;background:rgba(255,253,249,.96);box-shadow:0 8px 24px rgba(49,95,107,.06);backdrop-filter:blur(16px)}
 .adminSelectionSummary{display:grid;gap:3px;min-width:0}
@@ -50,11 +42,6 @@ body.adminMode .shell{padding-bottom:0}
 .featuredAdminPanel>summary{cursor:pointer;color:#315f6b;font-weight:600}
 .featuredAdminPanel[open]>.featuredAdminHead{margin-top:14px}
 /* Management must not clip selectable entries or hide the older days. */
-#adminApp #agendaReviewList .weekPanel{height:auto;grid-template-rows:auto auto}
-#adminApp #agendaReviewList .agendaBoard{height:auto;align-items:stretch}
-#adminApp #agendaReviewList .agendaDay{height:auto;min-height:0;overflow:visible}
-#adminApp #agendaReviewList .pastDay{opacity:1}
-#adminApp #agendaReviewList .agendaAdminMoreItems{display:grid;gap:8px;margin-top:8px}
 #adminApp .adminPublicSurface .adminIdeaImageBadge{position:absolute;right:8px;left:auto;bottom:8px;font-size:10px}
 #adminApp .adminPublicSurface .adminIdeaEditPanel{scroll-margin-top:90px}
 #adminApp .adminPublicSurface .adminIdeaEditPanel .teamForm{display:grid}
@@ -68,15 +55,9 @@ body.adminMode .shell{padding-bottom:0}
  .adminSelectionActions{max-width:100%;overflow-x:auto}
  #adminApp .adminPublicSurface .adminAgendaUtilities{align-items:flex-start;flex-wrap:wrap}
 }
-#adminApp #agendaReviewPanel .filterToggle{position:static!important;inset:auto!important;transform:none!important;flex:0 0 48px}
-#adminApp #agendaReviewPanel .filterSearch{max-width:none!important;width:auto!important}
-#adminApp #agendaReviewPanel .sharedDiscoveryFilters{position:relative!important;min-height:48px!important}
 #adminApp .adminPublicSurface .featuredAdminPanel{margin:0 0 16px;padding:12px 16px}
 #adminApp .adminPublicSurface .agendaCheckNotice{margin:0 0 18px}
 @media(max-width:640px){
- #adminApp #agendaReviewPanel .filterSearch{flex-basis:180px}
- #adminApp #agendaReviewPanel .sharedDiscoveryChipRow{gap:8px}
- #adminApp #agendaReviewPanel .sharedDiscoveryChipRow>.viewBar{margin:0 0 0 auto;padding:0}
  #adminApp .adminPublicSurface .adminCountBadge{margin:0}
 }
 .adminSettingsWorkspace{padding-top:32px;max-width:1000px;margin-inline:auto}
@@ -108,5 +89,17 @@ body.ideaFilterSheetOpen{overflow:hidden}
 /* Legacy form defaults must never style the shared discovery component. */
 @layer adminLegacy {
   #adminApp .desktopStickyControls :where(*),
-  .adminDiscoveryOverlay #ideaFilterSheetLayer :where(*) { all:revert-layer; }
+  .adminDiscoveryOverlay .ideaFilterSheetLayer :where(*),
+  #agendaContentSurface :where(*) { all:revert-layer; }
 }
+#adminApp .adminManagementFilterFields{display:flex;flex-wrap:wrap;gap:12px;padding:12px 0}
+.adminAgendaManagementFilters{margin:0 0 16px;padding:12px 16px;border:1px solid #e6e9e3;border-radius:16px;background:#fffdf9}
+.adminAgendaManagementFilters>summary{cursor:pointer;font-weight:600}
+#adminApp #agendaContentSurface .agendaSectionView[hidden]{display:none!important}
+#adminApp #agendaContentSurface .isSelected{outline-color:#1686ae!important;background:#e0f1fa!important}
+#adminApp #agendaContentSurface tr.isSelected>td{background:#e0f1fa!important}
+#adminApp #agendaContentSurface .ongoingAdminPicker{display:flex;align-items:end;gap:12px;margin:12px 20px;flex-wrap:wrap}
+#adminApp #agendaContentSurface .ongoingAdminPicker label{display:grid;gap:6px;flex:1;min-width:0}
+#adminApp #agendaContentSurface .ongoingAdminPicker select{max-width:100%;padding:10px;border:1px solid #dce4df;border-radius:10px}
+/* Workspace destinations must stay hidden despite legacy display:grid rules. */
+#adminApp .adminStack > [hidden]{display:none!important}
