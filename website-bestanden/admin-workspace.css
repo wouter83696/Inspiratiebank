@@ -118,9 +118,7 @@ body.ideaFilterSheetOpen{overflow:hidden}
 #adminApp .button.primary{background:#f0e7d5;border-color:#dfceb0;color:#635333}
 #adminApp .button.hot{background:#fffaf6;color:#986452;border-color:#e7d8cb}
 #adminApp .button:disabled{opacity:.55;cursor:default}
-#adminApp .adminSelectionActions .button.iconAction{width:34px;height:34px;min-width:34px;min-height:34px;padding:8px;background:#fffcf7;border-color:var(--manage-border);color:#597371;box-shadow:none;border-radius:11px}
-#adminApp .adminSelectionActions .button.iconAction:hover{background:#f0e7d5;border-color:#c4ad83}
-#adminApp .adminSelectionActions .button.iconAction.hot{color:#996958}
+#adminApp .adminSelectionActions .button.iconAction{width:34px;height:34px;min-width:34px;min-height:34px;padding:8px;box-shadow:none;border-radius:11px}
 #adminApp .adminPublicSurface .adminSelectionToolbar{min-height:52px;padding:8px 12px;margin:8px 0 12px;border-color:var(--manage-border);box-shadow:0 4px 14px rgba(92,65,33,.035)}
 #adminApp .adminSelectionSummary strong{max-width:100%;font-size:13px}
 #adminApp .adminSelectionActions{flex-wrap:wrap;flex-shrink:1;justify-content:flex-end}
@@ -173,3 +171,20 @@ body.ideaFilterSheetOpen{overflow:hidden}
 #adminApp :is([data-admin-workspace="meldkamer"],[data-admin-workspace="settings"])>.workspaceHeader{padding-top:22px}
 
 #adminApp input::file-selector-button{font:inherit;color:var(--manage-ink);background:#f5eddd;border:1px solid var(--manage-border);border-radius:8px;padding:6px 10px;margin-right:8px;cursor:pointer}
+
+/* Semantic action colours: retain the same meaning across every workspace. */
+#adminApp .button:is(.editIdeaAction,.editAction,[data-edit-link-kind],[data-edit-agenda]){--action-bg:#e1eff8;--action-line:#b4d2e4;--action-ink:#245d7e}
+#adminApp .button:is(.approveIdeaAction,[data-verify-agenda],[data-verify-ongoing],[data-approve-link]){--action-bg:#e0f0e5;--action-line:#b8d6c1;--action-ink:#32664a}
+#adminApp .button[data-feature-idea]{--action-bg:#fff0c9;--action-line:#e6cf90;--action-ink:#806015}
+#adminApp .button[data-feature-idea].primary{--action-bg:#f4dfa0;--action-line:#bea252;--action-ink:#664a0b}
+#adminApp .button:is(.visibilityIdeaAction,.visibilityAction){--action-bg:#e0efed;--action-line:#b7d4ce;--action-ink:#366760}
+#adminApp .button:is(.sourceAction,.titleAction){--action-bg:#f5e8d9;--action-line:#dfc5a7;--action-ink:#855727}
+#adminApp .button.hot{--action-bg:#f6e1e5;--action-line:#dfb7c0;--action-ink:#913d52}
+#adminApp .button:is(.editIdeaAction,.editAction,.approveIdeaAction,.visibilityIdeaAction,.visibilityAction,.sourceAction,.titleAction,.hot,[data-feature-idea],[data-edit-link-kind],[data-edit-agenda],[data-verify-agenda],[data-verify-ongoing],[data-approve-link]){background:var(--action-bg);border-color:var(--action-line);color:var(--action-ink)}
+#adminApp .button:is(.editIdeaAction,.editAction,.approveIdeaAction,.visibilityIdeaAction,.visibilityAction,.sourceAction,.titleAction,.hot,[data-feature-idea],[data-edit-link-kind],[data-edit-agenda],[data-verify-agenda],[data-verify-ongoing],[data-approve-link]):hover:not(:disabled){background:color-mix(in srgb,var(--action-bg) 85%,var(--action-line));border-color:var(--action-ink)}
+#adminApp .button:focus-visible{outline:2px solid #315f6b;outline-offset:3px}
+#adminApp .adminSelectionActions .button.iconAction.primary:disabled{background:#e0f0e5;border-color:#b8d6c1;color:#32664a}
+#adminApp .adminPublicSurface .adminAgendaManagementFilters{padding:0;overflow:visible}
+#adminApp .adminAgendaManagementFilters> :not(summary){margin-left:16px;margin-right:16px}
+#adminApp .adminAgendaManagementFilters .agendaCheckNotice{margin-bottom:16px}
+#adminApp .adminAgendaManagementFilters .adminManagementFilterFields{margin-bottom:16px}

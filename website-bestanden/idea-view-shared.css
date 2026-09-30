@@ -4,7 +4,7 @@
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:12px;
   align-items:stretch;
-  font-family:"IBM Plex Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 .sharedIdeaCards .card{
   display:flex;
@@ -31,6 +31,7 @@
 }
 .sharedIdeaCards .ideaImageFrame{
   position:relative;
+  flex-shrink:0;
   width:auto;
   align-self:stretch;
   aspect-ratio:16 / 8.7;
@@ -71,7 +72,7 @@
   border:1px solid rgba(11,18,32,.08);
   border-radius:8px;
   background:rgba(255,255,255,.88);
-  font-family:"IBM Plex Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 .sharedIdeaList table{width:100%;min-width:920px;border-collapse:collapse;table-layout:fixed}
 .sharedIdeaList th,.sharedIdeaList td{padding:11px 12px;text-align:left;vertical-align:middle;border-bottom:1px solid rgba(11,18,32,.065);font-size:.86rem;line-height:1.34}

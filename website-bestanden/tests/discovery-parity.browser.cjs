@@ -57,6 +57,12 @@ const base=process.env.DISCOVERY_BASE_URL || 'http://127.0.0.1:8765';
  assert.equal(await row.getAttribute('aria-pressed'),'true');
  assert(await admin.locator('#ideaSelectionActions [data-edit-idea]').isVisible());
  assert(await admin.locator('.featuredAdminPanel').getAttribute('open')!==null);
+ for(const page of pages){
+   const fonts=await page.locator('.sharedIdeaCards,.sharedIdeaList').evaluateAll(es=>es.map(e=>getComputedStyle(e).fontFamily));
+   assert(fonts.length>0&&fonts.every(f=>f.startsWith('Manrope')), 'Shared content uses the current Manrope typography');
+ }
+ const colours=await admin.locator('#ideaSelectionActions .button').evaluateAll(es=>es.map(e=>getComputedStyle(e).backgroundColor));
+ assert(new Set(colours).size>=4,'Editing actions have distinct semantic colours');
  await admin.screenshot({path:'/tmp/discovery-admin-verified.png'});
  assert.deepEqual(errors,[]);
  console.log('PASS: identical search/category/sheet styles at 1440px and 390px; autocomplete, categories, distance, reset, Escape, list selection and toolbar.');
