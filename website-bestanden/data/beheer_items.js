@@ -6398,17 +6398,17 @@ window.BCJN_BEHEER_BASE = {
     }
   ],
   "sourceCheck": {
-    "lastCheckedAt": "2026-09-30T14:28:09.877Z",
+    "lastCheckedAt": "2026-09-30T15:23:23.963Z",
     "reviewFile": "website-bestanden/data/offers_pending_review.json",
     "sourcesChecked": 41,
-    "sourcesWithChanges": 23,
-    "newCandidateCount": 0
+    "sourcesWithChanges": 20,
+    "newCandidateCount": 1
   },
   "sourceReview": {
-    "generatedAt": "2026-09-30T14:28:09.877Z",
-    "pendingCount": 399,
-    "newCount": 0,
-    "changedSourceCount": 23,
+    "generatedAt": "2026-09-30T15:23:23.963Z",
+    "pendingCount": 398,
+    "newCount": 1,
+    "changedSourceCount": 20,
     "changedSources": [
       {
         "id": "beuningen-samen-jongeren",
@@ -6416,10 +6416,10 @@ window.BCJN_BEHEER_BASE = {
         "url": "https://beuningensamen.nl/agenda?date_from=28-09-2026&leeftijd_beuningensamen%5B%5D=1886",
         "region": "Beuningen",
         "mode": "agenda-beuningen",
-        "newItemCount": 0,
+        "newItemCount": 1,
         "itemCount": 32,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "focus-arnhem-agenda",
@@ -6430,7 +6430,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "beuningen-events",
@@ -6441,7 +6441,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "gemeente-nijmegen-events",
@@ -6452,7 +6452,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "grip-boulderhal",
@@ -6463,7 +6463,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "land-van-cuijk-2026-09",
@@ -6474,7 +6474,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 181,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "land-van-cuijk-2026-10",
@@ -6483,9 +6483,9 @@ window.BCJN_BEHEER_BASE = {
         "region": "Land van Cuijk",
         "mode": "agenda-events",
         "newItemCount": 0,
-        "itemCount": 144,
+        "itemCount": 143,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "land-van-cuijk-2026-11",
@@ -6496,7 +6496,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 37,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "lux-programma",
@@ -6507,7 +6507,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "museumpark-orientalis-agenda",
@@ -6518,7 +6518,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "natuurmonumenten-agenda",
@@ -6529,7 +6529,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "nimma-sportzomer",
@@ -6540,7 +6540,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 5,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "planet-awesome",
@@ -6551,7 +6551,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "pretpark-tivoli",
@@ -6562,7 +6562,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "rozet-agenda",
@@ -6573,7 +6573,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "staatsbosbeheer-activiteiten",
@@ -6584,7 +6584,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "visit-arnhem-events",
@@ -6595,40 +6595,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
-      },
-      {
-        "id": "visit-arnhem-zomertips",
-        "name": "Visit Arnhem zomervakantie tips",
-        "url": "https://www.visitarnhem.com/artikelen/zomervakantie-arnhem",
-        "region": "Arnhem en omgeving",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
-      },
-      {
-        "id": "visit-nijmegen-events",
-        "name": "Visit Nijmegen Uitagenda",
-        "url": "https://www.visitnijmegen.com/evenementen",
-        "region": "Nijmegen en regio",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
-      },
-      {
-        "id": "visit-nijmegen-zomertips",
-        "name": "Visit Nijmegen zomervakantie tips",
-        "url": "https://www.visitnijmegen.com/artikelen/zomervakantie-nijmegen",
-        "region": "Rijk van Nijmegen",
-        "mode": "fingerprint",
-        "newItemCount": 0,
-        "itemCount": 0,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "vue-nijmegen",
@@ -6639,18 +6606,18 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
-        "id": "you-jump-nijmegen",
-        "name": "You Jump Nijmegen",
-        "url": "https://www.trampolinepark.nl/nl/locaties/nijmegen",
-        "region": "Dichtbij (0-10 km)",
+        "id": "watermuseum-activiteiten",
+        "name": "Watermuseum activiteiten",
+        "url": "https://watermuseum.nl/activiteiten/",
+        "region": "Arnhem",
         "mode": "fingerprint",
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       },
       {
         "id": "zooparc-overloon",
@@ -6661,7 +6628,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-09-30T14:28:09.877Z"
+        "lastCheckedAt": "2026-09-30T15:23:23.963Z"
       }
     ]
   }
