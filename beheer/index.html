@@ -2051,19 +2051,15 @@
     localStorage.removeItem(key);
   }
   function sourceAgendaCheckedAt(){
-    const online = centralStorageActive() ? centralStorage : {};
-    return online.sourceCheck?.lastCheckedAt || online.sourceReview?.generatedAt || BASE.sourceCheck?.lastCheckedAt || BASE.sourceReview?.generatedAt || '';
+    // Use the same published source report as the public agenda.
+    return BASE.sourceCheck?.lastCheckedAt || BASE.sourceReview?.generatedAt || '';
   }
   function storedAgendaCheckedAt(){
     if(centralStorageActive() && typeof centralStorage.agendaManualCheckedAt === 'string') return centralStorage.agendaManualCheckedAt;
     return localStorage.getItem(AGENDA_MANUAL_CHECK_KEY) || '';
   }
   function latestAgendaCheckedAt(){
-    const candidates = [sourceAgendaCheckedAt(), storedAgendaCheckedAt()]
-      .map(value => ({value, time:new Date(value || '').getTime()}))
-      .filter(item => item.value && Number.isFinite(item.time))
-      .sort((a,b) => b.time - a.time);
-    return candidates[0]?.value || '';
+    return sourceAgendaCheckedAt();
   }
   function agendaAdminFreshnessBadge(){
     const value = latestAgendaCheckedAt();
@@ -2090,9 +2086,8 @@
     return `${minutes} minuten`;
   }
   function agendaSourceCheckSummary(){
-    const online = centralStorageActive() ? centralStorage : {};
-    const sourceCheck = online.sourceCheck?.lastCheckedAt ? online.sourceCheck : BASE.sourceCheck || {};
-    const sourceReview = online.sourceReview?.generatedAt ? online.sourceReview : BASE.sourceReview || {};
+    const sourceCheck = BASE.sourceCheck || {};
+    const sourceReview = BASE.sourceReview || {};
     const sourceCount = Number(sourceCheck.sourcesChecked);
     const changedCount = Number(sourceCheck.sourcesWithChanges ?? sourceReview.changedSourceCount);
     const newCount = Number(sourceCheck.newCandidateCount ?? sourceReview.newCount);
@@ -2156,44 +2151,24 @@
     const requestState = agendaSourceCheckRequestState();
     const checkedAt = latestAgendaCheckedAt();
     const sourceSummary = agendaSourceCheckSummary();
-    let titleText = '';
-    let detailText = '';
+    const titleText = checkedAt
+      ? `Laatste broncontrole: ${formatAdminDateTime(checkedAt)}`
+      : 'Nog geen broncontrole opgeslagen';
+    const details = sourceSummary ? [sourceSummary + '.'] : [];
     if(requestState.status === 'queued'){
-      const queuedMinutes = minutesSince(requestState.requestedAt);
-      if(queuedMinutes >= 15){
-        titleText = 'Controle staat nog klaar';
-        detailText = `Aangevraagd om ${formatAdminDateTime(requestState.requestedAt)}. De controle wacht al ${elapsedLabel(queuedMinutes)} en start normaal vanzelf. Deze pagina werkt de status automatisch bij.`;
-      } else {
-        titleText = 'Controle aangevraagd';
-        detailText = `Aangevraagd om ${formatAdminDateTime(requestState.requestedAt)}. De bronnen worden zo opgepakt; meestal zie je binnen 10 tot 45 minuten resultaat.`;
-      }
+      details.push(`Nieuwe controle aangevraagd: ${formatAdminDateTime(requestState.requestedAt)}. De aanvraag wacht op uitvoering.`);
     } else if(requestState.status === 'running'){
-      const runningMinutes = minutesSince(requestState.startedAt);
-      titleText = runningMinutes >= 15 ? 'Controle duurt langer dan normaal' : 'Agenda wordt gecontroleerd';
-      detailText = runningMinutes >= 15
-        ? `Gestart om ${formatAdminDateTime(requestState.startedAt)}; bezig sinds ${elapsedLabel(runningMinutes)}. De status wordt automatisch ververst.`
-        : `Gestart om ${formatAdminDateTime(requestState.startedAt)}; bezig sinds ${elapsedLabel(runningMinutes)}. De bronnen worden nu nagekeken.`;
+      details.push(`Nieuwe controle bezig sinds ${formatAdminDateTime(requestState.startedAt)}.`);
     } else if(requestState.status === 'expired'){
-      titleText = 'Controle opnieuw aanvragen';
-      detailText = `De vorige aanvraag van ${formatAdminDateTime(requestState.requestedAt)} bleef te lang openstaan. Je kunt nu opnieuw op Controleer nu klikken.`;
+      details.push(`De aanvraag van ${formatAdminDateTime(requestState.requestedAt)} bleef te lang openstaan. Vraag de controle opnieuw aan.`);
     } else if(requestState.status === 'done' && requestState.completedAt){
-      titleText = `Agenda gecontroleerd: ${formatAdminDateTime(requestState.completedAt)}`;
-      detailText = sourceSummary || 'De aangevraagde controle is afgerond.';
-    } else if(requestState.status === 'error' && requestState.completedAt){
-      titleText = `Controle niet gelukt: ${formatAdminDateTime(requestState.completedAt)}`;
-      detailText = 'Probeer het later opnieuw. Als je de agenda zelf hebt nagekeken, kun je hem handmatig als gecheckt markeren.';
-    } else if(!checkedAt){
-      titleText = 'Nog geen agenda-check opgeslagen';
-      detailText = 'Klik op Controleer nu om de bronnen opnieuw te laten nakijken.';
-    } else {
-      const manual = storedAgendaCheckedAt();
-      const manualTime = new Date(manual || '').getTime();
-      const sourceTime = new Date(sourceAgendaCheckedAt() || '').getTime();
-      titleText = `Laatst gecheckt: ${formatAdminDateTime(checkedAt)}`;
-      detailText = Number.isFinite(manualTime) && manualTime >= (Number.isFinite(sourceTime) ? sourceTime : 0)
-        ? 'Handmatig gemarkeerd in beheer.'
-        : `Gebaseerd op de laatste agenda-update.${sourceSummary ? ` ${sourceSummary}.` : ''}`;
+      details.push(`Laatste aangevraagde controle afgerond: ${formatAdminDateTime(requestState.completedAt)}.`);
+    } else if(requestState.status === 'error'){
+      details.push(`Aangevraagde controle niet gelukt${requestState.completedAt ? `: ${formatAdminDateTime(requestState.completedAt)}` : ''}. Probeer het opnieuw.`);
     }
+    const manual = storedAgendaCheckedAt();
+    if(formatAdminDateTime(manual)) details.push(`Handmatig als gecheckt gemarkeerd: ${formatAdminDateTime(manual)}.`);
+    const detailText = details.join(' ') || 'Klik op Controleer nu om de bronnen te laten nakijken.';
     titles.forEach(title => { title.textContent = titleText; });
     texts.forEach(text => { text.textContent = detailText; });
     $$('[data-request-agenda-source-check]').forEach(button => {
