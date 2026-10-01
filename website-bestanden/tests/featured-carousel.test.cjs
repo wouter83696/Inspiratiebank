@@ -6,9 +6,9 @@ const path=require('node:path');
 const source=fs.readFileSync(path.join(__dirname,'../../index.html'),'utf8');
 const code=source.slice(source.indexOf('  function moveFeaturedCarousel('),source.indexOf('  function surpriseIdeaCard('));
 function fixture(reduced=false){
- const target=()=>({events:{},attrs:{},addEventListener(name,fn){this.events[name]=fn;},setAttribute(name,value){this.attrs[name]=value;}});
+ const target=()=>({events:{},attrs:{},matches(){return this.keyboardFocus === true;},addEventListener(name,fn){this.events[name]=fn;},setAttribute(name,value){this.attrs[name]=value;}});
  const slides=Array.from({length:3},target),dots=Array.from({length:3},target),pause=target();
- const carousel=Object.assign(target(),{dataset:{featuredIndex:'0'},querySelectorAll:q=>q==='[data-featured-slide]'?slides:dots,querySelector:()=>pause,contains:el=>el===pause});
+ const carousel=Object.assign(target(),{dataset:{featuredIndex:'0'},querySelectorAll:q=>q==='[data-featured-slide]'?slides:dots,querySelector:()=>pause,contains:el=>el===pause||dots.includes(el)||slides.includes(el)});
  const doc=Object.assign(target(),{hidden:false,activeElement:null,querySelector:()=>carousel});
  const motion=Object.assign(target(),{matches:reduced});
  const timers=new Map();let id=0,observer;
@@ -26,7 +26,7 @@ test('autoplay pauses offscreen, on hover, focus, hidden tab and explicit pause'
  const f=fixture();f.visible(.3);assert.equal(f.timers.size,0);f.visible(.8);
  f.carousel.events.pointerenter({pointerType:'mouse'});assert.equal(f.timers.size,0);
  f.carousel.events.pointerleave();assert.equal(f.timers.size,1);
- f.doc.activeElement=f.pause;f.carousel.events.focusin();assert.equal(f.timers.size,0);
+ f.doc.activeElement=f.dots[0];f.dots[0].keyboardFocus=true;f.carousel.events.focusin();assert.equal(f.timers.size,0);
  f.doc.activeElement=null;f.carousel.events.focusout();assert.equal(f.timers.size,1);
  f.doc.hidden=true;f.doc.events.visibilitychange();assert.equal(f.timers.size,0);
  f.doc.hidden=false;f.doc.events.visibilitychange();f.pause.events.click();assert.equal(f.timers.size,0);
@@ -36,4 +36,15 @@ test('reduced motion disables autoplay and rerender cleans up the old observer/t
  const f=fixture(true);f.visible(1);assert.equal(f.timers.size,0);
  f.pause.events.click();assert.equal(f.timers.size,1);
  const old=f.observer();f.ctx.setupFeaturedCarousel();assert.equal(old.disconnected,true);assert.equal(f.timers.size,0);
+});
+
+test('touch focus does not block autoplay and the start button resumes while focused',()=>{
+ const f=fixture();f.visible(1);
+ f.doc.activeElement=f.dots[0];f.carousel.events.focusin();assert.equal(f.timers.size,1);
+ f.carousel.events.touchstart();assert.equal(f.timers.size,0);
+ f.carousel.events.touchend();assert.equal(f.timers.size,1);
+ f.tick();assert.equal(f.carousel.dataset.featuredIndex,'1');
+ f.doc.activeElement=f.pause;f.pause.keyboardFocus=true;
+ f.pause.events.click();assert.equal(f.timers.size,0);
+ f.pause.events.click();assert.equal(f.timers.size,1);
 });

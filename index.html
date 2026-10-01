@@ -8926,7 +8926,9 @@
     };
     const arm = () => {
       window.clearTimeout(timer);
-      if(paused || !visible || hovering || document.hidden || carousel.contains(document.activeElement)) return;
+      const focused = document.activeElement;
+      const keyboardFocus = carousel.contains(focused) && focused !== pauseButton && focused.matches(':focus-visible');
+      if(paused || !visible || hovering || document.hidden || keyboardFocus) return;
       timer = window.setTimeout(() => moveFeaturedCarousel(carousel), FEATURED_INTERVAL_MS);
     };
     carousel.restartFeatured = arm;
