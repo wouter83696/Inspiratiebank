@@ -240,3 +240,14 @@ body.ideaFilterSheetOpen{overflow:hidden}
 #adminApp #agendaContentSurface{display:block}
 html:has(body.adminMode),body.adminMode{overflow-x:clip}
 #adminApp :is(#inspirationAdminPanel,#agendaReviewPanel){overflow:visible!important}
+
+/* Separate source-check facts and expose the exact approval scope. */
+#adminApp .agendaCheckNoticeText{gap:9px}
+#adminApp .agendaCheckNotice strong{line-height:1.4}
+#adminApp .agendaCheckDetail{white-space:pre-line;line-height:1.7}
+#adminApp .agendaPendingList{margin:0 16px 20px;max-height:480px;overflow:auto}
+#adminApp .agendaPendingRow{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--manage-border)}
+#adminApp .agendaPendingRow:first-child{padding-top:0}
+#adminApp .agendaPendingRow p{margin:5px 0 0;color:var(--muted);font-size:.86rem;line-height:1.5}
+#adminApp .agendaPendingActions{display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0}
+@media(max-width:820px){#adminApp .agendaPendingRow{align-items:flex-start;flex-direction:column}#adminApp .agendaPendingList{max-height:60vh}}

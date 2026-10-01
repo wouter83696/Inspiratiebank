@@ -8,6 +8,7 @@ const base=process.env.DISCOVERY_BASE_URL||'http://127.0.0.1:8765';
  const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
  context.setDefaultTimeout(60000);
  let stored={reports:[{id:'test-report',title:'Testmelding',message:'Controleer deze activiteit',createdAt:'2026-09-30T10:00:00Z',status:'open'}]},writes=0,failSave=false;
+ stored.autoAgendaItems=['A','B'].map((suffix,i)=>({id:`queue-${suffix}`,title:`Wachtrijcontrole ${suffix}`,week:'w41',date:'Woensdag 7 oktober 2026',time:`${14+i}.00`,where:'Nijmegen',domain:'Cultuur',locationType:'Buiten de deur',distanceBand:'0–10 km (dichtbij)',cost:'Gratis',stimulus:'Laag',source:'Automatische testbron',url:`https://example.org/queue-${suffix}`,reviewStatus:'new'}));
  await context.route('**/*',async r=>{
   const url=r.request().url();
   if(url.includes('/rest/v1/')){
@@ -121,6 +122,20 @@ const base=process.env.DISCOVERY_BASE_URL||'http://127.0.0.1:8765';
  await click('#adminAgendaTitle >> xpath=../.. >> [data-add-admin-source]');assert(await p.locator('#linkName').evaluate(e=>e===document.activeElement));assert(await p.locator('#linkForm').isVisible());
  const addedVisitor=await context.newPage();await addedVisitor.goto(base+'/');await addedVisitor.waitForFunction(()=>!document.documentElement.classList.contains('appLoading'));assert(await addedVisitor.evaluate(()=>allExternalItems().some(x=>x.title==='Nieuwe beheeragenda')));await addedVisitor.locator('#ideaSearch').fill('Nieuwe beheeractiviteit');assert((await addedVisitor.locator('#ideaCards').innerText()).includes('Nieuwe beheeractiviteit'));await addedVisitor.close();
  console.log('PASS adding: inspiration approved, agenda persisted and public, source form focused');
+ await nav('agenda');await p.locator('#agendaSearch').fill('Wachtrijcontrole');
+ if(!await p.locator('.adminAgendaManagementFilters').evaluate(e=>e.open))await click('.adminAgendaManagementFilters>summary');
+ assert.equal(await p.locator('[data-pending-agenda]').count(),2);
+ assert((await p.locator('#agendaPendingList').innerText()).includes('Automatisch gevonden · Bron: Automatische testbron'));
+ await p.locator('#agendaSearch').fill('Wachtrijcontrole A');assert.equal(await p.locator('[data-pending-agenda]').count(),1);
+ const queueId=await p.locator('[data-pending-agenda]').getAttribute('data-pending-agenda');
+ const beforeQueue=[...(stored.verifiedAgendaItemIds||[])];
+ await saved(()=>click('#approveAllAgendaBtn'));assert(stored.verifiedAgendaItemIds.includes(queueId));
+ assert.equal(await p.locator('[data-pending-agenda]').count(),0);
+ await p.locator('#agendaSearch').fill('Wachtrijcontrole B');assert.equal(await p.locator('[data-pending-agenda]').count(),1);
+ assert(!stored.verifiedAgendaItemIds.includes(await p.locator('[data-pending-agenda]').getAttribute('data-pending-agenda')));
+ assert.equal(stored.verifiedAgendaItemIds.filter(x=>!beforeQueue.includes(x)).length,1,'only the displayed item is approved');
+ assert((await p.locator('#agendaCheckStatusText').textContent()).includes('\n'));
+ console.log('PASS review queue: automatic next-week items visible, filtered bulk approval excludes other items, check status on separate lines');
  await nav('settings');failSave=true;const previous=structuredClone(stored);await p.locator('#siteRegionRadius').selectOption('5');await click('#siteSettingsSave');await p.locator('#siteSettingsStatus').filter({hasText:'geweigerd'}).waitFor();assert.deepEqual(stored,previous);
  await click('#logoutBtn');assert(await p.locator('#loginPanel').isVisible());assert.deepEqual(errors,[]);
  console.log(`PASS failed save and logout; ${writes} isolated writes; no live data modified.`);
