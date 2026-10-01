@@ -1,8 +1,10 @@
 /* One hover surface for public navigation and the management sidebar. */
 :root{--control-hover-surface:rgba(168,225,221,.12)}
 #adminApp :is(.adminNavButton,.adminSidebarToggle):is(:hover,:focus-visible):not(.active){background:var(--control-hover-surface);color:var(--accent-dark);transform:none}
-/* A single divider at the bottom of the complete sticky navigation. */
-:root{--sticky-divider-color:#e2ddd2}
+/* Sticky surfaces stay borderless, including the mobile day selector. */
 :is(#tab-inspiratie,#tab-weken):not(.adminPublicSurface)>.desktopStickyControls.isStuck::after,
-#tab-weken:not(.adminPublicSurface) .mobileDayNavigation.isStuck::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--sticky-divider-color);pointer-events:none}
-#adminApp :is(#inspirationAdminPanel,#agendaReviewPanel) .adminSelectionToolbar{border-bottom:1px solid var(--sticky-divider-color)}
+#tab-weken:not(.adminPublicSurface) .mobileDayNavigation.isStuck::after{content:none}
+#adminApp :is(#inspirationAdminPanel,#agendaReviewPanel) .adminSelectionToolbar{border:0}
+@media(max-width:820px){
+  #tab-weken .mobileDayNavigation.isStuck{border-color:transparent;box-shadow:0 0 0 100vmax #F8F5EB!important}
+}
