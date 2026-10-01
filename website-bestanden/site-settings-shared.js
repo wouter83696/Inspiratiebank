@@ -11,6 +11,13 @@
       return url.protocol === 'https:' && !url.username && !url.password ? url.href : '';
     }catch{return '';}
   }
+  const defaultText = {inspirationTitle:'Ontdek iets nieuws',inspirationSubtitle:'Vind én deel inspiratie',agendaTitle:'UIT-agenda',agendaSubtitle:'Bekijk wat er te doen is'};
+  const cleanText=(value,fallback,max=160)=>typeof value==='string'?value.trim().slice(0,max):fallback;
+  const placeKey=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLocaleLowerCase('nl');
+  function header(value={},fallback=defaultText){
+    return {headerImage:imageUrl(value.headerImage),headerPosition:Number.isFinite(value.headerPosition)?Math.max(0,Math.min(100,value.headerPosition)):30,
+      ...Object.fromEntries(Object.keys(defaultText).map(key=>[key,cleanText(value[key],fallback[key],key.endsWith('Title')?100:200)]))};
+  }
   function normalize(value={}){
     value = value && typeof value === 'object' ? value : {};
     const region = value.region || {};
@@ -19,22 +26,28 @@
       && Math.abs(region.lat) <= 90 && Math.abs(region.lon) <= 180
       && typeof region.label === 'string' && region.label.trim();
     return {
-      headerImage:imageUrl(value.headerImage),
+      ...header(value),
+      regionalHeaders:Array.isArray(value.regionalHeaders)?value.regionalHeaders.filter(x=>x&&typeof x==='object'&&typeof x.id==='string'&&x.id&&typeof x.label==='string'&&x.label.trim()).slice(0,30).map(x=>({id:x.id.slice(0,80),label:x.label.trim().slice(0,120),places:[...new Set((Array.isArray(x.places)?x.places:[]).filter(p=>typeof p==='string').map(placeKey).filter(Boolean))].slice(0,50),...header(x,header(value))})):[],
       agendaRadiusKm:radii.includes(value.agendaRadiusKm) ? value.agendaRadiusKm : 25,
       headerPosition:Number.isFinite(value.headerPosition) ? Math.max(0,Math.min(100,value.headerPosition)) : 30,
       region:valid ? {label:region.label.trim().slice(0,120),lat:region.lat,lon:region.lon,radiusKm:radii.includes(region.radiusKm) ? region.radiusKm : 10} : {...fallbackRegion}
     };
   }
-  function applyHeader(value, root=document){
-    const settings = normalize(value);
-    root.querySelectorAll('.tabHero').forEach(hero => {
+  function forLocation(value,location){
+    const settings=normalize(value),key=placeKey(location?.place||location?.label||settings.region.label);
+    return settings.regionalHeaders.find(x=>x.places.includes(key))||settings;
+  }
+  function applyHeader(value, root=document, location){
+    const settings=forLocation(value,location);
+    root.querySelectorAll('.tabHero').forEach(hero=>{
+      if(hero.classList.contains('siteHeaderPreview'))return;
       if(settings.headerImage){
-        hero.style.setProperty('--hero-bg-image', `url(${JSON.stringify(settings.headerImage)})`);
-        hero.style.setProperty('background-position', `center ${settings.headerPosition}%`, 'important');
-      }else{
-        hero.style.removeProperty('--hero-bg-image');
-        hero.style.removeProperty('background-position');
-      }
+        hero.style.setProperty('--hero-bg-image',`url(${JSON.stringify(settings.headerImage)})`);
+        hero.style.setProperty('background-position',`center ${settings.headerPosition}%`,'important');
+      }else{hero.style.removeProperty('--hero-bg-image');hero.style.removeProperty('background-position');}
+      const agenda=hero.classList.contains('agendaHero'),title=hero.querySelector('.tabHeroTitle'),subtitle=hero.querySelector('.tabHeroLine');
+      if(title)title.textContent=settings[agenda?'agendaTitle':'inspirationTitle'];
+      if(subtitle)subtitle.textContent=settings[agenda?'agendaSubtitle':'inspirationSubtitle'];
     });
   }
   async function resolveRegion(value){
@@ -49,5 +62,5 @@
     if(!point) throw new Error('Geen locatie gevonden. Controleer de plaats of postcode.');
     return {label:doc.woonplaatsnaam || doc.weergavenaam || query,lat:Number(point[2]),lon:Number(point[1])};
   }
-  window.SiteSettings = Object.freeze({normalize, imageUrl, applyHeader, resolveRegion, radii});
+  window.SiteSettings = Object.freeze({normalize, imageUrl, applyHeader, resolveRegion, radii, defaultText, forLocation, placeKey});
 })();

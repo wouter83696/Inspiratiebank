@@ -5446,6 +5446,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="website-bestanden/header-layout-shared.css?v=20261001-v1">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -5808,7 +5809,7 @@
   <script src="website-bestanden/select-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script src="website-bestanden/agenda-discovery-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script>DiscoveryViewShared.mount();AgendaDiscoveryShared.mount();</script>
-  <script src="website-bestanden/site-settings-shared.js?v=20260930-radius-v2"></script>
+  <script src="website-bestanden/site-settings-shared.js?v=20261001-regional-headers-v1"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20260930-list-parity-v2"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
@@ -6554,7 +6555,7 @@
       userLocation = {...DEFAULT_LOCATION};
       userLocationRadiusKm = loadUserLocationRadius();
     }
-    SiteSettings.applyHeader(settings);
+    SiteSettings.applyHeader(settings, document, userLocation);
   }
   function loadUserLocation(){
     if(typeof localStorage === 'undefined') return {...DEFAULT_LOCATION};
@@ -6596,6 +6597,7 @@
       if(userLocation.isDefault) localStorage.removeItem(USER_LOCATION_KEY);
       else localStorage.setItem(USER_LOCATION_KEY, JSON.stringify(userLocation));
     }
+    SiteSettings.applyHeader(centralStorage?.siteSettings, document, userLocation);
     syncLocationUi();
     renderIdeas();
     renderAgenda();
@@ -6809,6 +6811,7 @@
     return haversineKm(DEFAULT_LOCATION, location);
   }
   function isSupportedLocation(location){
+    if(SiteSettings.normalize(centralStorage?.siteSettings).regionalHeaders.some(h=>h.places.includes(SiteSettings.placeKey(location?.place||location?.label))))return true;
     const km = supportedRegionDistanceKm(location);
     return Number.isFinite(km) && km <= SUPPORTED_REGION_RADIUS_KM;
   }

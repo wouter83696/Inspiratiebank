@@ -8,6 +8,7 @@
  function setFilter(id,value){const select=$(id);select.value=value;syncCustomSelect(select);renderAgendaReview();}
  function sync(){
    if(!state.initialized)return;
+   SiteSettings.applyHeader(AdminSiteSettings.current(),$('agendaReviewPanel'),currentRegion());
    const filters=agendaAdminFilters();
    $('agendaThemeLegend').querySelectorAll('[data-theme-filter]').forEach(button=>{
      const active=domainDisplayLabel(button.dataset.themeFilter)===domainDisplayLabel(filters.domain);

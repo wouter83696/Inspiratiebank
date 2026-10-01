@@ -41,6 +41,7 @@
     renderIdeas();
   }
   function sync(count){
+    SiteSettings.applyHeader(AdminSiteSettings.current(),$('inspirationAdminPanel'),state.region||AdminSiteSettings.current().region);
     if(!initialized) return;
     document.querySelectorAll('#ideaFilterSheetLayer [data-sheet-filter]').forEach(button=>{
       const key=filterKey(button.dataset.sheetFilter),value=button.dataset.value;

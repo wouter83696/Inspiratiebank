@@ -992,8 +992,9 @@
   <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260911-first-paint-v4">
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260930-agenda-rebuild-v1">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260923-warm-cards-v1">
-  <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20260930-agenda-rebuild-v1">
-  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261001-management-filters-v1">
+  <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261001-regional-headers-v1">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261001-regional-headers-v1">
+  <link rel="stylesheet" href="../website-bestanden/header-layout-shared.css?v=20261001-v1">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -1168,8 +1169,21 @@
           <section class="adminWorkspace adminSettingsWorkspace" data-admin-workspace="settings" hidden>
             <div class="workspaceHeader"><div><h2>Instellingen</h2><p>Beheer de headerafbeelding en de standaardregio voor bezoekers.</p></div></div>
             <form id="siteSettingsForm" class="siteSettingsForm">
-              <section class="panel"><h3>Headerafbeelding</h3><p>Deze afbeelding verschijnt bovenaan de inspiratiebank en UIT-agenda.</p>
-                <div class="siteHeaderPreview"><img id="siteHeaderPreview" alt="Voorbeeld van de header" src="../website-bestanden/hero-achtergronden/inspiratiebank-header.png"><span>Ontdek iets nieuws</span></div>
+              <section class="panel" id="siteHeaderPreviewPanel"><h3>Headers</h3><p>Beheer de standaardheader of een eigen header voor een stad of gebied. Deze verschijnt bij de locatie die de bezoeker kiest.</p>
+                <div class="siteSettingsFields">
+                  <label>Header bewerken<select id="siteHeaderProfile"><option value="">Standaardheader</option></select></label>
+                  <label>Nieuwe stad of gebied<input id="siteHeaderNewName" placeholder="Bijvoorbeeld Arnhem of Land van Cuijk"></label>
+                </div>
+                <div class="siteHeaderProfileActions"><button class="button" id="siteHeaderAddProfile" type="button">Header toevoegen</button><button class="button hot" id="siteHeaderRemoveProfile" type="button" hidden>Deze regionale header verwijderen</button></div>
+                <label id="siteHeaderPlacesLabel" hidden>Plaatsen voor deze header<input id="siteHeaderPlaces" placeholder="Bijvoorbeeld Cuijk, Boxmeer, Grave"><small>Gebruik plaatsnamen zoals ze in het locatiefilter verschijnen, gescheiden door komma’s. Zonder passende header gebruikt de site de standaardheader.</small></label>
+                <div class="siteSettingsFields">
+                  <label>Titel Inspiratiebank<input id="siteInspirationTitle" maxlength="100" required></label>
+                  <label>Ondertitel Inspiratiebank<input id="siteInspirationSubtitle" maxlength="200"></label>
+                  <label>Titel UIT-agenda<input id="siteAgendaTitle" maxlength="100" required></label>
+                  <label>Ondertitel UIT-agenda<input id="siteAgendaSubtitle" maxlength="200"></label>
+                  <label>Voorbeeld bekijken<select id="siteHeaderPage"><option value="inspiration">Inspiratiebank</option><option value="agenda">UIT-agenda</option></select></label>
+                </div>
+                <div class="siteHeaderPreview tabHero inspirationHero"><img id="siteHeaderPreview" alt="" src="../website-bestanden/hero-achtergronden/inspiratiebank-header.png"><div class="tabHeroHomeLink"><h2 id="siteHeaderPreviewTitle" class="tabHeroTitle"></h2><p id="siteHeaderPreviewSubtitle" class="tabHeroLine"></p></div></div>
                 <div class="siteSettingsFields">
                   <label>Afbeelding kiezen<input id="siteHeaderFile" type="file" accept="image/jpeg,image/png,image/webp"><small id="siteHeaderFileLabel">Standaardafbeelding</small></label>
                   <label>Of een webadres<input id="siteHeaderUrl" type="url" placeholder="https://voorbeeld.nl/header.jpg"><small>Een rechtstreeks HTTPS-adres naar een afbeelding.</small></label>
@@ -1563,10 +1577,10 @@
   <script src="../website-bestanden/select-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script src="../website-bestanden/agenda-discovery-shared.js?v=20261001-stimulus-v1"></script>
   <script>DiscoveryViewShared.mount({admin:true});AgendaDiscoveryShared.mount();</script>
-  <script src="../website-bestanden/admin-agenda.js?v=20261001-management-filters-v1"></script>
-  <script src="../website-bestanden/site-settings-shared.js?v=20260930-radius-v2"></script>
-  <script src="../website-bestanden/admin-site-settings.js?v=20260930-radius-v2"></script>
-  <script src="../website-bestanden/admin-discovery.js?v=20260930-agenda-rebuild-v1"></script>
+  <script src="../website-bestanden/admin-agenda.js?v=20261001-regional-headers-v1"></script>
+  <script src="../website-bestanden/site-settings-shared.js?v=20261001-regional-headers-v1"></script>
+  <script src="../website-bestanden/admin-site-settings.js?v=20261001-regional-headers-v1"></script>
+  <script src="../website-bestanden/admin-discovery.js?v=20261001-regional-headers-v1"></script>
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
   <script src="../website-bestanden/idea-view-shared.js?v=20260930-list-parity-v2"></script>
   <script src="../website-bestanden/agenda-view-shared.js?v=20260930-agenda-rebuild-v1"></script>

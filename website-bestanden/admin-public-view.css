@@ -6353,4 +6353,19 @@
       }
     }
   
+/* One text layout for public headers, management headers and their preview. */
+:scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel,:scope#inspirationAdminPanel,:scope#agendaReviewPanel,#siteHeaderPreviewPanel) .tabHero{
+ display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;
+ box-sizing:border-box;padding-top:32px!important;padding-bottom:32px!important;
+}
+:scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel,:scope#inspirationAdminPanel,:scope#agendaReviewPanel,#siteHeaderPreviewPanel) .tabHero>.tabHeroHomeLink{
+ position:relative!important;inset:auto!important;transform:none!important;margin:0!important;width:100%!important;max-width:none!important;
+}
+:scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel,:scope#inspirationAdminPanel,:scope#agendaReviewPanel,#siteHeaderPreviewPanel) .tabHeroTitle{
+ position:relative;inset:auto!important;transform:none!important;margin:0!important;padding:0!important;white-space:normal!important;overflow-wrap:anywhere;
+}
+:scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel,:scope#inspirationAdminPanel,:scope#agendaReviewPanel,#siteHeaderPreviewPanel) .tabHeroLine{
+ transform:none!important;margin:8px 0 0!important;padding:0!important;white-space:normal!important;overflow-wrap:anywhere;
+}
+
 }
