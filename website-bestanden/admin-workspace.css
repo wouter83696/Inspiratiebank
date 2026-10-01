@@ -227,3 +227,16 @@ body.ideaFilterSheetOpen{overflow:hidden}
 #adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.desktopStickyControls{margin-top:calc(-1 * var(--admin-search-half,24px))!important;padding-top:0!important;background:linear-gradient(transparent var(--admin-search-half,24px),#F8F5EB var(--admin-search-half,24px))!important}
 #adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.desktopStickyControls>.filterBar{margin-top:0!important}
 #adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.desktopStickyControls.isStuck{background:#F8F5EB!important}
+/* Keep the banner broad while the controls and results share one inset. */
+#adminApp .adminPublicSurface{--admin-content-inset:24px}
+#adminApp .adminPublicSurface>:not(.tabHero){margin-left:var(--admin-content-inset)!important;margin-right:var(--admin-content-inset)!important;width:calc(100% - 2 * var(--admin-content-inset))!important;box-sizing:border-box}
+#adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.desktopStickyControls{top:12px!important}
+#adminApp .desktopStickyControls.isStuck::before{content:"";position:absolute;top:-12px;left:0;right:0;height:12px;background:#F8F5EB;pointer-events:none}
+#adminApp .adminHeroActions{position:absolute;z-index:3;right:24px;top:18px;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+#adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.tabHero{padding-top:70px!important;min-height:210px!important}
+#adminApp #agendaEditWeekLabel[hidden]{display:none}
+@media(max-width:640px){#adminApp .adminPublicSurface{--admin-content-inset:12px}#adminApp .adminHeroActions{left:20px;right:20px;top:12px;justify-content:flex-start}#adminApp .adminHeroActions .button{font-size:12px;padding:8px}#adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.tabHero{padding-top:100px!important;min-height:250px!important}}
+#adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.desktopStickyControls{display:block!important;position:sticky!important;z-index:45}
+#adminApp #agendaContentSurface{display:block}
+html:has(body.adminMode),body.adminMode{overflow-x:clip}
+#adminApp :is(#inspirationAdminPanel,#agendaReviewPanel){overflow:visible!important}

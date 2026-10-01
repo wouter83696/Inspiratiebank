@@ -993,7 +993,7 @@
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260930-agenda-rebuild-v1">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260923-warm-cards-v1">
   <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261001-regional-headers-v1">
-  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261001-hero-overlap-v1">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261001-add-actions-v1">
   <link rel="stylesheet" href="../website-bestanden/header-layout-shared.css?v=20261001-v1">
   <link rel="stylesheet" href="../website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
 </head>
@@ -1227,7 +1227,7 @@
         <section class="panel tintedPanel toneSource" id="sourceOwnPanel">
           <div class="panelHead">
             <div>
-              <h2>Bronnen</h2>
+              <h2>Bronnen</h2><button class="button" type="button" data-add-admin-source>+ Bron toevoegen</button>
               <p>Voeg bronnen toe en beheer de links die op de gewone pagina bij Bronnen staan. Je kunt bronlinks openen, wijzigen of verwijderen.</p>
             </div>
           </div>
@@ -1264,7 +1264,7 @@
       </div>
 
         <section class="adminPublicSurface" id="agendaReviewPanel">
-          <section class="tabHero agendaHero" aria-labelledby="adminAgendaTitle">
+          <section class="tabHero agendaHero" aria-labelledby="adminAgendaTitle"><div class="adminHeroActions"><button class="button primary" id="addAdminAgendaBtn" type="button">+ Agenda-item toevoegen</button><button class="button" data-add-admin-source type="button">Bron toevoegen</button></div>
             <div class="tabHeroHomeLink"><h1 class="tabHeroTitle" id="adminAgendaTitle">UIT-agenda</h1><p class="tabHeroLine" data-header-subtitle="Beheerpagina">Beheerpagina</p></div>
           </section>
           <div data-agenda-controls></div>
@@ -1326,7 +1326,7 @@
 
           <section class="adminWorkspace" data-admin-workspace="inspiration" hidden>
       <section class="adminPublicSurface" id="inspirationAdminPanel" data-public-view="inspiration">
-        <section class="tabHero inspirationHero" aria-labelledby="adminInspirationTitle">
+        <section class="tabHero inspirationHero" aria-labelledby="adminInspirationTitle"><div class="adminHeroActions"><button class="button primary" id="addAdminIdeaBtn" type="button">+ Activiteit toevoegen</button></div>
           <div class="tabHeroHomeLink"><h1 class="tabHeroTitle" id="adminInspirationTitle">Ontdek iets nieuws</h1><p class="tabHeroLine" data-header-subtitle="Beheerpagina">Beheerpagina</p></div>
         </section>
         <div data-discovery-controls></div>
@@ -1354,7 +1354,7 @@
           <div class="panelHead">
             <div>
               <h3>Inspiratieformulier</h3>
-              <p>Gebruik hetzelfde formulier als bij inspiratie toevoegen. Bij vaste items wordt het origineel verborgen en komt deze bewerkte versie online terug.</p>
+              <p id="adminIdeaFormIntro">Vul de activiteit in.</p>
             </div>
           </div>
           <form id="adminIdeaEditForm" class="teamForm">
@@ -1532,7 +1532,7 @@
       <form id="agendaEditForm" class="agendaEditForm">
         <label class="wide">Titel<input id="agendaEditItemTitle" required></label>
         <label>Datum of periode<input id="agendaEditDate" placeholder="Bijv. 10 sep t/m 15 okt"></label>
-        <label>Tijd<input id="agendaEditTime" placeholder="Bijv. 19.00 - 23.00"></label>
+        <label id="agendaEditWeekLabel" hidden>Week<select id="agendaEditWeek"></select></label><label>Tijd<input id="agendaEditTime" placeholder="Bijv. 19.00 - 23.00"></label>
         <label>Plek<input id="agendaEditWhere"></label>
         <label>Categorie<select id="agendaEditDomain"></select></label>
         <label>Afstand<select id="agendaEditDistance"></select></label>
@@ -2703,6 +2703,7 @@
 	    const rules = agendaBlockRules();
 	    const items = [
 	      ...baseAgendaItems().map(item => ({...item, agendaKind:'base'})),
+      ...agendaItemOverrides().filter(item=>item.manualEntry).map(item=>({...normalizeAgendaOffer(item),agendaKind:'base'})),
 	      ...autoAgendaItems().map(item => ({...applyAgendaItemOverride(item), agendaKind:'auto'}))
 	    ];
 	    const seen = new Set();
@@ -3950,7 +3951,13 @@
 	    editingAgendaItemIds = (item.groupIds || [item.id]).map(String);
 	    editingAgendaSource = item;
 	    $('#agendaEditTitle').textContent = isAgendaOngoingOffer(item) || isAgendaFlexiblePeriod(item) ? 'Doorlopend aanbod wijzigen' : 'Agenda-item wijzigen';
-	    $('#agendaEditItemTitle').value = item.title || '';
+	    const custom = Boolean(item.isNew || agendaItemOverrides().find(x=>x.id===String(item.id))?.manualEntry);
+    $('#agendaEditWeekLabel').hidden=!custom;
+    $('#agendaEditWeek').replaceChildren(...ADMIN_WEEKS.map(w=>new Option(`Week ${w.week} · ${w.dates}`,w.id)));
+    $('#agendaEditWeek').value=item.week || ADMIN_WEEKS[0]?.id || '';
+    if(item.isNew)$('#agendaEditTitle').textContent='Agenda-item toevoegen';
+    $('#agendaEditForm button[type=submit]').textContent=item.isNew?'Agenda-item toevoegen':'Wijzigingen opslaan';
+    $('#agendaEditItemTitle').value = item.title || '';
 	    $('#agendaEditDate').value = item.date || '';
 	    $('#agendaEditTime').value = item.time || '';
 	    $('#agendaEditWhere').value = item.where || '';
@@ -3994,7 +4001,11 @@
 	      pinToAgenda:$('#agendaEditPinToAgenda').checked,
 	      updatedAt:new Date().toISOString()
 	    };
-	    const targetIds = editingAgendaItemIds.length ? editingAgendaItemIds : [String(item.id)];
+	    if(item.isNew || agendaItemOverrides().find(x=>x.id===String(item.id))?.manualEntry){
+      if(!$('#agendaEditWeek').value || !override.date){setStatus('#agendaEditStatus','Kies een week en vul een datum of periode in.','warn');return;}
+      Object.assign(override,{manualEntry:true,week:$('#agendaEditWeek').value,reviewStatus:'verified',locationType:'Buiten de deur'});
+    }
+    const targetIds = editingAgendaItemIds.length ? editingAgendaItemIds : [String(item.id)];
 	    const overrides = agendaItemOverrides().filter(entry => !targetIds.includes(String(entry.id)));
 	    saveArray(AGENDA_OVERRIDES_KEY, [...targetIds.map(id => ({...override, id})), ...overrides]);
 	    if(!(await saveCentralStorage())){
@@ -4624,11 +4635,12 @@
     };
     return legacy[hash] || hash || 'meldkamer';
   }
-  function startAdminIdeaEdit(kind, key){
-    const item = allAdminIdeas().find(entry => entry.kind === kind && String(entry.key) === String(key));
+  function startAdminIdeaEdit(kind, key, draft){
+    const item = draft || allAdminIdeas().find(entry => entry.kind === kind && String(entry.key) === String(key));
     if(!item) return;
     setAdminWorkspace('inspiration', {scroll:false});
     editingAdminIdea = item;
+    $('#adminIdeaFormIntro').textContent=item.isNew?'Voeg een activiteit toe aan de inspiratiebank. Na opslaan is deze direct zichtbaar.':'Pas de activiteit aan. Bij vaste items vervangt deze versie het origineel.';
     $('#adminIdeaEditPanel').hidden = false;
     $('#adminEditIdeaTitle').value = item.title || '';
     setEditSelect('#adminEditIdeaDomain', item.domain || 'Ontmoeten, Spel & Vaardigheden');
@@ -4658,7 +4670,7 @@
     syncAdminIdeaImageSuggestion();
     $('#adminEditIdeaDescription').value = item.fit || item.description || '';
     $('#adminEditIdeaRules').value = item.materials || item.rules || item.note || '';
-    setStatus('#adminIdeaEditStatus', item.kind === 'collega-toegevoegd' ? 'Pas de velden aan en sla de wijziging op.' : 'Bij opslaan komt er een bewerkte online versie en wordt het vaste origineel verborgen.', 'ok');
+    setStatus('#adminIdeaEditStatus', item.isNew ? 'Vul de activiteit in en sla op om deze te publiceren.' : item.kind === 'collega-toegevoegd' ? 'Pas de velden aan en sla de wijziging op.' : 'Bij opslaan komt er een bewerkte online versie en wordt het vaste origineel verborgen.', 'ok');
     $('#adminIdeaEditPanel').scrollIntoView({behavior:'smooth', block:'start'});
     $('#adminEditIdeaTitle')?.focus({preventScroll:true});
   }
@@ -4712,6 +4724,7 @@
     const stored = storedTeamIdeas().filter(item => item.id !== next.id && item.id !== original.key);
     if(original.kind === 'collega-toegevoegd'){
       stored.unshift(next);
+      if(original.isNew){const approved=approvedTeamIds();approved.add(next.id);saveArray(COLLEAGUE_APPROVED_KEY,[...approved]);}
       if(next.id !== original.key){
         const approved = approvedTeamIds();
         if(approved.delete(original.key)) approved.add(next.id);
@@ -4748,7 +4761,7 @@
     setupIdeaFilters();
     renderIdeas();
     resetAdminIdeaEditForm();
-    setStatus('#adminStatus', 'Inspiratie-item gewijzigd. Ververs de gewone pagina om de wijziging daar te zien.', 'ok');
+    setStatus('#adminStatus', original.isNew?'Activiteit toegevoegd aan de inspiratiebank.':'Inspiratie-item gewijzigd.', 'ok');
   }
 	  async function verifyAdminPassword(password){
 	    if(!password) return false;
@@ -4862,6 +4875,9 @@
     $('#agendaAdminResetBtn').addEventListener('click',()=>{['agendaAdminKindFilter','agendaAdminStatusFilter'].forEach(id=>{document.getElementById(id).value='all';syncCustomSelect(document.getElementById(id));});renderAgendaReview();});
     enhanceCustomSelect($('#linkCategory'));
     resetLinkForm();
+    $('#addAdminIdeaBtn').addEventListener('click',()=>{resetAdminIdeaEditForm();startAdminIdeaEdit('', '', {kind:'collega-toegevoegd',key:crypto.randomUUID(),isNew:true,title:'',source:'Beheer'});});
+    $('#addAdminAgendaBtn').addEventListener('click',()=>startAgendaEdit('',{item:{id:crypto.randomUUID(),isNew:true,title:'',source:'Beheer'}}));
+    $$('[data-add-admin-source]').forEach(button=>button.addEventListener('click',()=>{resetLinkForm();setAdminWorkspace('agenda',{scrollTarget:'sourceOwnPanel',hash:true});$('#linkName').focus({preventScroll:true});}));
     $('#linkForm').addEventListener('submit', addCustomLink);
     $('#cancelLinkEditBtn').addEventListener('click', () => {
       resetLinkForm();

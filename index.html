@@ -7378,7 +7378,7 @@
 	    const automatic = loadAutoAgendaItems().map(applyAgendaItemOverride);
 	    const merged = [];
 	    const seen = new Set();
-	    dedupeAgendaItems([...base, ...automatic]).forEach((item, index) => {
+	    dedupeAgendaItems([...base, ...loadAgendaItemOverrides().filter(item=>item.manualEntry), ...automatic]).forEach((item, index) => {
 	      const normalized = normalizeAgendaOffer(item, index);
 	      const key = agendaItemKey(normalized);
 	      const contentKey = agendaContentKey(normalized);
