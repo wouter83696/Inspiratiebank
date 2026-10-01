@@ -47,7 +47,7 @@
       }else{hero.style.removeProperty('--hero-bg-image');hero.style.removeProperty('background-position');}
       const agenda=hero.classList.contains('agendaHero'),title=hero.querySelector('.tabHeroTitle'),subtitle=hero.querySelector('.tabHeroLine');
       if(title)title.textContent=settings[agenda?'agendaTitle':'inspirationTitle'];
-      if(subtitle)subtitle.textContent=settings[agenda?'agendaSubtitle':'inspirationSubtitle'];
+      if(subtitle)subtitle.textContent=subtitle.dataset.headerSubtitle || settings[agenda?'agendaSubtitle':'inspirationSubtitle'];
     });
   }
   async function resolveRegion(value){
