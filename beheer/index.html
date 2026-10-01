@@ -715,6 +715,9 @@
     .featuredAdminHead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
     .featuredAdminHead h3{margin:0 0 3px;color:var(--accent-dark);font-size:1rem}
     .featuredAdminHead p{margin:0;color:var(--muted);font-size:.82rem}
+    .featuredAdminSaveNote{display:block;margin-top:4px;color:var(--accent);font-size:.76rem;font-weight:600}
+    .featuredAdminHeadActions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+    .featuredAdminClear{min-height:32px;padding:6px 10px;font-size:.78rem}
     .featuredAdminCount{white-space:nowrap;color:#8f7000;font-size:.78rem;font-weight:700}
     .featuredAdminList{display:grid;gap:7px}
     .featuredAdminItem{display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:9px;padding:8px 9px;border:1px solid rgba(218,187,93,.25);border-radius:10px;background:rgba(255,255,255,.76)}
@@ -1336,8 +1339,12 @@
             <div>
               <h3 id="featuredAdminTitle">Uitgelicht</h3>
               <p>Selecteer maximaal vijf activiteiten met de sterknop. De volgorde hieronder is de volgorde van de carrousel.</p>
+              <span class="featuredAdminSaveNote">Wijzigingen worden automatisch opgeslagen.</span>
             </div>
-            <span class="featuredAdminCount" id="featuredAdminCount">0 / 5</span>
+            <div class="featuredAdminHeadActions">
+              <span class="featuredAdminCount" id="featuredAdminCount">0 / 5</span>
+              <button class="button featuredAdminClear" id="clearFeaturedIdeasBtn" type="button">Selectie leegmaken</button>
+            </div>
           </div>
           <div class="featuredAdminList" id="featuredAdminList"></div>
         </details>
@@ -3040,6 +3047,16 @@
     renderIdeas();
     setStatus('#adminStatus', 'Volgorde van Uitgelicht aangepast.', 'ok');
   }
+  async function clearFeaturedIdeas(){
+    if(!featuredIdeaKeys().length) return;
+    if(!(await confirmDialog('Alle activiteiten uit de carrousel verwijderen? Daarna kiest de site automatisch één activiteit.', {title:'Carrousel leegmaken?', confirmText:'Selectie leegmaken'}))) return;
+    if(!(await saveFeaturedIdeaKeys([]))){
+      setStatus('#adminStatus', storageErrorMessage('Carrouselselectie leegmaken lukte niet.'), 'warn');
+      return;
+    }
+    renderIdeas();
+    setStatus('#adminStatus', 'Carrouselselectie leeggemaakt. De site kiest nu automatisch één activiteit.', 'ok');
+  }
   function ideaFilterValues(){ return AdminDiscovery.values(); }
   function passesIdeaFilters(item){ return AdminDiscovery.matches(item); }
   function adminIdeaEmptyMessage(query='', filters={}){
@@ -3272,6 +3289,7 @@
     const byKey = new Map(allAdminIdeas().map(item => [adminFeaturedIdeaKey(item), item]));
     const selected = keys.map(key => ({key, item:byKey.get(key)})).filter(entry => entry.item);
     $('#featuredAdminCount').textContent = `${selected.length} / 5`;
+    $('#clearFeaturedIdeasBtn').disabled = selected.length === 0;
     $('#featuredAdminList').innerHTML = selected.length ? selected.map(({key,item}, index) => `<div class="featuredAdminItem">
       <span class="featuredAdminIndex">${index + 1}</span>
       <span class="featuredAdminTitle">${escapeHtml(item.title)}</span>
@@ -4929,6 +4947,7 @@
     $('#restoreHiddenBtn').addEventListener('click', restoreHidden);
     $('#restoreSourceLinksBtn').addEventListener('click', restoreSourceLinks);
     $('#clearLinksBtn').addEventListener('click', clearCustomLinks);
+    $('#clearFeaturedIdeasBtn').addEventListener('click', clearFeaturedIdeas);
     $('#approveAllAgendaBtn').addEventListener('click', verifyAllAgendaItems);
     document.querySelectorAll('[data-request-agenda-source-check]').forEach(button => {
       button.addEventListener('click', requestAgendaSourceCheck);
