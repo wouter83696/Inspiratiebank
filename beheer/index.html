@@ -996,7 +996,7 @@
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260930-agenda-rebuild-v1">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260923-warm-cards-v1">
   <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261001-regional-headers-v1">
-  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261001-selection-bar-v5">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261001-action-topbar-v1">
   <link rel="stylesheet" href="../website-bestanden/header-layout-shared.css?v=20261001-v1">
   <link rel="stylesheet" href="../website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
 </head>
@@ -1267,7 +1267,8 @@
       </div>
 
         <section class="adminPublicSurface" id="agendaReviewPanel">
-          <section class="tabHero agendaHero" aria-labelledby="adminAgendaTitle"><div class="adminHeroActions"><button class="button adminHeaderAdd" id="addAdminAgendaBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg><span>Agenda-item toevoegen</span></button><button class="button adminHeaderAdd" data-add-admin-source type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg><span>Bron toevoegen</span></button></div>
+          <header class="adminActionTopbar" aria-label="Beheeracties"><div class="adminHeroActions"><button class="button adminHeaderAdd" id="addAdminAgendaBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg><span>Agenda-item toevoegen</span></button><button class="button adminHeaderAdd" data-add-admin-source type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg><span>Bron toevoegen</span></button></div></header>
+        <section class="tabHero agendaHero" aria-labelledby="adminAgendaTitle">
             <div class="tabHeroHomeLink"><h1 class="tabHeroTitle" id="adminAgendaTitle">UIT-agenda</h1><p class="tabHeroLine" data-header-subtitle="Beheerpagina">Beheerpagina</p></div>
           </section>
           <div data-agenda-controls></div>
@@ -1330,7 +1331,8 @@
 
           <section class="adminWorkspace" data-admin-workspace="inspiration" hidden>
       <section class="adminPublicSurface" id="inspirationAdminPanel" data-public-view="inspiration">
-        <section class="tabHero inspirationHero" aria-labelledby="adminInspirationTitle"><div class="adminHeroActions"><button class="button adminHeaderAdd" id="addAdminIdeaBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg><span>Activiteit toevoegen</span></button></div>
+        <header class="adminActionTopbar" aria-label="Beheeracties"><div class="adminHeroActions"><button class="button adminHeaderAdd" id="addAdminIdeaBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg><span>Activiteit toevoegen</span></button></div></header>
+        <section class="tabHero inspirationHero" aria-labelledby="adminInspirationTitle">
           <div class="tabHeroHomeLink"><h1 class="tabHeroTitle" id="adminInspirationTitle" data-header-title="Inspiratiebank">Inspiratiebank</h1><p class="tabHeroLine" data-header-subtitle="Beheerpagina">Beheerpagina</p></div>
         </section>
         <div data-discovery-controls></div>
