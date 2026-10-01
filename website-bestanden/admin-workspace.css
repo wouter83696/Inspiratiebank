@@ -251,3 +251,11 @@ html:has(body.adminMode),body.adminMode{overflow-x:clip}
 #adminApp .agendaPendingRow p{margin:5px 0 0;color:var(--muted);font-size:.86rem;line-height:1.5}
 #adminApp .agendaPendingActions{display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0}
 @media(max-width:820px){#adminApp .agendaPendingRow{align-items:flex-start;flex-direction:column}#adminApp .agendaPendingList{max-height:60vh}}
+/* Keep agenda view choices alongside the category chips. */
+@media(min-width:641px){
+  #adminApp #agendaReviewPanel>.agendaDesktopControls{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:16px}
+  #adminApp #agendaReviewPanel>.agendaDesktopControls>.filterBar{grid-column:1 / -1}
+  #adminApp #agendaReviewPanel .agendaDesktopControls>.agendaLegendBar{grid-column:1;grid-row:2;min-width:0;margin:8px 0 10px}
+  #adminApp #agendaReviewPanel .agendaDesktopControls>.agendaSectionSwitcher{grid-column:2;grid-row:2;margin:8px 6px 10px 0;align-self:center}
+  #adminApp #agendaReviewPanel .agendaDesktopControls #agendaThemeLegend{min-width:0;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+}
