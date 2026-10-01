@@ -1329,7 +1329,7 @@
           <div class="tabHeroHomeLink"><h1 class="tabHeroTitle" id="adminInspirationTitle">Ontdek iets nieuws</h1><p class="tabHeroLine">Vind én beheer inspiratie</p></div>
         </section>
         <div data-discovery-controls></div>
-        <details class="featuredAdminPanel" open><summary>Uitgelicht tegel beheren</summary>
+        <details class="featuredAdminPanel" open><summary>Uitgelicht instellen</summary>
           <div class="featuredAdminHead">
             <div>
               <h3 id="featuredAdminTitle">Uitgelicht</h3>
@@ -1340,7 +1340,7 @@
           <div class="featuredAdminList" id="featuredAdminList"></div>
         </details>
 <div class="adminSelectionToolbar" id="ideaSelectionToolbar" aria-live="polite">
-	          <div class="adminSelectionSummary"><span class="adminSelectionKicker">Geselecteerd</span><strong id="ideaSelectionTitle">Klik op een tegel om deze te beheren</strong></div>
+	          <div class="adminSelectionSummary"><span class="adminSelectionKicker">Tegel bewerken</span><strong id="ideaSelectionTitle">Selecteer een tegel om te bewerken</strong></div>
 	                  <span id="ideaCount" class="adminCountBadge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.5-8 11-8 11S4 14.5 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span><strong id="ideaCountValue">0</strong><span id="ideaCountLabel">activiteiten</span></span></span>
 	          <div class="adminSelectionActions" id="ideaSelectionActions"></div>
 	        </div>
@@ -3275,7 +3275,7 @@
     if(!title || !actions) return;
     if(!item){
       selectedAdminIdeaKey = '';
-      title.textContent = 'Klik op een tegel om deze te beheren';
+      title.textContent = 'Selecteer een tegel om te bewerken';
       actions.innerHTML = '';
       $('#ideaSelectionToolbar')?.classList.remove('hasSelection');
       return;
