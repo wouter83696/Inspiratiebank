@@ -3702,6 +3702,15 @@
     selectedAgendaItemId = selectedAgendaItemId === String(id) ? '' : String(id);
     renderAgendaReview();
   }
+  function clearAgendaItemSelection(){
+    if(!selectedAgendaItemId) return;
+    selectedAgendaItemId = '';
+    $$('#agendaContentSurface [data-agenda-select].isSelected').forEach(item => {
+      item.classList.remove('isSelected');
+      item.setAttribute('aria-pressed', 'false');
+    });
+    renderAgendaSelectionToolbar();
+  }
   async function updateTitleVisibility(key, action){
     const titles = new Set(loadArray(ADMIN_HIDDEN_INSPIRATION_KEY).map(normalize));
     if(action === 'hide') titles.add(normalize(key));
@@ -4951,6 +4960,7 @@
       if(ideaCard && !event.target.closest('a,button,details,summary,input,select,textarea')) selectAdminIdea(ideaCard.dataset.ideaKey);
       const agendaCard = event.target.closest('#agendaContentSurface [data-agenda-select]');
       if(agendaCard && !event.target.closest('a,button,details,summary,input,select,textarea')) selectAgendaItem(agendaCard.dataset.agendaSelect);
+      else if(selectedAgendaItemId && event.target.closest('#agendaContentSurface') && !event.target.closest('a,button,details,summary,input,select,textarea')) clearAgendaItemSelection();
       const titleButton = event.target.closest('[data-title-action]');
       if(titleButton) updateTitleVisibility(titleButton.dataset.key, titleButton.dataset.titleAction);
       const teamButton = event.target.closest('[data-team-action]');
