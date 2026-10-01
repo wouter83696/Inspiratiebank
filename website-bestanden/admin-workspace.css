@@ -259,3 +259,8 @@ html:has(body.adminMode),body.adminMode{overflow-x:clip}
   #adminApp #agendaReviewPanel .agendaDesktopControls>.agendaSectionSwitcher{grid-column:2;grid-row:2;margin:8px 6px 10px 0;align-self:center}
   #adminApp #agendaReviewPanel .agendaDesktopControls #agendaThemeLegend{min-width:0;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
 }
+
+/* Source actions use the same compact controls as the editing toolbar. */
+#adminApp .sharedSourceActions .button.iconAction{display:inline-grid;place-items:center;width:36px;height:36px;min-width:36px;min-height:36px;padding:8px;border-radius:12px;box-shadow:none}
+#adminApp .sharedSourceActions .button.iconAction svg{width:18px;height:18px}
+@media(pointer:coarse){#adminApp .sharedSourceActions .button.iconAction{width:44px;height:44px;min-width:44px;min-height:44px}}
