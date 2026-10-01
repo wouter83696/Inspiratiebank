@@ -3479,7 +3479,7 @@ window.BCJN_BEHEER_BASE = {
       "title": "Wandeling met zoekopdrachten",
       "domain": "Natuur & Buiten",
       "type": "Eigen aanbod",
-      "locationType": "Thuis",
+      "locationType": "Buiten",
       "cost": "Gratis",
       "stimulus": "Laag",
       "duration": "30–60 min",
@@ -3489,9 +3489,9 @@ window.BCJN_BEHEER_BASE = {
       "tags": [
         "wandelen",
         "laag prikkel",
-        "thuis"
+        "buiten"
       ],
-      "distanceBand": "Thuis",
+      "distanceBand": "Op locatie",
       "image": "website-bestanden/afbeeldingen/inspiratie/065-terreinwandeling-met-opdracht.jpg",
       "imageAlt": "Foto bij Wandeling met zoekopdrachten",
       "imageStatus": "approved"
@@ -4186,7 +4186,7 @@ window.BCJN_BEHEER_BASE = {
       "title": "Bootcamp",
       "domain": "Sport & Bewegen",
       "type": "Eigen aanbod",
-      "locationType": "Thuis",
+      "locationType": "Buiten",
       "cost": "Gratis",
       "stimulus": "Middel/hoog",
       "duration": "45–75 min",
@@ -4196,9 +4196,9 @@ window.BCJN_BEHEER_BASE = {
       "tags": [
         "sport",
         "conditie",
-        "thuis"
+        "buiten"
       ],
-      "distanceBand": "Thuis",
+      "distanceBand": "Op locatie",
       "image": "website-bestanden/afbeeldingen/inspiratie/099-bootcamp.jpg",
       "imageAlt": "Foto bij Bootcamp",
       "imageStatus": "approved"
@@ -4337,7 +4337,7 @@ window.BCJN_BEHEER_BASE = {
       "title": "Watermiddag",
       "domain": "Sport & Bewegen",
       "type": "Eigen aanbod",
-      "locationType": "Thuis",
+      "locationType": "Buiten",
       "cost": "Laag",
       "stimulus": "Middel",
       "duration": "60–120 min",
@@ -4346,10 +4346,10 @@ window.BCJN_BEHEER_BASE = {
       "fit": "Verkoelende spellen met water, sponzen en emmers voor een warme zomerdag.",
       "tags": [
         "water",
-        "thuis",
+        "buiten",
         "zomer"
       ],
-      "distanceBand": "Thuis",
+      "distanceBand": "Op locatie",
       "image": "website-bestanden/afbeeldingen/inspiratie/106-watermiddag-op-het-terrein.jpg",
       "imageAlt": "Foto bij Watermiddag",
       "imageStatus": "approved"

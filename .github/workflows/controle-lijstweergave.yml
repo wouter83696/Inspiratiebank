@@ -37,7 +37,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node --test website-bestanden/tests/idea-list-parity.test.cjs website-bestanden/tests/agenda-check-status.test.cjs
+      - run: node --test website-bestanden/tests/idea-list-parity.test.cjs website-bestanden/tests/agenda-check-status.test.cjs website-bestanden/tests/review-fixes.test.cjs website-bestanden/tests/featured-carousel.test.cjs
       - run: node website-bestanden/scripts/build-admin-public-view.js --check
       - run: npm install --no-save playwright
       - run: npx playwright install --with-deps chromium

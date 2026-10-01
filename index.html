@@ -714,12 +714,15 @@
     }
     .ideaFeaturedCarousel{position:relative;grid-column:span 2;min-width:0}
     .ideaFeaturedCarousel .ideaFeaturedCard{grid-column:auto}
-    .ideaFeaturedCard[hidden]{display:none!important}
-    .ideaFeaturedNav{position:absolute;z-index:5;top:20px;right:20px;display:flex;align-items:center;gap:6px;padding:4px;border:1px solid rgba(255,255,255,.72);border-radius:999px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-    .ideaFeaturedNav button{display:grid;place-items:center;width:30px;height:30px;padding:0;border:0;border-radius:50%;background:transparent;color:#315f6d;cursor:pointer}
-    .ideaFeaturedNav button:hover{background:rgba(226,245,243,.82)}
-    .ideaFeaturedNav button svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .ideaFeaturedPosition{min-width:34px;text-align:center;color:#4d686d;font-size:.7rem;font-weight:700}
+    .ideaFeaturedNav{display:flex;align-items:center;justify-content:center;gap:2px;min-height:30px}
+    .ideaFeaturedNav button{display:grid;place-items:center;width:28px;height:28px;padding:0;border:0;border-radius:50%;background:transparent;color:#52777c;cursor:pointer}
+    .ideaFeaturedDot::before{content:"";width:6px;height:6px;border-radius:50%;background:#b7c6c5;transition:width .25s ease,background .25s ease}
+    .ideaFeaturedDot[aria-pressed="true"]::before{width:17px;border-radius:8px;background:#527f85}
+    .ideaFeaturedNav button:focus-visible{outline:2px solid #527f85;outline-offset:1px}
+    .ideaFeaturedPause{font-size:12px;opacity:.75}
+    .ideaFeaturedSlides{display:grid;min-width:0}
+    .ideaFeaturedSlides .ideaFeaturedCard{grid-area:1 / 1;transition:opacity .45s ease,border-color .18s ease}
+    .ideaFeaturedSlides .ideaFeaturedCard[aria-hidden="true"]{visibility:hidden;opacity:0;pointer-events:none}
     .ideaFeaturedCard{
       position:relative;grid-column:span 2;align-self:stretch;display:block;
       width:100%;min-width:0;min-height:370px;padding:8px;overflow:hidden;border:1px solid rgba(218,187,93,.38);border-radius:18px;
@@ -732,8 +735,8 @@
     .ideaFeaturedMedia img{display:block;width:100%;height:100%;object-fit:cover;border-radius:11px}
     .ideaFeaturedMedia .ideaImagePlaceholder{display:grid;width:100%;height:100%;min-height:248px;margin:0;border:0;border-radius:0;place-items:center}
     .ideaFeaturedContent{
-      position:absolute;z-index:3;right:32px;bottom:32px;display:flex;flex-direction:column;align-items:stretch;gap:11px;
-      width:clamp(380px,52%,470px);min-width:0;padding:20px 22px;overflow:visible;border:1px solid rgba(64,45,20,.075);border-radius:13px;
+      position:absolute;z-index:3;right:22px;bottom:22px;display:flex;flex-direction:column;align-items:stretch;gap:8px;
+      width:min(370px,calc(100% - 44px));min-width:0;padding:15px 17px;overflow:visible;border:1px solid rgba(64,45,20,.075);border-radius:13px;
       background:rgba(255,254,252,.86);
       -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:none
     }
@@ -744,10 +747,10 @@
       writing-mode:horizontal-tb;transform:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)
     }
     .ideaFeaturedSideLabel svg{width:16px;height:16px;flex:0 0 auto;fill:none;stroke:#9A7800;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-    .ideaFeaturedCard h3{margin:0;color:#005F73;font-size:1.44rem;font-weight:680;line-height:1.16}
+    .ideaFeaturedCard h3{margin:0;color:#005F73;font-size:1.25rem;font-weight:680;line-height:1.16}
     .ideaFeaturedBottom{display:flex;align-items:center;gap:12px;width:100%;min-width:0;margin-top:1px}
     .ideaFeaturedMeta{
-      display:flex;align-items:center;gap:8px;flex:1 1 auto;width:auto;max-width:calc(100% - 46px);min-width:0;padding:8px 10px;
+      display:flex;flex-wrap:wrap;align-items:center;gap:5px 8px;flex:1 1 auto;width:auto;max-width:calc(100% - 46px);min-width:0;padding:4px 0;
       border:1px solid rgba(112,94,63,.035);border-radius:11px;background:rgba(247,241,231,.11);
       color:#697472;font-size:.76rem;font-weight:500;line-height:1.16
     }
@@ -771,12 +774,11 @@
       #ideaCards .ideaFeaturedMedia{position:relative;inset:auto;min-height:0;aspect-ratio:16 / 9;border-radius:12px 12px 0 0}
       #ideaCards .ideaFeaturedMedia .ideaImagePlaceholder{min-height:0}
       #ideaCards .ideaFeaturedSideLabel{top:14px;padding:7px 10px;border-left:0;border-radius:0 8px 8px 0;font-size:.68rem}
-      #ideaCards .ideaFeaturedContent{position:relative;right:auto;bottom:auto;width:auto;min-height:0;gap:10px;padding:12px 16px 16px;border:0;border-radius:0 0 11px 11px;background:#FFFEFC;box-shadow:none;backdrop-filter:none}
+      #ideaCards .ideaFeaturedContent{position:relative;right:auto;bottom:auto;width:auto;min-height:0;gap:8px;padding:12px 14px 14px;border:0;border-radius:0 0 11px 11px;background:#FFFEFC;box-shadow:none;backdrop-filter:none}
       #ideaCards .ideaFeaturedCard h3{font-size:1.2rem;line-height:1.2;color:#005F73}
       #ideaCards .ideaFeaturedBottom{gap:10px}
       #ideaCards .ideaFeaturedMeta{gap:5px;font-size:.74rem}
       #ideaCards .ideaFeaturedArrow{width:36px;height:36px;flex-basis:36px}
-      #ideaCards .ideaFeaturedNav{top:12px;right:12px}
     }
     .ideaSurpriseCard{
       grid-column:1 / -1;align-self:start;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px 14px;
@@ -5447,6 +5449,25 @@
     }
   </style>
   <link rel="stylesheet" href="website-bestanden/header-layout-shared.css?v=20261001-v1">
+  <style>
+    /* Tablet layouts keep navigation outside the hero and days readable. */
+    @media (min-width:641px) and (max-width:980px){
+      .topbar{width:100%;margin:0;min-height:60px;padding:0 var(--hero-edge);align-items:center;background:#fffdf8}
+      :is(#tab-inspiratie,#tab-weken) .tabHero{margin-top:0;min-height:260px}
+      #inspirationThemeLegend .locationLegendItem{display:none}
+    }
+    @media (min-width:641px) and (max-width:1179px){
+      #tab-weken #weekPanels .weekPanel{height:auto;grid-template-rows:auto auto}
+      #tab-weken #weekPanels .agendaBoard{grid-template-columns:repeat(2,minmax(0,1fr));height:auto}
+      #tab-weken #weekPanels .agendaDay{height:auto;min-height:0;overflow:visible;border-left:0;border-top:1px solid rgba(11,18,32,.06)}
+      #tab-weken #weekPanels .agendaDay:nth-child(-n+2){border-top:0}
+      #tab-weken #weekPanels .agendaDay:nth-child(even){border-left:1px solid rgba(11,18,32,.06)}
+      #tab-weken #weekPanels .agendaDayHead{flex-wrap:wrap}
+    }
+    @media (max-width:360px){
+      #tab-weken .agendaWeekFilterSlot .customSelectButton::before{display:none!important}
+    }
+</style>
   <link rel="stylesheet" href="website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
 </head>
 <body class="appLoading">
@@ -5813,7 +5834,7 @@
   <script src="website-bestanden/site-settings-shared.js?v=20261001-regional-headers-v1"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20260930-list-parity-v2"></script>
-  <script src="website-bestanden/agenda-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
+  <script src="website-bestanden/agenda-view-shared.js?v=20261001-time-sort-v2"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
@@ -6499,7 +6520,8 @@
     const distance = compactIdeaBadgeLabel(distanceLabel);
     const pills = [];
     if(normalize(location) === 'online') return ['Online'];
-    if(isHomeLocationBadge(location)) pills.push(location);
+    if(isHomeLocationBadge(location) || normalize(location) === 'buiten') pills.push(location);
+    if((isHomeLocationBadge(location) || normalize(location) === 'buiten') && isHomeLocationBadge(distance)) return pills;
     const sameTerrain = normalize(location).includes('terrein') && normalize(distance).includes('terrein');
     if(distance && !sameTerrain && normalize(distance) !== normalize(location)) pills.push(distance);
     return pills;
@@ -6883,7 +6905,20 @@
     const explicit = parseDistanceKm(item);
     if(Number.isFinite(explicit) && explicit > 0 && userLocation?.isDefault) return explicit;
     const coord = itemCoordinate(item);
-    return coord ? haversineKm(userLocation || DEFAULT_LOCATION, coord) : explicit;
+    return coord ? haversineKm(userLocation || DEFAULT_LOCATION, coord) : (!userLocation || userLocation.isDefault ? explicit : NaN);
+  }
+  function itemWithinRadius(item={}, radius=50){
+    if(radius >= 50 || itemIsHomeActivity(item)) return true;
+    const distance = itemDistanceKm(item);
+    if(Number.isFinite(distance)) return distance <= radius;
+    // Locally organised activities do not require travel to a fixed venue.
+    const band = normalize(item.distanceBand || '');
+    if(/^(op locatie|op terrein|thuis|0 km)$/.test(band)) return true;
+    // Legacy bands are relative to Nijmegen. Only include a band when its
+    // entire range fits; never turn an unknown distance into a nearby result.
+    if(userLocation && !userLocation.isDefault) return false;
+    const range = band.match(/(\d+)\s*[-–—]\s*(\d+)\s*km/);
+    return Boolean(range && Number(range[2]) <= radius);
   }
   function personalDistanceLabel(item={}, context='inspiration'){
     const locationType = normalize(`${item.locationType || ''} ${item.address || ''} ${item.where || ''}`);
@@ -8476,9 +8511,7 @@
     if(!agendaMatchesSearch(item, filters.query || '')) return false;
     if(filters.domain && filters.domain !== 'all' && domainDisplayLabel(item.domain) !== domainDisplayLabel(filters.domain)) return false;
     if(filters.distanceBand && filters.distanceBand !== 'all' && normalizeIdeaDistance(item.distanceBand, item, 'agenda') !== filters.distanceBand) return false;
-    const distance = itemDistanceKm(item);
-    const agendaRadius = loadUserLocationRadius('agenda');
-    if(agendaRadius < 50 && Number.isFinite(distance) && distance > agendaRadius) return false;
+    if(!itemWithinRadius(item, loadUserLocationRadius('agenda'))) return false;
     if(filters.cost && filters.cost !== 'all' && normalizeIdeaCost(item.cost) !== filters.cost) return false;
     return true;
   }
@@ -8842,7 +8875,7 @@
       ? featuredImage
       : `<span class="ideaImagePlaceholder" aria-hidden="true"></span>`;
     const metadata = sharedIdeaMetadata(item);
-    return `<button class="ideaFeaturedCard ${domainThemeClass(item.domain)}" type="button" data-featured-target="${escapeHtml(ideaDomKey(item))}" data-featured-slide="${index}"${index ? ' hidden' : ''} aria-label="Bekijk de gewone tegel van ${escapeHtml(item.title)}">
+    return `<button class="ideaFeaturedCard ${domainThemeClass(item.domain)}" type="button" data-featured-target="${escapeHtml(ideaDomKey(item))}" data-featured-slide="${index}"${index ? ' aria-hidden="true" inert' : ' aria-hidden="false"'} aria-label="Bekijk de gewone tegel van ${escapeHtml(item.title)}">
       <div class="ideaFeaturedMedia">${imageContent}<span class="ideaFeaturedSideLabel">${surpriseIdeaIcon()}<span>Uitgelicht</span></span></div>
       <div class="ideaFeaturedContent">
         <h3>${escapeHtml(item.title)}</h3>
@@ -8855,23 +8888,63 @@
   }
   function featuredIdeaCarousel(items=[]){
     const slides = items.map((item,index) => featuredIdeaCard(item,index)).join('');
-    const navigation = items.length > 1 ? `<div class="ideaFeaturedNav" aria-label="Blader door Uitgelicht">
-      <button type="button" data-featured-direction="-1" aria-label="Vorige uitgelichte activiteit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
-      <span class="ideaFeaturedPosition" aria-live="polite">1 / ${items.length}</span>
-      <button type="button" data-featured-direction="1" aria-label="Volgende uitgelichte activiteit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+    const navigation = items.length > 1 ? `<div class="ideaFeaturedNav" role="group" aria-label="Blader door Uitgelicht">
+      ${items.map((item,index) => `<button class="ideaFeaturedDot" type="button" data-featured-index-target="${index}" aria-label="Toon ${escapeHtml(item.title)}" aria-pressed="${index === 0}"></button>`).join('')}
+      <button class="ideaFeaturedPause" type="button" data-featured-pause aria-label="Automatisch wisselen pauzeren" title="Automatisch wisselen pauzeren">Ⅱ</button>
     </div>` : '';
-    return `<div class="ideaFeaturedCarousel" data-featured-carousel data-featured-index="0">${slides}${navigation}</div>`;
+    return `<div class="ideaFeaturedCarousel" data-featured-carousel data-featured-index="0" role="region" aria-roledescription="carrousel" aria-label="Uitgelichte activiteiten"><div class="ideaFeaturedSlides">${slides}</div>${navigation}</div>`;
   }
   function moveFeaturedCarousel(carousel, direction=1){
     if(!carousel) return;
     const slides = [...carousel.querySelectorAll('[data-featured-slide]')];
     if(slides.length < 2) return;
     const current = Number(carousel.dataset.featuredIndex || 0);
-    const next = (current + Number(direction) + slides.length) % slides.length;
-    slides.forEach((slide,index) => { slide.hidden = index !== next; });
+    const next = ((current + Number(direction)) % slides.length + slides.length) % slides.length;
+    slides.forEach((slide,index) => {
+      slide.setAttribute('aria-hidden', String(index !== next));
+      slide.inert = index !== next;
+    });
     carousel.dataset.featuredIndex = String(next);
-    const position = carousel.querySelector('.ideaFeaturedPosition');
-    if(position) position.textContent = `${next + 1} / ${slides.length}`;
+    carousel.querySelectorAll('[data-featured-index-target]').forEach((dot,index) => dot.setAttribute('aria-pressed', String(index === next)));
+    carousel.restartFeatured?.();
+  }
+  const FEATURED_INTERVAL_MS = 7000;
+  let cleanupFeaturedCarousel = () => {};
+  function setupFeaturedCarousel(){
+    cleanupFeaturedCarousel();
+    const carousel = document.querySelector('#ideaCards [data-featured-carousel]');
+    if(!carousel || carousel.querySelectorAll('[data-featured-slide]').length < 2) return;
+    const controller = new AbortController();
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let timer, visible = false, hovering = false, paused = motion.matches;
+    const pauseButton = carousel.querySelector('[data-featured-pause]');
+    const updatePause = () => {
+      const label = paused ? 'Automatisch wisselen starten' : 'Automatisch wisselen pauzeren';
+      pauseButton.textContent = paused ? '▶' : 'Ⅱ';
+      pauseButton.setAttribute('aria-label', label);
+      pauseButton.title = label;
+    };
+    const arm = () => {
+      window.clearTimeout(timer);
+      if(paused || !visible || hovering || document.hidden || carousel.contains(document.activeElement)) return;
+      timer = window.setTimeout(() => moveFeaturedCarousel(carousel), FEATURED_INTERVAL_MS);
+    };
+    carousel.restartFeatured = arm;
+    const observer = new IntersectionObserver(entries => { visible = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.5; arm(); }, {threshold:0.5});
+    observer.observe(carousel);
+    const on = (target,type,listener) => target.addEventListener(type,listener,{signal:controller.signal});
+    on(carousel,'pointerenter',event => { if(event.pointerType === 'mouse'){ hovering = true; arm(); } });
+    on(carousel,'pointerleave',() => { hovering = false; arm(); });
+    on(carousel,'focusin',arm);
+    on(carousel,'focusout',() => queueMicrotask(arm));
+    on(carousel,'touchstart',() => { hovering = true; arm(); });
+    on(carousel,'touchend',() => { hovering = false; arm(); });
+    on(carousel,'touchcancel',() => { hovering = false; arm(); });
+    on(pauseButton,'click',() => { paused = !paused; updatePause(); arm(); });
+    on(document,'visibilitychange',arm);
+    on(motion,'change',() => { paused = motion.matches; updatePause(); arm(); });
+    updatePause();
+    cleanupFeaturedCarousel = () => { window.clearTimeout(timer); observer.disconnect(); controller.abort(); delete carousel.restartFeatured; };
   }
   function surpriseIdeaCard(){
     return `<article class="ideaSurpriseCard" aria-label="Laat een willekeurig idee kiezen">
@@ -9071,9 +9144,7 @@
     const items = allInspirationItems().filter(item => {
       if(selectedIdeaCategories.size && !selectedIdeaCategories.has(domainDisplayLabel(item.domain))) return false;
       if(!matches(item,q,filters) || !matchesIdeaDuration(item,duration)) return false;
-      const distance = itemDistanceKm(item);
-      const inspirationRadius = loadUserLocationRadius('inspiration');
-      return inspirationRadius >= 50 || !Number.isFinite(distance) || distance <= inspirationRadius;
+      return itemWithinRadius(item, loadUserLocationRadius('inspiration'));
     });
     return selectedIdeaCategories.size ? sortIdeasAlphabetically(items) : smartMixedIdeas(items);
   }
@@ -9089,7 +9160,8 @@
     if(filters.duration && filters.duration !== 'all') hints.push('kies een ruimere duur');
     if(filters.stimulus && filters.stimulus !== 'all') hints.push('probeer ook een andere prikkelbelasting');
     if(hasQuery) hints.push('maak je zoekterm korter');
-    return `Geen ideeën gevonden. Probeer ${hints.slice(0,2).join(' of ') || 'minder filters'}.`;
+    const suggestion = hints.slice(0,2).join(' of ') || 'gebruik minder filters';
+    return `Geen ideeën gevonden. ${suggestion.charAt(0).toUpperCase()}${suggestion.slice(1)}.`;
   }
   function updateInspirationThemeChips(){
     $$('#inspirationThemeLegend [data-theme-filter]').forEach(button => {
@@ -9423,6 +9495,7 @@
     let maxLon = Math.max(...values.map(point => point.lon));
     const latPad = Math.max((maxLat - minLat) * .22, .045);
     const lonPad = Math.max((maxLon - minLon) * .22, .065);
+    setupFeaturedCarousel();
     minLat -= latPad; maxLat += latPad; minLon -= lonPad; maxLon += lonPad;
     return {minLat,maxLat,minLon,maxLon};
   }
@@ -10763,10 +10836,11 @@
       renderIdeas();
     });
     document.addEventListener('click', event => {
-      const featuredDirection = event.target.closest('[data-featured-carousel] [data-featured-direction]');
+      const featuredDirection = event.target.closest('[data-featured-carousel] [data-featured-index-target]');
       if(featuredDirection){
         event.preventDefault();
-        moveFeaturedCarousel(featuredDirection.closest('[data-featured-carousel]'), featuredDirection.dataset.featuredDirection);
+        const carousel = featuredDirection.closest('[data-featured-carousel]');
+        moveFeaturedCarousel(carousel, Number(featuredDirection.dataset.featuredIndexTarget) - Number(carousel.dataset.featuredIndex));
         return;
       }
       const featured = event.target.closest('[data-featured-target]');

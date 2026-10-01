@@ -81,12 +81,18 @@
     return spanDays > 0 || /dagelijks|wisselende voorstellingen|start wanneer je wilt|diverse tijden|di t\/m zo|ma t\/m zo|maandag t\/m zondag/.test(label);
   }
 
+  function agendaStartMinutes(value=''){
+    const match = String(value).match(/(?:^|\D)([01]?\d|2[0-3])[:.]([0-5]\d)(?!\d)/);
+    if(match) return Number(match[1]) * 60 + Number(match[2]);
+    const hour = String(value).match(/(?:^|\D)([01]?\d|2[0-3])\s*uur\b/i);
+    return hour ? Number(hour[1]) * 60 : Infinity;
+  }
   function sortAgendaItems(items=[], spanDaysFor=()=>0){
     return [...items].sort((a,b) => {
+      const timeA = agendaStartMinutes(a.time), timeB = agendaStartMinutes(b.time);
+      if(timeA !== timeB) return timeA - timeB;
       const spanDiff = spanDaysFor(a) - spanDaysFor(b);
       if(spanDiff !== 0) return spanDiff;
-      const timeDiff = String(a.time || '').localeCompare(String(b.time || ''), 'nl');
-      if(timeDiff !== 0) return timeDiff;
       return String(a.title || '').localeCompare(String(b.title || ''), 'nl');
     });
   }
