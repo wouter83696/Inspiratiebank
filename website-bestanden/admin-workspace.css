@@ -7,8 +7,6 @@ body.adminMode .shell{padding-bottom:0}
 .adminWorkspace>.adminPublicSurface{padding:0;margin:0;border:0;background:transparent;box-shadow:none}
 .adminPublicSurface{min-width:0;overflow:visible;color:#315f6b;font-family:Manrope,system-ui,sans-serif}
 /* A hero fits its workspace rather than escaping to the browser edges. */
-#adminApp .adminPublicSurface>.tabHero{position:relative;min-height:240px;height:240px;width:auto;max-width:none;margin:0 -30px 24px;padding:0;border-radius:0;overflow:hidden}
-#adminApp .adminPublicSurface .tabHeroHomeLink{position:absolute!important;inset:auto 30px 52px!important;transform:none!important;text-decoration:none}
 #adminApp .adminPublicSurface .tabHeroTitle{transform:none!important;margin:0!important;font-family:Lora,serif;font-size:44px!important;line-height:1.12!important;font-weight:500}
 #adminApp .adminPublicSurface .tabHeroLine{transform:none!important;margin:10px 0 0!important;font-size:19px!important}
 .adminModeBadge{position:absolute;top:24px;left:30px;padding:7px 12px;border:1px solid rgba(49,95,107,.1);border-radius:999px;background:rgba(255,253,249,.75);font-size:12px;font-weight:600;color:#315f6b}
@@ -47,9 +45,7 @@ body.adminMode .shell{padding-bottom:0}
 #adminApp .adminPublicSurface .adminIdeaEditPanel .teamForm{display:grid}
 @media(max-width:820px){
  .adminWorkspaceShell,#adminApp.adminSidebarCollapsed .adminWorkspaceShell{margin-left:0;padding:0 10px 40px}
- #adminApp .adminPublicSurface>.tabHero{margin:0 -10px 18px;height:200px;min-height:200px}
  #adminApp .adminPublicSurface .tabHeroTitle{font-size:34px!important}
- #adminApp .adminPublicSurface .tabHeroHomeLink{inset:auto 20px 35px!important}
  .adminModeBadge{left:20px;top:18px}
  #adminApp .adminPublicSurface .adminSelectionToolbar{top:6px;flex-wrap:wrap;gap:8px}
  .adminSelectionActions{max-width:100%;overflow-x:auto}
@@ -123,8 +119,6 @@ body.ideaFilterSheetOpen{overflow:hidden}
 #adminApp .adminSelectionSummary strong{max-width:100%;font-size:13px}
 #adminApp .adminSelectionActions{flex-wrap:wrap;flex-shrink:1;justify-content:flex-end}
 #adminApp .adminSelectionSummary{flex:1;min-width:80px}
-#adminApp .adminPublicSurface>.tabHero{height:180px;min-height:180px;margin-bottom:16px}
-#adminApp .adminPublicSurface .tabHeroHomeLink{bottom:34px!important}
 #adminApp .adminPublicSurface .tabHeroTitle{font-size:36px!important}
 #adminApp .adminPublicSurface .tabHeroLine{font-size:16px!important;margin-top:6px!important}
 #adminApp .adminModeBadge{top:16px;padding:5px 10px;font-size:11px}
@@ -159,7 +153,6 @@ body.ideaFilterSheetOpen{overflow:hidden}
 @media(max-width:1100px){#adminApp .sharedSourceRow{grid-template-columns:minmax(0,1fr)}#adminApp .sharedSourceActions{justify-content:flex-start}}
 @media(max-width:820px){
  #adminApp .adminLayout,#adminApp .adminWorkspaceShell{overflow:visible}
- #adminApp .adminPublicSurface>.tabHero{height:150px;min-height:150px}
  #adminApp .adminPublicSurface .tabHeroTitle{font-size:30px!important}
  #adminApp #linkForm{grid-template-columns:1fr}
  #adminApp #sourceOwnPanel{padding:16px}
@@ -211,3 +204,8 @@ body.ideaFilterSheetOpen{overflow:hidden}
 
 /* Cover subpixel seams at browser zoom levels between the two sticky rows. */
 #adminApp .adminPublicSurface .adminSelectionToolbar::before{content:"";position:absolute;inset:-2px 0 auto;height:2px;background:#F8F5EB;pointer-events:none}
+
+/* Header copy is aligned within its own banner, not pinned to an old bottom offset. */
+#adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.tabHero{display:flex!important;flex-direction:row;align-items:center!important;justify-content:flex-start;box-sizing:border-box;height:180px!important;min-height:180px!important;width:100%!important;max-width:100%;margin:0 0 16px!important;padding:24px!important}
+#adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.tabHero>.tabHeroHomeLink{position:relative!important;inset:auto!important;transform:none!important;width:100%!important;max-width:none!important;margin:0!important}
+@media(max-width:820px){#adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.tabHero{height:180px!important;min-height:180px!important;padding:20px!important}}
