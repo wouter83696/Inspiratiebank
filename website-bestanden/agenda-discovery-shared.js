@@ -81,7 +81,8 @@
     const groups = [
       ['agendaFilterWeekChips','agendaWeekFilter','Alle weken',false],
       ['agendaFilterCategoryChips','agendaDomain','Alles',true],
-      ['agendaFilterPriceChips','agendaCost','Alles',false]
+      ['agendaFilterPriceChips','agendaCost','Alles',false],
+      ['agendaFilterStimulusChips','agendaAdminStimulusFilter','Alles',false]
     ];
     groups.forEach(([containerId, selectId, allLabel, themed]) => {
       const container = $('#'+containerId);

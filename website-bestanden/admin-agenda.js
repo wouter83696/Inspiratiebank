@@ -48,7 +48,7 @@
  function reset(){
    state.region=null;state.radius=AdminSiteSettings.current().agendaRadiusKm;
    $('agendaSearch').value='';
-   for(const id of ['agendaDomain','agendaDistance','agendaCost']){$(id).value='all';syncCustomSelect($(id));}
+   for(const id of ['agendaDomain','agendaDistance','agendaCost','agendaAdminStimulusFilter']){$(id).value='all';syncCustomSelect($(id));}
    $('agendaWeekFilter').value='all';syncCustomSelect($('agendaWeekFilter'));
    renderAgendaReview();syncLocation();
  }
@@ -115,6 +115,12 @@
  }
  function setup(){
    $('agendaDesktopLocation').innerHTML=DiscoveryViewShared.locationLegendButton({filterIcon:true});
+   if(!$('agendaFilterStimulusChips')){
+     const section=document.createElement('section');section.className='ideaFilterSection';
+     section.innerHTML='<div class="ideaFilterSectionHead"><h3>Prikkelbelasting</h3></div><div class="ideaFilterChips" id="agendaFilterStimulusChips"></div>';
+     $('agendaFilterSheetBody').append(section);
+     section.append($('agendaAdminStimulusFilter'));
+   }
    AgendaDiscoveryShared.buildFilterChips();
    if(state.initialized){sync();return;}
    state.initialized=true;state.radius=AdminSiteSettings.current().agendaRadiusKm;
