@@ -192,8 +192,8 @@ body.ideaFilterSheetOpen{overflow:hidden}
 /* One opaque, compact control stack, with no content showing between sticky rows. */
 #adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.desktopStickyControls{background:#F8F5EB!important;backdrop-filter:none!important;padding-bottom:4px!important;margin-bottom:8px!important;box-shadow:none!important;clip-path:none!important}
 #adminApp :is(#inspirationAdminPanel,#agendaReviewPanel) .adminSelectionToolbar{top:max(0px,calc(var(--admin-controls-height,0px) - 1px));background:#F8F5EB;backdrop-filter:none;border:0;border-bottom:1px solid var(--manage-border);border-radius:0;box-shadow:none;margin:0 0 10px;padding:8px 0;gap:10px}
-#adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.desktopStickyControls>:is(.inspirationDesktopFilterRow,.agendaLegendBar){margin-top:6px!important;margin-bottom:0!important;padding-inline:0!important}
-#adminApp #agendaReviewPanel .agendaDesktopControls>.agendaSectionSwitcher{margin-top:6px;margin-bottom:0;margin-right:0}
+#adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.desktopStickyControls>:is(.inspirationDesktopFilterRow,.agendaLegendBar){margin-top:6px!important;margin-bottom:0!important}
+#adminApp #agendaReviewPanel .agendaDesktopControls>.agendaSectionSwitcher{margin-top:6px;margin-bottom:0}
 #adminApp #ideaSelectionToolbar #ideaCount{flex:0 0 auto;border:0;background:none;padding:0;margin:0;color:#70817d;font-size:11px;box-shadow:none;white-space:nowrap}
 #adminApp #ideaSelectionToolbar #ideaCount svg{display:none}
 #adminApp #ideaSelectionToolbar #ideaCount strong{font-weight:500;color:inherit}

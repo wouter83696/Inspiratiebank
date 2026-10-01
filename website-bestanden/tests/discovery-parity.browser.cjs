@@ -22,6 +22,8 @@ const base=process.env.DISCOVERY_BASE_URL || 'http://127.0.0.1:8765';
  for(const width of [1440,390]){
    console.log('Checking viewport',width);
    for(const page of pages)await page.setViewportSize({width,height:1000});
+   const horizontalInset=page=>page.locator(':is(#tab-inspiratie,#inspirationAdminPanel) .inspirationDesktopFilterRow').evaluate(e=>{const s=getComputedStyle(e);return [s.paddingLeft,s.paddingRight]});
+   assert.deepEqual(await horizontalInset(pages[0]),await horizontalInset(pages[1]),`${width}: shared chips and view switch inset`);
    for(const selector of ['#ideaSearch','#filterToggle','#inspirationThemeLegend [data-theme-filter]']){
      assert.deepEqual(await styles(pages[0],selector),await styles(pages[1],selector),`${width}: ${selector}`);
    }
