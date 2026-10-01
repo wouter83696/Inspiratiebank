@@ -6368,4 +6368,8 @@
  transform:none!important;margin:8px 0 0!important;padding:0!important;white-space:normal!important;overflow-wrap:anywhere;
 }
 
+/* One hover surface for public navigation and the management sidebar. */
+:scope{--control-hover-surface:rgba(168,225,221,.12)}
+#adminApp :is(.adminNavButton,.adminSidebarToggle):is(:hover,:focus-visible):not(.active){background:var(--control-hover-surface);color:var(--accent-dark);transform:none}
+
 }
