@@ -270,3 +270,9 @@ html:has(body.adminMode),body.adminMode{overflow-x:clip}
 #adminApp .adminHeroActions{right:calc(24px + var(--admin-header-bleed))}
 @media(max-width:820px){#adminApp .adminWorkspaceShell{--admin-header-bleed:10px}#adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.tabHero{padding-left:30px!important;padding-right:30px!important}}
 @media(max-width:640px){#adminApp .adminHeroActions{left:30px;right:30px}}
+
+/* Match the public inspiration submission button in the management headers. */
+#adminApp .adminHeroActions .button.adminHeaderAdd{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:auto;min-width:190px;min-height:38px;padding:0 15px;border:1.5px solid rgba(23,79,93,.46);border-radius:12px;background:rgba(255,253,249,.72);color:#236875;font:inherit;font-size:.82rem;font-weight:600;line-height:1;white-space:nowrap;cursor:pointer;box-shadow:none;transform:none;transition:background .18s ease,border-color .18s ease,color .18s ease}
+#adminApp .adminHeroActions .button.adminHeaderAdd:hover{border-color:rgba(23,79,93,.68);background:var(--control-hover-surface);color:#1f5763}
+#adminApp .adminHeroActions .button.adminHeaderAdd svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex-shrink:0}
+@media(max-width:640px){#adminApp .adminHeroActions .button.adminHeaderAdd{min-width:0;min-height:40px;font-size:12px;padding:0 10px}}
