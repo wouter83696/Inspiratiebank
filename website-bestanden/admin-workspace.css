@@ -122,11 +122,11 @@ body.ideaFilterSheetOpen{overflow:hidden}
 #adminApp .adminPublicSurface .tabHeroTitle{font-size:36px!important}
 #adminApp .adminPublicSurface .tabHeroLine{font-size:16px!important;margin-top:6px!important}
 #adminApp .adminModeBadge{top:16px;padding:5px 10px;font-size:11px}
-#adminApp .adminAgendaManagementFilters,#adminApp .featuredAdminPanel{border:1px solid var(--manage-border);background:var(--page-background,#F8F5EB);border-radius:12px;box-shadow:none;padding:0;margin:0 0 12px}
-#adminApp :is(.adminAgendaManagementFilters,.featuredAdminPanel)>summary{display:flex;align-items:center;gap:10px;padding:12px 15px;cursor:pointer;list-style:none;font-size:13px;font-weight:600;color:#496866}
-#adminApp :is(.adminAgendaManagementFilters,.featuredAdminPanel)>summary::-webkit-details-marker{display:none}
-#adminApp :is(.adminAgendaManagementFilters,.featuredAdminPanel)>summary::before{content:'›';font-size:20px;font-weight:400;line-height:1;transition:transform .15s}
-#adminApp :is(.adminAgendaManagementFilters,.featuredAdminPanel)[open]>summary::before{transform:rotate(90deg)}
+#adminApp .adminPublicSurface :is(.adminAgendaManagementFilters,.featuredAdminPanel){border:1px solid var(--manage-border);background:var(--page-background,#F8F5EB);border-radius:12px;box-shadow:none;padding:0;margin:0 0 12px}
+#adminApp .adminPublicSurface :is(.adminAgendaManagementFilters,.featuredAdminPanel)>summary{display:flex;align-items:center;gap:10px;padding:12px 15px;cursor:pointer;list-style:none;font-size:13px;font-weight:600;color:#496866}
+#adminApp .adminPublicSurface :is(.adminAgendaManagementFilters,.featuredAdminPanel)>summary::-webkit-details-marker{display:none}
+#adminApp .adminPublicSurface :is(.adminAgendaManagementFilters,.featuredAdminPanel)>summary::before{content:'›';font-size:20px;font-weight:400;line-height:1;transition:transform .15s}
+#adminApp .adminPublicSurface :is(.adminAgendaManagementFilters,.featuredAdminPanel)[open]>summary::before{transform:rotate(90deg)}
 #adminApp :is(.adminAgendaManagementFilters)>summary>span{margin-left:auto;font-size:12px;font-weight:400;color:#8a8c82}
 #adminApp .adminAgendaManagementFilters[open]>summary{border-bottom:1px solid var(--manage-border);margin-bottom:12px}
 #adminApp .adminAgendaManagementFilters> :not(summary){margin-left:14px;margin-right:14px}
@@ -320,5 +320,5 @@ html:has(body.adminMode),body.adminMode{overflow-x:clip}
  #adminApp #agendaReviewPanel .adminManagementFilterFields>.button{width:100%;min-height:44px}
 }
 /* Opening a management section reveals one continuous warm-white content area. */
-#adminApp :is(.adminAgendaManagementFilters,.featuredAdminPanel)[open]{background:var(--manage-paper)}
-#adminApp :is(.adminAgendaManagementFilters,.featuredAdminPanel)[open]>summary{background:var(--page-background,#F8F5EB);border-radius:11px 11px 0 0;border-bottom:1px solid var(--manage-border)}
+#adminApp .adminPublicSurface :is(.adminAgendaManagementFilters,.featuredAdminPanel)[open]{background:var(--manage-paper)}
+#adminApp .adminPublicSurface :is(.adminAgendaManagementFilters,.featuredAdminPanel)[open]>summary{background:var(--page-background,#F8F5EB);border-radius:11px 11px 0 0;border-bottom:1px solid var(--manage-border)}
