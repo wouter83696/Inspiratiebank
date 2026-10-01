@@ -46,7 +46,7 @@
         hero.style.setProperty('background-position',`center ${settings.headerPosition}%`,'important');
       }else{hero.style.removeProperty('--hero-bg-image');hero.style.removeProperty('background-position');}
       const agenda=hero.classList.contains('agendaHero'),title=hero.querySelector('.tabHeroTitle'),subtitle=hero.querySelector('.tabHeroLine');
-      if(title)title.textContent=settings[agenda?'agendaTitle':'inspirationTitle'];
+      if(title)title.textContent=title.dataset.headerTitle || settings[agenda?'agendaTitle':'inspirationTitle'];
       if(subtitle)subtitle.textContent=subtitle.dataset.headerSubtitle || settings[agenda?'agendaSubtitle':'inspirationSubtitle'];
     });
   }
