@@ -278,10 +278,10 @@ html:has(body.adminMode),body.adminMode{overflow-x:clip}
 @media(max-width:640px){#adminApp .adminHeroActions .button.adminHeaderAdd{min-width:0;min-height:40px;font-size:12px;padding:0 10px}}
 
 /* The public-style action bar sits above the artwork in each management view. */
-#adminApp .adminPublicSurface>.adminActionTopbar{display:flex;align-items:center;justify-content:flex-end;position:relative;box-sizing:border-box;min-height:60px;padding:10px calc(24px + var(--admin-header-bleed));width:calc(100% + 2 * var(--admin-header-bleed))!important;margin:0 calc(-1 * var(--admin-header-bleed))!important;background:#fffdf9;border-bottom:1px solid rgba(123,112,88,.08)}
+#adminApp .adminPublicSurface>.adminActionTopbar{display:flex;align-items:center;justify-content:flex-end;position:relative;box-sizing:border-box;min-height:60px;padding:10px 24px;width:calc(100% + 2 * var(--admin-header-bleed))!important;margin:0 calc(-1 * var(--admin-header-bleed))!important;background:#fffdf9;border-bottom:1px solid rgba(123,112,88,.08)}
 #adminApp .adminActionTopbar .adminHeroActions{position:static;display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px;min-width:0}
 #adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.tabHero{min-height:180px!important;padding-top:32px!important;padding-bottom:32px!important}
-@media(max-width:820px){#adminApp .adminPublicSurface>.adminActionTopbar{padding-inline:30px}}
+@media(max-width:820px){#adminApp .adminPublicSurface>.adminActionTopbar{padding-inline:20px}}
 @media(max-width:640px){
  #adminApp .adminPublicSurface>.adminActionTopbar{padding:8px 14px}
  #adminApp .adminActionTopbar .adminHeroActions{gap:6px}
