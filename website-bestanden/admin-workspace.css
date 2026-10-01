@@ -287,3 +287,6 @@ html:has(body.adminMode),body.adminMode{overflow-x:clip}
  #adminApp .adminActionTopbar .adminHeroActions{gap:6px}
  #adminApp .adminActionTopbar .button.adminHeaderAdd{min-height:44px;font-size:11px;padding-inline:8px;gap:5px}
 }
+
+/* Keep the workspace colour even beside the navigation and editing controls. */
+#adminApp .adminSidebar,#adminApp.adminSidebarCollapsed .adminSidebar{box-shadow:none}
