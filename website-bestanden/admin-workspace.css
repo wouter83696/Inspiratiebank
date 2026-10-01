@@ -206,3 +206,5 @@ body.ideaFilterSheetOpen{overflow:hidden}
  #adminApp #ideaSelectionToolbar #ideaCount{margin-left:auto}
  #adminApp .adminSelectionActions{width:100%;justify-content:flex-start}
 }
+/* The mobile navigation must scroll away instead of covering the sticky tools. */
+@media(max-width:640px){#adminApp .adminSidebar,#adminApp.adminSidebarCollapsed .adminSidebar{position:relative;top:auto}}
