@@ -9,6 +9,7 @@
     dialog.innerHTML='<button type="button" class="ideaFilterSheetBackdrop" tabindex="-1" aria-label="Detailpaneel sluiten"></button><section class="ideaFilterSheet photoDetailPanel"><header class="ideaFilterSheetHeader"><button class="ideaFilterSheetClose" type="button" aria-label="Details sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></header><div class="photoDetailBody ideaFilterSheetBody sharedIdeaCards"></div></section>';
     document.body.append(dialog);
     dialog.querySelector('header button').addEventListener('click',close);
+    dialog.querySelector('.photoDetailBody').addEventListener('click',animateSection);
     dialog.querySelector('.ideaFilterSheetBackdrop').addEventListener('click',close);
     dialog.addEventListener('click',e=>{if(e.target===dialog)close();});
     dialog.addEventListener('cancel',e=>{e.preventDefault();close();});
@@ -54,6 +55,30 @@
     closeTimer=setTimeout(finish,Math.max(...durations,0)+50);
   }
 
+  const sectionMotion=new WeakMap();
+  function animateSection(event){
+    const summary=event.target.closest('summary');
+    if(!summary||summary.parentElement.tagName!=='DETAILS')return;
+    const details=summary.parentElement;
+    event.preventDefault();
+    summary.focus({preventScroll:true});
+    const previous=sectionMotion.get(details);
+    const opening=previous?!previous.opening:!details.open;
+    const start=details.getBoundingClientRect().height;
+    if(previous){previous.animation.onfinish=null;previous.animation.cancel();}
+    details.style.height='';details.style.overflow='';
+    details.open=opening;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){sectionMotion.delete(details);return;}
+    const end=details.getBoundingClientRect().height;
+    details.open=true;
+    details.style.overflow='hidden';
+    details.classList.toggle('isSectionClosing',!opening);
+    const animation=details.animate([{height:`${start}px`},{height:`${end}px`}],{duration:260,easing:'cubic-bezier(.4,0,.2,1)'});
+    sectionMotion.set(details,{animation,opening});
+    animation.onfinish=()=>{
+      details.open=opening;details.style.overflow='';details.classList.remove('isSectionClosing');sectionMotion.delete(details);
+    };
+  }
   function detailIcon(kind){
     const paths={location:'<path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>',route:'<path d="M9 18l-5-5 5-5M4 13h10a5 5 0 0 1 5 5v2"/>',photo:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><path d="m3 17 6-6 4 4 3-3 5 5"/>'};
     return `<svg class="photoDetailSectionIcon" viewBox="0 0 24 24" aria-hidden="true">${paths[kind]}</svg>`;

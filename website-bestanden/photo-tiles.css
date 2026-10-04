@@ -586,3 +586,12 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaCards.compactTiles .photoTileMedia,
  #ideaCards.compactTiles .photoTileOverlay{--activity-photo-radius:12px}
 }
+
+/* Calm accordion movement and the same action hover as the top bar. */
+.photoDetailBody details{box-sizing:border-box}
+.photoDetailBody details>summary::after{transition:transform 260ms cubic-bezier(.4,0,.2,1)}
+.photoDetailBody details.isSectionClosing>summary::after{transform:rotate(45deg)!important}
+.photoDetailBody .photoDetailActions>.ideaRouteButton{transition:background-color 180ms ease,border-color 180ms ease,color 180ms ease}
+.photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:var(--control-hover-surface);border-color:rgba(23,79,93,.68);color:#1f5763}
+.photoDetailBody .photoDetailActions>.ideaRouteButton:focus-visible{outline:2px solid #315f6b;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.photoDetailBody details>summary::after{transition:none}}
