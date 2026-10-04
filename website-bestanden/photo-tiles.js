@@ -114,7 +114,7 @@
     const query=encodeURIComponent(destination);
     return `<details class="photoRouteChoices"><summary>${detailIcon('location')}<span>Adres &amp; route</span></summary>${locationText}${destination?`<div><a href="https://www.google.com/maps/dir/?api=1&destination=${query}" target="_blank" rel="noopener" class="mapAppButton" aria-label="Route openen in Google Maps" title="Google Maps">${mapAppIcon('google')}<span>Google Maps</span></a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener" class="mapAppButton" aria-label="Route openen in Apple Kaarten" title="Apple Kaarten">${mapAppIcon('apple')}<span>Apple Kaarten</span></a></div>`:''}</details>`;
   }
-  function detailContent(item){
+  function detailContent(item, titleId='photoDetailTitle'){
     const extras=(Array.isArray(item.images)?item.images:[]).filter(image=>image&&typeof image==='object'&&(image.status==='approved'||image.approved===true)&&/^https?:\/\//i.test(image.src||''));
     const gallery=extras.length?`<details class="photoDetailSection"><summary>${detailIcon('photo')}<span>Foto’s</span></summary><div class="photoDetailGallery">${extras.map(image=>`<img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}" loading="lazy">`).join('')}</div></details>`:'';
     // Use the very same card renderer as the map detail, including image and metadata.
@@ -122,7 +122,7 @@
     template.innerHTML=cardIdea(item,{mapDetailAction:'close'});
     const card=template.content.querySelector('article');
     const title=card.querySelector('h3');
-    title.id='photoDetailTitle';
+    title.id=titleId;
     card.prepend(title);
     card.querySelector('.ideaPracticalDetails:not(.ideaMaterialsDetails)')?.remove();
     card.querySelector('.cardFooter')?.remove();
@@ -183,5 +183,6 @@
   }
   document.addEventListener('click',e=>{const button=e.target.closest('[data-photo-detail]');if(button)open(button.dataset.photoDetail);});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&dialog?.open&&dialog.classList.contains('isDocked')&&!document.querySelector('dialog:modal')){e.preventDefault();close();}});
-  window.PhotoTiles={render,openFeatured:key=>enabled&&open(key)};
+  document.addEventListener('click',event=>{if(event.target.closest('.ideaMapSingleCard.photoDetailBody'))animateSection(event);});
+  window.PhotoTiles={render,detailContent,openFeatured:key=>enabled&&open(key)};
 })();

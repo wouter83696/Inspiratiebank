@@ -5469,7 +5469,7 @@
     }
 </style>
   <link rel="stylesheet" href="website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
-  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261004-meta-lower-v67">
+  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261004-map-match-v68">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -5837,7 +5837,7 @@
   <script src="website-bestanden/agenda-discovery-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script>DiscoveryViewShared.mount();AgendaDiscoveryShared.mount();</script>
   <script src="website-bestanden/site-settings-shared.js?v=20261004-compact-v1"></script>
-  <script src="website-bestanden/photo-tiles.js?v=20261004-address-dedup-v25"></script>
+  <script src="website-bestanden/photo-tiles.js?v=20261004-map-detail-v26"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20261004-materials-v4"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20261001-time-sort-v2"></script>
@@ -9586,7 +9586,7 @@
       ? `<div class="ideaMapDetailToolbar ideaMapDetailToolbarCard">${detailCloseButton}</div>`
       : '';
     const resultsHtml = singleDetail
-      ? `<div class="ideaMapSingleCard sharedIdeaCards" data-map-detail-key="${escapeHtml(detailPoint.key)}">${cardIdea(detailPoint.item, {mapDetailAction:'close'})}</div>`
+      ? `<div class="ideaMapSingleCard sharedIdeaCards photoDetailBody" data-map-detail-key="${escapeHtml(detailPoint.key)}">${PhotoTiles.detailContent(detailPoint.item, 'ideaMapDetailTitle')}</div>`
       : listHtml;
     const sharedPlace = activeIdeaMapClusterKeys
       && visiblePoints.length
