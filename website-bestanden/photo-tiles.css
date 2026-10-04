@@ -484,3 +484,17 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock{width:100%!important;margin:0!important}
 .photoDetailPanel .ideaFilterSheetClose:hover{background:rgba(194,178,153,.06);border-color:rgba(61,126,136,.16);color:#63858b;box-shadow:none}
 .photoDetailPanel .ideaFilterSheetClose:focus-visible{background:rgba(194,178,153,.06)}
+
+/* Adjacent desktop cards end at the featured card, above its navigation dots. */
+@media(min-width:801px){
+ #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile{height:300px!important;align-self:start}
+ #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile .photoTileMedia{flex:1 1 0;aspect-ratio:auto}
+}
+@media(min-width:1180px){
+ body:not(.photoDetailDocked) #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile{height:300px!important;align-self:start}
+ body:not(.photoDetailDocked) #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile .photoTileMedia{flex:1 1 0;aspect-ratio:auto}
+}
+@media(min-width:1600px){
+ #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile,
+ body:not(.photoDetailDocked) #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile{height:330px!important}
+}
