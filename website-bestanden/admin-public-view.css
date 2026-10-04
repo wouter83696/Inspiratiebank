@@ -6418,32 +6418,32 @@
 #adminIdeaCards.photoTiles .photoTile:hover{box-shadow:0 5px 20px #243a3230}
 #adminIdeaCards.photoTiles .photoTile:focus-visible{outline:3px solid #397e8a;outline-offset:4px}
 /* Keep the existing featured carousel, timer and pause control. */
-#adminIdeaCards.photoTiles .ideaFeaturedCarousel{grid-column:auto;min-width:0;align-self:start}
-#adminIdeaCards.photoTiles .ideaFeaturedSlides{aspect-ratio:4/4.5;height:auto!important}
-#adminIdeaCards.photoTiles .ideaFeaturedCard{height:100%!important;min-height:0!important;padding:0!important;border-radius:20px;overflow:hidden;border:0!important;background:#315f6b!important}
-#adminIdeaCards.photoTiles .ideaFeaturedMedia{position:absolute!important;inset:0!important;height:100%!important;aspect-ratio:auto!important;border-radius:20px!important}
-#adminIdeaCards.photoTiles .ideaFeaturedContent{position:absolute!important;inset:auto 0 0!important;width:100%!important;max-width:none!important;margin:0!important;padding:50px 16px 16px!important;border-radius:0!important;background:linear-gradient(transparent,rgba(9,25,28,.88) 50%,rgba(9,25,28,.96))!important;backdrop-filter:none!important;box-sizing:border-box}
-#adminIdeaCards.photoTiles .ideaFeaturedContent h3{color:#fff!important;font:600 19px/1.3 Manrope,sans-serif!important;margin:0 0 9px!important}
-#adminIdeaCards.photoTiles .ideaFeaturedMeta{background:none!important;border:0!important;padding:0!important;color:white!important}
-#adminIdeaCards.photoTiles .ideaFeaturedMeta :is(.pill,.cardMetaLine,.cardMetaPart){color:white!important;background:none!important;border:0!important;padding:0!important;font-size:12px!important}
-#adminIdeaCards.photoTiles .ideaFeaturedArrow{display:none!important}
-#adminIdeaCards.photoTiles .ideaFeaturedSideLabel{top:12px;left:12px;font-size:11px;border-radius:20px;padding:7px 10px}
-#adminIdeaCards.photoTiles .ideaFeaturedNav{min-height:32px;margin:0;gap:7px}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedCarousel{grid-column:auto;min-width:0;align-self:start}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedSlides{aspect-ratio:4/4.5;height:auto!important}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedCard{height:100%!important;min-height:0!important;padding:0!important;border-radius:20px;overflow:hidden;border:0!important;background:#315f6b!important}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedMedia{position:absolute!important;inset:0!important;height:100%!important;aspect-ratio:auto!important;border-radius:20px!important}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedContent{position:absolute!important;inset:auto 0 0!important;width:100%!important;max-width:none!important;margin:0!important;padding:50px 16px 16px!important;border-radius:0!important;background:linear-gradient(transparent,rgba(9,25,28,.88) 50%,rgba(9,25,28,.96))!important;backdrop-filter:none!important;box-sizing:border-box}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedContent h3{color:#fff!important;font:600 19px/1.3 Manrope,sans-serif!important;margin:0 0 9px!important}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedMeta{background:none!important;border:0!important;padding:0!important;color:white!important}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedMeta :is(.pill,.cardMetaLine,.cardMetaPart){color:white!important;background:none!important;border:0!important;padding:0!important;font-size:12px!important}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedArrow{display:none!important}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedSideLabel{top:12px;left:12px;font-size:11px;border-radius:20px;padding:7px 10px}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedNav{min-height:32px;margin:0;gap:7px}
 @media(max-width:1179px){#adminIdeaCards.photoTiles{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 @media(max-width:800px){#adminIdeaCards.photoTiles{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px}}
 @media(max-width:600px){
  #adminIdeaCards.photoTiles{gap:10px}
- #adminIdeaCards.photoTiles .photoTile,#adminIdeaCards.photoTiles .ideaFeaturedSlides{aspect-ratio:3/4}
+ #adminIdeaCards.photoTiles:not(.compactTiles) .photoTile,#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedSlides{aspect-ratio:3/4}
  .photoTileContent{padding:12px 10px;gap:8px}
  .photoTileTitle{font-size:15px;gap:6px;align-items:flex-start}
  .photoTileTitle>.domainIcon{width:24px;height:24px;flex-basis:24px}
  .photoTileTitle svg{width:13px;height:13px}
  .photoTileExtra{display:none}
  .photoTileMeta{gap:7px}
- #adminIdeaCards.photoTiles .ideaFeaturedContent{padding:40px 10px 12px!important}
- #adminIdeaCards.photoTiles .ideaFeaturedContent h3{font-size:15px!important}
- #adminIdeaCards.photoTiles .ideaFeaturedMeta .cardMetaLine{display:none!important}
- #adminIdeaCards.photoTiles .ideaFeaturedSideLabel{top:8px;left:8px;padding:5px 8px;font-size:10px}
+ #adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedContent{padding:40px 10px 12px!important}
+ #adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedContent h3{font-size:15px!important}
+ #adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedMeta .cardMetaLine{display:none!important}
+ #adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedSideLabel{top:8px;left:8px;padding:5px 8px;font-size:10px}
 }
 @media(max-width:350px){#adminIdeaCards.photoTiles{grid-template-columns:minmax(0,1fr)!important}}
 /* Detail panels share the filter sheet's dimensions, motion, header and close control. */
@@ -6461,7 +6461,7 @@
 :scope.photoDetailOpen{overflow:hidden!important}
 .photoTileTitle>span:last-child{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 #adminIdeaCards.photoTiles .photoTileTitle>.domainIcon{background:var(--theme-tint,#e5f2ef)!important;color:var(--theme-ink,#315f6b)!important}
-#adminIdeaCards.photoTiles .ideaFeaturedContent h3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedContent h3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .photoDetailBody .sharedIdeaCard>h3{font-size:22px!important;line-height:1.35!important}
 .photoDetailBody .sharedIdeaCard>p{font-size:16px!important;line-height:1.65!important}
 .photoDetailBody .ideaPracticalText{font-size:15px!important;line-height:1.6!important}
@@ -6472,12 +6472,12 @@
 .photoDetailBody .ideaImageFrame{width:100%!important;height:auto!important;flex:none!important}
 .photoDetailBody .ideaTitleLink{white-space:normal!important;overflow:visible!important;display:inline!important;-webkit-line-clamp:unset!important}
 #adminIdeaCards.photoTiles .photoTileTitle>.domainIcon{background:color-mix(in srgb,var(--theme-ink,#315f6b) 12%,#fffdf9)!important}
-#adminIdeaCards.photoTiles :is(.photoTileMeta,.photoTileExtra,.ideaFeaturedMeta) :is(.metaIcon,.metaIcon svg,.stimulusIcon,.stimulusIcon svg){color:#fff!important;stroke:currentColor}
+#adminIdeaCards.photoTiles:not(.compactTiles) :is(.photoTileMeta,.photoTileExtra,.ideaFeaturedMeta) :is(.metaIcon,.metaIcon svg,.stimulusIcon,.stimulusIcon svg){color:#fff!important;stroke:currentColor}
 
-#adminIdeaCards.photoTiles .ideaFeaturedCarousel{grid-column:span 2}
-#adminIdeaCards.photoTiles .ideaFeaturedSlides{aspect-ratio:16/9}
-#adminIdeaCards.photoTiles .ideaFeaturedSideLabel{left:0;top:16px;border-left:0;border-radius:0 9px 9px 0;padding:9px 12px;font-size:11px}
-@media(max-width:350px){#adminIdeaCards.photoTiles .ideaFeaturedCarousel{grid-column:auto}}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedCarousel{grid-column:span 2}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedSlides{aspect-ratio:16/9}
+#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedSideLabel{left:0;top:16px;border-left:0;border-radius:0 9px 9px 0;padding:9px 12px;font-size:11px}
+@media(max-width:350px){#adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedCarousel{grid-column:auto}}
 .photoDetailBody .cardMetaBlock{flex-direction:row!important;justify-content:flex-start!important}
 .photoDetailBody .ideaImageFrame{position:relative!important;min-height:0!important;aspect-ratio:16/10!important}
 .photoDetailBody .ideaImageFrame img{position:absolute!important;inset:0;width:100%!important;height:100%!important;object-fit:cover}
@@ -6495,15 +6495,20 @@
 #adminIdeaCards.compactTiles .photoTile :is(.pill,.cardMetaPart,.cardMetaLine){color:#637d7b!important;font-size:12px}
 #adminIdeaCards.compactTiles :is(.photoTileMeta,.photoTileExtra) :is(.metaIcon,.metaIcon svg,.stimulusIcon,.stimulusIcon svg){color:#637d7b!important}
 #adminIdeaCards.compactTiles .photoTileExtra{margin-top:-4px}
-#adminIdeaCards.compactTiles .ideaFeaturedCarousel{align-self:stretch;display:flex;flex-direction:column}
-#adminIdeaCards.compactTiles .ideaFeaturedSlides{flex:1;min-height:260px;aspect-ratio:auto}
 @media(max-width:600px){
  #adminIdeaCards.compactTiles .photoTile{padding:6px;border-radius:18px}
  #adminIdeaCards.compactTiles .photoTile>img,#adminIdeaCards.compactTiles .photoTilePlaceholder{border-radius:12px;aspect-ratio:4/3}
  #adminIdeaCards.compactTiles .photoTileContent{padding:20px 4px 8px;gap:9px}
  #adminIdeaCards.compactTiles .photoTileTitle{font-size:14px}
  #adminIdeaCards.compactTiles .photoTileTitle>.domainIcon{left:4px;width:28px;height:28px;top:-15px}
- #adminIdeaCards.compactTiles .ideaFeaturedSlides{aspect-ratio:16/9;min-height:0;flex:auto}
 }
+
+/* Compact cards keep one readable metadata line; featured retains its classic styling. */
+#adminIdeaCards.compactTiles .ideaFeaturedCarousel{grid-column:span 2;align-self:stretch}
+#adminIdeaCards.compactTiles .photoTileFacts{display:flex;align-items:center;gap:8px;flex-wrap:nowrap;margin-top:auto;overflow-x:auto;white-space:nowrap}
+#adminIdeaCards.compactTiles .photoTileFacts :is(.photoTileMeta,.photoTileExtra,.cardMetaLine){display:contents}
+#adminIdeaCards.compactTiles .photoTileFacts :is(.pill,.cardMetaPart){flex-shrink:0;white-space:nowrap;font-size:11px}
+@media(max-width:600px){#adminIdeaCards.compactTiles .photoTileFacts .photoTileExtra{display:none}}
+@media(max-width:350px){#adminIdeaCards.compactTiles .ideaFeaturedCarousel{grid-column:auto}}
 
 }
