@@ -518,7 +518,9 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailPanel .photoDetailBody{min-height:0;overscroll-behavior:contain;scroll-behavior:auto}
 
 /* Bring tile facts optically closer to the overlapping category badge. */
-#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{top:3px}
+/* Option 3: leave roughly 16px below the metadata inside the photo. */
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{top:-13px}
+@media(max-width:600px){#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{top:-16px}}
 
 /* Quiet, labelled navigation links in the detail sheet. */
 .photoDetailBody .photoRouteChoices a.mapAppButton{border:0;background:transparent;box-shadow:none;min-width:88px;min-height:64px;padding:6px 8px;gap:5px;transition:background-color 140ms ease}
