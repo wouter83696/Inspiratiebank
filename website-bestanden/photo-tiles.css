@@ -196,8 +196,9 @@ body.photoDetailOpen{overflow:hidden!important}
 #ideaCards .ideaFeaturedContent h3{flex:1;min-width:0;margin:0!important}
 #ideaCards .ideaFeaturedBottom{flex:0 0 auto;width:auto;margin:0}
 @media(min-width:351px) and (max-width:600px){
- #ideaCards.compactTiles{row-gap:28px;padding-bottom:18px}
- #ideaCards.compactTiles>.photoTileOffset{top:18px}
+ #ideaCards.compactTiles{row-gap:16px!important;column-gap:12px!important;padding-bottom:0;align-items:start}
+ #ideaCards.compactTiles>.photoTile{align-self:start;height:auto!important;min-width:0;box-sizing:border-box}
+ #ideaCards.compactTiles>.photoTileOffset{top:0;margin-top:24px}
 }
 
 /* Reuse filter dimensions and the map card rather than a second detail design. */
