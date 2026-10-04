@@ -368,3 +368,13 @@ body.photoDetailOpen{overflow:hidden!important}
 @media(max-width:640px){
  .photoDetailLayer .photoDetailPanel{clip-path:inset(0 round 24px 24px 0 0)}
 }
+
+/* Compact category badges straddle the image edge; facts keep a fixed inset. */
+#ideaCards.compactTiles .photoTileOverlay{padding-left:50px;min-height:30px}
+#ideaCards.compactTiles .photoTileOverlay>.domainIcon{position:absolute;left:8px;bottom:-15px}
+#ideaCards.compactTiles .photoTileContent{padding-top:22px}
+@media(max-width:600px){
+ #ideaCards.compactTiles .photoTileOverlay{padding-left:35px;min-height:23px}
+ #ideaCards.compactTiles .photoTileOverlay>.domainIcon{left:4px;bottom:-11.5px}
+ #ideaCards.compactTiles .photoTileContent{padding-top:17px}
+}
