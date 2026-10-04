@@ -255,3 +255,36 @@ body.photoDetailOpen{overflow:hidden!important}
 }
 .photoDetailBody .sharedIdeaCard .ideaImageFrame{border-radius:18px!important}
 .photoDetailBody .sharedIdeaCard .ideaImageFrame img{border-radius:inherit!important;clip-path:inset(0 round 18px);filter:none!important}
+
+/* Compact metadata sits on the photo; the title keeps its quiet light surface. */
+#ideaCards.compactTiles .photoTileMedia{position:relative;display:block;flex:1 1 auto;min-height:0;aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:#315f6b}
+#ideaCards.compactTiles .photoTileMedia>img,#ideaCards.compactTiles .photoTileMedia>.photoTilePlaceholder{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+#ideaCards.compactTiles .photoTileOverlay{position:absolute;inset:auto 0 0;display:flex;align-items:center;gap:10px;padding:30px 10px 8px;background:linear-gradient(transparent,rgba(9,25,28,.82));color:#fff}
+#ideaCards.compactTiles .photoTileOverlay>.domainIcon{display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;border-radius:50%;background:var(--theme-tint,#e5f2ef);color:var(--theme-ink,#315f6b)}
+#ideaCards.compactTiles .photoTileOverlay>.domainIcon svg{width:17px;height:17px}
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{flex:1;min-width:0;max-width:none;width:auto;margin:0;padding:0;border:0;border-radius:0;background:none;overflow:visible;gap:10px}
+#ideaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{padding:0;color:#fff!important;min-height:0;font-size:12px;line-height:1.4}
+#ideaCards.compactTiles .photoTileOverlay .photoTileMeta :is(.metaIcon,.metaIcon svg,.stimulusIcon,.stimulusIcon svg){color:#fff!important;stroke:currentColor}
+#ideaCards.compactTiles .photoTileContent{padding:12px 8px 8px}
+@media(max-width:600px){
+ #ideaCards.compactTiles .photoTileMedia{aspect-ratio:4/3;border-radius:12px}
+ #ideaCards.compactTiles .photoTileOverlay{padding:26px 5px 6px;gap:5px}
+ #ideaCards.compactTiles .photoTileOverlay>.domainIcon{width:23px;height:23px;flex-basis:23px}
+ #ideaCards.compactTiles .photoTileOverlay>.domainIcon svg{width:13px;height:13px}
+ #ideaCards.compactTiles .photoTileOverlay .photoTileFacts{gap:5px}
+ #ideaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{font-size:10px}
+ #ideaCards.compactTiles .photoTileContent{padding:9px 4px 6px}
+}
+
+/* Desktop details open on the left; mobile keeps the bottom sheet. */
+@media(min-width:641px){
+ .photoDetailLayer .photoDetailPanel{left:0;right:auto;border-radius:0 16px 16px 0;border-left:0;border-right:1px solid rgba(79,142,158,.14);transform:translateX(-100%)}
+ .photoDetailLayer.isOpen .photoDetailPanel{transform:translateX(0)}
+}
+@media(min-width:1280px){
+ body.photoDetailDocked{padding-right:0;padding-left:480px}
+ .photoDetailLayer.isDocked{left:0;right:auto;border-radius:0 16px 16px 0;box-shadow:8px 0 32px #264b4e18}
+ .photoDetailLayer.isDocked .photoDetailPanel{left:0;right:auto}
+}
+#ideaCards.compactTiles .photoTileOverlay>.domainIcon{background:color-mix(in srgb,var(--theme-ink,#315f6b) 12%,#fffdf9)!important;color:var(--theme-ink,#315f6b)!important}
+@media(max-width:600px){#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{gap:3px}}
