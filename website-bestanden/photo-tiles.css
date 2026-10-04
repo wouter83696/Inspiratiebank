@@ -447,3 +447,6 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaCards.compactTiles .photoTileOverlay{bottom:-3px;padding:0 5px;min-height:23px;height:23px}
  #ideaCards.compactTiles .photoTileContent{padding-top:11px}
 }
+
+/* Equal card rows must not stretch photos when neighbouring titles wrap. */
+#ideaCards.compactTiles .photoTileMedia{flex:0 0 auto;width:100%;max-width:100%;box-sizing:border-box}
