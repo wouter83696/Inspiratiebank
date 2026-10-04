@@ -27,6 +27,7 @@
       && typeof region.label === 'string' && region.label.trim();
     return {
       ...header(value),
+      tileStyle:['compact','photo','classic'].includes(value.tileStyle) ? value.tileStyle : (value.photoTiles === false ? 'classic' : 'compact'),
       photoTiles:value.photoTiles !== false,
       featuredAutoplay:value.featuredAutoplay !== false,
       featuredIntervalSeconds:[5,7,10,15].includes(value.featuredIntervalSeconds) ? value.featuredIntervalSeconds : 7,

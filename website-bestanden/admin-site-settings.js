@@ -36,7 +36,7 @@
     $('siteRegionInput').value = regionInputValue;
     $('siteRegionRadius').value = String(draft.region.radiusKm);
     $('siteAgendaRadius').value = String(draft.agendaRadiusKm);
-    $('sitePhotoTiles').value = draft.photoTiles ? 'photo' : 'classic';
+    $('sitePhotoTiles').value = draft.tileStyle;
     $('siteFeaturedAutoplay').checked = draft.featuredAutoplay;
     $('siteFeaturedInterval').value = String(draft.featuredIntervalSeconds);
     $('siteHeaderPosition').value = String(active().headerPosition);
@@ -104,7 +104,7 @@
   }
   function setup(){
     $('siteSettingsForm').addEventListener('submit',save);
-    $('sitePhotoTiles').addEventListener('change',e=>{draft.photoTiles=e.target.value==='photo';});
+    $('sitePhotoTiles').addEventListener('change',e=>{draft.tileStyle=e.target.value;draft.photoTiles=e.target.value!=='classic';});
     $('siteFeaturedAutoplay').addEventListener('change',e=>{draft.featuredAutoplay=e.target.checked;});
     $('siteFeaturedInterval').addEventListener('change',e=>{draft.featuredIntervalSeconds=Number(e.target.value);});
     for(const [id,key] of Object.entries(textFields))$(id).addEventListener('input',e=>{active()[key]=e.target.value;preview();});

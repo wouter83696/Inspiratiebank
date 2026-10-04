@@ -28,9 +28,10 @@
     sheet.querySelector('.photoDetailBody').innerHTML=cardIdea(item,{mapDetailAction:'close'})+`<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="button primary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Website bekijken ↗</a>`:''}${ideaRouteButton(item)}${reportMenu('inspiratiebank',ideaDomKey(item),item.title)}</div>`;
     clearTimeout(closeTimer);sheet.showModal();requestAnimationFrame(()=>requestAnimationFrame(()=>{if(sheet.open)sheet.classList.add('isOpen');}));document.body.classList.add('photoDetailOpen');sheet.querySelector('.photoDetailBody').scrollTop=0;sheet.querySelector('header button').focus();return true;
   }
-  function render(items,on){
+  function render(items,style){
+    const on=style!=='classic';
     enabled=on;current=new Map(items.map(item=>[ideaDomKey(item),item]));
-    const grid=document.getElementById('ideaCards');grid.classList.toggle('photoTiles',on);if(!on)return;
+    const grid=document.getElementById('ideaCards');grid.classList.toggle('photoTiles',on);grid.classList.toggle('compactTiles',style==='compact');if(!on)return;
     grid.querySelectorAll('.ideaFeaturedGroup').forEach(group=>group.replaceWith(...group.childNodes));
     const featured=grid.querySelector('.ideaFeaturedCarousel');if(featured)grid.prepend(featured);
     grid.querySelectorAll('article[data-idea-key]').forEach(card=>{

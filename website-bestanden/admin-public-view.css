@@ -6482,5 +6482,28 @@
 .photoDetailBody .ideaImageFrame{position:relative!important;min-height:0!important;aspect-ratio:16/10!important}
 .photoDetailBody .ideaImageFrame img{position:absolute!important;inset:0;width:100%!important;height:100%!important;object-fit:cover}
 .photoDetailBody h3 .ideaTitleText{display:inline!important;white-space:normal!important;overflow:visible!important;-webkit-line-clamp:unset!important}
+/* Classic compact keeps the familiar warm-white card beneath each photo. */
+#adminIdeaCards.compactTiles{align-items:stretch}
+#adminIdeaCards.compactTiles .photoTile{aspect-ratio:auto;display:flex;flex-direction:column;background:#fffdf9;color:#005f73;padding:8px;border:1px solid rgba(117,94,62,.06);border-radius:22px;overflow:visible}
+#adminIdeaCards.compactTiles .photoTile::after{display:none}
+#adminIdeaCards.compactTiles .photoTile>img,#adminIdeaCards.compactTiles .photoTilePlaceholder{position:static;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:16px;z-index:auto;flex:none}
+#adminIdeaCards.compactTiles .photoTileContent{position:relative;inset:auto;display:flex;flex:1;flex-direction:column;gap:10px;padding:22px 8px 10px;width:100%;box-sizing:border-box}
+#adminIdeaCards.compactTiles .photoTileTitle{font-size:17px;line-height:1.35;font-weight:600;padding:0}
+#adminIdeaCards.compactTiles .photoTileTitle>.domainIcon{position:absolute;left:8px;top:-18px;width:34px;height:34px;border:1px solid var(--theme-line,#e5ece5)}
+#adminIdeaCards.compactTiles .photoTileTitle>span:last-child{-webkit-line-clamp:3}
+#adminIdeaCards.compactTiles .photoTileMeta{margin-top:auto}
+#adminIdeaCards.compactTiles .photoTile :is(.pill,.cardMetaPart,.cardMetaLine){color:#637d7b!important;font-size:12px}
+#adminIdeaCards.compactTiles :is(.photoTileMeta,.photoTileExtra) :is(.metaIcon,.metaIcon svg,.stimulusIcon,.stimulusIcon svg){color:#637d7b!important}
+#adminIdeaCards.compactTiles .photoTileExtra{margin-top:-4px}
+#adminIdeaCards.compactTiles .ideaFeaturedCarousel{align-self:stretch;display:flex;flex-direction:column}
+#adminIdeaCards.compactTiles .ideaFeaturedSlides{flex:1;min-height:260px;aspect-ratio:auto}
+@media(max-width:600px){
+ #adminIdeaCards.compactTiles .photoTile{padding:6px;border-radius:18px}
+ #adminIdeaCards.compactTiles .photoTile>img,#adminIdeaCards.compactTiles .photoTilePlaceholder{border-radius:12px;aspect-ratio:4/3}
+ #adminIdeaCards.compactTiles .photoTileContent{padding:20px 4px 8px;gap:9px}
+ #adminIdeaCards.compactTiles .photoTileTitle{font-size:14px}
+ #adminIdeaCards.compactTiles .photoTileTitle>.domainIcon{left:4px;width:28px;height:28px;top:-15px}
+ #adminIdeaCards.compactTiles .ideaFeaturedSlides{aspect-ratio:16/9;min-height:0;flex:auto}
+}
 
 }

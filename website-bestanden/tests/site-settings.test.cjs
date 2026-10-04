@@ -17,3 +17,10 @@ test('photo tile presentation defaults on and can be reverted independently',()=
  assert.equal(normalize({photoTiles:false,featuredAutoplay:false}).featuredAutoplay,false);
  assert.equal(normalize({photoTiles:true}).photoTiles,true);
 });
+test('compact style is the default and all three styles remain selectable',()=>{
+ const normalize=ctx.window.SiteSettings.normalize;
+ assert.equal(normalize().tileStyle,'compact');
+ assert.equal(normalize({photoTiles:false}).tileStyle,'classic');
+ for(const tileStyle of ['compact','photo','classic'])assert.equal(normalize({tileStyle}).tileStyle,tileStyle);
+ assert.equal(normalize({tileStyle:'invalid'}).tileStyle,'compact');
+});

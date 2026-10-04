@@ -5469,7 +5469,7 @@
     }
 </style>
   <link rel="stylesheet" href="website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
-  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261004-v2">
+  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261004-compact-v1">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -5832,8 +5832,8 @@
   <script src="website-bestanden/select-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script src="website-bestanden/agenda-discovery-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script>DiscoveryViewShared.mount();AgendaDiscoveryShared.mount();</script>
-  <script src="website-bestanden/site-settings-shared.js?v=20261004-photo-v1"></script>
-  <script src="website-bestanden/photo-tiles.js?v=20261004-v2"></script>
+  <script src="website-bestanden/site-settings-shared.js?v=20261004-compact-v1"></script>
+  <script src="website-bestanden/photo-tiles.js?v=20261004-compact-v1"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20260930-list-parity-v2"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20261001-time-sort-v2"></script>
@@ -9481,7 +9481,7 @@
     const empty = `<div class="empty">${escapeHtml(inspirationEmptyMessage())}</div>`;
     const surpriseAfter = window.matchMedia('(min-width:1180px)').matches ? 4 : window.matchMedia('(min-width:641px)').matches ? 3 : 2;
     $('#ideaCards').innerHTML = items.length ? withFeaturedIdeaMarkup(items, surpriseAfter) : empty;
-    PhotoTiles.render(items, SiteSettings.normalize(centralStorage?.siteSettings).photoTiles);
+    PhotoTiles.render(items, SiteSettings.normalize(centralStorage?.siteSettings).tileStyle);
     setupFeaturedCarousel();
     $('#ideaList').innerHTML = items.length
       ? IdeaViewShared.renderDesktopTable({rows:withSurpriseMarkup(items, ideaRow, surpriseIdeaRow, 3)})
