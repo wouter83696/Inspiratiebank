@@ -478,3 +478,9 @@ body.photoDetailOpen{overflow:hidden!important}
 /* Keep text inside the photo while the category badge overlaps its edge. */
 #ideaCards.compactTiles .photoTileOverlay .photoTileFacts{position:relative;top:-15px;text-shadow:0 1px 2px rgba(0,0,0,.35)}
 @media(max-width:600px){#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{top:-12px}}
+
+/* Sheet facts return to their own full-width row below the overlapping badge. */
+.photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:24px!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock{width:100%!important;margin:0!important}
+.photoDetailPanel .ideaFilterSheetClose:hover{background:rgba(194,178,153,.06);border-color:rgba(61,126,136,.16);color:#63858b;box-shadow:none}
+.photoDetailPanel .ideaFilterSheetClose:focus-visible{background:rgba(194,178,153,.06)}
