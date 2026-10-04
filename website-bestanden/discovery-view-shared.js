@@ -143,6 +143,7 @@
         template.content.querySelectorAll('[data-view="map"]').forEach(button=>button.remove());
         template.content.querySelectorAll('[data-view]').forEach(button=>button.dataset.adminView=button.dataset.view);
       }
+      if(!admin)template.content.querySelectorAll('[data-view="list"]').forEach(button=>button.remove());
       node.replaceWith(template.content);
     });
     document.querySelectorAll('[data-discovery-sheet]').forEach(node=>{const template=document.createElement('template');template.innerHTML=sheet;node.replaceWith(template.content);});

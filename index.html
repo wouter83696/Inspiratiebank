@@ -5832,7 +5832,7 @@
     </div>
   </div>
 
-  <script src="website-bestanden/discovery-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
+  <script src="website-bestanden/discovery-view-shared.js?v=20261004-tiles-map-v2"></script>
   <script src="website-bestanden/select-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script src="website-bestanden/agenda-discovery-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script>DiscoveryViewShared.mount();AgendaDiscoveryShared.mount();</script>
@@ -9491,9 +9491,7 @@
     $('#ideaCards').innerHTML = items.length ? withFeaturedIdeaMarkup(items, surpriseAfter) : empty;
     PhotoTiles.render(items, SiteSettings.normalize(centralStorage?.siteSettings).tileStyle);
     setupFeaturedCarousel();
-    $('#ideaList').innerHTML = items.length
-      ? IdeaViewShared.renderDesktopTable({rows:withSurpriseMarkup(items, ideaRow, surpriseIdeaRow, 3)})
-      : empty;
+    $('#ideaList').replaceChildren();
     renderIdeaMap(items);
   }
   function renderIdeaLocationActiveChip(){
@@ -10172,7 +10170,7 @@
   }
   function ideaViewFromLocation(){
     const view = new URLSearchParams(window.location.search).get('weergave');
-    return {tegels:'tiles', lijst:'list', kaart:'map', tiles:'tiles', list:'list', map:'map'}[view] || 'tiles';
+    return {tegels:'tiles', lijst:'tiles', kaart:'map', tiles:'tiles', list:'tiles', map:'map'}[view] || 'tiles';
   }
   function updatePublicRoute(tabName, view, {replace=false}={}){
     const url = new URL(window.location.href);
@@ -10272,10 +10270,7 @@
     syncTopTabIndicator();
   }
   function setIdeaView(view, options={}){
-    const requestedView = ['tiles','list','map'].includes(view) ? view : 'tiles';
-    const nextView = window.matchMedia('(max-width:640px)').matches && requestedView === 'list'
-      ? 'tiles'
-      : requestedView;
+    const nextView = view === 'map' ? 'map' : 'tiles';
     const listOn = nextView === 'list';
     const mapOn = nextView === 'map';
     $('#tab-inspiratie')?.classList.toggle('mapViewActive', mapOn);
