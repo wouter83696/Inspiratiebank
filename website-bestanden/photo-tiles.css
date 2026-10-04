@@ -567,3 +567,22 @@ body.photoDetailOpen{overflow:hidden!important}
 @media(prefers-reduced-motion:reduce){
  .photoDetailLayer.isDocked{transition-duration:.01ms!important;transition-delay:0s!important}
 }
+
+/* One radius per photo surface; badges remain outside the clipping area. */
+:root{--activity-photo-radius:16px;--activity-thumb-radius:12px}
+#ideaCards.compactTiles .photoTileMedia,
+.photoDetailBody .sharedIdeaCard .ideaImageFrame,
+.ideaMapPanel .sharedIdeaCard .ideaImageFrame{border-radius:var(--activity-photo-radius)!important}
+:is(.photoDetailBody,.ideaMapPanel) .sharedIdeaCard .ideaImageFrame :is(img,.ideaImageLink,.ideaImagePlaceholder){border-radius:inherit!important}
+#ideaCards.compactTiles .photoTileMedia::after,
+#ideaCards.compactTiles .photoTileOverlay{border-radius:0 0 var(--activity-photo-radius) var(--activity-photo-radius)}
+#ideaList .ideaListVisual,
+.ideaMapResult .ideaMapResultThumbWrap,
+.ideaMapAccordionImage{border-radius:var(--activity-thumb-radius)!important}
+#ideaList .ideaListVisual img,
+.ideaMapResult .ideaMapResultThumbWrap img,
+.ideaMapAccordionImage img{border-radius:inherit!important}
+@media(max-width:600px){
+ #ideaCards.compactTiles .photoTileMedia,
+ #ideaCards.compactTiles .photoTileOverlay{--activity-photo-radius:12px}
+}
