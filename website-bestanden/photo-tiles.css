@@ -108,3 +108,43 @@ body.photoDetailOpen{overflow:hidden!important}
 #ideaCards.compactTiles .photoTileFacts :is(.pill,.cardMetaPart){flex-shrink:0;white-space:nowrap;font-size:11px}
 @media(max-width:600px){#ideaCards.compactTiles .photoTileFacts .photoTileExtra{display:none}}
 @media(max-width:350px){#ideaCards.compactTiles .ideaFeaturedCarousel{grid-column:auto}}
+
+/* Photo-led detail with the same metadata as the classic cards. */
+.photoDetailPanel .ideaFilterSheetHeader{position:absolute;right:16px;top:16px;z-index:3;padding:0;background:none;border:0}
+.photoDetailPanel .ideaFilterSheetHeader h2{display:none}
+.photoDetailPanel .ideaFilterSheetClose{background:#fffdf9;box-shadow:0 2px 12px #183f4520}
+.photoDetailLayer .photoDetailPanel{display:block}
+.photoDetailPanel .photoDetailBody{height:100%;padding:0!important;overflow-y:auto}
+.photoDetailHero{display:block;width:100%;height:300px;object-fit:cover}
+.photoDetailInfo{position:relative;padding:30px 24px 20px;background:#fffdf9;border-radius:24px 24px 0 0;margin-top:-22px;min-height:250px}
+.photoDetailBadge{position:absolute;top:-22px;left:24px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:var(--theme-tint,#e5f2ef);color:var(--theme-ink,#315f6b)}
+.photoDetailBadge svg{width:22px;height:22px}
+.photoDetailInfo h2{margin:6px 0 18px;font-size:25px;line-height:1.3;color:#005f73}
+.photoDetailInfo .cardMetaBlock{flex-wrap:wrap!important;overflow:visible;white-space:normal}
+.photoDetailDescription,.photoDetailSection p{font-size:15px;line-height:1.7;color:#637d7b}
+.photoDetailSection{border-top:1px solid #e8e8df;padding:18px 0}
+.photoDetailSection>summary{cursor:pointer;font-weight:600;color:#315f6b}
+.photoRouteChoices{margin-top:16px}
+.photoRouteChoices>summary{display:list-item;width:fit-content;padding:10px 16px;border:1px solid #d4e4df;border-radius:14px;cursor:pointer;color:#315f6b;background:#edf5f2}
+.photoRouteChoices>div{display:flex;gap:12px;flex-wrap:wrap;padding:14px 0}
+.photoRouteChoices a{color:#005f73;text-underline-offset:4px;padding:8px}
+.photoRouteChoices small{display:block;color:#637d7b;line-height:1.5}
+.photoDetailGallery{display:grid;gap:12px;padding-top:16px}.photoDetailGallery img{width:100%;border-radius:14px}
+.photoDetailActions>.primary{width:100%;text-align:center;justify-content:center}
+#ideaCards.photoTiles .photoTile.isSelected{outline:2px solid #bda365;outline-offset:2px}
+@media(min-width:1280px){
+ body.photoDetailDocked{padding-right:440px;box-sizing:border-box}
+ body.photoDetailDocked #ideaCards.photoTiles{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .photoDetailLayer.isDocked{left:auto;right:0;width:440px;max-width:440px;z-index:90;box-shadow:-8px 0 32px #264b4e18}
+ .photoDetailLayer.isDocked .ideaFilterSheetBackdrop{display:none}
+ .photoDetailLayer.isDocked .photoDetailPanel{width:100%;max-width:100%;height:100%;border-radius:0;inset:0}
+}
+@media(max-width:600px){.photoDetailHero{height:250px}.photoDetailInfo{padding:28px 20px 18px}.photoDetailInfo h2{font-size:23px}}
+@media(min-width:1280px){.photoDetailLayer.isDocked .photoDetailPanel{position:absolute;width:440px;max-width:440px;left:0;right:0;top:0;bottom:0}}
+.photoDetailInfo{overflow-wrap:anywhere}.photoDetailPanel .ideaFilterSheetHeader{position:absolute!important}
+
+.photoDetailActions>.primary{display:flex;align-items:center;min-height:48px;padding:12px 20px;border-radius:24px;background:#006579;color:white;text-decoration:none;box-sizing:border-box;font-weight:600}
+.photoDetailActions>.primary:hover{background:#004f60}
+.photoDetailArticle .photoDetailInfo .photoDetailBadge{z-index:1}
+.photoDetailPanel .ideaFilterSheetClose{border-radius:50%}
+.photoDetailArticle{overflow:visible!important}.photoDetailInfo{isolation:isolate;overflow:visible!important}.photoDetailBadge{transform:translateY(0)}
