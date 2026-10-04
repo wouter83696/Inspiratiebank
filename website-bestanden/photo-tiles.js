@@ -67,6 +67,11 @@
       button.innerHTML=`${image?`<img src="${escapeHtml(image.src)}" alt="" loading="lazy" decoding="async">`:'<span class="photoTilePlaceholder" aria-hidden="true"></span>'}<span class="photoTileContent"><span class="photoTileTitle"><span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span>${escapeHtml(item.title)}</span></span><span class="photoTileFacts"><span class="photoTileMeta">${metadata.pills}</span>${compact?'':`<span class="photoTileExtra">${metadata.meta}</span>`}</span></span>`;
       card.replaceWith(button);
     });
+    let column=0;
+    for(const child of grid.children){
+      if(!child.classList.contains('photoTile')){column=0;continue;}
+      child.classList.toggle('photoTileOffset',column++%2===1);
+    }
     grid.querySelectorAll('[data-featured-target]').forEach(button=>{button.setAttribute('aria-label','Bekijk '+(current.get(button.dataset.featuredTarget)?.title||'uitgelichte activiteit'));button.setAttribute('aria-haspopup','dialog');});
   }
   document.addEventListener('click',e=>{const button=e.target.closest('[data-photo-detail]');if(button)open(button.dataset.photoDetail);});

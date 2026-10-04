@@ -190,3 +190,12 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .ideaPracticalDetails .photoRouteChoices>summary{display:list-item;width:fit-content;padding:10px 16px;border:1px solid #d4e4df;border-radius:14px;background:#edf5f2;font-size:14px;list-style:disclosure-closed}
 .photoDetailBody .ideaPracticalDetails .photoRouteChoices[open]>summary{list-style:disclosure-open}
 .photoDetailBody .ideaPracticalDetails .photoRouteChoices>summary::after{content:none}
+
+/* The title and arrow share the bottom line now that featured has no metadata. */
+#ideaCards .ideaFeaturedContent{display:flex!important;flex-direction:row!important;align-items:center!important;gap:12px!important}
+#ideaCards .ideaFeaturedContent h3{flex:1;min-width:0;margin:0!important}
+#ideaCards .ideaFeaturedBottom{flex:0 0 auto;width:auto;margin:0}
+@media(min-width:351px) and (max-width:600px){
+ #ideaCards.compactTiles{row-gap:28px;padding-bottom:18px}
+ #ideaCards.compactTiles>.photoTileOffset{top:18px}
+}
