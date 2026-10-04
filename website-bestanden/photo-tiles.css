@@ -305,8 +305,8 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .photoRouteChoices>summary{font-size:16px;font-weight:600}
 .photoDetailBody .photoDetailActions{padding:16px 0 8px;border-top:1px solid rgba(79,142,158,.12)}
 .photoDetailBody .photoDetailActions:empty{display:none}
-.photoDetailBody .photoDetailActions>.ideaRouteButton{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 16px;box-sizing:border-box;border:1px solid #006579;border-radius:12px;background:#006579;color:#fff;font-size:16px;font-weight:600;text-decoration:none}
-.photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:#004f60;border-color:#004f60}
+.photoDetailBody .photoDetailActions>.ideaRouteButton{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 16px;box-sizing:border-box;border:1.5px solid rgba(23,79,93,.46);border-radius:12px;background:rgba(255,253,249,.72);color:#236875;font-size:16px;font-weight:600;text-decoration:none}
+.photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:var(--control-hover-surface);border-color:rgba(23,79,93,.68);color:#1f5763}
 .photoDetailBody .photoRouteChoices a{border-radius:12px}
 @media(max-width:640px){
  .photoDetailPanel .ideaFilterSheetHeader{padding:10px 16px;min-height:60px}
