@@ -126,7 +126,7 @@
     card.prepend(title);
     card.querySelector('.ideaPracticalDetails:not(.ideaMaterialsDetails)')?.remove();
     card.querySelector('.cardFooter')?.remove();
-    card.insertAdjacentHTML('beforeend',`${gallery}${IdeaViewShared.renderPractical(escapeHtml(item.materials||item.rules||''))}${routeChoices(item)}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="ideaRouteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Naar website ↗</a>`:''}</div>`);
+    card.insertAdjacentHTML('beforeend',`${gallery}${IdeaViewShared.renderPractical(escapeHtml(item.materials||item.rules||''))}${routeChoices(item)}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="ideaRouteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><svg class="websiteGlobe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg><span>Naar website</span></a>`:''}</div>`);
     const materials=card.querySelector('.ideaMaterialsDetails');
     if(materials) card.insertBefore(materials,card.querySelector('.photoRouteChoices') || card.querySelector('.photoDetailActions'));
     const practicalSummary=card.querySelector('.ideaPracticalDetails:not(.ideaMaterialsDetails)>summary');
