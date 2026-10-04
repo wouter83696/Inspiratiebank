@@ -548,3 +548,8 @@ body.photoDetailOpen{overflow:hidden!important}
 @media(prefers-reduced-motion:reduce){
  .photoDetailLayer.isDocked{transition-duration:.01ms!important;transition-delay:0s!important}
 }
+
+/* Both detail metadata groups share one vertical centre and line height. */
+.photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardPillGroup,
+.photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardMetaLine{align-self:center!important;align-items:center!important;min-height:24px;line-height:16px!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock :is(.pill,.cardMetaPart){display:inline-flex!important;align-items:center!important;box-sizing:border-box;height:24px;min-height:24px;padding-top:0!important;padding-bottom:0!important;line-height:16px!important}
