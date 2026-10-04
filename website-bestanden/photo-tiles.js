@@ -36,7 +36,12 @@
     const place=String(item.place||item.location||'').trim();
     const postcode=String(item.postcode||'').trim();
     const name=String(item.locationName||item.venue||'').trim();
-    const lines=[...new Set([name,address,[postcode,place].filter(value=>value&&!address.toLowerCase().includes(value.toLowerCase())).join(' ')].filter(Boolean))];
+    // Stored addresses may already contain postcode and town in one string.
+    const addressParts=address.split(/,?\s+(?=\d{4}\s?[A-Za-z]{2}\b)/);
+    if(addressParts.length===1&&place&&address.toLowerCase().endsWith(', '+place.toLowerCase())){
+      addressParts.splice(0,1,address.slice(0,-place.length-2),place);
+    }
+    const lines=[...new Set([name,...addressParts,[postcode,place].filter(value=>value&&!address.toLowerCase().includes(value.toLowerCase())).join(' ')].filter(Boolean))];
     const destination=ideaRouteDestination(item);
     if(!destination&&!lines.length)return '';
     const locationText=`<p class="ideaPracticalText">${lines.length?lines.map(escapeHtml).join('<br>'):'Adres nog niet opgegeven'}</p>`;
