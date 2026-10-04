@@ -687,9 +687,6 @@ body.photoDetailOpen{overflow:hidden!important}
 }
 @media(pointer:coarse){#ideaMap .ideaMapDetailClose::after{content:"";position:absolute;inset:-8px}}
 
-/* Sheet facts get their own line below the overlapping theme badge. */
-.photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:24px!important}
-.photoDetailBody .sharedIdeaCard .cardMetaBlock{margin:0!important;max-width:100%!important;width:fit-content!important;align-self:flex-start}
 /* One close control for both filter and activity sheets. */
 .ideaFilterSheet .ideaFilterSheetClose{position:relative;inset:auto;display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;width:32px;height:32px;min-width:32px;min-height:32px;padding:0;border:1px solid rgba(79,142,158,.16);border-radius:10px;background:rgba(255,253,249,.72);color:#63858b;box-shadow:none;transition:background-color 140ms ease,color 140ms ease}
 .ideaFilterSheet .ideaFilterSheetClose svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
