@@ -558,3 +558,12 @@ body.photoDetailOpen{overflow:hidden!important}
 :is(#ideaFilters,#agendaFilters) .filterSearch:has(.ideaSearchSuggestions.open) input{border-bottom-left-radius:0!important;border-bottom-right-radius:0!important;border-bottom-color:transparent!important}
 :is(#ideaFilters,#agendaFilters) .ideaSearchSuggestions{top:100%;margin-top:0;border-top:1px solid rgba(79,142,158,.08);border-radius:0 0 18px 18px;background:rgba(255,253,249,.62);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);box-shadow:0 12px 22px rgba(20,38,42,.06)}
 #ideaCards>.empty{grid-column:1 / -1;width:100%;box-sizing:border-box;text-align:left}
+
+/* Both directions start gently and settle smoothly, with page reflow in sync. */
+@media(min-width:1280px){
+ .photoDetailLayer.isDocked{transition:transform 420ms cubic-bezier(.4,0,.2,1),visibility 0s linear 420ms!important}
+ body:has(.photoDetailLayer.isDocked[open]){overflow-anchor:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .photoDetailLayer.isDocked{transition-duration:.01ms!important;transition-delay:0s!important}
+}

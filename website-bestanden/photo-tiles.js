@@ -17,19 +17,19 @@
   }
   let closeTimer,openFrame,closeListener;
   let layoutAnimations=[];
-  function releaseDock(){
-    if(!document.body.classList.contains('photoDetailDocked'))return;
-    // Capture tiles individually: closing the dock also changes the column count.
-    const elements=[...document.querySelectorAll('.topbar,.tabHero,#ideaCards > *,.ideaToolbar')];
+  function setDock(docked){
+    if(document.body.classList.contains('photoDetailDocked')===docked)return;
+    // Animate the column change in either direction, including sticky controls.
+    const elements=[...document.querySelectorAll('.topbar,.tabHero,.desktopStickyControls,#ideaCards > *,.ideaToolbar:not(.desktopStickyControls *)')];
     const before=elements.map(element=>({element,rect:element.getBoundingClientRect()}));
-    document.body.classList.remove('photoDetailDocked');
+    document.body.classList.toggle('photoDetailDocked',docked);
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
     const style=getComputedStyle(dialog);
     const time=style.transitionDuration.split(',')[0].trim();
     const duration=parseFloat(time)*(time.endsWith('ms')?1:1000);
     layoutAnimations=before.flatMap(({element,rect})=>{
       const next=element.getBoundingClientRect();
-      if(!rect.width||!next.width||!rect.height||!next.height||rect.bottom<0||rect.top>innerHeight)return [];
+      if(!rect.width||!next.width||!rect.height||!next.height||(rect.bottom<0&&next.bottom<0)||(rect.top>innerHeight&&next.top>innerHeight))return [];
       return [element.animate([
         {transformOrigin:'0 0',transform:`translate(${rect.left-next.left}px,${rect.top-next.top}px) scale(${rect.width/next.width},${rect.height/next.height})`},
         {transformOrigin:'0 0',transform:'none'}
@@ -47,8 +47,9 @@
     const finish=()=>{cancelPendingMotion();if(dialog.open)dialog.close();};
     const handler=event=>{if(event.target===target&&event.propertyName==='transform')finish();};
     closeListener={target,handler};target.addEventListener('transitionend',handler);
-    releaseDock();
+    dialog.classList.add('isClosing');
     dialog.classList.remove('isOpen');
+    setDock(false);
     const durations=getComputedStyle(target).transitionDuration.split(',').map(x=>parseFloat(x)*(x.trim().endsWith('ms')?1:1000));
     closeTimer=setTimeout(finish,Math.max(...durations,0)+50);
   }
@@ -99,9 +100,10 @@
     return card.outerHTML;
   }
   function present(sheet){
+    sheet.classList.remove('isClosing');
     const docked=wide.matches;
     sheet.classList.toggle('isDocked',docked);
-    document.body.classList.toggle('photoDetailDocked',docked);
+    setDock(docked);
     document.body.classList.toggle('photoDetailOpen',!docked);
     if(!sheet.open){if(docked)sheet.show();else sheet.showModal();}
     openFrame=requestAnimationFrame(()=>{openFrame=requestAnimationFrame(()=>{if(sheet.open)sheet.classList.add('isOpen');});});
