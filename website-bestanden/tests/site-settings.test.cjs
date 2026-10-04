@@ -10,3 +10,10 @@ test('featured settings keep defaults for existing sites and validate saved valu
  assert.equal(normalize({featuredAutoplay:false}).featuredAutoplay,false);
  for(const invalid of [0,-1,300,'10',null])assert.equal(normalize({featuredIntervalSeconds:invalid}).featuredIntervalSeconds,7);
 });
+test('photo tile presentation defaults on and can be reverted independently',()=>{
+ const normalize=ctx.window.SiteSettings.normalize;
+ assert.equal(normalize().photoTiles,true);
+ assert.equal(normalize({photoTiles:false}).photoTiles,false);
+ assert.equal(normalize({photoTiles:false,featuredAutoplay:false}).featuredAutoplay,false);
+ assert.equal(normalize({photoTiles:true}).photoTiles,true);
+});

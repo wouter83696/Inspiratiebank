@@ -428,3 +428,6 @@ body.adminEditorOpen{overflow:hidden!important}
  .adminEditorCard .teamActionBar{bottom:-20px}
 }
 @media(prefers-reduced-motion:reduce){.adminEditorLayer .adminEditorCard{animation:none}}
+
+.adminLoginBrand{display:flex;align-items:center;gap:12px;margin-bottom:20px;color:#315f6b;font:500 23px/1.25 Lora,serif}
+#loginPanel .adminLoginBrand .adminLoginLogo{margin:0;flex-shrink:0}

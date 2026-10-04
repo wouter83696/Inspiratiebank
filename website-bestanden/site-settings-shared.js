@@ -27,6 +27,7 @@
       && typeof region.label === 'string' && region.label.trim();
     return {
       ...header(value),
+      photoTiles:value.photoTiles !== false,
       featuredAutoplay:value.featuredAutoplay !== false,
       featuredIntervalSeconds:[5,7,10,15].includes(value.featuredIntervalSeconds) ? value.featuredIntervalSeconds : 7,
       regionalHeaders:Array.isArray(value.regionalHeaders)?value.regionalHeaders.filter(x=>x&&typeof x==='object'&&typeof x.id==='string'&&x.id&&typeof x.label==='string'&&x.label.trim()).slice(0,30).map(x=>({id:x.id.slice(0,80),label:x.label.trim().slice(0,120),places:[...new Set((Array.isArray(x.places)?x.places:[]).filter(p=>typeof p==='string').map(placeKey).filter(Boolean))].slice(0,50),...header(x,header(value))})):[],

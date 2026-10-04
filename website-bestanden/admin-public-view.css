@@ -6400,4 +6400,80 @@
   :scope#agendaReviewPanel .mobileDayNavigation.isStuck{border-color:transparent;box-shadow:0 0 0 100vmax #F8F5EB!important}
 }
 
+/* One scoped class switches back to the untouched classic presentation. */
+#adminIdeaCards.photoTiles{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:16px;align-items:start}
+#adminIdeaCards.photoTiles .photoTile{position:relative;display:block;width:100%;min-width:0;aspect-ratio:4/4.5;padding:0;overflow:hidden;border:0;border-radius:20px;background:#315f6b;color:white;text-align:left;font:inherit;cursor:pointer;box-shadow:0 3px 16px #243a3210;isolation:isolate}
+.photoTile>img,.photoTilePlaceholder{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.photoTilePlaceholder{background:linear-gradient(135deg,#597d74,#274f5b)}
+.photoTile::after{content:'';position:absolute;inset:15% 0 0;background:linear-gradient(transparent,rgba(9,25,28,.75) 62%,rgba(9,25,28,.94));z-index:-1}
+.photoTileContent{position:absolute;bottom:0;left:0;right:0;display:grid;gap:9px;padding:16px}
+.photoTileTitle{display:flex;align-items:center;gap:9px;font-size:19px;font-weight:600;line-height:1.3;overflow-wrap:anywhere}
+.photoTileTitle>.domainIcon{flex:0 0 32px;width:32px;height:32px;border-radius:50%;background:var(--theme-tint,#e5f2ef);color:var(--theme-ink,#315f6b);display:grid;place-items:center}
+.photoTileTitle svg{width:17px;height:17px}
+.photoTileMeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#adminIdeaCards.photoTiles .photoTile :is(.pill,.cardMetaPart,.cardMetaLine){color:#fff;background:none;border:0;box-shadow:none;padding:0;font-size:12px;line-height:1.4}
+#adminIdeaCards.photoTiles .photoTile .pill svg{color:inherit;stroke:currentColor}
+#adminIdeaCards.photoTiles .photoTile .cardMetaLine{display:flex;gap:12px;flex-wrap:wrap}
+#adminIdeaCards.photoTiles .photoTile .stimulusPillText{display:none}
+#adminIdeaCards.photoTiles .photoTile:hover{box-shadow:0 5px 20px #243a3230}
+#adminIdeaCards.photoTiles .photoTile:focus-visible{outline:3px solid #397e8a;outline-offset:4px}
+/* Keep the existing featured carousel, timer and pause control. */
+#adminIdeaCards.photoTiles .ideaFeaturedCarousel{grid-column:auto;min-width:0;align-self:start}
+#adminIdeaCards.photoTiles .ideaFeaturedSlides{aspect-ratio:4/4.5;height:auto!important}
+#adminIdeaCards.photoTiles .ideaFeaturedCard{height:100%!important;min-height:0!important;padding:0!important;border-radius:20px;overflow:hidden;border:0!important;background:#315f6b!important}
+#adminIdeaCards.photoTiles .ideaFeaturedMedia{position:absolute!important;inset:0!important;height:100%!important;aspect-ratio:auto!important;border-radius:20px!important}
+#adminIdeaCards.photoTiles .ideaFeaturedContent{position:absolute!important;inset:auto 0 0!important;width:100%!important;max-width:none!important;margin:0!important;padding:50px 16px 16px!important;border-radius:0!important;background:linear-gradient(transparent,rgba(9,25,28,.88) 50%,rgba(9,25,28,.96))!important;backdrop-filter:none!important;box-sizing:border-box}
+#adminIdeaCards.photoTiles .ideaFeaturedContent h3{color:#fff!important;font:600 19px/1.3 Manrope,sans-serif!important;margin:0 0 9px!important}
+#adminIdeaCards.photoTiles .ideaFeaturedMeta{background:none!important;border:0!important;padding:0!important;color:white!important}
+#adminIdeaCards.photoTiles .ideaFeaturedMeta :is(.pill,.cardMetaLine,.cardMetaPart){color:white!important;background:none!important;border:0!important;padding:0!important;font-size:12px!important}
+#adminIdeaCards.photoTiles .ideaFeaturedArrow{display:none!important}
+#adminIdeaCards.photoTiles .ideaFeaturedSideLabel{top:12px;left:12px;font-size:11px;border-radius:20px;padding:7px 10px}
+#adminIdeaCards.photoTiles .ideaFeaturedNav{min-height:32px;margin:0;gap:7px}
+@media(max-width:1179px){#adminIdeaCards.photoTiles{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:800px){#adminIdeaCards.photoTiles{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px}}
+@media(max-width:600px){
+ #adminIdeaCards.photoTiles{gap:10px}
+ #adminIdeaCards.photoTiles .photoTile,#adminIdeaCards.photoTiles .ideaFeaturedSlides{aspect-ratio:3/4}
+ .photoTileContent{padding:12px 10px;gap:8px}
+ .photoTileTitle{font-size:15px;gap:6px;align-items:flex-start}
+ .photoTileTitle>.domainIcon{width:24px;height:24px;flex-basis:24px}
+ .photoTileTitle svg{width:13px;height:13px}
+ .photoTileExtra{display:none}
+ .photoTileMeta{gap:7px}
+ #adminIdeaCards.photoTiles .ideaFeaturedContent{padding:40px 10px 12px!important}
+ #adminIdeaCards.photoTiles .ideaFeaturedContent h3{font-size:15px!important}
+ #adminIdeaCards.photoTiles .ideaFeaturedMeta .cardMetaLine{display:none!important}
+ #adminIdeaCards.photoTiles .ideaFeaturedSideLabel{top:8px;left:8px;padding:5px 8px;font-size:10px}
+}
+@media(max-width:350px){#adminIdeaCards.photoTiles{grid-template-columns:minmax(0,1fr)!important}}
+.photoDetailSheet{position:fixed;inset:0 0 0 auto;margin:0;border:0;padding:0;width:min(560px,100%);max-width:100%;height:100dvh;max-height:100dvh;background:#fffdf9;color:#315f6b;box-shadow:-16px 0 40px #38312424;overflow:hidden}
+.photoDetailSheet[open]{display:flex;flex-direction:column}
+.photoDetailSheet::backdrop{background:#302e2738;backdrop-filter:blur(3px)}
+.photoDetailSheet>header{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #e7e4da}
+.photoDetailSheet>header h2{font:600 18px/1.4 Manrope,sans-serif;margin:0}
+.photoDetailSheet>header button{flex:0 0 42px;width:42px;height:42px;border-radius:50%;background:#f3f5ef;border:1px solid #dce4df;color:#315f6b;font:26px/1 sans-serif;cursor:pointer}
+.photoDetailBody{padding:20px;overflow-y:auto;overscroll-behavior:contain;min-height:0}
+.photoDetailBody .sharedIdeaCard{box-shadow:none!important;border:0!important;padding:0!important;background:none!important}
+.photoDetailBody .ideaImageFrame{margin:0 0 20px!important;aspect-ratio:16/10;border-radius:18px}
+.photoDetailBody .sharedIdeaCard>h3{font-size:23px;line-height:1.3}
+.photoDetailBody .sharedIdeaCard>p{font-size:16px;line-height:1.65}
+.photoDetailBody .ideaPracticalDetails{margin-block:18px}
+:scope.photoDetailOpen{overflow:hidden!important}
+@media(max-width:600px){.photoDetailSheet{width:100%;height:94dvh;inset:auto 0 0;border-radius:22px 22px 0 0}.photoDetailBody{padding:16px 16px calc(24px + env(safe-area-inset-bottom))}}
+
+.photoTileTitle>span:last-child{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+#adminIdeaCards.photoTiles .photoTileTitle>.domainIcon{background:var(--theme-tint,#e5f2ef)!important;color:var(--theme-ink,#315f6b)!important}
+#adminIdeaCards.photoTiles .ideaFeaturedContent h3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.photoDetailBody .sharedIdeaCard>h3{font-size:22px!important;line-height:1.35!important}
+.photoDetailBody .sharedIdeaCard>p{font-size:16px!important;line-height:1.65!important}
+.photoDetailBody .ideaPracticalText{font-size:15px!important;line-height:1.6!important}
+.photoDetailBody :is(.pill,.cardMetaPart){font-size:14px!important}
+.photoDetailActions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding-block:18px}
+.photoDetailSheet .photoDetailBody{display:block!important}
+.photoDetailBody .sharedIdeaCard{width:100%!important;min-width:0!important;height:auto!important;display:flex!important;flex-direction:column!important}
+.photoDetailBody .ideaImageFrame{width:100%!important;height:auto!important;flex:none!important}
+.photoDetailBody .ideaTitleLink{white-space:normal!important;overflow:visible!important;display:inline!important;-webkit-line-clamp:unset!important}
+#adminIdeaCards.photoTiles .photoTileTitle>.domainIcon{background:color-mix(in srgb,var(--theme-ink,#315f6b) 12%,#fffdf9)!important}
+#adminIdeaCards.photoTiles :is(.photoTileMeta,.photoTileExtra,.ideaFeaturedMeta) :is(.metaIcon,.metaIcon svg,.stimulusIcon,.stimulusIcon svg){color:#fff!important;stroke:currentColor}
+
 }
