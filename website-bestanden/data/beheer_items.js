@@ -1010,7 +1010,7 @@ window.BCJN_BEHEER_BASE = {
       "distanceBand": "In de regio (10-30 km)"
     },
     {
-      "title": "Planet Awesome Nijmegen - karten, lasergamen, bowling en arcade",
+      "title": "Planet Awesome Nijmegen",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "dagelijks, vooraf reserveren",
@@ -1039,7 +1039,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "Olround Nijmegen - bowlen en Prison Island",
+      "title": "Olround Nijmegen",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "dagelijks, reserveren aanbevolen",
@@ -1087,7 +1087,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "Pathe Nijmegen - film, Pathe Games en X-Cube",
+      "title": "Pathé Nijmegen",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "dagelijks volgens filmagenda",
@@ -1111,7 +1111,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "Vue Nijmegen Plein - bioscoop",
+      "title": "Vue Nijmegen Plein",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "dagelijks volgens filmagenda",
@@ -1133,7 +1133,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "EnjoyVR Nijmegen - virtual reality",
+      "title": "EnjoyVR Nijmegen",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "op reservering",
@@ -1177,7 +1177,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "Waalhalla Nijmegen - skateboard, BMX, step en urban sport",
+      "title": "Waalhalla Nijmegen",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "check vrije inloop en activiteiten",
@@ -1200,7 +1200,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "De Wijchense Berg - skiën, snowboarden, tuben en outdoor",
+      "title": "De Wijchense Berg",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "check zomeropening en reserveer",
@@ -1245,7 +1245,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "Gamestate Arnhem - arcadehal",
+      "title": "Gamestate Arnhem",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "dagelijks, check rustige uren",
@@ -1266,7 +1266,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "VR SO Real Arnhem - virtual reality",
+      "title": "VR SO Real Arnhem",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "op reservering",
@@ -1352,7 +1352,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "You Jump Nijmegen - trampolinepark en jumpactiviteiten",
+      "title": "You Jump Nijmegen",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "dagelijks, reserveer een tijdsblok",
@@ -1374,7 +1374,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "Escape Boot Nijmegen - escaperooms en Escape Arena",
+      "title": "Escape Boot Nijmegen",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "op reservering",
@@ -1396,7 +1396,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "ROX Escape Nijmegen - escaperooms op NYMA",
+      "title": "ROX Escape Nijmegen",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "op reservering",
@@ -1418,7 +1418,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "Nijmegen Outdoor - stadsspellen en actieve groepsuitjes",
+      "title": "Nijmegen Outdoor",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "op reservering",
@@ -1440,7 +1440,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "SUP & SURF Nijmegen - suppen en watersport",
+      "title": "SUP & SURF Nijmegen",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "op reservering en afhankelijk van weer",
@@ -1462,7 +1462,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "LaserQuest Nijmegen - lasergamen, Mystic Golf en StepZone",
+      "title": "LaserQuest Nijmegen",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "reserveren aanbevolen",
@@ -1489,7 +1489,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "Fundustry Nijmegen/Ewijk - klimpark, paintball en outdoor challenges",
+      "title": "Fundustry Nijmegen/Ewijk",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "op reservering",
@@ -2294,7 +2294,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Kröller-Müller Museum – kunst en beeldentuin",
+      "title": "Kröller-Müller Museum",
       "domain": "Creatief & Expressie",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -2314,7 +2314,7 @@ window.BCJN_BEHEER_BASE = {
       ],
       "distanceBand": "Verder weg (30-50 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/008-kroller-muller-museum-kunst-en-beeldentuin.jpg",
-      "imageAlt": "Foto bij Kröller-Müller Museum – kunst en beeldentuin",
+      "imageAlt": "Foto bij Kröller-Müller Museum",
       "imageStatus": "approved"
     },
     {
@@ -2378,7 +2378,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Lindenberg Cultuurhuis – workshops en cultuur",
+      "title": "Lindenberg Cultuurhuis",
       "domain": "Creatief & Expressie",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -2398,7 +2398,7 @@ window.BCJN_BEHEER_BASE = {
       ],
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/012-lindenberg-cultuurhuis-workshops-en-cultuur.jpg",
-      "imageAlt": "Foto bij Lindenberg Cultuurhuis – workshops en cultuur",
+      "imageAlt": "Foto bij Lindenberg Cultuurhuis",
       "imageStatus": "approved"
     },
     {
@@ -2569,7 +2569,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Rozet Arnhem – bibliotheek, expo en maakplekken",
+      "title": "Rozet Arnhem",
       "domain": "Creatief & Expressie",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -2589,7 +2589,7 @@ window.BCJN_BEHEER_BASE = {
       ],
       "distanceBand": "In de regio (10-30 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/022-rozet-arnhem-bibliotheek-expo-en-maakplekken-verified.jpg",
-      "imageAlt": "Foto bij Rozet Arnhem – bibliotheek, expo en maakplekken",
+      "imageAlt": "Foto bij Rozet Arnhem",
       "imageStatus": "approved"
     },
     {
@@ -2962,7 +2962,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Museum De Bastei – natuur en Waalverhalen",
+      "title": "Museum De Bastei",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -2982,7 +2982,7 @@ window.BCJN_BEHEER_BASE = {
       ],
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/041-museum-de-bastei-natuur-en-waalverhalen.jpg",
-      "imageAlt": "Foto bij Museum De Bastei – natuur en Waalverhalen",
+      "imageAlt": "Foto bij Museum De Bastei",
       "imageStatus": "approved"
     },
     {
@@ -3031,7 +3031,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "muZIEum – zintuiglijke museumervaring",
+      "title": "muZIEum",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -3051,7 +3051,7 @@ window.BCJN_BEHEER_BASE = {
       ],
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/044-muzieum-zintuiglijke-museumervaring.jpg",
-      "imageAlt": "Foto bij muZIEum – zintuiglijke museumervaring",
+      "imageAlt": "Foto bij muZIEum",
       "imageStatus": "approved"
     },
     {
@@ -3294,7 +3294,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Nationaal Park De Hoge Veluwe – fietsen en route kiezen",
+      "title": "Nationaal Park De Hoge Veluwe",
       "domain": "Natuur & Buiten",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -3314,7 +3314,7 @@ window.BCJN_BEHEER_BASE = {
       ],
       "distanceBand": "Verder weg (30-50 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/056-nationaal-park-de-hoge-veluwe-fietsen-en-route-kiezen-verified.jpg",
-      "imageAlt": "Foto bij Nationaal Park De Hoge Veluwe – fietsen en route kiezen",
+      "imageAlt": "Foto bij Nationaal Park De Hoge Veluwe",
       "imageStatus": "approved"
     },
     {
@@ -3687,7 +3687,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "DoeNijmegen – stadsspellen en groepsuitjes",
+      "title": "DoeNijmegen",
       "domain": "Ontmoeten, Spel & Vaardigheden",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -3707,7 +3707,7 @@ window.BCJN_BEHEER_BASE = {
       ],
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/075-doenijmegen-stadsspellen-en-groepsuitjes.jpg",
-      "imageAlt": "Foto bij DoeNijmegen – stadsspellen en groepsuitjes",
+      "imageAlt": "Foto bij DoeNijmegen",
       "imageStatus": "approved"
     },
     {
@@ -4310,7 +4310,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Waalhalla / NYMA – urban sports en graffiti",
+      "title": "Waalhalla / NYMA",
       "domain": "Sport & Bewegen",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4330,7 +4330,7 @@ window.BCJN_BEHEER_BASE = {
       ],
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/105-waalhalla-nyma-urban-sports-en-graffiti.jpg",
-      "imageAlt": "Foto bij Waalhalla / NYMA – urban sports en graffiti",
+      "imageAlt": "Foto bij Waalhalla / NYMA",
       "imageStatus": "approved"
     },
     {
@@ -4487,7 +4487,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Planet Awesome Nijmegen - karten, lasergamen, bowling en arcade",
+      "title": "Planet Awesome Nijmegen",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4514,11 +4514,11 @@ window.BCJN_BEHEER_BASE = {
         "nijmegen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/114-planet-awesome-nijmegen-karten-lasergamen-bowling-en-arcad.jpg",
-      "imageAlt": "Foto bij Planet Awesome Nijmegen - karten, lasergamen, bowling en arcade",
+      "imageAlt": "Foto bij Planet Awesome Nijmegen",
       "imageStatus": "approved"
     },
     {
-      "title": "Olround Nijmegen - bowlen en Prison Island",
+      "title": "Olround Nijmegen",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4542,11 +4542,11 @@ window.BCJN_BEHEER_BASE = {
         "nijmegen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/115-olround-nijmegen-bowlen-en-prison-island.jpg",
-      "imageAlt": "Foto bij Olround Nijmegen - bowlen en Prison Island",
+      "imageAlt": "Foto bij Olround Nijmegen",
       "imageStatus": "approved"
     },
     {
-      "title": "LaserQuest Nijmegen - lasergamen, Mystic Golf en StepZone",
+      "title": "LaserQuest Nijmegen",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4571,7 +4571,7 @@ window.BCJN_BEHEER_BASE = {
         "nijmegen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/116-laserquest-nijmegen-lasergamen-mystic-golf-en-stepzone.jpg",
-      "imageAlt": "Foto bij LaserQuest Nijmegen - lasergamen, Mystic Golf en StepZone",
+      "imageAlt": "Foto bij LaserQuest Nijmegen",
       "imageStatus": "approved"
     },
     {
@@ -4603,7 +4603,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Pathe Nijmegen - film, Pathe Games en X-Cube",
+      "title": "Pathé Nijmegen",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4629,11 +4629,11 @@ window.BCJN_BEHEER_BASE = {
         "lent"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/118-pathe-nijmegen-film-pathe-games-en-x-cube.jpg",
-      "imageAlt": "Foto bij Pathe Nijmegen - film, Pathe Games en X-Cube",
+      "imageAlt": "Foto bij Pathé Nijmegen",
       "imageStatus": "approved"
     },
     {
-      "title": "Vue Nijmegen Plein - bioscoop",
+      "title": "Vue Nijmegen Plein",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4657,11 +4657,11 @@ window.BCJN_BEHEER_BASE = {
         "binnen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/119-vue-nijmegen-plein-reguliere-bioscoopfilm.jpg",
-      "imageAlt": "Foto bij Vue Nijmegen Plein - bioscoop",
+      "imageAlt": "Foto bij Vue Nijmegen Plein",
       "imageStatus": "approved"
     },
     {
-      "title": "EnjoyVR Nijmegen - virtual reality",
+      "title": "EnjoyVR Nijmegen",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4685,7 +4685,7 @@ window.BCJN_BEHEER_BASE = {
         "nijmegen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/120-enjoyvr-nijmegen-virtual-reality-in-een-eigen-tijdsblok.jpg",
-      "imageAlt": "Foto bij EnjoyVR Nijmegen - virtual reality",
+      "imageAlt": "Foto bij EnjoyVR Nijmegen",
       "imageStatus": "approved"
     },
     {
@@ -4717,7 +4717,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Waalhalla Nijmegen - skateboard, BMX, step en urban sport",
+      "title": "Waalhalla Nijmegen",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4742,11 +4742,11 @@ window.BCJN_BEHEER_BASE = {
         "nijmegen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/122-waalhalla-nijmegen-skateboard-bmx-step-en-urban-sport.jpg",
-      "imageAlt": "Foto bij Waalhalla Nijmegen - skateboard, BMX, step en urban sport",
+      "imageAlt": "Foto bij Waalhalla Nijmegen",
       "imageStatus": "approved"
     },
     {
-      "title": "De Wijchense Berg - skiën, snowboarden, tuben en outdoor",
+      "title": "De Wijchense Berg",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4768,7 +4768,7 @@ window.BCJN_BEHEER_BASE = {
         "bijzonder"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/123-de-wijchense-berg-skien-snowboarden-tuben-en-outdoor.jpg",
-      "imageAlt": "Foto bij De Wijchense Berg - skiën, snowboarden, tuben en outdoor",
+      "imageAlt": "Foto bij De Wijchense Berg",
       "imageStatus": "approved"
     },
     {
@@ -4795,7 +4795,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Gamestate Arnhem - arcadehal",
+      "title": "Gamestate Arnhem",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4814,11 +4814,11 @@ window.BCJN_BEHEER_BASE = {
         "arnhem"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/125-gamestate-arnhem-arcadehal-met-meer-dan-50-games.jpg",
-      "imageAlt": "Foto bij Gamestate Arnhem - arcadehal",
+      "imageAlt": "Foto bij Gamestate Arnhem",
       "imageStatus": "approved"
     },
     {
-      "title": "VR SO Real Arnhem - virtual reality",
+      "title": "VR SO Real Arnhem",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4837,11 +4837,11 @@ window.BCJN_BEHEER_BASE = {
         "arnhem"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/126-vr-so-real-arnhem-virtual-reality-kiezen-op-niveau.jpg",
-      "imageAlt": "Foto bij VR SO Real Arnhem - virtual reality",
+      "imageAlt": "Foto bij VR SO Real Arnhem",
       "imageStatus": "approved"
     },
     {
-      "title": "You Jump Nijmegen - trampolinepark en jumpactiviteiten",
+      "title": "You Jump Nijmegen",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4865,11 +4865,11 @@ window.BCJN_BEHEER_BASE = {
         "nijmegen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/127-you-jump-nijmegen-trampolinepark-en-jumpactiviteiten-verified.jpg",
-      "imageAlt": "Foto bij You Jump Nijmegen - trampolinepark en jumpactiviteiten",
+      "imageAlt": "Foto bij You Jump Nijmegen",
       "imageStatus": "approved"
     },
     {
-      "title": "Escape Boot Nijmegen - escaperooms en Escape Arena",
+      "title": "Escape Boot Nijmegen",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4893,11 +4893,11 @@ window.BCJN_BEHEER_BASE = {
         "nijmegen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/128-escape-boot-nijmegen-escaperooms-en-escape-arena-verified.jpg",
-      "imageAlt": "Foto bij Escape Boot Nijmegen - escaperooms en Escape Arena",
+      "imageAlt": "Foto bij Escape Boot Nijmegen",
       "imageStatus": "approved"
     },
     {
-      "title": "ROX Escape Nijmegen - escaperooms op NYMA",
+      "title": "ROX Escape Nijmegen",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4921,11 +4921,11 @@ window.BCJN_BEHEER_BASE = {
         "nijmegen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/129-rox-escape-nijmegen-escaperooms-op-nyma-verified.jpg",
-      "imageAlt": "Foto bij ROX Escape Nijmegen - escaperooms op NYMA",
+      "imageAlt": "Foto bij ROX Escape Nijmegen",
       "imageStatus": "approved"
     },
     {
-      "title": "Nijmegen Outdoor - stadsspellen en actieve groepsuitjes",
+      "title": "Nijmegen Outdoor",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4945,11 +4945,11 @@ window.BCJN_BEHEER_BASE = {
         "nijmegen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/130-nijmegen-outdoor-stadsspellen-en-actieve-groepsuitjes.jpg",
-      "imageAlt": "Foto bij Nijmegen Outdoor - stadsspellen en actieve groepsuitjes",
+      "imageAlt": "Foto bij Nijmegen Outdoor",
       "imageStatus": "approved"
     },
     {
-      "title": "SUP & SURF Nijmegen - suppen en watersport",
+      "title": "SUP & SURF Nijmegen",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4969,7 +4969,7 @@ window.BCJN_BEHEER_BASE = {
         "nijmegen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/131-sup-surf-nijmegen-suppen-en-watersport.jpg",
-      "imageAlt": "Foto bij SUP & SURF Nijmegen - suppen en watersport",
+      "imageAlt": "Foto bij SUP & SURF Nijmegen",
       "imageStatus": "approved"
     },
     {
@@ -5016,7 +5016,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Fundustry Nijmegen/Ewijk - klimpark, paintball en outdoor challenges",
+      "title": "Fundustry Nijmegen/Ewijk",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5043,11 +5043,11 @@ window.BCJN_BEHEER_BASE = {
         "ewijk"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/134-fundustry-nijmegen-ewijk-klimpark-paintball-en-outdoor-cha-verified.jpg",
-      "imageAlt": "Foto bij Fundustry Nijmegen/Ewijk - klimpark, paintball en outdoor challenges",
+      "imageAlt": "Foto bij Fundustry Nijmegen/Ewijk",
       "imageStatus": "approved"
     },
     {
-      "title": "Valkhof Museum - Romeinen, kunst en Nijmegen",
+      "title": "Valkhof Museum",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5134,7 +5134,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Hortus Nijmegen - botanische tuin en theetuin",
+      "title": "Hortus Nijmegen",
       "domain": "Natuur & Buiten",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5163,7 +5163,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Fort Pannerden - gangen, expedities en uitzicht",
+      "title": "Fort Pannerden",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5222,7 +5222,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Pannenkoekenboot Nijmegen - varen over de Waal",
+      "title": "Pannenkoekenboot Nijmegen",
       "domain": "Ontmoeten, Spel & Vaardigheden",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5252,7 +5252,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Museum Arnhem - kunst, tuin en uitzicht",
+      "title": "Museum Arnhem",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5275,7 +5275,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.9854915,
       "lon": 5.8922001,
       "image": "website-bestanden/afbeeldingen/inspiratie/142-museum-arnhem-kunst-tuin-en-uitzicht.jpg",
-      "imageAlt": "Foto bij Museum Arnhem - kunst, tuin en uitzicht",
+      "imageAlt": "Foto bij Museum Arnhem",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://commons.wikimedia.org/wiki/Category:Museum_Arnhem",
@@ -5283,7 +5283,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Zie bronpagina"
     },
     {
-      "title": "Eusebiuskerk Arnhem - glazen balkons en tijdreis",
+      "title": "Eusebiuskerk Arnhem",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5307,7 +5307,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.9790578,
       "lon": 5.9096488,
       "image": "website-bestanden/afbeeldingen/inspiratie/143-eusebiuskerk-arnhem-glazen-balkons-en-tijdreis.jpg",
-      "imageAlt": "Foto bij Eusebiuskerk Arnhem - glazen balkons en tijdreis",
+      "imageAlt": "Foto bij Eusebiuskerk Arnhem",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://eusebius.nl/bezoeken/",
@@ -5315,7 +5315,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "Airborne Museum Hartenstein - Slag om Arnhem beleven",
+      "title": "Airborne Museum Hartenstein",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5338,7 +5338,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.9877085,
       "lon": 5.8326876,
       "image": "website-bestanden/afbeeldingen/inspiratie/144-airborne-museum-hartenstein-slag-om-arnhem-beleven.jpg",
-      "imageAlt": "Foto bij Airborne Museum Hartenstein - Slag om Arnhem beleven",
+      "imageAlt": "Foto bij Airborne Museum Hartenstein",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://www.airbornemuseum.nl/",
@@ -5346,7 +5346,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "Museum Bronbeek en landgoed - koloniaal verleden en audiowandeling",
+      "title": "Museum Bronbeek en landgoed",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5370,7 +5370,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.995138,
       "lon": 5.9502543,
       "image": "website-bestanden/afbeeldingen/inspiratie/145-museum-bronbeek-en-landgoed-koloniaal-verleden-en-audiowandeling.png",
-      "imageAlt": "Foto bij Museum Bronbeek en landgoed - koloniaal verleden en audiowandeling",
+      "imageAlt": "Foto bij Museum Bronbeek en landgoed",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://www.bronbeek.nl/plan-je-bezoek",
@@ -5378,7 +5378,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "Kasteel Rosendael - kasteel, park en bedriegertjes",
+      "title": "Kasteel Rosendael",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5402,7 +5402,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 52.0094886,
       "lon": 5.9636379,
       "image": "website-bestanden/afbeeldingen/inspiratie/146-kasteel-rosendael-kasteel-park-en-bedriegertjes.jpg",
-      "imageAlt": "Foto bij Kasteel Rosendael - kasteel, park en bedriegertjes",
+      "imageAlt": "Foto bij Kasteel Rosendael",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://www.glk.nl/rosendael/kasteel-rosendael",
@@ -5410,7 +5410,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "Huis Zypendaal - buitenplaats en park",
+      "title": "Huis Zypendaal",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5434,7 +5434,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.9993397,
       "lon": 5.8930592,
       "image": "website-bestanden/afbeeldingen/inspiratie/147-huis-zypendaal-buitenplaats-en-park.jpg",
-      "imageAlt": "Foto bij Huis Zypendaal - buitenplaats en park",
+      "imageAlt": "Foto bij Huis Zypendaal",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://www.glk.nl/zypendaal/huis-zypendaal",
@@ -5442,7 +5442,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "Mountain Network Arnhem - klimmen of boulderen",
+      "title": "Mountain Network Arnhem",
       "domain": "Sport & Bewegen",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5466,7 +5466,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.9622951,
       "lon": 5.9039911,
       "image": "website-bestanden/afbeeldingen/inspiratie/148-mountain-network-arnhem-klimmen-of-boulderen.jpg",
-      "imageAlt": "Foto bij Mountain Network Arnhem - klimmen of boulderen",
+      "imageAlt": "Foto bij Mountain Network Arnhem",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://mountain-network.nl/klimcentra/locaties/",
@@ -5474,7 +5474,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "Timestamp Arnhem - social gaming en karaoke",
+      "title": "Timestamp Arnhem",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5499,7 +5499,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.9822676,
       "lon": 5.9039471,
       "image": "website-bestanden/afbeeldingen/inspiratie/149-timestamp-arnhem-social-gaming-en-karaoke.webp",
-      "imageAlt": "Foto bij Timestamp Arnhem - social gaming en karaoke",
+      "imageAlt": "Foto bij Timestamp Arnhem",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://timestamp.nl/",
@@ -5507,7 +5507,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "Hack42 Arnhem - open hackerspace en maakavond",
+      "title": "Hack42 Arnhem",
       "domain": "Creatief & Expressie",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5531,7 +5531,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.9770956,
       "lon": 5.9402289,
       "image": "website-bestanden/afbeeldingen/inspiratie/150-hack42-arnhem-open-hackerspace-en-maakavond.png",
-      "imageAlt": "Foto bij Hack42 Arnhem - open hackerspace en maakavond",
+      "imageAlt": "Foto bij Hack42 Arnhem",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Hack42_Museum_Computermuseum_Arnhem_(15109490099).png",
@@ -5539,7 +5539,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Zie bronpagina"
     },
     {
-      "title": "Juffrouw Jannie Arnhem - creatieve workshop of open atelier",
+      "title": "Juffrouw Jannie Arnhem",
       "domain": "Creatief & Expressie",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5563,7 +5563,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.9951397,
       "lon": 5.9468619,
       "image": "website-bestanden/afbeeldingen/inspiratie/151-juffrouw-jannie-arnhem-creatieve-workshop-of-open-atelier.png",
-      "imageAlt": "Foto bij Juffrouw Jannie Arnhem - creatieve workshop of open atelier",
+      "imageAlt": "Foto bij Juffrouw Jannie Arnhem",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://www.juffrouwjannie.com/",
@@ -5571,7 +5571,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "Natuurcentrum Arnhem - Molenplaats en stadsboerderijen",
+      "title": "Natuurcentrum Arnhem",
       "domain": "Natuur & Buiten",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5593,7 +5593,7 @@ window.BCJN_BEHEER_BASE = {
         "arnhem"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/152-natuurcentrum-arnhem-molenplaats-en-stadsboerderijen.jpg",
-      "imageAlt": "Foto bij Natuurcentrum Arnhem - Molenplaats en stadsboerderijen",
+      "imageAlt": "Foto bij Natuurcentrum Arnhem",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://www.natuurcentrumarnhem.nl/locaties/molenplaats-sonsbeek/",
@@ -5635,7 +5635,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "Museum voor Anatomie en Pathologie - menselijk lichaam",
+      "title": "Museum voor Anatomie en Pathologie",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5659,7 +5659,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.8246101,
       "lon": 5.8613148,
       "image": "website-bestanden/afbeeldingen/inspiratie/154-museum-voor-anatomie-en-pathologie-menselijk-lichaam.jpg",
-      "imageAlt": "Foto bij Museum voor Anatomie en Pathologie - menselijk lichaam",
+      "imageAlt": "Foto bij Museum voor Anatomie en Pathologie",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://www.radboudumc.nl/afdelingen/beeldvorming/onderdelen/anatomie/museum-voor-anatomie-en-pathologie/adres-en-contact",
@@ -5699,7 +5699,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "Museum Kasteel Wijchen - kasteel en lokale geschiedenis",
+      "title": "Museum Kasteel Wijchen",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5723,7 +5723,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.8085399,
       "lon": 5.7275987,
       "image": "website-bestanden/afbeeldingen/inspiratie/156-museum-kasteel-wijchen-kasteel-en-lokale-geschiedenis.jpg",
-      "imageAlt": "Foto bij Museum Kasteel Wijchen - kasteel en lokale geschiedenis",
+      "imageAlt": "Foto bij Museum Kasteel Wijchen",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://commons.wikimedia.org/wiki/File:Kasteel_Wijchen_02%2C_vooraanzicht_(zuid)_met_poortgebouw_tussen_west-_en_oostvleugel.jpg",
@@ -5731,7 +5731,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "CC0"
     },
     {
-      "title": "Kasteel Doornenburg - mediatour en fotospeurtocht",
+      "title": "Kasteel Doornenburg",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5755,7 +5755,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.8943664,
       "lon": 5.9989469,
       "image": "website-bestanden/afbeeldingen/inspiratie/157-kasteel-doornenburg-mediatour-en-fotospeurtocht.jpg",
-      "imageAlt": "Foto bij Kasteel Doornenburg - mediatour en fotospeurtocht",
+      "imageAlt": "Foto bij Kasteel Doornenburg",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://www.kasteeldoornenburg.nl/plan-uw-bezoek/",
@@ -5763,7 +5763,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "Brouwerij De Hemel - rondleiding en proeverij",
+      "title": "Brouwerij De Hemel",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5786,7 +5786,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.8487679,
       "lon": 5.8643174,
       "image": "website-bestanden/afbeeldingen/inspiratie/158-brouwerij-de-hemel-rondleiding-en-proeverij.jpg",
-      "imageAlt": "Foto bij Brouwerij De Hemel - rondleiding en proeverij",
+      "imageAlt": "Foto bij Brouwerij De Hemel",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://brouwerijdehemel.nl/bezoek-de-brouwerij/",
@@ -5794,7 +5794,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "Chocobreak Nijmegen - bonbonworkshop",
+      "title": "Chocobreak Nijmegen",
       "domain": "Creatief & Expressie",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5818,7 +5818,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.8425749,
       "lon": 5.8389606,
       "image": "website-bestanden/afbeeldingen/inspiratie/159-chocobreak-nijmegen-bonbonworkshop.jpg",
-      "imageAlt": "Foto bij Chocobreak Nijmegen - bonbonworkshop",
+      "imageAlt": "Foto bij Chocobreak Nijmegen",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://www.visitnijmegen.com/locaties/4027531105/chocobreak",
@@ -5826,7 +5826,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "De Ezelboer - ezelwandelen en dierencontact",
+      "title": "De Ezelboer",
       "domain": "Natuur & Buiten",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5850,7 +5850,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.7088423,
       "lon": 6.0694799,
       "image": "website-bestanden/afbeeldingen/inspiratie/160-de-ezelboer-ezelwandelen-en-dierencontact.png",
-      "imageAlt": "Foto bij De Ezelboer - ezelwandelen en dierencontact",
+      "imageAlt": "Foto bij De Ezelboer",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://www.deezelboer.nl/ezel.html",
@@ -5858,7 +5858,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "Nederlands Wijnmuseum Arnhem - kelders en wijnverhaal",
+      "title": "Nederlands Wijnmuseum Arnhem",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5882,7 +5882,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.9861153,
       "lon": 5.9230833,
       "image": "website-bestanden/afbeeldingen/inspiratie/161-nederlands-wijnmuseum-arnhem-kelders-en-wijnverhaal.jpg",
-      "imageAlt": "Foto bij Nederlands Wijnmuseum Arnhem - kelders en wijnverhaal",
+      "imageAlt": "Foto bij Nederlands Wijnmuseum Arnhem",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://www.regioarnhem.com/nl/locaties/4164321636/nederlands-wijnmuseum-1",

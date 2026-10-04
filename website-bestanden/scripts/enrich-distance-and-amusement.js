@@ -185,7 +185,7 @@ function cleanInspiration(items = []) {
 
 const flexibleOffers = [
   {
-    title: 'Planet Awesome Nijmegen - karten, lasergamen, bowling en arcade',
+    title: 'Planet Awesome Nijmegen',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'dagelijks, vooraf reserveren',
@@ -202,7 +202,7 @@ const flexibleOffers = [
     tags: ['karten', 'lasergamen', 'bowlen', 'arcade', 'glowgolf', 'karaoke', 'nijmegen'],
   },
   {
-    title: 'Olround Nijmegen - bowlen en Prison Island',
+    title: 'Olround Nijmegen',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'dagelijks, reserveren aanbevolen',
@@ -219,7 +219,7 @@ const flexibleOffers = [
     tags: ['bowlen', 'prison island', 'samenwerken', 'nijmegen'],
   },
   {
-    title: 'LaserQuest Nijmegen - lasergamen, Mystic Golf en StepZone',
+    title: 'LaserQuest Nijmegen',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'reserveren aanbevolen',
@@ -253,7 +253,7 @@ const flexibleOffers = [
     tags: ['arcade', 'gaming', 'challenge', 'nijmegen'],
   },
   {
-    title: 'Pathe Nijmegen - film, Pathe Games en X-Cube',
+    title: 'Pathé Nijmegen',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'dagelijks volgens filmagenda',
@@ -270,7 +270,7 @@ const flexibleOffers = [
     tags: ['bioscoop', 'film', 'arcade', 'x-cube', 'escape', 'lent'],
   },
   {
-    title: 'Vue Nijmegen Plein - bioscoop',
+    title: 'Vue Nijmegen Plein',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'dagelijks volgens filmagenda',
@@ -287,7 +287,7 @@ const flexibleOffers = [
     tags: ['bioscoop', 'film', 'nijmegen', 'binnen'],
   },
   {
-    title: 'EnjoyVR Nijmegen - virtual reality',
+    title: 'EnjoyVR Nijmegen',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'op reservering',
@@ -321,7 +321,7 @@ const flexibleOffers = [
     tags: ['boulderen', 'klimmen', 'sport', 'nijmegen'],
   },
   {
-    title: 'Waalhalla Nijmegen - skateboard, BMX, step en urban sport',
+    title: 'Waalhalla Nijmegen',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'check vrije inloop en activiteiten',
@@ -338,7 +338,7 @@ const flexibleOffers = [
     tags: ['skate', 'bmx', 'step', 'urban', 'nijmegen'],
   },
   {
-    title: 'Fundustry Nijmegen/Ewijk - klimpark, paintball en outdoor challenges',
+    title: 'Fundustry Nijmegen/Ewijk',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'op reservering',
@@ -355,7 +355,7 @@ const flexibleOffers = [
     tags: ['klimpark', 'klimbos', 'paintball', 'airsoft', 'outdoor', 'hindernis', 'ewijk'],
   },
   {
-    title: 'De Wijchense Berg - skiën, snowboarden, tuben en outdoor',
+    title: 'De Wijchense Berg',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'check zomeropening en reserveer',
@@ -389,7 +389,7 @@ const flexibleOffers = [
     tags: ['pretpark', 'attracties', 'berg en dal'],
   },
   {
-    title: 'Gamestate Arnhem - arcadehal',
+    title: 'Gamestate Arnhem',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'dagelijks, check rustige uren',
@@ -406,7 +406,7 @@ const flexibleOffers = [
     tags: ['arcade', 'gaming', 'arnhem'],
   },
   {
-    title: 'VR SO Real Arnhem - virtual reality',
+    title: 'VR SO Real Arnhem',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'op reservering',
@@ -423,7 +423,7 @@ const flexibleOffers = [
     tags: ['vr', 'gaming', 'arnhem'],
   },
   {
-    title: 'You Jump Nijmegen - trampolinepark en jumpactiviteiten',
+    title: 'You Jump Nijmegen',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'dagelijks, reserveer een tijdsblok',
@@ -440,7 +440,7 @@ const flexibleOffers = [
     tags: ['trampoline', 'jump', 'bewegen', 'nijmegen'],
   },
   {
-    title: 'Escape Boot Nijmegen - escaperooms en Escape Arena',
+    title: 'Escape Boot Nijmegen',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'op reservering',
@@ -457,7 +457,7 @@ const flexibleOffers = [
     tags: ['escaperoom', 'puzzels', 'samenwerken', 'nijmegen'],
   },
   {
-    title: 'ROX Escape Nijmegen - escaperooms op NYMA',
+    title: 'ROX Escape Nijmegen',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'op reservering',
@@ -474,7 +474,7 @@ const flexibleOffers = [
     tags: ['escaperoom', 'puzzels', 'nyma', 'nijmegen'],
   },
   {
-    title: 'Nijmegen Outdoor - stadsspellen en actieve groepsuitjes',
+    title: 'Nijmegen Outdoor',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'op reservering',
@@ -491,7 +491,7 @@ const flexibleOffers = [
     tags: ['outdoor', 'stadsspel', 'groepsuitje', 'nijmegen'],
   },
   {
-    title: 'SUP & SURF Nijmegen - suppen en watersport',
+    title: 'SUP & SURF Nijmegen',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'op reservering en afhankelijk van weer',
@@ -654,25 +654,25 @@ const amusementIdeas = [
 ];
 
 const inspirationOfferTitles = new Set([
-  'Planet Awesome Nijmegen - karten, lasergamen, bowling en arcade',
-  'Olround Nijmegen - bowlen en Prison Island',
-  'LaserQuest Nijmegen - lasergamen, Mystic Golf en StepZone',
+  'Planet Awesome Nijmegen',
+  'Olround Nijmegen',
+  'LaserQuest Nijmegen',
   'Pop Culture Arcade Nijmegen',
-  'Pathe Nijmegen - film, Pathe Games en X-Cube',
-  'Vue Nijmegen Plein - bioscoop',
-  'EnjoyVR Nijmegen - virtual reality',
+  'Pathé Nijmegen',
+  'Vue Nijmegen Plein',
+  'EnjoyVR Nijmegen',
   'GRIP Boulderhal Nijmegen',
-  'Waalhalla Nijmegen - skateboard, BMX, step en urban sport',
-  'Fundustry Nijmegen/Ewijk - klimpark, paintball en outdoor challenges',
-  'De Wijchense Berg - skiën, snowboarden, tuben en outdoor',
+  'Waalhalla Nijmegen',
+  'Fundustry Nijmegen/Ewijk',
+  'De Wijchense Berg',
   'Pretpark Tivoli Berg en Dal',
-  'Gamestate Arnhem - arcadehal',
-  'VR SO Real Arnhem - virtual reality',
-  'You Jump Nijmegen - trampolinepark en jumpactiviteiten',
-  'Escape Boot Nijmegen - escaperooms en Escape Arena',
-  'ROX Escape Nijmegen - escaperooms op NYMA',
-  'Nijmegen Outdoor - stadsspellen en actieve groepsuitjes',
-  'SUP & SURF Nijmegen - suppen en watersport',
+  'Gamestate Arnhem',
+  'VR SO Real Arnhem',
+  'You Jump Nijmegen',
+  'Escape Boot Nijmegen',
+  'ROX Escape Nijmegen',
+  'Nijmegen Outdoor',
+  'SUP & SURF Nijmegen',
 ]);
 
 function offerToInspiration(offer) {
@@ -821,8 +821,8 @@ async function main() {
   const data = JSON.parse(await fs.readFile(dataPath, 'utf8'));
 
   const renamedTitles = new Map([
-    ['Skicentrum De Wijchense Berg - ski of snowboard', 'De Wijchense Berg - skiën, snowboarden, tuben en outdoor'],
-    ['Fundustry Nijmegen/Ewijk - paintball, airsoft en klimpark', 'Fundustry Nijmegen/Ewijk - klimpark, paintball en outdoor challenges'],
+    ['Skicentrum De Wijchense Berg - ski of snowboard', 'De Wijchense Berg'],
+    ['Fundustry Nijmegen/Ewijk - paintball, airsoft en klimpark', 'Fundustry Nijmegen/Ewijk'],
   ]);
   for (const item of data.external || []) {
     if (renamedTitles.has(item.title)) item.title = renamedTitles.get(item.title);
