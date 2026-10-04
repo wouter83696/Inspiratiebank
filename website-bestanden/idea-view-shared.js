@@ -5,8 +5,8 @@
     return `<span class="${classes}"><span class="${pillClasses}">${view.pills || ''}</span>${view.meta || ''}</span>`;
   }
 
-  function renderPractical(content, open=false){
-    return content ? `<details class="ideaPracticalDetails"${open ? ' open' : ''}><summary>Praktisch</summary><p class="ideaPracticalText">${content}</p></details>` : '';
+  function renderPractical(content, open=false, extra=''){
+    return content || extra ? `<details class="ideaPracticalDetails"${open ? ' open' : ''}><summary>Praktisch</summary>${content ? `<p class="ideaPracticalText">${content}</p>` : ''}${extra}</details>` : '';
   }
 
   function renderPracticalList(content){
@@ -89,5 +89,5 @@
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
-  window.IdeaViewShared = Object.freeze({renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
+  window.IdeaViewShared = Object.freeze({renderPractical, renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
 })();

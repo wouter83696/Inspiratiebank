@@ -183,3 +183,10 @@ body.photoDetailOpen{overflow:hidden!important}
 /* Let the photo absorb row-height differences, keeping the text block compact. */
 #ideaCards.compactTiles .photoTile>img,#ideaCards.compactTiles .photoTilePlaceholder{flex:1 1 auto;min-height:0;object-fit:cover}
 #ideaCards.compactTiles .photoTileContent{flex:0 0 auto}
+
+/* Featured invites discovery; practical metadata stays in the detail panel. */
+#ideaCards .ideaFeaturedContent .ideaFeaturedMeta{display:none!important}
+
+.photoDetailBody .ideaPracticalDetails .photoRouteChoices>summary{display:list-item;width:fit-content;padding:10px 16px;border:1px solid #d4e4df;border-radius:14px;background:#edf5f2;font-size:14px;list-style:disclosure-closed}
+.photoDetailBody .ideaPracticalDetails .photoRouteChoices[open]>summary{list-style:disclosure-open}
+.photoDetailBody .ideaPracticalDetails .photoRouteChoices>summary::after{content:none}
