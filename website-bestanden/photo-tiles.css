@@ -322,19 +322,21 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailPanel .ideaFilterSheetHeader{min-height:24px;height:24px;padding:0}
  .photoDetailPanel .ideaFilterSheetClose{top:34px;right:26px}
 }
-/* Category badges overlap the photo edge, as in the classic cards. */
+/* Category and metadata form one aligned row inside the photo. */
 #ideaCards.compactTiles .photoTileMedia{overflow:visible}
 #ideaCards.compactTiles .photoTileMedia>img,#ideaCards.compactTiles .photoTileMedia>.photoTilePlaceholder{border-radius:inherit}
-#ideaCards.compactTiles .photoTileOverlay{border-radius:0 0 16px 16px;padding-left:48px;min-height:30px}
-#ideaCards.compactTiles .photoTileOverlay>.domainIcon{position:absolute;left:8px;bottom:-15px;z-index:1}
-#ideaCards.compactTiles .photoTileContent{padding-top:23px}
+#ideaCards.compactTiles .photoTileOverlay{border-radius:0 0 16px 16px;padding-left:8px;min-height:30px;gap:12px}
+#ideaCards.compactTiles .photoTileOverlay>.domainIcon{position:static;z-index:1}
+#ideaCards.compactTiles .photoTileContent{padding-top:12px}
 .photoDetailLayer .photoDetailPanel{grid-template-rows:16px minmax(0,1fr)}
 @media(max-width:600px){
- #ideaCards.compactTiles .photoTileOverlay{padding-left:32px;border-radius:0 0 12px 12px;min-height:23px}
- #ideaCards.compactTiles .photoTileOverlay>.domainIcon{left:4px;bottom:-11px}
- #ideaCards.compactTiles .photoTileContent{padding-top:18px}
+ #ideaCards.compactTiles .photoTileOverlay{padding-left:4px;border-radius:0 0 12px 12px;min-height:23px;gap:8px}
+ #ideaCards.compactTiles .photoTileContent{padding-top:9px}
 }
 @media(max-width:640px){.photoDetailLayer .photoDetailPanel{grid-template-rows:24px minmax(0,1fr)}}
 /* Preserve the original close button; only its placement changes. */
 .photoDetailPanel .ideaFilterSheetClose{width:38px;height:38px;box-shadow:none;border-radius:12px;border:1px solid rgba(79,142,158,.16);background:#fffdf9}
 @media(max-width:640px){.photoDetailPanel .ideaFilterSheetClose{width:36px;height:36px;background:#fffefc;border-color:rgba(79,142,158,.14)}}
+
+.photoDetailBody .sharedIdeaCard .ideaImageDomainBadge{left:10px;bottom:10px}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:8px!important}
