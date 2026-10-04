@@ -529,3 +529,12 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .photoRouteChoices{padding-bottom:6px}
 .photoDetailBody .photoDetailActions>.ideaRouteButton{background:transparent}
 .photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:rgba(194,178,153,.08)}
+
+/* Separate the theme badge from facts without moving their vertical alignment. */
+#ideaCards.compactTiles .photoTileOverlay{gap:18px}
+@media(max-width:600px){
+ #ideaCards.compactTiles .photoTileOverlay{gap:12px}
+}
+
+/* Quiet, full-width information band beneath the detail photo. */
+.photoDetailBody .sharedIdeaCard .cardMetaBlock{padding:10px 12px!important;background:rgba(247,241,231,.45)!important;border:0!important;box-shadow:none!important;border-radius:12px}
