@@ -147,3 +147,10 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailArticle .photoDetailInfo .photoDetailBadge{z-index:1}
 .photoDetailPanel .ideaFilterSheetClose{border-radius:50%}
 .photoDetailArticle{overflow:visible!important}.photoDetailInfo{isolation:isolate;overflow:visible!important}.photoDetailBadge{transform:translateY(0)}
+
+/* Compact desktop cards keep their own height beside the larger featured card. */
+@media(min-width:801px){
+ #ideaCards.compactTiles .photoTile{align-self:start}
+ #ideaCards.compactTiles .photoTileContent{flex:none;gap:12px;padding-bottom:12px}
+ #ideaCards.compactTiles .photoTileFacts{margin-top:0}
+}

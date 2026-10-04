@@ -6550,4 +6550,11 @@
 .photoDetailPanel .ideaFilterSheetClose{border-radius:50%}
 .photoDetailArticle{overflow:visible!important}.photoDetailInfo{isolation:isolate;overflow:visible!important}.photoDetailBadge{transform:translateY(0)}
 
+/* Compact desktop cards keep their own height beside the larger featured card. */
+@media(min-width:801px){
+ #adminIdeaCards.compactTiles .photoTile{align-self:start}
+ #adminIdeaCards.compactTiles .photoTileContent{flex:none;gap:12px;padding-bottom:12px}
+ #adminIdeaCards.compactTiles .photoTileFacts{margin-top:0}
+}
+
 }
