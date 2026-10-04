@@ -553,3 +553,8 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardPillGroup,
 .photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardMetaLine{align-self:center!important;align-items:center!important;min-height:24px;line-height:16px!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock :is(.pill,.cardMetaPart){display:inline-flex!important;align-items:center!important;box-sizing:border-box;height:24px;min-height:24px;padding-top:0!important;padding-bottom:0!important;line-height:16px!important}
+
+/* Search suggestions continue the translucent search surface without a gap. */
+:is(#ideaFilters,#agendaFilters) .filterSearch:has(.ideaSearchSuggestions.open) input{border-bottom-left-radius:0!important;border-bottom-right-radius:0!important;border-bottom-color:transparent!important}
+:is(#ideaFilters,#agendaFilters) .ideaSearchSuggestions{top:100%;margin-top:0;border-top:1px solid rgba(79,142,158,.08);border-radius:0 0 18px 18px;background:rgba(255,253,249,.62);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);box-shadow:0 12px 22px rgba(20,38,42,.06)}
+#ideaCards>.empty{grid-column:1 / -1;width:100%;box-sizing:border-box;text-align:left}
