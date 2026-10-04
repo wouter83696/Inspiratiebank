@@ -498,3 +498,16 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile,
  body:not(.photoDetailDocked) #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile{height:330px!important}
 }
+
+/* Lower the facts and enlarge the badge around their shared centre line. */
+#ideaCards.compactTiles .photoTileOverlay{height:44px;min-height:44px;bottom:-10px}
+#ideaCards.compactTiles .photoTileOverlay>.domainIcon{width:44px;height:44px;flex-basis:44px}
+#ideaCards.compactTiles .photoTileOverlay>.domainIcon svg{width:22px;height:22px}
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{top:0}
+@media(max-width:600px){
+ #ideaCards.compactTiles .photoTileOverlay{height:32px;min-height:32px;bottom:-7px}
+ #ideaCards.compactTiles .photoTileOverlay>.domainIcon{width:32px;height:32px;flex-basis:32px}
+ #ideaCards.compactTiles .photoTileOverlay>.domainIcon svg{width:17px;height:17px}
+ #ideaCards.compactTiles .photoTileOverlay .photoTileFacts{top:0;min-height:18px;line-height:18px}
+}
+@media(max-width:600px){#ideaCards.compactTiles .photoTileOverlay .photoTileFacts .pill{height:18px}}
