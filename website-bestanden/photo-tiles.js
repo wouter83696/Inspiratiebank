@@ -23,16 +23,22 @@
     clearTimeout(closeTimer);closeTimer=setTimeout(()=>dialog.close(),Math.max(...durations,0));
   }
   function detailIcon(kind){
-    const paths={info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>',route:'<path d="M9 18l-5-5 5-5M4 13h10a5 5 0 0 1 5 5v2"/>',photo:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><path d="m3 17 6-6 4 4 3-3 5 5"/>'};
+    const paths={location:'<path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>',route:'<path d="M9 18l-5-5 5-5M4 13h10a5 5 0 0 1 5 5v2"/>',photo:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><path d="m3 17 6-6 4 4 3-3 5 5"/>'};
     return `<svg class="photoDetailSectionIcon" viewBox="0 0 24 24" aria-hidden="true">${paths[kind]}</svg>`;
   }
   function routeChoices(item){
-    const destination=ideaRouteDestination(item);if(!destination)return '';
+    const address=String(item.address||item.where||'').trim();
+    const place=String(item.place||item.location||'').trim();
+    const postcode=String(item.postcode||'').trim();
+    const name=String(item.locationName||item.venue||'').trim();
+    const lines=[...new Set([name,address,[postcode,place].filter(value=>value&&!address.toLowerCase().includes(value.toLowerCase())).join(' ')].filter(Boolean))];
+    const destination=ideaRouteDestination(item);
+    if(!destination&&!lines.length)return '';
+    const locationText=lines.length?`<p class="ideaPracticalText">${lines.map(escapeHtml).join('<br>')}</p>`:'';
     const query=encodeURIComponent(destination);
-    return `<details class="photoRouteChoices"><summary>${detailIcon('route')}<span>Route plannen</span></summary><div><a href="https://www.google.com/maps/dir/?api=1&destination=${query}" target="_blank" rel="noopener">${detailIcon('route')}<span>Google Maps</span></a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener">${detailIcon('route')}<span>Apple Kaarten</span></a></div><small>Op je telefoon opent de gekozen kaartapp als je toestel dit ondersteunt.</small></details>`;
+    return `<details class="photoRouteChoices"><summary>${detailIcon('location')}<span>Locatie &amp; route</span></summary>${locationText}${destination?`<div><a href="https://www.google.com/maps/dir/?api=1&destination=${query}" target="_blank" rel="noopener">${detailIcon('route')}<span>Google Maps</span></a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener">${detailIcon('route')}<span>Apple Kaarten</span></a></div><small>Op je telefoon opent de gekozen kaartapp als je toestel dit ondersteunt.</small>`:''}</details>`;
   }
   function detailContent(item){
-    const location=String(item.address||item.where||item.place||item.location||'').trim();
     const extras=(Array.isArray(item.images)?item.images:[]).filter(image=>image&&typeof image==='object'&&(image.status==='approved'||image.approved===true)&&/^https?:\/\//i.test(image.src||''));
     const gallery=extras.length?`<details class="photoDetailSection"><summary>${detailIcon('photo')}<span>Foto’s</span></summary><div class="photoDetailGallery">${extras.map(image=>`<img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}" loading="lazy">`).join('')}</div></details>`:'';
     // Use the very same card renderer as the map detail, including image and metadata.
@@ -44,7 +50,7 @@
     card.prepend(title);
     card.querySelector('.ideaPracticalDetails:not(.ideaMaterialsDetails)')?.remove();
     card.querySelector('.cardFooter')?.remove();
-    card.insertAdjacentHTML('beforeend',`${gallery}${IdeaViewShared.renderPractical(escapeHtml(item.materials||item.rules||''),false,`${location?`<p class="ideaPracticalText">${escapeHtml(location)}${item.postcode?`<br>${escapeHtml(item.postcode)}`:''}</p>`:''}`)}${routeChoices(item)}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="ideaRouteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Naar website ↗</a>`:''}</div>`);
+    card.insertAdjacentHTML('beforeend',`${gallery}${IdeaViewShared.renderPractical(escapeHtml(item.materials||item.rules||''))}${routeChoices(item)}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="ideaRouteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Naar website ↗</a>`:''}</div>`);
     const materials=card.querySelector('.ideaMaterialsDetails');
     if(materials) card.insertBefore(materials,card.querySelector('.photoRouteChoices') || card.querySelector('.photoDetailActions'));
     const practicalSummary=card.querySelector('.ideaPracticalDetails:not(.ideaMaterialsDetails)>summary');
