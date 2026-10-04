@@ -420,3 +420,6 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaCards.compactTiles .photoTileTitle{font-size:16px;line-height:1.25}
  #ideaCards.compactTiles .photoTileTitle>span:last-child{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 }
+
+/* Featured navigation keeps only the slide indicators. */
+#ideaCards .ideaFeaturedPause{display:none!important}
