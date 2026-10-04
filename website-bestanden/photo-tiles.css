@@ -154,3 +154,21 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaCards.compactTiles .photoTileContent{flex:none;gap:12px;padding-bottom:12px}
  #ideaCards.compactTiles .photoTileFacts{margin-top:0}
 }
+/* Featured stays wide but compact, with readable text directly on the photo. */
+#ideaCards.compactTiles .ideaFeaturedCarousel{align-self:start}
+#ideaCards.compactTiles .ideaFeaturedSlides{height:300px}
+#ideaCards.compactTiles .ideaFeaturedCard{height:100%!important;min-height:0!important;display:block!important}
+#ideaCards.compactTiles .ideaFeaturedMedia{position:absolute!important;inset:8px!important;height:auto!important;aspect-ratio:auto!important}
+#ideaCards.compactTiles .ideaFeaturedContent{position:absolute!important;inset:auto 8px 8px!important;width:auto!important;max-width:none!important;padding:64px 18px 16px!important;border:0!important;border-radius:0 0 12px 12px!important;background:linear-gradient(transparent,rgba(9,25,28,.78) 50%,rgba(9,25,28,.92))!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+#ideaCards.compactTiles .ideaFeaturedContent h3{color:#fff!important;font-size:20px!important;line-height:1.3!important}
+#ideaCards.compactTiles .ideaFeaturedMeta{display:flex;flex-wrap:nowrap!important;gap:10px;max-width:none;background:none!important;border:0!important;overflow-x:auto;white-space:nowrap}
+#ideaCards.compactTiles .ideaFeaturedMeta :is(.cardLabels,.cardMetaLine){display:contents!important}
+#ideaCards.compactTiles .ideaFeaturedMeta :is(.pill,.cardMetaPart,.metaIcon,.stimulusIcon){color:#fff!important;flex-shrink:0;white-space:nowrap}
+#ideaCards.compactTiles .ideaFeaturedMeta svg{color:#fff!important;stroke:currentColor}
+#ideaCards.compactTiles .ideaFeaturedArrow{flex-basis:32px;width:32px;height:32px}
+#ideaCards.compactTiles .photoTileFacts{width:fit-content;max-width:100%;box-sizing:border-box;padding:7px 8px;border:1px solid rgba(112,94,63,.065);border-radius:10px;background:rgba(247,241,231,.3);gap:7px}
+#ideaCards.compactTiles .photoTileFacts .pill{color:#617573!important}
+#ideaCards.compactTiles .photoTileFacts .cardMetaPart{color:#697472!important}
+@media(min-width:1600px){#ideaCards.compactTiles .ideaFeaturedSlides{height:330px}}
+@media(max-width:600px){#ideaCards.compactTiles .ideaFeaturedSlides{height:280px}#ideaCards.compactTiles .ideaFeaturedContent{padding:56px 12px 12px!important}#ideaCards.compactTiles .ideaFeaturedContent h3{font-size:18px!important}#ideaCards.compactTiles .ideaFeaturedMeta{gap:7px}#ideaCards.compactTiles .ideaFeaturedMeta :is(.pill,.cardMetaPart){font-size:11px!important}}
+#ideaCards.compactTiles .ideaFeaturedArrow{background:transparent;border:0;color:#fff;box-shadow:none}
