@@ -19,6 +19,7 @@ function context(){
     approvedIdeaImage:()=>({src:'https://example.org/photo.jpg'}),adminIdeaImage:()=>({src:'https://example.org/photo.jpg'})};
   vm.createContext(sandbox);vm.runInContext(shared,sandbox);sandbox.IdeaViewShared=sandbox.window.IdeaViewShared;
   vm.runInContext(adapter('index.html','ideaRow','agendaSectionNavigation'),sandbox);
+  vm.runInContext(adapter('beheer/index.html','adminIdeaStatusLabel','adminIdeaCard'),sandbox);
   vm.runInContext(adapter('beheer/index.html','adminIdeaRow','renderIdeas'),sandbox);
   return sandbox;
 }
@@ -47,4 +48,10 @@ test('activity content is escaped in text and attributes',()=>{
   const ctx=context();
   const html=ctx.IdeaViewShared.renderActivityRow({title:'<script>',fit:'<img onerror="x">',materials:'A & B',url:'https://example.org/" onmouseover="x'});
   assert(!html.includes('<script>'));assert(!html.includes('<img onerror'));assert(html.includes('A &amp; B'));assert(html.includes('&quot;'));
+});
+test('management status labels distinguish hidden and pending activities',()=>{
+ const ctx=context();
+ assert.match(ctx.adminIdeaRow({title:'Verborgen activiteit',hidden:true}),/Verborgen<\/span>/);
+ assert.match(ctx.adminIdeaRow({title:'Ingezonden activiteit',kind:'collega-toegevoegd',approved:false}),/Nog goed te keuren/);
+ assert.doesNotMatch(ctx.adminIdeaRow({title:'Zichtbaar',kind:'collega-toegevoegd',approved:true}),/adminItemStatus/);
 });

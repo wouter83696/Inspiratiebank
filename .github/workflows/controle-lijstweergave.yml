@@ -7,6 +7,8 @@ on:
       - 'website-bestanden/idea-view-shared.js'
       - 'website-bestanden/discovery-view-shared.js'
       - 'website-bestanden/admin-discovery.js'
+      - 'website-bestanden/admin-polish.js'
+      - 'website-bestanden/*site-settings*.js'
       - 'website-bestanden/*agenda*.js'
       - 'website-bestanden/select-view-shared.js'
       - 'website-bestanden/*css'
@@ -20,6 +22,8 @@ on:
       - 'website-bestanden/idea-view-shared.js'
       - 'website-bestanden/discovery-view-shared.js'
       - 'website-bestanden/admin-discovery.js'
+      - 'website-bestanden/admin-polish.js'
+      - 'website-bestanden/*site-settings*.js'
       - 'website-bestanden/*agenda*.js'
       - 'website-bestanden/select-view-shared.js'
       - 'website-bestanden/*css'
@@ -37,7 +41,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node --test website-bestanden/tests/idea-list-parity.test.cjs website-bestanden/tests/agenda-check-status.test.cjs website-bestanden/tests/review-fixes.test.cjs website-bestanden/tests/featured-carousel.test.cjs
+      - run: node --test website-bestanden/tests/idea-list-parity.test.cjs website-bestanden/tests/agenda-check-status.test.cjs website-bestanden/tests/review-fixes.test.cjs website-bestanden/tests/featured-carousel.test.cjs website-bestanden/tests/site-settings.test.cjs
       - run: node website-bestanden/scripts/build-admin-public-view.js --check
       - run: npm install --no-save playwright
       - run: npx playwright install --with-deps chromium

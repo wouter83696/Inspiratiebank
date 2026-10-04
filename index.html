@@ -5831,7 +5831,7 @@
   <script src="website-bestanden/select-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script src="website-bestanden/agenda-discovery-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script>DiscoveryViewShared.mount();AgendaDiscoveryShared.mount();</script>
-  <script src="website-bestanden/site-settings-shared.js?v=20261001-regional-headers-v1"></script>
+  <script src="website-bestanden/site-settings-shared.js?v=20261001-featured-settings-v1"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20260930-list-parity-v2"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20261001-time-sort-v2"></script>
@@ -8916,7 +8916,9 @@
     if(!carousel || carousel.querySelectorAll('[data-featured-slide]').length < 2) return;
     const controller = new AbortController();
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let timer, visible = false, hovering = false, paused = motion.matches;
+    const featuredSettings = SiteSettings.normalize(centralStorage?.siteSettings);
+    const interval = featuredSettings.featuredIntervalSeconds * 1000;
+    let timer, visible = false, hovering = false, paused = motion.matches || !featuredSettings.featuredAutoplay;
     const pauseButton = carousel.querySelector('[data-featured-pause]');
     const updatePause = () => {
       const label = paused ? 'Automatisch wisselen starten' : 'Automatisch wisselen pauzeren';
@@ -8929,7 +8931,7 @@
       const focused = document.activeElement;
       const keyboardFocus = carousel.contains(focused) && focused !== pauseButton && focused.matches(':focus-visible');
       if(paused || !visible || hovering || document.hidden || keyboardFocus) return;
-      timer = window.setTimeout(() => moveFeaturedCarousel(carousel), FEATURED_INTERVAL_MS);
+      timer = window.setTimeout(() => moveFeaturedCarousel(carousel), interval);
     };
     carousel.restartFeatured = arm;
     const observer = new IntersectionObserver(entries => { visible = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.5; arm(); }, {threshold:0.5});
@@ -8944,7 +8946,7 @@
     on(carousel,'touchcancel',() => { hovering = false; arm(); });
     on(pauseButton,'click',() => { paused = !paused; updatePause(); arm(); });
     on(document,'visibilitychange',arm);
-    on(motion,'change',() => { paused = motion.matches; updatePause(); arm(); });
+    on(motion,'change',() => { paused = motion.matches || !featuredSettings.featuredAutoplay; updatePause(); arm(); });
     updatePause();
     cleanupFeaturedCarousel = () => { window.clearTimeout(timer); observer.disconnect(); controller.abort(); delete carousel.restartFeatured; };
   }
@@ -9477,6 +9479,7 @@
     const empty = `<div class="empty">${escapeHtml(inspirationEmptyMessage())}</div>`;
     const surpriseAfter = window.matchMedia('(min-width:1180px)').matches ? 4 : window.matchMedia('(min-width:641px)').matches ? 3 : 2;
     $('#ideaCards').innerHTML = items.length ? withFeaturedIdeaMarkup(items, surpriseAfter) : empty;
+    setupFeaturedCarousel();
     $('#ideaList').innerHTML = items.length
       ? IdeaViewShared.renderDesktopTable({rows:withSurpriseMarkup(items, ideaRow, surpriseIdeaRow, 3)})
       : empty;
@@ -9497,7 +9500,6 @@
     let maxLon = Math.max(...values.map(point => point.lon));
     const latPad = Math.max((maxLat - minLat) * .22, .045);
     const lonPad = Math.max((maxLon - minLon) * .22, .065);
-    setupFeaturedCarousel();
     minLat -= latPad; maxLat += latPad; minLon -= lonPad; maxLon += lonPad;
     return {minLat,maxLat,minLon,maxLon};
   }

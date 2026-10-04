@@ -5,14 +5,14 @@ const vm=require('node:vm');
 const path=require('node:path');
 const source=fs.readFileSync(path.join(__dirname,'../../index.html'),'utf8');
 const code=source.slice(source.indexOf('  function moveFeaturedCarousel('),source.indexOf('  function surpriseIdeaCard('));
-function fixture(reduced=false){
+function fixture(reduced=false,settings={}){
  const target=()=>({events:{},attrs:{},matches(){return this.keyboardFocus === true;},addEventListener(name,fn){this.events[name]=fn;},setAttribute(name,value){this.attrs[name]=value;}});
  const slides=Array.from({length:3},target),dots=Array.from({length:3},target),pause=target();
  const carousel=Object.assign(target(),{dataset:{featuredIndex:'0'},querySelectorAll:q=>q==='[data-featured-slide]'?slides:dots,querySelector:()=>pause,contains:el=>el===pause||dots.includes(el)||slides.includes(el)});
  const doc=Object.assign(target(),{hidden:false,activeElement:null,querySelector:()=>carousel});
  const motion=Object.assign(target(),{matches:reduced});
  const timers=new Map();let id=0,observer;
- const ctx={document:doc,AbortController,queueMicrotask:fn=>fn(),window:{matchMedia:()=>motion,setTimeout:(fn,ms)=>{timers.set(++id,{fn,ms});return id;},clearTimeout:id=>timers.delete(id)},IntersectionObserver:class{constructor(fn){this.fn=fn;observer=this;}observe(){}disconnect(){this.disconnected=true;}}};
+ const ctx={centralStorage:{siteSettings:settings},SiteSettings:{normalize:value=>({featuredAutoplay:true,featuredIntervalSeconds:7,...value})},document:doc,AbortController,queueMicrotask:fn=>fn(),window:{matchMedia:()=>motion,setTimeout:(fn,ms)=>{timers.set(++id,{fn,ms});return id;},clearTimeout:id=>timers.delete(id)},IntersectionObserver:class{constructor(fn){this.fn=fn;observer=this;}observe(){}disconnect(){this.disconnected=true;}}};
  vm.createContext(ctx);vm.runInContext(code,ctx);ctx.setupFeaturedCarousel();
  return {ctx,carousel,slides,dots,pause,doc,motion,timers,visible:r=>observer.fn([{isIntersecting:r>0,intersectionRatio:r}]),tick(){const [id,timer]=[...timers][0];timers.delete(id);timer.fn();},observer:()=>observer};
 }
@@ -47,4 +47,14 @@ test('touch focus does not block autoplay and the start button resumes while foc
  f.doc.activeElement=f.pause;f.pause.keyboardFocus=true;
  f.pause.events.click();assert.equal(f.timers.size,0);
  f.pause.events.click();assert.equal(f.timers.size,1);
+});
+
+test('configured delay and disabled autoplay are respected',()=>{
+ const timed=fixture(false,{featuredIntervalSeconds:15});timed.visible(1);assert.equal([...timed.timers.values()][0].ms,15000);
+ const stopped=fixture(false,{featuredAutoplay:false});stopped.visible(1);assert.equal(stopped.timers.size,0);stopped.pause.events.click();assert.equal(stopped.timers.size,1);
+});
+
+test('rendering the cards initializes autoplay without requiring the map',()=>{
+ const render=source.slice(source.indexOf('  function renderIdeas(){'),source.indexOf('  function ',source.indexOf('  function renderIdeas(){')+12));
+ assert.match(render,/setupFeaturedCarousel\(\)/);
 });

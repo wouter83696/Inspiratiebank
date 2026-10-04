@@ -996,7 +996,7 @@
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260930-agenda-rebuild-v1">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20260923-warm-cards-v1">
   <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261001-regional-headers-v1">
-  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261001-collapsed-featured-v1">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261004-editors-v1">
   <link rel="stylesheet" href="../website-bestanden/header-layout-shared.css?v=20261001-v1">
   <link rel="stylesheet" href="../website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
 </head>
@@ -1038,7 +1038,7 @@
     <section id="loginPanel" class="panel loginPanel">
       <div class="panelHead">
         <div>
-          <h2>Beheer openen</h2>
+          <img class="adminLoginLogo" src="../inspiratiebank-app-icon-180.png" alt=""><h2>Beheer openen</h2>
           <p>Log in om aanvullingen, bronlinks en agenda-items te controleren of aan te passen.</p>
         </div>
       </div>
@@ -1055,8 +1055,10 @@
     </section>
 
     <section id="adminApp" hidden>
+      <header class="adminMobileTopbar"><div id="adminMobileActions"></div><button id="adminMobileMenuButton" type="button" aria-expanded="false" aria-controls="adminNavigation"><img src="../inspiratiebank-app-icon-180.png" alt=""><span>Beheer</span><span aria-hidden="true">⌄</span></button></header>
+      <div id="adminNotice" hidden><div id="adminStatus" class="status" role="status" aria-live="polite"></div><button type="button" id="adminNoticeClose" aria-label="Melding sluiten">×</button></div>
       <div class="adminLayout">
-        <aside class="adminSidebar" aria-label="Beheernavigatie">
+        <aside class="adminSidebar" id="adminNavigation" aria-label="Beheernavigatie">
           <div class="adminSidebarBrand">
             <div class="adminSidebarIdentity">
               <span class="adminSidebarMark"><img src="../inspiratiebank-app-icon-180.png?v=20260930-admin-parity-v1" alt=""></span>
@@ -1202,6 +1204,7 @@
                   <label>Zoekafstand UIT-agenda<select id="siteAgendaRadius"><option value="3">3 km</option><option value="5">5 km</option><option value="10">10 km</option><option value="15">15 km</option><option value="25">25 km</option><option value="50">50+ km (alle afstanden)</option></select></label>
                 </div><p id="siteRegionPreview" class="small"></p>
               </section>
+              <section class="panel"><h3>Uitgelicht</h3><p>Stel in hoe de uitgelichte activiteiten op de gewone website wisselen. Bezoekers kunnen het wisselen zelf pauzeren.</p><div class="siteSettingsFields"><label><span>Automatisch wisselen</span><input id="siteFeaturedAutoplay" type="checkbox"></label><label>Tijd per activiteit<select id="siteFeaturedInterval"><option value="5">5 seconden</option><option value="7">7 seconden (aanbevolen)</option><option value="10">10 seconden</option><option value="15">15 seconden</option></select></label></div></section>
               <div class="siteSettingsSaveBar"><button class="button primary" id="siteSettingsSave" type="submit">Instellingen opslaan</button><button class="button" id="siteSettingsCancel" type="button">Wijzigingen annuleren</button><p id="siteSettingsStatus" class="status" role="status" aria-live="polite"></p></div>
             </form>
           </section>
@@ -1336,6 +1339,7 @@
           <div class="tabHeroHomeLink"><h1 class="tabHeroTitle" id="adminInspirationTitle" data-header-title="Inspiratiebank">Inspiratiebank</h1><p class="tabHeroLine" data-header-subtitle="Beheerpagina">Beheerpagina</p></div>
         </section>
         <div data-discovery-controls></div>
+        <div class="adminStatusFilter"><label for="adminIdeaStatusFilter">Beheerstatus</label><select id="adminIdeaStatusFilter"><option value="all">Alle activiteiten</option><option value="visible">Zichtbaar</option><option value="hidden">Verborgen</option><option value="pending">Nog goed te keuren</option></select></div>
         <details class="featuredAdminPanel" open><summary>Tegel ‘Uitgelicht’ bewerken</summary>
           <div class="featuredAdminHead">
             <div>
@@ -1470,6 +1474,7 @@
                 </span>
                 <small class="teamFieldHint">Na uploaden staat de foto meteen als goedgekeurd in dit item.</small>
               </label>
+              <div class="adminPhotoActions"><button class="button" id="adminIdeaPhotoClear" type="button">Eigen foto verwijderen</button><button class="button" id="adminIdeaPhotoReset" type="button">Foto terugzetten</button><small>Na verwijderen gebruikt de site zo mogelijk een standaardafbeelding. Sla op om de wijziging te bewaren.</small></div>
               <div id="adminEditIdeaImagePreview" class="adminImagePreview" aria-hidden="true"></div>
               <div id="adminEditIdeaImageSuggestion" class="adminImageSuggestion" aria-live="polite"></div>
               <label class="teamField wide adminCheckField">
@@ -1526,7 +1531,7 @@
           <span id="trashCount" class="pill">0 items</span>
         </div>
         <div id="trashList" class="list"></div>
-        <div id="adminStatus" class="status" role="status" aria-live="polite"></div>
+
       </section>
     </section>
         </main>
@@ -1589,8 +1594,8 @@
   <script src="../website-bestanden/agenda-discovery-shared.js?v=20261001-stimulus-v1"></script>
   <script>DiscoveryViewShared.mount({admin:true});AgendaDiscoveryShared.mount();</script>
   <script src="../website-bestanden/admin-agenda.js?v=20261001-regional-headers-v1"></script>
-  <script src="../website-bestanden/site-settings-shared.js?v=20261001-admin-title-v1"></script>
-  <script src="../website-bestanden/admin-site-settings.js?v=20261001-regional-headers-v1"></script>
+  <script src="../website-bestanden/site-settings-shared.js?v=20261001-featured-settings-v1"></script>
+  <script src="../website-bestanden/admin-site-settings.js?v=20261001-featured-settings-v1"></script>
   <script src="../website-bestanden/admin-discovery.js?v=20261001-regional-headers-v1"></script>
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
   <script src="../website-bestanden/idea-view-shared.js?v=20260930-list-parity-v2"></script>
@@ -1650,6 +1655,7 @@
   const $ = selector => document.querySelector(selector);
   const $$ = selector => Array.from(document.querySelectorAll(selector));
   let confirmDialogResolve = null;
+  let confirmReturnFocus = null;
   let lastStorageErrorMessage = '';
   function closeConfirmDialog(result=false){
     const modal = $('#confirmModal');
@@ -1659,11 +1665,13 @@
     document.body.style.overflow = '';
     const resolve = confirmDialogResolve;
     confirmDialogResolve = null;
+    if(confirmReturnFocus?.isConnected) confirmReturnFocus.focus({preventScroll:true});
     if(resolve) resolve(Boolean(result));
   }
   function confirmDialog(message, options={}){
     const modal = $('#confirmModal');
     if(!modal) return Promise.resolve(false);
+    confirmReturnFocus = document.activeElement;
     $('#confirmModalTitle').textContent = options.title || 'Weet je het zeker?';
     $('#confirmModalText').textContent = message;
     $('#confirmModalConfirm').textContent = options.confirmText || 'Bevestigen';
@@ -3009,6 +3017,7 @@
   }
   function featuredIdeaKey(){ return featuredIdeaKeys()[0] || ''; }
   async function saveFeaturedIdeaKeys(keys=[]){
+    const previous = featuredIdeaKeys();
     const next = [...new Set(keys.map(String).filter(Boolean))].slice(0,5);
     if(centralStorageActive()){
       centralStorage.featuredIdeaKeys = next;
@@ -3019,7 +3028,12 @@
       if(next[0]) localStorage.setItem(FEATURED_IDEA_KEY, next[0]);
       else localStorage.removeItem(FEATURED_IDEA_KEY);
     }catch(error){}
-    return await saveCentralStorage();
+    const saved = await saveCentralStorage();
+    if(!saved){
+      if(centralStorageActive()){centralStorage.featuredIdeaKeys=previous;centralStorage.featuredIdeaKey=previous[0]||'';}
+      try{localStorage.setItem(FEATURED_IDEAS_KEY,JSON.stringify(previous));if(previous[0])localStorage.setItem(FEATURED_IDEA_KEY,previous[0]);else localStorage.removeItem(FEATURED_IDEA_KEY);}catch{}
+    }
+    return saved;
   }
   async function toggleFeaturedIdea(key=''){
     const current = featuredIdeaKeys();
@@ -3098,6 +3112,7 @@
     if(!el) return;
     el.textContent = message;
     el.className = kind ? `status ${kind}` : 'status';
+    if(selector === '#adminStatus') window.AdminPolish?.status(message,kind);
   }
   function actionIcon(name){
     if(name === 'eye') return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
@@ -3209,6 +3224,9 @@
     const deleteAction = `<button class="button iconAction hot" data-delete-idea="${escapeHtml(item.key)}" data-kind="${escapeHtml(item.kind)}" data-title="${escapeHtml(item.title)}" type="button" aria-label="Verwijder" title="Verwijder">${actionIcon('trash')}</button>`;
     return `<div class="ideaActions">${approveAction}${featureAction}${editAction}${hideAction}${deleteAction}</div>`;
   }
+  function adminIdeaStatusLabel(item){
+    return item.hidden ? '<span class="adminItemStatus">Verborgen</span>' : item.kind === 'collega-toegevoegd' && !item.approved ? '<span class="adminItemStatus pending">Nog goed te keuren</span>' : '';
+  }
   function adminIdeaCard(item){
     const image = adminIdeaImage(item);
     const locationLabel = normalizeIdeaLocation(item.locationType);
@@ -3229,7 +3247,7 @@
       themeClass:`${domainThemeClass(item.domain)}${image ? ' hasPhoto' : ''} adminSelectableCard${selected ? ' isSelected' : ''}`, hidden:item.hidden, hasImage:true,
       attributes:`data-idea-key="${escapeHtml(item.key)}" tabindex="0" role="button" aria-pressed="${selected ? 'true' : 'false'}"`, image:imageMarkup,
       title:cardTitle,
-      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
+      pills:`${adminIdeaStatusLabel(item)}${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
       meta:cardMetaLine(item, {compact:true}),
       description:escapeHtml(description), practical:escapeHtml(practical), website:''
     });
@@ -3246,7 +3264,7 @@
       attributes:`data-idea-key="${escapeHtml(item.key)}" tabindex="0" role="button" aria-pressed="${selected ? 'true' : 'false'}"`,
       image:adminIdeaImage(item), icon:domainIcon(item.domain), formatDescription:audienceText,
       meta:cardMetaLine(item),
-      pills:`${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel || item.stimulus)}`
+      pills:`${adminIdeaStatusLabel(item)}${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel || item.stimulus)}`
     });
   }
   function renderIdeas(){
@@ -3254,12 +3272,13 @@
     renderFeaturedIdeaManager();
     const query = $('#ideaSearch').value;
     const filters = ideaFilterValues();
-    const items = AdminDiscovery.sort(allAdminIdeas().filter(item => ideaMatches(item, query)).filter(item => passesIdeaFilters(item, filters)));
+    const status = $('#adminIdeaStatusFilter')?.value || 'all';
+    const items = AdminDiscovery.sort(allAdminIdeas().filter(item => status === 'all' || (status === 'hidden' ? item.hidden : status === 'visible' ? !item.hidden && (item.kind !== 'collega-toegevoegd' || item.approved) : item.kind === 'collega-toegevoegd' && !item.approved)).filter(item => ideaMatches(item, query)).filter(item => passesIdeaFilters(item, filters)));
     updateAdminThemeChips();
     $('#ideaCountValue').textContent = items.length;
     $('#ideaCountLabel').textContent = items.length === 1 ? 'activiteit' : 'activiteiten';
     AdminDiscovery.sync(items.length);
-    const empty = `<div class="empty">${escapeHtml(adminIdeaEmptyMessage(query, filters))}</div>`;
+    const empty = `<div class="empty">${escapeHtml(status === 'all' ? adminIdeaEmptyMessage(query, filters) : 'Geen activiteiten met deze beheerstatus binnen je huidige zoekopdracht en filters. Kies Alle activiteiten of pas je filters aan.')}</div>`;
     $('#adminIdeaList').innerHTML = items.length
       ? IdeaViewShared.renderDesktopTable({admin:false, rows:items.map(adminIdeaRow).join('')})
       : empty;
@@ -3294,7 +3313,7 @@
     $('#clearFeaturedIdeasBtn').disabled = selected.length === 0;
     $('#featuredAdminList').innerHTML = selected.length ? selected.map(({key,item}, index) => `<div class="featuredAdminItem">
       <span class="featuredAdminIndex">${index + 1}</span>
-      <span class="featuredAdminTitle">${escapeHtml(item.title)}</span>
+      <span class="featuredAdminActivity">${adminIdeaImage(item) ? `<img class="featuredAdminThumb" src="${escapeHtml(adminIdeaImage(item).src)}" alt="" loading="lazy">` : `<span class="featuredAdminThumb featuredAdminPlaceholder" aria-hidden="true">${domainIcon(item.domain)}</span>`}<span class="featuredAdminTitle">${escapeHtml(item.title)}</span></span>
       <span class="featuredAdminActions">
         <button class="button" type="button" data-move-featured="${escapeHtml(key)}" data-featured-direction="-1" aria-label="Omhoog" title="Omhoog"${index === 0 ? ' disabled' : ''}>↑</button>
         <button class="button" type="button" data-move-featured="${escapeHtml(key)}" data-featured-direction="1" aria-label="Omlaag" title="Omlaag"${index === selected.length - 1 ? ' disabled' : ''}>↓</button>
@@ -4009,6 +4028,7 @@
 	    modal.hidden = false;
 	    modal.setAttribute('aria-hidden', 'false');
 	    document.body.style.overflow = 'hidden';
+	    window.AdminEditors?.openAgenda();
 	    $('#agendaEditItemTitle').focus();
 	  }
 	  async function saveAgendaEdit(event){
@@ -4467,6 +4487,7 @@
     syncAdminIdeaImageSuggestion();
     if(panel) panel.hidden = true;
     setStatus('#adminIdeaEditStatus', '');
+    window.AdminPolish?.captureIdea();
   }
   function syncAdminIdeaImagePreview(){
     const preview = $('#adminEditIdeaImagePreview');
@@ -4703,7 +4724,8 @@
     $('#adminEditIdeaDescription').value = item.fit || item.description || '';
     $('#adminEditIdeaRules').value = item.materials || item.rules || item.note || '';
     setStatus('#adminIdeaEditStatus', item.isNew ? 'Vul de activiteit in en sla op om deze te publiceren.' : item.kind === 'collega-toegevoegd' ? 'Pas de velden aan en sla de wijziging op.' : 'Bij opslaan komt er een bewerkte online versie en wordt het vaste origineel verborgen.', 'ok');
-    $('#adminIdeaEditPanel').scrollIntoView({behavior:'smooth', block:'start'});
+    window.AdminPolish?.captureIdea();
+    window.AdminEditors?.openIdea(item.isNew);
     $('#adminEditIdeaTitle')?.focus({preventScroll:true});
   }
   function editedIdeaPayload(original){
@@ -4962,9 +4984,9 @@
     $('#confirmModalCancel').addEventListener('click', () => closeConfirmDialog(false));
     $('#confirmModalConfirm').addEventListener('click', () => closeConfirmDialog(true));
     $('#agendaEditForm').addEventListener('submit', saveAgendaEdit);
-    $('#agendaEditCancel').addEventListener('click', closeAgendaEdit);
+    $('#agendaEditCancel').addEventListener('click', () => window.AdminEditors.requestAgendaClose());
     $('#agendaEditModal').addEventListener('click', event => {
-      if(event.target.id === 'agendaEditModal') closeAgendaEdit();
+      if(event.target.id === 'agendaEditModal') window.AdminEditors.requestAgendaClose();
     });
     $('#ongoingAdminAddBtn').addEventListener('click', () => {
       const id = $('#ongoingAdminSelect').value;
@@ -5052,9 +5074,10 @@
         return;
       }
       if(!$('#agendaEditModal').hidden){
-        closeAgendaEdit();
+        window.AdminEditors.requestAgendaClose();
         return;
       }
+      if(!$('#adminIdeaEditPanel').hidden){$('#adminIdeaEditCancelBtn').click();return;}
 	      closeCustomSelects();
       $('#adminMenu').open = false;
     });
@@ -5076,5 +5099,7 @@
     }));
   });
   </script>
+  <script src="../website-bestanden/admin-polish.js?v=20261001-v1"></script>
+<script src="../website-bestanden/admin-editors.js?v=20261004-v1"></script>
 </body>
 </html>

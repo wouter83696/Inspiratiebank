@@ -36,11 +36,14 @@
     $('siteRegionInput').value = regionInputValue;
     $('siteRegionRadius').value = String(draft.region.radiusKm);
     $('siteAgendaRadius').value = String(draft.agendaRadiusKm);
+    $('siteFeaturedAutoplay').checked = draft.featuredAutoplay;
+    $('siteFeaturedInterval').value = String(draft.featuredIntervalSeconds);
     $('siteHeaderPosition').value = String(active().headerPosition);
     $('siteHeaderFile').value = '';
     $('siteHeaderUrl').setCustomValidity('');
     preview(); status('');
     SiteSettings.applyHeader(draft);
+    window.AdminPolish?.captureSettings();
   }
   async function upload(file){
     if(!file) return;
@@ -94,12 +97,14 @@
         centralStorage.siteSettings = previous;
         throw new Error(storageErrorMessage('Opslaan is niet gelukt. Probeer het opnieuw.'));
       }
-      load(); status('Opgeslagen. De header en standaardregio gelden nu voor bezoekers.');
+      load(); status('Opgeslagen. De instellingen gelden nu voor bezoekers.');
     }catch(error){status(error.message,true);}
     finally{button.disabled=false;}
   }
   function setup(){
     $('siteSettingsForm').addEventListener('submit',save);
+    $('siteFeaturedAutoplay').addEventListener('change',e=>{draft.featuredAutoplay=e.target.checked;});
+    $('siteFeaturedInterval').addEventListener('change',e=>{draft.featuredIntervalSeconds=Number(e.target.value);});
     for(const [id,key] of Object.entries(textFields))$(id).addEventListener('input',e=>{active()[key]=e.target.value;preview();});
     $('siteHeaderPage').addEventListener('change',preview);
     $('siteHeaderProfile').addEventListener('change',e=>{generation++;profileId=e.target.value;fillHeader();status('');});
@@ -127,5 +132,6 @@
     $('siteAgendaRadius').addEventListener('change',event=>{draft.agendaRadiusKm=Number(event.target.value);preview();});
     $('siteHeaderPreview').addEventListener('error',()=>status('De afbeelding kan niet worden geladen. Controleer het webadres of kies een bestand.',true));
   }
-  window.AdminSiteSettings = {setup,load,current};
+  function hasUnsaved(){return uploadPending || JSON.stringify(draft)!==JSON.stringify(current()) || $('siteRegionInput').value.trim()!==draft.region.label || $('siteHeaderUrl').validity.customError;}
+  window.AdminSiteSettings = {setup,load,current,hasUnsaved};
 })();
