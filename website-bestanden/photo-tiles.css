@@ -460,3 +460,12 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock{width:calc(100% - 52px)!important;margin:0 0 0 52px!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible;flex-wrap:wrap!important;column-gap:26px!important;row-gap:8px!important;min-height:24px}
 .photoDetailBody .cardMetaBlock>.cardPillGroup,.photoDetailBody .cardMetaBlock>.cardMetaLine{display:inline-flex!important;align-items:center;flex:0 0 auto;gap:10px!important;margin:0!important;width:auto!important}
 .photoDetailBody .cardMetaBlock>.cardMetaLine{white-space:nowrap}
+
+/* Centre the entire metadata row on the compact photo's lower edge. */
+#ideaCards.compactTiles .photoTileOverlay{bottom:-15px}
+#ideaCards.compactTiles .photoTileContent{padding-top:25px}
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{text-shadow:0 1px 2px #142d32,0 -1px 2px #142d32,1px 0 2px #142d32,-1px 0 2px #142d32}
+@media(max-width:600px){
+ #ideaCards.compactTiles .photoTileOverlay{bottom:-11.5px}
+ #ideaCards.compactTiles .photoTileContent{padding-top:20px}
+}
