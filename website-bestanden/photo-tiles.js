@@ -26,6 +26,11 @@
     const paths={location:'<path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>',route:'<path d="M9 18l-5-5 5-5M4 13h10a5 5 0 0 1 5 5v2"/>',photo:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><path d="m3 17 6-6 4 4 3-3 5 5"/>'};
     return `<svg class="photoDetailSectionIcon" viewBox="0 0 24 24" aria-hidden="true">${paths[kind]}</svg>`;
   }
+  function mapAppIcon(app){
+    return app==='google'
+      ? '<svg class="mapAppLogo" viewBox="0 0 32 32" aria-hidden="true"><path fill="#34a853" d="M16 2a11 11 0 0 0-11 11c0 8 11 17 11 17s11-9 11-17A11 11 0 0 0 16 2Z"/><path fill="#4285f4" d="M16 2A11 11 0 0 0 5 13l11 3 7-11a11 11 0 0 0-7-3Z"/><path fill="#fbbc04" d="m5 13 8 8 10-16-5 3Z"/><path fill="#ea4335" d="M16 6a7 7 0 1 0 0 14 7 7 0 0 0 0-14Z"/><circle fill="white" cx="16" cy="13" r="3.5"/></svg>'
+      : '<svg class="mapAppLogo" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="6" fill="#e8efdf"/><path fill="#b3dc98" d="M2 3h11v12H2zm19 16h9v11h-9Z"/><path stroke="white" stroke-width="5" fill="none" d="m2 26 28-18M12 1l8 30"/><path stroke="#f9c84c" stroke-width="2" d="m2 26 28-18"/><path fill="#3295ee" stroke="white" stroke-width="1.5" d="m19 8 7 17-8-3-7 5Z"/></svg>';
+  }
   function routeChoices(item){
     const address=String(item.address||item.where||'').trim();
     const place=String(item.place||item.location||'').trim();
@@ -36,7 +41,7 @@
     if(!destination&&!lines.length)return '';
     const locationText=lines.length?`<p class="ideaPracticalText">${lines.map(escapeHtml).join('<br>')}</p>`:'';
     const query=encodeURIComponent(destination);
-    return `<details class="photoRouteChoices"><summary>${detailIcon('location')}<span>Locatie &amp; route</span></summary>${locationText}${destination?`<div><a href="https://www.google.com/maps/dir/?api=1&destination=${query}" target="_blank" rel="noopener">${detailIcon('route')}<span>Google Maps</span></a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener">${detailIcon('route')}<span>Apple Kaarten</span></a></div><small>Op je telefoon opent de gekozen kaartapp als je toestel dit ondersteunt.</small>`:''}</details>`;
+    return `<details class="photoRouteChoices"><summary>${detailIcon('location')}<span>Adres &amp; route</span></summary>${locationText}${destination?`<div><a href="https://www.google.com/maps/dir/?api=1&destination=${query}" target="_blank" rel="noopener" class="mapAppButton" aria-label="Route openen in Google Maps" title="Google Maps">${mapAppIcon('google')}</a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener" class="mapAppButton" aria-label="Route openen in Apple Kaarten" title="Apple Kaarten">${mapAppIcon('apple')}</a></div>`:''}</details>`;
   }
   function detailContent(item){
     const extras=(Array.isArray(item.images)?item.images:[]).filter(image=>image&&typeof image==='object'&&(image.status==='approved'||image.approved===true)&&/^https?:\/\//i.test(image.src||''));

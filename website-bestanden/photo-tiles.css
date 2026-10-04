@@ -378,3 +378,10 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaCards.compactTiles .photoTileOverlay>.domainIcon{left:4px;bottom:-11.5px}
  #ideaCards.compactTiles .photoTileContent{padding-top:17px}
 }
+
+/* Icon-only map choices and a more legible overlapping sheet badge. */
+.photoDetailBody .photoRouteChoices a.mapAppButton{width:44px;height:44px;min-height:44px;padding:8px;justify-content:center;border-radius:10px}
+.photoDetailBody .photoRouteChoices a .mapAppLogo{width:28px;height:28px;stroke:none}
+.photoDetailBody .sharedIdeaCard .ideaImageDomainBadge{width:46px;height:46px;bottom:-23px}
+.photoDetailBody .sharedIdeaCard .ideaImageDomainBadge svg{width:23px;height:23px}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:28px!important}
