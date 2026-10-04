@@ -147,6 +147,7 @@
     const card=template.content.querySelector('article');
     const title=card.querySelector('h3');
     title.id=titleId;
+    title.querySelectorAll('.domainIcon').forEach(icon=>icon.remove());
     card.prepend(title);
     card.querySelector('.ideaPracticalDetails:not(.ideaMaterialsDetails)')?.remove();
     card.querySelector('.cardFooter')?.remove();

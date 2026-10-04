@@ -711,3 +711,8 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailPanel .ideaFilterSheetHeader h3 a{color:inherit;text-decoration:none}
 .photoDetailPanel .ideaFilterSheetHeader .ideaFilterSheetClose{flex-shrink:0}
 @media(max-width:640px){.photoDetailPanel .ideaFilterSheetHeader{padding:20px 16px 12px}.photoDetailPanel .ideaFilterSheetHeader h3{font-size:18px;line-height:30px}}
+
+/* The title row must grow with wrapped titles at every breakpoint. */
+.photoDetailLayer .photoDetailPanel{grid-template-rows:auto minmax(0,1fr)!important}
+.photoDetailPanel .ideaFilterSheetHeader{height:auto!important;max-height:none!important}
+.photoDetailPanel .ideaFilterSheetHeader .ideaTitleLink,.photoDetailPanel .ideaFilterSheetHeader .ideaTitleText{display:inline!important;white-space:normal!important;overflow:visible!important;-webkit-line-clamp:unset!important}
