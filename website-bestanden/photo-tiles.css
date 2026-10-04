@@ -13,7 +13,7 @@
 #ideaCards.photoTiles .photoTile .pill svg{color:inherit;stroke:currentColor}
 #ideaCards.photoTiles .photoTile .cardMetaLine{display:flex;gap:12px;flex-wrap:wrap}
 #ideaCards.photoTiles .photoTile .stimulusPillText{display:none}
-#ideaCards.photoTiles .photoTile:hover{box-shadow:0 5px 20px #243a3230}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){#ideaCards.photoTiles .photoTile:hover{box-shadow:0 5px 20px #243a3230}}
 #ideaCards.photoTiles .photoTile:focus-visible{outline:3px solid #397e8a;outline-offset:4px}
 /* Keep the existing featured carousel, timer and pause control. */
 #ideaCards.photoTiles:not(.compactTiles) .ideaFeaturedCarousel{grid-column:auto;min-width:0;align-self:start}
@@ -141,7 +141,7 @@ body.photoDetailOpen{overflow:hidden!important}
 
 
 .photoDetailActions>.primary{display:flex;align-items:center;min-height:48px;padding:12px 20px;border-radius:24px;background:#006579;color:white;text-decoration:none;box-sizing:border-box;font-weight:600}
-.photoDetailActions>.primary:hover{background:#004f60}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailActions>.primary:hover{background:#004f60}}
 .photoDetailArticle .photoDetailInfo .photoDetailBadge{z-index:1}
 
 .photoDetailArticle{overflow:visible!important}.photoDetailInfo{isolation:isolate;overflow:visible!important}.photoDetailBadge{transform:translateY(0)}
@@ -246,7 +246,7 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .photoRouteChoices{order:5;margin:0}
 .photoDetailBody .photoRouteChoices>div{gap:10px;padding:8px 0 12px}
 .photoDetailBody .photoRouteChoices a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 12px;box-sizing:border-box;border:1px solid rgba(79,142,158,.16);border-radius:14px;background:#fffdf9;color:#315f6b;text-decoration:none;font-size:14px}
-.photoDetailBody .photoRouteChoices a:hover{background:#edf5f2;border-color:rgba(79,142,158,.3)}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailBody .photoRouteChoices a:hover{background:#edf5f2;border-color:rgba(79,142,158,.3)}}
 .photoDetailBody .photoRouteChoices a:focus-visible{outline:2px solid #3f7884;outline-offset:3px}
 .photoDetailBody .photoRouteChoices a svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 
@@ -307,7 +307,7 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .photoDetailActions{padding:16px 0 8px;border-top:1px solid rgba(79,142,158,.12)}
 .photoDetailBody .photoDetailActions:empty{display:none}
 .photoDetailBody .photoDetailActions>.ideaRouteButton{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 16px;box-sizing:border-box;border:1.5px solid rgba(23,79,93,.46);border-radius:12px;background:rgba(255,253,249,.72);color:#236875;font-size:16px;font-weight:600;text-decoration:none}
-.photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:var(--control-hover-surface);border-color:rgba(23,79,93,.68);color:#1f5763}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:var(--control-hover-surface);border-color:rgba(23,79,93,.68);color:#1f5763}}
 .photoDetailBody .photoRouteChoices a{border-radius:12px}
 @media(max-width:640px){
  .photoDetailPanel .ideaFilterSheetHeader{padding:10px 16px;min-height:60px}
@@ -398,7 +398,7 @@ body.photoDetailOpen{overflow:hidden!important}
 /* Refined detail controls and compact, reserved photo space. */
 .photoDetailPanel .ideaFilterSheetClose{display:inline-flex;align-items:center;justify-content:center;flex:0 0 40px;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:transparent;color:#63858b;box-shadow:none;transition:background-color 140ms ease,color 140ms ease}
 .photoDetailPanel .ideaFilterSheetClose svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
-.photoDetailPanel .ideaFilterSheetClose:hover{background:rgba(79,142,158,.09);color:#315f6b}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailPanel .ideaFilterSheetClose:hover{background:rgba(79,142,158,.09);color:#315f6b}}
 .photoDetailPanel .ideaFilterSheetClose:focus-visible{outline:2px solid #315f6b;outline-offset:2px;background:rgba(79,142,158,.09)}
 .photoDetailBody .sharedIdeaCard .ideaImageFrame{height:auto!important;aspect-ratio:16/9!important}
 .photoDetailBody .sharedIdeaCard .ideaImageFrame img{object-fit:cover;object-position:center}
@@ -453,7 +453,7 @@ body.photoDetailOpen{overflow:hidden!important}
 
 /* Refined sheet controls and two readable groups beside the overlapping badge. */
 .photoDetailPanel .ideaFilterSheetClose svg{width:16px;height:16px}
-.photoDetailPanel .ideaFilterSheetClose:hover,.photoDetailPanel .ideaFilterSheetClose:focus-visible{background:#f1eadf;color:#526f73}
+.photoDetailPanel .ideaFilterSheetClose:focus-visible{background:#f1eadf;color:#526f73}
 .photoDetailBody .sharedIdeaCard .ideaImageDomainBadge{width:40px;height:40px;bottom:-20px}
 .photoDetailBody .sharedIdeaCard .ideaImageDomainBadge svg{width:21px;height:21px}
 .photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:0!important}
@@ -482,7 +482,7 @@ body.photoDetailOpen{overflow:hidden!important}
 /* Sheet facts return to their own full-width row below the overlapping badge. */
 .photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:24px!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock{width:100%!important;margin:0!important}
-.photoDetailPanel .ideaFilterSheetClose:hover{background:var(--control-hover-surface);border-color:rgba(61,126,136,.16);color:#63858b;box-shadow:none}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailPanel .ideaFilterSheetClose:hover{background:var(--control-hover-surface);border-color:rgba(61,126,136,.16);color:#63858b;box-shadow:none}}
 .photoDetailPanel .ideaFilterSheetClose:focus-visible{background:var(--control-hover-surface)}
 
 /* Adjacent desktop cards end at the featured card, above its navigation dots. */
@@ -522,13 +522,13 @@ body.photoDetailOpen{overflow:hidden!important}
 
 /* Quiet, labelled navigation links in the detail sheet. */
 .photoDetailBody .photoRouteChoices a.mapAppButton{border:0;background:transparent;box-shadow:none;min-width:88px;min-height:64px;padding:6px 8px;gap:5px;transition:background-color 140ms ease}
-.photoDetailBody .photoRouteChoices a.mapAppButton:hover{background:rgba(194,178,153,.08)}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailBody .photoRouteChoices a.mapAppButton:hover{background:rgba(194,178,153,.08)}}
 .photoDetailBody .photoRouteChoices a.mapAppButton:focus-visible{outline:2px solid #315f6b;outline-offset:3px}
 .photoDetailBody .photoRouteChoices a.mapAppButton .mapAppLogo{width:30px;height:30px}
 .photoDetailBody .photoRouteChoices>div{padding:12px 0 0;gap:12px}
 .photoDetailBody .photoRouteChoices{padding-bottom:6px}
 .photoDetailBody .photoDetailActions>.ideaRouteButton{background:transparent}
-.photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:rgba(194,178,153,.08)}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:rgba(194,178,153,.08)}}
 
 /* Separate the theme badge from facts without moving their vertical alignment. */
 #ideaCards.compactTiles .photoTileOverlay{gap:12px}
@@ -592,12 +592,19 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody details>summary::after{transition:transform 260ms cubic-bezier(.4,0,.2,1)}
 .photoDetailBody details.isSectionClosing>summary::after{transform:rotate(45deg)!important}
 .photoDetailBody .photoDetailActions>.ideaRouteButton{transition:background-color 180ms ease,border-color 180ms ease,color 180ms ease}
-.photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:var(--control-hover-surface);border-color:rgba(23,79,93,.68);color:#1f5763}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:var(--control-hover-surface);border-color:rgba(23,79,93,.68);color:#1f5763}}
 .photoDetailBody .photoDetailActions>.ideaRouteButton:focus-visible{outline:2px solid #315f6b;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){.photoDetailBody details>summary::after{transition:none}}
 
 /* Match the featured card's gentle lift on pointer devices. */
-@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
- #ideaCards.compactTiles .photoTile{transition:transform 180ms var(--ease),box-shadow 180ms var(--ease)}
+@media(min-width:981px) and (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ #ideaCards.compactTiles .photoTile{transition:transform 180ms var(--ease),background-color 180ms var(--ease),border-color 180ms var(--ease)}
  #ideaCards.compactTiles .photoTile:hover{transform:translateY(-2px)}
+}
+
+/* Compact cards stay shadow-free; pointer hover adds the classic soft highlight. */
+#ideaCards.compactTiles .photoTile,
+#ideaCards.compactTiles .photoTile:hover{box-shadow:none}
+@media(min-width:981px) and (hover:hover) and (pointer:fine){
+ #ideaCards.compactTiles .photoTile:hover{background:#fffefb;border-color:rgba(79,142,158,.13)}
 }

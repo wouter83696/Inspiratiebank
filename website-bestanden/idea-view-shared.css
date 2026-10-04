@@ -23,12 +23,12 @@
   background:#fffdf8;
   border-color:rgba(64,45,20,.075);
 }
-.sharedIdeaCards .ideaThemeCard:hover{
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.sharedIdeaCards .ideaThemeCard:hover{
   transform:translateY(-2px);
   background:#fffdf8;
   border-color:rgba(64,45,20,.10);
   box-shadow:0 16px 34px rgba(64,45,20,.065);
-}
+}}
 .sharedIdeaCards .ideaImageFrame{
   position:relative;
   flex-shrink:0;
