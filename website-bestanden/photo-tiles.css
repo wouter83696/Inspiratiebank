@@ -667,6 +667,6 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock{width:fit-content!important;max-width:calc(100% - 52px)!important;margin:0 0 0 52px!important;padding:4px 0!important;background:transparent!important;column-gap:16px!important}
 
 /* A small warm surface groups the facts directly below the photo. */
-#ideaCards.compactTiles .photoTileOverlay{padding-top:0}
-#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{flex:0 1 auto;width:fit-content;max-width:100%;padding:2px 6px;background:rgba(247,241,231,.65);border-radius:8px;box-sizing:border-box}
-.photoDetailBody .sharedIdeaCard .cardMetaBlock{padding:4px 8px!important;background:rgba(247,241,231,.65)!important;border-radius:10px}
+#ideaCards.compactTiles .photoTileOverlay{padding-top:6px}
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{flex:0 1 auto;width:fit-content;max-width:100%;padding:2px 6px;background:rgba(247,241,231,.45);border-radius:8px;box-sizing:border-box}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock{margin-top:4px!important;padding:4px 8px!important;background:rgba(247,241,231,.45)!important;border-radius:10px}
