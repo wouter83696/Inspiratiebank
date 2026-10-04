@@ -172,3 +172,8 @@ body.photoDetailOpen{overflow:hidden!important}
 @media(min-width:1600px){#ideaCards.compactTiles .ideaFeaturedSlides{height:330px}}
 @media(max-width:600px){#ideaCards.compactTiles .ideaFeaturedSlides{height:280px}#ideaCards.compactTiles .ideaFeaturedContent{padding:56px 12px 12px!important}#ideaCards.compactTiles .ideaFeaturedContent h3{font-size:18px!important}#ideaCards.compactTiles .ideaFeaturedMeta{gap:7px}#ideaCards.compactTiles .ideaFeaturedMeta :is(.pill,.cardMetaPart){font-size:11px!important}}
 #ideaCards.compactTiles .ideaFeaturedArrow{background:transparent;border:0;color:#fff;box-shadow:none}
+
+/* Equal card heights, with metadata following the title instead of the bottom edge. */
+#ideaCards.compactTiles .photoTile{align-self:stretch}
+#ideaCards.compactTiles .photoTileContent{flex:none;gap:5px}
+#ideaCards.compactTiles .photoTileFacts{margin-top:0}

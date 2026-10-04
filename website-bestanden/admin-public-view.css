@@ -6575,4 +6575,9 @@
 @media(max-width:600px){#adminIdeaCards.compactTiles .ideaFeaturedSlides{height:280px}#adminIdeaCards.compactTiles .ideaFeaturedContent{padding:56px 12px 12px!important}#adminIdeaCards.compactTiles .ideaFeaturedContent h3{font-size:18px!important}#adminIdeaCards.compactTiles .ideaFeaturedMeta{gap:7px}#adminIdeaCards.compactTiles .ideaFeaturedMeta :is(.pill,.cardMetaPart){font-size:11px!important}}
 #adminIdeaCards.compactTiles .ideaFeaturedArrow{background:transparent;border:0;color:#fff;box-shadow:none}
 
+/* Equal card heights, with metadata following the title instead of the bottom edge. */
+#adminIdeaCards.compactTiles .photoTile{align-self:stretch}
+#adminIdeaCards.compactTiles .photoTileContent{flex:none;gap:5px}
+#adminIdeaCards.compactTiles .photoTileFacts{margin-top:0}
+
 }
