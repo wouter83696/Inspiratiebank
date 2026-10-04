@@ -1,6 +1,6 @@
 /* Optional photo presentation; classic cards remain the source for detail content. */
 (function(){
-  let current=new Map(),enabled=false,returnFocus=null;
+  let current=new Map(),enabled=false,compact=false,returnFocus=null;
   let dialog,activeKey=null;
   const wide=window.matchMedia('(min-width:1280px)');
   function getDialog(){
@@ -32,7 +32,7 @@
     const location=String(item.address||item.where||item.place||item.location||'').trim();
     const extras=(Array.isArray(item.images)?item.images:[]).filter(image=>image&&typeof image==='object'&&(image.status==='approved'||image.approved===true)&&/^https?:\/\//i.test(image.src||''));
     const gallery=extras.length?`<details class="photoDetailSection"><summary>Foto’s</summary><div class="photoDetailGallery">${extras.map(image=>`<img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}" loading="lazy">`).join('')}</div></details>`:'';
-    return `<article class="photoDetailArticle ${domainThemeClass(item.domain)}">${image?`<img class="photoDetailHero" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}">`:''}<div class="photoDetailInfo"><span class="photoDetailBadge domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><h2 id="photoDetailTitle">${escapeHtml(item.title)}</h2>${IdeaViewShared.renderMetadata({className:'cardMetaBlock',pillsClass:'cardLabels',pills:metadata.pills,meta:metadata.meta})}<p class="photoDetailDescription">${escapeHtml(audienceText(item.fit||item.description||''))}</p>${gallery}<details class="photoDetailSection" open><summary>Praktische informatie</summary>${item.materials||item.rules?`<p>${escapeHtml(item.materials||item.rules)}</p>`:''}${routeChoices(item)}</details>${location?`<details class="photoDetailSection"><summary>Locatie</summary><p>${escapeHtml(location)}</p>${item.postcode?`<p>${escapeHtml(item.postcode)}</p>`:''}</details>`:''}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="button primary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Naar website ↗</a>`:''}${reportMenu('inspiratiebank',ideaDomKey(item),item.title)}</div></div></article>`;
+    return `<article class="photoDetailArticle ${domainThemeClass(item.domain)}">${image?`<img class="photoDetailHero" src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}">`:''}<div class="photoDetailInfo"><span class="photoDetailBadge domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><h2 id="photoDetailTitle">${escapeHtml(item.title)}</h2>${IdeaViewShared.renderMetadata({className:'cardMetaBlock',pillsClass:'cardLabels',pills:metadata.pills,meta:metadata.meta})}<p class="photoDetailDescription">${escapeHtml(audienceText(item.fit||item.description||''))}</p>${gallery}<details class="photoDetailSection" open><summary>Praktische informatie</summary>${item.materials||item.rules?`<p>${escapeHtml(item.materials||item.rules)}</p>`:''}${routeChoices(item)}</details>${location?`<details class="photoDetailSection"><summary>Locatie</summary><p>${escapeHtml(location)}</p>${item.postcode?`<p>${escapeHtml(item.postcode)}</p>`:''}</details>`:''}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="button primary" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Naar website ↗</a>`:''}${compact?'':reportMenu('inspiratiebank',ideaDomKey(item),item.title)}</div></div></article>`;
   }
   function present(sheet){
     const docked=wide.matches;
@@ -54,7 +54,7 @@
   }
   wide.addEventListener('change',()=>{if(dialog?.open){close();}});
   function render(items,style){
-    const on=style!=='classic';
+    const on=style!=='classic';compact=style==='compact';
     enabled=on;current=new Map(items.map(item=>[ideaDomKey(item),item]));
     if(dialog?.open&&(!on||!current.has(activeKey)))close();
     const grid=document.getElementById('ideaCards');grid.classList.toggle('photoTiles',on);grid.classList.toggle('compactTiles',style==='compact');if(!on)return;
