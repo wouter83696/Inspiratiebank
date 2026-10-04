@@ -437,3 +437,13 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaCards.compactTiles .photoTileOverlay>.domainIcon{flex-basis:23px}
  #ideaCards.compactTiles .photoTileContent{padding-top:9px}
 }
+
+/* Let the badge cross the photo edge while facts share its centre line. */
+#ideaCards.compactTiles .photoTileOverlay{bottom:-4px;padding:0 10px;min-height:30px;height:30px;box-sizing:border-box;overflow:visible}
+#ideaCards.compactTiles .photoTileMedia{overflow:visible}
+#ideaCards.compactTiles .photoTileMedia>img,#ideaCards.compactTiles .photoTileMedia>.photoTilePlaceholder{border-radius:inherit}
+#ideaCards.compactTiles .photoTileContent{padding-top:14px}
+@media(max-width:600px){
+ #ideaCards.compactTiles .photoTileOverlay{bottom:-3px;padding:0 5px;min-height:23px;height:23px}
+ #ideaCards.compactTiles .photoTileContent{padding-top:11px}
+}
