@@ -29,7 +29,7 @@
   function routeChoices(item){
     const destination=ideaRouteDestination(item);if(!destination)return '';
     const query=encodeURIComponent(destination);
-    return `<details class="photoRouteChoices"><summary>${detailIcon('route')}<span>Route plannen</span></summary><div><a href="https://www.google.com/maps/dir/?api=1&destination=${query}" target="_blank" rel="noopener">Google Maps</a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener">Apple Kaarten</a></div><small>Op je telefoon opent de gekozen kaartapp als je toestel dit ondersteunt.</small></details>`;
+    return `<details class="photoRouteChoices"><summary>${detailIcon('route')}<span>Route plannen</span></summary><div><a href="https://www.google.com/maps/dir/?api=1&destination=${query}" target="_blank" rel="noopener">${detailIcon('route')}<span>Google Maps</span></a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener">${detailIcon('route')}<span>Apple Kaarten</span></a></div><small>Op je telefoon opent de gekozen kaartapp als je toestel dit ondersteunt.</small></details>`;
   }
   function detailContent(item){
     const location=String(item.address||item.where||item.place||item.location||'').trim();
@@ -42,7 +42,7 @@
     card.querySelector('h3').id='photoDetailTitle';
     card.querySelector('.ideaPracticalDetails')?.remove();
     card.querySelector('.cardFooter')?.remove();
-    card.insertAdjacentHTML('beforeend',`${gallery}${IdeaViewShared.renderPractical(escapeHtml(item.materials||item.rules||''),false,`${location?`<p class="ideaPracticalText">${escapeHtml(location)}${item.postcode?`<br>${escapeHtml(item.postcode)}`:''}</p>`:''}${routeChoices(item)}`)}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="ideaRouteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Naar website ↗</a>`:''}</div>`);
+    card.insertAdjacentHTML('beforeend',`${gallery}${IdeaViewShared.renderPractical(escapeHtml(item.materials||item.rules||''),false,`${location?`<p class="ideaPracticalText">${escapeHtml(location)}${item.postcode?`<br>${escapeHtml(item.postcode)}`:''}</p>`:''}`)}${routeChoices(item)}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="ideaRouteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Naar website ↗</a>`:''}</div>`);
     const practicalSummary=card.querySelector('.ideaPracticalDetails>summary');
     if(practicalSummary) practicalSummary.innerHTML=`${detailIcon('info')}<span>Praktische informatie</span>`;
     return card.outerHTML;
