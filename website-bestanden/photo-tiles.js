@@ -170,7 +170,7 @@
       const badge=`<span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>`;
       const facts=`<span class="photoTileFacts"><span class="photoTileMeta">${metadata.pills}</span>${compact?'':`<span class="photoTileExtra">${metadata.meta}</span>`}</span>`;
       button.innerHTML=compact
-        ? `<span class="photoTileMedia">${media}</span><span class="photoTileOverlay">${badge}${facts}</span><span class="photoTileContent"><span class="photoTileTitle"><span>${escapeHtml(item.title)}</span></span></span>`
+        ? `<span class="photoTileMedia">${media}<span class="photoTileOverlay">${badge}${facts}</span></span><span class="photoTileContent"><span class="photoTileTitle"><span>${escapeHtml(item.title)}</span></span></span>`
         : `${media}<span class="photoTileContent"><span class="photoTileTitle">${badge}<span>${escapeHtml(item.title)}</span></span>${facts}</span>`;
       card.replaceWith(button);
     });
