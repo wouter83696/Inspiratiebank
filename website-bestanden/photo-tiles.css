@@ -469,3 +469,8 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaCards.compactTiles .photoTileOverlay{bottom:-11.5px}
  #ideaCards.compactTiles .photoTileContent{padding-top:20px}
 }
+
+/* Facts use their actual content width, including the home-only icon. */
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{gap:8px!important}
+#ideaCards.compactTiles .photoTileOverlay .photoTileMeta .pill{min-width:0!important;width:auto!important;margin:0!important;flex:0 0 auto}
+@media(max-width:600px){#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{gap:6px!important}}
