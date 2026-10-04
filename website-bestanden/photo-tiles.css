@@ -538,3 +538,13 @@ body.photoDetailOpen{overflow:hidden!important}
 
 /* Quiet, full-width information band beneath the detail photo. */
 .photoDetailBody .sharedIdeaCard .cardMetaBlock{padding:10px 12px!important;background:rgba(247,241,231,.45)!important;border:0!important;box-shadow:none!important;border-radius:12px}
+
+/* Move the complete desktop dock, including its edge and shadow. */
+@media(min-width:1280px){
+ .photoDetailLayer.isDocked{transform:translate3d(-100%,0,0);transition:transform var(--motion-slow,420ms) var(--motion-enter,cubic-bezier(.22,1,.36,1)),visibility 0s linear var(--motion-slow,420ms)!important;will-change:transform}
+ .photoDetailLayer.isDocked.isOpen{transform:translate3d(0,0,0);transition-delay:0s!important}
+ .photoDetailLayer.isDocked .photoDetailPanel{transform:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .photoDetailLayer.isDocked{transition-duration:.01ms!important;transition-delay:0s!important}
+}

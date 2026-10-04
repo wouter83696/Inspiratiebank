@@ -15,13 +15,23 @@
     dialog.addEventListener('close',()=>{document.body.classList.remove('photoDetailOpen','photoDetailDocked');document.querySelectorAll('.photoTile.isSelected').forEach(el=>el.classList.remove('isSelected'));if(returnFocus?.isConnected)returnFocus.focus({preventScroll:true});});
     return dialog;
   }
-  let closeTimer;
+  let closeTimer,openFrame,closeListener;
+  function cancelPendingMotion(){
+    cancelAnimationFrame(openFrame);clearTimeout(closeTimer);
+    if(closeListener){closeListener.target.removeEventListener('transitionend',closeListener.handler);closeListener=null;}
+  }
   function close(){
     if(!dialog?.open)return;
+    cancelPendingMotion();
+    const target=dialog.classList.contains('isDocked')?dialog:dialog.querySelector('.ideaFilterSheet');
+    const finish=()=>{cancelPendingMotion();if(dialog.open)dialog.close();};
+    const handler=event=>{if(event.target===target&&event.propertyName==='transform')finish();};
+    closeListener={target,handler};target.addEventListener('transitionend',handler);
     dialog.classList.remove('isOpen');
-    const durations=getComputedStyle(dialog.querySelector('.ideaFilterSheet')).transitionDuration.split(',').map(x=>parseFloat(x)*(x.trim().endsWith('ms')?1:1000));
-    clearTimeout(closeTimer);closeTimer=setTimeout(()=>dialog.close(),Math.max(...durations,0));
+    const durations=getComputedStyle(target).transitionDuration.split(',').map(x=>parseFloat(x)*(x.trim().endsWith('ms')?1:1000));
+    closeTimer=setTimeout(finish,Math.max(...durations,0)+50);
   }
+
   function detailIcon(kind){
     const paths={location:'<path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>',route:'<path d="M9 18l-5-5 5-5M4 13h10a5 5 0 0 1 5 5v2"/>',photo:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><path d="m3 17 6-6 4 4 3-3 5 5"/>'};
     return `<svg class="photoDetailSectionIcon" viewBox="0 0 24 24" aria-hidden="true">${paths[kind]}</svg>`;
@@ -73,14 +83,14 @@
     document.body.classList.toggle('photoDetailDocked',docked);
     document.body.classList.toggle('photoDetailOpen',!docked);
     if(!sheet.open){if(docked)sheet.show();else sheet.showModal();}
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{if(sheet.open)sheet.classList.add('isOpen');}));
+    openFrame=requestAnimationFrame(()=>{openFrame=requestAnimationFrame(()=>{if(sheet.open)sheet.classList.add('isOpen');});});
   }
   function open(key){
     const item=current.get(key);if(!item)return false;
     const sheet=getDialog(),wasOpen=sheet.open;
     returnFocus=document.activeElement;activeKey=key;
     sheet.querySelector('.photoDetailBody').innerHTML=detailContent(item);
-    clearTimeout(closeTimer);present(sheet);
+    cancelPendingMotion();present(sheet);
     document.querySelectorAll('.photoTile').forEach(el=>el.classList.toggle('isSelected',el.dataset.ideaKey===key));
     sheet.scrollTop=0;
     sheet.querySelector('.photoDetailPanel').scrollTop=0;
