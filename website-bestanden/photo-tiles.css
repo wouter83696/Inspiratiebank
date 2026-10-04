@@ -129,7 +129,6 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoRouteChoices small{display:block;color:#637d7b;line-height:1.5}
 .photoDetailGallery{display:grid;gap:12px;padding-top:16px}.photoDetailGallery img{width:100%;border-radius:14px}
 .photoDetailActions>.primary{width:100%;text-align:center;justify-content:center}
-#ideaCards.photoTiles .photoTile.isSelected{outline:2px solid #bda365;outline-offset:2px}
 @media(min-width:1280px){
  body.photoDetailDocked{padding-right:440px;box-sizing:border-box}
  body.photoDetailDocked #ideaCards.photoTiles{grid-template-columns:repeat(3,minmax(0,1fr))!important}
