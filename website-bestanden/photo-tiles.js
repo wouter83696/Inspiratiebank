@@ -28,7 +28,7 @@
   }
   function mapAppIcon(app){
     return app==='google'
-      ? '<svg class="mapAppLogo" viewBox="0 0 32 32" aria-hidden="true"><path fill="#34a853" d="M16 2a11 11 0 0 0-11 11c0 8 11 17 11 17s11-9 11-17A11 11 0 0 0 16 2Z"/><path fill="#4285f4" d="M16 2A11 11 0 0 0 5 13l11 3 7-11a11 11 0 0 0-7-3Z"/><path fill="#fbbc04" d="m5 13 8 8 10-16-5 3Z"/><path fill="#ea4335" d="M16 6a7 7 0 1 0 0 14 7 7 0 0 0 0-14Z"/><circle fill="white" cx="16" cy="13" r="3.5"/></svg>'
+      ? '<svg class="mapAppLogo" viewBox="0 0 48 48" aria-hidden="true"><path fill="#34a853" d="M24 2C13.5 2 7 9.6 7 19c0 11 11 20 14 25 1.4 2.6 4.6 2.6 6 0 3-5 14-14 14-25C41 9.6 34.5 2 24 2Z"/><path fill="#4285f4" d="M24 2C13.5 2 7 9.6 7 19c0 3.7 1.3 7.2 3.2 10.5L34.8 5.7A17 17 0 0 0 24 2Z"/><path fill="#ea4335" d="M10.5 8.5 20 18l14.8-12.3A17 17 0 0 0 24 2c-5.6 0-10.3 2.3-13.5 6.5Z"/><path fill="#fbbc04" d="m10.2 29.5 8.1 10.4L39 13a17 17 0 0 0-4.2-7.3Z"/><path fill="#4285f4" d="m19 20-8.8 9.5c2 3.5 5 7.2 8.1 10.4L28 27Z"/><circle cx="24" cy="18.5" r="7" fill="white"/></svg>'
       : '<svg class="mapAppLogo" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="6" fill="#e8efdf"/><path fill="#b3dc98" d="M2 3h11v12H2zm19 16h9v11h-9Z"/><path stroke="white" stroke-width="5" fill="none" d="m2 26 28-18M12 1l8 30"/><path stroke="#f9c84c" stroke-width="2" d="m2 26 28-18"/><path fill="#3295ee" stroke="white" stroke-width="1.5" d="m19 8 7 17-8-3-7 5Z"/></svg>';
   }
   function routeChoices(item){
@@ -39,9 +39,9 @@
     const lines=[...new Set([name,address,[postcode,place].filter(value=>value&&!address.toLowerCase().includes(value.toLowerCase())).join(' ')].filter(Boolean))];
     const destination=ideaRouteDestination(item);
     if(!destination&&!lines.length)return '';
-    const locationText=lines.length?`<p class="ideaPracticalText">${lines.map(escapeHtml).join('<br>')}</p>`:'';
+    const locationText=`<p class="ideaPracticalText">${lines.length?lines.map(escapeHtml).join('<br>'):'Adres nog niet opgegeven'}</p>`;
     const query=encodeURIComponent(destination);
-    return `<details class="photoRouteChoices"><summary>${detailIcon('location')}<span>Adres &amp; route</span></summary>${locationText}${destination?`<div><a href="https://www.google.com/maps/dir/?api=1&destination=${query}" target="_blank" rel="noopener" class="mapAppButton" aria-label="Route openen in Google Maps" title="Google Maps">${mapAppIcon('google')}</a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener" class="mapAppButton" aria-label="Route openen in Apple Kaarten" title="Apple Kaarten">${mapAppIcon('apple')}</a></div>`:''}</details>`;
+    return `<details class="photoRouteChoices"><summary>${detailIcon('location')}<span>Adres &amp; route</span></summary>${locationText}${destination?`<div><a href="https://www.google.com/maps/dir/?api=1&destination=${query}" target="_blank" rel="noopener" class="mapAppButton" aria-label="Route openen in Google Maps" title="Google Maps">${mapAppIcon('google')}<span>Google Maps</span></a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener" class="mapAppButton" aria-label="Route openen in Apple Kaarten" title="Apple Kaarten">${mapAppIcon('apple')}<span>Apple Kaarten</span></a></div>`:''}</details>`;
   }
   function detailContent(item){
     const extras=(Array.isArray(item.images)?item.images:[]).filter(image=>image&&typeof image==='object'&&(image.status==='approved'||image.approved===true)&&/^https?:\/\//i.test(image.src||''));
