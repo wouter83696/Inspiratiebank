@@ -22,16 +22,19 @@
     const durations=getComputedStyle(dialog.querySelector('.ideaFilterSheet')).transitionDuration.split(',').map(x=>parseFloat(x)*(x.trim().endsWith('ms')?1:1000));
     clearTimeout(closeTimer);closeTimer=setTimeout(()=>dialog.close(),Math.max(...durations,0));
   }
+  function detailIcon(kind){
+    const paths={info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>',route:'<path d="M9 18l-5-5 5-5M4 13h10a5 5 0 0 1 5 5v2"/>',photo:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><path d="m3 17 6-6 4 4 3-3 5 5"/>'};
+    return `<svg class="photoDetailSectionIcon" viewBox="0 0 24 24" aria-hidden="true">${paths[kind]}</svg>`;
+  }
   function routeChoices(item){
     const destination=ideaRouteDestination(item);if(!destination)return '';
     const query=encodeURIComponent(destination);
-    return `<details class="photoRouteChoices"><summary>Route plannen ↗</summary><div><a href="https://www.google.com/maps/dir/?api=1&destination=${query}" target="_blank" rel="noopener">Google Maps</a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener">Apple Kaarten</a></div><small>Op je telefoon opent de gekozen kaartapp als je toestel dit ondersteunt.</small></details>`;
+    return `<details class="photoRouteChoices"><summary>${detailIcon('route')}<span>Route plannen</span></summary><div><a href="https://www.google.com/maps/dir/?api=1&destination=${query}" target="_blank" rel="noopener">Google Maps</a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener">Apple Kaarten</a></div><small>Op je telefoon opent de gekozen kaartapp als je toestel dit ondersteunt.</small></details>`;
   }
   function detailContent(item){
-    const image=approvedIdeaImage(item),metadata=sharedIdeaMetadata(item,{map:true});
     const location=String(item.address||item.where||item.place||item.location||'').trim();
     const extras=(Array.isArray(item.images)?item.images:[]).filter(image=>image&&typeof image==='object'&&(image.status==='approved'||image.approved===true)&&/^https?:\/\//i.test(image.src||''));
-    const gallery=extras.length?`<details class="photoDetailSection"><summary>Foto’s</summary><div class="photoDetailGallery">${extras.map(image=>`<img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}" loading="lazy">`).join('')}</div></details>`:'';
+    const gallery=extras.length?`<details class="photoDetailSection"><summary>${detailIcon('photo')}<span>Foto’s</span></summary><div class="photoDetailGallery">${extras.map(image=>`<img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}" loading="lazy">`).join('')}</div></details>`:'';
     // Use the very same card renderer as the map detail, including image and metadata.
     const template=document.createElement('template');
     template.innerHTML=cardIdea(item,{mapDetailAction:'close'});
@@ -40,6 +43,8 @@
     card.querySelector('.ideaPracticalDetails')?.remove();
     card.querySelector('.cardFooter')?.remove();
     card.insertAdjacentHTML('beforeend',`${gallery}${IdeaViewShared.renderPractical(escapeHtml(item.materials||item.rules||''),false,`${location?`<p class="ideaPracticalText">${escapeHtml(location)}${item.postcode?`<br>${escapeHtml(item.postcode)}`:''}</p>`:''}${routeChoices(item)}`)}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="ideaRouteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Naar website ↗</a>`:''}</div>`);
+    const practicalSummary=card.querySelector('.ideaPracticalDetails>summary');
+    if(practicalSummary) practicalSummary.innerHTML=`${detailIcon('info')}<span>Praktische informatie</span>`;
     return card.outerHTML;
   }
   function present(sheet){
