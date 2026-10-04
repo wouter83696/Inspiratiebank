@@ -39,7 +39,9 @@
     const template=document.createElement('template');
     template.innerHTML=cardIdea(item,{mapDetailAction:'close'});
     const card=template.content.querySelector('article');
-    card.querySelector('h3').id='photoDetailTitle';
+    const title=card.querySelector('h3');
+    title.id='photoDetailTitle';
+    card.prepend(title);
     card.querySelector('.ideaPracticalDetails:not(.ideaMaterialsDetails)')?.remove();
     card.querySelector('.cardFooter')?.remove();
     card.insertAdjacentHTML('beforeend',`${gallery}${IdeaViewShared.renderPractical(escapeHtml(item.materials||item.rules||''),false,`${location?`<p class="ideaPracticalText">${escapeHtml(location)}${item.postcode?`<br>${escapeHtml(item.postcode)}`:''}</p>`:''}`)}${routeChoices(item)}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="ideaRouteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Naar website ↗</a>`:''}</div>`);

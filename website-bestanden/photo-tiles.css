@@ -345,3 +345,16 @@ body.photoDetailOpen{overflow:hidden!important}
 
 .photoDetailBody .sharedIdeaCard .ideaImageDomainBadge{left:10px;bottom:10px}
 .photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:8px!important}
+
+/* Detail sheet: close above the content, then title, photo and complete facts. */
+.photoDetailLayer .photoDetailPanel{grid-template-rows:54px minmax(0,1fr)}
+.photoDetailPanel .ideaFilterSheetHeader{height:54px;min-height:54px;padding:8px 20px;box-sizing:border-box}
+.photoDetailPanel .ideaFilterSheetClose{position:static;flex-shrink:0}
+.photoDetailBody .sharedIdeaCard>h3{order:-1;margin:0 0 6px!important}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:22px!important;overflow:visible}
+.photoDetailBody .sharedIdeaCard .ideaImageDomainBadge{left:10px;bottom:-18px}
+.photoDetailBody .cardMetaBlock{border:0!important}
+@media(max-width:640px){
+ .photoDetailLayer .photoDetailPanel{grid-template-rows:60px minmax(0,1fr)}
+ .photoDetailPanel .ideaFilterSheetHeader{height:60px;min-height:60px;padding:16px 16px 8px}
+}
