@@ -264,7 +264,7 @@ body.photoDetailOpen{overflow:hidden!important}
 #ideaCards.compactTiles .photoTileOverlay>.domainIcon{display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;border-radius:50%;background:var(--theme-tint,#e5f2ef);color:var(--theme-ink,#315f6b)}
 #ideaCards.compactTiles .photoTileOverlay>.domainIcon svg{width:17px;height:17px}
 #ideaCards.compactTiles .photoTileOverlay .photoTileFacts{flex:1;min-width:0;max-width:none;width:auto;margin:0;padding:0;border:0;border-radius:0;background:none;overflow:visible;gap:10px}
-#ideaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{padding:0;color:#fff!important;min-height:0;font-size:12px;line-height:1.4}
+#ideaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{padding:0;color:#315f6b!important;min-height:0;font-size:12px;line-height:1.4}
 #ideaCards.compactTiles .photoTileOverlay .photoTileMeta :is(.metaIcon,.metaIcon svg,.stimulusIcon,.stimulusIcon svg){color:#fff!important;stroke:currentColor}
 #ideaCards.compactTiles .photoTileContent{padding:12px 8px 8px}
 @media(max-width:600px){
@@ -648,3 +648,19 @@ body.photoDetailOpen{overflow:hidden!important}
 #ideaMap .ideaMapPanel .ideaMapResultInfo>.cardPillGroup,
 #ideaMap .ideaMapPanel .ideaMapResultInfo>.cardMetaLine{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;max-width:100%;flex-wrap:wrap!important}
 #ideaMap .ideaMapPanel .ideaMapResultBody{min-width:0!important;max-width:100%!important;overflow:visible!important}
+/* Metadata sits on the card surface beside the overlapping category badge. */
+#ideaCards.compactTiles .photoTileMedia::after{display:none}
+#ideaCards.compactTiles .photoTileOverlay{position:relative;inset:auto;flex:0 0 auto;height:auto;min-height:28px;width:100%;box-sizing:border-box;padding:6px 4px 0 48px;background:none;border-radius:0;align-items:flex-start}
+#ideaCards.compactTiles .photoTileOverlay>.domainIcon{position:absolute;left:8px;top:-16px;transform:none;width:32px;height:32px;flex-basis:32px}
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{position:static;top:auto;min-height:20px;color:#315f6b!important;text-shadow:none!important;line-height:20px}
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts :is(.pill,.cardMetaPart,.cardMetaLine,.metaIcon,.metaIcon svg,.stimulusIcon,.stimulusIcon svg){color:#315f6b!important;text-shadow:none!important}
+#ideaCards.compactTiles .photoTileContent{padding-top:8px;flex:0 0 auto}
+@media(max-width:600px){
+ #ideaCards.compactTiles .photoTileOverlay{padding-left:38px;min-height:26px}
+ #ideaCards.compactTiles .photoTileOverlay>.domainIcon{left:4px;top:-14px;width:28px;height:28px;flex-basis:28px}
+ #ideaCards.compactTiles .photoTileMeta{flex-wrap:wrap;row-gap:2px}
+}
+.photoDetailLayer .photoDetailPanel{background:#fffdf9!important}
+#ideaMap .ideaMapSingleCard.photoDetailBody{background:#fffdf9!important}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:0!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock{width:fit-content!important;max-width:calc(100% - 52px)!important;margin:0 0 0 52px!important;padding:4px 0!important;background:transparent!important;column-gap:16px!important}
