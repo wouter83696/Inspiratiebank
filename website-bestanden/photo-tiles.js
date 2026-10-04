@@ -89,16 +89,25 @@
       : '<svg class="mapAppLogo" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="6" fill="#e8efdf"/><path fill="#b3dc98" d="M2 3h11v12H2zm19 16h9v11h-9Z"/><path stroke="white" stroke-width="5" fill="none" d="m2 26 28-18M12 1l8 30"/><path stroke="#f9c84c" stroke-width="2" d="m2 26 28-18"/><path fill="#3295ee" stroke="white" stroke-width="1.5" d="m19 8 7 17-8-3-7 5Z"/></svg>';
   }
   function routeChoices(item){
-    const address=String(item.address||item.where||'').trim();
-    const place=String(item.place||item.location||'').trim();
-    const postcode=String(item.postcode||'').trim();
-    const name=String(item.locationName||item.venue||'').trim();
-    // Stored addresses may already contain postcode and town in one string.
-    const addressParts=address.split(/,?\s+(?=\d{4}\s?[A-Za-z]{2}\b)/);
-    if(addressParts.length===1&&place&&address.toLowerCase().endsWith(', '+place.toLowerCase())){
-      addressParts.splice(0,1,address.slice(0,-place.length-2),place);
+    const format=value=>String(value||'').trim().replace(/\b(\d{4})\s*([A-Za-z]{2})\b/g,(_,digits,letters)=>`${digits} ${letters.toUpperCase()}`);
+    const key=value=>format(value).toLocaleLowerCase('nl').replace(/[\s,]+/g,' ').trim();
+    const address=format(item.address||item.where);
+    const place=format(item.place||item.location);
+    const postcode=format(item.postcode);
+    const name=format(item.locationName||item.venue);
+    const addressParts=address.split(/,?\s+(?=\d{4} [A-Z]{2}\b)/);
+    if(addressParts.length===1&&place&&key(address).endsWith(' '+key(place))){
+      const suffix=address.toLowerCase().lastIndexOf(place.toLowerCase());
+      if(suffix>0)addressParts.splice(0,1,address.slice(0,suffix).replace(/[,\s]+$/,''),place);
     }
-    const lines=[...new Set([name,...addressParts,[postcode,place].filter(value=>value&&!address.toLowerCase().includes(value.toLowerCase())).join(' ')].filter(Boolean))];
+    const addressKey=key(address);
+    const extra=[postcode,place].filter(value=>value&&!(` ${addressKey} `).includes(` ${key(value)} `)).join(' ');
+    const seen=new Set();
+    const lines=[name,...addressParts,extra].filter(value=>{
+      const normalized=key(value);
+      if(!normalized||seen.has(normalized))return false;
+      seen.add(normalized);return true;
+    });
     const destination=ideaRouteDestination(item);
     if(!destination&&!lines.length)return '';
     const locationText=`<p class="ideaPracticalText">${lines.length?lines.map(escapeHtml).join('<br>'):'Adres nog niet opgegeven'}</p>`;
