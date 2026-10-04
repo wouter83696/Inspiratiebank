@@ -382,7 +382,7 @@ body.photoDetailOpen{overflow:hidden!important}
 /* Icon-only map choices and a more legible overlapping sheet badge. */
 .photoDetailBody .photoRouteChoices a.mapAppButton{width:44px;height:44px;min-height:44px;padding:8px;justify-content:center;border-radius:10px}
 .photoDetailBody .photoRouteChoices a .mapAppLogo{width:28px;height:28px;stroke:none}
-.photoDetailBody .sharedIdeaCard .ideaImageDomainBadge{width:46px;height:46px;bottom:-23px}
+.photoDetailBody .sharedIdeaCard .ideaImageDomainBadge{width:44px;height:44px;left:0;bottom:-22px;box-sizing:border-box;border:0;display:grid;place-items:center}
 .photoDetailBody .sharedIdeaCard .ideaImageDomainBadge svg{width:23px;height:23px}
 .photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:28px!important}
 
@@ -392,4 +392,16 @@ body.photoDetailOpen{overflow:hidden!important}
   content:"";position:absolute;top:0;bottom:0;left:-16px;width:16px;
   background:inherit;pointer-events:none;
  }
+}
+
+/* Refined detail controls and compact, reserved photo space. */
+.photoDetailPanel .ideaFilterSheetClose{display:inline-flex;align-items:center;justify-content:center;flex:0 0 40px;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:transparent;color:#63858b;box-shadow:none;transition:background-color 140ms ease,color 140ms ease}
+.photoDetailPanel .ideaFilterSheetClose svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+.photoDetailPanel .ideaFilterSheetClose:hover{background:rgba(79,142,158,.09);color:#315f6b}
+.photoDetailPanel .ideaFilterSheetClose:focus-visible{outline:2px solid #315f6b;outline-offset:2px;background:rgba(79,142,158,.09)}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame{height:180px!important;aspect-ratio:auto!important}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame img{object-fit:cover;object-position:center}
+@media(max-width:640px){
+ .photoDetailPanel .ideaFilterSheetClose{flex-basis:44px;width:44px;height:44px}
+ .photoDetailBody .sharedIdeaCard .ideaImageFrame{height:auto!important;aspect-ratio:2/1!important;min-height:140px!important;max-height:200px}
 }
