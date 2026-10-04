@@ -531,9 +531,9 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:rgba(194,178,153,.08)}
 
 /* Separate the theme badge from facts without moving their vertical alignment. */
-#ideaCards.compactTiles .photoTileOverlay{gap:18px}
+#ideaCards.compactTiles .photoTileOverlay{gap:12px}
 @media(max-width:600px){
- #ideaCards.compactTiles .photoTileOverlay{gap:12px}
+ #ideaCards.compactTiles .photoTileOverlay{gap:8px}
 }
 
 /* Quiet, full-width information band beneath the detail photo. */
