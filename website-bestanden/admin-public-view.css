@@ -6580,4 +6580,8 @@
 #adminIdeaCards.compactTiles .photoTileContent{flex:none;gap:5px}
 #adminIdeaCards.compactTiles .photoTileFacts{margin-top:0}
 
+/* Let the photo absorb row-height differences, keeping the text block compact. */
+#adminIdeaCards.compactTiles .photoTile>img,#adminIdeaCards.compactTiles .photoTilePlaceholder{flex:1 1 auto;min-height:0;object-fit:cover}
+#adminIdeaCards.compactTiles .photoTileContent{flex:0 0 auto}
+
 }

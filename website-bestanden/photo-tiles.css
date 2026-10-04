@@ -177,3 +177,7 @@ body.photoDetailOpen{overflow:hidden!important}
 #ideaCards.compactTiles .photoTile{align-self:stretch}
 #ideaCards.compactTiles .photoTileContent{flex:none;gap:5px}
 #ideaCards.compactTiles .photoTileFacts{margin-top:0}
+
+/* Let the photo absorb row-height differences, keeping the text block compact. */
+#ideaCards.compactTiles .photoTile>img,#ideaCards.compactTiles .photoTilePlaceholder{flex:1 1 auto;min-height:0;object-fit:cover}
+#ideaCards.compactTiles .photoTileContent{flex:0 0 auto}
