@@ -424,3 +424,16 @@ body.photoDetailOpen{overflow:hidden!important}
 
 /* Featured navigation keeps only the slide indicators. */
 #ideaCards .ideaFeaturedPause{display:none!important}
+
+/* Keep compact photo facts level with the badge and readable on light images. */
+#ideaCards.compactTiles .photoTileMedia::after{content:"";position:absolute;inset:auto 0 0;height:25%;min-height:56px;border-radius:0 0 16px 16px;background:linear-gradient(to bottom,transparent,rgba(0,0,0,.64) 48%,rgba(0,0,0,.68));pointer-events:none;z-index:1}
+#ideaCards.compactTiles .photoTileOverlay{z-index:2;min-height:30px;padding:0 10px 8px;gap:10px;background:none}
+#ideaCards.compactTiles .photoTileOverlay>.domainIcon{position:static;flex:0 0 30px;margin:0}
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{align-items:center;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+#ideaCards.compactTiles .photoTileContent{padding-top:12px}
+@media(max-width:600px){
+ #ideaCards.compactTiles .photoTileMedia::after{border-radius:0 0 12px 12px;min-height:48px}
+ #ideaCards.compactTiles .photoTileOverlay{min-height:23px;padding:0 5px 6px;gap:6px}
+ #ideaCards.compactTiles .photoTileOverlay>.domainIcon{flex-basis:23px}
+ #ideaCards.compactTiles .photoTileContent{padding-top:9px}
+}
