@@ -511,3 +511,8 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaCards.compactTiles .photoTileOverlay .photoTileFacts{top:0;min-height:18px;line-height:18px}
 }
 @media(max-width:600px){#ideaCards.compactTiles .photoTileOverlay .photoTileFacts .pill{height:18px}}
+
+/* Only the detail content scrolls; focus must not pan the clipped shell. */
+.photoDetailLayer,.photoDetailLayer .photoDetailPanel{overflow:clip}
+.photoDetailPanel .ideaFilterSheetHeader{position:relative;top:0;min-width:0}
+.photoDetailPanel .photoDetailBody{min-height:0;overscroll-behavior:contain;scroll-behavior:auto}

@@ -77,8 +77,10 @@
     sheet.querySelector('.photoDetailBody').innerHTML=detailContent(item);
     clearTimeout(closeTimer);present(sheet);
     document.querySelectorAll('.photoTile').forEach(el=>el.classList.toggle('isSelected',el.dataset.ideaKey===key));
-    sheet.querySelector('.photoDetailBody').scrollTop=0;
-    if(!wasOpen)sheet.querySelector('header button').focus();return true;
+    sheet.scrollTop=0;
+    sheet.querySelector('.photoDetailPanel').scrollTop=0;
+    sheet.querySelector('.photoDetailBody').scrollTo({top:0,left:0,behavior:'instant'});
+    if(!wasOpen)sheet.querySelector('header button').focus({preventScroll:true});return true;
   }
   wide.addEventListener('change',()=>{if(dialog?.open){close();}});
   function render(items,style){
