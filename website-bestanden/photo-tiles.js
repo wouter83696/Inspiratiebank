@@ -6,7 +6,7 @@
   function getDialog(){
     if(dialog)return dialog;
     dialog=document.createElement('dialog');dialog.className='photoDetailLayer ideaFilterSheetLayer';dialog.setAttribute('aria-labelledby','photoDetailTitle');
-    dialog.innerHTML='<button type="button" class="ideaFilterSheetBackdrop" tabindex="-1" aria-label="Detailpaneel sluiten"></button><section class="ideaFilterSheet photoDetailPanel"><header class="ideaFilterSheetHeader"><h2 id="photoDetailTitle">Activiteit</h2><button class="ideaFilterSheetClose" type="button" aria-label="Details sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></header><div class="photoDetailBody ideaFilterSheetBody sharedIdeaCards"></div></section>';
+    dialog.innerHTML='<button type="button" class="ideaFilterSheetBackdrop" tabindex="-1" aria-label="Detailpaneel sluiten"></button><section class="ideaFilterSheet photoDetailPanel"><header class="ideaFilterSheetHeader"><button class="ideaFilterSheetClose" type="button" aria-label="Details sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></header><div class="photoDetailBody ideaFilterSheetBody sharedIdeaCards"></div></section>';
     document.body.append(dialog);
     dialog.querySelector('header button').addEventListener('click',close);
     dialog.querySelector('.ideaFilterSheetBackdrop').addEventListener('click',close);
@@ -46,7 +46,6 @@
     const item=current.get(key);if(!item)return false;
     const sheet=getDialog(),wasOpen=sheet.open;
     returnFocus=document.activeElement;activeKey=key;
-    sheet.querySelector('header h2').removeAttribute('id');sheet.querySelector('header h2').textContent='Activiteit';
     sheet.querySelector('.photoDetailBody').innerHTML=detailContent(item);
     clearTimeout(closeTimer);present(sheet);
     document.querySelectorAll('.photoTile').forEach(el=>el.classList.toggle('isSelected',el.dataset.ideaKey===key));
