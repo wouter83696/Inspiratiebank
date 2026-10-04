@@ -431,3 +431,10 @@ body.adminEditorOpen{overflow:hidden!important}
 
 .adminLoginBrand{display:flex;align-items:center;gap:12px;margin-bottom:20px;color:#315f6b;font:500 23px/1.25 Lora,serif}
 #loginPanel .adminLoginBrand .adminLoginLogo{margin:0;flex-shrink:0}
+
+/* Align confirmation icon with the complete two-line heading. */
+#confirmModal .confirmModalTop{align-items:center;gap:12px;margin-bottom:16px}
+#confirmModal .confirmModalTop>div:last-child{display:grid;gap:4px;min-width:0}
+#confirmModal .confirmModalKicker{margin:0;line-height:1.3}
+#confirmModal .confirmModalTitle{margin:0;line-height:1.2;overflow-wrap:break-word}
+#confirmModal .confirmModalBadge{flex:0 0 44px;width:44px;height:44px;box-sizing:border-box}
