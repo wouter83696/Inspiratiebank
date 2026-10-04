@@ -1,5 +1,5 @@
 html.appLoading,body.appLoading{overflow:hidden}
-body.appLoading > :not(.appLoader){display:none !important}
+body.appLoading > :not(.appLoader){visibility:hidden !important;pointer-events:none !important}
 .appLoader{
   position:fixed;
   inset:0;
