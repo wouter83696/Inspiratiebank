@@ -41,9 +41,17 @@
     cancelAnimationFrame(openFrame);clearTimeout(closeTimer);
     if(closeListener){closeListener.target.removeEventListener('transitionend',closeListener.handler);closeListener=null;}
   }
-  function close(){
+  function close({immediate=false,restoreFocus=true}={}){
     if(!dialog?.open)return;
     cancelPendingMotion();
+    if(!restoreFocus)returnFocus=null;
+    if(immediate){
+      layoutAnimations.forEach(animation=>animation.cancel());layoutAnimations=[];
+      dialog.classList.remove('isOpen','isClosing');
+      document.body.classList.remove('photoDetailOpen','photoDetailDocked');
+      dialog.close();
+      return;
+    }
     const target=dialog.classList.contains('isDocked')?dialog:dialog.querySelector('.ideaFilterSheet');
     const finish=()=>{cancelPendingMotion();if(dialog.open)dialog.close();};
     const handler=event=>{if(event.target===target&&event.propertyName==='transform')finish();};
@@ -184,5 +192,5 @@
   document.addEventListener('click',e=>{const button=e.target.closest('[data-photo-detail]');if(button)open(button.dataset.photoDetail);});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&dialog?.open&&dialog.classList.contains('isDocked')&&!document.querySelector('dialog:modal')){e.preventDefault();close();}});
   document.addEventListener('click',event=>{if(event.target.closest('.ideaMapSingleCard.photoDetailBody'))animateSection(event);});
-  window.PhotoTiles={render,detailContent,openFeatured:key=>enabled&&open(key)};
+  window.PhotoTiles={render,detailContent,close,openFeatured:key=>enabled&&open(key)};
 })();

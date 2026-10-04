@@ -250,6 +250,7 @@
     .tab.active{background:rgba(168,225,221,.42);color:var(--accent-dark);box-shadow:inset 0 0 0 1px rgba(79,142,158,.08)}
     .tabPanel{display:none;animation:in .25s var(--ease);background:transparent}
     .tabPanel.active{display:block;scroll-margin-top:92px}
+    @media screen{.tabPanel:not(.active),.tabPanel[hidden]{display:none!important}}
     #tab-inspiratie,
     #tab-weken,
     #ideaCards,
@@ -5538,7 +5539,7 @@
   </div>
 
   <main class="shell">
-    <section id="tab-weken" class="tabPanel" role="tabpanel">
+    <section id="tab-weken" class="tabPanel" role="tabpanel" hidden inert>
       <section class="tabHero agendaHero" aria-labelledby="agendaHeroTitle">
         <a class="tabHeroHomeLink" href="/uit-agenda/" aria-label="Naar het begin van de UIT-agenda">
           <h1 class="tabHeroTitle" id="agendaHeroTitle">UIT-agenda</h1>
@@ -5837,7 +5838,7 @@
   <script src="website-bestanden/agenda-discovery-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script>DiscoveryViewShared.mount();AgendaDiscoveryShared.mount();</script>
   <script src="website-bestanden/site-settings-shared.js?v=20261004-compact-v1"></script>
-  <script src="website-bestanden/photo-tiles.js?v=20261004-photo-meta-v29"></script>
+  <script src="website-bestanden/photo-tiles.js?v=20261004-photo-meta-v30"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20261004-materials-v4"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20261001-time-sort-v2"></script>
@@ -10217,7 +10218,12 @@
     if(leavingInspiration || returningToInspiration) resetIdeaMapTransientState();
     $$('.tab').forEach(b=>{ const on=b.dataset.tab===name; b.classList.toggle('active',on); b.setAttribute('aria-selected',on?'true':'false'); });
     syncTopTabIndicator();
-    $$('.tabPanel').forEach(p=>p.classList.toggle('active',p.id === 'tab-'+name));
+    $$('.tabPanel').forEach(p=>{
+      const active = p.id === 'tab-'+name;
+      p.classList.toggle('active', active);
+      p.hidden = !active;
+      p.inert = !active;
+    });
     userLocationRadiusKm = loadUserLocationRadius();
     syncLocationRadiusUi();
     if(name === 'weken') renderAgenda();
@@ -10273,6 +10279,12 @@
     const nextView = view === 'map' ? 'map' : 'tiles';
     const listOn = nextView === 'list';
     const mapOn = nextView === 'map';
+    if(mapOn){
+      window.PhotoTiles?.close({immediate:true,restoreFocus:false});
+      closeDesktopSidebar();
+      closeIdeaFilterSheet();
+      closeAgendaFilterSheet({restoreFocus:false});
+    }
     $('#tab-inspiratie')?.classList.toggle('mapViewActive', mapOn);
     document.body.classList.toggle('ideaMapMode', mapOn && $('#tab-inspiratie')?.classList.contains('active'));
     if(mapOn){
