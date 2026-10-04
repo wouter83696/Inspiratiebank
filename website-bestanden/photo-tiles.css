@@ -516,3 +516,6 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailLayer,.photoDetailLayer .photoDetailPanel{overflow:clip}
 .photoDetailPanel .ideaFilterSheetHeader{position:relative;top:0;min-width:0}
 .photoDetailPanel .photoDetailBody{min-height:0;overscroll-behavior:contain;scroll-behavior:auto}
+
+/* Bring tile facts optically closer to the overlapping category badge. */
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{top:3px}
