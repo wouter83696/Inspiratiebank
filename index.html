@@ -10988,15 +10988,15 @@
 	      window.setInterval(refreshFromCentral, refreshMinutes * 60 * 1000);
 	    }
 	  }
-  async function prepareVisiblePhotos(maxWait = 2500){
-    // The hidden page retains its layout, so only photos in the viewport get priority.
+  async function prepareVisiblePhotos(maxWait = 600){
+    // Only the first visible activity photos may briefly hold the loader.
     await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-    const images = Array.from(document.images).filter(image => {
-      if(image.closest('.appLoader')) return false;
+    const images = Array.from(document.querySelectorAll('#ideaCards img, .sharedIdeaCard img')).filter(image => {
+      if(image.closest('[hidden], .ideaFeaturedCard[aria-hidden="true"]')) return false;
       const rect = image.getBoundingClientRect();
       return rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.right > 0
         && rect.top < window.innerHeight && rect.left < window.innerWidth;
-    });
+    }).slice(0, 3);
     const cleanups = [];
     let timer;
     const ready = images.map(image => new Promise(resolve => {
