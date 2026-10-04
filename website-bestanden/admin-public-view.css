@@ -6446,21 +6446,19 @@
  #adminIdeaCards.photoTiles .ideaFeaturedSideLabel{top:8px;left:8px;padding:5px 8px;font-size:10px}
 }
 @media(max-width:350px){#adminIdeaCards.photoTiles{grid-template-columns:minmax(0,1fr)!important}}
-.photoDetailSheet{position:fixed;inset:0 0 0 auto;margin:0;border:0;padding:0;width:min(560px,100%);max-width:100%;height:100dvh;max-height:100dvh;background:#fffdf9;color:#315f6b;box-shadow:-16px 0 40px #38312424;overflow:hidden}
-.photoDetailSheet[open]{display:flex;flex-direction:column}
-.photoDetailSheet::backdrop{background:#302e2738;backdrop-filter:blur(3px)}
-.photoDetailSheet>header{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #e7e4da}
-.photoDetailSheet>header h2{font:600 18px/1.4 Manrope,sans-serif;margin:0}
-.photoDetailSheet>header button{flex:0 0 42px;width:42px;height:42px;border-radius:50%;background:#f3f5ef;border:1px solid #dce4df;color:#315f6b;font:26px/1 sans-serif;cursor:pointer}
-.photoDetailBody{padding:20px;overflow-y:auto;overscroll-behavior:contain;min-height:0}
+/* Detail panels share the filter sheet's dimensions, motion, header and close control. */
+.photoDetailLayer{position:fixed;inset:0;margin:0;padding:0;border:0;width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;background:transparent;overflow:hidden;color:#315f6b}
+.photoDetailLayer:not([open]){display:none}
+.photoDetailLayer::backdrop{background:transparent}
+.photoDetailLayer .photoDetailPanel{grid-template-rows:auto minmax(0,1fr)}
+.photoDetailLayer .photoDetailBody{display:block!important;overscroll-behavior:contain}
 .photoDetailBody .sharedIdeaCard{box-shadow:none!important;border:0!important;padding:0!important;background:none!important}
 .photoDetailBody .ideaImageFrame{margin:0 0 20px!important;aspect-ratio:16/10;border-radius:18px}
-.photoDetailBody .sharedIdeaCard>h3{font-size:23px;line-height:1.3}
-.photoDetailBody .sharedIdeaCard>p{font-size:16px;line-height:1.65}
 .photoDetailBody .ideaPracticalDetails{margin-block:18px}
+.photoDetailBody .cardMetaBlock{display:flex!important;flex-wrap:nowrap!important;align-items:center;gap:10px!important;width:100%!important;max-width:100%!important;overflow-x:auto;white-space:nowrap;box-sizing:border-box}
+.photoDetailBody .cardMetaBlock :is(.cardLabels,.cardMetaLine){display:contents!important}
+.photoDetailBody .cardMetaBlock :is(.pill,.cardMetaPart){flex-shrink:0;white-space:nowrap;font-size:12px!important}
 :scope.photoDetailOpen{overflow:hidden!important}
-@media(max-width:600px){.photoDetailSheet{width:100%;height:94dvh;inset:auto 0 0;border-radius:22px 22px 0 0}.photoDetailBody{padding:16px 16px calc(24px + env(safe-area-inset-bottom))}}
-
 .photoTileTitle>span:last-child{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 #adminIdeaCards.photoTiles .photoTileTitle>.domainIcon{background:var(--theme-tint,#e5f2ef)!important;color:var(--theme-ink,#315f6b)!important}
 #adminIdeaCards.photoTiles .ideaFeaturedContent h3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
@@ -6469,11 +6467,20 @@
 .photoDetailBody .ideaPracticalText{font-size:15px!important;line-height:1.6!important}
 .photoDetailBody :is(.pill,.cardMetaPart){font-size:14px!important}
 .photoDetailActions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding-block:18px}
-.photoDetailSheet .photoDetailBody{display:block!important}
+.photoDetailPanel .photoDetailBody{display:block!important}
 .photoDetailBody .sharedIdeaCard{width:100%!important;min-width:0!important;height:auto!important;display:flex!important;flex-direction:column!important}
 .photoDetailBody .ideaImageFrame{width:100%!important;height:auto!important;flex:none!important}
 .photoDetailBody .ideaTitleLink{white-space:normal!important;overflow:visible!important;display:inline!important;-webkit-line-clamp:unset!important}
 #adminIdeaCards.photoTiles .photoTileTitle>.domainIcon{background:color-mix(in srgb,var(--theme-ink,#315f6b) 12%,#fffdf9)!important}
 #adminIdeaCards.photoTiles :is(.photoTileMeta,.photoTileExtra,.ideaFeaturedMeta) :is(.metaIcon,.metaIcon svg,.stimulusIcon,.stimulusIcon svg){color:#fff!important;stroke:currentColor}
+
+#adminIdeaCards.photoTiles .ideaFeaturedCarousel{grid-column:span 2}
+#adminIdeaCards.photoTiles .ideaFeaturedSlides{aspect-ratio:16/9}
+#adminIdeaCards.photoTiles .ideaFeaturedSideLabel{left:0;top:16px;border-left:0;border-radius:0 9px 9px 0;padding:9px 12px;font-size:11px}
+@media(max-width:350px){#adminIdeaCards.photoTiles .ideaFeaturedCarousel{grid-column:auto}}
+.photoDetailBody .cardMetaBlock{flex-direction:row!important;justify-content:flex-start!important}
+.photoDetailBody .ideaImageFrame{position:relative!important;min-height:0!important;aspect-ratio:16/10!important}
+.photoDetailBody .ideaImageFrame img{position:absolute!important;inset:0;width:100%!important;height:100%!important;object-fit:cover}
+.photoDetailBody h3 .ideaTitleText{display:inline!important;white-space:normal!important;overflow:visible!important;-webkit-line-clamp:unset!important}
 
 }
