@@ -164,9 +164,13 @@ body.photoDetailOpen{overflow:hidden!important}
 #ideaCards.compactTiles .ideaFeaturedMeta :is(.pill,.cardMetaPart,.metaIcon,.stimulusIcon){color:#fff!important;flex-shrink:0;white-space:nowrap}
 #ideaCards.compactTiles .ideaFeaturedMeta svg{color:#fff!important;stroke:currentColor}
 #ideaCards.compactTiles .ideaFeaturedArrow{flex-basis:32px;width:32px;height:32px}
-#ideaCards.compactTiles .photoTileFacts{width:fit-content;max-width:100%;box-sizing:border-box;padding:7px 8px;border:1px solid rgba(112,94,63,.065);border-radius:10px;background:rgba(247,241,231,.3);gap:7px}
-#ideaCards.compactTiles .photoTileFacts .pill{color:#617573!important}
-#ideaCards.compactTiles .photoTileFacts .cardMetaPart{color:#697472!important}
+#ideaCards.compactTiles .photoTileFacts{width:fit-content;max-width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid rgba(112,94,63,.035);border-radius:10px;background:rgba(247,241,231,.11);gap:7px}
+#ideaCards.compactTiles .photoTile .photoTileFacts .pill{color:#617573!important;padding:3px 2px;min-height:22px;font-weight:500}
+#ideaCards.compactTiles .photoTile .photoTileFacts .cardMetaPart{color:#697472!important}
+@media(min-width:981px){
+ #ideaCards.compactTiles .photoTileFacts{padding:8px 11px;border-radius:11px}
+ #ideaCards.compactTiles .photoTile .photoTileFacts .cardMetaPart .metaIcon{width:16px;height:16px;color:#55777a!important}
+}
 @media(min-width:1600px){#ideaCards.compactTiles .ideaFeaturedSlides{height:330px}}
 @media(max-width:600px){#ideaCards.compactTiles .ideaFeaturedSlides{height:280px}#ideaCards.compactTiles .ideaFeaturedContent{padding:56px 12px 12px!important}#ideaCards.compactTiles .ideaFeaturedContent h3{font-size:18px!important}#ideaCards.compactTiles .ideaFeaturedMeta{gap:7px}#ideaCards.compactTiles .ideaFeaturedMeta :is(.pill,.cardMetaPart){font-size:11px!important}}
 #ideaCards.compactTiles .ideaFeaturedArrow{background:transparent;border:0;color:#fff;box-shadow:none}
