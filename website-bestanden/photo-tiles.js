@@ -155,6 +155,10 @@
     const sheet=getDialog(),wasOpen=sheet.open;
     returnFocus=document.activeElement;activeKey=key;
     sheet.querySelector('.photoDetailBody').innerHTML=detailContent(item);
+    const header=sheet.querySelector('.ideaFilterSheetHeader');
+    header.querySelector('#photoDetailTitle')?.remove();
+    const heading=sheet.querySelector('.photoDetailBody #photoDetailTitle');
+    if(heading)header.prepend(heading);
     cancelPendingMotion();layoutAnimations.forEach(animation=>animation.cancel());layoutAnimations=[];present(sheet);
     document.querySelectorAll('.photoTile').forEach(el=>el.classList.toggle('isSelected',el.dataset.ideaKey===key));
     sheet.scrollTop=0;

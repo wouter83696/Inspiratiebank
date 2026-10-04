@@ -704,3 +704,10 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaMap .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:24px!important;right:24px!important}
  #ideaMap .ideaMapDetailClose::before{content:none!important}
 }
+
+/* Shared title/action row leaves room for future save and share controls. */
+.photoDetailPanel .ideaFilterSheetHeader{height:auto;min-height:64px;padding:16px 20px 12px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-shrink:0}
+.photoDetailPanel .ideaFilterSheetHeader h3{flex:1;min-width:0;margin:0;font-size:20px;line-height:32px;font-weight:600;color:#006780;overflow-wrap:anywhere}
+.photoDetailPanel .ideaFilterSheetHeader h3 a{color:inherit;text-decoration:none}
+.photoDetailPanel .ideaFilterSheetHeader .ideaFilterSheetClose{flex-shrink:0}
+@media(max-width:640px){.photoDetailPanel .ideaFilterSheetHeader{padding:20px 16px 12px}.photoDetailPanel .ideaFilterSheetHeader h3{font-size:18px;line-height:30px}}
