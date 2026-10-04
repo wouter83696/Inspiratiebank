@@ -308,3 +308,33 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailBody .sharedIdeaCard>h3{font-size:22px!important}
 }
 .photoDetailBody .sharedIdeaCard .ideaPracticalDetails{width:100%;box-sizing:border-box}
+
+/* Align the category and compact facts with the title's left edge. */
+#ideaCards.compactTiles .photoTileOverlay{justify-content:flex-start;padding-left:8px;padding-right:8px}
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{justify-content:flex-start;flex:0 1 auto}
+#ideaCards.compactTiles .photoTileOverlay .pill{flex:0 0 auto;justify-content:flex-start}
+@media(max-width:600px){#ideaCards.compactTiles .photoTileOverlay{padding-left:4px;padding-right:4px}}
+/* Keep the close control available above scrolling content without a tall header. */
+.photoDetailPanel .ideaFilterSheetHeader{position:relative;min-height:16px;height:16px;padding:0;border:0;z-index:3;background:transparent}
+.photoDetailPanel .ideaFilterSheetClose{position:absolute;top:26px;right:30px;width:44px;height:44px;background:#fffdf9;box-shadow:0 2px 8px #183e4320}
+.photoDetailBody .cardMetaBlock{border:1px solid rgba(112,94,63,.07)!important;border-radius:12px;background:rgba(247,241,231,.22)!important;padding:9px 10px!important;justify-content:flex-start!important}
+@media(max-width:640px){
+ .photoDetailPanel .ideaFilterSheetHeader{min-height:24px;height:24px;padding:0}
+ .photoDetailPanel .ideaFilterSheetClose{top:34px;right:26px}
+}
+/* Category badges overlap the photo edge, as in the classic cards. */
+#ideaCards.compactTiles .photoTileMedia{overflow:visible}
+#ideaCards.compactTiles .photoTileMedia>img,#ideaCards.compactTiles .photoTileMedia>.photoTilePlaceholder{border-radius:inherit}
+#ideaCards.compactTiles .photoTileOverlay{border-radius:0 0 16px 16px;padding-left:48px;min-height:30px}
+#ideaCards.compactTiles .photoTileOverlay>.domainIcon{position:absolute;left:8px;bottom:-15px;z-index:1}
+#ideaCards.compactTiles .photoTileContent{padding-top:23px}
+.photoDetailLayer .photoDetailPanel{grid-template-rows:16px minmax(0,1fr)}
+@media(max-width:600px){
+ #ideaCards.compactTiles .photoTileOverlay{padding-left:32px;border-radius:0 0 12px 12px;min-height:23px}
+ #ideaCards.compactTiles .photoTileOverlay>.domainIcon{left:4px;bottom:-11px}
+ #ideaCards.compactTiles .photoTileContent{padding-top:18px}
+}
+@media(max-width:640px){.photoDetailLayer .photoDetailPanel{grid-template-rows:24px minmax(0,1fr)}}
+/* Preserve the original close button; only its placement changes. */
+.photoDetailPanel .ideaFilterSheetClose{width:38px;height:38px;box-shadow:none;border-radius:12px;border:1px solid rgba(79,142,158,.16);background:#fffdf9}
+@media(max-width:640px){.photoDetailPanel .ideaFilterSheetClose{width:36px;height:36px;background:#fffefc;border-color:rgba(79,142,158,.14)}}
