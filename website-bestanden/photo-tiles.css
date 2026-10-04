@@ -385,3 +385,11 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .sharedIdeaCard .ideaImageDomainBadge{width:46px;height:46px;bottom:-23px}
 .photoDetailBody .sharedIdeaCard .ideaImageDomainBadge svg{width:23px;height:23px}
 .photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:28px!important}
+
+/* The topbar continues behind the dock's transparent upper corner and scrolls with it. */
+@media(min-width:1280px){
+ body.photoDetailDocked .topbar::before{
+  content:"";position:absolute;top:0;bottom:0;left:-16px;width:16px;
+  background:inherit;pointer-events:none;
+ }
+}
