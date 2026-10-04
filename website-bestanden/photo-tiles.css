@@ -130,14 +130,14 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailGallery{display:grid;gap:12px;padding-top:16px}.photoDetailGallery img{width:100%;border-radius:14px}
 .photoDetailActions>.primary{width:100%;text-align:center;justify-content:center}
 @media(min-width:1280px){
- body.photoDetailDocked{padding-right:440px;box-sizing:border-box}
+ body.photoDetailDocked{padding-right:480px;box-sizing:border-box}
  body.photoDetailDocked #ideaCards.photoTiles{grid-template-columns:repeat(3,minmax(0,1fr))!important}
- .photoDetailLayer.isDocked{left:auto;right:0;width:440px;max-width:440px;z-index:90;box-shadow:-8px 0 32px #264b4e18}
+ .photoDetailLayer.isDocked{left:auto;right:0;width:480px;max-width:480px;z-index:90;box-shadow:-8px 0 32px #264b4e18}
  .photoDetailLayer.isDocked .ideaFilterSheetBackdrop{display:none}
- .photoDetailLayer.isDocked .photoDetailPanel{width:100%;max-width:100%;height:100%;border-radius:0;inset:0}
+ .photoDetailLayer.isDocked .photoDetailPanel{width:100%;max-width:100%;height:100%;inset:0}
 }
 @media(max-width:600px){.photoDetailPanel .photoDetailBody{padding:0 16px 24px!important}.photoDetailInfo h2{font-size:22px}}
-@media(min-width:1280px){.photoDetailLayer.isDocked .photoDetailPanel{position:absolute;width:440px;max-width:440px;left:0;right:0;top:0;bottom:0}}
+@media(min-width:1280px){.photoDetailLayer.isDocked .photoDetailPanel{position:absolute;width:480px;max-width:480px;left:0;right:0;top:0;bottom:0}}
 
 
 .photoDetailActions>.primary{display:flex;align-items:center;min-height:48px;padding:12px 20px;border-radius:24px;background:#006579;color:white;text-decoration:none;box-sizing:border-box;font-weight:600}
@@ -198,4 +198,21 @@ body.photoDetailOpen{overflow:hidden!important}
 @media(min-width:351px) and (max-width:600px){
  #ideaCards.compactTiles{row-gap:28px;padding-bottom:18px}
  #ideaCards.compactTiles>.photoTileOffset{top:18px}
+}
+
+/* Reuse filter dimensions and the map card rather than a second detail design. */
+.photoDetailLayer .photoDetailPanel{border-radius:16px 0 0 16px}
+.photoDetailBody .sharedIdeaCard{min-height:0!important;gap:8px!important}
+.photoDetailBody .sharedIdeaCard>h3{margin:0!important;font-size:1.08rem!important;font-weight:500;line-height:1.25!important}
+.photoDetailBody .sharedIdeaCard>p{font-size:.92rem!important;line-height:1.45!important;color:#74716e!important}
+.photoDetailBody .ideaImageFrame{margin:0 0 22px!important}
+.photoDetailBody .cardMetaBlock{gap:9px!important;padding:7px 9px;scrollbar-width:none}
+.photoDetailBody .ideaPracticalDetails{margin:6px 0 0}
+.photoDetailBody .photoDetailActions{position:static;order:6;padding:8px 0 0}
+.photoDetailBody .photoDetailSection{order:5}
+@media(max-width:640px){
+ .photoDetailLayer .photoDetailPanel{border-radius:24px 24px 0 0;background:#fffefc}
+ .photoDetailPanel .ideaFilterSheetHeader{min-height:48px;padding:0 12px}
+ .photoDetailPanel .ideaFilterSheetClose{width:36px;height:36px;border:1px solid rgba(79,142,158,.14);border-radius:12px;background:#fffefc}
+ .photoDetailBody .ideaImageFrame{aspect-ratio:16/9!important}
 }
