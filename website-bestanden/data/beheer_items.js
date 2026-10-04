@@ -1065,7 +1065,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "Pop Culture Arcade Nijmegen - vrij spelen en challenges",
+      "title": "Pop Culture Arcade Nijmegen",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "check actuele openingstijden",
@@ -1111,7 +1111,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "Vue Nijmegen Plein - reguliere bioscoopfilm",
+      "title": "Vue Nijmegen Plein - bioscoop",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "dagelijks volgens filmagenda",
@@ -1133,7 +1133,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "EnjoyVR Nijmegen - virtual reality in een eigen tijdsblok",
+      "title": "EnjoyVR Nijmegen - virtual reality",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "op reservering",
@@ -1155,7 +1155,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "GRIP Boulderhal Nijmegen - boulderen op eigen niveau",
+      "title": "GRIP Boulderhal Nijmegen",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "dagelijks, check daluren",
@@ -1224,7 +1224,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "Pretpark Tivoli Berg en Dal - attracties in compact park",
+      "title": "Pretpark Tivoli Berg en Dal",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "check zomerse openingstijden",
@@ -1245,7 +1245,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "Gamestate Arnhem - arcadehal met meer dan 50 games",
+      "title": "Gamestate Arnhem - arcadehal",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "dagelijks, check rustige uren",
@@ -1266,7 +1266,7 @@ window.BCJN_BEHEER_BASE = {
       ]
     },
     {
-      "title": "VR SO Real Arnhem - virtual reality kiezen op niveau",
+      "title": "VR SO Real Arnhem - virtual reality",
       "week": "w29,w30,w31,w32,w33,w34",
       "date": "13 juli t/m 23 augustus 2026",
       "time": "op reservering",
@@ -4376,7 +4376,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Zwemmen Goffertbad / zwembad",
+      "title": "Zwemmen in het Goffertbad",
       "domain": "Sport & Bewegen",
       "type": "Bestaand aanbod / eigen begeleiding",
       "locationType": "Buiten de deur",
@@ -4393,7 +4393,7 @@ window.BCJN_BEHEER_BASE = {
       ],
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/108-zwemmen-goffertbad-zwembad.jpg",
-      "imageAlt": "Foto bij Zwemmen Goffertbad / zwembad",
+      "imageAlt": "Foto bij Zwemmen in het Goffertbad",
       "imageStatus": "approved"
     },
     {
@@ -4575,7 +4575,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Pop Culture Arcade Nijmegen - vrij spelen en challenges",
+      "title": "Pop Culture Arcade Nijmegen",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4599,7 +4599,7 @@ window.BCJN_BEHEER_BASE = {
         "nijmegen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/117-pop-culture-arcade-nijmegen-vrij-spelen-en-challenges.jpg",
-      "imageAlt": "Foto bij Pop Culture Arcade Nijmegen - vrij spelen en challenges",
+      "imageAlt": "Foto bij Pop Culture Arcade Nijmegen",
       "imageStatus": "approved"
     },
     {
@@ -4633,7 +4633,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Vue Nijmegen Plein - reguliere bioscoopfilm",
+      "title": "Vue Nijmegen Plein - bioscoop",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4657,11 +4657,11 @@ window.BCJN_BEHEER_BASE = {
         "binnen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/119-vue-nijmegen-plein-reguliere-bioscoopfilm.jpg",
-      "imageAlt": "Foto bij Vue Nijmegen Plein - reguliere bioscoopfilm",
+      "imageAlt": "Foto bij Vue Nijmegen Plein - bioscoop",
       "imageStatus": "approved"
     },
     {
-      "title": "EnjoyVR Nijmegen - virtual reality in een eigen tijdsblok",
+      "title": "EnjoyVR Nijmegen - virtual reality",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4685,11 +4685,11 @@ window.BCJN_BEHEER_BASE = {
         "nijmegen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/120-enjoyvr-nijmegen-virtual-reality-in-een-eigen-tijdsblok.jpg",
-      "imageAlt": "Foto bij EnjoyVR Nijmegen - virtual reality in een eigen tijdsblok",
+      "imageAlt": "Foto bij EnjoyVR Nijmegen - virtual reality",
       "imageStatus": "approved"
     },
     {
-      "title": "GRIP Boulderhal Nijmegen - boulderen op eigen niveau",
+      "title": "GRIP Boulderhal Nijmegen",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4713,7 +4713,7 @@ window.BCJN_BEHEER_BASE = {
         "nijmegen"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/121-grip-boulderhal-nijmegen-boulderen-op-eigen-niveau.jpg",
-      "imageAlt": "Foto bij GRIP Boulderhal Nijmegen - boulderen op eigen niveau",
+      "imageAlt": "Foto bij GRIP Boulderhal Nijmegen",
       "imageStatus": "approved"
     },
     {
@@ -4772,7 +4772,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Pretpark Tivoli Berg en Dal - attracties in compact park",
+      "title": "Pretpark Tivoli Berg en Dal",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4791,11 +4791,11 @@ window.BCJN_BEHEER_BASE = {
         "berg en dal"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/124-pretpark-tivoli-berg-en-dal-attracties-in-compact-park-verified.jpg",
-      "imageAlt": "Foto bij Pretpark Tivoli Berg en Dal - attracties in compact park",
+      "imageAlt": "Foto bij Pretpark Tivoli Berg en Dal",
       "imageStatus": "approved"
     },
     {
-      "title": "Gamestate Arnhem - arcadehal met meer dan 50 games",
+      "title": "Gamestate Arnhem - arcadehal",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4814,11 +4814,11 @@ window.BCJN_BEHEER_BASE = {
         "arnhem"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/125-gamestate-arnhem-arcadehal-met-meer-dan-50-games.jpg",
-      "imageAlt": "Foto bij Gamestate Arnhem - arcadehal met meer dan 50 games",
+      "imageAlt": "Foto bij Gamestate Arnhem - arcadehal",
       "imageStatus": "approved"
     },
     {
-      "title": "VR SO Real Arnhem - virtual reality kiezen op niveau",
+      "title": "VR SO Real Arnhem - virtual reality",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -4837,7 +4837,7 @@ window.BCJN_BEHEER_BASE = {
         "arnhem"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/126-vr-so-real-arnhem-virtual-reality-kiezen-op-niveau.jpg",
-      "imageAlt": "Foto bij VR SO Real Arnhem - virtual reality kiezen op niveau",
+      "imageAlt": "Foto bij VR SO Real Arnhem - virtual reality",
       "imageStatus": "approved"
     },
     {
@@ -4973,7 +4973,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Rage room / smashactiviteit in de regio checken",
+      "title": "Rage room / smashactiviteit",
       "domain": "Actie & Amusement",
       "type": "Zoekbron / extern",
       "locationType": "Buiten de deur",
@@ -4994,7 +4994,7 @@ window.BCJN_BEHEER_BASE = {
         "hoog prikkel"
       ],
       "image": "website-bestanden/afbeeldingen/inspiratie/132-rage-room-smashactiviteit-in-de-regio-checken.jpg",
-      "imageAlt": "Foto bij Rage room / smashactiviteit in de regio checken",
+      "imageAlt": "Foto bij Rage room / smashactiviteit",
       "imageStatus": "approved"
     },
     {
@@ -5193,7 +5193,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved"
     },
     {
-      "title": "Kasteel Hernen - zelf op ontdekking door het kasteel",
+      "title": "Kasteel Hernen",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5603,7 +5603,7 @@ window.BCJN_BEHEER_BASE = {
       "lon": 5.9021425
     },
     {
-      "title": "Infocentrum WO2 Nijmegen - gratis experience en escaperoute",
+      "title": "Infocentrum WO2 Nijmegen",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5627,7 +5627,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.8473238,
       "lon": 5.8683769,
       "image": "website-bestanden/afbeeldingen/inspiratie/153-infocentrum-wo2-nijmegen-gratis-experience-en-escaperoute.jpg",
-      "imageAlt": "Foto bij Infocentrum WO2 Nijmegen - gratis experience en escaperoute",
+      "imageAlt": "Foto bij Infocentrum WO2 Nijmegen",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://mijngelderland.nl/inhoud/organisaties/infocentrum-wo2",
@@ -5667,7 +5667,7 @@ window.BCJN_BEHEER_BASE = {
       "imageLicense": "Onbekend"
     },
     {
-      "title": "Huis van de Nijmeegse Geschiedenis - gratis stadsverhalen",
+      "title": "Huis van de Nijmeegse Geschiedenis",
       "domain": "Cultuur & Ontdekken",
       "type": "Bestaand extern aanbod",
       "locationType": "Buiten de deur",
@@ -5691,7 +5691,7 @@ window.BCJN_BEHEER_BASE = {
       "lat": 51.8452161,
       "lon": 5.8664085,
       "image": "website-bestanden/afbeeldingen/inspiratie/155-huis-van-de-nijmeegse-geschiedenis-gratis-stadsverhalen.png",
-      "imageAlt": "Foto bij Huis van de Nijmeegse Geschiedenis - gratis stadsverhalen",
+      "imageAlt": "Foto bij Huis van de Nijmeegse Geschiedenis",
       "imageStatus": "approved",
       "imageSourceType": "website",
       "imageSourceUrl": "https://www.huisvandenijmeegsegeschiedenis.nl/",

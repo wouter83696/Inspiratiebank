@@ -236,7 +236,7 @@ const flexibleOffers = [
     tags: ['lasergamen', 'glowgolf', 'stepzone', 'lasersquash', 'nijmegen'],
   },
   {
-    title: 'Pop Culture Arcade Nijmegen - vrij spelen en challenges',
+    title: 'Pop Culture Arcade Nijmegen',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'check actuele openingstijden',
@@ -270,7 +270,7 @@ const flexibleOffers = [
     tags: ['bioscoop', 'film', 'arcade', 'x-cube', 'escape', 'lent'],
   },
   {
-    title: 'Vue Nijmegen Plein - reguliere bioscoopfilm',
+    title: 'Vue Nijmegen Plein - bioscoop',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'dagelijks volgens filmagenda',
@@ -287,7 +287,7 @@ const flexibleOffers = [
     tags: ['bioscoop', 'film', 'nijmegen', 'binnen'],
   },
   {
-    title: 'EnjoyVR Nijmegen - virtual reality in een eigen tijdsblok',
+    title: 'EnjoyVR Nijmegen - virtual reality',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'op reservering',
@@ -304,7 +304,7 @@ const flexibleOffers = [
     tags: ['vr', 'gaming', 'immersief', 'nijmegen'],
   },
   {
-    title: 'GRIP Boulderhal Nijmegen - boulderen op eigen niveau',
+    title: 'GRIP Boulderhal Nijmegen',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'dagelijks, check daluren',
@@ -372,7 +372,7 @@ const flexibleOffers = [
     tags: ['ski', 'snowboard', 'tuben', 'outdoor', 'wijchen', 'bijzonder'],
   },
   {
-    title: 'Pretpark Tivoli Berg en Dal - attracties in compact park',
+    title: 'Pretpark Tivoli Berg en Dal',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'check zomerse openingstijden',
@@ -389,7 +389,7 @@ const flexibleOffers = [
     tags: ['pretpark', 'attracties', 'berg en dal'],
   },
   {
-    title: 'Gamestate Arnhem - arcadehal met meer dan 50 games',
+    title: 'Gamestate Arnhem - arcadehal',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'dagelijks, check rustige uren',
@@ -406,7 +406,7 @@ const flexibleOffers = [
     tags: ['arcade', 'gaming', 'arnhem'],
   },
   {
-    title: 'VR SO Real Arnhem - virtual reality kiezen op niveau',
+    title: 'VR SO Real Arnhem - virtual reality',
     week: ALL_WEEKS,
     date: '13 juli t/m 23 augustus 2026',
     time: 'op reservering',
@@ -657,17 +657,17 @@ const inspirationOfferTitles = new Set([
   'Planet Awesome Nijmegen - karten, lasergamen, bowling en arcade',
   'Olround Nijmegen - bowlen en Prison Island',
   'LaserQuest Nijmegen - lasergamen, Mystic Golf en StepZone',
-  'Pop Culture Arcade Nijmegen - vrij spelen en challenges',
+  'Pop Culture Arcade Nijmegen',
   'Pathe Nijmegen - film, Pathe Games en X-Cube',
-  'Vue Nijmegen Plein - reguliere bioscoopfilm',
-  'EnjoyVR Nijmegen - virtual reality in een eigen tijdsblok',
-  'GRIP Boulderhal Nijmegen - boulderen op eigen niveau',
+  'Vue Nijmegen Plein - bioscoop',
+  'EnjoyVR Nijmegen - virtual reality',
+  'GRIP Boulderhal Nijmegen',
   'Waalhalla Nijmegen - skateboard, BMX, step en urban sport',
   'Fundustry Nijmegen/Ewijk - klimpark, paintball en outdoor challenges',
   'De Wijchense Berg - skiën, snowboarden, tuben en outdoor',
-  'Pretpark Tivoli Berg en Dal - attracties in compact park',
-  'Gamestate Arnhem - arcadehal met meer dan 50 games',
-  'VR SO Real Arnhem - virtual reality kiezen op niveau',
+  'Pretpark Tivoli Berg en Dal',
+  'Gamestate Arnhem - arcadehal',
+  'VR SO Real Arnhem - virtual reality',
   'You Jump Nijmegen - trampolinepark en jumpactiviteiten',
   'Escape Boot Nijmegen - escaperooms en Escape Arena',
   'ROX Escape Nijmegen - escaperooms op NYMA',
@@ -699,7 +699,7 @@ const concreteAmusementIdeas = flexibleOffers
   .map(offerToInspiration);
 
 const rageRoomIdea = {
-  title: 'Rage room / smashactiviteit in de regio checken',
+  title: 'Rage room / smashactiviteit',
   domain: 'Actie & Amusement',
   type: 'Zoekbron / extern',
   locationType: 'Op pad',
