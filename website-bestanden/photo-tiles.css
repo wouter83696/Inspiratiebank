@@ -660,7 +660,8 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaCards.compactTiles .photoTileOverlay>.domainIcon{left:4px;top:-14px;width:28px;height:28px;flex-basis:28px}
  #ideaCards.compactTiles .photoTileMeta{flex-wrap:wrap;row-gap:2px}
 }
-.photoDetailLayer .photoDetailPanel{background:#fffdf9!important}
-#ideaMap .ideaMapSingleCard.photoDetailBody{background:#fffdf9!important}
+:root{--sheet-surface:linear-gradient(180deg,#fffdfa 0%,#faf7ef 100%)}
+.ideaFilterSheet,.photoDetailLayer .photoDetailPanel{background:var(--sheet-surface)!important}
+#ideaMap .ideaMapSingleCard.photoDetailBody{background:var(--sheet-surface)!important}
 .photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:0!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock{width:fit-content!important;max-width:calc(100% - 52px)!important;margin:0 0 0 52px!important;padding:4px 0!important;background:transparent!important;column-gap:16px!important}
