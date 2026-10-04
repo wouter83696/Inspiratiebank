@@ -6541,7 +6541,7 @@
     if(normalized === 'online'){
       return `<span class="pill locationPill onlineLocationPill" title="Online" aria-label="Online">${ICONS.globe}</span>`;
     }
-    if(isHomeLocationBadge(label)){
+    if(isHomeLocationBadge(label) || normalized === 'buiten'){
       return `<span class="pill locationPill homeLocationPill" title="${escapeHtml(label)}" aria-label="${escapeHtml(label)}">${ICONS.home}</span>`;
     }
     const distanceClass = normalized.includes('25') || normalized.includes('50') ? 'distanceFar'
