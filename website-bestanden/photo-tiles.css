@@ -481,7 +481,7 @@ body.photoDetailOpen{overflow:hidden!important}
 
 /* Sheet facts return to their own full-width row below the overlapping badge. */
 .photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:24px!important}
-.photoDetailBody .sharedIdeaCard .cardMetaBlock{width:100%!important;margin:0!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock{width:fit-content!important;max-width:100%;box-sizing:border-box;align-self:flex-start;margin:0!important}
 @media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailPanel .ideaFilterSheetClose:hover{background:var(--control-hover-surface);border-color:rgba(61,126,136,.16);color:#63858b;box-shadow:none}}
 .photoDetailPanel .ideaFilterSheetClose:focus-visible{background:var(--control-hover-surface)}
 
