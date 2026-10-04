@@ -40,10 +40,12 @@
     template.innerHTML=cardIdea(item,{mapDetailAction:'close'});
     const card=template.content.querySelector('article');
     card.querySelector('h3').id='photoDetailTitle';
-    card.querySelector('.ideaPracticalDetails')?.remove();
+    card.querySelector('.ideaPracticalDetails:not(.ideaMaterialsDetails)')?.remove();
     card.querySelector('.cardFooter')?.remove();
     card.insertAdjacentHTML('beforeend',`${gallery}${IdeaViewShared.renderPractical(escapeHtml(item.materials||item.rules||''),false,`${location?`<p class="ideaPracticalText">${escapeHtml(location)}${item.postcode?`<br>${escapeHtml(item.postcode)}`:''}</p>`:''}`)}${routeChoices(item)}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="ideaRouteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">Naar website ↗</a>`:''}</div>`);
-    const practicalSummary=card.querySelector('.ideaPracticalDetails>summary');
+    const materials=card.querySelector('.ideaMaterialsDetails');
+    if(materials) card.insertBefore(materials,card.querySelector('.photoRouteChoices') || card.querySelector('.photoDetailActions'));
+    const practicalSummary=card.querySelector('.ideaPracticalDetails:not(.ideaMaterialsDetails)>summary');
     if(practicalSummary) practicalSummary.innerHTML=`${detailIcon('info')}<span>Praktische informatie</span>`;
     return card.outerHTML;
   }

@@ -9,6 +9,11 @@
     return content || extra ? `<details class="ideaPracticalDetails"${open ? ' open' : ''}><summary>Praktisch</summary>${content ? `<p class="ideaPracticalText">${content}</p>` : ''}${extra}</details>` : '';
   }
 
+  function renderMaterials(value){
+    const text=String(value || '').trim();
+    return text ? `<details class="ideaPracticalDetails ideaMaterialsDetails"><summary>Materialen</summary><p class="ideaPracticalText">${escape(text)}</p></details>` : '';
+  }
+
   function renderPracticalList(content){
     return content ? `<p class="ideaPracticalListText">${content}</p>` : '<span class="ideaPracticalEmpty">-</span>';
   }
@@ -28,7 +33,7 @@
       ${view.themePill ? `<div class="cardThemePill">${view.themePill}</div>` : ''}
       <h3>${view.title || ''}</h3>
       ${renderMetadata({className:'cardMetaBlock', pillsClass:'cardLabels', pills, meta:view.meta})}
-      ${source}${body}${practical}${footer}
+      ${source}${body}${practical}${renderMaterials(view.supplies)}${footer}
     </article>`;
   }
 
@@ -62,7 +67,8 @@
       ...view,
       activity:{title:item.title, url:item.url, image:view.image, icon:view.icon},
       description:escape(describe(item.fit || item.description || '')),
-      practical:escape(item.materials || item.rules || '')
+      practical:escape(item.materials || item.rules || ''),
+      supplies:item.supplies
     });
   }
 
@@ -71,7 +77,7 @@
       {label:'Activiteit', html:view.activity ? renderListActivity(view.activity) : (view.title || '')},
       {label:'Kenmerken', html:renderMetadata({pills:view.pills, meta:view.meta})},
       {label:'Beschrijving', html:renderPracticalList(view.description)},
-      {label:'Praktisch', html:renderPracticalList(view.practical)}
+      {label:'Praktisch', html:(view.practical || !String(view.supplies || '').trim() ? renderPracticalList(view.practical) : '') + renderMaterials(view.supplies)}
     ];
     if(view.manageActions !== undefined){
       const manageCell = {label:'Beheer', html:`<div class="ideaAdminListActions">${view.manageActions || ''}</div>`};
@@ -89,5 +95,5 @@
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
-  window.IdeaViewShared = Object.freeze({renderPractical, renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
+  window.IdeaViewShared = Object.freeze({renderMaterials, renderPractical, renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
 })();

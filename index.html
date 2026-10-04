@@ -5679,8 +5679,12 @@
               <textarea id="teamIdeaFitInput" name="fit" placeholder="Bijv. waarom past dit idee goed, voor wie is het prettig, of wat maakt het inspirerend?"></textarea>
             </label>
             <label class="teamField wide">
-              <span>Materiaal / praktische informatie (optioneel)</span>
-              <textarea id="teamIdeaNoteInput" name="note" placeholder="Bijv. benodigd materiaal, voorbereiding of iets om vooraf rekening mee te houden."></textarea>
+              <span>Materialen / benodigdheden (optioneel)</span>
+              <textarea id="teamIdeaSuppliesInput" name="supplies" placeholder="Bijv. papier, schaar, lijm of kleding die vies mag worden."></textarea>
+            </label>
+            <label class="teamField wide">
+              <span>Praktische informatie (optioneel)</span>
+              <textarea id="teamIdeaNoteInput" name="note" placeholder="Bijv. voorbereiding of iets om vooraf rekening mee te houden."></textarea>
             </label>
           </div>
           <div class="teamActionBar">
@@ -5832,10 +5836,10 @@
   <script src="website-bestanden/select-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script src="website-bestanden/agenda-discovery-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script>DiscoveryViewShared.mount();AgendaDiscoveryShared.mount();</script>
-  <script src="website-bestanden/site-settings-shared.js?v=20261004-detail-v4"></script>
-  <script src="website-bestanden/photo-tiles.js?v=20261004-panel-v13"></script>
+  <script src="website-bestanden/site-settings-shared.js?v=20261004-compact-v1"></script>
+  <script src="website-bestanden/photo-tiles.js?v=20261004-materials-v14"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20261004-practical-v3"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20261004-materials-v4"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20261001-time-sort-v2"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
@@ -7032,6 +7036,7 @@
       cost: normalizeIdeaCost(item.cost || '€'),
       stimulus: normalizeIdeaStimulus(item.stimulus || 'Laag/middel'),
       materials: item.materials || '',
+      supplies: String(item.supplies || '').trim(),
       fit: String(item.fit || item.note || '').trim(),
       note: String(item.note || '').trim(),
       url: String(item.url || '').trim(),
@@ -7595,6 +7600,7 @@
       cost:item.cost,
       stimulus:item.stimulus,
       materials:item.note || item.materials || '',
+      supplies:String(item.supplies || '').trim(),
       fit:item.fit || item.note || 'Toegevoegd door iemand uit de omgeving.',
       source:item.url ? '' : 'Inzending',
       url:item.url || '',
@@ -8186,6 +8192,7 @@
       stimulus:$('#teamIdeaStimulusInput').value,
       fit:$('#teamIdeaFitInput').value.trim(),
       note:$('#teamIdeaNoteInput').value.trim(),
+      supplies:$('#teamIdeaSuppliesInput').value.trim(),
       url:$('#teamIdeaUrlInput').value.trim(),
       image:imageData,
       imageAlt:$('#teamIdeaTitleInput').value.trim(),
@@ -8809,7 +8816,7 @@
       image:imageContent,
       title:cardTitle,
       pills:metadata.pills,
-      meta:metadata.meta, description:escapeHtml(fitText), practical:escapeHtml(item.materials || ''),
+      meta:metadata.meta, description:escapeHtml(fitText), practical:escapeHtml(item.materials || ''), supplies:item.supplies,
       practicalOpen:mapDetailAction === 'close',
       website:'',
       actions:mapDetailAction === 'close'
@@ -8840,6 +8847,7 @@
           ${image ? `<div class="ideaMapAccordionImage"><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt || item.title || 'Activiteit')}" loading="lazy" decoding="async"></div>` : ''}
           ${metadataBlock}
           ${description ? `<p class="ideaMapAccordionDescription">${escapeHtml(description)}</p>` : ''}
+          ${IdeaViewShared.renderMaterials(item.supplies)}
           ${practical ? `<details class="ideaMapAccordionPractical"><summary>Praktisch</summary><p>${escapeHtml(practical)}</p></details>` : ''}
         </div>
       </div>

@@ -1487,8 +1487,12 @@
                 <textarea id="adminEditIdeaDescription" placeholder="Bijv. waarom past dit idee goed, voor wie is het prettig, of wat maakt het inspirerend?"></textarea>
               </label>
               <label class="teamField wide">
-                <span>Praktische notitie / materiaal</span>
-                <textarea id="adminEditIdeaRules" placeholder="Bijv. voorbereiding, tijdstip, materiaal, rustopties of iets om vooraf rekening mee te houden."></textarea>
+                <span>Materialen / benodigdheden (optioneel)</span>
+                <textarea id="adminEditIdeaSupplies" placeholder="Bijv. papier, schaar, lijm of kleding die vies mag worden."></textarea>
+              </label>
+              <label class="teamField wide">
+                <span>Praktische informatie</span>
+                <textarea id="adminEditIdeaRules" placeholder="Bijv. voorbereiding, tijdstip, rustopties of iets om vooraf rekening mee te houden."></textarea>
               </label>
             </div>
             <div class="teamActionBar">
@@ -1599,7 +1603,7 @@
   <script src="../website-bestanden/admin-site-settings.js?v=20261004-compact-v1"></script>
   <script src="../website-bestanden/admin-discovery.js?v=20261001-regional-headers-v1"></script>
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
-  <script src="../website-bestanden/idea-view-shared.js?v=20260930-list-parity-v2"></script>
+  <script src="../website-bestanden/idea-view-shared.js?v=20261004-materials-v4"></script>
   <script src="../website-bestanden/agenda-view-shared.js?v=20261001-time-sort-v2"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
@@ -3250,7 +3254,7 @@
       title:cardTitle,
       pills:`${adminIdeaStatusLabel(item)}${placePills} ${costPill(costLabel)} ${stimulusPill(stimulusLabel)}`,
       meta:cardMetaLine(item, {compact:true}),
-      description:escapeHtml(description), practical:escapeHtml(practical), website:''
+      description:escapeHtml(description), practical:escapeHtml(practical), supplies:item.supplies, website:''
     });
   }
   function adminIdeaRow(item){
@@ -4723,6 +4727,7 @@
     syncAdminIdeaImagePreview();
     syncAdminIdeaImageSuggestion();
     $('#adminEditIdeaDescription').value = item.fit || item.description || '';
+    $('#adminEditIdeaSupplies').value = String(item.supplies || '').trim();
     $('#adminEditIdeaRules').value = item.materials || item.rules || item.note || '';
     setStatus('#adminIdeaEditStatus', item.isNew ? 'Vul de activiteit in en sla op om deze te publiceren.' : item.kind === 'collega-toegevoegd' ? 'Pas de velden aan en sla de wijziging op.' : 'Bij opslaan komt er een bewerkte online versie en wordt het vaste origineel verborgen.', 'ok');
     window.AdminPolish?.captureIdea();
@@ -4756,6 +4761,7 @@
       fit:$('#adminEditIdeaDescription').value.trim(),
       note:$('#adminEditIdeaRules').value.trim(),
       materials:$('#adminEditIdeaRules').value.trim(),
+      supplies:$('#adminEditIdeaSupplies').value.trim(),
       url:$('#adminEditIdeaUrl').value.trim(),
       image,
       imageAlt:title,
