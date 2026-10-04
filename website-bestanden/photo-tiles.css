@@ -350,7 +350,7 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailLayer .photoDetailPanel{grid-template-rows:54px minmax(0,1fr)}
 .photoDetailPanel .ideaFilterSheetHeader{height:54px;min-height:54px;padding:8px 20px;box-sizing:border-box}
 .photoDetailPanel .ideaFilterSheetClose{position:static;flex-shrink:0}
-.photoDetailBody .sharedIdeaCard>h3{order:-1;margin:0 0 6px!important}
+.photoDetailBody .sharedIdeaCard>h3{order:-1;margin:0 0 4px!important}
 .photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:22px!important;overflow:visible}
 .photoDetailBody .sharedIdeaCard .ideaImageDomainBadge{left:10px;bottom:-18px}
 .photoDetailBody .cardMetaBlock{border:0!important}
