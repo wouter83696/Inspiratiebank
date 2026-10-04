@@ -358,3 +358,13 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailLayer .photoDetailPanel{grid-template-rows:60px minmax(0,1fr)}
  .photoDetailPanel .ideaFilterSheetHeader{height:60px;min-height:60px;padding:16px 16px 8px}
 }
+
+/* Clip every painted sheet layer, including composited scrolling content. */
+.photoDetailLayer{background:transparent!important}
+.photoDetailLayer .photoDetailPanel{clip-path:inset(0 round 0 16px 16px 0)}
+@media(min-width:1280px){
+ .photoDetailLayer.isDocked{clip-path:inset(0 round 0 16px 16px 0);background:transparent!important}
+}
+@media(max-width:640px){
+ .photoDetailLayer .photoDetailPanel{clip-path:inset(0 round 24px 24px 0 0)}
+}
