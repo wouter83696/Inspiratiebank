@@ -414,3 +414,9 @@ body.photoDetailOpen{overflow:hidden!important}
 /* Balanced detail heading and softly outlined square close control. */
 .photoDetailBody .sharedIdeaCard>h3{font-size:20px!important;line-height:1.35!important}
 .photoDetailPanel .ideaFilterSheetClose{border-radius:12px;border:1px solid rgba(79,142,158,.16);background:rgba(255,253,249,.72)}
+
+/* Compact desktop titles keep a calm two-line rhythm. */
+@media(min-width:601px){
+ #ideaCards.compactTiles .photoTileTitle{font-size:16px;line-height:1.25}
+ #ideaCards.compactTiles .photoTileTitle>span:last-child{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+}
