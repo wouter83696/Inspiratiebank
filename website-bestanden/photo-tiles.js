@@ -16,6 +16,26 @@
     return dialog;
   }
   let closeTimer,openFrame,closeListener;
+  let layoutAnimations=[];
+  function releaseDock(){
+    if(!document.body.classList.contains('photoDetailDocked'))return;
+    // Capture tiles individually: closing the dock also changes the column count.
+    const elements=[...document.querySelectorAll('.topbar,.tabHero,#ideaCards > *,.ideaToolbar')];
+    const before=elements.map(element=>({element,rect:element.getBoundingClientRect()}));
+    document.body.classList.remove('photoDetailDocked');
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    const style=getComputedStyle(dialog);
+    const time=style.transitionDuration.split(',')[0].trim();
+    const duration=parseFloat(time)*(time.endsWith('ms')?1:1000);
+    layoutAnimations=before.flatMap(({element,rect})=>{
+      const next=element.getBoundingClientRect();
+      if(!rect.width||!next.width||!rect.height||!next.height||rect.bottom<0||rect.top>innerHeight)return [];
+      return [element.animate([
+        {transformOrigin:'0 0',transform:`translate(${rect.left-next.left}px,${rect.top-next.top}px) scale(${rect.width/next.width},${rect.height/next.height})`},
+        {transformOrigin:'0 0',transform:'none'}
+      ],{duration,easing:style.transitionTimingFunction.split(/,(?![^()]*\))/)[0],fill:'none'})];
+    });
+  }
   function cancelPendingMotion(){
     cancelAnimationFrame(openFrame);clearTimeout(closeTimer);
     if(closeListener){closeListener.target.removeEventListener('transitionend',closeListener.handler);closeListener=null;}
@@ -27,6 +47,7 @@
     const finish=()=>{cancelPendingMotion();if(dialog.open)dialog.close();};
     const handler=event=>{if(event.target===target&&event.propertyName==='transform')finish();};
     closeListener={target,handler};target.addEventListener('transitionend',handler);
+    releaseDock();
     dialog.classList.remove('isOpen');
     const durations=getComputedStyle(target).transitionDuration.split(',').map(x=>parseFloat(x)*(x.trim().endsWith('ms')?1:1000));
     closeTimer=setTimeout(finish,Math.max(...durations,0)+50);
@@ -90,7 +111,7 @@
     const sheet=getDialog(),wasOpen=sheet.open;
     returnFocus=document.activeElement;activeKey=key;
     sheet.querySelector('.photoDetailBody').innerHTML=detailContent(item);
-    cancelPendingMotion();present(sheet);
+    cancelPendingMotion();layoutAnimations.forEach(animation=>animation.cancel());layoutAnimations=[];present(sheet);
     document.querySelectorAll('.photoTile').forEach(el=>el.classList.toggle('isSelected',el.dataset.ideaKey===key));
     sheet.scrollTop=0;
     sheet.querySelector('.photoDetailPanel').scrollTop=0;
