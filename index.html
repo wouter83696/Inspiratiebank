@@ -6550,8 +6550,7 @@
       : normalized.includes('km') ? 'distanceNear'
       : '';
     const content = `<span class="pill locationPill ${distanceClass}">${escapeHtml(label)}</span>`;
-    if(!routeUrl) return content;
-    return `<a class="locationRouteLink" href="${escapeHtml(routeUrl)}" target="_blank" rel="noopener" aria-label="Route naar ${escapeHtml(routeLabel || 'deze activiteit')} openen in Google Maps" title="Open route in Google Maps">${content}</a>`;
+    return content;
   }
   function compactIdeaBadgeLabel(label=''){
     const raw = String(label || '').trim();
