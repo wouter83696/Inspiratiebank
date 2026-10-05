@@ -838,7 +838,7 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailBody .detailAddressDisclosure:hover{background:var(--control-hover-surface)}
 }
 /* Soft, readable detail facts with fine separators. */
-.photoDetailBody .sharedIdeaCard .cardMetaBlock{background:rgba(247,241,231,.48)!important;border-radius:0!important;padding:8px 10px!important;column-gap:0!important;row-gap:8px!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock{background:rgba(247,241,231,.48)!important;border-radius:6px!important;padding:8px 10px!important;column-gap:0!important;row-gap:8px!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardPillGroup,
 .photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardMetaLine{display:contents!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock .pill,
@@ -874,7 +874,7 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .photoDetailActions{background:#fffdf9;box-shadow:-20px 0 #fffdf9,20px 0 #fffdf9;align-self:stretch}
 
 /* One compact facts row in map lists, with separators only between items. */
-#ideaMap .ideaMapPanel .ideaMapResultInfo{flex-wrap:nowrap!important;gap:0!important;white-space:nowrap!important;max-width:100%;overflow-x:auto!important;scrollbar-width:none}
+#ideaMap .ideaMapPanel .ideaMapResultInfo{border-radius:6px!important;flex-wrap:nowrap!important;gap:0!important;white-space:nowrap!important;max-width:100%;overflow-x:auto!important;scrollbar-width:none}
 #ideaMap .ideaMapPanel .ideaMapResultInfo>.cardPillGroup,
 #ideaMap .ideaMapPanel .ideaMapResultInfo>.cardMetaLine{display:contents!important}
 #ideaMap .ideaMapResultInfo :is(.pill,.cardMetaPart){flex:0 0 auto!important;white-space:nowrap!important;border:0!important;border-left:1px solid rgba(79,126,136,.22)!important;border-radius:0!important;padding:0 5px!important;margin:0!important;font-size:11px!important}
