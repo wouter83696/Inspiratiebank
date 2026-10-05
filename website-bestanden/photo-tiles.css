@@ -869,3 +869,6 @@ body.photoDetailOpen{overflow:hidden!important}
 #ideaCards.compactTiles .photoTileOverlay{right:auto;width:max-content;max-width:100%;padding-right:12px;background:rgba(20,27,25,.38);border-radius:0 8px 0 var(--activity-photo-radius,16px)}
 #ideaCards.compactTiles .photoTileOverlay .photoTileFacts{flex:0 1 auto;width:auto}
 @media(max-width:600px){#ideaCards.compactTiles .photoTileOverlay{padding-right:8px}}
+
+/* Extend only the action background to the sheet edges; retain link alignment. */
+.photoDetailBody .photoDetailActions{background:#fffdf9;box-shadow:-20px 0 #fffdf9,20px 0 #fffdf9;align-self:stretch}
