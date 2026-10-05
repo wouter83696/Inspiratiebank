@@ -68,6 +68,7 @@
     const summary=event.target.closest('summary');
     if(!summary||summary.parentElement.tagName!=='DETAILS')return;
     const details=summary.parentElement;
+    if(details.classList.contains('detailAddressDisclosure')&&window.matchMedia('(hover:hover) and (pointer:fine)').matches){event.preventDefault();details.open=true;return;}
     event.preventDefault();
     summary.focus({preventScroll:true});
     const previous=sectionMotion.get(details);
@@ -237,6 +238,17 @@
     grid.querySelectorAll('[data-featured-target]').forEach(button=>{button.setAttribute('aria-label','Bekijk '+(current.get(button.dataset.featuredTarget)?.title||'uitgelichte activiteit'));button.setAttribute('aria-haspopup','dialog');});
   }
   document.addEventListener('click',e=>{const button=e.target.closest('[data-photo-detail]');if(button)open(button.dataset.photoDetail);});
+  const addressHover=window.matchMedia('(hover:hover) and (pointer:fine)');
+  document.addEventListener('pointerover',event=>{
+    const row=event.target.closest('.detailAddressDisclosure');
+    if(addressHover.matches&&row){row.open=true;}
+  });
+  document.addEventListener('pointerout',event=>{
+    const row=event.target.closest('.detailAddressDisclosure');
+    if(addressHover.matches&&row&&!row.contains(event.relatedTarget)&&!row.contains(document.activeElement))row.open=false;
+  });
+  document.addEventListener('focusin',event=>{const row=event.target.closest('.detailAddressDisclosure');if(addressHover.matches&&row)row.open=true;});
+  document.addEventListener('focusout',event=>{const row=event.target.closest('.detailAddressDisclosure');if(addressHover.matches&&row&&!row.contains(event.relatedTarget)&&!row.matches(':hover'))row.open=false;});
   function selectInfoTab(tab){
     const group=tab.closest('.photoDetailTabs');
     group.querySelectorAll('[role="tab"]').forEach(button=>{const selected=button===tab;button.setAttribute('aria-selected',String(selected));button.tabIndex=selected?0:-1;});

@@ -826,3 +826,14 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaCards.compactTiles .photoTileOverlay{height:28px;min-height:28px;padding:0 5px;gap:6px}
  #ideaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{font-size:11px;line-height:18px}
 }
+
+/* Fine-pointer navigation reveals on hover, aligned with the address. */
+@media(hover:hover) and (pointer:fine){
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary,
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure[open]>summary{padding-right:112px!important;min-height:48px}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary::after{display:none!important}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{position:absolute;right:8px;top:50%;transform:translateY(-50%);margin:0!important;gap:0}
+ .photoDetailBody .detailAddressDisclosure .detailRouteLinks a{width:32px;height:32px;min-height:32px;flex-basis:32px;padding:5px}
+ .photoDetailBody .detailAddressDisclosure .detailRouteLinks .mapAppLogo{width:22px;height:22px}
+ .photoDetailBody .detailAddressDisclosure:hover{background:var(--control-hover-surface)}
+}
