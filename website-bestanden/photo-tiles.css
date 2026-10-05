@@ -1018,3 +1018,10 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailBody .detailAddressDisclosure:hover .detailCopyAddress,
  .photoDetailBody .detailAddressDisclosure:focus-within .detailCopyAddress{opacity:1;pointer-events:auto}
 }
+
+/* List and detail map panels share the complete close-button treatment. */
+#ideaMap :is(.ideaMapPanelClose,.ideaMapDetailClose){display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;padding:0!important;border:1px solid var(--map-close-border)!important;border-radius:var(--map-close-radius)!important;background:var(--map-close-surface)!important;color:#63858b!important;box-shadow:none!important}
+@media(hover:hover) and (pointer:fine){
+ #ideaMap :is(.ideaMapPanelClose,.ideaMapDetailClose):hover{background:var(--control-hover-surface)!important;border-color:rgba(61,126,136,.16)!important}
+}
+#ideaMap :is(.ideaMapPanelClose,.ideaMapDetailClose):focus-visible{outline:2px solid #315f6b;outline-offset:2px}
