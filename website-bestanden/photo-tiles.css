@@ -696,7 +696,7 @@ body.photoDetailOpen{overflow:hidden!important}
 
 /* Mobile map details use the available viewport and one continuous sheet surface. */
 @media(max-width:640px){
- #ideaMap .ideaMapPanel.isSingleDetail{height:80dvh!important;max-height:80dvh!important;background:var(--sheet-surface)!important;display:flex!important;flex-direction:column;overflow:hidden}
+ #ideaMap .ideaMapPanel.isSingleDetail{height:88dvh!important;max-height:88dvh!important;background:var(--sheet-surface)!important;display:flex!important;flex-direction:column;overflow:hidden}
  #ideaMap .ideaMapPanel.isSingleDetail .ideaMapPanelHead{height:24px!important;min-height:24px!important;flex:0 0 24px!important;margin:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
  #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{flex:1 1 auto!important;min-height:0!important;padding:0 16px max(16px,env(safe-area-inset-bottom))!important}
  #ideaMap .ideaMapSingleCard.photoDetailBody{padding:0 16px 16px!important;background:transparent!important}
