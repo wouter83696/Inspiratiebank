@@ -1186,3 +1186,8 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaMap .ideaMapPanel.isList:not(.isSingleDetail) .ideaMapResult{background:var(--sheet-surface)!important}
  #ideaMap .ideaMapPanel.isList.isTall .ideaMapResults{display:flex!important;scroll-snap-type:none!important;align-items:stretch!important}
 }
+
+/* No empty collapsed sheet on mobile: selecting a map group opens the rail. */
+@media(max-width:640px){
+ #ideaMap .ideaMapPanel.isMinimized:not(.isSingleDetail){display:none!important}
+}
