@@ -867,8 +867,8 @@ body.photoDetailOpen{overflow:hidden!important}
 /* Shade only the metadata, leaving the rest of the photograph clear. */
 #ideaCards.compactTiles .photoTileMedia::after{display:none}
 #ideaCards.compactTiles .photoTileOverlay{right:auto;width:max-content;max-width:100%;padding-right:6px;background:transparent;border-radius:0;gap:0}
-#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{flex:0 1 auto;width:auto;padding:2px 6px;background:transparent;border-radius:4px;position:relative;isolation:isolate}
-#ideaCards.compactTiles .photoTileOverlay .photoTileFacts::before{content:"";position:absolute;inset:0 0 0 -14px;background:rgba(20,27,25,.24);border-radius:8px;z-index:-1;pointer-events:none}
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{flex:0 1 auto;width:auto;padding:1px 6px;background:transparent;border-radius:4px;position:relative;isolation:isolate}
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts::before{content:"";position:absolute;inset:0 0 0 -14px;background:rgba(35,35,35,.20);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border-radius:8px;z-index:-1;pointer-events:none}
 #ideaCards.compactTiles .photoTileOverlay>.domainIcon{position:relative;inset:auto;z-index:1;transform:translateY(16px)}
 @media(max-width:600px){#ideaCards.compactTiles .photoTileOverlay{padding-right:8px}#ideaCards.compactTiles .photoTileOverlay>.domainIcon{transform:translateY(14px)}}
 
