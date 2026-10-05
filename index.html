@@ -5470,7 +5470,7 @@
     }
 </style>
   <link rel="stylesheet" href="website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
-  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261005-photo-meta-v126">
+  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261005-photo-meta-v128">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -9608,7 +9608,7 @@
       : '<button class="ideaMapPanelClose" type="button" data-map-panel-close aria-label="Resultaten sluiten" title="Sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button>';
     const panelHeadAttributes = singleDetail
       ? 'aria-label="Sleep omlaag om terug te gaan naar de resultaten"'
-      : `role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"`;
+      : window.matchMedia('(max-width:640px)').matches && ideaMapPanelExpanded ? '' : `role="button" tabindex="0" aria-label="${ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen'}"`;
     return `<aside class="ideaMapPanel isList${ideaMapPanelExpanded ? ' isExpanded' : ''}${ideaMapPanelTall && !singleDetail ? ' isTall' : ''}${singleDetail ? ' isSingleDetail' : ''}${minimized ? ' isMinimized' : ''}" aria-label="Activiteiten op de kaart">
       <div class="ideaMapPanelHead" ${panelHeadAttributes}><div class="ideaMapPanelHeadRow"><div><h3>${visibleTitleHtml}</h3><p>${escapeHtml(visibleText)}</p></div>${panelClose}</div></div>
       ${detailClose}
@@ -9774,6 +9774,7 @@
       if(!mobile() || event.button !== 0 || event.target.closest('button,a,input,select,textarea')) return;
       const handle = sheetHandle(event.target);
       const mapSheet = event.target.closest('.ideaMapPanel');
+      if(mapSheet && !mapSheet.classList.contains('isSingleDetail')) return;
       const resultsSurface = event.target.closest('.ideaMapResults');
       const canDragMapResults = Boolean(mapSheet && resultsSurface
         && !mapSheet.classList.contains('isMinimized')
@@ -9875,7 +9876,7 @@
     document.addEventListener('click', event => {
       const head = event.target.closest('.ideaMapPanelHead');
       if(!head || event.target.closest('button,a,input,select,textarea') || performance.now() < suppressSheetClickUntil) return;
-      if(ideaMapDetailKey) return;
+      if(ideaMapDetailKey || (mobile() && ideaMapPanelExpanded)) return;
       if(ideaMapPanelTall) ideaMapPanelTall = false;
       else ideaMapPanelExpanded = !ideaMapPanelExpanded;
       if(!ideaMapPanelExpanded) closeIdeaMapOverlay();
@@ -9883,7 +9884,7 @@
     });
     document.addEventListener('keydown', event => {
       if(!event.target.matches('.ideaMapPanelHead') || !['Enter',' '].includes(event.key)) return;
-      if(ideaMapDetailKey) return;
+      if(ideaMapDetailKey || (mobile() && ideaMapPanelExpanded)) return;
       event.preventDefault();
       if(ideaMapPanelTall) ideaMapPanelTall = false;
       else ideaMapPanelExpanded = !ideaMapPanelExpanded;

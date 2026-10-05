@@ -1072,3 +1072,59 @@ body.photoDetailOpen{overflow:hidden!important}
 @media(hover:hover) and (pointer:fine){
  #ideaCards .ideaSurpriseButton:hover{background:#ffedcb;border-color:#d49a40;transform:none}
 }
+
+/* Submission actions share the rounded surface of activity-sheet links. */
+.ideaSubmitSheet{background:var(--sheet-surface)!important}
+.ideaSubmitSheet .teamActionBar{
+ margin:18px 0 calc(16px + env(safe-area-inset-bottom));
+ bottom:calc(16px + env(safe-area-inset-bottom));
+ padding:0;gap:0;border:1px solid rgba(79,126,136,.08);border-radius:16px;
+ background:var(--activity-card-surface);backdrop-filter:none;overflow:hidden;
+}
+.ideaSubmitSheet .teamActionBar .formButton.primary{
+ min-height:48px;padding:14px 16px;border:0;border-radius:0;
+ background:transparent;box-shadow:none;color:#236875;
+}
+.ideaSubmitSheet .teamActionBar .teamFormStatus:empty{display:none}
+.ideaSubmitSheet .teamActionBar .teamFormStatus:not(:empty){padding:0 16px 14px}
+@media(hover:hover) and (pointer:fine){
+ .ideaSubmitSheet .teamActionBar .formButton.primary:hover{background:#f2f8f4}
+}
+@media(hover:none){
+ .ideaSubmitSheet .teamActionBar .formButton.primary:hover{background:transparent}
+}
+
+/* Mobile map overview is a horizontal card rail, not a draggable sheet. */
+@media(max-width:640px){
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail){
+  background:transparent!important;border:0!important;border-radius:0!important;
+  box-shadow:none!important;backdrop-filter:none!important;
+  padding:0 0 max(4px,env(safe-area-inset-bottom))!important;
+  height:auto!important;max-height:none!important;overflow:visible!important;
+  pointer-events:none;
+ }
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail)::before,
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail) .ideaMapPanelHead::before{display:none!important}
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail) .ideaMapPanelHead{
+  padding:0!important;margin:0 16px 8px!important;min-height:32px!important;
+  background:transparent!important;border:0!important;box-shadow:none!important;
+  cursor:default;touch-action:auto;
+ }
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail) .ideaMapPanelHead h3{
+  font-size:13px!important;line-height:1.3;font-weight:600;
+  background:#fffdf9;padding:7px 10px;border-radius:10px;
+  box-shadow:0 2px 8px rgba(38,75,78,.08);
+ }
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail) .ideaMapPanelHeadRow{gap:8px;align-items:center}
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail) .ideaMapResults{
+  background:transparent!important;overflow-x:auto!important;overflow-y:hidden!important;
+  padding:0 16px 12px!important;pointer-events:auto;touch-action:pan-x;
+ }
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail) .ideaMapResult{
+  background:var(--activity-card-surface)!important;
+  box-shadow:0 4px 12px rgba(38,75,78,.12)!important;
+ }
+}
+@media(max-width:640px){
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail) .ideaMapPanelHead{display:none!important}
+}
