@@ -1006,3 +1006,10 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailBody>.sharedIdeaCard::before{left:-16px;right:-16px}
  .photoDetailBody .photoDetailActions::before{left:-16px;right:-16px}
 }
+
+/* Copy stays beside the address, independent of the route disclosure. */
+.photoDetailBody .detailCopyAddress{display:inline-flex;align-items:center;justify-content:center;flex:0 0 28px;width:28px;height:32px;padding:4px;border:0;background:transparent;color:inherit;cursor:pointer;border-radius:6px}
+.photoDetailBody .detailCopyAddress svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7}
+.photoDetailBody .detailCopyAddress:focus-visible{outline:2px solid #008f99;outline-offset:2px}
+.photoDetailBody .detailCopyStatus{position:absolute;right:8px;bottom:0;font-size:11px;line-height:14px;background:#fefcf8;border-radius:4px;z-index:2}
+.photoDetailBody .detailCopyStatus:empty{display:none}

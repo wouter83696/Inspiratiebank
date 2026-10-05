@@ -180,7 +180,8 @@
       disclosure.className='photoRouteChoices detailRouteCompact detailAddressDisclosure';
       const address=route.querySelector('.ideaPracticalText');
       const addressText=address?address.innerHTML.replace(/<br\s*\/?\s*>/gi,', '):'Locatie bekijken';
-      disclosure.innerHTML=`<summary>${detailIcon('location')}<span>${addressText}</span></summary>`;
+      const copyAddress=address&&address.textContent.trim()!=='Adres nog niet opgegeven'?`<button type="button" class="detailCopyAddress" aria-label="Adres kopiëren" title="Adres kopiëren"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3"/></svg></button><span class="detailCopyStatus" role="status"></span>`:'';
+      disclosure.innerHTML=`<summary>${detailIcon('location')}<span class="detailAddressText">${addressText}</span>${copyAddress}</summary>`;
       address?.remove();
       route.querySelectorAll('.detailRouteLinks a').forEach(link=>{
         const label=link.textContent.trim();
@@ -247,6 +248,18 @@
     grid.querySelectorAll('[data-featured-target]').forEach(button=>{button.setAttribute('aria-label','Bekijk '+(current.get(button.dataset.featuredTarget)?.title||'uitgelichte activiteit'));button.setAttribute('aria-haspopup','dialog');});
   }
   document.addEventListener('click',e=>{const button=e.target.closest('[data-photo-detail]');if(button)open(button.dataset.photoDetail);});
+  document.addEventListener('click',async event=>{
+    const button=event.target.closest('.detailCopyAddress');if(!button)return;
+    event.preventDefault();event.stopImmediatePropagation();
+    const summary=button.closest('summary');
+    const status=summary.querySelector('.detailCopyStatus');
+    try{
+      await navigator.clipboard.writeText(summary.querySelector('.detailAddressText').textContent.trim());
+      status.textContent='Adres gekopieerd';
+    }catch(error){status.textContent='Kopiëren niet gelukt';}
+    clearTimeout(button.copyStatusTimer);
+    button.copyStatusTimer=setTimeout(()=>{status.textContent='';},2200);
+  },true);
   const addressHover=window.matchMedia('(min-width:641px) and (hover:hover) and (pointer:fine)');
   document.addEventListener('pointerover',event=>{
     const row=event.target.closest('.detailAddressDisclosure');
@@ -256,7 +269,7 @@
     const row=event.target.closest('.detailAddressDisclosure');
     if(addressHover.matches&&row&&!row.contains(event.relatedTarget)&&!row.contains(document.activeElement))row.open=false;
   });
-  document.addEventListener('focusin',event=>{const row=event.target.closest('.detailAddressDisclosure');if(addressHover.matches&&row)row.open=true;});
+  document.addEventListener('focusin',event=>{const row=event.target.closest('.detailAddressDisclosure');if(addressHover.matches&&row&&!event.target.closest('.detailCopyAddress'))row.open=true;});
   document.addEventListener('focusout',event=>{const row=event.target.closest('.detailAddressDisclosure');if(addressHover.matches&&row&&!row.contains(event.relatedTarget)&&!row.matches(':hover'))row.open=false;});
   function selectInfoTab(tab){
     const group=tab.closest('.photoDetailTabs');
