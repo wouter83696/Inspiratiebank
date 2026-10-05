@@ -170,7 +170,7 @@
       });
       while(route.firstChild)disclosure.append(route.firstChild);
       route.remove();
-      actions.append(disclosure);
+      actions.insertBefore(disclosure,actions.querySelector('a'));
     }
     return card.outerHTML;
   }

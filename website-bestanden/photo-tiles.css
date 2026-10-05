@@ -781,3 +781,7 @@ body.photoDetailOpen{overflow:hidden!important}
 @media(hover:hover) and (pointer:fine){.photoDetailBody .photoDetailActions>details>summary:hover{background:var(--control-hover-surface)}}
 .photoDetailBody .photoDetailActions>details{width:100%!important;max-width:none!important;align-self:stretch!important}
 .photoDetailBody .photoDetailActions>details>summary{width:100%!important;max-width:none!important;text-align:left;box-sizing:border-box}
+
+/* All three action labels use the same type treatment. */
+.photoDetailBody .photoDetailActions>.ideaRouteButton,
+.photoDetailBody .photoDetailActions>details>summary{font-family:inherit!important;font-size:15px!important;font-weight:500!important;line-height:24px!important;letter-spacing:normal!important}
