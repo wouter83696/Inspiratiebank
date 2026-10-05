@@ -1034,3 +1034,16 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailBody .detailRouteLinks>.detailCopyAddressMobile{display:inline-flex;width:44px;height:44px;flex:0 0 44px;margin-left:auto;opacity:1;pointer-events:auto}
  .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{margin-right:8px!important}
 }
+
+/* Group the two actions in one inset rounded surface. */
+#ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults,
+.photoDetailPanel .photoDetailBody{background:var(--sheet-surface)!important}
+.photoDetailBody .photoDetailActions{background:#fffdfa!important;border:1px solid rgba(79,126,136,.08)!important;border-radius:16px!important;box-shadow:none!important;padding:4px 0!important;overflow:visible}
+.photoDetailBody .photoDetailActions::before,
+.photoDetailBody .photoDetailActions::after{content:none!important}
+@media(min-width:641px) and (hover:hover) and (pointer:fine){
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary{position:relative;padding-right:148px!important}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure[open]>summary{padding-right:148px!important}
+ .photoDetailBody .detailAddressDisclosure>summary>.detailCopyAddress{position:absolute;right:4px;top:50%;transform:translateY(-50%);opacity:1;pointer-events:auto}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{right:40px!important}
+}
