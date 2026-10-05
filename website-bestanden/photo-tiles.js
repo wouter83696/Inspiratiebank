@@ -91,16 +91,21 @@
     const start=details.getBoundingClientRect().height;
     if(previous){previous.animation.onfinish=null;previous.animation.cancel();}
     details.style.height='';details.style.overflow='';
-    details.open=opening;
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){sectionMotion.delete(details);return;}
-    const end=details.getBoundingClientRect().height;
+    details.classList.remove('isSectionClosing');
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){details.open=opening;sectionMotion.delete(details);return;}
+    // Keep the content rendered while measuring and collapsing: toggling open
+    // off and on in one frame can make Safari skip the closing animation.
     details.open=true;
+    const style=getComputedStyle(details);
+    const outer=['paddingTop','paddingBottom','borderTopWidth','borderBottomWidth'].reduce((n,key)=>n+(parseFloat(style[key])||0),0);
+    const end=opening?details.getBoundingClientRect().height:summary.getBoundingClientRect().height+outer;
+    details.style.height=`${start}px`;
     details.style.overflow='hidden';
     details.classList.toggle('isSectionClosing',!opening);
-    const animation=details.animate([{height:`${start}px`},{height:`${end}px`}],{duration:260,easing:'cubic-bezier(.4,0,.2,1)'});
+    const animation=details.animate([{height:`${start}px`},{height:`${end}px`}],{duration:260,easing:'cubic-bezier(.4,0,.2,1)',fill:'forwards'});
     sectionMotion.set(details,{animation,opening});
     animation.onfinish=()=>{
-      details.open=opening;details.style.overflow='';details.classList.remove('isSectionClosing');sectionMotion.delete(details);
+      details.open=opening;details.style.height='';details.style.overflow='';details.classList.remove('isSectionClosing');sectionMotion.delete(details);animation.cancel();
     };
   }
   function detailIcon(kind){
