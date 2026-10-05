@@ -5470,7 +5470,7 @@
     }
 </style>
   <link rel="stylesheet" href="website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
-  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261005-photo-meta-v129">
+  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261005-photo-meta-v130">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -9638,7 +9638,12 @@
     panel.classList.toggle('isTall', ideaMapPanelTall && ideaMapPanelExpanded);
     panel.classList.toggle('isMinimized', minimized);
     const head = panel.querySelector('.ideaMapPanelHead');
-    head?.setAttribute('aria-label', ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen');
+    if(head){
+      const actionable = !window.matchMedia('(max-width:640px)').matches || !ideaMapPanelExpanded || ideaMapPanelTall;
+      if(actionable){head.setAttribute('role','button');head.tabIndex=0;}
+      else{head.removeAttribute('role');head.removeAttribute('tabindex');}
+      head.setAttribute('aria-label', ideaMapPanelTall ? 'Terug naar tegelrij' : ideaMapPanelExpanded ? 'Resultaten inklappen' : 'Resultaten openen');
+    }
     return true;
   }
   function setActiveIdeaMapItem(key, {scroll=true, clearCluster=false, refreshPanel=false, emphasize=false}={}){
@@ -9774,7 +9779,6 @@
       if(!mobile() || event.button !== 0 || event.target.closest('button,a,input,select,textarea')) return;
       const handle = sheetHandle(event.target);
       const mapSheet = event.target.closest('.ideaMapPanel');
-      if(mapSheet && !mapSheet.classList.contains('isSingleDetail')) return;
       const resultsSurface = event.target.closest('.ideaMapResults');
       const canDragMapResults = Boolean(mapSheet && resultsSurface
         && !mapSheet.classList.contains('isMinimized')
@@ -9876,7 +9880,7 @@
     document.addEventListener('click', event => {
       const head = event.target.closest('.ideaMapPanelHead');
       if(!head || event.target.closest('button,a,input,select,textarea') || performance.now() < suppressSheetClickUntil) return;
-      if(ideaMapDetailKey || (mobile() && ideaMapPanelExpanded)) return;
+      if(ideaMapDetailKey || (mobile() && ideaMapPanelExpanded && !ideaMapPanelTall)) return;
       if(ideaMapPanelTall) ideaMapPanelTall = false;
       else ideaMapPanelExpanded = !ideaMapPanelExpanded;
       if(!ideaMapPanelExpanded) closeIdeaMapOverlay();
@@ -9884,7 +9888,7 @@
     });
     document.addEventListener('keydown', event => {
       if(!event.target.matches('.ideaMapPanelHead') || !['Enter',' '].includes(event.key)) return;
-      if(ideaMapDetailKey || (mobile() && ideaMapPanelExpanded)) return;
+      if(ideaMapDetailKey || (mobile() && ideaMapPanelExpanded && !ideaMapPanelTall)) return;
       event.preventDefault();
       if(ideaMapPanelTall) ideaMapPanelTall = false;
       else ideaMapPanelExpanded = !ideaMapPanelExpanded;
