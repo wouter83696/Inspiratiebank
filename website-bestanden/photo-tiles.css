@@ -873,7 +873,7 @@ body.photoDetailOpen{overflow:hidden!important}
 @media(max-width:600px){#ideaCards.compactTiles .photoTileOverlay{padding-right:8px}}
 
 /* Extend only the action background to the sheet edges; retain link alignment. */
-.photoDetailBody .photoDetailActions{background:#fcf9f3;box-shadow:-20px 0 #fcf9f3,20px 0 #fcf9f3;align-self:stretch}
+.photoDetailBody .photoDetailActions{background:#fefcf8;box-shadow:-20px 0 #fefcf8,20px 0 #fefcf8;align-self:stretch}
 
 /* One compact facts row in map lists, with separators only between items. */
 #ideaMap .ideaMapPanel .ideaMapResultInfo{border-radius:6px!important;flex-wrap:nowrap!important;gap:0!important;white-space:nowrap!important;max-width:100%;overflow-x:auto!important;scrollbar-width:none}
@@ -899,3 +899,6 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailBody .photoDetailActions>.detailAddressDisclosure:hover,
  .photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:var(--control-hover-surface)}
 }
+
+.photoDetailBody .photoDetailActions::before{content:"";position:absolute;top:0;left:-20px;right:-20px;height:1px;background:rgba(79,126,136,.16);opacity:0;pointer-events:none}
+.photoDetailBody .photoDetailActions.isOverContent::before{opacity:1}

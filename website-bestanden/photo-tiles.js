@@ -263,5 +263,29 @@
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&dialog?.open&&dialog.classList.contains('isDocked')&&!document.querySelector('dialog:modal')){e.preventDefault();close();}});
   document.addEventListener('click',event=>{if(event.target.closest('.ideaMapSingleCard.photoDetailBody'))animateSection(event);});
+  // Show the separator only while the sticky actions overlap scrolling content.
+  let actionFrame=0;
+  const observedActionContent=new Set();
+  const actionResize=new ResizeObserver(queueActionSurface);
+  function queueActionSurface(){
+    if(actionFrame)return;
+    actionFrame=requestAnimationFrame(()=>{
+      actionFrame=0;
+      observedActionContent.forEach(node=>{if(!node.isConnected){actionResize.unobserve(node);observedActionContent.delete(node);}});
+      document.querySelectorAll('.photoDetailActions').forEach(actions=>{
+        const content=actions.previousElementSibling;
+        if(!content)return;
+        if(!observedActionContent.has(content)){
+          observedActionContent.add(content);observedActionContent.add(actions);actionResize.observe(content);actionResize.observe(actions);
+        }
+        const rect=actions.getBoundingClientRect();
+        actions.classList.toggle('isOverContent',rect.height>0&&content.getBoundingClientRect().bottom>rect.top+1);
+      });
+    });
+  }
+  document.addEventListener('scroll',queueActionSurface,{capture:true,passive:true});
+  window.addEventListener('resize',queueActionSurface,{passive:true});
+  new MutationObserver(queueActionSurface).observe(document.body,{childList:true,subtree:true});
+  queueActionSurface();
   window.PhotoTiles={render,detailContent,close,openFeatured:key=>enabled&&open(key)};
 })();
