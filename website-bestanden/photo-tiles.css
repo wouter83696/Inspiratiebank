@@ -1047,3 +1047,9 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailBody .detailAddressDisclosure>summary>.detailCopyAddress{position:absolute;right:4px;top:50%;transform:translateY(-50%);opacity:1;pointer-events:auto}
  .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{right:40px!important}
 }
+
+/* Align the mobile copy glyph with the address chevron and website action. */
+@media(max-width:640px){
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{margin-right:0!important}
+ .photoDetailBody .detailRouteLinks>.detailCopyAddressMobile{width:36px;flex-basis:36px;color:#236875}
+}
