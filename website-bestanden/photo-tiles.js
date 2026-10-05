@@ -129,6 +129,7 @@
     const search=encodeURIComponent([item.title,...lines].filter(Boolean).join(', ')||destination);
     return `<section class="photoRouteChoices">${locationText}${destination?`<div class="detailRouteLinks"><a href="https://www.google.com/maps/search/?api=1&query=${search}" target="_blank" rel="noopener" class="detailGoogle">${mapAppIcon('google')}<span>Bekijk op Google Maps</span></a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener">${mapAppIcon('apple')}<span>Apple Kaarten</span></a><a href="https://waze.com/ul?q=${query}&navigate=yes" target="_blank" rel="noopener">${mapAppIcon('waze')}<span>Waze</span></a></div>`:''}</section>`;
   }
+  let detailTabSequence=0;
   function detailContent(item, titleId='photoDetailTitle'){
     const extras=(Array.isArray(item.images)?item.images:[]).filter(image=>image&&typeof image==='object'&&(image.status==='approved'||image.approved===true)&&/^https?:\/\//i.test(image.src||''));
     const gallery=extras.length?`<details class="photoDetailSection"><summary>${detailIcon('photo')}<span>Foto’s</span></summary><div class="photoDetailGallery">${extras.map(image=>`<img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}" loading="lazy">`).join('')}</div></details>`:'';
@@ -148,27 +149,32 @@
     const actions=card.querySelector('.photoDetailActions');
     const external='<svg class="detailExternal" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7M21 3 10 14M10 3H3v18h18v-7"/></svg>';
     actions.querySelector('a')?.insertAdjacentHTML('beforeend',external);
-    const practical=document.createElement('details');
-    practical.className='photoDetailSection detailPractical';
-    practical.innerHTML=`<summary>${detailIcon('info')}<span>Praktisch</span></summary>`;
+    const practical=document.createElement('section');
     card.querySelectorAll('.ideaPracticalDetails,.photoDetailSection').forEach(section=>{
       section.querySelector('summary')?.remove();
       while(section.firstChild)practical.append(section.firstChild);
       section.remove();
     });
-    if(practical.children.length===1)practical.insertAdjacentHTML('beforeend','<p>Geen aanvullende praktische informatie.</p>');
-    actions.prepend(practical);
+    if(!practical.childNodes.length)practical.innerHTML='<p>Geen aanvullende praktische informatie.</p>';
+    const tabs=document.createElement('div');tabs.className='photoDetailTabs';
+    const id=`detail-info-${++detailTabSequence}`;
+    tabs.innerHTML=`<div role="tablist" aria-label="Activiteitsinformatie"><button type="button" role="tab" id="${id}-description-tab" aria-controls="${id}-description" aria-selected="true">Beschrijving</button><button type="button" role="tab" id="${id}-practical-tab" aria-controls="${id}-practical" aria-selected="false" tabindex="-1">Praktisch</button></div><section role="tabpanel" id="${id}-description" aria-labelledby="${id}-description-tab" tabindex="0"></section>`;
+    const description=tabs.querySelector('[role="tabpanel"]');
+    Array.from(card.children).filter(node=>node.tagName==='P').forEach(node=>description.append(node));
+    if(!description.childNodes.length)description.innerHTML='<p>Geen beschrijving beschikbaar.</p>';
+    practical.id=`${id}-practical`;practical.setAttribute('role','tabpanel');practical.setAttribute('aria-labelledby',`${id}-practical-tab`);practical.tabIndex=0;practical.hidden=true;
+    tabs.append(practical);card.insertBefore(tabs,actions);
     const route=card.querySelector('.photoRouteChoices');
     if(route){
-      const disclosure=document.createElement('section');
-      disclosure.className='photoRouteChoices detailRouteCompact detailAddressRow';
-      disclosure.setAttribute('aria-label','Adres en navigatie');
-      disclosure.innerHTML=`<span class="detailAddressIcon" aria-hidden="true">${detailIcon('location')}</span>`;
+      const disclosure=document.createElement('details');
+      disclosure.className='photoRouteChoices detailRouteCompact';
+      disclosure.innerHTML=`<summary>${detailIcon('location')}<span>Route</span></summary>`;
       route.querySelectorAll('.detailRouteLinks a').forEach(link=>{
         const label=link.textContent.trim();
         link.setAttribute('aria-label',label);link.title=label;
         link.querySelector('span')?.remove();
       });
+      route.querySelectorAll('.ideaPracticalText br').forEach(br=>br.replaceWith(document.createTextNode(', ')));
       while(route.firstChild)disclosure.append(route.firstChild);
       route.remove();
       actions.insertBefore(disclosure,actions.querySelector('a'));
@@ -228,6 +234,18 @@
     grid.querySelectorAll('[data-featured-target]').forEach(button=>{button.setAttribute('aria-label','Bekijk '+(current.get(button.dataset.featuredTarget)?.title||'uitgelichte activiteit'));button.setAttribute('aria-haspopup','dialog');});
   }
   document.addEventListener('click',e=>{const button=e.target.closest('[data-photo-detail]');if(button)open(button.dataset.photoDetail);});
+  function selectInfoTab(tab){
+    const group=tab.closest('.photoDetailTabs');
+    group.querySelectorAll('[role="tab"]').forEach(button=>{const selected=button===tab;button.setAttribute('aria-selected',String(selected));button.tabIndex=selected?0:-1;});
+    group.querySelectorAll('[role="tabpanel"]').forEach(panel=>{panel.hidden=panel.id!==tab.getAttribute('aria-controls');});
+  }
+  document.addEventListener('click',event=>{const tab=event.target.closest('.photoDetailTabs [role="tab"]');if(tab)selectInfoTab(tab);});
+  document.addEventListener('keydown',event=>{
+    const tab=event.target.closest('.photoDetailTabs [role="tab"]');if(!tab||!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+    event.preventDefault();const buttons=[...tab.parentElement.querySelectorAll('[role="tab"]')];
+    const index=event.key==='Home'?0:event.key==='End'?buttons.length-1:(buttons.indexOf(tab)+(event.key==='ArrowLeft'?-1:1)+buttons.length)%buttons.length;
+    selectInfoTab(buttons[index]);buttons[index].focus();
+  });
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&dialog?.open&&dialog.classList.contains('isDocked')&&!document.querySelector('dialog:modal')){e.preventDefault();close();}});
   document.addEventListener('click',event=>{if(event.target.closest('.ideaMapSingleCard.photoDetailBody'))animateSection(event);});
   window.PhotoTiles={render,detailContent,close,openFeatured:key=>enabled&&open(key)};

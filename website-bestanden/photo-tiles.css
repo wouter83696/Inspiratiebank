@@ -799,3 +799,6 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailBody .photoDetailActions>.detailAddressRow:hover{background:var(--control-hover-surface)}
 }
 @media(prefers-reduced-motion:reduce){.photoDetailBody .photoDetailActions>.detailAddressRow>.detailRouteLinks{transition:none}}
+
+.photoDetailBody .photoDetailTabs [role="tabpanel"] p{font-family:inherit;font-size:15px!important;line-height:1.65!important;color:#777;margin:0 0 12px}
+.photoDetailBody .photoDetailTabs [role="tab"]{font-family:inherit;font-size:15px;line-height:24px}
