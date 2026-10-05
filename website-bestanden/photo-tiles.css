@@ -1026,8 +1026,11 @@ body.photoDetailOpen{overflow:hidden!important}
 }
 #ideaMap :is(.ideaMapPanelClose,.ideaMapDetailClose):focus-visible{outline:2px solid #315f6b;outline-offset:2px}
 
-/* Let the metadata backing curve into the theme badge. */
-#ideaCards.compactTiles .photoTileOverlay .photoTileFacts::before{left:-20px;border-top-left-radius:24px 22px}
+/* Start the backing at the badge centre, with the badge layered above it. */
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts::before{left:-16px;border-top-left-radius:3px}
+@media(max-width:600px){
+ #ideaCards.compactTiles .photoTileOverlay .photoTileFacts::before{left:-14px}
+}
 .photoDetailBody .detailCopyAddressMobile{display:none}
 @media(max-width:640px){
  .photoDetailBody .detailAddressDisclosure>summary>.detailCopyAddress{display:none}
@@ -1065,12 +1068,12 @@ body.photoDetailOpen{overflow:hidden!important}
 /* Match the add-action button while retaining the warm surprise accent. */
 #ideaCards .ideaSurpriseButton{
  min-height:40px;padding:10px 18px;border-radius:14px;
- border:1.5px solid #e4b76b;background:#fff6e6;color:#94600e;
+ border:1.5px solid #e7cf88;background:#fff8e9;color:#805b08;
  box-shadow:0 6px 16px rgba(128,91,8,.04);
 }
 #ideaCards .ideaSurpriseButton svg{width:17px;height:17px;flex-basis:17px}
 @media(hover:hover) and (pointer:fine){
- #ideaCards .ideaSurpriseButton:hover{background:#ffedcb;border-color:#d49a40;transform:none}
+ #ideaCards .ideaSurpriseButton:hover{background:#fcf0d1;border-color:#d6bc70;transform:none}
 }
 
 /* Submission actions share the rounded surface of activity-sheet links. */
@@ -1174,3 +1177,6 @@ body.photoDetailOpen{overflow:hidden!important}
  width:18px!important;height:18px!important;flex:0 0 18px;
  fill:none;stroke:currentColor;stroke-width:1.7;
 }
+
+/* A single sparkle in the action keeps the surprise strip quiet. */
+:is(#ideaCards,#ideaList) .ideaSurpriseCard{grid-template-columns:minmax(0,1fr) auto}
