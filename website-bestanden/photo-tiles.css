@@ -838,12 +838,13 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailBody .detailAddressDisclosure:hover{background:var(--control-hover-surface)}
 }
 /* Soft, readable detail facts with fine separators. */
-.photoDetailBody .sharedIdeaCard .cardMetaBlock{background:rgba(247,241,231,.48)!important;border-radius:20px!important;padding:8px 10px!important;column-gap:0!important;row-gap:8px!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock{background:rgba(247,241,231,.48)!important;border-radius:0!important;padding:8px 10px!important;column-gap:0!important;row-gap:8px!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardPillGroup,
 .photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardMetaLine{display:contents!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock .pill,
 .photoDetailBody .sharedIdeaCard .cardMetaBlock .cardMetaPart{font-size:13px!important;line-height:20px!important;min-height:20px!important;height:auto!important;padding:0 9px!important;margin:0!important;border:0!important;border-left:1px solid rgba(79,126,136,.22)!important;border-radius:0!important;background:transparent!important;white-space:nowrap;flex:0 0 auto}
-.photoDetailBody .sharedIdeaCard .cardMetaBlock .cardPillGroup>.pill:first-child{border-left:0!important;padding-left:0!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock .cardPillGroup>.pill:first-child,
+.photoDetailBody .sharedIdeaCard .cardMetaBlock .cardPillGroup>.locationRouteLink:first-child>.pill{border-left:0!important;padding-left:0!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock .metaIcon,
 .photoDetailBody .sharedIdeaCard .cardMetaBlock .metaIcon svg{width:15px!important;height:15px!important}
 @media(max-width:600px){
