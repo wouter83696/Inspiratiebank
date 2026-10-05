@@ -129,7 +129,6 @@
     const search=encodeURIComponent([item.title,...lines].filter(Boolean).join(', ')||destination);
     return `<section class="photoRouteChoices">${locationText}${destination?`<div class="detailRouteLinks"><a href="https://www.google.com/maps/search/?api=1&query=${search}" target="_blank" rel="noopener" class="detailGoogle">${mapAppIcon('google')}<span>Bekijk op Google Maps</span></a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener">${mapAppIcon('apple')}<span>Apple Kaarten</span></a><a href="https://waze.com/ul?q=${query}&navigate=yes" target="_blank" rel="noopener">${mapAppIcon('waze')}<span>Waze</span></a></div>`:''}</section>`;
   }
-  let detailSequence=0;
   function detailContent(item, titleId='photoDetailTitle'){
     const extras=(Array.isArray(item.images)?item.images:[]).filter(image=>image&&typeof image==='object'&&(image.status==='approved'||image.approved===true)&&/^https?:\/\//i.test(image.src||''));
     const gallery=extras.length?`<details class="photoDetailSection"><summary>${detailIcon('photo')}<span>Foto’s</span></summary><div class="photoDetailGallery">${extras.map(image=>`<img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}" loading="lazy">`).join('')}</div></details>`:'';
@@ -149,29 +148,27 @@
     const actions=card.querySelector('.photoDetailActions');
     const external='<svg class="detailExternal" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7M21 3 10 14M10 3H3v18h18v-7"/></svg>';
     actions.querySelector('a')?.insertAdjacentHTML('beforeend',external);
-    if(ideaRouteDestination(item))actions.insertAdjacentHTML('beforeend',`<button type="button" class="detailRouteAction">${detailIcon('route')}<span>Route openen</span><span aria-hidden="true">›</span></button>`);
-    const tabs=document.createElement('div');
-    tabs.className='photoDetailTabs';
-    const prefix=`detail-tabs-${++detailSequence}`;
-    tabs.innerHTML=`<div role="tablist" aria-label="Activiteitsinformatie"><button type="button" role="tab" id="${prefix}-practical-tab" aria-controls="${prefix}-practical" aria-selected="true" tabindex="0">Praktisch</button><button type="button" role="tab" id="${prefix}-route-tab" aria-controls="${prefix}-route" aria-selected="false" tabindex="-1">Route</button></div><section role="tabpanel" id="${prefix}-practical" aria-labelledby="${prefix}-practical-tab"></section><section role="tabpanel" id="${prefix}-route" aria-labelledby="${prefix}-route-tab" hidden></section>`;
-    const panels=tabs.querySelectorAll('[role="tabpanel"]');
+    const practical=document.createElement('details');
+    practical.className='photoDetailSection detailPractical';
+    practical.innerHTML=`<summary>${detailIcon('info')}<span>Praktisch</span></summary>`;
     card.querySelectorAll('.ideaPracticalDetails,.photoDetailSection').forEach(section=>{
-      const heading=section.querySelector('summary');
-      if(heading){const label=document.createElement('h4');label.textContent=heading.textContent;panels[0].append(label);heading.remove();}
-      while(section.firstChild)panels[0].append(section.firstChild);
+      section.querySelector('summary')?.remove();
+      while(section.firstChild)practical.append(section.firstChild);
       section.remove();
     });
-    if(!panels[0].textContent.trim())panels[0].innerHTML='<p>Geen aanvullende praktische informatie.</p>';
+    if(practical.children.length===1)practical.insertAdjacentHTML('beforeend','<p>Geen aanvullende praktische informatie.</p>');
+    card.insertBefore(practical,actions);
     const route=card.querySelector('.photoRouteChoices');
-    const googleLink=route?.querySelector('.detailGoogle');
-    if(googleLink){
-      const action=googleLink.cloneNode(true);
-      action.className='detailGoogleAction';
-      action.insertAdjacentHTML('beforeend',external);
-      actions.append(action);
+    if(route){
+      route.classList.add('detailRouteCompact');
+      route.insertAdjacentHTML('afterbegin',`<h4>${detailIcon('route')}<span>Route openen</span></h4>`);
+      route.querySelectorAll('.detailRouteLinks a').forEach(link=>{
+        const label=link.textContent.trim();
+        link.setAttribute('aria-label',label);link.title=label;
+        link.querySelector('span')?.remove();
+      });
+      actions.append(route);
     }
-    if(route)panels[1].append(route);else panels[1].innerHTML='<p>Geen locatie opgegeven.</p>';
-    card.insertBefore(tabs,card.querySelector('.photoDetailActions'));
     return card.outerHTML;
   }
   function present(sheet){
@@ -227,19 +224,6 @@
     grid.querySelectorAll('[data-featured-target]').forEach(button=>{button.setAttribute('aria-label','Bekijk '+(current.get(button.dataset.featuredTarget)?.title||'uitgelichte activiteit'));button.setAttribute('aria-haspopup','dialog');});
   }
   document.addEventListener('click',e=>{const button=e.target.closest('[data-photo-detail]');if(button)open(button.dataset.photoDetail);});
-  function selectDetailTab(tab){
-    const group=tab.closest('.photoDetailTabs');
-    group.querySelectorAll('[role="tab"]').forEach(button=>{const active=button===tab;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
-    group.querySelectorAll('[role="tabpanel"]').forEach(panel=>{panel.hidden=panel.id!==tab.getAttribute('aria-controls');});
-  }
-  document.addEventListener('click',event=>{const tab=event.target.closest('.photoDetailTabs [role="tab"]');if(tab)selectDetailTab(tab);const route=event.target.closest('.detailRouteAction');if(route){const target=route.closest('article').querySelectorAll('[role="tab"]')[1];selectDetailTab(target);target.focus();}});
-  document.addEventListener('keydown',event=>{
-    const tab=event.target.closest('.photoDetailTabs [role="tab"]');
-    if(!tab||!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
-    event.preventDefault();const buttons=[...tab.parentElement.querySelectorAll('[role="tab"]')];
-    const next=buttons[event.key==='Home'?0:event.key==='End'?buttons.length-1:(buttons.indexOf(tab)+1)%buttons.length];
-    selectDetailTab(next);next.focus();
-  });
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&dialog?.open&&dialog.classList.contains('isDocked')&&!document.querySelector('dialog:modal')){e.preventDefault();close();}});
   document.addEventListener('click',event=>{if(event.target.closest('.ideaMapSingleCard.photoDetailBody'))animateSection(event);});
   window.PhotoTiles={render,detailContent,close,openFeatured:key=>enabled&&open(key)};

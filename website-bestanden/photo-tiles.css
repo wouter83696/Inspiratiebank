@@ -758,3 +758,12 @@ body.photoDetailOpen{overflow:hidden!important}
 .detailRouteAction:focus-visible{outline:2px solid #008f99;outline-offset:2px}
 
 .photoDetailActions .mapAppLogo{width:22px;height:22px;stroke:none}
+
+/* One practical disclosure and a compact choice of map services. */
+.photoDetailBody .detailRouteCompact{margin:0!important;padding:12px 8px!important;border:0!important}
+.detailRouteCompact h4{display:flex;align-items:center;gap:14px;margin:0 0 12px;color:#236875;font-size:15px;font-weight:500}
+.detailRouteCompact h4 svg{width:20px;height:20px}
+.photoDetailBody .detailRouteCompact .detailRouteLinks{display:flex;flex-direction:row;align-items:center;gap:12px;margin-top:8px}
+.photoDetailBody .detailRouteCompact .detailRouteLinks a{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;padding:10px;border:0;background:transparent;border-radius:10px}
+.photoDetailBody .detailRouteCompact .mapAppLogo{width:28px;height:28px;stroke:none}
+@media(hover:hover) and (pointer:fine){.photoDetailBody .detailRouteCompact .detailRouteLinks a:hover{background:var(--control-hover-surface)}}
