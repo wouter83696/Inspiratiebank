@@ -976,3 +976,14 @@ body.photoDetailOpen{overflow:hidden!important}
 /* Paint the detail surface through its side gutters, keeping actions warm white. */
 .photoDetailBody>.sharedIdeaCard{position:relative;isolation:isolate}
 .photoDetailBody>.sharedIdeaCard::before{content:"";position:absolute;inset:0 -20px;background:var(--sheet-surface);z-index:-1;pointer-events:none}
+
+/* Mobile action alignment: quiet touch feedback and an address-aligned route row. */
+@media(max-width:640px){
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary{position:relative}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary::after{position:absolute;right:15px;top:calc(50% - 3px);margin:0}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{margin:6px 0 8px 32px!important;gap:16px!important;justify-content:flex-start;align-items:center}
+ .photoDetailBody .detailAddressDisclosure .detailRouteLinks a{display:flex;align-items:center;justify-content:center;background:transparent!important;box-shadow:none!important;transform:none!important}
+ .photoDetailBody .detailAddressDisclosure .detailRouteLinks .mapAppLogo{display:block;width:24px;height:24px;flex:0 0 24px}
+ .photoDetailBody .photoDetailActions :is(.detailAddressDisclosure,summary,.ideaRouteButton):is(:hover,:focus-within,:active){background:transparent!important;box-shadow:none!important}
+ .photoDetailBody .photoDetailTabs button:hover{background:transparent!important}
+}
