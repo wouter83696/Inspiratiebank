@@ -146,7 +146,7 @@
     card.querySelector('.cardFooter')?.remove();
     card.insertAdjacentHTML('beforeend',`${gallery}${IdeaViewShared.renderPractical(escapeHtml(item.materials||item.rules||''))}${routeChoices(item)}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="ideaRouteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><svg class="websiteGlobe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg><span>Website bezoeken</span></a>`:''}</div>`);
     const materials=card.querySelector('.ideaMaterialsDetails');
-    if(materials) card.insertBefore(materials,card.querySelector('.photoRouteChoices') || card.querySelector('.photoDetailActions'));
+    if(materials) materials.remove();
     const actions=card.querySelector('.photoDetailActions');
     const external='<svg class="detailExternal" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7M21 3 10 14M10 3H3v18h18v-7"/></svg>';
     actions.querySelector('a')?.insertAdjacentHTML('beforeend',external);
@@ -164,7 +164,16 @@
     Array.from(card.children).filter(node=>node.tagName==='P').forEach(node=>description.append(node));
     if(!description.childNodes.length)description.innerHTML='<p>Geen beschrijving beschikbaar.</p>';
     practical.id=`${id}-practical`;practical.setAttribute('role','tabpanel');practical.setAttribute('aria-labelledby',`${id}-practical-tab`);practical.tabIndex=0;practical.hidden=true;
-    tabs.append(practical);card.insertBefore(tabs,actions);
+    tabs.append(practical);
+    if(materials){
+      tabs.querySelector('[role="tablist"]').insertAdjacentHTML('beforeend',`<button type="button" role="tab" id="${id}-materials-tab" aria-controls="${id}-materials" aria-selected="false" tabindex="-1">Materialen</button>`);
+      const panel=document.createElement('section');
+      panel.id=`${id}-materials`;panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby',`${id}-materials-tab`);panel.tabIndex=0;panel.hidden=true;
+      materials.querySelector('summary')?.remove();
+      while(materials.firstChild)panel.append(materials.firstChild);
+      tabs.append(panel);
+    }
+    card.insertBefore(tabs,actions);
     const route=card.querySelector('.photoRouteChoices');
     if(route){
       const disclosure=document.createElement('details');
