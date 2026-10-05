@@ -167,8 +167,11 @@
     const route=card.querySelector('.photoRouteChoices');
     if(route){
       const disclosure=document.createElement('details');
-      disclosure.className='photoRouteChoices detailRouteCompact';
-      disclosure.innerHTML=`<summary>${detailIcon('location')}<span>Route</span></summary>`;
+      disclosure.className='photoRouteChoices detailRouteCompact detailAddressDisclosure';
+      const address=route.querySelector('.ideaPracticalText');
+      const addressText=address?address.innerHTML.replace(/<br\s*\/?\s*>/gi,', '):'Locatie bekijken';
+      disclosure.innerHTML=`<summary>${detailIcon('location')}<span>${addressText}</span></summary>`;
+      address?.remove();
       route.querySelectorAll('.detailRouteLinks a').forEach(link=>{
         const label=link.textContent.trim();
         link.setAttribute('aria-label',label);link.title=label;
