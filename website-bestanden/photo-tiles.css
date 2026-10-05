@@ -1128,3 +1128,13 @@ body.photoDetailOpen{overflow:hidden!important}
 @media(max-width:640px){
  #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail) .ideaMapPanelHead{display:none!important}
 }
+
+/* Keep desktop sticky actions inside the photo column and rounded sheet. */
+@media(min-width:981px){
+ #ideaMap .ideaMapPanel.isSingleDetail .photoDetailActions{
+  box-sizing:border-box!important;width:100%!important;max-width:100%!important;min-width:0;
+  margin-inline:0!important;align-self:stretch;bottom:12px!important;flex-shrink:0;
+ }
+ #ideaMap .ideaMapPanel.isSingleDetail .photoDetailActions>*{min-width:0;box-sizing:border-box}
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{scroll-padding-bottom:16px;scrollbar-gutter:stable}
+}
