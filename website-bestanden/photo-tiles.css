@@ -1053,3 +1053,11 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{margin-right:0!important}
  .photoDetailBody .detailRouteLinks>.detailCopyAddressMobile{width:36px;flex-basis:36px;color:#236875}
 }
+
+/* Shared warm-white surface; interaction fills each row to the outer edge. */
+:root{--activity-card-surface:#fffdf9}
+#ideaCards.compactTiles .photoTile{background:var(--activity-card-surface)}
+:is(#ideaMap,.photoDetailPanel) .photoDetailBody .photoDetailActions{background:var(--activity-card-surface)!important;padding:0!important;overflow:clip}
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure,
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary,
+.photoDetailBody .photoDetailActions>.ideaRouteButton{border-radius:0!important}
