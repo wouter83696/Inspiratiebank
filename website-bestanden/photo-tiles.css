@@ -859,7 +859,7 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock :is(.pill,.cardMetaPart){color:#486e76!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock :is(.metaIcon,.stimulusIcon){color:#236875!important}
 .photoDetailPanel .ideaFilterSheetHeader h3{font-size:19px}
-.photoDetailBody .photoDetailActions{position:sticky!important;bottom:0;z-index:4;background:var(--sheet-surface);border-top:1px solid rgba(79,126,136,.16);margin-top:12px!important;padding:8px 0!important;gap:0}
+.photoDetailBody .photoDetailActions{position:sticky!important;bottom:0;z-index:4;background:var(--sheet-surface);border-top:0;margin-top:12px!important;padding:8px 0!important;gap:0}
 .photoDetailBody .photoDetailActions>.ideaRouteButton,
 .photoDetailBody .photoDetailActions>details>summary{min-height:44px!important;padding-top:10px!important;padding-bottom:10px!important}
 .photoDetailBody .photoDetailTabs [role="tabpanel"]{padding:16px 0 4px}
@@ -873,7 +873,7 @@ body.photoDetailOpen{overflow:hidden!important}
 @media(max-width:600px){#ideaCards.compactTiles .photoTileOverlay{padding-right:8px}}
 
 /* Extend only the action background to the sheet edges; retain link alignment. */
-.photoDetailBody .photoDetailActions{background:#fffdf9;box-shadow:-20px 0 #fffdf9,20px 0 #fffdf9;align-self:stretch}
+.photoDetailBody .photoDetailActions{background:#fcf9f3;box-shadow:-20px 0 #fcf9f3,20px 0 #fcf9f3;align-self:stretch}
 
 /* One compact facts row in map lists, with separators only between items. */
 #ideaMap .ideaMapPanel .ideaMapResultInfo{border-radius:6px!important;flex-wrap:nowrap!important;gap:0!important;white-space:nowrap!important;max-width:100%;overflow-x:auto!important;scrollbar-width:none}
@@ -886,4 +886,16 @@ body.photoDetailOpen{overflow:hidden!important}
 #ideaMap .ideaMapResultInfo::-webkit-scrollbar{display:none}
 @media(max-width:600px){
  #ideaMap .ideaMapResultInfo :is(.pill,.cardMetaPart){font-size:10px!important;padding-right:2px!important;padding-left:2px!important;gap:2px!important}
+}
+
+/* Address and website share one rounded, inset interaction surface. */
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure,
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary,
+.photoDetailBody .photoDetailActions>.ideaRouteButton{border-radius:12px!important}
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary:hover,
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary:focus-visible{background:transparent!important}
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure:focus-within{background:var(--control-hover-surface)}
+@media(hover:hover) and (pointer:fine){
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure:hover,
+ .photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:var(--control-hover-surface)}
 }
