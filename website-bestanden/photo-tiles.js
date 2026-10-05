@@ -163,6 +163,13 @@
     });
     if(!panels[0].textContent.trim())panels[0].innerHTML='<p>Geen aanvullende praktische informatie.</p>';
     const route=card.querySelector('.photoRouteChoices');
+    const googleLink=route?.querySelector('.detailGoogle');
+    if(googleLink){
+      const action=googleLink.cloneNode(true);
+      action.className='detailGoogleAction';
+      action.insertAdjacentHTML('beforeend',external);
+      actions.append(action);
+    }
     if(route)panels[1].append(route);else panels[1].innerHTML='<p>Geen locatie opgegeven.</p>';
     card.insertBefore(tabs,card.querySelector('.photoDetailActions'));
     return card.outerHTML;

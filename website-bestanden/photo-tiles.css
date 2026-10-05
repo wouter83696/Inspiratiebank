@@ -756,3 +756,5 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .detailRouteLinks .mapAppLogo{width:28px;height:28px;stroke:none;flex-shrink:0}
 @media(hover:hover) and (pointer:fine){.photoDetailBody .photoDetailActions>a:hover,.photoDetailBody .detailRouteAction:hover{background:var(--control-hover-surface)}}
 .detailRouteAction:focus-visible{outline:2px solid #008f99;outline-offset:2px}
+
+.photoDetailActions .mapAppLogo{width:22px;height:22px;stroke:none}
