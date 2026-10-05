@@ -68,7 +68,7 @@
     const summary=event.target.closest('summary');
     if(!summary||summary.parentElement.tagName!=='DETAILS')return;
     const details=summary.parentElement;
-    if(details.classList.contains('detailAddressDisclosure')&&window.matchMedia('(hover:hover) and (pointer:fine)').matches){event.preventDefault();details.open=true;return;}
+    if(details.classList.contains('detailAddressDisclosure')&&window.matchMedia('(min-width:641px) and (hover:hover) and (pointer:fine)').matches){event.preventDefault();details.open=true;return;}
     event.preventDefault();
     summary.focus({preventScroll:true});
     const previous=sectionMotion.get(details);
@@ -238,7 +238,7 @@
     grid.querySelectorAll('[data-featured-target]').forEach(button=>{button.setAttribute('aria-label','Bekijk '+(current.get(button.dataset.featuredTarget)?.title||'uitgelichte activiteit'));button.setAttribute('aria-haspopup','dialog');});
   }
   document.addEventListener('click',e=>{const button=e.target.closest('[data-photo-detail]');if(button)open(button.dataset.photoDetail);});
-  const addressHover=window.matchMedia('(hover:hover) and (pointer:fine)');
+  const addressHover=window.matchMedia('(min-width:641px) and (hover:hover) and (pointer:fine)');
   document.addEventListener('pointerover',event=>{
     const row=event.target.closest('.detailAddressDisclosure');
     if(addressHover.matches&&row){row.open=true;}
@@ -271,6 +271,14 @@
     if(actionFrame)return;
     actionFrame=requestAnimationFrame(()=>{
       actionFrame=0;
+      document.querySelectorAll('.ideaMapPanel.isSingleDetail').forEach(panel=>{
+        if(panel.querySelector('.activityMapHeader'))return;
+        const title=panel.querySelector('.ideaMapSingleCard h3');
+        const toolbar=panel.querySelector('.ideaMapDetailToolbar');
+        if(!title||!toolbar)return;
+        const header=document.createElement('div');header.className='activityMapHeader';
+        toolbar.before(header);header.append(title,toolbar);
+      });
       observedActionContent.forEach(node=>{if(!node.isConnected){actionResize.unobserve(node);observedActionContent.delete(node);}});
       document.querySelectorAll('.photoDetailActions').forEach(actions=>{
         const content=actions.previousElementSibling;
