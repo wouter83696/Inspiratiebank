@@ -814,3 +814,15 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailBody .photoDetailActions>.detailAddressDisclosure[open]>summary::after{display:none}
  .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{position:absolute;right:8px;top:8px;margin:0!important}
 }
+/* Compact card facts match the restrained strip in the reference mock-up. */
+#ideaCards.compactTiles .photoTileMedia::after{height:32px;min-height:0;background:rgba(12,22,23,.52)}
+#ideaCards.compactTiles .photoTileOverlay{bottom:0;height:32px;min-height:32px;padding:0 10px;gap:12px;background:none}
+#ideaCards.compactTiles .photoTileOverlay>.domainIcon{transform:translateY(8px)}
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{top:0;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+#ideaCards.compactTiles .photoTileOverlay .photoTileMeta .stimulusPill{display:none!important}
+#ideaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{font-size:13px;font-weight:500;line-height:20px;height:auto}
+@media(max-width:600px){
+ #ideaCards.compactTiles .photoTileMedia::after{height:28px}
+ #ideaCards.compactTiles .photoTileOverlay{height:28px;min-height:28px;padding:0 5px;gap:6px}
+ #ideaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{font-size:11px;line-height:18px}
+}
