@@ -1025,3 +1025,12 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaMap :is(.ideaMapPanelClose,.ideaMapDetailClose):hover{background:var(--control-hover-surface)!important;border-color:rgba(61,126,136,.16)!important}
 }
 #ideaMap :is(.ideaMapPanelClose,.ideaMapDetailClose):focus-visible{outline:2px solid #315f6b;outline-offset:2px}
+
+/* Let the metadata backing curve into the theme badge. */
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts::before{left:-20px;border-top-left-radius:24px 22px}
+.photoDetailBody .detailCopyAddressMobile{display:none}
+@media(max-width:640px){
+ .photoDetailBody .detailAddressDisclosure>summary>.detailCopyAddress{display:none}
+ .photoDetailBody .detailRouteLinks>.detailCopyAddressMobile{display:inline-flex;width:44px;height:44px;flex:0 0 44px;margin-left:auto;opacity:1;pointer-events:auto}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{margin-right:8px!important}
+}

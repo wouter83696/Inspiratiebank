@@ -191,6 +191,9 @@
       route.querySelectorAll('.ideaPracticalText br').forEach(br=>br.replaceWith(document.createTextNode(', ')));
       while(route.firstChild)disclosure.append(route.firstChild);
       route.remove();
+      const copy=disclosure.querySelector('.detailCopyAddress');
+      const links=disclosure.querySelector('.detailRouteLinks');
+      if(copy&&links){const mobileCopy=copy.cloneNode(true);mobileCopy.classList.add('detailCopyAddressMobile');links.append(mobileCopy);}
       actions.insertBefore(disclosure,actions.querySelector('a'));
     }
     return card.outerHTML;
@@ -251,7 +254,7 @@
   document.addEventListener('click',async event=>{
     const button=event.target.closest('.detailCopyAddress');if(!button)return;
     event.preventDefault();event.stopImmediatePropagation();
-    const summary=button.closest('summary');
+    const summary=button.closest('.detailAddressDisclosure').querySelector('summary');
     const status=summary.querySelector('.detailCopyStatus');
     try{
       await navigator.clipboard.writeText(summary.querySelector('.detailAddressText').textContent.trim());
