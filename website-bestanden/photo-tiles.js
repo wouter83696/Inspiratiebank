@@ -157,17 +157,20 @@
       section.remove();
     });
     if(practical.children.length===1)practical.insertAdjacentHTML('beforeend','<p>Geen aanvullende praktische informatie.</p>');
-    card.insertBefore(practical,actions);
+    actions.prepend(practical);
     const route=card.querySelector('.photoRouteChoices');
     if(route){
-      route.classList.add('detailRouteCompact');
-      route.insertAdjacentHTML('afterbegin',`<h4>${detailIcon('route')}<span>Route openen</span></h4>`);
+      const disclosure=document.createElement('details');
+      disclosure.className='photoRouteChoices detailRouteCompact';
+      disclosure.innerHTML=`<summary>${detailIcon('route')}<span>Route</span></summary>`;
       route.querySelectorAll('.detailRouteLinks a').forEach(link=>{
         const label=link.textContent.trim();
         link.setAttribute('aria-label',label);link.title=label;
         link.querySelector('span')?.remove();
       });
-      actions.append(route);
+      while(route.firstChild)disclosure.append(route.firstChild);
+      route.remove();
+      actions.append(disclosure);
     }
     return card.outerHTML;
   }
