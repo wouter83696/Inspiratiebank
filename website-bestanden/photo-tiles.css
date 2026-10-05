@@ -1011,3 +1011,10 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .detailCopyAddress:focus-visible{outline:2px solid #008f99;outline-offset:2px}
 .photoDetailBody .detailCopyStatus{position:absolute;right:8px;bottom:0;font-size:11px;line-height:14px;background:#fefcf8;border-radius:4px;z-index:2}
 .photoDetailBody .detailCopyStatus:empty{display:none}
+
+/* Keep desktop copy controls quiet until the address is being used. */
+@media(min-width:641px) and (hover:hover) and (pointer:fine){
+ .photoDetailBody .detailAddressDisclosure .detailCopyAddress{opacity:0;pointer-events:none}
+ .photoDetailBody .detailAddressDisclosure:hover .detailCopyAddress,
+ .photoDetailBody .detailAddressDisclosure:focus-within .detailCopyAddress{opacity:1;pointer-events:auto}
+}
