@@ -961,3 +961,7 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailPanel .photoDetailBody{background:#fefcf8!important}
 .photoDetailPanel .photoDetailBody>.sharedIdeaCard{background:var(--sheet-surface)!important;overflow:visible!important}
 #ideaMap .ideaMapSingleCard.photoDetailBody{background:var(--sheet-surface)!important}
+
+/* Seat the compact facts on the photo edge without moving the theme badge. */
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{align-self:flex-end;top:0;transform:none}
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts::before{border-radius:8px 8px 0 0}
