@@ -97,6 +97,7 @@
     return `<svg class="photoDetailSectionIcon" viewBox="0 0 24 24" aria-hidden="true">${paths[kind]}</svg>`;
   }
   function mapAppIcon(app){
+    if(app==='waze')return '<svg class="mapAppLogo" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 24c-3-3-3-8-2-12C5 2 22 1 28 10c5 9-2 17-11 17H7l-4-3Z" fill="#b9edf5" stroke="#315f6b" stroke-width="1.5"/><circle cx="10" cy="27" r="3" fill="#315f6b"/><circle cx="24" cy="27" r="3" fill="#315f6b"/><circle cx="12" cy="13" r="1.5" fill="#315f6b"/><circle cx="23" cy="13" r="1.5" fill="#315f6b"/><path d="M12 18q6 6 11-1" fill="none" stroke="#315f6b" stroke-width="1.5"/></svg>';
     return app==='google'
       ? '<svg class="mapAppLogo" viewBox="0 0 48 48" aria-hidden="true"><path fill="#34a853" d="M24 2C13.5 2 7 9.6 7 19c0 11 11 20 14 25 1.4 2.6 4.6 2.6 6 0 3-5 14-14 14-25C41 9.6 34.5 2 24 2Z"/><path fill="#4285f4" d="M24 2C13.5 2 7 9.6 7 19c0 3.7 1.3 7.2 3.2 10.5L34.8 5.7A17 17 0 0 0 24 2Z"/><path fill="#ea4335" d="M10.5 8.5 20 18l14.8-12.3A17 17 0 0 0 24 2c-5.6 0-10.3 2.3-13.5 6.5Z"/><path fill="#fbbc04" d="m10.2 29.5 8.1 10.4L39 13a17 17 0 0 0-4.2-7.3Z"/><path fill="#4285f4" d="m19 20-8.8 9.5c2 3.5 5 7.2 8.1 10.4L28 27Z"/><circle cx="24" cy="18.5" r="7" fill="white"/></svg>'
       : '<svg class="mapAppLogo" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="6" fill="#e8efdf"/><path fill="#b3dc98" d="M2 3h11v12H2zm19 16h9v11h-9Z"/><path stroke="white" stroke-width="5" fill="none" d="m2 26 28-18M12 1l8 30"/><path stroke="#f9c84c" stroke-width="2" d="m2 26 28-18"/><path fill="#3295ee" stroke="white" stroke-width="1.5" d="m19 8 7 17-8-3-7 5Z"/></svg>';
@@ -125,8 +126,10 @@
     if(!destination&&!lines.length)return '';
     const locationText=`<p class="ideaPracticalText">${lines.length?lines.map(escapeHtml).join('<br>'):'Adres nog niet opgegeven'}</p>`;
     const query=encodeURIComponent(destination);
-    return `<details class="photoRouteChoices"><summary>${detailIcon('location')}<span>Adres &amp; route</span></summary>${locationText}${destination?`<div><a href="https://www.google.com/maps/dir/?api=1&destination=${query}" target="_blank" rel="noopener" class="mapAppButton" aria-label="Route openen in Google Maps" title="Google Maps">${mapAppIcon('google')}<span>Google Maps</span></a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener" class="mapAppButton" aria-label="Route openen in Apple Kaarten" title="Apple Kaarten">${mapAppIcon('apple')}<span>Apple Kaarten</span></a></div>`:''}</details>`;
+    const search=encodeURIComponent([item.title,...lines].filter(Boolean).join(', ')||destination);
+    return `<section class="photoRouteChoices">${locationText}${destination?`<div class="detailRouteLinks"><a href="https://www.google.com/maps/search/?api=1&query=${search}" target="_blank" rel="noopener" class="detailGoogle">${mapAppIcon('google')}<span>Bekijk op Google Maps</span></a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener">${mapAppIcon('apple')}<span>Apple Kaarten</span></a><a href="https://waze.com/ul?q=${query}&navigate=yes" target="_blank" rel="noopener">${mapAppIcon('waze')}<span>Waze</span></a></div>`:''}</section>`;
   }
+  let detailSequence=0;
   function detailContent(item, titleId='photoDetailTitle'){
     const extras=(Array.isArray(item.images)?item.images:[]).filter(image=>image&&typeof image==='object'&&(image.status==='approved'||image.approved===true)&&/^https?:\/\//i.test(image.src||''));
     const gallery=extras.length?`<details class="photoDetailSection"><summary>${detailIcon('photo')}<span>Foto’s</span></summary><div class="photoDetailGallery">${extras.map(image=>`<img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}" loading="lazy">`).join('')}</div></details>`:'';
@@ -140,11 +143,28 @@
     card.prepend(title);
     card.querySelector('.ideaPracticalDetails:not(.ideaMaterialsDetails)')?.remove();
     card.querySelector('.cardFooter')?.remove();
-    card.insertAdjacentHTML('beforeend',`${gallery}${IdeaViewShared.renderPractical(escapeHtml(item.materials||item.rules||''))}${routeChoices(item)}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="ideaRouteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><svg class="websiteGlobe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg><span>Naar website</span></a>`:''}</div>`);
+    card.insertAdjacentHTML('beforeend',`${gallery}${IdeaViewShared.renderPractical(escapeHtml(item.materials||item.rules||''))}${routeChoices(item)}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="ideaRouteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><svg class="websiteGlobe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg><span>Website bezoeken</span></a>`:''}</div>`);
     const materials=card.querySelector('.ideaMaterialsDetails');
     if(materials) card.insertBefore(materials,card.querySelector('.photoRouteChoices') || card.querySelector('.photoDetailActions'));
-    const practicalSummary=card.querySelector('.ideaPracticalDetails:not(.ideaMaterialsDetails)>summary');
-    if(practicalSummary) practicalSummary.innerHTML=`${detailIcon('info')}<span>Praktische informatie</span>`;
+    const actions=card.querySelector('.photoDetailActions');
+    const external='<svg class="detailExternal" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7M21 3 10 14M10 3H3v18h18v-7"/></svg>';
+    actions.querySelector('a')?.insertAdjacentHTML('beforeend',external);
+    if(ideaRouteDestination(item))actions.insertAdjacentHTML('beforeend',`<button type="button" class="detailRouteAction">${detailIcon('route')}<span>Route openen</span><span aria-hidden="true">›</span></button>`);
+    const tabs=document.createElement('div');
+    tabs.className='photoDetailTabs';
+    const prefix=`detail-tabs-${++detailSequence}`;
+    tabs.innerHTML=`<div role="tablist" aria-label="Activiteitsinformatie"><button type="button" role="tab" id="${prefix}-practical-tab" aria-controls="${prefix}-practical" aria-selected="true" tabindex="0">Praktisch</button><button type="button" role="tab" id="${prefix}-route-tab" aria-controls="${prefix}-route" aria-selected="false" tabindex="-1">Route</button></div><section role="tabpanel" id="${prefix}-practical" aria-labelledby="${prefix}-practical-tab"></section><section role="tabpanel" id="${prefix}-route" aria-labelledby="${prefix}-route-tab" hidden></section>`;
+    const panels=tabs.querySelectorAll('[role="tabpanel"]');
+    card.querySelectorAll('.ideaPracticalDetails,.photoDetailSection').forEach(section=>{
+      const heading=section.querySelector('summary');
+      if(heading){const label=document.createElement('h4');label.textContent=heading.textContent;panels[0].append(label);heading.remove();}
+      while(section.firstChild)panels[0].append(section.firstChild);
+      section.remove();
+    });
+    if(!panels[0].textContent.trim())panels[0].innerHTML='<p>Geen aanvullende praktische informatie.</p>';
+    const route=card.querySelector('.photoRouteChoices');
+    if(route)panels[1].append(route);else panels[1].innerHTML='<p>Geen locatie opgegeven.</p>';
+    card.insertBefore(tabs,card.querySelector('.photoDetailActions'));
     return card.outerHTML;
   }
   function present(sheet){
@@ -200,6 +220,19 @@
     grid.querySelectorAll('[data-featured-target]').forEach(button=>{button.setAttribute('aria-label','Bekijk '+(current.get(button.dataset.featuredTarget)?.title||'uitgelichte activiteit'));button.setAttribute('aria-haspopup','dialog');});
   }
   document.addEventListener('click',e=>{const button=e.target.closest('[data-photo-detail]');if(button)open(button.dataset.photoDetail);});
+  function selectDetailTab(tab){
+    const group=tab.closest('.photoDetailTabs');
+    group.querySelectorAll('[role="tab"]').forEach(button=>{const active=button===tab;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
+    group.querySelectorAll('[role="tabpanel"]').forEach(panel=>{panel.hidden=panel.id!==tab.getAttribute('aria-controls');});
+  }
+  document.addEventListener('click',event=>{const tab=event.target.closest('.photoDetailTabs [role="tab"]');if(tab)selectDetailTab(tab);const route=event.target.closest('.detailRouteAction');if(route){const target=route.closest('article').querySelectorAll('[role="tab"]')[1];selectDetailTab(target);target.focus();}});
+  document.addEventListener('keydown',event=>{
+    const tab=event.target.closest('.photoDetailTabs [role="tab"]');
+    if(!tab||!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+    event.preventDefault();const buttons=[...tab.parentElement.querySelectorAll('[role="tab"]')];
+    const next=buttons[event.key==='Home'?0:event.key==='End'?buttons.length-1:(buttons.indexOf(tab)+1)%buttons.length];
+    selectDetailTab(next);next.focus();
+  });
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&dialog?.open&&dialog.classList.contains('isDocked')&&!document.querySelector('dialog:modal')){e.preventDefault();close();}});
   document.addEventListener('click',event=>{if(event.target.closest('.ideaMapSingleCard.photoDetailBody'))animateSection(event);});
   window.PhotoTiles={render,detailContent,close,openFeatured:key=>enabled&&open(key)};

@@ -727,3 +727,32 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaMap .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:32px!important}
 }
 .photoDetailBody details{overflow-anchor:none}
+
+/* Shared detail navigation for the activity sheet and map viewer. */
+.photoDetailTabs{margin-top:16px}
+.photoDetailTabs [role="tablist"]{display:flex;border-bottom:1px solid rgba(79,142,158,.16);gap:20px}
+.photoDetailTabs [role="tab"]{appearance:none;border:0;border-bottom:2px solid transparent;background:transparent;padding:12px 8px;color:#63858b;font:inherit;cursor:pointer}
+.photoDetailTabs [role="tab"][aria-selected="true"]{color:#006780;border-bottom-color:#008f99;font-weight:600}
+.photoDetailTabs [role="tabpanel"]{padding:16px 0}
+.photoDetailTabs [role="tabpanel"][hidden]{display:none!important}
+.photoDetailTabs h4{margin:0 0 8px;font-size:15px;color:#315f6b}
+.photoDetailTabs p{margin:0 0 12px}
+.photoDetailTabs .photoRouteChoices{border:0!important;padding:0!important;margin:0!important}
+.detailRouteLinks{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:16px}
+.photoDetailBody .detailRouteLinks a,.photoDetailBody .photoDetailActions a{text-decoration:none!important}
+.detailRouteLinks a{display:inline-flex;align-items:center;gap:8px;padding:10px 8px;border-radius:10px;color:#006780}
+.detailRouteLinks .detailGoogle{font-weight:600;background:rgba(247,241,231,.35)}
+.detailRouteLinks svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7}
+.photoDetailTabs button:focus-visible,.detailRouteLinks a:focus-visible{outline:2px solid #008f99;outline-offset:2px}
+@media(hover:hover) and (pointer:fine){.photoDetailTabs button:hover,.detailRouteLinks a:hover{background:var(--control-hover-surface)}}
+.photoDetailBody .photoDetailTabs{order:5}
+.photoDetailBody .photoDetailActions>.ideaRouteButton{justify-content:flex-start;min-height:44px;padding:10px 8px;border:0;background:transparent;font-size:15px}
+.photoDetailBody .detailRouteLinks a{border:0;background:transparent;box-shadow:none}
+.photoDetailBody .detailRouteLinks .detailGoogle{background:rgba(247,241,231,.35)}
+.photoDetailBody .photoDetailActions{display:flex;flex-direction:column;gap:0}
+.photoDetailBody .photoDetailActions>a,.photoDetailBody .detailRouteAction{display:flex;align-items:center;gap:14px;width:100%;box-sizing:border-box;border:0;border-radius:0;background:transparent;color:#236875;font:inherit;font-size:15px;font-weight:500;text-align:left;padding:12px 8px;min-height:48px;cursor:pointer;text-decoration:none!important}
+.photoDetailActions .detailExternal,.detailRouteAction>span:last-child{margin-left:auto}
+.photoDetailActions svg{width:20px;height:20px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.7}
+.photoDetailBody .detailRouteLinks .mapAppLogo{width:28px;height:28px;stroke:none;flex-shrink:0}
+@media(hover:hover) and (pointer:fine){.photoDetailBody .photoDetailActions>a:hover,.photoDetailBody .detailRouteAction:hover{background:var(--control-hover-surface)}}
+.detailRouteAction:focus-visible{outline:2px solid #008f99;outline-offset:2px}
