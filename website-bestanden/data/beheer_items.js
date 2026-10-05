@@ -1221,7 +1221,10 @@ window.BCJN_BEHEER_BASE = {
         "outdoor",
         "wijchen",
         "bijzonder"
-      ]
+      ],
+      "address": "Heumenseweg 180, 6603 KT Wijchen",
+      "addressSource": "https://www.dewijchenseberg.nl/privacy-verklaring/",
+      "addressCheckedAt": "2026-10-04"
     },
     {
       "title": "Pretpark Tivoli Berg en Dal",
@@ -1242,7 +1245,10 @@ window.BCJN_BEHEER_BASE = {
         "pretpark",
         "attracties",
         "berg en dal"
-      ]
+      ],
+      "address": "Oude Kleefsebaan 116, 6571 BK Berg en Dal",
+      "addressSource": "https://www.parktivoli.nl/plan-je-bezoek/contact-route/",
+      "addressCheckedAt": "2026-10-04"
     },
     {
       "title": "Gamestate Arnhem",
@@ -1263,7 +1269,10 @@ window.BCJN_BEHEER_BASE = {
         "arcade",
         "gaming",
         "arnhem"
-      ]
+      ],
+      "address": "Oude Stationsstraat 11A, 6811 KE Arnhem",
+      "addressSource": "https://www.gamestate.com/nl/arnhem/visiting-gamestate-arnhem",
+      "addressCheckedAt": "2026-10-04"
     },
     {
       "title": "VR SO Real Arnhem",
@@ -1284,7 +1293,10 @@ window.BCJN_BEHEER_BASE = {
         "vr",
         "gaming",
         "arnhem"
-      ]
+      ],
+      "address": "Kronenburgpassage 31, 6831 EM Arnhem",
+      "addressSource": "https://kronenburgarnhem.nl/nl/stores/vr-soreal",
+      "addressCheckedAt": "2026-10-04"
     },
     {
       "title": "Ouwehands Dierenpark Rhenen - verder weg",
@@ -1437,7 +1449,11 @@ window.BCJN_BEHEER_BASE = {
         "stadsspel",
         "groepsuitje",
         "nijmegen"
-      ]
+      ],
+      "address": "Tweede Walstraat 17, 6511 LN Nijmegen",
+      "addressSource": "https://nijmegenoutdoor.nl/",
+      "addressCheckedAt": "2026-10-05",
+      "note": "Het verzamelpunt kan per activiteit verschillen; volg de locatie in je boekingsbevestiging."
     },
     {
       "title": "SUP & SURF Nijmegen",
@@ -1459,7 +1475,10 @@ window.BCJN_BEHEER_BASE = {
         "watersport",
         "buiten",
         "nijmegen"
-      ]
+      ],
+      "address": "Willem van Arenbergstraat 6, Nijmegen",
+      "addressSource": "https://supensurf-nijmegen.nl/locaties/lentse-plas/",
+      "addressCheckedAt": "2026-10-04"
     },
     {
       "title": "LaserQuest Nijmegen",
@@ -3592,7 +3611,7 @@ window.BCJN_BEHEER_BASE = {
       "stimulus": "Middel",
       "duration": "2–4 uur",
       "group": "2–6",
-      "materials": "Route, stevige schoenen, water",
+      "materials": "Route, stevige schoenen, water. Start bij Hotel ’t Spijker voor de N70. Er zijn meerdere instappunten; stem het startpunt en de lengte van je wandeling vooraf af.",
       "fit": "Een stevige wandeling met hoogteverschil, bos en mooie uitzichten.",
       "tags": [
         "wandelen",
@@ -3602,7 +3621,12 @@ window.BCJN_BEHEER_BASE = {
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/068-wandeling-duivelsberg-n70-verified.jpg",
       "imageAlt": "Foto bij Wandeling Duivelsberg / N70",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "address": "Nieuwe Holleweg 4, 6573 DX Beek-Ubbergen",
+      "locationName": "Voorgesteld startpunt N70",
+      "addressSource": "https://www.visitnijmegen.com/routes/3673389898/n70-natuurwandelroute",
+      "addressCheckedAt": "2026-10-05",
+      "url": "https://www.visitnijmegen.com/routes/3673389898/n70-natuurwandelroute"
     },
     {
       "title": "Wandeling Hatertse en Overasseltse Vennen",
@@ -3613,7 +3637,7 @@ window.BCJN_BEHEER_BASE = {
       "stimulus": "Laag/middel",
       "duration": "2–3 uur",
       "group": "2–8",
-      "materials": "Route, water, zonnebrand, check weer",
+      "materials": "Route, water, zonnebrand, check weer. Volg de bordjes naar de parkeerplaats van Staatsbosbeheer aan de Oude Nijmeegseweg. Vanaf hier kun je de geel gemarkeerde Vennenroute lopen.",
       "fit": "Wandel langs vennen, heide en bos in de Hatertse en Overasseltse Vennen.",
       "tags": [
         "wandelen",
@@ -3623,7 +3647,12 @@ window.BCJN_BEHEER_BASE = {
       "distanceBand": "In de regio (10-30 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/069-wandeling-hatertse-en-overasseltse-vennen-verified.jpg",
       "imageAlt": "Foto bij Wandeling Hatertse en Overasseltse Vennen",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "address": "Oude Nijmeegseweg, Overasselt",
+      "locationName": "Startpunt: parkeerplaats Staatsbosbeheer",
+      "addressSource": "https://www.visitnijmegen.com/routes/1792279383/wandelroute-vennen",
+      "addressCheckedAt": "2026-10-05",
+      "url": "https://www.visitnijmegen.com/routes/1792279383/wandelroute-vennen"
     },
     {
       "title": "Wandeling Ooijpolder",
@@ -3634,7 +3663,7 @@ window.BCJN_BEHEER_BASE = {
       "stimulus": "Laag/middel",
       "duration": "2–3 uur",
       "group": "2–8",
-      "materials": "Route, water, pauzepunt, OV/terugroute",
+      "materials": "Route, water, pauzepunt, OV/terugroute. De wandelroute vanaf De Bastei is 7,5 km en eindigt bij de Sint Hubertusweg, bushalte Erlecomsedam. Regel je terugreis; dit is geen rondwandeling.",
       "fit": "Verken het rivierenlandschap van de Ooijpolder te voet en neem je camera mee.",
       "tags": [
         "wandelen",
@@ -3644,7 +3673,12 @@ window.BCJN_BEHEER_BASE = {
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/070-wandeling-ooijpolder-verified.jpg",
       "imageAlt": "Foto bij Wandeling Ooijpolder",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "address": "Lange Baan 4, 6511 XJ Nijmegen",
+      "locationName": "Voorgesteld startpunt: De Bastei",
+      "addressSource": "https://www.visitnijmegen.com/routes/1298714414/boswachterspad-ooijpolder",
+      "addressCheckedAt": "2026-10-05",
+      "url": "https://www.visitnijmegen.com/routes/1298714414/boswachterspad-ooijpolder"
     },
     {
       "title": "Watermuseum waterwandeling Arnhem",
@@ -3655,7 +3689,7 @@ window.BCJN_BEHEER_BASE = {
       "stimulus": "Laag/middel",
       "duration": "60–180 min",
       "group": "1–6",
-      "materials": "IVN-app, wandelschoenen en een kort routeplan of deeltraject.",
+      "materials": "IVN-app, wandelschoenen en een kort routeplan of deeltraject. Dit is het adres van het Watermuseum. Controleer bij de aanbieder waar de waterwandeling begint.",
       "fit": "Volg een wandelroute rond water, landschap en de geschiedenis van de omgeving.",
       "source": "Nederlands Watermuseum",
       "url": "https://watermuseum.nl/activiteiten/waterwandeling/",
@@ -3672,7 +3706,7 @@ window.BCJN_BEHEER_BASE = {
       "address": "Zijpendaalseweg 26-28, 6814 CL Arnhem",
       "addressSource": "https://www.museum.nl/nl/nederlands-watermuseum",
       "addressCheckedAt": "2026-10-04",
-      "locationName": "Nederlands Watermuseum — controleer het startpunt bij de aanbieder"
+      "locationName": "Nederlands Watermuseum"
     },
     {
       "title": "Barista- of ijskoffielab",
@@ -3747,7 +3781,7 @@ window.BCJN_BEHEER_BASE = {
       "stimulus": "Middel",
       "duration": "90–180 min",
       "group": "2–8",
-      "materials": "Kies liever een compacte opdracht dan een te lang programma.",
+      "materials": "Kies liever een compacte opdracht dan een te lang programma. Dit is het adres van de aanbieder. Het verzamelpunt kan per activiteit verschillen; volg de locatie in je boekingsbevestiging.",
       "fit": "Ontdek de stad met een missie, speurtocht of compacte teamopdracht.",
       "source": "DoeNijmegen",
       "url": "https://www.doenijmegen.nl/",
@@ -3763,8 +3797,7 @@ window.BCJN_BEHEER_BASE = {
       "imageStatus": "approved",
       "address": "Titus Brandsmastraat 30, 6511 JR Nijmegen",
       "addressSource": "https://www.doenijmegen.nl/algemeen/contact/",
-      "addressCheckedAt": "2026-10-04",
-      "locationName": "Adres aanbieder — bevestig het startpunt bij je boeking"
+      "addressCheckedAt": "2026-10-05"
     },
     {
       "title": "Dungeons & Dragons one-shot",
@@ -4537,7 +4570,7 @@ window.BCJN_BEHEER_BASE = {
       "group": "2-6",
       "cost": "Gratis/€€",
       "stimulus": "Middel/hoog",
-      "materials": "Telefoon, powerbank en route-informatie.",
+      "materials": "Telefoon, powerbank en route-informatie. Dit is het adres van de aanbieder. Het verzamelpunt kan per activiteit verschillen; volg de locatie in je boekingsbevestiging.",
       "fit": "Los onderweg opdrachten op en ontdek de stad via een spel op je telefoon.",
       "source": "Nijmegen Outdoor / DoeNijmegen / eigen route",
       "url": "https://nijmegenoutdoor.nl/",
@@ -4545,9 +4578,8 @@ window.BCJN_BEHEER_BASE = {
       "imageAlt": "Foto bij Escape walk, citygame of telefoonmissie",
       "imageStatus": "approved",
       "address": "Tweede Walstraat 17, 6511 LN Nijmegen",
-      "addressSource": "https://nijmegenoutdoor.nl/contact/",
-      "addressCheckedAt": "2026-10-04",
-      "locationName": "Adres aanbieder — bevestig het startpunt bij je boeking"
+      "addressSource": "https://nijmegenoutdoor.nl/",
+      "addressCheckedAt": "2026-10-05"
     },
     {
       "title": "Skatepark, pumptrack of urban sports sessie",
@@ -5031,7 +5063,7 @@ window.BCJN_BEHEER_BASE = {
       "group": "4-10",
       "cost": "€€",
       "stimulus": "Middel/hoog",
-      "materials": "Actuele openingstijden, kosten en reserveren checken. Locatie: Centrum Nijmegen en omgeving.",
+      "materials": "Actuele openingstijden, kosten en reserveren checken. Locatie: Centrum Nijmegen en omgeving. Dit is het adres van de aanbieder. Het verzamelpunt kan per activiteit verschillen; volg de locatie in je boekingsbevestiging.",
       "fit": "Actief groepsaanbod in en rond de stad, zoals citygames en groepsopdrachten.",
       "source": "Nijmegen Outdoor",
       "url": "https://nijmegenoutdoor.nl/",
@@ -5045,9 +5077,8 @@ window.BCJN_BEHEER_BASE = {
       "imageAlt": "Foto bij Nijmegen Outdoor",
       "imageStatus": "approved",
       "address": "Tweede Walstraat 17, 6511 LN Nijmegen",
-      "addressSource": "https://nijmegenoutdoor.nl/contact/",
-      "addressCheckedAt": "2026-10-04",
-      "locationName": "Adres aanbieder — bevestig het startpunt bij je boeking"
+      "addressSource": "https://nijmegenoutdoor.nl/",
+      "addressCheckedAt": "2026-10-05"
     },
     {
       "title": "SUP & SURF Nijmegen",
