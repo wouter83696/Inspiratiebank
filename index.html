@@ -6527,6 +6527,8 @@
     const distance = compactIdeaBadgeLabel(distanceLabel);
     const pills = [];
     if(normalize(location) === 'online') return ['Online'];
+    // A travel distance already identifies an activity away from home.
+    if(/\bkm\b/i.test(distance)) return [distance];
     if(isHomeLocationBadge(location) || normalize(location) === 'buiten') pills.push(location);
     if((isHomeLocationBadge(location) || normalize(location) === 'buiten') && isHomeLocationBadge(distance)) return pills;
     const sameTerrain = normalize(location).includes('terrein') && normalize(distance).includes('terrein');
