@@ -863,3 +863,8 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .photoDetailActions>details>summary{min-height:44px!important;padding-top:10px!important;padding-bottom:10px!important}
 .photoDetailBody .photoDetailTabs [role="tabpanel"]{padding:16px 0 4px}
 @media(max-width:640px){.photoDetailPanel .ideaFilterSheetHeader h3{font-size:18px}}
+/* Shade only the metadata, leaving the rest of the photograph clear. */
+#ideaCards.compactTiles .photoTileMedia::after{display:none}
+#ideaCards.compactTiles .photoTileOverlay{right:auto;width:max-content;max-width:100%;padding-right:12px;background:rgba(20,27,25,.38);border-radius:0 8px 0 var(--activity-photo-radius,16px)}
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{flex:0 1 auto;width:auto}
+@media(max-width:600px){#ideaCards.compactTiles .photoTileOverlay{padding-right:8px}}
