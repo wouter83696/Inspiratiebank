@@ -837,3 +837,29 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailBody .detailAddressDisclosure .detailRouteLinks .mapAppLogo{width:22px;height:22px}
  .photoDetailBody .detailAddressDisclosure:hover{background:var(--control-hover-surface)}
 }
+/* Soft, readable detail facts with fine separators. */
+.photoDetailBody .sharedIdeaCard .cardMetaBlock{background:rgba(247,241,231,.48)!important;border-radius:20px!important;padding:8px 10px!important;column-gap:0!important;row-gap:8px!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardPillGroup,
+.photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardMetaLine{display:contents!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock .pill,
+.photoDetailBody .sharedIdeaCard .cardMetaBlock .cardMetaPart{font-size:13px!important;line-height:20px!important;min-height:20px!important;height:auto!important;padding:0 9px!important;margin:0!important;border:0!important;border-left:1px solid rgba(79,126,136,.22)!important;border-radius:0!important;background:transparent!important;white-space:nowrap;flex:0 0 auto}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock .cardPillGroup>.pill:first-child{border-left:0!important;padding-left:0!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock .metaIcon,
+.photoDetailBody .sharedIdeaCard .cardMetaBlock .metaIcon svg{width:15px!important;height:15px!important}
+@media(max-width:600px){
+ .photoDetailBody .sharedIdeaCard .cardMetaBlock{padding:7px 8px!important}
+ .photoDetailBody .sharedIdeaCard .cardMetaBlock .pill,
+ .photoDetailBody .sharedIdeaCard .cardMetaBlock .cardMetaPart{padding-right:6px!important;padding-left:6px!important;font-size:12px!important}
+}
+/* Quiet tabs and a compact action area that remains available while scrolling. */
+.photoDetailBody .photoDetailTabs [role="tab"],
+.photoDetailBody .photoDetailTabs [role="tab"]:hover{background:transparent!important}
+.photoDetailBody .photoDetailTabs [role="tab"][aria-selected="true"]{color:#006780;border-bottom:2px solid #008f99}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock :is(.pill,.cardMetaPart){color:#486e76!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock :is(.metaIcon,.stimulusIcon){color:#236875!important}
+.photoDetailPanel .ideaFilterSheetHeader h3{font-size:19px}
+.photoDetailBody .photoDetailActions{position:sticky!important;bottom:0;z-index:4;background:var(--sheet-surface);border-top:1px solid rgba(79,126,136,.16);margin-top:12px!important;padding:8px 0!important;gap:0}
+.photoDetailBody .photoDetailActions>.ideaRouteButton,
+.photoDetailBody .photoDetailActions>details>summary{min-height:44px!important;padding-top:10px!important;padding-bottom:10px!important}
+.photoDetailBody .photoDetailTabs [role="tabpanel"]{padding:16px 0 4px}
+@media(max-width:640px){.photoDetailPanel .ideaFilterSheetHeader h3{font-size:18px}}
