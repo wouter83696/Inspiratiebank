@@ -25,3 +25,19 @@ test('horizontal swipe, tap and cancelled swipe do not open list',()=>{
   s.handlers.touchend();assert.equal(s.context.ideaMapPanelTall,false);
  }
 });
+test('closing tall mobile list restores the rail without clearing its selection',()=>{
+ const classes=new Set(['isList','isExpanded']);
+ const results={scrollLeft:320,scrollTop:0};
+ const panel={dataset:{},classList:{contains:c=>classes.has(c),toggle(c,on){on?classes.add(c):classes.delete(c);}},querySelector:s=>s==='.ideaMapResults'?results:null};
+ const context={$:()=>panel,window:{matchMedia:()=>({matches:true})},ideaMapPanelTall:false,ideaMapPanelExpanded:true,ideaMapDetailKey:'',activeIdeaMapClusterKeys:['a','b'],activeIdeaMapKey:'b'};
+ vm.createContext(context);
+ const sync=html.slice(html.indexOf('  function syncIdeaMapPanelPresentation(){'),html.indexOf('  function setActiveIdeaMapItem('));
+ const close=html.slice(html.indexOf('  function closeIdeaMapOverlay(){'),html.indexOf('  function resetIdeaMapTransientState(){'));
+ vm.runInContext(sync+close,context);
+ context.ideaMapPanelTall=true;context.syncIdeaMapPanelPresentation();
+ results.scrollLeft=0;results.scrollTop=400;
+ context.closeIdeaMapOverlay();
+ assert.equal(context.ideaMapPanelTall,false);assert.equal(context.ideaMapPanelExpanded,true);
+ assert.equal(results.scrollLeft,320);assert.equal(results.scrollTop,0);
+ assert.deepEqual(context.activeIdeaMapClusterKeys,['a','b']);assert.equal(context.activeIdeaMapKey,'b');
+});

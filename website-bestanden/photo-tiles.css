@@ -1183,7 +1183,7 @@ body.photoDetailOpen{overflow:hidden!important}
 
 /* Mobile list cards use the same warm surface as the activity detail sheet. */
 @media(max-width:640px){
- #ideaMap .ideaMapPanel.isList:not(.isSingleDetail) .ideaMapResult{background:var(--sheet-surface)!important}
+ #ideaMap .ideaMapPanel.isList:not(.isSingleDetail) .ideaMapResult{background:#fffdf9!important}
  #ideaMap .ideaMapPanel.isList.isTall .ideaMapResults{display:flex!important;scroll-snap-type:none!important;align-items:stretch!important}
 }
 

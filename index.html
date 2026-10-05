@@ -5470,7 +5470,7 @@
     }
 </style>
   <link rel="stylesheet" href="website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
-  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261005-photo-meta-v134">
+  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261005-photo-meta-v135">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -9634,10 +9634,23 @@
   function syncIdeaMapPanelPresentation(){
     const panel = $('#ideaMap .ideaMapPanel');
     if(!panel || panel.classList.contains('isSingleDetail')) return false;
+    const results = panel.querySelector('.ideaMapResults');
+    const wasTall = panel.classList.contains('isTall');
+    const willBeTall = ideaMapPanelTall && ideaMapPanelExpanded;
+    if(results && !wasTall && willBeTall) panel.dataset.railScrollLeft = String(results.scrollLeft);
     const minimized = !ideaMapPanelExpanded && !activeIdeaMapClusterKeys;
     panel.classList.toggle('isExpanded', ideaMapPanelExpanded);
     panel.classList.toggle('isTall', ideaMapPanelTall && ideaMapPanelExpanded);
     panel.classList.toggle('isMinimized', minimized);
+    if(results && wasTall && !willBeTall){
+      results.scrollTop = 0;
+      results.scrollLeft = Number(panel.dataset.railScrollLeft || 0);
+    }
+    const close = panel.querySelector('[data-map-panel-close]');
+    if(close){
+      close.setAttribute('aria-label', willBeTall ? 'Terug naar tegelrij' : 'Resultaten sluiten');
+      close.title = willBeTall ? 'Terug naar tegelrij' : 'Sluiten';
+    }
     const head = panel.querySelector('.ideaMapPanelHead');
     if(head){
       const actionable = !window.matchMedia('(max-width:640px)').matches || !ideaMapPanelExpanded || ideaMapPanelTall;
@@ -9738,6 +9751,12 @@
   }
   function closeIdeaMapOverlay(){
     const panel = $('#ideaMap .ideaMapPanel');
+    if(window.matchMedia('(max-width:640px)').matches && ideaMapPanelTall && !ideaMapDetailKey){
+      ideaMapPanelTall = false;
+      ideaMapPanelExpanded = true;
+      syncIdeaMapPanelPresentation();
+      return;
+    }
     const visuallyExpanded = panel?.classList.contains('isExpanded');
     if(!ideaMapPanelExpanded && !visuallyExpanded && !ideaMapDetailKey && !activeIdeaMapClusterKeys) return;
     const requiresRefresh = Boolean(ideaMapDetailKey || activeIdeaMapClusterKeys);
