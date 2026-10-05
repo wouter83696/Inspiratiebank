@@ -1180,3 +1180,9 @@ body.photoDetailOpen{overflow:hidden!important}
 
 /* A single sparkle in the action keeps the surprise strip quiet. */
 :is(#ideaCards,#ideaList) .ideaSurpriseCard{grid-template-columns:minmax(0,1fr) auto}
+
+/* Mobile list cards use the same warm surface as the activity detail sheet. */
+@media(max-width:640px){
+ #ideaMap .ideaMapPanel.isList:not(.isSingleDetail) .ideaMapResult{background:var(--sheet-surface)!important}
+ #ideaMap .ideaMapPanel.isList.isTall .ideaMapResults{display:flex!important;scroll-snap-type:none!important;align-items:stretch!important}
+}

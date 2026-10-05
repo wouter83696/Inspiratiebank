@@ -5470,7 +5470,7 @@
     }
 </style>
   <link rel="stylesheet" href="website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
-  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261005-photo-meta-v132">
+  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261005-photo-meta-v133">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -9776,6 +9776,40 @@
       sheet.classList.remove('isDragging');
       sheet.style.removeProperty('transform');
     };
+    // Touch events survive native horizontal scrolling taking over pointer events.
+    let railTouch = null;
+    document.addEventListener('touchstart', event => {
+      if(!mobile() || event.touches.length !== 1) { railTouch = null; return; }
+      const results = event.target.closest('.ideaMapResults');
+      const sheet = results?.closest('.ideaMapPanel.isList.isExpanded:not(.isTall):not(.isSingleDetail)');
+      if(!sheet) return;
+      const touch = event.touches[0];
+      railTouch = {sheet, x:touch.clientX, y:touch.clientY, delta:0, axis:null};
+    }, {passive:true, capture:true});
+    document.addEventListener('touchmove', event => {
+      if(!railTouch) return;
+      if(event.touches.length !== 1) { railTouch = null; return; }
+      const touch = event.touches[0];
+      const dx = touch.clientX - railTouch.x;
+      const dy = touch.clientY - railTouch.y;
+      if(!railTouch.axis && Math.max(Math.abs(dx), Math.abs(dy)) > 8)
+        railTouch.axis = Math.abs(dy) > Math.abs(dx) ? 'vertical' : 'horizontal';
+      if(railTouch.axis !== 'vertical') return;
+      railTouch.delta = dy;
+      if(event.cancelable) event.preventDefault();
+    }, {passive:false, capture:true});
+    document.addEventListener('touchend', () => {
+      const gesture = railTouch;
+      railTouch = null;
+      if(!gesture || gesture.axis !== 'vertical' || gesture.delta >= -42) return;
+      suppressSheetClickUntil = performance.now() + 350;
+      ideaMapPanelExpanded = true;
+      ideaMapPanelTall = true;
+      syncIdeaMapPanelPresentation();
+      const results = gesture.sheet.querySelector('.ideaMapResults');
+      if(results) { results.scrollLeft = 0; results.scrollTop = 0; }
+    }, {capture:true});
+    document.addEventListener('touchcancel', () => { railTouch = null; }, {capture:true});
     document.addEventListener('pointerdown', event => {
       if(!mobile() || event.button !== 0 || event.target.closest('button,a,input,select,textarea')) return;
       const handle = sheetHandle(event.target);
@@ -9787,6 +9821,7 @@
         && !mapSheet.classList.contains('isSingleDetail'));
       const sheet = handle?.closest('.ideaMapPanel,.ideaFilterSheet,.ideaSubmitSheet') || (canDragMapResults ? mapSheet : null);
       if(!sheet || (!handle && !canDragMapResults)) return;
+      if(event.pointerType === 'touch' && canDragMapResults && !handle) return;
       const isMap = sheet.classList.contains('ideaMapPanel');
       const detail = isMap && sheet.classList.contains('isSingleDetail');
       const minimized = isMap && sheet.classList.contains('isMinimized');
