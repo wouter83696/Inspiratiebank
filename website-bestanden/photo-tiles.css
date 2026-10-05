@@ -987,3 +987,6 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailBody .photoDetailActions :is(.detailAddressDisclosure,summary,.ideaRouteButton):is(:hover,:focus-within,:active){background:transparent!important;box-shadow:none!important}
  .photoDetailBody .photoDetailTabs button:hover{background:transparent!important}
 }
+
+/* A slightly deeper beige behind the list preserves the shared tile surface. */
+#ideaMap .ideaMapPanel.isList:not(.isSingleDetail){background:#f2ecdf!important}
