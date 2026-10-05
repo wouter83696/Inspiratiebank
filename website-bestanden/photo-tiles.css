@@ -785,3 +785,20 @@ body.photoDetailOpen{overflow:hidden!important}
 /* All three action labels use the same type treatment. */
 .photoDetailBody .photoDetailActions>.ideaRouteButton,
 .photoDetailBody .photoDetailActions>details>summary{font-family:inherit!important;font-size:15px!important;font-weight:500!important;line-height:24px!important;letter-spacing:normal!important}
+
+/* Address stays visible; navigation choices appear without moving the text. */
+.photoDetailBody .photoDetailActions>.detailAddressRow{position:relative;display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px 14px;width:100%;box-sizing:border-box;padding:12px 8px!important;border:0!important;margin:0!important}
+.detailAddressIcon{grid-column:1;grid-row:1;display:flex;align-items:flex-start;padding-top:2px;color:#236875}
+.photoDetailBody .detailAddressRow>.ideaPracticalText{grid-column:2;grid-row:1;margin:0!important;font-size:15px!important;line-height:24px!important;overflow-wrap:anywhere}
+.photoDetailBody .photoDetailActions>.detailAddressRow>.detailRouteLinks{grid-column:2;grid-row:2;display:flex;gap:4px;margin:0!important;align-items:center}
+.photoDetailBody .detailAddressRow .detailRouteLinks a{width:44px;height:44px;min-height:44px;padding:8px;flex:0 0 44px}
+@media(min-width:981px) and (hover:hover) and (pointer:fine){
+ .photoDetailBody .photoDetailActions>.detailAddressRow{grid-template-columns:132px minmax(0,1fr);min-height:68px;align-items:center}
+ .detailAddressRow .detailAddressIcon{align-self:center;padding:0;transition:opacity 160ms ease}
+ .photoDetailBody .photoDetailActions>.detailAddressRow>.detailRouteLinks{grid-column:1;grid-row:1;gap:0;opacity:0;transform:translateX(-4px);pointer-events:none;transition:opacity 160ms ease,transform 160ms ease}
+ .photoDetailBody .photoDetailActions>.detailAddressRow:hover>.detailRouteLinks,
+ .photoDetailBody .photoDetailActions>.detailAddressRow:focus-within>.detailRouteLinks{opacity:1;transform:none;pointer-events:auto}
+ .detailAddressRow:hover>.detailAddressIcon,.detailAddressRow:focus-within>.detailAddressIcon{opacity:0}
+ .photoDetailBody .photoDetailActions>.detailAddressRow:hover{background:var(--control-hover-surface)}
+}
+@media(prefers-reduced-motion:reduce){.photoDetailBody .photoDetailActions>.detailAddressRow>.detailRouteLinks,.detailAddressRow .detailAddressIcon{transition:none}}

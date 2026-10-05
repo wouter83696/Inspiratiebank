@@ -160,9 +160,10 @@
     actions.prepend(practical);
     const route=card.querySelector('.photoRouteChoices');
     if(route){
-      const disclosure=document.createElement('details');
-      disclosure.className='photoRouteChoices detailRouteCompact';
-      disclosure.innerHTML=`<summary>${detailIcon('route')}<span>Route</span></summary>`;
+      const disclosure=document.createElement('section');
+      disclosure.className='photoRouteChoices detailRouteCompact detailAddressRow';
+      disclosure.setAttribute('aria-label','Adres en navigatie');
+      disclosure.innerHTML=`<span class="detailAddressIcon" aria-hidden="true">${detailIcon('location')}</span>`;
       route.querySelectorAll('.detailRouteLinks a').forEach(link=>{
         const label=link.textContent.trim();
         link.setAttribute('aria-label',label);link.title=label;
