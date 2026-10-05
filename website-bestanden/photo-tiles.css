@@ -1155,7 +1155,7 @@ body.photoDetailOpen{overflow:hidden!important}
   position:relative;touch-action:none;cursor:grab;
  }
  #ideaMap .ideaMapPanel.isList.isTall .ideaMapPanelHead::before{
-  content:"";display:block!important;position:absolute;top:8px;left:50%;
+  content:"";display:block!important;position:absolute;top:12px;left:50%;margin:0;
   transform:translateX(-50%);width:36px;height:4px;border-radius:4px;background:#cdd8d8;
  }
  #ideaMap .ideaMapPanel.isList.isTall .ideaMapPanelHead h3{font-size:16px!important}
