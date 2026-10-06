@@ -931,3 +931,20 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
  :is(#agendaEditModal,#adminAgendaManagerSheet) .adminEditorClose{top:15px;right:16px}
  :is(.adminAgendaEditBody,.adminAgendaManagerBody){padding:18px 16px 24px}
 }
+
+/* Ongoing offers: align the category badge with the title, not the date block. */
+#adminApp #ongoingAdminSection .ongoingTitleCell .nameWithIcon{
+ display:grid;grid-template-columns:32px minmax(0,1fr);align-items:start;gap:12px;
+}
+#adminApp #ongoingAdminSection .ongoingTitleVisual{
+ width:32px;height:32px;min-width:32px;display:grid;place-items:center;
+ border:0;border-radius:50%;background:transparent;box-shadow:none;
+}
+#adminApp #ongoingAdminSection .ongoingTitleTextStack{gap:5px;min-width:0}
+#adminApp #ongoingAdminSection .ongoingTitleTextStack>.ongoingTitleLink,
+#adminApp #ongoingAdminSection .ongoingTitleTextStack>.ideaTitleText{
+ display:flex;align-items:center;min-height:32px;line-height:1.4;
+}
+#adminApp #ongoingAdminSection .ongoingTitleTextStack .ongoingDateMeta{
+ padding:0;margin:0;border:0;border-radius:0;background:transparent;line-height:1.5;
+}
