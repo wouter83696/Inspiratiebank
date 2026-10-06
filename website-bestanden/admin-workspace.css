@@ -577,7 +577,7 @@ body.adminEditorOpen{overflow:hidden!important}
 
 #adminIdeaEditPanel .adminEditToolbar .adminToolbarIcon{width:40px;min-width:28px;flex:0 1 40px;height:40px;padding:0}
 .adminToolbarIcon>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-#adminIdeaEditPanel .adminEditToolbar .adminToolbarSave{margin-left:0;background:#e5f2ef;border-color:rgba(79,142,158,.16);min-height:40px;padding:8px 12px}
+#adminIdeaEditPanel .adminEditToolbar .adminToolbarSave{margin-left:auto;background:#e5f2ef;border-color:rgba(79,142,158,.16);min-height:40px;padding:8px 12px}
 @media(max-width:640px){
  #adminIdeaEditPanel .adminEditToolbar{padding:4px;gap:2px}
  #adminIdeaEditPanel .adminEditToolbar .adminToolbarIcon{width:36px;min-height:44px;height:44px}
@@ -585,8 +585,10 @@ body.adminEditorOpen{overflow:hidden!important}
 }
 
 #adminIdeaEditPanel .adminEditToolbar .adminToolbarIcon{background:transparent;border-color:transparent}
-#adminIdeaEditPanel .adminDeleteAction{margin-right:6px}
+#adminIdeaEditPanel .adminDeleteAction{margin-left:auto;margin-right:6px}
 @media(min-width:1101px){
  body.adminDetailDocked .adminIdeaLayer::before{content:"";position:absolute;top:0;left:0;width:480px;height:64px;background:var(--site-topbar-surface);pointer-events:none}
  body.adminDetailDocked #adminIdeaEditPanel{position:relative}
 }
+
+#adminIdeaEditPanel .adminDeleteAction + .adminToolbarSave{margin-left:0}

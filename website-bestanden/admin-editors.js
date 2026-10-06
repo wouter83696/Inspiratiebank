@@ -92,14 +92,14 @@
       if(approval)toolbar.append(prepare(approval,'Goedkeuren'));
       toolbar.append(prepare(source.querySelector('.visibilityIdeaAction'),item.hidden?'Zichtbaar maken':'Verbergen'));
       const remove=prepare(source.querySelector('[data-delete-idea]'),'Verwijderen');remove.classList.add('adminDeleteAction');
-      toolbar.prepend(remove);
+      toolbar.append(remove);
     }
     toolbar.querySelectorAll(':scope > button').forEach(control=>{
       const label=control.getAttribute('aria-label')||control.textContent.trim();
       control.setAttribute('aria-label',label);control.title=label;control.classList.add('adminToolbarIcon');
     });
     saveButton.className='ideaFilterSheetAction secondary adminToolbarSave';
-    toolbar.prepend(saveButton);
+    toolbar.append(saveButton);
     syncPhoto();
   }
   function updateContact(){
