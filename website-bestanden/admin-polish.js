@@ -6,7 +6,7 @@
   $('adminNavigationMode').value=localStorage.getItem(modeKey)==='side'?'side':'top';
   $('adminPinMenu').checked=localStorage.getItem(pinKey)==='1';
   let ideaSnapshot='', settingsSnapshot='', originalPhoto=null, approvedClick=false, noticeTimer;
-  const snapshot=form=>JSON.stringify([...form.elements].filter(e=>e.tagName!=='BUTTON').map(e=>[e.id,e.type==='checkbox'?e.checked:e.value]));
+  const snapshot=form=>JSON.stringify([...form.elements].filter(e=>e.tagName!=='BUTTON').map(e=>[e.id,e.type==='checkbox'?e.checked:e.value]).sort((a,b)=>a[0].localeCompare(b[0])));
   const ideaDirty=()=>!$('adminIdeaEditPanel').hidden && ideaSnapshot!==snapshot($('adminIdeaEditForm'));
   const settingsDirty=()=>window.AdminSiteSettings?.hasUnsaved?.() || false;
   function captureIdea(){ideaSnapshot=snapshot($('adminIdeaEditForm'));originalPhoto={image:$('adminEditIdeaImage').value,approved:$('adminEditIdeaImageApproved').checked};}
@@ -57,10 +57,10 @@
   $('adminIdeaPhotoReset').addEventListener('click',()=>setPhoto(originalPhoto?.image||'',originalPhoto?.approved||false));
   document.addEventListener('click',async event=>{
     if(approvedClick)return;
-    const target=event.target.closest('#addAdminIdeaBtn,[data-edit-idea],#adminIdeaEditCancelBtn,[data-admin-target],#logoutBtn,#siteSettingsCancel');
+    const target=event.target.closest('#addAdminIdeaBtn,[data-edit-idea],[data-idea-key],[data-admin-featured-key],[data-feature-idea],[data-delete-idea],[data-title-action],[data-team-action],#adminIdeaEditCancelBtn,[data-admin-target],#logoutBtn,#siteSettingsCancel');
     if(!target)return;
     const leaving=target.id==='logoutBtn' || (target.hasAttribute('data-admin-target') && target.dataset.adminTarget!==document.querySelector('[data-admin-workspace]:not([hidden])')?.dataset.adminWorkspace);
-    const discardIdea=ideaDirty()&&(leaving||target.matches('#addAdminIdeaBtn,[data-edit-idea],#adminIdeaEditCancelBtn'));
+    const discardIdea=ideaDirty()&&(leaving||target.matches('#addAdminIdeaBtn,[data-edit-idea],[data-idea-key],[data-admin-featured-key],[data-feature-idea],[data-delete-idea],[data-title-action],[data-team-action],#adminIdeaEditCancelBtn'));
     const discardSettings=settingsDirty()&&(leaving||target.id==='siteSettingsCancel');
     if(!discardIdea&&!discardSettings)return;
     event.preventDefault();event.stopImmediatePropagation();

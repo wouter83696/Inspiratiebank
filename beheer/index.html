@@ -986,7 +986,7 @@
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260930-agenda-rebuild-v1">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20261004-meta-alignment-v2">
   <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261006-editor-sections-v3">
-  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261006-cleanup-v7">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261006-inline-edit-v8">
   <link rel="stylesheet" href="../website-bestanden/header-layout-shared.css?v=20261001-v1">
   <link rel="stylesheet" href="../website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
 </head>
@@ -3234,7 +3234,8 @@
   }
   function selectAdminIdea(key){
     selectedAdminIdeaKey = key;
-    AdminVisual.open(key);
+    const item=allAdminIdeas().find(item=>item.key===key);
+    if(item)startAdminIdeaEdit(item.kind,item.key);
   }
   function renderFeaturedIdeaManager(){
     const keys = featuredIdeaKeys();
@@ -4653,7 +4654,7 @@
     $('#adminEditIdeaImageUpload').value = '';
     $('#adminEditIdeaImageUploadName').textContent = 'Geen bestand geselecteerd';
     if($('#adminEditIdeaAddress').value && !$('#adminEditIdeaDistanceKm').value) syncAdminDistanceFromAddress();
-    const image = item.image ? adminIdeaImage(item) : null;
+    const image = adminIdeaImage(item);
     $('#adminEditIdeaImage').value = image ? (image.publicSrc || image.src || '') : '';
     $('#adminEditIdeaImageApproved').checked = image ? image.approved : false;
     syncAdminIdeaImagePreview();
@@ -4712,6 +4713,11 @@
     const next = editedIdeaPayload(original);
     if(!next.title){
       setStatus('#adminIdeaEditStatus', 'Vul minimaal een titel in.', 'warn');
+      return;
+    }
+    if(!$('#adminEditIdeaImage').value.trim() || !$('#adminEditIdeaImageApproved').checked){
+      setStatus('#adminIdeaEditStatus', 'Upload eerst een foto. Een activiteit kan niet zonder foto worden opgeslagen.', 'warn');
+      document.querySelector('.adminInlinePhotoButton')?.focus();
       return;
     }
     const stored = storedTeamIdeas().filter(item => item.id !== next.id && item.id !== original.key);
@@ -5050,9 +5056,9 @@
     });
   }, { once: true });
   </script>
-  <script src="../website-bestanden/admin-polish.js?v=20261006-editor-sections-v3"></script>
+  <script src="../website-bestanden/admin-polish.js?v=20261006-inline-edit-v8"></script>
 <script src="../website-bestanden/photo-tiles.js?v=20261006-editor-sections-v3"></script>
-<script src="../website-bestanden/admin-visual.js?v=20261006-sheet-controls-v6"></script>
-<script src="../website-bestanden/admin-editors.js?v=20261006-sheet-controls-v6"></script>
+<script src="../website-bestanden/admin-visual.js?v=20261006-inline-edit-v8"></script>
+<script src="../website-bestanden/admin-editors.js?v=20261006-inline-edit-v8"></script>
 </body>
 </html>

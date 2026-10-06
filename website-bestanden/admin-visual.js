@@ -69,7 +69,7 @@
     const dot=event.target.closest('[data-admin-featured-index]');
     if(dot){const carousel=dot.closest('.ideaFeaturedCarousel');const index=Number(dot.dataset.adminFeaturedIndex);carousel.querySelectorAll('[data-featured-slide]').forEach((slide,i)=>{slide.setAttribute('aria-hidden',String(i!==index));slide.inert=i!==index;});carousel.querySelectorAll('[data-admin-featured-index]').forEach((button,i)=>button.setAttribute('aria-pressed',String(i===index)));return;}
     const featured=event.target.closest('[data-admin-featured-key]');
-    if(featured){open(featured.dataset.adminFeaturedKey);actions.querySelector('[data-edit-idea]')?.click();}
+    if(featured){selectAdminIdea(featured.dataset.adminFeaturedKey);}
 
   });
   $('manageFeaturedBtn').addEventListener('click',()=>{
