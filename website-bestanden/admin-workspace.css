@@ -535,7 +535,7 @@ body.adminEditorOpen{overflow:hidden!important}
 }
 
 /* Mirror the right filter sheet's 16px outer corners on the left editor. */
-@media(min-width:641px){#adminIdeaEditPanel.adminEditorCard{border-radius:0 16px 16px 0}}
+@media(min-width:641px){#adminIdeaEditPanel.adminEditorCard{border-radius:0 16px 16px 0;border-right:1px solid rgba(79,142,158,.14)}}
 #adminIdeaEditPanel .adminEditorClose{top:12px;right:16px;width:32px;height:32px;min-width:32px;min-height:32px;border-radius:10px;border:1px solid rgba(79,142,158,.16);background:rgba(255,253,249,.72);color:#63858b;padding:0}
 .adminEditorClose svg{display:block;width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
 #adminIdeaEditPanel.adminEditorCard{overflow:hidden!important;clip-path:inset(0 round 0 16px 16px 0)}
