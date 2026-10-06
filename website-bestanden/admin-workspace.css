@@ -596,7 +596,7 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaEditPanel .adminEditToolbar .ideaFilterSheetAction:is(:hover,:focus-visible){background:#e5f2ef;border-color:transparent;box-shadow:none;transform:none}
 #adminIdeaEditPanel .adminPhotoDropzone{width:100%;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px dashed rgba(79,142,158,.55);border-radius:16px;background:rgba(255,255,255,.5);color:var(--accent-dark);font:inherit;cursor:pointer;padding:20px;text-align:center}
 #adminIdeaEditPanel .adminPhotoDropzone[hidden]{display:none}
-#adminIdeaEditPanel .adminPhotoDropzone:is(:hover,:focus-visible,.isDragging){background:#e5f2ef;border-color:var(--accent-dark)}
+#adminIdeaEditPanel .adminPhotoDropzone:is(:hover,:focus-visible,.isDragging){background:#f5f0e7;border-color:rgba(123,112,88,.4)}
 #adminIdeaEditPanel .adminPhotoDropzone svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.7}
 #adminIdeaEditPanel .adminPhotoDropzone small{font-size:12px;color:var(--muted)}
 
@@ -761,3 +761,6 @@ body:not(.adminMode) > .topbar .topLink:hover{text-decoration:underline;color:#3
 /* Keep activity actions visible outside the scrolling form. */
 #adminIdeaEditPanel.adminEditorCard{grid-template-rows:auto auto minmax(0,1fr) auto}
 .adminActivityFooter #adminIdeaEditSubmitBtn.hasChanges{background:#e5f2ef}
+
+#adminIdeaEditPanel .adminInlineMetadata > div[aria-label="Kenmerken aanpassen"]{margin-left:48px;max-width:calc(100% - 48px)}
+#adminIdeaEditPanel .adminActivityFooter{padding-inline:20px}

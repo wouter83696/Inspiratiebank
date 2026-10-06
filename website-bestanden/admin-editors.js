@@ -149,8 +149,17 @@
       current.replaceWith(next);
     }
     const badge=fields.querySelector('.ideaImageDomainBadge');
-    if(badge)badge.innerHTML=domainIcon(draft.domain);
+    const nextBadge=template.content.querySelector('.ideaImageDomainBadge');
+    if(badge&&nextBadge)badge.replaceWith(nextBadge);
+    else if(nextBadge)fields.querySelector('.ideaImageFrame')?.append(nextBadge);
+    const article=fields.querySelector('article');
+    const nextCard=template.content.querySelector('.sharedIdeaCard');
+    if(article&&nextCard){
+      [...article.classList].filter(name=>name.startsWith('theme')).forEach(name=>article.classList.remove(name));
+      article.classList.add(...[...nextCard.classList].filter(name=>name.startsWith('theme')));
+    }
   }
+  form.addEventListener('input',updateMetadata);
   form.addEventListener('change',()=>{updateMetadata();updateContact();});
   const locationFields=['Postcode','HouseNumber','Address'].map(id=>$('adminEditIdea'+id).closest('.teamField'));
   function syncLocationFields(){
