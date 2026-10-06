@@ -48,10 +48,12 @@
       const selected=key==='domains' ? value==='all'?!state.domains.size:state.domains.has(value) : state[key]===value;
       button.classList.toggle('active',selected);button.setAttribute('aria-pressed',String(selected));
     });
+    document.querySelectorAll('[data-admin-filter-select]').forEach(select=>{select.value=state[select.dataset.adminFilterSelect];syncCustomSelect(select);});
     document.querySelectorAll('#inspirationThemeLegend [data-theme-filter]').forEach(button=>{
       const value=button.dataset.themeFilter,selected=value==='all'?!state.domains.size:state.domains.has(value);
       button.classList.toggle('active',selected);button.setAttribute('aria-pressed',String(selected));
     });
+    syncCustomSelect($('adminIdeaStatusFilter'));
     $('ideaFilterDistanceRange').value=String(SiteSettings.radii.indexOf(state.radius));
     $('ideaFilterDistanceValue').textContent=state.radius>=50?'50+ km':state.radius+' km';
     $('ideaFilterApplyBtn').textContent='Toon activiteiten';
@@ -97,7 +99,22 @@
     const statusSection=document.createElement('section');statusSection.className='ideaFilterSection adminStatusFilterSection';
     const statusControl=$('adminIdeaStatusFilter').closest('.adminStatusFilter');
     statusSection.append(statusControl);
+    statusControl.querySelector('label').hidden=true;
+    const statusSelect=$('adminIdeaStatusFilter');statusSelect.setAttribute('aria-label','Beheerstatus');statusSelect.classList.add('adminFilterSelect');
+    [...statusSelect.options].forEach(option=>{option.textContent='Beheerstatus: '+(option.value==='all'?'alles':option.textContent.toLocaleLowerCase());});
+    ['ideaLocation','ideaCost','ideaDuration','ideaStimulus'].forEach(filter=>{
+      const buttons=[...document.querySelectorAll(`#ideaFilterSheetLayer [data-sheet-filter="${filter}"]`)];
+      const section=buttons[0].closest('section');const title=section.querySelector('h3').textContent;
+      const select=document.createElement('select');select.className='adminFilterSelect';select.dataset.adminFilterSelect=filterKey(filter);select.setAttribute('aria-label',title);
+      buttons.forEach(button=>{const option=document.createElement('option');option.value=button.dataset.value;option.textContent=title+': '+(option.value==='all'?'alles':button.textContent.trim());select.append(option);});
+      section.replaceChildren(select);
+      select.addEventListener('change',()=>{state[filterKey(filter)]=select.value;renderIdeas();});
+    });
     $('ideaFilterLocationSection').before(statusSection);
+    document.querySelectorAll('#ideaFilterSheetLayer .adminFilterSelect').forEach(select=>{
+      select.dataset.includePlaceholderOption='true';enhanceCustomSelect(select);
+      select.closest('.customSelect').querySelector('.customSelectButton').setAttribute('aria-label',select.getAttribute('aria-label'));
+    });
     state.radius=AdminSiteSettings.current().region.radiusKm;
     $('ideaFilterDistanceRange').max=SiteSettings.radii.length-1;
     const categories=ADMIN_THEME_LEGEND.map(value=>({value:domainDisplayLabel(value),label:domainDisplayLabel(value),theme:domainThemeClass(value),icon:domainIcon(value)}));

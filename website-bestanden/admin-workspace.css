@@ -729,3 +729,16 @@ body.adminEditorOpen{overflow:hidden!important}
 #ideaFilterSheetLayer .adminStatusFilter{display:grid;gap:12px;margin:0}
 #ideaFilterSheetLayer .adminStatusFilter label{font-size:18px;font-weight:700;color:#315f6b}
 #ideaFilterSheetLayer #adminIdeaStatusFilter{width:100%;min-height:44px;padding:10px 14px;border:1px solid rgba(79,142,158,.16);border-radius:12px;background:#fffdf9;color:#315f6b;font:inherit}
+
+#ideaFilterSheetLayer .adminFilterSelect{box-sizing:border-box;width:100%;min-height:46px;padding:10px 14px;border:1px solid rgba(79,142,158,.16);border-radius:12px;background:#fffdf9;color:#315f6b;font:inherit;cursor:pointer}
+#ideaFilterSheetLayer .adminFilterSelect:hover{background:#e5f2ef}
+#ideaFilterSheetLayer .adminFilterSelect:focus-visible{outline:2px solid #8fcfc4;outline-offset:2px}
+#ideaFilterSheetLayer .adminStatusFilter label[hidden]{display:none}
+
+#ideaFilterSheetLayer .customSelect{width:100%;min-width:0}
+#ideaFilterSheetLayer .customSelectButton{box-sizing:border-box;width:100%;min-height:46px;padding:12px 40px 12px 16px;border:1px solid rgba(79,142,158,.16);border-radius:14px;background:#fffdf9;color:#315f6b;font:inherit;text-align:left;box-shadow:none}
+#ideaFilterSheetLayer .customSelectButton:hover,#ideaFilterSheetLayer .customSelect.open .customSelectButton{background:#e5f2ef}
+#ideaFilterSheetLayer .customSelectMenu{box-sizing:border-box;width:100%;max-width:none;border:1px solid rgba(79,142,158,.16);border-radius:14px;background:#fffdf9;padding:6px;box-shadow:0 8px 24px rgba(23,79,93,.12)}
+#ideaFilterSheetLayer .customSelectOption{color:#315f6b;font:inherit;border-radius:9px;padding:10px 12px;min-height:42px;background:transparent}
+#ideaFilterSheetLayer .customSelectOption:is(:hover,:focus-visible,[aria-selected="true"]){background:#e5f2ef;color:#315f6b}
+#ideaFilterSheetLayer .customNativeSelect{position:absolute!important;width:1px!important;height:1px!important;min-height:0!important;padding:0!important;opacity:0;pointer-events:none}
