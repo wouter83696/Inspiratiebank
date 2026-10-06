@@ -130,5 +130,5 @@
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
-  window.IdeaViewShared = Object.freeze({materialItems, renderOutdoorPill, renderFeaturedCard, renderPhotoTileContent, renderMaterials, renderPractical, renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
+  window.IdeaViewShared = Object.freeze({renderListActivity,materialItems, renderOutdoorPill, renderFeaturedCard, renderPhotoTileContent, renderMaterials, renderPractical, renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
 })();
