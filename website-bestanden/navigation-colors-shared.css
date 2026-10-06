@@ -1,5 +1,6 @@
 /* One hover surface for public navigation and the management sidebar. */
-:root{--control-hover-surface:rgba(168,225,221,.12)}
+:root{--control-hover-surface:rgba(168,225,221,.12);--site-topbar-surface:#fffdf8}
+.topbar{background:var(--site-topbar-surface)!important}
 #adminApp :is(.adminNavButton,.adminSidebarToggle):is(:hover,:focus-visible):not(.active){background:var(--control-hover-surface);color:var(--accent-dark);transform:none}
 /* Sticky surfaces stay borderless, including the mobile day selector. */
 :is(#tab-inspiratie,#tab-weken):not(.adminPublicSurface)>.desktopStickyControls.isStuck::after,
