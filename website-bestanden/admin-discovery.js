@@ -101,14 +101,15 @@
     $('ideaFilterLocationSection').before(statusSection);
     statusSection.append(statusControl);
     statusControl.querySelector('label').hidden=true;
+    const statusHeading=document.createElement('h3');statusHeading.textContent='Beheerstatus';statusSection.prepend(statusHeading);
     const statusSelect=$('adminIdeaStatusFilter');statusSelect.setAttribute('aria-label','Beheerstatus');statusSelect.classList.add('adminFilterSelect');
-    [...statusSelect.options].forEach(option=>{option.textContent='Beheerstatus: '+(option.value==='all'?'alles':option.textContent.toLocaleLowerCase());});
+    [...statusSelect.options].forEach(option=>{if(option.value==='all')option.textContent='Alle activiteiten';});
     ['ideaLocation','ideaCost','ideaDuration','ideaStimulus'].forEach(filter=>{
       const buttons=[...document.querySelectorAll(`#ideaFilterSheetLayer [data-sheet-filter="${filter}"]`)];
-      const section=buttons[0].closest('section');const title=section.querySelector('h3').textContent;
+      const section=buttons[0].closest('section');const heading=section.querySelector('h3');const title=heading.textContent;
       const select=document.createElement('select');select.className='adminFilterSelect';select.dataset.adminFilterSelect=filterKey(filter);select.setAttribute('aria-label',title);
-      buttons.forEach(button=>{const option=document.createElement('option');option.value=button.dataset.value;option.textContent=title+': '+(option.value==='all'?'alles':button.textContent.trim());select.append(option);});
-      section.replaceChildren(select);
+      buttons.forEach(button=>{const option=document.createElement('option');option.value=button.dataset.value;option.textContent=option.value==='all'?'Alles':button.textContent.trim();select.append(option);});
+      section.replaceChildren(heading,select);
       select.addEventListener('change',()=>{state[filterKey(filter)]=select.value;renderIdeas();});
     });
     document.querySelectorAll('#ideaFilterSheetLayer .adminFilterSelect').forEach(select=>{
