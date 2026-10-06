@@ -24,6 +24,10 @@
     fields.append(section);
   });
   form.prepend(fields);oldGrid.remove();
+  idea.querySelectorAll('.adminPhotoActions .button').forEach(button=>{
+    button.classList.remove('button');
+    button.classList.add('ideaFilterSheetAction','secondary');
+  });
   const footer=form.querySelector('.teamActionBar');footer.prepend($('adminIdeaEditCancelBtn'));
   $('adminIdeaEditSubmitBtn').textContent='Opslaan';$('adminIdeaEditCancelBtn').textContent='Annuleren';
   const locationFields=['Postcode','HouseNumber','Address','DistanceKm'].map(id=>$('adminEditIdea'+id).closest('.teamField'));

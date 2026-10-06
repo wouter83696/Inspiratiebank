@@ -3,7 +3,7 @@
   const $=id=>document.getElementById(id);
   const layer=document.createElement('div');
   layer.id='adminIdeaLayer';layer.className='adminEditorLayer adminIdeaLayer';layer.hidden=true;
-  layer.innerHTML='<section id="adminIdeaPreview" class="adminEditorCard adminPublicSurface photoDetailPanel" aria-labelledby="adminPreviewTitle"><header class="adminPreviewHeader"><h2 id="adminPreviewTitle"></h2><button class="adminEditorClose" type="button" aria-label="Activiteit sluiten">×</button></header><div class="adminPreviewActions" role="group" aria-label="Activiteit beheren"></div><div class="photoDetailBody sharedIdeaCards"></div></section>';
+  layer.innerHTML='<section id="adminIdeaPreview" class="adminEditorCard adminPublicSurface photoDetailPanel" aria-labelledby="adminPreviewTitle"><header class="adminPreviewHeader"><h2 id="adminPreviewTitle"></h2><button class="adminEditorClose" type="button" aria-label="Activiteit sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></header><div class="adminPreviewActions" role="group" aria-label="Activiteit beheren"></div><div class="photoDetailBody sharedIdeaCards"></div></section>';
   document.body.append(layer);
   const preview=$('adminIdeaPreview'),body=preview.querySelector('.photoDetailBody'),actions=preview.querySelector('.adminPreviewActions');
   let returnFocus=null,tab='Beschrijving';
