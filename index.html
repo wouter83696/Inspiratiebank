@@ -5838,7 +5838,7 @@
   <script src="website-bestanden/agenda-discovery-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script>DiscoveryViewShared.mount();AgendaDiscoveryShared.mount();</script>
   <script src="website-bestanden/site-settings-shared.js?v=20261004-compact-v1"></script>
-  <script src="website-bestanden/photo-tiles.js?v=20261006-photo-titles-v50"></script>
+  <script src="website-bestanden/photo-tiles.js?v=20261006-location-v51"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20261004-materials-v4"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20261006-content-fields-v3"></script>
@@ -5847,7 +5847,7 @@
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script>
-  const SITE_DATA_URL = 'website-bestanden/data/zomerprogramma_data.json?v=20261006-content-fields';
+  const SITE_DATA_URL = 'website-bestanden/data/zomerprogramma_data.json?v=20261006-location-review';
   const EMPTY_SITE_DATA = {
     weeks:[],
     external:[],
@@ -5873,7 +5873,7 @@
     if(window.BCJN_BEHEER_BASE && typeof window.BCJN_BEHEER_BASE === 'object') return Promise.resolve(window.BCJN_BEHEER_BASE);
     return new Promise((resolve, reject) => {
       const script = document.createElement('script');
-      script.src = 'website-bestanden/data/beheer_items.js?v=20261006-content-fields';
+      script.src = 'website-bestanden/data/beheer_items.js?v=20261006-location-review';
       script.onload = () => resolve(window.BCJN_BEHEER_BASE || null);
       script.onerror = () => reject(new Error('Reserve-data kon niet worden geladen.'));
       document.head.appendChild(script);
@@ -6479,7 +6479,7 @@
     const hasOutdoor = v === 'buiten' || v.includes('buitenactiviteit') || v.includes('buitenruimte') || v.includes('wandelen') || v.includes('park') || v.includes('route');
     const hasIndoor = v === 'binnen' || v.includes('op locatie') || v.includes('op groep') || v.includes('op terrein') || v.includes('terrein') || v.includes('binnenruimte');
     if(hasOnline) return 'Online';
-    if(hasHome) return 'Thuis';
+    if(hasHome && !hasOutside) return 'Thuis';
     if(v.includes('op locatie + buiten') || v.includes('binnen + buiten') || v.includes('binnen en buiten')) return hasOutside ? 'Op pad' : 'Buiten';
     if(hasOutside && hasIndoor) return 'Op pad';
     if(hasOutside) return 'Op pad';
@@ -6885,6 +6885,7 @@
   function itemIsHomeActivity(item={}){
     const text = normalize(`${item.locationType || ''} ${item.address || ''} ${item.where || ''} ${item.place || ''} ${item.location || ''} ${item.materials || ''} ${item.fit || ''}`);
     const location = normalizeIdeaLocation(item.locationType || '');
+    if(String(item.locationType || '').trim()) return location === 'Thuis' || location === 'Online';
     return location === 'Thuis'
       || text.includes('thuis')
       || text.includes('aan huis')
@@ -6989,7 +6990,9 @@
     return match ? Number(match[1]) : NaN;
   }
   function normalizeIdeaDistance(value='', item={}, context='inspiration'){
+    if(itemIsHomeActivity(item)) return 'Thuis';
     const v = normalize(value);
+    if(normalizeIdeaLocation(item.locationType) === 'Buiten' && v === 'op locatie') return 'Op locatie';
     const location = normalize(`${item.locationType || ''} ${item.address || ''} ${item.where || ''} ${item.title || ''} ${item.source || ''}`);
     if(location.includes('op locatie') || location.includes('op groep') || location.includes('op terrein') || location.includes('online')) return 'Op locatie';
     const measuredKm = itemDistanceKm(item);
@@ -8776,7 +8779,7 @@
     const place = String(item.place || item.location || '').trim();
     if(address) return address;
     if(postcode) return [postcode, place].filter(Boolean).join(' ');
-    return [item.title, place].filter(Boolean).join(', ');
+    return [item.locationName || item.venue, place].filter(Boolean).join(', ');
   }
   function ideaRouteUrl(item={}){
     const destination = ideaRouteDestination(item);

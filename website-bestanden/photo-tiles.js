@@ -104,6 +104,7 @@
       : '<svg class="mapAppLogo" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="6" fill="#e8efdf"/><path fill="#b3dc98" d="M2 3h11v12H2zm19 16h9v11h-9Z"/><path stroke="white" stroke-width="5" fill="none" d="m2 26 28-18M12 1l8 30"/><path stroke="#f9c84c" stroke-width="2" d="m2 26 28-18"/><path fill="#3295ee" stroke="white" stroke-width="1.5" d="m19 8 7 17-8-3-7 5Z"/></svg>';
   }
   function routeChoices(item){
+    if(itemIsHomeActivity(item))return '';
     const format=value=>String(value||'').trim().replace(/\b(\d{4})\s*([A-Za-z]{2})\b/g,(_,digits,letters)=>`${digits} ${letters.toUpperCase()}`);
     const key=value=>format(value).toLocaleLowerCase('nl').replace(/[\s,]+/g,' ').trim();
     const address=format(item.address||item.where);

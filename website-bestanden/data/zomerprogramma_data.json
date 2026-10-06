@@ -127,7 +127,8 @@
         "week 29"
       ],
       "distanceBand": "Dichtbij (0-10 km)",
-      "note": "Check vooraf zwemvaardigheid, toezicht, omkleden en verwachte drukte."
+      "note": "Check vooraf zwemvaardigheid, toezicht, omkleden en verwachte drukte.",
+      "address": "Goffertweg 22, 6532 AA Nijmegen"
     },
     {
       "title": "Gennepse Zomer – Limburgse avond",
@@ -245,7 +246,8 @@
         "gratis",
         "zomer"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "address": "Zijpendaalseweg 26-28, 6814 CL Arnhem"
     },
     {
       "title": "Burgers' Zoo Arnhem – zomeraanbod",
@@ -266,7 +268,8 @@
         "zomer",
         "prikkelend"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "address": "Antoon van Hooffplein 1, 6816 SH Arnhem"
     },
     {
       "title": "De stem van Nijmegen – audiotour",
@@ -287,7 +290,8 @@
         "stad",
         "zomer"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "address": "Grote Markt, Nijmegen"
     },
     {
       "title": "Focus Arnhem – filmprogramma en dakzaal",
@@ -308,7 +312,8 @@
         "binnen",
         "zomer"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "address": "Audrey Hepburnplein 1, 6811 EH Arnhem"
     },
     {
       "title": "Kröller-Müller Museum – zomerbezoek",
@@ -330,7 +335,8 @@
         "zomer"
       ],
       "distanceBand": "Verder weg (30-50 km)",
-      "note": "Structureer het bezoek met een kijkopdracht of fotomissie."
+      "note": "Structureer het bezoek met een kijkopdracht of fotomissie.",
+      "address": "Houtkampweg 6, 6731 AW Otterlo"
     },
     {
       "title": "muZIEum Nijmegen – expedities en Unseen",
@@ -351,7 +357,8 @@
         "museum",
         "zomer"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "address": "Ziekerstraat 6B, 6511 LH Nijmegen"
     },
     {
       "title": "Nederlands Openluchtmuseum Arnhem – zomerseizoen",
@@ -373,7 +380,8 @@
         "buiten"
       ],
       "distanceBand": "In de regio (10-30 km)",
-      "note": "Kies vooraf een paar onderdelen en concrete stopplekken."
+      "note": "Kies vooraf een paar onderdelen en concrete stopplekken.",
+      "address": "Hoeferlaan 4, 6816 SG Arnhem"
     },
     {
       "title": "Nederlands Watermuseum Arnhem – zomerexpo Waterkracht",
@@ -395,7 +403,8 @@
         "interactief",
         "zomerexpo"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "address": "Zijpendaalseweg 26-28, 6814 CL Arnhem"
     },
     {
       "title": "Route 1900 – wandel mee met 125 jaar N.E.C.",
@@ -490,7 +499,8 @@
         "museum",
         "zomer"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "address": "Wylerbaan 4, 6561 KR Groesbeek"
     },
     {
       "title": "Wandel door bioscoopgeschiedenis van Arnhem",
@@ -543,7 +553,8 @@
       ],
       "pinToAgenda": true,
       "distanceBand": "Dichtbij (0-10 km)",
-      "note": "Controleer of het programma in de vakantie doorgaat."
+      "note": "Controleer of het programma in de vakantie doorgaat.",
+      "address": "Rijstveld 4, Beuningen"
     },
     {
       "title": "Pop Culture Arcade – Woensdag Madness",
@@ -572,7 +583,11 @@
       ],
       "pinToAgenda": true,
       "distanceBand": "Dichtbij (0-10 km)",
-      "note": "Spreek vooraf speeltijd, pauzemoment en geluids- en druktekeuze af."
+      "note": "Spreek vooraf speeltijd, pauzemoment en geluids- en druktekeuze af.",
+      "address": "Mariënburg 28, 6511 PS Nijmegen",
+      "postcode": "6511 PS",
+      "lat": 51.845296,
+      "lon": 5.8657041
     },
     {
       "title": "Weekmarkt Millingen aan de Rijn",
@@ -630,7 +645,8 @@
         5,
         6
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "address": "Profetenlaan 2, 6564 BL Heilig Landstichting"
     },
     {
       "title": "Weekmarkt Bemmel",
@@ -743,7 +759,8 @@
         6
       ],
       "pinToAgenda": true,
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "address": "Binnenweg 2, 6644 KD Ewijk"
     },
     {
       "title": "Happen & Tappen Foodtruckfestival Grave",
@@ -1099,7 +1116,11 @@
         "gaming",
         "challenge",
         "nijmegen"
-      ]
+      ],
+      "address": "Mariënburg 28, 6511 PS Nijmegen",
+      "postcode": "6511 PS",
+      "lat": 51.845296,
+      "lon": 5.8657041
     },
     {
       "title": "Pathé Nijmegen",
@@ -1123,7 +1144,11 @@
         "x-cube",
         "escape",
         "lent"
-      ]
+      ],
+      "address": "Willem van Arenbergstraat 4, 6515 AT Nijmegen",
+      "postcode": "6515 AT",
+      "lat": 51.8798408,
+      "lon": 5.8615081
     },
     {
       "title": "Vue Nijmegen Plein",
@@ -1145,7 +1170,11 @@
         "film",
         "nijmegen",
         "binnen"
-      ]
+      ],
+      "address": "Tweede Walstraat 16, 6511 LV Nijmegen",
+      "postcode": "6511 LV",
+      "lat": 51.8442811,
+      "lon": 5.8661121
     },
     {
       "title": "EnjoyVR Nijmegen",
@@ -1167,7 +1196,11 @@
         "gaming",
         "immersief",
         "nijmegen"
-      ]
+      ],
+      "address": "Klein Mariënburg 3, 6511 PL Nijmegen",
+      "postcode": "6511 PL",
+      "lat": 51.8446573,
+      "lon": 5.868038
     },
     {
       "title": "GRIP Boulderhal Nijmegen",
@@ -1189,7 +1222,11 @@
         "klimmen",
         "sport",
         "nijmegen"
-      ]
+      ],
+      "address": "Kamerlingh Onnesstraat 35, 6533 HK Nijmegen",
+      "postcode": "6533 HK",
+      "lat": 51.8131713,
+      "lon": 5.8384456
     },
     {
       "title": "Waalhalla Nijmegen",
@@ -1212,7 +1249,11 @@
         "step",
         "urban",
         "nijmegen"
-      ]
+      ],
+      "address": "Winselingseweg 12, 6541 AK Nijmegen",
+      "postcode": "6541 AK",
+      "lat": 51.8567017,
+      "lon": 5.8394174
     },
     {
       "title": "De Wijchense Berg",
@@ -1334,7 +1375,8 @@
         "rhenen",
         "daguitstap"
       ],
-      "note": "Plan dit als uitje wat verder weg. Kies vooraf enkele dierengebieden, plan vervoer en rustmomenten en houd ruimte om eerder te vertrekken."
+      "note": "Plan dit als uitje wat verder weg. Kies vooraf enkele dierengebieden, plan vervoer en rustmomenten en houd ruimte om eerder te vertrekken.",
+      "address": "Grebbeweg 111, 3911 AV Rhenen"
     },
     {
       "title": "BillyBird Hemelrijk - strand, attracties en outdoor uitje verder weg",
@@ -1358,7 +1400,8 @@
         "volkel",
         "daguitstap"
       ],
-      "note": "Plan dit als uitje wat verder weg, kies vooraf een beperkt programma en neem rust- en omkleedmomenten mee."
+      "note": "Plan dit als uitje wat verder weg, kies vooraf een beperkt programma en neem rust- en omkleedmomenten mee.",
+      "address": "Zeelandsedijk 34a, 5408 SM Volkel"
     },
     {
       "title": "ZooParc Overloon - expeditieroute wat verder weg",
@@ -1379,7 +1422,8 @@
         "dieren",
         "overloon",
         "daguitstap"
-      ]
+      ],
+      "address": "Stevensbeekseweg 21, 5825 JB Overloon"
     },
     {
       "title": "You Jump Nijmegen",
@@ -1401,7 +1445,11 @@
         "jump",
         "bewegen",
         "nijmegen"
-      ]
+      ],
+      "address": "Industrieweg 101, 6541 TV Nijmegen",
+      "postcode": "6541 TV",
+      "lat": 51.8469473,
+      "lon": 5.8341453
     },
     {
       "title": "Escape Boot Nijmegen",
@@ -1423,7 +1471,11 @@
         "puzzels",
         "samenwerken",
         "nijmegen"
-      ]
+      ],
+      "address": "Waalkade 100, 6511 XR Nijmegen",
+      "postcode": "6511 XR",
+      "lat": 51.8496652,
+      "lon": 5.8679131
     },
     {
       "title": "ROX Escape Nijmegen",
@@ -1445,7 +1497,11 @@
         "puzzels",
         "nyma",
         "nijmegen"
-      ]
+      ],
+      "address": "De Kolk 17, 6541 AV Nijmegen",
+      "postcode": "6541 AV",
+      "lat": 51.8559206,
+      "lon": 5.8383507
     },
     {
       "title": "Nijmegen Outdoor",
@@ -1548,7 +1604,11 @@
         "outdoor",
         "hindernis",
         "ewijk"
-      ]
+      ],
+      "address": "Groene Heuvels 1, 6644 KX Ewijk",
+      "postcode": "6644 KX",
+      "lat": 51.844225,
+      "lon": 5.6927007
     },
     {
       "title": "Verhalenvertellers bij De Barendonk",
@@ -1571,7 +1631,8 @@
         "zomer 2026",
         "regio",
         "uitje"
-      ]
+      ],
+      "address": "Millseweg 13, 5437 NB Beers"
     },
     {
       "title": "Pop Culture Arcade – PCA Challenge",
@@ -1595,7 +1656,11 @@
         "regio",
         "uitje"
       ],
-      "note": "Kies vooraf een tijdsblok."
+      "note": "Kies vooraf een tijdsblok.",
+      "address": "Mariënburg 28, 6511 PS Nijmegen",
+      "postcode": "6511 PS",
+      "lat": 51.845296,
+      "lon": 5.8657041
     },
     {
       "title": "Verhalenvertellers bij De Barendonk",
@@ -1618,7 +1683,8 @@
         "zomer 2026",
         "regio",
         "uitje"
-      ]
+      ],
+      "address": "Millseweg 13, 5437 NB Beers"
     },
     {
       "title": "Verhalenvertellers bij De Barendonk",
@@ -1641,7 +1707,8 @@
         "zomer 2026",
         "regio",
         "uitje"
-      ]
+      ],
+      "address": "Millseweg 13, 5437 NB Beers"
     },
     {
       "title": "Verhalenvertellers bij De Barendonk",
@@ -1664,7 +1731,8 @@
         "zomer 2026",
         "regio",
         "uitje"
-      ]
+      ],
+      "address": "Millseweg 13, 5437 NB Beers"
     },
     {
       "title": "Alle kinderen stinken (6+)",
@@ -1703,7 +1771,8 @@
         "makers",
         "najaar 2026"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "address": "Audrey Hepburnplein 1, 6811 EH Arnhem"
     },
     {
       "title": "Yentl en de Boer – Rekhalzen",
@@ -1760,7 +1829,8 @@
         "kortfilm",
         "najaar 2026"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "address": "Audrey Hepburnplein 1, 6811 EH Arnhem"
     },
     {
       "title": "Margriet van der Linden – Annie, are you ok?",
@@ -1817,7 +1887,8 @@
         "talent",
         "najaar 2026"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "address": "Mariënburg 38-39, 6511 PS Nijmegen"
     },
     {
       "title": "Over de liefde",
@@ -1875,7 +1946,8 @@
         "workshop",
         "najaar 2026"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "address": "Mariënburg 38-39, 6511 PS Nijmegen"
     },
     {
       "title": "Organ & Film Festival – Animatieplaats (6+)",
@@ -1895,7 +1967,11 @@
         "familie",
         "najaar 2026"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "address": "Stevenskerkhof 62, 6511 VZ Nijmegen",
+      "postcode": "6511 VZ",
+      "lat": 51.8471,
+      "lon": 5.8638
     },
     {
       "title": "Gestrand op Mars (8+)",
@@ -2064,7 +2140,8 @@
         "podium",
         "najaar 2026"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "address": "Mariënburg 38-39, 6511 PS Nijmegen"
     },
     {
       "title": "Liefdesbrieven",
@@ -2158,7 +2235,8 @@
         "podium",
         "najaar 2026"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "address": "Mariënburg 38-39, 6511 PS Nijmegen"
     },
     {
       "title": "Halloweenfilm – Carrie",
@@ -2177,7 +2255,8 @@
         "halloween",
         "najaar 2026"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "address": "Mariënburg 38-39, 6511 PS Nijmegen"
     }
   ],
   "inspiration": [
@@ -2275,7 +2354,7 @@
       "title": "Graffiti op doek of houten panelen",
       "domain": "Creatief & Expressie",
       "type": "Eigen aanbod / workshop",
-      "locationType": "Op pad",
+      "locationType": "Thuis",
       "cost": "Laag/betaald",
       "stimulus": "Middel",
       "duration": "90–180 min",
@@ -2287,7 +2366,7 @@
         "creatief",
         "buiten"
       ],
-      "distanceBand": "Dichtbij (0-10 km)",
+      "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/005-graffiti-op-doek-of-houten-panelen.jpg",
       "imageAlt": "Foto bij Graffiti op doek of houten panelen",
       "imageStatus": "approved",
@@ -3441,7 +3520,7 @@
       "title": "Natuurbingo",
       "domain": "Natuur & Buiten",
       "type": "Eigen aanbod",
-      "locationType": "Op pad",
+      "locationType": "Buiten",
       "cost": "Gratis",
       "stimulus": "Laag/middel",
       "duration": "45–90 min",
@@ -3453,7 +3532,7 @@
         "bingo",
         "opdracht"
       ],
-      "distanceBand": "Dichtbij (0-10 km)",
+      "distanceBand": "Op locatie",
       "image": "website-bestanden/afbeeldingen/inspiratie/057-natuurbingo-verified-v2.jpg",
       "imageAlt": "Foto bij Natuurbingo",
       "imageStatus": "approved",
@@ -3531,7 +3610,7 @@
       "title": "Rustig avondrondje",
       "domain": "Natuur & Buiten",
       "type": "Eigen aanbod",
-      "locationType": "Op pad",
+      "locationType": "Buiten",
       "cost": "Gratis",
       "stimulus": "Laag",
       "duration": "20–45 min",
@@ -3543,7 +3622,7 @@
         "rust",
         "kort"
       ],
-      "distanceBand": "Dichtbij (0-10 km)",
+      "distanceBand": "Op locatie",
       "image": "website-bestanden/afbeeldingen/inspiratie/061-prikkelarm-avondrondje.jpg",
       "imageAlt": "Foto bij Rustig avondrondje",
       "imageStatus": "approved"
@@ -4095,14 +4174,14 @@
       "title": "Openluchtspel in park met rollenkaart",
       "domain": "Ontmoeten, Spel & Vaardigheden",
       "type": "Eigen aanbod",
-      "locationType": "Op pad",
+      "locationType": "Buiten",
       "duration": "45-90 min",
       "group": "4-10",
       "cost": "Gratis/laag",
       "stimulus": "Middel",
       "materials": "Spreek een start-stopstructuur af.",
       "fit": "Speel samen een buitenspel in het park en wissel tussen verschillende rollen.",
-      "distanceBand": "Dichtbij (0-10 km)",
+      "distanceBand": "Op locatie",
       "image": "website-bestanden/afbeeldingen/inspiratie/086-openluchtspel-in-park-met-rollenkaart.jpg",
       "imageAlt": "Foto bij Openluchtspel in park met rollenkaart",
       "imageStatus": "approved",
@@ -4305,7 +4384,7 @@
       "title": "Vrijwilligerswerk ontdekken",
       "domain": "Ontmoeten, Spel & Vaardigheden",
       "type": "Eigen aanbod / oriëntatie",
-      "locationType": "Op pad",
+      "locationType": "Thuis",
       "cost": "Gratis",
       "stimulus": "Laag/middel",
       "duration": "60–120 min",
@@ -4317,7 +4396,7 @@
         "vaardigheid",
         "toekomst"
       ],
-      "distanceBand": "Dichtbij (0-10 km)",
+      "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/096-vrijwilligerswerk-verkennen-op-papier.jpg",
       "imageAlt": "Foto bij Vrijwilligerswerk ontdekken",
       "imageStatus": "approved",
@@ -4416,7 +4495,7 @@
       "title": "Kubb / frisbee / spikeball",
       "domain": "Sport & Bewegen",
       "type": "Eigen aanbod",
-      "locationType": "Op pad",
+      "locationType": "Buiten",
       "cost": "Laag",
       "stimulus": "Middel",
       "duration": "60–120 min",
@@ -4428,7 +4507,7 @@
         "buiten",
         "sport"
       ],
-      "distanceBand": "Dichtbij (0-10 km)",
+      "distanceBand": "Op locatie",
       "image": "website-bestanden/afbeeldingen/inspiratie/101-kubb-frisbee-spikeball-verified.jpg",
       "imageAlt": "Foto bij Kubb / frisbee / spikeball",
       "imageStatus": "approved",
@@ -4438,7 +4517,7 @@
       "title": "Silent disco of koptelefoonplaylist wandeling",
       "domain": "Sport & Bewegen",
       "type": "Eigen aanbod",
-      "locationType": "Op pad",
+      "locationType": "Buiten",
       "cost": "Laag",
       "stimulus": "Middel",
       "duration": "30–60 min",
@@ -4451,7 +4530,7 @@
         "bewegen",
         "doseerbaar"
       ],
-      "distanceBand": "Dichtbij (0-10 km)",
+      "distanceBand": "Op locatie",
       "image": "website-bestanden/afbeeldingen/inspiratie/102-silent-disco-of-koptelefoonplaylist-wandeling.jpg",
       "imageAlt": "Foto bij Silent disco of koptelefoonplaylist wandeling",
       "imageStatus": "approved",
@@ -4483,7 +4562,7 @@
       "title": "Volleybal / beachvolleybal",
       "domain": "Sport & Bewegen",
       "type": "Eigen aanbod",
-      "locationType": "Op pad",
+      "locationType": "Buiten",
       "cost": "Gratis/laag",
       "stimulus": "Middel",
       "duration": "60–120 min",
@@ -4495,7 +4574,7 @@
         "team",
         "bal"
       ],
-      "distanceBand": "Dichtbij (0-10 km)",
+      "distanceBand": "Op locatie",
       "image": "website-bestanden/afbeeldingen/inspiratie/104-volleybal-beachvolleybal.jpg",
       "imageAlt": "Foto bij Volleybal / beachvolleybal",
       "imageStatus": "approved",
@@ -4623,7 +4702,7 @@
       "title": "Karaoke-room of muziekchallenge",
       "domain": "Actie & Amusement",
       "type": "Bestaand extern aanbod / eigen variant",
-      "locationType": "Binnen + buiten",
+      "locationType": "Buiten de deur",
       "distanceBand": "Dichtbij (0-10 km)",
       "duration": "45-90 min",
       "group": "2-8",

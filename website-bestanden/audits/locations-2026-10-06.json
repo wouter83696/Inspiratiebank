@@ -1,0 +1,807 @@
+{
+  "reviewed": {
+    "inspiration": 161,
+    "external": 92
+  },
+  "policy": "No fixed address invented for generic activities, multiple venue choices, or unspecified event venues. Existing reviewed addresses reused only for explicit venue matches.",
+  "changes": [
+    {
+      "collection": "inspiration",
+      "index": 4,
+      "title": "Graffiti op doek of houten panelen",
+      "fields": {
+        "locationType": {
+          "before": "Op pad",
+          "after": "Thuis"
+        },
+        "distanceBand": {
+          "before": "Dichtbij (0-10 km)",
+          "after": "Thuis"
+        }
+      }
+    },
+    {
+      "collection": "inspiration",
+      "index": 56,
+      "title": "Natuurbingo",
+      "fields": {
+        "locationType": {
+          "before": "Op pad",
+          "after": "Buiten"
+        },
+        "distanceBand": {
+          "before": "Dichtbij (0-10 km)",
+          "after": "Op locatie"
+        }
+      }
+    },
+    {
+      "collection": "inspiration",
+      "index": 60,
+      "title": "Rustig avondrondje",
+      "fields": {
+        "locationType": {
+          "before": "Op pad",
+          "after": "Buiten"
+        },
+        "distanceBand": {
+          "before": "Dichtbij (0-10 km)",
+          "after": "Op locatie"
+        }
+      }
+    },
+    {
+      "collection": "inspiration",
+      "index": 85,
+      "title": "Openluchtspel in park met rollenkaart",
+      "fields": {
+        "locationType": {
+          "before": "Op pad",
+          "after": "Buiten"
+        },
+        "distanceBand": {
+          "before": "Dichtbij (0-10 km)",
+          "after": "Op locatie"
+        }
+      }
+    },
+    {
+      "collection": "inspiration",
+      "index": 95,
+      "title": "Vrijwilligerswerk ontdekken",
+      "fields": {
+        "locationType": {
+          "before": "Op pad",
+          "after": "Thuis"
+        },
+        "distanceBand": {
+          "before": "Dichtbij (0-10 km)",
+          "after": "Thuis"
+        }
+      }
+    },
+    {
+      "collection": "inspiration",
+      "index": 100,
+      "title": "Kubb / frisbee / spikeball",
+      "fields": {
+        "locationType": {
+          "before": "Op pad",
+          "after": "Buiten"
+        },
+        "distanceBand": {
+          "before": "Dichtbij (0-10 km)",
+          "after": "Op locatie"
+        }
+      }
+    },
+    {
+      "collection": "inspiration",
+      "index": 101,
+      "title": "Silent disco of koptelefoonplaylist wandeling",
+      "fields": {
+        "locationType": {
+          "before": "Op pad",
+          "after": "Buiten"
+        },
+        "distanceBand": {
+          "before": "Dichtbij (0-10 km)",
+          "after": "Op locatie"
+        }
+      }
+    },
+    {
+      "collection": "inspiration",
+      "index": 103,
+      "title": "Volleybal / beachvolleybal",
+      "fields": {
+        "locationType": {
+          "before": "Op pad",
+          "after": "Buiten"
+        },
+        "distanceBand": {
+          "before": "Dichtbij (0-10 km)",
+          "after": "Op locatie"
+        }
+      }
+    },
+    {
+      "collection": "inspiration",
+      "index": 109,
+      "title": "Karaoke-room of muziekchallenge",
+      "fields": {
+        "locationType": {
+          "before": "Binnen + buiten",
+          "after": "Buiten de deur"
+        }
+      }
+    },
+    {
+      "collection": "external",
+      "index": 0,
+      "title": "Nimma Sportzomer – Goffert Waterfestival",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Goffertweg 22, 6532 AA Nijmegen"
+        }
+      },
+      "reusedFrom": "Zwemmen in het Goffertbad",
+      "source": ""
+    },
+    {
+      "collection": "external",
+      "index": 5,
+      "title": "Arnhemse waterwandeling – zelf te starten route",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Zijpendaalseweg 26-28, 6814 CL Arnhem"
+        }
+      },
+      "reusedFrom": "Watermuseum waterwandeling Arnhem",
+      "source": "https://watermuseum.nl/activiteiten/waterwandeling/"
+    },
+    {
+      "collection": "external",
+      "index": 6,
+      "title": "Burgers' Zoo Arnhem – zomeraanbod",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Antoon van Hooffplein 1, 6816 SH Arnhem"
+        }
+      },
+      "reusedFrom": "Burgers' Zoo Arnhem",
+      "source": "https://www.burgerszoo.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 7,
+      "title": "De stem van Nijmegen – audiotour",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Grote Markt, Nijmegen"
+        }
+      },
+      "reusedFrom": "Audiotour door Nijmegen met fotostops",
+      "source": "https://www.visitnijmegen.com/evenementen/334127498/de-stem-van-nijmegen-audiotour-1"
+    },
+    {
+      "collection": "external",
+      "index": 8,
+      "title": "Focus Arnhem – filmprogramma en dakzaal",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Audrey Hepburnplein 1, 6811 EH Arnhem"
+        }
+      },
+      "reusedFrom": "Focus Filmtheater Arnhem",
+      "source": "https://www.focusarnhem.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 9,
+      "title": "Kröller-Müller Museum – zomerbezoek",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Houtkampweg 6, 6731 AW Otterlo"
+        }
+      },
+      "reusedFrom": "Kröller-Müller Museum",
+      "source": "https://krollermuller.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 10,
+      "title": "muZIEum Nijmegen – expedities en Unseen",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Ziekerstraat 6B, 6511 LH Nijmegen"
+        }
+      },
+      "reusedFrom": "muZIEum",
+      "source": "https://www.muzieum.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 11,
+      "title": "Nederlands Openluchtmuseum Arnhem – zomerseizoen",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Hoeferlaan 4, 6816 SG Arnhem"
+        }
+      },
+      "reusedFrom": "Nederlands Openluchtmuseum Arnhem",
+      "source": "https://www.openluchtmuseum.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 12,
+      "title": "Nederlands Watermuseum Arnhem – zomerexpo Waterkracht",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Zijpendaalseweg 26-28, 6814 CL Arnhem"
+        }
+      },
+      "reusedFrom": "Nederlands Watermuseum Arnhem",
+      "source": "https://watermuseum.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 16,
+      "title": "Vrijheidsmuseum Groesbeek – zomervisit",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Wylerbaan 4, 6561 KR Groesbeek"
+        }
+      },
+      "reusedFrom": "Vrijheidsmuseum Groesbeek",
+      "source": "https://vrijheidsmuseum.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 18,
+      "title": "JAC Hotspot Beuningen – jongerenactiviteiten woensdagavond",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Rijstveld 4, Beuningen"
+        }
+      },
+      "verifiedSource": "https://stg-perspectief.nl/dienst/jongerenactiviteiten/"
+    },
+    {
+      "collection": "external",
+      "index": 19,
+      "title": "Pop Culture Arcade – Woensdag Madness",
+      "fields": {
+        "lon": {
+          "before": null,
+          "after": 5.8657041
+        },
+        "lat": {
+          "before": null,
+          "after": 51.845296
+        },
+        "address": {
+          "before": null,
+          "after": "Mariënburg 28, 6511 PS Nijmegen"
+        },
+        "postcode": {
+          "before": null,
+          "after": "6511 PS"
+        }
+      },
+      "reusedFrom": "Pop Culture Arcade Nijmegen",
+      "source": "http://www.popculturearcade.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 21,
+      "title": "Museumpark Orientalis – expositie en parkroute",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Profetenlaan 2, 6564 BL Heilig Landstichting"
+        }
+      },
+      "reusedFrom": "Museumpark Orientalis",
+      "source": "https://www.museumparkorientalis.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 25,
+      "title": "Picknick in de wijngaard – Domein Doddendael",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Binnenweg 2, 6644 KD Ewijk"
+        }
+      },
+      "verifiedSource": "https://www.doddendael.nl/wijndomein/"
+    },
+    {
+      "collection": "external",
+      "index": 40,
+      "title": "Pop Culture Arcade Nijmegen",
+      "fields": {
+        "lon": {
+          "before": null,
+          "after": 5.8657041
+        },
+        "lat": {
+          "before": null,
+          "after": 51.845296
+        },
+        "address": {
+          "before": null,
+          "after": "Mariënburg 28, 6511 PS Nijmegen"
+        },
+        "postcode": {
+          "before": null,
+          "after": "6511 PS"
+        }
+      },
+      "reusedFrom": "Pop Culture Arcade Nijmegen",
+      "source": "http://www.popculturearcade.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 41,
+      "title": "Pathé Nijmegen",
+      "fields": {
+        "lon": {
+          "before": null,
+          "after": 5.8615081
+        },
+        "lat": {
+          "before": null,
+          "after": 51.8798408
+        },
+        "address": {
+          "before": null,
+          "after": "Willem van Arenbergstraat 4, 6515 AT Nijmegen"
+        },
+        "postcode": {
+          "before": null,
+          "after": "6515 AT"
+        }
+      },
+      "reusedFrom": "Pathé Nijmegen",
+      "source": "https://www.pathe.nl/nl/bioscopen/pathe-nijmegen"
+    },
+    {
+      "collection": "external",
+      "index": 42,
+      "title": "Vue Nijmegen Plein",
+      "fields": {
+        "lon": {
+          "before": null,
+          "after": 5.8661121
+        },
+        "lat": {
+          "before": null,
+          "after": 51.8442811
+        },
+        "address": {
+          "before": null,
+          "after": "Tweede Walstraat 16, 6511 LV Nijmegen"
+        },
+        "postcode": {
+          "before": null,
+          "after": "6511 LV"
+        }
+      },
+      "reusedFrom": "Vue Nijmegen Plein",
+      "source": "https://www.vuecinemas.nl/cinema/nijmegen/nu-in-de-bioscoop"
+    },
+    {
+      "collection": "external",
+      "index": 43,
+      "title": "EnjoyVR Nijmegen",
+      "fields": {
+        "lon": {
+          "before": null,
+          "after": 5.868038
+        },
+        "lat": {
+          "before": null,
+          "after": 51.8446573
+        },
+        "address": {
+          "before": null,
+          "after": "Klein Mariënburg 3, 6511 PL Nijmegen"
+        },
+        "postcode": {
+          "before": null,
+          "after": "6511 PL"
+        }
+      },
+      "reusedFrom": "EnjoyVR Nijmegen",
+      "source": "https://enjoyvr.nl/groepsuitje-nijmegen/"
+    },
+    {
+      "collection": "external",
+      "index": 44,
+      "title": "GRIP Boulderhal Nijmegen",
+      "fields": {
+        "lon": {
+          "before": null,
+          "after": 5.8384456
+        },
+        "lat": {
+          "before": null,
+          "after": 51.8131713
+        },
+        "address": {
+          "before": null,
+          "after": "Kamerlingh Onnesstraat 35, 6533 HK Nijmegen"
+        },
+        "postcode": {
+          "before": null,
+          "after": "6533 HK"
+        }
+      },
+      "reusedFrom": "GRIP Boulderhal Nijmegen",
+      "source": "https://gripnijmegen.nl/boulderhal/"
+    },
+    {
+      "collection": "external",
+      "index": 45,
+      "title": "Waalhalla Nijmegen",
+      "fields": {
+        "lon": {
+          "before": null,
+          "after": 5.8394174
+        },
+        "lat": {
+          "before": null,
+          "after": 51.8567017
+        },
+        "address": {
+          "before": null,
+          "after": "Winselingseweg 12, 6541 AK Nijmegen"
+        },
+        "postcode": {
+          "before": null,
+          "after": "6541 AK"
+        }
+      },
+      "reusedFrom": "Waalhalla Nijmegen",
+      "source": "https://www.waalhalla-centrum.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 50,
+      "title": "Ouwehands Dierenpark Rhenen - verder weg",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Grebbeweg 111, 3911 AV Rhenen"
+        }
+      },
+      "verifiedSource": "https://www.ouwehand.nl/contact"
+    },
+    {
+      "collection": "external",
+      "index": 51,
+      "title": "BillyBird Hemelrijk - strand, attracties en outdoor uitje verder weg",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Zeelandsedijk 34a, 5408 SM Volkel"
+        }
+      },
+      "verifiedSource": "https://billybird.nl/nl/hemelrijk/contact"
+    },
+    {
+      "collection": "external",
+      "index": 52,
+      "title": "ZooParc Overloon - expeditieroute wat verder weg",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Stevensbeekseweg 21, 5825 JB Overloon"
+        }
+      },
+      "verifiedSource": "https://www.zooparc.nl/bezoekersinfo/adres-route"
+    },
+    {
+      "collection": "external",
+      "index": 53,
+      "title": "You Jump Nijmegen",
+      "fields": {
+        "lon": {
+          "before": null,
+          "after": 5.8341453
+        },
+        "lat": {
+          "before": null,
+          "after": 51.8469473
+        },
+        "address": {
+          "before": null,
+          "after": "Industrieweg 101, 6541 TV Nijmegen"
+        },
+        "postcode": {
+          "before": null,
+          "after": "6541 TV"
+        }
+      },
+      "reusedFrom": "You Jump Nijmegen",
+      "source": "https://www.trampolinepark.nl/nl/locaties/nijmegen"
+    },
+    {
+      "collection": "external",
+      "index": 54,
+      "title": "Escape Boot Nijmegen",
+      "fields": {
+        "lon": {
+          "before": null,
+          "after": 5.8679131
+        },
+        "lat": {
+          "before": null,
+          "after": 51.8496652
+        },
+        "address": {
+          "before": null,
+          "after": "Waalkade 100, 6511 XR Nijmegen"
+        },
+        "postcode": {
+          "before": null,
+          "after": "6511 XR"
+        }
+      },
+      "reusedFrom": "Escape Boot Nijmegen",
+      "source": "https://escapebootnijmegen.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 55,
+      "title": "ROX Escape Nijmegen",
+      "fields": {
+        "lon": {
+          "before": null,
+          "after": 5.8383507
+        },
+        "lat": {
+          "before": null,
+          "after": 51.8559206
+        },
+        "address": {
+          "before": null,
+          "after": "De Kolk 17, 6541 AV Nijmegen"
+        },
+        "postcode": {
+          "before": null,
+          "after": "6541 AV"
+        }
+      },
+      "reusedFrom": "ROX Escape Nijmegen",
+      "source": "https://roxescape.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 59,
+      "title": "Fundustry Nijmegen/Ewijk",
+      "fields": {
+        "lon": {
+          "before": null,
+          "after": 5.6927007
+        },
+        "lat": {
+          "before": null,
+          "after": 51.844225
+        },
+        "address": {
+          "before": null,
+          "after": "Groene Heuvels 1, 6644 KX Ewijk"
+        },
+        "postcode": {
+          "before": null,
+          "after": "6644 KX"
+        }
+      },
+      "reusedFrom": "Fundustry Nijmegen/Ewijk",
+      "source": "https://www.fundustry.nl/locaties/nijmegen/"
+    },
+    {
+      "collection": "external",
+      "index": 60,
+      "title": "Verhalenvertellers bij De Barendonk",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Millseweg 13, 5437 NB Beers"
+        }
+      },
+      "verifiedSource": "https://www.barendonk.nl/contact/"
+    },
+    {
+      "collection": "external",
+      "index": 61,
+      "title": "Pop Culture Arcade – PCA Challenge",
+      "fields": {
+        "lon": {
+          "before": null,
+          "after": 5.8657041
+        },
+        "lat": {
+          "before": null,
+          "after": 51.845296
+        },
+        "address": {
+          "before": null,
+          "after": "Mariënburg 28, 6511 PS Nijmegen"
+        },
+        "postcode": {
+          "before": null,
+          "after": "6511 PS"
+        }
+      },
+      "reusedFrom": "Pop Culture Arcade Nijmegen",
+      "source": "http://www.popculturearcade.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 62,
+      "title": "Verhalenvertellers bij De Barendonk",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Millseweg 13, 5437 NB Beers"
+        }
+      },
+      "verifiedSource": "https://www.barendonk.nl/contact/"
+    },
+    {
+      "collection": "external",
+      "index": 63,
+      "title": "Verhalenvertellers bij De Barendonk",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Millseweg 13, 5437 NB Beers"
+        }
+      },
+      "verifiedSource": "https://www.barendonk.nl/contact/"
+    },
+    {
+      "collection": "external",
+      "index": 64,
+      "title": "Verhalenvertellers bij De Barendonk",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Millseweg 13, 5437 NB Beers"
+        }
+      },
+      "verifiedSource": "https://www.barendonk.nl/contact/"
+    },
+    {
+      "collection": "external",
+      "index": 66,
+      "title": "OPA presenteert Arnhemse Nieuwe 2026",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Audrey Hepburnplein 1, 6811 EH Arnhem"
+        }
+      },
+      "reusedFrom": "Focus Filmtheater Arnhem",
+      "source": "https://www.focusarnhem.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 69,
+      "title": "Go Short Arnhem 2026",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Audrey Hepburnplein 1, 6811 EH Arnhem"
+        }
+      },
+      "reusedFrom": "Focus Filmtheater Arnhem",
+      "source": "https://www.focusarnhem.nl/"
+    },
+    {
+      "collection": "external",
+      "index": 72,
+      "title": "Het Debuut 2026",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Mariënburg 38-39, 6511 PS Nijmegen"
+        }
+      },
+      "reusedFrom": "LUX kieskaart: film, expo of nagesprek",
+      "source": "https://www.lux-nijmegen.nl/programma/"
+    },
+    {
+      "collection": "external",
+      "index": 75,
+      "title": "Cinekid 2026",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Mariënburg 38-39, 6511 PS Nijmegen"
+        }
+      },
+      "reusedFrom": "LUX kieskaart: film, expo of nagesprek",
+      "source": "https://www.lux-nijmegen.nl/programma/"
+    },
+    {
+      "collection": "external",
+      "index": 76,
+      "title": "Organ & Film Festival – Animatieplaats (6+)",
+      "fields": {
+        "lon": {
+          "before": null,
+          "after": 5.8638
+        },
+        "lat": {
+          "before": null,
+          "after": 51.8471
+        },
+        "address": {
+          "before": null,
+          "after": "Stevenskerkhof 62, 6511 VZ Nijmegen"
+        },
+        "postcode": {
+          "before": null,
+          "after": "6511 VZ"
+        }
+      },
+      "reusedFrom": "Stevenskerk bezoeken en Stevenstoren beklimmen",
+      "source": "https://www.visitnijmegen.com/locaties/3723656447/stevenskerk"
+    },
+    {
+      "collection": "external",
+      "index": 85,
+      "title": "Folk",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Mariënburg 38-39, 6511 PS Nijmegen"
+        }
+      },
+      "reusedFrom": "LUX kieskaart: film, expo of nagesprek",
+      "source": "https://www.lux-nijmegen.nl/programma/"
+    },
+    {
+      "collection": "external",
+      "index": 90,
+      "title": "ROOM IN OUR HOUSE",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Mariënburg 38-39, 6511 PS Nijmegen"
+        }
+      },
+      "reusedFrom": "LUX kieskaart: film, expo of nagesprek",
+      "source": "https://www.lux-nijmegen.nl/programma/"
+    },
+    {
+      "collection": "external",
+      "index": 91,
+      "title": "Halloweenfilm – Carrie",
+      "fields": {
+        "address": {
+          "before": null,
+          "after": "Mariënburg 38-39, 6511 PS Nijmegen"
+        }
+      },
+      "reusedFrom": "LUX kieskaart: film, expo of nagesprek",
+      "source": "https://www.lux-nijmegen.nl/programma/"
+    }
+  ]
+}
