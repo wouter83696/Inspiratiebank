@@ -1,0 +1,15 @@
+/* Shared compact select appearance, based on the management filter sheet. */
+.customSelect .customSelectButton{
+  box-sizing:border-box;position:relative;width:100%;height:auto!important;min-height:40px!important;
+  padding:9px 36px 9px 12px!important;border:1px solid rgba(79,142,158,.16)!important;
+  border-radius:12px!important;background:#fffdf9!important;color:#315f6b;
+  font-size:14px!important;line-height:1.4!important;box-shadow:none!important;text-align:left;
+}
+.customSelect .customSelectButton:hover,.customSelect.open .customSelectButton{background:#fffdf9!important;border-color:rgba(79,142,158,.3)!important}
+.customSelect .customSelectButton::after{position:absolute!important;right:12px;top:50%;width:16px!important;height:16px!important;margin:0!important;transform:translateY(-50%)!important;background-size:16px!important}
+.customSelect.open .customSelectButton::after{transform:translateY(-50%) rotate(180deg)!important}
+.customSelect .customSelectMenu{box-sizing:border-box;min-width:100%;max-width:100%;padding:4px!important;border:1px solid rgba(79,142,158,.16);border-radius:12px!important;background:#fffdf9;box-shadow:0 8px 24px rgba(23,79,93,.12)}
+.customSelect .customSelectOption{min-height:36px!important;padding:8px 10px!important;font-size:14px!important;line-height:1.4!important;border-radius:8px!important;color:#315f6b;background:transparent}
+.customSelect .customSelectOption:is(.active,[aria-selected="true"]){background:#e5f2ef!important}
+.customSelect .customSelectOption:hover:not([aria-selected="true"]){background:rgba(229,242,239,.45)!important}
+.customSelect .customSelectButton:focus-visible{outline:2px solid #63858b;outline-offset:2px}
