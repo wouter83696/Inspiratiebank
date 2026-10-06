@@ -20,7 +20,8 @@
   function renderItem(view){
     const classes = ['agendaItem', view.themeClass || '', view.compact ? 'multiDayItem' : '', view.hidden ? 'hiddenItem' : '', view.isNew ? 'newItem' : '']
       .filter(Boolean).join(' ');
-    const content = `${view.title || ''}${view.review || ''}<span class="agendaItemMeta">${view.meta || ''}</span>`;
+    const meta=String(view.meta || '').split(' • ').filter(part=>part.trim()).map(part=>`<span class="agendaMetaRow">${part}</span>`).join('');
+    const content = `${view.title || ''}${view.review || ''}<span class="agendaItemMeta">${meta}</span>`;
     const main = view.href
       ? `<a class="agendaItemLink" href="${view.href}" target="_blank" rel="noopener">${content}</a>`
       : `<div class="agendaItemLink">${content}</div>`;

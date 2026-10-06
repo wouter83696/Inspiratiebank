@@ -751,3 +751,8 @@
 /* Long category labels must wrap to the next chip row in both filter sheets. */
 #agendaFilterCategoryChips{display:flex!important;flex-wrap:wrap;gap:6px}
 #agendaFilterCategoryChips .ideaFilterChip{flex:0 0 auto;max-width:100%}
+
+/* Keep time and venue on separate, consistently aligned lines. */
+.agendaItem .agendaItemMeta{line-height:1.45;hyphens:none;word-break:normal;overflow-wrap:break-word}
+.agendaItem .agendaItemMeta .agendaMetaRow{display:block;margin:0;text-align:left;hyphens:none;overflow-wrap:break-word}
+.agendaItem .agendaItemMeta .agendaMetaRow+.agendaMetaRow{margin-top:3px}
