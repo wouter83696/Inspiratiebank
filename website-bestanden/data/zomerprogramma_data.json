@@ -117,7 +117,7 @@
       "locationType": "Buiten de deur",
       "cost": "Gratis",
       "stimulus": "Middel/hoog",
-      "fit": "Een actief waterprogramma. Check vooraf zwemvaardigheid, toezicht, omkleden en verwachte drukte.",
+      "fit": "Een actief waterprogramma.",
       "source": "Sport in Nijmegen",
       "url": "https://sport.nijmegen.nl/nimma-sportzomer/goffert-waterfestival/",
       "tags": [
@@ -126,7 +126,8 @@
         "gratis",
         "week 29"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "note": "Check vooraf zwemvaardigheid, toezicht, omkleden en verwachte drukte."
     },
     {
       "title": "Gennepse Zomer – Limburgse avond",
@@ -138,7 +139,7 @@
       "locationType": "Buiten de deur",
       "cost": "Gratis/laag",
       "stimulus": "Hoog",
-      "fit": "Een levendige muziekavond. Spreek vooraf een aankomsttijd, rustmoment en vertrektijd af.",
+      "fit": "Een levendige muziekavond.",
       "source": "Land van Cuijk",
       "url": "https://www.landvancuijk.nl/agenda/2026/07/",
       "tags": [
@@ -150,7 +151,8 @@
         "regio",
         "uitje"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "note": "Spreek vooraf een aankomsttijd, rustmoment en vertrektijd af."
     },
     {
       "title": "Kofferbakverkoop Beugen",
@@ -162,7 +164,7 @@
       "locationType": "Buiten de deur",
       "cost": "Gratis/laag",
       "stimulus": "Middel",
-      "fit": "Braderie-achtig snuffeluitje met veel kijkmateriaal. Maak het kort en werk met een zoek- of budgetopdracht.",
+      "fit": "Braderie-achtig snuffeluitje met veel kijkmateriaal.",
       "source": "Land van Cuijk",
       "url": "https://www.landvancuijk.nl/agenda/2026/07/",
       "tags": [
@@ -174,7 +176,8 @@
         "regio",
         "uitje"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "note": "Maak het kort en werk met een zoek- of budgetopdracht."
     },
     {
       "title": "Vierdaagsefeesten Nijmegen",
@@ -317,7 +320,7 @@
       "locationType": "Buiten de deur",
       "cost": "Betaald",
       "stimulus": "Laag/middel",
-      "fit": "Combinatie van kunst, beeldentuin en buitenruimte. Goed te structureren met een kijkopdracht of fotomissie.",
+      "fit": "Combinatie van kunst, beeldentuin en buitenruimte.",
       "source": "Kröller-Müller Museum",
       "url": "https://krollermuller.nl/openingstijden-en-prijzen",
       "tags": [
@@ -326,7 +329,8 @@
         "otterlo",
         "zomer"
       ],
-      "distanceBand": "Verder weg (30-50 km)"
+      "distanceBand": "Verder weg (30-50 km)",
+      "note": "Structureer het bezoek met een kijkopdracht of fotomissie."
     },
     {
       "title": "muZIEum Nijmegen – expedities en Unseen",
@@ -359,7 +363,7 @@
       "locationType": "Buiten de deur",
       "cost": "Betaald",
       "stimulus": "Middel",
-      "fit": "Veel ruimte, routes en concrete stopplekken; kies vooraf een paar onderdelen.",
+      "fit": "Ontdek historische gebouwen, ambachten en verhalen in het Openluchtmuseum.",
       "source": "Nederlands Openluchtmuseum",
       "url": "https://www.openluchtmuseum.nl/nl/openingstijden",
       "tags": [
@@ -368,7 +372,8 @@
         "zomer",
         "buiten"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "note": "Kies vooraf een paar onderdelen en concrete stopplekken."
     },
     {
       "title": "Nederlands Watermuseum Arnhem – zomerexpo Waterkracht",
@@ -451,7 +456,7 @@
       "locationType": "Buiten de deur",
       "cost": "Betaald",
       "stimulus": "Middel",
-      "fit": "Stadsspel met missie en route. Werkt goed als je kiest voor duo’s, pauzepunten en een vaste eindtijd.",
+      "fit": "Stadsspel met missie en route.",
       "source": "Visit Nijmegen",
       "url": "https://www.visitnijmegen.com/evenementen/3062769259/sherlock-detective-game-nijmegen",
       "tags": [
@@ -463,7 +468,8 @@
         "regio",
         "uitje"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "note": "Kies duo’s, pauzepunten en een vaste eindtijd."
     },
     {
       "title": "Vrijheidsmuseum Groesbeek – zomervisit",
@@ -520,7 +526,7 @@
       "locationType": "Buiten de deur",
       "cost": "Gratis",
       "stimulus": "Middel",
-      "fit": "Lokale inloopavond met verschillende activiteiten; controleer of het programma in de vakantie doorgaat.",
+      "fit": "Lokale inloopavond met verschillende activiteiten.",
       "source": "Beuningen Samen",
       "url": "https://beuningensamen.nl/agenda",
       "tags": [
@@ -536,7 +542,8 @@
         2
       ],
       "pinToAgenda": true,
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "note": "Controleer of het programma in de vakantie doorgaat."
     },
     {
       "title": "Pop Culture Arcade – Woensdag Madness",
@@ -548,7 +555,7 @@
       "locationType": "Buiten de deur",
       "cost": "Gratis/laag",
       "stimulus": "Middel/hoog",
-      "fit": "Gaming en popcultuur als motiverende ingang. Spreek vooraf speeltijd, pauzemoment en geluids-/druktekeuze af.",
+      "fit": "Een activiteit rond gaming en popcultuur.",
       "source": "Visit Nijmegen",
       "url": "https://www.visitnijmegen.com/evenementen/1941383191/woensdag-madness-bij-pop-culture-arcade",
       "tags": [
@@ -564,7 +571,8 @@
         2
       ],
       "pinToAgenda": true,
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "note": "Spreek vooraf speeltijd, pauzemoment en geluids- en druktekeuze af."
     },
     {
       "title": "Weekmarkt Millingen aan de Rijn",
@@ -634,7 +642,7 @@
       "locationType": "Buiten de deur",
       "cost": "Gratis/laag",
       "stimulus": "Middel",
-      "fit": "Klein en concreet marktuitje met kijk-, proef- of budgetopdracht. Minder groot dan Nijmegen centrum en goed te timeboxen.",
+      "fit": "Klein marktuitje met een kijk-, proef- of budgetopdracht.",
       "source": "Visit Arnhem",
       "url": "https://www.visitarnhem.com/evenementen/2997368542/weekmarkt-bemmel",
       "tags": [
@@ -650,7 +658,8 @@
         3
       ],
       "pinToAgenda": true,
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "note": "Plan vooraf hoe lang je blijft; de markt is kleiner dan die in Nijmegen centrum."
     },
     {
       "title": "Weekmarkt Gendt",
@@ -770,7 +779,7 @@
       "locationType": "Buiten de deur",
       "cost": "Gratis/laag",
       "stimulus": "Middel/hoog",
-      "fit": "Zomers muziekuitje aan de kade. Geschikt als korte avondactiviteit met oordoppen, rustplek en vaste eindtijd.",
+      "fit": "Zomers muziekuitje aan de kade.",
       "source": "Land van Cuijk",
       "url": "https://www.landvancuijk.nl/agenda/2026/07/",
       "tags": [
@@ -782,7 +791,9 @@
         "regio",
         "uitje"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "note": "Kies een korte avondactiviteit, een rustplek en een vaste eindtijd.",
+      "supplies": "Oordoppen."
     },
     {
       "title": "Nimma Sportzomer – Balsport & Spel",
@@ -861,7 +872,7 @@
       "locationType": "Buiten de deur",
       "cost": "Gratis",
       "stimulus": "Middel",
-      "fit": "Sportinstuif en beweegactiviteiten voor verschillende leeftijden; bekijk vooraf het programma.",
+      "fit": "Sportinstuif en beweegactiviteiten voor verschillende leeftijden.",
       "source": "Sport in Nijmegen",
       "url": "https://sport.nijmegen.nl/nimma-sportzomer/jong-en-oud/",
       "tags": [
@@ -869,7 +880,8 @@
         "gratis",
         "week 33"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "note": "Bekijk vooraf het programma."
     },
     {
       "title": "Verhalenvertellers Kasteel Aldendriel",
@@ -881,7 +893,7 @@
       "locationType": "Buiten de deur",
       "cost": "Betaald/soms gratis",
       "stimulus": "Laag/middel",
-      "fit": "Korte cultuuractiviteit op een bijzondere plek. Goed met vooraf afgesproken luister- en wandelmomenten.",
+      "fit": "Korte cultuuractiviteit op een bijzondere plek.",
       "source": "Land van Cuijk",
       "url": "https://www.landvancuijk.nl/agenda/2026/08/",
       "tags": [
@@ -893,7 +905,8 @@
         "regio",
         "uitje"
       ],
-      "distanceBand": "In de regio (10-30 km)"
+      "distanceBand": "In de regio (10-30 km)",
+      "note": "Spreek vooraf luister- en wandelmomenten af."
     },
     {
       "title": "We Love The 90's Festival",
@@ -905,7 +918,7 @@
       "locationType": "Buiten de deur",
       "cost": "Betaald",
       "stimulus": "Hoog",
-      "fit": "Een groot en druk festival. Maak vooraf afspraken over duur, geluid, rust en vertrek.",
+      "fit": "Een groot en druk muziekfestival.",
       "source": "We Love The 90's",
       "url": "https://welovethe90s.nl/",
       "tags": [
@@ -915,7 +928,8 @@
         "groot event",
         "week 33"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "note": "Maak vooraf afspraken over duur, geluid, rust en vertrek."
     },
     {
       "title": "De Hollandse Zomer",
@@ -927,7 +941,7 @@
       "locationType": "Buiten de deur",
       "cost": "Betaald",
       "stimulus": "Hoog",
-      "fit": "Een groot muziekfestival met meezingers. Kies vooraf een tijdsblok en neem zo nodig gehoorbescherming mee.",
+      "fit": "Een groot muziekfestival met meezingers.",
       "source": "De Hollandse Zomer",
       "url": "https://dehollandsezomer.nl/",
       "tags": [
@@ -937,7 +951,9 @@
         "groot event",
         "week 33"
       ],
-      "distanceBand": "Dichtbij (0-10 km)"
+      "distanceBand": "Dichtbij (0-10 km)",
+      "note": "Kies vooraf een tijdsblok.",
+      "supplies": "Zo nodig gehoorbescherming."
     },
     {
       "title": "Nimma Sportzomer – Beweegfestival",
@@ -1210,7 +1226,7 @@
       "distanceKm": "ca. 11 km",
       "cost": "€€€",
       "stimulus": "Middel/hoog",
-      "fit": "Probeer skiën, snowboarden, tuben of een outdooractiviteit. Controleer welke onderdelen in de zomer beschikbaar zijn.",
+      "fit": "Probeer skiën, snowboarden, tuben of een outdooractiviteit.",
       "source": "Skicentrum De Wijchense Berg",
       "url": "https://www.dewijchenseberg.nl/",
       "tags": [
@@ -1223,7 +1239,8 @@
       ],
       "address": "Heumenseweg 180, 6603 KT Wijchen",
       "addressSource": "https://www.dewijchenseberg.nl/privacy-verklaring/",
-      "addressCheckedAt": "2026-10-04"
+      "addressCheckedAt": "2026-10-04",
+      "note": "Controleer welke onderdelen in de zomer beschikbaar zijn."
     },
     {
       "title": "Pretpark Tivoli Berg en Dal",
@@ -1309,14 +1326,15 @@
       "distanceKm": "ca. 42 km",
       "cost": "€€€",
       "stimulus": "Middel/hoog",
-      "fit": "Alleen als bewust uitje wat verder weg. Kies vooraf enkele dierengebieden, plan vervoer en rustmomenten en houd ruimte om eerder te vertrekken.",
+      "fit": "Ontdek dieren en hun leefgebieden in Ouwehands Dierenpark in Rhenen.",
       "source": "Ouwehands Dierenpark",
       "url": "https://www.ouwehand.nl/",
       "tags": [
         "dieren",
         "rhenen",
         "daguitstap"
-      ]
+      ],
+      "note": "Plan dit als uitje wat verder weg. Kies vooraf enkele dierengebieden, plan vervoer en rustmomenten en houd ruimte om eerder te vertrekken."
     },
     {
       "title": "BillyBird Hemelrijk - strand, attracties en outdoor uitje verder weg",
@@ -1330,7 +1348,7 @@
       "distanceKm": "ca. 38 km",
       "cost": "€€",
       "stimulus": "Hoog",
-      "fit": "Combinatie van strand, binnen- en buitenactiviteiten. Plan dit als uitje wat verder weg, kies vooraf een beperkt programma en neem rust- en omkleedmomenten mee.",
+      "fit": "Combinatie van strand, binnen- en buitenactiviteiten.",
       "source": "BillyBird Hemelrijk",
       "url": "https://www.billybird.nl/hemelrijk/",
       "tags": [
@@ -1339,7 +1357,8 @@
         "outdoor",
         "volkel",
         "daguitstap"
-      ]
+      ],
+      "note": "Plan dit als uitje wat verder weg, kies vooraf een beperkt programma en neem rust- en omkleedmomenten mee."
     },
     {
       "title": "ZooParc Overloon - expeditieroute wat verder weg",
@@ -1564,7 +1583,7 @@
       "locationType": "Buiten de deur",
       "cost": "Gratis/laag",
       "stimulus": "Middel/hoog",
-      "fit": "Een gamechallenge met scores en korte missies; kies vooraf een tijdsblok.",
+      "fit": "Een gamechallenge met scores en korte missies.",
       "source": "Visit Nijmegen",
       "url": "https://www.visitnijmegen.com/evenementen/4179578618/pca-challenge",
       "tags": [
@@ -1575,7 +1594,8 @@
         "zomer 2026",
         "regio",
         "uitje"
-      ]
+      ],
+      "note": "Kies vooraf een tijdsblok."
     },
     {
       "title": "Verhalenvertellers bij De Barendonk",
@@ -2170,7 +2190,7 @@
       "stimulus": "Middel",
       "duration": "60–90 min",
       "group": "1–6",
-      "materials": "Tablet of laptop, koptelefoons, beat-app, kleine speaker.",
+      "materials": "",
       "fit": "Maak beats, mix geluiden en bouw in korte rondes aan een eigen track.",
       "tags": [
         "muziek",
@@ -2181,7 +2201,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/001-beatmaking-dj-sessie.jpg",
       "imageAlt": "Foto bij Beatmaking / DJ sessie",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Tablet of laptop, koptelefoons, beat-app, kleine speaker."
     },
     {
       "title": "Dromenvangers maken",
@@ -2192,7 +2213,7 @@
       "stimulus": "Laag",
       "duration": "60–120 min",
       "group": "2–8",
-      "materials": "Ringen, draad, kralen, veren",
+      "materials": "",
       "fit": "Maak een dromenvanger met draad, kralen, veren en kleuren naar eigen smaak.",
       "tags": [
         "creatief",
@@ -2202,7 +2223,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/002-dromenvangers-maken.jpg",
       "imageAlt": "Foto bij Dromenvangers maken",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Ringen, draad, kralen, veren"
     },
     {
       "title": "Drum- of percussiesessie",
@@ -2213,7 +2235,7 @@
       "stimulus": "Middel/hoog",
       "duration": "30–60 min",
       "group": "1–8",
-      "materials": "Djembés, emmers, stokken, koptelefoonoptie of geluidsafspraken.",
+      "materials": "Maak vooraf geluidsafspraken.",
       "fit": "Ontdek ritmes en maak samen muziek met drums of andere percussie-instrumenten.",
       "tags": [
         "muziek",
@@ -2224,7 +2246,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/003-drum-of-percussiesessie.jpg",
       "imageAlt": "Foto bij Drum- of percussiesessie",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Djembés, emmers, stokken; eventueel koptelefoons."
     },
     {
       "title": "Fotowandeling",
@@ -2235,7 +2258,7 @@
       "stimulus": "Laag/middel",
       "duration": "60–120 min",
       "group": "2–8",
-      "materials": "Telefoons/camera, thema-opdracht",
+      "materials": "",
       "fit": "Ga op pad met een camera of telefoon en leg bijzondere plekken en details vast.",
       "tags": [
         "fotografie",
@@ -2245,7 +2268,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/004-fotowandeling.jpg",
       "imageAlt": "Foto bij Fotowandeling",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Telefoons/camera, thema-opdracht"
     },
     {
       "title": "Graffiti op doek of houten panelen",
@@ -2256,7 +2280,7 @@
       "stimulus": "Middel",
       "duration": "90–180 min",
       "group": "3–10",
-      "materials": "Doeken/panelen, spuitverf/stiften, buitenplek, beschermmateriaal",
+      "materials": "Zorg voor een geschikte buitenplek.",
       "fit": "Ontwerp een eigen piece op doek of hout, met stiften of spuitverf.",
       "tags": [
         "graffiti",
@@ -2266,7 +2290,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/005-graffiti-op-doek-of-houten-panelen.jpg",
       "imageAlt": "Foto bij Graffiti op doek of houten panelen",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Doeken of houten panelen, spuitverf of stiften, beschermmateriaal."
     },
     {
       "title": "Kleding pimpen of upcyclen",
@@ -2277,7 +2302,7 @@
       "stimulus": "Laag/middel",
       "duration": "60–120 min",
       "group": "1–8",
-      "materials": "Oude kleding, textielstiften, patches, transferpapier, voorbeelden.",
+      "materials": "",
       "fit": "Geef oude kleding een nieuwe uitstraling met kleur, patches en eigen details.",
       "tags": [
         "mode",
@@ -2288,7 +2313,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/006-kleding-pimpen-of-upcyclen.jpg",
       "imageAlt": "Foto bij Kleding pimpen of upcyclen",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Oude kleding, textielstiften, patches, transferpapier, voorbeelden."
     },
     {
       "title": "Klei / keramiek",
@@ -2299,7 +2325,7 @@
       "stimulus": "Laag",
       "duration": "60–120 min",
       "group": "2–8",
-      "materials": "Klei, gereedschap, droogplek, schorten",
+      "materials": "Zorg voor een droogplek.",
       "fit": "Vorm een schaal, beeldje of ander ontwerp van klei en werk het af met eigen details.",
       "tags": [
         "creatief",
@@ -2309,7 +2335,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/007-klei-keramiek.jpg",
       "imageAlt": "Foto bij Klei / keramiek",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Klei, gereedschap en schorten."
     },
     {
       "title": "Kröller-Müller Museum",
@@ -2363,7 +2390,7 @@
       "stimulus": "Laag/middel",
       "duration": "45–90 min",
       "group": "1–6",
-      "materials": "Lego, Kapla, karton of blokken, voorbeeldkaarten en timer.",
+      "materials": "",
       "fit": "Bouw binnen een thema of tijdslimiet en vergelijk de verrassende oplossingen.",
       "tags": [
         "bouwen",
@@ -2374,7 +2401,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/010-lego-of-bouwchallenge.jpg",
       "imageAlt": "Foto bij Lego- of bouwchallenge",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Lego, Kapla, karton of blokken, voorbeeldkaarten en timer."
     },
     {
       "title": "Lichtfotografie of schemerroute",
@@ -2385,7 +2413,7 @@
       "stimulus": "Laag/middel",
       "duration": "45–90 min",
       "group": "1–4",
-      "materials": "Telefoon of camera, reflectiepunten, vaste route en eindtijd voor donker.",
+      "materials": "Kies reflectiepunten, een vaste route en een eindtijd voor het donker.",
       "fit": "Experimenteer met licht en schaduw tijdens een fotowandeling in de schemering.",
       "tags": [
         "fotografie",
@@ -2396,7 +2424,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/011-lichtfotografie-of-schemerroute.jpg",
       "imageAlt": "Foto bij Lichtfotografie of schemerroute",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Telefoon of camera."
     },
     {
       "title": "Lindenberg Cultuurhuis",
@@ -2434,12 +2463,13 @@
       "group": "2-6",
       "cost": "Gratis/laag",
       "stimulus": "Middel",
-      "materials": "Kaart met “zoek een maker”, “vind iets onverwachts” of “kies een favoriet ontwerp”.",
+      "materials": "",
       "fit": "Ontdek bijzondere makers en ontwerpen met een compacte zoekopdracht.",
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/013-makersmarkt-of-designdag-als-speurtocht.jpg",
       "imageAlt": "Foto bij Makersmarkt of designdag als speurtocht",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Kaart met “zoek een maker”, “vind iets onverwachts” of “kies een favoriet ontwerp”."
     },
     {
       "title": "Makersmiddag karton / maquette bouwen",
@@ -2450,7 +2480,7 @@
       "stimulus": "Laag/middel",
       "duration": "60–120 min",
       "group": "1–8",
-      "materials": "Karton, tape, mesjes onder begeleiding, verf, voorbeelden.",
+      "materials": "Gebruik mesjes onder begeleiding.",
       "fit": "Bouw met karton een kamer, gebouw of fantasieplek op schaal.",
       "tags": [
         "bouwen",
@@ -2461,7 +2491,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/014-makersmiddag-karton-maquette-bouwen.jpg",
       "imageAlt": "Foto bij Makersmiddag karton / maquette bouwen",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Karton, tape, mesjes, verf en voorbeelden."
     },
     {
       "title": "Makerspace of creatieve werkplaats verkennen",
@@ -2494,12 +2525,13 @@
       "group": "2-6",
       "cost": "Gratis/laag",
       "stimulus": "Middel",
-      "materials": "Telefoon, vragenkaart, eenvoudige montage-app en rolverdeling.",
+      "materials": "Spreek een rolverdeling af.",
       "fit": "Maak met je telefoon een kort portret, interview of verslag van een plek.",
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/016-mini-docu-of-straatinterview-met-telefoon.jpg",
       "imageAlt": "Foto bij Mini-docu of straatinterview met telefoon",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Telefoon, vragenkaart en eenvoudige montage-app."
     },
     {
       "title": "Mini-fotoboekje maken van een uitje",
@@ -2510,12 +2542,13 @@
       "stimulus": "Laag/middel",
       "duration": "45-90 min",
       "group": "1-6",
-      "materials": "Printjes of telefoonfoto's, nietmachine, papier, stiften en simpele captions.",
+      "materials": "",
       "fit": "Bundel favoriete foto’s en herinneringen in een klein fotoboekje.",
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/017-mini-fotoboekje-maken-van-een-uitje.jpg",
       "imageAlt": "Foto bij Mini-fotoboekje maken van een uitje",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Printjes of telefoonfoto's, nietmachine, papier, stiften en simpele captions."
     },
     {
       "title": "Mini-podcast of interview opnemen",
@@ -2526,12 +2559,13 @@
       "stimulus": "Laag/middel",
       "duration": "30-90 min",
       "group": "1-4",
-      "materials": "Telefoon of recorder, rustige ruimte, vragenkaartjes en een vaste structuur: intro, midden, afsluiting.",
+      "materials": "Kies een rustige ruimte en een vaste structuur: intro, midden en afsluiting.",
       "fit": "Neem een kort interview, audioverhaal of eigen podcastaflevering op.",
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/018-mini-podcast-of-interview-opnemen.jpg",
       "imageAlt": "Foto bij Mini-podcast of interview opnemen",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Telefoon of recorder en vragenkaartjes."
     },
     {
       "title": "Modelbouw of miniatuur schilderen",
@@ -2542,7 +2576,7 @@
       "stimulus": "Laag",
       "duration": "60–120 min",
       "group": "1–6",
-      "materials": "Bouwpakketjes, verf, pincetten, voorbeelden en een stille werkplek.",
+      "materials": "Zorg voor een stille werkplek.",
       "fit": "Werk geconcentreerd aan een bouwpakket of geef een miniatuur eigen details.",
       "tags": [
         "fijn werk",
@@ -2553,7 +2587,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/019-modelbouw-of-miniatuur-schilderen.jpg",
       "imageAlt": "Foto bij Modelbouw of miniatuur schilderen",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Bouwpakketjes, verf, pincetten en voorbeelden."
     },
     {
       "title": "Muziek maken met apps",
@@ -2564,7 +2599,7 @@
       "stimulus": "Middel",
       "duration": "60–120 min",
       "group": "1–6",
-      "materials": "Tablet/laptop/telefoon, koptelefoons",
+      "materials": "",
       "fit": "Maak laagdrempelig beats, loops en melodieën met een telefoon of tablet.",
       "tags": [
         "muziek",
@@ -2574,7 +2609,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/020-muziek-maken-met-apps.jpg",
       "imageAlt": "Foto bij Muziek maken met apps",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Tablet/laptop/telefoon, koptelefoons"
     },
     {
       "title": "Reparatie- of makerchallenge",
@@ -2585,12 +2621,13 @@
       "group": "2-8",
       "cost": "Gratis/laag",
       "stimulus": "Laag/middel",
-      "materials": "Kapotte spullen, tape, lijm, schroevendraaiers, handschoenen en veiligheidsspelregels.",
+      "materials": "Spreek vooraf veiligheidsspelregels af.",
       "fit": "Repareer een voorwerp of bedenk een slimme oplossing voor een praktische uitdaging.",
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/021-reparatie-of-makerchallenge.jpg",
       "imageAlt": "Foto bij Reparatie- of makerchallenge",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Kapotte spullen, tape, lijm, schroevendraaiers en handschoenen."
     },
     {
       "title": "Rozet Arnhem",
@@ -2628,7 +2665,7 @@
       "stimulus": "Middel",
       "duration": "60–120 min",
       "group": "1–6",
-      "materials": "Textielstiften, sjablonen, oude pet of canvas schoenen, inspiratiebeelden.",
+      "materials": "",
       "fit": "Geef sneakers of een pet een eigen ontwerp met verf, patronen en kleur.",
       "tags": [
         "mode",
@@ -2639,7 +2676,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/023-sneaker-custom-of-pet-design.jpg",
       "imageAlt": "Foto bij Sneaker custom of pet design",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Textielstiften, sjablonen, oude pet of canvas schoenen, inspiratiebeelden."
     },
     {
       "title": "Stickerlab of label-design",
@@ -2650,12 +2688,13 @@
       "stimulus": "Laag/middel",
       "duration": "45-90 min",
       "group": "1-6",
-      "materials": "Stickerpapier, pennen, laptop/tablet of sjablonen met letters en pictogrammen.",
+      "materials": "",
       "fit": "Ontwerp een kleine stickerserie met letters, symbolen of illustraties.",
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/024-stickerlab-of-label-design.jpg",
       "imageAlt": "Foto bij Stickerlab of label-design",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Stickerpapier, pennen, laptop/tablet of sjablonen met letters en pictogrammen."
     },
     {
       "title": "Stop-motion of mini-film maken",
@@ -2666,7 +2705,7 @@
       "stimulus": "Middel",
       "duration": "60–120 min",
       "group": "1–6",
-      "materials": "Telefoon of tablet, statief, props, storyboardkaart.",
+      "materials": "",
       "fit": "Bedenk een kort verhaal en breng het beeld voor beeld tot leven.",
       "tags": [
         "film",
@@ -2677,7 +2716,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/025-stop-motion-of-mini-film-maken.jpg",
       "imageAlt": "Foto bij Stop-motion of mini-film maken",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Telefoon of tablet, statief, props, storyboardkaart."
     },
     {
       "title": "Street-art route met fotomissie",
@@ -2688,7 +2728,7 @@
       "stimulus": "Middel",
       "duration": "60-120 min",
       "group": "1-6",
-      "materials": "Route, telefoon of camera, 5 foto-opdrachten en rustplek onderweg.",
+      "materials": "Kies een rustplek onderweg.",
       "fit": "Ontdek street-art in de stad en fotografeer je favoriete werken.",
       "tags": [
         "street art",
@@ -2699,7 +2739,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/026-street-art-route-met-fotomissie.jpg",
       "imageAlt": "Foto bij Street-art route met fotomissie",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Routekaart, telefoon of camera en vijf foto-opdrachten."
     },
     {
       "title": "Street-photo + edit challenge",
@@ -2710,7 +2751,7 @@
       "stimulus": "Middel",
       "duration": "60–120 min",
       "group": "1–6",
-      "materials": "Telefoon of camera, 5 fotothema's, eenvoudige edit-app.",
+      "materials": "",
       "fit": "Fotografeer het straatleven en selecteer en bewerk daarna je favoriete beelden.",
       "tags": [
         "fotografie",
@@ -2721,7 +2762,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/027-street-photo-edit-challenge.jpg",
       "imageAlt": "Foto bij Street-photo + edit challenge",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Telefoon of camera, 5 fotothema's, eenvoudige edit-app."
     },
     {
       "title": "T-shirts of totebags ontwerpen",
@@ -2732,8 +2774,8 @@
       "stimulus": "Laag/middel",
       "duration": "90–150 min",
       "group": "2–10",
-      "materials": "Textiel, textielstiften/verf, sjablonen",
-      "fit": "Tastbaar resultaat; je kunt eigen stijl kwijt.",
+      "materials": "",
+      "fit": "Ontwerp een eigen T-shirt of totebag met textielstiften, verf en sjablonen.",
       "tags": [
         "creatief",
         "textiel",
@@ -2742,7 +2784,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/028-t-shirts-of-totebags-ontwerpen.jpg",
       "imageAlt": "Foto bij T-shirts of totebags ontwerpen",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Textiel, textielstiften/verf, sjablonen"
     },
     {
       "title": "Tegeltjes beschilderen",
@@ -2753,8 +2796,8 @@
       "stimulus": "Laag",
       "duration": "60–120 min",
       "group": "2–10",
-      "materials": "Tegels, verf/stiften, beschermmateriaal",
-      "fit": "Rustige creatieve activiteit met tastbaar eindresultaat.",
+      "materials": "",
+      "fit": "Beschilder een tegel met een eigen tekst, patroon of illustratie.",
       "tags": [
         "creatief",
         "rustig",
@@ -2763,7 +2806,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/029-tegeltjes-beschilderen.jpg",
       "imageAlt": "Foto bij Tegeltjes beschilderen",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Tegels, verf/stiften, beschermmateriaal"
     },
     {
       "title": "Urban sketching op locatie",
@@ -2774,7 +2818,7 @@
       "stimulus": "Laag/middel",
       "duration": "60–120 min",
       "group": "1–6",
-      "materials": "Schetsboek, potlood, fineliner, zitplek en 3 kijkopdrachten.",
+      "materials": "Kies een zitplek en drie kijkopdrachten.",
       "fit": "Kies een plek in de stad en leg opvallende lijnen en details vast.",
       "tags": [
         "tekenen",
@@ -2785,7 +2829,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/030-urban-sketching-op-locatie.jpg",
       "imageAlt": "Foto bij Urban sketching op locatie",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Schetsboek, potlood en fineliner."
     },
     {
       "title": "Zeefdruk of totebag-printlab",
@@ -2796,12 +2841,13 @@
       "group": "2-8",
       "cost": "Laag/middel",
       "stimulus": "Laag/middel",
-      "materials": "Textieltas, textielverf, sjablonen, karton en droogplek.",
+      "materials": "Zorg voor een droogplek.",
       "fit": "Ontwerp en druk een eigen motief op een tas of ander textiel.",
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/031-zeefdruk-of-totebag-printlab.jpg",
       "imageAlt": "Foto bij Zeefdruk of totebag-printlab",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Textieltas, textielverf, sjablonen en karton."
     },
     {
       "title": "Zine of mini-magazine over de zomer maken",
@@ -2812,12 +2858,13 @@
       "stimulus": "Laag/middel",
       "duration": "60-120 min",
       "group": "1-6",
-      "materials": "Oud papier, printjes, schaar, lijm, stiften en een simpele indeling per pagina.",
+      "materials": "Kies een simpele indeling per pagina.",
       "fit": "Bundel beelden, korte teksten en vondsten in een eigen mini-magazine.",
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/032-zine-of-mini-magazine-over-de-zomer-maken.jpg",
       "imageAlt": "Foto bij Zine of mini-magazine over de zomer maken",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Oud papier, printjes, schaar, lijm en stiften."
     },
     {
       "title": "Architectuurroute of bruggen/foto-opdracht",
@@ -2828,7 +2875,7 @@
       "stimulus": "Laag/middel",
       "duration": "60–120 min",
       "group": "1–6",
-      "materials": "Korte route, 5 zoekopdrachten, telefoon of camera.",
+      "materials": "",
       "fit": "Ontdek bijzondere gebouwen en bruggen en fotografeer opvallende vormen en details.",
       "tags": [
         "architectuur",
@@ -2839,7 +2886,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/033-architectuurroute-of-bruggen-foto-opdracht.jpg",
       "imageAlt": "Foto bij Architectuurroute of bruggen/foto-opdracht",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Korte route, 5 zoekopdrachten, telefoon of camera."
     },
     {
       "title": "Audiotour door Nijmegen met fotostops",
@@ -2850,7 +2898,7 @@
       "group": "1-6",
       "cost": "Laag/betaald",
       "stimulus": "Laag/middel",
-      "materials": "Telefoon, oortjes, fotolijst-opdracht en een korte nabespreekvraag.",
+      "materials": "Kies een korte nabespreekvraag.",
       "fit": "Luister onderweg naar stadsverhalen en leg een paar bijzondere plekken vast.",
       "source": "Visit Nijmegen",
       "url": "https://www.visitnijmegen.com/evenementen/334127498/de-stem-van-nijmegen-audiotour-1",
@@ -2861,7 +2909,8 @@
       "address": "Grote Markt, Nijmegen",
       "addressSource": "https://www.visitnijmegen.com/evenementen/334127498/de-stem-van-nijmegen-audiotour-1",
       "addressCheckedAt": "2026-10-04",
-      "locationName": "Startpunt audiotour"
+      "locationName": "Startpunt audiotour",
+      "supplies": "Telefoon, oortjes en fotolijst met opdrachten."
     },
     {
       "title": "Dakterrasbios of openluchtfilm",
@@ -2872,7 +2921,7 @@
       "stimulus": "Middel",
       "duration": "2–3 uur",
       "group": "1–6",
-      "materials": "Kaarten, kleding voor buiten, rustige terugreis en alternatief bij slecht weer.",
+      "materials": "Plan een rustige terugreis en een alternatief bij slecht weer.",
       "fit": "Bekijk een film in de buitenlucht of op een dakterras.",
       "tags": [
         "film",
@@ -2883,7 +2932,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/035-dakterrasbios-of-openluchtfilm.jpg",
       "imageAlt": "Foto bij Dakterrasbios of openluchtfilm",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Kaarten en kleding voor buiten."
     },
     {
       "title": "Focus Filmtheater Arnhem",
@@ -2921,7 +2971,7 @@
       "stimulus": "Middel",
       "duration": "90–150 min",
       "group": "2–8",
-      "materials": "Route, kijkopdracht, pauzeplek",
+      "materials": "Kies vooraf een pauzeplek.",
       "fit": "Ontdek historische plekken in Nijmegen, maak foto's en verzamel bijzondere stadsverhalen.",
       "tags": [
         "stad",
@@ -2931,7 +2981,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/037-historische-stadswandeling-nijmegen.jpg",
       "imageAlt": "Foto bij Historische stadswandeling Nijmegen",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Routekaart en kijkopdracht."
     },
     {
       "title": "Kringloop- of vintageroute met budget",
@@ -2985,7 +3036,7 @@
       "stimulus": "Laag",
       "duration": "45–75 min",
       "group": "1–8",
-      "materials": "Manga, strips, tekenmateriaal, 3 vaste gespreksvragen.",
+      "materials": "",
       "fit": "Ontdek manga en graphic novels, deel favorieten of teken zelf een personage.",
       "tags": [
         "manga",
@@ -2996,7 +3047,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/040-manga-graphic-novel-club.jpg",
       "imageAlt": "Foto bij Manga / graphic novel club",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Manga, strips, tekenmateriaal, 3 vaste gespreksvragen."
     },
     {
       "title": "Museum De Bastei",
@@ -3034,7 +3086,7 @@
       "stimulus": "Laag/middel",
       "duration": "90–180 min",
       "group": "2–8",
-      "materials": "Tickets, opdrachtkaart, pauzemogelijkheid",
+      "materials": "Zorg voor een pauzemogelijkheid.",
       "fit": "Verken een museum met een opdrachtkaart: kies een object, stel een vraag en maak een schets.",
       "tags": [
         "museum",
@@ -3044,7 +3096,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/042-museumbezoek-met-opdrachtkaart.jpg",
       "imageAlt": "Foto bij Museumbezoek met opdrachtkaart",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Tickets en opdrachtkaart."
     },
     {
       "title": "Museumpark Orientalis",
@@ -3082,7 +3135,7 @@
       "stimulus": "Middel",
       "duration": "90–150 min",
       "group": "1–6",
-      "materials": "Boek op tijd en bereid de ervaring kort voor voor.",
+      "materials": "Boek op tijd en bereid de ervaring kort voor.",
       "fit": "Ervaar alledaagse situaties zonder zicht tijdens een bijzondere rondleiding.",
       "source": "muZIEum",
       "url": "https://www.muzieum.nl/",
@@ -3163,7 +3216,7 @@
       "stimulus": "Laag/middel",
       "duration": "45–75 min",
       "group": "3–15",
-      "materials": "Quizvragen, beeldmateriaal, scorekaart",
+      "materials": "",
       "fit": "Test je kennis van Nijmegen met rondes over muziek, geschiedenis, sport en bekende plekken.",
       "tags": [
         "cultuur",
@@ -3173,7 +3226,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/047-nijmegen-quiz-op-het-terrein.jpg",
       "imageAlt": "Foto bij Nijmegen-quiz",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Quizvragen, beeldmateriaal, scorekaart"
     },
     {
       "title": "Podcast luisteren en recensie maken",
@@ -3184,7 +3238,7 @@
       "stimulus": "Laag",
       "duration": "30–60 min",
       "group": "1–6",
-      "materials": "Koptelefoons, korte podcastaflevering, 3 reflectievragen of scorekaart.",
+      "materials": "",
       "fit": "Luister naar een korte aflevering en geef daarna je eigen oordeel of score.",
       "tags": [
         "podcast",
@@ -3195,7 +3249,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/048-podcast-luisteren-en-recensie-maken.jpg",
       "imageAlt": "Foto bij Podcast luisteren en recensie maken",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Koptelefoons, korte podcastaflevering, 3 reflectievragen of scorekaart."
     },
     {
       "title": "Special interest route: strips, games of platenzaken",
@@ -3228,12 +3283,13 @@
       "stimulus": "Middel",
       "duration": "30-75 min",
       "group": "1-4",
-      "materials": "Bingokaart met onschuldige observaties zoals hond, zonnebril, opvallende tas of fiets met krat.",
+      "materials": "",
       "fit": "Pak een terrasje en speel een bingo met dingen die je om je heen ziet.",
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/050-terrasje-plus-peoplewatch-bingo.jpg",
       "imageAlt": "Foto bij Terrasje plus peoplewatch-bingo",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Bingokaart met onschuldige observaties zoals hond, zonnebril, opvallende tas of fiets met krat."
     },
     {
       "title": "Vierdaagsefeesten met persoonlijk blokkenschema",
@@ -3316,7 +3372,7 @@
       "stimulus": "Laag/middel",
       "duration": "60–120 min",
       "group": "1–6",
-      "materials": "Vooraf contact, taakkaart, handschoenen en kleding die vies mag worden.",
+      "materials": "Neem vooraf contact op met de locatie.",
       "fit": "Help een tijdje mee bij dieren of op een stadsboerderij.",
       "tags": [
         "dieren",
@@ -3327,7 +3383,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/054-dierenzorg-of-stadsboerderij-helpblok.jpg",
       "imageAlt": "Foto bij Dierenzorg of stadsboerderij-helpblok",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Taakkaart, handschoenen en kleding die vies mag worden."
     },
     {
       "title": "Geocaching / GPS-speurtocht",
@@ -3338,7 +3395,7 @@
       "stimulus": "Laag/middel",
       "duration": "60–150 min",
       "group": "1–6",
-      "materials": "Telefoon of GPS-app, powerbank, route, afspraken en noodstop.",
+      "materials": "Maak afspraken over de route en wanneer je de tocht afbreekt.",
       "fit": "Combineer wandelen, zoeken en puzzelen tijdens een route met een concreet doel.",
       "tags": [
         "zoeken",
@@ -3349,7 +3406,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/055-geocaching-gps-speurtocht.jpg",
       "imageAlt": "Foto bij Geocaching / GPS-speurtocht",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Telefoon met GPS-app, powerbank en routekaart."
     },
     {
       "title": "Nationaal Park De Hoge Veluwe",
@@ -3388,7 +3446,7 @@
       "stimulus": "Laag/middel",
       "duration": "45–90 min",
       "group": "2–10",
-      "materials": "Bingokaarten, potloden, eventueel camera",
+      "materials": "",
       "fit": "Zoek planten, dieren en andere natuurvondsten op je bingokaart tijdens een wandeling.",
       "tags": [
         "natuur",
@@ -3398,7 +3456,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/057-natuurbingo-verified-v2.jpg",
       "imageAlt": "Foto bij Natuurbingo",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Bingokaarten, potloden, eventueel camera"
     },
     {
       "title": "Ooijpolder – wandelroute met foto-opdrachten",
@@ -3437,7 +3496,7 @@
       "stimulus": "Laag/middel",
       "duration": "60–150 min",
       "group": "1–6",
-      "materials": "Route, fotolijstje, waterpunt-opdracht of picknick.",
+      "materials": "Kies een waterpunt-opdracht of picknickstop.",
       "fit": "Verken het groen met een korte route, fotomissie of picknickstop.",
       "tags": [
         "sonsbeek",
@@ -3448,7 +3507,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/059-park-sonsbeek-of-meinerswijk-met-natuurmissie-verified.jpg",
       "imageAlt": "Foto bij Park Sonsbeek of Meinerswijk met natuurmissie",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Routekaart en fotolijstje."
     },
     {
       "title": "Podcastwandeling of audio-opdracht",
@@ -3459,12 +3519,13 @@
       "group": "1-6",
       "cost": "Gratis",
       "stimulus": "Laag",
-      "materials": "Telefoon, koptelefoon, vooraf gedownloade audio en een korte nabespreekvraag.",
+      "materials": "Kies een korte nabespreekvraag.",
       "fit": "Combineer een wandeling met een verhaal, podcast of luisteropdracht.",
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/060-podcastwandeling-of-audio-opdracht.jpg",
       "imageAlt": "Foto bij Podcastwandeling of audio-opdracht",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Telefoon, koptelefoon en vooraf gedownloade audio."
     },
     {
       "title": "Rustig avondrondje",
@@ -3496,12 +3557,13 @@
       "stimulus": "Laag/middel",
       "duration": "30-75 min",
       "group": "1-6",
-      "materials": "Telefoon, oortjes, routekaart en drie fotopunten: mooi, vreemd en rustig.",
+      "materials": "Kies drie fotopunten: mooi, vreemd en rustig.",
       "fit": "Loop met een eigen playlist en maak foto’s rond drie eenvoudige thema’s.",
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/062-silent-walk-met-eigen-playlist-en-fotostops.jpg",
       "imageAlt": "Foto bij Silent walk met eigen playlist en fotostops",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Telefoon, oortjes, playlist en routekaart."
     },
     {
       "title": "Spoorzoeken of dierenspotten in uiterwaarden",
@@ -3512,12 +3574,13 @@
       "stimulus": "Laag",
       "duration": "45-90 min",
       "group": "1-6",
-      "materials": "Verrekijker, checklist met vogels, insecten of sporen en een korte looproute.",
+      "materials": "Kies een korte looproute.",
       "fit": "Zoek dierensporen en observeer vogels, insecten en andere details in de natuur.",
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/063-spoorzoeken-of-dierenspotten-in-uiterwaarden-verified.jpg",
       "imageAlt": "Foto bij Spoorzoeken of dierenspotten in uiterwaarden",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Verrekijker en checklist met vogels, insecten of sporen."
     },
     {
       "title": "Terrarium, stekjes of plantlab",
@@ -3528,7 +3591,7 @@
       "stimulus": "Laag",
       "duration": "45–90 min",
       "group": "1–6",
-      "materials": "Glazen potten, aarde, stekjes, mos, decoratie en verzorgkaart.",
+      "materials": "",
       "fit": "Maak een terrarium, kweek stekjes of experimenteer met planten en zie ze groeien.",
       "tags": [
         "planten",
@@ -3539,7 +3602,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/064-terrarium-stekjes-of-plantlab.jpg",
       "imageAlt": "Foto bij Terrarium, stekjes of plantlab",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Glazen potten, aarde, stekjes, mos, decoratie en verzorgkaart."
     },
     {
       "title": "Wandeling met zoekopdrachten",
@@ -3550,7 +3614,7 @@
       "stimulus": "Laag",
       "duration": "30–60 min",
       "group": "2–8",
-      "materials": "Opdrachtenkaartjes, eventueel telefoon/camera",
+      "materials": "",
       "fit": "Maak van een wandeling een speurtocht met foto-, kleur- of detailopdrachten.",
       "tags": [
         "wandelen",
@@ -3560,7 +3624,8 @@
       "distanceBand": "Op locatie",
       "image": "website-bestanden/afbeeldingen/inspiratie/065-terreinwandeling-met-opdracht.jpg",
       "imageAlt": "Foto bij Wandeling met zoekopdrachten",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Opdrachtenkaartjes, eventueel telefoon/camera"
     },
     {
       "title": "Treinspottour of stationschallenge",
@@ -3571,7 +3636,7 @@
       "stimulus": "Laag/middel",
       "duration": "45–120 min",
       "group": "1–4",
-      "materials": "Checklist met typen treinen, tijden, foto-opdracht en rustige wachtplek.",
+      "materials": "Kies een foto-opdracht en een rustige wachtplek.",
       "fit": "Spot verschillende treinen en vink tijden, types of details af.",
       "tags": [
         "treinen",
@@ -3582,7 +3647,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/066-treinspottour-of-stationschallenge.jpg",
       "imageAlt": "Foto bij Treinspottour of stationschallenge",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Checklist met typen treinen en tijden."
     },
     {
       "title": "Uitzichtpunt- of bruggenroute met fotostops",
@@ -3593,13 +3659,14 @@
       "group": "2-8",
       "cost": "Gratis",
       "stimulus": "Laag/middel",
-      "materials": "Route, fotolijst-opdracht, tussenstops en een rustige afsluitplek.",
+      "materials": "Kies tussenstops en een rustige afsluitplek.",
       "fit": "Volg een route langs bruggen en uitzichtpunten en leg je favorieten vast.",
       "source": "Eigen routekeuze",
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/067-uitzichtpunt-of-bruggenroute-met-fotostops.jpg",
       "imageAlt": "Foto bij Uitzichtpunt- of bruggenroute met fotostops",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Routekaart en fotolijst met opdrachten."
     },
     {
       "title": "Wandeling Duivelsberg / N70",
@@ -3610,7 +3677,7 @@
       "stimulus": "Middel",
       "duration": "2–4 uur",
       "group": "2–6",
-      "materials": "Route, stevige schoenen, water. Start bij Hotel ’t Spijker voor de N70. Er zijn meerdere instappunten; stem het startpunt en de lengte van je wandeling vooraf af.",
+      "materials": "Start bij Hotel ’t Spijker voor de N70. Er zijn meerdere instappunten; stem het startpunt en de lengte van je wandeling vooraf af.",
       "fit": "Een stevige wandeling met hoogteverschil, bos en mooie uitzichten.",
       "tags": [
         "wandelen",
@@ -3625,7 +3692,8 @@
       "locationName": "Voorgesteld startpunt N70",
       "addressSource": "https://www.visitnijmegen.com/routes/3673389898/n70-natuurwandelroute",
       "addressCheckedAt": "2026-10-05",
-      "url": "https://www.visitnijmegen.com/routes/3673389898/n70-natuurwandelroute"
+      "url": "https://www.visitnijmegen.com/routes/3673389898/n70-natuurwandelroute",
+      "supplies": "Routekaart, stevige schoenen en water."
     },
     {
       "title": "Wandeling Hatertse en Overasseltse Vennen",
@@ -3636,7 +3704,7 @@
       "stimulus": "Laag/middel",
       "duration": "2–3 uur",
       "group": "2–8",
-      "materials": "Route, water, zonnebrand, check weer. Volg de bordjes naar de parkeerplaats van Staatsbosbeheer aan de Oude Nijmeegseweg. Vanaf hier kun je de geel gemarkeerde Vennenroute lopen.",
+      "materials": "Check het weer. Volg de bordjes naar de parkeerplaats van Staatsbosbeheer aan de Oude Nijmeegseweg. Vanaf hier kun je de geel gemarkeerde Vennenroute lopen.",
       "fit": "Wandel langs vennen, heide en bos in de Hatertse en Overasseltse Vennen.",
       "tags": [
         "wandelen",
@@ -3651,7 +3719,8 @@
       "locationName": "Startpunt: parkeerplaats Staatsbosbeheer",
       "addressSource": "https://www.visitnijmegen.com/routes/1792279383/wandelroute-vennen",
       "addressCheckedAt": "2026-10-05",
-      "url": "https://www.visitnijmegen.com/routes/1792279383/wandelroute-vennen"
+      "url": "https://www.visitnijmegen.com/routes/1792279383/wandelroute-vennen",
+      "supplies": "Routekaart, water en zonnebrand."
     },
     {
       "title": "Wandeling Ooijpolder",
@@ -3662,7 +3731,7 @@
       "stimulus": "Laag/middel",
       "duration": "2–3 uur",
       "group": "2–8",
-      "materials": "Route, water, pauzepunt, OV/terugroute. De wandelroute vanaf De Bastei is 7,5 km en eindigt bij de Sint Hubertusweg, bushalte Erlecomsedam. Regel je terugreis; dit is geen rondwandeling.",
+      "materials": "Kies een pauzepunt en plan je OV- of terugroute. De wandelroute vanaf De Bastei is 7,5 km en eindigt bij de Sint Hubertusweg, bushalte Erlecomsedam. Regel je terugreis; dit is geen rondwandeling.",
       "fit": "Verken het rivierenlandschap van de Ooijpolder te voet en neem je camera mee.",
       "tags": [
         "wandelen",
@@ -3677,7 +3746,8 @@
       "locationName": "Voorgesteld startpunt: De Bastei",
       "addressSource": "https://www.visitnijmegen.com/routes/1298714414/boswachterspad-ooijpolder",
       "addressCheckedAt": "2026-10-05",
-      "url": "https://www.visitnijmegen.com/routes/1298714414/boswachterspad-ooijpolder"
+      "url": "https://www.visitnijmegen.com/routes/1298714414/boswachterspad-ooijpolder",
+      "supplies": "Routekaart en water."
     },
     {
       "title": "Watermuseum waterwandeling Arnhem",
@@ -3688,7 +3758,7 @@
       "stimulus": "Laag/middel",
       "duration": "60–180 min",
       "group": "1–6",
-      "materials": "IVN-app, wandelschoenen en een kort routeplan of deeltraject. Dit is het adres van het Watermuseum. Controleer bij de aanbieder waar de waterwandeling begint.",
+      "materials": "Maak een kort routeplan of kies een deeltraject. Dit is het adres van het Watermuseum. Controleer bij de aanbieder waar de waterwandeling begint.",
       "fit": "Volg een wandelroute rond water, landschap en de geschiedenis van de omgeving.",
       "source": "Nederlands Watermuseum",
       "url": "https://watermuseum.nl/activiteiten/waterwandeling/",
@@ -3705,7 +3775,8 @@
       "address": "Zijpendaalseweg 26-28, 6814 CL Arnhem",
       "addressSource": "https://www.museum.nl/nl/nederlands-watermuseum",
       "addressCheckedAt": "2026-10-04",
-      "locationName": "Nederlands Watermuseum"
+      "locationName": "Nederlands Watermuseum",
+      "supplies": "IVN-app en wandelschoenen."
     },
     {
       "title": "Barista- of ijskoffielab",
@@ -3716,7 +3787,7 @@
       "stimulus": "Laag/middel",
       "duration": "45–90 min",
       "group": "1–6",
-      "materials": "Koffie, thee, siroop, melk, ijs, receptkaarten en proefscorekaart.",
+      "materials": "",
       "fit": "Maak en proef verschillende koffie-, thee- of ijskoffiecombinaties.",
       "tags": [
         "proeven",
@@ -3727,7 +3798,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/072-barista-of-ijskoffielab.jpg",
       "imageAlt": "Foto bij Barista- of ijskoffielab",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Koffie, thee, siroop, melk, ijs, receptkaarten en proefscorekaart."
     },
     {
       "title": "Bordspellenmiddag",
@@ -3738,7 +3810,7 @@
       "stimulus": "Laag/middel",
       "duration": "60–180 min",
       "group": "2–12",
-      "materials": "Spellen, rustige tafelindeling",
+      "materials": "Zorg voor een rustige tafelindeling.",
       "fit": "Kies een mix van korte en langere spellen en speel in wisselende teams.",
       "tags": [
         "spel",
@@ -3748,7 +3820,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/073-bordspellenmiddag.jpg",
       "imageAlt": "Foto bij Bordspellenmiddag",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Spellen."
     },
     {
       "title": "Budgetproof uitje plannen",
@@ -3759,7 +3832,7 @@
       "stimulus": "Laag",
       "duration": "45–90 min",
       "group": "2–8",
-      "materials": "Laptop, budgetkaart, ov-info",
+      "materials": "",
       "fit": "Zoek een leuk gratis of betaalbaar uitje en maak samen een eenvoudig plan.",
       "tags": [
         "budget",
@@ -3769,7 +3842,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/074-budgetproof-uitje-plannen-verified.jpg",
       "imageAlt": "Foto bij Budgetproof uitje plannen",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Laptop, budgetkaart, ov-info"
     },
     {
       "title": "DoeNijmegen",
@@ -3807,7 +3881,7 @@
       "stimulus": "Middel",
       "duration": "120–180 min",
       "group": "3–6",
-      "materials": "Dobbelstenen, simpele personages, korte verhaallijn",
+      "materials": "",
       "fit": "Speel een kort Dungeons & Dragons-avontuur vol fantasie, puzzels en samenwerking.",
       "tags": [
         "spel",
@@ -3817,7 +3891,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/076-dungeons-dragons-one-shot.jpg",
       "imageAlt": "Foto bij Dungeons & Dragons one-shot",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Dobbelstenen, simpele personages, korte verhaallijn"
     },
     {
       "title": "Escape room voor thuis",
@@ -3828,7 +3903,7 @@
       "stimulus": "Middel",
       "duration": "60–120 min",
       "group": "3–8",
-      "materials": "Slotjes, enveloppen, puzzels, timer",
+      "materials": "",
       "fit": "Bouw samen een compacte escape room met puzzels, codes en hints.",
       "tags": [
         "escape",
@@ -3838,7 +3913,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/077-escape-room-op-de-groep.jpg",
       "imageAlt": "Foto bij Escape room voor thuis",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Slotjes, enveloppen, puzzels, timer"
     },
     {
       "title": "Esports of game-toernooi op kleine schaal",
@@ -3849,7 +3925,7 @@
       "stimulus": "Middel/hoog",
       "duration": "60–120 min",
       "group": "2–8",
-      "materials": "Console of pc, vaste rondes, spelregels, time-outplek.",
+      "materials": "Spreek vaste rondes en spelregels af en zorg voor een time-outplek.",
       "fit": "Speel een gametoernooi en daag elkaar uit in je favoriete spellen.",
       "tags": [
         "esports",
@@ -3860,7 +3936,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/078-esports-of-game-toernooi-op-kleine-schaal.jpg",
       "imageAlt": "Foto bij Esports of game-toernooi op kleine schaal",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Console of pc."
     },
     {
       "title": "Fietsreparatie-basis",
@@ -3871,7 +3948,7 @@
       "stimulus": "Laag/middel",
       "duration": "60–120 min",
       "group": "2–8",
-      "materials": "Fietspomp, bandenlichters, plakset, kettingolie",
+      "materials": "",
       "fit": "Leer eenvoudige fietsreparaties en probeer je fiets daarna uit tijdens een korte tocht.",
       "tags": [
         "fiets",
@@ -3881,7 +3958,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/079-fietsreparatie-basis.jpg",
       "imageAlt": "Foto bij Fietsreparatie-basis",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Fietspomp, bandenlichters, plakset, kettingolie"
     },
     {
       "title": "Filmavond met nagesprek",
@@ -3892,7 +3970,7 @@
       "stimulus": "Laag/middel",
       "duration": "2–3 uur",
       "group": "2–12",
-      "materials": "Film, beamer/tv, snacks, pauzemogelijkheid",
+      "materials": "Zorg voor een pauzemogelijkheid.",
       "fit": "Kies samen een film en praat na over het verhaal, de personages of je favoriete scène.",
       "tags": [
         "film",
@@ -3902,7 +3980,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/080-filmavond-met-nagesprek.jpg",
       "imageAlt": "Foto bij Filmavond met nagesprek",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Film, beamer of tv en snacks."
     },
     {
       "title": "Foodhall of streetfood-proefroute met keuzekaart",
@@ -3913,13 +3992,14 @@
       "group": "2-6",
       "cost": "Laag/betaald",
       "stimulus": "Middel/hoog",
-      "materials": "Budget per persoon, 2 of 3 eetopties, vaste eindtijd, rustige zitplek en een simpele beoordelingskaart.",
+      "materials": "Spreek een budget per persoon af, kies twee of drie eetopties, een vaste eindtijd en een rustige zitplek.",
       "fit": "Proef een paar kleine gerechten en kies samen de favoriet.",
       "source": "Eigen keuze in stad",
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/081-foodhall-of-streetfood-proefroute-met-keuzekaart.jpg",
       "imageAlt": "Foto bij Foodhall of streetfood-proefroute met keuzekaart",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Een eenvoudige beoordelingskaart."
     },
     {
       "title": "JongerenLab Nijmegen",
@@ -3957,12 +4037,13 @@
       "group": "2-8",
       "cost": "Gratis",
       "stimulus": "Laag/middel",
-      "materials": "Vuilniszakken, grijpers, plantjes, kaartjes of kleine helpopdracht voor buurtplek.",
+      "materials": "Kies een kleine helpopdracht voor een buurtplek.",
       "fit": "Doe iets concreets voor de buurt, van opruimen tot helpen bij een lokale plek.",
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/083-kleine-vrijwilligersactie-in-de-buurt-verified.jpg",
       "imageAlt": "Foto bij Kleine vrijwilligersactie in de buurt",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Vuilniszakken, grijpers, plantjes of kaartjes."
     },
     {
       "title": "Mini-onderneming: zomerpop-upkraam",
@@ -3973,7 +4054,7 @@
       "stimulus": "Middel",
       "duration": "90–180 min",
       "group": "2–8",
-      "materials": "Tafel, prijskaartjes, kleine voorraad, taakverdeling en echt of oefenbudget.",
+      "materials": "Spreek een taakverdeling af.",
       "fit": "Bedenk een product, richt een kleine pop-upkraam in en probeer het samen te verkopen.",
       "tags": [
         "zelfstandigheid",
@@ -3984,7 +4065,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/084-mini-onderneming-zomerpop-upkraam.jpg",
       "imageAlt": "Foto bij Mini-onderneming: zomerpop-upkraam",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Tafel, prijskaartjes, kleine voorraad en echt of oefenbudget."
     },
     {
       "title": "Mocktail-workshop met kleine tapasplank",
@@ -3995,7 +4077,7 @@
       "stimulus": "Middel",
       "duration": "45-90 min",
       "group": "2-10",
-      "materials": "Sap, bruiswater, fruit, ijs, glazen, receptkaarten, kleine hapjes en 3 veilige combinaties.",
+      "materials": "Kies drie veilige combinaties.",
       "fit": "Mix je eigen alcoholvrije cocktails en maak er een kleine tapasplank bij.",
       "tags": [
         "mocktail",
@@ -4006,7 +4088,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/085-mocktail-workshop-met-kleine-tapasplank.jpg",
       "imageAlt": "Foto bij Mocktail-workshop met kleine tapasplank",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Sap, bruiswater, fruit, ijs, glazen, receptkaarten en kleine hapjes."
     },
     {
       "title": "Openluchtspel in park met rollenkaart",
@@ -4017,12 +4100,13 @@
       "group": "4-10",
       "cost": "Gratis/laag",
       "stimulus": "Middel",
-      "materials": "Rollenkaart, scorekaart, pionnen, krijt of lint en een start-stopstructuur.",
+      "materials": "Spreek een start-stopstructuur af.",
       "fit": "Speel samen een buitenspel in het park en wissel tussen verschillende rollen.",
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/086-openluchtspel-in-park-met-rollenkaart.jpg",
       "imageAlt": "Foto bij Openluchtspel in park met rollenkaart",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Rollenkaart, scorekaart, pionnen, krijt of lint."
     },
     {
       "title": "Oude elektronica openmaken / repairlab",
@@ -4033,12 +4117,13 @@
       "stimulus": "Middel",
       "duration": "45-90 min",
       "group": "1-4",
-      "materials": "Oude apparaten, kleine schroevendraaiers, bakjes voor onderdelen en handschoenen indien nodig.",
+      "materials": "",
       "fit": "Ontdek hoe apparaten in elkaar zitten of probeer een eenvoudige reparatie.",
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/087-oude-elektronica-openmaken-repairlab.jpg",
       "imageAlt": "Foto bij Oude elektronica openmaken / repairlab",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Oude apparaten, kleine schroevendraaiers, bakjes voor onderdelen en handschoenen indien nodig."
     },
     {
       "title": "OV-oefenuitje met planner en mini-missie",
@@ -4049,7 +4134,7 @@
       "stimulus": "Middel",
       "duration": "60–120 min",
       "group": "1–4",
-      "materials": "OV-app, reisdoel, routekaart of printscreen, vaste opdracht, pauzeplek en terugvalplan.",
+      "materials": "Kies een reisdoel, vaste opdracht, pauzeplek en terugvalplan.",
       "fit": "Plan een reis met het openbaar vervoer en ontdek onderweg een nieuwe plek met een kleine missie.",
       "tags": [
         "ov",
@@ -4061,7 +4146,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/088-ov-oefenuitje-met-planner-en-mini-missie.jpg",
       "imageAlt": "Foto bij OV-oefenuitje met planner en mini-missie",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "OV-app en routekaart of printscreen."
     },
     {
       "title": "Pubquiz / zomerquiz",
@@ -4072,7 +4158,7 @@
       "stimulus": "Middel",
       "duration": "60–90 min",
       "group": "4–20",
-      "materials": "Quizvragen, scoreformulier, teams",
+      "materials": "Verdeel de deelnemers in teams.",
       "fit": "Speel in teams verschillende rondes over muziek, sport, Nijmegen en natuur.",
       "tags": [
         "quiz",
@@ -4082,7 +4168,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/089-pubquiz-zomerquiz.jpg",
       "imageAlt": "Foto bij Pubquiz / zomerquiz",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Quizvragen en scoreformulier."
     },
     {
       "title": "Route kiezen met maximaal drie haltes",
@@ -4093,12 +4180,13 @@
       "stimulus": "Laag/middel",
       "duration": "60-150 min",
       "group": "1-6",
-      "materials": "Kaartje met precies drie keuzes: iets zien, iets doen, iets eten.",
+      "materials": "",
       "fit": "Stel je eigen route samen met maximaal drie leuke tussenstops.",
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/090-route-kiezen-met-maximaal-drie-haltes.jpg",
       "imageAlt": "Foto bij Route kiezen met maximaal drie haltes",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Kaartje met precies drie keuzes: iets zien, iets doen, iets eten."
     },
     {
       "title": "Samen koken – wereldkeuken",
@@ -4109,7 +4197,7 @@
       "stimulus": "Middel",
       "duration": "120–180 min",
       "group": "3–8",
-      "materials": "Recept, boodschappen, taakverdeling",
+      "materials": "Spreek een taakverdeling af.",
       "fit": "Kies gerechten uit een wereldkeuken en bereid samen een maaltijd.",
       "tags": [
         "koken",
@@ -4119,7 +4207,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/091-samen-koken-wereldkeuken.jpg",
       "imageAlt": "Foto bij Samen koken – wereldkeuken",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Recept en boodschappen."
     },
     {
       "title": "Techlab met stroom, licht en kleine proefjes",
@@ -4130,7 +4219,7 @@
       "stimulus": "Middel",
       "duration": "45–90 min",
       "group": "1–6",
-      "materials": "Magneten, batterijen, ledlampjes, simpele stroomkringen, proefkaartjes en veiligheidsafspraken.",
+      "materials": "Maak vooraf veiligheidsafspraken.",
       "fit": "Experimenteer met stroom, magneten en licht via korte praktische proefjes.",
       "tags": [
         "techniek",
@@ -4141,7 +4230,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/092-techlab-met-stroom-licht-en-kleine-proefjes.jpg",
       "imageAlt": "Foto bij Techlab met stroom, licht en kleine proefjes",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Magneten, batterijen, ledlampjes, simpele stroomkringen en proefkaartjes."
     },
     {
       "title": "Sushirollen of snacklab",
@@ -4152,7 +4242,7 @@
       "stimulus": "Middel",
       "duration": "60–120 min",
       "group": "2–6",
-      "materials": "Ingrediënten, handschoenen, rollen, hygiënekaart en alternatief voor moeilijke eters.",
+      "materials": "Zorg voor een alternatief voor moeilijke eters.",
       "fit": "Maak stap voor stap eigen sushirollen of stel een kleine snackproeverij samen.",
       "tags": [
         "eten",
@@ -4163,7 +4253,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/093-sushirollen-of-snacklab.jpg",
       "imageAlt": "Foto bij Sushirollen of snacklab",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Ingrediënten, handschoenen, rollen en hygiënekaart."
     },
     {
       "title": "TCG / kaartspeltoernooi",
@@ -4174,7 +4265,7 @@
       "stimulus": "Laag/middel",
       "duration": "45–120 min",
       "group": "2–8",
-      "materials": "Kaartspellen, regels, scorekaart en rustige tafelopstelling.",
+      "materials": "Zorg voor een rustige tafelopstelling.",
       "fit": "Speel een toernooi met je favoriete verzamelkaartspel.",
       "tags": [
         "kaartspel",
@@ -4185,7 +4276,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/094-tcg-kaartspeltoernooi.jpg",
       "imageAlt": "Foto bij TCG / kaartspeltoernooi",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Kaartspellen, regels en scorekaart."
     },
     {
       "title": "Vlooienmarkt of rommelmarkt speurmissie",
@@ -4218,7 +4310,7 @@
       "stimulus": "Laag/middel",
       "duration": "60–120 min",
       "group": "1–6",
-      "materials": "Laptop, voorbeeldorganisaties, gesprekkaart",
+      "materials": "",
       "fit": "Verken lokale initiatieven en kies welk soort vrijwilligerswerk bij je interesses past.",
       "tags": [
         "participatie",
@@ -4228,7 +4320,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/096-vrijwilligerswerk-verkennen-op-papier.jpg",
       "imageAlt": "Foto bij Vrijwilligerswerk ontdekken",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Laptop, voorbeeldorganisaties, gesprekkaart"
     },
     {
       "title": "Waterproefjes met bouwen en testen",
@@ -4239,7 +4332,7 @@
       "stimulus": "Middel",
       "duration": "45–90 min",
       "group": "1–6",
-      "materials": "Bekers, bakjes, rietjes, trechters, doekjes, waterbak en proefkaartjes.",
+      "materials": "",
       "fit": "Bouw, giet en test met water aan de hand van korte proefopdrachten.",
       "tags": [
         "techniek",
@@ -4250,7 +4343,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/097-waterproefjes-met-bouwen-en-testen.jpg",
       "imageAlt": "Foto bij Waterproefjes met bouwen en testen",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Bekers, bakjes, rietjes, trechters, doekjes, waterbak en proefkaartjes."
     },
     {
       "title": "Badmintontoernooi",
@@ -4261,7 +4355,7 @@
       "stimulus": "Middel",
       "duration": "60–120 min",
       "group": "4–12",
-      "materials": "Rackets, shuttles, veldmarkering, schema",
+      "materials": "",
       "fit": "Speel badminton in een toernooi of sla samen een shuttle over.",
       "tags": [
         "sport",
@@ -4271,7 +4365,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/098-badmintontoernooi.jpg",
       "imageAlt": "Foto bij Badmintontoernooi",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Rackets, shuttles, veldmarkering, schema"
     },
     {
       "title": "Bootcamp",
@@ -4282,7 +4377,7 @@
       "stimulus": "Middel/hoog",
       "duration": "45–75 min",
       "group": "3–10",
-      "materials": "Matjes, timer, muziek optioneel",
+      "materials": "",
       "fit": "Kies een serie oefeningen op eigen niveau en werk in korte rondes.",
       "tags": [
         "sport",
@@ -4292,7 +4387,8 @@
       "distanceBand": "Op locatie",
       "image": "website-bestanden/afbeeldingen/inspiratie/099-bootcamp.jpg",
       "imageAlt": "Foto bij Bootcamp",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Matjes, timer, muziek optioneel"
     },
     {
       "title": "Fietscheck en korte fietstocht",
@@ -4303,7 +4399,7 @@
       "stimulus": "Middel",
       "duration": "60–150 min",
       "group": "2–8",
-      "materials": "Fietsen, pomp, bandenplakset, route",
+      "materials": "",
       "fit": "Controleer samen de fietsen en sluit af met een korte tocht.",
       "tags": [
         "fiets",
@@ -4313,7 +4409,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/100-fietscheck-en-korte-fietstocht.jpg",
       "imageAlt": "Foto bij Fietscheck en korte fietstocht",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Fietsen, pomp, bandenplakset, route"
     },
     {
       "title": "Kubb / frisbee / spikeball",
@@ -4324,7 +4421,7 @@
       "stimulus": "Middel",
       "duration": "60–120 min",
       "group": "4–12",
-      "materials": "Spelmateriaal, veld",
+      "materials": "Kies een geschikt veld.",
       "fit": "Probeer kubb, frisbee of spikeball in het park of op een grasveld.",
       "tags": [
         "spel",
@@ -4334,7 +4431,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/101-kubb-frisbee-spikeball-verified.jpg",
       "imageAlt": "Foto bij Kubb / frisbee / spikeball",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Spelmateriaal voor kubb, frisbee of spikeball."
     },
     {
       "title": "Silent disco of koptelefoonplaylist wandeling",
@@ -4345,7 +4443,7 @@
       "stimulus": "Middel",
       "duration": "30–60 min",
       "group": "1–8",
-      "materials": "Koptelefoons of oortjes, playlist, korte route of beweegopdrachten.",
+      "materials": "Kies een korte route of beweegopdrachten.",
       "fit": "Beweeg of wandel op je eigen muziek, volume en tempo.",
       "tags": [
         "muziek",
@@ -4356,7 +4454,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/102-silent-disco-of-koptelefoonplaylist-wandeling.jpg",
       "imageAlt": "Foto bij Silent disco of koptelefoonplaylist wandeling",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Koptelefoons of oortjes en playlist."
     },
     {
       "title": "Tafeltennischallenge",
@@ -4367,8 +4466,8 @@
       "stimulus": "Middel",
       "duration": "45–90 min",
       "group": "2–10",
-      "materials": "Batjes, ballen, scorekaart",
-      "fit": "Korte activiteit die makkelijk in pauzes of avonden past.",
+      "materials": "",
+      "fit": "Speel een korte tafeltennischallenge en daag elkaar uit met verschillende opdrachten.",
       "tags": [
         "sport",
         "spel",
@@ -4377,7 +4476,8 @@
       "distanceBand": "Thuis",
       "image": "website-bestanden/afbeeldingen/inspiratie/103-tafeltennischallenge.jpg",
       "imageAlt": "Foto bij Tafeltennischallenge",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Batjes, ballen, scorekaart"
     },
     {
       "title": "Volleybal / beachvolleybal",
@@ -4388,7 +4488,7 @@
       "stimulus": "Middel",
       "duration": "60–120 min",
       "group": "6–14",
-      "materials": "Bal, net of veldmarkering, teamschema",
+      "materials": "",
       "fit": "Speel een potje volleybal op een veld of in het zand.",
       "tags": [
         "sport",
@@ -4398,7 +4498,8 @@
       "distanceBand": "Dichtbij (0-10 km)",
       "image": "website-bestanden/afbeeldingen/inspiratie/104-volleybal-beachvolleybal.jpg",
       "imageAlt": "Foto bij Volleybal / beachvolleybal",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Bal, net of veldmarkering, teamschema"
     },
     {
       "title": "Waalhalla / NYMA",
@@ -4437,7 +4538,7 @@
       "stimulus": "Middel",
       "duration": "60–120 min",
       "group": "4–12",
-      "materials": "Waterballonnen alternatief, sponzen, emmers, handdoeken, droge plek",
+      "materials": "Zorg voor een droge plek.",
       "fit": "Verkoelende spellen met water, sponzen en emmers voor een warme zomerdag.",
       "tags": [
         "water",
@@ -4447,7 +4548,8 @@
       "distanceBand": "Op locatie",
       "image": "website-bestanden/afbeeldingen/inspiratie/106-watermiddag-op-het-terrein.jpg",
       "imageAlt": "Foto bij Watermiddag",
-      "imageStatus": "approved"
+      "imageStatus": "approved",
+      "supplies": "Een alternatief voor waterballonnen, sponzen, emmers en handdoeken."
     },
     {
       "title": "Zwemmen Berendonck",
@@ -4458,7 +4560,7 @@
       "stimulus": "Middel/hoog",
       "duration": "2–4 uur",
       "group": "3–8",
-      "materials": "Zwemspullen, handdoek, zonnebrand, check zwemwater",
+      "materials": "Controleer de zwemwaterkwaliteit.",
       "fit": "Neem een duik bij recreatiegebied Berendonck en combineer zwemmen met ontspannen aan het water.",
       "tags": [
         "zwemmen",
@@ -4471,7 +4573,8 @@
       "imageStatus": "approved",
       "address": "Weg door de Berendonck 4, Wijchen",
       "addressSource": "https://www.leisurelands.nl/nl/locaties/3102355710/berendonck",
-      "addressCheckedAt": "2026-10-04"
+      "addressCheckedAt": "2026-10-04",
+      "supplies": "Zwemspullen, handdoek en zonnebrand."
     },
     {
       "title": "Zwemmen in het Goffertbad",
@@ -4482,7 +4585,7 @@
       "stimulus": "Middel/hoog",
       "duration": "2–3 uur",
       "group": "3–8",
-      "materials": "Zwemspullen, reservering/check openingstijden",
+      "materials": "Controleer openingstijden en of reserveren nodig is.",
       "fit": "Geniet van een dag zwemmen in het openluchtbad Goffertbad.",
       "tags": [
         "zwemmen",
@@ -4495,7 +4598,8 @@
       "imageStatus": "approved",
       "address": "Goffertweg 22, 6532 AA Nijmegen",
       "addressSource": "https://goffertbad.sportfondsen.nl/contact/",
-      "addressCheckedAt": "2026-10-04"
+      "addressCheckedAt": "2026-10-04",
+      "supplies": "Zwemspullen."
     },
     {
       "title": "Poolen, snooker of darts in Nijmegen",
@@ -4569,7 +4673,7 @@
       "group": "2-6",
       "cost": "Gratis/€€",
       "stimulus": "Middel/hoog",
-      "materials": "Telefoon, powerbank en route-informatie. Dit is het adres van de aanbieder. Het verzamelpunt kan per activiteit verschillen; volg de locatie in je boekingsbevestiging.",
+      "materials": "Dit is het adres van de aanbieder. Het verzamelpunt kan per activiteit verschillen; volg de locatie in je boekingsbevestiging.",
       "fit": "Los onderweg opdrachten op en ontdek de stad via een spel op je telefoon.",
       "source": "Nijmegen Outdoor / DoeNijmegen / eigen route",
       "url": "https://nijmegenoutdoor.nl/",
@@ -4578,7 +4682,8 @@
       "imageStatus": "approved",
       "address": "Tweede Walstraat 17, 6511 LN Nijmegen",
       "addressSource": "https://nijmegenoutdoor.nl/",
-      "addressCheckedAt": "2026-10-05"
+      "addressCheckedAt": "2026-10-05",
+      "supplies": "Telefoon, powerbank en route-informatie."
     },
     {
       "title": "Skatepark, pumptrack of urban sports sessie",
@@ -4871,8 +4976,8 @@
       "group": "4-10",
       "cost": "€€€",
       "stimulus": "Middel/hoog",
-      "materials": "Actuele openingstijden, kosten en reserveren checken. Locatie: Skicentrum De Wijchense Berg, Wijchen.",
-      "fit": "Bijzondere sportervaring met instructie en herhaling. Naast skiën en snowboarden zijn er outdooractiviteiten en tuben; controleer vooraf welke onderdelen in de zomer beschikbaar zijn.",
+      "materials": "Actuele openingstijden, kosten en reserveren checken. Locatie: Skicentrum De Wijchense Berg, Wijchen. Controleer vooraf welke onderdelen in de zomer beschikbaar zijn.",
+      "fit": "Probeer skiën, snowboarden, tuben of een outdooractiviteit, met instructie en herhaling.",
       "source": "Skicentrum De Wijchense Berg",
       "url": "https://www.dewijchenseberg.nl/",
       "tags": [
@@ -5591,7 +5696,7 @@
       "cost": "€€",
       "stimulus": "Middel/hoog",
       "fit": "Probeer touwklimmen met een introductieles of ga boulderen op je eigen niveau.",
-      "materials": "Beginners boeken een introductie; sportkleding meenemen en materiaalhuur vooraf controleren.",
+      "materials": "Beginners boeken een introductie; controleer vooraf de materiaalhuur.",
       "source": "Mountain Network Arnhem",
       "url": "https://mountain-network.nl/klimcentra/locaties/",
       "address": "Olympus 27, 6832 EL Arnhem",
@@ -5610,7 +5715,8 @@
       "imageSourceType": "website",
       "imageSourceUrl": "https://mountain-network.nl/klimcentra/locaties/",
       "imageSourceLabel": "Mountain Network Arnhem",
-      "imageLicense": "Onbekend"
+      "imageLicense": "Onbekend",
+      "supplies": "Sportkleding."
     },
     {
       "title": "Timestamp Arnhem",

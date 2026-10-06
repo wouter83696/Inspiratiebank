@@ -1,5 +1,10 @@
 (function(){
   const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function renderPreparation(item={}){
+    return [['Praktisch',item.note || item.materials],['Materialen',item.supplies]]
+      .filter(([,text])=>String(text || '').trim())
+      .map(([label,text])=>`<details class="ideaPracticalDetails"><summary>${label}</summary><p class="ideaPracticalText">${escapeHtml(text)}</p></details>`).join('');
+  }
   function sourceButtonLabel(item={}){
     const source = String(item.source || '').trim();
     if(source && !/^ingebracht door\b/i.test(source) && source.toLocaleLowerCase('nl-NL') !== 'inzending') return source;
@@ -61,7 +66,7 @@
       <td class="ongoingTitleCell"><span class="name">${view.title || ''}</span>${view.review || ''}${view.date ? `<div class="small ongoingDateMeta">${view.date}</div>` : ''}${titleActions}</td>
       <td class="ongoingWeeksCell">${view.weeks || ''}</td>
       <td class="ongoingBadgesCell"><div class="cardPillGroup ongoingBadges">${view.place || ''}${view.cost || ''}${view.stimulus || ''}</div></td>
-      <td class="ongoingFitCell">${view.meta || ''}<div class="small ongoingAdminDescription">${view.description || ''}</div></td>
+      <td class="ongoingFitCell">${view.meta || ''}<div class="small ongoingAdminDescription">${view.description || ''}</div>${view.preparation || ''}</td>
       ${view.hideWebsite ? '' : `<td class="websiteCell">${view.website || ''}</td>`}
       ${view.actions !== undefined && !view.actionsInTitle && !view.manageFirst ? `<td class="ongoingManageCell" data-label="Beheer"><div class="ongoingAdminActions">${view.actions || ''}</div></td>` : ''}
     </tr>`;
@@ -119,7 +124,7 @@
       <td data-label="Locatie en afstand">${view.location || ''}</td>
       <td data-label="Kosten">${view.cost || ''}</td>
       <td data-label="Prikkel">${view.stimulus || ''}</td>
-      <td data-label="Beschrijving"><div class="small">${view.description || ''}</div></td>
+      <td data-label="Beschrijving"><div class="small">${view.description || ''}</div>${view.preparation || ''}</td>
       <td class="websiteCell" data-label="Website">${view.website || ''}</td>
       ${view.actions !== undefined ? `<td data-label="Beheer"><div class="agendaTableActions">${view.actions || ''}</div></td>` : ''}
     </tr>`;
@@ -301,7 +306,7 @@
       review, date:'',
       weeks:escapeHtml(weekLabel), place:`${mobileWeekPill}${placePills}`,
       cost:costLabel, stimulus:stimulusLabel, meta:'',
-      description:escapeHtml(description),
+      description:escapeHtml(description), preparation:renderPreparation(item),
       hideWebsite:true
     });
   }
@@ -311,5 +316,5 @@
     const qualifier = amount === 1 ? '' : '<span class="weekCountWord">verschillende</span>';
     return `<span class="weekCountBadge"><span><strong>${escapeHtml(count)}</strong>${qualifier}<span class="weekCountLabel">${label}</span></span></span>`;
   }
-  window.AgendaViewShared = Object.freeze({renderWeekCount,renderBoard,renderWeekNavigation,renderDayNavigation,renderSectionNavigation,renderOngoingActivity,sourceButtonLabel, renderItem, renderDay, renderWeek, renderOngoingRow, renderOngoingTable, renderAgendaRow, renderSourceRow, mergeSourceLinks, buildOngoingOffers, isFlexiblePeriodOffer, sortAgendaItems, compactWeekLabel});
+  window.AgendaViewShared = Object.freeze({renderPreparation,renderWeekCount,renderBoard,renderWeekNavigation,renderDayNavigation,renderSectionNavigation,renderOngoingActivity,sourceButtonLabel, renderItem, renderDay, renderWeek, renderOngoingRow, renderOngoingTable, renderAgendaRow, renderSourceRow, mergeSourceLinks, buildOngoingOffers, isFlexiblePeriodOffer, sortAgendaItems, compactWeekLabel});
 })();
