@@ -88,23 +88,18 @@
       const featured=featuredIdeaKeys().includes(adminFeaturedIdeaKey(item));
       toolbar.append(prepare(feature,featured?'Uitgelicht':'Uitlichten'));
       feature.setAttribute('aria-pressed',String(featured));
-      const more=document.createElement('details');more.className='adminEditMore';
-      more.innerHTML='<summary class="ideaFilterSheetAction secondary"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><span>Meer</span></summary><div class="adminEditMoreItems"></div>';
-      const menu=more.querySelector('div');
       const approval=source.querySelector('[data-approve-idea]');
-      if(approval)menu.append(prepare(approval,'Goedkeuren'));
-      else {const status=document.createElement('span');status.className='adminEditStatus';status.textContent='Goedgekeurd';menu.append(status);}
-      menu.append(prepare(source.querySelector('.visibilityIdeaAction'),item.hidden?'Zichtbaar maken':'Verbergen'));
+      if(approval)toolbar.append(prepare(approval,'Goedkeuren'));
+      toolbar.append(prepare(source.querySelector('.visibilityIdeaAction'),item.hidden?'Zichtbaar maken':'Verbergen'));
       const remove=prepare(source.querySelector('[data-delete-idea]'),'Verwijderen');remove.classList.add('adminDeleteAction');
-      more.addEventListener('keydown',event=>{if(event.key==='Escape'){event.stopPropagation();more.open=false;more.querySelector('summary').focus();}});
-      toolbar.append(more,remove);
+      toolbar.prepend(remove);
     }
-    toolbar.querySelectorAll(':scope > button,.adminEditMore > summary').forEach(control=>{
+    toolbar.querySelectorAll(':scope > button').forEach(control=>{
       const label=control.getAttribute('aria-label')||control.textContent.trim();
       control.setAttribute('aria-label',label);control.title=label;control.classList.add('adminToolbarIcon');
     });
     saveButton.className='ideaFilterSheetAction secondary adminToolbarSave';
-    toolbar.append(saveButton);
+    toolbar.prepend(saveButton);
     syncPhoto();
   }
   function updateContact(){
