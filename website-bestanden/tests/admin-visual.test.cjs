@@ -20,3 +20,10 @@ test('opening an editor preserves existing values outside the preset options',()
  vm.createContext(context);vm.runInContext(code,context);context.setEditSelect('#duration','90–150 min');
  assert.equal(element.value,'90–150 min');assert.equal(element.options.at(-1).text,'90–150 min');
 });
+test('shared featured cards escape content and hide inactive slides from interaction',()=>{
+ const html=shared.window.IdeaViewShared.renderFeaturedCard({title:'<script>bad</script>',label:'Bewerk "titel"',index:1,media:'<img src="test.jpg">',attributes:'data-admin-featured-key="test"'});
+ assert.match(html,/aria-hidden="true" inert/);assert.match(html,/data-admin-featured-key="test"/);
+ assert.match(html,/&lt;script&gt;bad&lt;\/script&gt;/);assert.match(html,/Bewerk &quot;titel&quot;/);
+ const active=shared.window.IdeaViewShared.renderFeaturedCard({title:'Test',index:0});
+ assert.match(active,/aria-hidden="false"/);assert.doesNotMatch(active,/ inert/);
+});

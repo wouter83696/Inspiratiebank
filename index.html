@@ -5840,7 +5840,7 @@
   <script src="website-bestanden/site-settings-shared.js?v=20261004-compact-v1"></script>
   <script src="website-bestanden/photo-tiles.js?v=20261006-visual-v1"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20261006-visual-v1"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20261006-admin-parity-v2"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20261006-content-fields-v3"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
@@ -8890,17 +8890,11 @@
       ? featuredImage
       : `<span class="ideaImagePlaceholder" aria-hidden="true"></span>`;
     const metadata = sharedIdeaMetadata(item);
-    return `<button class="ideaFeaturedCard ${domainThemeClass(item.domain)}" type="button" data-featured-target="${escapeHtml(ideaDomKey(item))}" data-featured-slide="${index}"${index ? ' aria-hidden="true" inert' : ' aria-hidden="false"'} aria-label="Bekijk de gewone tegel van ${escapeHtml(item.title)}">
-      <div class="ideaFeaturedMedia">${imageContent}<span class="ideaFeaturedSideLabel">${surpriseIdeaIcon()}<span>Uitgelicht</span></span></div>
-      <div class="ideaFeaturedContent">
-        <h3>${escapeHtml(item.title)}</h3>
-        <div class="ideaFeaturedBottom">
-          <div class="ideaFeaturedMeta"><span class="cardLabels">${metadata.pills}</span>${metadata.meta}</div>
-          <span class="ideaFeaturedArrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m14 7 5 5-5 5"></path></svg></span>
-        </div>
-      </div>
-    </button>`;
+    return IdeaViewShared.renderFeaturedCard({title:item.title,themeClass:domainThemeClass(item.domain),index,
+      attributes:`data-featured-target="${escapeHtml(ideaDomKey(item))}"`,label:`Bekijk de gewone tegel van ${item.title}`,
+      media:imageContent,icon:surpriseIdeaIcon(),pills:metadata.pills,meta:metadata.meta});
   }
+
   function featuredIdeaCarousel(items=[]){
     const slides = items.map((item,index) => featuredIdeaCard(item,index)).join('');
     const navigation = items.length > 1 ? `<div class="ideaFeaturedNav" role="group" aria-label="Blader door Uitgelicht">

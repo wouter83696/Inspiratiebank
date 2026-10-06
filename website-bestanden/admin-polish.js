@@ -32,7 +32,7 @@
     app.classList.toggle('adminNavigationPinned',top&&!mobile.matches&&$('adminPinMenu').checked);
     const hidePin=!top||mobile.matches;
     if($('adminPinMenuLabel').hidden!==hidePin)$('adminPinMenuLabel').hidden=hidePin;
-    $('adminMenuLabel').textContent=document.querySelector('.adminNavButton.active .adminNavText')?.textContent||'Beheer';
+    $('adminMenuLabel').textContent=(document.querySelector('.adminNavButton.active .adminNavText')?.textContent||'Inspiratiebank')+' beheer';
     for(const {node,home} of homes){const target=top&&workspace?.contains(home)?$('adminMobileActions'):home;if(node.parentElement!==target)target.append(node);}
     if(!top)closeMenu();
   }

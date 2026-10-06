@@ -3,7 +3,7 @@
   const $=id=>document.getElementById(id);
   const idea=$('adminIdeaEditPanel'), agenda=$('agendaEditModal');
   const layer=AdminVisual.layer;layer.append(idea);
-  idea.classList.add('adminEditorCard');agenda.classList.add('adminEditorLayer');
+  idea.classList.add('adminEditorCard','adminPublicSurface','ideaSubmitSheet');agenda.classList.add('adminEditorLayer');
   agenda.querySelector('.confirmModalCard').classList.add('adminEditorCard');
   const title=idea.querySelector('h3');title.id='adminEditorTitle';
   function closeButton(parent,action){const button=document.createElement('button');button.type='button';button.className='adminEditorClose';button.textContent='×';button.setAttribute('aria-label','Formulier sluiten');button.addEventListener('click',action);parent.append(button);}

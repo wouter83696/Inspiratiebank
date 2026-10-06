@@ -985,8 +985,8 @@
   <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260911-first-paint-v4">
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260930-agenda-rebuild-v1">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20261004-meta-alignment-v2">
-  <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261006-visual-v1">
-  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261006-visual-v1">
+  <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261006-admin-parity-v2">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261006-admin-parity-v2">
   <link rel="stylesheet" href="../website-bestanden/header-layout-shared.css?v=20261001-v1">
   <link rel="stylesheet" href="../website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
 </head>
@@ -1053,15 +1053,15 @@
             <div class="adminSidebarIdentity">
               <span class="adminSidebarMark"><img src="../inspiratiebank-app-icon-180.png?v=20260930-admin-parity-v1" alt=""></span>
               <div class="adminSidebarText">
-                <div class="adminSidebarTitle">Beheer</div>
-                <div class="adminSidebarSub">Inspiratiebank</div>
+                <div class="adminSidebarTitle">Inspiratiebank</div>
+                <div class="adminSidebarSub">Beheer</div>
               </div>
             </div>
             <button class="adminSidebarToggle" id="adminSidebarToggle" type="button" aria-label="Zijbalk inklappen" aria-pressed="false" title="Zijbalk inklappen">
               <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10.5 3.5 6 8l4.5 4.5"></path></svg>
             </button>
           </div>
-          <div class="adminNavigationPreferences"><label>Menuweergave<select id="adminNavigationMode"><option value="top">Bovenmenu</option><option value="side">Zijmenu</option></select></label><label id="adminPinMenuLabel"><input type="checkbox" id="adminPinMenu"> Menu vastzetten</label></div>
+
           <nav class="adminSidebarGroup" aria-label="Werkvensters">
             <button class="adminNavButton active" type="button" data-admin-target="meldkamer" title="Dashboard">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"></rect><rect x="14" y="4" width="6" height="6" rx="1.5"></rect><rect x="4" y="14" width="6" height="6" rx="1.5"></rect><rect x="14" y="14" width="6" height="6" rx="1.5"></rect></svg></span>
@@ -1095,6 +1095,7 @@
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"></path><circle cx="15" cy="7" r="2"></circle><circle cx="9" cy="17" r="2"></circle></svg></span>
               <span class="adminNavText">Instellingen</span>
             </button>
+            <details class="adminMenuPreferences"><summary class="adminNavButton"><span class="adminNavIcon" aria-hidden="true">☰</span><span class="adminNavText">Menuweergave</span></summary><div class="adminNavigationPreferences"><label>Menuweergave<select id="adminNavigationMode"><option value="top">Bovenmenu</option><option value="side">Zijmenu</option></select></label><label id="adminPinMenuLabel"><input type="checkbox" id="adminPinMenu"> Menu vastzetten</label></div></details>
             <button class="adminNavButton" type="button" data-admin-target="backup" title="Herstel">
               <span class="adminNavIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.2"></circle><path d="M12 8v4.2l2.8 1.7"></path><path d="M8.2 4.8 6.4 3"></path><path d="M15.8 4.8 17.6 3"></path></svg></span>
               <span class="adminNavText">Herstel</span>
@@ -1347,7 +1348,6 @@
           <div class="featuredAdminList" id="featuredAdminList"></div>
         </details>
 <div class="adminIdeaSummary"><span id="ideaCount"><strong id="ideaCountValue">0</strong> <span id="ideaCountLabel">activiteiten</span></span><button class="button" id="manageFeaturedBtn" type="button">Uitgelicht beheren</button></div>
-        <div id="adminFeaturedPreview" aria-label="Uitgelichte activiteiten"></div>
         <div id="adminIdeaList" class="tableWrap adminIdeaView sharedIdeaList" hidden></div>
         <div id="adminIdeaCards" class="cards adminIdeaView sharedIdeaCards isAdmin active photoTiles compactTiles"></div>
 
@@ -1590,7 +1590,7 @@
   <script src="../website-bestanden/admin-site-settings.js?v=20261004-compact-v1"></script>
   <script src="../website-bestanden/admin-discovery.js?v=20261001-regional-headers-v1"></script>
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
-  <script src="../website-bestanden/idea-view-shared.js?v=20261006-visual-v1"></script>
+  <script src="../website-bestanden/idea-view-shared.js?v=20261006-admin-parity-v2"></script>
   <script src="../website-bestanden/agenda-view-shared.js?v=20261001-time-sort-v2"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
@@ -5049,9 +5049,9 @@
     });
   }, { once: true });
   </script>
-  <script src="../website-bestanden/admin-polish.js?v=20261006-visual-v1"></script>
-<script src="../website-bestanden/photo-tiles.js?v=20261006-visual-v1"></script>
-<script src="../website-bestanden/admin-visual.js?v=20261006-visual-v1"></script>
-<script src="../website-bestanden/admin-editors.js?v=20261006-visual-v1"></script>
+  <script src="../website-bestanden/admin-polish.js?v=20261006-admin-parity-v2"></script>
+<script src="../website-bestanden/photo-tiles.js?v=20261006-admin-parity-v2"></script>
+<script src="../website-bestanden/admin-visual.js?v=20261006-admin-parity-v2"></script>
+<script src="../website-bestanden/admin-editors.js?v=20261006-admin-parity-v2"></script>
 </body>
 </html>

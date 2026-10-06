@@ -1,4 +1,10 @@
 (function(){
+  function renderFeaturedCard(view={}){
+    return `<button class="ideaFeaturedCard ${escape(view.themeClass||'')}" type="button" ${view.attributes||''} data-featured-slide="${view.index||0}" aria-hidden="${!!view.index}"${view.index?' inert':''} aria-label="${escape(view.label||view.title)}">
+      <div class="ideaFeaturedMedia">${view.media||''}<span class="ideaFeaturedSideLabel">${view.icon||'✦'}<span>Uitgelicht</span></span></div>
+      <div class="ideaFeaturedContent"><h3>${escape(view.title)}</h3><div class="ideaFeaturedBottom"><div class="ideaFeaturedMeta"><span class="cardLabels">${view.pills||''}</span>${view.meta||''}</div><span class="ideaFeaturedArrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m14 7 5 5-5 5"></path></svg></span></div></div>
+    </button>`;
+  }
   function renderMetadata(view={}){
     const classes = ['sharedMetaBlock', view.className || ''].filter(Boolean).join(' ');
     const pillClasses = ['cardPillGroup', view.pillsClass || ''].filter(Boolean).join(' ');
@@ -104,5 +110,5 @@
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
-  window.IdeaViewShared = Object.freeze({renderPhotoTileContent, renderMaterials, renderPractical, renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
+  window.IdeaViewShared = Object.freeze({renderFeaturedCard, renderPhotoTileContent, renderMaterials, renderPractical, renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
 })();
