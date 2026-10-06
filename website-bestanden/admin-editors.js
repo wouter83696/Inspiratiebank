@@ -67,7 +67,7 @@
     contact.replaceChildren();
     const addressFields=document.createElement('div');addressFields.className='teamFormGrid adminEditAddressFields';
     ['Postcode','HouseNumber','Address'].forEach(id=>addressFields.append(fieldFor(id)));
-    contact.before(addressFields);
+    fieldFor('Location').after(addressFields);
     $('adminEditIdeaAddress').readOnly=true;
     $('adminEditIdeaAddress').placeholder='Wordt aangevuld via postcode en huisnummer';
     const urlField=fieldFor('Url');urlField.classList.add('adminEditUrlField');contact.before(urlField);
@@ -111,7 +111,8 @@
     const host=fields.querySelector('.adminContactPreview');
     if(!host||!editingAdminIdea)return;
     const draft=editedIdeaPayload(editingAdminIdea);
-    const address=String(draft.address||'').trim();
+    const location=normalizeIdeaLocation($('adminEditIdeaLocation').value);
+    const address=(location==='Op pad'||location==='Binnen')?String(draft.address||'').trim():'';
     const routes=address?`<section class="photoRouteChoices"><p class="ideaPracticalText">${escapeHtml(address)}</p></section>`:'';
     const template=document.createElement('template');
     template.innerHTML=PhotoTiles.detailContent(draft,'adminContactPreviewTitle',{card:adminIdeaCard(draft),routes});
@@ -132,7 +133,9 @@
   const locationFields=['Postcode','HouseNumber','Address'].map(id=>$('adminEditIdea'+id).closest('.teamField'));
   function syncLocationFields(){
     const value=normalizeIdeaLocation($('adminEditIdeaLocation').value);
-    const show=value==='Op pad'||value==='Binnen'||Boolean($('adminEditIdeaAddress').value.trim());
+    const show=value==='Op pad'||value==='Binnen';
+    const group=fields.querySelector('.adminEditAddressFields');
+    if(group)group.hidden=!show;
     locationFields.forEach(field=>{field.hidden=!show;});
   }
   $('adminEditIdeaLocation').closest('.teamField').classList.add('wide');

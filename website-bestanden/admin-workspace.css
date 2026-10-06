@@ -571,7 +571,7 @@ body.adminEditorOpen{overflow:hidden!important}
 .adminEditToolbar .adminDeleteAction{color:#9b5146}
 
 #adminIdeaEditPanel input:not([type=checkbox]),#adminIdeaEditPanel textarea,#adminIdeaEditPanel .customSelectButton{border-radius:12px}
-#adminIdeaEditPanel .adminEditAddressFields{padding:0;margin:0;order:6}
+#adminIdeaEditPanel .adminEditAddressFields{padding:0;margin:0;grid-column:1/-1}
 #adminIdeaEditPanel .adminEditUrlField{order:6}
 #adminIdeaEditPanel .adminEditFields section{scroll-margin-top:12px}
 
