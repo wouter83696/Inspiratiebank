@@ -13,3 +13,6 @@
 .customSelect .customSelectOption:is(.active,[aria-selected="true"]){background:#e5f2ef!important}
 .customSelect .customSelectOption:hover:not([aria-selected="true"]){background:rgba(229,242,239,.45)!important}
 .customSelect .customSelectButton:focus-visible{outline:2px solid #63858b;outline-offset:2px}
+
+/* Text areas keep their designed size across public and management forms. */
+textarea{resize:none!important}
