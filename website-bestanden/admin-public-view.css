@@ -6403,7 +6403,8 @@
     }
 
 /* One hover surface for public navigation and the management sidebar. */
-:scope{--control-hover-surface:rgba(168,225,221,.12)}
+:scope{--control-hover-surface:rgba(168,225,221,.12);--site-topbar-surface:#fffdf8}
+.topbar{background:var(--site-topbar-surface)!important}
 #adminApp :is(.adminNavButton,.adminSidebarToggle):is(:hover,:focus-visible):not(.active){background:var(--control-hover-surface);color:var(--accent-dark);transform:none}
 /* Sticky surfaces stay borderless, including the mobile day selector. */
 :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel):not(.adminPublicSurface)>.desktopStickyControls.isStuck::after,
@@ -7353,7 +7354,7 @@
 #ideaMap .ideaMapDetailClose svg,#ideaMap .ideaMapPanelClose svg,.photoDetailPanel .ideaFilterSheetClose svg{width:16px!important;height:16px!important}
 .photoDetailLayer .photoDetailPanel{overflow:hidden!important}
 .photoDetailPanel .ideaFilterSheetHeader{position:relative;flex:none}
-.photoDetailBody .photoDetailActions::after{content:"";position:absolute;top:100%;left:-20px;right:-20px;height:100vh;background:#fefcf8;pointer-events:none}
+.photoDetailBody .photoDetailActions::after{content:none}
 @media(max-width:640px){
  #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{touch-action:pan-y!important;overscroll-behavior:contain!important}
  #ideaMap .activityMapHeader{padding-top:0;padding-bottom:12px}
@@ -7373,8 +7374,8 @@
 }
 /* Empty space below the actions belongs to the same warm action surface. */
 #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults,
-.photoDetailPanel .photoDetailBody{background:#fefcf8!important}
-.photoDetailPanel .photoDetailBody>.sharedIdeaCard{background:var(--sheet-surface)!important;overflow:visible!important}
+.photoDetailPanel .photoDetailBody{background:transparent!important}
+.photoDetailPanel .photoDetailBody>.sharedIdeaCard{background:transparent!important;overflow:visible!important}
 #ideaMap .ideaMapSingleCard.photoDetailBody{background:var(--sheet-surface)!important}
 
 /* Seat the compact facts on the photo edge without moving the theme badge. */
@@ -7390,7 +7391,7 @@
 }
 /* Paint the detail surface through its side gutters, keeping actions warm white. */
 .photoDetailBody>.sharedIdeaCard{position:relative;isolation:isolate}
-.photoDetailBody>.sharedIdeaCard::before{content:"";position:absolute;inset:0 -20px;background:var(--sheet-surface);z-index:-1;pointer-events:none}
+.photoDetailBody>.sharedIdeaCard::before{content:none}
 
 /* Mobile action alignment: quiet touch feedback and an address-aligned route row. */
 @media(max-width:640px){
@@ -7455,7 +7456,7 @@
 
 /* Group the two actions in one inset rounded surface. */
 #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults,
-.photoDetailPanel .photoDetailBody{background:var(--sheet-surface)!important}
+.photoDetailPanel .photoDetailBody{background:transparent!important}
 .photoDetailBody .photoDetailActions{background:#fffdfa!important;border:1px solid rgba(79,126,136,.08)!important;border-radius:16px!important;box-shadow:none!important;padding:4px 0!important;overflow:visible}
 .photoDetailBody .photoDetailActions::before,
 .photoDetailBody .photoDetailActions::after{content:none!important}
