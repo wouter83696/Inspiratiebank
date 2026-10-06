@@ -1051,3 +1051,21 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
  body.adminDetailDocked #adminApp #agendaReviewPanel .agendaBoard{height:auto!important;max-height:none!important;overflow:visible!important}
  body.adminDetailDocked #adminApp #agendaReviewPanel .agendaList{height:auto!important;max-height:none!important;overflow:visible!important}
 }
+
+/* Reserve room for every preview card and the day’s “more” action. */
+@media(min-width:1101px){
+ body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaDay{display:flex;flex-direction:column;box-sizing:border-box}
+ body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaList{flex:1;min-height:0;display:flex}
+ body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaGroup{display:flex;flex-direction:column;flex:1;min-height:0}
+ body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItem{flex:1 1 0;min-height:0;padding:8px;overflow:hidden}
+ body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItemTitle{align-items:start}
+ body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItemTitle .ideaTitleText{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+ body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItemMeta{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+ body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaMore{flex:0 0 auto;margin-top:4px}
+}
+
+@media(min-width:1101px){
+ body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .weekBody,
+ body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .subBlock{min-height:0;box-sizing:border-box}
+ body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaBoard{min-height:0;box-sizing:border-box}
+}
