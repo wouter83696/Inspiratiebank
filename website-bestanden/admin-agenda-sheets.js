@@ -25,6 +25,14 @@
  const originalOpen=AdminEditors.openAgenda;
  AdminEditors.openAgenda=function(){
    manager.hidden=true;$('adminIdeaEditPanel').hidden=true;AdminVisual.featuredPanel.hidden=true;
+   const category=$('agendaEditDomain'),currentTheme=domainThemeClass(category.value);
+   const categories=[...$('adminEditIdeaDomain').options];
+   const matching=categories.find(option=>domainThemeClass(option.value)===currentTheme);
+   if(matching){
+     category.replaceChildren(...categories.map(option=>new Option(option.textContent,option.value)));
+     category.value=matching.value;
+   }
+   category.dataset.themeSelect='true';
    ['Domain','Distance','Cost','Stimulus','Week'].forEach(key=>enhanceCustomSelect($('agendaEdit'+key)));
    footer.querySelector('button[type=submit]').textContent='Opslaan';
    toolbar.replaceChildren();advanced.querySelector('.adminAgendaExtraActions').replaceChildren();advanced.open=false;
