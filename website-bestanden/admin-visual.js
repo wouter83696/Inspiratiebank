@@ -7,6 +7,30 @@
   document.body.append(layer);
   const preview=$('adminIdeaPreview'),body=preview.querySelector('.photoDetailBody'),actions=preview.querySelector('.adminPreviewActions');
   let returnFocus=null,tab='Beschrijving';
+  const featuredPanel=document.createElement('section');
+  featuredPanel.id='adminFeaturedSheet';featuredPanel.className='adminEditorCard adminPublicSurface photoDetailPanel';featuredPanel.hidden=true;
+  featuredPanel.setAttribute('aria-labelledby','adminFeaturedHeading');
+  featuredPanel.innerHTML='<header class="adminPreviewHeader"><h2 id="adminFeaturedHeading">Uitgelicht beheren</h2><button class="adminEditorClose" type="button" aria-label="Uitgelicht sluiten">×</button></header><div class="adminFeaturedBody"><div class="adminFeaturedSelection"></div><label class="teamField"><span>Activiteit toevoegen aan Uitgelicht</span><input type="search" id="adminFeaturedSearch" placeholder="Zoek een activiteit"></label><div class="adminFeaturedChoices"></div><p role="status" class="adminFeaturedStatus"></p></div>';
+  layer.append(featuredPanel);
+  const oldManager=$('featuredManager');const manager=document.createElement('div');manager.id='featuredManager';manager.className='featuredAdminPanel';oldManager.querySelector('summary').remove();manager.append(...oldManager.childNodes);oldManager.replaceWith(manager);
+  featuredPanel.querySelector('.adminFeaturedSelection').append(manager);
+  $('manageFeaturedBtn')?.remove();
+  function featuredChoices(){
+    const query=$('adminFeaturedSearch').value.toLocaleLowerCase();
+    const selected=featuredIdeaKeys();
+    const choices=allAdminIdeas().filter(item=>!item.hidden&&!selected.includes(adminFeaturedIdeaKey(item))&&item.title.toLocaleLowerCase().includes(query));
+    featuredPanel.querySelector('.adminFeaturedChoices').innerHTML=choices.map(item=>`<button class="button" type="button" data-feature-idea="${escapeHtml(adminFeaturedIdeaKey(item))}" ${selected.length>=5?'disabled':''}><span>${escapeHtml(item.title)}</span><span aria-hidden="true">＋</span></button>`).join('')||'<p>Geen activiteiten gevonden.</p>';
+  }
+  function openFeatured(){
+    returnFocus=document.activeElement;
+    $('adminIdeaEditPanel').hidden=true;preview.hidden=true;featuredPanel.hidden=false;layer.hidden=false;
+    renderFeaturedIdeaManager();featuredChoices();window.AdminEditors?.sync();
+    featuredPanel.querySelector('.adminEditorClose').focus({preventScroll:true});
+  }
+  featuredPanel.querySelector('.adminEditorClose').addEventListener('click',()=>{featuredPanel.hidden=true;window.AdminEditors?.sync();returnFocus?.focus({preventScroll:true});});
+  $('adminFeaturedSearch').addEventListener('input',featuredChoices);
+  new MutationObserver(()=>{featuredPanel.querySelector('.adminFeaturedStatus').textContent=$('adminStatus').textContent;}).observe($('adminStatus'),{childList:true,subtree:true,characterData:true});
+
   function tile(item){
     const image=adminIdeaImage(item);
     const media=image?`<img src="${escapeHtml(image.src)}" alt="" loading="lazy" decoding="async">`:'<span class="photoTilePlaceholder" aria-hidden="true"></span>';
@@ -17,13 +41,15 @@
   function refresh(){
     const items=allAdminIdeas();
     const featured=featuredIdeaKeys().map(key=>items.find(item=>adminFeaturedIdeaKey(item)===key)).filter(Boolean);
+    if(!featured.length){const fallback=items.find(item=>!item.hidden&&adminIdeaImage(item));if(fallback)featured.push(fallback);}
+    if(!featuredPanel.hidden)featuredChoices();
     const host=$('adminIdeaCards');
     host.querySelector('.ideaFeaturedCarousel')?.remove();
     if(featured.length){
       const slides=featured.map((item,index)=>{
         const image=adminIdeaImage(item);
         return IdeaViewShared.renderFeaturedCard({title:item.title,themeClass:domainThemeClass(item.domain),index,
-          attributes:`data-admin-featured-key="${escapeHtml(item.key)}"`,label:`Bewerk ${item.title}`,icon:actionIcon('spark'),
+          attributes:`data-admin-featured-key="${escapeHtml(item.key)}"`,label:`Uitgelicht beheren: ${item.title}`,icon:actionIcon('spark'),
           media:image?`<img src="${escapeHtml(image.src)}" alt="" loading="lazy">`:''});
       }).join('');
       const dots=featured.length>1?`<div class="ideaFeaturedNav" aria-label="Blader door Uitgelicht">${featured.map((item,index)=>`<button type="button" class="ideaFeaturedDot" data-admin-featured-index="${index}" aria-label="Toon ${escapeHtml(item.title)}" aria-pressed="${index===0}"></button>`).join('')}</div>`:'';
@@ -69,15 +95,11 @@
     const dot=event.target.closest('[data-admin-featured-index]');
     if(dot){const carousel=dot.closest('.ideaFeaturedCarousel');const index=Number(dot.dataset.adminFeaturedIndex);carousel.querySelectorAll('[data-featured-slide]').forEach((slide,i)=>{slide.setAttribute('aria-hidden',String(i!==index));slide.inert=i!==index;});carousel.querySelectorAll('[data-admin-featured-index]').forEach((button,i)=>button.setAttribute('aria-pressed',String(i===index)));return;}
     const featured=event.target.closest('[data-admin-featured-key]');
-    if(featured){selectAdminIdea(featured.dataset.adminFeaturedKey);}
+    if(featured){openFeatured();}
 
   });
-  $('manageFeaturedBtn').addEventListener('click',()=>{
-    const manager=$('featuredManager');manager.open=!manager.open;
-    if(manager.open)manager.scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
-  });
   document.addEventListener('keydown',event=>{
-    if(!event.defaultPrevented&&event.key==='Escape'&&!layer.hidden&&$('adminIdeaEditPanel').hidden&&$('confirmModal').hidden){event.preventDefault();close();}
+    if(!event.defaultPrevented&&event.key==='Escape'&&!layer.hidden&&$('adminIdeaEditPanel').hidden&&$('confirmModal').hidden){event.preventDefault();if(!featuredPanel.hidden)featuredPanel.querySelector('.adminEditorClose').click();else close();}
   });
-  window.AdminVisual={tile,open,close,refresh,layer,preview};
+  window.AdminVisual={tile,open,close,refresh,layer,preview,featuredPanel};
 })();

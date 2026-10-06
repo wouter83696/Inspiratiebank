@@ -173,20 +173,20 @@
   let ideaFocus=null,agendaFocus=null,agendaDraft='',closing=false;
   const snapshot=()=>JSON.stringify([...$('agendaEditForm').elements].filter(e=>e.tagName!=='BUTTON').map(e=>[e.id,e.type==='checkbox'?e.checked:e.value]));
   function sync(){
-    const detail=false;
+    const detail=!AdminVisual.featuredPanel.hidden;
     layer.hidden=idea.hidden&&!detail;
-    AdminVisual.preview.hidden=!idea.hidden;
-    const modal=!agenda.hidden||(!idea.hidden&&matchMedia('(max-width:1100px)').matches);
+    AdminVisual.preview.hidden=true;
+    const modal=!agenda.hidden||((!idea.hidden||detail)&&matchMedia('(max-width:1100px)').matches);
     const open=modal;
     layer.setAttribute('role',modal?'dialog':'region');
-    layer.setAttribute('aria-label',!idea.hidden?'Activiteit bewerken':'Activiteitsdetails');
+    layer.setAttribute('aria-label',!idea.hidden?'Activiteit bewerken':'Uitgelicht beheren');
     if(modal)layer.setAttribute('aria-modal','true');else layer.removeAttribute('aria-modal');
     layer.classList.toggle('isEditing',!idea.hidden);
     layer.classList.toggle('isModal',modal);
     document.body.classList.toggle('adminDetailDocked',!layer.hidden&&!modal);
     document.body.classList.toggle('adminEditorOpen',open);
     $('adminApp').inert=open;
-    if(idea.hidden&&ideaFocus){if(detail){AdminVisual.refresh();AdminVisual.preview.querySelector('.adminEditorClose').focus({preventScroll:true});}else if(ideaFocus.isConnected)ideaFocus.focus({preventScroll:true});ideaFocus=null;}
+    if(idea.hidden&&ideaFocus){if(detail){AdminVisual.featuredPanel.querySelector('.adminEditorClose').focus({preventScroll:true});}else if(ideaFocus.isConnected)ideaFocus.focus({preventScroll:true});ideaFocus=null;}
     if(agenda.hidden&&agendaFocus){if(agendaFocus.isConnected)agendaFocus.focus({preventScroll:true});agendaFocus=null;}
   }
   async function requestAgendaClose(){
@@ -209,7 +209,7 @@
   },true);
   window.addEventListener('resize',sync);
   window.AdminEditors={
-    openIdea(isNew){ideaFocus=document.activeElement;title.textContent=isNew?'Activiteit toevoegen':'Activiteit bewerken';mountDetail();sync();syncLocationFields();fields.scrollTop=0;window.AdminPolish?.captureIdea();syncSaveState();},
+    openIdea(isNew){AdminVisual.featuredPanel.hidden=true;ideaFocus=document.activeElement;title.textContent=isNew?'Activiteit toevoegen':'Activiteit bewerken';mountDetail();sync();syncLocationFields();fields.scrollTop=0;window.AdminPolish?.captureIdea();syncSaveState();},
     openAgenda(){agendaFocus=document.activeElement;agendaDraft=snapshot();sync();agenda.querySelector('.adminEditorCard').scrollTop=0;},
     sync,requestAgendaClose
   };

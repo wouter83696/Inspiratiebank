@@ -611,3 +611,32 @@ body.adminEditorOpen{overflow:hidden!important}
 
 #adminIdeaEditPanel .adminEditToolbar .adminToolbarSave.hasChanges{background:#e5f2ef}
 #adminIdeaEditPanel .adminEditToolbar .adminDeleteAction:is(:hover,:focus-visible){color:#9b5146;background:#f8eeeb}
+
+#adminFeaturedSheet{display:grid;grid-template-rows:auto minmax(0,1fr);padding:0;overflow:hidden;border-radius:0 16px 16px 0;border-right:1px solid rgba(79,142,158,.14)}
+#adminFeaturedSheet[hidden]{display:none}
+#adminFeaturedSheet .adminPreviewHeader{padding:16px 60px 16px 20px;min-height:64px;box-sizing:border-box}
+#adminFeaturedHeading{font-size:19px;font-weight:700;margin:0}
+.adminFeaturedBody{overflow-y:auto;padding:12px 20px 24px;min-height:0;color:#315f6b}
+#adminFeaturedSheet #featuredManager{display:block;background:transparent;border:0;padding:0;margin:0 0 24px}
+#adminFeaturedSheet .featuredAdminHead{display:block}
+#adminFeaturedSheet .featuredAdminHead h3{display:none}
+#adminFeaturedSheet .featuredAdminHeadActions{justify-content:space-between;margin:12px 0}
+#adminFeaturedSheet .featuredAdminItem{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;padding:12px 0;border-bottom:1px solid rgba(79,142,158,.12)}
+#adminFeaturedSheet .featuredAdminActions{grid-column:2;justify-content:flex-end}
+.adminFeaturedChoices{display:grid;gap:8px;margin-top:12px}
+#adminFeaturedSheet .adminFeaturedChoices .button{display:flex;justify-content:space-between;text-align:left;white-space:normal;border-radius:12px}
+#adminFeaturedSearch{width:100%;box-sizing:border-box;color:inherit;border:1px solid rgba(79,142,158,.16);border-radius:12px;padding:12px;font:inherit}
+@media(max-width:640px){#adminFeaturedSheet{border-radius:24px 24px 0 0}}
+
+#adminFeaturedSheet .adminPreviewHeader{display:flex!important;position:relative;align-items:center;flex:none;margin:0}
+#adminFeaturedSheet .adminPreviewHeader h2{display:block!important;color:#315f6b}
+#adminFeaturedSheet .adminEditorClose{position:absolute;right:16px;top:12px;width:32px;height:32px;border:1px solid rgba(79,142,158,.16);border-radius:10px;background:transparent;color:#63858b}
+#adminFeaturedSheet .featuredAdminActivity{display:flex;align-items:center;gap:12px;min-width:0}
+#adminFeaturedSheet .featuredAdminThumb{width:56px;height:56px;flex:0 0 56px;object-fit:cover;border-radius:12px}
+#adminFeaturedSheet .featuredAdminTitle{font-size:14px;line-height:1.4}
+#adminFeaturedSheet .featuredAdminActions{display:flex;gap:8px}
+#adminFeaturedSheet .button{border:1px solid rgba(79,142,158,.16);background:rgba(255,255,255,.7);color:#315f6b;border-radius:12px;padding:8px 10px;font:inherit;cursor:pointer}
+#adminFeaturedSheet .button:hover{background:#e5f2ef}
+#adminFeaturedSheet .button:disabled{opacity:.4;cursor:default}
+#adminFeaturedSheet .featuredAdminHeadActions{display:flex;align-items:center}
+#adminFeaturedSheet .featuredAdminHead p,#adminFeaturedSheet .featuredAdminSaveNote{font-size:13px;line-height:1.5}
