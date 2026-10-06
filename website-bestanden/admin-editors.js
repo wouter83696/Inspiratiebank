@@ -121,6 +121,7 @@
     saveButton.setAttribute('aria-label','Opslaan');saveButton.title='Opslaan';
     toolbar.append(saveButton);
     syncPhoto();
+    updateMetadata();
   }
   function updateContact(){
     const host=fields.querySelector('.adminContactPreview');
@@ -140,7 +141,12 @@
     const template=document.createElement('template');template.innerHTML=adminIdeaCard(draft);
     const current=fields.querySelector('.adminInlineMetadata .cardMetaBlock');
     const next=template.content.querySelector('.cardMetaBlock');
-    if(current&&next)current.replaceWith(next);
+    if(current&&next){
+      current.parentElement.querySelector(':scope > .adminItemStatus')?.remove();
+      const status=next.querySelector('.adminItemStatus');
+      if(status)current.before(status);
+      current.replaceWith(next);
+    }
     const badge=fields.querySelector('.ideaImageDomainBadge');
     if(badge)badge.innerHTML=domainIcon(draft.domain);
   }

@@ -601,3 +601,10 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaEditPanel .adminPhotoDropzone small{font-size:12px;color:var(--muted)}
 
 #adminIdeaEditPanel .ideaImageFrame img[hidden]{display:none!important}
+
+/* Use the sheet text colour consistently for every editable value. */
+#adminIdeaEditPanel .teamField :is(input:not([type=checkbox]),textarea,select),#adminIdeaEditPanel .customSelectButton{color:var(--accent-dark)}
+#adminIdeaEditPanel .teamField :is(input,textarea)::placeholder{color:#82999e;opacity:1}
+#adminIdeaEditPanel .adminInlineMetadata .adminItemStatus{display:block;margin:8px 0;font-size:12px;color:var(--accent-dark)}
+#adminIdeaEditPanel .adminInlineMetadata .cardMetaBlock{flex-wrap:nowrap!important;white-space:nowrap!important;max-width:100%!important;margin-left:0!important;overflow-x:auto;gap:0!important}
+#adminIdeaEditPanel .adminInlineMetadata .cardMetaBlock :is(.pill,.cardMetaPart){font-size:12px!important;padding-inline:5px!important;flex-shrink:0}
