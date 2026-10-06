@@ -718,3 +718,9 @@ body.adminEditorOpen{overflow:hidden!important}
  #adminFeaturedSheet .adminFeaturedAddField,#adminFeaturedSheet .adminFeaturedChoices{display:none}
  #adminFeaturedSheet #featuredManager{margin-bottom:0}
 }
+
+#adminFeaturedSheet.adminEditorCard{grid-template-rows:auto minmax(0,1fr) auto}
+.adminFeaturedFooter{display:flex;gap:12px;padding:12px 20px;background:#fffdf9}
+#adminFeaturedSheet .adminFeaturedFooter .button{min-height:42px;padding:8px 18px}
+#adminFeaturedSheet #saveFeaturedDraft{flex:1}
+#adminFeaturedSheet #saveFeaturedDraft.hasChanges{background:#e5f2ef}

@@ -984,9 +984,9 @@
   </style>
   <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260911-first-paint-v4">
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260930-agenda-rebuild-v1">
-  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20261006-toolbar-refine-v40">
-  <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261006-toolbar-refine-v40">
-  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261006-toolbar-refine-v40">
+  <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20261006-featured-save-v41">
+  <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261006-featured-save-v41">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261006-featured-save-v41">
   <link rel="stylesheet" href="../website-bestanden/header-layout-shared.css?v=20261001-v1">
   <link rel="stylesheet" href="../website-bestanden/navigation-colors-shared.css?v=20261006-single-sheet-surface-v26">
 </head>
@@ -1336,8 +1336,8 @@
           <div class="featuredAdminHead">
             <div>
               <h3 id="featuredAdminTitle">Uitgelicht</h3>
-              <p>Kies hieronder maximaal vijf activiteiten. Sleep activiteiten uit het overzicht naar deze sheet. Sleep ze terug naar het overzicht om ze uit Uitgelicht te halen. Gebruik de grepen of pijlen om de volgorde aan te passen.</p>
-              <span class="featuredAdminSaveNote">Wijzigingen worden automatisch opgeslagen.</span>
+              <p>Kies maximaal vijf activiteiten. Sleep ze naar deze lijst en zet ze in de gewenste volgorde.</p>
+              <span class="featuredAdminSaveNote">Sla je selectie op als je klaar bent.</span>
             </div>
             <div class="featuredAdminHeadActions">
               <span class="featuredAdminCount" id="featuredAdminCount">0 / 5</span>
@@ -1589,7 +1589,7 @@
   <script src="../website-bestanden/admin-site-settings.js?v=20261004-compact-v1"></script>
   <script src="../website-bestanden/admin-discovery.js?v=20261001-regional-headers-v1"></script>
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
-  <script src="../website-bestanden/idea-view-shared.js?v=20261006-toolbar-refine-v40"></script>
+  <script src="../website-bestanden/idea-view-shared.js?v=20261006-featured-save-v41"></script>
   <script src="../website-bestanden/agenda-view-shared.js?v=20261001-time-sort-v2"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
@@ -2996,7 +2996,9 @@
   function adminFeaturedIdeaKey(item={}){
     return `${normalize(item.title || '')}|${normalize(item.domain || '')}`;
   }
-  function featuredIdeaKeys(){
+  let featuredDraft=null;
+  function featuredIdeaKeys(persisted=false){
+    if(!persisted&&featuredDraft!==null)return [...featuredDraft];
     if(centralStorageActive()){
       const keys = Array.isArray(centralStorage.featuredIdeaKeys) ? centralStorage.featuredIdeaKeys : [];
       return keys.length ? keys.map(String).filter(Boolean).slice(0,5) : (centralStorage.featuredIdeaKey ? [String(centralStorage.featuredIdeaKey)] : []);
@@ -3009,8 +3011,9 @@
     }catch(error){ return []; }
   }
   function featuredIdeaKey(){ return featuredIdeaKeys()[0] || ''; }
-  async function saveFeaturedIdeaKeys(keys=[]){
-    const previous = featuredIdeaKeys();
+  async function saveFeaturedIdeaKeys(keys=[],commit=false){
+    if(featuredDraft!==null&&!commit){featuredDraft=[...new Set(keys.map(String).filter(Boolean))].slice(0,5);window.AdminVisual?.syncFeaturedSave();return true;}
+    const previous = featuredIdeaKeys(true);
     const next = [...new Set(keys.map(String).filter(Boolean))].slice(0,5);
     if(centralStorageActive()){
       centralStorage.featuredIdeaKeys = next;
@@ -5064,7 +5067,7 @@
   </script>
   <script src="../website-bestanden/admin-polish.js?v=20261006-top-toolbar-v32"></script>
 <script src="../website-bestanden/photo-tiles.js?v=20261006-editor-sections-v3"></script>
-<script src="../website-bestanden/admin-visual.js?v=20261006-toolbar-refine-v40"></script>
-<script src="../website-bestanden/admin-editors.js?v=20261006-toolbar-refine-v40"></script>
+<script src="../website-bestanden/admin-visual.js?v=20261006-featured-save-v41"></script>
+<script src="../website-bestanden/admin-editors.js?v=20261006-featured-save-v41"></script>
 </body>
 </html>

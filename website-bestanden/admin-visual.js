@@ -10,7 +10,7 @@
   const featuredPanel=document.createElement('section');
   featuredPanel.id='adminFeaturedSheet';featuredPanel.className='adminEditorCard adminPublicSurface photoDetailPanel';featuredPanel.hidden=true;
   featuredPanel.setAttribute('aria-labelledby','adminFeaturedHeading');
-  featuredPanel.innerHTML='<header class="panelHead"><h3 id="adminFeaturedHeading">Uitgelicht beheren</h3><button class="adminEditorClose" type="button" aria-label="Uitgelicht sluiten">×</button></header><div class="adminFeaturedBody"><div class="adminFeaturedSelection"></div><label class="teamField adminFeaturedAddField"><span>Activiteit toevoegen aan Uitgelicht</span><input type="search" id="adminFeaturedSearch" placeholder="Zoek een activiteit"></label><div class="adminFeaturedChoices"></div><p role="status" class="adminFeaturedStatus"></p></div>';
+  featuredPanel.innerHTML='<header class="panelHead"><h3 id="adminFeaturedHeading">Uitgelicht</h3><button class="adminEditorClose" type="button" aria-label="Uitgelicht sluiten">×</button></header><div class="adminFeaturedBody"><div class="adminFeaturedSelection"></div><label class="teamField adminFeaturedAddField"><span>Activiteit toevoegen aan Uitgelicht</span><input type="search" id="adminFeaturedSearch" placeholder="Zoek een activiteit"></label><div class="adminFeaturedChoices"></div><p role="status" class="adminFeaturedStatus"></p></div><footer class="adminFeaturedFooter"><button type="button" class="button" id="cancelFeaturedDraft">Annuleren</button><button type="button" class="button" id="saveFeaturedDraft">Opslaan</button></footer>';
   featuredPanel.querySelector('.adminEditorClose').innerHTML=actionIcon('close');
   layer.append(featuredPanel);
   const oldManager=$('featuredManager');const manager=document.createElement('div');manager.id='featuredManager';manager.className='featuredAdminPanel';oldManager.querySelector('summary').remove();manager.append(...oldManager.childNodes);oldManager.replaceWith(manager);
@@ -24,11 +24,25 @@
   }
   function openFeatured(){
     returnFocus=document.activeElement;
+    featuredDraft=featuredIdeaKeys(true);
     $('adminIdeaEditPanel').hidden=true;preview.hidden=true;featuredPanel.hidden=false;layer.hidden=false;
-    renderFeaturedIdeaManager();featuredChoices();window.AdminEditors?.sync();
+    renderFeaturedIdeaManager();featuredChoices();syncFeaturedSave();window.AdminEditors?.sync();
     featuredPanel.querySelector('.adminEditorClose').focus({preventScroll:true});
   }
-  featuredPanel.querySelector('.adminEditorClose').addEventListener('click',()=>{featuredPanel.hidden=true;window.AdminEditors?.sync();returnFocus?.focus({preventScroll:true});});
+  function featuredDirty(){return JSON.stringify(featuredDraft)!==JSON.stringify(featuredIdeaKeys(true));}
+  function syncFeaturedSave(){const button=$('saveFeaturedDraft');button.disabled=!featuredDirty();button.classList.toggle('hasChanges',featuredDirty());}
+  function finishFeatured(){featuredDraft=null;featuredPanel.hidden=true;renderIdeas();window.AdminEditors?.sync();returnFocus?.focus({preventScroll:true});}
+  async function commitFeatured(){
+    const button=$('saveFeaturedDraft');button.disabled=true;
+    if(await saveFeaturedIdeaKeys(featuredDraft,true)){finishFeatured();setStatus('#adminStatus','Uitgelicht opgeslagen.','ok');}
+    else{syncFeaturedSave();featuredPanel.querySelector('.adminFeaturedStatus').textContent='Opslaan lukte niet. Je wijzigingen staan nog klaar; probeer opnieuw.';}
+  }
+  $('saveFeaturedDraft').addEventListener('click',commitFeatured);
+  $('cancelFeaturedDraft').addEventListener('click',finishFeatured);
+  featuredPanel.querySelector('.adminEditorClose').addEventListener('click',async()=>{
+    if(!featuredDirty()){finishFeatured();return;}
+    if(await confirmDialog('Wil je je wijzigingen in Uitgelicht opslaan?',{title:'Niet-opgeslagen wijzigingen',confirmText:'Opslaan',cancelText:'Verder bewerken'}))await commitFeatured();
+  });
   $('adminFeaturedSearch').addEventListener('input',featuredChoices);
   let sorting=null,suppressClick=false;
   const sortList=$('featuredAdminList');
@@ -105,7 +119,7 @@
     else setStatus('#adminStatus',storageErrorMessage('Opslaan lukte niet.'),'warn');
   });
 
-  new MutationObserver(()=>{featuredPanel.querySelector('.adminFeaturedStatus').textContent=$('adminStatus').textContent;}).observe($('adminStatus'),{childList:true,subtree:true,characterData:true});
+  new MutationObserver(()=>{featuredPanel.querySelector('.adminFeaturedStatus').textContent=featuredDraft!==null?(featuredDirty()?'Nog niet opgeslagen.':''):$('adminStatus').textContent;}).observe($('adminStatus'),{childList:true,subtree:true,characterData:true});
 
   function tile(item){
     const image=adminIdeaImage(item);
@@ -177,5 +191,5 @@
   document.addEventListener('keydown',event=>{
     if(!event.defaultPrevented&&event.key==='Escape'&&!layer.hidden&&$('adminIdeaEditPanel').hidden&&$('confirmModal').hidden){event.preventDefault();if(!featuredPanel.hidden)featuredPanel.querySelector('.adminEditorClose').click();else close();}
   });
-  window.AdminVisual={tile,open,close,refresh,layer,preview,featuredPanel};
+  window.AdminVisual={tile,open,close,refresh,layer,preview,featuredPanel,syncFeaturedSave};
 })();
