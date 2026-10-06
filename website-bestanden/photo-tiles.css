@@ -820,7 +820,6 @@ body.photoDetailOpen{overflow:hidden!important}
 #ideaCards.compactTiles .photoTileOverlay>.domainIcon{transform:translateY(8px)}
 #ideaCards.compactTiles .photoTileOverlay .photoTileFacts{top:0;text-shadow:0 1px 2px rgba(0,0,0,.25)}
 #ideaCards.compactTiles .photoTileOverlay .photoTileMeta .stimulusPill{display:inline-flex!important;width:auto;min-width:0;gap:4px}
-#ideaCards.compactTiles .photoTile .stimulusPillText{display:inline}
 #ideaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{font-size:13px;font-weight:500;line-height:20px;height:auto}
 @media(max-width:600px){
  #ideaCards.compactTiles .photoTileMedia::after{height:28px}
