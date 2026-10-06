@@ -474,7 +474,7 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminApp.adminTopNavigation .adminMobileTopbar{display:flex;position:sticky;top:0;z-index:100;align-items:center;justify-content:space-between;min-height:64px;padding:10px 24px;gap:16px;background:#fffdf9;border-bottom:1px solid #dce4df}
 #adminApp.adminTopNavigation #adminMobileMenuButton{display:flex;align-items:center;gap:8px;background:transparent;border:0;color:#315f6b;font:600 15px Manrope,system-ui,sans-serif;cursor:pointer;padding:8px}
 #adminApp.adminTopNavigation #adminMobileMenuButton img{width:30px;height:30px}
-#adminApp.adminTopNavigation .adminSidebar{display:none;position:fixed;top:var(--admin-mobile-bar-height,64px);right:18px;left:auto;bottom:auto;width:340px;max-width:calc(100% - 32px);height:auto;min-height:0;max-height:calc(100dvh - 85px);overflow:auto;z-index:101;padding:12px;border:1px solid #dce4df;border-radius:16px;background:#fffdf9;box-shadow:0 12px 40px #315f6b20;gap:8px;grid-template-rows:auto auto auto}
+#adminApp.adminTopNavigation .adminSidebar{display:none;position:fixed;top:var(--admin-mobile-bar-height,64px);right:auto;left:18px;bottom:auto;width:340px;max-width:calc(100% - 32px);height:auto;min-height:0;max-height:calc(100dvh - 85px);overflow:auto;z-index:101;padding:12px;border:1px solid #dce4df;border-radius:16px;background:#fffdf9;box-shadow:0 12px 40px #315f6b20;gap:8px;grid-template-rows:auto auto auto}
 #adminApp.adminTopNavigation.mobileMenuOpen .adminSidebar{display:grid}
 #adminApp.adminTopNavigation .adminSidebarBrand{display:none}
 #adminApp.adminTopNavigation .adminSidebarGroup{display:grid;grid-template-columns:1fr;padding:4px 0;overflow:visible}
@@ -589,3 +589,9 @@ body.adminEditorOpen{overflow:hidden!important}
  #adminIdeaEditPanel.adminEditorCard{clip-path:inset(0 round 24px 24px 0 0)}
  #adminIdeaEditPanel .adminEditSection:first-child .teamField{grid-column:1/-1}
 }
+
+/* Match the public header: identity/navigation left, workspace actions right. */
+#adminApp.adminTopNavigation #adminMobileActions{margin-left:auto;min-width:0;flex:0 1 auto}
+#adminApp.adminTopNavigation #adminMobileActions .adminHeroActions{justify-content:flex-end}
+#adminApp.adminTopNavigation #adminMobileMenuButton{min-width:0;flex:0 1 auto;text-align:left}
+@media(max-width:640px){#adminApp.adminTopNavigation .adminSidebar{left:12px;right:auto}}
