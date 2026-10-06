@@ -688,3 +688,24 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminFeaturedSheet .featuredAdminItem{grid-template-columns:20px minmax(0,1fr);align-items:center;gap:8px}
 #adminFeaturedSheet .featuredDragHandle{width:20px}
 #adminFeaturedSheet .featuredAdminActions{margin-top:0}
+
+/* Keep title and controls on the same compact row. */
+#adminFeaturedSheet .featuredAdminItem{grid-template-columns:20px minmax(0,1fr) auto;gap:10px}
+#adminFeaturedSheet .featuredAdminActions{grid-column:3;gap:4px}
+#adminFeaturedSheet .featuredAdminActions .button{width:28px;height:32px;min-height:32px;flex-basis:28px}
+#adminFeaturedSheet .ideaListVisual{width:48px;height:48px;flex-basis:48px}
+#adminFeaturedSheet .nameWithIcon{font-size:14px;line-height:1.35}
+#adminFeaturedSheet.isDropTarget{box-shadow:inset 0 0 0 2px #8fcfc4}
+#adminFeaturedSheet .isDragging{opacity:.45}
+@media(max-width:400px){#adminFeaturedSheet .featuredAdminActions{flex-direction:column}}
+
+.featuredDragGhost{position:fixed;left:0;top:0;z-index:100000;pointer-events:none;width:240px;padding:12px;border:1px solid #8fcfc4;border-radius:14px;background:#fffdf9;box-shadow:0 12px 32px rgba(23,79,93,.2);color:#315f6b;font:14px Manrope,system-ui,sans-serif;will-change:transform;animation:featuredPickup .14s ease-out}
+.featuredDragGhost .nameWithIcon{display:flex;align-items:center;gap:10px}
+.featuredDragGhost .ideaListVisual{position:relative;flex:0 0 42px;width:42px;height:42px}
+.featuredDragGhost .ideaListThumb{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.featuredDragGhost .domainIcon{position:absolute;right:-4px;bottom:-4px;width:20px;height:20px;display:grid;place-items:center;border-radius:50%;background:var(--theme-icon-bg);color:var(--theme-ink)}
+.featuredDragGhost svg{width:12px;height:12px}
+.featuredDragGhost small{display:block;margin-top:8px;color:#63858b;font-size:11px}
+@keyframes featuredPickup{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.featuredDragGhost{animation:none}}
+#adminFeaturedSheet .ideaListVisual{border:0;box-shadow:none}

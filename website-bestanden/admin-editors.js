@@ -106,10 +106,6 @@
         button.setAttribute('aria-label',label);
         return button;
       };
-      const feature=source.querySelector('[data-feature-idea]');
-      const featured=featuredIdeaKeys().includes(adminFeaturedIdeaKey(item));
-      toolbar.append(prepare(feature,featured?'Uitgelicht':'Uitlichten'));
-      feature.setAttribute('aria-pressed',String(featured));
       const approval=source.querySelector('[data-approve-idea]');
       if(approval)toolbar.append(prepare(approval,'Goedkeuren'));
       toolbar.append(prepare(source.querySelector('.visibilityIdeaAction'),item.hidden?'Zichtbaar maken':'Verbergen'));

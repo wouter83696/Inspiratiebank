@@ -30,29 +30,60 @@
   }
   featuredPanel.querySelector('.adminEditorClose').addEventListener('click',()=>{featuredPanel.hidden=true;window.AdminEditors?.sync();returnFocus?.focus({preventScroll:true});});
   $('adminFeaturedSearch').addEventListener('input',featuredChoices);
-  let sorting=null;
+  let sorting=null,suppressClick=false;
   const sortList=$('featuredAdminList');
-  sortList.addEventListener('pointerdown',event=>{
-    const handle=event.target.closest('.featuredDragHandle');if(!handle||event.button!==0)return;
-    const row=handle.closest('[data-featured-sort-key]');
-    sorting={key:row.dataset.featuredSortKey,target:row.dataset.featuredSortKey,handle};
-    handle.setPointerCapture(event.pointerId);row.classList.add('isDragging');event.preventDefault();
+  document.addEventListener('pointerdown',event=>{
+    if(featuredPanel.hidden||event.button!==0)return;
+    const handle=event.target.closest('.featuredDragHandle');
+    const tile=event.target.closest('#adminIdeaCards [data-idea-key],#adminIdeaList [data-idea-key]');
+    if(!handle&&!tile)return;
+    const item=tile&&allAdminIdeas().find(item=>item.key===tile.dataset.ideaKey);
+    if(tile&&(!item||item.hidden))return;
+    const row=handle?.closest('[data-featured-sort-key]');
+    sorting={key:row?row.dataset.featuredSortKey:adminFeaturedIdeaKey(item),source:row?'selection':'catalog',handle:handle||tile,x:event.clientX,y:event.clientY,active:false};
+    sorting.handle.setPointerCapture(event.pointerId);event.preventDefault();
   });
-  sortList.addEventListener('pointermove',event=>{
+  document.addEventListener('pointermove',event=>{
     if(!sorting)return;
-    const row=document.elementFromPoint(event.clientX,event.clientY)?.closest('[data-featured-sort-key]');
-    sortList.querySelectorAll('.isDropTarget').forEach(item=>item.classList.remove('isDropTarget'));
-    if(row){sorting.target=row.dataset.featuredSortKey;row.classList.add('isDropTarget');}
-  });
-  function clearSort(){sortList.querySelectorAll('.isDragging,.isDropTarget').forEach(item=>item.classList.remove('isDragging','isDropTarget'));sorting=null;}
-  sortList.addEventListener('pointercancel',clearSort);
-  sortList.addEventListener('pointerup',async()=>{
+    if(!sorting.active&&Math.hypot(event.clientX-sorting.x,event.clientY-sorting.y)<6)return;
+    if(!sorting.active){sorting.active=true;sorting.handle.setPointerCapture(event.pointerId);sorting.handle.classList.add('isDragging');
+      const item=allAdminIdeas().find(item=>adminFeaturedIdeaKey(item)===sorting.key);
+      const ghost=document.createElement('div');ghost.className='featuredDragGhost '+domainThemeClass(item.domain);ghost.setAttribute('aria-hidden','true');
+      ghost.innerHTML=IdeaViewShared.renderListActivity({title:item.title,image:adminIdeaImage(item),icon:domainIcon(item.domain)})+'<small></small>';
+      document.body.append(ghost);sorting.ghost=ghost;
+    }
+    sorting.ghost.style.transform=`translate3d(${event.clientX+16}px,${event.clientY+16}px,0)`;
+    event.preventDefault();
+    const target=document.elementFromPoint(event.clientX,event.clientY);
+    sorting.into=!!target?.closest('#adminFeaturedSheet');
+    sorting.out=!!target?.closest('#adminIdeaCards,#adminIdeaList');
+    sorting.ghost.querySelector('small').textContent=sorting.into?'Loslaten in Uitgelicht':sorting.out&&sorting.source==='selection'?'Uit Uitgelicht halen':'Sleep naar Uitgelicht';
+    sorting.target=target?.closest('[data-featured-sort-key]')?.dataset.featuredSortKey;
+    featuredPanel.classList.toggle('isDropTarget',sorting.into);
+    sortList.querySelectorAll('.isDropTarget').forEach(row=>row.classList.remove('isDropTarget'));
+    target?.closest('[data-featured-sort-key]')?.classList.add('isDropTarget');
+  },{passive:false});
+  function clearSort(){
+    sorting?.ghost?.remove();sorting?.handle.classList.remove('isDragging');featuredPanel.classList.remove('isDropTarget');
+    sortList.querySelectorAll('.isDropTarget').forEach(row=>row.classList.remove('isDropTarget'));sorting=null;
+  }
+  document.addEventListener('pointercancel',clearSort);
+  document.addEventListener('dragstart',event=>{if(sorting)event.preventDefault();});
+  document.addEventListener('click',event=>{if(suppressClick){event.preventDefault();event.stopImmediatePropagation();suppressClick=false;}},true);
+  document.addEventListener('pointerup',async()=>{
     if(!sorting)return;
-    const {key,target}=sorting;clearSort();if(key===target)return;
-    const keys=featuredIdeaKeys();const from=keys.indexOf(key),to=keys.indexOf(target);if(from<0||to<0)return;
-    keys.splice(from,1);keys.splice(to,0,key);
-    if(await saveFeaturedIdeaKeys(keys)){renderIdeas();setStatus('#adminStatus','Volgorde van Uitgelicht aangepast.','ok');}
-    else setStatus('#adminStatus',storageErrorMessage('Volgorde opslaan lukte niet.'),'warn');
+    const drag=sorting;clearSort();if(!drag.active)return;
+    suppressClick=true;setTimeout(()=>{suppressClick=false;},0);
+    const keys=featuredIdeaKeys();const from=keys.indexOf(drag.key);
+    if(drag.source==='selection'&&drag.out){if(from<0)return;keys.splice(from,1);}
+    else if(drag.into){
+      if(from<0&&keys.length>=5){setStatus('#adminStatus','Er passen maximaal vijf activiteiten in Uitgelicht. Verwijder eerst een activiteit.','warn');return;}
+      const to=keys.indexOf(drag.target);
+      if(from>=0)keys.splice(from,1);
+      keys.splice(to<0?keys.length:to,0,drag.key);
+    }else return;
+    if(await saveFeaturedIdeaKeys(keys)){renderIdeas();setStatus('#adminStatus','Uitgelicht opgeslagen.','ok');}
+    else setStatus('#adminStatus',storageErrorMessage('Opslaan lukte niet.'),'warn');
   });
 
   new MutationObserver(()=>{featuredPanel.querySelector('.adminFeaturedStatus').textContent=$('adminStatus').textContent;}).observe($('adminStatus'),{childList:true,subtree:true,characterData:true});
