@@ -523,10 +523,8 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaEditPanel .adminPhotoActions,#adminIdeaEditPanel .adminImagePreview,#adminIdeaEditPanel .adminImageSuggestion{grid-column:1/-1}
 #adminIdeaEditPanel .adminPhotoActions{display:flex;gap:8px;flex-wrap:wrap}
 #adminIdeaEditPanel .adminPhotoActions small{flex-basis:100%;font-size:12px;line-height:1.5}
-#adminIdeaEditPanel .teamActionBar{position:static;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;margin:0;padding:12px 20px max(12px,env(safe-area-inset-bottom));border-top:1px solid rgba(123,112,88,.08);background:#fffdfa}
-#adminIdeaEditPanel .teamActionBar .button{min-height:42px;margin:0;box-shadow:none;border:1px solid rgba(79,142,158,.12);background:#fff;color:#315f6b;font-weight:600}
-#adminIdeaEditPanel .teamActionBar .primary{border-color:#8cabb0;background:#fffdfa}
-#adminIdeaEditPanel .teamActionBar .button:hover{background:#e5f2ef}
+#adminIdeaEditPanel .teamActionBar{position:static;display:block;margin:0;padding:8px 20px;background:#fff;border:0}
+#adminIdeaEditPanel .teamActionBar:has(#adminIdeaEditStatus:empty){display:none}
 #adminIdeaEditStatus{grid-column:1/-1;font-size:12px;line-height:1.5}
 #adminIdeaEditStatus:empty{display:none}
 @media(max-width:640px){
@@ -562,15 +560,15 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaEditPanel .photoDetailActions{position:static!important;transform:none;margin-top:18px}
 
 /* Toolbar layout only: controls use the shared filter action styles. */
-#adminIdeaEditPanel .adminEditToolbar{position:relative;z-index:25;background:#fffdfa;display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:10px 20px;border-bottom:1px solid rgba(79,142,158,.12)}
+#adminIdeaEditPanel .adminEditToolbar{position:relative;z-index:25;background:#fff;display:flex;flex-wrap:nowrap;align-items:center;gap:6px;padding:10px 20px;border-bottom:1px solid rgba(79,142,158,.12)}
 #adminIdeaEditPanel .adminEditToolbar .ideaFilterSheetAction{display:inline-flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;flex:none;min-height:36px;padding:7px 8px;font-size:12px;line-height:1.35;font-weight:600;border-radius:10px}
 .adminEditToolbar svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.adminEditMore{position:relative;margin-left:auto}
+.adminEditMore{position:relative}
 .adminEditMore>summary{list-style:none;cursor:pointer}
 .adminEditMore>summary::-webkit-details-marker{display:none}
 .adminEditMoreItems{position:absolute;top:calc(100% + 6px);right:0;z-index:30;display:grid;gap:6px;min-width:160px;padding:8px;background:#fffdfa;border:1px solid rgba(79,142,158,.16);border-radius:12px;box-shadow:0 8px 20px #315f6b18}
 .adminEditStatus{font-size:12px;color:#63858b;padding:6px 8px}
-.adminEditMoreItems .adminDeleteAction{color:#9b5146}
+.adminEditToolbar .adminDeleteAction{color:#9b5146}
 
 #adminIdeaEditPanel input:not([type=checkbox]),#adminIdeaEditPanel textarea,#adminIdeaEditPanel .customSelectButton{border-radius:12px}
 #adminIdeaEditPanel .adminEditAddressFields{padding:0;margin:0;order:6}
@@ -581,3 +579,12 @@ body.adminEditorOpen{overflow:hidden!important}
 
 /* A restrained mint border marks the active editable field. */
 #adminIdeaEditPanel .teamField :is(input,textarea,select):focus-visible,#adminIdeaEditPanel .customSelectButton:focus-visible{outline:none;border-color:rgba(127,207,201,.8);box-shadow:none}
+
+#adminIdeaEditPanel .adminEditToolbar .adminToolbarIcon{width:40px;height:40px;padding:0}
+.adminToolbarIcon>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+#adminIdeaEditPanel .adminEditToolbar .adminToolbarSave{margin-left:auto;background:#e5f2ef;border-color:rgba(79,142,158,.16);min-height:40px;padding:8px 12px}
+@media(max-width:640px){
+ #adminIdeaEditPanel .adminEditToolbar{padding-inline:12px;gap:4px}
+ #adminIdeaEditPanel .adminEditToolbar .adminToolbarIcon{width:36px;min-height:44px;height:44px}
+ #adminIdeaEditPanel .adminEditToolbar .adminToolbarSave{min-height:44px;padding-inline:8px}
+}

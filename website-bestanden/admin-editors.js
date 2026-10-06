@@ -13,7 +13,10 @@
   bank.append(oldGrid);form.prepend(fields,bank);
   const fieldFor=id=>$('adminEditIdea'+id)?.closest('.teamField');
   const allFields=[...oldGrid.querySelectorAll('.teamField')];
-  const footer=form.querySelector('.teamActionBar');footer.prepend($('adminIdeaEditCancelBtn'));
+  const footer=form.querySelector('.teamActionBar');
+  const saveButton=$('adminIdeaEditSubmitBtn');saveButton.setAttribute('form',form.id);
+  bank.append($('adminIdeaEditCancelBtn'),saveButton);
+  footer.replaceChildren($('adminIdeaEditStatus'));
   $('adminIdeaEditSubmitBtn').textContent='Opslaan';$('adminIdeaEditCancelBtn').textContent='Annuleren';
   const photoPreview=$('adminEditIdeaImagePreview');
   function syncPhoto(){
@@ -26,6 +29,7 @@
   new MutationObserver(syncPhoto).observe(photoPreview,{childList:true,subtree:true});
   function mountDetail(){
     allFields.forEach(field=>oldGrid.append(field));
+    bank.append(saveButton);
     idea.querySelector('.adminEditToolbar')?.remove();
     const item=editingAdminIdea||{};
     const renderItem={...item};
@@ -91,10 +95,16 @@
       if(approval)menu.append(prepare(approval,'Goedkeuren'));
       else {const status=document.createElement('span');status.className='adminEditStatus';status.textContent='Goedgekeurd';menu.append(status);}
       menu.append(prepare(source.querySelector('.visibilityIdeaAction'),item.hidden?'Zichtbaar maken':'Verbergen'));
-      const remove=prepare(source.querySelector('[data-delete-idea]'),'Verwijderen');remove.classList.add('adminDeleteAction');menu.append(remove);
+      const remove=prepare(source.querySelector('[data-delete-idea]'),'Verwijderen');remove.classList.add('adminDeleteAction');
       more.addEventListener('keydown',event=>{if(event.key==='Escape'){event.stopPropagation();more.open=false;more.querySelector('summary').focus();}});
-      toolbar.append(more);
+      toolbar.append(more,remove);
     }
+    toolbar.querySelectorAll(':scope > button,.adminEditMore > summary').forEach(control=>{
+      const label=control.getAttribute('aria-label')||control.textContent.trim();
+      control.setAttribute('aria-label',label);control.title=label;control.classList.add('adminToolbarIcon');
+    });
+    saveButton.className='ideaFilterSheetAction secondary adminToolbarSave';
+    toolbar.append(saveButton);
     syncPhoto();
   }
   function updateContact(){
