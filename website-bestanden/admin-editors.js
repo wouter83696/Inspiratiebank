@@ -21,7 +21,7 @@
     const src=photoPreview.querySelector('img')?.getAttribute('src');
     if(image){image.hidden=!src;if(src)image.src=src;}
     const button=idea.querySelector('.adminInlinePhotoButton');
-    if(button){button.textContent='Foto';button.setAttribute('aria-label',src?'Foto wijzigen':'Foto uploaden (verplicht)');}
+    if(button){button.innerHTML=actionIcon('image')+'<span>Foto</span>';button.setAttribute('aria-label',src?'Foto wijzigen':'Foto uploaden (verplicht)');}
   }
   new MutationObserver(syncPhoto).observe(photoPreview,{childList:true,subtree:true});
   function mountDetail(){
@@ -48,9 +48,10 @@
     const summary=document.createElement('div');summary.setAttribute('aria-label','Kenmerken aanpassen');
     if(metadata){metadata.replaceWith(details);summary.append(metadata);}else article.append(details);
     details.append(summary);
-    const properties=document.createElement('button');properties.type='button';properties.className='ideaFilterSheetAction secondary';properties.textContent='Kenmerken';
+    const properties=document.createElement('button');properties.type='button';properties.className='ideaFilterSheetAction secondary';properties.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="2"/><circle cx="15" cy="17" r="2"/></svg><span>Kenmerken</span>';
     properties.addEventListener('click',()=>details.scrollIntoView({block:'start',behavior:'smooth'}));toolbar.append(properties);
     const grid=document.createElement('div');grid.className='teamFormGrid';details.append(grid);
+    ['Domain','By'].forEach(id=>fieldFor(id).classList.add('wide'));
     ['Domain','Location','Cost','Stimulus','Duration','Group','By'].forEach(id=>grid.append(fieldFor(id)));
     const panels=article.querySelectorAll('[role="tabpanel"]');
     panels[0].replaceChildren(fieldFor('Description'));
@@ -62,19 +63,20 @@
     contact.replaceChildren();
     const addressFields=document.createElement('div');addressFields.className='teamFormGrid adminEditAddressFields';
     ['Postcode','HouseNumber','Address'].forEach(id=>addressFields.append(fieldFor(id)));
+    contact.before(addressFields);
     $('adminEditIdeaAddress').readOnly=true;
     $('adminEditIdeaAddress').placeholder='Wordt aangevuld via postcode en huisnummer';
-    contact.before(addressFields);
-    const urlField=fieldFor('Url');contact.before(urlField);
+    const urlField=fieldFor('Url');urlField.classList.add('adminEditUrlField');contact.before(urlField);
     contact.classList.add('adminContactPreview');
     updateContact();
-    const locationShortcut=document.createElement('button');locationShortcut.type='button';locationShortcut.className='ideaFilterSheetAction secondary';locationShortcut.textContent='Locatie';locationShortcut.addEventListener('click',()=>contact.scrollIntoView({block:'start',behavior:'smooth'}));toolbar.append(locationShortcut);
+    const locationShortcut=document.createElement('button');locationShortcut.type='button';locationShortcut.className='ideaFilterSheetAction secondary';locationShortcut.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Locatie</span>';locationShortcut.addEventListener('click',()=>{const target=addressFields.querySelector('.teamField:not([hidden])')||fieldFor('Location');target.scrollIntoView({block:'start',behavior:'smooth'});});toolbar.append(locationShortcut);
     if(!item.isNew){
       const source=document.createElement('div');source.innerHTML=adminIdeaActions(item);
       const prepare=(button,label)=>{
         if(!button)return;
         button.className='ideaFilterSheetAction secondary';
-        button.textContent=label;
+        const icon=button.querySelector('svg')?.outerHTML||'';
+        button.innerHTML=icon+'<span>'+escapeHtml(label)+'</span>';
         button.setAttribute('aria-label',label);
         return button;
       };
@@ -83,11 +85,11 @@
       toolbar.append(prepare(feature,featured?'Uitgelicht':'Uitlichten'));
       feature.setAttribute('aria-pressed',String(featured));
       const more=document.createElement('details');more.className='adminEditMore';
-      more.innerHTML='<summary class="ideaFilterSheetAction secondary">Meer ⋯</summary><div class="adminEditMoreItems"></div>';
+      more.innerHTML='<summary class="ideaFilterSheetAction secondary"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg><span>Meer</span></summary><div class="adminEditMoreItems"></div>';
       const menu=more.querySelector('div');
       const approval=source.querySelector('[data-approve-idea]');
       if(approval)menu.append(prepare(approval,'Goedkeuren'));
-      else {const status=document.createElement('span');status.className='adminEditStatus';status.textContent='Goedgekeurd';toolbar.append(status);}
+      else {const status=document.createElement('span');status.className='adminEditStatus';status.textContent='Goedgekeurd';menu.append(status);}
       menu.append(prepare(source.querySelector('.visibilityIdeaAction'),item.hidden?'Zichtbaar maken':'Verbergen'));
       const remove=prepare(source.querySelector('[data-delete-idea]'),'Verwijderen');remove.classList.add('adminDeleteAction');menu.append(remove);
       more.addEventListener('keydown',event=>{if(event.key==='Escape'){event.stopPropagation();more.open=false;more.querySelector('summary').focus();}});

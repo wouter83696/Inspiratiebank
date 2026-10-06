@@ -550,27 +550,29 @@ body.adminEditorOpen{overflow:hidden!important}
 
 /* Editable slots inside the shared photo-detail component. */
 #adminIdeaEditPanel .adminInlineTitle>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-#adminIdeaEditPanel .adminInlineTitle input{font-size:22px;font-weight:600;color:var(--accent-dark);background:rgba(255,255,255,.5);border:1px solid rgba(79,142,158,.16);padding:10px 11px;box-shadow:none}
+#adminIdeaEditPanel .adminInlineTitle input{font-size:20px;font-weight:600;color:var(--accent-dark);background:rgba(255,255,255,.5);border:1px solid rgba(79,142,158,.16);padding:10px 11px;box-shadow:none}
 #adminIdeaEditPanel .adminInlineTitle input:focus{border-color:var(--accent-dark)}
 #adminIdeaEditPanel .adminInlineUpload{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-#adminIdeaEditPanel .adminInlineMetadata>summary{list-style:none;cursor:pointer}
-#adminIdeaEditPanel .adminInlineMetadata>summary::-webkit-details-marker{display:none}
 #adminIdeaEditPanel .adminInlineMetadata .teamFormGrid{padding-block:12px}
 #adminIdeaEditPanel .adminEditTextSection{margin-block:16px}
-#adminIdeaEditPanel .adminEditTextSection textarea{width:100%;min-height:120px;resize:none;font:inherit;color:inherit;background:rgba(255,255,255,.5);border-color:rgba(79,142,158,.16);padding:10px 11px}
+#adminIdeaEditPanel .adminEditTextSection textarea{width:100%;min-height:104px;resize:none;font-size:14px;line-height:1.6;color:inherit;background:rgba(255,255,255,.5);border-color:rgba(79,142,158,.16);padding:10px 11px}
 #adminIdeaEditPanel .adminEditTextSection textarea:focus{border-color:var(--accent-dark)}
 #adminIdeaEditPanel .photoDetailActions{position:static!important;transform:none;margin-top:18px}
 
 /* Toolbar layout only: controls use the shared filter action styles. */
-.adminEditToolbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:10px 20px;border-bottom:1px solid rgba(79,142,158,.12)}
-.adminEditToolbar .ideaFilterSheetAction{white-space:nowrap;flex:none;min-height:34px;padding:6px 10px;font-size:13px;border-radius:10px}
-.adminEditMore{position:relative}
+#adminIdeaEditPanel .adminEditToolbar{position:relative;z-index:25;background:#fffdfa;display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:10px 20px;border-bottom:1px solid rgba(79,142,158,.12)}
+#adminIdeaEditPanel .adminEditToolbar .ideaFilterSheetAction{display:inline-flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;flex:none;min-height:36px;padding:7px 8px;font-size:12px;line-height:1.35;font-weight:600;border-radius:10px}
+.adminEditToolbar svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.adminEditMore{position:relative;margin-left:auto}
 .adminEditMore>summary{list-style:none;cursor:pointer}
 .adminEditMore>summary::-webkit-details-marker{display:none}
 .adminEditMoreItems{position:absolute;top:calc(100% + 6px);right:0;z-index:30;display:grid;gap:6px;min-width:160px;padding:8px;background:#fffdfa;border:1px solid rgba(79,142,158,.16);border-radius:12px;box-shadow:0 8px 20px #315f6b18}
-.adminEditStatus{font-size:12px;color:#63858b}
+.adminEditStatus{font-size:12px;color:#63858b;padding:6px 8px}
 .adminEditMoreItems .adminDeleteAction{color:#9b5146}
 
 #adminIdeaEditPanel input:not([type=checkbox]),#adminIdeaEditPanel textarea,#adminIdeaEditPanel .customSelectButton{border-radius:12px}
-#adminIdeaEditPanel .adminEditAddressFields{padding:0;margin:0}
+#adminIdeaEditPanel .adminEditAddressFields{padding:0;margin:0;order:6}
+#adminIdeaEditPanel .adminEditUrlField{order:6}
 #adminIdeaEditPanel .adminEditFields section{scroll-margin-top:12px}
+
+@media(max-width:640px){#adminIdeaEditPanel .adminEditToolbar{padding:8px 16px}#adminIdeaEditPanel .adminEditToolbar .ideaFilterSheetAction{min-height:40px}#adminIdeaEditPanel .adminInlineTitle input{font-size:18px}}
