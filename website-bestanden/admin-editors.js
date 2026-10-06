@@ -15,7 +15,13 @@
   const allFields=[...oldGrid.querySelectorAll('.teamField')];
   const footer=form.querySelector('.teamActionBar');
   const saveButton=$('adminIdeaEditSubmitBtn');saveButton.setAttribute('form',form.id);
-  bank.append($('adminIdeaEditCancelBtn'),saveButton);
+  const actions=document.createElement('footer');
+  actions.className='adminActivityFooter ideaFilterSheetFooter';
+  const cancelButton=$('adminIdeaEditCancelBtn');
+  cancelButton.className='ideaFilterSheetAction secondary';
+  saveButton.className='ideaFilterSheetAction primary';
+  actions.append(cancelButton,saveButton);
+  idea.append(actions);
   footer.replaceChildren($('adminIdeaEditStatus'));
   $('adminIdeaEditSubmitBtn').textContent='Opslaan';$('adminIdeaEditCancelBtn').textContent='Annuleren';
   const photoPreview=$('adminEditIdeaImagePreview');
@@ -35,7 +41,6 @@
   new MutationObserver(syncPhoto).observe(photoPreview,{childList:true,subtree:true});
   function mountDetail(){
     allFields.forEach(field=>oldGrid.append(field));
-    bank.append(saveButton);
     idea.querySelector('.adminEditToolbar')?.remove();
     const item=editingAdminIdea||{};
     const renderItem={...item};
@@ -116,10 +121,6 @@
       const label=control.getAttribute('aria-label')||control.textContent.trim();
       control.setAttribute('aria-label',label);control.title=label;control.classList.add('adminToolbarIcon');
     });
-    saveButton.className='ideaFilterSheetAction secondary adminToolbarIcon adminToolbarSave';
-    saveButton.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12l4 4v12a2 2 0 0 1-2 2Z"/><path d="M7 3v6h10V3M7 21v-8h10v8"/></svg><span>Opslaan</span>';
-    saveButton.setAttribute('aria-label','Opslaan');saveButton.title='Opslaan';
-    toolbar.append(saveButton);
     syncPhoto();
     updateMetadata();
   }

@@ -740,9 +740,9 @@ body.adminEditorOpen{overflow:hidden!important}
 #ideaFilterSheetLayer .customSelectOption:is(:hover,:focus-visible,[aria-selected="true"]){background:#e5f2ef;color:#315f6b}
 #ideaFilterSheetLayer .customNativeSelect{position:absolute!important;width:1px!important;height:1px!important;min-height:0!important;padding:0!important;opacity:0;pointer-events:none}
 
-.adminFeaturedFooter .ideaFilterSheetAction.primary{border:1.5px solid rgba(23,79,93,.48);border-radius:12px;background:rgba(255,253,249,.72);color:#236875;box-shadow:none;font-weight:600;transition:background .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease)}
-.adminFeaturedFooter .ideaFilterSheetAction.primary:hover:not(:disabled){border-color:rgba(23,79,93,.68);background:rgba(168,225,221,.24);color:#1f5763}
-.adminFeaturedFooter .ideaFilterSheetAction:disabled{opacity:.45;cursor:default;transform:none;box-shadow:none}
+:is(.adminFeaturedFooter,.adminActivityFooter) .ideaFilterSheetAction.primary{border:1.5px solid rgba(23,79,93,.48);border-radius:12px;background:rgba(255,253,249,.72);color:#236875;box-shadow:none;font-weight:600;transition:background .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease)}
+:is(.adminFeaturedFooter,.adminActivityFooter) .ideaFilterSheetAction.primary:hover:not(:disabled){border-color:rgba(23,79,93,.68);background:rgba(168,225,221,.24);color:#1f5763}
+:is(.adminFeaturedFooter,.adminActivityFooter) .ideaFilterSheetAction:disabled{opacity:.45;cursor:default;transform:none;box-shadow:none}
 /* Login navigation is a plain text link, without a header surface. */
 body:not(.adminMode) > .topbar{background:transparent;border:0;box-shadow:none;backdrop-filter:none;justify-content:flex-end}
 body:not(.adminMode) > .topbar .actions{display:flex;background:transparent;border:0;box-shadow:none}
@@ -757,3 +757,7 @@ body:not(.adminMode) > .topbar .topLink:hover{text-decoration:underline;color:#3
 #ideaFilterSheetLayer .customSelectMenu{padding:4px;border-radius:12px}
 #ideaFilterSheetLayer .customSelectOption{min-height:36px;padding:8px 10px;font-size:14px;line-height:1.4;border-radius:8px}
 #ideaFilterSheetLayer .customSelectOption:hover:not([aria-selected="true"]){background:rgba(229,242,239,.45)}
+
+/* Keep activity actions visible outside the scrolling form. */
+#adminIdeaEditPanel.adminEditorCard{grid-template-rows:auto auto minmax(0,1fr) auto}
+.adminActivityFooter #adminIdeaEditSubmitBtn.hasChanges{background:#e5f2ef}
