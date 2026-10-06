@@ -756,3 +756,26 @@
 .agendaItem .agendaItemMeta{line-height:1.45;hyphens:none;word-break:normal;overflow-wrap:break-word}
 .agendaItem .agendaItemMeta .agendaMetaRow{display:block;margin:0;text-align:left;hyphens:none;overflow-wrap:break-word}
 .agendaItem .agendaItemMeta .agendaMetaRow+.agendaMetaRow{margin-top:3px}
+
+/* One ongoing-offer title layout for the public agenda and management. */
+:is(#longerOffers,#ongoingAdminSection) .ongoingTitleCell .nameWithIcon{
+ display:grid;grid-template-columns:64px minmax(0,1fr);align-items:start;gap:12px;
+}
+:is(#longerOffers,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleVisual{
+ display:grid;place-items:center;width:64px;height:64px;min-width:64px;
+ border:1px solid var(--theme-line);border-radius:11px;background:transparent;box-shadow:none;
+}
+:is(#longerOffers,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleTextStack{
+ display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;
+}
+:is(#longerOffers,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleTextStack>:is(.ongoingTitleLink,.ideaTitleText){
+ display:block;min-height:0;padding:0;margin:0;line-height:1.25;
+}
+:is(#longerOffers,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleTextStack .ongoingDateMeta{
+ display:block;max-width:100%;padding:0;margin:0;border:0;border-radius:0;background:transparent;
+ color:#697472;font-size:.72rem;line-height:1.35;white-space:normal;
+}
+@media(max-width:640px){
+ :is(#longerOffers,#ongoingAdminSection) .ongoingTitleCell .nameWithIcon{grid-template-columns:56px minmax(0,1fr);gap:10px}
+ :is(#longerOffers,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleVisual{width:56px;height:56px;min-width:56px}
+}

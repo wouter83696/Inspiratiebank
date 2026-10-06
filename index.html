@@ -2807,7 +2807,7 @@
     @media print{.topbar,.tabs,.actions,.filters,.viewBar,.viewSwitch,.siteButton,.teamFormBox,.formButton{display:none !important}body{padding-top:0;background:#fff}.shell{max-width:none;padding:0}.hero{display:none}.tabPanel{display:block !important}.weekPanel,.panel,.card{box-shadow:none;break-inside:avoid}}
   </style>
   <link rel="stylesheet" href="website-bestanden/loading-screen.css?v=20261004-visible-photos-v9">
-  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20261006-meta-lines-v2">
+  <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20261006-ongoing-unified-v3">
   <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20261006-material-rows-v51">
   <style>
     /* De kaart zelf blijft rustig; categorieaccenten zitten alleen in iconen en badges. */
@@ -4093,8 +4093,8 @@
     :root{
       --motion-instant:120ms;
       --motion-fast:180ms;
-      --motion-base:280ms;
-      --motion-slow:420ms;
+      --motion-base:240ms;
+      --motion-slow:320ms;
       --motion-standard:cubic-bezier(.4,0,.2,1);
       --motion-enter:cubic-bezier(.22,1,.36,1);
       --motion-exit:cubic-bezier(.4,0,.7,.2);
@@ -4104,8 +4104,8 @@
       to{opacity:1;transform:translate3d(0,0,0)}
     }
     @keyframes viewSurfaceEnter{
-      from{opacity:0;transform:translate3d(0,7px,0) scale(.998)}
-      to{opacity:1;transform:translate3d(0,0,0)}
+      from{opacity:0}
+      to{opacity:1}
     }
     @keyframes mobileCoachmarkIn{
       from{opacity:0;transform:translate3d(0,-4px,0) scale(.98)}
@@ -4116,7 +4116,8 @@
       to{opacity:1;transform:translate3d(0,0,0) scale(1)}
     }
     .tabPanel.active{animation:viewSurfaceEnter var(--motion-base) var(--motion-enter) backwards}
-    .ideaView.active{animation:viewSurfaceEnter var(--motion-base) var(--motion-enter) both}
+    .ideaView.active{animation:viewSurfaceEnter var(--motion-base) var(--motion-enter) backwards}
+    .tabPanel.active:has(.ideaView.active){animation:none}
     .ideaFilterSheetLayer,.ideaSubmitSheetLayer{transition:visibility 0s linear var(--motion-slow)!important}
     .ideaFilterSheetLayer.isOpen,.ideaSubmitSheetLayer.isOpen{transition-delay:0s!important}
     .ideaFilterSheetBackdrop,.ideaSubmitSheetBackdrop{
@@ -4999,8 +5000,7 @@
         right:0!important;bottom:0!important;left:0!important;height:auto!important;max-height:min(34dvh,280px)!important;
         border-right:0!important;border-left:0!important;border-radius:22px 22px 0 0!important;
         background:#FFFEFC!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
-        transition:max-height .38s cubic-bezier(.22,1,.36,1),height .38s cubic-bezier(.22,1,.36,1),transform .34s cubic-bezier(.22,1,.36,1),opacity .22s ease!important;
-        will-change:max-height
+        transition:max-height var(--motion-slow) var(--motion-enter),height var(--motion-slow) var(--motion-enter),transform var(--motion-slow) var(--motion-enter),opacity var(--motion-base) ease!important;
       }
       .ideaMapPanel.isList:not(.isSingleDetail){background:rgba(255,254,252,.95)!important}
       .ideaMapPanel.isMinimized{height:64px!important;max-height:64px!important;transform:none}
@@ -5446,10 +5446,10 @@
       *,*::before,*::after{
         scroll-behavior:auto!important;animation-duration:.01ms!important;
         animation-iteration-count:1!important;transition-duration:.01ms!important;
+        animation-delay:0s!important;transition-delay:0s!important;
       }
     }
   </style>
-  <link rel="stylesheet" href="website-bestanden/header-layout-shared.css?v=20261001-v1">
   <style>
     /* Tablet layouts keep navigation outside the hero and days readable. */
     @media (min-width:641px) and (max-width:980px){
@@ -5469,7 +5469,8 @@
       #tab-weken .agendaWeekFilterSlot .customSelectButton::before{display:none!important}
     }
 </style>
-  <link rel="stylesheet" href="website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
+  <link rel="stylesheet" href="website-bestanden/header-layout-shared.css?v=20261001-v1">
+  <link rel="stylesheet" href="website-bestanden/navigation-colors-shared.css?v=20261006-header-palette-v27">
   <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261006-single-sheet-surface-v146">
 </head>
 <body class="appLoading">
@@ -8628,7 +8629,7 @@
     panel.hidden = !open;
     if(toggle) toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     if(open && options.scroll){
-      window.requestAnimationFrame(() => accordion.scrollIntoView({behavior:'smooth', block:'start'}));
+      window.requestAnimationFrame(() => accordion.scrollIntoView({behavior:motionScrollBehavior(), block:'start'}));
     }
   }
   function toggleOngoing(options={}){
@@ -9058,7 +9059,26 @@
     const duration = distance > 1800 ? 280 : distance > 900 ? 340 : 360;
     animatePageScroll(0, reduceMotion ? 0 : duration);
   }
+  function prefersReducedMotion(){
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+  function motionScrollBehavior(){
+    return prefersReducedMotion() ? 'auto' : 'smooth';
+  }
+  let pageScrollFrame = 0;
+  function cancelPageScroll(){
+    window.cancelAnimationFrame(pageScrollFrame);
+    pageScrollFrame = 0;
+  }
+  // Manual interaction takes precedence over navigation's scrolling animation.
+  ['wheel','touchstart','pointerdown'].forEach(type =>
+    window.addEventListener(type, cancelPageScroll, {passive:true}));
+  window.addEventListener('keydown', event => {
+    if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' ','Escape'].includes(event.key)) cancelPageScroll();
+  });
   function animatePageScroll(targetTop, duration=420){
+    cancelPageScroll();
+    if(prefersReducedMotion()) duration = 0;
     const startTop = window.scrollY;
     const distance = targetTop - startTop;
     if(!duration || Math.abs(distance) < 4){
@@ -9070,9 +9090,9 @@
     const step = now => {
       const progress = Math.min(1, (now - start) / duration);
       window.scrollTo(0, startTop + distance * ease(progress));
-      if(progress < 1) window.requestAnimationFrame(step);
+      pageScrollFrame = progress < 1 ? window.requestAnimationFrame(step) : 0;
     };
-    window.requestAnimationFrame(step);
+    pageScrollFrame = window.requestAnimationFrame(step);
   }
   function warmHeroBackgrounds(){
     ['website-bestanden/hero-achtergronden/inspiratiebank-header.png'].forEach(src => {
@@ -9691,16 +9711,16 @@
         }else if(window.matchMedia('(min-width:981px)').matches){
           const resultTop = resultRect.top - panelRect.top + panel.scrollTop;
           const centeredTop = resultTop - Math.max(8, (panel.clientHeight - result.offsetHeight) / 2);
-          panel.scrollTo({top:Math.max(0, centeredTop), behavior:'smooth'});
+          panel.scrollTo({top:Math.max(0, centeredTop), behavior:motionScrollBehavior()});
         }else if(activeIdeaMapClusterKeys?.length > 1 && !ideaMapDetailKey){
           panel.scrollTo({left:0, behavior:'auto'});
         }else{
           const resultLeft = resultRect.left - panelRect.left + panel.scrollLeft;
           const centeredLeft = resultLeft - Math.max(12, (panel.clientWidth - result.offsetWidth) / 2);
-          panel.scrollTo({left:Math.max(0, centeredLeft), behavior:'smooth'});
+          panel.scrollTo({left:Math.max(0, centeredLeft), behavior:motionScrollBehavior()});
         }
       }
-      else result.scrollIntoView({behavior:'smooth', block:'nearest'});
+      else result.scrollIntoView({behavior:motionScrollBehavior(), block:'nearest'});
     }
     if(result && emphasize){
       document.querySelectorAll('.ideaRandomFocus').forEach(node => node.classList.remove('ideaRandomFocus'));
@@ -9988,6 +10008,10 @@
   function createLeafletMapProvider(container, points, options={}){
     if(!container || !window.L) return null;
     const map = L.map(container, {
+      zoomAnimation:!prefersReducedMotion(),
+      fadeAnimation:!prefersReducedMotion(),
+      markerZoomAnimation:!prefersReducedMotion(),
+      inertia:!prefersReducedMotion(),
       scrollWheelZoom:false,
       tap:true,
       maxZoom:19,
@@ -10020,6 +10044,7 @@
     const clusterSignature = keys => [...new Set(keys.filter(Boolean))].sort().join('|');
     let activeClusterSignature = activeIdeaMapClusterKeys ? clusterSignature(activeIdeaMapClusterKeys) : '';
     const markerLayer = L.markerClusterGroup({
+      animate:!prefersReducedMotion(),
       // Keep room for the marker circles, count badges and selection rings at every zoom.
       maxClusterRadius:80,
       showCoverageOnHover:false,
@@ -10083,7 +10108,7 @@
         const shouldZoom = pendingIdeaMapZoomTarget === targetKey;
         options.onSelect?.(point.key);
         pendingIdeaMapZoomTarget = targetKey;
-        if(shouldZoom) map.setView(marker.getLatLng(), Math.min(map.getZoom() + 2, 16), {animate:true});
+        if(shouldZoom) map.setView(marker.getLatLng(), Math.min(map.getZoom() + 2, 16), {animate:!prefersReducedMotion()});
       });
       markerLayer.addLayer(marker);
       bounds.push([point.lat, point.lon]);
@@ -10116,7 +10141,7 @@
             element.classList.toggle('active', active);
             element.querySelector('.ideaLeafletMarker')?.classList.toggle('active', active);
           }
-          if(active && pan) map.panTo(marker.getLatLng(), {animate:true, duration:.35});
+          if(active && pan) map.panTo(marker.getLatLng(), {animate:!prefersReducedMotion(), duration:.28});
         });
         if(!activeIdeaMapClusterKeys){
           activeClusterSignature = '';
@@ -10216,7 +10241,7 @@
     if(!target) return;
     document.querySelectorAll('.ideaRandomFocus').forEach(el => el.classList.remove('ideaRandomFocus'));
     target.classList.add('ideaRandomFocus');
-    target.scrollIntoView({behavior:'smooth', block:'center'});
+    target.scrollIntoView({behavior:motionScrollBehavior(), block:'center'});
     window.setTimeout(() => target.classList.remove('ideaRandomFocus'), 2200);
   }
   function closeReportMenus(except=null){

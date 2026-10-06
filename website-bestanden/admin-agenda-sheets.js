@@ -82,7 +82,8 @@
    if(!modal.hidden){await AdminEditors.requestAgendaClose();if(!modal.hidden)return;}
    window.AdminSources?.close();returnFocus=document.activeElement;manager.hidden=false;AdminEditors.sync();manager.querySelector('.adminEditorClose').focus();
  });
- new MutationObserver(()=>AdminEditors.sync()).observe(manager,{attributes:true,attributeFilter:['hidden']});
+ link.setAttribute('aria-expanded','false');
+ new MutationObserver(()=>{link.setAttribute('aria-expanded',String(!manager.hidden));AdminEditors.sync();}).observe(manager,{attributes:true,attributeFilter:['hidden']});
  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!manager.hidden){event.preventDefault();closeManager();}});
  const sources=document.createElement('section');sources.id='adminSourcesSheet';sources.className='adminEditorCard adminPublicSurface';sources.hidden=true;
  sources.innerHTML='<header class="panelHead"><h3>Bronnen</h3><button class="adminEditorClose" type="button" aria-label="Bronnen sluiten">×</button></header><div class="adminAgendaManagerBody"></div><footer class="adminActivityFooter ideaFilterSheetFooter"><button class="ideaFilterSheetAction primary" type="button">Klaar</button></footer>';
@@ -90,21 +91,36 @@
  const sourcePanel=$('sourceOwnPanel');sources.querySelector('.adminAgendaManagerBody').append(sourcePanel);
  sourcePanel.querySelector('h2').remove();$('linkForm').hidden=true;
  const sourceLink=document.createElement('button');sourceLink.type='button';sourceLink.className='adminAgendaManageLink';sourceLink.textContent='Bronnen';link.after(sourceLink);
- actions.querySelector('[data-add-admin-source]')?.remove();
+ let addSource=actions.querySelector('[data-add-admin-source]');
+ if(!addSource){addSource=document.createElement('button');addSource.type='button';addSource.dataset.addAdminSource='';actions.append(addSource);}
+ addSource.className=$('addAdminAgendaBtn').className;
+ addSource.innerHTML=$('addAdminAgendaBtn').innerHTML.replace('Agenda-item toevoegen','Bron toevoegen');
+ const inlineAdd=sourcePanel.querySelector('[data-add-admin-source]');inlineAdd.className=addSource.className;inlineAdd.innerHTML=addSource.innerHTML;
+ const rulesPanel=$('agendaRulesPanel'),tabs=document.createElement('div');tabs.className='adminSourceTabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Bronnen beheren');
+ tabs.innerHTML='<button type="button" role="tab" id="sourceOverviewTab" aria-controls="sourceOwnPanel">Bronnen</button><button type="button" role="tab" id="sourceRulesTab" aria-controls="agendaRulesPanel">Uitsluitingen</button>';
+ sourcePanel.before(tabs);sourcePanel.after(rulesPanel);
+ [sourcePanel,rulesPanel].forEach((panel,i)=>{panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby',i?'sourceRulesTab':'sourceOverviewTab');});
+ function selectSourceTab(rules=false){
+   sourcePanel.hidden=rules;rulesPanel.hidden=!rules;
+   [...tabs.children].forEach((tab,i)=>{const active=Boolean(i)===rules;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;});
+ }
+ [...tabs.children].forEach((tab,i)=>tab.addEventListener('click',()=>selectSourceTab(Boolean(i))));
+ tabs.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const rules=event.key==='End'||(event.key!=='Home'&&sourcePanel.hidden===false);selectSourceTab(rules);tabs.children[rules?1:0].focus();});
+ selectSourceTab();
  const navigation=document.createElement('nav');navigation.className='adminAgendaHeaderNavigation';navigation.setAttribute('aria-label','Agendabeheer');link.before(navigation);navigation.append(link,sourceLink);
  let sourceFocus;
  function closeSources(){sources.hidden=true;AdminEditors.sync();}
- async function openSources(){
+ async function openSources(options={}){
    if(!modal.hidden){await AdminEditors.requestAgendaClose();if(!modal.hidden)return;}
    if(!$('adminIdeaEditPanel').hidden){$('adminIdeaEditCancelBtn').click();if(!$('adminIdeaEditPanel').hidden)return;}
-   manager.hidden=true;AdminVisual.featuredPanel.hidden=true;sourceFocus=document.activeElement;sources.hidden=false;AdminEditors.sync();sources.querySelector('.adminEditorClose').focus();
+   selectSourceTab(options.rules===true);manager.hidden=true;AdminVisual.featuredPanel.hidden=true;sourceFocus=document.activeElement;sources.hidden=false;AdminEditors.sync();sources.querySelector('.adminEditorClose').focus();
  }
  sourceLink.addEventListener('click',openSources);
  sources.querySelectorAll('header button,footer button').forEach(button=>button.addEventListener('click',()=>{closeSources();sourceFocus?.focus();}));
  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!sources.hidden){event.preventDefault();closeSources();sourceFocus?.focus();}});
  document.addEventListener('click',event=>{
    if(event.target.closest('[data-admin-scroll="sourceOwnPanel"]')){event.preventDefault();event.stopImmediatePropagation();openSources();}
-   if(event.target.closest('#sourceOwnPanel [data-add-admin-source]')){event.preventDefault();event.stopImmediatePropagation();resetLinkForm();$('linkForm').hidden=false;$('linkName').focus();}
+   if(event.target.closest('[data-add-admin-source]')){event.preventDefault();event.stopImmediatePropagation();openSources().then(()=>{if(sources.hidden)return;resetLinkForm();$('linkForm').hidden=false;$('linkName').focus();});}
  },true);
  new MutationObserver(()=>{sourceLink.setAttribute('aria-expanded',String(!sources.hidden));AdminEditors.sync();}).observe(sources,{attributes:true,attributeFilter:['hidden']});
  window.AdminSources={open:openSources,close:closeSources};

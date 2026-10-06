@@ -5021,8 +5021,8 @@
     :scope{
       --motion-instant:120ms;
       --motion-fast:180ms;
-      --motion-base:280ms;
-      --motion-slow:420ms;
+      --motion-base:240ms;
+      --motion-slow:320ms;
       --motion-standard:cubic-bezier(.4,0,.2,1);
       --motion-enter:cubic-bezier(.22,1,.36,1);
       --motion-exit:cubic-bezier(.4,0,.7,.2);
@@ -5032,8 +5032,8 @@
       to{opacity:1;transform:translate3d(0,0,0)}
     }
     @keyframes viewSurfaceEnter{
-      from{opacity:0;transform:translate3d(0,7px,0) scale(.998)}
-      to{opacity:1;transform:translate3d(0,0,0)}
+      from{opacity:0}
+      to{opacity:1}
     }
     @keyframes mobileCoachmarkIn{
       from{opacity:0;transform:translate3d(0,-4px,0) scale(.98)}
@@ -5044,7 +5044,8 @@
       to{opacity:1;transform:translate3d(0,0,0) scale(1)}
     }
     .tabPanel.active{animation:viewSurfaceEnter var(--motion-base) var(--motion-enter) backwards}
-    .ideaView.active{animation:viewSurfaceEnter var(--motion-base) var(--motion-enter) both}
+    .ideaView.active{animation:viewSurfaceEnter var(--motion-base) var(--motion-enter) backwards}
+    .tabPanel.active:has(.ideaView.active){animation:none}
     .ideaFilterSheetLayer,.ideaSubmitSheetLayer{transition:visibility 0s linear var(--motion-slow)!important}
     .ideaFilterSheetLayer.isOpen,.ideaSubmitSheetLayer.isOpen{transition-delay:0s!important}
     .ideaFilterSheetBackdrop,.ideaSubmitSheetBackdrop{
@@ -5927,8 +5928,7 @@
         right:0!important;bottom:0!important;left:0!important;height:auto!important;max-height:min(34dvh,280px)!important;
         border-right:0!important;border-left:0!important;border-radius:22px 22px 0 0!important;
         background:#FFFEFC!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
-        transition:max-height .38s cubic-bezier(.22,1,.36,1),height .38s cubic-bezier(.22,1,.36,1),transform .34s cubic-bezier(.22,1,.36,1),opacity .22s ease!important;
-        will-change:max-height
+        transition:max-height var(--motion-slow) var(--motion-enter),height var(--motion-slow) var(--motion-enter),transform var(--motion-slow) var(--motion-enter),opacity var(--motion-base) ease!important;
       }
       .ideaMapPanel.isList:not(.isSingleDetail){background:rgba(255,254,252,.95)!important}
       .ideaMapPanel.isMinimized{height:64px!important;max-height:64px!important;transform:none}
@@ -6374,24 +6374,10 @@
       *,*::before,*::after{
         scroll-behavior:auto!important;animation-duration:.01ms!important;
         animation-iteration-count:1!important;transition-duration:.01ms!important;
+        animation-delay:0s!important;transition-delay:0s!important;
       }
     }
   
-/* One text layout for public headers, management headers and their preview. */
-:scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel,:scope#inspirationAdminPanel,:scope#agendaReviewPanel,#siteHeaderPreviewPanel) .tabHero{
- display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;
- box-sizing:border-box;padding-top:32px!important;padding-bottom:32px!important;
-}
-:scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel,:scope#inspirationAdminPanel,:scope#agendaReviewPanel,#siteHeaderPreviewPanel) .tabHero>.tabHeroHomeLink{
- position:relative!important;inset:auto!important;transform:none!important;margin:0!important;width:100%!important;max-width:none!important;
-}
-:scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel,:scope#inspirationAdminPanel,:scope#agendaReviewPanel,#siteHeaderPreviewPanel) .tabHeroTitle{
- position:relative;inset:auto!important;transform:none!important;margin:0!important;padding:0!important;white-space:normal!important;overflow-wrap:anywhere;
-}
-:scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel,:scope#inspirationAdminPanel,:scope#agendaReviewPanel,#siteHeaderPreviewPanel) .tabHeroLine{
- transform:none!important;margin:8px 0 0!important;padding:0!important;white-space:normal!important;overflow-wrap:anywhere;
-}
-
 
     /* Tablet layouts keep navigation outside the hero and days readable. */
     @media (min-width:641px) and (max-width:980px){
@@ -6410,6 +6396,21 @@
     @media (max-width:360px){
       :scope#agendaReviewPanel .agendaWeekFilterSlot .customSelectButton::before{display:none!important}
     }
+
+/* One text layout for public headers, management headers and their preview. */
+:scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel,:scope#inspirationAdminPanel,:scope#agendaReviewPanel,#siteHeaderPreviewPanel) .tabHero{
+ display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;
+ box-sizing:border-box;padding-top:32px!important;padding-bottom:32px!important;
+}
+:scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel,:scope#inspirationAdminPanel,:scope#agendaReviewPanel,#siteHeaderPreviewPanel) .tabHero>.tabHeroHomeLink{
+ position:relative!important;inset:auto!important;transform:none!important;margin:0!important;width:100%!important;max-width:none!important;
+}
+:scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel,:scope#inspirationAdminPanel,:scope#agendaReviewPanel,#siteHeaderPreviewPanel) .tabHeroTitle{
+ position:relative;inset:auto!important;transform:none!important;margin:0!important;padding:0!important;white-space:normal!important;overflow-wrap:anywhere;
+}
+:scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel,:scope#inspirationAdminPanel,:scope#agendaReviewPanel,#siteHeaderPreviewPanel) .tabHeroLine{
+ transform:none!important;margin:8px 0 0!important;padding:0!important;white-space:normal!important;overflow-wrap:anywhere;
+}
 
 /* One hover surface for public navigation and the management sidebar. */
 :scope{--control-hover-surface:rgba(168,225,221,.12);--site-topbar-surface:#fffdf8}

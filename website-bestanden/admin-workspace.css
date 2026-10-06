@@ -932,23 +932,6 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
  :is(.adminAgendaEditBody,.adminAgendaManagerBody){padding:18px 16px 24px}
 }
 
-/* Ongoing offers: align the category badge with the title, not the date block. */
-#adminApp #ongoingAdminSection .ongoingTitleCell .nameWithIcon{
- display:grid;grid-template-columns:32px minmax(0,1fr);align-items:start;gap:12px;
-}
-#adminApp #ongoingAdminSection .ongoingTitleVisual{
- width:32px;height:32px;min-width:32px;display:grid;place-items:center;
- border:0;border-radius:50%;background:transparent;box-shadow:none;
-}
-#adminApp #ongoingAdminSection .ongoingTitleTextStack{gap:5px;min-width:0}
-#adminApp #ongoingAdminSection .ongoingTitleTextStack>.ongoingTitleLink,
-#adminApp #ongoingAdminSection .ongoingTitleTextStack>.ideaTitleText{
- display:flex;align-items:center;min-height:32px;line-height:1.4;
-}
-#adminApp #ongoingAdminSection .ongoingTitleTextStack .ongoingDateMeta{
- padding:0;margin:0;border:0;border-radius:0;background:transparent;line-height:1.5;
-}
-
 /* The sidebar edge is the reveal boundary for all docked editors. */
 @media(min-width:1101px){
  #adminIdeaLayer:not(.isModal){clip-path:inset(0);overflow:hidden}
@@ -982,3 +965,18 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
 #adminSourcesSheet .row{display:flex;flex-direction:column;align-items:stretch;gap:12px;padding:14px;border:1px solid rgba(79,142,158,.14);border-radius:14px;background:#fffdf9}
 #adminSourcesSheet .rowActions{justify-content:flex-start;flex-wrap:wrap}
 #adminSourcesSheet #linkForm[hidden]{display:none}
+
+/* Light source cards and matching source/exclusion tabs. */
+#adminSourcesSheet .row{background:#fff;border-color:rgba(79,142,158,.07);border-radius:18px;gap:6px;box-shadow:none}
+#adminSourcesSheet .rowActions{margin-top:6px}
+#adminSourcesSheet #agendaRulesPanel{padding:0;margin:0;background:transparent;border:0;box-shadow:none}
+#adminSourcesSheet :is(#sourceOwnPanel,#agendaRulesPanel)[hidden]{display:none!important}
+#adminSourcesSheet .adminSourceTabs{display:flex;gap:8px;border-bottom:1px solid rgba(79,142,158,.12);padding-bottom:8px}
+#adminSourcesSheet .adminSourceTabs button{border:0;border-radius:12px;padding:10px 14px;background:transparent;color:#63858b;font:600 14px Manrope,system-ui,sans-serif;cursor:pointer}
+#adminSourcesSheet .adminSourceTabs button[aria-selected=true]{background:#e5f2ef;color:#315f6b}
+#adminSourcesSheet .adminSourceTabs button:focus-visible{outline:2px solid #4f8e9e;outline-offset:2px}
+#adminSourcesSheet [data-add-admin-source]{min-height:40px;padding:9px 16px;border:1px solid #92afb4;border-radius:12px;background:#fffdf9;color:#315f6b;font:600 14px Manrope,system-ui,sans-serif;display:inline-flex;align-items:center;gap:8px}
+#adminSourcesSheet [data-add-admin-source] svg{width:18px;height:18px}
+
+#adminSourcesSheet .sharedSourceMain strong{color:#315f6b}
+#adminSourcesSheet .sharedSourceMain>span{color:#71817e;line-height:1.5}

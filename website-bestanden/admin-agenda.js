@@ -112,8 +112,9 @@
  function navigate(target=''){
    const sources=target==='sourceOwnPanel',rules=target==='agendaRulesPanel';
    const sourceGrid=$('sourceOwnPanel').closest('.sourceGrid');if(sourceGrid)sourceGrid.hidden=!sources;
-   $('agendaRulesPanel').hidden=!rules;$('agendaReviewPanel').hidden=rules||(sources&&!window.AdminSources);
-   if(sources&&window.AdminSources)window.AdminSources.open();
+   if(!window.AdminSources)$('agendaRulesPanel').hidden=!rules;
+   $('agendaReviewPanel').hidden=(rules||sources)&&!window.AdminSources;
+   if((sources||rules)&&window.AdminSources)window.AdminSources.open({rules});
    if(!sources&&!rules)section(target==='ongoingAdminSection'?'ongoing':'weeks');
  }
  function setup(){
