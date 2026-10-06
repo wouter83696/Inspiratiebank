@@ -1007,3 +1007,17 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
  body.adminDetailDocked #agendaReviewPanel .weekHeadingRow{flex-wrap:wrap;gap:12px}
  body.adminDetailDocked #agendaReviewPanel .weekHeadingActions{margin-left:0}
 }
+
+/* Source tabs follow the inspiration detail tabs. */
+#adminSourcesSheet .adminSourceTabs{gap:20px;padding-bottom:0}
+#adminSourcesSheet .adminSourceTabs button{border-radius:0;border-bottom:2px solid transparent;padding:10px 8px;background:transparent}
+#adminSourcesSheet .adminSourceTabs button[aria-selected=true]{background:transparent;border-bottom-color:#20a6ae;color:#236875;font-weight:700}
+#adminSourcesSheet [data-add-admin-source]{justify-content:center}
+#adminSourcesSheet [data-add-admin-source] svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex-shrink:0}
+@media(min-width:1101px){
+ body.adminDetailDocked #agendaReviewPanel .mobileDayNavigation{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;padding:0 20px 12px}
+ body.adminDetailDocked #agendaReviewPanel .mobileDayButton{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 3px;border:0;border-radius:12px;background:transparent;color:#63858b;font:inherit;cursor:pointer}
+ body.adminDetailDocked #agendaReviewPanel .mobileDayButton.active{background:#e5f2ef;color:#236875}
+ body.adminDetailDocked #agendaReviewPanel .agendaDay:not(.adminFocusedDay){display:none}
+ body.adminDetailDocked #agendaReviewPanel .agendaDay.adminFocusedDay{grid-template-columns:minmax(0,1fr);gap:12px}
+}
