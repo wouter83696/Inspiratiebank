@@ -560,7 +560,7 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaEditPanel .photoDetailActions{position:static!important;transform:none;margin-top:18px}
 
 /* Toolbar layout only: controls use the shared filter action styles. */
-#adminIdeaEditPanel .adminEditToolbar{position:relative;z-index:25;background:#fffdf9;color:#236875;display:flex;flex-wrap:nowrap;align-items:center;gap:6px;margin:8px 20px 0;padding:6px;border:1.5px solid rgba(23,79,93,.48);border-radius:16px}
+#adminIdeaEditPanel .adminEditToolbar{position:relative;z-index:25;background:#fffdf9;color:#236875;display:flex;flex-wrap:nowrap;align-items:center;gap:6px;margin:8px 20px 12px;padding:6px;border:1.5px solid rgba(23,79,93,.48);border-radius:16px}
 #adminIdeaEditPanel .adminEditToolbar .ideaFilterSheetAction{display:inline-flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;flex:none;min-height:36px;padding:7px 8px;font-size:12px;line-height:1.35;font-weight:600;border-radius:10px}
 .adminEditToolbar svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .adminEditToolbar .adminDeleteAction{color:#9b5146}
