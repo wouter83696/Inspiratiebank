@@ -966,9 +966,9 @@ body.photoDetailOpen{overflow:hidden!important}
 #ideaCards.compactTiles .photoTileOverlay .photoTileFacts{align-self:flex-end;top:0;transform:none}
 #ideaCards.compactTiles .photoTileOverlay .photoTileFacts::before{border-radius:8px 8px 0 0}
 
-/* Restore the desktop photo proportions; give mobile photos a little more room. */
+/* Desktop detail photos are 8% shorter; mobile keeps its existing height. */
 @media(min-width:981px){
- :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .ideaImageFrame{height:auto!important;aspect-ratio:16/9!important;max-height:none!important}
+ :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .ideaImageFrame{height:auto!important;aspect-ratio:16/8.28!important;max-height:none!important}
 }
 @media(max-width:980px){
  :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .ideaImageFrame{height:clamp(150px,25dvh,210px)!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important}
