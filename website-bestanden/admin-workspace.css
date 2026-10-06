@@ -748,3 +748,12 @@ body:not(.adminMode) > .topbar{background:transparent;border:0;box-shadow:none;b
 body:not(.adminMode) > .topbar .actions{display:flex;background:transparent;border:0;box-shadow:none}
 body:not(.adminMode) > .topbar .topLink{background:transparent;border:0;box-shadow:none;padding:6px 0;color:#63858b;text-decoration:none}
 body:not(.adminMode) > .topbar .topLink:hover{text-decoration:underline;color:#315f6b}
+
+/* Compact filter controls; fixed chevron alignment independent of label length. */
+#ideaFilterSheetLayer .customSelectButton{position:relative;min-height:40px;padding:9px 36px 9px 12px;border-radius:12px;font-size:14px;line-height:1.4;background:#fffdf9}
+#ideaFilterSheetLayer .customSelectButton:hover,#ideaFilterSheetLayer .customSelect.open .customSelectButton{background:#fffdf9;border-color:rgba(79,142,158,.3)}
+#ideaFilterSheetLayer .customSelectButton::after{position:absolute;right:12px;top:50%;width:16px;height:16px;margin:0;transform:translateY(-50%);background-size:16px}
+#ideaFilterSheetLayer .customSelect.open .customSelectButton::after{transform:translateY(-50%) rotate(180deg)}
+#ideaFilterSheetLayer .customSelectMenu{padding:4px;border-radius:12px}
+#ideaFilterSheetLayer .customSelectOption{min-height:36px;padding:8px 10px;font-size:14px;line-height:1.4;border-radius:8px}
+#ideaFilterSheetLayer .customSelectOption:hover:not([aria-selected="true"]){background:rgba(229,242,239,.45)}

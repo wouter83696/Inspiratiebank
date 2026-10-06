@@ -113,7 +113,9 @@
     });
     document.querySelectorAll('#ideaFilterSheetLayer .adminFilterSelect').forEach(select=>{
       select.dataset.includePlaceholderOption='true';enhanceCustomSelect(select);
-      select.closest('.customSelect').querySelector('.customSelectButton').setAttribute('aria-label',select.getAttribute('aria-label'));
+      const control=select.closest('.customSelect');
+      control.querySelector('.customSelectButton').setAttribute('aria-label',select.getAttribute('aria-label'));
+      control.querySelectorAll('.customSelectOption').forEach(option=>{option.textContent=option.textContent.replace(/^[^:]+:\s*/, '');});
     });
     state.radius=AdminSiteSettings.current().region.radiusKm;
     $('ideaFilterDistanceRange').max=SiteSettings.radii.length-1;
