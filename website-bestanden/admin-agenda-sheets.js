@@ -122,7 +122,13 @@
    if(event.target.closest('[data-admin-scroll="sourceOwnPanel"]')){event.preventDefault();event.stopImmediatePropagation();openSources();}
    if(event.target.closest('[data-add-admin-source]')){event.preventDefault();event.stopImmediatePropagation();openSources().then(()=>{if(sources.hidden)return;resetLinkForm();$('linkForm').hidden=false;$('linkName').focus();});}
  },true);
- new MutationObserver(()=>{sourceLink.setAttribute('aria-expanded',String(!sources.hidden));AdminEditors.sync();}).observe(sources,{attributes:true,attributeFilter:['hidden']});
+ function syncHeaderSelection(){
+   sourceLink.setAttribute('aria-expanded',String(!sources.hidden));
+   [link,sourceLink].forEach(button=>button.removeAttribute('aria-current'));
+   (sources.hidden?link:sourceLink).setAttribute('aria-current','true');
+ }
+ syncHeaderSelection();
+ new MutationObserver(()=>{syncHeaderSelection();AdminEditors.sync();}).observe(sources,{attributes:true,attributeFilter:['hidden']});
  window.AdminSources={open:openSources,close:closeSources};
  $('agendaSelectionToolbar').hidden=true;
 })();

@@ -18,4 +18,4 @@
 .topbar>.tabs .tab:hover,
 #adminApp .adminAgendaHeaderNavigation .adminAgendaManageLink:hover{color:var(--header-link-hover)!important;background:var(--control-hover-surface)!important}
 .topbar>.tabs .tab.active,
-#adminApp .adminAgendaHeaderNavigation .adminAgendaManageLink[aria-expanded=true]{color:var(--header-link-active)!important;font-weight:650!important;background:transparent!important}
+#adminApp .adminAgendaHeaderNavigation .adminAgendaManageLink[aria-current=true]{color:var(--header-link-active)!important;font-weight:650!important;background:transparent!important}
