@@ -104,7 +104,7 @@
  if(!addSource){addSource=document.createElement('button');addSource.type='button';addSource.dataset.addAdminSource='';actions.append(addSource);}
  addSource.className=$('addAdminAgendaBtn').className;
  addSource.innerHTML=$('addAdminAgendaBtn').innerHTML.replace('Agenda-item toevoegen','Bron toevoegen');
- const inlineAdd=sourcePanel.querySelector('[data-add-admin-source]');inlineAdd.className=addSource.className;inlineAdd.innerHTML=addSource.innerHTML;
+ const inlineAdd=sourcePanel.querySelector('[data-add-admin-source]');inlineAdd.className=addSource.className;inlineAdd.innerHTML=addSource.innerHTML;sources.querySelector('header').insertBefore(inlineAdd,sources.querySelector('.adminEditorClose'));
  const rulesPanel=$('agendaRulesPanel'),tabs=document.createElement('div');tabs.className='adminSourceTabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Bronnen beheren');
  tabs.innerHTML='<button type="button" role="tab" id="sourceOverviewTab" aria-controls="sourceOwnPanel">Bronnen</button><button type="button" role="tab" id="sourceRulesTab" aria-controls="agendaRulesPanel">Uitsluitingen</button>';
  sourcePanel.before(tabs);sourcePanel.after(rulesPanel);
@@ -125,7 +125,7 @@
    selectSourceTab(options.rules===true);manager.hidden=true;AdminVisual.featuredPanel.hidden=true;sourceFocus=document.activeElement;sources.hidden=false;AdminEditors.sync();sources.querySelector('.adminEditorClose').focus();
  }
  sourceLink.addEventListener('click',()=>openSources());
- sources.querySelectorAll('header button,footer button').forEach(button=>button.addEventListener('click',async()=>{if(!await canLeaveSource())return;closeSources();sourceFocus?.focus();}));
+ sources.querySelectorAll('header .adminEditorClose,footer button').forEach(button=>button.addEventListener('click',async()=>{if(!await canLeaveSource())return;closeSources();sourceFocus?.focus();}));
  document.addEventListener('keydown',async event=>{if(event.key==='Escape'&&!sources.hidden&&!sourceConfirm){event.preventDefault();if(!await canLeaveSource())return;closeSources();sourceFocus?.focus();}});
  document.addEventListener('click',event=>{
    if(event.target.closest('[data-admin-scroll="sourceOwnPanel"]')){event.preventDefault();event.stopImmediatePropagation();openSources();}
@@ -145,8 +145,8 @@
  const sourceSnapshot=()=>JSON.stringify(['linkName','linkUrl','linkCategory'].map(id=>$(id).value));
  function sourceDirty(){return sourceEditing&&sourceSnapshot()!==sourceDraft;}
  function syncSourceSave(){saveSource.classList.toggle('hasChanges',sourceDirty());}
- function beginSourceEdit(){sourceEditing=true;sourceDraft=sourceSnapshot();sourceForm.hidden=false;saveSource.hidden=false;cancelSource.hidden=false;doneSource.hidden=true;saveSource.textContent='Opslaan';sourceFooter.classList.add('isEditing');$('customLinkList').hidden=true;sourceSearch.hidden=true;noSources.hidden=true;sourcePanel.querySelector('.panelHead').hidden=true;sources.querySelector('header h3').textContent=editingSourceLink?'Bron bewerken':'Bron toevoegen';syncSourceSave();}
- function finishSourceEdit(){sourceEditing=false;sourceForm.hidden=true;saveSource.hidden=true;cancelSource.hidden=true;doneSource.hidden=false;sourceFooter.classList.remove('isEditing');$('customLinkList').hidden=false;sourceSearch.hidden=false;sourcePanel.querySelector('.panelHead').hidden=false;sources.querySelector('header h3').textContent='Bronnen';filterSources();}
+ function beginSourceEdit(){inlineAdd.hidden=true;sourceEditing=true;sourceDraft=sourceSnapshot();sourceForm.hidden=false;saveSource.hidden=false;cancelSource.hidden=false;doneSource.hidden=true;saveSource.textContent='Opslaan';sourceFooter.classList.add('isEditing');$('customLinkList').hidden=true;sourceSearch.hidden=true;noSources.hidden=true;sourcePanel.querySelector('.panelHead').hidden=true;sources.querySelector('header h3').textContent=editingSourceLink?'Bron bewerken':'Bron toevoegen';syncSourceSave();}
+ function finishSourceEdit(){inlineAdd.hidden=false;sourceEditing=false;sourceForm.hidden=true;saveSource.hidden=true;cancelSource.hidden=true;doneSource.hidden=false;sourceFooter.classList.remove('isEditing');$('customLinkList').hidden=false;sourceSearch.hidden=false;sourcePanel.querySelector('.panelHead').hidden=false;sources.querySelector('header h3').textContent='Bronnen';filterSources();}
  async function canLeaveSource(){
    if(sourceEditing&&saveSource.disabled)return false;
    if(sourceConfirm)return sourceConfirm;

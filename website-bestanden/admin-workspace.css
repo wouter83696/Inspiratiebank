@@ -1021,3 +1021,19 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
  body.adminDetailDocked #agendaReviewPanel .agendaDay:not(.adminFocusedDay){display:none}
  body.adminDetailDocked #agendaReviewPanel .agendaDay.adminFocusedDay{grid-template-columns:minmax(0,1fr);gap:12px}
 }
+
+/* Keep source creation available in the fixed sheet header. */
+#adminSourcesSheet>header.panelHead{display:flex;align-items:center;gap:12px;padding-right:64px}
+#adminSourcesSheet>header h3{margin-right:auto;min-width:0}
+#adminSourcesSheet>header [data-add-admin-source]{min-width:0;min-height:32px;padding:6px 10px;font-size:12px;white-space:nowrap}
+@media(min-width:1101px){
+ body.adminDetailDocked #agendaReviewPanel .weekPanel{max-height:calc(100dvh - 100px);display:flex;flex-direction:column;overflow:hidden}
+ body.adminDetailDocked #agendaReviewPanel .weekTop{flex-shrink:0;padding:14px 20px 10px}
+ body.adminDetailDocked #agendaReviewPanel .mobileDayNavigation{flex-shrink:0;min-height:0;height:auto;margin:0;padding:0 20px 10px;align-items:start}
+ body.adminDetailDocked #agendaReviewPanel .mobileDayButton{height:auto;min-height:52px;max-height:60px}
+ body.adminDetailDocked #agendaReviewPanel .weekBody{min-height:0;overflow-y:auto;overscroll-behavior:contain}
+ body.adminDetailDocked #agendaReviewPanel .agendaItemLink{padding:9px 12px}
+ body.adminDetailDocked #agendaReviewPanel .agendaItemMeta{display:flex;flex-wrap:wrap;column-gap:12px;row-gap:2px;margin-top:4px}
+ body.adminDetailDocked #agendaReviewPanel .agendaDay.adminFocusedDay{padding:12px;gap:8px}
+ body.adminDetailDocked #agendaReviewPanel [data-collapse-agenda-day]{display:none}
+}
