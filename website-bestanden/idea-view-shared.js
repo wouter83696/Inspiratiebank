@@ -30,7 +30,7 @@
       let checked=false;try{checked=window.localStorage?.getItem(key)==='1';}catch(_){}
       return `<li><label><input type="checkbox" data-material-key="${escape(key)}"${checked?' checked':''}><span>${escape(text)}</span></label></li>`;
     }).join('');
-    return `<details class="ideaPracticalDetails ideaMaterialsDetails"><summary>Materialen</summary><ul class="ideaMaterialChecklist">${rows}</ul></details>`;
+    return `<details class="ideaPracticalDetails ideaMaterialsDetails"><summary>Materialen</summary><div class="ideaMaterialsList"><div class="ideaMaterialsHeading"><span>${items.length} ${items.length===1?'materiaal':'materialen'}</span><button type="button" class="materialToggle" aria-pressed="false">Afvinken</button></div><ul class="ideaMaterialChecklist">${rows}</ul></div></details>`;
   }
   if(typeof document!=='undefined')document.addEventListener('change',event=>{
     const input=event.target;
@@ -38,6 +38,32 @@
     try{if(input.checked)window.localStorage.setItem(input.dataset.materialKey,'1');else window.localStorage.removeItem(input.dataset.materialKey);}catch(_){}
     document.querySelectorAll('input[data-material-key]').forEach(other=>{if(other.dataset.materialKey===input.dataset.materialKey)other.checked=input.checked;});
   });
+
+  if(typeof document!=='undefined')document.addEventListener('click',event=>{
+    const button=event.target.closest?.('.materialToggle');if(!button)return;
+    const list=button.closest('.ideaMaterialsList');
+    const active=list.classList.toggle('isChecking');
+    button.setAttribute('aria-pressed',String(active));button.textContent=active?'Klaar':'Afvinken';
+  });
+  function editMaterials(textarea){
+    if(!textarea)return;
+    let host=textarea.nextElementSibling;
+    if(!host?.classList.contains('materialEditor')){
+      host=document.createElement('div');host.className='materialEditor';textarea.after(host);textarea.hidden=true;
+      const sync=()=>{textarea.value=[...host.querySelectorAll('input')].map(input=>input.value.trim()).filter(Boolean).join('\n');textarea.dispatchEvent(new Event('input',{bubbles:true}));};
+      host.addEventListener('input',event=>{if(event.target.tagName!=='INPUT')return;sync();if([...host.querySelectorAll('input')].at(-1).value.trim())row('');});
+      host.addEventListener('keydown',event=>{if(event.key!=='Enter'||event.target.tagName!=='INPUT')return;event.preventDefault();const inputs=[...host.querySelectorAll('input')];inputs[inputs.indexOf(event.target)+1]?.focus();});
+      host.addEventListener('click',event=>{const button=event.target.closest('button');if(!button)return;const line=button.parentElement;const next=line.nextElementSibling?.querySelector('input');line.remove();sync();next?.focus();});
+      host.addRow=row;
+      function row(value){const line=document.createElement('div');const input=document.createElement('input');input.type='text';input.placeholder='Bijv. schaar';input.setAttribute('aria-label','Materiaal');input.value=value;const remove=document.createElement('button');remove.type='button';remove.textContent='×';remove.setAttribute('aria-label','Materiaal verwijderen');line.append(input,remove);host.append(line);}
+      textarea.form?.addEventListener('reset',()=>setTimeout(()=>editMaterials(textarea),0));
+    }
+    host.replaceChildren();materialItems(textarea.value).forEach(value=>host.addRow(value));host.addRow('');
+  }
+  if(typeof document!=='undefined'){
+    const init=()=>editMaterials(document.getElementById('teamIdeaSuppliesInput'));
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+  }
 
   function renderPracticalList(content){
     return content ? `<p class="ideaPracticalListText">${content}</p>` : '<span class="ideaPracticalEmpty">-</span>';
@@ -130,5 +156,5 @@
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
-  window.IdeaViewShared = Object.freeze({renderListActivity,materialItems, renderOutdoorPill, renderFeaturedCard, renderPhotoTileContent, renderMaterials, renderPractical, renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
+  window.IdeaViewShared = Object.freeze({editMaterials,renderListActivity,materialItems, renderOutdoorPill, renderFeaturedCard, renderPhotoTileContent, renderMaterials, renderPractical, renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
 })();

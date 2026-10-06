@@ -88,6 +88,7 @@
     panels[0].replaceChildren(fieldFor('Description'));
     panels[1].replaceChildren(fieldFor('Rules'));
     panels[2]?.replaceChildren(fieldFor('Supplies'));
+    IdeaViewShared.editMaterials($('adminEditIdeaSupplies'));
     article.querySelector('[role=tablist]')?.remove();
     panels.forEach(panel=>{panel.hidden=false;panel.removeAttribute('role');panel.removeAttribute('aria-labelledby');panel.classList.add('adminEditTextSection');});
     const contact=article.querySelector('.photoDetailActions');

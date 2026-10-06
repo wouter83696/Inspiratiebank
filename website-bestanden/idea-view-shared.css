@@ -211,3 +211,19 @@
 .ideaMaterialChecklist input:checked::after{content:"";width:8px;height:4px;border-left:2px solid #236875;border-bottom:2px solid #236875;transform:rotate(-45deg);margin-top:-2px}
 .ideaMaterialChecklist input:focus-visible{outline:2px solid #236875;outline-offset:3px}
 .ideaMaterialChecklist input:checked + span{color:#71888c}
+
+.ideaMaterialsHeading{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;color:#71888c;font-size:13px}
+.materialToggle{border:0;background:transparent;color:#236875;font:inherit;cursor:pointer;padding:6px 8px;border-radius:8px}
+.materialToggle:hover{background:#e5f2ef}
+.ideaMaterialsList:not(.isChecking) .ideaMaterialChecklist input{display:none}
+.ideaMaterialsList:not(.isChecking) .ideaMaterialChecklist label{pointer-events:none}
+.ideaMaterialChecklist li+li{border-top:1px solid rgba(79,142,158,.1)}
+.materialEditor{background:#fffdf9;border:1px solid rgba(79,142,158,.16);border-radius:14px;overflow:hidden}
+.materialEditor>div{display:flex;align-items:center;padding:4px 10px;gap:8px}
+.materialEditor>div+div{border-top:1px solid rgba(79,142,158,.1)}
+.materialEditor>div>input{flex:1;min-width:0;border:0!important;background:transparent!important;box-shadow:none;padding:10px!important;color:#315f6b;font:inherit}
+.materialEditor button{flex:none;border:0;background:transparent;color:#63858b;font-size:22px;width:32px;height:32px;cursor:pointer;border-radius:8px}
+.materialEditor button:hover{background:#e5f2ef}
+.materialEditor>div:last-child:has(input:placeholder-shown) button{visibility:hidden}
+
+textarea[hidden]:has(+ .materialEditor){display:none!important}
