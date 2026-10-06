@@ -98,6 +98,7 @@
     sheetController=DiscoveryViewShared.createSheet();
     const statusSection=document.createElement('section');statusSection.className='ideaFilterSection adminStatusFilterSection';
     const statusControl=$('adminIdeaStatusFilter').closest('.adminStatusFilter');
+    $('ideaFilterLocationSection').before(statusSection);
     statusSection.append(statusControl);
     statusControl.querySelector('label').hidden=true;
     const statusSelect=$('adminIdeaStatusFilter');statusSelect.setAttribute('aria-label','Beheerstatus');statusSelect.classList.add('adminFilterSelect');
@@ -110,7 +111,6 @@
       section.replaceChildren(select);
       select.addEventListener('change',()=>{state[filterKey(filter)]=select.value;renderIdeas();});
     });
-    $('ideaFilterLocationSection').before(statusSection);
     document.querySelectorAll('#ideaFilterSheetLayer .adminFilterSelect').forEach(select=>{
       select.dataset.includePlaceholderOption='true';enhanceCustomSelect(select);
       select.closest('.customSelect').querySelector('.customSelectButton').setAttribute('aria-label',select.getAttribute('aria-label'));
