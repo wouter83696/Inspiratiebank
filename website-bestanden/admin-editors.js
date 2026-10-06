@@ -21,7 +21,7 @@
     const src=photoPreview.querySelector('img')?.getAttribute('src');
     if(image){image.hidden=!src;if(src)image.src=src;}
     const button=fields.querySelector('.adminInlinePhotoButton');
-    if(button)button.textContent=src?'Foto wijzigen':'Foto uploaden (verplicht)';
+    if(button){button.textContent='Foto';button.setAttribute('aria-label',src?'Foto wijzigen':'Foto uploaden (verplicht)');}
   }
   new MutationObserver(syncPhoto).observe(photoPreview,{childList:true,subtree:true});
   function mountDetail(){
@@ -38,13 +38,18 @@
     if(!figure){figure=document.createElement('figure');figure.className='ideaImageFrame';article.prepend(figure);}
     if(!figure.querySelector('img'))figure.insertAdjacentHTML('afterbegin','<img alt="">');
     const photoButton=document.createElement('button');photoButton.type='button';photoButton.className='ideaFilterSheetAction secondary adminInlinePhotoButton';
-    photoButton.addEventListener('click',()=>$('adminEditIdeaImageUpload').click());figure.append(photoButton);
+    photoButton.addEventListener('click',()=>$('adminEditIdeaImageUpload').click());
+    const toolbar=document.createElement('div');toolbar.className='adminEditToolbar';toolbar.setAttribute('role','group');toolbar.setAttribute('aria-label','Activiteit beheren');
+    toolbar.append(photoButton);fieldFor('Title').after(toolbar);
     const photoField=fieldFor('ImageUpload');photoField.classList.add('adminInlineUpload');figure.after(photoField);
     const metadata=article.querySelector('.cardMetaBlock');
     const details=document.createElement('details');details.className='adminInlineMetadata';
     const summary=document.createElement('summary');summary.setAttribute('aria-label','Kenmerken aanpassen');
     if(metadata){metadata.replaceWith(details);summary.append(metadata);}else article.append(details);
-    summary.insertAdjacentHTML('beforeend','<span class="adminInlineHint">Kenmerken aanpassen</span>');details.append(summary);
+    details.append(summary);
+    const properties=document.createElement('button');properties.type='button';properties.className='ideaFilterSheetAction secondary';properties.textContent='Kenmerken';properties.setAttribute('aria-expanded','false');
+    properties.addEventListener('click',()=>{details.open=!details.open;});
+    details.addEventListener('toggle',()=>properties.setAttribute('aria-expanded',String(details.open)));toolbar.append(properties);
     const grid=document.createElement('div');grid.className='teamFormGrid';details.append(grid);
     ['Domain','Location','Cost','Stimulus','Duration','Group','By'].forEach(id=>grid.append(fieldFor(id)));
     const panels=article.querySelectorAll('[role="tabpanel"]');
@@ -53,11 +58,30 @@
     panels[2]?.replaceChildren(fieldFor('Supplies'));
     const contact=article.querySelector('.photoDetailActions');
     ['Postcode','HouseNumber','Address','DistanceKm','Url'].forEach(id=>contact.append(fieldFor(id)));
-    const actions=document.createElement('div');actions.className='adminPreviewActions';actions.innerHTML=item.isNew?'':adminIdeaActions(item);
-    actions.querySelector('[data-edit-idea]')?.remove();
-    actions.querySelectorAll('button').forEach(button=>{button.insertAdjacentHTML('beforeend',`<span>${escapeHtml(button.getAttribute('aria-label'))}</span>`);});
-    // State-changing management actions are kept separate from the unsaved draft.
-    if(!item.isNew){const more=document.createElement('details');more.className='adminInlineManagement';more.innerHTML='<summary>Beheeracties</summary>';more.append(actions);article.append(more);}
+    if(!item.isNew){
+      const source=document.createElement('div');source.innerHTML=adminIdeaActions(item);
+      const prepare=(button,label)=>{
+        if(!button)return;
+        button.className='ideaFilterSheetAction secondary';
+        button.textContent=label;
+        button.setAttribute('aria-label',label);
+        return button;
+      };
+      const feature=source.querySelector('[data-feature-idea]');
+      const featured=featuredIdeaKeys().includes(adminFeaturedIdeaKey(item));
+      toolbar.append(prepare(feature,featured?'Uitgelicht':'Uitlichten'));
+      feature.setAttribute('aria-pressed',String(featured));
+      const more=document.createElement('details');more.className='adminEditMore';
+      more.innerHTML='<summary class="ideaFilterSheetAction secondary">Meer ⋯</summary><div class="adminEditMoreItems"></div>';
+      const menu=more.querySelector('div');
+      const approval=source.querySelector('[data-approve-idea]');
+      if(approval)menu.append(prepare(approval,'Goedkeuren'));
+      else {const status=document.createElement('span');status.className='adminEditStatus';status.textContent='Goedgekeurd';toolbar.append(status);}
+      menu.append(prepare(source.querySelector('.visibilityIdeaAction'),item.hidden?'Zichtbaar maken':'Verbergen'));
+      const remove=prepare(source.querySelector('[data-delete-idea]'),'Verwijderen');remove.classList.add('adminDeleteAction');menu.append(remove);
+      more.addEventListener('keydown',event=>{if(event.key==='Escape'){event.stopPropagation();more.open=false;more.querySelector('summary').focus();}});
+      toolbar.append(more);
+    }
     syncPhoto();
   }
   function updateMetadata(){

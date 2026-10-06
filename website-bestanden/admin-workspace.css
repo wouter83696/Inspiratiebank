@@ -552,17 +552,21 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaEditPanel .adminInlineTitle>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 #adminIdeaEditPanel .adminInlineTitle input{font-size:22px;font-weight:600;color:var(--accent-dark);background:transparent;border-color:transparent;padding:0;box-shadow:none}
 #adminIdeaEditPanel .adminInlineTitle input:focus{border-color:var(--accent-dark)}
-#adminIdeaEditPanel .ideaImageFrame .adminInlinePhotoButton{position:absolute;bottom:12px;right:12px;z-index:2}
 #adminIdeaEditPanel .adminInlineUpload{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 #adminIdeaEditPanel .adminInlineMetadata>summary{list-style:none;cursor:pointer}
 #adminIdeaEditPanel .adminInlineMetadata>summary::-webkit-details-marker{display:none}
-#adminIdeaEditPanel .adminInlineHint{display:block;font-size:12px;color:var(--accent-dark);margin:4px 0 14px}
 #adminIdeaEditPanel .adminInlineMetadata .teamFormGrid{padding-block:12px}
 #adminIdeaEditPanel [role=tabpanel] .teamField>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-#adminIdeaEditPanel [role=tabpanel] textarea{width:100%;min-height:120px;resize:none;font:inherit;color:inherit;background:transparent;border-color:transparent;padding:0}
+#adminIdeaEditPanel [role=tabpanel] textarea{width:100%;min-height:120px;resize:none;font:inherit;color:inherit;background:rgba(255,255,255,.5);border-color:rgba(79,142,158,.16);padding:10px 11px}
 #adminIdeaEditPanel [role=tabpanel] textarea:focus{border-color:var(--accent-dark)}
 #adminIdeaEditPanel .photoDetailActions{position:static!important;display:grid;gap:12px;padding:14px;transform:none;margin-top:18px}
-#adminIdeaEditPanel .adminInlineManagement{order:7;margin-top:18px}
-#adminIdeaEditPanel .adminInlineManagement summary{cursor:pointer;color:var(--accent-dark)}
-#adminIdeaEditPanel .adminPreviewActions .ideaActions{display:flex;flex-wrap:wrap;gap:8px;padding-top:12px}
-#adminIdeaEditPanel .adminPreviewActions .button{width:auto;display:inline-flex;gap:6px;align-items:center;border-radius:12px}
+
+/* Toolbar layout only: controls use the shared filter action styles. */
+.adminEditToolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding-block:8px 14px}
+.adminEditToolbar .ideaFilterSheetAction{white-space:nowrap;flex:none}
+.adminEditMore{position:relative}
+.adminEditMore>summary{list-style:none;cursor:pointer}
+.adminEditMore>summary::-webkit-details-marker{display:none}
+.adminEditMoreItems{position:absolute;top:calc(100% + 6px);right:0;z-index:30;display:grid;gap:6px;min-width:160px;padding:8px;background:#fffdfa;border:1px solid rgba(79,142,158,.16);border-radius:12px;box-shadow:0 8px 20px #315f6b18}
+.adminEditStatus{font-size:12px;color:#63858b}
+.adminEditMoreItems .adminDeleteAction{color:#9b5146}
