@@ -453,7 +453,7 @@ body.adminEditorOpen{overflow:hidden!important}
  body.adminDetailDocked #adminApp.adminMobileNavigation .adminWorkspaceShell{margin-left:480px;width:calc(100% - 480px)}
  body.adminDetailDocked .adminIdeaLayer{top:60px;height:calc(100dvh - 60px)}
  body.adminDetailDocked #adminApp .adminPublicSurface>.adminActionTopbar{position:sticky;top:0;z-index:1200;width:calc(100% + 2 * var(--admin-header-bleed) + 480px)!important;margin-left:calc(-1 * var(--admin-header-bleed) - 480px)!important;min-height:60px;height:60px;background:#fffdfa}
- body.adminDetailDocked #adminIdeaEditPanel.adminEditorCard{height:100%;max-height:100%;border-radius:0 0 16px 0;clip-path:inset(0 round 0 0 16px 0)}
+ body.adminDetailDocked #adminIdeaEditPanel.adminEditorCard{height:100%;max-height:100%;border-radius:0 16px 16px 0;clip-path:inset(0 round 0 16px 16px 0)}
 
 }
 /* Desktop uses the sidebar; narrow screens use the mobile menu. */
