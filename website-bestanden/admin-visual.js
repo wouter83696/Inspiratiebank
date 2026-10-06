@@ -32,6 +32,17 @@
   $('adminFeaturedSearch').addEventListener('input',featuredChoices);
   let sorting=null,suppressClick=false;
   const sortList=$('featuredAdminList');
+  function placeFeaturedGap(before){
+    const gap=sorting.gap;
+    if(gap.parentNode===sortList&&gap.nextElementSibling===before)return;
+    const rows=[...sortList.querySelectorAll('[data-featured-sort-key]')].filter(row=>row!==sorting.row);
+    const positions=new Map(rows.map(row=>[row,row.getBoundingClientRect().top]));
+    sortList.insertBefore(gap,before);
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches)rows.forEach(row=>{
+      const dy=positions.get(row)-row.getBoundingClientRect().top;
+      if(dy)row.animate([{transform:`translateY(${dy}px)`},{transform:'translateY(0)'}],{duration:180,easing:'ease-out'});
+    });
+  }
   document.addEventListener('pointerdown',event=>{
     if(featuredPanel.hidden||event.button!==0)return;
     const handle=event.target.closest('.featuredDragHandle');
@@ -51,6 +62,11 @@
       const ghost=document.createElement('div');ghost.className='featuredDragGhost '+domainThemeClass(item.domain);ghost.setAttribute('aria-hidden','true');
       ghost.innerHTML=IdeaViewShared.renderListActivity({title:item.title,image:adminIdeaImage(item),icon:domainIcon(item.domain)})+'<small></small>';
       document.body.append(ghost);sorting.ghost=ghost;
+      sorting.row=[...sortList.querySelectorAll('[data-featured-sort-key]')].find(row=>row.dataset.featuredSortKey===sorting.key);
+      const gap=document.createElement('div');gap.className='featuredInsertGap';gap.textContent='Hier plaatsen';gap.setAttribute('aria-hidden','true');
+      gap.style.height=`${sorting.row?.getBoundingClientRect().height||74}px`;sorting.gap=gap;
+      if(sorting.row){sortList.insertBefore(gap,sorting.row);sorting.row.hidden=true;}
+
     }
     sorting.ghost.style.transform=`translate3d(${event.clientX+16}px,${event.clientY+16}px,0)`;
     event.preventDefault();
@@ -58,13 +74,16 @@
     sorting.into=!!target?.closest('#adminFeaturedSheet');
     sorting.out=!!target?.closest('#adminIdeaCards,#adminIdeaList');
     sorting.ghost.querySelector('small').textContent=sorting.into?'Loslaten in Uitgelicht':sorting.out&&sorting.source==='selection'?'Uit Uitgelicht halen':'Sleep naar Uitgelicht';
-    sorting.target=target?.closest('[data-featured-sort-key]')?.dataset.featuredSortKey;
     featuredPanel.classList.toggle('isDropTarget',sorting.into);
-    sortList.querySelectorAll('.isDropTarget').forEach(row=>row.classList.remove('isDropTarget'));
-    target?.closest('[data-featured-sort-key]')?.classList.add('isDropTarget');
+    if(sorting.into){
+      const rows=[...sortList.querySelectorAll('[data-featured-sort-key]')].filter(row=>row!==sorting.row);
+      const before=rows.find(row=>event.clientY<row.getBoundingClientRect().top+row.offsetHeight/2);
+      sorting.target=before?.dataset.featuredSortKey;
+      placeFeaturedGap(before||null);
+    }else sorting.gap.remove();
   },{passive:false});
   function clearSort(){
-    sorting?.ghost?.remove();sorting?.handle.classList.remove('isDragging');featuredPanel.classList.remove('isDropTarget');
+    sorting?.ghost?.remove();sorting?.gap?.remove();if(sorting?.row)sorting.row.hidden=false;sorting?.handle.classList.remove('isDragging');featuredPanel.classList.remove('isDropTarget');
     sortList.querySelectorAll('.isDropTarget').forEach(row=>row.classList.remove('isDropTarget'));sorting=null;
   }
   document.addEventListener('pointercancel',clearSort);
@@ -78,8 +97,8 @@
     if(drag.source==='selection'&&drag.out){if(from<0)return;keys.splice(from,1);}
     else if(drag.into){
       if(from<0&&keys.length>=5){setStatus('#adminStatus','Er passen maximaal vijf activiteiten in Uitgelicht. Verwijder eerst een activiteit.','warn');return;}
-      const to=keys.indexOf(drag.target);
       if(from>=0)keys.splice(from,1);
+      const to=keys.indexOf(drag.target);
       keys.splice(to<0?keys.length:to,0,drag.key);
     }else return;
     if(await saveFeaturedIdeaKeys(keys)){renderIdeas();setStatus('#adminStatus','Uitgelicht opgeslagen.','ok');}

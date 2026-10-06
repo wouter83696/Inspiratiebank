@@ -709,3 +709,6 @@ body.adminEditorOpen{overflow:hidden!important}
 @keyframes featuredPickup{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.featuredDragGhost{animation:none}}
 #adminFeaturedSheet .ideaListVisual{border:0;box-shadow:none}
+
+#adminFeaturedSheet .featuredAdminItem[hidden]{display:none}
+.featuredInsertGap{box-sizing:border-box;border:1.5px dashed #8fcfc4;border-radius:14px;background:#e5f2ef;display:grid;place-items:center;color:#63858b;font-size:12px;min-height:64px}
