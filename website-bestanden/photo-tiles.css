@@ -1191,3 +1191,17 @@ body.photoDetailOpen{overflow:hidden!important}
 @media(max-width:640px){
  #ideaMap .ideaMapPanel.isMinimized:not(.isSingleDetail){display:none!important}
 }
+
+/* Metadata and the upper half of the badge share the same top and photo edge. */
+#ideaCards.compactTiles .photoTileOverlay .photoTileFacts{
+ height:16px;min-height:16px;line-height:16px;padding:0 6px;box-sizing:border-box;
+}
+#ideaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{
+ height:16px;min-height:0;line-height:16px;
+}
+@media(max-width:600px){
+ #ideaCards.compactTiles .photoTileOverlay .photoTileFacts,
+ #ideaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{
+  height:14px;min-height:0;line-height:14px;
+ }
+}
