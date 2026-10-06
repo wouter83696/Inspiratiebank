@@ -111,7 +111,9 @@
  }
  function navigate(target=''){
    const sources=target==='sourceOwnPanel',rules=target==='agendaRulesPanel';
-   $('sourceOwnPanel').closest('.sourceGrid').hidden=!sources;$('agendaRulesPanel').hidden=!rules;$('agendaReviewPanel').hidden=sources||rules;
+   const sourceGrid=$('sourceOwnPanel').closest('.sourceGrid');if(sourceGrid)sourceGrid.hidden=!sources;
+   $('agendaRulesPanel').hidden=!rules;$('agendaReviewPanel').hidden=rules||(sources&&!window.AdminSources);
+   if(sources&&window.AdminSources)window.AdminSources.open();
    if(!sources&&!rules)section(target==='ongoingAdminSection'?'ongoing':'weeks');
  }
  function setup(){

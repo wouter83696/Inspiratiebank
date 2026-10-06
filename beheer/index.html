@@ -986,7 +986,7 @@
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20261006-meta-lines-v2">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20261006-material-rows-v51">
   <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261006-toolbar-border-v50">
-  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261006-agenda-header-v8">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261006-sources-sheet-v9">
   <link rel="stylesheet" href="../website-bestanden/header-layout-shared.css?v=20261001-v1">
   <link rel="stylesheet" href="../website-bestanden/navigation-colors-shared.css?v=20261006-single-sheet-surface-v26">
 </head>
@@ -1584,7 +1584,7 @@
   <script src="../website-bestanden/select-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script src="../website-bestanden/agenda-discovery-shared.js?v=20261001-stimulus-v1"></script>
   <script>DiscoveryViewShared.mount({admin:true});AgendaDiscoveryShared.mount();</script>
-  <script src="../website-bestanden/admin-agenda.js?v=20261006-toolbar-border-v50"></script>
+  <script src="../website-bestanden/admin-agenda.js?v=20261006-sources-sheet-v9"></script>
   <script src="../website-bestanden/site-settings-shared.js?v=20261004-compact-v1"></script>
   <script src="../website-bestanden/admin-site-settings.js?v=20261004-compact-v1"></script>
   <script src="../website-bestanden/admin-discovery.js?v=20261006-filter-prompts-v54"></script>
@@ -3843,7 +3843,9 @@
 	    syncCustomSelect($('#linkCategory'));
 	    $('#linkSubmitBtn').textContent = 'Wijziging opslaan';
 	    $('#cancelLinkEditBtn').hidden = false;
-	    $('#linkName').focus();
+	    window.AdminSources?.open();
+    $('#linkForm').hidden=false;
+    $('#linkName').focus();
 	    setAdminWorkspace('agenda', {scroll:false, scrollTarget:'sourceOwnPanel'});
 	    $('#sourceOwnPanel').scrollIntoView({behavior:'smooth', block:'start'});
 	    setStatus('#linkStatus', 'Pas de velden aan en klik op Wijziging opslaan.', 'ok');
@@ -5073,8 +5075,8 @@
   <script src="../website-bestanden/admin-polish.js?v=20261006-top-toolbar-v32"></script>
 <script src="../website-bestanden/photo-tiles.js?v=20261006-editor-sections-v3"></script>
 <script src="../website-bestanden/admin-visual.js?v=20261006-toolbar-border-v50"></script>
-<script src="../website-bestanden/admin-editors.js?v=20261006-shared-sheet-motion-v4"></script>
+<script src="../website-bestanden/admin-editors.js?v=20261006-sources-sheet-v9"></script>
 <link rel="stylesheet" href="../website-bestanden/select-controls.css?v=20261006-fixed-textareas-v2">
-<script src="../website-bestanden/admin-agenda-sheets.js?v=20261006-agenda-header-v7"></script>
+<script src="../website-bestanden/admin-agenda-sheets.js?v=20261006-sources-sheet-v9"></script>
 </body>
 </html>
