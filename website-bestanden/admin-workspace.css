@@ -712,3 +712,9 @@ body.adminEditorOpen{overflow:hidden!important}
 
 #adminFeaturedSheet .featuredAdminItem[hidden]{display:none}
 .featuredInsertGap{box-sizing:border-box;border:1.5px dashed #8fcfc4;border-radius:14px;background:#e5f2ef;display:grid;place-items:center;color:#63858b;font-size:12px;min-height:64px}
+
+/* Desktop adds activities directly from the adjacent overview. */
+@media(min-width:1101px){
+ #adminFeaturedSheet .adminFeaturedAddField,#adminFeaturedSheet .adminFeaturedChoices{display:none}
+ #adminFeaturedSheet #featuredManager{margin-bottom:0}
+}
