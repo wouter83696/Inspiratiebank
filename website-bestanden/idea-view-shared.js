@@ -15,10 +15,29 @@
     return content || extra ? `<details class="ideaPracticalDetails"${open ? ' open' : ''}><summary>Praktisch</summary>${content ? `<p class="ideaPracticalText">${content}</p>` : ''}${extra}</details>` : '';
   }
 
-  function renderMaterials(value){
-    const text=String(value || '').trim();
-    return text ? `<details class="ideaPracticalDetails ideaMaterialsDetails"><summary>Materialen</summary><p class="ideaPracticalText">${escape(text)}</p></details>` : '';
+  function renderOutdoorPill(icon){
+    return `<span class="pill locationPill homeLocationPill outdoorLocationPill" title="Buiten · zelf een plek kiezen" aria-label="Buiten">${icon}</span>`;
   }
+  function materialItems(value){
+    const text=String(value || '').trim();
+    return text.split(text.includes('\n') ? /\n+/ : /[,;]+/).map(item=>item.trim().replace(/^[-•]\s*/, '').replace(/\.$/, '')).filter(Boolean);
+  }
+  function renderMaterials(value, activity=''){
+    const items=materialItems(value);
+    if(!items.length)return '';
+    const rows=items.map((text,index)=>{
+      const key='inspiration-material:'+JSON.stringify([activity,String(value),index]);
+      let checked=false;try{checked=window.localStorage?.getItem(key)==='1';}catch(_){}
+      return `<li><label><input type="checkbox" data-material-key="${escape(key)}"${checked?' checked':''}><span>${escape(text)}</span></label></li>`;
+    }).join('');
+    return `<details class="ideaPracticalDetails ideaMaterialsDetails"><summary>Materialen</summary><ul class="ideaMaterialChecklist">${rows}</ul></details>`;
+  }
+  if(typeof document!=='undefined')document.addEventListener('change',event=>{
+    const input=event.target;
+    if(!input.matches?.('input[data-material-key]'))return;
+    try{if(input.checked)window.localStorage.setItem(input.dataset.materialKey,'1');else window.localStorage.removeItem(input.dataset.materialKey);}catch(_){}
+    document.querySelectorAll('input[data-material-key]').forEach(other=>{if(other.dataset.materialKey===input.dataset.materialKey)other.checked=input.checked;});
+  });
 
   function renderPracticalList(content){
     return content ? `<p class="ideaPracticalListText">${content}</p>` : '<span class="ideaPracticalEmpty">-</span>';
@@ -39,7 +58,7 @@
       ${view.themePill ? `<div class="cardThemePill">${view.themePill}</div>` : ''}
       <h3>${view.title || ''}</h3>
       ${renderMetadata({className:'cardMetaBlock', pillsClass:'cardLabels', pills, meta:view.meta})}
-      ${source}${body}${practical}${renderMaterials(view.supplies)}${footer}
+      ${source}${body}${practical}${renderMaterials(view.supplies,view.materialsKey || view.title || view.activity?.title || '')}${footer}
     </article>`;
   }
 
@@ -74,6 +93,7 @@
       activity:{title:item.title, url:item.url, image:view.image, icon:view.icon},
       description:escape(describe(item.fit || item.description || '')),
       practical:escape(item.materials || item.rules || ''),
+      materialsKey:item.id || item.title,
       supplies:item.supplies
     });
   }
@@ -83,7 +103,7 @@
       {label:'Activiteit', html:view.activity ? renderListActivity(view.activity) : (view.title || '')},
       {label:'Kenmerken', html:renderMetadata({pills:view.pills, meta:view.meta})},
       {label:'Beschrijving', html:renderPracticalList(view.description)},
-      {label:'Praktisch', html:(view.practical || !String(view.supplies || '').trim() ? renderPracticalList(view.practical) : '') + renderMaterials(view.supplies)}
+      {label:'Praktisch', html:(view.practical || !String(view.supplies || '').trim() ? renderPracticalList(view.practical) : '') + renderMaterials(view.supplies,view.materialsKey || view.title || view.activity?.title || '')}
     ];
     if(view.manageActions !== undefined){
       const manageCell = {label:'Beheer', html:`<div class="ideaAdminListActions">${view.manageActions || ''}</div>`};
@@ -110,5 +130,5 @@
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
-  window.IdeaViewShared = Object.freeze({renderFeaturedCard, renderPhotoTileContent, renderMaterials, renderPractical, renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
+  window.IdeaViewShared = Object.freeze({materialItems, renderOutdoorPill, renderFeaturedCard, renderPhotoTileContent, renderMaterials, renderPractical, renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
 })();

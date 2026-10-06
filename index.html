@@ -2808,7 +2808,7 @@
   </style>
   <link rel="stylesheet" href="website-bestanden/loading-screen.css?v=20261004-visible-photos-v9">
   <link rel="stylesheet" href="website-bestanden/agenda-shared.css?v=20260930-agenda-rebuild-v1">
-  <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20261004-touch-hover-v3">
+  <link rel="stylesheet" href="website-bestanden/idea-view-shared.css?v=20261006-material-checklist-v1">
   <style>
     /* De kaart zelf blijft rustig; categorieaccenten zitten alleen in iconen en badges. */
     @media (min-width:981px){
@@ -5840,7 +5840,7 @@
   <script src="website-bestanden/site-settings-shared.js?v=20261004-compact-v1"></script>
   <script src="website-bestanden/photo-tiles.js?v=20261006-visual-v1"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
-  <script src="website-bestanden/idea-view-shared.js?v=20261006-admin-parity-v2"></script>
+  <script src="website-bestanden/idea-view-shared.js?v=20261006-material-checklist-v1"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20261006-content-fields-v3"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
@@ -6541,10 +6541,11 @@
   }
   function locationPill(label='', {routeUrl='', routeLabel=''}={}){
     const normalized = normalize(label);
+    if(normalized === 'buiten') return IdeaViewShared.renderOutdoorPill(ICONS.nature);
     if(normalized === 'online'){
       return `<span class="pill locationPill onlineLocationPill" title="Online" aria-label="Online">${ICONS.globe}</span>`;
     }
-    if(isHomeLocationBadge(label) || normalized === 'buiten'){
+    if(isHomeLocationBadge(label)){
       return `<span class="pill locationPill homeLocationPill" title="${escapeHtml(label)}" aria-label="${escapeHtml(label)}">${ICONS.home}</span>`;
     }
     const distanceClass = normalized.includes('25') || normalized.includes('50') ? 'distanceFar'
