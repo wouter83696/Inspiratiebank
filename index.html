@@ -5470,7 +5470,7 @@
     }
 </style>
   <link rel="stylesheet" href="website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
-  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261006-detail-photo-v141">
+  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261006-map-count-v142">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -10188,6 +10188,7 @@
       <div id="ideaMapProviderCanvas"></div>
     </div>
     ${ideaMapToolbarMarkup()}
+    <div class="ideaMapActivityCount" role="status">${points.length} ${points.length === 1 ? 'activiteit' : 'activiteiten'}</div>
     ${ideaMapPanelMarkup(points)}`;
     destroyIdeaMapProvider();
     ideaMapProvider = createIdeaMapProvider($('#ideaMapProviderCanvas'), points);
