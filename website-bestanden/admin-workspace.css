@@ -720,9 +720,6 @@ body.adminEditorOpen{overflow:hidden!important}
 }
 
 #adminFeaturedSheet.adminEditorCard{grid-template-rows:auto minmax(0,1fr) auto}
-.adminFeaturedFooter{display:flex;gap:12px;padding:12px 20px;background:#fffdf9}
-#adminFeaturedSheet .adminFeaturedFooter .button{min-height:42px;padding:8px 18px}
-#adminFeaturedSheet #saveFeaturedDraft{flex:1}
 #adminFeaturedSheet #saveFeaturedDraft.hasChanges{background:#e5f2ef}
 
 #inspirationAdminPanel .adminIdeaSummary{display:none}
@@ -742,3 +739,7 @@ body.adminEditorOpen{overflow:hidden!important}
 #ideaFilterSheetLayer .customSelectOption{color:#315f6b;font:inherit;border-radius:9px;padding:10px 12px;min-height:42px;background:transparent}
 #ideaFilterSheetLayer .customSelectOption:is(:hover,:focus-visible,[aria-selected="true"]){background:#e5f2ef;color:#315f6b}
 #ideaFilterSheetLayer .customNativeSelect{position:absolute!important;width:1px!important;height:1px!important;min-height:0!important;padding:0!important;opacity:0;pointer-events:none}
+
+.adminFeaturedFooter .ideaFilterSheetAction.primary{border:1.5px solid rgba(23,79,93,.48);border-radius:12px;background:rgba(255,253,249,.72);color:#236875;box-shadow:none;font-weight:600;transition:background .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease)}
+.adminFeaturedFooter .ideaFilterSheetAction.primary:hover:not(:disabled){border-color:rgba(23,79,93,.68);background:rgba(168,225,221,.24);color:#1f5763}
+.adminFeaturedFooter .ideaFilterSheetAction:disabled{opacity:.45;cursor:default;transform:none;box-shadow:none}
