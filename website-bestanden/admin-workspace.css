@@ -448,42 +448,30 @@ body.adminEditorOpen{overflow:hidden!important}
 @media(min-width:1101px){
  body.adminDetailDocked #adminApp .adminWorkspaceShell{margin-left:calc(var(--admin-sidebar-w) + 480px);width:calc(100% - var(--admin-sidebar-w) - 480px)}
  body.adminDetailDocked #adminApp.adminSidebarCollapsed .adminWorkspaceShell{margin-left:calc(var(--admin-sidebar-closed-w) + 480px);width:calc(100% - var(--admin-sidebar-closed-w) - 480px)}
- body.adminDetailDocked:has(#adminApp:not(.adminTopNavigation)) .adminIdeaLayer{left:248px}
- body.adminDetailDocked:has(#adminApp.adminSidebarCollapsed:not(.adminTopNavigation)) .adminIdeaLayer{left:62px}
- body.adminDetailDocked #adminApp.adminTopNavigation .adminWorkspaceShell{margin-left:480px;width:calc(100% - 480px)}
+ body.adminDetailDocked:has(#adminApp:not(.adminMobileNavigation)) .adminIdeaLayer{left:248px}
+ body.adminDetailDocked:has(#adminApp.adminSidebarCollapsed:not(.adminMobileNavigation)) .adminIdeaLayer{left:62px}
+ body.adminDetailDocked #adminApp.adminMobileNavigation .adminWorkspaceShell{margin-left:480px;width:calc(100% - 480px)}
 }
-/* Navigation preference: top dropdown by default, optional persistent sidebar. */
-.adminNavigationPreferences{display:grid;gap:12px;padding:10px;border-bottom:1px solid #dce4df;color:#315f6b;font-size:12px}
-.adminNavigationPreferences label{display:flex;gap:8px;align-items:center;justify-content:space-between}
-.adminNavigationPreferences select{width:auto;padding:8px;border:1px solid #dce4df;border-radius:9px;background:#fffdf9;color:inherit;font:inherit}
-.adminNavigationPreferences input{width:16px;height:16px;accent-color:#4f8e9e}
-#adminApp.adminSidebarCollapsed:not(.adminTopNavigation) .adminNavigationPreferences{display:none}
-#adminApp.adminTopNavigation .adminWorkspaceShell{margin-left:0;width:100%}
-#adminApp.adminTopNavigation .adminMobileTopbar{display:flex;position:sticky;top:0;z-index:100;align-items:center;justify-content:space-between;min-height:64px;padding:10px 24px;gap:16px;background:#fffdf9;border-bottom:1px solid #dce4df}
-#adminApp.adminTopNavigation #adminMobileMenuButton{display:flex;align-items:center;gap:8px;background:transparent;border:0;color:#315f6b;font:600 15px Manrope,system-ui,sans-serif;cursor:pointer;padding:8px}
-#adminApp.adminTopNavigation #adminMobileMenuButton img{width:30px;height:30px}
-#adminApp.adminTopNavigation .adminSidebar{display:none;position:fixed;top:var(--admin-mobile-bar-height,64px);right:auto;left:18px;bottom:auto;width:340px;max-width:calc(100% - 32px);height:auto;min-height:0;max-height:calc(100dvh - 85px);overflow:auto;z-index:101;padding:12px;border:1px solid #dce4df;border-radius:16px;background:#fffdf9;box-shadow:0 12px 40px #315f6b20;gap:8px;grid-template-rows:auto auto auto}
-#adminApp.adminTopNavigation.mobileMenuOpen .adminSidebar{display:grid}
-#adminApp.adminTopNavigation .adminSidebarBrand{display:none}
-#adminApp.adminTopNavigation .adminSidebarGroup{display:grid;grid-template-columns:1fr;padding:4px 0;overflow:visible}
-#adminApp.adminTopNavigation .adminNavButton{display:flex;align-items:center;gap:10px;width:100%;min-height:40px;padding:8px 10px;margin:0}
-#adminApp.adminTopNavigation .adminNavText{display:block}
-#adminApp.adminTopNavigation .adminNavIcon{flex-shrink:0}
-#adminApp.adminTopNavigation .adminSidebarFoot{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0}
-#adminApp.adminTopNavigation .adminSidebarFoot .mini{display:flex;width:auto;gap:8px;padding:8px}
-#adminApp.adminTopNavigation .adminSidebarFoot .mini span{display:inline}
-#adminApp.adminTopNavigation .adminActionTopbar{display:none!important}
-#adminApp.adminTopNavigation #adminMobileActions .adminHeroActions{position:static;display:flex;gap:8px}
-#adminApp.adminTopNavigation #adminMobileActions .adminHeaderAdd{position:static;min-height:40px}
-@media(min-width:821px){
- #adminApp.adminTopNavigation.adminNavigationPinned .adminSidebar{display:flex;position:sticky;top:var(--admin-mobile-bar-height,64px);width:100%;max-width:none;max-height:none;left:0;right:0;align-items:center;flex-wrap:wrap;border-radius:0;border-width:0 0 1px;box-shadow:none;padding:8px 24px;gap:10px}
- #adminApp.adminNavigationPinned .adminSidebarGroup{display:flex;flex:1;flex-wrap:wrap;gap:3px}
- #adminApp.adminNavigationPinned .adminNavButton{width:auto;font-size:12px}
- #adminApp.adminNavigationPinned .adminNavigationPreferences{border:0;padding:0}
- #adminApp.adminNavigationPinned .adminSidebarFoot{padding:0}
-}
+/* Desktop uses the sidebar; narrow screens use the mobile menu. */
+#adminApp.adminMobileNavigation .adminWorkspaceShell{margin-left:0;width:100%}
+#adminApp.adminMobileNavigation .adminMobileTopbar{display:flex;position:sticky;top:0;z-index:100;align-items:center;justify-content:space-between;min-height:64px;padding:10px 24px;gap:16px;background:#fffdf9;border-bottom:1px solid #dce4df}
+#adminApp.adminMobileNavigation #adminMobileMenuButton{display:flex;align-items:center;gap:8px;background:transparent;border:0;color:#315f6b;font:600 15px Manrope,system-ui,sans-serif;cursor:pointer;padding:8px}
+#adminApp.adminMobileNavigation #adminMobileMenuButton img{width:30px;height:30px}
+#adminApp.adminMobileNavigation .adminSidebar{display:none;position:fixed;top:var(--admin-mobile-bar-height,64px);right:auto;left:18px;bottom:auto;width:340px;max-width:calc(100% - 32px);height:auto;min-height:0;max-height:calc(100dvh - 85px);overflow:auto;z-index:101;padding:12px;border:1px solid #dce4df;border-radius:16px;background:#fffdf9;box-shadow:0 12px 40px #315f6b20;gap:8px;grid-template-rows:auto auto auto}
+#adminApp.adminMobileNavigation.mobileMenuOpen .adminSidebar{display:grid}
+#adminApp.adminMobileNavigation .adminSidebarBrand{display:none}
+#adminApp.adminMobileNavigation .adminSidebarGroup{display:grid;grid-template-columns:1fr;padding:4px 0;overflow:visible}
+#adminApp.adminMobileNavigation .adminNavButton{display:flex;align-items:center;gap:10px;width:100%;min-height:40px;padding:8px 10px;margin:0}
+#adminApp.adminMobileNavigation .adminNavText{display:block}
+#adminApp.adminMobileNavigation .adminNavIcon{flex-shrink:0}
+#adminApp.adminMobileNavigation .adminSidebarFoot{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0}
+#adminApp.adminMobileNavigation .adminSidebarFoot .mini{display:flex;width:auto;gap:8px;padding:8px}
+#adminApp.adminMobileNavigation .adminSidebarFoot .mini span{display:inline}
+#adminApp.adminMobileNavigation .adminActionTopbar{display:none!important}
+#adminApp.adminMobileNavigation #adminMobileActions .adminHeroActions{position:static;display:flex;gap:8px}
+#adminApp.adminMobileNavigation #adminMobileActions .adminHeaderAdd{position:static;min-height:40px}
 @media(max-width:640px){
- #adminApp.adminTopNavigation .adminMobileTopbar{padding:8px 12px}
+ #adminApp.adminMobileNavigation .adminMobileTopbar{padding:8px 12px}
  #adminIdeaPreview h2{font-size:19px}
  .adminIdeaLayer .adminEditorCard{width:100%;border-radius:24px 24px 0 0;height:94dvh;max-height:94dvh;align-self:flex-end}
 }
@@ -494,21 +482,12 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaPreview .ideaActions .button{min-width:max-content!important;width:auto!important;flex:0 0 auto!important}
 #adminIdeaPreview .ideaActions .button span{display:inline!important}
 
-#adminApp:not(.adminTopNavigation) .adminSidebar{grid-template-rows:auto minmax(0,1fr) auto}
+#adminApp:not(.adminMobileNavigation) .adminSidebar{grid-template-rows:auto minmax(0,1fr) auto}
 @media(max-width:640px){#adminIdeaPreview .adminPreviewHeader{top:-20px}}
 
-.adminNavigationPreferences select{min-width:0;max-width:130px;box-sizing:border-box}
-.adminNavigationPreferences label{flex-wrap:wrap}
-#adminApp.adminTopNavigation .desktopStickyControls{top:var(--admin-mobile-bar-height,64px)!important}
+#adminApp.adminMobileNavigation .desktopStickyControls{top:var(--admin-mobile-bar-height,64px)!important}
 @media(max-width:640px){.adminIdeaLayer .adminEditorCard{min-height:0!important;height:94dvh!important;max-height:94dvh!important}}
 
-/* Navigation preferences belong to a menu item, not the navigation header. */
-.adminMenuPreferences{min-width:0}
-.adminMenuPreferences>summary{cursor:pointer;list-style:none}
-.adminMenuPreferences>summary::-webkit-details-marker{display:none}
-.adminMenuPreferences>summary::after{content:'⌄';margin-left:auto}
-.adminMenuPreferences .adminNavigationPreferences{padding:10px 12px 16px;border:0}
-#adminApp.adminSidebarCollapsed:not(.adminTopNavigation) .adminMenuPreferences[open] .adminNavigationPreferences{display:grid;position:absolute;left:62px;width:240px;background:#fffdf9;border:1px solid #dce4df;border-radius:14px;z-index:110}
 #adminMenuLabel{font-size:14px;line-height:1.3}
 #adminApp .adminPublicSurface:has(#adminIdeaCards){container-type:inline-size}
 @container (max-width:1050px){#adminApp #adminIdeaCards.photoTiles{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
@@ -564,10 +543,10 @@ body.adminEditorOpen{overflow:hidden!important}
 }
 
 /* Match the public header: identity/navigation left, workspace actions right. */
-#adminApp.adminTopNavigation #adminMobileActions{margin-left:auto;min-width:0;flex:0 1 auto}
-#adminApp.adminTopNavigation #adminMobileActions .adminHeroActions{justify-content:flex-end}
-#adminApp.adminTopNavigation #adminMobileMenuButton{min-width:0;flex:0 1 auto;text-align:left}
-@media(max-width:640px){#adminApp.adminTopNavigation .adminSidebar{left:12px;right:auto}}
+#adminApp.adminMobileNavigation #adminMobileActions{margin-left:auto;min-width:0;flex:0 1 auto}
+#adminApp.adminMobileNavigation #adminMobileActions .adminHeroActions{justify-content:flex-end}
+#adminApp.adminMobileNavigation #adminMobileMenuButton{min-width:0;flex:0 1 auto;text-align:left}
+@media(max-width:640px){#adminApp.adminMobileNavigation .adminSidebar{left:12px;right:auto}}
 
 /* Editable slots inside the shared photo-detail component. */
 #adminIdeaEditPanel .adminInlineTitle>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
