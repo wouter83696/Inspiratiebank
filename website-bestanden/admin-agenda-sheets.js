@@ -53,7 +53,7 @@
  const manager=document.createElement('section');manager.id='adminAgendaManagerSheet';manager.className='adminEditorCard adminPublicSurface';manager.hidden=true;
  manager.innerHTML='<header class="panelHead"><h3>Agenda beheren</h3><button type="button" class="adminEditorClose" aria-label="Agenda beheren sluiten">×</button></header><div class="adminAgendaManagerBody"></div><footer class="adminActivityFooter ideaFilterSheetFooter"><button type="button" class="ideaFilterSheetAction primary">Klaar</button></footer>';
  const old=document.querySelector('.adminAgendaManagementFilters');
- const link=document.createElement('button');link.type='button';link.className='adminAgendaManageLink';link.textContent='Agenda beheren';old.before(link);
+ const link=document.createElement('button');link.type='button';link.className='adminAgendaManageLink';link.textContent='Agenda beheren';const actions=$('addAdminAgendaBtn').parentElement;actions.classList.add('adminAgendaHeaderActions');actions.prepend(link);
  old.querySelector('summary')?.remove();manager.querySelector('.adminAgendaManagerBody').append(...old.children);old.remove();layer.append(manager);
  const managerBody=manager.querySelector('.adminAgendaManagerBody');
  const pending=$('agendaPendingList');
