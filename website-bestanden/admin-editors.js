@@ -67,7 +67,7 @@
     const photoButton=document.createElement('button');photoButton.type='button';photoButton.className='ideaFilterSheetAction secondary adminInlinePhotoButton';
     photoButton.addEventListener('click',()=>$('adminEditIdeaImageUpload').click());
     const toolbar=document.createElement('div');toolbar.className='adminEditToolbar';toolbar.setAttribute('role','group');toolbar.setAttribute('aria-label','Activiteit beheren');
-    toolbar.append(photoButton);idea.append(toolbar);
+    toolbar.append(photoButton);idea.querySelector('.panelHead').after(toolbar);
     const photoField=fieldFor('ImageUpload');photoField.classList.add('adminInlineUpload');figure.after(photoField);
     const metadata=article.querySelector('.cardMetaBlock');
     const details=document.createElement('section');details.className='adminInlineMetadata';
