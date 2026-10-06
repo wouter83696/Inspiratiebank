@@ -555,12 +555,10 @@ body.adminEditorOpen{overflow:hidden!important}
 /* Editable slots inside the shared photo-detail component. */
 #adminIdeaEditPanel .adminInlineTitle>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 #adminIdeaEditPanel .adminInlineTitle input{font-size:20px;font-weight:600;color:var(--accent-dark);background:rgba(255,255,255,.5);border:1px solid rgba(79,142,158,.16);padding:10px 11px;box-shadow:none}
-#adminIdeaEditPanel .adminInlineTitle input:focus{border-color:var(--accent-dark)}
 #adminIdeaEditPanel .adminInlineUpload{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 #adminIdeaEditPanel .adminInlineMetadata .teamFormGrid{padding-block:12px}
 #adminIdeaEditPanel .adminEditTextSection{margin-block:16px}
 #adminIdeaEditPanel .adminEditTextSection textarea{width:100%;min-height:104px;resize:none;font-size:14px;line-height:1.6;color:inherit;background:rgba(255,255,255,.5);border-color:rgba(79,142,158,.16);padding:10px 11px}
-#adminIdeaEditPanel .adminEditTextSection textarea:focus{border-color:var(--accent-dark)}
 #adminIdeaEditPanel .photoDetailActions{position:static!important;transform:none;margin-top:18px}
 
 /* Toolbar layout only: controls use the shared filter action styles. */
@@ -580,3 +578,6 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaEditPanel .adminEditFields section{scroll-margin-top:12px}
 
 @media(max-width:640px){#adminIdeaEditPanel .adminEditToolbar{padding:8px 16px}#adminIdeaEditPanel .adminEditToolbar .ideaFilterSheetAction{min-height:40px}#adminIdeaEditPanel .adminInlineTitle input{font-size:18px}}
+
+/* Use the site focus token for editable fields, including the inline title. */
+#adminIdeaEditPanel .teamField :is(input,textarea,select):focus-visible,#adminIdeaEditPanel .customSelectButton:focus-visible{outline:none;border-color:rgba(127,207,201,.8);box-shadow:var(--focus)}
