@@ -865,3 +865,32 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
   height:94dvh;max-height:94dvh;align-self:flex-end;
  }
 }
+
+/* Shared left-sheet motion, including the hidden/display exit lifecycle. */
+@supports (transition-behavior:allow-discrete){
+ #adminIdeaLayer{
+  transition:display 420ms allow-discrete;
+ }
+ #adminIdeaLayer>.adminEditorCard,
+ #adminIdeaLayer>#agendaEditModal.adminAgendaSheet{
+  animation:none!important;
+  transform:translateX(0);
+  transition:transform 420ms cubic-bezier(.4,0,.2,1),display 420ms allow-discrete;
+ }
+ #adminIdeaLayer #agendaEditModal .adminEditorCard{animation:none!important}
+ #adminIdeaLayer[hidden]>.adminEditorCard,
+ #adminIdeaLayer[hidden]>#agendaEditModal.adminAgendaSheet,
+ #adminIdeaLayer>.adminEditorCard[hidden],
+ #adminIdeaLayer>#agendaEditModal.adminAgendaSheet[hidden]{transform:translateX(-100%)}
+ @starting-style{
+  #adminIdeaLayer>.adminEditorCard,
+  #adminIdeaLayer>#agendaEditModal.adminAgendaSheet{transform:translateX(-100%)}
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #adminIdeaLayer,#adminIdeaLayer>.adminEditorCard,
+ #adminIdeaLayer>#agendaEditModal.adminAgendaSheet{transition:none!important;animation:none!important}
+}
+@media(min-width:1101px) and (prefers-reduced-motion:no-preference){
+ #adminApp .adminWorkspaceShell{transition:margin-left 420ms cubic-bezier(.4,0,.2,1),width 420ms cubic-bezier(.4,0,.2,1)}
+}

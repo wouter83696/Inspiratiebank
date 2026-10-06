@@ -192,6 +192,8 @@
     agenda.setAttribute('role',modal?'dialog':'region');agenda.removeAttribute('aria-modal');
     layer.classList.toggle('isEditing',!layer.hidden);
     layer.classList.toggle('isModal',modal);
+    if(!layer.hidden)layer.style.left='';
+    if(layer.hidden&&document.body.classList.contains('adminDetailDocked'))layer.style.left=getComputedStyle(layer).left;
     document.body.classList.toggle('adminDetailDocked',!layer.hidden&&!modal);
     document.body.classList.toggle('adminEditorOpen',open);
     $('adminApp').inert=open;
