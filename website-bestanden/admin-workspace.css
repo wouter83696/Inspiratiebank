@@ -841,3 +841,27 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
 #adminAgendaManagerSheet button:disabled{opacity:.45;cursor:default}
 #adminAgendaManagerSheet .adminAgendaManagerBody>*{flex-shrink:0}
 #adminAgendaManagerSheet #agendaAdminSection{height:auto;max-height:none;overflow:visible}
+
+/* Agenda sheets share the activity sheet's silhouette and clipping. */
+#agendaEditModal.adminAgendaSheet,
+#agendaEditModal.adminAgendaSheet .adminEditorCard,
+#adminAgendaManagerSheet.adminEditorCard{
+ border-radius:0 16px 16px 0;
+ clip-path:inset(0 round 0 16px 16px 0);
+ overflow:hidden;
+}
+@media(min-width:641px){
+ #agendaEditModal.adminAgendaSheet .adminEditorCard,
+ #adminAgendaManagerSheet.adminEditorCard{border-right:1px solid rgba(79,142,158,.14)}
+}
+@media(max-width:640px){
+ #agendaEditModal.adminAgendaSheet,
+ #agendaEditModal.adminAgendaSheet .adminEditorCard,
+ #adminAgendaManagerSheet.adminEditorCard{
+  border-radius:24px 24px 0 0;
+  clip-path:inset(0 round 24px 24px 0 0);
+ }
+ #agendaEditModal.adminAgendaSheet,#adminAgendaManagerSheet.adminEditorCard{
+  height:94dvh;max-height:94dvh;align-self:flex-end;
+ }
+}
