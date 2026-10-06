@@ -73,7 +73,7 @@
     const urlField=fieldFor('Url');urlField.classList.add('adminEditUrlField');contact.before(urlField);
     contact.classList.add('adminContactPreview');
     updateContact();
-    const locationShortcut=document.createElement('button');locationShortcut.type='button';locationShortcut.className='ideaFilterSheetAction secondary';locationShortcut.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Locatie</span>';locationShortcut.addEventListener('click',()=>{const target=addressFields.querySelector('.teamField:not([hidden])')||fieldFor('Location');target.scrollIntoView({block:'start',behavior:'smooth'});});toolbar.append(locationShortcut);
+    const locationShortcut=document.createElement('button');locationShortcut.type='button';locationShortcut.className='ideaFilterSheetAction secondary';locationShortcut.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Locatie</span>';locationShortcut.addEventListener('click',()=>{const target=fieldFor('Location');target.scrollIntoView({block:'start',behavior:'smooth'});});toolbar.append(locationShortcut);
     if(!item.isNew){
       const source=document.createElement('div');source.innerHTML=adminIdeaActions(item);
       const prepare=(button,label)=>{
