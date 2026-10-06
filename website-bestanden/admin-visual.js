@@ -3,9 +3,9 @@
   const $=id=>document.getElementById(id);
   const layer=document.createElement('div');
   layer.id='adminIdeaLayer';layer.className='adminEditorLayer adminIdeaLayer';layer.hidden=true;
-  layer.innerHTML='<section id="adminIdeaPreview" class="adminEditorCard adminPublicSurface photoDetailPanel" aria-labelledby="adminPreviewTitle"><header class="adminPreviewHeader"><h2 id="adminPreviewTitle"></h2><button class="adminEditorClose" type="button" aria-label="Activiteit sluiten">×</button></header><div class="photoDetailBody sharedIdeaCards"></div><footer class="adminPreviewActions" aria-label="Activiteit beheren"></footer></section>';
+  layer.innerHTML='<section id="adminIdeaPreview" class="adminEditorCard adminPublicSurface photoDetailPanel" aria-labelledby="adminPreviewTitle"><header class="adminPreviewHeader"><h2 id="adminPreviewTitle"></h2><button class="adminEditorClose" type="button" aria-label="Activiteit sluiten">×</button></header><div class="adminPreviewActions" role="group" aria-label="Activiteit beheren"></div><div class="photoDetailBody sharedIdeaCards"></div></section>';
   document.body.append(layer);
-  const preview=$('adminIdeaPreview'),body=preview.querySelector('.photoDetailBody'),actions=preview.querySelector('footer');
+  const preview=$('adminIdeaPreview'),body=preview.querySelector('.photoDetailBody'),actions=preview.querySelector('.adminPreviewActions');
   let returnFocus=null,tab='Beschrijving';
   function tile(item){
     const image=adminIdeaImage(item);
@@ -40,6 +40,9 @@
     actions.innerHTML=adminIdeaActions(item);
     // Expose explicit labels in the sheet rather than a row of unexplained icons.
     actions.querySelectorAll('button').forEach(button=>{const label=button.getAttribute('aria-label');button.insertAdjacentHTML('beforeend',`<span>${escapeHtml(label==='Wijzig'?'Bewerken':label)}</span>`);});
+    const actionRow=actions.querySelector('.ideaActions');
+    const editButton=actionRow.querySelector('[data-edit-idea]');
+    if(editButton)actionRow.prepend(editButton);
     const remembered=[...body.querySelectorAll('[role="tab"]')].find(button=>button.textContent===tab);
     remembered?.click();
     document.querySelectorAll('#adminIdeaCards [data-idea-key],#adminIdeaList [data-idea-key]').forEach(node=>node.classList.toggle('isSelected',node.dataset.ideaKey===selectedAdminIdeaKey));
