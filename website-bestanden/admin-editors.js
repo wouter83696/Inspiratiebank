@@ -19,7 +19,11 @@
   footer.replaceChildren($('adminIdeaEditStatus'));
   $('adminIdeaEditSubmitBtn').textContent='Opslaan';$('adminIdeaEditCancelBtn').textContent='Annuleren';
   const photoPreview=$('adminEditIdeaImagePreview');
+  function syncSaveState(){saveButton.classList.toggle('hasChanges',!!window.AdminPolish?.ideaDirty());}
+  form.addEventListener('input',syncSaveState);
+  form.addEventListener('change',()=>queueMicrotask(syncSaveState));
   function syncPhoto(){
+    syncSaveState();
     const image=fields.querySelector('.ideaImageFrame img');
     const src=photoPreview.querySelector('img')?.getAttribute('src');
     if(image){image.hidden=!src;if(src)image.src=src;}
@@ -63,7 +67,7 @@
     const photoButton=document.createElement('button');photoButton.type='button';photoButton.className='ideaFilterSheetAction secondary adminInlinePhotoButton';
     photoButton.addEventListener('click',()=>$('adminEditIdeaImageUpload').click());
     const toolbar=document.createElement('div');toolbar.className='adminEditToolbar';toolbar.setAttribute('role','group');toolbar.setAttribute('aria-label','Activiteit beheren');
-    toolbar.append(photoButton);idea.querySelector('.panelHead').after(toolbar);
+    toolbar.append(photoButton);idea.append(toolbar);
     const photoField=fieldFor('ImageUpload');photoField.classList.add('adminInlineUpload');figure.after(photoField);
     const metadata=article.querySelector('.cardMetaBlock');
     const details=document.createElement('section');details.className='adminInlineMetadata';
@@ -205,7 +209,7 @@
   },true);
   window.addEventListener('resize',sync);
   window.AdminEditors={
-    openIdea(isNew){ideaFocus=document.activeElement;title.textContent=isNew?'Activiteit toevoegen':'Activiteit bewerken';mountDetail();sync();syncLocationFields();fields.scrollTop=0;window.AdminPolish?.captureIdea();},
+    openIdea(isNew){ideaFocus=document.activeElement;title.textContent=isNew?'Activiteit toevoegen':'Activiteit bewerken';mountDetail();sync();syncLocationFields();fields.scrollTop=0;window.AdminPolish?.captureIdea();syncSaveState();},
     openAgenda(){agendaFocus=document.activeElement;agendaDraft=snapshot();sync();agenda.querySelector('.adminEditorCard').scrollTop=0;},
     sync,requestAgendaClose
   };

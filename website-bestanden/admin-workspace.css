@@ -507,7 +507,7 @@ body.adminEditorOpen{overflow:hidden!important}
 
 /* A fixed filter-style header/footer with only the form contents scrolling. */
 .adminIdeaLayer.isEditing{backdrop-filter:none}
-#adminIdeaEditPanel.adminEditorCard{display:grid;grid-template-rows:auto auto minmax(0,1fr);padding:0;overflow:hidden;width:min(480px,100%);border-radius:0;background:var(--sheet-surface)}
+#adminIdeaEditPanel.adminEditorCard{display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding:0;overflow:hidden;width:min(480px,100%);border-radius:0;background:var(--sheet-surface)}
 #adminIdeaEditPanel .panelHead{position:relative;z-index:20;background:transparent;border-bottom:0;top:auto;margin:0;min-height:64px;padding:16px 60px 16px 20px;box-sizing:border-box;display:flex;align-items:center}
 #adminIdeaEditPanel .panelHead h3{font-size:19px;line-height:1.4}
 #adminIdeaEditPanel .panelHead p{display:none}
@@ -560,7 +560,7 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaEditPanel .photoDetailActions{position:static!important;transform:none;margin-top:18px}
 
 /* Toolbar layout only: controls use the shared filter action styles. */
-#adminIdeaEditPanel .adminEditToolbar{position:relative;z-index:25;background:rgba(255,255,255,.7);display:flex;flex-wrap:nowrap;align-items:center;gap:6px;margin:10px 20px 0;padding:6px;border:1px solid rgba(79,142,158,.08);border-radius:16px}
+#adminIdeaEditPanel .adminEditToolbar{position:relative;z-index:25;background:rgba(255,255,255,.7);display:flex;flex-wrap:nowrap;align-items:center;gap:6px;margin:8px 20px calc(12px + env(safe-area-inset-bottom));padding:6px;border:1px solid rgba(79,142,158,.55);border-radius:16px}
 #adminIdeaEditPanel .adminEditToolbar .ideaFilterSheetAction{display:inline-flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;flex:none;min-height:36px;padding:7px 8px;font-size:12px;line-height:1.35;font-weight:600;border-radius:10px}
 .adminEditToolbar svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .adminEditToolbar .adminDeleteAction{color:#9b5146}
@@ -608,3 +608,6 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaEditPanel .adminInlineMetadata .adminItemStatus{display:block;margin:8px 0;font-size:12px;color:var(--accent-dark)}
 #adminIdeaEditPanel .adminInlineMetadata .cardMetaBlock{flex-wrap:nowrap!important;white-space:nowrap!important;max-width:100%!important;margin-left:0!important;overflow-x:auto;gap:0!important}
 #adminIdeaEditPanel .adminInlineMetadata .cardMetaBlock :is(.pill,.cardMetaPart){font-size:12px!important;padding-inline:5px!important;flex-shrink:0}
+
+#adminIdeaEditPanel .adminEditToolbar .adminToolbarSave.hasChanges{background:#e5f2ef}
+#adminIdeaEditPanel .adminEditToolbar .adminDeleteAction:is(:hover,:focus-visible){color:#9b5146;background:#f8eeeb}

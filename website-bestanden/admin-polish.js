@@ -76,6 +76,6 @@
     if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}
     else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}
   });
-  window.AdminPolish={captureIdea,captureSettings,status,syncMobile};
+  window.AdminPolish={ideaDirty,captureIdea,captureSettings,status,syncMobile};
   captureIdea();captureSettings();syncMobile();
 })();
