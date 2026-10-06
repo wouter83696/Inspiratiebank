@@ -1284,3 +1284,20 @@ body.photoDetailOpen{overflow:hidden!important}
 .ideaMapActivityCount svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .ideaMapActivityCount:hover{background:#e5f2ef!important}
 .ideaMapActivityCount:focus-visible{outline:2px solid #4f8e9e;outline-offset:3px}
+
+/* Fit all seven day previews, including their more buttons, within the week. */
+@media(min-width:1180px){
+ #tab-weken #weekPanels .weekPanel:not(.expanded) .weekBody{box-sizing:border-box;padding:0 20px 16px;min-height:0}
+ #tab-weken #weekPanels .weekPanel:not(.expanded) .subBlock{height:100%;min-height:0;box-sizing:border-box}
+ #tab-weken #weekPanels .weekPanel:not(.expanded) .agendaBoard{min-height:0;box-sizing:border-box}
+ #tab-weken #weekPanels .weekPanel:not(.expanded) .agendaDay{display:flex;flex-direction:column;box-sizing:border-box;padding:10px 7px;gap:8px}
+ #tab-weken #weekPanels .weekPanel:not(.expanded) .agendaHead{flex:none}
+ #tab-weken #weekPanels .weekPanel:not(.expanded) .agendaList{display:flex;flex:1;min-height:0}
+ #tab-weken #weekPanels .weekPanel:not(.expanded) .agendaGroup{display:flex;flex-direction:column;flex:1;min-height:0;gap:6px}
+ #tab-weken #weekPanels .weekPanel:not(.expanded) .agendaItem{flex:1 1 0;min-height:0;padding:8px;overflow:hidden}
+ #tab-weken #weekPanels .weekPanel:not(.expanded) .agendaItemLink{padding:0;min-height:0}
+ #tab-weken #weekPanels .weekPanel:not(.expanded) .agendaItemTitle{align-items:start;font-size:13px;line-height:1.2}
+ #tab-weken #weekPanels .weekPanel:not(.expanded) .agendaItemTitle .ideaTitleText{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+ #tab-weken #weekPanels .weekPanel:not(.expanded) .agendaItemMeta{font-size:12px;line-height:1.25;margin-top:4px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+ #tab-weken #weekPanels .weekPanel:not(.expanded) .agendaMore{flex:none;min-height:28px;margin:0;padding:4px;font-size:12px}
+}
