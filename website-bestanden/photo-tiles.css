@@ -1215,3 +1215,7 @@ body.photoDetailOpen{overflow:hidden!important}
 @media(min-width:641px){
  #ideaMap .ideaMapPanel.isList .ideaMapPanelHead h3{font-size:18px!important;line-height:1.3}
 }
+
+/* Reserve the same two-line title space on every compact tile. */
+#ideaCards.compactTiles .photoTileTitle{align-items:flex-start;min-height:2.5em;line-height:1.25;overflow-wrap:normal}
+#ideaCards.compactTiles .photoTileTitle>span:last-child{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}

@@ -224,6 +224,21 @@
     if(!wasOpen)sheet.querySelector('header button').focus({preventScroll:true});return true;
   }
   wide.addEventListener('change',()=>{if(dialog?.open){close();}});
+  // Short display names only: search, accessibility and details retain the full title.
+  const compactTitles=new Map([
+    ['Makerspace of creatieve werkplaats verkennen','Makerspace ontdekken'],
+    ['Skatepark, pumptrack of urban sports sessie','Skaten, pumptrack of urban sports'],
+    ['Route kiezen met maximaal drie haltes','Route met drie haltes'],
+    ['Graffiti op doek of houten panelen','Graffiti op doek of hout'],
+    ['Podcastwandeling of audio-opdracht','Podcastwandeling'],
+    ['Park Sonsbeek of Meinerswijk met natuurmissie','Natuurmissie Sonsbeek / Meinerswijk'],
+    ['Vlooienmarkt of rommelmarkt speurmissie','Speurmissie op de rommelmarkt'],
+    ['Special interest route: strips, games of platenzaken','Strips, games en platenroute'],
+    ['Hindernis- of Expeditie Robinson challenge in Ewijk','Hindernischallenge in Ewijk'],
+    ['Vierdaagsefeesten met persoonlijk blokkenschema','Vierdaagsefeesten op jouw tempo'],
+    ['Stevenskerk bezoeken en Stevenstoren beklimmen','Stevenskerk en Stevenstoren'],
+    ['Esports of game-toernooi op kleine schaal','Klein esports- of gametoernooi']
+  ]);
   function render(items,style){
     const on=style!=='classic';compact=style==='compact';
     enabled=on;current=new Map(items.map(item=>[ideaDomKey(item),item]));
@@ -239,7 +254,7 @@
       const badge=`<span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>`;
       const facts=`<span class="photoTileFacts"><span class="photoTileMeta">${metadata.pills}</span>${compact?'':`<span class="photoTileExtra">${metadata.meta}</span>`}</span>`;
       button.innerHTML=compact
-        ? `<span class="photoTileMedia">${media}<span class="photoTileOverlay">${badge}${facts}</span></span><span class="photoTileContent"><span class="photoTileTitle"><span>${escapeHtml(item.title)}</span></span></span>`
+        ? `<span class="photoTileMedia">${media}<span class="photoTileOverlay">${badge}${facts}</span></span><span class="photoTileContent"><span class="photoTileTitle"><span>${escapeHtml(compactTitles.get(item.title)||item.title)}</span></span></span>`
         : `${media}<span class="photoTileContent"><span class="photoTileTitle">${badge}<span>${escapeHtml(item.title)}</span></span>${facts}</span>`;
       card.replaceWith(button);
     });
