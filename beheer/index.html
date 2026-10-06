@@ -986,7 +986,7 @@
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260930-agenda-rebuild-v1">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20261006-material-checklist-v1">
   <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261006-material-checklist-v1">
-  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261006-toolbar-white-v34">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261006-featured-alignment-v35">
   <link rel="stylesheet" href="../website-bestanden/header-layout-shared.css?v=20261001-v1">
   <link rel="stylesheet" href="../website-bestanden/navigation-colors-shared.css?v=20261006-single-sheet-surface-v26">
 </head>
@@ -1336,7 +1336,7 @@
           <div class="featuredAdminHead">
             <div>
               <h3 id="featuredAdminTitle">Uitgelicht</h3>
-              <p>Kies hieronder maximaal vijf activiteiten. Pas met de pijlen de volgorde in de carrousel aan.</p>
+              <p>Kies hieronder maximaal vijf activiteiten. Sleep de activiteiten of gebruik de pijlen om de volgorde in de carrousel aan te passen.</p>
               <span class="featuredAdminSaveNote">Wijzigingen worden automatisch opgeslagen.</span>
             </div>
             <div class="featuredAdminHeadActions">
@@ -3108,6 +3108,10 @@
     if(selector === '#adminStatus') window.AdminPolish?.status(message,kind);
   }
   function actionIcon(name){
+    if(name === 'up') return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg>';
+    if(name === 'down') return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14m-6-6 6 6 6-6"/></svg>';
+    if(name === 'close') return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>';
+    if(name === 'plus') return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
     if(name === 'eye') return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
     if(name === 'eyeOff') return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 3 18 18"></path><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path><path d="M9.9 5.2A10.6 10.6 0 0 1 12 5c6.5 0 10 7 10 7a18 18 0 0 1-2.7 3.4"></path><path d="M6.6 6.7C3.6 8.6 2 12 2 12s3.5 7 10 7a10.8 10.8 0 0 0 4.4-.9"></path></svg>';
     if(name === 'trash') return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v5"></path><path d="M14 11v5"></path></svg>';
@@ -3244,13 +3248,13 @@
     const selected = keys.map(key => ({key, item:byKey.get(key)})).filter(entry => entry.item);
     $('#featuredAdminCount').textContent = `${selected.length} / 5`;
     $('#clearFeaturedIdeasBtn').disabled = selected.length === 0;
-    $('#featuredAdminList').innerHTML = selected.length ? selected.map(({key,item}, index) => `<div class="featuredAdminItem">
-      <span class="featuredAdminIndex">${index + 1}</span>
+    $('#featuredAdminList').innerHTML = selected.length ? selected.map(({key,item}, index) => `<div class="featuredAdminItem" data-featured-sort-key="${escapeHtml(key)}">
+      <button type="button" class="featuredDragHandle" aria-label="Versleep ${escapeHtml(item.title)}" title="Versleep om de volgorde aan te passen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5h.01M15 5h.01M9 12h.01M15 12h.01M9 19h.01M15 19h.01"/></svg></button>
       <span class="featuredAdminActivity">${adminIdeaImage(item) ? `<img class="featuredAdminThumb" src="${escapeHtml(adminIdeaImage(item).src)}" alt="" loading="lazy">` : `<span class="featuredAdminThumb featuredAdminPlaceholder" aria-hidden="true">${domainIcon(item.domain)}</span>`}<span class="featuredAdminTitle">${escapeHtml(item.title)}</span></span>
       <span class="featuredAdminActions">
-        <button class="button" type="button" data-move-featured="${escapeHtml(key)}" data-featured-direction="-1" aria-label="Omhoog" title="Omhoog"${index === 0 ? ' disabled' : ''}>↑</button>
-        <button class="button" type="button" data-move-featured="${escapeHtml(key)}" data-featured-direction="1" aria-label="Omlaag" title="Omlaag"${index === selected.length - 1 ? ' disabled' : ''}>↓</button>
-        <button class="button hot" type="button" data-feature-idea="${escapeHtml(key)}" aria-label="Verwijderen" title="Verwijderen">×</button>
+        <button class="button" type="button" data-move-featured="${escapeHtml(key)}" data-featured-direction="-1" aria-label="Omhoog" title="Omhoog"${index === 0 ? ' disabled' : ''}>${actionIcon('up')}</button>
+        <button class="button" type="button" data-move-featured="${escapeHtml(key)}" data-featured-direction="1" aria-label="Omlaag" title="Omlaag"${index === selected.length - 1 ? ' disabled' : ''}>${actionIcon('down')}</button>
+        <button class="button hot" type="button" data-feature-idea="${escapeHtml(key)}" aria-label="Uit Uitgelicht verwijderen" title="Uit Uitgelicht verwijderen">${actionIcon('close')}</button>
       </span>
     </div>`).join('') : '<div class="empty">Nog niets gekozen. Zonder selectie kiest de site automatisch één activiteit.</div>';
   }
@@ -5060,7 +5064,7 @@
   </script>
   <script src="../website-bestanden/admin-polish.js?v=20261006-top-toolbar-v32"></script>
 <script src="../website-bestanden/photo-tiles.js?v=20261006-editor-sections-v3"></script>
-<script src="../website-bestanden/admin-visual.js?v=20261006-featured-sheet-v33"></script>
-<script src="../website-bestanden/admin-editors.js?v=20261006-featured-sheet-v33"></script>
+<script src="../website-bestanden/admin-visual.js?v=20261006-featured-alignment-v35"></script>
+<script src="../website-bestanden/admin-editors.js?v=20261006-featured-alignment-v35"></script>
 </body>
 </html>

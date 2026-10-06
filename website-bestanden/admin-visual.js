@@ -10,7 +10,8 @@
   const featuredPanel=document.createElement('section');
   featuredPanel.id='adminFeaturedSheet';featuredPanel.className='adminEditorCard adminPublicSurface photoDetailPanel';featuredPanel.hidden=true;
   featuredPanel.setAttribute('aria-labelledby','adminFeaturedHeading');
-  featuredPanel.innerHTML='<header class="adminPreviewHeader"><h2 id="adminFeaturedHeading">Uitgelicht beheren</h2><button class="adminEditorClose" type="button" aria-label="Uitgelicht sluiten">×</button></header><div class="adminFeaturedBody"><div class="adminFeaturedSelection"></div><label class="teamField"><span>Activiteit toevoegen aan Uitgelicht</span><input type="search" id="adminFeaturedSearch" placeholder="Zoek een activiteit"></label><div class="adminFeaturedChoices"></div><p role="status" class="adminFeaturedStatus"></p></div>';
+  featuredPanel.innerHTML='<header class="panelHead"><h3 id="adminFeaturedHeading">Uitgelicht beheren</h3><button class="adminEditorClose" type="button" aria-label="Uitgelicht sluiten">×</button></header><div class="adminFeaturedBody"><div class="adminFeaturedSelection"></div><label class="teamField"><span>Activiteit toevoegen aan Uitgelicht</span><input type="search" id="adminFeaturedSearch" placeholder="Zoek een activiteit"></label><div class="adminFeaturedChoices"></div><p role="status" class="adminFeaturedStatus"></p></div>';
+  featuredPanel.querySelector('.adminEditorClose').innerHTML=actionIcon('close');
   layer.append(featuredPanel);
   const oldManager=$('featuredManager');const manager=document.createElement('div');manager.id='featuredManager';manager.className='featuredAdminPanel';oldManager.querySelector('summary').remove();manager.append(...oldManager.childNodes);oldManager.replaceWith(manager);
   featuredPanel.querySelector('.adminFeaturedSelection').append(manager);
@@ -19,7 +20,7 @@
     const query=$('adminFeaturedSearch').value.toLocaleLowerCase();
     const selected=featuredIdeaKeys();
     const choices=allAdminIdeas().filter(item=>!item.hidden&&!selected.includes(adminFeaturedIdeaKey(item))&&item.title.toLocaleLowerCase().includes(query));
-    featuredPanel.querySelector('.adminFeaturedChoices').innerHTML=choices.map(item=>`<button class="button" type="button" data-feature-idea="${escapeHtml(adminFeaturedIdeaKey(item))}" ${selected.length>=5?'disabled':''}><span>${escapeHtml(item.title)}</span><span aria-hidden="true">＋</span></button>`).join('')||'<p>Geen activiteiten gevonden.</p>';
+    featuredPanel.querySelector('.adminFeaturedChoices').innerHTML=choices.map(item=>`<button class="button" type="button" data-feature-idea="${escapeHtml(adminFeaturedIdeaKey(item))}" ${selected.length>=5?'disabled':''}><span>${escapeHtml(item.title)}</span>${actionIcon('plus')}</button>`).join('')||'<p>Geen activiteiten gevonden.</p>';
   }
   function openFeatured(){
     returnFocus=document.activeElement;
@@ -29,6 +30,31 @@
   }
   featuredPanel.querySelector('.adminEditorClose').addEventListener('click',()=>{featuredPanel.hidden=true;window.AdminEditors?.sync();returnFocus?.focus({preventScroll:true});});
   $('adminFeaturedSearch').addEventListener('input',featuredChoices);
+  let sorting=null;
+  const sortList=$('featuredAdminList');
+  sortList.addEventListener('pointerdown',event=>{
+    const handle=event.target.closest('.featuredDragHandle');if(!handle||event.button!==0)return;
+    const row=handle.closest('[data-featured-sort-key]');
+    sorting={key:row.dataset.featuredSortKey,target:row.dataset.featuredSortKey,handle};
+    handle.setPointerCapture(event.pointerId);row.classList.add('isDragging');event.preventDefault();
+  });
+  sortList.addEventListener('pointermove',event=>{
+    if(!sorting)return;
+    const row=document.elementFromPoint(event.clientX,event.clientY)?.closest('[data-featured-sort-key]');
+    sortList.querySelectorAll('.isDropTarget').forEach(item=>item.classList.remove('isDropTarget'));
+    if(row){sorting.target=row.dataset.featuredSortKey;row.classList.add('isDropTarget');}
+  });
+  function clearSort(){sortList.querySelectorAll('.isDragging,.isDropTarget').forEach(item=>item.classList.remove('isDragging','isDropTarget'));sorting=null;}
+  sortList.addEventListener('pointercancel',clearSort);
+  sortList.addEventListener('pointerup',async()=>{
+    if(!sorting)return;
+    const {key,target}=sorting;clearSort();if(key===target)return;
+    const keys=featuredIdeaKeys();const from=keys.indexOf(key),to=keys.indexOf(target);if(from<0||to<0)return;
+    keys.splice(from,1);keys.splice(to,0,key);
+    if(await saveFeaturedIdeaKeys(keys)){renderIdeas();setStatus('#adminStatus','Volgorde van Uitgelicht aangepast.','ok');}
+    else setStatus('#adminStatus',storageErrorMessage('Volgorde opslaan lukte niet.'),'warn');
+  });
+
   new MutationObserver(()=>{featuredPanel.querySelector('.adminFeaturedStatus').textContent=$('adminStatus').textContent;}).observe($('adminStatus'),{childList:true,subtree:true,characterData:true});
 
   function tile(item){

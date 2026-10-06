@@ -181,7 +181,7 @@
     layer.setAttribute('role',modal?'dialog':'region');
     layer.setAttribute('aria-label',!idea.hidden?'Activiteit bewerken':'Uitgelicht beheren');
     if(modal)layer.setAttribute('aria-modal','true');else layer.removeAttribute('aria-modal');
-    layer.classList.toggle('isEditing',!idea.hidden);
+    layer.classList.toggle('isEditing',!idea.hidden||detail);
     layer.classList.toggle('isModal',modal);
     document.body.classList.toggle('adminDetailDocked',!layer.hidden&&!modal);
     document.body.classList.toggle('adminEditorOpen',open);

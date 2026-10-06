@@ -453,7 +453,7 @@ body.adminEditorOpen{overflow:hidden!important}
  body.adminDetailDocked #adminApp.adminMobileNavigation .adminWorkspaceShell{margin-left:480px;width:calc(100% - 480px)}
  body.adminDetailDocked .adminIdeaLayer{top:0;height:100dvh}
  body.adminDetailDocked #adminApp .adminPublicSurface>.adminActionTopbar{position:sticky;top:0;z-index:1200;min-height:60px;height:60px;background:var(--site-topbar-surface)}
- body.adminDetailDocked #adminIdeaEditPanel.adminEditorCard{height:100%;max-height:100%;border-radius:0 16px 16px 0;clip-path:inset(0 round 0 16px 16px 0)}
+ body.adminDetailDocked :is(#adminIdeaEditPanel,#adminFeaturedSheet).adminEditorCard{height:100%;max-height:100%;border-radius:0 16px 16px 0;clip-path:inset(0 round 0 16px 16px 0)}
 
 }
 /* Desktop uses the sidebar; narrow screens use the mobile menu. */
@@ -497,7 +497,7 @@ body.adminEditorOpen{overflow:hidden!important}
 @container (max-width:1050px){#adminApp #adminIdeaCards.photoTiles{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 @container (max-width:760px){#adminApp #adminIdeaCards.photoTiles{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 /* The editor inherits public form fields through adminPublicSurface. */
-#adminIdeaEditPanel{font-family:Manrope,system-ui,sans-serif;color:#315f6b}
+:is(#adminIdeaEditPanel,#adminFeaturedSheet){font-family:Manrope,system-ui,sans-serif;color:#315f6b}
 #adminIdeaEditPanel h3{font:650 20px/1.35 Manrope,system-ui,sans-serif;margin:0;color:#315f6b}
 #adminIdeaEditPanel .teamField{min-width:0}
 #adminIdeaEditPanel :is(input,select,textarea,button){font-family:inherit;box-sizing:border-box}
@@ -507,10 +507,10 @@ body.adminEditorOpen{overflow:hidden!important}
 
 /* A fixed filter-style header/footer with only the form contents scrolling. */
 .adminIdeaLayer.isEditing{backdrop-filter:none}
-#adminIdeaEditPanel.adminEditorCard{display:grid;grid-template-rows:auto auto minmax(0,1fr);padding:0;overflow:hidden;width:min(480px,100%);border-radius:0;background:var(--sheet-surface)}
-#adminIdeaEditPanel .panelHead{position:relative;z-index:20;background:transparent;border-bottom:0;top:auto;margin:0;min-height:64px;padding:16px 60px 16px 20px;box-sizing:border-box;display:flex;align-items:center}
-#adminIdeaEditPanel .panelHead h3{font-size:19px;line-height:1.4}
-#adminIdeaEditPanel .panelHead p{display:none}
+:is(#adminIdeaEditPanel,#adminFeaturedSheet).adminEditorCard{display:grid;grid-template-rows:auto auto minmax(0,1fr);padding:0;overflow:hidden;width:min(480px,100%);border-radius:0;background:var(--sheet-surface)}
+:is(#adminIdeaEditPanel,#adminFeaturedSheet) .panelHead{position:relative;z-index:20;background:transparent;border-bottom:0;top:auto;margin:0;min-height:64px;padding:16px 60px 16px 20px;box-sizing:border-box;display:flex;align-items:center}
+:is(#adminIdeaEditPanel,#adminFeaturedSheet) .panelHead h3{font-family:Manrope,system-ui,sans-serif;font-size:19px;line-height:1.4}
+:is(#adminIdeaEditPanel,#adminFeaturedSheet) .panelHead p{display:none}
 #adminIdeaEditPanel #adminIdeaEditForm{display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0;gap:0;margin:0;overflow:hidden}
 #adminIdeaEditPanel .adminEditFields{padding:18px 20px 24px;overflow-y:auto;min-height:0;overscroll-behavior:contain;scroll-behavior:auto}
 #adminIdeaEditPanel .teamFormGrid{gap:12px}
@@ -528,20 +528,20 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaEditStatus{grid-column:1/-1;font-size:12px;line-height:1.5}
 #adminIdeaEditStatus:empty{display:none}
 @media(max-width:640px){
- #adminIdeaEditPanel.adminEditorCard{border-radius:24px 24px 0 0}
+ :is(#adminIdeaEditPanel,#adminFeaturedSheet).adminEditorCard{border-radius:24px 24px 0 0}
  #adminIdeaEditPanel .teamFormGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
  #adminIdeaEditPanel .adminEditFields{padding-inline:16px}
  #adminIdeaEditPanel .teamActionBar{padding-inline:16px}
 }
 
 /* Mirror the right filter sheet's 16px outer corners on the left editor. */
-@media(min-width:641px){#adminIdeaEditPanel.adminEditorCard{border-radius:0 16px 16px 0;border-right:1px solid rgba(79,142,158,.14)}}
-#adminIdeaEditPanel .adminEditorClose{top:12px;right:16px;width:32px;height:32px;min-width:32px;min-height:32px;border-radius:10px;border:1px solid rgba(79,142,158,.16);background:rgba(255,253,249,.72);color:#63858b;padding:0}
+@media(min-width:641px){:is(#adminIdeaEditPanel,#adminFeaturedSheet).adminEditorCard{border-radius:0 16px 16px 0;border-right:1px solid rgba(79,142,158,.14)}}
+:is(#adminIdeaEditPanel,#adminFeaturedSheet) .adminEditorClose{top:12px;right:16px;width:32px;height:32px;min-width:32px;min-height:32px;border-radius:10px;border:1px solid rgba(79,142,158,.16);background:rgba(255,253,249,.72);color:#63858b;padding:0}
 .adminEditorClose svg{display:block;width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
-#adminIdeaEditPanel.adminEditorCard{overflow:hidden!important;clip-path:inset(0 round 0 16px 16px 0)}
-#adminIdeaEditPanel .panelHead>div{width:100%;text-align:left}
+:is(#adminIdeaEditPanel,#adminFeaturedSheet).adminEditorCard{overflow:hidden!important;clip-path:inset(0 round 0 16px 16px 0)}
+:is(#adminIdeaEditPanel,#adminFeaturedSheet) .panelHead>div{width:100%;text-align:left}
 @media(max-width:640px){
- #adminIdeaEditPanel.adminEditorCard{clip-path:inset(0 round 24px 24px 0 0)}
+ :is(#adminIdeaEditPanel,#adminFeaturedSheet).adminEditorCard{clip-path:inset(0 round 24px 24px 0 0)}
 }
 
 /* Match the public header: identity/navigation left, workspace actions right. */
@@ -588,7 +588,7 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaEditPanel .adminDeleteAction{margin-left:auto;margin-right:6px}
 @media(min-width:1101px){
  body.adminDetailDocked .adminIdeaLayer::before{content:"";position:absolute;top:0;left:0;width:480px;height:64px;background:var(--site-topbar-surface);pointer-events:none}
- body.adminDetailDocked #adminIdeaEditPanel{position:relative}
+ body.adminDetailDocked :is(#adminIdeaEditPanel,#adminFeaturedSheet){position:relative}
 }
 
 #adminIdeaEditPanel .adminDeleteAction + .adminToolbarSave{margin-left:0}
@@ -612,16 +612,16 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaEditPanel .adminEditToolbar .adminToolbarSave.hasChanges{background:#e5f2ef}
 #adminIdeaEditPanel .adminEditToolbar .adminDeleteAction:is(:hover,:focus-visible){color:#9b5146;background:#f8eeeb}
 
-#adminFeaturedSheet{display:grid;grid-template-rows:auto minmax(0,1fr);padding:0;overflow:hidden;border-radius:0 16px 16px 0;border-right:1px solid rgba(79,142,158,.14)}
+#adminFeaturedSheet.adminEditorCard{display:grid;grid-template-rows:auto minmax(0,1fr)}
 #adminFeaturedSheet[hidden]{display:none}
 #adminFeaturedSheet .adminPreviewHeader{padding:16px 60px 16px 20px;min-height:64px;box-sizing:border-box}
 #adminFeaturedHeading{font-size:19px;font-weight:700;margin:0}
-.adminFeaturedBody{overflow-y:auto;padding:12px 20px 24px;min-height:0;color:#315f6b}
+.adminFeaturedBody{overflow-y:auto;padding:18px 20px 24px;min-height:0;color:#315f6b;overscroll-behavior:contain}
 #adminFeaturedSheet #featuredManager{display:block;background:transparent;border:0;padding:0;margin:0 0 24px}
 #adminFeaturedSheet .featuredAdminHead{display:block}
 #adminFeaturedSheet .featuredAdminHead h3{display:none}
 #adminFeaturedSheet .featuredAdminHeadActions{justify-content:space-between;margin:12px 0}
-#adminFeaturedSheet .featuredAdminItem{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;padding:12px 0;border-bottom:1px solid rgba(79,142,158,.12)}
+#adminFeaturedSheet .featuredAdminItem{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;padding:12px;border:1px solid rgba(79,142,158,.12);border-radius:16px;background:#fffdf9}
 #adminFeaturedSheet .featuredAdminActions{grid-column:2;justify-content:flex-end}
 .adminFeaturedChoices{display:grid;gap:8px;margin-top:12px}
 #adminFeaturedSheet .adminFeaturedChoices .button{display:flex;justify-content:space-between;text-align:left;white-space:normal;border-radius:12px}
@@ -635,8 +635,27 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminFeaturedSheet .featuredAdminThumb{width:56px;height:56px;flex:0 0 56px;object-fit:cover;border-radius:12px}
 #adminFeaturedSheet .featuredAdminTitle{font-size:14px;line-height:1.4}
 #adminFeaturedSheet .featuredAdminActions{display:flex;gap:8px}
-#adminFeaturedSheet .button{border:1px solid rgba(79,142,158,.16);background:rgba(255,255,255,.7);color:#315f6b;border-radius:12px;padding:8px 10px;font:inherit;cursor:pointer}
+#adminFeaturedSheet .button{border:1px solid rgba(79,142,158,.16);background:#fffdf9;color:#315f6b;border-radius:12px;padding:8px 10px;font:inherit;cursor:pointer}
 #adminFeaturedSheet .button:hover{background:#e5f2ef}
 #adminFeaturedSheet .button:disabled{opacity:.4;cursor:default}
 #adminFeaturedSheet .featuredAdminHeadActions{display:flex;align-items:center}
 #adminFeaturedSheet .featuredAdminHead p,#adminFeaturedSheet .featuredAdminSaveNote{font-size:13px;line-height:1.5}
+
+#adminFeaturedSheet .featuredAdminActions .button{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;width:36px;height:36px;min-height:36px;padding:0;flex:0 0 36px;line-height:1;border-radius:10px}
+#adminFeaturedSheet :is(.button,.adminEditorClose) svg{display:block;width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+#adminFeaturedSheet .featuredAdminIndex{background:#e5f2ef;color:#315f6b}
+#adminFeaturedSheet .featuredAdminCount{color:#315f6b}
+#adminFeaturedSheet .featuredAdminTitle{white-space:normal;overflow-wrap:anywhere}
+#adminFeaturedSheet .featuredAdminActions .button:disabled:hover{background:#fffdf9}
+#adminFeaturedSheet .adminEditorClose:hover{background:#e5f2ef}
+#adminFeaturedSheet .featuredAdminActions .hot:hover{color:#9b5146;background:#f8eeeb}
+
+@media(max-width:640px){.adminFeaturedBody{padding-inline:16px}}
+
+#adminFeaturedSheet .featuredDragHandle{display:grid;place-items:center;width:28px;height:40px;padding:0;border:0;border-radius:8px;background:transparent;color:#63858b;cursor:grab;touch-action:none}
+#adminFeaturedSheet .featuredDragHandle svg{width:20px;height:24px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round}
+#adminFeaturedSheet .featuredDragHandle:hover{background:#e5f2ef}
+#adminFeaturedSheet .featuredAdminItem.isDragging{opacity:.55}
+#adminFeaturedSheet .featuredAdminItem.isDropTarget{border-color:#4f8e9e;background:#e5f2ef}
+
+#adminFeaturedSheet .adminEditorClose{display:inline-flex;align-items:center;justify-content:center}
