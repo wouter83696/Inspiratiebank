@@ -23,6 +23,8 @@
     const image=fields.querySelector('.ideaImageFrame img');
     const src=photoPreview.querySelector('img')?.getAttribute('src');
     if(image){image.hidden=!src;if(src)image.src=src;}
+    const dropzone=fields.querySelector('.adminPhotoDropzone');
+    if(dropzone)dropzone.hidden=!!src;
     const button=idea.querySelector('.adminInlinePhotoButton');
     if(button){button.innerHTML=actionIcon('image')+'<span>Foto</span>';button.setAttribute('aria-label',src?'Foto wijzigen':'Foto uploaden (verplicht)');}
   }
@@ -41,7 +43,23 @@
     fieldFor('Title').classList.add('adminInlineTitle');
     let figure=article.querySelector('.ideaImageFrame');
     if(!figure){figure=document.createElement('figure');figure.className='ideaImageFrame';article.prepend(figure);}
+    figure.removeAttribute('aria-hidden');
+    if(figure.classList.contains('ideaImagePlaceholder')){figure.classList.remove('ideaImagePlaceholder');figure.replaceChildren();}
     if(!figure.querySelector('img'))figure.insertAdjacentHTML('afterbegin','<img alt="">');
+    const dropzone=document.createElement('button');dropzone.type='button';dropzone.className='adminPhotoDropzone';dropzone.setAttribute('aria-label','Foto toevoegen: klik of sleep een foto');
+    dropzone.innerHTML=actionIcon('image')+'<strong>Sleep hier een foto naartoe</strong><span>of klik om een foto te kiezen</span><small>Foto verplicht · maximaal 1,5 MB</small>';
+    dropzone.addEventListener('click',()=>$('adminEditIdeaImageUpload').click());
+    figure.append(dropzone);
+    figure.addEventListener('dragover',event=>{event.preventDefault();if(!dropzone.hidden)dropzone.classList.add('isDragging');});
+    figure.addEventListener('dragleave',event=>{if(!figure.contains(event.relatedTarget))dropzone.classList.remove('isDragging');});
+    figure.addEventListener('drop',event=>{
+      event.preventDefault();dropzone.classList.remove('isDragging');
+      const files=event.dataTransfer?.files;
+      if(!files?.length)return;
+      if(files.length!==1||!files[0].type.startsWith('image/')){setStatus('#adminIdeaEditStatus','Kies één afbeeldingsbestand.','warn');return;}
+      const input=$('adminEditIdeaImageUpload');
+      input.files=files;input.dispatchEvent(new Event('change',{bubbles:true}));
+    });
     const photoButton=document.createElement('button');photoButton.type='button';photoButton.className='ideaFilterSheetAction secondary adminInlinePhotoButton';
     photoButton.addEventListener('click',()=>$('adminEditIdeaImageUpload').click());
     const toolbar=document.createElement('div');toolbar.className='adminEditToolbar';toolbar.setAttribute('role','group');toolbar.setAttribute('aria-label','Activiteit beheren');
