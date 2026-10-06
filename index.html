@@ -9631,8 +9631,24 @@
     const panel = map?.querySelector('.ideaMapPanel');
     if(!panel) return;
     const points = filteredInspirationItems().map(ideaMapPoint).filter(Boolean);
+    const openingDetail = Boolean(ideaMapDetailKey) && !panel.classList.contains('isSingleDetail');
     panel.outerHTML = ideaMapPanelMarkup(points);
     setActiveIdeaMapItem(activeIdeaMapKey, {scroll, emphasize});
+    if(openingDetail) requestAnimationFrame(alignDesktopMapDetail);
+  }
+  function alignDesktopMapDetail(){
+    if(!window.matchMedia('(min-width:981px)').matches) return;
+    const panel = $('#ideaMap .ideaMapPanel.isSingleDetail');
+    const controls = document.querySelector('.desktopStickyControls');
+    if(!panel || !controls) return;
+    const controlsRect = controls.getBoundingClientRect();
+    if(!controlsRect.height) return;
+    const targetTop = Math.max(0, controlsRect.bottom) + 20;
+    const excessSpace = panel.getBoundingClientRect().top - targetTop;
+    // Only lift a newly opened detail; switching activities must not move the page.
+    if(excessSpace > 8){
+      window.scrollBy({top:excessSpace, behavior:motionScrollBehavior()});
+    }
   }
   function syncIdeaMapPanelPresentation(){
     const panel = $('#ideaMap .ideaMapPanel');
