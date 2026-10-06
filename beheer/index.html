@@ -986,7 +986,7 @@
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20261006-compact-week-v4">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20261006-material-rows-v51">
   <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261006-motion-v51">
-  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261006-source-tabs-v11">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261006-sheet-consistency-v12">
   <link rel="stylesheet" href="../website-bestanden/header-layout-shared.css?v=20261001-v1">
   <link rel="stylesheet" href="../website-bestanden/navigation-colors-shared.css?v=20261006-header-selection-v28">
 </head>
@@ -3777,6 +3777,7 @@
       return;
     }
     resetLinkForm();
+    window.AdminSources?.saved();
     renderLinks();
     setStatus('#linkStatus', currentEntry ? 'Bronlink gewijzigd en direct zichtbaar bij Bronnen na verversen.' : 'Link toegevoegd en direct zichtbaar bij Bronnen na verversen.', 'ok');
   }
@@ -3815,7 +3816,8 @@
 	      return normalize(entry.link.name) === normalize(next.name) || entry.link.url === next.url;
 	    });
 	  }
-	  function editSourceLink(kind, identifier){
+	  async function editSourceLink(kind, identifier){
+      if(window.AdminSources && !await window.AdminSources.canLeave())return;
 	    const currentEntry = kind === 'custom'
 	      ? managedSourceLinks().find(entry => entry.kind === 'custom' && Number(entry.index) === Number(identifier))
 	      : managedSourceLinks().find(entry => entry.kind === 'base' && entry.key === identifier);
@@ -3827,12 +3829,13 @@
 	    syncCustomSelect($('#linkCategory'));
 	    $('#linkSubmitBtn').textContent = 'Wijziging opslaan';
 	    $('#cancelLinkEditBtn').hidden = false;
-	    window.AdminSources?.open();
+	    await window.AdminSources?.open();
     $('#linkForm').hidden=false;
+    window.AdminSources?.beginEdit();
     $('#linkName').focus();
 	    setAdminWorkspace('agenda', {scroll:false, scrollTarget:'sourceOwnPanel'});
 	    $('#sourceOwnPanel').scrollIntoView({behavior:'smooth', block:'start'});
-	    setStatus('#linkStatus', 'Pas de velden aan en klik op Wijziging opslaan.', 'ok');
+	    setStatus('#linkStatus', 'Pas de velden aan en klik op Opslaan.', 'ok');
 	  }
 	  async function removeCustomLink(index){
 	    if(!(await confirmDialog('Deze eigen bronlink verwijderen?', {confirmText:'Verwijderen'}))) return;
@@ -4886,7 +4889,11 @@
     $('#addAdminIdeaBtn').addEventListener('click',()=>{resetAdminIdeaEditForm();startAdminIdeaEdit('', '', {kind:'collega-toegevoegd',key:crypto.randomUUID(),isNew:true,title:'',source:'Beheer'});});
     $('#addAdminAgendaBtn').addEventListener('click',()=>startAgendaEdit('',{item:{id:crypto.randomUUID(),isNew:true,title:'',source:'Beheer'}}));
     $$('[data-add-admin-source]').forEach(button=>button.addEventListener('click',()=>{resetLinkForm();setAdminWorkspace('agenda',{scrollTarget:'sourceOwnPanel',hash:true});$('#linkName').focus({preventScroll:true});}));
-    $('#linkForm').addEventListener('submit', addCustomLink);
+    $('#linkForm').addEventListener('submit', async event=>{
+      if($('#linkSubmitBtn').disabled){event.preventDefault();return;}
+      $('#linkSubmitBtn').disabled=true;$('#linkSubmitBtn').textContent='Opslaan…';
+      try{await addCustomLink(event);}finally{$('#linkSubmitBtn').disabled=false;$('#linkSubmitBtn').textContent='Opslaan';}
+    });
     $('#cancelLinkEditBtn').addEventListener('click', () => {
       resetLinkForm();
       setStatus('#linkStatus', 'Wijzigen geannuleerd.', 'warn');
@@ -4937,7 +4944,12 @@
     });
     $('#confirmModalCancel').addEventListener('click', () => closeConfirmDialog(false));
     $('#confirmModalConfirm').addEventListener('click', () => closeConfirmDialog(true));
-    $('#agendaEditForm').addEventListener('submit', saveAgendaEdit);
+    $('#agendaEditForm').addEventListener('submit', async event=>{
+      const button=$('#agendaEditForm button[type=submit]');
+      if(button.disabled){event.preventDefault();return;}
+      button.disabled=true;button.textContent='Opslaan…';
+      try{await saveAgendaEdit(event);}finally{button.disabled=false;button.textContent='Opslaan';}
+    });
     $('#agendaEditCancel').addEventListener('click', () => window.AdminEditors.requestAgendaClose());
     $('#agendaEditModal').addEventListener('click', event => {
       if(event.target.id === 'agendaEditModal') window.AdminEditors.requestAgendaClose();
@@ -5059,8 +5071,8 @@
   <script src="../website-bestanden/admin-polish.js?v=20261006-top-toolbar-v32"></script>
 <script src="../website-bestanden/photo-tiles.js?v=20261006-editor-sections-v3"></script>
 <script src="../website-bestanden/admin-visual.js?v=20261006-toolbar-border-v50"></script>
-<script src="../website-bestanden/admin-editors.js?v=20261006-sources-sheet-v9"></script>
+<script src="../website-bestanden/admin-editors.js?v=20261006-source-close-v10"></script>
 <link rel="stylesheet" href="../website-bestanden/select-controls.css?v=20261006-fixed-textareas-v2">
-<script src="../website-bestanden/admin-agenda-sheets.js?v=20261006-header-selection-v12"></script>
+<script src="../website-bestanden/admin-agenda-sheets.js?v=20261006-sheet-consistency-v13"></script>
 </body>
 </html>

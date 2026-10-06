@@ -176,7 +176,7 @@
   function closeButton(parent,action){const button=document.createElement('button');button.type='button';button.className='adminEditorClose';button.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>';button.setAttribute('aria-label','Formulier sluiten');button.addEventListener('click',action);parent.append(button);}
   closeButton(idea.querySelector('.panelHead'),()=>$('adminIdeaEditCancelBtn').click());
   closeButton(agenda.querySelector('.confirmModalTop'),()=>requestAgendaClose());
-  layer.addEventListener('click',e=>{if(e.target===layer){if(!agenda.hidden)requestAgendaClose();else if(!idea.hidden)$('adminIdeaEditCancelBtn').click();else if(document.getElementById('adminAgendaManagerSheet')?.hidden===false)document.querySelector('#adminAgendaManagerSheet .adminEditorClose').click();else if(document.getElementById('adminSourcesSheet')?.hidden===false)window.AdminSources.close();else AdminVisual.close();}});
+  layer.addEventListener('click',e=>{if(e.target===layer){if(!agenda.hidden)requestAgendaClose();else if(!idea.hidden)$('adminIdeaEditCancelBtn').click();else if(document.getElementById('adminAgendaManagerSheet')?.hidden===false)document.querySelector('#adminAgendaManagerSheet .adminEditorClose').click();else if(document.getElementById('adminSourcesSheet')?.hidden===false)window.AdminSources.requestClose();else AdminVisual.close();}});
   let ideaFocus=null,agendaFocus=null,agendaDraft='',closing=false;
   const snapshot=()=>JSON.stringify([...$('agendaEditForm').elements].filter(e=>e.tagName!=='BUTTON').map(e=>[e.id,e.type==='checkbox'?e.checked:e.value]));
   function sync(){

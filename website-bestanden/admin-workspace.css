@@ -980,3 +980,30 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
 
 #adminSourcesSheet .sharedSourceMain strong{color:#315f6b}
 #adminSourcesSheet .sharedSourceMain>span{color:#71817e;line-height:1.5}
+
+/* Shared editing rhythm across management sheets. */
+#adminIdeaLayer{--admin-field-gap:8px;--admin-section-gap:16px;--admin-field-height:40px}
+#adminIdeaLayer :is(.adminAgendaFieldGrid,.adminEditFields) :is(label,.teamField),
+#adminApp #adminSourcesSheet #linkForm label{gap:var(--admin-field-gap);font-size:14px;line-height:1.4}
+#adminIdeaLayer .adminAgendaFieldGrid,#adminApp #adminSourcesSheet #linkForm{gap:var(--admin-section-gap)}
+#adminIdeaLayer :is(.adminAgendaFieldGrid,.adminEditFields) input:not([type=checkbox]):not([type=file]),
+#adminApp #adminSourcesSheet #linkForm input{min-height:var(--admin-field-height);font-size:14px;padding:9px 12px;border-radius:12px;box-sizing:border-box}
+#adminIdeaLayer :is(.adminAgendaFieldGrid,.adminEditFields) textarea{font-size:14px;line-height:1.5;padding:10px 12px;border-radius:12px}
+#adminIdeaLayer .adminAgendaFieldGrid>.wide{grid-column:1/-1}
+#adminIdeaLayer .ideaFilterSheetAction.hasChanges{background:#e5f2ef}
+#adminSourcesSheet footer.isEditing{grid-template-columns:auto minmax(0,1fr)}
+#adminSourcesSheet footer.isEditing button{grid-column:auto}
+#adminSourcesSheet [hidden]{display:none!important}
+#adminSourcesSheet .adminSourceSearch{margin:0 0 12px}
+#adminSourcesSheet #linkStatus{margin:8px 0;font-size:13px;line-height:1.5}
+#agendaEditModal .adminAgendaToolbar .adminLabelledAction{width:auto;flex:0 1 auto;gap:6px;font:500 13px Manrope,system-ui,sans-serif}
+@media(min-width:1101px){
+ body.adminDetailDocked #agendaReviewPanel .weekBody{overflow:visible}
+ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:0;grid-template-columns:minmax(0,1fr)}
+ body.adminDetailDocked #agendaReviewPanel .agendaDay{display:grid;grid-template-columns:110px minmax(0,1fr);align-items:start;border-left:0;border-top:1px solid rgba(79,142,158,.1);padding:16px;gap:16px}
+ body.adminDetailDocked #agendaReviewPanel .agendaHead{position:static;min-width:0}
+ body.adminDetailDocked #agendaReviewPanel .agendaGroup{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+ body.adminDetailDocked #agendaReviewPanel .agendaItemTitle{hyphens:none}
+ body.adminDetailDocked #agendaReviewPanel .weekHeadingRow{flex-wrap:wrap;gap:12px}
+ body.adminDetailDocked #agendaReviewPanel .weekHeadingActions{margin-left:0}
+}

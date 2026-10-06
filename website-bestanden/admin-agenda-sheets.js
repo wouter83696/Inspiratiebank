@@ -18,12 +18,16 @@
  ['Source','Url'].forEach(key=>advanced.querySelector('.adminAgendaAdvancedFields').append($('agendaEdit'+key).closest('label')));
  grid.append(advanced);
 
+ let agendaSaveBaseline='';
+ const agendaSaveSnapshot=()=>JSON.stringify([...form.querySelectorAll('input,select,textarea')].map(field=>field.type==='checkbox'?field.checked:field.value));
  function updatePreview(){
+   footer.querySelector('button[type=submit]').classList.toggle('hasChanges',agendaSaveSnapshot()!==agendaSaveBaseline);
    preview.innerHTML=AgendaViewShared.renderItem({themeClass:domainThemeClass($('agendaEditDomain').value),title:titleWithIcon($('agendaEditItemTitle').value||'Titel van de activiteit',$('agendaEditDomain').value,'agendaItemTitle'),meta:[$('agendaEditTime').value,$('agendaEditWhere').value].filter(Boolean).map(escapeHtml).join(' • ')});
  }
  form.addEventListener('input',updatePreview);form.addEventListener('change',updatePreview);
  const originalOpen=AdminEditors.openAgenda;
- AdminEditors.openAgenda=function(){
+ AdminEditors.openAgenda=async function(){
+   if(window.AdminSources && !await window.AdminSources.canLeave())return;
    manager.hidden=true;window.AdminSources?.close();$('adminIdeaEditPanel').hidden=true;AdminVisual.featuredPanel.hidden=true;
    const category=$('agendaEditDomain'),currentTheme=domainThemeClass(category.value);
    const categories=[...$('adminEditIdeaDomain').options];
@@ -46,9 +50,14 @@
        if(control.matches('[data-block-agenda-source],[data-block-agenda-title]')){
          clone.textContent=control.getAttribute('aria-label')||control.title;
          advanced.querySelector('.adminAgendaExtraActions').append(clone);
-       }else toolbar.append(clone);});
+       }else{
+         if(control.matches('[data-verify-agenda],[data-hide-agenda],button:disabled')){
+           const label=document.createElement('span');label.textContent=control.getAttribute('aria-label')||control.title||'Goedgekeurd';clone.append(label);clone.classList.add('adminLabelledAction');
+         }
+         toolbar.append(clone);
+       }});
    }
-   updatePreview();originalOpen();body.scrollTop=0;
+   agendaSaveBaseline=agendaSaveSnapshot();updatePreview();originalOpen();body.scrollTop=0;
  };
  const manager=document.createElement('section');manager.id='adminAgendaManagerSheet';manager.className='adminEditorCard adminPublicSurface';manager.hidden=true;
  manager.innerHTML='<header class="panelHead"><h3>Agenda beheren</h3><button type="button" class="adminEditorClose" aria-label="Agenda beheren sluiten">×</button></header><div class="adminAgendaManagerBody"></div><footer class="adminActivityFooter ideaFilterSheetFooter"><button type="button" class="ideaFilterSheetAction primary">Klaar</button></footer>';
@@ -80,7 +89,7 @@
  manager.querySelector('.adminEditorClose').addEventListener('click',closeManager);manager.querySelector('footer button').addEventListener('click',closeManager);
  link.addEventListener('click',async()=>{
    if(!modal.hidden){await AdminEditors.requestAgendaClose();if(!modal.hidden)return;}
-   window.AdminSources?.close();returnFocus=document.activeElement;manager.hidden=false;AdminEditors.sync();manager.querySelector('.adminEditorClose').focus();
+   if(window.AdminSources && !await window.AdminSources.canLeave())return;window.AdminSources?.close();returnFocus=document.activeElement;manager.hidden=false;AdminEditors.sync();manager.querySelector('.adminEditorClose').focus();
  });
  link.setAttribute('aria-expanded','false');
  new MutationObserver(()=>{link.setAttribute('aria-expanded',String(!manager.hidden));AdminEditors.sync();}).observe(manager,{attributes:true,attributeFilter:['hidden']});
@@ -104,8 +113,8 @@
    sourcePanel.hidden=rules;rulesPanel.hidden=!rules;
    [...tabs.children].forEach((tab,i)=>{const active=Boolean(i)===rules;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;});
  }
- [...tabs.children].forEach((tab,i)=>tab.addEventListener('click',()=>selectSourceTab(Boolean(i))));
- tabs.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const rules=event.key==='End'||(event.key!=='Home'&&sourcePanel.hidden===false);selectSourceTab(rules);tabs.children[rules?1:0].focus();});
+ [...tabs.children].forEach((tab,i)=>tab.addEventListener('click',async()=>{if(!await canLeaveSource())return;selectSourceTab(Boolean(i));}));
+ tabs.addEventListener('keydown',async event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();if(!await canLeaveSource())return;const rules=event.key==='End'||(event.key!=='Home'&&sourcePanel.hidden===false);selectSourceTab(rules);tabs.children[rules?1:0].focus();});
  selectSourceTab();
  const navigation=document.createElement('nav');navigation.className='adminAgendaHeaderNavigation';navigation.setAttribute('aria-label','Agendabeheer');link.before(navigation);navigation.append(link,sourceLink);
  let sourceFocus;
@@ -115,20 +124,58 @@
    if(!$('adminIdeaEditPanel').hidden){$('adminIdeaEditCancelBtn').click();if(!$('adminIdeaEditPanel').hidden)return;}
    selectSourceTab(options.rules===true);manager.hidden=true;AdminVisual.featuredPanel.hidden=true;sourceFocus=document.activeElement;sources.hidden=false;AdminEditors.sync();sources.querySelector('.adminEditorClose').focus();
  }
- sourceLink.addEventListener('click',openSources);
- sources.querySelectorAll('header button,footer button').forEach(button=>button.addEventListener('click',()=>{closeSources();sourceFocus?.focus();}));
- document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!sources.hidden){event.preventDefault();closeSources();sourceFocus?.focus();}});
+ sourceLink.addEventListener('click',()=>openSources());
+ sources.querySelectorAll('header button,footer button').forEach(button=>button.addEventListener('click',async()=>{if(!await canLeaveSource())return;closeSources();sourceFocus?.focus();}));
+ document.addEventListener('keydown',async event=>{if(event.key==='Escape'&&!sources.hidden&&!sourceConfirm){event.preventDefault();if(!await canLeaveSource())return;closeSources();sourceFocus?.focus();}});
  document.addEventListener('click',event=>{
    if(event.target.closest('[data-admin-scroll="sourceOwnPanel"]')){event.preventDefault();event.stopImmediatePropagation();openSources();}
-   if(event.target.closest('[data-add-admin-source]')){event.preventDefault();event.stopImmediatePropagation();openSources().then(()=>{if(sources.hidden)return;resetLinkForm();$('linkForm').hidden=false;$('linkName').focus();});}
+   if(event.target.closest('[data-add-admin-source]')){event.preventDefault();event.stopImmediatePropagation();canLeaveSource().then(async allowed=>{if(!allowed)return;await openSources();if(sources.hidden)return;resetLinkForm();$('linkForm').hidden=false;beginSourceEdit();$('linkName').focus();});}
  },true);
+
+ const sourceForm=$('linkForm'),sourceFooter=sources.querySelector('footer'),doneSource=sourceFooter.querySelector('button');
+ const cancelSource=document.createElement('button');cancelSource.type='button';cancelSource.className='ideaFilterSheetAction secondary';cancelSource.textContent='Annuleren';cancelSource.hidden=true;
+ const saveSource=$('linkSubmitBtn');saveSource.className='ideaFilterSheetAction primary';saveSource.setAttribute('form','linkForm');saveSource.textContent='Opslaan';saveSource.hidden=true;
+ sourceFooter.append(cancelSource,saveSource);sourceForm.querySelector('.linkFormActions').hidden=true;
+ sourceForm.after($('linkStatus'));
+ const sourceSearch=document.createElement('input');sourceSearch.type='search';sourceSearch.placeholder='Zoek bronnen…';sourceSearch.setAttribute('aria-label','Zoek bronnen');sourceSearch.className='adminSourceSearch';$('customLinkList').before(sourceSearch);
+ const noSources=document.createElement('p');noSources.textContent='Geen bronnen gevonden.';noSources.hidden=true;$('customLinkList').after(noSources);
+ function filterSources(){const query=sourceSearch.value.trim().toLocaleLowerCase('nl');const rows=[...$('customLinkList').querySelectorAll('.sharedSourceRow')];rows.forEach(row=>row.hidden=!row.querySelector('.sharedSourceMain').textContent.toLocaleLowerCase('nl').includes(query));noSources.hidden=!rows.length||rows.some(row=>!row.hidden);}
+ sourceSearch.addEventListener('input',filterSources);new MutationObserver(filterSources).observe($('customLinkList'),{childList:true});
+ let sourceDraft='',sourceEditing=false,sourceConfirm=null;
+ const sourceSnapshot=()=>JSON.stringify(['linkName','linkUrl','linkCategory'].map(id=>$(id).value));
+ function sourceDirty(){return sourceEditing&&sourceSnapshot()!==sourceDraft;}
+ function syncSourceSave(){saveSource.classList.toggle('hasChanges',sourceDirty());}
+ function beginSourceEdit(){sourceEditing=true;sourceDraft=sourceSnapshot();sourceForm.hidden=false;saveSource.hidden=false;cancelSource.hidden=false;doneSource.hidden=true;saveSource.textContent='Opslaan';sourceFooter.classList.add('isEditing');$('customLinkList').hidden=true;sourceSearch.hidden=true;noSources.hidden=true;sourcePanel.querySelector('.panelHead').hidden=true;sources.querySelector('header h3').textContent=editingSourceLink?'Bron bewerken':'Bron toevoegen';syncSourceSave();}
+ function finishSourceEdit(){sourceEditing=false;sourceForm.hidden=true;saveSource.hidden=true;cancelSource.hidden=true;doneSource.hidden=false;sourceFooter.classList.remove('isEditing');$('customLinkList').hidden=false;sourceSearch.hidden=false;sourcePanel.querySelector('.panelHead').hidden=false;sources.querySelector('header h3').textContent='Bronnen';filterSources();}
+ async function canLeaveSource(){
+   if(sourceEditing&&saveSource.disabled)return false;
+   if(sourceConfirm)return sourceConfirm;
+   if(sourceDirty()){
+     sourceConfirm=confirmDialog('Je hebt wijzigingen die nog niet zijn opgeslagen. Wil je deze weggooien?',{title:'Wijzigingen bewaren?',confirmText:'Wijzigingen weggooien',cancelText:'Verder bewerken'});
+     let allowed;try{allowed=await sourceConfirm;}finally{sourceConfirm=null;}if(!allowed)return false;
+   }
+   if(sourceEditing){resetLinkForm();finishSourceEdit();}return true;
+ }
+ cancelSource.addEventListener('click',canLeaveSource);
+ sourceForm.addEventListener('input',syncSourceSave);sourceForm.addEventListener('change',syncSourceSave);
+ window.addEventListener('beforeunload',event=>{if(sourceDirty()){event.preventDefault();event.returnValue='';}});
+ // Guard workspace changes before their existing handlers reset forms.
+ let replaySourceNavigation=false;
+ document.addEventListener('click',async event=>{
+   const target=event.target.closest('[data-admin-target],#addAdminIdeaBtn,#adminSidebarToggle,#logoutBtn');
+   if(!target||!sourceEditing||replaySourceNavigation)return;
+   event.preventDefault();event.stopImmediatePropagation();if(!await canLeaveSource())return;
+   closeSources();replaySourceNavigation=true;try{target.click();}finally{replaySourceNavigation=false;}
+ },true);
+ new MutationObserver(()=>syncHeaderSelection()).observe(manager,{attributes:true,attributeFilter:['hidden']});
  function syncHeaderSelection(){
    sourceLink.setAttribute('aria-expanded',String(!sources.hidden));
    [link,sourceLink].forEach(button=>button.removeAttribute('aria-current'));
-   (sources.hidden?link:sourceLink).setAttribute('aria-current','true');
+   if(!sources.hidden)sourceLink.setAttribute('aria-current','true');
+   else if(!manager.hidden)link.setAttribute('aria-current','true');
  }
  syncHeaderSelection();
  new MutationObserver(()=>{syncHeaderSelection();AdminEditors.sync();}).observe(sources,{attributes:true,attributeFilter:['hidden']});
- window.AdminSources={open:openSources,close:closeSources};
+ window.AdminSources={open:openSources,close:closeSources,requestClose:async()=>{if(await canLeaveSource()){closeSources();sourceFocus?.focus();}},canLeave:canLeaveSource,beginEdit:beginSourceEdit,saved:finishSourceEdit};
  $('agendaSelectionToolbar').hidden=true;
 })();
