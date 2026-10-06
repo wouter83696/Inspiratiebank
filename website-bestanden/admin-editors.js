@@ -20,12 +20,13 @@
     const image=fields.querySelector('.ideaImageFrame img');
     const src=photoPreview.querySelector('img')?.getAttribute('src');
     if(image){image.hidden=!src;if(src)image.src=src;}
-    const button=fields.querySelector('.adminInlinePhotoButton');
+    const button=idea.querySelector('.adminInlinePhotoButton');
     if(button){button.textContent='Foto';button.setAttribute('aria-label',src?'Foto wijzigen':'Foto uploaden (verplicht)');}
   }
   new MutationObserver(syncPhoto).observe(photoPreview,{childList:true,subtree:true});
   function mountDetail(){
     allFields.forEach(field=>oldGrid.append(field));
+    idea.querySelector('.adminEditToolbar')?.remove();
     const item=editingAdminIdea||{};
     const renderItem={...item};
     // Keep an editable materials tab even when no materials have been entered.
@@ -40,24 +41,34 @@
     const photoButton=document.createElement('button');photoButton.type='button';photoButton.className='ideaFilterSheetAction secondary adminInlinePhotoButton';
     photoButton.addEventListener('click',()=>$('adminEditIdeaImageUpload').click());
     const toolbar=document.createElement('div');toolbar.className='adminEditToolbar';toolbar.setAttribute('role','group');toolbar.setAttribute('aria-label','Activiteit beheren');
-    toolbar.append(photoButton);fieldFor('Title').after(toolbar);
+    toolbar.append(photoButton);idea.querySelector('.panelHead').after(toolbar);
     const photoField=fieldFor('ImageUpload');photoField.classList.add('adminInlineUpload');figure.after(photoField);
     const metadata=article.querySelector('.cardMetaBlock');
-    const details=document.createElement('details');details.className='adminInlineMetadata';
-    const summary=document.createElement('summary');summary.setAttribute('aria-label','Kenmerken aanpassen');
+    const details=document.createElement('section');details.className='adminInlineMetadata';
+    const summary=document.createElement('div');summary.setAttribute('aria-label','Kenmerken aanpassen');
     if(metadata){metadata.replaceWith(details);summary.append(metadata);}else article.append(details);
     details.append(summary);
-    const properties=document.createElement('button');properties.type='button';properties.className='ideaFilterSheetAction secondary';properties.textContent='Kenmerken';properties.setAttribute('aria-expanded','false');
-    properties.addEventListener('click',()=>{details.open=!details.open;});
-    details.addEventListener('toggle',()=>properties.setAttribute('aria-expanded',String(details.open)));toolbar.append(properties);
+    const properties=document.createElement('button');properties.type='button';properties.className='ideaFilterSheetAction secondary';properties.textContent='Kenmerken';
+    properties.addEventListener('click',()=>details.scrollIntoView({block:'start',behavior:'smooth'}));toolbar.append(properties);
     const grid=document.createElement('div');grid.className='teamFormGrid';details.append(grid);
     ['Domain','Location','Cost','Stimulus','Duration','Group','By'].forEach(id=>grid.append(fieldFor(id)));
     const panels=article.querySelectorAll('[role="tabpanel"]');
     panels[0].replaceChildren(fieldFor('Description'));
     panels[1].replaceChildren(fieldFor('Rules'));
     panels[2]?.replaceChildren(fieldFor('Supplies'));
+    article.querySelector('[role=tablist]')?.remove();
+    panels.forEach(panel=>{panel.hidden=false;panel.removeAttribute('role');panel.removeAttribute('aria-labelledby');panel.classList.add('adminEditTextSection');});
     const contact=article.querySelector('.photoDetailActions');
-    ['Postcode','HouseNumber','Address','DistanceKm','Url'].forEach(id=>contact.append(fieldFor(id)));
+    contact.replaceChildren();
+    const addressFields=document.createElement('div');addressFields.className='teamFormGrid adminEditAddressFields';
+    ['Postcode','HouseNumber','Address'].forEach(id=>addressFields.append(fieldFor(id)));
+    $('adminEditIdeaAddress').readOnly=true;
+    $('adminEditIdeaAddress').placeholder='Wordt aangevuld via postcode en huisnummer';
+    contact.before(addressFields);
+    const urlField=fieldFor('Url');contact.before(urlField);
+    contact.classList.add('adminContactPreview');
+    updateContact();
+    const locationShortcut=document.createElement('button');locationShortcut.type='button';locationShortcut.className='ideaFilterSheetAction secondary';locationShortcut.textContent='Locatie';locationShortcut.addEventListener('click',()=>contact.scrollIntoView({block:'start',behavior:'smooth'}));toolbar.append(locationShortcut);
     if(!item.isNew){
       const source=document.createElement('div');source.innerHTML=adminIdeaActions(item);
       const prepare=(button,label)=>{
@@ -84,6 +95,17 @@
     }
     syncPhoto();
   }
+  function updateContact(){
+    const host=fields.querySelector('.adminContactPreview');
+    if(!host||!editingAdminIdea)return;
+    const draft=editedIdeaPayload(editingAdminIdea);
+    const address=String(draft.address||'').trim();
+    const routes=address?`<section class="photoRouteChoices"><p class="ideaPracticalText">${escapeHtml(address)}</p></section>`:'';
+    const template=document.createElement('template');
+    template.innerHTML=PhotoTiles.detailContent(draft,'adminContactPreviewTitle',{card:adminIdeaCard(draft),routes});
+    host.replaceChildren(...template.content.querySelector('.photoDetailActions').childNodes);
+    host.hidden=!host.childNodes.length;
+  }
   function updateMetadata(){
     if(!editingAdminIdea)return;
     const draft=editedIdeaPayload(editingAdminIdea);
@@ -94,8 +116,8 @@
     const badge=fields.querySelector('.ideaImageDomainBadge');
     if(badge)badge.innerHTML=domainIcon(draft.domain);
   }
-  form.addEventListener('change',updateMetadata);
-  const locationFields=['Postcode','HouseNumber','Address','DistanceKm'].map(id=>$('adminEditIdea'+id).closest('.teamField'));
+  form.addEventListener('change',()=>{updateMetadata();updateContact();});
+  const locationFields=['Postcode','HouseNumber','Address'].map(id=>$('adminEditIdea'+id).closest('.teamField'));
   function syncLocationFields(){
     const value=normalizeIdeaLocation($('adminEditIdeaLocation').value);
     const show=value==='Op pad'||value==='Binnen'||Boolean($('adminEditIdeaAddress').value.trim());
