@@ -779,3 +779,16 @@
  :is(#longerOffers,#ongoingAdminSection) .ongoingTitleCell .nameWithIcon{grid-template-columns:56px minmax(0,1fr);gap:10px}
  :is(#longerOffers,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleVisual{width:56px;height:56px;min-width:56px}
 }
+
+/* Compact desktop week overview, shared by public and management pages. */
+@media(min-width:981px){
+ :is(#tab-weken,#agendaReviewPanel) .weekPanel .weekTop{padding:20px 24px 12px}
+ :is(#tab-weken,#agendaReviewPanel) .weekPanel .weekBadge{width:52px;height:52px;min-width:52px}
+ :is(#tab-weken,#agendaReviewPanel) .weekPanel .agendaDay{min-height:0;padding:12px 8px;gap:12px}
+ :is(#tab-weken,#agendaReviewPanel) .weekPanel .agendaGroup{gap:8px}
+ :is(#tab-weken,#agendaReviewPanel) .weekPanel .agendaItem{padding:10px;min-height:0}
+ :is(#tab-weken,#agendaReviewPanel) .weekPanel .agendaItemTitle{gap:6px;line-height:1.25}
+ :is(#tab-weken,#agendaReviewPanel) .weekPanel .agendaItemMeta{margin-top:6px;line-height:1.3}
+ :is(#tab-weken,#agendaReviewPanel) .weekPanel .agendaMetaRow+.agendaMetaRow{margin-top:2px}
+ :is(#tab-weken,#agendaReviewPanel) .weekPanel .agendaMore{margin-top:4px}
+}
