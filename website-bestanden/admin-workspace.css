@@ -727,18 +727,6 @@ body.adminEditorOpen{overflow:hidden!important}
 #ideaFilterSheetLayer .adminStatusFilter label{font-size:18px;font-weight:700;color:#315f6b}
 #ideaFilterSheetLayer #adminIdeaStatusFilter{width:100%;min-height:44px;padding:10px 14px;border:1px solid rgba(79,142,158,.16);border-radius:12px;background:#fffdf9;color:#315f6b;font:inherit}
 
-#ideaFilterSheetLayer .adminFilterSelect{box-sizing:border-box;width:100%;min-height:46px;padding:10px 14px;border:1px solid rgba(79,142,158,.16);border-radius:12px;background:#fffdf9;color:#315f6b;font:inherit;cursor:pointer}
-#ideaFilterSheetLayer .adminFilterSelect:hover{background:#e5f2ef}
-#ideaFilterSheetLayer .adminFilterSelect:focus-visible{outline:2px solid #8fcfc4;outline-offset:2px}
-#ideaFilterSheetLayer .adminStatusFilter label[hidden]{display:none}
-
-#ideaFilterSheetLayer .customSelect{width:100%;min-width:0}
-#ideaFilterSheetLayer .customSelectButton{box-sizing:border-box;width:100%;min-height:46px;padding:12px 40px 12px 16px;border:1px solid rgba(79,142,158,.16);border-radius:14px;background:#fffdf9;color:#315f6b;font:inherit;text-align:left;box-shadow:none}
-#ideaFilterSheetLayer .customSelectButton:hover,#ideaFilterSheetLayer .customSelect.open .customSelectButton{background:#e5f2ef}
-#ideaFilterSheetLayer .customSelectMenu{box-sizing:border-box;width:100%;max-width:none;border:1px solid rgba(79,142,158,.16);border-radius:14px;background:#fffdf9;padding:6px;box-shadow:0 8px 24px rgba(23,79,93,.12)}
-#ideaFilterSheetLayer .customSelectOption{color:#315f6b;font:inherit;border-radius:9px;padding:10px 12px;min-height:42px;background:transparent}
-#ideaFilterSheetLayer .customSelectOption:is(:hover,:focus-visible,[aria-selected="true"]){background:#e5f2ef;color:#315f6b}
-#ideaFilterSheetLayer .customNativeSelect{position:absolute!important;width:1px!important;height:1px!important;min-height:0!important;padding:0!important;opacity:0;pointer-events:none}
 
 :is(.adminFeaturedFooter,.adminActivityFooter) .ideaFilterSheetAction.primary{border:1.5px solid rgba(23,79,93,.48);border-radius:12px;background:rgba(255,253,249,.72);color:#236875;box-shadow:none;font-weight:600;transition:background .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease)}
 :is(.adminFeaturedFooter,.adminActivityFooter) .ideaFilterSheetAction.primary:hover:not(:disabled){border-color:rgba(23,79,93,.68);background:rgba(168,225,221,.24);color:#1f5763}
@@ -749,14 +737,7 @@ body:not(.adminMode) > .topbar .actions{display:flex;background:transparent;bord
 body:not(.adminMode) > .topbar .topLink{background:transparent;border:0;box-shadow:none;padding:6px 0;color:#63858b;text-decoration:none}
 body:not(.adminMode) > .topbar .topLink:hover{text-decoration:underline;color:#315f6b}
 
-/* Compact filter controls; fixed chevron alignment independent of label length. */
-#ideaFilterSheetLayer .customSelectButton{position:relative;min-height:40px;padding:9px 36px 9px 12px;border-radius:12px;font-size:14px;line-height:1.4;background:#fffdf9}
-#ideaFilterSheetLayer .customSelectButton:hover,#ideaFilterSheetLayer .customSelect.open .customSelectButton{background:#fffdf9;border-color:rgba(79,142,158,.3)}
-#ideaFilterSheetLayer .customSelectButton::after{position:absolute;right:12px;top:50%;width:16px;height:16px;margin:0;transform:translateY(-50%);background-size:16px}
-#ideaFilterSheetLayer .customSelect.open .customSelectButton::after{transform:translateY(-50%) rotate(180deg)}
-#ideaFilterSheetLayer .customSelectMenu{padding:4px;border-radius:12px}
-#ideaFilterSheetLayer .customSelectOption{min-height:36px;padding:8px 10px;font-size:14px;line-height:1.4;border-radius:8px}
-#ideaFilterSheetLayer .customSelectOption:hover:not([aria-selected="true"]){background:rgba(229,242,239,.45)}
+
 
 /* Keep activity actions visible outside the scrolling form. */
 #adminIdeaEditPanel.adminEditorCard{grid-template-rows:auto auto minmax(0,1fr) auto}
@@ -875,7 +856,7 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
  #adminIdeaLayer>#agendaEditModal.adminAgendaSheet{
   animation:none!important;
   transform:translateX(0);
-  transition:transform 420ms cubic-bezier(.4,0,.2,1),display 420ms allow-discrete;
+  transition:transform var(--sheet-motion,420ms) var(--sheet-ease,cubic-bezier(.4,0,.2,1)),display 420ms allow-discrete;
  }
  #adminIdeaLayer #agendaEditModal .adminEditorCard{animation:none!important}
  #adminIdeaLayer[hidden]>.adminEditorCard,
@@ -892,7 +873,7 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
  #adminIdeaLayer>#agendaEditModal.adminAgendaSheet{transition:none!important;animation:none!important}
 }
 @media(min-width:1101px) and (prefers-reduced-motion:no-preference){
- #adminApp .adminWorkspaceShell{transition:margin-left 420ms cubic-bezier(.4,0,.2,1),width 420ms cubic-bezier(.4,0,.2,1)}
+ #adminApp .adminWorkspaceShell{transition:margin-left var(--sheet-motion,420ms) var(--sheet-ease,cubic-bezier(.4,0,.2,1)),width var(--sheet-motion,420ms) var(--sheet-ease,cubic-bezier(.4,0,.2,1))}
 }
 
 /* Agenda headings follow the filter sheet's typography and spacing. */

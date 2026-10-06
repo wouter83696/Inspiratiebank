@@ -167,6 +167,20 @@
     bar.hidden=value==='all';
     bar.innerHTML=value==='all'?'':`<button class="ideaActiveFilterChip" type="button" aria-label="Filter ${escapeHtml(label)} verwijderen"><span>${escapeHtml(label)}</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 6l8 8M14 6l-8 8"></path></svg></button>`;
   }
+  function filterDropdown(layer,filter,{attribute='data-sheet-filter',onChange,keepButtons=false}={}){
+    const buttons=[...layer.querySelectorAll(`[${attribute}="${filter}"]`)];if(!buttons.length)return;
+    const section=buttons[0].closest('section'),heading=section.querySelector('h3');
+    const prompts={ideaLocation:'Kies een locatie',ideaCost:'Kies een prijs',ideaDuration:'Kies een duur',ideaStimulus:'Kies een prikkelbelasting',agendaCost:'Kies een prijs'};
+    const select=document.createElement('select');select.className='sharedFilterSelect';select.dataset.sharedFilter=filter;select.setAttribute('aria-label',heading.textContent);
+    buttons.forEach(button=>{const option=document.createElement('option');option.value=button.dataset.value;option.textContent=option.value==='all'?(prompts[filter]||'Kies een optie'):button.textContent.trim();select.append(option);});
+    if(keepButtons){buttons[0].parentElement.hidden=true;section.append(select);}else section.replaceChildren(heading,select);
+    select.dataset.includePlaceholderOption='true';enhanceCustomSelect(select);
+    select.closest('.customSelect').querySelector('.customSelectButton').setAttribute('aria-label',heading.textContent);
+    select.addEventListener('change',()=>onChange(select.value));return select;
+  }
+  function syncDropdowns(){
+    document.querySelectorAll('[data-shared-filter]').forEach(select=>{const control=document.getElementById(select.dataset.sharedFilter);if(control){select.value=control.value;syncCustomSelect(select);}});
+  }
   function createSheet({prefix='idea'}={}){
     let returnFocus=null,timer;
     const layer=document.getElementById(prefix+'FilterSheetLayer');
@@ -285,5 +299,5 @@
 
     setup();return {close:closeIdeaSearchSuggestions};
   }
-  window.DiscoveryViewShared=Object.freeze({mount,locationLegendButton,categoryChips,legend,activeLocation,createSheet,setupSearch});
+  window.DiscoveryViewShared=Object.freeze({mount,locationLegendButton,categoryChips,legend,activeLocation,filterDropdown,syncDropdowns,createSheet,setupSearch});
 })();

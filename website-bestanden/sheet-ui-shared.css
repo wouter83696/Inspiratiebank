@@ -1,0 +1,64 @@
+/* One visual source for sheets on public and management pages. */
+:root{--sheet-width:480px;--sheet-motion:420ms;--sheet-ease:cubic-bezier(.4,0,.2,1);--sheet-surface:linear-gradient(180deg,#fffdfa,#faf7ef);--sheet-ink:#315f6b;--sheet-line:rgba(79,142,158,.16)}
+.sharedSheet{background:var(--sheet-surface)!important;color:var(--sheet-ink);font-family:Manrope,system-ui,sans-serif}
+.sharedSheet .sharedSheetHeader{min-height:64px!important;padding:12px 20px!important;border-bottom:1px solid rgba(123,112,88,.08);box-sizing:border-box}
+.sharedSheetHeader :is(h2,h3){margin:0;font:700 20px/1.3 Manrope,system-ui,sans-serif!important;color:var(--sheet-ink)!important}
+.sharedSheet .sharedSheetBody{padding:20px 20px 24px;scrollbar-width:thin}
+.sharedSheet :is(.teamField,#linkForm label,.adminAgendaFieldGrid>label){gap:8px;font-size:14px;line-height:1.4;color:var(--sheet-ink)}
+.sharedSheet :is(input:not([type=checkbox]):not([type=file]):not([type=hidden]),select,.customSelectButton){min-height:40px;font:400 14px/1.4 Manrope,system-ui,sans-serif;border-radius:12px;box-sizing:border-box}
+.sharedSheet textarea{resize:none;font:400 14px/1.5 Manrope,system-ui,sans-serif;border-radius:12px}
+.sharedSheet .teamFormGrid{gap:16px}
+.sharedSheetFooter{display:grid!important;grid-template-columns:auto minmax(0,1fr);gap:10px;padding:12px 20px calc(12px + env(safe-area-inset-bottom))!important;border-top:1px solid rgba(123,112,88,.08);background:#fffdf9;flex-shrink:0}
+.sharedSheetFooter .ideaFilterSheetAction{min-height:40px;border-radius:12px;padding:9px 16px;font:600 14px/1.4 Manrope,system-ui,sans-serif;color:var(--sheet-ink);background:#fffdf9;border:1px solid var(--sheet-line);cursor:pointer}
+.sharedSheetFooter .ideaFilterSheetAction.primary{border-color:#92afb4}
+.sharedSheetFooter .ideaFilterSheetAction:hover{background:#edf8f6}
+.sharedSheetFooter:has(>button:only-child){grid-template-columns:1fr}
+.sharedSheet .teamActionBar.sharedSheetStatus{position:static!important;display:block;margin:12px 0;padding:0!important;background:transparent;border:0;backdrop-filter:none}
+.sharedPublicSheetLayer{justify-content:flex-start!important;align-items:stretch!important;transition:visibility 0s linear var(--sheet-motion)!important}
+.sharedPublicSheetLayer.isOpen{transition-delay:0s!important}
+.sharedPublicSheetLayer>.sharedSheet{position:relative!important;inset:auto!important;left:0!important;right:auto!important;width:min(var(--sheet-width),100vw)!important;height:100dvh!important;max-height:100dvh!important;border:0!important;border-right:1px solid var(--sheet-line)!important;border-radius:0 20px 20px 0!important;transform:translateX(-100%)!important;transition:transform var(--sheet-motion) var(--sheet-ease)!important;box-shadow:12px 0 32px rgba(49,95,107,.08)!important;display:flex!important;flex-direction:column!important;overflow:hidden!important}
+.sharedPublicSheetLayer.isOpen>.sharedSheet{transform:translateX(0)!important;opacity:1!important}
+.sharedPublicSheetLayer .sharedSheetHeader{flex-shrink:0}
+.sharedPublicSheetLayer .sharedSheetBody{flex:1;min-height:0;overflow-y:auto}
+.sharedSheet :is(.ideaSubmitSheetClose,.ideaFilterSheetClose){width:32px;height:32px;min-width:32px;border:1px solid var(--sheet-line);border-radius:10px;background:#fffdf9;color:#63858b}
+@media(prefers-reduced-motion:reduce){:root{--sheet-motion:0ms}}
+
+.sharedSheetPhoto{grid-column:1/-1;position:relative;display:grid;aspect-ratio:16/9;width:100%;margin:0;border-radius:16px;overflow:hidden;background:#faf8f3}
+.sharedSheetPhoto img{width:100%;height:100%;object-fit:cover}
+.sharedSheetPhoto [hidden],.sharedPhotoDropzone[hidden]{display:none!important}
+.sharedPhotoDropzone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;min-height:200px;border:1px dashed var(--sheet-line);border-radius:16px;background:#faf8f3;color:var(--sheet-ink);font:400 14px/1.4 Manrope,system-ui,sans-serif;cursor:pointer}
+.sharedPhotoDropzone svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.5}
+.sharedPhotoDropzone small{font-size:12px;color:#63858b}
+.sharedPhotoDropzone:hover,.sharedPhotoDropzone.isDragging{background:#edf8f6}
+.sharedSheet#adminSourcesSheet>.sharedSheetHeader,.sharedSheet.adminEditorCard>.sharedSheetHeader{padding-right:64px!important}
+.sharedPublicSheetLayer{display:flex!important}
+.sharedSheet :is(.teamField>span:first-child,#linkForm>label){font-weight:650}
+
+#ideaFilterSheetLayer .sharedFilterSelect{box-sizing:border-box;width:100%;min-height:46px;padding:10px 14px;border:1px solid rgba(79,142,158,.16);border-radius:12px;background:#fffdf9;color:#315f6b;font:inherit;cursor:pointer}
+#ideaFilterSheetLayer .sharedFilterSelect:hover{background:#e5f2ef}
+#ideaFilterSheetLayer .sharedFilterSelect:focus-visible{outline:2px solid #8fcfc4;outline-offset:2px}
+#ideaFilterSheetLayer .adminStatusFilter label[hidden]{display:none}
+
+#ideaFilterSheetLayer .customSelect{width:100%;min-width:0}
+#ideaFilterSheetLayer .customSelectButton{box-sizing:border-box;width:100%;min-height:46px;padding:12px 40px 12px 16px;border:1px solid rgba(79,142,158,.16);border-radius:14px;background:#fffdf9;color:#315f6b;font:inherit;text-align:left;box-shadow:none}
+#ideaFilterSheetLayer .customSelectButton:hover,#ideaFilterSheetLayer .customSelect.open .customSelectButton{background:#e5f2ef}
+#ideaFilterSheetLayer .customSelectMenu{box-sizing:border-box;width:100%;max-width:none;border:1px solid rgba(79,142,158,.16);border-radius:14px;background:#fffdf9;padding:6px;box-shadow:0 8px 24px rgba(23,79,93,.12)}
+#ideaFilterSheetLayer .customSelectOption{color:#315f6b;font:inherit;border-radius:9px;padding:10px 12px;min-height:42px;background:transparent}
+#ideaFilterSheetLayer .customSelectOption:is(:hover,:focus-visible,[aria-selected="true"]){background:#e5f2ef;color:#315f6b}
+#ideaFilterSheetLayer .customNativeSelect{position:absolute!important;width:1px!important;height:1px!important;min-height:0!important;padding:0!important;opacity:0;pointer-events:none}
+
+/* Compact filter controls; fixed chevron alignment independent of label length. */
+#ideaFilterSheetLayer .customSelectButton{position:relative;min-height:40px;padding:9px 36px 9px 12px;border-radius:12px;font-size:14px;line-height:1.4;background:#fffdf9}
+#ideaFilterSheetLayer .customSelectButton:hover,#ideaFilterSheetLayer .customSelect.open .customSelectButton{background:#fffdf9;border-color:rgba(79,142,158,.3)}
+#ideaFilterSheetLayer .customSelectButton::after{position:absolute;right:12px;top:50%;width:16px;height:16px;margin:0;transform:translateY(-50%);background-size:16px}
+#ideaFilterSheetLayer .customSelect.open .customSelectButton::after{transform:translateY(-50%) rotate(180deg)}
+#ideaFilterSheetLayer .customSelectMenu{padding:4px;border-radius:12px}
+#ideaFilterSheetLayer .customSelectOption{min-height:36px;padding:8px 10px;font-size:14px;line-height:1.4;border-radius:8px}
+#ideaFilterSheetLayer .customSelectOption:hover:not([aria-selected="true"]){background:rgba(229,242,239,.45)}
+.sharedSheet .ideaFilterChips[hidden]{display:none!important}
+.sharedPublicSheetLayer>.sharedSheet::before{display:none!important}
+
+.sharedSheet .sharedEditorToolbar{position:relative;flex-shrink:0;display:flex;align-items:center;gap:6px;margin:8px 20px 12px;padding:6px;border:1.5px solid rgba(23,79,93,.48);border-radius:16px;background:#fffdf9;color:#236875}
+.sharedEditorToolbar .ideaFilterSheetAction{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:0;border-radius:10px;background:transparent;color:inherit;cursor:pointer}
+.sharedEditorToolbar svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.sharedEditorToolbar .ideaFilterSheetAction:hover{background:#e5f2ef}

@@ -5702,7 +5702,7 @@
         <button class="ideaSubmitSheetBackdrop" type="button" data-agenda-source-close aria-label="Formulier sluiten"></button>
         <aside class="ideaSubmitSheet agendaSourceSheet" role="dialog" aria-modal="true" aria-labelledby="agendaSourceSheetTitle">
           <header class="ideaSubmitSheetHeader">
-            <h2 id="agendaSourceSheetTitle">Inspiratie toevoegen</h2>
+            <h2 id="agendaSourceSheetTitle">Bron toevoegen</h2>
             <button class="ideaSubmitSheetClose" type="button" data-agenda-source-close aria-label="Formulier sluiten"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg></button>
           </header>
           <div class="ideaSubmitSheetBody">
@@ -5834,7 +5834,7 @@
     </div>
   </div>
 
-  <script src="website-bestanden/discovery-view-shared.js?v=20261006-filter-neutral-v4"></script>
+  <script src="website-bestanden/discovery-view-shared.js?v=20261006-shared-dropdowns-v5"></script>
   <script src="website-bestanden/select-view-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script src="website-bestanden/agenda-discovery-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script>DiscoveryViewShared.mount();AgendaDiscoveryShared.mount();</script>
@@ -8273,7 +8273,7 @@
 	    if(!publicActionAllowed('linkAdd', {form, notify:setLinkAddStatus})) return;
 	    const item = normalizeCustomLink({
 	      id:`pending-link-${Date.now()}`,
-	      name:linkNameFromUrl($('#linkUrlInput').value),
+	      name:$('#linkNameInput')?.value.trim() || linkNameFromUrl($('#linkUrlInput').value),
 	      url:$('#linkUrlInput').value,
 	      category:'Ingestuurde agendabron',
 	      note:'Ingestuurd voor automatische controle op een tijdelijk agenda-item.',
@@ -9333,6 +9333,7 @@
     button.textContent = count === 1 ? 'Toon 1 activiteit' : `Toon ${count} activiteiten`;
   }
   function syncIdeaFilterSheet(){
+    DiscoveryViewShared.syncDropdowns();
     syncSharedFilterLocation('idea');
     $$('[data-sheet-filter]').forEach(button => {
       const control = $('#'+button.dataset.sheetFilter);
@@ -10323,7 +10324,7 @@
     $$('[data-sidebar-tab]').forEach(button => button.classList.toggle('active', button.dataset.sidebarTab === name));
     const topbarAddButton = $('#topbarAddButton');
     if(topbarAddButton){
-      const label = 'Inspiratie toevoegen';
+      const label = name === 'weken' ? 'Bron toevoegen' : 'Inspiratie toevoegen';
       topbarAddButton.querySelector('span').textContent = label;
       topbarAddButton.setAttribute('aria-label', label);
       topbarAddButton.setAttribute('aria-haspopup', 'dialog');
@@ -11132,5 +11133,7 @@
   });
   </script>
 <link rel="stylesheet" href="website-bestanden/select-controls.css?v=20261006-fixed-textareas-v2">
+<link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261006-v1">
+<script src="website-bestanden/sheet-ui-shared.js?v=20261006-v1"></script>
 </body>
 </html>

@@ -55,24 +55,13 @@
     figure.removeAttribute('aria-hidden');
     if(figure.classList.contains('ideaImagePlaceholder')){figure.classList.remove('ideaImagePlaceholder');figure.replaceChildren();}
     if(!figure.querySelector('img'))figure.insertAdjacentHTML('afterbegin','<img alt="">');
-    const dropzone=document.createElement('button');dropzone.type='button';dropzone.className='adminPhotoDropzone';dropzone.setAttribute('aria-label','Foto toevoegen: klik of sleep een foto');
-    dropzone.innerHTML=actionIcon('image')+'<strong>Sleep hier een foto naartoe</strong><span>of klik om een foto te kiezen</span><small>Foto verplicht · maximaal 1,5 MB</small>';
-    dropzone.addEventListener('click',()=>$('adminEditIdeaImageUpload').click());
-    figure.append(dropzone);
-    figure.addEventListener('dragover',event=>{event.preventDefault();if(!dropzone.hidden)dropzone.classList.add('isDragging');});
-    figure.addEventListener('dragleave',event=>{if(!figure.contains(event.relatedTarget))dropzone.classList.remove('isDragging');});
-    figure.addEventListener('drop',event=>{
-      event.preventDefault();dropzone.classList.remove('isDragging');
-      const files=event.dataTransfer?.files;
-      if(!files?.length)return;
-      if(files.length!==1||!files[0].type.startsWith('image/')){setStatus('#adminIdeaEditStatus','Kies één afbeeldingsbestand.','warn');return;}
-      const input=$('adminEditIdeaImageUpload');
-      input.files=files;input.dispatchEvent(new Event('change',{bubbles:true}));
+    SheetUIShared.photoPicker(figure,$('adminEditIdeaImageUpload'),{
+      required:true,onError:message=>setStatus('#adminIdeaEditStatus',message,'warn')
     });
     const photoButton=document.createElement('button');photoButton.type='button';photoButton.className='ideaFilterSheetAction secondary adminInlinePhotoButton';
     photoButton.addEventListener('click',()=>$('adminEditIdeaImageUpload').click());
-    const toolbar=document.createElement('div');toolbar.className='adminEditToolbar';toolbar.setAttribute('role','group');toolbar.setAttribute('aria-label','Activiteit beheren');
-    toolbar.append(photoButton);idea.querySelector('.panelHead').after(toolbar);
+    const toolbar=SheetUIShared.editorToolbar(idea.querySelector('.panelHead'));
+    toolbar.append(photoButton);
     const photoField=fieldFor('ImageUpload');photoField.classList.add('adminInlineUpload');figure.after(photoField);
     const metadata=article.querySelector('.cardMetaBlock');
     const details=document.createElement('section');details.className='adminInlineMetadata';
