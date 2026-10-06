@@ -894,3 +894,40 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
 @media(min-width:1101px) and (prefers-reduced-motion:no-preference){
  #adminApp .adminWorkspaceShell{transition:margin-left 420ms cubic-bezier(.4,0,.2,1),width 420ms cubic-bezier(.4,0,.2,1)}
 }
+
+/* Agenda headings follow the filter sheet's typography and spacing. */
+:is(#agendaEditModal,#adminAgendaManagerSheet)>.adminEditorCard>.panelHead,
+#adminAgendaManagerSheet>header.panelHead{
+ min-height:68px;padding:12px 60px 12px 20px;
+ border-bottom:1px solid rgba(123,112,88,.08);align-items:center;
+}
+:is(#agendaEditModal,#adminAgendaManagerSheet) .panelHead :is(h2,h3){
+ font-family:inherit;font-size:1.2rem;font-weight:650;line-height:1.4;color:var(--accent-dark);
+}
+#agendaEditModal .adminAgendaFieldGrid label,
+#adminAgendaManagerSheet .ongoingAdminPicker label{
+ display:grid;gap:11px;color:#285663;font-size:.91rem;font-weight:650;line-height:1.4;
+}
+#agendaEditModal .adminAgendaFieldGrid :is(input,textarea,select,.customSelect),
+#adminAgendaManagerSheet .ongoingAdminPicker :is(select,.customSelect){font-size:14px;font-weight:400;color:#315f6b}
+#agendaEditModal .agendaEditChecks label{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:400}
+#adminAgendaManagerSheet #agendaAdminSection h2,
+#adminAgendaManagerSheet .agendaCheckNotice strong,
+:is(#agendaEditModal,#adminAgendaManagerSheet) .adminAgendaAdvanced summary{
+ color:#285663;font-size:.91rem;font-weight:650;line-height:1.4;
+}
+:is(.adminAgendaEditBody,.adminAgendaManagerBody){padding:20px 20px 28px;scrollbar-width:thin;scrollbar-color:rgba(49,95,107,.22) transparent}
+#adminAgendaManagerSheet .agendaCheckNotice{padding:0 0 22px;border:0;border-bottom:1px solid rgba(123,112,88,.09);border-radius:0;background:transparent}
+#adminAgendaManagerSheet .agendaCheckActions{justify-content:flex-start}
+#adminAgendaManagerSheet .rowActions{justify-content:flex-start}
+:is(#agendaEditModal,#adminAgendaManagerSheet) .adminEditorClose{
+ top:18px;right:20px;width:32px;height:32px;min-width:32px;min-height:32px;
+ padding:0;border:1px solid rgba(79,142,158,.16);border-radius:10px;
+ background:rgba(255,253,249,.72);color:#63858b;
+}
+@media(max-width:640px){
+ :is(#agendaEditModal,#adminAgendaManagerSheet)>.adminEditorCard>.panelHead,
+ #adminAgendaManagerSheet>header.panelHead{min-height:62px;padding:10px 56px 10px 16px}
+ :is(#agendaEditModal,#adminAgendaManagerSheet) .adminEditorClose{top:15px;right:16px}
+ :is(.adminAgendaEditBody,.adminAgendaManagerBody){padding:18px 16px 24px}
+}
