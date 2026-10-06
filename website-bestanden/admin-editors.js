@@ -5,8 +5,37 @@
   const layer=AdminVisual.layer;layer.append(idea);
   idea.classList.add('adminEditorCard','adminPublicSurface','ideaSubmitSheet');agenda.classList.add('adminEditorLayer');
   agenda.querySelector('.confirmModalCard').classList.add('adminEditorCard');
+  // Keep the existing controls and save handlers, arranged like the public filter sheet.
+  const form=$('adminIdeaEditForm'),oldGrid=form.querySelector('.teamFormGrid');
+  const fields=document.createElement('div');fields.className='adminEditFields ideaFilterSheetBody';
+  const groups=[
+    ['Activiteit',['Title','Domain','By','Description']],
+    ['Locatie',['Location','Postcode','HouseNumber','Address','DistanceKm','Url']],
+    ['Kenmerken',['Cost','Stimulus','Duration','Group']],
+    ['Voorbereiding',['Supplies','Rules']],
+    ['Foto',['ImageUpload','ImageApproved']]
+  ];
+  groups.forEach(([name,ids])=>{
+    const section=document.createElement('section');section.className='ideaFilterSection adminEditSection';
+    const heading=document.createElement('h4');heading.textContent=name;section.append(heading);
+    const grid=document.createElement('div');grid.className='teamFormGrid';section.append(grid);
+    ids.forEach(id=>{const field=$('adminEditIdea'+id)?.closest('.teamField');if(field)grid.append(field);});
+    if(name==='Foto')oldGrid.querySelectorAll('input[type="hidden"],.adminPhotoActions,.adminImagePreview,.adminImageSuggestion').forEach(node=>grid.append(node));
+    fields.append(section);
+  });
+  form.prepend(fields);oldGrid.remove();
+  const footer=form.querySelector('.teamActionBar');footer.prepend($('adminIdeaEditCancelBtn'));
+  $('adminIdeaEditSubmitBtn').textContent='Opslaan';$('adminIdeaEditCancelBtn').textContent='Annuleren';
+  const locationFields=['Postcode','HouseNumber','Address','DistanceKm'].map(id=>$('adminEditIdea'+id).closest('.teamField'));
+  function syncLocationFields(){
+    const value=normalizeIdeaLocation($('adminEditIdeaLocation').value);
+    const show=value==='Op pad'||value==='Binnen'||Boolean($('adminEditIdeaAddress').value.trim());
+    locationFields.forEach(field=>{field.hidden=!show;});
+  }
+  $('adminEditIdeaLocation').closest('.teamField').classList.add('wide');
+  $('adminEditIdeaLocation').addEventListener('change',syncLocationFields);
   const title=idea.querySelector('h3');title.id='adminEditorTitle';
-  function closeButton(parent,action){const button=document.createElement('button');button.type='button';button.className='adminEditorClose';button.textContent='×';button.setAttribute('aria-label','Formulier sluiten');button.addEventListener('click',action);parent.append(button);}
+  function closeButton(parent,action){const button=document.createElement('button');button.type='button';button.className='adminEditorClose';button.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>';button.setAttribute('aria-label','Formulier sluiten');button.addEventListener('click',action);parent.append(button);}
   closeButton(idea.querySelector('.panelHead'),()=>$('adminIdeaEditCancelBtn').click());
   closeButton(agenda.querySelector('.confirmModalTop'),()=>requestAgendaClose());
   layer.addEventListener('click',e=>{if(e.target===layer){if(!idea.hidden)$('adminIdeaEditCancelBtn').click();else AdminVisual.close();}});
@@ -49,7 +78,7 @@
   },true);
   window.addEventListener('resize',sync);
   window.AdminEditors={
-    openIdea(isNew){ideaFocus=document.activeElement;title.textContent=isNew?'Activiteit toevoegen':'Activiteit wijzigen';sync();idea.scrollTop=0;},
+    openIdea(isNew){ideaFocus=document.activeElement;title.textContent=isNew?'Activiteit toevoegen':'Activiteit wijzigen';sync();syncLocationFields();fields.scrollTop=0;},
     openAgenda(){agendaFocus=document.activeElement;agendaDraft=snapshot();sync();agenda.querySelector('.adminEditorCard').scrollTop=0;},
     sync,requestAgendaClose
   };

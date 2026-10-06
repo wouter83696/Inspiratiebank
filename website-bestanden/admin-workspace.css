@@ -541,3 +541,51 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaEditPanel .teamActionBar{padding:14px 0;background:#fffdfa}
 #adminIdeaEditPanel .teamActionBar .button{border-radius:14px;padding:11px 16px;font-size:14px}
 @media(max-width:640px){.adminIdeaLayer.isEditing .adminEditorCard{width:100%;border-radius:24px 24px 0 0}#adminIdeaEditPanel .panelHead{top:-20px}#adminMenuLabel{font-size:12px;max-width:150px}}
+
+/* A fixed filter-style header/footer with only the form contents scrolling. */
+.adminIdeaLayer.isEditing{backdrop-filter:none}
+#adminIdeaEditPanel.adminEditorCard{display:grid;grid-template-rows:auto minmax(0,1fr);padding:0;overflow:hidden;width:min(480px,100%);border-radius:0;background:linear-gradient(180deg,#fffdfa,#faf7ef)}
+#adminIdeaEditPanel .panelHead{position:relative;top:auto;margin:0;min-height:64px;padding:16px 60px 16px 20px;box-sizing:border-box;display:flex;align-items:center}
+#adminIdeaEditPanel .panelHead h3{font-size:19px;line-height:1.4}
+#adminIdeaEditPanel .panelHead p{display:none}
+#adminIdeaEditPanel .adminEditorClose{top:12px;right:16px;width:34px;height:34px;border:1px solid rgba(79,142,158,.12);border-radius:12px}
+#adminIdeaEditPanel #adminIdeaEditForm{display:grid;grid-template-rows:minmax(0,1fr) auto;min-height:0;gap:0;margin:0;overflow:hidden}
+#adminIdeaEditPanel .adminEditFields{padding:18px 20px 24px;overflow-y:auto;min-height:0;overscroll-behavior:contain;scroll-behavior:auto}
+#adminIdeaEditPanel .adminEditSection{display:block;margin:0 0 18px;padding:0 0 18px;border-bottom:1px solid rgba(123,112,88,.09)}
+#adminIdeaEditPanel .adminEditSection:last-child{border:0;margin:0;padding:0}
+#adminIdeaEditPanel .adminEditSection h4{font:650 14px/1.4 Manrope,system-ui,sans-serif;color:#285663;margin:0 0 12px}
+#adminIdeaEditPanel .teamFormGrid{gap:12px}
+#adminIdeaEditPanel .teamField[hidden]{display:none!important}
+#adminIdeaEditPanel .teamField>span{font-size:13px;font-weight:500}
+#adminIdeaEditPanel .teamField :is(input:not([type=checkbox]),select,textarea){padding:10px 12px;border-radius:14px;font-size:14px;min-height:42px}
+#adminIdeaEditPanel .teamField textarea{min-height:100px;resize:vertical}
+#adminIdeaEditPanel .teamField .customSelectButton{min-height:42px;padding:10px 12px;font-size:14px;border-radius:14px}
+#adminIdeaEditPanel .teamField .distanceEstimateStatus:empty{display:none}
+#adminIdeaEditPanel .adminCheckField{display:flex;align-items:center;gap:10px}
+#adminIdeaEditPanel .adminCheckField input{width:18px;height:18px;flex:none;accent-color:#4f8e9e}
+#adminIdeaEditPanel .adminPhotoActions,#adminIdeaEditPanel .adminImagePreview,#adminIdeaEditPanel .adminImageSuggestion{grid-column:1/-1}
+#adminIdeaEditPanel .adminPhotoActions{display:flex;gap:8px;flex-wrap:wrap}
+#adminIdeaEditPanel .adminPhotoActions small{flex-basis:100%;font-size:12px;line-height:1.5}
+#adminIdeaEditPanel .teamActionBar{position:static;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;margin:0;padding:12px 20px max(12px,env(safe-area-inset-bottom));border-top:1px solid rgba(123,112,88,.08);background:#fffdfa}
+#adminIdeaEditPanel .teamActionBar .button{min-height:42px;margin:0;box-shadow:none;border:1px solid rgba(79,142,158,.12);background:#fff;color:#315f6b;font-weight:600}
+#adminIdeaEditPanel .teamActionBar .primary{border-color:#8cabb0;background:#fffdfa}
+#adminIdeaEditPanel .teamActionBar .button:hover{background:#e5f2ef}
+#adminIdeaEditStatus{grid-column:1/-1;font-size:12px;line-height:1.5}
+#adminIdeaEditStatus:empty{display:none}
+@media(max-width:640px){
+ #adminIdeaEditPanel.adminEditorCard{border-radius:24px 24px 0 0}
+ #adminIdeaEditPanel .teamFormGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #adminIdeaEditPanel .adminEditFields{padding-inline:16px}
+ #adminIdeaEditPanel .teamActionBar{padding-inline:16px}
+}
+
+/* Mirror the right filter sheet's 16px outer corners on the left editor. */
+@media(min-width:641px){#adminIdeaEditPanel.adminEditorCard{border-radius:0 16px 16px 0}}
+#adminIdeaEditPanel .adminEditorClose{width:32px;height:32px;min-width:32px;min-height:32px;border-radius:10px;border:1px solid rgba(79,142,158,.16);background:rgba(255,253,249,.72);color:#63858b;padding:0}
+.adminEditorClose svg{display:block;width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+#adminIdeaEditPanel.adminEditorCard{overflow:hidden!important;clip-path:inset(0 round 0 16px 16px 0)}
+#adminIdeaEditPanel .panelHead>div{width:100%;text-align:left}
+@media(max-width:640px){
+ #adminIdeaEditPanel.adminEditorCard{clip-path:inset(0 round 24px 24px 0 0)}
+ #adminIdeaEditPanel .adminEditSection:first-child .teamField{grid-column:1/-1}
+}

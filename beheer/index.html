@@ -985,8 +985,8 @@
   <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260911-first-paint-v4">
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20260930-agenda-rebuild-v1">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20261004-meta-alignment-v2">
-  <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261006-admin-parity-v2">
-  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261006-admin-parity-v2">
+  <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261006-editor-sections-v3">
+  <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261006-editor-sections-v3">
   <link rel="stylesheet" href="../website-bestanden/header-layout-shared.css?v=20261001-v1">
   <link rel="stylesheet" href="../website-bestanden/navigation-colors-shared.css?v=20261001-divider-v1">
 </head>
@@ -1383,10 +1383,10 @@
               <label class="teamField">
                 <span>Locatie</span>
                 <select id="adminEditIdeaLocation">
-                  <option value="Binnen">Binnen</option>
-                  <option value="Buiten">Buiten</option>
-                  <option value="Op pad">Op pad</option>
-                  <option value="Online / voorbereiding">Online / voorbereiding</option>
+                  <option value="Thuis">Thuis</option>
+                  <option value="Buiten">Buiten (zelf een plek kiezen)</option>
+                  <option value="Op pad">Op pad (vaste locatie)</option>
+                  <option value="Online">Online</option>
                 </select>
               </label>
               <label class="teamField">
@@ -1590,7 +1590,7 @@
   <script src="../website-bestanden/admin-site-settings.js?v=20261004-compact-v1"></script>
   <script src="../website-bestanden/admin-discovery.js?v=20261001-regional-headers-v1"></script>
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
-  <script src="../website-bestanden/idea-view-shared.js?v=20261006-admin-parity-v2"></script>
+  <script src="../website-bestanden/idea-view-shared.js?v=20261006-editor-sections-v3"></script>
   <script src="../website-bestanden/agenda-view-shared.js?v=20261001-time-sort-v2"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
@@ -4409,6 +4409,7 @@
       el.querySelectorAll('[data-preserved-value]').forEach(option=>option.remove());
       const preserved=new Option(normalized,normalized);
       preserved.dataset.preservedValue='true';el.add(preserved);el.value=normalized;
+      if(el.closest?.('.customSelect')) enhanceCustomSelect(el);
     }else if(el.options.length) el.value = el.options[0].value;
     syncCustomSelect(el);
   }
@@ -4633,7 +4634,7 @@
     $('#adminIdeaEditPanel').hidden = false;
     $('#adminEditIdeaTitle').value = item.title || '';
     setEditSelect('#adminEditIdeaDomain', item.domain || 'Ontmoeten, Spel & Vaardigheden');
-    setEditSelect('#adminEditIdeaLocation', item.locationType || 'Binnen');
+    setEditSelect('#adminEditIdeaLocation', normalizeIdeaLocation(item.locationType)==='Binnen'?'Thuis':normalizeIdeaLocation(item.locationType));
     setEditSelect('#adminEditIdeaDistance', item.distanceBand || 'Op locatie');
     setEditSelect('#adminEditIdeaCost', item.cost || 'Gratis');
     setEditSelect('#adminEditIdeaStimulus', item.stimulus || 'Middel');
@@ -4660,7 +4661,7 @@
     $('#adminEditIdeaDescription').value = item.fit || item.description || '';
     $('#adminEditIdeaSupplies').value = String(item.supplies || '').trim();
     $('#adminEditIdeaRules').value = item.materials || item.rules || item.note || '';
-    setStatus('#adminIdeaEditStatus', item.isNew ? 'Vul de activiteit in en sla op om deze te publiceren.' : item.kind === 'collega-toegevoegd' ? 'Pas de velden aan en sla de wijziging op.' : 'Bij opslaan komt er een bewerkte online versie en wordt het vaste origineel verborgen.', 'ok');
+    setStatus('#adminIdeaEditStatus', '');
     window.AdminPolish?.captureIdea();
     window.AdminEditors?.openIdea(item.isNew);
     $('#adminEditIdeaTitle')?.focus({preventScroll:true});
@@ -5049,9 +5050,9 @@
     });
   }, { once: true });
   </script>
-  <script src="../website-bestanden/admin-polish.js?v=20261006-admin-parity-v2"></script>
-<script src="../website-bestanden/photo-tiles.js?v=20261006-admin-parity-v2"></script>
-<script src="../website-bestanden/admin-visual.js?v=20261006-admin-parity-v2"></script>
-<script src="../website-bestanden/admin-editors.js?v=20261006-admin-parity-v2"></script>
+  <script src="../website-bestanden/admin-polish.js?v=20261006-editor-sections-v3"></script>
+<script src="../website-bestanden/photo-tiles.js?v=20261006-editor-sections-v3"></script>
+<script src="../website-bestanden/admin-visual.js?v=20261006-editor-sections-v3"></script>
+<script src="../website-bestanden/admin-editors.js?v=20261006-editor-sections-v3"></script>
 </body>
 </html>
