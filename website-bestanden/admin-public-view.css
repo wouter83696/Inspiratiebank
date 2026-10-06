@@ -3523,6 +3523,47 @@
 #agendaFilterCategoryChips{display:flex!important;flex-wrap:wrap;gap:6px}
 #agendaFilterCategoryChips .ideaFilterChip{flex:0 0 auto;max-width:100%}
 
+/* Keep time and venue on separate, consistently aligned lines. */
+.agendaItem .agendaItemMeta{line-height:1.45;hyphens:none;word-break:normal;overflow-wrap:break-word}
+.agendaItem .agendaItemMeta .agendaMetaRow{display:block;margin:0;text-align:left;hyphens:none;overflow-wrap:break-word}
+.agendaItem .agendaItemMeta .agendaMetaRow+.agendaMetaRow{margin-top:3px}
+
+/* One ongoing-offer title layout for the public agenda and management. */
+:is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .nameWithIcon{
+ display:grid;grid-template-columns:64px minmax(0,1fr);align-items:start;gap:12px;
+}
+:is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleVisual{
+ display:grid;place-items:center;width:64px;height:64px;min-width:64px;
+ border:1px solid var(--theme-line);border-radius:11px;background:transparent;box-shadow:none;
+}
+:is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleTextStack{
+ display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;
+}
+:is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleTextStack>:is(.ongoingTitleLink,.ideaTitleText){
+ display:block;min-height:0;padding:0;margin:0;line-height:1.25;
+}
+:is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleTextStack .ongoingDateMeta{
+ display:block;max-width:100%;padding:0;margin:0;border:0;border-radius:0;background:transparent;
+ color:#697472;font-size:.72rem;line-height:1.35;white-space:normal;
+}
+@media(max-width:640px){
+ :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .nameWithIcon{grid-template-columns:56px minmax(0,1fr);gap:10px}
+ :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleVisual{width:56px;height:56px;min-width:56px}
+}
+
+/* Compact desktop week overview, shared by public and management pages. */
+@media(min-width:981px){
+ :is(:scope#agendaReviewPanel,:scope#agendaReviewPanel) .weekPanel .weekTop{padding:20px 24px 12px}
+ :is(:scope#agendaReviewPanel,:scope#agendaReviewPanel) .weekPanel .weekBadge{width:52px;height:52px;min-width:52px}
+ :is(:scope#agendaReviewPanel,:scope#agendaReviewPanel) .weekPanel .agendaDay{min-height:0;padding:12px 8px;gap:12px}
+ :is(:scope#agendaReviewPanel,:scope#agendaReviewPanel) .weekPanel .agendaGroup{gap:8px}
+ :is(:scope#agendaReviewPanel,:scope#agendaReviewPanel) .weekPanel .agendaItem{padding:10px;min-height:0}
+ :is(:scope#agendaReviewPanel,:scope#agendaReviewPanel) .weekPanel .agendaItemTitle{gap:6px;line-height:1.25}
+ :is(:scope#agendaReviewPanel,:scope#agendaReviewPanel) .weekPanel .agendaItemMeta{margin-top:6px;line-height:1.3}
+ :is(:scope#agendaReviewPanel,:scope#agendaReviewPanel) .weekPanel .agendaMetaRow+.agendaMetaRow{margin-top:2px}
+ :is(:scope#agendaReviewPanel,:scope#agendaReviewPanel) .weekPanel .agendaMore{margin-top:4px}
+}
+
 /* Canonieke inspiratieweergaven voor publiek en beheer. */
 .sharedIdeaCards{
   display:grid;
@@ -3736,6 +3777,22 @@
 .ideaMaterialChecklist input:checked::after{content:"";width:8px;height:4px;border-left:2px solid #236875;border-bottom:2px solid #236875;transform:rotate(-45deg);margin-top:-2px}
 .ideaMaterialChecklist input:focus-visible{outline:2px solid #236875;outline-offset:3px}
 .ideaMaterialChecklist input:checked + span{color:#71888c}
+
+.ideaMaterialsHeading{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;color:#71888c;font-size:13px}
+.materialToggle{border:0;background:transparent;color:#236875;font:inherit;cursor:pointer;padding:6px 8px;border-radius:8px}
+.materialToggle:hover{background:#e5f2ef}
+.ideaMaterialsList:not(.isChecking) .ideaMaterialChecklist input{display:none}
+.ideaMaterialsList:not(.isChecking) .ideaMaterialChecklist label{pointer-events:none}
+.ideaMaterialChecklist li+li{border-top:1px solid rgba(79,142,158,.1)}
+.materialEditor{background:#fffdf9;border:1px solid rgba(79,142,158,.16);border-radius:14px;overflow:hidden}
+.materialEditor>div{display:flex;align-items:center;padding:4px 10px;gap:8px}
+.materialEditor>div+div{border-top:1px solid rgba(79,142,158,.1)}
+.materialEditor>div>input{flex:1;min-width:0;border:0!important;background:transparent!important;box-shadow:none;padding:10px!important;color:#315f6b;font:inherit}
+.materialEditor button{flex:none;border:0;background:transparent;color:#63858b;font-size:22px;width:32px;height:32px;cursor:pointer;border-radius:8px}
+.materialEditor button:hover{background:#e5f2ef}
+.materialEditor>div:last-child:has(input:placeholder-shown) button{visibility:hidden}
+
+textarea[hidden]:has(+ .materialEditor){display:none!important}
 
 
     /* De kaart zelf blijft rustig; categorieaccenten zitten alleen in iconen en badges. */
@@ -5724,9 +5781,11 @@
 
     /* Op tablet en mobiel is de kaart het canvas; desktop behoudt de zijviewer. */
     @media (max-width:980px){
-    :scope#inspirationAdminPanel.mapViewActive .inspirationHero,
-    :scope#inspirationAdminPanel.mapViewActive .desktopStickyControls{display:none!important}
-    :scope#inspirationAdminPanel.mapViewActive{padding-top:0}
+    @media(max-width:980px){
+      :scope#inspirationAdminPanel.mapViewActive .inspirationHero,
+      :scope#inspirationAdminPanel.mapViewActive .desktopStickyControls{display:none!important}
+      :scope#inspirationAdminPanel.mapViewActive{padding-top:0}
+    }
     .ideaMapToolbar{
       position:absolute;z-index:800;top:16px;left:16px;width:min(620px,calc(100% - 32px));
       display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:8px;pointer-events:none
@@ -6423,6 +6482,16 @@
 @media(max-width:820px){
   :scope#agendaReviewPanel .mobileDayNavigation.isStuck{border-color:transparent;box-shadow:0 0 0 100vmax #F8F5EB!important}
 }
+
+/* Public and management header links share the same navigation palette. */
+:scope{--header-link-color:rgba(49,95,107,.78);--header-link-active:#244f58;--header-link-hover:rgba(36,79,88,.94)}
+@media(max-width:980px){:scope{--header-link-color:rgba(49,95,107,.72);--header-link-active:#174f5d}}
+.topbar>.tabs .tab,
+#adminApp .adminAgendaHeaderNavigation .adminAgendaManageLink{color:var(--header-link-color)!important}
+.topbar>.tabs .tab:hover,
+#adminApp .adminAgendaHeaderNavigation .adminAgendaManageLink:hover{color:var(--header-link-hover)!important;background:var(--control-hover-surface)!important}
+.topbar>.tabs .tab.active,
+#adminApp .adminAgendaHeaderNavigation .adminAgendaManageLink[aria-current=true]{color:var(--header-link-active)!important;font-weight:650!important;background:transparent!important}
 
 /* One scoped class switches back to the untouched classic presentation. */
 #adminIdeaCards.photoTiles{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:16px;align-items:start}
@@ -7687,8 +7756,6 @@
     .ideaMapToolbarView{gap:7px;padding:0 13px;font-size:.78rem;font-weight:650;white-space:nowrap}
     .ideaMapToolbarButton:hover,.ideaMapToolbarView:hover{background:#fff;color:#168697}
 
- :scope#inspirationAdminPanel.mapViewActive :is(.desktopStickyControls,.inspirationHero){display:none!important}
- :scope#inspirationAdminPanel.mapViewActive{padding-top:16px}
  #ideaMap .ideaMapSingleCard.photoDetailBody{padding-top:0!important}
  #ideaMap .ideaMapToolbar{width:min(620px,calc(100% - 100px))}
  #ideaMap .ideaMapPanel{top:72px!important;max-height:calc(100% - 88px)!important}
@@ -7702,5 +7769,99 @@
   font-size:13px;line-height:1.3;font-weight:500;box-shadow:0 2px 10px rgba(35,55,55,.08);pointer-events:none
  }
 }
+
+/* Keep the results action and its chevron together at the bottom centre. */
+#ideaMap:has(.ideaMapPanel.isMinimized:not(.isSingleDetail)) .ideaMapActivityCount{
+ display:flex;align-items:center;justify-content:center;gap:8px;position:absolute;z-index:450;left:50%;right:auto;bottom:calc(24px + env(safe-area-inset-bottom,0px));
+ padding:7px 12px;border-radius:14px;background:rgba(255,253,249,.92);color:var(--accent-dark);font-size:13px;line-height:1.3;
+ transform:translateX(-50%);border:1px solid rgba(61,126,136,.16);cursor:pointer;pointer-events:auto;font-family:inherit;
+}
+.ideaMapActivityCount svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ideaMapActivityCount:hover{background:#e5f2ef!important}
+.ideaMapActivityCount:focus-visible{outline:2px solid #4f8e9e;outline-offset:3px}
+
+/* Shared compact select appearance, based on the management filter sheet. */
+.customSelect .customSelectButton{
+  box-sizing:border-box;position:relative;width:100%;height:auto!important;min-height:40px!important;
+  padding:9px 36px 9px 12px!important;border:1px solid rgba(79,142,158,.16)!important;
+  border-radius:12px!important;background:#fffdf9!important;color:#315f6b;
+  font-size:14px!important;line-height:1.4!important;box-shadow:none!important;text-align:left;
+}
+.customSelect .customSelectButton:hover,.customSelect.open .customSelectButton{background:#fffdf9!important;border-color:rgba(79,142,158,.3)!important}
+.customSelect .customSelectButton::after{position:absolute!important;right:12px;top:50%;width:16px!important;height:16px!important;margin:0!important;transform:translateY(-50%)!important;background-size:16px!important}
+.customSelect.open .customSelectButton::after{transform:translateY(-50%) rotate(180deg)!important}
+.customSelect .customSelectMenu{box-sizing:border-box;min-width:100%;max-width:100%;padding:4px!important;border:1px solid rgba(79,142,158,.16);border-radius:12px!important;background:#fffdf9;box-shadow:0 8px 24px rgba(23,79,93,.12)}
+.customSelect .customSelectOption{min-height:36px!important;padding:8px 10px!important;font-size:14px!important;line-height:1.4!important;border-radius:8px!important;color:#315f6b;background:transparent}
+.customSelect .customSelectOption:is(.active,[aria-selected="true"]){background:#e5f2ef!important}
+.customSelect .customSelectOption:hover:not([aria-selected="true"]){background:rgba(229,242,239,.45)!important}
+.customSelect .customSelectButton:focus-visible{outline:2px solid #63858b;outline-offset:2px}
+
+/* Text areas keep their designed size across public and management forms. */
+textarea{resize:none!important}
+
+/* One visual source for sheets on public and management pages. */
+:scope{--sheet-width:480px;--sheet-motion:420ms;--sheet-ease:cubic-bezier(.4,0,.2,1);--sheet-surface:linear-gradient(180deg,#fffdfa,#faf7ef);--sheet-ink:#315f6b;--sheet-line:rgba(79,142,158,.16)}
+.sharedSheet{background:var(--sheet-surface)!important;color:var(--sheet-ink);font-family:Manrope,system-ui,sans-serif}
+.sharedSheet .sharedSheetHeader{min-height:64px!important;padding:12px 20px!important;border-bottom:1px solid rgba(123,112,88,.08);box-sizing:border-box}
+.sharedSheetHeader :is(h2,h3){margin:0;font:700 20px/1.3 Manrope,system-ui,sans-serif!important;color:var(--sheet-ink)!important}
+.sharedSheet .sharedSheetBody{padding:20px 20px 24px;scrollbar-width:thin}
+.sharedSheet :is(.teamField,#linkForm label,.adminAgendaFieldGrid>label){gap:8px;font-size:14px;line-height:1.4;color:var(--sheet-ink)}
+.sharedSheet :is(input:not([type=checkbox]):not([type=file]):not([type=hidden]),select,.customSelectButton){min-height:40px;font:400 14px/1.4 Manrope,system-ui,sans-serif;border-radius:12px;box-sizing:border-box}
+.sharedSheet textarea{resize:none;font:400 14px/1.5 Manrope,system-ui,sans-serif;border-radius:12px}
+.sharedSheet .teamFormGrid{gap:16px}
+.sharedSheetFooter{display:grid!important;grid-template-columns:auto minmax(0,1fr);gap:10px;padding:12px 20px calc(12px + env(safe-area-inset-bottom))!important;border-top:1px solid rgba(123,112,88,.08);background:#fffdf9;flex-shrink:0}
+.sharedSheetFooter .ideaFilterSheetAction{min-height:40px;border-radius:12px;padding:9px 16px;font:600 14px/1.4 Manrope,system-ui,sans-serif;color:var(--sheet-ink);background:#fffdf9;border:1px solid var(--sheet-line);cursor:pointer}
+.sharedSheetFooter .ideaFilterSheetAction.primary{border-color:#92afb4}
+.sharedSheetFooter .ideaFilterSheetAction:hover{background:#edf8f6}
+.sharedSheetFooter:has(>button:only-child){grid-template-columns:1fr}
+.sharedSheet .teamActionBar.sharedSheetStatus{position:static!important;display:block;margin:12px 0;padding:0!important;background:transparent;border:0;backdrop-filter:none}
+.sharedPublicSheetLayer{justify-content:flex-start!important;align-items:stretch!important;transition:visibility 0s linear var(--sheet-motion)!important}
+.sharedPublicSheetLayer.isOpen{transition-delay:0s!important}
+.sharedPublicSheetLayer>.sharedSheet{position:relative!important;inset:auto!important;left:0!important;right:auto!important;width:min(var(--sheet-width),100vw)!important;height:100dvh!important;max-height:100dvh!important;border:0!important;border-right:1px solid var(--sheet-line)!important;border-radius:0 20px 20px 0!important;transform:translateX(-100%)!important;transition:transform var(--sheet-motion) var(--sheet-ease)!important;box-shadow:12px 0 32px rgba(49,95,107,.08)!important;display:flex!important;flex-direction:column!important;overflow:hidden!important}
+.sharedPublicSheetLayer.isOpen>.sharedSheet{transform:translateX(0)!important;opacity:1!important}
+.sharedPublicSheetLayer .sharedSheetHeader{flex-shrink:0}
+.sharedPublicSheetLayer .sharedSheetBody{flex:1;min-height:0;overflow-y:auto}
+.sharedSheet :is(.ideaSubmitSheetClose,.ideaFilterSheetClose){width:32px;height:32px;min-width:32px;border:1px solid var(--sheet-line);border-radius:10px;background:#fffdf9;color:#63858b}
+@media(prefers-reduced-motion:reduce){:scope{--sheet-motion:0ms}}
+
+.sharedSheetPhoto{grid-column:1/-1;position:relative;display:grid;aspect-ratio:16/9;width:100%;margin:0;border-radius:16px;overflow:hidden;background:#faf8f3}
+.sharedSheetPhoto img{width:100%;height:100%;object-fit:cover}
+.sharedSheetPhoto [hidden],.sharedPhotoDropzone[hidden]{display:none!important}
+.sharedPhotoDropzone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;min-height:200px;border:1px dashed var(--sheet-line);border-radius:16px;background:#faf8f3;color:var(--sheet-ink);font:400 14px/1.4 Manrope,system-ui,sans-serif;cursor:pointer}
+.sharedPhotoDropzone svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.5}
+.sharedPhotoDropzone small{font-size:12px;color:#63858b}
+.sharedPhotoDropzone:hover,.sharedPhotoDropzone.isDragging{background:#edf8f6}
+.sharedSheet#adminSourcesSheet>.sharedSheetHeader,.sharedSheet.adminEditorCard>.sharedSheetHeader{padding-right:64px!important}
+.sharedPublicSheetLayer{display:flex!important}
+.sharedSheet :is(.teamField>span:first-child,#linkForm>label){font-weight:650}
+
+#ideaFilterSheetLayer .sharedFilterSelect{box-sizing:border-box;width:100%;min-height:46px;padding:10px 14px;border:1px solid rgba(79,142,158,.16);border-radius:12px;background:#fffdf9;color:#315f6b;font:inherit;cursor:pointer}
+#ideaFilterSheetLayer .sharedFilterSelect:hover{background:#e5f2ef}
+#ideaFilterSheetLayer .sharedFilterSelect:focus-visible{outline:2px solid #8fcfc4;outline-offset:2px}
+#ideaFilterSheetLayer .adminStatusFilter label[hidden]{display:none}
+
+#ideaFilterSheetLayer .customSelect{width:100%;min-width:0}
+#ideaFilterSheetLayer .customSelectButton{box-sizing:border-box;width:100%;min-height:46px;padding:12px 40px 12px 16px;border:1px solid rgba(79,142,158,.16);border-radius:14px;background:#fffdf9;color:#315f6b;font:inherit;text-align:left;box-shadow:none}
+#ideaFilterSheetLayer .customSelectButton:hover,#ideaFilterSheetLayer .customSelect.open .customSelectButton{background:#e5f2ef}
+#ideaFilterSheetLayer .customSelectMenu{box-sizing:border-box;width:100%;max-width:none;border:1px solid rgba(79,142,158,.16);border-radius:14px;background:#fffdf9;padding:6px;box-shadow:0 8px 24px rgba(23,79,93,.12)}
+#ideaFilterSheetLayer .customSelectOption{color:#315f6b;font:inherit;border-radius:9px;padding:10px 12px;min-height:42px;background:transparent}
+#ideaFilterSheetLayer .customSelectOption:is(:hover,:focus-visible,[aria-selected="true"]){background:#e5f2ef;color:#315f6b}
+#ideaFilterSheetLayer .customNativeSelect{position:absolute!important;width:1px!important;height:1px!important;min-height:0!important;padding:0!important;opacity:0;pointer-events:none}
+
+/* Compact filter controls; fixed chevron alignment independent of label length. */
+#ideaFilterSheetLayer .customSelectButton{position:relative;min-height:40px;padding:9px 36px 9px 12px;border-radius:12px;font-size:14px;line-height:1.4;background:#fffdf9}
+#ideaFilterSheetLayer .customSelectButton:hover,#ideaFilterSheetLayer .customSelect.open .customSelectButton{background:#fffdf9;border-color:rgba(79,142,158,.3)}
+#ideaFilterSheetLayer .customSelectButton::after{position:absolute;right:12px;top:50%;width:16px;height:16px;margin:0;transform:translateY(-50%);background-size:16px}
+#ideaFilterSheetLayer .customSelect.open .customSelectButton::after{transform:translateY(-50%) rotate(180deg)}
+#ideaFilterSheetLayer .customSelectMenu{padding:4px;border-radius:12px}
+#ideaFilterSheetLayer .customSelectOption{min-height:36px;padding:8px 10px;font-size:14px;line-height:1.4;border-radius:8px}
+#ideaFilterSheetLayer .customSelectOption:hover:not([aria-selected="true"]){background:rgba(229,242,239,.45)}
+.sharedSheet .ideaFilterChips[hidden]{display:none!important}
+.sharedPublicSheetLayer>.sharedSheet::before{display:none!important}
+
+.sharedSheet .sharedEditorToolbar{position:relative;flex-shrink:0;display:flex;align-items:center;gap:6px;margin:8px 20px 12px;padding:6px;border:1.5px solid rgba(23,79,93,.48);border-radius:16px;background:#fffdf9;color:#236875}
+.sharedEditorToolbar .ideaFilterSheetAction{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:0;border-radius:10px;background:transparent;color:inherit;cursor:pointer}
+.sharedEditorToolbar svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.sharedEditorToolbar .ideaFilterSheetAction:hover{background:#e5f2ef}
 
 }

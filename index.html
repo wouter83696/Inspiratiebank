@@ -4796,9 +4796,11 @@
 
     /* Op tablet en mobiel is de kaart het canvas; desktop behoudt de zijviewer. */
     @media (max-width:980px){
-    #tab-inspiratie.mapViewActive .inspirationHero,
-    #tab-inspiratie.mapViewActive .desktopStickyControls{display:none!important}
-    #tab-inspiratie.mapViewActive{padding-top:0}
+    @media(max-width:980px){
+      #tab-inspiratie.mapViewActive .inspirationHero,
+      #tab-inspiratie.mapViewActive .desktopStickyControls{display:none!important}
+      #tab-inspiratie.mapViewActive{padding-top:0}
+    }
     .ideaMapToolbar{
       position:absolute;z-index:800;top:16px;left:16px;width:min(620px,calc(100% - 32px));
       display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:8px;pointer-events:none
@@ -5471,7 +5473,7 @@
 </style>
   <link rel="stylesheet" href="website-bestanden/header-layout-shared.css?v=20261001-v1">
   <link rel="stylesheet" href="website-bestanden/navigation-colors-shared.css?v=20261006-header-selection-v28">
-  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261006-single-sheet-surface-v146">
+  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261006-desktop-map-header-v147">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -10211,7 +10213,7 @@
       <div id="ideaMapProviderCanvas"></div>
     </div>
     ${ideaMapToolbarMarkup()}
-    <div class="ideaMapActivityCount" role="status">${points.length} ${points.length === 1 ? 'activiteit' : 'activiteiten'}</div>
+    <button class="ideaMapActivityCount" type="button" data-map-panel-toggle aria-label="${points.length} activiteiten openen"><span>${points.length} ${points.length === 1 ? 'activiteit' : 'activiteiten'}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
     ${ideaMapPanelMarkup(points)}`;
     destroyIdeaMapProvider();
     ideaMapProvider = createIdeaMapProvider($('#ideaMapProviderCanvas'), points);
