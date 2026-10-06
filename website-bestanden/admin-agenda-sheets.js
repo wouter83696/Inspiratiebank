@@ -12,6 +12,12 @@
  [...form.children].filter(node=>node!==footer).forEach(node=>grid.append(node));
  const preview=document.createElement('div');preview.className='adminAgendaLivePreview';preview.setAttribute('aria-label','Voorbeeld agendategel');
  body.append(preview,grid);form.prepend(body);
+ ['Date','Time','Where','Domain'].forEach(key=>$('agendaEdit'+key).closest('label').classList.add('wide'));
+ const advanced=document.createElement('details');advanced.className='adminAgendaAdvanced wide';
+ advanced.innerHTML='<summary>Bron en extra opties</summary><div class="adminAgendaAdvancedFields"></div><div class="adminAgendaExtraActions"></div>';
+ ['Source','Url'].forEach(key=>advanced.querySelector('.adminAgendaAdvancedFields').append($('agendaEdit'+key).closest('label')));
+ grid.append(advanced);
+
  function updatePreview(){
    preview.innerHTML=AgendaViewShared.renderItem({themeClass:domainThemeClass($('agendaEditDomain').value),title:titleWithIcon($('agendaEditItemTitle').value||'Titel van de activiteit',$('agendaEditDomain').value,'agendaItemTitle'),meta:[$('agendaEditTime').value,$('agendaEditWhere').value].filter(Boolean).map(escapeHtml).join(' • ')});
  }
@@ -21,14 +27,18 @@
    manager.hidden=true;$('adminIdeaEditPanel').hidden=true;AdminVisual.featuredPanel.hidden=true;
    ['Domain','Distance','Cost','Stimulus','Week'].forEach(key=>enhanceCustomSelect($('agendaEdit'+key)));
    footer.querySelector('button[type=submit]').textContent='Opslaan';
-   toolbar.replaceChildren();
+   toolbar.replaceChildren();advanced.querySelector('.adminAgendaExtraActions').replaceChildren();advanced.open=false;
    [['Kenmerken','Domain','sliders'],['Locatie','Where','pin']].forEach(([label,key,icon])=>{
      const button=document.createElement('button');button.type='button';button.title=label;button.setAttribute('aria-label',label);button.innerHTML=icon==='pin'?'<svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2"/></svg>':'<svg viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="2"/><circle cx="15" cy="17" r="2"/></svg>';button.addEventListener('click',()=>{$('agendaEdit'+key).closest('label').scrollIntoView({block:'center',behavior:'smooth'});});toolbar.append(button);
    });
    if(!editingAgendaSource?.isNew){
      selectedAgendaItemId=String(editingAgendaSource.id);renderAgendaSelectionToolbar();
      const source=$('agendaSelectionActions');
-     source.querySelectorAll('button,a').forEach(control=>{if(control.matches('[data-edit-agenda],[data-edit-ongoing]'))return;toolbar.append(control.cloneNode(true));});
+     source.querySelectorAll('button,a').forEach(control=>{if(control.matches('[data-edit-agenda],[data-edit-ongoing]'))return;const clone=control.cloneNode(true);
+       if(control.matches('[data-block-agenda-source],[data-block-agenda-title]')){
+         clone.textContent=control.getAttribute('aria-label')||control.title;
+         advanced.querySelector('.adminAgendaExtraActions').append(clone);
+       }else toolbar.append(clone);});
    }
    updatePreview();originalOpen();body.scrollTop=0;
  };
@@ -37,6 +47,26 @@
  const old=document.querySelector('.adminAgendaManagementFilters');
  const link=document.createElement('button');link.type='button';link.className='adminAgendaManageLink';link.textContent='Agenda beheren';old.before(link);
  old.querySelector('summary')?.remove();manager.querySelector('.adminAgendaManagerBody').append(...old.children);old.remove();layer.append(manager);
+ const managerBody=manager.querySelector('.adminAgendaManagerBody');
+ const pending=$('agendaPendingList');
+ const search=document.createElement('input');search.type='search';search.placeholder='Zoek in te controleren items…';search.setAttribute('aria-label','Zoek in te controleren items');search.className='adminAgendaManagerSearch';pending.before(search);
+ const pager=document.createElement('nav');pager.className='adminAgendaPager';pager.setAttribute('aria-label','Door controlelijst bladeren');
+ pager.innerHTML='<button type="button" class="button">Vorige</button><span aria-live="polite"></span><button type="button" class="button">Volgende</button>';pending.after(pager);
+ let page=0;
+ function paginate(){
+   const rows=[...pending.querySelectorAll('.agendaPendingRow')],query=search.value.trim().toLocaleLowerCase('nl');
+   const matches=rows.filter(row=>row.textContent.toLocaleLowerCase('nl').includes(query));
+   page=Math.min(page,Math.max(0,Math.ceil(matches.length/6)-1));
+   rows.forEach(row=>row.hidden=true);matches.slice(page*6,page*6+6).forEach(row=>row.hidden=false);
+   pager.querySelector('span').textContent=matches.length?`${page*6+1}–${Math.min(page*6+6,matches.length)} van ${matches.length}`:'Geen resultaten';
+   pager.firstElementChild.disabled=page===0;pager.lastElementChild.disabled=(page+1)*6>=matches.length;
+ }
+ search.addEventListener('input',()=>{page=0;paginate();});
+ pager.firstElementChild.addEventListener('click',()=>{page--;paginate();search.scrollIntoView({block:'start',behavior:'smooth'});});
+ pager.lastElementChild.addEventListener('click',()=>{page++;paginate();search.scrollIntoView({block:'start',behavior:'smooth'});});
+ new MutationObserver(()=>{page=0;paginate();}).observe(pending,{childList:true});paginate();
+ manager.querySelector('#agendaAdminSection p').textContent='Bekijk nieuwe activiteiten en keur ze goed. Zoek hieronder gericht in de lijst.';
+ const ongoing=manager.querySelector('.ongoingAdminPicker'),extra=document.createElement('details');extra.className='adminAgendaAdvanced';extra.innerHTML='<summary>Doorlopend aanbod instellen</summary>';ongoing.before(extra);extra.append(ongoing);
  let returnFocus;
  function closeManager(){manager.hidden=true;AdminEditors.sync();returnFocus?.focus();}
  manager.querySelector('.adminEditorClose').addEventListener('click',closeManager);manager.querySelector('footer button').addEventListener('click',closeManager);

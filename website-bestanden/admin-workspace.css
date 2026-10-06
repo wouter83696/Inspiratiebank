@@ -808,3 +808,36 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
 #adminAgendaManagerSheet .button:hover:not(:disabled){background:#e5f2ef}
 #adminAgendaManagerSheet .agendaCheckNotice{display:block;background:#fffdf9;border:1px solid rgba(79,142,158,.12);border-radius:14px;padding:14px;box-shadow:none}
 #adminAgendaManagerSheet .agendaCheckActions{margin-top:12px}
+
+/* Give long agenda values room and keep occasional actions out of the toolbar. */
+.adminAgendaFieldGrid{gap:18px 14px}
+.adminAgendaLivePreview .agendaItem{box-shadow:none;padding:18px}
+.adminAgendaLivePreview .agendaItemTitle{font-size:19px;line-height:1.4;align-items:flex-start;hyphens:none;overflow-wrap:break-word}
+.adminAgendaLivePreview .agendaItemMeta{font-size:14px;line-height:1.6;hyphens:none;word-break:normal;overflow-wrap:break-word;margin-top:12px}
+.adminAgendaLivePreview .agendaItemTitle .domainIcon{flex-shrink:0}
+.adminAgendaAdvanced{margin-top:4px;border-top:1px solid rgba(79,142,158,.14);padding-top:16px;color:#315f6b}
+.adminAgendaAdvanced summary{cursor:pointer;font-size:14px;padding:4px 0}
+.adminAgendaAdvancedFields{display:grid;gap:16px;margin-top:16px}
+.adminAgendaExtraActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+#agendaEditModal .adminAgendaExtraActions button{width:auto;height:auto;border:1px solid rgba(79,142,158,.18);border-radius:10px;padding:8px 12px;background:#fffdf9;color:#63858b;font:inherit;font-size:13px}
+#agendaEditModal .adminAgendaExtraActions button:hover{background:#f5f1e8}
+
+#adminAgendaManagerSheet .adminAgendaManagerBody{display:flex;flex-direction:column;gap:18px}
+#adminAgendaManagerSheet .agendaCheckNotice{padding:16px;margin:0;background:rgba(229,242,239,.35)}
+#adminAgendaManagerSheet .agendaCheckEyebrow{display:none}
+#adminAgendaManagerSheet .agendaCheckDetail,#adminAgendaManagerSheet p{font-size:13px;line-height:1.6;color:#71817e;margin:6px 0 0}
+#adminAgendaManagerSheet #agendaAdminSection{margin:8px 0 0}
+#adminAgendaManagerSheet #agendaAdminSection h2{font-size:16px;margin:0;color:#315f6b}
+#adminAgendaManagerSheet .rowActions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
+#adminAgendaManagerSheet .adminManagementFilterFields{margin:0}
+#adminAgendaManagerSheet .adminAgendaManagerSearch{width:100%;box-sizing:border-box;min-height:42px;padding:10px 12px;border:1px solid rgba(79,142,158,.16);border-radius:12px;background:#fffdf9;color:#315f6b;font:inherit;font-size:14px}
+#adminAgendaManagerSheet .agendaPendingList{display:grid;gap:12px;max-height:none;overflow:visible}
+#adminAgendaManagerSheet .agendaPendingRow{margin:0;padding:16px;gap:14px}
+#adminAgendaManagerSheet .agendaPendingRow[hidden]{display:none}
+#adminAgendaManagerSheet .agendaPendingRow strong{font-size:15px;line-height:1.45;color:#315f6b}
+#adminAgendaManagerSheet .agendaPendingActions .button{font-size:12px;min-height:34px;padding:7px 10px}
+#adminAgendaManagerSheet .adminAgendaPager{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;color:#63858b}
+#adminAgendaManagerSheet .ongoingAdminPicker{display:grid;gap:12px;margin-top:14px}
+#adminAgendaManagerSheet button:disabled{opacity:.45;cursor:default}
+#adminAgendaManagerSheet .adminAgendaManagerBody>*{flex-shrink:0}
+#adminAgendaManagerSheet #agendaAdminSection{height:auto;max-height:none;overflow:visible}
