@@ -132,12 +132,12 @@
     return `<section class="photoRouteChoices">${locationText}${destination?`<div class="detailRouteLinks"><a href="https://www.google.com/maps/search/?api=1&query=${search}" target="_blank" rel="noopener" class="detailGoogle">${mapAppIcon('google')}<span>Bekijk op Google Maps</span></a><a href="https://maps.apple.com/?daddr=${query}" target="_blank" rel="noopener">${mapAppIcon('apple')}<span>Apple Kaarten</span></a><a href="https://waze.com/ul?q=${query}&navigate=yes" target="_blank" rel="noopener">${mapAppIcon('waze')}<span>Waze</span></a></div>`:''}</section>`;
   }
   let detailTabSequence=0;
-  function detailContent(item, titleId='photoDetailTitle'){
+  function detailContent(item, titleId='photoDetailTitle', view={}){
     const extras=(Array.isArray(item.images)?item.images:[]).filter(image=>image&&typeof image==='object'&&(image.status==='approved'||image.approved===true)&&/^https?:\/\//i.test(image.src||''));
     const gallery=extras.length?`<details class="photoDetailSection"><summary>${detailIcon('photo')}<span>Foto’s</span></summary><div class="photoDetailGallery">${extras.map(image=>`<img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}" loading="lazy">`).join('')}</div></details>`:'';
     // Use the very same card renderer as the map detail, including image and metadata.
     const template=document.createElement('template');
-    template.innerHTML=cardIdea(item,{mapDetailAction:'close'});
+    template.innerHTML=view.card || cardIdea(item,{mapDetailAction:'close'});
     const card=template.content.querySelector('article');
     const title=card.querySelector('h3');
     title.id=titleId;
@@ -145,7 +145,7 @@
     card.prepend(title);
     card.querySelector('.ideaPracticalDetails:not(.ideaMaterialsDetails)')?.remove();
     card.querySelector('.cardFooter')?.remove();
-    card.insertAdjacentHTML('beforeend',`${gallery}${IdeaViewShared.renderPractical(escapeHtml(item.materials||item.rules||''))}${routeChoices(item)}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="ideaRouteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><svg class="websiteGlobe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg><span>Website bezoeken</span></a>`:''}</div>`);
+    card.insertAdjacentHTML('beforeend',`${gallery}${IdeaViewShared.renderPractical(escapeHtml(item.materials||item.rules||''))}${view.routes !== undefined ? view.routes : routeChoices(item)}<div class="photoDetailActions">${/^https?:\/\//i.test(item.url||'')?`<a class="ideaRouteButton" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><svg class="websiteGlobe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg><span>Website bezoeken</span></a>`:''}</div>`);
     const materials=card.querySelector('.ideaMaterialsDetails');
     if(materials) materials.remove();
     const actions=card.querySelector('.photoDetailActions');
@@ -252,11 +252,7 @@
       const image=approvedIdeaImage(item),metadata=sharedIdeaMetadata(item);
       const button=document.createElement('button');button.type='button';button.className='photoTile '+domainThemeClass(item.domain);button.dataset.ideaKey=ideaDomKey(item);button.dataset.photoDetail=ideaDomKey(item);button.setAttribute('aria-label','Bekijk '+item.title);button.setAttribute('aria-haspopup','dialog');
       const media=image?`<img src="${escapeHtml(image.src)}" alt="" loading="lazy" decoding="async">`:'<span class="photoTilePlaceholder" aria-hidden="true"></span>';
-      const badge=`<span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span>`;
-      const facts=`<span class="photoTileFacts"><span class="photoTileMeta">${metadata.pills}</span>${compact?'':`<span class="photoTileExtra">${metadata.meta}</span>`}</span>`;
-      button.innerHTML=compact
-        ? `<span class="photoTileMedia">${media}<span class="photoTileOverlay">${badge}${facts}</span></span><span class="photoTileContent"><span class="photoTileTitle"><span>${escapeHtml(compactTitles.get(item.title)||item.title)}</span></span></span>`
-        : `${media}<span class="photoTileContent"><span class="photoTileTitle">${badge}<span>${escapeHtml(item.title)}</span></span>${facts}</span>`;
+      button.innerHTML=IdeaViewShared.renderPhotoTileContent({media,icon:domainIcon(item.domain),pills:metadata.pills,meta:metadata.meta,title:compact?(compactTitles.get(item.title)||item.title):item.title,compact});
       card.replaceWith(button);
     });
     let column=0;

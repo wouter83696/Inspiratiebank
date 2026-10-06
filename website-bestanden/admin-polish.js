@@ -2,6 +2,9 @@
 (function(){
   const $=id=>document.getElementById(id);
   const app=$('adminApp'), mobile=matchMedia('(max-width:820px)');
+  const modeKey='admin_navigation_mode_v1',pinKey='admin_navigation_pinned_v1';
+  $('adminNavigationMode').value=localStorage.getItem(modeKey)==='side'?'side':'top';
+  $('adminPinMenu').checked=localStorage.getItem(pinKey)==='1';
   let ideaSnapshot='', settingsSnapshot='', originalPhoto=null, approvedClick=false, noticeTimer;
   const snapshot=form=>JSON.stringify([...form.elements].filter(e=>e.tagName!=='BUTTON').map(e=>[e.id,e.type==='checkbox'?e.checked:e.value]));
   const ideaDirty=()=>!$('adminIdeaEditPanel').hidden && ideaSnapshot!==snapshot($('adminIdeaEditForm'));
@@ -24,9 +27,17 @@
   new ResizeObserver(()=>app.style.setProperty('--admin-mobile-bar-height',`${document.querySelector('.adminMobileTopbar').getBoundingClientRect().height}px`)).observe(document.querySelector('.adminMobileTopbar'));
   function syncMobile(){
     const workspace=document.querySelector('[data-admin-workspace]:not([hidden])');
-    for(const {node,home} of homes){const target=mobile.matches&&workspace?.contains(home)?$('adminMobileActions'):home;if(node.parentElement!==target)target.append(node);}
-    if(!mobile.matches)closeMenu();
+    const top=mobile.matches||$('adminNavigationMode').value==='top';
+    app.classList.toggle('adminTopNavigation',top);
+    app.classList.toggle('adminNavigationPinned',top&&!mobile.matches&&$('adminPinMenu').checked);
+    const hidePin=!top||mobile.matches;
+    if($('adminPinMenuLabel').hidden!==hidePin)$('adminPinMenuLabel').hidden=hidePin;
+    $('adminMenuLabel').textContent=document.querySelector('.adminNavButton.active .adminNavText')?.textContent||'Beheer';
+    for(const {node,home} of homes){const target=top&&workspace?.contains(home)?$('adminMobileActions'):home;if(node.parentElement!==target)target.append(node);}
+    if(!top)closeMenu();
   }
+  $('adminNavigationMode').addEventListener('change',()=>{localStorage.setItem(modeKey,$('adminNavigationMode').value);syncMobile();});
+  $('adminPinMenu').addEventListener('change',()=>{localStorage.setItem(pinKey,$('adminPinMenu').checked?'1':'0');syncMobile();});
   $('adminMobileMenuButton').addEventListener('click',()=>{const open=!app.classList.contains('mobileMenuOpen');app.classList.toggle('mobileMenuOpen',open);$('adminMobileMenuButton').setAttribute('aria-expanded',String(open));});
   document.addEventListener('click',event=>{
     if(!event.target.closest('.adminSidebar,#adminMobileMenuButton'))closeMenu();

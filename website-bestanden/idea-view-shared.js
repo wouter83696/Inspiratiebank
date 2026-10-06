@@ -87,6 +87,15 @@
     return renderRow({...view, cells});
   }
 
+  // Shared photo-tile structure for the public grid and management workspace.
+  function renderPhotoTileContent({media='',icon='',pills='',meta='',title='',compact=true}={}){
+    const badge=`<span class="domainIcon" aria-hidden="true">${icon}</span>`;
+    const facts=`<span class="photoTileFacts"><span class="photoTileMeta">${pills}</span>${compact?'':`<span class="photoTileExtra">${meta}</span>`}</span>`;
+    return compact
+      ? `<span class="photoTileMedia">${media}<span class="photoTileOverlay">${badge}${facts}</span></span><span class="photoTileContent"><span class="photoTileTitle"><span>${escape(title)}</span></span></span>`
+      : `${media}<span class="photoTileContent"><span class="photoTileTitle">${badge}<span>${escape(title)}</span></span>${facts}</span>`;
+  }
+
   function renderDesktopTable(view={}){
     const admin = view.admin === true;
     const headers = ['Activiteit', 'Kenmerken', 'Beschrijving', 'Praktisch'];
@@ -95,5 +104,5 @@
     return `<table><thead><tr>${headers.map(label => `<th>${label}</th>`).join('')}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
-  window.IdeaViewShared = Object.freeze({renderMaterials, renderPractical, renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
+  window.IdeaViewShared = Object.freeze({renderPhotoTileContent, renderMaterials, renderPractical, renderMetadata, renderCard, renderRow, renderActivityRow, renderDesktopRow, renderDesktopTable});
 })();

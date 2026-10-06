@@ -22,13 +22,12 @@ body.adminMode .shell{padding-bottom:0}
 .adminSelectionActions{display:flex;align-items:center;gap:6px;flex-shrink:0}
 .adminSelectionActions>.ideaActions{display:contents}
 .adminSelectionActions .button.iconAction{display:inline-grid;place-items:center;width:36px;height:36px;min-width:36px;padding:0;border-radius:10px}
-.adminSelectableCard,.adminSelectableAgendaItem,.adminSelectableIdeaRow{cursor:pointer}
-.adminSelectableCard.isSelected,.adminSelectableAgendaItem.isSelected{outline:2px solid #c4ad83!important;outline-offset:3px;box-shadow:0 0 0 5px rgba(196,173,131,.14)!important}
+.adminSelectableAgendaItem,.adminSelectableIdeaRow{cursor:pointer}
+.adminSelectableAgendaItem.isSelected{outline:2px solid #c4ad83!important;outline-offset:3px;box-shadow:0 0 0 5px rgba(196,173,131,.14)!important}
 #adminApp #adminIdeaList tr.isSelected > td{background:#f6efdf!important}
 #adminApp #adminIdeaList tr.isSelected > td:first-child{box-shadow:inset 3px 0 #c4ad83}
 #adminApp #adminIdeaList tr.isSelected:hover > td{background:#f1e6d2!important}
-#adminApp .adminPublicSurface .adminSelectableCard.isSelected{outline-color:#c4ad83!important;background:#fffaf1!important}
-.adminSelectableCard:focus-visible,.adminSelectableAgendaItem:focus-visible{outline:2px solid #c4ad83;outline-offset:3px}
+.adminSelectableAgendaItem:focus-visible{outline:2px solid #c4ad83;outline-offset:3px}
 #adminApp .adminPublicSurface .adminIdeaView[hidden]{display:none!important}
 #adminApp .adminPublicSurface .adminIdeaView.active{display:grid}
 #adminApp .adminPublicSurface .tableWrap.adminIdeaView.active{display:block}
@@ -191,16 +190,12 @@ body.ideaFilterSheetOpen{overflow:hidden}
 #adminApp :is(#inspirationAdminPanel,#agendaReviewPanel) .adminSelectionToolbar>*{position:relative;z-index:2}
 #adminApp :is(#inspirationAdminPanel,#agendaReviewPanel)>.desktopStickyControls>:is(.inspirationDesktopFilterRow,.agendaLegendBar){margin-top:6px!important;margin-bottom:0!important}
 #adminApp #agendaReviewPanel .agendaDesktopControls>.agendaSectionSwitcher{margin-top:6px;margin-bottom:0}
-#adminApp #ideaSelectionToolbar #ideaCount{flex:0 0 auto;border:0;background:none;padding:0;margin:0;color:#70817d;font-size:11px;box-shadow:none;white-space:nowrap}
-#adminApp #ideaSelectionToolbar #ideaCount svg{display:none}
-#adminApp #ideaSelectionToolbar #ideaCount strong{font-weight:500;color:inherit}
 #adminApp .adminSelectionActions .button.iconAction{width:36px;height:36px;border-radius:12px}
 #adminApp #agendaReviewPanel .adminAgendaManagementFilters> :not(summary){margin-left:16px;margin-right:16px}
 #adminApp #agendaReviewPanel .adminAgendaManagementFilters .adminAgendaUtilities{width:auto;margin-bottom:16px}
 #adminApp #agendaReviewPanel .adminAgendaManagementFilters .agendaCheckNotice{margin-top:12px;margin-bottom:16px;border:0;border-radius:0;padding:0 0 16px;border-bottom:1px solid var(--manage-border)}
 #adminApp #inspirationAdminPanel .featuredAdminPanel{padding:0;margin-bottom:10px}
 @media(max-width:640px){
- #adminApp #ideaSelectionToolbar #ideaCount{margin-left:auto}
  #adminApp .adminSelectionActions{width:100%;justify-content:flex-start}
 }
 /* The mobile navigation must scroll away instead of covering the sticky tools. */
@@ -438,3 +433,100 @@ body.adminEditorOpen{overflow:hidden!important}
 #confirmModal .confirmModalKicker{margin:0;line-height:1.3}
 #confirmModal .confirmModalTitle{margin:0;line-height:1.2;overflow-wrap:break-word}
 #confirmModal .confirmModalBadge{flex:0 0 44px;width:44px;height:44px;box-sizing:border-box}
+
+/* The same compact tile surface as the public page, with management status only. */
+#adminApp .adminIdeaSummary{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0 18px;color:#496866;font-size:13px}
+#adminApp #adminIdeaCards.photoTiles{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
+#adminApp #adminIdeaCards .photoTile{position:relative;cursor:pointer}
+#adminApp #adminIdeaCards .photoTile .adminItemStatus{position:absolute;left:16px;top:16px}
+#adminApp #adminIdeaCards .photoTile.isSelected{outline:2px solid #4f8e9e;outline-offset:3px}
+#adminApp .adminFeaturedRail{display:flex;gap:18px;overflow-x:auto;margin:0 0 24px;padding:4px;scroll-snap-type:x proximity}
+#adminApp .adminFeaturedTile{position:relative;flex:0 0 min(380px,85%);border:0;border-radius:22px;background:#fffdf9;overflow:hidden;padding:8px;text-align:left;color:#006780;cursor:pointer;scroll-snap-align:start}
+.adminFeaturedTile .photoTileMedia{display:block;position:relative;aspect-ratio:16/9}
+.adminFeaturedTile img{width:100%;height:100%;object-fit:cover;border-radius:16px}
+.adminFeaturedTile .photoTileOverlay{display:none}
+.adminFeaturedTile .photoTileTitle{display:block;padding:14px 8px 10px;font-size:17px;font-weight:600}
+.adminFeaturedBadge{position:absolute;left:8px;top:24px;background:#fff1c9;color:#805b08;padding:8px 12px;border-radius:0 10px 10px 0;font-size:12px}
+.adminFeaturedTile .adminItemStatus{position:absolute;right:16px;top:24px}
+#adminApp .featuredAdminPanel:not([open]){display:none}
+.adminIdeaLayer{justify-content:flex-start;background:transparent;backdrop-filter:none;pointer-events:none;z-index:1100}
+.adminIdeaLayer.isModal{background:rgba(48,46,39,.18);backdrop-filter:blur(3px);pointer-events:auto}
+.adminIdeaLayer .adminEditorCard{pointer-events:auto;width:min(480px,100%);background:linear-gradient(180deg,#fffdfa,#faf7ef);box-shadow:12px 0 32px #38312414;animation:adminIdeaEnter .2s ease-out}
+.adminIdeaLayer.isEditing .adminEditorCard{width:min(640px,100%)}
+.adminIdeaLayer [hidden]{display:none!important}
+#adminIdeaPreview .adminPreviewHeader{display:flex;position:sticky;top:-24px;z-index:8;background:#fffdfa;padding-top:12px;padding-bottom:12px;align-items:center;min-height:42px;padding-right:52px;margin-bottom:18px}
+#adminIdeaPreview h2{margin:0;font:600 21px/1.35 Manrope,system-ui,sans-serif;color:#006780}
+#adminIdeaPreview .photoDetailBody{padding:0;overflow:visible}
+#adminIdeaPreview .ideaImageFrame{aspect-ratio:16/9!important;height:auto!important;max-height:none!important}
+#adminIdeaPreview .adminPreviewActions{position:sticky;bottom:-24px;padding:14px 0;background:#faf7ef;border-top:1px solid #e7e4da;z-index:5}
+#adminIdeaPreview .ideaActions{display:flex;gap:8px;flex-wrap:wrap}
+#adminIdeaPreview .ideaActions .button{display:inline-flex;align-items:center;gap:7px;width:auto;min-width:0;height:auto;padding:9px 11px;font:500 12px/1.3 Manrope,system-ui,sans-serif;border:1px solid #dce4df;border-radius:10px;background:#fffdf9;color:#315f6b;cursor:pointer}
+#adminIdeaPreview .ideaActions .button svg{width:17px;height:17px}
+#adminIdeaPreview .ideaActions .button.editIdeaAction{background:#e5f2ef}
+#adminIdeaPreview .ideaActions .button.hot{color:#9b5146}
+#adminIdeaPreview .ideaActions .button:disabled{opacity:.5;cursor:default}
+@keyframes adminIdeaEnter{from{transform:translateX(-24px);opacity:.6}to{transform:translateX(0);opacity:1}}
+@media(min-width:1101px){
+ body.adminDetailDocked #adminApp .adminWorkspaceShell{margin-left:calc(var(--admin-sidebar-w) + 480px);width:calc(100% - var(--admin-sidebar-w) - 480px)}
+ body.adminDetailDocked #adminApp.adminSidebarCollapsed .adminWorkspaceShell{margin-left:calc(var(--admin-sidebar-closed-w) + 480px);width:calc(100% - var(--admin-sidebar-closed-w) - 480px)}
+ body.adminDetailDocked:has(#adminApp:not(.adminTopNavigation)) .adminIdeaLayer{left:248px}
+ body.adminDetailDocked:has(#adminApp.adminSidebarCollapsed:not(.adminTopNavigation)) .adminIdeaLayer{left:62px}
+ body.adminDetailDocked #adminApp.adminTopNavigation .adminWorkspaceShell{margin-left:480px;width:calc(100% - 480px)}
+}
+/* Navigation preference: top dropdown by default, optional persistent sidebar. */
+.adminNavigationPreferences{display:grid;gap:12px;padding:10px;border-bottom:1px solid #dce4df;color:#315f6b;font-size:12px}
+.adminNavigationPreferences label{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.adminNavigationPreferences select{width:auto;padding:8px;border:1px solid #dce4df;border-radius:9px;background:#fffdf9;color:inherit;font:inherit}
+.adminNavigationPreferences input{width:16px;height:16px;accent-color:#4f8e9e}
+#adminApp.adminSidebarCollapsed:not(.adminTopNavigation) .adminNavigationPreferences{display:none}
+#adminApp.adminTopNavigation .adminWorkspaceShell{margin-left:0;width:100%}
+#adminApp.adminTopNavigation .adminMobileTopbar{display:flex;position:sticky;top:0;z-index:100;align-items:center;justify-content:space-between;min-height:64px;padding:10px 24px;gap:16px;background:#fffdf9;border-bottom:1px solid #dce4df}
+#adminApp.adminTopNavigation #adminMobileMenuButton{display:flex;align-items:center;gap:8px;background:transparent;border:0;color:#315f6b;font:600 15px Manrope,system-ui,sans-serif;cursor:pointer;padding:8px}
+#adminApp.adminTopNavigation #adminMobileMenuButton img{width:30px;height:30px}
+#adminApp.adminTopNavigation .adminSidebar{display:none;position:fixed;top:var(--admin-mobile-bar-height,64px);right:18px;left:auto;bottom:auto;width:340px;max-width:calc(100% - 32px);height:auto;min-height:0;max-height:calc(100dvh - 85px);overflow:auto;z-index:101;padding:12px;border:1px solid #dce4df;border-radius:16px;background:#fffdf9;box-shadow:0 12px 40px #315f6b20;gap:8px;grid-template-rows:auto auto auto}
+#adminApp.adminTopNavigation.mobileMenuOpen .adminSidebar{display:grid}
+#adminApp.adminTopNavigation .adminSidebarBrand{display:none}
+#adminApp.adminTopNavigation .adminSidebarGroup{display:grid;grid-template-columns:1fr;padding:4px 0;overflow:visible}
+#adminApp.adminTopNavigation .adminNavButton{display:flex;align-items:center;gap:10px;width:100%;min-height:40px;padding:8px 10px;margin:0}
+#adminApp.adminTopNavigation .adminNavText{display:block}
+#adminApp.adminTopNavigation .adminNavIcon{flex-shrink:0}
+#adminApp.adminTopNavigation .adminSidebarFoot{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0}
+#adminApp.adminTopNavigation .adminSidebarFoot .mini{display:flex;width:auto;gap:8px;padding:8px}
+#adminApp.adminTopNavigation .adminSidebarFoot .mini span{display:inline}
+#adminApp.adminTopNavigation .adminActionTopbar{display:none!important}
+#adminApp.adminTopNavigation #adminMobileActions .adminHeroActions{position:static;display:flex;gap:8px}
+#adminApp.adminTopNavigation #adminMobileActions .adminHeaderAdd{position:static;min-height:40px}
+@media(min-width:821px){
+ #adminApp.adminTopNavigation.adminNavigationPinned .adminSidebar{display:flex;position:sticky;top:var(--admin-mobile-bar-height,64px);width:100%;max-width:none;max-height:none;left:0;right:0;align-items:center;flex-wrap:wrap;border-radius:0;border-width:0 0 1px;box-shadow:none;padding:8px 24px;gap:10px}
+ #adminApp.adminNavigationPinned .adminSidebarGroup{display:flex;flex:1;flex-wrap:wrap;gap:3px}
+ #adminApp.adminNavigationPinned .adminNavButton{width:auto;font-size:12px}
+ #adminApp.adminNavigationPinned .adminNavigationPreferences{border:0;padding:0}
+ #adminApp.adminNavigationPinned .adminSidebarFoot{padding:0}
+}
+@media(max-width:640px){
+ #adminApp #adminIdeaCards.photoTiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ #adminApp.adminTopNavigation .adminMobileTopbar{padding:8px 12px}
+ #adminIdeaPreview h2{font-size:19px}
+ .adminIdeaLayer .adminEditorCard{width:100%;border-radius:24px 24px 0 0;height:94dvh;max-height:94dvh;align-self:flex-end}
+ #adminIdeaPreview .adminPreviewActions{bottom:-20px}
+}
+@media(prefers-reduced-motion:reduce){.adminIdeaLayer .adminEditorCard{animation:none}}
+/* Detail content is one column, independently of the tile grid outside it. */
+#adminIdeaPreview .photoDetailBody{display:block!important;width:100%!important;min-width:0}
+#adminIdeaPreview .photoDetailBody>.sharedIdeaCard{width:100%!important;min-width:0}
+#adminIdeaPreview .ideaActions .button{min-width:max-content!important;width:auto!important;flex:0 0 auto!important}
+#adminIdeaPreview .ideaActions .button span{display:inline!important}
+#adminApp #adminIdeaCards.photoTiles{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))!important}
+@media(max-width:640px){#adminApp #adminIdeaCards.photoTiles{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+#adminApp:not(.adminTopNavigation) .adminSidebar{grid-template-rows:auto auto minmax(0,1fr) auto}
+#adminApp .adminFeaturedTile .photoTileContent{position:static!important;display:block!important;padding:0!important;background:none!important}
+#adminApp .adminFeaturedTile .photoTileTitle{color:#006780!important;text-shadow:none!important}
+#adminApp .adminFeaturedTile{display:block!important;aspect-ratio:auto!important}
+@media(max-width:640px){#adminIdeaPreview .adminPreviewHeader{top:-20px}}
+
+.adminNavigationPreferences select{min-width:0;max-width:130px;box-sizing:border-box}
+.adminNavigationPreferences label{flex-wrap:wrap}
+#adminApp .adminFeaturedTile{flex-basis:min(540px,85%)}
+#adminApp.adminTopNavigation .desktopStickyControls{top:var(--admin-mobile-bar-height,64px)!important}
+@media(max-width:640px){.adminIdeaLayer .adminEditorCard{min-height:0!important;height:94dvh!important;max-height:94dvh!important}}

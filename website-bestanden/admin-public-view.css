@@ -3,7 +3,7 @@
 
     :scope.appLoading{overflow:hidden;background:#F8F5EB}
     :scope.appLoading :scope{margin:0;overflow:hidden;background:#F8F5EB}
-    :scope.appLoading :scope > :not(.appLoader){display:none !important}
+    :scope.appLoading :scope > :not(.appLoader){visibility:hidden !important;pointer-events:none !important}
     :scope.appLoading .appLoader{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;width:100%;min-height:100vh;padding:24px;background:#F8F5EB}
     .desktopStickyControls{display:contents}
     @media (min-width:981px){
@@ -121,7 +121,7 @@
       font:inherit;font-size:.82rem;font-weight:600;line-height:1;white-space:nowrap;pointer-events:auto;cursor:pointer;
       transition:background .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease)
     }
-    .topbarAddButton:hover{border-color:rgba(23,79,93,.68);background:var(--control-hover-surface);color:#1f5763}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.topbarAddButton:hover{border-color:rgba(23,79,93,.68);background:var(--control-hover-surface);color:#1f5763}}
     .topbarAddButton svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
     .actions{
       display:flex;align-items:center;gap:14px;margin-left:auto;padding:3px 0;min-height:40px;pointer-events:auto
@@ -209,10 +209,11 @@
     }
     .tabs::-webkit-scrollbar{display:none}
     .tab{border:0;background:transparent;color:var(--muted);border-radius:999px;padding:8px 11px;white-space:nowrap;cursor:pointer;transition:.18s var(--ease)}
-    .tab:hover{background:rgba(168,225,221,.20);color:var(--accent-dark)}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.tab:hover{background:rgba(168,225,221,.20);color:var(--accent-dark)}}
     .tab.active{background:rgba(168,225,221,.42);color:var(--accent-dark);box-shadow:inset 0 0 0 1px rgba(79,142,158,.08)}
     .tabPanel{display:none;animation:in .25s var(--ease);background:transparent}
     .tabPanel.active{display:block;scroll-margin-top:92px}
+    @media screen{.tabPanel:not(.active),.tabPanel[hidden]{display:none!important}}
     :scope#inspirationAdminPanel,
     :scope#agendaReviewPanel,
     #adminIdeaCards,
@@ -229,7 +230,7 @@
       box-shadow:0 4px 12px rgba(49,95,107,.045);
       transition:background-color .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease)
     }
-    .ideaActiveFilterChip:hover{background:#fffaf4;border-color:rgba(79,142,158,.24);transform:translateY(-1px)}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.ideaActiveFilterChip:hover{background:#fffaf4;border-color:rgba(79,142,158,.24);transform:translateY(-1px)}}
     .ideaActiveFilterChip:focus-visible{outline:2px solid rgba(63,120,132,.40);outline-offset:2px}
     .ideaActiveFilterChip svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
     @keyframes in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
@@ -542,7 +543,7 @@
       max-width:100%;min-width:72px;padding:9px 12px;font-size:.86rem;font-weight:500;line-height:1.18;text-align:center;white-space:nowrap;box-shadow:0 8px 20px rgba(20,38,42,.04);
       transition:transform .18s var(--ease), background .18s ease, border-color .18s ease;
     }
-    .siteButton:hover{transform:translateY(-1px);background:#fff;border-color:rgba(79,142,158,.16);text-decoration:none}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.siteButton:hover{transform:translateY(-1px);background:#fff;border-color:rgba(79,142,158,.16);text-decoration:none}}
     .siteButton.secondary{
       background:rgba(168,225,221,.34);
       border:1px solid rgba(79,142,158,.10);
@@ -557,7 +558,7 @@
     .websiteCell{vertical-align:middle;text-align:center}
     .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:12px}
     .card{min-width:0;padding:18px;min-height:215px;display:flex;flex-direction:column;gap:10px;background:#fffdf9;border-color:#EFE9DE;box-shadow:0 10px 26px rgba(64,45,20,.04);transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease)}
-    .card:hover{transform:translateY(-2px);background:#fffefb;box-shadow:0 16px 34px rgba(64,45,20,.065);border-color:rgba(79,142,158,.13)}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.card:hover{transform:translateY(-2px);background:#fffefb;box-shadow:0 16px 34px rgba(64,45,20,.065);border-color:rgba(79,142,158,.13)}}
     .themeCreative{--theme-tint:rgba(229,0,90,.055);--theme-tint-strong:rgba(229,0,90,.13);--theme-line:rgba(229,0,90,.18);--theme-icon-bg:#fde0ec;--theme-icon-line:#f8d1e0;--theme-ink:#a00042;--agenda-tint:#fdf0f6;--agenda-line:rgba(229,0,90,.22)}
     .themeCulture{--theme-tint:rgba(72,70,184,.055);--theme-tint-strong:rgba(72,70,184,.13);--theme-line:rgba(72,70,184,.18);--theme-icon-bg:#e7e7f6;--theme-icon-line:#deddf2;--theme-ink:#4644a0;--agenda-tint:#f1f0fb;--agenda-line:rgba(72,70,184,.22)}
     .themeNature{--theme-tint:rgba(0,155,72,.06);--theme-tint-strong:rgba(0,155,72,.14);--theme-line:rgba(0,155,72,.18);--theme-icon-bg:#dbf1e3;--theme-icon-line:#d1ebdc;--theme-ink:#087b43;--agenda-tint:#eef8f2;--agenda-line:rgba(0,155,72,.22)}
@@ -571,11 +572,11 @@
       border-color:#EFE9DE;
       box-shadow:0 10px 26px rgba(64,45,20,.04)
     }
-    .ideaThemeCard:hover{
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.ideaThemeCard:hover{
       background:#fffefb;
       border-color:rgba(79,142,158,.13);
       box-shadow:0 16px 34px rgba(64,45,20,.065)
-    }
+    }}
     .ideaImageFrame{
       position:relative;width:auto;align-self:stretch;overflow:hidden;margin:-10px -10px 10px;border-radius:13px;
       aspect-ratio:16 / 8.7;background:linear-gradient(var(--theme-tint),rgba(255,255,255,.58));
@@ -770,7 +771,7 @@
       box-shadow:none;transition:transform .18s var(--ease),background .18s var(--ease)
     }
     .ideaSurpriseButton svg{width:22px;height:22px;flex:0 0 22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-    .ideaSurpriseButton:hover{transform:translateY(-1px);background:#EED59A}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.ideaSurpriseButton:hover{transform:translateY(-1px);background:#EED59A}}
     .ideaSurpriseRow td{padding:12px;background:rgba(255,253,247,.96)}
     .ideaSurpriseRow .ideaSurpriseCard{grid-column:auto;margin:0;border-radius:14px;box-shadow:none}
     @media (min-width:1180px){
@@ -794,7 +795,7 @@
       background:rgba(255,255,255,.60);color:rgba(11,18,32,.52);cursor:pointer;
       transition:color .18s var(--ease), background .18s var(--ease), transform .18s var(--ease)
     }
-    .reportButton:hover{background:#fff;color:rgba(11,18,32,.66);transform:translateY(-1px)}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.reportButton:hover{background:#fff;color:rgba(11,18,32,.66);transform:translateY(-1px)}}
     .reportButton svg{width:15px;height:15px;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
     .reportFlagPole{stroke:rgba(11,18,32,.52)}
     .reportFlagBanner{stroke:rgba(11,18,32,.52);fill:none}
@@ -835,7 +836,7 @@
       transition:opacity .2s var(--ease),transform .2s var(--ease),background .18s var(--ease)
     }
     .backToTop svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-    .backToTop:hover,.ideaFeaturedArrow:hover{background:rgba(255,254,252,.80)}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.backToTop:hover,.ideaFeaturedArrow:hover{background:rgba(255,254,252,.80)}}
     .backToTop.show{opacity:1;pointer-events:auto;transform:translateY(0)}
     @media (min-width:981px){
       .backToTop{display:inline-flex;align-items:center;justify-content:center;right:24px;bottom:24px;visibility:hidden}
@@ -1125,7 +1126,7 @@
       width:34px;height:34px;border-radius:13px;padding:0;cursor:pointer;transition:.18s var(--ease);
       display:inline-flex;align-items:center;justify-content:center;
     }
-    .viewBtn:hover{background:var(--control-hover-surface);color:rgba(49,95,107,.68)}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.viewBtn:hover{background:var(--control-hover-surface);color:rgba(49,95,107,.68)}}
     .viewBtn.active{background:rgba(168,225,221,.28);color:rgba(31,101,114,.92);box-shadow:inset 0 0 0 1px rgba(79,142,158,.06)}
     .viewIcon{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px}
     .viewIcon svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -1476,7 +1477,7 @@
     .ideaFilterSheetHeader{display:flex;align-items:center;justify-content:space-between;min-height:68px;padding:12px 20px;border-bottom:1px solid rgba(123,112,88,.08)}
     .ideaFilterSheetHeader h2{margin:0;color:var(--accent-dark);font-size:1.2rem;font-weight:650}
     .ideaFilterSheetClose{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:0;border-radius:12px;background:transparent;color:rgba(49,95,107,.72);cursor:pointer}
-    .ideaFilterSheetClose:hover{background:rgba(217,231,214,.45);color:var(--accent-dark)}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.ideaFilterSheetClose:hover{background:rgba(217,231,214,.45);color:var(--accent-dark)}}
     .ideaFilterSheetClose svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
     .ideaFilterSheetBody{min-height:0;overflow:auto;padding:20px 20px 28px;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(49,95,107,.22) transparent}
     .ideaFilterSheetBody::-webkit-scrollbar{width:6px}
@@ -1499,7 +1500,7 @@
       background:rgba(255,255,255,.54);color:rgba(49,95,107,.76);font:inherit;font-size:.79rem;font-weight:550;cursor:pointer;
       transition:background-color .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease)
     }
-    .ideaFilterChip:hover{background:rgba(168,225,221,.20);border-color:rgba(79,142,158,.22);color:var(--accent-dark);box-shadow:0 4px 10px rgba(49,95,107,.07);transform:translateY(-1px)}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.ideaFilterChip:hover{background:rgba(168,225,221,.20);border-color:rgba(79,142,158,.22);color:var(--accent-dark);box-shadow:0 4px 10px rgba(49,95,107,.07);transform:translateY(-1px)}}
     .ideaFilterChip:focus-visible{outline:2px solid rgba(63,120,132,.40);outline-offset:2px}
     .ideaFilterChip.active{background:rgba(168,225,221,.28);border-color:rgba(79,142,158,.16);color:rgba(31,101,114,.92);box-shadow:inset 0 0 0 1px rgba(79,142,158,.06)}
     #ideaFilterPlaceChips .ideaFilterChip{gap:6px;min-height:34px;padding:7px 11px;font-weight:500}
@@ -1552,7 +1553,7 @@
       border-radius:14px;background:rgba(255,255,255,.68);color:var(--accent-dark);font:inherit;font-size:.84rem;font-weight:600;cursor:pointer;
       transition:background-color .18s var(--ease),border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease)
     }
-    .ideaFilterMix:hover{background:rgba(220,239,229,.48);border-color:rgba(63,120,132,.28);box-shadow:0 5px 12px rgba(49,95,107,.07);transform:translateY(-1px)}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.ideaFilterMix:hover{background:rgba(220,239,229,.48);border-color:rgba(63,120,132,.28);box-shadow:0 5px 12px rgba(49,95,107,.07);transform:translateY(-1px)}}
     .ideaFilterMix:focus-visible{outline:2px solid rgba(63,120,132,.40);outline-offset:2px}
     .ideaFilterMix svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
     .ideaFilterSheetStatus{min-height:19px;margin:0;color:rgba(49,95,107,.66);font-size:.78rem;line-height:1.4}
@@ -1560,9 +1561,9 @@
     .ideaFilterSheetFooter{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;padding:14px 20px calc(14px + env(safe-area-inset-bottom));border-top:1px solid rgba(123,112,88,.09);background:rgba(255,253,249,.94);backdrop-filter:blur(14px)}
     .ideaFilterSheetAction{min-height:46px;border:0;border-radius:15px;padding:10px 17px;font:inherit;font-size:.86rem;font-weight:650;cursor:pointer;transition:background-color .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease)}
     .ideaFilterSheetAction.secondary{background:rgba(255,255,255,.7);color:var(--accent-dark);border:1px solid rgba(79,142,158,.11)}
-    .ideaFilterSheetAction.secondary:hover{background:rgba(220,239,229,.48);border-color:rgba(63,120,132,.28);box-shadow:0 5px 12px rgba(49,95,107,.07);transform:translateY(-1px)}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.ideaFilterSheetAction.secondary:hover{background:rgba(220,239,229,.48);border-color:rgba(63,120,132,.28);box-shadow:0 5px 12px rgba(49,95,107,.07);transform:translateY(-1px)}}
     .ideaFilterSheetAction.primary{background:#3F7884;color:#fff;box-shadow:0 8px 20px rgba(63,120,132,.16)}
-    .ideaFilterSheetAction.primary:hover{background:#356f7b;box-shadow:0 10px 22px rgba(63,120,132,.24);transform:translateY(-1px)}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.ideaFilterSheetAction.primary:hover{background:#356f7b;box-shadow:0 10px 22px rgba(63,120,132,.24);transform:translateY(-1px)}}
     .ideaFilterSheetAction:focus-visible{outline:2px solid rgba(63,120,132,.40);outline-offset:2px}
     :scope.ideaFilterSheetOpen{overflow:hidden}
     @media (min-width:641px){
@@ -1629,7 +1630,7 @@
     .ideaSubmitSheetHeader{display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:7px 18px;border-bottom:1px solid rgba(123,112,88,.08);background:rgba(255,253,250,.97)}
     .ideaSubmitSheetHeader h2{margin:0;color:var(--accent-dark);font-size:1.2rem;font-weight:650}
     .ideaSubmitSheetClose{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;border:0;border-radius:12px;background:transparent;color:rgba(49,95,107,.72);cursor:pointer}
-    .ideaSubmitSheetClose:hover{background:rgba(217,231,214,.45);color:var(--accent-dark)}
+    @media (min-width:981px) and (hover:hover) and (pointer:fine){.ideaSubmitSheetClose:hover{background:rgba(217,231,214,.45);color:var(--accent-dark)}}
     .ideaSubmitSheetClose svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
     .ideaSubmitSheetBody{min-height:0;overflow:auto;padding:14px 18px 0;scrollbar-width:thin;scrollbar-color:rgba(49,95,107,.22) transparent}
     .ideaSubmitSheetIntro{margin:0 0 14px;color:var(--muted);font-size:.84rem;line-height:1.45}
@@ -3547,12 +3548,12 @@
   background:#fffdf8;
   border-color:rgba(64,45,20,.075);
 }
-.sharedIdeaCards .ideaThemeCard:hover{
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.sharedIdeaCards .ideaThemeCard:hover{
   transform:translateY(-2px);
   background:#fffdf8;
   border-color:rgba(64,45,20,.10);
   box-shadow:0 16px 34px rgba(64,45,20,.065);
-}
+}}
 .sharedIdeaCards .ideaImageFrame{
   position:relative;
   flex-shrink:0;
@@ -3714,6 +3715,18 @@
   .sharedIdeaList.isAdmin td:nth-child(5){grid-column:2;grid-row:2 / span 3;align-self:end}
   .sharedIdeaList.isAdmin td:nth-child(4) .ideaActions{margin-left:0;width:100%}
 }
+
+/* One quiet metadata surface across cards, lists and map results. */
+.sharedMetaBlock,.ideaMapResultInfo{border:0!important;background:rgba(247,241,231,.22)!important;box-shadow:none!important}
+/* Let title and facts fit together instead of clipping facts in a fixed row. */
+#ideaMap .ideaMapPanel .ideaMapResult.hasThumb{
+ height:auto!important;max-height:none!important;grid-template-rows:auto auto!important;
+ row-gap:5px!important;align-content:center!important;
+}
+#ideaMap .ideaMapPanel .ideaMapResult.hasThumb .ideaMapResultText{display:contents!important;transform:none!important}
+#ideaMap .ideaMapPanel .ideaMapResult.hasThumb .ideaMapResultTitle{transform:none!important;align-self:end!important}
+#ideaMap .ideaMapPanel .ideaMapResult.hasThumb .ideaMapResultBody{margin-top:0!important;align-self:start!important;transform:none!important}
+#ideaMap .ideaMapPanel .ideaMapResult.hasThumb .ideaMapResultInfo{margin:0!important;padding:5px 7px!important}
 
 
     /* De kaart zelf blijft rustig; categorieaccenten zitten alleen in iconen en badges. */
@@ -6415,7 +6428,7 @@
 #adminIdeaCards.photoTiles .photoTile .pill svg{color:inherit;stroke:currentColor}
 #adminIdeaCards.photoTiles .photoTile .cardMetaLine{display:flex;gap:12px;flex-wrap:wrap}
 #adminIdeaCards.photoTiles .photoTile .stimulusPillText{display:none}
-#adminIdeaCards.photoTiles .photoTile:hover{box-shadow:0 5px 20px #243a3230}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){#adminIdeaCards.photoTiles .photoTile:hover{box-shadow:0 5px 20px #243a3230}}
 #adminIdeaCards.photoTiles .photoTile:focus-visible{outline:3px solid #397e8a;outline-offset:4px}
 /* Keep the existing featured carousel, timer and pause control. */
 #adminIdeaCards.photoTiles:not(.compactTiles) .ideaFeaturedCarousel{grid-column:auto;min-width:0;align-self:start}
@@ -6511,20 +6524,19 @@
 @media(max-width:600px){#adminIdeaCards.compactTiles .photoTileFacts .photoTileExtra{display:none}}
 @media(max-width:350px){#adminIdeaCards.compactTiles .ideaFeaturedCarousel{grid-column:auto}}
 
-/* Photo-led detail with the same metadata as the classic cards. */
-.photoDetailPanel .ideaFilterSheetHeader{position:absolute;right:16px;top:16px;z-index:3;padding:0;background:none;border:0}
-.photoDetailPanel .ideaFilterSheetClose{background:#fffdf9;box-shadow:0 2px 12px #183f4520}
-.photoDetailLayer .photoDetailPanel{display:block}
-.photoDetailPanel .photoDetailBody{height:100%;padding:0!important;overflow-y:auto}
-.photoDetailHero{display:block;width:100%;height:300px;object-fit:cover}
-.photoDetailInfo{position:relative;padding:30px 24px 20px;background:#fffdf9;border-radius:24px 24px 0 0;margin-top:-22px;min-height:250px}
-.photoDetailBadge{position:absolute;top:-22px;left:24px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:var(--theme-tint,#e5f2ef);color:var(--theme-ink,#315f6b)}
-.photoDetailBadge svg{width:22px;height:22px}
-.photoDetailInfo h2{margin:6px 0 18px;font-size:25px;line-height:1.3;color:#005f73}
-.photoDetailInfo .cardMetaBlock{flex-wrap:wrap!important;overflow:visible;white-space:normal}
-.photoDetailDescription,.photoDetailSection p{font-size:15px;line-height:1.7;color:#637d7b}
-.photoDetailSection{border-top:1px solid #e8e8df;padding:18px 0}
-.photoDetailSection>summary{cursor:pointer;font-weight:600;color:#315f6b}
+/* Detail content uses the filter sheet shell and the familiar inset card styling. */
+ .photoDetailPanel .ideaFilterSheetHeader{justify-content:flex-end;min-height:52px;padding:6px 16px;border-bottom:0;background:transparent}
+.photoDetailLayer .photoDetailPanel{display:grid;grid-template-rows:auto minmax(0,1fr)}
+.photoDetailPanel .photoDetailBody{padding:0 20px 24px!important;overflow-y:auto}
+.photoDetailHero{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:18px}
+.photoDetailInfo{position:relative;padding:26px 0 0;overflow-wrap:anywhere}
+.photoDetailBadge{position:absolute;top:-18px;left:0;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:var(--theme-tint,#e5f2ef);color:var(--theme-ink,#315f6b);border:1px solid var(--theme-line,#e5ece5)}
+.photoDetailBadge svg{width:18px;height:18px}
+.photoDetailInfo h2{margin:0 0 12px;font-size:22px;font-weight:500;line-height:1.35;color:#005f73}
+.photoDetailDescription,.photoDetailSection p{font-size:15px;line-height:1.65;color:#637d7b}
+.photoDetailDescription{margin:18px 0}
+.photoDetailSection{border-top:1px solid rgba(123,112,88,.09);padding:16px 0}
+.photoDetailSection>summary{cursor:pointer;font-size:14px;font-weight:500;color:#537f87}
 .photoRouteChoices{margin-top:16px}
 .photoRouteChoices>summary{display:list-item;width:fit-content;padding:10px 16px;border:1px solid #d4e4df;border-radius:14px;cursor:pointer;color:#315f6b;background:#edf5f2}
 .photoRouteChoices>div{display:flex;gap:12px;flex-wrap:wrap;padding:14px 0}
@@ -6532,22 +6544,21 @@
 .photoRouteChoices small{display:block;color:#637d7b;line-height:1.5}
 .photoDetailGallery{display:grid;gap:12px;padding-top:16px}.photoDetailGallery img{width:100%;border-radius:14px}
 .photoDetailActions>.primary{width:100%;text-align:center;justify-content:center}
-#adminIdeaCards.photoTiles .photoTile.isSelected{outline:2px solid #bda365;outline-offset:2px}
 @media(min-width:1280px){
- :scope.photoDetailDocked{padding-right:440px;box-sizing:border-box}
+ :scope.photoDetailDocked{padding-right:480px;box-sizing:border-box}
  :scope.photoDetailDocked #adminIdeaCards.photoTiles{grid-template-columns:repeat(3,minmax(0,1fr))!important}
- .photoDetailLayer.isDocked{left:auto;right:0;width:440px;max-width:440px;z-index:90;box-shadow:-8px 0 32px #264b4e18}
+ .photoDetailLayer.isDocked{left:auto;right:0;width:480px;max-width:480px;z-index:90;box-shadow:-8px 0 32px #264b4e18}
  .photoDetailLayer.isDocked .ideaFilterSheetBackdrop{display:none}
- .photoDetailLayer.isDocked .photoDetailPanel{width:100%;max-width:100%;height:100%;border-radius:0;inset:0}
+ .photoDetailLayer.isDocked .photoDetailPanel{width:100%;max-width:100%;height:100%;inset:0}
 }
-@media(max-width:600px){.photoDetailHero{height:250px}.photoDetailInfo{padding:24px 20px 18px}.photoDetailInfo h2{font-size:23px;margin-top:0}}
-@media(min-width:1280px){.photoDetailLayer.isDocked .photoDetailPanel{position:absolute;width:440px;max-width:440px;left:0;right:0;top:0;bottom:0}}
-.photoDetailInfo{overflow-wrap:anywhere}.photoDetailPanel .ideaFilterSheetHeader{position:absolute!important}
+@media(max-width:600px){.photoDetailPanel .photoDetailBody{padding:0 16px 24px!important}.photoDetailInfo h2{font-size:22px}}
+@media(min-width:1280px){.photoDetailLayer.isDocked .photoDetailPanel{position:absolute;width:480px;max-width:480px;left:0;right:0;top:0;bottom:0}}
+
 
 .photoDetailActions>.primary{display:flex;align-items:center;min-height:48px;padding:12px 20px;border-radius:24px;background:#006579;color:white;text-decoration:none;box-sizing:border-box;font-weight:600}
-.photoDetailActions>.primary:hover{background:#004f60}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailActions>.primary:hover{background:#004f60}}
 .photoDetailArticle .photoDetailInfo .photoDetailBadge{z-index:1}
-.photoDetailPanel .ideaFilterSheetClose{border-radius:50%}
+
 .photoDetailArticle{overflow:visible!important}.photoDetailInfo{isolation:isolate;overflow:visible!important}.photoDetailBadge{transform:translateY(0)}
 
 /* Compact desktop cards keep their own height beside the larger featured card. */
@@ -6568,9 +6579,13 @@
 #adminIdeaCards.compactTiles .ideaFeaturedMeta :is(.pill,.cardMetaPart,.metaIcon,.stimulusIcon){color:#fff!important;flex-shrink:0;white-space:nowrap}
 #adminIdeaCards.compactTiles .ideaFeaturedMeta svg{color:#fff!important;stroke:currentColor}
 #adminIdeaCards.compactTiles .ideaFeaturedArrow{flex-basis:32px;width:32px;height:32px}
-#adminIdeaCards.compactTiles .photoTileFacts{width:fit-content;max-width:100%;box-sizing:border-box;padding:7px 8px;border:1px solid rgba(112,94,63,.065);border-radius:10px;background:rgba(247,241,231,.3);gap:7px}
-#adminIdeaCards.compactTiles .photoTileFacts .pill{color:#617573!important}
-#adminIdeaCards.compactTiles .photoTileFacts .cardMetaPart{color:#697472!important}
+#adminIdeaCards.compactTiles .photoTileFacts{width:fit-content;max-width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid rgba(112,94,63,.035);border-radius:10px;background:rgba(247,241,231,.11);gap:7px}
+#adminIdeaCards.compactTiles .photoTile .photoTileFacts .pill{color:#617573!important;padding:3px 2px;min-height:22px;font-weight:500}
+#adminIdeaCards.compactTiles .photoTile .photoTileFacts .cardMetaPart{color:#697472!important}
+@media(min-width:981px){
+ #adminIdeaCards.compactTiles .photoTileFacts{padding:8px 11px;border-radius:11px}
+ #adminIdeaCards.compactTiles .photoTile .photoTileFacts .cardMetaPart .metaIcon{width:16px;height:16px;color:#55777a!important}
+}
 @media(min-width:1600px){#adminIdeaCards.compactTiles .ideaFeaturedSlides{height:330px}}
 @media(max-width:600px){#adminIdeaCards.compactTiles .ideaFeaturedSlides{height:280px}#adminIdeaCards.compactTiles .ideaFeaturedContent{padding:56px 12px 12px!important}#adminIdeaCards.compactTiles .ideaFeaturedContent h3{font-size:18px!important}#adminIdeaCards.compactTiles .ideaFeaturedMeta{gap:7px}#adminIdeaCards.compactTiles .ideaFeaturedMeta :is(.pill,.cardMetaPart){font-size:11px!important}}
 #adminIdeaCards.compactTiles .ideaFeaturedArrow{background:transparent;border:0;color:#fff;box-shadow:none}
@@ -6583,5 +6598,1052 @@
 /* Let the photo absorb row-height differences, keeping the text block compact. */
 #adminIdeaCards.compactTiles .photoTile>img,#adminIdeaCards.compactTiles .photoTilePlaceholder{flex:1 1 auto;min-height:0;object-fit:cover}
 #adminIdeaCards.compactTiles .photoTileContent{flex:0 0 auto}
+
+/* Featured invites discovery; practical metadata stays in the detail panel. */
+#adminIdeaCards .ideaFeaturedContent .ideaFeaturedMeta{display:none!important}
+
+.photoDetailBody .photoRouteChoices>summary{display:list-item;width:fit-content;padding:10px 16px;border:1px solid #d4e4df;border-radius:14px;background:#edf5f2;font-size:14px;list-style:disclosure-closed}
+.photoDetailBody .photoRouteChoices[open]>summary{list-style:disclosure-open}
+.photoDetailBody .photoRouteChoices>summary::after{content:none}
+
+/* The title and arrow share the bottom line now that featured has no metadata. */
+#adminIdeaCards .ideaFeaturedContent{display:flex!important;flex-direction:row!important;align-items:center!important;gap:12px!important}
+#adminIdeaCards .ideaFeaturedContent h3{flex:1;min-width:0;margin:0!important}
+#adminIdeaCards .ideaFeaturedBottom{flex:0 0 auto;width:auto;margin:0}
+@media(min-width:351px) and (max-width:600px){
+ #adminIdeaCards.compactTiles{row-gap:16px!important;column-gap:12px!important;padding-bottom:0;align-items:start}
+ #adminIdeaCards.compactTiles>.photoTile{align-self:stretch;height:auto!important;min-width:0;box-sizing:border-box}
+ #adminIdeaCards.compactTiles>.photoTileOffset{top:0;margin-top:0}
+}
+
+/* Reuse filter dimensions and the map card rather than a second detail design. */
+.photoDetailLayer .photoDetailPanel{border-radius:16px 0 0 16px}
+.photoDetailBody .sharedIdeaCard{min-height:0!important;gap:8px!important}
+.photoDetailBody .sharedIdeaCard>h3{margin:0!important;font-size:1.08rem!important;font-weight:500;line-height:1.25!important}
+.photoDetailBody .sharedIdeaCard>p{font-size:.92rem!important;line-height:1.45!important;color:#74716e!important}
+.photoDetailBody .ideaImageFrame{margin:0 0 22px!important}
+.photoDetailBody .cardMetaBlock{gap:9px!important;padding:7px 9px;scrollbar-width:none}
+.photoDetailBody .ideaPracticalDetails{margin:6px 0 0}
+.photoDetailBody .photoDetailActions{position:static;order:6;padding:8px 0 0}
+.photoDetailBody .photoDetailSection{order:5}
+@media(max-width:640px){
+ .photoDetailLayer .photoDetailPanel{border-radius:24px 24px 0 0;background:#fffefc}
+ .photoDetailPanel .ideaFilterSheetHeader{min-height:48px;padding:0 12px}
+ .photoDetailPanel .ideaFilterSheetClose{width:36px;height:36px;border:1px solid rgba(79,142,158,.14);border-radius:12px;background:#fffefc}
+ .photoDetailBody .ideaImageFrame{aspect-ratio:16/9!important}
+}
+
+/* Clear section labels, retaining the map sheet styling without divider lines. */
+.photoDetailBody .photoDetailSection{border:0;padding:8px 0}
+.photoDetailBody .sharedIdeaCard .ideaPracticalDetails>summary,
+.photoDetailBody .photoDetailSection>summary,
+.photoDetailBody .photoRouteChoices>summary{
+ display:flex;align-items:center;gap:10px;width:100%;box-sizing:border-box;min-height:44px;
+ padding:6px 0;border:0;border-radius:0;background:transparent;color:#315f6b;
+ font-size:15px;font-weight:500;line-height:1.4;list-style:none;cursor:pointer
+}
+.photoDetailBody summary .photoDetailSectionIcon{width:20px;height:20px;flex:0 0 20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.photoDetailBody .sharedIdeaCard .ideaPracticalDetails>summary::after,
+.photoDetailBody .photoDetailSection>summary::after,
+.photoDetailBody .photoRouteChoices>summary::after{
+ content:'';display:block;margin-left:auto;width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;background:none;transform:rotate(45deg);flex-shrink:0
+}
+.photoDetailBody details[open]>summary::after{transform:rotate(225deg)!important}
+.photoDetailBody summary::-webkit-details-marker{display:none}
+.photoDetailBody .sharedIdeaCard>h3{font-size:22px!important;font-weight:600;line-height:1.3!important}
+.photoDetailBody .sharedIdeaCard>p,.photoDetailBody .ideaPracticalText{font-size:15px!important;line-height:1.65!important}
+
+/* A detail card is stationary; only the sheet itself animates on open/close. */
+.photoDetailBody .sharedIdeaCard,
+.photoDetailBody .sharedIdeaCard:hover,
+.photoDetailBody .sharedIdeaCard .ideaImageFrame,
+.photoDetailBody .sharedIdeaCard .ideaImageFrame img{transform:none!important;translate:none!important;scale:none!important}
+.photoDetailBody .photoRouteChoices{order:5;margin:0}
+.photoDetailBody .photoRouteChoices>div{gap:10px;padding:8px 0 12px}
+.photoDetailBody .photoRouteChoices a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 12px;box-sizing:border-box;border:1px solid rgba(79,142,158,.16);border-radius:14px;background:#fffdf9;color:#315f6b;text-decoration:none;font-size:14px}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailBody .photoRouteChoices a:hover{background:#edf5f2;border-color:rgba(79,142,158,.3)}}
+.photoDetailBody .photoRouteChoices a:focus-visible{outline:2px solid #3f7884;outline-offset:3px}
+.photoDetailBody .photoRouteChoices a svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* Clip the dock shell to the same silhouette as the filter sheet. */
+@media(min-width:1280px){
+ .photoDetailLayer.isDocked{border-radius:16px 0 0 16px}
+}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame{border-radius:18px!important}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame img{border-radius:inherit!important;clip-path:inset(0 round 18px);filter:none!important}
+
+/* Compact metadata sits on the photo; the title keeps its quiet light surface. */
+#adminIdeaCards.compactTiles .photoTileMedia{position:relative;display:block;flex:1 1 auto;min-height:0;aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:#315f6b}
+#adminIdeaCards.compactTiles .photoTileMedia>img,#adminIdeaCards.compactTiles .photoTileMedia>.photoTilePlaceholder{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+#adminIdeaCards.compactTiles .photoTileOverlay{position:absolute;inset:auto 0 0;display:flex;align-items:center;gap:10px;padding:30px 10px 8px;background:linear-gradient(transparent,rgba(9,25,28,.82));color:#fff}
+#adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon{display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;border-radius:50%;background:var(--theme-tint,#e5f2ef);color:var(--theme-ink,#315f6b)}
+#adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon svg{width:17px;height:17px}
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{flex:1;min-width:0;max-width:none;width:auto;margin:0;padding:0;border:0;border-radius:0;background:none;overflow:visible;gap:10px}
+#adminIdeaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{padding:0;color:#fff!important;min-height:0;font-size:12px;line-height:1.4}
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileMeta :is(.metaIcon,.metaIcon svg,.stimulusIcon,.stimulusIcon svg){color:#fff!important;stroke:currentColor}
+#adminIdeaCards.compactTiles .photoTileContent{padding:12px 8px 8px}
+@media(max-width:600px){
+ #adminIdeaCards.compactTiles .photoTileMedia{aspect-ratio:4/3;border-radius:12px}
+ #adminIdeaCards.compactTiles .photoTileOverlay{padding:26px 5px 6px;gap:5px}
+ #adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon{width:23px;height:23px;flex-basis:23px}
+ #adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon svg{width:13px;height:13px}
+ #adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{gap:5px}
+ #adminIdeaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{font-size:10px}
+ #adminIdeaCards.compactTiles .photoTileContent{padding:9px 4px 6px}
+}
+
+/* Desktop details open on the left; mobile keeps the bottom sheet. */
+@media(min-width:641px){
+ .photoDetailLayer .photoDetailPanel{left:0;right:auto;border-radius:0 16px 16px 0;border-left:0;border-right:1px solid rgba(79,142,158,.14);transform:translateX(-100%)}
+ .photoDetailLayer.isOpen .photoDetailPanel{transform:translateX(0)}
+}
+@media(min-width:1280px){
+ :scope.photoDetailDocked{
+  padding-right:0;padding-left:480px;
+  --hero-edge:max(clamp(14px,3vw,28px),calc((100vw - 480px - var(--max)) / 2 + clamp(14px,3vw,28px)));
+ }
+ /* Full-bleed headers use the space beside the dock, not the whole viewport. */
+ :scope.photoDetailDocked .tabHero{margin-left:calc(50% - (100vw - 480px) / 2);margin-right:calc(50% - (100vw - 480px) / 2)}
+ .photoDetailLayer.isDocked{left:0;right:auto;border-radius:0 16px 16px 0;box-shadow:8px 0 32px #264b4e18}
+ .photoDetailLayer.isDocked .photoDetailPanel{left:0;right:auto}
+}
+#adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon{background:color-mix(in srgb,var(--theme-ink,#315f6b) 12%,#fffdf9)!important;color:var(--theme-ink,#315f6b)!important}
+@media(max-width:600px){#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{gap:3px}}
+
+/* Clear detail header and actions in the site's square-button style. */
+.photoDetailPanel .ideaFilterSheetHeader{justify-content:flex-end;min-height:56px;padding:8px 20px;gap:16px}
+.photoDetailPanel .ideaFilterSheetClose{flex:0 0 38px;width:38px;height:38px;border:1px solid rgba(79,142,158,.16);border-radius:12px;background:#fffdf9}
+.photoDetailBody .sharedIdeaCard>h3{font-size:24px!important;line-height:1.3!important}
+.photoDetailBody .cardMetaBlock{border:0!important;background:transparent!important;padding:5px 0!important}
+.photoDetailBody .sharedIdeaCard .ideaPracticalDetails,
+.photoDetailBody .photoRouteChoices{border-top:1px solid rgba(79,142,158,.12);padding:12px 0;margin:0}
+.photoDetailBody .sharedIdeaCard .ideaPracticalDetails>summary,
+.photoDetailBody .photoRouteChoices>summary{font-size:16px;font-weight:600}
+.photoDetailBody .photoDetailActions{padding:16px 0 8px;border-top:1px solid rgba(79,142,158,.12)}
+.photoDetailBody .photoDetailActions:empty{display:none}
+.photoDetailBody .photoDetailActions>.ideaRouteButton{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 16px;box-sizing:border-box;border:1.5px solid rgba(23,79,93,.46);border-radius:12px;background:rgba(255,253,249,.72);color:#236875;font-size:16px;font-weight:600;text-decoration:none}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:var(--control-hover-surface);border-color:rgba(23,79,93,.68);color:#1f5763}}
+.photoDetailBody .photoRouteChoices a{border-radius:12px}
+@media(max-width:640px){
+ .photoDetailPanel .ideaFilterSheetHeader{padding:10px 16px;min-height:60px}
+ .photoDetailBody .sharedIdeaCard>h3{font-size:22px!important}
+}
+.photoDetailBody .sharedIdeaCard .ideaPracticalDetails{width:100%;box-sizing:border-box}
+
+/* Align the category and compact facts with the title's left edge. */
+#adminIdeaCards.compactTiles .photoTileOverlay{justify-content:flex-start;padding-left:8px;padding-right:8px}
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{justify-content:flex-start;flex:0 1 auto}
+#adminIdeaCards.compactTiles .photoTileOverlay .pill{flex:0 0 auto;justify-content:flex-start}
+@media(max-width:600px){#adminIdeaCards.compactTiles .photoTileOverlay{padding-left:4px;padding-right:4px}}
+/* Keep the close control available above scrolling content without a tall header. */
+.photoDetailPanel .ideaFilterSheetHeader{position:relative;min-height:16px;height:16px;padding:0;border:0;z-index:3;background:transparent}
+.photoDetailPanel .ideaFilterSheetClose{position:absolute;top:26px;right:30px;width:44px;height:44px;background:#fffdf9;box-shadow:0 2px 8px #183e4320}
+.photoDetailBody .cardMetaBlock{border:1px solid rgba(112,94,63,.07)!important;border-radius:12px;background:rgba(247,241,231,.22)!important;padding:9px 10px!important;justify-content:flex-start!important}
+@media(max-width:640px){
+ .photoDetailPanel .ideaFilterSheetHeader{min-height:24px;height:24px;padding:0}
+ .photoDetailPanel .ideaFilterSheetClose{top:34px;right:26px}
+}
+/* Category and metadata form one aligned row inside the photo. */
+#adminIdeaCards.compactTiles .photoTileMedia{overflow:visible}
+#adminIdeaCards.compactTiles .photoTileMedia>img,#adminIdeaCards.compactTiles .photoTileMedia>.photoTilePlaceholder{border-radius:inherit}
+#adminIdeaCards.compactTiles .photoTileOverlay{border-radius:0 0 16px 16px;padding-left:8px;min-height:30px;gap:12px}
+#adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon{position:static;z-index:1}
+#adminIdeaCards.compactTiles .photoTileContent{padding-top:12px}
+.photoDetailLayer .photoDetailPanel{grid-template-rows:16px minmax(0,1fr)}
+@media(max-width:600px){
+ #adminIdeaCards.compactTiles .photoTileOverlay{padding-left:4px;border-radius:0 0 12px 12px;min-height:23px;gap:8px}
+ #adminIdeaCards.compactTiles .photoTileContent{padding-top:9px}
+}
+@media(max-width:640px){.photoDetailLayer .photoDetailPanel{grid-template-rows:24px minmax(0,1fr)}}
+/* Preserve the original close button; only its placement changes. */
+.photoDetailPanel .ideaFilterSheetClose{width:38px;height:38px;box-shadow:none;border-radius:12px;border:1px solid rgba(79,142,158,.16);background:#fffdf9}
+@media(max-width:640px){.photoDetailPanel .ideaFilterSheetClose{width:36px;height:36px;background:#fffefc;border-color:rgba(79,142,158,.14)}}
+
+.photoDetailBody .sharedIdeaCard .ideaImageDomainBadge{left:10px;bottom:10px}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:8px!important}
+
+/* Detail sheet: close above the content, then title, photo and complete facts. */
+.photoDetailLayer .photoDetailPanel{grid-template-rows:54px minmax(0,1fr)}
+.photoDetailPanel .ideaFilterSheetHeader{height:54px;min-height:54px;padding:8px 20px;box-sizing:border-box}
+.photoDetailPanel .ideaFilterSheetClose{position:static;flex-shrink:0}
+.photoDetailBody .sharedIdeaCard>h3{order:-1;margin:0 0 4px!important}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:22px!important;overflow:visible}
+.photoDetailBody .sharedIdeaCard .ideaImageDomainBadge{left:10px;bottom:-18px}
+.photoDetailBody .cardMetaBlock{border:0!important}
+@media(max-width:640px){
+ .photoDetailLayer .photoDetailPanel{grid-template-rows:60px minmax(0,1fr)}
+ .photoDetailPanel .ideaFilterSheetHeader{height:60px;min-height:60px;padding:16px 16px 8px}
+}
+
+/* Clip every painted sheet layer, including composited scrolling content. */
+.photoDetailLayer{background:transparent!important}
+.photoDetailLayer .photoDetailPanel{clip-path:inset(0 round 0 16px 16px 0)}
+@media(min-width:1280px){
+ .photoDetailLayer.isDocked{clip-path:inset(0 round 0 16px 16px 0);background:transparent!important}
+}
+@media(max-width:640px){
+ .photoDetailLayer .photoDetailPanel{clip-path:inset(0 round 24px 24px 0 0)}
+}
+
+/* Compact category badges straddle the image edge; facts keep a fixed inset. */
+#adminIdeaCards.compactTiles .photoTileOverlay{padding-left:50px;min-height:30px}
+#adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon{position:absolute;left:8px;bottom:-15px}
+#adminIdeaCards.compactTiles .photoTileContent{padding-top:22px}
+@media(max-width:600px){
+ #adminIdeaCards.compactTiles .photoTileOverlay{padding-left:35px;min-height:23px}
+ #adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon{left:4px;bottom:-11.5px}
+ #adminIdeaCards.compactTiles .photoTileContent{padding-top:17px}
+}
+
+/* Icon-only map choices and a more legible overlapping sheet badge. */
+.photoDetailBody .photoRouteChoices a.mapAppButton{width:44px;height:44px;min-height:44px;padding:8px;justify-content:center;border-radius:10px}
+.photoDetailBody .photoRouteChoices a .mapAppLogo{width:28px;height:28px;stroke:none}
+.photoDetailBody .sharedIdeaCard .ideaImageDomainBadge{width:44px;height:44px;left:0;bottom:-22px;box-sizing:border-box;border:0;display:grid;place-items:center}
+.photoDetailBody .sharedIdeaCard .ideaImageDomainBadge svg{width:23px;height:23px}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:28px!important}
+
+/* The topbar continues behind the dock's transparent upper corner and scrolls with it. */
+@media(min-width:1280px){
+ :scope.photoDetailDocked .topbar::before{
+  content:"";position:absolute;top:0;bottom:0;left:-16px;width:16px;
+  background:inherit;pointer-events:none;
+ }
+}
+
+/* Refined detail controls and compact, reserved photo space. */
+.photoDetailPanel .ideaFilterSheetClose{display:inline-flex;align-items:center;justify-content:center;flex:0 0 40px;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:transparent;color:#63858b;box-shadow:none;transition:background-color 140ms ease,color 140ms ease}
+.photoDetailPanel .ideaFilterSheetClose svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailPanel .ideaFilterSheetClose:hover{background:rgba(79,142,158,.09);color:#315f6b}}
+.photoDetailPanel .ideaFilterSheetClose:focus-visible{outline:2px solid #315f6b;outline-offset:2px;background:rgba(79,142,158,.09)}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame{height:auto!important;aspect-ratio:16/9!important}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame img{object-fit:cover;object-position:center}
+@media(max-width:640px){
+ .photoDetailPanel .ideaFilterSheetClose{flex-basis:44px;width:44px;height:44px}
+ .photoDetailBody .sharedIdeaCard .ideaImageFrame{height:auto!important;aspect-ratio:16/9!important;min-height:160px!important;max-height:240px}
+}
+
+/* Name each navigation app visibly below its recognizable map icon. */
+.photoDetailBody .photoRouteChoices a.mapAppButton{width:auto;min-width:96px;height:auto;min-height:72px;display:inline-flex;flex-direction:column;gap:7px;padding:10px;border-radius:10px;text-decoration:none}
+.photoDetailBody .photoRouteChoices a.mapAppButton .mapAppLogo{width:32px;height:32px;flex:none}
+.photoDetailBody .photoRouteChoices a.mapAppButton span{font-size:12px;line-height:1.3;white-space:nowrap}
+
+/* Balanced detail heading and softly outlined square close control. */
+.photoDetailBody .sharedIdeaCard>h3{font-size:20px!important;line-height:1.35!important}
+.photoDetailPanel .ideaFilterSheetClose{border-radius:12px;border:1px solid rgba(79,142,158,.16);background:rgba(255,253,249,.72)}
+
+/* Compact desktop titles keep a calm two-line rhythm. */
+@media(min-width:601px){
+ #adminIdeaCards.compactTiles .photoTileTitle{font-size:16px;line-height:1.25}
+ #adminIdeaCards.compactTiles .photoTileTitle>span:last-child{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+}
+
+/* Featured navigation keeps only the slide indicators. */
+#adminIdeaCards .ideaFeaturedPause{display:none!important}
+
+/* Keep compact photo facts level with the badge and readable on light images. */
+#adminIdeaCards.compactTiles .photoTileMedia::after{content:"";position:absolute;inset:auto 0 0;height:25%;min-height:56px;border-radius:0 0 16px 16px;background:linear-gradient(to bottom,transparent,rgba(0,0,0,.64) 48%,rgba(0,0,0,.68));pointer-events:none;z-index:1}
+#adminIdeaCards.compactTiles .photoTileOverlay{z-index:2;min-height:30px;padding:0 10px 8px;gap:10px;background:none}
+#adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon{position:static;flex:0 0 30px;margin:0}
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{align-items:center;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+#adminIdeaCards.compactTiles .photoTileContent{padding-top:12px}
+@media(max-width:600px){
+ #adminIdeaCards.compactTiles .photoTileMedia::after{border-radius:0 0 12px 12px;min-height:48px}
+ #adminIdeaCards.compactTiles .photoTileOverlay{min-height:23px;padding:0 5px 6px;gap:6px}
+ #adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon{flex-basis:23px}
+ #adminIdeaCards.compactTiles .photoTileContent{padding-top:9px}
+}
+
+/* Let the badge cross the photo edge while facts share its centre line. */
+#adminIdeaCards.compactTiles .photoTileOverlay{bottom:-4px;padding:0 10px;min-height:30px;height:30px;box-sizing:border-box;overflow:visible}
+#adminIdeaCards.compactTiles .photoTileMedia{overflow:visible}
+#adminIdeaCards.compactTiles .photoTileMedia>img,#adminIdeaCards.compactTiles .photoTileMedia>.photoTilePlaceholder{border-radius:inherit}
+#adminIdeaCards.compactTiles .photoTileContent{padding-top:14px}
+@media(max-width:600px){
+ #adminIdeaCards.compactTiles .photoTileOverlay{bottom:-3px;padding:0 5px;min-height:23px;height:23px}
+ #adminIdeaCards.compactTiles .photoTileContent{padding-top:11px}
+}
+
+/* Equal card rows must not stretch photos when neighbouring titles wrap. */
+#adminIdeaCards.compactTiles .photoTileMedia{flex:0 0 auto;width:100%;max-width:100%;box-sizing:border-box}
+
+/* Refined sheet controls and two readable groups beside the overlapping badge. */
+.photoDetailPanel .ideaFilterSheetClose svg{width:16px;height:16px}
+.photoDetailPanel .ideaFilterSheetClose:focus-visible{background:#f1eadf;color:#526f73}
+.photoDetailBody .sharedIdeaCard .ideaImageDomainBadge{width:40px;height:40px;bottom:-20px}
+.photoDetailBody .sharedIdeaCard .ideaImageDomainBadge svg{width:21px;height:21px}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:0!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock{width:calc(100% - 52px)!important;margin:0 0 0 52px!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible;flex-wrap:wrap!important;column-gap:26px!important;row-gap:8px!important;min-height:24px}
+.photoDetailBody .cardMetaBlock>.cardPillGroup,.photoDetailBody .cardMetaBlock>.cardMetaLine{display:inline-flex!important;align-items:center;flex:0 0 auto;gap:10px!important;margin:0!important;width:auto!important}
+.photoDetailBody .cardMetaBlock>.cardMetaLine{white-space:nowrap}
+
+/* Centre the entire metadata row on the compact photo's lower edge. */
+#adminIdeaCards.compactTiles .photoTileOverlay{bottom:-15px}
+#adminIdeaCards.compactTiles .photoTileContent{padding-top:25px}
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{text-shadow:0 1px 2px #142d32,0 -1px 2px #142d32,1px 0 2px #142d32,-1px 0 2px #142d32}
+@media(max-width:600px){
+ #adminIdeaCards.compactTiles .photoTileOverlay{bottom:-11.5px}
+ #adminIdeaCards.compactTiles .photoTileContent{padding-top:20px}
+}
+
+/* Facts use their actual content width, including the home-only icon. */
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{gap:8px!important}
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileMeta .pill{min-width:0!important;width:auto!important;margin:0!important;flex:0 0 auto}
+@media(max-width:600px){#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{gap:6px!important}}
+
+/* Keep text inside the photo while the category badge overlaps its edge. */
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{position:relative;top:-15px;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+@media(max-width:600px){#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{top:-12px}}
+
+/* Sheet facts return to their own full-width row below the overlapping badge. */
+.photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:24px!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock{width:fit-content!important;max-width:100%;box-sizing:border-box;align-self:flex-start;margin:0!important}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailPanel .ideaFilterSheetClose:hover{background:var(--control-hover-surface);border-color:rgba(61,126,136,.16);color:#63858b;box-shadow:none}}
+.photoDetailPanel .ideaFilterSheetClose:focus-visible{background:var(--control-hover-surface)}
+
+/* Adjacent desktop cards end at the featured card, above its navigation dots. */
+@media(min-width:801px){
+ #adminIdeaCards.compactTiles>.ideaFeaturedCarousel + .photoTile{height:300px!important;align-self:start}
+ #adminIdeaCards.compactTiles>.ideaFeaturedCarousel + .photoTile .photoTileMedia{flex:1 1 0;aspect-ratio:auto}
+}
+@media(min-width:1180px){
+ :scope:not(.photoDetailDocked) #adminIdeaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile{height:300px!important;align-self:start}
+ :scope:not(.photoDetailDocked) #adminIdeaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile .photoTileMedia{flex:1 1 0;aspect-ratio:auto}
+}
+@media(min-width:1600px){
+ #adminIdeaCards.compactTiles>.ideaFeaturedCarousel + .photoTile,
+ :scope:not(.photoDetailDocked) #adminIdeaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile{height:330px!important}
+}
+
+/* Keep facts inside the photo; centre the smaller badge on its lower edge. */
+#adminIdeaCards.compactTiles .photoTileOverlay{height:44px;min-height:44px;bottom:-10px}
+#adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon{width:32px;height:32px;flex-basis:32px;transform:translateY(12px)}
+#adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon svg{width:18px;height:18px}
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{top:0}
+@media(max-width:600px){
+ #adminIdeaCards.compactTiles .photoTileOverlay{height:32px;min-height:32px;bottom:-7px}
+ #adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon{width:28px;height:28px;flex-basis:28px;transform:translateY(9px)}
+ #adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon svg{width:16px;height:16px}
+ #adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{top:0;min-height:18px;line-height:18px}
+}
+@media(max-width:600px){#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts .pill{height:18px}}
+
+/* Only the detail content scrolls; focus must not pan the clipped shell. */
+.photoDetailLayer,.photoDetailLayer .photoDetailPanel{overflow:clip}
+.photoDetailPanel .ideaFilterSheetHeader{position:relative;top:0;min-width:0}
+.photoDetailPanel .photoDetailBody{min-height:0;overscroll-behavior:contain;scroll-behavior:auto}
+
+/* Bring tile facts optically closer to the overlapping category badge. */
+/* Keep a small inset above the photo edge, close to the category badge. */
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{top:0}
+@media(max-width:600px){#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{top:-3px}}
+
+/* Quiet, labelled navigation links in the detail sheet. */
+.photoDetailBody .photoRouteChoices a.mapAppButton{border:0;background:transparent;box-shadow:none;min-width:88px;min-height:64px;padding:6px 8px;gap:5px;transition:background-color 140ms ease}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailBody .photoRouteChoices a.mapAppButton:hover{background:rgba(194,178,153,.08)}}
+.photoDetailBody .photoRouteChoices a.mapAppButton:focus-visible{outline:2px solid #315f6b;outline-offset:3px}
+.photoDetailBody .photoRouteChoices a.mapAppButton .mapAppLogo{width:30px;height:30px}
+.photoDetailBody .photoRouteChoices>div{padding:12px 0 0;gap:12px}
+.photoDetailBody .photoRouteChoices{padding-bottom:6px}
+.photoDetailBody .photoDetailActions>.ideaRouteButton{background:transparent}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:rgba(194,178,153,.08)}}
+
+/* Separate the theme badge from facts without moving their vertical alignment. */
+#adminIdeaCards.compactTiles .photoTileOverlay{gap:12px}
+@media(max-width:600px){
+ #adminIdeaCards.compactTiles .photoTileOverlay{gap:8px}
+}
+
+/* Quiet, full-width information band beneath the detail photo. */
+.photoDetailBody .sharedIdeaCard .cardMetaBlock{padding:10px 12px!important;background:rgba(247,241,231,.22)!important;border:0!important;box-shadow:none!important;border-radius:12px}
+
+/* Move the complete desktop dock, including its edge and shadow. */
+@media(min-width:1280px){
+ .photoDetailLayer.isDocked{transform:translate3d(-100%,0,0);transition:transform var(--motion-slow,420ms) var(--motion-enter,cubic-bezier(.22,1,.36,1)),visibility 0s linear var(--motion-slow,420ms)!important;will-change:transform}
+ .photoDetailLayer.isDocked.isOpen{transform:translate3d(0,0,0);transition-delay:0s!important}
+ .photoDetailLayer.isDocked .photoDetailPanel{transform:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .photoDetailLayer.isDocked{transition-duration:.01ms!important;transition-delay:0s!important}
+}
+
+/* Both detail metadata groups share one vertical centre and line height. */
+.photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardPillGroup,
+.photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardMetaLine{align-self:center!important;align-items:center!important;min-height:24px;line-height:16px!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock :is(.pill,.cardMetaPart){display:inline-flex!important;align-items:center!important;box-sizing:border-box;height:24px;min-height:24px;padding-top:0!important;padding-bottom:0!important;line-height:16px!important}
+
+/* Search suggestions continue the translucent search surface without a gap. */
+:is(#ideaFilters,#agendaFilters) .filterSearch:has(.ideaSearchSuggestions.open) input{border-bottom-left-radius:0!important;border-bottom-right-radius:0!important;border-bottom-color:transparent!important}
+:is(#ideaFilters,#agendaFilters) .ideaSearchSuggestions{top:100%;margin-top:0;border-top:1px solid rgba(79,142,158,.08);border-radius:0 0 18px 18px;background:rgba(255,253,249,.95);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);box-shadow:0 12px 22px rgba(20,38,42,.06)}
+#adminIdeaCards>.empty{grid-column:1 / -1;width:100%;box-sizing:border-box;text-align:left}
+
+/* Both directions start gently and settle smoothly, with page reflow in sync. */
+@media(min-width:1280px){
+ .photoDetailLayer.isDocked{transition:transform 420ms cubic-bezier(.4,0,.2,1),visibility 0s linear 420ms!important}
+ :scope:has(.photoDetailLayer.isDocked[open]){overflow-anchor:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .photoDetailLayer.isDocked{transition-duration:.01ms!important;transition-delay:0s!important}
+}
+
+/* One radius per photo surface; badges remain outside the clipping area. */
+:scope{--activity-photo-radius:16px;--activity-thumb-radius:12px}
+#adminIdeaCards.compactTiles .photoTileMedia,
+.photoDetailBody .sharedIdeaCard .ideaImageFrame,
+.ideaMapPanel .sharedIdeaCard .ideaImageFrame{border-radius:var(--activity-photo-radius)!important}
+:is(.photoDetailBody,.ideaMapPanel) .sharedIdeaCard .ideaImageFrame :is(img,.ideaImageLink,.ideaImagePlaceholder){border-radius:inherit!important}
+#adminIdeaCards.compactTiles .photoTileMedia::after,
+#adminIdeaCards.compactTiles .photoTileOverlay{border-radius:0 0 var(--activity-photo-radius) var(--activity-photo-radius)}
+#adminIdeaList .ideaListVisual,
+.ideaMapResult .ideaMapResultThumbWrap,
+.ideaMapAccordionImage{border-radius:var(--activity-thumb-radius)!important}
+#adminIdeaList .ideaListVisual img,
+.ideaMapResult .ideaMapResultThumbWrap img,
+.ideaMapAccordionImage img{border-radius:inherit!important}
+@media(max-width:600px){
+ #adminIdeaCards.compactTiles .photoTileMedia,
+ #adminIdeaCards.compactTiles .photoTileOverlay{--activity-photo-radius:12px}
+}
+
+/* Calm accordion movement and the same action hover as the top bar. */
+.photoDetailBody details{box-sizing:border-box}
+.photoDetailBody details>summary::after{transition:transform 260ms cubic-bezier(.4,0,.2,1)}
+.photoDetailBody details.isSectionClosing>summary::after{transform:rotate(45deg)!important}
+.photoDetailBody .photoDetailActions>.ideaRouteButton{transition:background-color 180ms ease,border-color 180ms ease,color 180ms ease}
+@media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:var(--control-hover-surface);border-color:rgba(23,79,93,.68);color:#1f5763}}
+.photoDetailBody .photoDetailActions>.ideaRouteButton:focus-visible{outline:2px solid #315f6b;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.photoDetailBody details>summary::after{transition:none}}
+
+/* Match the featured card's gentle lift on pointer devices. */
+@media(min-width:981px) and (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ #adminIdeaCards.compactTiles .photoTile{transition:transform 180ms var(--ease),background-color 180ms var(--ease),border-color 180ms var(--ease)}
+ #adminIdeaCards.compactTiles .photoTile:hover{transform:translateY(-2px)}
+}
+
+/* Compact cards stay shadow-free; pointer hover adds the classic soft highlight. */
+#adminIdeaCards.compactTiles .photoTile,
+#adminIdeaCards.compactTiles .photoTile:hover{box-shadow:none}
+@media(min-width:981px) and (hover:hover) and (pointer:fine){
+ #adminIdeaCards.compactTiles .photoTile:hover{background:#fffefb;border-color:rgba(79,142,158,.13)}
+}
+
+/* Map results and details follow the same quiet card styling as the tile view. */
+#ideaMap .ideaMapPanel .ideaMapResult,
+#ideaMap .ideaMapPanel .ideaMapResult:hover,
+#ideaMap .ideaMapPanel .ideaMapResult:focus-visible{box-shadow:none!important}
+#ideaMap .ideaMapPanel .ideaMapResult{background:#fffdf9;border-color:rgba(117,94,62,.06)}
+#ideaMap .ideaMapResultInfo{width:fit-content!important;max-width:100%;box-sizing:border-box;background:rgba(247,241,231,.22)!important;border-radius:12px;align-items:center!important;gap:8px!important}
+#ideaMap .ideaMapResultInfo :is(.pill,.cardMetaPart){display:inline-flex!important;align-items:center!important;min-height:20px;line-height:16px!important;padding-top:0!important;padding-bottom:0!important}
+#ideaMap .ideaMapResultInfo :is(.ideaMapResultPills,.cardMetaLine){align-items:center!important;margin:0!important;gap:8px!important}
+#ideaMap .ideaMapResult:focus-visible{outline:2px solid #315f6b!important;outline-offset:-2px}
+#ideaMap .ideaMapResult.active{border-color:rgba(117,94,62,.06)!important;box-shadow:none!important}
+#ideaMap .ideaMapSingleCard.photoDetailBody{display:block!important;padding:0!important;min-width:0}
+#ideaMap .ideaMapSingleCard.photoDetailBody>.sharedIdeaCard{height:auto!important;min-height:0!important;transform:none!important;box-shadow:none!important}
+#ideaMap .ideaMapSingleCard.photoDetailBody .ideaImageFrame{border-radius:var(--activity-photo-radius,16px)!important}
+#ideaMap .ideaMapSingleCard.photoDetailBody h3{margin-bottom:12px!important}
+#ideaMap .ideaMapDetailClose{width:40px!important;height:40px!important;border-radius:12px!important;box-shadow:none!important}
+#ideaMap .ideaMapDetailClose svg{width:16px!important;height:16px!important}
+#ideaMap .ideaMapDetailClose:focus-visible{outline:2px solid #315f6b;outline-offset:2px}
+@media(min-width:981px) and (hover:hover) and (pointer:fine){
+ #ideaMap .ideaMapPanel .ideaMapResult:hover{background:#fffefb!important;border-color:rgba(79,142,158,.13)!important}
+ #ideaMap .ideaMapDetailClose:hover{background:var(--control-hover-surface)!important}
+}
+@media(max-width:980px),(hover:none),(pointer:coarse){
+ #ideaMap .ideaMapPanel .ideaMapResult:hover{background:#fffdf9!important;transform:none!important}
+ #ideaMap .ideaMapPanel .ideaMapResult:hover .ideaMapResultTitleText{color:#006780}
+}
+/* Map details need an opaque surface above the map tiles. */
+#ideaMap .ideaMapSingleCard.photoDetailBody{padding:20px!important;background:#fffdf9!important;border-radius:20px;box-sizing:border-box}
+#ideaMap .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:12px!important;right:12px!important;z-index:3}
+#ideaMap .ideaMapSingleCard.photoDetailBody h3{padding-right:44px!important}
+@media(max-width:980px){
+ #ideaMap .ideaMapSingleCard.photoDetailBody{padding:16px!important;border-radius:16px}
+}
+/* Wrap whole metadata groups instead of horizontally clipping duration on phones. */
+#ideaMap .ideaMapPanel .ideaMapResultInfo{display:flex!important;flex-wrap:wrap!important;overflow:visible!important;white-space:normal!important;column-gap:16px!important;row-gap:3px!important}
+#ideaMap .ideaMapPanel .ideaMapResultInfo>.cardPillGroup,
+#ideaMap .ideaMapPanel .ideaMapResultInfo>.cardMetaLine{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;max-width:100%;flex-wrap:wrap!important}
+#ideaMap .ideaMapPanel .ideaMapResultBody{min-width:0!important;max-width:100%!important;overflow:visible!important}
+:scope{--sheet-surface:linear-gradient(180deg,#fffdfa 0%,#faf7ef 100%)}
+.ideaFilterSheet,.photoDetailLayer .photoDetailPanel{background:var(--sheet-surface)!important}
+#ideaMap .ideaMapSingleCard.photoDetailBody{background:var(--sheet-surface)!important}
+.photoDetailBody .sharedIdeaCard .ideaImageFrame{margin-bottom:0!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock{width:fit-content!important;max-width:calc(100% - 52px)!important;margin:0 0 0 52px!important;padding:4px 0!important;background:transparent!important;column-gap:16px!important}
+
+/* A small warm surface groups the facts directly below the photo. */
+.photoDetailBody .sharedIdeaCard .cardMetaBlock{margin-top:4px!important;padding:4px 8px!important;background:rgba(247,241,231,.22)!important;border-radius:10px}
+/* Compact close control, with a larger invisible touch target. */
+.photoDetailPanel .ideaFilterSheetClose{position:relative;inset:auto;flex:0 0 32px;width:32px;height:32px;min-width:32px;min-height:32px;border-radius:10px}
+.photoDetailPanel .ideaFilterSheetClose svg{width:14px;height:14px}
+@media(max-width:980px),(pointer:coarse){
+ .photoDetailPanel .ideaFilterSheetClose::after{content:"";position:absolute;inset:-6px;border-radius:12px}
+}
+
+/* Restore the location marker before distances in compact photo metadata. */
+#adminIdeaCards.compactTiles .photoTileOverlay .locationPill:not(.homeLocationPill):not(.onlineLocationPill){display:inline-flex;align-items:center;gap:4px}
+#adminIdeaCards.compactTiles .photoTileOverlay .locationPill:not(.homeLocationPill):not(.onlineLocationPill)::before{content:"";flex:0 0 12px;width:12px;height:14px;background:currentColor;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E") center/contain no-repeat}
+
+/* Keep map details readable within the available map height. */
+.photoDetailActions .websiteGlobe{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+#ideaMap .ideaMapDetailClose{width:28px!important;height:28px!important;min-width:28px;min-height:28px;border-radius:var(--map-close-radius)!important;background:var(--map-close-surface);border:1px solid var(--map-close-border)}
+#ideaMap .ideaMapDetailClose svg{width:10px!important;height:10px!important}
+@media(min-width:981px){
+ #ideaMap .ideaMapPanel.isSingleDetail{display:flex;flex-direction:column;min-height:0;overflow:hidden;border-radius:20px}
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{display:block;min-height:0;max-height:100%;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;scrollbar-width:thin;padding:0!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody{padding:16px!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody>.sharedIdeaCard{overflow:visible!important;gap:8px!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody h3{font-size:18px!important;line-height:1.3!important;padding-right:32px!important;margin:0 0 8px!important;overflow-wrap:anywhere}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .ideaImageFrame{height:clamp(120px,20vh,170px)!important;min-height:0!important;aspect-ratio:auto!important;flex-shrink:0}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .cardMetaBlock{display:flex!important;white-space:normal!important;overflow:visible!important;column-gap:10px!important;row-gap:2px!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody :is(.cardPillGroup,.cardMetaLine){flex-wrap:wrap!important;min-width:0!important;max-width:100%!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .sharedIdeaCard>p{font-size:14px!important;line-height:1.5!important;margin:4px 0!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody :is(.ideaPracticalDetails,.photoRouteChoices){padding:8px 0!important;margin:0!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailActions{padding-top:8px!important;margin-top:0!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailActions .ideaRouteButton{min-height:40px;padding:8px 12px!important}
+}
+@media(pointer:coarse){#ideaMap .ideaMapDetailClose::after{content:"";position:absolute;inset:-8px}}
+
+/* One close control for both filter and activity sheets. */
+.ideaFilterSheet .ideaFilterSheetClose{position:relative;inset:auto;display:inline-flex;align-items:center;justify-content:center;flex:0 0 32px;width:32px;height:32px;min-width:32px;min-height:32px;padding:0;border:1px solid rgba(79,142,158,.16);border-radius:10px;background:rgba(255,253,249,.72);color:#63858b;box-shadow:none;transition:background-color 140ms ease,color 140ms ease}
+.ideaFilterSheet .ideaFilterSheetClose svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+.ideaFilterSheet .ideaFilterSheetClose:focus-visible{outline:2px solid #315f6b;outline-offset:2px;background:var(--control-hover-surface)}
+@media(min-width:981px) and (hover:hover) and (pointer:fine){.ideaFilterSheet .ideaFilterSheetClose:hover{background:var(--control-hover-surface);border-color:rgba(61,126,136,.16);color:#63858b}}
+@media(max-width:980px),(pointer:coarse){.ideaFilterSheet .ideaFilterSheetClose::after{content:"";position:absolute;inset:-6px;border-radius:12px}}
+
+/* Mobile map details use the available viewport and one continuous sheet surface. */
+@media(max-width:640px){
+ #ideaMap .ideaMapPanel.isSingleDetail{height:88dvh!important;max-height:88dvh!important;background:var(--sheet-surface)!important;display:flex!important;flex-direction:column;overflow:hidden}
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapPanelHead{height:24px!important;min-height:24px!important;flex:0 0 24px!important;margin:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{flex:1 1 auto!important;min-height:0!important;padding:0 16px max(16px,env(safe-area-inset-bottom))!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody{padding:0 16px 16px!important;background:transparent!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody h3{margin-top:0!important;padding-right:40px!important}
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:24px!important;right:24px!important}
+ #ideaMap .ideaMapDetailClose::before{content:none!important}
+}
+
+/* Shared title/action row leaves room for future save and share controls. */
+.photoDetailPanel .ideaFilterSheetHeader{height:auto;min-height:64px;padding:16px 20px 12px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-shrink:0}
+.photoDetailPanel .ideaFilterSheetHeader h3{flex:1;min-width:0;margin:0;font-size:20px;line-height:32px;font-weight:600;color:#006780;overflow-wrap:anywhere}
+.photoDetailPanel .ideaFilterSheetHeader h3 a{color:inherit;text-decoration:none}
+.photoDetailPanel .ideaFilterSheetHeader .ideaFilterSheetClose{flex-shrink:0}
+@media(max-width:640px){.photoDetailPanel .ideaFilterSheetHeader{padding:20px 16px 12px}.photoDetailPanel .ideaFilterSheetHeader h3{font-size:18px;line-height:30px}}
+
+/* The title row must grow with wrapped titles at every breakpoint. */
+.photoDetailLayer .photoDetailPanel{grid-template-rows:auto minmax(0,1fr)!important}
+.photoDetailPanel .ideaFilterSheetHeader{height:auto!important;max-height:none!important}
+.photoDetailPanel .ideaFilterSheetHeader .ideaTitleLink,.photoDetailPanel .ideaFilterSheetHeader .ideaTitleText{display:inline!important;white-space:normal!important;overflow:visible!important;-webkit-line-clamp:unset!important}
+
+/* Give bottom-sheet titles breathing room below the drag handle. */
+@media(max-width:980px){
+ .photoDetailPanel .ideaFilterSheetHeader{padding:28px 16px 16px!important}
+ .photoDetailPanel .ideaFilterSheetHeader h3{line-height:32px!important}
+}
+@media(max-width:640px){
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapPanelHead{height:32px!important;min-height:32px!important;flex-basis:32px!important}
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:32px!important}
+}
+.photoDetailBody details{overflow-anchor:none}
+
+/* Shared detail navigation for the activity sheet and map viewer. */
+.photoDetailTabs{margin-top:16px}
+.photoDetailTabs [role="tablist"]{display:flex;border-bottom:1px solid rgba(79,142,158,.16);gap:20px}
+.photoDetailTabs [role="tab"]{appearance:none;border:0;border-bottom:2px solid transparent;background:transparent;padding:12px 8px;color:#63858b;font:inherit;cursor:pointer}
+.photoDetailTabs [role="tab"][aria-selected="true"]{color:#006780;border-bottom-color:#008f99;font-weight:600}
+.photoDetailTabs [role="tabpanel"]{padding:16px 0}
+.photoDetailTabs [role="tabpanel"][hidden]{display:none!important}
+.photoDetailTabs h4{margin:0 0 8px;font-size:15px;color:#315f6b}
+.photoDetailTabs p{margin:0 0 12px}
+.photoDetailTabs .photoRouteChoices{border:0!important;padding:0!important;margin:0!important}
+.detailRouteLinks{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:16px}
+.photoDetailBody .detailRouteLinks a,.photoDetailBody .photoDetailActions a{text-decoration:none!important}
+.detailRouteLinks a{display:inline-flex;align-items:center;gap:8px;padding:10px 8px;border-radius:10px;color:#006780}
+.detailRouteLinks .detailGoogle{font-weight:600;background:rgba(247,241,231,.35)}
+.detailRouteLinks svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7}
+.photoDetailTabs button:focus-visible,.detailRouteLinks a:focus-visible{outline:2px solid #008f99;outline-offset:2px}
+@media(hover:hover) and (pointer:fine){.photoDetailTabs button:hover,.detailRouteLinks a:hover{background:var(--control-hover-surface)}}
+.photoDetailBody .photoDetailTabs{order:5}
+.photoDetailBody .photoDetailActions>.ideaRouteButton{justify-content:flex-start;min-height:44px;padding:10px 8px;border:0;background:transparent;font-size:15px}
+.photoDetailBody .detailRouteLinks a{border:0;background:transparent;box-shadow:none}
+.photoDetailBody .detailRouteLinks .detailGoogle{background:rgba(247,241,231,.35)}
+.photoDetailBody .photoDetailActions{display:flex;flex-direction:column;gap:0}
+.photoDetailBody .photoDetailActions>a,.photoDetailBody .detailRouteAction{display:flex;align-items:center;gap:14px;width:100%;box-sizing:border-box;border:0;border-radius:0;background:transparent;color:#236875;font:inherit;font-size:15px;font-weight:500;text-align:left;padding:12px 8px;min-height:48px;cursor:pointer;text-decoration:none!important}
+.photoDetailActions .detailExternal,.detailRouteAction>span:last-child{margin-left:auto}
+.photoDetailActions svg{width:20px;height:20px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.7}
+.photoDetailBody .detailRouteLinks .mapAppLogo{width:28px;height:28px;stroke:none;flex-shrink:0}
+@media(hover:hover) and (pointer:fine){.photoDetailBody .photoDetailActions>a:hover,.photoDetailBody .detailRouteAction:hover{background:var(--control-hover-surface)}}
+.detailRouteAction:focus-visible{outline:2px solid #008f99;outline-offset:2px}
+
+.photoDetailActions .mapAppLogo{width:22px;height:22px;stroke:none}
+
+/* One practical disclosure and a compact choice of map services. */
+.photoDetailBody .detailRouteCompact{margin:0!important;padding:12px 8px!important;border:0!important}
+.detailRouteCompact h4{display:flex;align-items:center;gap:14px;margin:0 0 12px;color:#236875;font-size:15px;font-weight:500}
+.detailRouteCompact h4 svg{width:20px;height:20px}
+.photoDetailBody .detailRouteCompact .detailRouteLinks{display:flex;flex-direction:row;align-items:center;gap:12px;margin-top:8px}
+.photoDetailBody .detailRouteCompact .detailRouteLinks a{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;padding:10px;border:0;background:transparent;border-radius:10px}
+.photoDetailBody .detailRouteCompact .mapAppLogo{width:28px;height:28px;stroke:none}
+@media(hover:hover) and (pointer:fine){.photoDetailBody .detailRouteCompact .detailRouteLinks a:hover{background:var(--control-hover-surface)}}
+
+/* Disclosure actions retain the compact link-row appearance. */
+.photoDetailBody .photoDetailActions>.detailPractical,
+.photoDetailBody .photoDetailActions>.detailRouteCompact{order:initial;margin:0!important;padding:0!important;border:0!important}
+.photoDetailBody .photoDetailActions>details>summary{display:flex;align-items:center;gap:14px;min-height:48px;padding:12px 8px!important;border:0!important;border-radius:0;background:transparent;color:#236875;font-size:15px!important;font-weight:500!important;line-height:24px;list-style:none;cursor:pointer;text-decoration:none}
+.photoDetailBody .photoDetailActions>details>summary::after{width:6px;height:6px;transform:rotate(-45deg)}
+.photoDetailBody .photoDetailActions>details[open]>summary::after{transform:rotate(45deg)!important}
+.photoDetailBody .photoDetailActions>details.isSectionClosing>summary::after{transform:rotate(-45deg)!important}
+.photoDetailBody .photoDetailActions>details>p{margin:8px 8px 16px 42px!important}
+.photoDetailBody .photoDetailActions .detailRouteLinks{margin:0 0 12px 34px}
+.photoDetailBody .photoDetailActions>details>summary:focus-visible{outline:2px solid #008f99;outline-offset:-2px;background:var(--control-hover-surface)}
+@media(hover:hover) and (pointer:fine){.photoDetailBody .photoDetailActions>details>summary:hover{background:var(--control-hover-surface)}}
+.photoDetailBody .photoDetailActions>details{width:100%!important;max-width:none!important;align-self:stretch!important}
+.photoDetailBody .photoDetailActions>details>summary{width:100%!important;max-width:none!important;text-align:left;box-sizing:border-box}
+
+/* All three action labels use the same type treatment. */
+.photoDetailBody .photoDetailActions>.ideaRouteButton,
+.photoDetailBody .photoDetailActions>details>summary{font-family:inherit!important;font-size:15px!important;font-weight:500!important;line-height:24px!important;letter-spacing:normal!important}
+
+/* Address, location marker and navigation stay in one stable row. */
+.photoDetailBody .photoDetailActions>.detailAddressRow{position:relative;display:grid;grid-template-columns:20px minmax(0,1fr) 132px;align-items:center;column-gap:10px;width:100%;box-sizing:border-box;padding:12px 8px!important;border:0!important;margin:0!important;min-height:68px}
+.detailAddressIcon{grid-column:1;grid-row:1;display:flex;align-items:center;color:#236875}
+.photoDetailBody .detailAddressRow>.ideaPracticalText{grid-column:2;grid-row:1;margin:0!important;font-size:15px!important;line-height:24px!important;overflow-wrap:anywhere;min-width:0}
+.photoDetailBody .photoDetailActions>.detailAddressRow>.detailRouteLinks{grid-column:3;grid-row:1;display:flex;gap:0;margin:0!important;align-items:center}
+.photoDetailBody .detailAddressRow .detailRouteLinks a{width:44px;height:44px;min-height:44px;padding:8px;flex:0 0 44px}
+@media(min-width:981px) and (hover:hover) and (pointer:fine){
+ .photoDetailBody .photoDetailActions>.detailAddressRow>.detailRouteLinks{opacity:0;transform:translateX(4px);pointer-events:none;transition:opacity 160ms ease,transform 160ms ease}
+ .photoDetailBody .photoDetailActions>.detailAddressRow:hover>.detailRouteLinks,
+ .photoDetailBody .photoDetailActions>.detailAddressRow:focus-within>.detailRouteLinks{opacity:1;transform:none;pointer-events:auto}
+ .photoDetailBody .photoDetailActions>.detailAddressRow:hover{background:var(--control-hover-surface)}
+}
+@media(prefers-reduced-motion:reduce){.photoDetailBody .photoDetailActions>.detailAddressRow>.detailRouteLinks{transition:none}}
+
+.photoDetailBody .photoDetailTabs [role="tabpanel"] p{font-family:inherit;font-size:15px!important;line-height:1.65!important;color:#777;margin:0 0 12px}
+.photoDetailBody .photoDetailTabs [role="tab"]{font-family:inherit;font-size:15px;line-height:24px}
+
+/* Use available sheet width, rather than device type, for inline navigation. */
+.photoDetailBody .photoDetailActions{container-type:inline-size}
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure{position:relative}
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary>span{min-width:0;overflow-wrap:anywhere}
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{margin:0 0 8px 34px!important;padding:0;gap:0}
+.photoDetailBody .detailAddressDisclosure .detailRouteLinks a{width:44px;height:44px;min-height:44px;flex:0 0 44px;padding:8px}
+@container(min-width:420px){
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure[open]>summary{padding-right:148px!important;min-height:60px}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure[open]>summary::after{display:none}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{position:absolute;right:8px;top:8px;margin:0!important}
+}
+/* Compact card facts match the restrained strip in the reference mock-up. */
+#adminIdeaCards.compactTiles .photoTileMedia::after{height:32px;min-height:0;background:rgba(12,22,23,.52)}
+#adminIdeaCards.compactTiles .photoTileOverlay{bottom:0;height:32px;min-height:32px;padding:0 10px;gap:12px;background:none}
+#adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon{transform:translateY(8px)}
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{top:0;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileMeta .stimulusPill{display:inline-flex!important;width:auto;min-width:0;gap:4px}
+#adminIdeaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{font-size:13px;font-weight:500;line-height:20px;height:auto}
+@media(max-width:600px){
+ #adminIdeaCards.compactTiles .photoTileMedia::after{height:28px}
+ #adminIdeaCards.compactTiles .photoTileOverlay{height:28px;min-height:28px;padding:0 5px;gap:6px}
+ #adminIdeaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{font-size:11px;line-height:18px}
+}
+
+/* Fine-pointer navigation reveals on hover, aligned with the address. */
+@media(hover:hover) and (pointer:fine){
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary,
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure[open]>summary{padding-right:112px!important;min-height:48px}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary::after{display:none!important}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{position:absolute;right:8px;top:50%;transform:translateY(-50%);margin:0!important;gap:0}
+ .photoDetailBody .detailAddressDisclosure .detailRouteLinks a{width:32px;height:32px;min-height:32px;flex-basis:32px;padding:5px}
+ .photoDetailBody .detailAddressDisclosure .detailRouteLinks .mapAppLogo{width:22px;height:22px}
+ .photoDetailBody .detailAddressDisclosure:hover{background:var(--control-hover-surface)}
+}
+/* Soft, readable detail facts with fine separators. */
+.photoDetailBody .sharedIdeaCard .cardMetaBlock{background:rgba(247,241,231,.48)!important;border-radius:6px!important;padding:8px 10px!important;column-gap:0!important;row-gap:8px!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardPillGroup,
+.photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardMetaLine{display:contents!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock .pill,
+.photoDetailBody .sharedIdeaCard .cardMetaBlock .cardMetaPart{font-size:13px!important;line-height:20px!important;min-height:20px!important;height:auto!important;padding:0 9px!important;margin:0!important;border:0!important;border-left:1px solid rgba(79,126,136,.22)!important;border-radius:0!important;background:transparent!important;white-space:nowrap;flex:0 0 auto}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock .cardPillGroup>.pill:first-child,
+.photoDetailBody .sharedIdeaCard .cardMetaBlock .cardPillGroup>.locationRouteLink:first-child>.pill{border-left:0!important;padding-left:0!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock .metaIcon,
+.photoDetailBody .sharedIdeaCard .cardMetaBlock .metaIcon svg{width:15px!important;height:15px!important}
+@media(max-width:600px){
+ .photoDetailBody .sharedIdeaCard .cardMetaBlock{padding:7px 8px!important}
+ .photoDetailBody .sharedIdeaCard .cardMetaBlock .pill,
+ .photoDetailBody .sharedIdeaCard .cardMetaBlock .cardMetaPart{padding-right:6px!important;padding-left:6px!important;font-size:12px!important}
+}
+/* Quiet tabs and a compact action area that remains available while scrolling. */
+.photoDetailBody .photoDetailTabs [role="tab"],
+.photoDetailBody .photoDetailTabs [role="tab"]:hover{background:transparent!important}
+.photoDetailBody .photoDetailTabs [role="tab"][aria-selected="true"]{color:#006780;border-bottom:2px solid #008f99}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock :is(.pill,.cardMetaPart){color:#486e76!important}
+.photoDetailBody .sharedIdeaCard .cardMetaBlock :is(.metaIcon,.stimulusIcon){color:#236875!important}
+.photoDetailPanel .ideaFilterSheetHeader h3{font-size:19px}
+.photoDetailBody .photoDetailActions{position:sticky!important;bottom:0;z-index:4;background:var(--sheet-surface);border-top:0;margin-top:12px!important;padding:8px 0!important;gap:0}
+.photoDetailBody .photoDetailActions>.ideaRouteButton,
+.photoDetailBody .photoDetailActions>details>summary{min-height:44px!important;padding-top:10px!important;padding-bottom:10px!important}
+.photoDetailBody .photoDetailTabs [role="tabpanel"]{padding:16px 0 4px}
+@media(max-width:640px){.photoDetailPanel .ideaFilterSheetHeader h3{font-size:18px}}
+/* Shade only the metadata, leaving the rest of the photograph clear. */
+#adminIdeaCards.compactTiles .photoTileMedia::after{display:none}
+#adminIdeaCards.compactTiles .photoTileOverlay{right:auto;width:max-content;max-width:100%;padding-right:6px;background:transparent;border-radius:0;gap:0}
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{flex:0 1 auto;width:auto;padding:1px 6px;background:transparent;border-radius:4px;position:relative;isolation:isolate}
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts::before{content:"";position:absolute;inset:0 0 0 -14px;background:rgba(35,35,35,.20);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border-radius:8px;z-index:-1;pointer-events:none}
+#adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon{position:relative;inset:auto;z-index:1;transform:translateY(16px)}
+@media(max-width:600px){#adminIdeaCards.compactTiles .photoTileOverlay{padding-right:8px}#adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon{transform:translateY(14px)}}
+
+/* Extend only the action background to the sheet edges; retain link alignment. */
+.photoDetailBody .photoDetailActions{background:#fefcf8;box-shadow:-20px 0 #fefcf8,20px 0 #fefcf8;align-self:stretch}
+
+/* One compact facts row in map lists, with separators only between items. */
+#ideaMap .ideaMapPanel .ideaMapResultInfo{border-radius:6px!important;flex-wrap:nowrap!important;gap:0!important;white-space:nowrap!important;max-width:100%;overflow-x:auto!important;scrollbar-width:none}
+#ideaMap .ideaMapPanel .ideaMapResultInfo>.cardPillGroup,
+#ideaMap .ideaMapPanel .ideaMapResultInfo>.cardMetaLine{display:contents!important}
+#ideaMap .ideaMapResultInfo :is(.pill,.cardMetaPart){flex:0 0 auto!important;white-space:nowrap!important;border:0!important;border-left:1px solid rgba(79,126,136,.22)!important;border-radius:0!important;padding:0 5px!important;margin:0!important;font-size:11px!important}
+#ideaMap .ideaMapResultInfo .cardPillGroup>.pill:first-child,
+#ideaMap .ideaMapResultInfo .cardPillGroup>.locationRouteLink:first-child>.pill{border-left:0!important;padding-left:0!important}
+#ideaMap .ideaMapResultInfo .cardMetaLine>.cardMetaPart:last-child{padding-right:0!important}
+#ideaMap .ideaMapResultInfo::-webkit-scrollbar{display:none}
+@media(max-width:600px){
+ #ideaMap .ideaMapResultInfo :is(.pill,.cardMetaPart){font-size:10px!important;padding-right:2px!important;padding-left:2px!important;gap:2px!important}
+}
+
+/* Address and website share one rounded, inset interaction surface. */
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure,
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary,
+.photoDetailBody .photoDetailActions>.ideaRouteButton{border-radius:12px!important}
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary:hover,
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary:focus-visible{background:transparent!important}
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure:focus-within{background:var(--control-hover-surface)}
+@media(hover:hover) and (pointer:fine){
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure:hover,
+ .photoDetailBody .photoDetailActions>.ideaRouteButton:hover{background:var(--control-hover-surface)}
+}
+
+.photoDetailBody .photoDetailActions::before{content:"";position:absolute;top:0;left:-20px;right:-20px;height:1px;background:rgba(79,126,136,.16);opacity:0;pointer-events:none}
+.photoDetailBody .photoDetailActions.isOverContent::before{opacity:1}
+
+/* Shared responsive detail sizing: tile sheets and map sheets use the same rules. */
+.photoDetailBody{container-type:inline-size;container-name:activity-detail}
+#ideaMap .ideaMapPanel.isSingleDetail{overflow:hidden!important;display:flex!important;flex-direction:column;min-height:0}
+#ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{overflow-y:auto!important;overflow-x:hidden!important;min-height:0;flex:1 1 auto;max-height:100%}
+#ideaMap .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{position:absolute!important;top:12px!important;right:12px!important;z-index:8}
+#ideaMap .ideaMapDetailClose,.photoDetailPanel .ideaFilterSheetClose{width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;flex-basis:40px!important}
+#ideaMap .ideaMapDetailClose svg,.photoDetailPanel .ideaFilterSheetClose svg{width:20px!important;height:20px!important}
+@container activity-detail (max-width:480px){
+ :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .ideaImageFrame{height:clamp(120px,22dvh,180px)!important;min-height:0!important;aspect-ratio:auto!important}
+ :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .cardMetaBlock{margin-left:48px!important;margin-top:4px!important;max-width:calc(100% - 48px)!important;width:fit-content!important;flex-wrap:nowrap!important;white-space:nowrap!important;gap:0!important;padding:6px!important}
+ :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardPillGroup,
+ :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardMetaLine{display:contents!important}
+ :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .cardMetaBlock :is(.pill,.cardMetaPart){font-size:11px!important;padding-inline:5px!important;gap:3px!important}
+ :is(#ideaMap,.photoDetailPanel) .photoDetailBody .photoDetailTabs{margin-top:8px!important}
+ :is(#ideaMap,.photoDetailPanel) .photoDetailBody .photoDetailTabs [role=tab]{font-size:14px!important;line-height:20px!important;padding:8px!important}
+ :is(#ideaMap,.photoDetailPanel) .photoDetailBody .photoDetailTabs [role=tabpanel]{padding:10px 0 2px!important}
+ :is(#ideaMap,.photoDetailPanel) .photoDetailBody .photoDetailTabs [role=tabpanel] p{font-size:14px!important;line-height:1.5!important;margin-bottom:6px!important}
+ :is(#ideaMap,.photoDetailPanel) .photoDetailBody .photoDetailActions :is(summary,.ideaRouteButton){font-size:14px!important;line-height:21px!important}
+}
+@media(max-width:640px){
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{padding:0 16px max(12px,env(safe-area-inset-bottom))!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody{padding:0!important}
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapDetailToolbar{top:28px!important;right:16px!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody h3{min-height:40px;display:flex;align-items:center;font-size:18px!important;padding-right:48px!important;margin-bottom:10px!important}
+}
+
+/* Stable header and consistent inset facts on every activity sheet. */
+#ideaMap .activityMapHeader{display:flex;align-items:flex-start;gap:12px;flex:none;padding:12px 16px;background:#fffdfa;z-index:8}
+#ideaMap .activityMapHeader h3{flex:1;min-width:0;margin:0!important;padding:0!important;font-size:18px!important;line-height:28px!important;color:#006780}
+#ideaMap .activityMapHeader h3 a{color:inherit;text-decoration:none}
+#ideaMap .ideaMapPanel.isSingleDetail .activityMapHeader .ideaMapDetailToolbar{position:static!important;flex:none;margin:0!important;transform:none!important}
+#ideaMap .ideaMapDetailClose,#ideaMap .ideaMapPanelClose,.photoDetailPanel .ideaFilterSheetClose{width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important;flex-basis:32px!important}
+#ideaMap .ideaMapDetailClose svg,#ideaMap .ideaMapPanelClose svg,.photoDetailPanel .ideaFilterSheetClose svg{width:16px!important;height:16px!important}
+.photoDetailLayer .photoDetailPanel{overflow:hidden!important}
+.photoDetailPanel .ideaFilterSheetHeader{position:relative;flex:none}
+.photoDetailBody .photoDetailActions::after{content:"";position:absolute;top:100%;left:-20px;right:-20px;height:100vh;background:#fefcf8;pointer-events:none}
+@media(max-width:640px){
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{touch-action:pan-y!important;overscroll-behavior:contain!important}
+ #ideaMap .activityMapHeader{padding-top:0;padding-bottom:12px}
+ .photoDetailBody .detailAddressDisclosure .detailRouteLinks{padding:0!important;gap:6px!important}
+ .photoDetailBody .detailAddressDisclosure .detailRouteLinks a{width:44px;height:44px;min-height:44px;flex-basis:44px;padding:10px}
+ .photoDetailBody .detailAddressDisclosure .detailRouteLinks .mapAppLogo{width:24px;height:24px}
+}
+@container activity-detail (max-width:360px){
+ :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .cardMetaBlock :is(.pill,.cardMetaPart){font-size:10px!important;padding-inline:3px!important;gap:2px!important}
+}
+
+@media(max-width:640px){
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary,
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure[open]>summary{padding-right:28px!important}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary::after{display:block!important}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{position:static!important;transform:none!important;margin:0 0 8px 37px!important}
+}
+/* Empty space below the actions belongs to the same warm action surface. */
+#ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults,
+.photoDetailPanel .photoDetailBody{background:#fefcf8!important}
+.photoDetailPanel .photoDetailBody>.sharedIdeaCard{background:var(--sheet-surface)!important;overflow:visible!important}
+#ideaMap .ideaMapSingleCard.photoDetailBody{background:var(--sheet-surface)!important}
+
+/* Seat the compact facts on the photo edge without moving the theme badge. */
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{align-self:flex-end;top:0;transform:none}
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts::before{border-radius:8px 8px 0 0}
+
+/* Desktop details keep the standard 16:9 photo ratio. */
+@media(min-width:981px){
+ :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .ideaImageFrame{height:auto!important;aspect-ratio:16/9!important;max-height:none!important}
+}
+@media(max-width:980px){
+ :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .ideaImageFrame{height:clamp(150px,25dvh,210px)!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important}
+}
+/* Paint the detail surface through its side gutters, keeping actions warm white. */
+.photoDetailBody>.sharedIdeaCard{position:relative;isolation:isolate}
+.photoDetailBody>.sharedIdeaCard::before{content:"";position:absolute;inset:0 -20px;background:var(--sheet-surface);z-index:-1;pointer-events:none}
+
+/* Mobile action alignment: quiet touch feedback and an address-aligned route row. */
+@media(max-width:640px){
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary{position:relative}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary::after{position:absolute;right:15px;top:calc(50% - 3px);margin:0}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{margin:6px 0 8px 32px!important;gap:16px!important;justify-content:flex-start;align-items:center}
+ .photoDetailBody .detailAddressDisclosure .detailRouteLinks a{display:flex;align-items:center;justify-content:center;background:transparent!important;box-shadow:none!important;transform:none!important}
+ .photoDetailBody .detailAddressDisclosure .detailRouteLinks .mapAppLogo{display:block;width:24px;height:24px;flex:0 0 24px}
+ .photoDetailBody .photoDetailActions :is(.detailAddressDisclosure,summary,.ideaRouteButton):is(:hover,:focus-within,:active){background:transparent!important;box-shadow:none!important}
+ .photoDetailBody .photoDetailTabs button:hover{background:transparent!important}
+}
+
+
+/* One vertical scroll surface per mobile sheet; never pan the detail sideways. */
+@media(max-width:980px){
+ .photoDetailPanel .photoDetailBody,
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{
+  display:block!important;min-width:0;overflow-x:hidden!important;overflow-y:auto!important;
+  overscroll-behavior:contain!important;touch-action:pan-y!important;scroll-snap-type:none!important;
+ }
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapSingleCard.photoDetailBody{overflow:visible!important;max-height:none!important}
+ .photoDetailBody>.sharedIdeaCard{min-width:0!important;max-width:100%!important;box-sizing:border-box}
+ .photoDetailBody .photoDetailActions::after{content:none}
+}
+@media(max-width:600px){
+ .photoDetailBody>.sharedIdeaCard::before{left:-16px;right:-16px}
+ .photoDetailBody .photoDetailActions::before{left:-16px;right:-16px}
+}
+
+/* Copy stays beside the address, independent of the route disclosure. */
+.photoDetailBody .detailCopyAddress{display:inline-flex;align-items:center;justify-content:center;flex:0 0 28px;width:28px;height:32px;padding:4px;border:0;background:transparent;color:inherit;cursor:pointer;border-radius:6px}
+.photoDetailBody .detailCopyAddress svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7}
+.photoDetailBody .detailCopyAddress:focus-visible{outline:2px solid #008f99;outline-offset:2px}
+.photoDetailBody .detailCopyStatus{position:absolute;right:8px;bottom:0;font-size:11px;line-height:14px;background:#fefcf8;border-radius:4px;z-index:2}
+.photoDetailBody .detailCopyStatus:empty{display:none}
+
+/* Keep desktop copy controls quiet until the address is being used. */
+@media(min-width:641px) and (hover:hover) and (pointer:fine){
+ .photoDetailBody .detailAddressDisclosure .detailCopyAddress{opacity:0;pointer-events:none}
+ .photoDetailBody .detailAddressDisclosure:hover .detailCopyAddress,
+ .photoDetailBody .detailAddressDisclosure:focus-within .detailCopyAddress{opacity:1;pointer-events:auto}
+}
+
+/* List and detail map panels share the complete close-button treatment. */
+#ideaMap :is(.ideaMapPanelClose,.ideaMapDetailClose){display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;padding:0!important;border:1px solid var(--map-close-border)!important;border-radius:var(--map-close-radius)!important;background:var(--map-close-surface)!important;color:#63858b!important;box-shadow:none!important}
+@media(hover:hover) and (pointer:fine){
+ #ideaMap :is(.ideaMapPanelClose,.ideaMapDetailClose):hover{background:var(--control-hover-surface)!important;border-color:rgba(61,126,136,.16)!important}
+}
+#ideaMap :is(.ideaMapPanelClose,.ideaMapDetailClose):focus-visible{outline:2px solid #315f6b;outline-offset:2px}
+
+/* Start the backing at the badge centre, with the badge layered above it. */
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts::before{left:-16px;border-top-left-radius:3px}
+@media(max-width:600px){
+ #adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts::before{left:-14px}
+}
+.photoDetailBody .detailCopyAddressMobile{display:none}
+@media(max-width:640px){
+ .photoDetailBody .detailAddressDisclosure>summary>.detailCopyAddress{display:none}
+ .photoDetailBody .detailRouteLinks>.detailCopyAddressMobile{display:inline-flex;width:44px;height:44px;flex:0 0 44px;margin-left:auto;opacity:1;pointer-events:auto}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{margin-right:8px!important}
+}
+
+/* Group the two actions in one inset rounded surface. */
+#ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults,
+.photoDetailPanel .photoDetailBody{background:var(--sheet-surface)!important}
+.photoDetailBody .photoDetailActions{background:#fffdfa!important;border:1px solid rgba(79,126,136,.08)!important;border-radius:16px!important;box-shadow:none!important;padding:4px 0!important;overflow:visible}
+.photoDetailBody .photoDetailActions::before,
+.photoDetailBody .photoDetailActions::after{content:none!important}
+@media(min-width:641px) and (hover:hover) and (pointer:fine){
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary{position:relative;padding-right:148px!important}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure[open]>summary{padding-right:148px!important}
+ .photoDetailBody .detailAddressDisclosure>summary>.detailCopyAddress{position:absolute;right:4px;top:50%;transform:translateY(-50%);opacity:1;pointer-events:auto}
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{right:40px!important}
+}
+
+/* Align the mobile copy glyph with the address chevron and website action. */
+@media(max-width:640px){
+ .photoDetailBody .photoDetailActions>.detailAddressDisclosure>.detailRouteLinks{margin-right:0!important}
+ .photoDetailBody .detailRouteLinks>.detailCopyAddressMobile{width:36px;flex-basis:36px;color:#236875}
+}
+
+/* Shared warm-white surface; interaction fills each row to the outer edge. */
+:scope{--activity-card-surface:#fffdf9}
+#adminIdeaCards.compactTiles .photoTile{background:var(--activity-card-surface)}
+:is(#ideaMap,.photoDetailPanel) .photoDetailBody .photoDetailActions{background:var(--activity-card-surface)!important;padding:0!important;overflow:clip}
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure,
+.photoDetailBody .photoDetailActions>.detailAddressDisclosure>summary,
+.photoDetailBody .photoDetailActions>.ideaRouteButton{border-radius:0!important}
+
+/* Match the add-action button while retaining the warm surprise accent. */
+#adminIdeaCards .ideaSurpriseButton{
+ min-height:40px;padding:10px 18px;border-radius:14px;
+ border:1.5px solid #e7cf88;background:#fff8e9;color:#805b08;
+ box-shadow:0 6px 16px rgba(128,91,8,.04);
+}
+#adminIdeaCards .ideaSurpriseButton svg{width:17px;height:17px;flex-basis:17px}
+@media(hover:hover) and (pointer:fine){
+ #adminIdeaCards .ideaSurpriseButton:hover{background:#fcf0d1;border-color:#d6bc70;transform:none}
+}
+
+/* Submission actions share the rounded surface of activity-sheet links. */
+.ideaSubmitSheet{background:var(--sheet-surface)!important}
+.ideaSubmitSheet .teamActionBar{
+ margin:18px 0 calc(16px + env(safe-area-inset-bottom));
+ bottom:calc(16px + env(safe-area-inset-bottom));
+ padding:0;gap:0;border:1px solid rgba(79,126,136,.08);border-radius:16px;
+ background:var(--activity-card-surface);backdrop-filter:none;overflow:hidden;
+}
+.ideaSubmitSheet .teamActionBar .formButton.primary{
+ min-height:48px;padding:14px 16px;border:0;border-radius:0;
+ background:transparent;box-shadow:none;color:#236875;
+}
+.ideaSubmitSheet .teamActionBar .teamFormStatus:empty{display:none}
+.ideaSubmitSheet .teamActionBar .teamFormStatus:not(:empty){padding:0 16px 14px}
+@media(hover:hover) and (pointer:fine){
+ .ideaSubmitSheet .teamActionBar .formButton.primary:hover{background:#f2f8f4}
+}
+@media(hover:none){
+ .ideaSubmitSheet .teamActionBar .formButton.primary:hover{background:transparent}
+}
+
+/* Mobile map overview is a horizontal card rail, not a draggable sheet. */
+@media(max-width:640px){
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail):not(.isTall){
+  background:transparent!important;border:0!important;border-radius:0!important;
+  box-shadow:none!important;backdrop-filter:none!important;
+  padding:0 0 max(4px,env(safe-area-inset-bottom))!important;
+  height:auto!important;max-height:none!important;overflow:visible!important;
+  pointer-events:none;
+ }
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail):not(.isTall)::before,
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail):not(.isTall) .ideaMapPanelHead::before{display:none!important}
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail):not(.isTall) .ideaMapPanelHead{
+  padding:0!important;margin:0 16px 8px!important;min-height:32px!important;
+  background:transparent!important;border:0!important;box-shadow:none!important;
+  cursor:default;touch-action:auto;
+ }
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail):not(.isTall) .ideaMapPanelHead h3{
+  font-size:13px!important;line-height:1.3;font-weight:600;
+  background:#fffdf9;padding:7px 10px;border-radius:10px;
+  box-shadow:0 2px 8px rgba(38,75,78,.08);
+ }
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail):not(.isTall) .ideaMapPanelHeadRow{gap:8px;align-items:center}
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail):not(.isTall) .ideaMapResults{
+  background:transparent!important;overflow-x:auto!important;overflow-y:hidden!important;
+  padding:0 16px 12px!important;pointer-events:auto;touch-action:pan-x;
+ }
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail):not(.isTall) .ideaMapResult{
+  background:var(--activity-card-surface)!important;
+  box-shadow:0 4px 12px rgba(38,75,78,.12)!important;
+ }
+}
+@media(max-width:640px){
+ #ideaMap .ideaMapPanel.isList.isExpanded:not(.isSingleDetail):not(.isTall) .ideaMapPanelHead{display:none!important}
+}
+
+/* Keep desktop sticky actions inside the photo column and rounded sheet. */
+@media(min-width:981px){
+ #ideaMap .ideaMapPanel.isSingleDetail .photoDetailActions{
+  box-sizing:border-box!important;width:100%!important;max-width:100%!important;min-width:0;
+  margin-inline:0!important;align-self:stretch;bottom:12px!important;flex-shrink:0;
+ }
+ #ideaMap .ideaMapPanel.isSingleDetail .photoDetailActions>*{min-width:0;box-sizing:border-box}
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{scroll-padding-bottom:16px;scrollbar-gutter:stable}
+}
+
+/* Expanded mobile results retain native vertical scrolling and a drag handle. */
+@media(max-width:640px){
+ #ideaMap .ideaMapPanel.isList.isTall:not(.isSingleDetail){
+  display:flex!important;flex-direction:column;overflow:hidden!important;
+  height:78dvh!important;max-height:78dvh!important;
+  background:var(--sheet-surface)!important;border-radius:22px 22px 0 0!important;
+  box-shadow:0 -8px 24px rgba(38,75,78,.12)!important;pointer-events:auto;
+ }
+ #ideaMap .ideaMapPanel.isList.isTall .ideaMapPanelHead{
+  display:block!important;flex:none;padding:22px 16px 12px!important;
+  position:relative;touch-action:none;cursor:grab;
+ }
+ #ideaMap .ideaMapPanel.isList.isTall .ideaMapPanelHead::before{
+  content:"";display:block!important;position:absolute;top:12px;left:50%;margin:0;
+  transform:translateX(-50%);width:36px;height:4px;border-radius:4px;background:#cdd8d8;
+ }
+ #ideaMap .ideaMapPanel.isList.isTall .ideaMapPanelHead h3{font-size:16px!important}
+ #ideaMap .ideaMapPanel.isList.isTall .ideaMapResults{
+  min-height:0;flex:1 1 auto!important;flex-direction:column!important;
+  overflow-y:auto!important;overflow-x:hidden!important;touch-action:pan-y!important;
+  padding:0 16px max(16px,env(safe-area-inset-bottom))!important;
+ }
+ #ideaMap .ideaMapPanel.isList.isTall .ideaMapResult{width:100%!important;flex:0 0 auto!important}
+}
+@media(max-width:640px){
+ #ideaMap .ideaMapPanel.isList.isTall .ideaMapPanelHead::before{content:""!important;opacity:1!important}
+ #ideaMap .ideaMapPanel.isList:not(.isSingleDetail){-webkit-user-select:none;user-select:none}
+}
+
+/* Equal visual weight for copy and external-website actions. */
+.photoDetailBody .photoDetailActions .detailExternal,
+.photoDetailBody .detailCopyAddress svg{
+ width:18px!important;height:18px!important;flex:0 0 18px;
+ fill:none;stroke:currentColor;stroke-width:1.7;
+}
+
+/* A single sparkle in the action keeps the surprise strip quiet. */
+:is(#adminIdeaCards,#adminIdeaList) .ideaSurpriseCard{grid-template-columns:minmax(0,1fr) auto}
+
+/* Mobile list cards use the same warm surface as the activity detail sheet. */
+@media(max-width:640px){
+ #ideaMap .ideaMapPanel.isList:not(.isSingleDetail) .ideaMapResult{background:#fffdf9!important}
+ #ideaMap .ideaMapPanel.isList.isTall .ideaMapResults{display:flex!important;scroll-snap-type:none!important;align-items:stretch!important}
+}
+
+/* No empty collapsed sheet on mobile: selecting a map group opens the rail. */
+@media(max-width:640px){
+ #ideaMap .ideaMapPanel.isMinimized:not(.isSingleDetail){display:none!important}
+}
+
+/* Metadata and the upper half of the badge share the same top and photo edge. */
+#adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{
+ height:16px;min-height:16px;line-height:16px;padding:0 6px;box-sizing:border-box;
+}
+#adminIdeaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{
+ height:16px;min-height:0;line-height:16px;
+}
+@media(max-width:600px){
+ #adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts,
+ #adminIdeaCards.compactTiles .photoTile .photoTileOverlay .photoTileFacts .pill{
+  height:14px;min-height:0;line-height:14px;
+ }
+}
+/* Mobile photo tiles show two facts on one line. */
+@media(max-width:600px){
+ #adminIdeaCards.compactTiles .photoTileOverlay{box-sizing:border-box}
+ #adminIdeaCards.compactTiles .photoTileOverlay .photoTileMeta .stimulusPill{display:none!important}
+}
+/* Keep the desktop map result count modest beside activity titles. */
+@media(min-width:641px){
+ #ideaMap .ideaMapPanel.isList .ideaMapPanelHead h3{font-size:14px!important;font-weight:500!important;line-height:1.3}
+}
+
+/* Reserve the same two-line title space on every compact tile. */
+#adminIdeaCards.compactTiles .photoTileTitle{align-items:flex-start;min-height:2.5em;line-height:1.25;overflow-wrap:normal}
+#adminIdeaCards.compactTiles .photoTileTitle>span:last-child{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+
+/* A quiet count on the bare mobile map, hidden whenever results are open. */
+.ideaMapActivityCount{display:none}
+@media(max-width:640px){
+ #ideaMap:has(.ideaMapPanel.isMinimized:not(.isSingleDetail)) .ideaMapActivityCount{
+  display:block;position:absolute;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));
+  transform:translateX(-50%);z-index:450;max-width:calc(100% - 32px);box-sizing:border-box;
+  padding:7px 12px;border-radius:14px;background:rgba(255,253,249,.92);color:var(--accent-dark);
+  font-size:13px;line-height:1.3;font-weight:500;box-shadow:0 2px 10px rgba(35,55,55,.08);
+  pointer-events:none;text-align:center;
+ }
+}
 
 }
