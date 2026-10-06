@@ -19,7 +19,7 @@
   footer.replaceChildren($('adminIdeaEditStatus'));
   $('adminIdeaEditSubmitBtn').textContent='Opslaan';$('adminIdeaEditCancelBtn').textContent='Annuleren';
   const photoPreview=$('adminEditIdeaImagePreview');
-  function syncSaveState(){saveButton.classList.toggle('hasChanges',!!window.AdminPolish?.ideaDirty());}
+  function syncSaveState(){const dirty=!!window.AdminPolish?.ideaDirty();saveButton.classList.toggle('hasChanges',dirty);saveButton.title=dirty?'Wijzigingen opslaan':'Opslaan — geen wijzigingen';}
   form.addEventListener('input',syncSaveState);
   form.addEventListener('change',()=>queueMicrotask(syncSaveState));
   function syncPhoto(){
@@ -108,7 +108,7 @@
       };
       const approval=source.querySelector('[data-approve-idea]');
       if(approval)toolbar.append(prepare(approval,'Goedkeuren'));
-      toolbar.append(prepare(source.querySelector('.visibilityIdeaAction'),item.hidden?'Zichtbaar maken':'Verbergen'));
+      toolbar.append(prepare(source.querySelector('.visibilityIdeaAction'),item.hidden?'Activiteit zichtbaar maken':'Activiteit verbergen'));
       const remove=prepare(source.querySelector('[data-delete-idea]'),'Verwijderen');remove.classList.add('adminDeleteAction');
       toolbar.append(remove);
     }
