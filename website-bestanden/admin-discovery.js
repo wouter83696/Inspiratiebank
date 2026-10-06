@@ -54,9 +54,9 @@
     });
     $('ideaFilterDistanceRange').value=String(SiteSettings.radii.indexOf(state.radius));
     $('ideaFilterDistanceValue').textContent=state.radius>=50?'50+ km':state.radius+' km';
-    $('ideaFilterApplyBtn').textContent=`Toon ${count ?? $('ideaCountValue').textContent} activiteiten`;
+    $('ideaFilterApplyBtn').textContent='Toon activiteiten';
     DiscoveryViewShared.activeLocation(state.locationType,state.locationType==='Binnen'?'Thuis':'Op pad');
-    const active=state.domains.size+['locationType','cost','stimulus','duration'].filter(k=>state[k]!=='all').length+(state.radius<50?1:0);
+    const active=state.domains.size+['locationType','cost','stimulus','duration'].filter(k=>state[k]!=='all').length+(state.radius<50?1:0)+($('adminIdeaStatusFilter').value!=='all'?1:0);
     $('filterToggle').setAttribute('aria-label',active?`Filters (${active} actief)`:'Filters');
     document.querySelectorAll('#inspirationAdminPanel [data-location-settings-label]').forEach(el=>el.textContent=(state.region || AdminSiteSettings.current().region).label);
     document.querySelectorAll('#inspirationAdminPanel [data-location-radius-label]').forEach(el=>el.textContent=state.radius>=50?'50+ km':state.radius+' km');
@@ -64,6 +64,7 @@
   }
   function reset(){
     state.domains.clear();Object.assign(state,{locationType:'all',cost:'all',stimulus:'all',duration:'all',radius:AdminSiteSettings.current().region.radiusKm,region:null});
+    $('adminIdeaStatusFilter').value='all';
     mixOrder=null;$('ideaSearch').value='';$('ideaFilterLocationInput').value='';
     $('ideaFilterLocationStatus').textContent='Standaardlocatie: '+AdminSiteSettings.current().region.label;renderIdeas();
   }
@@ -93,6 +94,10 @@
   function setup(){
     if(initialized)return;initialized=true;
     sheetController=DiscoveryViewShared.createSheet();
+    const statusSection=document.createElement('section');statusSection.className='ideaFilterSection adminStatusFilterSection';
+    const statusControl=$('adminIdeaStatusFilter').closest('.adminStatusFilter');
+    statusSection.append(statusControl);
+    $('ideaFilterLocationSection').before(statusSection);
     state.radius=AdminSiteSettings.current().region.radiusKm;
     $('ideaFilterDistanceRange').max=SiteSettings.radii.length-1;
     const categories=ADMIN_THEME_LEGEND.map(value=>({value:domainDisplayLabel(value),label:domainDisplayLabel(value),theme:domainThemeClass(value),icon:domainIcon(value)}));

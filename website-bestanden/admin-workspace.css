@@ -724,3 +724,8 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminFeaturedSheet .adminFeaturedFooter .button{min-height:42px;padding:8px 18px}
 #adminFeaturedSheet #saveFeaturedDraft{flex:1}
 #adminFeaturedSheet #saveFeaturedDraft.hasChanges{background:#e5f2ef}
+
+#inspirationAdminPanel .adminIdeaSummary{display:none}
+#ideaFilterSheetLayer .adminStatusFilter{display:grid;gap:12px;margin:0}
+#ideaFilterSheetLayer .adminStatusFilter label{font-size:18px;font-weight:700;color:#315f6b}
+#ideaFilterSheetLayer #adminIdeaStatusFilter{width:100%;min-height:44px;padding:10px 14px;border:1px solid rgba(79,142,158,.16);border-radius:12px;background:#fffdf9;color:#315f6b;font:inherit}
