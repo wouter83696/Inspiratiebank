@@ -8014,8 +8014,8 @@ textarea{resize:none!important}
 /* Keep management actions beside navigation; move them into the mobile header. */
 .sharedSectionToolbar{display:flex!important;align-items:center!important;flex-wrap:nowrap!important;gap:8px!important}
 .sharedSectionToolbar>.sharedSectionNav{flex:1 1 auto!important;width:auto!important;min-width:0;margin-bottom:0;gap:2px}
-.sharedSectionActions{display:flex;align-items:center;gap:3px;flex:none;padding-left:8px;border-left:1px solid var(--sheet-line)}
-.sharedSectionActions :is(button,a){display:inline-flex!important;align-items:center;justify-content:center;width:32px!important;min-width:32px!important;height:36px!important;min-height:36px!important;margin:0!important;padding:6px!important;border:0!important;border-radius:10px!important;background:transparent;color:var(--sheet-ink)}
+.sharedSectionActions{display:flex;align-items:center;gap:3px;flex:none;padding-left:0;border:0}
+.sharedSectionActions :is(button,a){display:inline-flex!important;align-items:center;justify-content:center;flex:0 0 32px!important;width:32px!important;min-width:32px!important;height:36px!important;min-height:36px!important;margin:0!important;padding:6px!important;border:0!important;border-radius:10px!important;background:transparent;color:var(--sheet-ink)}
 .sharedSectionActions :is(button,a)>span{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden;clip-path:inset(50%)}
 .sharedSectionActions svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7}
 @media(min-width:981px) and (hover:hover) and (pointer:fine){
