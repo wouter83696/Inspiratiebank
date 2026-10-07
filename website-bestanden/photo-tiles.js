@@ -316,6 +316,28 @@
         const header=document.createElement('div');header.className='activityMapHeader';
         toolbar.before(header);header.append(title,toolbar);
       });
+      // Reserve space for the full active tab and links before sizing the map photo.
+      document.querySelectorAll('#ideaMap .ideaMapPanel.isSingleDetail').forEach(panel=>{
+        const results=panel.querySelector('.ideaMapResults');
+        const card=panel.querySelector('.ideaMapSingleCard .sharedIdeaCard');
+        const photo=card?.querySelector('.ideaImageFrame');
+        if(!results||!card||!photo)return;
+        [results,card].forEach(node=>{
+          if(!observedActionContent.has(node)){observedActionContent.add(node);actionResize.observe(node);}
+        });
+        if(!matchMedia('(min-width:981px)').matches){photo.style.removeProperty('--map-photo-height');return;}
+        const photoRect=photo.getBoundingClientRect();
+        const resultStyle=getComputedStyle(results);
+        const wrapper=card.parentElement;
+        const wrapperStyle=getComputedStyle(wrapper);
+        const padding=parseFloat(resultStyle.paddingTop)+parseFloat(resultStyle.paddingBottom)
+          +parseFloat(wrapperStyle.paddingTop)+parseFloat(wrapperStyle.paddingBottom);
+        const otherHeight=card.getBoundingClientRect().height-photoRect.height;
+        const available=panel.getBoundingClientRect().bottom-results.getBoundingClientRect().top-padding-otherHeight-2;
+        const height=Math.round(Math.max(80,Math.min(photoRect.width*9/16,available)));
+        const value=height+'px';
+        if(photo.style.getPropertyValue('--map-photo-height')!==value)photo.style.setProperty('--map-photo-height',value);
+      });
       observedActionContent.forEach(node=>{if(!node.isConnected){actionResize.unobserve(node);observedActionContent.delete(node);}});
       document.querySelectorAll('.photoDetailActions').forEach(actions=>{
         const content=actions.previousElementSibling;

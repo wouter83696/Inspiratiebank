@@ -7838,6 +7838,14 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
  #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailTabs [role="tab"]{min-width:0;padding-inline:4px;font-size:13px}
 }
 
+/* Let the photograph yield height to the active detail content on desktop maps. */
+@media(min-width:981px){
+ :scope :scope #ideaMap .ideaMapSingleCard.photoDetailBody .sharedIdeaCard .ideaImageFrame{
+  height:var(--map-photo-height,140px)!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important;flex-shrink:0;
+ }
+ :scope :scope #ideaMap .ideaMapSingleCard.photoDetailBody .ideaImageFrame img{height:100%!important;object-fit:cover}
+}
+
 /* Shared compact select appearance, based on the management filter sheet. */
 .customSelect .customSelectButton{
   box-sizing:border-box;position:relative;width:100%;height:auto!important;min-height:40px!important;

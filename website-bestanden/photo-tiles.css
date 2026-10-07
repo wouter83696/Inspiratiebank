@@ -1324,3 +1324,11 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailTabs [role="tabpanel"] p{margin-bottom:0!important}
  #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailTabs [role="tab"]{min-width:0;padding-inline:4px;font-size:13px}
 }
+
+/* Let the photograph yield height to the active detail content on desktop maps. */
+@media(min-width:981px){
+ html body #ideaMap .ideaMapSingleCard.photoDetailBody .sharedIdeaCard .ideaImageFrame{
+  height:var(--map-photo-height,140px)!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important;flex-shrink:0;
+ }
+ html body #ideaMap .ideaMapSingleCard.photoDetailBody .ideaImageFrame img{height:100%!important;object-fit:cover}
+}
