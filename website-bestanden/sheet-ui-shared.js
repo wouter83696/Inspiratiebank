@@ -132,7 +132,7 @@
   function publicAgendaAdd(form){
     const layer=document.getElementById('agendaSourceSheetLayer'),panel=layer.querySelector('aside');
     document.getElementById('agendaSourceSheetTitle').textContent='Toevoegen aan UIT-agenda';
-    const nav=document.createElement('div');nav.className='adminCombinedAddTabs agendaAddModeNav';nav.setAttribute('role','tablist');nav.setAttribute('aria-label','Wat wil je toevoegen?');
+    const nav=document.createElement('div');nav.className='sharedSectionNav agendaAddModeNav';nav.setAttribute('role','tablist');nav.setAttribute('aria-label','Wat wil je toevoegen?');
     nav.innerHTML='<button type="button" role="tab" aria-selected="true">Activiteit</button><button type="button" role="tab" aria-selected="false">Bron</button>';
     panel.querySelector('header').after(nav);
     const source=form.querySelector('.teamFormGrid');
@@ -162,7 +162,7 @@
       }
       form.dataset.agendaMode=mode;const isSource=mode==='source';source.hidden=!isSource;activity.hidden=isSource;
       source.querySelectorAll('input').forEach(input=>input.disabled=!isSource);activity.querySelectorAll('input,select,textarea').forEach(input=>input.disabled=isSource);
-      [...nav.children].forEach((button,i)=>{const active=i===Number(isSource);button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
+      [...nav.children].forEach((button,i)=>{const active=i===Number(isSource);button.setAttribute('aria-selected',String(active));button.classList.toggle('isActive',active);button.tabIndex=active?0:-1;});
       submit.textContent=isSource?'Bron toevoegen':'Activiteit toevoegen';
       intro.textContent=isSource?'Deel een website of agenda. We controleren de bron voordat deze wordt toegevoegd.':'Deel een activiteit met datum, tijd en locatie. We controleren je inzending voordat deze verschijnt.';
     };

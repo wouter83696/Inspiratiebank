@@ -8113,4 +8113,10 @@ textarea{resize:none!important}
 .publicAgendaDetailBody .publicAgendaCategory svg{width:20px;height:20px}
 .publicAgendaDetailBody .publicAgendaSummary .cardMetaBlock{min-width:0;margin:0!important;max-width:calc(100% - 52px)!important}
 
+/* Public creation tabs reuse the section navigation; management keeps its mode switch. */
+.sharedPublicSheetLayer .sharedSheetHeader{border-bottom:0!important}
+:scope #agendaSourceSheetLayer .agendaAddModeNav{display:flex;flex-shrink:0;gap:8px;margin:12px 20px 16px;padding:0;border:0;border-bottom:1px solid var(--sheet-line);background:transparent}
+:scope #agendaSourceSheetLayer .agendaAddModeNav>button{flex:1;min-width:0;height:42px;padding:8px 6px;border:0;font:600 13px/1.4 Manrope,system-ui,sans-serif;color:#63858b;cursor:pointer}
+:scope #agendaSourceSheetLayer .agendaAddModeNav>button.isActive{color:#236875;font-weight:700}
+
 }
