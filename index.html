@@ -8533,10 +8533,10 @@
     const date=item.date||item.period||dayKey.split(':').at(-1);
     const time=AgendaViewShared.formatTime(item.time);
     const image=item.image&&(item.imageStatus==='approved'||item.imageApproved===true)?ideaImageData(item.image,item.imageAlt||item.title):null;
-    const facts=[date,time].filter(Boolean).map(value=>`<span>${escapeHtml(value)}</span>`).join('');
+    const facts=IdeaViewShared.renderMetadata({className:'cardMetaBlock',pills:[date,time].filter(Boolean).map(value=>`<span class="pill">${escapeHtml(value)}</span>`).join('')});
     const photo=image?`<figure class="ideaImageFrame"><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}"></figure>`:'';
     const practical=[['Datum',date],['Tijd',time],['Locatie',item.where]].filter(([,value])=>value).map(([label,value])=>`<p><strong>${label}</strong><br>${escapeHtml(value)}</p>`).join('');
-    const card=`<article class="sharedIdeaCard ${domainThemeClass(item.domain)}"><h3>${escapeHtml(item.title||'Activiteit')}</h3>${photo}<div class="publicAgendaCategory">${categoryPill(item.domain)}</div><div class="publicAgendaFacts">${facts}</div><p>${escapeHtml(item.description||item.notes||'Bekijk de website van de aanbieder voor meer informatie over deze activiteit.')}</p><section class="photoDetailSection">${practical}</section></article>`;
+    const card=`<article class="sharedIdeaCard ${domainThemeClass(item.domain)}"><h3>${escapeHtml(item.title||'Activiteit')}</h3>${photo}<div class="publicAgendaCategory"><span class="ideaImageDomainBadge domainIcon" role="img" aria-label="${escapeHtml(domainDisplayLabel(item.domain))}" title="${escapeHtml(domainDisplayLabel(item.domain))}">${domainIcon(item.domain)}</span></div>${facts}<p>${escapeHtml(item.description||item.notes||'Bekijk de website van de aanbieder voor meer informatie over deze activiteit.')}</p><section class="photoDetailSection">${practical}</section></article>`;
     // Share the actual detail renderer, tabs and location actions with inspiration.
     body.innerHTML=PhotoTiles.detailContent(item,'publicAgendaContentTitle',{card});
     body.querySelector('#publicAgendaContentTitle')?.remove();
@@ -11212,7 +11212,7 @@
   });
   </script>
 <link rel="stylesheet" href="website-bestanden/select-controls.css?v=20261006-fixed-textareas-v2">
-<link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261007-toolbar-row">
+<link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261007-agenda-meta">
 <script src="website-bestanden/sheet-ui-shared.js?v=20261007-toolbar-row"></script>
 </body>
 </html>

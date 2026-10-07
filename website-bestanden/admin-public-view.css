@@ -8032,7 +8032,10 @@ textarea{resize:none!important}
 .publicAgendaDetailLayer{z-index:1190}
 .publicAgendaDetailLayer .sharedSheetHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .publicAgendaDetailBody{padding:16px 20px 24px!important}
-.publicAgendaDetailBody .publicAgendaFacts{display:flex;flex-wrap:wrap;gap:8px 16px;padding:12px;border-radius:10px;background:rgba(229,242,239,.45);font-size:13px;color:var(--sheet-ink)}
+.publicAgendaDetailBody .publicAgendaCategory{height:40px;position:relative}
+.publicAgendaDetailBody .publicAgendaCategory .ideaImageDomainBadge{position:static!important}
+.publicAgendaDetailBody .sharedIdeaCard .cardMetaBlock{flex-wrap:wrap!important;overflow:visible;white-space:normal}
+.publicAgendaDetailBody .sharedIdeaCard .cardMetaBlock .pill{white-space:normal}
 .publicAgendaDetailBody .photoDetailActions{position:static!important}
 .publicAgendaDetailBody .photoDetailTabs [role=tabpanel] p{white-space:pre-line}
 @media(min-width:981px){
