@@ -12,3 +12,13 @@ html body :is(#tab-inspiratie,#tab-weken,#inspirationAdminPanel,#agendaReviewPan
 html body :is(#tab-inspiratie,#tab-weken,#inspirationAdminPanel,#agendaReviewPanel,#siteHeaderPreviewPanel) .tabHeroLine{
  transform:none!important;margin:8px 0 0!important;padding:0!important;white-space:normal!important;overflow-wrap:anywhere;
 }
+/* Mobile hero typography follows the compact UIT-agenda heading on both pages. */
+@media(max-width:640px){
+ html body :is(#tab-inspiratie,#tab-weken) .tabHero .tabHeroTitle{
+  font-size:clamp(1.95rem,8.3vw,2.3rem)!important;
+  font-weight:500!important;line-height:1.04!important;letter-spacing:0!important;
+ }
+ html body :is(#tab-inspiratie,#tab-weken) .tabHero .tabHeroLine{
+  font-size:clamp(1rem,4.2vw,1.12rem)!important;line-height:1.25!important;margin-top:8px!important;
+ }
+}
