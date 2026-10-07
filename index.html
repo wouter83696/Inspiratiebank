@@ -5844,7 +5844,7 @@
   <script src="website-bestanden/photo-tiles.js?v=20261006-visual-v1"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20261006-material-rows-v51"></script>
-  <script src="website-bestanden/agenda-view-shared.js?v=20261006-meta-lines-v4"></script>
+  <script src="website-bestanden/agenda-view-shared.js?v=20261007-time-format-v5"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
   <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
@@ -8478,7 +8478,7 @@
 	  function agendaItem(item, compact=false){
 	    const meta = eventDateMeta(item) || {};
 	    const isMultiDay = meta.end && meta.end !== meta.start;
-	    const timeLabel = compact ? item.time : (isMultiDay && !item.pinToAgenda ? `${item.date} • ${item.time}` : item.time);
+	    const timeLabel = AgendaViewShared.formatTime(item.time);
 	    const themeClass = domainThemeClass(item.domain);
 	    return AgendaViewShared.renderItem({
         themeClass, compact, href:escapeHtml(item.url),
@@ -8567,7 +8567,7 @@
 	    const distanceLabel = normalizeIdeaDistance(item.distanceBand, item, 'agenda');
     return AgendaViewShared.renderAgendaRow({
       themeClass:domainThemeClass(item.domain), title:escapeHtml(item.title),
-      review:`<div>${agendaReviewPill(item)}</div>`, date:`${escapeHtml(item.date)} • ${escapeHtml(item.time)}`,
+      review:`<div>${agendaReviewPill(item)}</div>`, date:`${escapeHtml(item.date)} • ${escapeHtml(AgendaViewShared.formatTime(item.time))}`,
       domain:escapeHtml(domainDisplayLabel(item.domain)),
       location:`${escapeHtml(item.where)}<div class="small">${escapeHtml(distanceLabel)}${item.distanceKm ? ` • ${escapeHtml(item.distanceKm)}` : ''}</div>`,
       cost:costPill(item.cost), stimulus:stimulusPill(item.stimulus),

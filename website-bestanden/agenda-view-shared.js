@@ -1,5 +1,17 @@
 (function(){
   const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function formatTime(value){
+    const text=String(value || '').trim();
+    if(/divers|wissel|variabel|check|onbekend|programma/i.test(text))return 'Wisselend';
+    const times=[...text.matchAll(/\b([01]?\d|2[0-3])[.:]([0-5]\d)\b/g)];
+    const label=m=>m[1].padStart(2,'0')+'.'+m[2];
+    if(times.length===1)return label(times[0]);
+    if(times.length===2){
+      const between=text.slice(times[0].index+times[0][0].length,times[1].index);
+      if(/[-–—]|tot|t\/m/i.test(between))return label(times[0])+' - '+label(times[1]);
+    }
+    return 'Wisselend';
+  }
   function renderPreparation(item={}){
     return [['Praktisch',item.note || item.materials],['Materialen',item.supplies]]
       .filter(([,text])=>String(text || '').trim())
@@ -300,7 +312,7 @@
     const titleText = item.url
       ? `<a class="ongoingTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="ideaTitleText">${escapeHtml(item.title)}</span></a>`
       : `<span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
-    const dateMeta = `<span class="small ongoingDateMeta">${escapeHtml(item.date)} • ${escapeHtml(item.time)}</span>`;
+    const dateMeta = `<span class="small ongoingDateMeta">${escapeHtml(item.date)} • ${escapeHtml(formatTime(item.time))}</span>`;
     const title = `<span class="nameWithIcon"><span class="ongoingTitleVisual" aria-hidden="true"><span class="domainIcon">${icon}</span></span><span class="ongoingTitleTextStack">${titleText}${dateMeta}</span></span>`;
     return renderOngoingRow({
       themeClass, attributes, hidden, title,
@@ -317,5 +329,5 @@
     const qualifier = amount === 1 ? '' : '<span class="weekCountWord">verschillende</span>';
     return `<span class="weekCountBadge"><span><strong>${escapeHtml(count)}</strong>${qualifier}<span class="weekCountLabel">${label}</span></span></span>`;
   }
-  window.AgendaViewShared = Object.freeze({renderPreparation,renderWeekCount,renderBoard,renderWeekNavigation,renderDayNavigation,renderSectionNavigation,renderOngoingActivity,sourceButtonLabel, renderItem, renderDay, renderWeek, renderOngoingRow, renderOngoingTable, renderAgendaRow, renderSourceRow, mergeSourceLinks, buildOngoingOffers, isFlexiblePeriodOffer, sortAgendaItems, compactWeekLabel});
+  window.AgendaViewShared = Object.freeze({formatTime,renderPreparation,renderWeekCount,renderBoard,renderWeekNavigation,renderDayNavigation,renderSectionNavigation,renderOngoingActivity,sourceButtonLabel, renderItem, renderDay, renderWeek, renderOngoingRow, renderOngoingTable, renderAgendaRow, renderSourceRow, mergeSourceLinks, buildOngoingOffers, isFlexiblePeriodOffer, sortAgendaItems, compactWeekLabel});
 })();

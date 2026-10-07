@@ -1092,3 +1092,6 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
  #adminIdeaLayer>.adminEditorCard,
  #adminIdeaLayer>#agendaEditModal.adminAgendaSheet{width:100%;align-self:flex-end}
 }
+@media(min-width:1101px){
+ body.adminDetailDocked #adminApp #agendaReviewList .agendaMetaRow+.agendaMetaRow::before{content:'·';margin-right:8px}
+}
