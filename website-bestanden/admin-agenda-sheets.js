@@ -192,7 +192,7 @@
  let combinedAdd=false;
  function selectAddTab(source=false){
    [...addTabs.children].forEach((tab,i)=>{const active=Boolean(i)===source;tab.classList.toggle('isActive',active);tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;});
-   form.hidden=source;toolbar.hidden=source;sourceHost.hidden=!source;sourceFooter.hidden=!source;
+   form.hidden=source;toolbar.hidden=true;sourceHost.hidden=!source;sourceFooter.hidden=!source;
    form.setAttribute('role','tabpanel');form.setAttribute('aria-labelledby','agendaAddActivityTab');
    saveSource.textContent='Bron toevoegen';footer.querySelector('button[type=submit]').textContent='Activiteit toevoegen';
  }
