@@ -3564,6 +3564,10 @@
  :is(:scope#agendaReviewPanel,:scope#agendaReviewPanel) .weekPanel .agendaMore{margin-top:4px}
 }
 
+/* A single time accent across calendar cards, ongoing offers and detail sheets. */
+:scope{--agenda-time-color:#356f7b}
+:scope :scope .agendaTime{color:var(--agenda-time-color)!important;font-weight:600}
+
 /* Canonieke inspiratieweergaven voor publiek en beheer. */
 .sharedIdeaCards{
   display:grid;
@@ -8107,5 +8111,10 @@ textarea{resize:none!important}
  :scope :scope #agendaSourceSheetLayer .agendaAddModeNav{margin-bottom:8px}
  :scope :scope :is(#ideaSubmitSheetLayer,#agendaSourceSheetLayer) .ideaSubmitSheetIntro{margin:0 0 16px;line-height:1.5}
 }
+
+.publicAgendaDetailBody .publicAgendaSummary{display:flex;align-items:center;gap:12px;min-width:0}
+.publicAgendaDetailBody .publicAgendaSummary>.publicAgendaCategory{position:static!important;display:inline-flex;align-items:center;justify-content:center;flex:0 0 40px;width:40px;height:40px;border-radius:50%;margin:0;background:var(--theme-icon-bg);color:var(--theme-ink);border-color:var(--theme-icon-line)}
+.publicAgendaDetailBody .publicAgendaCategory svg{width:20px;height:20px}
+.publicAgendaDetailBody .publicAgendaSummary .cardMetaBlock{min-width:0;margin:0!important;max-width:calc(100% - 52px)!important}
 
 }

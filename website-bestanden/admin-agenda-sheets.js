@@ -22,7 +22,7 @@
  const agendaSaveSnapshot=()=>JSON.stringify([...form.querySelectorAll('input,select,textarea')].map(field=>field.type==='checkbox'?field.checked:field.value));
  function updatePreview(){
    footer.querySelector('button[type=submit]').classList.toggle('hasChanges',agendaSaveSnapshot()!==agendaSaveBaseline);
-   preview.innerHTML=AgendaViewShared.renderItem({themeClass:domainThemeClass($('agendaEditDomain').value),title:titleWithIcon($('agendaEditItemTitle').value||'Titel van de activiteit',$('agendaEditDomain').value,'agendaItemTitle'),meta:[$('agendaEditTime').value,$('agendaEditWhere').value].filter(Boolean).map(escapeHtml).join(' • ')});
+   preview.innerHTML=AgendaViewShared.renderItem({themeClass:domainThemeClass($('agendaEditDomain').value),title:titleWithIcon($('agendaEditItemTitle').value||'Titel van de activiteit',$('agendaEditDomain').value,'agendaItemTitle'),meta:[$('agendaEditTime').value,$('agendaEditWhere').value].map(escapeHtml).join(' • ')});
  }
  form.addEventListener('input',updatePreview);form.addEventListener('change',updatePreview);
  const originalOpen=AdminEditors.openAgenda;

@@ -32,7 +32,7 @@
   function renderItem(view){
     const classes = ['agendaItem', view.themeClass || '', view.compact ? 'multiDayItem' : '', view.hidden ? 'hiddenItem' : '', view.isNew ? 'newItem' : '']
       .filter(Boolean).join(' ');
-    const meta=String(view.meta || '').split(' • ').filter(part=>part.trim()).map(part=>`<span class="agendaMetaRow">${part}</span>`).join('');
+    const meta=String(view.meta || '').split(' • ').map((part,index)=>part.trim()?`<span class="agendaMetaRow${index===0?' agendaTime':''}">${part}</span>`:'').join('');
     const content = `${view.title || ''}${view.review || ''}<span class="agendaItemMeta">${meta}</span>`;
     const main = view.href
       ? `<a class="agendaItemLink" href="${view.href}" target="_blank" rel="noopener">${content}</a>`
@@ -312,7 +312,7 @@
     const titleText = item.url
       ? `<a class="ongoingTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="ideaTitleText">${escapeHtml(item.title)}</span></a>`
       : `<span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
-    const dateMeta = `<span class="small ongoingDateMeta">${escapeHtml(item.date)} • ${escapeHtml(formatTime(item.time))}</span>`;
+    const dateMeta = `<span class="small ongoingDateMeta">${escapeHtml(item.date)} • <span class="agendaTime">${escapeHtml(formatTime(item.time))}</span></span>`;
     const title = `<span class="nameWithIcon"><span class="ongoingTitleVisual" aria-hidden="true"><span class="domainIcon">${icon}</span></span><span class="ongoingTitleTextStack">${titleText}${dateMeta}</span></span>`;
     return renderOngoingRow({
       themeClass, attributes, hidden, title,

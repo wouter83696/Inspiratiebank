@@ -792,3 +792,7 @@
  :is(#tab-weken,#agendaReviewPanel) .weekPanel .agendaMetaRow+.agendaMetaRow{margin-top:2px}
  :is(#tab-weken,#agendaReviewPanel) .weekPanel .agendaMore{margin-top:4px}
 }
+
+/* A single time accent across calendar cards, ongoing offers and detail sheets. */
+:root{--agenda-time-color:#356f7b}
+html body .agendaTime{color:var(--agenda-time-color)!important;font-weight:600}
