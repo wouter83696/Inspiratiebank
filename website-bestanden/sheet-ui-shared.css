@@ -106,3 +106,10 @@
 .sharedPhotoSection:not(:has(.ideaImageSuggestPreview:not([hidden]))) :is(#teamIdeaAcceptImage,#teamIdeaFindFreeImage,#teamIdeaSkipImage){display:none}
 .sharedPhotoSection:has(.ideaImageSuggestPreview:not([hidden])) #teamIdeaStartFreeImage{display:none}
 .sharedSheet .teamFileField[hidden],.sharedPhotoSection .sharedSheetPhoto[hidden]{display:none!important}
+
+/* Filters open from the right on desktop; phones retain the bottom sheet. */
+@media(min-width:641px){
+ #ideaFilterSheetLayer{justify-content:flex-end!important}
+ #ideaFilterSheetLayer>.ideaFilterSheet{left:auto!important;right:0!important;border-right:0!important;border-left:1px solid var(--sheet-line)!important;border-radius:20px 0 0 20px!important;transform:translateX(100%)!important;box-shadow:-12px 0 32px rgba(49,95,107,.08)!important}
+ #ideaFilterSheetLayer.isOpen>.ideaFilterSheet{transform:translateX(0)!important}
+}
