@@ -43,6 +43,17 @@
   function editorToolbar(header,label='Activiteit beheren'){
     const toolbar=document.createElement('div');toolbar.className='adminEditToolbar sharedEditorToolbar';toolbar.setAttribute('role','group');toolbar.setAttribute('aria-label',label);header.after(toolbar);return toolbar;
   }
+  function sectionNavigation(toolbar,definitions){
+    const nav=document.createElement('div');nav.className='sharedSectionNav';nav.setAttribute('role','group');nav.setAttribute('aria-label','Secties');
+    definitions.forEach(([button,label])=>{
+      button.classList.add('sharedSectionButton');button.classList.remove('adminToolbarIcon');button.removeAttribute('title');
+      if(!button.querySelector('span')){const text=document.createElement('span');text.textContent=label;button.append(text);}
+      nav.append(button);
+      button.addEventListener('click',()=>{nav.querySelectorAll('button').forEach(control=>{const active=control===button;control.classList.toggle('isActive',active);if(active)control.setAttribute('aria-current','true');else control.removeAttribute('aria-current');});});
+    });
+    definitions[0]?.[0].classList.add('isActive');definitions[0]?.[0].setAttribute('aria-current','true');
+    toolbar.prepend(nav);toolbar.classList.add('sharedSectionToolbar');
+  }
   function publicActivityPreview(){
     const form=document.getElementById('teamIdeaForm');if(!form)return;
     const field=id=>document.getElementById('teamIdea'+id+'Input');
@@ -53,7 +64,7 @@
     const sectionTargets=()=>[document.getElementById('teamIdeaImageSuggest'),field('Domain').closest('label'),field('Location').closest('label')];
     const selectSection=index=>[...toolbar.children].forEach((button,i)=>{button.classList.toggle('isActive',i===index);if(i===index)button.setAttribute('aria-current','true');else button.removeAttribute('aria-current');});
     ['Foto','Kenmerken','Locatie'].forEach((label,index)=>{
-      const button=document.createElement('button');button.type='button';button.className='ideaFilterSheetAction secondary';button.title=label;button.setAttribute('aria-label',label);button.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+icons[index]+'</svg><span>'+label+'</span>';
+      const button=document.createElement('button');button.type='button';button.className='ideaFilterSheetAction secondary';button.setAttribute('aria-label',label);button.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+icons[index]+'</svg><span>'+label+'</span>';
       button.addEventListener('click',()=>{selectSection(index);sectionTargets()[index].scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});});toolbar.append(button);
     });
     selectSection(0);
@@ -136,6 +147,6 @@
     mount();
     new MutationObserver(records=>{if(records.some(record=>record.addedNodes.length))mount();}).observe(document.body,{childList:true,subtree:true});
   }
-  window.SheetUIShared=Object.freeze({mount,submissionFooter,photoPicker,editorToolbar});
+  window.SheetUIShared=Object.freeze({mount,submissionFooter,photoPicker,editorToolbar,sectionNavigation});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup,{once:true});else setup();
 })();

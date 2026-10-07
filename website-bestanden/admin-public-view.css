@@ -7953,7 +7953,7 @@ textarea{resize:none!important}
 .sharedPhotoSection .ideaImageSuggestStatus[hidden]{display:none!important}
 .sharedSheet .sharedSectionNav{gap:8px;padding:0;border:0;border-bottom:1px solid var(--sheet-line);border-radius:0;background:transparent}
 .sharedSectionNav .ideaFilterSheetAction{width:auto;min-width:0;flex:1;gap:6px;height:42px;padding:8px 4px;border-radius:0;border-bottom:2px solid transparent;font:600 13px/1.4 Manrope,system-ui,sans-serif;color:#63858b}
-.sharedSectionNav .ideaFilterSheetAction.isActive{border-bottom-color:#39a5a9;color:#236875;font-weight:700}
+.sharedSectionNav .ideaFilterSheetAction.isActive{border-bottom-color:#236875;color:#236875;font-weight:700}
 .sharedSectionNav .ideaFilterSheetAction:focus-visible{outline:2px solid #8fcfc4;outline-offset:2px}
 .sharedPhotoSection,.sharedSheet .teamField{scroll-margin-top:12px}
 
@@ -7966,5 +7966,19 @@ textarea{resize:none!important}
 :is(button,[role="button"],input[type="button"],input[type="submit"],a.button,a.btn,.teamFileButton),
 :is(button,[role="button"],input[type="button"],input[type="submit"],a.button,a.btn,.teamFileButton):is(:hover,:active,:focus,:focus-visible){box-shadow:none!important;text-shadow:none!important}
 :is(button,[role="button"],input[type="button"],input[type="submit"],a.button,a.btn,.teamFileButton):focus-visible{outline:2px solid #8fcfc4!important;outline-offset:2px}
+
+/* A single section-menu treatment for public details and all editor menus. */
+.sharedSectionToolbar{flex-wrap:wrap!important;border:0!important;border-radius:0!important;background:transparent!important;padding:0!important}
+.sharedSectionToolbar>.sharedSectionNav{display:flex;flex:0 0 100%;width:100%;gap:8px;border-bottom:1px solid var(--sheet-line);margin-bottom:6px}
+.sharedSectionNav button,.photoDetailTabs [role=tab],#adminSourcesSheet .adminSourceTabs button{position:relative;border-radius:10px 10px 0 0!important;background:transparent!important;transform:none!important;transition:background-color .15s ease}
+.sharedSectionToolbar .sharedSectionNav>button{display:inline-flex!important;align-items:center;justify-content:center;gap:6px;flex:1!important;width:auto!important;min-width:0!important;height:42px!important;padding:8px 6px!important;border:0!important;border-bottom:2px solid transparent!important;font:600 13px/1.4 Manrope,system-ui,sans-serif!important;color:#63858b}
+.sharedSectionToolbar .sharedSectionNav>button span{display:inline!important}
+.sharedSectionToolbar .sharedSectionNav>button svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7}
+.sharedSectionToolbar .sharedSectionNav>button.isActive{border-bottom-color:#236875!important;color:#236875;font-weight:700!important}
+@media(min-width:981px) and (hover:hover) and (pointer:fine){
+ .sharedSectionNav button:hover,.photoDetailTabs [role=tab]:hover,#adminSourcesSheet .adminSourceTabs button:hover{background:rgba(168,225,221,.16)!important}
+}
+
+.sharedSectionNav button.isActive,.photoDetailTabs [role=tab][aria-selected=true],#adminSourcesSheet .adminSourceTabs button[aria-selected=true]{border-bottom-color:#236875!important;color:#236875!important}
 
 }

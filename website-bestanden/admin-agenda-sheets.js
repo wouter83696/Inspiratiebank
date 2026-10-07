@@ -57,6 +57,7 @@
          toolbar.append(clone);
        }});
    }
+   SheetUIShared.sectionNavigation(toolbar,[[toolbar.children[0],'Kenmerken'],[toolbar.children[1],'Locatie']]);
    agendaSaveBaseline=agendaSaveSnapshot();updatePreview();originalOpen();body.scrollTop=0;
  };
  const manager=document.createElement('section');manager.id='adminAgendaManagerSheet';manager.className='adminEditorCard adminPublicSurface';manager.hidden=true;

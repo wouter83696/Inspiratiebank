@@ -59,7 +59,7 @@
       required:true,onError:message=>setStatus('#adminIdeaEditStatus',message,'warn')
     });
     const photoButton=document.createElement('button');photoButton.type='button';photoButton.className='ideaFilterSheetAction secondary adminInlinePhotoButton';
-    photoButton.addEventListener('click',()=>$('adminEditIdeaImageUpload').click());
+    photoButton.addEventListener('click',()=>figure.scrollIntoView({block:'start',behavior:'smooth'}));
     const toolbar=SheetUIShared.editorToolbar(idea.querySelector('.panelHead'));
     toolbar.append(photoButton);
     const photoField=fieldFor('ImageUpload');photoField.classList.add('adminInlineUpload');figure.after(photoField);
@@ -111,6 +111,7 @@
       const label=control.getAttribute('aria-label')||control.textContent.trim();
       control.setAttribute('aria-label',label);control.title=label;control.classList.add('adminToolbarIcon');
     });
+    SheetUIShared.sectionNavigation(toolbar,[[photoButton,'Foto'],[properties,'Kenmerken'],[locationShortcut,'Locatie']]);
     syncPhoto();
     updateMetadata();
   }
