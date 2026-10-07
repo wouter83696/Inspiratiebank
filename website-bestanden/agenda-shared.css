@@ -794,5 +794,5 @@
 }
 
 /* A single time accent across calendar cards, ongoing offers and detail sheets. */
-:root{--agenda-time-color:#356f7b}
+:root{--agenda-time-color:#07345e}
 html body .agendaTime{color:var(--agenda-time-color)!important;font-weight:600}
