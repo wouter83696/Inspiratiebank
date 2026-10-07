@@ -84,3 +84,13 @@
 .sharedSheet .teamFileField:hover .teamFileControl{background:transparent}
 .sharedSheet .teamFileField .teamFieldHint{font-size:12px;line-height:1.4}
 .sharedSheet .ideaImageSuggestActions{gap:6px;margin-top:2px}
+
+/* Shared checkbox styling, with native semantics and keyboard interaction. */
+.sharedSheet input[type=checkbox]{appearance:none;-webkit-appearance:none;display:inline-grid;place-content:center;box-sizing:border-box;width:18px;height:18px;min-width:18px;min-height:18px;flex:none;margin:0;border:1.5px solid #92afb4;border-radius:5px;background:#fffdf9;color:#315f6b;vertical-align:middle;cursor:pointer}
+.sharedSheet input[type=checkbox]::before{content:"";width:8px;height:4px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-1px) rotate(-45deg);visibility:hidden}
+.sharedSheet input[type=checkbox]:checked{background:#dff1ed;border-color:#4f8e9e}
+.sharedSheet input[type=checkbox]:checked::before{visibility:visible}
+.sharedSheet input[type=checkbox]:hover:not(:disabled){border-color:#315f6b;background:#edf8f6}
+.sharedSheet input[type=checkbox]:focus-visible{outline:2px solid #4f8e9e;outline-offset:3px}
+.sharedSheet input[type=checkbox]:disabled{opacity:.5;cursor:default}
+@media(forced-colors:active){.sharedSheet input[type=checkbox]{appearance:auto}.sharedSheet input[type=checkbox]::before{display:none}}
