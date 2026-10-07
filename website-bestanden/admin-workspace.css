@@ -1079,11 +1079,11 @@ body.adminAgendaFocused #agendaReviewPanel .agendaBoard{min-width:1000px}
  body.adminAgendaFocused #adminApp #agendaReviewList .agendaMetaRow+.agendaMetaRow{margin-top:0}
 }
 
-/* A docked editor leaves room for two deliberate action rows. */
+/* Keep agenda navigation and its single add action on one desktop row. */
 @media(min-width:1101px){
- body.adminDetailDocked #adminApp .adminActionTopbar .adminAgendaHeaderActions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:center}
- body.adminDetailDocked #adminApp .adminAgendaHeaderNavigation{grid-column:1 / -1;min-width:0;flex-wrap:wrap}
- body.adminDetailDocked #adminApp .adminActionTopbar .button.adminHeaderAdd{min-width:0;width:100%;box-sizing:border-box;white-space:normal;line-height:1.25;padding:8px 10px}
+ body.adminDetailDocked #adminApp .adminActionTopbar .adminAgendaHeaderActions{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center}
+ body.adminDetailDocked #adminApp .adminAgendaHeaderNavigation{grid-column:auto;min-width:0;flex-wrap:nowrap}
+ body.adminDetailDocked #adminApp .adminActionTopbar .button.adminHeaderAdd{min-width:0;width:auto;box-sizing:border-box;white-space:nowrap;line-height:1.25;padding:8px 14px}
 }
 
 /* The same lifecycle slides down again on close on phones. */
