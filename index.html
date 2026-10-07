@@ -7786,6 +7786,14 @@
   let teamIdeaImageSuggestion = null;
   let teamIdeaImageSuggestTimer = 0;
   let teamIdeaImageSuggestRequest = 0;
+  let teamIdeaPhotoManual = false;
+  let teamIdeaPhotoLastUrl = '';
+  const teamIdeaPhotoSeen = new Set();
+  function stopTeamIdeaAutomaticPhoto(){
+    teamIdeaPhotoManual = true;
+    window.clearTimeout(teamIdeaImageSuggestTimer);
+    teamIdeaImageSuggestRequest += 1;
+  }
   function validRemoteImageUrl(value=''){
     try{
       const raw = String(value || '').trim();
@@ -7910,7 +7918,7 @@
         const meta = info?.extmetadata || {};
         const license = plainMetadataText(meta.LicenseShortName?.value);
         const imageUrl = validRemoteImageUrl(info?.thumburl || info?.url);
-        if(!imageUrl || !allowed.test(license)) continue;
+        if(!imageUrl || !allowed.test(license) || teamIdeaPhotoSeen.has(imageUrl)) continue;
         const artist = plainMetadataText(meta.Artist?.value || meta.Credit?.value) || 'Onbekende maker';
         const description = plainMetadataText(meta.ImageDescription?.value);
         const haystack = normalize(`${page?.title || ''} ${description}`);
@@ -7934,9 +7942,15 @@
     return bestMatch?.suggestion || null;
   }
   async function suggestTeamIdeaImage(options={}){
-    const request = ++teamIdeaImageSuggestRequest;
     const freeOnly = Boolean(options.freeOnly);
     const url = $('#teamIdeaUrlInput')?.value.trim() || '';
+    if(freeOnly) stopTeamIdeaAutomaticPhoto();
+    else {
+      if(teamIdeaPhotoManual || $('#teamIdeaImageInput')?.files?.length || teamIdeaImageSuggestion?.accepted || teamIdeaPhotoLastUrl === url) return;
+      teamIdeaPhotoLastUrl = url;
+    }
+    window.clearTimeout(teamIdeaImageSuggestTimer);
+    const request = ++teamIdeaImageSuggestRequest;
     setTeamIdeaImageSuggestion(null);
     setTeamIdeaImageSuggestStatus(freeOnly ? 'Rechtenvrije foto zoeken...' : 'Websitefoto zoeken...', true);
     try{
@@ -7951,6 +7965,7 @@
         setTeamIdeaImageSuggestStatus('Geen betrouwbare fotosuggestie gevonden. Kies eventueel zelf een foto.');
         return;
       }
+      teamIdeaPhotoSeen.add(suggestion.url);
       setTeamIdeaImageSuggestion(suggestion);
     }catch(error){
       if(request !== teamIdeaImageSuggestRequest) return;
@@ -7959,6 +7974,8 @@
   }
   function scheduleTeamIdeaImageSuggestion(){
     window.clearTimeout(teamIdeaImageSuggestTimer);
+    if(teamIdeaPhotoManual) return;
+    teamIdeaImageSuggestRequest += 1;
     const url = $('#teamIdeaUrlInput')?.value.trim() || '';
     if(!url){
       teamIdeaImageSuggestRequest += 1;
@@ -7970,6 +7987,9 @@
     teamIdeaImageSuggestTimer = window.setTimeout(() => suggestTeamIdeaImage(), 650);
   }
   function resetTeamIdeaImageSuggestion(){
+    teamIdeaPhotoManual = false;
+    teamIdeaPhotoLastUrl = '';
+    teamIdeaPhotoSeen.clear();
     teamIdeaImageSuggestRequest += 1;
     window.clearTimeout(teamIdeaImageSuggestTimer);
     setTeamIdeaImageSuggestion(null);
@@ -10904,7 +10924,7 @@
     if(teamIdeaImageInput) teamIdeaImageInput.addEventListener('change', () => {
       syncTeamIdeaImageName();
       if(teamIdeaImageInput.files?.[0]){
-        teamIdeaImageSuggestRequest += 1;
+        stopTeamIdeaAutomaticPhoto();
         setTeamIdeaImageSuggestion(null);
         setTeamIdeaImageSuggestStatus('Je eigen foto is gekozen en wordt eerst beoordeeld.');
       }
@@ -10916,6 +10936,7 @@
     });
     $('#teamIdeaAcceptImage')?.addEventListener('click', () => {
       if(!teamIdeaImageSuggestion) return;
+      stopTeamIdeaAutomaticPhoto();
       teamIdeaImageSuggestion.accepted = true;
       if(teamIdeaImageInput) teamIdeaImageInput.value = '';
       syncTeamIdeaImageName();
@@ -10923,7 +10944,8 @@
     });
     $('#teamIdeaFindFreeImage')?.addEventListener('click', () => suggestTeamIdeaImage({freeOnly:true}));
     $('#teamIdeaStartFreeImage')?.addEventListener('click', () => suggestTeamIdeaImage({freeOnly:true}));
-    $('#teamIdeaReplaceImage')?.addEventListener('click', () => teamIdeaImageInput?.click());
+    $('#teamIdeaReplaceImage')?.addEventListener('click', () => { stopTeamIdeaAutomaticPhoto(); setTeamIdeaImageSuggestStatus(''); teamIdeaImageInput?.click(); });
+    teamIdeaImageInput?.addEventListener('click', stopTeamIdeaAutomaticPhoto);
     $('#teamIdeaSkipImage')?.addEventListener('click', () => {
       if(teamIdeaImageInput) teamIdeaImageInput.value = '';
       syncTeamIdeaImageName();
