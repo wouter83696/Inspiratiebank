@@ -63,8 +63,24 @@
     const name=field('By');name.closest('label').querySelector('span').textContent='Ingebracht door';
     field('Group').closest('label').after(name.closest('label'));
     title.querySelector('span').textContent='Titel';
-    // Both editors keep the category before location and the contributor after characteristics.
-    field('Domain').closest('label').before(figure);
+    // Keep the existing upload and suggestion handlers in one photo section.
+    const website=field('Url').closest('label');title.after(website);
+    website.querySelector('span').textContent='Website (optioneel)';
+    const suggestion=document.getElementById('teamIdeaImageSuggest');
+    suggestion.classList.add('sharedPhotoSection');website.after(suggestion);
+    const top=suggestion.querySelector('.ideaImageSuggestTop');
+    const status=document.getElementById('teamIdeaImageSuggestStatus');
+    const actions=suggestion.querySelector('.ideaImageSuggestActions');
+    top.append(...actions.children);actions.remove();
+    top.after(status,figure);
+    const uploadField=upload.closest('label');
+    uploadField.hidden=true;
+    document.getElementById('teamIdeaReplaceImage').textContent='Upload foto';
+    document.getElementById('teamIdeaStartFreeImage').textContent='Zoek foto';
+    document.getElementById('teamIdeaFindFreeImage').textContent='Andere foto';
+    const syncPhoto=()=>{figure.hidden=!document.getElementById('teamIdeaImageSuggestPreview').hidden;};
+    new MutationObserver(syncPhoto).observe(document.getElementById('teamIdeaImageSuggestPreview'),{attributes:true,attributeFilter:['hidden']});
+    syncPhoto();
   }
   function sourceFields(form,ids){
     // Keep the host's controls (and their handlers); both hosts use this field layout.

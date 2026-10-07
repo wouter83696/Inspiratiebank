@@ -5648,7 +5648,7 @@
             </label>
             <section class="ideaImageSuggest" id="teamIdeaImageSuggest" aria-live="polite">
               <div class="ideaImageSuggestTop">
-                <div class="ideaImageSuggestStatus" id="teamIdeaImageSuggestStatus"><span>Geen website? Zoek een rechtenvrije beeldsuggestie.</span></div>
+                <div class="ideaImageSuggestStatus" id="teamIdeaImageSuggestStatus"><span>Zoek een foto of upload je eigen afbeelding.</span></div>
                 <button class="formButton" id="teamIdeaStartFreeImage" type="button">Zoek rechtenvrije foto</button>
               </div>
               <div class="ideaImageSuggestPreview" id="teamIdeaImageSuggestPreview" hidden>
@@ -7806,7 +7806,7 @@
     const status = $('#teamIdeaImageSuggestStatus');
     if(!box || !status) return;
     box.hidden = false;
-    const text = message || 'Geen website? Zoek een rechtenvrije beeldsuggestie.';
+    const text = message || 'Zoek een foto of upload je eigen afbeelding.';
     status.innerHTML = `${loading ? '<span class="ideaImageSuggestSpinner" aria-hidden="true"></span>' : ''}<span>${escapeHtml(text)}</span>`;
   }
   function renderTeamIdeaImageSuggestion(){
@@ -7827,7 +7827,7 @@
     $('#teamIdeaImageSuggestMeta').textContent = suggestion.meta;
     $('#teamIdeaImageSuggestWarning').textContent = suggestion.warning;
     const accept = $('#teamIdeaAcceptImage');
-    accept.textContent = suggestion.accepted ? 'Foto gekozen' : 'Gebruik deze foto';
+    accept.textContent = suggestion.accepted ? 'Foto gekozen' : 'Gebruik foto';
     accept.disabled = Boolean(suggestion.accepted);
   }
   function setTeamIdeaImageSuggestion(suggestion){
@@ -11135,7 +11135,7 @@
   });
   </script>
 <link rel="stylesheet" href="website-bestanden/select-controls.css?v=20261006-fixed-textareas-v2">
-<link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261007-checkbox-v4">
-<script src="website-bestanden/sheet-ui-shared.js?v=20261006-v1"></script>
+<link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261007-photo-section-v5">
+<script src="website-bestanden/sheet-ui-shared.js?v=20261007-photo-section-v2"></script>
 </body>
 </html>

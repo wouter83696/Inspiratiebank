@@ -7920,4 +7920,16 @@ textarea{resize:none!important}
 .sharedSheet input[type=checkbox]:disabled{opacity:.5;cursor:default}
 @media(forced-colors:active){.sharedSheet input[type=checkbox]{appearance:auto}.sharedSheet input[type=checkbox]::before{display:none}}
 
+.sharedSheet .sharedPhotoSection{display:grid;gap:10px;grid-column:1/-1;padding:12px;border:1px solid var(--sheet-line);border-radius:16px;background:#fffdf9}
+.sharedPhotoSection .ideaImageSuggestTop{justify-content:flex-start;gap:6px}
+.sharedPhotoSection .ideaImageSuggestStatus{font-size:12px;line-height:1.4}
+.sharedPhotoSection .sharedSheetPhoto{aspect-ratio:auto}
+.sharedPhotoSection .sharedPhotoDropzone{min-height:150px}
+.sharedPhotoSection .sharedSheetPhoto img{max-height:240px;object-fit:contain}
+.sharedPhotoSection .ideaImageSuggestPreview{grid-template-columns:minmax(0,1fr);gap:8px}
+.sharedPhotoSection .ideaImageSuggestPreview>img{width:100%;max-height:240px;object-fit:contain}
+.sharedPhotoSection:not(:has(.ideaImageSuggestPreview:not([hidden]))) :is(#teamIdeaAcceptImage,#teamIdeaFindFreeImage,#teamIdeaSkipImage){display:none}
+.sharedPhotoSection:has(.ideaImageSuggestPreview:not([hidden])) #teamIdeaStartFreeImage{display:none}
+.sharedSheet .teamFileField[hidden],.sharedPhotoSection .sharedSheetPhoto[hidden]{display:none!important}
+
 }
