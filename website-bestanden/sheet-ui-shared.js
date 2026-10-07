@@ -138,11 +138,30 @@
     const source=form.querySelector('.teamFormGrid');
     const activity=document.createElement('div');activity.className='teamFormGrid';activity.id='publicAgendaActivityFields';
     activity.innerHTML=[['Title','Titel','text'],['Url','Website','url'],['Date','Datum of periode','text'],['Time','Tijd','text'],['Where','Locatie','text']].map(([key,label,type])=>`<label class="teamField wide"><span>${label}</span><input id="publicAgenda${key}" type="${type}" ${key==='Time'?'placeholder="Bijv. 19.00 - 23.00"':''} required></label>`).join('');source.before(activity);
+    // Reuse the same option lists and select presentation as the existing forms.
+    const optionSets=[['Domain','Categorie',unique(allInspirationItems().map(item=>item.domain)),domainDisplayLabel],['Distance','Afstand',AGENDA_DISTANCE_OPTIONS,value=>value],['Cost','Kosten',IDEA_COST_OPTIONS,value=>value],['Stimulus','Prikkelbelasting',IDEA_STIMULUS_OPTIONS,value=>value]];
+    optionSets.forEach(([key,label,values,display])=>{
+      const field=document.createElement('label');field.className='teamField wide';
+      const caption=document.createElement('span');caption.textContent=label;
+      const select=document.createElement('select');select.id='publicAgenda'+key;
+      if(key==='Domain')select.dataset.themeSelect='true';
+      select.add(new Option('Kies '+label.toLowerCase()+' (optioneel)',''));
+      values.forEach(value=>select.add(new Option(display(value),value)));
+      field.append(caption,select);activity.append(field);enhanceCustomSelect(select);
+    });
+    const description=document.createElement('label');description.className='teamField wide';
+    description.innerHTML='<span>Beschrijving (optioneel)</span><textarea id="publicAgendaDescription" rows="3" placeholder="Wat is er te doen?"></textarea>';
+    activity.append(description);
     const intro=layer.querySelector('.ideaSubmitSheetIntro');
     const submit=panel.querySelector('button[type=submit]');
     const select=mode=>{
+      const category=activity.querySelector('#publicAgendaDomain');
+      if(category.options.length===1){
+        unique(allInspirationItems().map(item=>item.domain)).forEach(value=>category.add(new Option(domainDisplayLabel(value),value)));
+        syncCustomSelect(category);
+      }
       form.dataset.agendaMode=mode;const isSource=mode==='source';source.hidden=!isSource;activity.hidden=isSource;
-      source.querySelectorAll('input').forEach(input=>input.disabled=!isSource);activity.querySelectorAll('input').forEach(input=>input.disabled=isSource);
+      source.querySelectorAll('input').forEach(input=>input.disabled=!isSource);activity.querySelectorAll('input,select,textarea').forEach(input=>input.disabled=isSource);
       [...nav.children].forEach((button,i)=>{const active=i===Number(isSource);button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
       submit.textContent=isSource?'Bron toevoegen':'Activiteit toevoegen';
       intro.textContent=isSource?'Deel een website of agenda. We controleren de bron voordat deze wordt toegevoegd.':'Deel een activiteit met datum, tijd en locatie. We controleren je inzending voordat deze verschijnt.';

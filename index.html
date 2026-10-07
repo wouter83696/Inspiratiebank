@@ -8304,7 +8304,7 @@
 	      name:activityMode ? $('#publicAgendaTitle').value.trim() : $('#linkNameInput')?.value.trim() || linkNameFromUrl($('#linkUrlInput').value),
 	      url:activityMode ? $('#publicAgendaUrl').value : $('#linkUrlInput').value,
 	      category:'Ingestuurde agendabron',
-	      note:activityMode ? `Ingestuurde activiteit. Datum: ${$('#publicAgendaDate').value}. Tijd: ${$('#publicAgendaTime').value}. Locatie: ${$('#publicAgendaWhere').value}.` : 'Ingestuurde agendabron.',
+	      note:activityMode ? `Ingestuurde activiteit. Datum: ${$('#publicAgendaDate').value}. Tijd: ${$('#publicAgendaTime').value}. Locatie: ${$('#publicAgendaWhere').value}. ${[['Domain','Categorie'],['Distance','Afstand'],['Cost','Kosten'],['Stimulus','Prikkelbelasting'],['Description','Beschrijving']].filter(([key])=>$('#publicAgenda'+key).value.trim()).map(([key,label])=>`${label}: ${$('#publicAgenda'+key).value.trim()}`).join('\n')}` : 'Ingestuurde agendabron.',
 	      status:'pending',
 	      createdAt:new Date().toISOString()
 	    });
@@ -8334,6 +8334,7 @@
 		    }
 	    markPublicAction('linkAdd');
 	    form.reset();
+        form.querySelectorAll('select').forEach(select=>syncCustomSelect(select));
 	    initPublicFormSecurity(form);
 	    setLinkAddStatus(`${item.name} is ontvangen en wordt eerst gecontroleerd.`, 'ok');
 	  }
@@ -11214,6 +11215,6 @@
   </script>
 <link rel="stylesheet" href="website-bestanden/select-controls.css?v=20261006-fixed-textareas-v2">
 <link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261007-sheet-spacing">
-<script src="website-bestanden/sheet-ui-shared.js?v=20261007-public-add"></script>
+<script src="website-bestanden/sheet-ui-shared.js?v=20261007-agenda-fields"></script>
 </body>
 </html>
