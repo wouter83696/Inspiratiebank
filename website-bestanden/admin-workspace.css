@@ -444,7 +444,7 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminIdeaPreview .ideaActions .button.editIdeaAction{background:#e5f2ef}
 #adminIdeaPreview .ideaActions .button.hot{color:#9b5146}
 #adminIdeaPreview .ideaActions .button:disabled{opacity:.5;cursor:default}
-@keyframes adminIdeaEnter{from{transform:translateX(-24px);opacity:.6}to{transform:translateX(0);opacity:1}}
+@keyframes adminIdeaEnter{from{transform:var(--admin-sheet-enter,translateX(-24px));opacity:.6}to{transform:translateX(0);opacity:1}}
 @media(min-width:1101px){
  body.adminDetailDocked #adminApp .adminWorkspaceShell{margin-left:calc(var(--admin-sidebar-w) + 480px);width:calc(100% - var(--admin-sidebar-w) - 480px)}
  body.adminDetailDocked #adminApp.adminSidebarCollapsed .adminWorkspaceShell{margin-left:calc(var(--admin-sidebar-closed-w) + 480px);width:calc(100% - var(--admin-sidebar-closed-w) - 480px)}
@@ -862,10 +862,10 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
  #adminIdeaLayer[hidden]>.adminEditorCard,
  #adminIdeaLayer[hidden]>#agendaEditModal.adminAgendaSheet,
  #adminIdeaLayer>.adminEditorCard[hidden],
- #adminIdeaLayer>#agendaEditModal.adminAgendaSheet[hidden]{transform:translateX(-100%)}
+ #adminIdeaLayer>#agendaEditModal.adminAgendaSheet[hidden]{transform:var(--admin-sheet-enter,translateX(-100%))}
  @starting-style{
   #adminIdeaLayer>.adminEditorCard,
-  #adminIdeaLayer>#agendaEditModal.adminAgendaSheet{transform:translateX(-100%)}
+  #adminIdeaLayer>#agendaEditModal.adminAgendaSheet{transform:var(--admin-sheet-enter,translateX(-100%))}
  }
 }
 @media(prefers-reduced-motion:reduce){
@@ -1077,4 +1077,11 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
  body.adminDetailDocked #adminApp .adminActionTopbar .adminAgendaHeaderActions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:center}
  body.adminDetailDocked #adminApp .adminAgendaHeaderNavigation{grid-column:1 / -1;min-width:0;flex-wrap:wrap}
  body.adminDetailDocked #adminApp .adminActionTopbar .button.adminHeaderAdd{min-width:0;width:100%;box-sizing:border-box;white-space:normal;line-height:1.25;padding:8px 10px}
+}
+
+/* The same lifecycle slides down again on close on phones. */
+@media(max-width:640px){
+ #adminIdeaLayer{--admin-sheet-enter:translateY(100%);align-items:flex-end}
+ #adminIdeaLayer>.adminEditorCard,
+ #adminIdeaLayer>#agendaEditModal.adminAgendaSheet{width:100%;align-self:flex-end}
 }
