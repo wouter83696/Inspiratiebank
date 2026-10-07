@@ -7888,4 +7888,19 @@ textarea{resize:none!important}
  .sharedPublicSheetLayer.isOpen>.sharedSheet{transform:translateY(0)!important}
 }
 
+/* Photo actions use the same compact outlined controls as the sheet. */
+.sharedSheet .ideaImageSuggest{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;gap:10px}
+.sharedSheet .ideaImageSuggestTop{gap:8px;align-items:center}
+.sharedSheet .ideaImageSuggestTop .ideaImageSuggestStatus{flex:1 1 150px;font-size:12px;line-height:1.4;min-height:0}
+.sharedSheet .ideaImageSuggest .formButton,
+.sharedSheet .teamFileButton{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:36px;box-sizing:border-box;padding:8px 12px;border:1px solid #92afb4;border-radius:10px;background:#fffdf9;color:var(--sheet-ink);font:600 13px/1.4 Manrope,system-ui,sans-serif;box-shadow:none;cursor:pointer}
+.sharedSheet .ideaImageSuggest .formButton:hover,
+.sharedSheet .teamFileField:hover .teamFileButton{background:#e5f2ef;border-color:#63858b}
+.sharedSheet .ideaImageSuggest .formButton:focus-visible{outline:2px solid #4f8e9e;outline-offset:2px}
+.sharedSheet .ideaImageSuggest .formButton:disabled{opacity:.55;cursor:wait}
+.sharedSheet .teamFileControl{min-height:0;padding:0;border:0;background:transparent;box-shadow:none;gap:8px;flex-wrap:wrap}
+.sharedSheet .teamFileField:hover .teamFileControl{background:transparent}
+.sharedSheet .teamFileField .teamFieldHint{font-size:12px;line-height:1.4}
+.sharedSheet .ideaImageSuggestActions{gap:6px;margin-top:2px}
+
 }
