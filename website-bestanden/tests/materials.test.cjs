@@ -33,7 +33,7 @@ test('checklists split legacy commas and preserve commas within explicit lines',
 });
 test('checkmarks persist locally and are isolated by activity',()=>{
  const store=new Map();const events={};
- const context={window:{localStorage:{getItem:k=>store.get(k),setItem:(k,v)=>store.set(k,v),removeItem:k=>store.delete(k)}},document:{addEventListener:(name,fn)=>events[name]=fn,querySelectorAll:()=>[]}};
+ const context={window:{localStorage:{getItem:k=>store.get(k),setItem:(k,v)=>store.set(k,v),removeItem:k=>store.delete(k)}},document:{getElementById:()=>null,addEventListener:(name,fn)=>events[name]=fn,querySelectorAll:()=>[]}};
  vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../idea-view-shared.js'),'utf8'),context);
  const key='inspiration-material:'+JSON.stringify(['a','Papier',0]);
  events.change({target:{matches:()=>true,dataset:{materialKey:key},checked:true}});

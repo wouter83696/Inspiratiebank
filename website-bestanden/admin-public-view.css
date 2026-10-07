@@ -7424,7 +7424,6 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
 #ideaMap .ideaMapDetailClose,.photoDetailPanel .ideaFilterSheetClose{width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;flex-basis:40px!important}
 #ideaMap .ideaMapDetailClose svg,.photoDetailPanel .ideaFilterSheetClose svg{width:20px!important;height:20px!important}
 @container activity-detail (max-width:480px){
- :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .ideaImageFrame{height:clamp(120px,22dvh,180px)!important;min-height:0!important;aspect-ratio:auto!important}
  :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .cardMetaBlock{margin-left:48px!important;margin-top:4px!important;max-width:calc(100% - 48px)!important;width:fit-content!important;flex-wrap:nowrap!important;white-space:nowrap!important;gap:0!important;padding:6px!important}
  :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardPillGroup,
  :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .cardMetaBlock>.cardMetaLine{display:contents!important}
@@ -7479,9 +7478,9 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
 #adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts{align-self:flex-end;top:0;transform:none}
 #adminIdeaCards.compactTiles .photoTileOverlay .photoTileFacts::before{border-radius:8px 8px 0 0}
 
-/* Desktop details keep the standard 16:9 photo ratio. */
+/* Standalone desktop sheets keep the standard photo ratio; maps fit available height. */
 @media(min-width:981px){
- :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .ideaImageFrame{height:auto!important;aspect-ratio:16/9!important;max-height:none!important}
+ .photoDetailPanel .photoDetailBody .sharedIdeaCard .ideaImageFrame{height:auto!important;aspect-ratio:16/9!important;max-height:none!important}
 }
 @media(max-width:980px){
  :is(#ideaMap,.photoDetailPanel) .photoDetailBody .sharedIdeaCard .ideaImageFrame{height:clamp(150px,25dvh,210px)!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important}
@@ -8058,8 +8057,6 @@ textarea{resize:none!important}
 .publicAgendaDetailLayer{z-index:1190}
 .publicAgendaDetailLayer .sharedSheetHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .publicAgendaDetailBody{padding:16px 20px 24px!important}
-.publicAgendaDetailBody .publicAgendaCategory{position:relative}
-.publicAgendaDetailBody .sharedIdeaCard .cardMetaBlock{margin-left:0!important;max-width:100%!important}
 .publicAgendaDetailBody .sharedIdeaCard .cardMetaBlock{flex-wrap:wrap!important;overflow:visible;white-space:normal}
 .publicAgendaDetailBody .sharedIdeaCard .cardMetaBlock .pill{white-space:normal}
 .publicAgendaDetailBody .photoDetailActions{position:static!important}
@@ -8070,33 +8067,22 @@ textarea{resize:none!important}
  .publicAgendaDetailLayer>.ideaFilterSheetBackdrop{display:none}
 }
 
-/* Both creation forms live in one sheet, sharing the same text-tab treatment. */
-.adminCombinedAddTabs{display:flex;margin:8px 20px 12px;gap:8px;border-bottom:1px solid var(--sheet-line);flex-shrink:0}
-.adminCombinedAddTabs button{position:relative;flex:1;border:0;background:transparent;color:#63858b;min-height:42px;font:600 13px/1.4 Manrope,system-ui,sans-serif;cursor:pointer}
-.adminCombinedAddTabs button[aria-selected=true]{color:#236875}
-.isCombinedAdd :is(.adminCombinedAddTabs,.adminCombinedSourceBody,form,.adminAgendaToolbar,footer)[hidden]{display:none!important}
+/* Creation-mode choices share the site's plain text navigation. */
+:scope .adminCombinedAddTabs{display:flex;flex-shrink:0;align-self:flex-start;width:auto;margin:12px 20px 8px;padding:0;gap:20px;border:0;border-radius:12px;background:transparent}
+:scope .adminCombinedAddTabs button{position:relative;flex:none;min-height:34px;padding:6px 0;border:0;border-radius:9px!important;background:transparent!important;color:#63858b;font:600 14px/1.4 Manrope,system-ui,sans-serif;cursor:pointer}
+:scope .adminCombinedAddTabs button[aria-selected=true]{color:#315f6b!important;font-weight:700}
+:scope .adminCombinedAddTabs button::before,:scope .adminCombinedAddTabs button::after{display:none}
+.isCombinedAdd :is(.adminCombinedAddTabs,.adminCombinedSourceBody,form,.adminAgendaToolbar,footer)[hidden],
+.adminCombinedAddTabs[hidden],.adminCombinedSourceBody[hidden]{display:none!important}
 .adminCombinedSourceBody{flex:1;min-height:0;overflow:auto;padding:16px 20px}
 .adminCombinedSourceBody #linkForm{display:grid;gap:16px}
 .adminCombinedSourceBody #linkForm label{display:grid;gap:8px}
-
-.adminCombinedAddTabs[hidden],.adminCombinedSourceBody[hidden]{display:none!important}
-
-/* Creation mode and section navigation have distinct visual roles. */
 #agendaEditModal.adminAgendaSheet .adminEditorCard.isCombinedAdd{display:flex;flex-direction:column}
 .isCombinedAdd>.panelHead,.isCombinedAdd>.adminAgendaToolbar{flex-shrink:0}
 .isCombinedAdd>#agendaEditForm{flex:1;min-height:0}
-:scope .isCombinedAdd>.adminCombinedAddTabs{align-self:flex-start;width:auto;margin:12px 20px 8px;padding:3px;gap:2px;border:0;border-radius:12px;background:rgba(229,242,239,.45)}
-:scope .adminCombinedAddTabs button{flex:none;min-height:34px;padding:6px 18px;border-radius:9px!important}
-:scope .adminCombinedAddTabs button[aria-selected=true]{background:#dff1ed!important;color:#236875!important}
-:scope .adminCombinedAddTabs button::after{display:none}
 .isCombinedAdd>.adminAgendaToolbar{margin-bottom:12px!important}
 .isCombinedAdd .adminAgendaEditBody{padding-top:20px}
 
-/* Add-mode choices use the same plain text treatment as site navigation. */
-:scope .isCombinedAdd>.adminCombinedAddTabs,:scope .agendaAddModeNav{background:transparent;border:0;padding:0;gap:20px;align-self:flex-start;width:auto;margin:12px 20px 8px}
-:scope .adminCombinedAddTabs button{background:transparent!important;padding:6px 0;font-size:14px}
-:scope .adminCombinedAddTabs button[aria-selected=true]{background:transparent!important;color:#315f6b!important;font-weight:700}
-:scope .adminCombinedAddTabs button::before{display:none}
 #linkAddForm .teamFormGrid[hidden]{display:none!important}
 #agendaSourceSheetLayer .agendaSourceSheet{display:flex!important;flex-direction:column}
 #agendaSourceSheetLayer .agendaSourceSheet>.ideaSubmitSheetBody{flex:1;min-height:0;overflow:auto}

@@ -191,8 +191,6 @@ body .sharedSectionToolbar .sharedSectionNav>button.isActive,body .sharedSection
 .publicAgendaDetailLayer{z-index:1190}
 .publicAgendaDetailLayer .sharedSheetHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .publicAgendaDetailBody{padding:16px 20px 24px!important}
-.publicAgendaDetailBody .publicAgendaCategory{position:relative}
-.publicAgendaDetailBody .sharedIdeaCard .cardMetaBlock{margin-left:0!important;max-width:100%!important}
 .publicAgendaDetailBody .sharedIdeaCard .cardMetaBlock{flex-wrap:wrap!important;overflow:visible;white-space:normal}
 .publicAgendaDetailBody .sharedIdeaCard .cardMetaBlock .pill{white-space:normal}
 .publicAgendaDetailBody .photoDetailActions{position:static!important}
@@ -203,33 +201,22 @@ body .sharedSectionToolbar .sharedSectionNav>button.isActive,body .sharedSection
  .publicAgendaDetailLayer>.ideaFilterSheetBackdrop{display:none}
 }
 
-/* Both creation forms live in one sheet, sharing the same text-tab treatment. */
-.adminCombinedAddTabs{display:flex;margin:8px 20px 12px;gap:8px;border-bottom:1px solid var(--sheet-line);flex-shrink:0}
-.adminCombinedAddTabs button{position:relative;flex:1;border:0;background:transparent;color:#63858b;min-height:42px;font:600 13px/1.4 Manrope,system-ui,sans-serif;cursor:pointer}
-.adminCombinedAddTabs button[aria-selected=true]{color:#236875}
-.isCombinedAdd :is(.adminCombinedAddTabs,.adminCombinedSourceBody,form,.adminAgendaToolbar,footer)[hidden]{display:none!important}
+/* Creation-mode choices share the site's plain text navigation. */
+body .adminCombinedAddTabs{display:flex;flex-shrink:0;align-self:flex-start;width:auto;margin:12px 20px 8px;padding:0;gap:20px;border:0;border-radius:12px;background:transparent}
+body .adminCombinedAddTabs button{position:relative;flex:none;min-height:34px;padding:6px 0;border:0;border-radius:9px!important;background:transparent!important;color:#63858b;font:600 14px/1.4 Manrope,system-ui,sans-serif;cursor:pointer}
+body .adminCombinedAddTabs button[aria-selected=true]{color:#315f6b!important;font-weight:700}
+body .adminCombinedAddTabs button::before,body .adminCombinedAddTabs button::after{display:none}
+.isCombinedAdd :is(.adminCombinedAddTabs,.adminCombinedSourceBody,form,.adminAgendaToolbar,footer)[hidden],
+.adminCombinedAddTabs[hidden],.adminCombinedSourceBody[hidden]{display:none!important}
 .adminCombinedSourceBody{flex:1;min-height:0;overflow:auto;padding:16px 20px}
 .adminCombinedSourceBody #linkForm{display:grid;gap:16px}
 .adminCombinedSourceBody #linkForm label{display:grid;gap:8px}
-
-.adminCombinedAddTabs[hidden],.adminCombinedSourceBody[hidden]{display:none!important}
-
-/* Creation mode and section navigation have distinct visual roles. */
 #agendaEditModal.adminAgendaSheet .adminEditorCard.isCombinedAdd{display:flex;flex-direction:column}
 .isCombinedAdd>.panelHead,.isCombinedAdd>.adminAgendaToolbar{flex-shrink:0}
 .isCombinedAdd>#agendaEditForm{flex:1;min-height:0}
-body .isCombinedAdd>.adminCombinedAddTabs{align-self:flex-start;width:auto;margin:12px 20px 8px;padding:3px;gap:2px;border:0;border-radius:12px;background:rgba(229,242,239,.45)}
-body .adminCombinedAddTabs button{flex:none;min-height:34px;padding:6px 18px;border-radius:9px!important}
-body .adminCombinedAddTabs button[aria-selected=true]{background:#dff1ed!important;color:#236875!important}
-body .adminCombinedAddTabs button::after{display:none}
 .isCombinedAdd>.adminAgendaToolbar{margin-bottom:12px!important}
 .isCombinedAdd .adminAgendaEditBody{padding-top:20px}
 
-/* Add-mode choices use the same plain text treatment as site navigation. */
-body .isCombinedAdd>.adminCombinedAddTabs,body .agendaAddModeNav{background:transparent;border:0;padding:0;gap:20px;align-self:flex-start;width:auto;margin:12px 20px 8px}
-body .adminCombinedAddTabs button{background:transparent!important;padding:6px 0;font-size:14px}
-body .adminCombinedAddTabs button[aria-selected=true]{background:transparent!important;color:#315f6b!important;font-weight:700}
-body .adminCombinedAddTabs button::before{display:none}
 #linkAddForm .teamFormGrid[hidden]{display:none!important}
 #agendaSourceSheetLayer .agendaSourceSheet{display:flex!important;flex-direction:column}
 #agendaSourceSheetLayer .agendaSourceSheet>.ideaSubmitSheetBody{flex:1;min-height:0;overflow:auto}

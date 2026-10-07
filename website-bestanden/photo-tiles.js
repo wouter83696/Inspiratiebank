@@ -300,59 +300,73 @@
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&dialog?.open&&dialog.classList.contains('isDocked')&&!document.querySelector('dialog:modal')){e.preventDefault();close();}});
   document.addEventListener('click',event=>{if(event.target.closest('.ideaMapSingleCard.photoDetailBody'))animateSection(event);});
-  // Show the separator only while the sticky actions overlap scrolling content.
+  // Observe only visible detail layouts; coalesce layout work into one frame.
   let actionFrame=0;
   const observedActionContent=new Set();
   const actionResize=new ResizeObserver(queueActionSurface);
-  function queueActionSurface(){
-    if(actionFrame)return;
-    actionFrame=requestAnimationFrame(()=>{
-      actionFrame=0;
-      document.querySelectorAll('.ideaMapPanel.isSingleDetail').forEach(panel=>{
-        if(panel.querySelector('.activityMapHeader'))return;
-        const title=panel.querySelector('.ideaMapSingleCard h3');
-        const toolbar=panel.querySelector('.ideaMapDetailToolbar');
-        if(!title||!toolbar)return;
-        const header=document.createElement('div');header.className='activityMapHeader';
-        toolbar.before(header);header.append(title,toolbar);
-      });
-      // Reserve space for the full active tab and links before sizing the map photo.
-      document.querySelectorAll('#ideaMap .ideaMapPanel.isSingleDetail').forEach(panel=>{
-        const results=panel.querySelector('.ideaMapResults');
-        const card=panel.querySelector('.ideaMapSingleCard .sharedIdeaCard');
-        const photo=card?.querySelector('.ideaImageFrame');
-        if(!results||!card||!photo)return;
-        [results,card].forEach(node=>{
-          if(!observedActionContent.has(node)){observedActionContent.add(node);actionResize.observe(node);}
-        });
-        if(!matchMedia('(min-width:981px)').matches){photo.style.removeProperty('--map-photo-height');return;}
-        const photoRect=photo.getBoundingClientRect();
-        const resultStyle=getComputedStyle(results);
-        const wrapper=card.parentElement;
-        const wrapperStyle=getComputedStyle(wrapper);
-        const padding=parseFloat(resultStyle.paddingTop)+parseFloat(resultStyle.paddingBottom)
-          +parseFloat(wrapperStyle.paddingTop)+parseFloat(wrapperStyle.paddingBottom);
-        const otherHeight=card.getBoundingClientRect().height-photoRect.height;
-        const available=panel.getBoundingClientRect().bottom-results.getBoundingClientRect().top-padding-otherHeight-2;
-        const height=Math.round(Math.max(80,Math.min(photoRect.width*9/16,available)));
-        const value=height+'px';
-        if(photo.style.getPropertyValue('--map-photo-height')!==value)photo.style.setProperty('--map-photo-height',value);
-      });
-      observedActionContent.forEach(node=>{if(!node.isConnected){actionResize.unobserve(node);observedActionContent.delete(node);}});
-      document.querySelectorAll('.photoDetailActions').forEach(actions=>{
-        const content=actions.previousElementSibling;
-        if(!content)return;
-        if(!observedActionContent.has(content)){
-          observedActionContent.add(content);observedActionContent.add(actions);actionResize.observe(content);actionResize.observe(actions);
-        }
-        const rect=actions.getBoundingClientRect();
-        actions.classList.toggle('isOverContent',rect.height>0&&content.getBoundingClientRect().bottom>rect.top+1);
-      });
+  const desktopMap=matchMedia('(min-width:981px)');
+  function mountMapHeader(panel){
+    if(panel.querySelector('.activityMapHeader'))return;
+    const title=panel.querySelector('.ideaMapSingleCard h3');
+    const toolbar=panel.querySelector('.ideaMapDetailToolbar');
+    if(!title||!toolbar)return;
+    const header=document.createElement('div');header.className='activityMapHeader';
+    toolbar.before(header);header.append(title,toolbar);
+  }
+  function fitMapPhoto(panel,observe){
+    const results=panel.querySelector('.ideaMapResults');
+    const card=panel.querySelector('.ideaMapSingleCard .sharedIdeaCard');
+    const photo=card?.querySelector('.ideaImageFrame');
+    if(!results||!card||!photo)return;
+    if(!desktopMap.matches){photo.style.removeProperty('--map-photo-height');return;}
+    observe(panel);observe(card);
+    const photoRect=photo.getBoundingClientRect();
+    const resultStyle=getComputedStyle(results);
+    const wrapperStyle=getComputedStyle(card.parentElement);
+    const padding=[resultStyle.paddingTop,resultStyle.paddingBottom,wrapperStyle.paddingTop,wrapperStyle.paddingBottom]
+      .reduce((sum,value)=>sum+(parseFloat(value)||0),0);
+    const otherHeight=card.getBoundingClientRect().height-photoRect.height;
+    const available=panel.getBoundingClientRect().bottom-results.getBoundingClientRect().top-padding-otherHeight-2;
+    const height=Math.floor(Math.max(80,Math.min(photoRect.width*9/16,available)));
+    const value=height+'px';
+    if(photo.style.getPropertyValue('--map-photo-height')!==value)photo.style.setProperty('--map-photo-height',value);
+  }
+  function refreshDetailLayout(){
+    actionFrame=0;
+    const wanted=new Set();
+    const observe=node=>wanted.add(node);
+    document.querySelectorAll('#ideaMap .ideaMapPanel.isSingleDetail').forEach(panel=>{
+      if(!panel.getClientRects().length)return;
+      mountMapHeader(panel);fitMapPhoto(panel,observe);
+    });
+    document.querySelectorAll('.photoDetailActions').forEach(actions=>{
+      if(!actions.getClientRects().length)return;
+      const content=actions.previousElementSibling;
+      if(!content)return;
+      observe(content);observe(actions);
+      const rect=actions.getBoundingClientRect();
+      const overlap=rect.height>0&&content.getBoundingClientRect().bottom>rect.top+1;
+      if(actions.classList.contains('isOverContent')!==overlap)actions.classList.toggle('isOverContent',overlap);
+    });
+    observedActionContent.forEach(node=>{
+      if(!wanted.has(node)){actionResize.unobserve(node);observedActionContent.delete(node);}
+    });
+    wanted.forEach(node=>{
+      if(!observedActionContent.has(node)){observedActionContent.add(node);actionResize.observe(node);}
     });
   }
-  document.addEventListener('scroll',queueActionSurface,{capture:true,passive:true});
+  function queueActionSurface(){
+    if(!actionFrame)actionFrame=requestAnimationFrame(refreshDetailLayout);
+  }
+  document.addEventListener('scroll',event=>{
+    if(event.target instanceof Element&&event.target.closest('.photoDetailBody,.ideaMapResults'))queueActionSurface();
+  },{capture:true,passive:true});
   window.addEventListener('resize',queueActionSurface,{passive:true});
-  new MutationObserver(queueActionSurface).observe(document.body,{childList:true,subtree:true});
+  const detailSelector='.photoDetailBody,.photoDetailActions,.ideaMapPanel';
+  new MutationObserver(records=>{
+    if(records.some(record=>record.target instanceof Element&&record.target.closest(detailSelector)
+      ||[...record.addedNodes,...record.removedNodes].some(node=>node instanceof Element&&(node.matches(detailSelector)||node.querySelector(detailSelector)))))queueActionSurface();
+  }).observe(document.body,{childList:true,subtree:true});
   queueActionSurface();
   window.PhotoTiles={render,detailContent,close,openFeatured:key=>enabled&&open(key)};
 })();
