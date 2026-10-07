@@ -6471,6 +6471,16 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
 :scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel,:scope#inspirationAdminPanel,:scope#agendaReviewPanel,#siteHeaderPreviewPanel) .tabHeroLine{
  transform:none!important;margin:8px 0 0!important;padding:0!important;white-space:normal!important;overflow-wrap:anywhere;
 }
+/* Mobile hero typography follows the compact UIT-agenda heading on both pages. */
+@media(max-width:640px){
+ :scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel) .tabHero .tabHeroTitle{
+  font-size:clamp(1.95rem,8.3vw,2.3rem)!important;
+  font-weight:500!important;line-height:1.04!important;letter-spacing:0!important;
+ }
+ :scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel) .tabHero .tabHeroLine{
+  font-size:clamp(1rem,4.2vw,1.12rem)!important;line-height:1.25!important;margin-top:8px!important;
+ }
+}
 
 /* One hover surface for public navigation and the management sidebar. */
 :scope{--control-hover-surface:rgba(168,225,221,.12);--site-topbar-surface:#fffdf8}
