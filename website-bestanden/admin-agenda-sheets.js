@@ -59,6 +59,7 @@
    }
    SheetUIShared.sectionNavigation(toolbar,[[toolbar.children[0],'Kenmerken'],[toolbar.children[1],'Locatie']]);
    agendaSaveBaseline=agendaSaveSnapshot();updatePreview();originalOpen();body.scrollTop=0;
+   if(editingAgendaSource?.isNew)openCombinedAdd();
  };
  const manager=document.createElement('section');manager.id='adminAgendaManagerSheet';manager.className='adminEditorCard adminPublicSurface';manager.hidden=true;
  manager.innerHTML='<header class="panelHead"><h3>Agenda beheren</h3><button type="button" class="adminEditorClose" aria-label="Agenda beheren sluiten">×</button></header><div class="adminAgendaManagerBody"></div><footer class="adminActivityFooter ideaFilterSheetFooter"><button type="button" class="ideaFilterSheetAction primary">Klaar</button></footer>';
@@ -178,5 +179,49 @@
  syncHeaderSelection();
  new MutationObserver(()=>{syncHeaderSelection();AdminEditors.sync();}).observe(sources,{attributes:true,attributeFilter:['hidden']});
  window.AdminSources={open:openSources,close:closeSources,requestClose:async()=>{if(await canLeaveSource()){closeSources();sourceFocus?.focus();}},canLeave:canLeaveSource,beginEdit:beginSourceEdit,saved:finishSourceEdit};
+ // Keep the two existing forms mounted: tab changes never reset either draft.
+ const addTabs=document.createElement('div');addTabs.className='sharedSectionNav adminCombinedAddTabs';addTabs.hidden=true;addTabs.setAttribute('role','tablist');addTabs.setAttribute('aria-label','Toevoegen aan UIT-agenda');
+ addTabs.innerHTML='<button type="button" role="tab" id="agendaAddActivityTab" aria-controls="agendaEditForm">Activiteit</button><button type="button" role="tab" id="agendaAddSourceTab" aria-controls="combinedSourcePanel">Bron</button>';
+ head.after(addTabs);
+ const sourceHost=document.createElement('div');sourceHost.id='combinedSourcePanel';sourceHost.className='adminAgendaManagerBody adminCombinedSourceBody';sourceHost.hidden=true;
+ sourceHost.setAttribute('role','tabpanel');sourceHost.setAttribute('aria-labelledby','agendaAddSourceTab');
+ const sourceAnchor=document.createComment('source form home');sourceForm.before(sourceAnchor);
+ const footerAnchor=document.createComment('source footer home');sourceFooter.before(footerAnchor);
+ const statusAnchor=document.createComment('source status home');$('linkStatus').before(statusAnchor);
+ card.append(sourceHost);
+ let combinedAdd=false;
+ function selectAddTab(source=false){
+   [...addTabs.children].forEach((tab,i)=>{const active=Boolean(i)===source;tab.classList.toggle('isActive',active);tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;});
+   form.hidden=source;toolbar.hidden=source;sourceHost.hidden=!source;sourceFooter.hidden=!source;
+   form.setAttribute('role','tabpanel');form.setAttribute('aria-labelledby','agendaAddActivityTab');
+   saveSource.textContent='Bron toevoegen';footer.querySelector('button[type=submit]').textContent='Activiteit toevoegen';
+ }
+ function openCombinedAdd(){
+   combinedAdd=true;addTabs.hidden=false;card.classList.add('isCombinedAdd');
+   $('agendaEditTitle').textContent='Toevoegen aan UIT-agenda';
+   resetLinkForm();beginSourceEdit();sourceHost.append(sourceForm,$('linkStatus'));card.append(sourceFooter);
+   sourceForm.hidden=false;selectAddTab(false);
+ }
+ function restoreCombinedAdd(){
+   if(!combinedAdd)return;combinedAdd=false;addTabs.hidden=true;card.classList.remove('isCombinedAdd');
+   sourceAnchor.after(sourceForm);footerAnchor.after(sourceFooter);statusAnchor.after($('linkStatus'));
+   sourceHost.hidden=true;form.hidden=false;toolbar.hidden=false;sourceFooter.hidden=false;
+   form.removeAttribute('role');form.removeAttribute('aria-labelledby');
+   resetLinkForm();finishSourceEdit();
+ }
+ [...addTabs.children].forEach((tab,i)=>tab.addEventListener('click',()=>selectAddTab(Boolean(i))));
+ addTabs.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const source=event.key==='End'||(event.key!=='Home'&&addTabs.children[0].getAttribute('aria-selected')==='true');selectAddTab(source);addTabs.children[source?1:0].focus();});
+ new MutationObserver(()=>{if(modal.hidden)restoreCombinedAdd();}).observe(modal,{attributes:true,attributeFilter:['hidden']});
+ cancelSource.addEventListener('click',event=>{if(!combinedAdd)return;event.preventDefault();event.stopImmediatePropagation();AdminEditors.requestAgendaClose();},true);
+ window.AdminSources.canLeaveCombined=async()=>!combinedAdd||!sourceDirty()||await confirmDialog('Je hebt een bron ingevuld die nog niet is toegevoegd. Wil je deze weggooien?',{title:'Wijzigingen bewaren?',confirmText:'Wijzigingen weggooien',cancelText:'Verder bewerken'});
+ let replayCombinedSubmit=false;
+ form.addEventListener('submit',async event=>{if(!combinedAdd||!sourceDirty()||replayCombinedSubmit)return;event.preventDefault();event.stopImmediatePropagation();if(!await window.AdminSources.canLeaveCombined())return;replayCombinedSubmit=true;try{form.requestSubmit();}finally{replayCombinedSubmit=false;}},true);
+ const savedSource=window.AdminSources.saved;
+ window.AdminSources.saved=()=>{if(!combinedAdd){savedSource();return;}beginSourceEdit();selectAddTab(true);};
+ new MutationObserver(()=>{const button=footer.querySelector('button[type=submit]');if(combinedAdd&&!button.disabled)button.textContent='Activiteit toevoegen';}).observe(footer.querySelector('button[type=submit]'),{attributes:true,attributeFilter:['disabled']});
+ new MutationObserver(()=>{if(combinedAdd&&!saveSource.disabled)saveSource.textContent='Bron toevoegen';}).observe(saveSource,{attributes:true,attributeFilter:['disabled']});
+ $('addAdminAgendaBtn').querySelector('span').textContent='Toevoegen';
+ $('addAdminAgendaBtn').setAttribute('aria-label','Toevoegen');$('addAdminAgendaBtn').title='Toevoegen';
+ addSource.remove();
  $('agendaSelectionToolbar').hidden=true;
 })();

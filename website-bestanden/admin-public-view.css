@@ -7804,6 +7804,22 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
  #ideaMap .ideaMapPanel{top:16px!important;max-height:calc(100% - 32px)!important}
 }
 
+/* The map is a bounded card, not a full-height sheet. Keep its content in one
+   scroll flow so the shared sheet footer cannot cover the selected tab. */
+@media(min-width:981px){
+ #ideaMap .ideaMapPanel.isSingleDetail{background:var(--sheet-surface)!important;bottom:16px}
+ #ideaMap .activityMapHeader{pointer-events:auto;align-items:flex-start}
+ #ideaMap .activityMapHeader h3{overflow-wrap:anywhere}
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{display:block!important;scroll-snap-type:none!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody{box-sizing:border-box;width:100%!important;max-width:none!important;min-width:0;overflow:visible!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody>.sharedIdeaCard{height:auto!important;max-height:none!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailActions{position:static!important;bottom:auto!important;margin-top:12px!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailTabs{flex:none;min-width:0;margin-top:4px!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailTabs [role="tabpanel"]{padding:10px 0 0!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailTabs [role="tabpanel"] p{margin-bottom:0!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailTabs [role="tab"]{min-width:0;padding-inline:4px;font-size:13px}
+}
+
 /* Shared compact select appearance, based on the management filter sheet. */
 .customSelect .customSelectButton{
   box-sizing:border-box;position:relative;width:100%;height:auto!important;min-height:40px!important;
@@ -8012,27 +8028,28 @@ textarea{resize:none!important}
  .sharedSectionToolbar>.sharedSectionNav{gap:8px}
 }
 
+/* Agenda details share inspiration content styles without rearranging the week. */
 .publicAgendaDetailLayer{z-index:1190}
 .publicAgendaDetailLayer .sharedSheetHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.publicAgendaDetailBody p{font-size:14px;line-height:1.6;margin:0 0 18px;white-space:pre-line}
-.publicAgendaDetailBody a{display:inline-flex;text-decoration:none}
+.publicAgendaDetailBody{padding:16px 20px 24px!important}
+.publicAgendaDetailBody .publicAgendaFacts{display:flex;flex-wrap:wrap;gap:8px 16px;padding:12px;border-radius:10px;background:rgba(229,242,239,.45);font-size:13px;color:var(--sheet-ink)}
+.publicAgendaDetailBody .photoDetailActions{position:static!important}
+.publicAgendaDetailBody .photoDetailTabs [role=tabpanel] p{white-space:pre-line}
 @media(min-width:981px){
- :scope.publicAgendaDetailOpen main{margin-left:var(--sheet-width);width:calc(100% - var(--sheet-width));box-sizing:border-box}
  .publicAgendaDetailLayer{pointer-events:none!important}
  .publicAgendaDetailLayer>.sharedSheet{pointer-events:auto}
  .publicAgendaDetailLayer>.ideaFilterSheetBackdrop{display:none}
- :scope.publicAgendaDetailOpen #agendaReviewList .weekPanel{height:auto!important;max-height:none!important;overflow:visible!important;scroll-margin-top:170px}
- :scope.publicAgendaDetailOpen #agendaReviewList .weekBody{height:auto!important;max-height:none!important;overflow:visible!important}
- :scope.publicAgendaDetailOpen #agendaReviewList .agendaBoard{display:block!important;min-width:0!important;height:auto!important}
- :scope.publicAgendaDetailOpen #agendaReviewList .agendaDay{display:none!important}
- :scope.publicAgendaDetailOpen #agendaReviewList .publicAgendaSelectedDay{display:block!important;height:auto!important;padding:12px!important}
- :scope.publicAgendaDetailOpen #agendaReviewList .agendaGroup{display:grid!important;height:auto!important;grid-auto-rows:auto!important;gap:8px}
- :scope.publicAgendaDetailOpen #agendaReviewList .agendaItem{height:auto!important;max-height:none!important;min-height:0!important;padding:10px!important;flex:none!important}
- :scope.publicAgendaDetailOpen #agendaReviewList .agendaItemTitle .ideaTitleText,:scope.publicAgendaDetailOpen #agendaReviewList .agendaItemMeta{display:block!important;-webkit-line-clamp:unset!important;max-height:none!important;overflow:visible!important}
- :scope.publicAgendaDetailOpen #agendaReviewList .mobileDayNavigation{display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;padding:8px 16px}
- :scope.publicAgendaDetailOpen #agendaReviewList .mobileDayButton{display:flex;flex-direction:column;align-items:center;padding:8px 3px;border:0;border-radius:10px;background:transparent;color:#63858b}
- :scope.publicAgendaDetailOpen #agendaReviewList .mobileDayButton.active{background:#e5f2ef;color:#236875}
- :scope.publicAgendaDetailOpen #agendaReviewList .weekHeadingRow{flex-wrap:wrap}
 }
+
+/* Both creation forms live in one sheet, sharing the same text-tab treatment. */
+.adminCombinedAddTabs{display:flex;margin:8px 20px 12px;gap:8px;border-bottom:1px solid var(--sheet-line);flex-shrink:0}
+.adminCombinedAddTabs button{position:relative;flex:1;border:0;background:transparent;color:#63858b;min-height:42px;font:600 13px/1.4 Manrope,system-ui,sans-serif;cursor:pointer}
+.adminCombinedAddTabs button[aria-selected=true]{color:#236875}
+.isCombinedAdd :is(.adminCombinedAddTabs,.adminCombinedSourceBody,form,.adminAgendaToolbar,footer)[hidden]{display:none!important}
+.adminCombinedSourceBody{flex:1;min-height:0;overflow:auto;padding:16px 20px}
+.adminCombinedSourceBody #linkForm{display:grid;gap:16px}
+.adminCombinedSourceBody #linkForm label{display:grid;gap:8px}
+
+.adminCombinedAddTabs[hidden],.adminCombinedSourceBody[hidden]{display:none!important}
 
 }

@@ -195,6 +195,7 @@
   async function requestAgendaClose(){
     if(closing)return;closing=true;
     try{
+      if(window.AdminSources?.canLeaveCombined&&!await window.AdminSources.canLeaveCombined())return;
       if(snapshot()!==agendaDraft&&!await confirmDialog('Je hebt wijzigingen die nog niet zijn opgeslagen. Wil je deze weggooien?',{title:'Wijzigingen bewaren?',confirmText:'Wijzigingen weggooien',cancelText:'Verder bewerken'}))return;
       closeAgendaEdit();
     }finally{closing=false;}

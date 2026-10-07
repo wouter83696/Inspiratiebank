@@ -5473,7 +5473,7 @@
 </style>
   <link rel="stylesheet" href="website-bestanden/header-layout-shared.css?v=20261001-v1">
   <link rel="stylesheet" href="website-bestanden/navigation-colors-shared.css?v=20261006-header-selection-v28">
-  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261007-map-controls-v150">
+  <link rel="stylesheet" href="website-bestanden/photo-tiles.css?v=20261007-map-detail-flow-v151">
 </head>
 <body class="appLoading">
   <div class="appLoader" id="appLoader" role="status" aria-live="polite" aria-label="Inspiratiebank laden">
@@ -8511,40 +8511,40 @@
         meta:`${escapeHtml(timeLabel)} • ${escapeHtml(item.where)}`
       });
 	  }
-  let publicAgendaSheet=null,publicAgendaOrigin=null,publicAgendaDay='',publicAgendaExpandedBefore=null;
-  function focusPublicAgendaDay(key){
-    publicAgendaDay=key;setActiveMobileAgendaDay(key);
-    document.querySelectorAll('#weekPanels [data-agenda-day]').forEach(day=>day.classList.toggle('publicAgendaSelectedDay',day.dataset.agendaDay===key));
-  }
+  let publicAgendaSheet=null,publicAgendaOrigin=null;
   function closePublicAgendaSheet(){
     if(!publicAgendaSheet)return;
     publicAgendaSheet.classList.remove('isOpen');publicAgendaSheet.setAttribute('aria-hidden','true');publicAgendaSheet.inert=true;
     document.body.classList.remove('publicAgendaDetailOpen');
-    if(publicAgendaExpandedBefore){expandedAgendaDays.clear();publicAgendaExpandedBefore.forEach(key=>expandedAgendaDays.add(key));publicAgendaExpandedBefore=null;renderWeekPanels();}
     const restored=[...document.querySelectorAll('#weekPanels .agendaItemLink')].find(link=>link.href===publicAgendaOrigin?.href);
     (restored||document.querySelector('#weekPanels'))?.focus({preventScroll:true});
   }
   function openPublicAgendaSheet(item,dayKey,trigger){
     if(!publicAgendaSheet){
       publicAgendaSheet=document.createElement('div');publicAgendaSheet.className='ideaSubmitSheetLayer sharedPublicSheetLayer publicAgendaDetailLayer';
-      publicAgendaSheet.innerHTML='<button class="ideaFilterSheetBackdrop" aria-label="Activiteit sluiten" data-public-agenda-close></button><aside class="ideaSubmitSheet sharedSheet" role="dialog" aria-labelledby="publicAgendaDetailTitle"><header class="sharedSheetHeader"><h2 id="publicAgendaDetailTitle"></h2><button type="button" class="ideaSubmitSheetClose" aria-label="Activiteit sluiten" data-public-agenda-close>×</button></header><div class="sharedSheetBody publicAgendaDetailBody"></div></aside>';
+      publicAgendaSheet.innerHTML='<button class="ideaFilterSheetBackdrop" aria-label="Activiteit sluiten" data-public-agenda-close></button><aside class="ideaSubmitSheet sharedSheet" role="dialog" aria-labelledby="publicAgendaDetailTitle"><header class="sharedSheetHeader"><h2 id="publicAgendaDetailTitle"></h2><button type="button" class="ideaSubmitSheetClose" aria-label="Activiteit sluiten" data-public-agenda-close>×</button></header><div class="sharedSheetBody photoDetailBody publicAgendaDetailBody"></div></aside>';
       document.body.append(publicAgendaSheet);
       publicAgendaSheet.querySelectorAll('[data-public-agenda-close]').forEach(button=>button.addEventListener('click',closePublicAgendaSheet));
       publicAgendaSheet.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();closePublicAgendaSheet();}});
     }
     publicAgendaOrigin=trigger;
     publicAgendaSheet.querySelector('h2').textContent=item.title||'Activiteit';
-    const body=publicAgendaSheet.querySelector('.publicAgendaDetailBody');body.replaceChildren();
-    const add=(label,value)=>{if(!value)return;const block=document.createElement('p'),strong=document.createElement('strong');strong.textContent=label;block.append(strong,document.createElement('br'),document.createTextNode(value));body.append(block);};
-    add('Datum',item.date||item.period||dayKey.split(':').at(-1));add('Tijd',AgendaViewShared.formatTime(item.time));add('Locatie',item.where);add('Beschrijving',item.description||item.notes);
-    if(/^https?:\/\//i.test(item.url||'')){const link=document.createElement('a');link.className='ideaFilterSheetAction secondary';link.textContent='Bekijk bij aanbieder';link.href=item.url;link.target='_blank';link.rel='noopener';body.append(link);}
-    if(!publicAgendaExpandedBefore)publicAgendaExpandedBefore=new Set(expandedAgendaDays);
-    document.querySelectorAll('#weekPanels [data-agenda-day]').forEach(day=>expandedAgendaDays.add(day.dataset.agendaDay));
-    document.body.classList.add('publicAgendaDetailOpen');renderWeekPanels();focusPublicAgendaDay(dayKey);
+    const body=publicAgendaSheet.querySelector('.publicAgendaDetailBody');
+    const date=item.date||item.period||dayKey.split(':').at(-1);
+    const time=AgendaViewShared.formatTime(item.time);
+    const image=item.image&&(item.imageStatus==='approved'||item.imageApproved===true)?ideaImageData(item.image,item.imageAlt||item.title):null;
+    const facts=[date,time].filter(Boolean).map(value=>`<span>${escapeHtml(value)}</span>`).join('');
+    const photo=image?`<figure class="ideaImageFrame"><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}"></figure>`:'';
+    const practical=[['Datum',date],['Tijd',time],['Locatie',item.where]].filter(([,value])=>value).map(([label,value])=>`<p><strong>${label}</strong><br>${escapeHtml(value)}</p>`).join('');
+    const card=`<article class="sharedIdeaCard ${domainThemeClass(item.domain)}"><h3>${escapeHtml(item.title||'Activiteit')}</h3>${photo}<div class="publicAgendaCategory">${categoryPill(item.domain)}</div><div class="publicAgendaFacts">${facts}</div><p>${escapeHtml(item.description||item.notes||'Bekijk de website van de aanbieder voor meer informatie over deze activiteit.')}</p><section class="photoDetailSection">${practical}</section></article>`;
+    // Share the actual detail renderer, tabs and location actions with inspiration.
+    body.innerHTML=PhotoTiles.detailContent(item,'publicAgendaContentTitle',{card});
+    body.querySelector('#publicAgendaContentTitle')?.remove();
+    body.scrollTop=0;
+    document.body.classList.add('publicAgendaDetailOpen');
     publicAgendaSheet.inert=false;publicAgendaSheet.setAttribute('aria-hidden','false');publicAgendaSheet.classList.add('isOpen');
     publicAgendaSheet.querySelector('aside').setAttribute('aria-modal',String(matchMedia('(max-width:980px)').matches));
     publicAgendaSheet.querySelector('.ideaSubmitSheetClose').focus({preventScroll:true});
-    document.querySelector('#weekPanels .publicAgendaSelectedDay')?.closest('.weekPanel')?.scrollIntoView({block:'start',behavior:'auto'});
   }
   document.addEventListener('click',event=>{
     const card=event.target.closest('#weekPanels [data-public-agenda-item]');
@@ -8553,7 +8553,7 @@
   });
   function renderAgendaBoard(weekId, concrete){
     return AgendaViewShared.renderBoard({weekId,concrete,days:weekDays(weekId),expandedAgendaDays,
-      todayIso:formatIsoDate(new Date()),visibleLimit:document.body.classList.contains('publicAgendaDetailOpen')?Infinity:agendaDayVisibleLimit(),itemOccursOnDay,
+      todayIso:formatIsoDate(new Date()),visibleLimit:agendaDayVisibleLimit(),itemOccursOnDay,
       isFlexiblePeriodOffer,showPeriodInAgenda,sortAgendaPeriods,agendaItem,emptyMessage:agendaEmptyMessage()});
   }
   function mobileAgendaDayNavigation(weekId){
@@ -8827,7 +8827,6 @@
         boardAttribute:` data-week-board="${escapeHtml(w.id)}"`
       });
     }).join('');
-    if(document.body.classList.contains('publicAgendaDetailOpen')){const days=[...document.querySelectorAll('#weekPanels [data-agenda-day]')];focusPublicAgendaDay(days.some(day=>day.dataset.agendaDay===publicAgendaDay)?publicAgendaDay:days[0]?.dataset.agendaDay);}
     if(sectionSwitcher) sectionSwitcher.innerHTML = agendaSectionNavigation();
     bindAgendaSectionIndicator();
     placeAgendaWeekFilter();
@@ -9717,6 +9716,16 @@
     const points = filteredInspirationItems().map(ideaMapPoint).filter(Boolean);
     panel.outerHTML = ideaMapPanelMarkup(points);
     setActiveIdeaMapItem(activeIdeaMapKey, {scroll, emphasize});
+    if(ideaMapDetailKey && window.matchMedia('(min-width:981px)').matches){
+      requestAnimationFrame(() => {
+        const controls = document.querySelector('#tab-inspiratie .desktopStickyControls');
+        const top = (controls?.getBoundingClientRect().height || 0) + 8;
+        const mapTop = map.getBoundingClientRect().top;
+        // A click near the map bottom must not leave the detail header behind
+        // the sticky search controls. Only reveal it when it is obscured.
+        if(mapTop < top) window.scrollBy({top:mapTop-top,behavior:'instant'});
+      });
+    }
   }
   function syncIdeaMapPanelPresentation(){
     const panel = $('#ideaMap .ideaMapPanel');
@@ -11082,7 +11091,6 @@
     document.addEventListener('click', event => {
       const dayTarget = event.target.closest('[data-agenda-day-target]');
       if(dayTarget){
-        if(document.body.classList.contains('publicAgendaDetailOpen')){event.preventDefault();focusPublicAgendaDay(dayTarget.dataset.agendaDayTarget);return;}
         setActiveMobileAgendaDay(dayTarget.dataset.agendaDayTarget);
         const weekPanel = dayTarget.closest('.weekPanel');
         const day = [...(weekPanel || document).querySelectorAll('[data-agenda-day]')]
@@ -11204,7 +11212,7 @@
   });
   </script>
 <link rel="stylesheet" href="website-bestanden/select-controls.css?v=20261006-fixed-textareas-v2">
-<link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261007-public-agenda-detail">
+<link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261007-combined-add">
 <script src="website-bestanden/sheet-ui-shared.js?v=20261007-inline-actions"></script>
 </body>
 </html>

@@ -1308,3 +1308,19 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaMap .ideaMapActivityCount svg{display:none}
  #ideaMap .ideaMapPanel{top:16px!important;max-height:calc(100% - 32px)!important}
 }
+
+/* The map is a bounded card, not a full-height sheet. Keep its content in one
+   scroll flow so the shared sheet footer cannot cover the selected tab. */
+@media(min-width:981px){
+ #ideaMap .ideaMapPanel.isSingleDetail{background:var(--sheet-surface)!important;bottom:16px}
+ #ideaMap .activityMapHeader{pointer-events:auto;align-items:flex-start}
+ #ideaMap .activityMapHeader h3{overflow-wrap:anywhere}
+ #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{display:block!important;scroll-snap-type:none!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody{box-sizing:border-box;width:100%!important;max-width:none!important;min-width:0;overflow:visible!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody>.sharedIdeaCard{height:auto!important;max-height:none!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailActions{position:static!important;bottom:auto!important;margin-top:12px!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailTabs{flex:none;min-width:0;margin-top:4px!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailTabs [role="tabpanel"]{padding:10px 0 0!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailTabs [role="tabpanel"] p{margin-bottom:0!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailTabs [role="tab"]{min-width:0;padding-inline:4px;font-size:13px}
+}
