@@ -112,7 +112,7 @@ body.photoDetailOpen{overflow:hidden!important}
 /* Detail content uses the filter sheet shell and the familiar inset card styling. */
  .photoDetailPanel .ideaFilterSheetHeader{justify-content:flex-end;min-height:52px;padding:6px 16px;border-bottom:0;background:transparent}
 .photoDetailLayer .photoDetailPanel{display:grid;grid-template-rows:auto minmax(0,1fr)}
-.photoDetailPanel .photoDetailBody{padding:0 20px 24px!important;overflow-y:auto}
+.photoDetailPanel .photoDetailBody{padding:16px 20px 24px!important;overflow-y:auto}
 .photoDetailHero{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:18px}
 .photoDetailInfo{position:relative;padding:26px 0 0;overflow-wrap:anywhere}
 .photoDetailBadge{position:absolute;top:-18px;left:0;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:var(--theme-tint,#e5f2ef);color:var(--theme-ink,#315f6b);border:1px solid var(--theme-line,#e5ece5)}
@@ -136,7 +136,7 @@ body.photoDetailOpen{overflow:hidden!important}
  .photoDetailLayer.isDocked .ideaFilterSheetBackdrop{display:none}
  .photoDetailLayer.isDocked .photoDetailPanel{width:100%;max-width:100%;height:100%;inset:0}
 }
-@media(max-width:600px){.photoDetailPanel .photoDetailBody{padding:0 16px 24px!important}.photoDetailInfo h2{font-size:22px}}
+@media(max-width:600px){.photoDetailPanel .photoDetailBody{padding:16px 16px 24px!important}.photoDetailInfo h2{font-size:22px}}
 @media(min-width:1280px){.photoDetailLayer.isDocked .photoDetailPanel{position:absolute;width:480px;max-width:480px;left:0;right:0;top:0;bottom:0}}
 
 
@@ -1260,7 +1260,7 @@ body.photoDetailOpen{overflow:hidden!important}
     .ideaMapToolbarView{gap:7px;padding:0 13px;font-size:.78rem;font-weight:650;white-space:nowrap}
     .ideaMapToolbarButton:hover,.ideaMapToolbarView:hover{background:#fff;color:#168697}
 
- #ideaMap .ideaMapSingleCard.photoDetailBody{padding-top:0!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody{padding-top:12px!important}
  #ideaMap .ideaMapToolbar{width:min(620px,calc(100% - 100px))}
  #ideaMap .ideaMapPanel{top:72px!important;max-height:calc(100% - 88px)!important}
  #ideaMap .ideaMapPanel.isMinimized:not(.isSingleDetail){display:none!important}

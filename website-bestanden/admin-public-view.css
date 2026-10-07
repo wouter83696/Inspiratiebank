@@ -6625,7 +6625,7 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
 /* Detail content uses the filter sheet shell and the familiar inset card styling. */
  .photoDetailPanel .ideaFilterSheetHeader{justify-content:flex-end;min-height:52px;padding:6px 16px;border-bottom:0;background:transparent}
 .photoDetailLayer .photoDetailPanel{display:grid;grid-template-rows:auto minmax(0,1fr)}
-.photoDetailPanel .photoDetailBody{padding:0 20px 24px!important;overflow-y:auto}
+.photoDetailPanel .photoDetailBody{padding:16px 20px 24px!important;overflow-y:auto}
 .photoDetailHero{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;border-radius:18px}
 .photoDetailInfo{position:relative;padding:26px 0 0;overflow-wrap:anywhere}
 .photoDetailBadge{position:absolute;top:-18px;left:0;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:var(--theme-tint,#e5f2ef);color:var(--theme-ink,#315f6b);border:1px solid var(--theme-line,#e5ece5)}
@@ -6649,7 +6649,7 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
  .photoDetailLayer.isDocked .ideaFilterSheetBackdrop{display:none}
  .photoDetailLayer.isDocked .photoDetailPanel{width:100%;max-width:100%;height:100%;inset:0}
 }
-@media(max-width:600px){.photoDetailPanel .photoDetailBody{padding:0 16px 24px!important}.photoDetailInfo h2{font-size:22px}}
+@media(max-width:600px){.photoDetailPanel .photoDetailBody{padding:16px 16px 24px!important}.photoDetailInfo h2{font-size:22px}}
 @media(min-width:1280px){.photoDetailLayer.isDocked .photoDetailPanel{position:absolute;width:480px;max-width:480px;left:0;right:0;top:0;bottom:0}}
 
 
@@ -7773,7 +7773,7 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
     .ideaMapToolbarView{gap:7px;padding:0 13px;font-size:.78rem;font-weight:650;white-space:nowrap}
     .ideaMapToolbarButton:hover,.ideaMapToolbarView:hover{background:#fff;color:#168697}
 
- #ideaMap .ideaMapSingleCard.photoDetailBody{padding-top:0!important}
+ #ideaMap .ideaMapSingleCard.photoDetailBody{padding-top:12px!important}
  #ideaMap .ideaMapToolbar{width:min(620px,calc(100% - 100px))}
  #ideaMap .ideaMapPanel{top:72px!important;max-height:calc(100% - 88px)!important}
  #ideaMap .ideaMapPanel.isMinimized:not(.isSingleDetail){display:none!important}
@@ -8085,24 +8085,26 @@ textarea{resize:none!important}
 
 #linkAddForm .teamFormGrid[hidden]{display:none!important}
 #agendaSourceSheetLayer .agendaSourceSheet{display:flex!important;flex-direction:column}
-#agendaSourceSheetLayer .agendaSourceSheet>.ideaSubmitSheetBody{flex:1;min-height:0;overflow:auto}
+#agendaSourceSheetLayer .agendaSourceSheet>.ideaSubmitSheetBody{flex:1;min-height:0;overflow:auto;padding-top:4px}
+:scope :scope #agendaSourceSheetLayer .agendaAddModeNav{margin-bottom:0}
+:scope :scope #agendaSourceSheetLayer .ideaSubmitSheetIntro{margin-top:0}
 #agendaSourceSheetLayer .agendaSourceSheet>:is(header,footer,.agendaAddModeNav){flex-shrink:0}
 @media(min-width:981px) and (hover:hover) and (pointer:fine){:scope .adminCombinedAddTabs button:hover{color:#315f6b!important}}
 /* Give tab content a consistent, comfortable distance from the navigation. */
 :scope :scope :is(#ideaMap,.photoDetailPanel,.publicAgendaDetailLayer) .photoDetailBody .sharedIdeaCard .photoDetailTabs [role=tabpanel]{padding-top:20px!important}
 
-/* Mobile uses the same filter controls and right-hand sheet as desktop. */
+/* Mobile sheets enter from below; tablet retains the narrow side panel. */
 @media(max-width:640px){
- :scope :scope .ideaFilterSheetLayer{align-items:stretch!important;justify-content:flex-end!important}
- :scope :scope .ideaFilterSheetLayer>.ideaFilterSheet{height:100dvh!important;max-height:100dvh!important;border-radius:20px 0 0 20px!important;transform:translateX(100%)!important}
- :scope :scope .ideaFilterSheetLayer.isOpen>.ideaFilterSheet{transform:translateX(0)!important}
+ :scope :scope .ideaFilterSheetLayer{align-items:flex-end!important;justify-content:flex-start!important}
+ :scope :scope .ideaFilterSheetLayer>.ideaFilterSheet{width:100%!important;height:94dvh!important;max-height:94dvh!important;border-radius:24px 24px 0 0!important;transform:translateY(100%)!important}
+ :scope :scope .ideaFilterSheetLayer.isOpen>.ideaFilterSheet{transform:translateY(0)!important}
  :scope :scope .ideaFilterSheet .ideaFilterSection{gap:8px;padding-bottom:16px;margin-bottom:16px}
  :scope :scope .ideaFilterSheet :is(.customSelectButton,.customSelectOption){min-height:44px}
  :scope :scope .ideaFilterSheet .ideaFilterChip{min-height:40px}
  :scope :scope #ideaMap .ideaMapActivityCount>svg{display:none}
  :scope :scope :is(#ideaSubmitSheetLayer,#agendaSourceSheetLayer) .ideaSubmitSheetBody{padding-top:8px}
  :scope :scope #ideaSubmitSheetLayer .sharedEditorToolbar{margin-bottom:8px}
- :scope :scope #agendaSourceSheetLayer .agendaAddModeNav{margin-bottom:8px}
+ :scope :scope #agendaSourceSheetLayer .agendaSourceSheet>.ideaSubmitSheetBody{padding-top:4px}
  :scope :scope :is(#ideaSubmitSheetLayer,#agendaSourceSheetLayer) .ideaSubmitSheetIntro{margin:0 0 16px;line-height:1.5}
 }
 

@@ -219,24 +219,26 @@ body .adminCombinedAddTabs button::before,body .adminCombinedAddTabs button::aft
 
 #linkAddForm .teamFormGrid[hidden]{display:none!important}
 #agendaSourceSheetLayer .agendaSourceSheet{display:flex!important;flex-direction:column}
-#agendaSourceSheetLayer .agendaSourceSheet>.ideaSubmitSheetBody{flex:1;min-height:0;overflow:auto}
+#agendaSourceSheetLayer .agendaSourceSheet>.ideaSubmitSheetBody{flex:1;min-height:0;overflow:auto;padding-top:4px}
+html body #agendaSourceSheetLayer .agendaAddModeNav{margin-bottom:0}
+html body #agendaSourceSheetLayer .ideaSubmitSheetIntro{margin-top:0}
 #agendaSourceSheetLayer .agendaSourceSheet>:is(header,footer,.agendaAddModeNav){flex-shrink:0}
 @media(min-width:981px) and (hover:hover) and (pointer:fine){body .adminCombinedAddTabs button:hover{color:#315f6b!important}}
 /* Give tab content a consistent, comfortable distance from the navigation. */
 html body :is(#ideaMap,.photoDetailPanel,.publicAgendaDetailLayer) .photoDetailBody .sharedIdeaCard .photoDetailTabs [role=tabpanel]{padding-top:20px!important}
 
-/* Mobile uses the same filter controls and right-hand sheet as desktop. */
+/* Mobile sheets enter from below; tablet retains the narrow side panel. */
 @media(max-width:640px){
- html body .ideaFilterSheetLayer{align-items:stretch!important;justify-content:flex-end!important}
- html body .ideaFilterSheetLayer>.ideaFilterSheet{height:100dvh!important;max-height:100dvh!important;border-radius:20px 0 0 20px!important;transform:translateX(100%)!important}
- html body .ideaFilterSheetLayer.isOpen>.ideaFilterSheet{transform:translateX(0)!important}
+ html body .ideaFilterSheetLayer{align-items:flex-end!important;justify-content:flex-start!important}
+ html body .ideaFilterSheetLayer>.ideaFilterSheet{width:100%!important;height:94dvh!important;max-height:94dvh!important;border-radius:24px 24px 0 0!important;transform:translateY(100%)!important}
+ html body .ideaFilterSheetLayer.isOpen>.ideaFilterSheet{transform:translateY(0)!important}
  html body .ideaFilterSheet .ideaFilterSection{gap:8px;padding-bottom:16px;margin-bottom:16px}
  html body .ideaFilterSheet :is(.customSelectButton,.customSelectOption){min-height:44px}
  html body .ideaFilterSheet .ideaFilterChip{min-height:40px}
  html body #ideaMap .ideaMapActivityCount>svg{display:none}
  html body :is(#ideaSubmitSheetLayer,#agendaSourceSheetLayer) .ideaSubmitSheetBody{padding-top:8px}
  html body #ideaSubmitSheetLayer .sharedEditorToolbar{margin-bottom:8px}
- html body #agendaSourceSheetLayer .agendaAddModeNav{margin-bottom:8px}
+ html body #agendaSourceSheetLayer .agendaSourceSheet>.ideaSubmitSheetBody{padding-top:4px}
  html body :is(#ideaSubmitSheetLayer,#agendaSourceSheetLayer) .ideaSubmitSheetIntro{margin:0 0 16px;line-height:1.5}
 }
 
