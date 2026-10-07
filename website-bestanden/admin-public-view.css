@@ -3565,7 +3565,7 @@
 }
 
 /* A single time accent across calendar cards, ongoing offers and detail sheets. */
-:scope{--agenda-time-color:#356f7b}
+:scope{--agenda-time-color:#07345e}
 :scope :scope .agendaTime{color:var(--agenda-time-color)!important;font-weight:600}
 
 /* Canonieke inspiratieweergaven voor publiek en beheer. */
