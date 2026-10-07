@@ -55,7 +55,7 @@
     });
     const figure=document.createElement('figure');figure.className='sharedSheetPhoto';title.after(figure);
     const img=document.createElement('img');img.alt='Voorbeeld van je activiteit';img.hidden=true;figure.append(img);
-    const picker=photoPicker(figure,upload,{onError:message=>{document.getElementById('teamIdeaStatus').textContent=message;}});
+    const picker=photoPicker(figure,upload,{required:true,onError:message=>{document.getElementById('teamIdeaStatus').textContent=message;}});
     let objectUrl;
     const reset=()=>{if(objectUrl)URL.revokeObjectURL(objectUrl);objectUrl=null;img.hidden=true;picker.hidden=false;img.removeAttribute('src');};
     upload.addEventListener('change',()=>{reset();const file=upload.files?.[0];if(file){objectUrl=URL.createObjectURL(file);img.src=objectUrl;img.hidden=false;picker.hidden=true;}});
@@ -72,7 +72,9 @@
     const status=document.getElementById('teamIdeaImageSuggestStatus');
     const actions=suggestion.querySelector('.ideaImageSuggestActions');
     top.append(...actions.children);actions.remove();
-    top.after(status,figure);
+    const photoBody=document.createElement('div');photoBody.className='sharedPhotoBody';
+    top.after(photoBody);photoBody.append(status,figure,document.getElementById('teamIdeaImageSuggestPreview'));
+    document.getElementById('teamIdeaSkipImage').hidden=true;
     const uploadField=upload.closest('label');
     uploadField.hidden=true;
     document.getElementById('teamIdeaReplaceImage').textContent='Upload foto';
