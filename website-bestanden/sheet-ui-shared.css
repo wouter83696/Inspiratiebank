@@ -235,3 +235,5 @@ body .adminCombinedAddTabs button::before{display:none}
 #agendaSourceSheetLayer .agendaSourceSheet>.ideaSubmitSheetBody{flex:1;min-height:0;overflow:auto}
 #agendaSourceSheetLayer .agendaSourceSheet>:is(header,footer,.agendaAddModeNav){flex-shrink:0}
 @media(min-width:981px) and (hover:hover) and (pointer:fine){body .adminCombinedAddTabs button:hover{color:#315f6b!important}}
+/* Give tab content a consistent, comfortable distance from the navigation. */
+html body :is(#ideaMap,.photoDetailPanel,.publicAgendaDetailLayer) .photoDetailBody .sharedIdeaCard .photoDetailTabs [role=tabpanel]{padding-top:20px!important}
