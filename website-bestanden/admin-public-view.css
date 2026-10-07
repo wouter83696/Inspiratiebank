@@ -7981,4 +7981,18 @@ textarea{resize:none!important}
 
 .sharedSectionNav button.isActive,.photoDetailTabs [role=tab][aria-selected=true],#adminSourcesSheet .adminSourceTabs button[aria-selected=true]{border-bottom-color:#236875!important;color:#236875!important}
 
+/* Rounded hover surface and a separate, straight selection line. */
+:scope :is(.sharedSectionNav button,.photoDetailTabs [role=tab],#adminSourcesSheet .adminSourceTabs button){position:relative;isolation:isolate;border-bottom-color:transparent!important;background:transparent!important;border-radius:10px!important}
+:scope :is(.sharedSectionNav button,.photoDetailTabs [role=tab],#adminSourcesSheet .adminSourceTabs button)::before{content:"";position:absolute;inset:3px 0 5px;border-radius:10px;z-index:-1;background:transparent;pointer-events:none}
+:scope :is(.sharedSectionNav button,.photoDetailTabs [role=tab],#adminSourcesSheet .adminSourceTabs button)::after{content:"";position:absolute;bottom:-2px;left:0;right:0;height:2px;background:transparent;pointer-events:none}
+:scope :is(.sharedSectionNav button.isActive,.photoDetailTabs [role=tab][aria-selected=true],#adminSourcesSheet .adminSourceTabs button[aria-selected=true])::after{background:#236875}
+:scope .photoDetailTabs [role=tablist]{display:flex;gap:8px;border-bottom:1px solid var(--sheet-line)}
+:scope .photoDetailTabs [role=tab]{display:inline-flex;flex:1;align-items:center;justify-content:center;gap:6px;min-width:0;min-height:42px;font:600 13px/1.4 Manrope,system-ui,sans-serif!important;padding:8px 4px!important;color:#63858b}
+:scope .photoDetailTabs [role=tab] svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+@media(min-width:981px) and (hover:hover) and (pointer:fine){
+ :scope :is(.sharedSectionNav button,.photoDetailTabs [role=tab],#adminSourcesSheet .adminSourceTabs button):hover{background:transparent!important}
+ :scope :is(.sharedSectionNav button,.photoDetailTabs [role=tab],#adminSourcesSheet .adminSourceTabs button):hover::before{background:rgba(168,225,221,.16)}
+}
+:scope .sharedSectionToolbar .sharedSectionNav>button.isActive,:scope .sharedSectionNav button.isActive,:scope .photoDetailTabs [role=tab][aria-selected=true],:scope #adminSourcesSheet .adminSourceTabs button[aria-selected=true]{border-bottom-color:transparent!important}
+
 }

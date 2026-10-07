@@ -174,6 +174,8 @@
       while(materials.firstChild)panel.append(materials.firstChild);
       tabs.append(panel);
     }
+    const menuIcons=['<path d="M5 5h14M5 10h14M5 15h10M5 20h8"/>','<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/>','<path d="m3 7 9-4 9 4-9 4-9-4Zm0 0v10l9 4 9-4V7M12 11v10"/>'];
+    tabs.querySelectorAll('[role="tab"]').forEach((button,index)=>{const label=button.textContent;button.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+menuIcons[index]+'</svg><span>'+label+'</span>';});
     card.insertBefore(tabs,actions);
     const route=card.querySelector('.photoRouteChoices');
     if(route){
