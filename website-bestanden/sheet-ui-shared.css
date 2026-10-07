@@ -220,7 +220,7 @@ body .adminCombinedAddTabs button::before,body .adminCombinedAddTabs button::aft
 #linkAddForm .teamFormGrid[hidden]{display:none!important}
 #agendaSourceSheetLayer .agendaSourceSheet{display:flex!important;flex-direction:column}
 #agendaSourceSheetLayer .agendaSourceSheet>.ideaSubmitSheetBody{flex:1;min-height:0;overflow:auto;padding-top:4px}
-html body #agendaSourceSheetLayer .agendaAddModeNav{margin-bottom:0}
+html body #agendaSourceSheetLayer .agendaAddModeNav{margin-bottom:16px}
 html body #agendaSourceSheetLayer .ideaSubmitSheetIntro{margin-top:0}
 #agendaSourceSheetLayer .agendaSourceSheet>:is(header,footer,.agendaAddModeNav){flex-shrink:0}
 @media(min-width:981px) and (hover:hover) and (pointer:fine){body .adminCombinedAddTabs button:hover{color:#315f6b!important}}
@@ -252,3 +252,13 @@ html body :is(#ideaMap,.photoDetailPanel,.publicAgendaDetailLayer) .photoDetailB
 body #agendaSourceSheetLayer .agendaAddModeNav{display:flex;flex-shrink:0;gap:8px;margin:12px 20px 16px;padding:0;border:0;border-bottom:1px solid var(--sheet-line);background:transparent}
 body #agendaSourceSheetLayer .agendaAddModeNav>button{flex:1;min-width:0;height:42px;padding:8px 6px;border:0;font:600 13px/1.4 Manrope,system-ui,sans-serif;color:#63858b;cursor:pointer}
 body #agendaSourceSheetLayer .agendaAddModeNav>button.isActive{color:#236875;font-weight:700}
+
+/* One mobile rhythm: title, navigation/content, then a readable content gap. */
+@media(max-width:640px){
+ html body .sharedPublicSheetLayer .sharedSheetHeader{min-height:64px!important;padding:16px 20px 12px!important;display:flex;align-items:center;gap:12px}
+ html body .sharedPublicSheetLayer .sharedSheetHeader :is(h2,h3){flex:1;min-width:0}
+ html body #agendaSourceSheetLayer .agendaAddModeNav{margin-top:8px;margin-bottom:16px}
+ html body #ideaSubmitSheetLayer .sharedEditorToolbar{margin-top:8px;margin-bottom:16px}
+ html body :is(#ideaSubmitSheetLayer,#agendaSourceSheetLayer) .sharedSheetBody{padding-top:0!important}
+ html body .sharedPublicSheetLayer .ideaFilterSheetBody:not(.photoDetailBody){padding:8px 20px 24px!important}
+}
