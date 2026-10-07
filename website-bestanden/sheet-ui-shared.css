@@ -213,3 +213,14 @@ body .sharedSectionToolbar .sharedSectionNav>button.isActive,body .sharedSection
 .adminCombinedSourceBody #linkForm label{display:grid;gap:8px}
 
 .adminCombinedAddTabs[hidden],.adminCombinedSourceBody[hidden]{display:none!important}
+
+/* Creation mode and section navigation have distinct visual roles. */
+#agendaEditModal.adminAgendaSheet .adminEditorCard.isCombinedAdd{display:flex;flex-direction:column}
+.isCombinedAdd>.panelHead,.isCombinedAdd>.adminAgendaToolbar{flex-shrink:0}
+.isCombinedAdd>#agendaEditForm{flex:1;min-height:0}
+body .isCombinedAdd>.adminCombinedAddTabs{align-self:flex-start;width:auto;margin:12px 20px 8px;padding:3px;gap:2px;border:0;border-radius:12px;background:rgba(229,242,239,.45)}
+body .adminCombinedAddTabs button{flex:none;min-height:34px;padding:6px 18px;border-radius:9px!important}
+body .adminCombinedAddTabs button[aria-selected=true]{background:#dff1ed!important;color:#236875!important}
+body .adminCombinedAddTabs button::after{display:none}
+.isCombinedAdd>.adminAgendaToolbar{margin-bottom:12px!important}
+.isCombinedAdd .adminAgendaEditBody{padding-top:20px}
