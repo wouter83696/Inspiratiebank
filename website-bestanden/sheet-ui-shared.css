@@ -113,3 +113,8 @@
  #ideaFilterSheetLayer>.ideaFilterSheet{left:auto!important;right:0!important;border-right:0!important;border-left:1px solid var(--sheet-line)!important;border-radius:20px 0 0 20px!important;transform:translateX(100%)!important;box-shadow:-12px 0 32px rgba(49,95,107,.08)!important}
  #ideaFilterSheetLayer.isOpen>.ideaFilterSheet{transform:translateX(0)!important}
 }
+
+/* Match the public desktop navigation bar's 60px baseline. */
+@media(min-width:981px){
+ .sharedPublicSheetLayer>.sharedSheet>.sharedSheetHeader{height:60px!important;min-height:60px!important;flex:0 0 60px;padding-block:10px!important;display:flex;align-items:center}
+}
