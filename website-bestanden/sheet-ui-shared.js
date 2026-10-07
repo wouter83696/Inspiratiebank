@@ -129,6 +129,30 @@
     });
     fields[1].before(fields[0]);
   }
+  function publicAgendaAdd(form){
+    const layer=document.getElementById('agendaSourceSheetLayer'),panel=layer.querySelector('aside');
+    document.getElementById('agendaSourceSheetTitle').textContent='Toevoegen aan UIT-agenda';
+    const nav=document.createElement('div');nav.className='adminCombinedAddTabs agendaAddModeNav';nav.setAttribute('role','tablist');nav.setAttribute('aria-label','Wat wil je toevoegen?');
+    nav.innerHTML='<button type="button" role="tab" aria-selected="true">Activiteit</button><button type="button" role="tab" aria-selected="false">Bron</button>';
+    panel.querySelector('header').after(nav);
+    const source=form.querySelector('.teamFormGrid');
+    const activity=document.createElement('div');activity.className='teamFormGrid';activity.id='publicAgendaActivityFields';
+    activity.innerHTML=[['Title','Titel','text'],['Url','Website','url'],['Date','Datum of periode','text'],['Time','Tijd','text'],['Where','Locatie','text']].map(([key,label,type])=>`<label class="teamField wide"><span>${label}</span><input id="publicAgenda${key}" type="${type}" ${key==='Time'?'placeholder="Bijv. 19.00 - 23.00"':''} required></label>`).join('');source.before(activity);
+    const intro=layer.querySelector('.ideaSubmitSheetIntro');
+    const submit=panel.querySelector('button[type=submit]');
+    const select=mode=>{
+      form.dataset.agendaMode=mode;const isSource=mode==='source';source.hidden=!isSource;activity.hidden=isSource;
+      source.querySelectorAll('input').forEach(input=>input.disabled=!isSource);activity.querySelectorAll('input').forEach(input=>input.disabled=isSource);
+      [...nav.children].forEach((button,i)=>{const active=i===Number(isSource);button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});
+      submit.textContent=isSource?'Bron toevoegen':'Activiteit toevoegen';
+      intro.textContent=isSource?'Deel een website of agenda. We controleren de bron voordat deze wordt toegevoegd.':'Deel een activiteit met datum, tijd en locatie. We controleren je inzending voordat deze verschijnt.';
+    };
+    [...nav.children].forEach((button,i)=>button.addEventListener('click',()=>select(i?'source':'activity')));
+    nav.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const index=event.key==='Home'?0:event.key==='End'?1:Number(form.dataset.agendaMode!=='source');select(index?'source':'activity');nav.children[index].focus();});
+    let wasOpen=false;
+    new MutationObserver(()=>{const open=layer.classList.contains('isOpen');if(open&&!wasOpen){wasOpen=true;select('activity');}else wasOpen=open;}).observe(layer,{attributes:true,attributeFilter:['class']});
+    select('activity');
+  }
   function setup(){
     [['ideaSubmitSheetLayer','teamIdeaForm','data-idea-submit-close'],['agendaSourceSheetLayer','linkAddForm','data-agenda-source-close']].forEach(([id,formId,close])=>{
       const layer=document.getElementById(id),form=document.getElementById(formId);
@@ -143,7 +167,7 @@
       DiscoveryViewShared.syncDropdowns();
     }
     const publicSource=document.getElementById('linkAddForm');
-    if(publicSource)sourceFields(publicSource,{name:'linkNameInput',url:'linkUrlInput'});
+    if(publicSource){sourceFields(publicSource,{name:'linkNameInput',url:'linkUrlInput'});publicAgendaAdd(publicSource);}
     const adminSource=document.getElementById('linkForm');
     if(adminSource)sourceFields(adminSource,{name:'linkName',url:'linkUrl'});
     const materials=document.getElementById('teamIdeaSuppliesInput');
