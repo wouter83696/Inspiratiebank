@@ -191,8 +191,8 @@ body .sharedSectionToolbar .sharedSectionNav>button.isActive,body .sharedSection
 .publicAgendaDetailLayer{z-index:1190}
 .publicAgendaDetailLayer .sharedSheetHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .publicAgendaDetailBody{padding:16px 20px 24px!important}
-.publicAgendaDetailBody .publicAgendaCategory{height:40px;position:relative}
-.publicAgendaDetailBody .publicAgendaCategory .ideaImageDomainBadge{position:static!important}
+.publicAgendaDetailBody .publicAgendaCategory{position:relative}
+.publicAgendaDetailBody .sharedIdeaCard .cardMetaBlock{margin-left:0!important;max-width:100%!important}
 .publicAgendaDetailBody .sharedIdeaCard .cardMetaBlock{flex-wrap:wrap!important;overflow:visible;white-space:normal}
 .publicAgendaDetailBody .sharedIdeaCard .cardMetaBlock .pill{white-space:normal}
 .publicAgendaDetailBody .photoDetailActions{position:static!important}
