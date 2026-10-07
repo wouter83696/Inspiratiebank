@@ -43,6 +43,7 @@
   function editorToolbar(header,label='Activiteit beheren'){
     const toolbar=document.createElement('div');toolbar.className='adminEditToolbar sharedEditorToolbar';toolbar.setAttribute('role','group');toolbar.setAttribute('aria-label',label);header.after(toolbar);return toolbar;
   }
+  const sectionActionCleanup=new WeakMap();
   function sectionNavigation(toolbar,definitions){
     const nav=document.createElement('div');nav.className='sharedSectionNav';nav.setAttribute('role','group');nav.setAttribute('aria-label','Secties');
     definitions.forEach(([button,label])=>{
@@ -53,6 +54,18 @@
     });
     definitions[0]?.[0].classList.add('isActive');definitions[0]?.[0].setAttribute('aria-current','true');
     toolbar.prepend(nav);toolbar.classList.add('sharedSectionToolbar');
+    const panel=toolbar.parentElement,header=toolbar.previousElementSibling;
+    sectionActionCleanup.get(panel)?.();
+    header?.querySelector('.sharedSectionActions')?.remove();
+    const actions=document.createElement('div');actions.className='sharedSectionActions';actions.setAttribute('role','group');actions.setAttribute('aria-label','Beheeracties');
+    [...toolbar.children].filter(child=>child!==nav).forEach(control=>actions.append(control));
+    if(actions.children.length){
+      const mobile=matchMedia('(max-width:640px)');
+      const place=()=>{header?.classList.toggle('hasSectionActions',mobile.matches);if(mobile.matches&&header)header.append(actions);else toolbar.append(actions);};
+      mobile.addEventListener('change',place);place();
+      sectionActionCleanup.set(panel,()=>{mobile.removeEventListener('change',place);actions.remove();header?.classList.remove('hasSectionActions');});
+    }
+
   }
   function publicActivityPreview(){
     const form=document.getElementById('teamIdeaForm');if(!form)return;
