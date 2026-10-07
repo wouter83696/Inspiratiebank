@@ -6473,6 +6473,9 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
 }
 /* Mobile hero typography follows the compact UIT-agenda heading on both pages. */
 @media(max-width:640px){
+ :scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel) .tabHero{
+  min-height:220px!important;height:auto!important;padding-block:32px!important;
+ }
  :scope :scope :is(:scope#inspirationAdminPanel,:scope#agendaReviewPanel) .tabHero .tabHeroTitle{
   font-size:clamp(1.95rem,8.3vw,2.3rem)!important;
   font-weight:500!important;line-height:1.04!important;letter-spacing:0!important;
@@ -8089,5 +8092,20 @@ textarea{resize:none!important}
 @media(min-width:981px) and (hover:hover) and (pointer:fine){:scope .adminCombinedAddTabs button:hover{color:#315f6b!important}}
 /* Give tab content a consistent, comfortable distance from the navigation. */
 :scope :scope :is(#ideaMap,.photoDetailPanel,.publicAgendaDetailLayer) .photoDetailBody .sharedIdeaCard .photoDetailTabs [role=tabpanel]{padding-top:20px!important}
+
+/* Mobile uses the same filter controls and right-hand sheet as desktop. */
+@media(max-width:640px){
+ :scope :scope .ideaFilterSheetLayer{align-items:stretch!important;justify-content:flex-end!important}
+ :scope :scope .ideaFilterSheetLayer>.ideaFilterSheet{height:100dvh!important;max-height:100dvh!important;border-radius:20px 0 0 20px!important;transform:translateX(100%)!important}
+ :scope :scope .ideaFilterSheetLayer.isOpen>.ideaFilterSheet{transform:translateX(0)!important}
+ :scope :scope .ideaFilterSheet .ideaFilterSection{gap:8px;padding-bottom:16px;margin-bottom:16px}
+ :scope :scope .ideaFilterSheet :is(.customSelectButton,.customSelectOption){min-height:44px}
+ :scope :scope .ideaFilterSheet .ideaFilterChip{min-height:40px}
+ :scope :scope #ideaMap .ideaMapActivityCount>svg{display:none}
+ :scope :scope :is(#ideaSubmitSheetLayer,#agendaSourceSheetLayer) .ideaSubmitSheetBody{padding-top:8px}
+ :scope :scope #ideaSubmitSheetLayer .sharedEditorToolbar{margin-bottom:8px}
+ :scope :scope #agendaSourceSheetLayer .agendaAddModeNav{margin-bottom:8px}
+ :scope :scope :is(#ideaSubmitSheetLayer,#agendaSourceSheetLayer) .ideaSubmitSheetIntro{margin:0 0 16px;line-height:1.5}
+}
 
 }
