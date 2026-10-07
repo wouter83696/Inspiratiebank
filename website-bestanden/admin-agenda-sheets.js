@@ -220,8 +220,8 @@
  window.AdminSources.saved=()=>{if(!combinedAdd){savedSource();return;}beginSourceEdit();selectAddTab(true);};
  new MutationObserver(()=>{const button=footer.querySelector('button[type=submit]');if(combinedAdd&&!button.disabled)button.textContent='Activiteit toevoegen';}).observe(footer.querySelector('button[type=submit]'),{attributes:true,attributeFilter:['disabled']});
  new MutationObserver(()=>{if(combinedAdd&&!saveSource.disabled)saveSource.textContent='Bron toevoegen';}).observe(saveSource,{attributes:true,attributeFilter:['disabled']});
- $('addAdminAgendaBtn').querySelector('span').textContent='Toevoegen';
- $('addAdminAgendaBtn').setAttribute('aria-label','Toevoegen');$('addAdminAgendaBtn').title='Toevoegen';
+ $('addAdminAgendaBtn').querySelector('span').textContent='Item toevoegen';
+ $('addAdminAgendaBtn').setAttribute('aria-label','Item toevoegen');$('addAdminAgendaBtn').title='Item toevoegen';
  addSource.remove();
  $('agendaSelectionToolbar').hidden=true;
 })();

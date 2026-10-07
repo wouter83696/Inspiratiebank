@@ -175,10 +175,11 @@
     const managing=sourcing||!!document.getElementById('adminAgendaManagerSheet')&&!document.getElementById('adminAgendaManagerSheet').hidden;
     layer.hidden=idea.hidden&&!detail&&agenda.hidden&&!managing;
     AdminVisual.preview.hidden=true;
-    const modal=(!idea.hidden||detail||!agenda.hidden||managing)&&matchMedia('(max-width:1100px)').matches;
+    const addingAgenda=!agenda.hidden&&!!editingAgendaSource?.isNew;
+    const modal=addingAgenda||((!idea.hidden||detail||!agenda.hidden||managing)&&matchMedia('(max-width:1100px)').matches);
     const open=modal;
     layer.setAttribute('role',modal?'dialog':'region');
-    layer.setAttribute('aria-label',!agenda.hidden?'Agenda-item bewerken':sourcing?'Bronnen':managing?'Agenda beheren':!idea.hidden?'Activiteit bewerken':'Uitgelicht beheren');
+    layer.setAttribute('aria-label',!agenda.hidden?(addingAgenda?'Toevoegen aan UIT-agenda':'Agenda-item bewerken'):sourcing?'Bronnen':managing?'Agenda beheren':!idea.hidden?'Activiteit bewerken':'Uitgelicht beheren');
     if(modal)layer.setAttribute('aria-modal','true');else layer.removeAttribute('aria-modal');
     agenda.setAttribute('role',modal?'dialog':'region');agenda.removeAttribute('aria-modal');
     layer.classList.toggle('isEditing',!layer.hidden);
