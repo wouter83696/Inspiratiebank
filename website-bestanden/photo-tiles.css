@@ -1301,3 +1301,10 @@ body.photoDetailOpen{overflow:hidden!important}
  #tab-weken:not(.adminPublicSurface) #weekPanels .weekPanel:not(.expanded) .agendaItemMeta{font-size:12px;line-height:1.25;margin-top:4px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
  #tab-weken:not(.adminPublicSurface) #weekPanels .weekPanel:not(.expanded) .agendaMore{flex:none;min-height:28px;margin:0;padding:4px;font-size:12px}
 }
+
+/* Desktop already has search and view controls above the map. */
+@media(min-width:981px){
+ #ideaMap .ideaMapToolbar{display:none!important}
+ #ideaMap .ideaMapActivityCount svg{display:none}
+ #ideaMap .ideaMapPanel{top:16px!important;max-height:calc(100% - 32px)!important}
+}

@@ -7797,6 +7797,13 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
  :scope#agendaReviewPanel:not(.adminPublicSurface) #agendaReviewList .weekPanel:not(.expanded) .agendaMore{flex:none;min-height:28px;margin:0;padding:4px;font-size:12px}
 }
 
+/* Desktop already has search and view controls above the map. */
+@media(min-width:981px){
+ #ideaMap .ideaMapToolbar{display:none!important}
+ #ideaMap .ideaMapActivityCount svg{display:none}
+ #ideaMap .ideaMapPanel{top:16px!important;max-height:calc(100% - 32px)!important}
+}
+
 /* Shared compact select appearance, based on the management filter sheet. */
 .customSelect .customSelectButton{
   box-sizing:border-box;position:relative;width:100%;height:auto!important;min-height:40px!important;
