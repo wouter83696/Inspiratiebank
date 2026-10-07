@@ -8004,7 +8004,7 @@ textarea{resize:none!important}
 :scope :is(.sharedSectionNav button,.photoDetailTabs [role=tab],#adminSourcesSheet .adminSourceTabs button)::after{content:"";position:absolute;bottom:-2px;left:0;right:0;height:2px;background:transparent;pointer-events:none}
 :scope :is(.sharedSectionNav button.isActive,.photoDetailTabs [role=tab][aria-selected=true],#adminSourcesSheet .adminSourceTabs button[aria-selected=true])::after{background:#236875}
 :scope .photoDetailTabs [role=tablist]{display:flex;gap:8px;border-bottom:1px solid var(--sheet-line)}
-:scope .photoDetailTabs [role=tab]{display:inline-flex;flex:1;align-items:center;justify-content:center;gap:6px;min-width:0;min-height:42px;font:600 13px/1.4 Manrope,system-ui,sans-serif!important;padding:8px 4px!important;color:#63858b}
+:scope .photoDetailTabs [role=tab]{display:inline-flex;flex:0 0 auto;align-items:center;justify-content:center;gap:6px;min-width:0;min-height:42px;font:600 13px/1.4 Manrope,system-ui,sans-serif!important;padding:8px!important;color:#63858b}
 :scope .photoDetailTabs [role=tab] svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 @media(min-width:981px) and (hover:hover) and (pointer:fine){
  :scope :is(.sharedSectionNav button,.photoDetailTabs [role=tab],#adminSourcesSheet .adminSourceTabs button):hover{background:transparent!important}
