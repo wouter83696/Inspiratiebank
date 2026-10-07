@@ -49,10 +49,16 @@
     const title=field('Title').closest('label'),upload=field('Image');
     const toolbar=editorToolbar(form.closest('aside').querySelector('header'),'Activiteit toevoegen');
     const icons=['<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8" cy="9" r="2"/><path d="m4 18 6-6 4 4 3-3 4 5"/>','<path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="2"/><circle cx="15" cy="17" r="2"/>','<path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>'];
+    toolbar.classList.add('sharedSectionNav');
+    const sectionTargets=()=>[document.getElementById('teamIdeaImageSuggest'),field('Domain').closest('label'),field('Location').closest('label')];
+    const selectSection=index=>[...toolbar.children].forEach((button,i)=>{button.classList.toggle('isActive',i===index);if(i===index)button.setAttribute('aria-current','true');else button.removeAttribute('aria-current');});
     ['Foto','Kenmerken','Locatie'].forEach((label,index)=>{
-      const button=document.createElement('button');button.type='button';button.className='ideaFilterSheetAction secondary';button.title=label;button.setAttribute('aria-label',label);button.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+icons[index]+'</svg>';
-      button.addEventListener('click',()=>{if(!index)upload.click();else field(index===1?'Domain':'Location').closest('label').scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});});toolbar.append(button);
+      const button=document.createElement('button');button.type='button';button.className='ideaFilterSheetAction secondary';button.title=label;button.setAttribute('aria-label',label);button.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+icons[index]+'</svg><span>'+label+'</span>';
+      button.addEventListener('click',()=>{selectSection(index);sectionTargets()[index].scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});});toolbar.append(button);
     });
+    selectSection(0);
+    const scrollBody=form.closest('.ideaSubmitSheetBody');
+    scrollBody?.addEventListener('scroll',()=>{const edge=scrollBody.getBoundingClientRect().top+80;let active=0;sectionTargets().forEach((target,index)=>{if(target.getBoundingClientRect().top<=edge)active=index;});selectSection(active);},{passive:true});
     const figure=document.createElement('figure');figure.className='sharedSheetPhoto';title.after(figure);
     const img=document.createElement('img');img.alt='Voorbeeld van je activiteit';img.hidden=true;figure.append(img);
     const picker=photoPicker(figure,upload,{required:true,onError:message=>{document.getElementById('teamIdeaStatus').textContent=message;}});
@@ -68,6 +74,7 @@
     website.querySelector('span').textContent='Website (optioneel)';
     const suggestion=document.getElementById('teamIdeaImageSuggest');
     suggestion.classList.add('sharedPhotoSection');website.after(suggestion);
+    const caption=document.createElement('div');caption.className='sharedPhotoLabel';caption.id='teamIdeaPhotoLabel';caption.textContent='Foto (verplicht)';suggestion.prepend(caption);suggestion.setAttribute('role','group');suggestion.setAttribute('aria-labelledby',caption.id);
     const top=suggestion.querySelector('.ideaImageSuggestTop');
     const status=document.getElementById('teamIdeaImageSuggestStatus');
     const actions=suggestion.querySelector('.ideaImageSuggestActions');
