@@ -136,3 +136,8 @@
 @media(min-width:981px) and (hover:hover) and (pointer:fine){
  :is(.ideaSubmitSheetClose,.ideaFilterSheetClose,.adminEditorClose):hover{background:#e5f2ef!important;color:#315f6b!important;border-color:#b7ddd5!important;box-shadow:none!important;transform:none!important}
 }
+
+/* Flat action controls throughout public pages and management, in every state. */
+:is(button,[role="button"],input[type="button"],input[type="submit"],a.button,a.btn,.teamFileButton),
+:is(button,[role="button"],input[type="button"],input[type="submit"],a.button,a.btn,.teamFileButton):is(:hover,:active,:focus,:focus-visible){box-shadow:none!important;text-shadow:none!important}
+:is(button,[role="button"],input[type="button"],input[type="submit"],a.button,a.btn,.teamFileButton):focus-visible{outline:2px solid #8fcfc4!important;outline-offset:2px}
