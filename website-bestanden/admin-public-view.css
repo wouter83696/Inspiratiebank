@@ -8012,4 +8012,27 @@ textarea{resize:none!important}
  .sharedSectionToolbar>.sharedSectionNav{gap:8px}
 }
 
+.publicAgendaDetailLayer{z-index:1190}
+.publicAgendaDetailLayer .sharedSheetHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.publicAgendaDetailBody p{font-size:14px;line-height:1.6;margin:0 0 18px;white-space:pre-line}
+.publicAgendaDetailBody a{display:inline-flex;text-decoration:none}
+@media(min-width:981px){
+ :scope.publicAgendaDetailOpen main{margin-left:var(--sheet-width);width:calc(100% - var(--sheet-width));box-sizing:border-box}
+ .publicAgendaDetailLayer{pointer-events:none!important}
+ .publicAgendaDetailLayer>.sharedSheet{pointer-events:auto}
+ .publicAgendaDetailLayer>.ideaFilterSheetBackdrop{display:none}
+ :scope.publicAgendaDetailOpen #agendaReviewList .weekPanel{height:auto!important;max-height:none!important;overflow:visible!important;scroll-margin-top:170px}
+ :scope.publicAgendaDetailOpen #agendaReviewList .weekBody{height:auto!important;max-height:none!important;overflow:visible!important}
+ :scope.publicAgendaDetailOpen #agendaReviewList .agendaBoard{display:block!important;min-width:0!important;height:auto!important}
+ :scope.publicAgendaDetailOpen #agendaReviewList .agendaDay{display:none!important}
+ :scope.publicAgendaDetailOpen #agendaReviewList .publicAgendaSelectedDay{display:block!important;height:auto!important;padding:12px!important}
+ :scope.publicAgendaDetailOpen #agendaReviewList .agendaGroup{display:grid!important;height:auto!important;grid-auto-rows:auto!important;gap:8px}
+ :scope.publicAgendaDetailOpen #agendaReviewList .agendaItem{height:auto!important;max-height:none!important;min-height:0!important;padding:10px!important;flex:none!important}
+ :scope.publicAgendaDetailOpen #agendaReviewList .agendaItemTitle .ideaTitleText,:scope.publicAgendaDetailOpen #agendaReviewList .agendaItemMeta{display:block!important;-webkit-line-clamp:unset!important;max-height:none!important;overflow:visible!important}
+ :scope.publicAgendaDetailOpen #agendaReviewList .mobileDayNavigation{display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;padding:8px 16px}
+ :scope.publicAgendaDetailOpen #agendaReviewList .mobileDayButton{display:flex;flex-direction:column;align-items:center;padding:8px 3px;border:0;border-radius:10px;background:transparent;color:#63858b}
+ :scope.publicAgendaDetailOpen #agendaReviewList .mobileDayButton.active{background:#e5f2ef;color:#236875}
+ :scope.publicAgendaDetailOpen #agendaReviewList .weekHeadingRow{flex-wrap:wrap}
+}
+
 }

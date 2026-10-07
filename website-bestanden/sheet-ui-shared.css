@@ -186,3 +186,26 @@ body .sharedSectionToolbar .sharedSectionNav>button.isActive,body .sharedSection
  .hasSectionActions .sharedSectionActions{margin-left:auto;border-left:0;padding-left:0;gap:2px}
  .sharedSectionToolbar>.sharedSectionNav{gap:8px}
 }
+
+.publicAgendaDetailLayer{z-index:1190}
+.publicAgendaDetailLayer .sharedSheetHeader{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.publicAgendaDetailBody p{font-size:14px;line-height:1.6;margin:0 0 18px;white-space:pre-line}
+.publicAgendaDetailBody a{display:inline-flex;text-decoration:none}
+@media(min-width:981px){
+ body.publicAgendaDetailOpen main{margin-left:var(--sheet-width);width:calc(100% - var(--sheet-width));box-sizing:border-box}
+ .publicAgendaDetailLayer{pointer-events:none!important}
+ .publicAgendaDetailLayer>.sharedSheet{pointer-events:auto}
+ .publicAgendaDetailLayer>.ideaFilterSheetBackdrop{display:none}
+ body.publicAgendaDetailOpen #weekPanels .weekPanel{height:auto!important;max-height:none!important;overflow:visible!important;scroll-margin-top:170px}
+ body.publicAgendaDetailOpen #weekPanels .weekBody{height:auto!important;max-height:none!important;overflow:visible!important}
+ body.publicAgendaDetailOpen #weekPanels .agendaBoard{display:block!important;min-width:0!important;height:auto!important}
+ body.publicAgendaDetailOpen #weekPanels .agendaDay{display:none!important}
+ body.publicAgendaDetailOpen #weekPanels .publicAgendaSelectedDay{display:block!important;height:auto!important;padding:12px!important}
+ body.publicAgendaDetailOpen #weekPanels .agendaGroup{display:grid!important;height:auto!important;grid-auto-rows:auto!important;gap:8px}
+ body.publicAgendaDetailOpen #weekPanels .agendaItem{height:auto!important;max-height:none!important;min-height:0!important;padding:10px!important;flex:none!important}
+ body.publicAgendaDetailOpen #weekPanels .agendaItemTitle .ideaTitleText,body.publicAgendaDetailOpen #weekPanels .agendaItemMeta{display:block!important;-webkit-line-clamp:unset!important;max-height:none!important;overflow:visible!important}
+ body.publicAgendaDetailOpen #weekPanels .mobileDayNavigation{display:grid!important;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;padding:8px 16px}
+ body.publicAgendaDetailOpen #weekPanels .mobileDayButton{display:flex;flex-direction:column;align-items:center;padding:8px 3px;border:0;border-radius:10px;background:transparent;color:#63858b}
+ body.publicAgendaDetailOpen #weekPanels .mobileDayButton.active{background:#e5f2ef;color:#236875}
+ body.publicAgendaDetailOpen #weekPanels .weekHeadingRow{flex-wrap:wrap}
+}

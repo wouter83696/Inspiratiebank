@@ -8506,14 +8506,54 @@
 	    const timeLabel = AgendaViewShared.formatTime(item.time);
 	    const themeClass = domainThemeClass(item.domain);
 	    return AgendaViewShared.renderItem({
-        themeClass, compact, href:escapeHtml(item.url),
+        themeClass, compact, href:escapeHtml(item.url), attributes:`data-public-agenda-item="${escapeHtml(JSON.stringify(item))}"`,
         title:titleWithIcon(item.title, item.domain, 'agendaItemTitle'), review:agendaReviewPill(item),
         meta:`${escapeHtml(timeLabel)} • ${escapeHtml(item.where)}`
       });
 	  }
+  let publicAgendaSheet=null,publicAgendaOrigin=null,publicAgendaDay='',publicAgendaExpandedBefore=null;
+  function focusPublicAgendaDay(key){
+    publicAgendaDay=key;setActiveMobileAgendaDay(key);
+    document.querySelectorAll('#weekPanels [data-agenda-day]').forEach(day=>day.classList.toggle('publicAgendaSelectedDay',day.dataset.agendaDay===key));
+  }
+  function closePublicAgendaSheet(){
+    if(!publicAgendaSheet)return;
+    publicAgendaSheet.classList.remove('isOpen');publicAgendaSheet.setAttribute('aria-hidden','true');publicAgendaSheet.inert=true;
+    document.body.classList.remove('publicAgendaDetailOpen');
+    if(publicAgendaExpandedBefore){expandedAgendaDays.clear();publicAgendaExpandedBefore.forEach(key=>expandedAgendaDays.add(key));publicAgendaExpandedBefore=null;renderWeekPanels();}
+    const restored=[...document.querySelectorAll('#weekPanels .agendaItemLink')].find(link=>link.href===publicAgendaOrigin?.href);
+    (restored||document.querySelector('#weekPanels'))?.focus({preventScroll:true});
+  }
+  function openPublicAgendaSheet(item,dayKey,trigger){
+    if(!publicAgendaSheet){
+      publicAgendaSheet=document.createElement('div');publicAgendaSheet.className='ideaSubmitSheetLayer sharedPublicSheetLayer publicAgendaDetailLayer';
+      publicAgendaSheet.innerHTML='<button class="ideaFilterSheetBackdrop" aria-label="Activiteit sluiten" data-public-agenda-close></button><aside class="ideaSubmitSheet sharedSheet" role="dialog" aria-labelledby="publicAgendaDetailTitle"><header class="sharedSheetHeader"><h2 id="publicAgendaDetailTitle"></h2><button type="button" class="ideaSubmitSheetClose" aria-label="Activiteit sluiten" data-public-agenda-close>×</button></header><div class="sharedSheetBody publicAgendaDetailBody"></div></aside>';
+      document.body.append(publicAgendaSheet);
+      publicAgendaSheet.querySelectorAll('[data-public-agenda-close]').forEach(button=>button.addEventListener('click',closePublicAgendaSheet));
+      publicAgendaSheet.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();closePublicAgendaSheet();}});
+    }
+    publicAgendaOrigin=trigger;
+    publicAgendaSheet.querySelector('h2').textContent=item.title||'Activiteit';
+    const body=publicAgendaSheet.querySelector('.publicAgendaDetailBody');body.replaceChildren();
+    const add=(label,value)=>{if(!value)return;const block=document.createElement('p'),strong=document.createElement('strong');strong.textContent=label;block.append(strong,document.createElement('br'),document.createTextNode(value));body.append(block);};
+    add('Datum',item.date||item.period||dayKey.split(':').at(-1));add('Tijd',AgendaViewShared.formatTime(item.time));add('Locatie',item.where);add('Beschrijving',item.description||item.notes);
+    if(/^https?:\/\//i.test(item.url||'')){const link=document.createElement('a');link.className='ideaFilterSheetAction secondary';link.textContent='Bekijk bij aanbieder';link.href=item.url;link.target='_blank';link.rel='noopener';body.append(link);}
+    if(!publicAgendaExpandedBefore)publicAgendaExpandedBefore=new Set(expandedAgendaDays);
+    document.querySelectorAll('#weekPanels [data-agenda-day]').forEach(day=>expandedAgendaDays.add(day.dataset.agendaDay));
+    document.body.classList.add('publicAgendaDetailOpen');renderWeekPanels();focusPublicAgendaDay(dayKey);
+    publicAgendaSheet.inert=false;publicAgendaSheet.setAttribute('aria-hidden','false');publicAgendaSheet.classList.add('isOpen');
+    publicAgendaSheet.querySelector('aside').setAttribute('aria-modal',String(matchMedia('(max-width:980px)').matches));
+    publicAgendaSheet.querySelector('.ideaSubmitSheetClose').focus({preventScroll:true});
+    document.querySelector('#weekPanels .publicAgendaSelectedDay')?.closest('.weekPanel')?.scrollIntoView({block:'start',behavior:'auto'});
+  }
+  document.addEventListener('click',event=>{
+    const card=event.target.closest('#weekPanels [data-public-agenda-item]');
+    if(!card||event.button>0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+    event.preventDefault();openPublicAgendaSheet(JSON.parse(card.dataset.publicAgendaItem),card.closest('[data-agenda-day]').dataset.agendaDay,card.querySelector('.agendaItemLink'));
+  });
   function renderAgendaBoard(weekId, concrete){
     return AgendaViewShared.renderBoard({weekId,concrete,days:weekDays(weekId),expandedAgendaDays,
-      todayIso:formatIsoDate(new Date()),visibleLimit:agendaDayVisibleLimit(),itemOccursOnDay,
+      todayIso:formatIsoDate(new Date()),visibleLimit:document.body.classList.contains('publicAgendaDetailOpen')?Infinity:agendaDayVisibleLimit(),itemOccursOnDay,
       isFlexiblePeriodOffer,showPeriodInAgenda,sortAgendaPeriods,agendaItem,emptyMessage:agendaEmptyMessage()});
   }
   function mobileAgendaDayNavigation(weekId){
@@ -8787,6 +8827,7 @@
         boardAttribute:` data-week-board="${escapeHtml(w.id)}"`
       });
     }).join('');
+    if(document.body.classList.contains('publicAgendaDetailOpen')){const days=[...document.querySelectorAll('#weekPanels [data-agenda-day]')];focusPublicAgendaDay(days.some(day=>day.dataset.agendaDay===publicAgendaDay)?publicAgendaDay:days[0]?.dataset.agendaDay);}
     if(sectionSwitcher) sectionSwitcher.innerHTML = agendaSectionNavigation();
     bindAgendaSectionIndicator();
     placeAgendaWeekFilter();
@@ -11041,6 +11082,7 @@
     document.addEventListener('click', event => {
       const dayTarget = event.target.closest('[data-agenda-day-target]');
       if(dayTarget){
+        if(document.body.classList.contains('publicAgendaDetailOpen')){event.preventDefault();focusPublicAgendaDay(dayTarget.dataset.agendaDayTarget);return;}
         setActiveMobileAgendaDay(dayTarget.dataset.agendaDayTarget);
         const weekPanel = dayTarget.closest('.weekPanel');
         const day = [...(weekPanel || document).querySelectorAll('[data-agenda-day]')]
@@ -11162,7 +11204,7 @@
   });
   </script>
 <link rel="stylesheet" href="website-bestanden/select-controls.css?v=20261006-fixed-textareas-v2">
-<link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261007-inline-actions">
+<link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261007-public-agenda-detail">
 <script src="website-bestanden/sheet-ui-shared.js?v=20261007-inline-actions"></script>
 </body>
 </html>
