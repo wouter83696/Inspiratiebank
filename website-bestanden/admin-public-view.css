@@ -7932,11 +7932,11 @@ textarea{resize:none!important}
 .sharedPhotoSection:has(.ideaImageSuggestPreview:not([hidden])) #teamIdeaStartFreeImage{display:none}
 .sharedSheet .teamFileField[hidden],.sharedPhotoSection .sharedSheetPhoto[hidden]{display:none!important}
 
-/* Filters open from the right on desktop; phones retain the bottom sheet. */
+/* All filter sheets share the right-hand desktop entrance; phones open below. */
 @media(min-width:641px){
- #ideaFilterSheetLayer{justify-content:flex-end!important}
- #ideaFilterSheetLayer>.ideaFilterSheet{left:auto!important;right:0!important;border-right:0!important;border-left:1px solid var(--sheet-line)!important;border-radius:20px 0 0 20px!important;transform:translateX(100%)!important;box-shadow:-12px 0 32px rgba(49,95,107,.08)!important}
- #ideaFilterSheetLayer.isOpen>.ideaFilterSheet{transform:translateX(0)!important}
+ .ideaFilterSheetLayer{justify-content:flex-end!important}
+ .ideaFilterSheetLayer>.ideaFilterSheet{left:auto!important;right:0!important;border-right:0!important;border-left:1px solid var(--sheet-line)!important;border-radius:20px 0 0 20px!important;transform:translateX(100%)!important;box-shadow:-12px 0 32px rgba(49,95,107,.08)!important}
+ .ideaFilterSheetLayer.isOpen>.ideaFilterSheet{transform:translateX(0)!important}
 }
 
 /* Match the public desktop navigation bar's 60px baseline. */
@@ -7956,5 +7956,10 @@ textarea{resize:none!important}
 .sharedSectionNav .ideaFilterSheetAction.isActive{border-bottom-color:#39a5a9;color:#236875;font-weight:700}
 .sharedSectionNav .ideaFilterSheetAction:focus-visible{outline:2px solid #8fcfc4;outline-offset:2px}
 .sharedPhotoSection,.sharedSheet .teamField{scroll-margin-top:12px}
+
+/* Shared close-button treatment, including management sheets outside sharedSheet. */
+@media(min-width:981px) and (hover:hover) and (pointer:fine){
+ :is(.ideaSubmitSheetClose,.ideaFilterSheetClose,.adminEditorClose):hover{background:#e5f2ef!important;color:#315f6b!important;border-color:#b7ddd5!important;box-shadow:none!important;transform:none!important}
+}
 
 }

@@ -399,7 +399,7 @@ body.adminEditorOpen{overflow:hidden!important}
 .adminEditorCard .panelHead,.adminEditorCard .confirmModalTop{position:relative;align-items:flex-start;padding-right:48px;margin-bottom:22px}
 .adminEditorCard h3{font:500 24px/1.25 Lora,serif;color:#315f6b;margin:0 0 8px}
 .adminEditorClose{position:absolute;right:0;top:0;display:grid;place-items:center;width:42px;height:42px;border:1px solid #dce4df;border-radius:10px;background:#fffdf9;color:#315f6b;font-size:26px;cursor:pointer}
-.adminEditorClose:hover{background:#e5f2ef}
+@media(min-width:981px) and (hover:hover) and (pointer:fine){.adminEditorClose:hover{background:#e5f2ef}}
 .adminEditorClose:focus-visible{outline:2px solid #4f8e9e;outline-offset:2px}
 .adminEditorCard .teamActionBar,.adminEditorCard .confirmModalActions{position:sticky;bottom:-24px;padding:16px 0;background:#faf7ef;border-top:1px solid #e7e4da;z-index:2}
 #confirmModal{z-index:1400}
@@ -647,7 +647,7 @@ body.adminEditorOpen{overflow:hidden!important}
 #adminFeaturedSheet .featuredAdminCount{color:#315f6b}
 #adminFeaturedSheet .featuredAdminTitle{white-space:normal;overflow-wrap:anywhere}
 #adminFeaturedSheet .featuredAdminActions .button:disabled:hover{background:#fffdf9}
-#adminFeaturedSheet .adminEditorClose:hover{background:#e5f2ef}
+@media(min-width:981px) and (hover:hover) and (pointer:fine){#adminFeaturedSheet .adminEditorClose:hover{background:#e5f2ef}}
 #adminFeaturedSheet .featuredAdminActions .hot:hover{color:#9b5146;background:#f8eeeb}
 
 @media(max-width:640px){.adminFeaturedBody{padding-inline:16px}}
