@@ -185,6 +185,7 @@
     layer.classList.toggle('isModal',modal);
     if(!layer.hidden)layer.style.left='';
     if(layer.hidden&&document.body.classList.contains('adminDetailDocked'))layer.style.left=getComputedStyle(layer).left;
+    document.body.classList.toggle('adminAgendaFocused',!agenda.hidden&&!editingAgendaSource?.isNew&&!modal);
     document.body.classList.toggle('adminDetailDocked',!layer.hidden&&!modal);
     document.body.classList.toggle('adminEditorOpen',open);
     $('adminApp').inert=open;

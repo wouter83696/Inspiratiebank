@@ -781,8 +781,8 @@ body:not(.adminMode) > .topbar .topLink:hover{text-decoration:underline;color:#3
 #agendaEditModal .adminAgendaToolbar [data-delete-agenda],#agendaEditModal .adminAgendaToolbar [data-delete-ongoing]{margin-left:auto}
 #agendaEditModal .adminEditorClose{top:14px;right:16px}
 #agendaEditModal input:focus-visible,#agendaEditModal textarea:focus-visible{outline:none;border-color:rgba(127,207,201,.8);box-shadow:none}
-body.adminDetailDocked #agendaReviewPanel .weekBody{overflow-x:auto}
-body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
+body.adminAgendaFocused #agendaReviewPanel .weekBody{overflow-x:auto}
+body.adminAgendaFocused #agendaReviewPanel .agendaBoard{min-width:1000px}
 :is(#adminAgendaManagerSheet,#adminSourcesSheet) .adminEditorClose{top:14px;right:16px}
 :is(#adminAgendaManagerSheet,#adminSourcesSheet) footer button{grid-column:1/-1}
 :is(#adminAgendaManagerSheet,#adminSourcesSheet) .button{border:1px solid rgba(79,142,158,.16);border-radius:12px;background:#fffdf9;color:#315f6b;box-shadow:none;min-height:40px;padding:9px 12px}
@@ -986,14 +986,14 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
 #adminSourcesSheet #linkStatus{margin:8px 0;font-size:13px;line-height:1.5}
 #agendaEditModal .adminAgendaToolbar .adminLabelledAction{width:auto;flex:0 1 auto;gap:6px;font:500 13px Manrope,system-ui,sans-serif}
 @media(min-width:1101px){
- body.adminDetailDocked #agendaReviewPanel .weekBody{overflow:visible}
- body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:0;grid-template-columns:minmax(0,1fr)}
- body.adminDetailDocked #agendaReviewPanel .agendaDay{display:grid;grid-template-columns:110px minmax(0,1fr);align-items:start;border-left:0;border-top:1px solid rgba(79,142,158,.1);padding:16px;gap:16px}
- body.adminDetailDocked #agendaReviewPanel .agendaHead{position:static;min-width:0}
- body.adminDetailDocked #agendaReviewPanel .agendaGroup{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
- body.adminDetailDocked #agendaReviewPanel .agendaItemTitle{hyphens:none}
- body.adminDetailDocked #agendaReviewPanel .weekHeadingRow{flex-wrap:wrap;gap:12px}
- body.adminDetailDocked #agendaReviewPanel .weekHeadingActions{margin-left:0}
+ body.adminAgendaFocused #agendaReviewPanel .weekBody{overflow:visible}
+ body.adminAgendaFocused #agendaReviewPanel .agendaBoard{min-width:0;grid-template-columns:minmax(0,1fr)}
+ body.adminAgendaFocused #agendaReviewPanel .agendaDay{display:grid;grid-template-columns:110px minmax(0,1fr);align-items:start;border-left:0;border-top:1px solid rgba(79,142,158,.1);padding:16px;gap:16px}
+ body.adminAgendaFocused #agendaReviewPanel .agendaHead{position:static;min-width:0}
+ body.adminAgendaFocused #agendaReviewPanel .agendaGroup{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+ body.adminAgendaFocused #agendaReviewPanel .agendaItemTitle{hyphens:none}
+ body.adminAgendaFocused #agendaReviewPanel .weekHeadingRow{flex-wrap:wrap;gap:12px}
+ body.adminAgendaFocused #agendaReviewPanel .weekHeadingActions{margin-left:0}
 }
 
 /* Source tabs follow the inspiration detail tabs. */
@@ -1003,11 +1003,11 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
 #adminSourcesSheet [data-add-admin-source]{justify-content:center}
 #adminSourcesSheet [data-add-admin-source] svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex-shrink:0}
 @media(min-width:1101px){
- body.adminDetailDocked #agendaReviewPanel .mobileDayNavigation{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;padding:0 20px 12px}
- body.adminDetailDocked #agendaReviewPanel .mobileDayButton{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 3px;border:0;border-radius:12px;background:transparent;color:#63858b;font:inherit;cursor:pointer}
- body.adminDetailDocked #agendaReviewPanel .mobileDayButton.active{background:#e5f2ef;color:#236875}
- body.adminDetailDocked #agendaReviewPanel .agendaDay:not(.adminFocusedDay){display:none}
- body.adminDetailDocked #agendaReviewPanel .agendaDay.adminFocusedDay{grid-template-columns:minmax(0,1fr);gap:12px}
+ body.adminAgendaFocused #agendaReviewPanel .mobileDayNavigation{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;padding:0 20px 12px}
+ body.adminAgendaFocused #agendaReviewPanel .mobileDayButton{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 3px;border:0;border-radius:12px;background:transparent;color:#63858b;font:inherit;cursor:pointer}
+ body.adminAgendaFocused #agendaReviewPanel .mobileDayButton.active{background:#e5f2ef;color:#236875}
+ body.adminAgendaFocused #agendaReviewPanel .agendaDay:not(.adminFocusedDay){display:none}
+ body.adminAgendaFocused #agendaReviewPanel .agendaDay.adminFocusedDay{grid-template-columns:minmax(0,1fr);gap:12px}
 }
 
 /* Keep source creation available in the fixed sheet header. */
@@ -1015,15 +1015,15 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
 #adminSourcesSheet>header h3{margin-right:auto;min-width:0}
 #adminSourcesSheet>header [data-add-admin-source]{min-width:0;min-height:32px;padding:6px 10px;font-size:12px;white-space:nowrap}
 @media(min-width:1101px){
- body.adminDetailDocked #agendaReviewPanel .weekPanel{max-height:none!important;height:auto!important;display:flex;flex-direction:column;overflow:visible!important}
- body.adminDetailDocked #agendaReviewPanel .weekTop{flex-shrink:0;padding:14px 20px 10px}
- body.adminDetailDocked #agendaReviewPanel .mobileDayNavigation{flex-shrink:0;min-height:0;height:auto;margin:0;padding:0 20px 10px;align-items:start}
- body.adminDetailDocked #agendaReviewPanel .mobileDayButton{height:auto;min-height:52px;max-height:60px}
- body.adminDetailDocked #agendaReviewPanel .weekBody{min-height:0;max-height:none!important;height:auto!important;overflow:visible!important}
- body.adminDetailDocked #agendaReviewPanel .agendaItemLink{padding:9px 12px}
- body.adminDetailDocked #agendaReviewPanel .agendaItemMeta{display:flex;flex-wrap:wrap;column-gap:12px;row-gap:2px;margin-top:4px}
- body.adminDetailDocked #agendaReviewPanel .agendaDay.adminFocusedDay{padding:12px;gap:8px}
- body.adminDetailDocked #agendaReviewPanel [data-collapse-agenda-day]{display:none}
+ body.adminAgendaFocused #agendaReviewPanel .weekPanel{max-height:none!important;height:auto!important;display:flex;flex-direction:column;overflow:visible!important}
+ body.adminAgendaFocused #agendaReviewPanel .weekTop{flex-shrink:0;padding:14px 20px 10px}
+ body.adminAgendaFocused #agendaReviewPanel .mobileDayNavigation{flex-shrink:0;min-height:0;height:auto;margin:0;padding:0 20px 10px;align-items:start}
+ body.adminAgendaFocused #agendaReviewPanel .mobileDayButton{height:auto;min-height:52px;max-height:60px}
+ body.adminAgendaFocused #agendaReviewPanel .weekBody{min-height:0;max-height:none!important;height:auto!important;overflow:visible!important}
+ body.adminAgendaFocused #agendaReviewPanel .agendaItemLink{padding:9px 12px}
+ body.adminAgendaFocused #agendaReviewPanel .agendaItemMeta{display:flex;flex-wrap:wrap;column-gap:12px;row-gap:2px;margin-top:4px}
+ body.adminAgendaFocused #agendaReviewPanel .agendaDay.adminFocusedDay{padding:12px;gap:8px}
+ body.adminAgendaFocused #agendaReviewPanel [data-collapse-agenda-day]{display:none}
 }
 
 /* Mint interaction feedback, shared with the public inspiration view. */
@@ -1035,48 +1035,48 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
 
 /* The docked week keeps its day picker and grows with the full day. */
 @media(min-width:1101px){
- body.adminDetailDocked #adminApp #agendaReviewPanel .mobileDayNavigation{display:grid!important;visibility:visible!important;position:sticky!important;top:8px!important;z-index:5;background:#fffdf9;border-radius:14px;grid-template-columns:repeat(7,minmax(0,1fr));width:auto;max-height:none;overflow:visible}
- body.adminDetailDocked #adminApp #agendaReviewPanel .agendaBoard{height:auto!important;max-height:none!important;overflow:visible!important}
- body.adminDetailDocked #adminApp #agendaReviewPanel .agendaList{height:auto!important;max-height:none!important;overflow:visible!important}
+ body.adminAgendaFocused #adminApp #agendaReviewPanel .mobileDayNavigation{display:grid!important;visibility:visible!important;position:sticky!important;top:8px!important;z-index:5;background:#fffdf9;border-radius:14px;grid-template-columns:repeat(7,minmax(0,1fr));width:auto;max-height:none;overflow:visible}
+ body.adminAgendaFocused #adminApp #agendaReviewPanel .agendaBoard{height:auto!important;max-height:none!important;overflow:visible!important}
+ body.adminAgendaFocused #adminApp #agendaReviewPanel .agendaList{height:auto!important;max-height:none!important;overflow:visible!important}
 }
 
 /* Reserve room for every preview card and the day’s “more” action. */
 @media(min-width:1101px){
- body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaDay{display:flex;flex-direction:column;box-sizing:border-box}
- body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaList{flex:1;min-height:0;display:flex}
- body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaGroup{display:flex;flex-direction:column;flex:1;min-height:0}
- body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItem{flex:1 1 0;min-height:0;padding:8px;overflow:hidden}
- body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItemTitle{align-items:start}
- body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItemTitle .ideaTitleText{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
- body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItemMeta{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
- body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaMore{flex:0 0 auto;margin-top:4px}
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaDay{display:flex;flex-direction:column;box-sizing:border-box}
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaList{flex:1;min-height:0;display:flex}
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaGroup{display:flex;flex-direction:column;flex:1;min-height:0}
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItem{flex:1 1 0;min-height:0;padding:8px;overflow:hidden}
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItemTitle{align-items:start}
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItemTitle .ideaTitleText{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItemMeta{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaMore{flex:0 0 auto;margin-top:4px}
 }
 
 @media(min-width:1101px){
- body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .weekBody,
- body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .subBlock{min-height:0;box-sizing:border-box}
- body:not(.adminDetailDocked) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaBoard{min-height:0;box-sizing:border-box}
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .weekBody,
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .subBlock{min-height:0;box-sizing:border-box}
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaBoard{min-height:0;box-sizing:border-box}
 }
 
 /* Compact day rows beside an editor: avoid padding on both card and link. */
 @media(min-width:1101px){
- body.adminDetailDocked #adminApp #agendaReviewList .weekTop{padding:10px 16px 8px}
- body.adminDetailDocked #adminApp #agendaReviewList .weekDateLine h3{font-size:24px;line-height:1.2}
- body.adminDetailDocked #adminApp #agendaReviewList .weekBadge{width:40px;height:40px;min-width:40px;font-size:20px}
- body.adminDetailDocked #adminApp #agendaReviewList .mobileDayNavigation{padding:0 16px 6px;gap:4px}
- body.adminDetailDocked #adminApp #agendaReviewList .mobileDayButton{min-height:40px;max-height:none;padding:5px 3px;gap:2px;font-size:12px;line-height:1.2}
- body.adminDetailDocked #adminApp #agendaReviewList .weekBody{padding:0 16px 12px}
- body.adminDetailDocked #adminApp #agendaReviewList .agendaDay.adminFocusedDay{padding:8px;gap:6px}
- body.adminDetailDocked #adminApp #agendaReviewList .agendaHead{padding:0;font-size:13px}
- body.adminDetailDocked #adminApp #agendaReviewList .agendaGroup{gap:5px}
- body.adminDetailDocked #adminApp #agendaReviewList .agendaItem{min-height:0;padding:7px 10px;border-radius:12px;box-shadow:none}
- body.adminDetailDocked #adminApp #agendaReviewList .agendaItemLink{padding:0;min-height:0}
- body.adminDetailDocked #adminApp #agendaReviewList .agendaItemTitle{grid-template-columns:20px minmax(0,1fr);gap:6px;font-size:13px;line-height:1.25}
- body.adminDetailDocked #adminApp #agendaReviewList .agendaItemTitle .ideaTitleText{hyphens:none}
- body.adminDetailDocked #adminApp #agendaReviewList .domainIcon{width:20px;height:20px;min-width:20px}
- body.adminDetailDocked #adminApp #agendaReviewList .domainIcon svg{width:12px;height:12px}
- body.adminDetailDocked #adminApp #agendaReviewList .agendaItemMeta{margin:3px 0 0 26px;font-size:12px;line-height:1.25;gap:2px 10px}
- body.adminDetailDocked #adminApp #agendaReviewList .agendaMetaRow+.agendaMetaRow{margin-top:0}
+ body.adminAgendaFocused #adminApp #agendaReviewList .weekTop{padding:10px 16px 8px}
+ body.adminAgendaFocused #adminApp #agendaReviewList .weekDateLine h3{font-size:24px;line-height:1.2}
+ body.adminAgendaFocused #adminApp #agendaReviewList .weekBadge{width:40px;height:40px;min-width:40px;font-size:20px}
+ body.adminAgendaFocused #adminApp #agendaReviewList .mobileDayNavigation{padding:0 16px 6px;gap:4px}
+ body.adminAgendaFocused #adminApp #agendaReviewList .mobileDayButton{min-height:40px;max-height:none;padding:5px 3px;gap:2px;font-size:12px;line-height:1.2}
+ body.adminAgendaFocused #adminApp #agendaReviewList .weekBody{padding:0 16px 12px}
+ body.adminAgendaFocused #adminApp #agendaReviewList .agendaDay.adminFocusedDay{padding:8px;gap:6px}
+ body.adminAgendaFocused #adminApp #agendaReviewList .agendaHead{padding:0;font-size:13px}
+ body.adminAgendaFocused #adminApp #agendaReviewList .agendaGroup{gap:5px}
+ body.adminAgendaFocused #adminApp #agendaReviewList .agendaItem{min-height:0;padding:7px 10px;border-radius:12px;box-shadow:none}
+ body.adminAgendaFocused #adminApp #agendaReviewList .agendaItemLink{padding:0;min-height:0}
+ body.adminAgendaFocused #adminApp #agendaReviewList .agendaItemTitle{grid-template-columns:20px minmax(0,1fr);gap:6px;font-size:13px;line-height:1.25}
+ body.adminAgendaFocused #adminApp #agendaReviewList .agendaItemTitle .ideaTitleText{hyphens:none}
+ body.adminAgendaFocused #adminApp #agendaReviewList .domainIcon{width:20px;height:20px;min-width:20px}
+ body.adminAgendaFocused #adminApp #agendaReviewList .domainIcon svg{width:12px;height:12px}
+ body.adminAgendaFocused #adminApp #agendaReviewList .agendaItemMeta{margin:3px 0 0 26px;font-size:12px;line-height:1.25;gap:2px 10px}
+ body.adminAgendaFocused #adminApp #agendaReviewList .agendaMetaRow+.agendaMetaRow{margin-top:0}
 }
 
 /* A docked editor leaves room for two deliberate action rows. */
@@ -1093,5 +1093,5 @@ body.adminDetailDocked #agendaReviewPanel .agendaBoard{min-width:1000px}
  #adminIdeaLayer>#agendaEditModal.adminAgendaSheet{width:100%;align-self:flex-end}
 }
 @media(min-width:1101px){
- body.adminDetailDocked #adminApp #agendaReviewList .agendaMetaRow+.agendaMetaRow::before{content:'·';margin-right:8px}
+ body.adminAgendaFocused #adminApp #agendaReviewList .agendaMetaRow+.agendaMetaRow::before{content:'·';margin-right:8px}
 }

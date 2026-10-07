@@ -79,7 +79,7 @@
        count:AgendaViewShared.renderWeekCount(count),
        navigation:AgendaViewShared.renderWeekNavigation(ADMIN_WEEKS,week.id),
        dayNavigation:AgendaViewShared.renderDayNavigation(week.id,days,state.day,today),boardAttribute:` data-week-board="${week.id}"`,
-       days:AgendaViewShared.renderBoard({weekId:week.id,days,concrete,expandedAgendaDays:state.expanded,todayIso:today,visibleLimit:document.body.classList.contains('adminDetailDocked')?Infinity:(matchMedia('(min-width:981px)').matches?3:4),
+       days:AgendaViewShared.renderBoard({weekId:week.id,days,concrete,expandedAgendaDays:state.expanded,todayIso:today,visibleLimit:document.body.classList.contains('adminAgendaFocused')?Infinity:(matchMedia('(min-width:981px)').matches?3:4),
          itemOccursOnDay:(item,iso)=>agendaAdminItemOccursOnDay(item,days.find(day=>day.iso===iso),week.id),
          isFlexiblePeriodOffer:isAgendaFlexiblePeriod,showPeriodInAgenda:showAgendaPeriodInWeek,
          sortAgendaPeriods:entries=>[...entries].sort((a,b)=>Number(isAgendaMultiDayFestival(b))-Number(isAgendaMultiDayFestival(a)) || a.title.localeCompare(b.title,'nl')),
@@ -174,7 +174,7 @@
    $('agendaFilterLocationInput').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();applyLocation();}});
    window.addEventListener('resize',()=>{AgendaDiscoveryShared.placeSwitcher($('agendaReviewPanel'));section(state.section);});sync();
  }
- let wasDocked=document.body.classList.contains('adminDetailDocked');
- new MutationObserver(()=>{const docked=document.body.classList.contains('adminDetailDocked');if(docked===wasDocked)return;wasDocked=docked;if(state.initialized){renderAgendaReview();if(docked)requestAnimationFrame(()=>{const day=$('agendaReviewList').querySelector('.adminFocusedDay');day?.closest('.weekPanel')?.scrollIntoView({block:'start',behavior:'smooth'});});}}).observe(document.body,{attributes:true,attributeFilter:['class']});
+ let wasDocked=document.body.classList.contains('adminAgendaFocused');
+ new MutationObserver(()=>{const docked=document.body.classList.contains('adminAgendaFocused');if(docked===wasDocked)return;wasDocked=docked;if(state.initialized){renderAgendaReview();if(docked)requestAnimationFrame(()=>{const day=$('agendaReviewList').querySelector('.adminFocusedDay');day?.closest('.weekPanel')?.scrollIntoView({block:'start',behavior:'smooth'});});}}).observe(document.body,{attributes:true,attributeFilter:['class']});
  window.AdminAgenda=Object.freeze({setup,sync,matchesRadius,parkWeekFilter,renderWeeks,afterRender,navigate});
 })();
