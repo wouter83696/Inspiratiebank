@@ -160,6 +160,36 @@
     const calendar=document.createElement('section');calendar.className='agendaCalendar';calendar.setAttribute('aria-label','Datum kiezen');
     calendar.innerHTML='<div class="agendaCalendarNav"><button type="button" aria-label="Vorige maand">‹</button><strong aria-live="polite"></strong><button type="button" aria-label="Volgende maand">›</button></div><div class="agendaCalendarWeekdays" aria-hidden="true">'+['ma','di','wo','do','vr','za','zo'].map(day=>'<span>'+day+'</span>').join('')+'</div><div class="agendaCalendarDays"></div><p class="agendaCalendarStatus" aria-live="polite"></p>';
     fields.after(calendar);
+    const disclosure=document.createElement('details');disclosure.className='agendaDateDisclosure';
+    const summary=document.createElement('summary');summary.innerHTML='<span>Datum en tijd</span><span class="agendaDateSummary"></span>';
+    const contents=document.createElement('div');contents.className='agendaDateContents';
+    disclosure.append(summary,contents);group.append(disclosure);contents.append(toggle,calendar);
+    let fromTime,toTime,freeTime;
+    const updateSummary=()=>{summary.querySelector('.agendaDateSummary').textContent=[start.value?format(start.value)+(kind.value==='ongoing'&&end.value?' t/m '+format(end.value):''):'Kies een datum',time?.value].filter(Boolean).join(' · ');};
+    if(time){
+      time.closest('label').hidden=true;time.type='hidden';time.required=false;
+      const controls=document.createElement('div');controls.className='agendaTimeRange';
+      controls.innerHTML='<label class="teamField"><span>Van</span><input type="time"></label><label class="teamField"><span>Tot (optioneel)</span><input type="time"></label><label class="teamField agendaTimeNote"><span>Of een tijdomschrijving</span><input type="text" placeholder="Bijv. diverse tijden"></label>';
+      [fromTime,toTime,freeTime]=controls.querySelectorAll('input');contents.append(controls);
+      controls.addEventListener('input',event=>{
+        if(event.target===freeTime){fromTime.value='';toTime.value='';}
+        else freeTime.value='';
+        time.value=freeTime.value.trim()||[fromTime.value,toTime.value].filter(Boolean).join(' - ');
+        time.dispatchEvent(new Event('input',{bubbles:true}));updateSummary();
+      });
+    }
+    const done=document.createElement('button');done.type='button';done.className='agendaDateDone';done.textContent='Gereed';contents.append(done);
+    done.addEventListener('click',()=>{
+      if(!start.value||(kind.value==='ongoing'&&!end.value)){calendar.querySelector('.agendaCalendarStatus').textContent='Kies '+(!start.value?'een datum.':'ook een einddatum.');return;}
+      disclosure.open=false;summary.focus();
+    });
+    const loadTime=()=>{
+      if(!time)return;
+      const match=time.value.trim().match(/^(\d{1,2})[.:](\d{2})(?:\s*[-–/]\s*(\d{1,2})[.:](\d{2}))?\s*(?:uur)?$/i);
+      fromTime.value=match?match[1].padStart(2,'0')+':'+match[2]:'';
+      toTime.value=match?.[3]?match[3].padStart(2,'0')+':'+match[4]:'';
+      freeTime.value=match?'':time.value;
+    };
     let month=new Date();month=new Date(month.getFullYear(),month.getMonth(),1);
     let choosingEnd=false;
     const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
@@ -192,8 +222,12 @@
     calendar.querySelectorAll('.agendaCalendarNav button').forEach((button,index)=>button.addEventListener('click',()=>{month=new Date(month.getFullYear(),month.getMonth()+(index?1:-1),1);drawCalendar();}));
     date.form?.addEventListener('submit',event=>{
       if(kind.disabled)return;
+      if(time&&((time.required&&!time.value.trim())||(toTime.value&&!fromTime.value))){
+        event.preventDefault();event.stopImmediatePropagation();disclosure.open=true;fromTime.focus();
+        calendar.querySelector('.agendaCalendarStatus').textContent='Vul een begintijd of tijdomschrijving in.';return;
+      }
       if(!start.value||(kind.value==='ongoing'&&!end.value)){
-        event.preventDefault();event.stopImmediatePropagation();
+        event.preventDefault();event.stopImmediatePropagation();disclosure.open=true;
         calendar.querySelector('.agendaCalendarStatus').textContent='Kies '+(!start.value?'een startdatum.':'ook een einddatum.');
         calendar.querySelector('.agendaCalendarDays button')?.focus();
       }
@@ -205,13 +239,13 @@
       end.closest('label').hidden=!ongoing;end.disabled=!ongoing;end.required=false;start.required=false;end.min=start.value;
       end.setCustomValidity(ongoing&&end.value&&start.value&&end.value<start.value?'De einddatum moet op of na de startdatum liggen.':'');
       if(write)date.value=start.value?format(start.value)+(ongoing&&end.value?' t/m '+format(end.value):''):'';
-      drawCalendar();
+      drawCalendar();updateSummary();
       onChange({ongoing,start:start.value,end:ongoing?end.value:start.value});
     }
     kind.addEventListener('change',()=>{choosingEnd=kind.value==='ongoing'&&!!start.value&&!end.value;sync();});start.addEventListener('input',()=>sync());end.addEventListener('input',()=>sync());
-    function load({ongoing=false,range}={}){kind.value=ongoing?'ongoing':'day';if(range!==undefined){start.value=range?.start||'';end.value=range?.end||'';if(start.value){const selected=new Date(start.value+'T12:00:00');month=new Date(selected.getFullYear(),selected.getMonth(),1);}}choosingEnd=ongoing&&!!start.value&&!end.value;sync(range===undefined);if(typeof syncCustomSelect==='function')syncCustomSelect(kind);}
+    function load({ongoing=false,range}={}){kind.value=ongoing?'ongoing':'day';if(range!==undefined){start.value=range?.start||'';end.value=range?.end||'';if(start.value){const selected=new Date(start.value+'T12:00:00');month=new Date(selected.getFullYear(),selected.getMonth(),1);}}loadTime();disclosure.open=false;choosingEnd=ongoing&&!!start.value&&!end.value;sync(range===undefined);if(typeof syncCustomSelect==='function')syncCustomSelect(kind);}
 
-    load();date.form?.addEventListener('reset',()=>queueMicrotask(()=>{start.value='';end.value='';sync();}));return {load,group};
+    load();date.form?.addEventListener('reset',()=>queueMicrotask(()=>{start.value='';end.value='';loadTime();disclosure.open=false;sync();}));return {load,group};
   }
   function publicAgendaAdd(form){
     const layer=document.getElementById('agendaSourceSheetLayer'),panel=layer.querySelector('aside');
