@@ -7938,6 +7938,16 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
  .ongoingAutoWeeks{display:block;color:#7a8786;font-size:12px;font-weight:400;line-height:1.35}
 }
 
+/* Foto schaalt mee met de ruimte die overblijft voor de detailinhoud. */
+.photoDetailLayer .photoDetailBody .ideaImageFrame{height:var(--detail-photo-height, min(32dvh,280px))!important;aspect-ratio:auto!important;min-height:0!important}
+@media(max-height:800px){
+ .photoDetailLayer .photoDetailBody{padding-top:10px!important;padding-bottom:14px!important}
+ :is(.photoDetailLayer,.ideaMapPanel.isSingleDetail) .photoDetailBody .ideaImageFrame{margin-bottom:14px!important}
+ :is(.photoDetailLayer,.ideaMapPanel.isSingleDetail) .photoDetailTabs{margin-top:8px!important}
+ :is(.photoDetailLayer,.ideaMapPanel.isSingleDetail) .photoDetailTabs [role=tabpanel]{padding-top:10px!important;padding-bottom:10px!important}
+ :is(.photoDetailLayer,.ideaMapPanel.isSingleDetail) .photoDetailActions{margin-top:8px!important}
+}
+
 /* Shared compact select appearance, based on the management filter sheet. */
 .customSelect .customSelectButton{
   box-sizing:border-box;position:relative;width:100%;height:auto!important;min-height:40px!important;

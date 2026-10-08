@@ -339,6 +339,16 @@
       if(!panel.getClientRects().length)return;
       mountMapHeader(panel);fitMapPhoto(panel,observe);
     });
+    document.querySelectorAll('.photoDetailLayer .photoDetailPanel').forEach(panel=>{
+      const body=panel.querySelector('.photoDetailBody'),card=body?.querySelector('.sharedIdeaCard'),photo=card?.querySelector('.ideaImageFrame');
+      if(!photo||!panel.getClientRects().length)return;
+      observe(panel);observe(card);observe(body);
+      const style=getComputedStyle(body),rect=photo.getBoundingClientRect();
+      const other=card.getBoundingClientRect().height-rect.height;
+      const room=body.clientHeight-(parseFloat(style.paddingTop)||0)-(parseFloat(style.paddingBottom)||0)-other;
+      const height=Math.floor(Math.max(96,Math.min(rect.width*0.625,room)));
+      if(photo.style.getPropertyValue('--detail-photo-height')!==height+'px')photo.style.setProperty('--detail-photo-height',height+'px');
+    });
     document.querySelectorAll('.photoDetailActions').forEach(actions=>{
       if(!actions.getClientRects().length)return;
       const content=actions.previousElementSibling;
