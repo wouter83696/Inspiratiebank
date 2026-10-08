@@ -8545,19 +8545,30 @@
       publicAgendaSheet.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();closePublicAgendaSheet();}});
     }
     publicAgendaOrigin=trigger;
-    publicAgendaSheet.querySelector('h2').textContent=item.title||'Activiteit';
+    publicAgendaSheet.querySelector('h2').textContent='Activiteit';
     const body=publicAgendaSheet.querySelector('.publicAgendaDetailBody');
     const date=item.date||item.period||dayKey.split(':').at(-1);
     const time=AgendaViewShared.formatTime(item.time);
     const image=item.image&&(item.imageStatus==='approved'||item.imageApproved===true)?ideaImageData(item.image,item.imageAlt||item.title):null;
-    const facts=IdeaViewShared.renderMetadata({className:'cardMetaBlock',pills:[item.distanceBand?locationPill(item.distanceBand):'',item.cost?costPill(item.cost):'',item.stimulus?stimulusPill(item.stimulus):''].join('')});
-    const schedule=`<div class="publicAgendaSchedule">${date?`<div>${escapeHtml(date)}</div>`:''}${time?`<div class="agendaTime">${escapeHtml(time)}</div>`:''}</div>`;
     const photo=image?`<figure class="ideaImageFrame"><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}"></figure>`:'';
-    const practical=[['Datum',date],['Tijd',time],['Locatie',item.where]].filter(([,value])=>value).map(([label,value])=>`<p><strong>${label}</strong><br>${escapeHtml(value)}</p>`).join('');
-    const card=`<article class="sharedIdeaCard ${domainThemeClass(item.domain)}"><h3>${escapeHtml(item.title||'Activiteit')}</h3>${photo}<div class="publicAgendaSummary"><span class="domainIcon publicAgendaCategory" role="img" aria-label="${escapeHtml(domainDisplayLabel(item.domain))}">${domainIcon(item.domain)}</span>${facts}</div>${schedule}<p>${escapeHtml(item.description||item.notes||'Bekijk de website van de aanbieder voor meer informatie over deze activiteit.')}</p><section class="photoDetailSection">${practical}</section></article>`;
+    const card=`<article class="sharedIdeaCard ${domainThemeClass(item.domain)}"><h3>${escapeHtml(item.title||'Activiteit')}</h3>${photo}<p>${escapeHtml(item.description||item.notes||'Bekijk de website van de aanbieder voor meer informatie over deze activiteit.')}</p></article>`;
     // Share the actual detail renderer, tabs and location actions with inspiration.
     body.innerHTML=PhotoTiles.detailContent(item,'publicAgendaContentTitle',{card});
     body.querySelector('#publicAgendaContentTitle')?.remove();
+    const practicalPanel=body.querySelector('[role="tabpanel"][id$="-practical"]');
+    if(practicalPanel?.textContent.trim()==='Geen aanvullende praktische informatie.'){
+      body.querySelector('[role="tab"][id$="-practical-tab"]')?.remove();
+      practicalPanel.remove();
+    }
+    const preview=document.createElement('div');
+    preview.className='agendaLivePreview publicAgendaPreview';
+    const previewValues={Title:item.title,Domain:item.domain,Time:time,Where:item.where,Distance:item.distanceBand,Cost:item.cost,Stimulus:item.stimulus};
+    preview.innerHTML=SheetUIShared.renderAgendaPreview(key=>previewValues[key]||'');
+    if(date){
+      const dateLine=document.createElement('div');dateLine.className='publicAgendaPreviewDate';dateLine.textContent=date;
+      preview.querySelector('.agendaItemTitle').after(dateLine);
+    }
+    body.prepend(preview);
     body.scrollTop=0;
     document.body.classList.add('publicAgendaDetailOpen');
     publicAgendaSheet.inert=false;publicAgendaSheet.setAttribute('aria-hidden','false');publicAgendaSheet.classList.add('isOpen');
@@ -11230,7 +11241,7 @@
   });
   </script>
 <link rel="stylesheet" href="website-bestanden/select-controls.css?v=20261006-fixed-textareas-v2">
-<link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261008-date-picker">
+<link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261008-public-preview">
 <script src="website-bestanden/sheet-ui-shared.js?v=20261008-preview-rebuilt"></script>
 <script src="website-bestanden/footer-admin.js?v=20261008-overlay"></script>
 </body>

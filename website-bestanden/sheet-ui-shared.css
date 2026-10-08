@@ -270,3 +270,7 @@ body #agendaSourceSheetLayer .agendaAddModeNav>button.isActive{color:#236875;fon
 .agendaDateFields input{width:100%;min-width:0}
 
 .agendaLegacyDate,.agendaDatePicker [hidden]{display:none!important}
+
+.publicAgendaDetailBody .publicAgendaPreview{margin:0 0 20px}
+.publicAgendaPreviewDate{margin:8px 0 0 36px;color:#71817e;font-size:14px;line-height:1.5}
+.publicAgendaPreview .publicAgendaPreviewDate+.agendaPreviewSchedule{margin-top:3px}
