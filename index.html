@@ -2265,6 +2265,10 @@
     .footerCopy p{margin:0}
     .footerCopy strong{color:var(--accent-dark);font-weight:500}
     .footerContact{justify-self:end;margin-left:10px;margin-right:clamp(18px,4vw,56px);color:var(--accent-dark);font-weight:500;text-decoration:none;padding:8px 0}
+    .footerAdminDialog{position:fixed;inset:0;width:min(520px,calc(100vw - 32px));height:min(560px,calc(100dvh - 32px));max-width:none;max-height:none;padding:0;border:1px solid #e7e2da;border-radius:24px;background:#fffdf9;box-shadow:0 20px 70px #243e4020;overflow:hidden}
+    .footerAdminDialog::backdrop{background:rgba(35,48,47,.35);backdrop-filter:blur(3px)}
+    .footerAdminDialog iframe{display:block;width:100%;height:100%;border:0}
+    .footerAdminClose{position:absolute;right:12px;top:10px;z-index:1;width:36px;height:36px;border:0;border-radius:50%;background:#fffdf9;color:#63858b;font-size:26px;cursor:pointer}
     .footerContact:hover{color:var(--accent)}
     .footerLinks{display:flex;align-items:center;gap:14px;justify-self:end;margin-left:10px;margin-right:clamp(18px,4vw,56px)}
     .footerLinks .footerContact{margin:0}
@@ -5748,7 +5752,7 @@
         <div class="footerLinks">
           <a class="footerContact" href="mailto:w.gerretsen@leokannerhuis.nl">Contact</a>
           <span class="footerDivider" aria-hidden="true"></span>
-          <a class="footerAdmin" id="footerAdminLink" href="/beheer/" aria-label="Beheer (opent in een nieuw venster)">Beheer</a>
+          <a class="footerAdmin" id="footerAdminLink" href="/beheer/" aria-label="Beheer (opent inlogvenster)">Beheer</a>
         </div>
       </div>
     </footer>
@@ -11228,6 +11232,6 @@
 <link rel="stylesheet" href="website-bestanden/select-controls.css?v=20261006-fixed-textareas-v2">
 <link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261008-date-picker">
 <script src="website-bestanden/sheet-ui-shared.js?v=20261008-preview-rebuilt"></script>
-<script src="website-bestanden/footer-admin.js?v=20261008"></script>
+<script src="website-bestanden/footer-admin.js?v=20261008-overlay"></script>
 </body>
 </html>

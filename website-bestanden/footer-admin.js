@@ -1,17 +1,28 @@
 (() => {
   const link = document.getElementById('footerAdminLink');
+  let dialog;
   link?.addEventListener('click', event => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    const width = Math.min(960, window.screen.availWidth);
-    const height = Math.min(820, window.screen.availHeight);
-    const left = Math.max(0, window.screenX + (window.outerWidth - width) / 2);
-    const top = Math.max(0, window.screenY + (window.outerHeight - height) / 2);
-    const popup = window.open(link.href, 'inspiratiebank-beheer',
-      `popup=yes,width=${width},height=${height},left=${Math.round(left)},top=${Math.round(top)},resizable=yes,scrollbars=yes`);
-    // Keep the regular link as fallback when the browser blocks pop-ups.
-    if (popup) {
-      event.preventDefault();
-      popup.focus();
+    event.preventDefault();
+    if (!dialog) {
+      dialog = document.createElement('dialog');
+      dialog.className = 'footerAdminDialog';
+      dialog.setAttribute('aria-label', 'Beheer openen');
+      dialog.innerHTML = '<button type="button" class="footerAdminClose" aria-label="Inlogvenster sluiten">×</button><iframe title="Inloggen voor beheer" src="/beheer/?login=overlay"></iframe>';
+      document.body.append(dialog);
+      dialog.querySelector('button').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+      dialog.addEventListener('close', () => { document.documentElement.style.overflow = ''; link.focus(); });
+      window.addEventListener('message', event => {
+        if (event.origin !== location.origin || event.source !== dialog.querySelector('iframe').contentWindow) return;
+        if (event.data === 'admin-login-complete') location.assign(link.href);
+        if (event.data === 'admin-login-close') dialog.close();
+        if (event.data?.type === 'admin-login-size' && Number.isFinite(event.data.height)) {
+          dialog.style.height = `min(${Math.max(300, event.data.height + 2)}px, calc(100dvh - 32px))`;
+        }
+      });
     }
+    document.documentElement.style.overflow = 'hidden';
+    dialog.showModal();
   });
 })();
