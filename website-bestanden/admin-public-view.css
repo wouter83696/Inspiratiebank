@@ -3585,10 +3585,13 @@
 .agendaLivePreview .agendaItemTitle{display:flex;align-items:center;gap:10px;font-size:19px;line-height:1.4;color:#315f6b;hyphens:none;overflow-wrap:break-word}
 .agendaLivePreview .agendaItemMeta{display:block;margin:6px 0 0 36px;color:#71817e;font-size:14px;line-height:1.6;hyphens:none;word-break:normal;overflow-wrap:break-word}
 .agendaLivePreview .agendaItemTitle .domainIcon{width:26px;height:26px;min-width:26px;flex:0 0 26px}
-.agendaLivePreview .agendaItem .agendaItemMeta .agendaMetaRow{display:inline;margin:0}
-.agendaLivePreview .agendaItem .agendaItemMeta .agendaMetaRow+.agendaMetaRow::before{content:" · ";white-space:pre;color:#8b9c9e;font-weight:400}
 #publicAgendaActivityFields>.agendaLivePreview{margin-bottom:0}
 .agendaLivePreview .agendaItemMeta:empty{display:none}
+
+.agendaLivePreview .agendaPreviewSchedule{margin:6px 0 0 36px;color:#71817e;font-size:14px;line-height:1.6;overflow-wrap:anywhere}
+.agendaLivePreview .agendaPreviewSeparator{color:#8b9c9e}
+.agendaLivePreview .agendaPreviewFacts{display:block;margin:10px 0 0 36px;padding:0}
+.agendaLivePreview .agendaPreviewFacts .cardPillGroup{max-width:100%;flex-wrap:wrap}
 
 /* Canonieke inspiratieweergaven voor publiek en beheer. */
 .sharedIdeaCards{

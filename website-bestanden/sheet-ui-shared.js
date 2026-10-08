@@ -129,6 +129,12 @@
     });
     fields[1].before(fields[0]);
   }
+  function renderAgendaPreview(value){
+    const time=value('Time'),where=value('Where');
+    const schedule=[time?`<span class="agendaTime">${escapeHtml(time)}</span>`:'',where?`<span>${escapeHtml(where)}</span>`:''].filter(Boolean).join('<span class="agendaPreviewSeparator" aria-hidden="true"> · </span>');
+    const pills=[value('Distance')?locationPill(value('Distance')):'',value('Cost')?costPill(value('Cost')):'',value('Stimulus')?stimulusPill(value('Stimulus')):''].join('');
+    return AgendaViewShared.renderItem({themeClass:domainThemeClass(value('Domain')),title:titleWithIcon(value('Title')||'Titel van de activiteit',value('Domain'),'agendaItemTitle'),status:(schedule?`<div class="agendaPreviewSchedule">${schedule}</div>`:'')+(pills?IdeaViewShared.renderMetadata({className:'agendaPreviewFacts',pills}):'')});
+  }
   function agendaDatePicker(date,{kind,onChange=()=>{}}={}){
     const original=date.closest('label');original.hidden=true;original.classList.add('agendaLegacyDate');date.required=false;date.type='hidden';
     const group=document.createElement('div');group.className='agendaDatePicker wide';
@@ -184,7 +190,7 @@
     activity.prepend(preview);
     const updatePreview=()=>{
       const value=key=>activity.querySelector('#publicAgenda'+key).value.trim();
-      preview.innerHTML=AgendaViewShared.renderItem({themeClass:domainThemeClass(value('Domain')),title:titleWithIcon(value('Title')||'Titel van de activiteit',value('Domain'),'agendaItemTitle'),meta:[value('Time'),value('Where')].map(escapeHtml).join(' • ')});
+      preview.innerHTML=renderAgendaPreview(value);
     };
     activity.addEventListener('input',updatePreview);activity.addEventListener('change',updatePreview);
     form.addEventListener('reset',()=>queueMicrotask(updatePreview));
@@ -244,6 +250,6 @@
     mount();
     new MutationObserver(records=>{if(records.some(record=>record.addedNodes.length))mount();}).observe(document.body,{childList:true,subtree:true});
   }
-  window.SheetUIShared=Object.freeze({mount,submissionFooter,photoPicker,editorToolbar,sectionNavigation,agendaDatePicker});
+  window.SheetUIShared=Object.freeze({mount,submissionFooter,photoPicker,editorToolbar,sectionNavigation,agendaDatePicker,renderAgendaPreview});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup,{once:true});else setup();
 })();
