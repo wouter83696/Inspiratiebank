@@ -342,8 +342,23 @@
     const overhead=panel.getBoundingClientRect().height-body.getBoundingClientRect().height;
     const bodyStyle=getComputedStyle(body);
     const padding=(parseFloat(bodyStyle.paddingTop)||0)+(parseFloat(bodyStyle.paddingBottom)||0);
-    const fixedContent=card.getBoundingClientRect().height-photoHeight+padding+overhead;
-    const sizes=[{height:75,photo:20},{height:88,photo:22}];
+    // Measure every tab synchronously before paint, including checkbox mode.
+    // Restore the selected tab and never resize again for this card instance.
+    const tabs=Array.from(card.querySelectorAll('.photoDetailTabs [role="tabpanel"]'));
+    const hidden=tabs.map(tab=>tab.hidden);
+    let largestCardHeight=card.getBoundingClientRect().height;
+    try{
+      for(const tab of tabs){
+        tabs.forEach(other=>{other.hidden=other!==tab;});
+        const materials=tab.querySelector('.ideaMaterialsList');
+        const wasChecking=materials?.classList.contains('isChecking');
+        if(materials)materials.classList.add('isChecking');
+        try{largestCardHeight=Math.max(largestCardHeight,card.getBoundingClientRect().height);}
+        finally{if(materials&&!wasChecking)materials.classList.remove('isChecking');}
+      }
+    }finally{tabs.forEach((tab,index)=>{tab.hidden=hidden[index];});}
+    const fixedContent=largestCardHeight-photoHeight+padding+overhead;
+    const sizes=[{height:60,photo:16},{height:75,photo:20},{height:88,photo:22}];
     const chosen=sizes.find(size=>fixedContent+(photo?Math.min(180,Math.max(100,viewport*size.photo/100)):0)+8<=viewport*size.height/100)||sizes[sizes.length-1];
     panel.style.setProperty('--mobile-detail-height',chosen.height+'dvh');
     panel.style.setProperty('--mobile-detail-photo',chosen.photo+'dvh');
