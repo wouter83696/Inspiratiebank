@@ -343,7 +343,7 @@ html body .publicAgendaDetailLayer .photoDetailTabs{margin-top:0!important}
  html body .photoDetailLayer.sharedPublicSheetLayer{align-items:flex-end!important}
  html body .photoDetailLayer.sharedPublicSheetLayer>.photoDetailPanel.sharedSheet,
  html body #ideaMap .ideaMapPanel.isSingleDetail{
-  height:88dvh!important;max-height:88dvh!important;min-height:0!important;
+  height:86dvh!important;max-height:86dvh!important;min-height:0!important;
   flex:0 0 auto!important;align-self:flex-end!important;
   display:flex!important;flex-direction:column!important;overflow:hidden!important
  }

@@ -7287,7 +7287,7 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
 
 /* Mobile map details use the available viewport and one continuous sheet surface. */
 @media(max-width:640px){
- #ideaMap .ideaMapPanel.isSingleDetail{height:88dvh!important;max-height:88dvh!important;background:var(--sheet-surface)!important;display:flex!important;flex-direction:column;overflow:hidden}
+ #ideaMap .ideaMapPanel.isSingleDetail{height:86dvh!important;max-height:86dvh!important;background:var(--sheet-surface)!important;display:flex!important;flex-direction:column;overflow:hidden}
  #ideaMap .ideaMapPanel.isSingleDetail .ideaMapPanelHead{height:24px!important;min-height:24px!important;flex:0 0 24px!important;margin:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
  #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{flex:1 1 auto!important;min-height:0!important;padding:0 16px max(16px,env(safe-area-inset-bottom))!important}
  #ideaMap .ideaMapSingleCard.photoDetailBody{padding:0 16px 16px!important;background:transparent!important}
@@ -8356,7 +8356,7 @@ textarea{resize:none!important}
  :scope :scope .photoDetailLayer.sharedPublicSheetLayer{align-items:flex-end!important}
  :scope :scope .photoDetailLayer.sharedPublicSheetLayer>.photoDetailPanel.sharedSheet,
  :scope :scope #ideaMap .ideaMapPanel.isSingleDetail{
-  height:88dvh!important;max-height:88dvh!important;min-height:0!important;
+  height:86dvh!important;max-height:86dvh!important;min-height:0!important;
   flex:0 0 auto!important;align-self:flex-end!important;
   display:flex!important;flex-direction:column!important;overflow:hidden!important
  }
