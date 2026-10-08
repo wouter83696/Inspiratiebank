@@ -7932,7 +7932,7 @@ textarea{resize:none!important}
 /* Phones share one bottom-sheet geometry and entry/exit direction. */
 @media(max-width:640px){
  .sharedPublicSheetLayer{align-items:flex-end!important}
- .sharedPublicSheetLayer>.sharedSheet{width:100%!important;height:94dvh!important;max-height:94dvh!important;border-right:0!important;border-radius:24px 24px 0 0!important;transform:translateY(100%)!important;box-shadow:0 -16px 40px rgba(49,95,107,.12)!important}
+ .sharedPublicSheetLayer>.sharedSheet{width:100%!important;height:86dvh!important;max-height:86dvh!important;border-right:0!important;border-radius:24px 24px 0 0!important;transform:translateY(100%)!important;box-shadow:0 -16px 40px rgba(49,95,107,.12)!important}
  .sharedPublicSheetLayer.isOpen>.sharedSheet{transform:translateY(0)!important}
 }
 
@@ -8096,7 +8096,7 @@ textarea{resize:none!important}
 /* Mobile sheets enter from below; tablet retains the narrow side panel. */
 @media(max-width:640px){
  :scope :scope .ideaFilterSheetLayer{align-items:flex-end!important;justify-content:flex-start!important}
- :scope :scope .ideaFilterSheetLayer>.ideaFilterSheet{width:100%!important;height:94dvh!important;max-height:94dvh!important;border-radius:24px 24px 0 0!important;transform:translateY(100%)!important}
+ :scope :scope .ideaFilterSheetLayer>.ideaFilterSheet{width:100%!important;height:86dvh!important;max-height:86dvh!important;border-radius:24px 24px 0 0!important;transform:translateY(100%)!important}
  :scope :scope .ideaFilterSheetLayer.isOpen>.ideaFilterSheet{transform:translateY(0)!important}
  :scope :scope .ideaFilterSheet .ideaFilterSection{gap:8px;padding-bottom:16px;margin-bottom:16px}
  :scope :scope .ideaFilterSheet :is(.customSelectButton,.customSelectOption){min-height:44px}
