@@ -1380,3 +1380,9 @@ body.photoDetailOpen{overflow:hidden!important}
  html body :is(#ideaMap .ideaMapSingleCard,.photoDetailLayer .photoDetailBody) .photoDetailActions>.detailAddressDisclosure>summary{min-height:44px!important;padding:8px 38px 8px 12px!important;font-size:14px!important;line-height:1.4!important}
  html body :is(#ideaMap .ideaMapSingleCard,.photoDetailLayer .photoDetailBody) .photoDetailActions>.ideaRouteButton{min-height:40px!important;padding:8px 12px!important;font-size:14px!important;line-height:1.4!important}
 }
+
+/* Desktop detail headings retain top spacing when their title wraps. */
+@media(min-width:981px){
+ html body .photoDetailLayer .photoDetailPanel .ideaFilterSheetHeader{height:auto!important;min-height:76px!important;padding:24px 20px 12px!important;align-items:flex-start!important}
+ html body .photoDetailLayer .photoDetailPanel .ideaFilterSheetHeader h3{margin:0!important;line-height:1.4!important}
+}

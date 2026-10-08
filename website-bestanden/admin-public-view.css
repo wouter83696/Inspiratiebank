@@ -7972,6 +7972,12 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
  :scope :scope :is(#ideaMap .ideaMapSingleCard,.photoDetailLayer .photoDetailBody) .photoDetailActions>.ideaRouteButton{min-height:40px!important;padding:8px 12px!important;font-size:14px!important;line-height:1.4!important}
 }
 
+/* Desktop detail headings retain top spacing when their title wraps. */
+@media(min-width:981px){
+ :scope :scope .photoDetailLayer .photoDetailPanel .ideaFilterSheetHeader{height:auto!important;min-height:76px!important;padding:24px 20px 12px!important;align-items:flex-start!important}
+ :scope :scope .photoDetailLayer .photoDetailPanel .ideaFilterSheetHeader h3{margin:0!important;line-height:1.4!important}
+}
+
 /* Shared compact select appearance, based on the management filter sheet. */
 .customSelect .customSelectButton{
   box-sizing:border-box;position:relative;width:100%;height:auto!important;min-height:40px!important;
