@@ -132,7 +132,10 @@
   function renderAgendaPreview(value){
     const time=value('Time'),where=value('Where');
     const schedule=[time?`<span class="agendaTime">${escapeHtml(time)}</span>`:'',where?`<span>${escapeHtml(where)}</span>`:''].filter(Boolean).join('<span class="agendaPreviewSeparator" aria-hidden="true"> · </span>');
-    const pills=[value('Distance')?locationPill(value('Distance')):'',value('Cost')?costPill(value('Cost')):'',value('Stimulus')?stimulusPill(value('Stimulus')):''].join('');
+    const distance=value('Distance');
+    const compactDistance=distance.match(/\d+\s*[–-]\s*\d+\s*km/i)?.[0]||distance;
+    const distancePill=distance?`<span class="pill locationPill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>${escapeHtml(compactDistance)}</span>`:'';
+    const pills=[distancePill,value('Cost')?costPill(value('Cost')):'',value('Stimulus')?stimulusPill(value('Stimulus')):''].join('');
     return AgendaViewShared.renderItem({themeClass:domainThemeClass(value('Domain')),title:titleWithIcon(value('Title')||'Titel van de activiteit',value('Domain'),'agendaItemTitle'),status:(schedule?`<div class="agendaPreviewSchedule">${schedule}</div>`:'')+(pills?IdeaViewShared.renderMetadata({className:'agendaPreviewFacts',pills}):'')});
   }
   function agendaDatePicker(date,{kind,onChange=()=>{}}={}){
