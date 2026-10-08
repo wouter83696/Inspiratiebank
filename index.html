@@ -2266,6 +2266,13 @@
     .footerCopy strong{color:var(--accent-dark);font-weight:500}
     .footerContact{justify-self:end;margin-left:10px;margin-right:clamp(18px,4vw,56px);color:var(--accent-dark);font-weight:500;text-decoration:none;padding:8px 0}
     .footerContact:hover{color:var(--accent)}
+    .footerLinks{display:flex;align-items:center;gap:14px;justify-self:end;margin-left:10px;margin-right:clamp(18px,4vw,56px)}
+    .footerLinks .footerContact{margin:0}
+    .footerDivider{height:14px;width:1px;background:rgba(49,95,107,.2)}
+    .footerAdmin{display:inline-flex;align-items:center;min-height:44px;color:#71817e;font-size:.78rem;font-weight:400;text-decoration:none}
+    .footerAdmin:hover{color:var(--accent-dark);text-decoration:underline}
+    .footerAdmin:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:3px}
+    @media(max-width:640px){.footerLinks{justify-self:start;margin:0}}
     @media (min-width:981px){
       #ideaCards.cards{align-items:stretch}
       #ideaCards .card{height:100%}
@@ -5738,7 +5745,11 @@
           <p>Ontwikkeld voor <strong>BCJN Nijmegen</strong></p>
           <p>Onderdeel van Youz | Parnassia Groep</p>
         </div>
-        <a class="footerContact" href="mailto:w.gerretsen@leokannerhuis.nl">Contact</a>
+        <div class="footerLinks">
+          <a class="footerContact" href="mailto:w.gerretsen@leokannerhuis.nl">Contact</a>
+          <span class="footerDivider" aria-hidden="true"></span>
+          <a class="footerAdmin" id="footerAdminLink" href="/beheer/" aria-label="Beheer (opent in een nieuw venster)">Beheer</a>
+        </div>
       </div>
     </footer>
   </main>
@@ -11217,5 +11228,6 @@
 <link rel="stylesheet" href="website-bestanden/select-controls.css?v=20261006-fixed-textareas-v2">
 <link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261008-date-picker">
 <script src="website-bestanden/sheet-ui-shared.js?v=20261008-preview-meta-refined"></script>
+<script src="website-bestanden/footer-admin.js?v=20261008"></script>
 </body>
 </html>
