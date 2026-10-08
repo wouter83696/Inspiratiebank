@@ -342,6 +342,7 @@
     document.querySelectorAll('.photoDetailLayer .photoDetailPanel').forEach(panel=>{
       const body=panel.querySelector('.photoDetailBody'),card=body?.querySelector('.sharedIdeaCard'),photo=card?.querySelector('.ideaImageFrame');
       if(!photo||!panel.getClientRects().length)return;
+      if(!desktopMap.matches){photo.style.removeProperty('--detail-photo-height');return;}
       observe(panel);observe(card);observe(body);
       const style=getComputedStyle(body),rect=photo.getBoundingClientRect();
       const other=card.getBoundingClientRect().height-rect.height;
