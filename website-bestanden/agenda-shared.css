@@ -824,3 +824,14 @@ html body .ongoingDateMeta .agendaTime{display:inline!important;font-size:inheri
 .agendaLivePreview .agendaPreviewFacts .cardPillGroup .pill{color:color-mix(in srgb,var(--theme-ink,#315f6b) 85%,#fff)!important;font-size:12px!important;font-weight:400!important;line-height:1.25;min-height:20px;padding:0 6px!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;display:inline-flex;align-items:center;gap:5px}
 .agendaLivePreview .agendaPreviewFacts .cardPillGroup .pill+.pill{border-left:1px solid color-mix(in srgb,var(--theme-ink,#315f6b) 8%,transparent)!important}
 .agendaLivePreview .agendaPreviewFacts .pill svg{width:14px!important;height:14px!important}
+
+/* Size calendar text to its actual card, including narrow desktop day columns. */
+.weekPanel :is(.agendaDay,.agendaGroup,.agendaItem,.agendaItemLink){min-width:0}
+.weekPanel .agendaItem{container-type:inline-size;container-name:agenda-card;box-sizing:border-box;max-width:100%}
+.weekPanel .agendaItemLink{max-width:100%}
+@container agenda-card (max-width:250px){
+  .agendaItem .agendaItemMeta .agendaMetaRow{display:block!important;overflow-wrap:anywhere}
+  .agendaItem .agendaItemMeta .agendaMetaRow+.agendaMetaRow{margin-top:3px!important}
+  .agendaItem .agendaItemMeta .agendaMetaRow+.agendaMetaRow::before{content:none!important}
+  .agendaItem .agendaItemMeta .agendaTime{white-space:normal}
+}

@@ -3603,6 +3603,17 @@
 .agendaLivePreview .agendaPreviewFacts .cardPillGroup .pill+.pill{border-left:1px solid color-mix(in srgb,var(--theme-ink,#315f6b) 8%,transparent)!important}
 .agendaLivePreview .agendaPreviewFacts .pill svg{width:14px!important;height:14px!important}
 
+/* Size calendar text to its actual card, including narrow desktop day columns. */
+.weekPanel :is(.agendaDay,.agendaGroup,.agendaItem,.agendaItemLink){min-width:0}
+.weekPanel .agendaItem{container-type:inline-size;container-name:agenda-card;box-sizing:border-box;max-width:100%}
+.weekPanel .agendaItemLink{max-width:100%}
+@container agenda-card (max-width:250px){
+  .agendaItem .agendaItemMeta .agendaMetaRow{display:block!important;overflow-wrap:anywhere}
+  .agendaItem .agendaItemMeta .agendaMetaRow+.agendaMetaRow{margin-top:3px!important}
+  .agendaItem .agendaItemMeta .agendaMetaRow+.agendaMetaRow::before{content:none!important}
+  .agendaItem .agendaItemMeta .agendaTime{white-space:normal}
+}
+
 /* Canonieke inspiratieweergaven voor publiek en beheer. */
 .sharedIdeaCards{
   display:grid;
