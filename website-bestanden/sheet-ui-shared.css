@@ -280,3 +280,6 @@ body #agendaSourceSheetLayer .agendaAddModeNav>button.isActive{color:#236875;fon
 .agendaDateFields input[type=date]{font:inherit;color:#315f6b;background:#fffdf9;border:1px solid #dce7e7;border-radius:12px;padding:12px 14px;box-sizing:border-box;color-scheme:light}
 .agendaDateFields input[type=date]:focus{outline:2px solid #8ac6c7;outline-offset:2px;border-color:#4f8e9e}
 .agendaDateFields input::-webkit-calendar-picker-indicator{opacity:.65;cursor:pointer}
+
+.sharedSheet .teamField:has(.customSelect.open){position:relative;z-index:50}
+.sharedSheet .customSelect.open{z-index:51}

@@ -126,12 +126,12 @@
         if(control.closest('.agendaWeekFilterSlot')) return;
         const buttonRect = button.getBoundingClientRect();
         const menuHeight = Math.min(menu.scrollHeight || 0, 280);
-        const modalCard = control.closest('.ideaModalCard');
+        const modalCard = control.closest('.sharedSheetBody,.ideaSubmitSheetBody,.ideaModalCard');
         const clipsToCard = modalCard && getComputedStyle(modalCard).overflow !== 'visible';
         const modalBottom = clipsToCard ? modalCard.getBoundingClientRect().bottom : window.innerHeight;
         const lowerBoundary = Math.min(window.innerHeight, modalBottom);
         const spaceBelow = lowerBoundary - buttonRect.bottom;
-        const spaceAbove = buttonRect.top;
+        const spaceAbove = buttonRect.top - (clipsToCard ? Math.max(0, modalCard.getBoundingClientRect().top) : 0);
         control.classList.toggle('openUp', spaceBelow < menuHeight + 18 && spaceAbove > spaceBelow);
       }
     });

@@ -215,7 +215,7 @@
       const category=activity.querySelector('#publicAgendaDomain');
       if(category.options.length===1){
         unique(allInspirationItems().map(item=>item.domain)).forEach(value=>category.add(new Option(domainDisplayLabel(value),value)));
-        syncCustomSelect(category);
+        enhanceCustomSelect(category);
       }
       form.dataset.agendaMode=mode;const isSource=mode==='source';source.hidden=!isSource;activity.hidden=isSource;
       source.querySelectorAll('input').forEach(input=>input.disabled=!isSource);activity.querySelectorAll('input,select,textarea').forEach(input=>input.disabled=isSource||(input.type==='date'&&input.closest('label').hidden));

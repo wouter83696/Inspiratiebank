@@ -8240,4 +8240,7 @@ textarea{resize:none!important}
 .agendaDateFields input[type=date]:focus{outline:2px solid #8ac6c7;outline-offset:2px;border-color:#4f8e9e}
 .agendaDateFields input::-webkit-calendar-picker-indicator{opacity:.65;cursor:pointer}
 
+.sharedSheet .teamField:has(.customSelect.open){position:relative;z-index:50}
+.sharedSheet .customSelect.open{z-index:51}
+
 }
