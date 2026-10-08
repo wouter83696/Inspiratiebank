@@ -161,7 +161,8 @@
     calendar.innerHTML='<div class="agendaCalendarNav"><button type="button" aria-label="Vorige maand">‹</button><strong aria-live="polite"></strong><button type="button" aria-label="Volgende maand">›</button></div><div class="agendaCalendarWeekdays" aria-hidden="true">'+['ma','di','wo','do','vr','za','zo'].map(day=>'<span>'+day+'</span>').join('')+'</div><div class="agendaCalendarDays"></div><p class="agendaCalendarStatus" aria-live="polite"></p>';
     fields.after(calendar);
     const disclosure=document.createElement('details');disclosure.className='agendaDateDisclosure';
-    const summary=document.createElement('summary');summary.innerHTML='<span>Datum en tijd</span><span class="agendaDateSummary"></span>';
+    const summary=document.createElement('summary');summary.innerHTML='<span class="agendaDateSummary"></span>';
+    const dateCaption=document.createElement('span');dateCaption.className='agendaDateCaption';dateCaption.textContent='Datum en tijd';group.append(dateCaption);
     const contents=document.createElement('div');contents.className='agendaDateContents';
     disclosure.append(summary,contents);group.append(disclosure);const calendarTop=document.createElement('div');calendarTop.className='agendaCalendarTop';calendarTop.append(toggle,group.querySelector('.agendaCalendarStatus'));contents.append(calendarTop,calendar);
     let fromTime,toTime,freeTime;

@@ -320,3 +320,14 @@ body #agendaSourceSheetLayer .agendaAddModeNav>button.isActive{color:#236875;fon
 .agendaCalendarTop .agendaCalendarStatus{margin:0!important;text-align:right;flex:1;min-width:0}
 .agendaCalendarTop .agendaOngoingToggle{flex-shrink:0;font-size:13px}
 .agendaTimeNote select{width:100%;padding:10px 12px;color:#315f6b;border:1px solid #dce7e7;background:#fffdf9}
+
+/* Datumkeuze gebruikt dezelfde control-afmetingen als de overige sheetvelden. */
+.sharedSheet .teamField .customSelectButton,
+.sharedSheet .agendaDateDisclosure>summary{min-height:44px;padding:10px 12px;border:1px solid rgba(11,18,32,.08);border-radius:12px;background:rgba(255,255,255,.76);color:var(--sheet-ink);font:400 14px/1.4 Manrope,system-ui,sans-serif;box-sizing:border-box;box-shadow:none}
+.sharedSheet .agendaDateDisclosure{border:0;background:transparent;border-radius:12px;overflow:hidden}
+.sharedSheet .agendaDateDisclosure>summary{padding-right:36px}
+.sharedSheet .agendaDateSummary{margin:0;font:inherit;color:inherit;flex:1}
+.sharedSheet .agendaDateDisclosure>summary::after{right:12px}
+.agendaDateCaption{font-size:14px;font-weight:600;color:var(--sheet-ink);line-height:1.4}
+.agendaDatePicker{gap:8px}
+.agendaDateDisclosure[open] .agendaDateContents{border:1px solid #dce7e7;border-top:0;border-radius:0 0 12px 12px;background:#fffdf9}
