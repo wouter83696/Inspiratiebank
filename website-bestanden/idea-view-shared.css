@@ -203,11 +203,12 @@
 #ideaMap .ideaMapPanel .ideaMapResult.hasThumb .ideaMapResultBody{margin-top:0!important;align-self:start!important;transform:none!important}
 #ideaMap .ideaMapPanel .ideaMapResult.hasThumb .ideaMapResultInfo{margin:0!important;padding:5px 7px!important}
 
-.ideaMaterialChecklist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ideaMaterialChecklist{list-style:none;margin:0;padding:0;display:grid;gap:0}
 .ideaMaterialChecklist li{margin:0;padding:0}
-.ideaMaterialChecklist label{display:flex;align-items:flex-start;gap:10px;cursor:pointer;color:#315f6b;font:400 16px/1.65 Manrope,system-ui,sans-serif;padding:5px 0}
+.ideaMaterialChecklist label{display:flex;align-items:center;gap:8px;cursor:pointer;color:#315f6b;font:400 15px/1.45 Manrope,system-ui,sans-serif;min-height:36px;box-sizing:border-box;padding:6px 0}
+.ideaMaterialsList.isChecking .ideaMaterialChecklist label{min-height:44px}
 .ideaMaterialChecklist label>span{flex:1;min-width:0}
-.ideaMaterialChecklist input[type=checkbox]{order:1;appearance:none;flex:none;width:18px;height:18px;margin:2px 0 0;border:1px solid #63858b;border-radius:4px;background:transparent;display:grid;place-content:center;cursor:pointer}
+.ideaMaterialChecklist input[type=checkbox]{order:1;appearance:none;flex:none;width:16px;height:16px;margin:0;border:1px solid #63858b;border-radius:4px;background:transparent;display:grid;place-content:center;cursor:pointer}
 .ideaMaterialChecklist input:checked{background:#dcefeb;border-color:#63858b}
 .ideaMaterialChecklist input:checked::before{content:"";width:8px;height:4px;border-left:2px solid #236875;border-bottom:2px solid #236875;transform:rotate(-45deg);margin-top:-2px}
 .ideaMaterialChecklist input:focus-visible{outline:2px solid #236875;outline-offset:3px}
