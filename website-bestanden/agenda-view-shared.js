@@ -308,7 +308,7 @@
       ? `<a class="ongoingTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="ideaTitleText">${escapeHtml(item.title)}</span></a>`
       : `<span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
     const dateMeta = `<span class="small ongoingDateMeta">${escapeHtml(item.date)} • <span class="agendaTime">${escapeHtml(formatTime(item.time))}</span></span>`;
-    const title = `<span class="nameWithIcon"><span class="ongoingTitleVisual" aria-hidden="true"><span class="domainIcon">${icon}</span></span><span class="ongoingTitleTextStack">${titleText}${dateMeta}</span></span>`;
+    const title = `<span class="nameWithIcon"><span class="ongoingTitleVisual" aria-hidden="true"><span class="domainIcon">${icon}</span></span><span class="ongoingTitleTextStack">${titleText}${dateMeta}${view.weekLabel ? `<span class="ongoingAutoWeeks">Week ${escapeHtml(view.weekLabel)}</span>` : ''}</span></span>`;
     return renderOngoingRow({
       themeClass, attributes, hidden, title,
       review, date:'',

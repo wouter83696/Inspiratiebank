@@ -7922,6 +7922,22 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
  :scope :scope #ideaMap .ideaMapSingleCard.photoDetailBody .ideaImageFrame img{height:100%!important;object-fit:cover}
 }
 
+/* Doorlopend aanbod: gedeelde, rustig uitgelijnde desktopkolommen. */
+.ongoingAutoWeeks{display:none}
+@media(min-width:981px){
+ :is(#ongoingAdminSection,#ongoingAdminSection) table{table-layout:fixed;width:100%}
+ :is(#ongoingAdminSection,#ongoingAdminSection) :is(th,td){vertical-align:top!important;padding:18px 16px!important;box-sizing:border-box}
+ :is(#ongoingAdminSection,#ongoingAdminSection) :is(.ongoingTitleHead,.ongoingTitleCell){width:46%!important}
+ :is(#ongoingAdminSection,#ongoingAdminSection) :is(.ongoingBadgesHead,.ongoingBadgesCell){width:22%!important}
+ :is(#ongoingAdminSection,#ongoingAdminSection) :is(.ongoingFitHead,.ongoingFitCell){width:32%!important}
+ :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .nameWithIcon{align-items:flex-start;gap:12px}
+ :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleVisual{width:32px;height:32px;min-width:32px}
+ :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleTextStack{padding-top:2px;gap:4px}
+ :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingBadges{margin:0!important;max-width:100%;flex-wrap:wrap}
+ :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingAdminDescription{margin:0;overflow-wrap:anywhere;line-height:1.5}
+ .ongoingAutoWeeks{display:block;color:#7a8786;font-size:12px;font-weight:400;line-height:1.35}
+}
+
 /* Shared compact select appearance, based on the management filter sheet. */
 .customSelect .customSelectButton{
   box-sizing:border-box;position:relative;width:100%;height:auto!important;min-height:40px!important;
