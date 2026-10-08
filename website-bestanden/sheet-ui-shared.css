@@ -333,9 +333,7 @@ body #agendaSourceSheetLayer .agendaAddModeNav>button.isActive{color:#236875;fon
 .agendaDateDisclosure[open] .agendaDateContents{border:1px solid #dce7e7;border-top:0;border-radius:0 0 12px 12px;background:#fffdf9}
 
 /* The preview title names the dialog; keep only a compact close row above it. */
-html body .publicAgendaDetailLayer .sharedSheetHeader{position:absolute;top:24px;right:28px;z-index:2;justify-content:flex-end;width:32px;height:32px!important;min-height:32px!important;padding:0!important;background:transparent!important}
-html body .publicAgendaDetailLayer .sharedSheetHeader .ideaSubmitSheetClose{width:32px;height:32px;min-height:32px;flex:0 0 32px}
-html body .publicAgendaDetailLayer .publicAgendaDetailBody{padding-top:16px!important}
-html body .publicAgendaDetailLayer .publicAgendaPreview .agendaItemTitle{padding-right:36px}
+html body .publicAgendaDetailLayer .sharedSheetHeader{justify-content:flex-end;height:48px!important;min-height:48px!important;flex:0 0 48px;padding:6px 20px!important}
+html body .publicAgendaDetailLayer .publicAgendaDetailBody{padding-top:8px!important}
 html body .publicAgendaDetailLayer .publicAgendaPreview{margin-bottom:8px}
 html body .publicAgendaDetailLayer .photoDetailTabs{margin-top:0!important}
