@@ -763,7 +763,7 @@
 }
 :is(#longerOffers,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleVisual{
  display:grid;place-items:center;width:64px;height:64px;min-width:64px;
- border:1px solid var(--theme-line);border-radius:11px;background:transparent;box-shadow:none;
+ border:0;border-radius:0;background:transparent;box-shadow:none;
 }
 :is(#longerOffers,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleTextStack{
  display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;
@@ -796,3 +796,8 @@
 /* A single time accent across calendar cards, ongoing offers and detail sheets. */
 :root{--agenda-time-color:#07345e}
 html body .agendaTime{color:var(--agenda-time-color)!important;font-weight:600}
+
+/* Dates and times form one quiet line; mobile weeks precede the date. */
+html body .ongoingDateMeta .agendaTime{display:inline!important;font-size:inherit!important;line-height:inherit!important;font-weight:400!important}
+.ongoingMobileWeekLabel{display:none}
+@media(max-width:640px){.ongoingMobileWeekLabel{display:inline}}

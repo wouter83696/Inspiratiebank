@@ -307,17 +307,17 @@
     const {placePills,weekLabel,costLabel,stimulusLabel,icon,description,review='',themeClass='',attributes='',hidden=false}=view;
     const mobileWeekLabel = weekLabel.replace(/(\d)\s*-\s*(\d)/g, '$1–$2');
     const mobileWeekPill = weekLabel
-      ? `<span class="ongoingMobileWeekPill" aria-label="Week ${escapeHtml(mobileWeekLabel)}"><strong>Week</strong> ${escapeHtml(mobileWeekLabel)}</span>`
+      ? `<span class="ongoingMobileWeekLabel" aria-label="Week ${escapeHtml(mobileWeekLabel)}">Week ${escapeHtml(mobileWeekLabel)} · </span>`
       : '';
     const titleText = item.url
       ? `<a class="ongoingTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="ideaTitleText">${escapeHtml(item.title)}</span></a>`
       : `<span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
-    const dateMeta = `<span class="small ongoingDateMeta">${escapeHtml(item.date)} • <span class="agendaTime">${escapeHtml(formatTime(item.time))}</span></span>`;
+    const dateMeta = `<span class="small ongoingDateMeta">${mobileWeekPill}${escapeHtml(item.date)} • <span class="agendaTime">${escapeHtml(formatTime(item.time))}</span></span>`;
     const title = `<span class="nameWithIcon"><span class="ongoingTitleVisual" aria-hidden="true"><span class="domainIcon">${icon}</span></span><span class="ongoingTitleTextStack">${titleText}${dateMeta}</span></span>`;
     return renderOngoingRow({
       themeClass, attributes, hidden, title,
       review, date:'',
-      weeks:escapeHtml(weekLabel), place:`${mobileWeekPill}${placePills}`,
+      weeks:escapeHtml(weekLabel), place:placePills,
       cost:costLabel, stimulus:stimulusLabel, meta:'',
       description:escapeHtml(description), preparation:renderPreparation(item),
       hideWebsite:true
