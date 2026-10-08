@@ -331,38 +331,6 @@
     const value=height+'px';
     if(photo.style.getPropertyValue('--map-photo-height')!==value)photo.style.setProperty('--map-photo-height',value);
   }
-  const mobileDetailCards=new WeakMap();
-  function setMobileDetailSize(panel,body,card){
-    if(desktopMap.matches){panel.style.removeProperty('--mobile-detail-height');return;}
-    if(!body||!card||mobileDetailCards.get(panel)===card)return;
-    mobileDetailCards.set(panel,card);
-    const viewport=window.visualViewport?.height||window.innerHeight;
-    const photo=card.querySelector('.ideaImageFrame');
-    const photoHeight=photo?.getBoundingClientRect().height||0;
-    const overhead=panel.getBoundingClientRect().height-body.getBoundingClientRect().height;
-    const bodyStyle=getComputedStyle(body);
-    const padding=(parseFloat(bodyStyle.paddingTop)||0)+(parseFloat(bodyStyle.paddingBottom)||0);
-    // Measure every tab synchronously before paint, including checkbox mode.
-    // Restore the selected tab and never resize again for this card instance.
-    const tabs=Array.from(card.querySelectorAll('.photoDetailTabs [role="tabpanel"]'));
-    const hidden=tabs.map(tab=>tab.hidden);
-    let largestCardHeight=card.getBoundingClientRect().height;
-    try{
-      for(const tab of tabs){
-        tabs.forEach(other=>{other.hidden=other!==tab;});
-        const materials=tab.querySelector('.ideaMaterialsList');
-        const wasChecking=materials?.classList.contains('isChecking');
-        if(materials)materials.classList.add('isChecking');
-        try{largestCardHeight=Math.max(largestCardHeight,card.getBoundingClientRect().height);}
-        finally{if(materials&&!wasChecking)materials.classList.remove('isChecking');}
-      }
-    }finally{tabs.forEach((tab,index)=>{tab.hidden=hidden[index];});}
-    const fixedContent=largestCardHeight-photoHeight+padding+overhead;
-    const sizes=[{height:60},{height:75},{height:88}];
-    const chosen=sizes.find(size=>fixedContent+photoHeight+8<=viewport*size.height/100)||sizes[sizes.length-1];
-    panel.style.setProperty('--mobile-detail-height',chosen.height+'dvh');
-
-  }
   function refreshDetailLayout(){
     actionFrame=0;
     const wanted=new Set();
@@ -370,12 +338,10 @@
     document.querySelectorAll('#ideaMap .ideaMapPanel.isSingleDetail').forEach(panel=>{
       if(!panel.getClientRects().length)return;
       mountMapHeader(panel);fitMapPhoto(panel,observe);
-      setMobileDetailSize(panel,panel.querySelector('.ideaMapResults'),panel.querySelector('.sharedIdeaCard'));
     });
     document.querySelectorAll('.photoDetailLayer .photoDetailPanel').forEach(panel=>{
       const body=panel.querySelector('.photoDetailBody'),card=body?.querySelector('.sharedIdeaCard'),photo=card?.querySelector('.ideaImageFrame');
       if(!panel.getClientRects().length)return;
-      setMobileDetailSize(panel,body,card);
       if(!photo)return;
       if(!desktopMap.matches){photo.style.removeProperty('--detail-photo-height');return;}
       observe(panel);observe(card);observe(body);
