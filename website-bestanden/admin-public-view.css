@@ -3616,6 +3616,13 @@
   .agendaItem .agendaItemMeta .agendaTime{white-space:normal}
 }
 
+/* Keep mobile calendar titles centered on their icon and the time close below. */
+@media(max-width:640px){
+  .weekPanel .agendaItemTitle{align-items:center}
+  .weekPanel .agendaItemTitle .domainIcon{align-self:center;margin-top:0}
+  .weekPanel .agendaItemMeta{margin-top:3px}
+}
+
 /* Canonieke inspiratieweergaven voor publiek en beheer. */
 .sharedIdeaCards{
   display:grid;
