@@ -8270,4 +8270,14 @@ textarea{resize:none!important}
 .agendaTimeNote{grid-column:1/-1}
 .agendaDateDone{border:1px solid #c5dfda;background:#e5f2ef;color:#315f6b;border-radius:10px;padding:10px;font:inherit;cursor:pointer}
 
+.agendaDateDisclosure>summary{flex-direction:row;align-items:center;gap:12px;min-height:44px;box-sizing:border-box}
+.agendaDateDisclosure>summary>span:first-child{flex-shrink:0}
+.agendaDateSummary{margin-left:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.agendaDateDisclosure>summary::after{content:"";width:13px;height:13px;top:50%;transform:translateY(-50%);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%233b6470' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E") center/contain no-repeat}
+.agendaDateDisclosure[open]>summary::after{transform:translateY(-50%) rotate(180deg)}
+.agendaCalendarTop{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.agendaCalendarTop .agendaCalendarStatus{margin:0!important;text-align:right;flex:1;min-width:0}
+.agendaCalendarTop .agendaOngoingToggle{flex-shrink:0;font-size:13px}
+.agendaTimeNote select{width:100%;padding:10px 12px;color:#315f6b;border:1px solid #dce7e7;background:#fffdf9}
+
 }

@@ -163,14 +163,14 @@
     const disclosure=document.createElement('details');disclosure.className='agendaDateDisclosure';
     const summary=document.createElement('summary');summary.innerHTML='<span>Datum en tijd</span><span class="agendaDateSummary"></span>';
     const contents=document.createElement('div');contents.className='agendaDateContents';
-    disclosure.append(summary,contents);group.append(disclosure);contents.append(toggle,calendar);
+    disclosure.append(summary,contents);group.append(disclosure);const calendarTop=document.createElement('div');calendarTop.className='agendaCalendarTop';calendarTop.append(toggle,group.querySelector('.agendaCalendarStatus'));contents.append(calendarTop,calendar);
     let fromTime,toTime,freeTime;
     const updateSummary=()=>{summary.querySelector('.agendaDateSummary').textContent=[start.value?format(start.value)+(kind.value==='ongoing'&&end.value?' t/m '+format(end.value):''):'Kies een datum',time?.value].filter(Boolean).join(' · ');};
     if(time){
       time.closest('label').hidden=true;time.type='hidden';time.required=false;
       const controls=document.createElement('div');controls.className='agendaTimeRange';
-      controls.innerHTML='<label class="teamField"><span>Van</span><input type="time"></label><label class="teamField"><span>Tot (optioneel)</span><input type="time"></label><label class="teamField agendaTimeNote"><span>Of een tijdomschrijving</span><input type="text" placeholder="Bijv. diverse tijden"></label>';
-      [fromTime,toTime,freeTime]=controls.querySelectorAll('input');contents.append(controls);
+      controls.innerHTML='<label class="teamField"><span>Van</span><input type="time"></label><label class="teamField"><span>Tot (optioneel)</span><input type="time"></label><label class="teamField agendaTimeNote"><span>Of een tijdomschrijving</span><select><option value="">Kies tijdomschrijving (optioneel)</option><option>Diverse tijden</option><option>Hele dag</option><option>Volgens openingstijden</option><option>Op afspraak</option><option>Tijd nog niet bekend</option></select></label>';
+      [fromTime,toTime,freeTime]=controls.querySelectorAll('input,select');contents.append(controls);
       controls.addEventListener('input',event=>{
         if(event.target===freeTime){fromTime.value='';toTime.value='';}
         else freeTime.value='';
@@ -180,7 +180,7 @@
     }
     const done=document.createElement('button');done.type='button';done.className='agendaDateDone';done.textContent='Gereed';contents.append(done);
     done.addEventListener('click',()=>{
-      if(!start.value||(kind.value==='ongoing'&&!end.value)){calendar.querySelector('.agendaCalendarStatus').textContent='Kies '+(!start.value?'een datum.':'ook een einddatum.');return;}
+      if(!start.value||(kind.value==='ongoing'&&!end.value)){group.querySelector('.agendaCalendarStatus').textContent='Kies '+(!start.value?'een datum.':'ook een einddatum.');return;}
       disclosure.open=false;summary.focus();
     });
     const loadTime=()=>{
@@ -188,6 +188,7 @@
       const match=time.value.trim().match(/^(\d{1,2})[.:](\d{2})(?:\s*[-–/]\s*(\d{1,2})[.:](\d{2}))?\s*(?:uur)?$/i);
       fromTime.value=match?match[1].padStart(2,'0')+':'+match[2]:'';
       toTime.value=match?.[3]?match[3].padStart(2,'0')+':'+match[4]:'';
+      if(!match&&time.value&&![...freeTime.options].some(option=>option.value===time.value))freeTime.add(new Option(time.value,time.value));
       freeTime.value=match?'':time.value;
     };
     let month=new Date();month=new Date(month.getFullYear(),month.getMonth(),1);
@@ -217,18 +218,18 @@
         });
         grid.append(button);
       }
-      calendar.querySelector('.agendaCalendarStatus').textContent=start.value?(ongoing?(end.value?format(start.value)+' t/m '+format(end.value):format(start.value)+' — kies nu de einddatum'):format(start.value)):(ongoing?'Kies eerst de startdatum, daarna de einddatum.':'Kies een datum.');
+      group.querySelector('.agendaCalendarStatus').textContent=start.value?(ongoing?(end.value?format(start.value)+' t/m '+format(end.value):format(start.value)+' — kies nu de einddatum'):format(start.value)):(ongoing?'Kies eerst de startdatum, daarna de einddatum.':'Kies een datum.');
     }
     calendar.querySelectorAll('.agendaCalendarNav button').forEach((button,index)=>button.addEventListener('click',()=>{month=new Date(month.getFullYear(),month.getMonth()+(index?1:-1),1);drawCalendar();}));
     date.form?.addEventListener('submit',event=>{
       if(kind.disabled)return;
       if(time&&((time.required&&!time.value.trim())||(toTime.value&&!fromTime.value))){
         event.preventDefault();event.stopImmediatePropagation();disclosure.open=true;fromTime.focus();
-        calendar.querySelector('.agendaCalendarStatus').textContent='Vul een begintijd of tijdomschrijving in.';return;
+        group.querySelector('.agendaCalendarStatus').textContent='Vul een begintijd of tijdomschrijving in.';return;
       }
       if(!start.value||(kind.value==='ongoing'&&!end.value)){
         event.preventDefault();event.stopImmediatePropagation();disclosure.open=true;
-        calendar.querySelector('.agendaCalendarStatus').textContent='Kies '+(!start.value?'een startdatum.':'ook een einddatum.');
+        group.querySelector('.agendaCalendarStatus').textContent='Kies '+(!start.value?'een startdatum.':'ook een einddatum.');
         calendar.querySelector('.agendaCalendarDays button')?.focus();
       }
     },true);
