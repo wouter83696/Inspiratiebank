@@ -343,3 +343,12 @@ html body .publicAgendaDetailLayer .photoDetailTabs{margin-top:0!important}
  html body .photoDetailLayer.sharedPublicSheetLayer>.photoDetailPanel.sharedSheet{height:auto!important;max-height:84dvh!important;flex:0 1 auto!important;align-self:flex-end!important}
  html body :is(.photoDetailLayer .photoDetailBody,#ideaMap .ideaMapSingleCard) .sharedIdeaCard .ideaImageFrame{height:clamp(100px,22dvh,180px)!important;aspect-ratio:auto!important}
 }
+
+/* Choose a mobile height once per activity; tab changes scroll inside it. */
+@media(max-width:980px){
+ html body .photoDetailLayer.sharedPublicSheetLayer>.photoDetailPanel.sharedSheet,
+ html body #ideaMap .ideaMapPanel.isSingleDetail{height:var(--mobile-detail-height,75dvh)!important;max-height:88dvh!important}
+ html body .photoDetailLayer .photoDetailPanel .photoDetailBody,
+ html body #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important}
+ html body :is(.photoDetailLayer .photoDetailBody,#ideaMap .ideaMapSingleCard) .sharedIdeaCard .ideaImageFrame{height:clamp(100px,var(--mobile-detail-photo,20dvh),180px)!important}
+}

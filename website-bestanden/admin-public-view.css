@@ -8357,4 +8357,13 @@ textarea{resize:none!important}
  :scope :scope :is(.photoDetailLayer .photoDetailBody,#ideaMap .ideaMapSingleCard) .sharedIdeaCard .ideaImageFrame{height:clamp(100px,22dvh,180px)!important;aspect-ratio:auto!important}
 }
 
+/* Choose a mobile height once per activity; tab changes scroll inside it. */
+@media(max-width:980px){
+ :scope :scope .photoDetailLayer.sharedPublicSheetLayer>.photoDetailPanel.sharedSheet,
+ :scope :scope #ideaMap .ideaMapPanel.isSingleDetail{height:var(--mobile-detail-height,75dvh)!important;max-height:88dvh!important}
+ :scope :scope .photoDetailLayer .photoDetailPanel .photoDetailBody,
+ :scope :scope #ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important}
+ :scope :scope :is(.photoDetailLayer .photoDetailBody,#ideaMap .ideaMapSingleCard) .sharedIdeaCard .ideaImageFrame{height:clamp(100px,var(--mobile-detail-photo,20dvh),180px)!important}
+}
+
 }

@@ -331,6 +331,23 @@
     const value=height+'px';
     if(photo.style.getPropertyValue('--map-photo-height')!==value)photo.style.setProperty('--map-photo-height',value);
   }
+  const mobileDetailCards=new WeakMap();
+  function setMobileDetailSize(panel,body,card){
+    if(desktopMap.matches){panel.style.removeProperty('--mobile-detail-height');return;}
+    if(!body||!card||mobileDetailCards.get(panel)===card)return;
+    mobileDetailCards.set(panel,card);
+    const viewport=window.visualViewport?.height||window.innerHeight;
+    const photo=card.querySelector('.ideaImageFrame');
+    const photoHeight=photo?.getBoundingClientRect().height||0;
+    const overhead=panel.getBoundingClientRect().height-body.getBoundingClientRect().height;
+    const bodyStyle=getComputedStyle(body);
+    const padding=(parseFloat(bodyStyle.paddingTop)||0)+(parseFloat(bodyStyle.paddingBottom)||0);
+    const fixedContent=card.getBoundingClientRect().height-photoHeight+padding+overhead;
+    const sizes=[{height:60,photo:16},{height:75,photo:20},{height:88,photo:22}];
+    const chosen=sizes.find(size=>fixedContent+(photo?Math.min(180,Math.max(100,viewport*size.photo/100)):0)+8<=viewport*size.height/100)||sizes[2];
+    panel.style.setProperty('--mobile-detail-height',chosen.height+'dvh');
+    panel.style.setProperty('--mobile-detail-photo',chosen.photo+'dvh');
+  }
   function refreshDetailLayout(){
     actionFrame=0;
     const wanted=new Set();
@@ -338,10 +355,13 @@
     document.querySelectorAll('#ideaMap .ideaMapPanel.isSingleDetail').forEach(panel=>{
       if(!panel.getClientRects().length)return;
       mountMapHeader(panel);fitMapPhoto(panel,observe);
+      setMobileDetailSize(panel,panel.querySelector('.ideaMapResults'),panel.querySelector('.sharedIdeaCard'));
     });
     document.querySelectorAll('.photoDetailLayer .photoDetailPanel').forEach(panel=>{
       const body=panel.querySelector('.photoDetailBody'),card=body?.querySelector('.sharedIdeaCard'),photo=card?.querySelector('.ideaImageFrame');
-      if(!photo||!panel.getClientRects().length)return;
+      if(!panel.getClientRects().length)return;
+      setMobileDetailSize(panel,body,card);
+      if(!photo)return;
       if(!desktopMap.matches){photo.style.removeProperty('--detail-photo-height');return;}
       observe(panel);observe(card);observe(body);
       const style=getComputedStyle(body),rect=photo.getBoundingClientRect();
