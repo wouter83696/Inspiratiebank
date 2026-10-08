@@ -779,6 +779,8 @@
 @media(max-width:640px){
  :is(#longerOffers,#ongoingAdminSection) .ongoingTitleCell .nameWithIcon{--ongoing-icon-space:56px;grid-template-columns:var(--ongoing-icon-space) minmax(0,1fr);gap:10px}
  :is(#longerOffers,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleVisual{width:56px;height:56px;min-width:56px}
+ :is(#longerOffers,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleTextStack{gap:6px}
+ :is(#longerOffers,#ongoingAdminSection) .ongoingBadgesCell{margin-top:-3px}
 }
 
 /* Compact desktop week overview, shared by public and management pages. */

@@ -3550,6 +3550,8 @@
 @media(max-width:640px){
  :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .nameWithIcon{--ongoing-icon-space:56px;grid-template-columns:var(--ongoing-icon-space) minmax(0,1fr);gap:10px}
  :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleVisual{width:56px;height:56px;min-width:56px}
+ :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleTextStack{gap:6px}
+ :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingBadgesCell{margin-top:-3px}
 }
 
 /* Compact desktop week overview, shared by public and management pages. */
