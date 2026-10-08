@@ -327,7 +327,7 @@
       .reduce((sum,value)=>sum+(parseFloat(value)||0),0);
     const otherHeight=card.getBoundingClientRect().height-photoRect.height;
     const available=panel.getBoundingClientRect().bottom-results.getBoundingClientRect().top-padding-otherHeight-2;
-    const height=Math.floor(Math.max(80,Math.min(photoRect.width*9/16,available)));
+    const height=Math.floor(Math.max(Math.min(160,photoRect.width*9/16),Math.min(photoRect.width*9/16,available)));
     const value=height+'px';
     if(photo.style.getPropertyValue('--map-photo-height')!==value)photo.style.setProperty('--map-photo-height',value);
   }
@@ -346,7 +346,7 @@
       const style=getComputedStyle(body),rect=photo.getBoundingClientRect();
       const other=card.getBoundingClientRect().height-rect.height;
       const room=body.clientHeight-(parseFloat(style.paddingTop)||0)-(parseFloat(style.paddingBottom)||0)-other;
-      const height=Math.floor(Math.max(96,Math.min(rect.width*0.625,room)));
+      const height=Math.floor(Math.max(Math.min(160,rect.width*0.625),Math.min(rect.width*0.625,room)));
       if(photo.style.getPropertyValue('--detail-photo-height')!==height+'px')photo.style.setProperty('--detail-photo-height',height+'px');
     });
     document.querySelectorAll('.photoDetailActions').forEach(actions=>{

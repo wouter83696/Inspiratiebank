@@ -1359,3 +1359,11 @@ body.photoDetailOpen{overflow:hidden!important}
  :is(.photoDetailLayer,.ideaMapPanel.isSingleDetail) .photoDetailTabs [role=tabpanel]{padding-top:10px!important;padding-bottom:10px!important}
  :is(.photoDetailLayer,.ideaMapPanel.isSingleDetail) .photoDetailActions{margin-top:8px!important}
 }
+
+/* Houd de foto herkenbaar; laat langere detailinhoud scrollen. */
+:is(#ideaMap .ideaMapSingleCard,.photoDetailLayer .photoDetailBody) .sharedIdeaCard{justify-content:flex-start!important;gap:8px!important}
+:is(#ideaMap .ideaMapSingleCard,.photoDetailLayer .photoDetailBody) .sharedIdeaCard .ideaImageFrame{margin-bottom:12px!important}
+:is(#ideaMap .ideaMapSingleCard,.photoDetailLayer .photoDetailBody) .photoDetailTabs{margin-top:4px!important}
+:is(#ideaMap .ideaMapSingleCard,.photoDetailLayer .photoDetailBody) .photoDetailTabs [role=tabpanel] p{margin-top:6px!important;margin-bottom:0!important}
+#ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{overflow-y:auto!important;min-height:0}
+#ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailActions{margin-top:8px!important}

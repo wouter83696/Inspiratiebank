@@ -7950,6 +7950,14 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
  :is(.photoDetailLayer,.ideaMapPanel.isSingleDetail) .photoDetailActions{margin-top:8px!important}
 }
 
+/* Houd de foto herkenbaar; laat langere detailinhoud scrollen. */
+:is(#ideaMap .ideaMapSingleCard,.photoDetailLayer .photoDetailBody) .sharedIdeaCard{justify-content:flex-start!important;gap:8px!important}
+:is(#ideaMap .ideaMapSingleCard,.photoDetailLayer .photoDetailBody) .sharedIdeaCard .ideaImageFrame{margin-bottom:12px!important}
+:is(#ideaMap .ideaMapSingleCard,.photoDetailLayer .photoDetailBody) .photoDetailTabs{margin-top:4px!important}
+:is(#ideaMap .ideaMapSingleCard,.photoDetailLayer .photoDetailBody) .photoDetailTabs [role=tabpanel] p{margin-top:6px!important;margin-bottom:0!important}
+#ideaMap .ideaMapPanel.isSingleDetail .ideaMapResults{overflow-y:auto!important;min-height:0}
+#ideaMap .ideaMapSingleCard.photoDetailBody .photoDetailActions{margin-top:8px!important}
+
 /* Shared compact select appearance, based on the management filter sheet. */
 .customSelect .customSelectButton{
   box-sizing:border-box;position:relative;width:100%;height:auto!important;min-height:40px!important;
