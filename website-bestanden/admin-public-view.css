@@ -8243,4 +8243,19 @@ textarea{resize:none!important}
 .sharedSheet .teamField:has(.customSelect.open){position:relative;z-index:50}
 .sharedSheet .customSelect.open{z-index:51}
 
+.agendaCalendar{padding:16px;border:1px solid #dce7e7;border-radius:16px;background:#fffdf9;color:#315f6b}
+.agendaCalendarNav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.agendaCalendarNav strong{font-size:16px;font-weight:500;text-transform:capitalize}
+.agendaCalendar button{font:inherit;color:#315f6b;border:0;box-shadow:none;cursor:pointer;background:transparent;border-radius:9px;min-height:38px;padding:6px}
+.agendaCalendarNav button{width:38px;font-size:24px}
+.agendaCalendarWeekdays,.agendaCalendarDays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center}
+.agendaCalendarWeekdays{font-size:12px;color:#788b8c;margin-bottom:7px}
+.agendaCalendarDays button{width:100%;font-size:14px}
+.agendaCalendar button:hover{background:#edf6f3}
+.agendaCalendarDays button.inRange{background:#e5f2ef;border-radius:3px}
+.agendaCalendarDays button[aria-pressed=true]{background:#287783;color:white}
+.agendaCalendarDays button[aria-current=date]{box-shadow:inset 0 0 0 1px #8cb8bc}
+.agendaCalendar button:focus-visible{outline:2px solid #287783;outline-offset:1px}
+.agendaCalendarStatus{margin:12px 0 0!important;font-size:12px!important;line-height:1.5;color:#63858b}
+
 }
