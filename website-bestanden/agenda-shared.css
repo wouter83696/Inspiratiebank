@@ -801,3 +801,12 @@ html body .agendaTime{color:var(--agenda-time-color)!important;font-weight:600}
 html body .ongoingDateMeta .agendaTime{display:inline!important;font-size:inherit!important;line-height:inherit!important;font-weight:400!important}
 .ongoingMobileWeekLabel{display:none}
 @media(max-width:640px){.ongoingMobileWeekLabel{display:inline}}
+
+/* The public submission and admin editor share their live card preview. */
+.agendaLivePreview{margin-bottom:24px;pointer-events:none;min-width:0}
+.agendaLivePreview .agendaItem{margin:0;padding:18px;border-radius:18px;border:1px solid var(--theme-line);background:var(--theme-tint);box-shadow:none}
+.agendaLivePreview .agendaItemTitle{display:flex;align-items:flex-start;gap:10px;font-size:19px;line-height:1.4;color:#315f6b;hyphens:none;overflow-wrap:break-word}
+.agendaLivePreview .agendaItemMeta{display:block;margin-top:12px;color:#71817e;font-size:14px;line-height:1.6;hyphens:none;word-break:normal;overflow-wrap:break-word}
+.agendaLivePreview .agendaItemTitle .domainIcon{flex-shrink:0}
+#publicAgendaActivityFields>.agendaLivePreview{margin-bottom:0}
+.agendaLivePreview .agendaItemMeta:empty{display:none}

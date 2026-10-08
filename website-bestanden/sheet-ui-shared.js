@@ -155,6 +155,15 @@
     const kindField=document.createElement('label');kindField.className='teamField wide';
     kindField.innerHTML='<span>Soort activiteit</span><select id="publicAgendaKind"><option value="day">Dagactiviteit</option><option value="ongoing">Doorlopend aanbod</option></select>';
     activity.prepend(kindField);
+    const preview=document.createElement('div');preview.className='agendaLivePreview wide';preview.setAttribute('aria-label','Voorbeeld agendategel');
+    activity.prepend(preview);
+    const updatePreview=()=>{
+      const value=key=>activity.querySelector('#publicAgenda'+key).value.trim();
+      preview.innerHTML=AgendaViewShared.renderItem({themeClass:domainThemeClass(value('Domain')),title:titleWithIcon(value('Title')||'Titel van de activiteit',value('Domain'),'agendaItemTitle'),meta:[value('Time'),value('Where')].map(escapeHtml).join(' • ')});
+    };
+    activity.addEventListener('input',updatePreview);activity.addEventListener('change',updatePreview);
+    form.addEventListener('reset',()=>queueMicrotask(updatePreview));
+    updatePreview();
     const kind=kindField.querySelector('select'),date=activity.querySelector('#publicAgendaDate'),time=activity.querySelector('#publicAgendaTime');
     const dateDrafts={day:'',ongoing:''};let previousKind='day';
     const updateKind=()=>{

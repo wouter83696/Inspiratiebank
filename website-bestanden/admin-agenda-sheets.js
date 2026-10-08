@@ -10,7 +10,7 @@
  footer.querySelector('button[type=button]').className='ideaFilterSheetAction secondary';footer.querySelector('button[type=submit]').className='ideaFilterSheetAction primary';
  const grid=document.createElement('div');grid.className='adminAgendaFieldGrid';
  [...form.children].filter(node=>node!==footer).forEach(node=>grid.append(node));
- const preview=document.createElement('div');preview.className='adminAgendaLivePreview';preview.setAttribute('aria-label','Voorbeeld agendategel');
+ const preview=document.createElement('div');preview.className='agendaLivePreview';preview.setAttribute('aria-label','Voorbeeld agendategel');
  body.append(preview,grid);form.prepend(body);
  ['Date','Time','Where','Domain'].forEach(key=>$('agendaEdit'+key).closest('label').classList.add('wide'));
  const advanced=document.createElement('details');advanced.className='adminAgendaAdvanced wide';
