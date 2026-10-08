@@ -985,7 +985,7 @@
   <link rel="stylesheet" href="../website-bestanden/loading-screen.css?v=20260911-first-paint-v4">
   <link rel="stylesheet" href="../website-bestanden/agenda-shared.css?v=20261007-blue-time">
   <link rel="stylesheet" href="../website-bestanden/idea-view-shared.css?v=20261007-material-check">
-  <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261007-mobile-alignment">
+  <link rel="stylesheet" href="../website-bestanden/admin-public-view.css?v=20261007-agenda-kind">
   <link rel="stylesheet" href="../website-bestanden/admin-workspace.css?v=20261007-header-one-row">
   <link rel="stylesheet" href="../website-bestanden/header-layout-shared.css?v=20261007-mobile-polish">
   <link rel="stylesheet" href="../website-bestanden/navigation-colors-shared.css?v=20261006-header-selection-v28">
@@ -3939,7 +3939,7 @@
 	    editingAgendaSource = item;
 	    $('#agendaEditTitle').textContent = isAgendaOngoingOffer(item) || isAgendaFlexiblePeriod(item) ? 'Doorlopend aanbod wijzigen' : 'Agenda-item wijzigen';
 	    const custom = Boolean(item.isNew || agendaItemOverrides().find(x=>x.id===String(item.id))?.manualEntry);
-    $('#agendaEditWeekLabel').hidden=!custom;
+    $('#agendaEditWeekLabel').hidden=!custom || isAgendaOngoingOffer(item);
     $('#agendaEditWeek').replaceChildren(...ADMIN_WEEKS.map(w=>new Option(`Week ${w.week} · ${w.dates}`,w.id)));
     $('#agendaEditWeek').value=item.week || ADMIN_WEEKS[0]?.id || '';
     if(item.isNew)$('#agendaEditTitle').textContent='Agenda-item toevoegen';
@@ -3957,6 +3957,15 @@
 	    $('#agendaEditFit').value = item.fit || '';
 	    $('#agendaEditSeasonLimited').checked = options.markOngoing ? true : Boolean(item.seasonLimited);
 	    $('#agendaEditPinToAgenda').checked = Boolean(item.pinToAgenda);
+    const syncAgendaKind=()=>{
+      const ongoing=$('#agendaEditSeasonLimited').checked;
+      const date=$('#agendaEditDate'),time=$('#agendaEditTime');
+      date.closest('label').firstChild.textContent=ongoing?'Periode':'Datum';
+      date.placeholder=ongoing?'Bijv. oktober t/m december':'Bijv. donderdag 8 oktober 2026';
+      time.closest('label').firstChild.textContent=ongoing?'Openingstijden':'Tijd';
+      $('#agendaEditWeekLabel').hidden=ongoing||!custom;
+    };
+    $('#agendaEditSeasonLimited').onchange=syncAgendaKind;syncAgendaKind();
 	    const modal = $('#agendaEditModal');
 	    modal.hidden = false;
 	    modal.setAttribute('aria-hidden', 'false');
@@ -3990,7 +3999,7 @@
 	      updatedAt:new Date().toISOString()
 	    };
 	    if(item.isNew || agendaItemOverrides().find(x=>x.id===String(item.id))?.manualEntry){
-      if(!$('#agendaEditWeek').value || !override.date){setStatus('#agendaEditStatus','Kies een week en vul een datum of periode in.','warn');return;}
+      if(!override.seasonLimited && (!$('#agendaEditWeek').value || !override.date)){setStatus('#agendaEditStatus','Kies een week en vul een datum of periode in.','warn');return;}
       Object.assign(override,{manualEntry:true,week:$('#agendaEditWeek').value,reviewStatus:'verified',locationType:'Buiten de deur'});
     }
     const targetIds = editingAgendaItemIds.length ? editingAgendaItemIds : [String(item.id)];
@@ -5070,10 +5079,10 @@
   <script src="../website-bestanden/admin-polish.js?v=20261006-top-toolbar-v32"></script>
 <script src="../website-bestanden/photo-tiles.js?v=20261007-sheet-spacing"></script>
 <script src="../website-bestanden/admin-visual.js?v=20261006-toolbar-border-v50"></script>
-<script src="../website-bestanden/sheet-ui-shared.js?v=20261007-public-tabs"></script>
+<script src="../website-bestanden/sheet-ui-shared.js?v=20261007-agenda-kind"></script>
 <script src="../website-bestanden/admin-editors.js?v=20261007-add-overlay"></script>
 <link rel="stylesheet" href="../website-bestanden/select-controls.css?v=20261006-fixed-textareas-v2">
 <script src="../website-bestanden/admin-agenda-sheets.js?v=20261007-time-accent"></script>
-<link rel="stylesheet" href="../website-bestanden/sheet-ui-shared.css?v=20261007-mobile-alignment">
+<link rel="stylesheet" href="../website-bestanden/sheet-ui-shared.css?v=20261007-agenda-kind">
 </body>
 </html>

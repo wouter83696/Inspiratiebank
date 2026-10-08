@@ -152,6 +152,19 @@
     const description=document.createElement('label');description.className='teamField wide';
     description.innerHTML='<span>Beschrijving (optioneel)</span><textarea id="publicAgendaDescription" rows="3" placeholder="Wat is er te doen?"></textarea>';
     activity.append(description);
+    const kindField=document.createElement('label');kindField.className='teamField wide';
+    kindField.innerHTML='<span>Soort activiteit</span><select id="publicAgendaKind"><option value="day">Dagactiviteit</option><option value="ongoing">Doorlopend aanbod</option></select>';
+    activity.prepend(kindField);
+    const kind=kindField.querySelector('select'),date=activity.querySelector('#publicAgendaDate'),time=activity.querySelector('#publicAgendaTime');
+    const dateDrafts={day:'',ongoing:''};let previousKind='day';
+    const updateKind=()=>{
+      dateDrafts[previousKind]=date.value;
+      const ongoing=kind.value==='ongoing';
+      date.closest('label').querySelector('span').textContent=ongoing?'Periode (optioneel)':'Datum';
+      date.type=ongoing?'text':'date';date.value=dateDrafts[kind.value];previousKind=kind.value;date.required=!ongoing;date.placeholder=ongoing?'Bijv. oktober t/m december':'';
+      time.closest('label').querySelector('span').textContent=ongoing?'Openingstijden (optioneel)':'Tijd';time.required=!ongoing;
+    };
+    kind.addEventListener('change',updateKind);enhanceCustomSelect(kind);updateKind();
     const intro=layer.querySelector('.ideaSubmitSheetIntro');
     const submit=panel.querySelector('button[type=submit]');
     const select=mode=>{
@@ -169,7 +182,7 @@
     [...nav.children].forEach((button,i)=>button.addEventListener('click',()=>select(i?'source':'activity')));
     nav.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const index=event.key==='Home'?0:event.key==='End'?1:Number(form.dataset.agendaMode!=='source');select(index?'source':'activity');nav.children[index].focus();});
     let wasOpen=false;
-    new MutationObserver(()=>{const open=layer.classList.contains('isOpen');if(open&&!wasOpen){wasOpen=true;select('activity');}else wasOpen=open;}).observe(layer,{attributes:true,attributeFilter:['class']});
+    new MutationObserver(()=>{const open=layer.classList.contains('isOpen');if(open&&!wasOpen){wasOpen=true;kind.value=document.getElementById('longerOffers')?.hidden===false?'ongoing':'day';updateKind();syncCustomSelect(kind);select('activity');}else wasOpen=open;}).observe(layer,{attributes:true,attributeFilter:['class']});
     select('activity');
   }
   function setup(){

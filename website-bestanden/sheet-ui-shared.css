@@ -262,3 +262,5 @@ body #agendaSourceSheetLayer .agendaAddModeNav>button.isActive{color:#236875;fon
  html body :is(#ideaSubmitSheetLayer,#agendaSourceSheetLayer) .sharedSheetBody{padding-top:0!important}
  html body .sharedPublicSheetLayer .ideaFilterSheetBody:not(.photoDetailBody){padding:8px 20px 24px!important}
 }
+
+.publicAgendaSchedule{display:grid;gap:4px;margin:12px 0;color:var(--sheet-ink);font-size:14px;line-height:1.5}
