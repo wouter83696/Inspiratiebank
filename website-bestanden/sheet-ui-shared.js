@@ -129,6 +129,31 @@
     });
     fields[1].before(fields[0]);
   }
+  function agendaDatePicker(date,{kind,onChange=()=>{}}={}){
+    const original=date.closest('label');original.hidden=true;original.classList.add('agendaLegacyDate');date.required=false;date.type='hidden';
+    const group=document.createElement('div');group.className='agendaDatePicker wide';
+    if(!kind){
+      const label=document.createElement('label');label.className='teamField';label.innerHTML='<span>Soort activiteit</span><select><option value="day">Eenmalige activiteit</option><option value="ongoing">Doorlopend aanbod</option></select>';
+      group.append(label);kind=label.querySelector('select');
+    }else group.append(kind.closest('label'));
+    const fields=document.createElement('div');fields.className='agendaDateFields';
+    fields.innerHTML='<label class="teamField"><span>Datum</span><input type="date" required></label><label class="teamField"><span>Einddatum</span><input type="date" required></label>';
+    group.append(fields);original.before(group);
+    const [start,end]=fields.querySelectorAll('input');
+    const format=value=>new Date(value+'T12:00:00').toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'});
+    function sync(write=true){
+      const ongoing=kind.value==='ongoing';
+      start.previousElementSibling.textContent=ongoing?'Startdatum':'Datum';
+      end.closest('label').hidden=!ongoing;end.disabled=!ongoing;end.required=ongoing;end.min=start.value;
+      end.setCustomValidity(ongoing&&end.value&&start.value&&end.value<start.value?'De einddatum moet op of na de startdatum liggen.':'');
+      if(write)date.value=start.value?format(start.value)+(ongoing&&end.value?' t/m '+format(end.value):''):'';
+      onChange({ongoing,start:start.value,end:ongoing?end.value:start.value});
+    }
+    kind.addEventListener('change',()=>sync());start.addEventListener('input',()=>sync());end.addEventListener('input',()=>sync());
+    function load({ongoing=false,range}={}){kind.value=ongoing?'ongoing':'day';if(range!==undefined){start.value=range?.start||'';end.value=range?.end||'';}sync(range===undefined);if(typeof syncCustomSelect==='function')syncCustomSelect(kind);}
+    if(typeof enhanceCustomSelect==='function')enhanceCustomSelect(kind);
+    load();date.form?.addEventListener('reset',()=>queueMicrotask(()=>{start.value='';end.value='';sync();}));return {load,group};
+  }
   function publicAgendaAdd(form){
     const layer=document.getElementById('agendaSourceSheetLayer'),panel=layer.querySelector('aside');
     document.getElementById('agendaSourceSheetTitle').textContent='Toevoegen aan UIT-agenda';
@@ -153,7 +178,7 @@
     description.innerHTML='<span>Beschrijving (optioneel)</span><textarea id="publicAgendaDescription" rows="3" placeholder="Wat is er te doen?"></textarea>';
     activity.append(description);
     const kindField=document.createElement('label');kindField.className='teamField wide';
-    kindField.innerHTML='<span>Soort activiteit</span><select id="publicAgendaKind"><option value="day">Dagactiviteit</option><option value="ongoing">Doorlopend aanbod</option></select>';
+    kindField.innerHTML='<span>Soort activiteit</span><select id="publicAgendaKind"><option value="day">Eenmalige activiteit</option><option value="ongoing">Doorlopend aanbod</option></select>';
     activity.prepend(kindField);
     const preview=document.createElement('div');preview.className='agendaLivePreview wide';preview.setAttribute('aria-label','Voorbeeld agendategel');
     activity.prepend(preview);
@@ -165,15 +190,9 @@
     form.addEventListener('reset',()=>queueMicrotask(updatePreview));
     updatePreview();
     const kind=kindField.querySelector('select'),date=activity.querySelector('#publicAgendaDate'),time=activity.querySelector('#publicAgendaTime');
-    const dateDrafts={day:'',ongoing:''};let previousKind='day';
-    const updateKind=()=>{
-      dateDrafts[previousKind]=date.value;
-      const ongoing=kind.value==='ongoing';
-      date.closest('label').querySelector('span').textContent=ongoing?'Periode (optioneel)':'Datum';
-      date.type=ongoing?'text':'date';date.value=dateDrafts[kind.value];previousKind=kind.value;date.required=!ongoing;date.placeholder=ongoing?'Bijv. oktober t/m december':'';
+    const dates=agendaDatePicker(date,{kind,onChange:({ongoing})=>{
       time.closest('label').querySelector('span').textContent=ongoing?'Openingstijden (optioneel)':'Tijd';time.required=!ongoing;
-    };
-    kind.addEventListener('change',updateKind);enhanceCustomSelect(kind);updateKind();
+    }});
     const intro=layer.querySelector('.ideaSubmitSheetIntro');
     const submit=panel.querySelector('button[type=submit]');
     const select=mode=>{
@@ -183,7 +202,7 @@
         syncCustomSelect(category);
       }
       form.dataset.agendaMode=mode;const isSource=mode==='source';source.hidden=!isSource;activity.hidden=isSource;
-      source.querySelectorAll('input').forEach(input=>input.disabled=!isSource);activity.querySelectorAll('input,select,textarea').forEach(input=>input.disabled=isSource);
+      source.querySelectorAll('input').forEach(input=>input.disabled=!isSource);activity.querySelectorAll('input,select,textarea').forEach(input=>input.disabled=isSource||(input.type==='date'&&input.closest('label').hidden));
       [...nav.children].forEach((button,i)=>{const active=i===Number(isSource);button.setAttribute('aria-selected',String(active));button.classList.toggle('isActive',active);button.tabIndex=active?0:-1;});
       submit.textContent=isSource?'Bron toevoegen':'Activiteit toevoegen';
       intro.textContent=isSource?'Deel een website of agenda. We controleren de bron voordat deze wordt toegevoegd.':'Deel een activiteit met datum, tijd en locatie. We controleren je inzending voordat deze verschijnt.';
@@ -191,7 +210,7 @@
     [...nav.children].forEach((button,i)=>button.addEventListener('click',()=>select(i?'source':'activity')));
     nav.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const index=event.key==='Home'?0:event.key==='End'?1:Number(form.dataset.agendaMode!=='source');select(index?'source':'activity');nav.children[index].focus();});
     let wasOpen=false;
-    new MutationObserver(()=>{const open=layer.classList.contains('isOpen');if(open&&!wasOpen){wasOpen=true;kind.value=document.getElementById('longerOffers')?.hidden===false?'ongoing':'day';updateKind();syncCustomSelect(kind);select('activity');}else wasOpen=open;}).observe(layer,{attributes:true,attributeFilter:['class']});
+    new MutationObserver(()=>{const open=layer.classList.contains('isOpen');if(open&&!wasOpen){wasOpen=true;kind.value=document.getElementById('longerOffers')?.hidden===false?'ongoing':'day';dates.load({ongoing:kind.value==='ongoing'});select('activity');}else wasOpen=open;}).observe(layer,{attributes:true,attributeFilter:['class']});
     select('activity');
   }
   function setup(){
@@ -225,6 +244,6 @@
     mount();
     new MutationObserver(records=>{if(records.some(record=>record.addedNodes.length))mount();}).observe(document.body,{childList:true,subtree:true});
   }
-  window.SheetUIShared=Object.freeze({mount,submissionFooter,photoPicker,editorToolbar,sectionNavigation});
+  window.SheetUIShared=Object.freeze({mount,submissionFooter,photoPicker,editorToolbar,sectionNavigation,agendaDatePicker});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup,{once:true});else setup();
 })();

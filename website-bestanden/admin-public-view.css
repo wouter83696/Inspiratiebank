@@ -8148,4 +8148,10 @@ textarea{resize:none!important}
 
 .publicAgendaSchedule{display:grid;gap:4px;margin:12px 0;color:var(--sheet-ink);font-size:14px;line-height:1.5}
 
+.agendaDatePicker{display:grid;gap:12px;min-width:0}
+.agendaDateFields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.agendaDateFields input{width:100%;min-width:0}
+
+.agendaLegacyDate,.agendaDatePicker [hidden]{display:none!important}
+
 }
