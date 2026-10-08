@@ -358,10 +358,10 @@
       }
     }finally{tabs.forEach((tab,index)=>{tab.hidden=hidden[index];});}
     const fixedContent=largestCardHeight-photoHeight+padding+overhead;
-    const sizes=[{height:60,photo:16},{height:75,photo:20},{height:88,photo:22}];
-    const chosen=sizes.find(size=>fixedContent+(photo?Math.min(180,Math.max(100,viewport*size.photo/100)):0)+8<=viewport*size.height/100)||sizes[sizes.length-1];
+    const sizes=[{height:60},{height:75},{height:88}];
+    const chosen=sizes.find(size=>fixedContent+photoHeight+8<=viewport*size.height/100)||sizes[sizes.length-1];
     panel.style.setProperty('--mobile-detail-height',chosen.height+'dvh');
-    panel.style.setProperty('--mobile-detail-photo',chosen.photo+'dvh');
+
   }
   function refreshDetailLayout(){
     actionFrame=0;
