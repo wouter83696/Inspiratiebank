@@ -3552,6 +3552,9 @@
  :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleVisual{width:56px;height:56px;min-width:56px}
  :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingTitleCell .ongoingTitleTextStack{gap:6px}
  :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingBadgesCell{margin-top:-3px}
+ :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingFitCell{padding-top:0!important;margin-top:3px}
+ :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingFitCell .ongoingAdminDescription{font-size:.8rem;line-height:1.45}
+ :is(#ongoingAdminSection,#ongoingAdminSection) .ongoingAdminDescription:empty{display:none}
 }
 
 /* Compact desktop week overview, shared by public and management pages. */
