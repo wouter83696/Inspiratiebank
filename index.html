@@ -8539,13 +8539,12 @@
   function openPublicAgendaSheet(item,dayKey,trigger){
     if(!publicAgendaSheet){
       publicAgendaSheet=document.createElement('div');publicAgendaSheet.className='ideaSubmitSheetLayer sharedPublicSheetLayer publicAgendaDetailLayer';
-      publicAgendaSheet.innerHTML='<button class="ideaFilterSheetBackdrop" aria-label="Activiteit sluiten" data-public-agenda-close></button><aside class="ideaSubmitSheet sharedSheet" role="dialog" aria-labelledby="publicAgendaDetailTitle"><header class="sharedSheetHeader"><h2 id="publicAgendaDetailTitle"></h2><button type="button" class="ideaSubmitSheetClose" aria-label="Activiteit sluiten" data-public-agenda-close>×</button></header><div class="sharedSheetBody photoDetailBody publicAgendaDetailBody"></div></aside>';
+      publicAgendaSheet.innerHTML='<button class="ideaFilterSheetBackdrop" aria-label="Activiteit sluiten" data-public-agenda-close></button><aside class="ideaSubmitSheet sharedSheet" role="dialog" aria-labelledby="publicAgendaDetailTitle"><header class="sharedSheetHeader"><button type="button" class="ideaSubmitSheetClose" aria-label="Activiteit sluiten" data-public-agenda-close>×</button></header><div class="sharedSheetBody photoDetailBody publicAgendaDetailBody"></div></aside>';
       document.body.append(publicAgendaSheet);
       publicAgendaSheet.querySelectorAll('[data-public-agenda-close]').forEach(button=>button.addEventListener('click',closePublicAgendaSheet));
       publicAgendaSheet.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();closePublicAgendaSheet();}});
     }
     publicAgendaOrigin=trigger;
-    publicAgendaSheet.querySelector('h2').textContent='Activiteit';
     const body=publicAgendaSheet.querySelector('.publicAgendaDetailBody');
     const date=item.date||item.period||dayKey.split(':').at(-1);
     const time=AgendaViewShared.formatTime(item.time);
@@ -8564,6 +8563,7 @@
     preview.className='agendaLivePreview publicAgendaPreview';
     const previewValues={Title:item.title,Domain:item.domain,Time:time,Where:item.where,Distance:item.distanceBand,Cost:item.cost,Stimulus:item.stimulus};
     preview.innerHTML=SheetUIShared.renderAgendaPreview(key=>previewValues[key]||'');
+    preview.querySelector('.agendaItemTitle').id='publicAgendaDetailTitle';
     if(date){
       const dateLine=document.createElement('div');dateLine.className='publicAgendaPreviewDate';dateLine.textContent=date;
       preview.querySelector('.agendaItemTitle').after(dateLine);
@@ -11241,7 +11241,7 @@
   });
   </script>
 <link rel="stylesheet" href="website-bestanden/select-controls.css?v=20261006-fixed-textareas-v2">
-<link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261008-matching-date-control">
+<link rel="stylesheet" href="website-bestanden/sheet-ui-shared.css?v=20261008-agenda-title">
 <script src="website-bestanden/sheet-ui-shared.js?v=20261008-matching-date-control"></script>
 <script src="website-bestanden/footer-admin.js?v=20261008-overlay"></script>
 </body>
