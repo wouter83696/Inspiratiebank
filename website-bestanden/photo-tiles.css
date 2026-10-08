@@ -1297,7 +1297,9 @@ body.photoDetailOpen{overflow:hidden!important}
  #tab-weken:not(.agendaEditorFocused) #weekPanels .weekPanel:not(.expanded) .agendaItemLink{padding:0;min-height:0}
  #tab-weken:not(.agendaEditorFocused) #weekPanels .weekPanel:not(.expanded) .agendaItemTitle{align-items:start;font-size:13px;line-height:1.2}
  #tab-weken:not(.agendaEditorFocused) #weekPanels .weekPanel:not(.expanded) .agendaItemTitle .ideaTitleText{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
- #tab-weken:not(.agendaEditorFocused) #weekPanels .weekPanel:not(.expanded) .agendaItemMeta{font-size:12px;line-height:1.25;margin-top:4px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+ #tab-weken:not(.agendaEditorFocused) #weekPanels .weekPanel:not(.expanded) .agendaItemMeta{font-size:12px;line-height:1.25;margin-top:4px;display:block!important;overflow:hidden}
+ #tab-weken:not(.agendaEditorFocused) #weekPanels .weekPanel:not(.expanded) .agendaMetaRow:first-child{display:block!important}
+ #tab-weken:not(.agendaEditorFocused) #weekPanels .weekPanel:not(.expanded) .agendaMetaRow+.agendaMetaRow{display:-webkit-box!important;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
  #tab-weken:not(.agendaEditorFocused) #weekPanels .weekPanel:not(.expanded) .agendaMore{flex:none;min-height:28px;margin:0;padding:4px;font-size:12px}
 }
 
