@@ -1032,15 +1032,15 @@ body.adminAgendaFocused #agendaReviewPanel .agendaBoard{min-width:1000px}
  body.adminAgendaFocused #adminApp #agendaReviewPanel .agendaList{height:auto!important;max-height:none!important;overflow:visible!important}
 }
 
-/* Reserve room for every preview card and the day’s “more” action. */
+/* Let overview cards grow with their content, as on the public calendar. */
 @media(min-width:1101px){
  body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaDay{display:flex;flex-direction:column;box-sizing:border-box}
- body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaList{flex:1;min-height:0;display:flex}
- body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaGroup{display:flex;flex-direction:column;flex:1;min-height:0}
- body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItem{flex:1 1 0;min-height:0;padding:8px;overflow:hidden}
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaList{flex:1 0 auto;min-height:0;display:grid;align-content:start}
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaGroup{display:grid;grid-auto-rows:auto;align-content:start;gap:8px;min-height:0}
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItem{flex:none;height:auto;min-height:min-content;padding:10px;overflow:hidden}
  body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItemTitle{align-items:start}
  body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItemTitle .ideaTitleText{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
- body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItemMeta{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+ body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaItemMeta{display:block;-webkit-line-clamp:unset;overflow:visible}
  body:not(.adminAgendaFocused) #adminApp #agendaReviewList .weekPanel:not(.expanded) .agendaMore{flex:0 0 auto;margin-top:4px}
 }
 
