@@ -2862,7 +2862,6 @@
 .adminOngoingAccordion table{min-width:0}
 .adminOngoingAccordion .ongoingManageHead,.adminOngoingAccordion .ongoingManageCell{width:9% !important}
 .adminOngoingAccordion .ongoingTitleHead,.adminOngoingAccordion .ongoingTitleCell{width:24% !important}
-.adminOngoingAccordion .ongoingWeeksHead,.adminOngoingAccordion .ongoingWeeksCell{width:7% !important;white-space:nowrap}
 .adminOngoingAccordion .ongoingBadgesHead,.adminOngoingAccordion .ongoingBadgesCell{width:15% !important}
 .adminOngoingAccordion .ongoingFitHead,.adminOngoingAccordion .ongoingFitCell{width:31% !important}
 .adminOngoingAccordion .ongoingWebsiteHead,.adminOngoingAccordion .websiteCell{width:14% !important}
@@ -3363,7 +3362,6 @@
   }
   .ongoingAccordion td{display:block;width:100% !important;align-self:stretch;border:0;padding:0;background:transparent !important;box-shadow:none !important}
   .ongoingAccordion td::before{display:none !important}
-  .ongoingAccordion td.ongoingWeeksCell{display:none !important}
   .ongoingAccordion .ongoingTitleCell{order:1}
   .ongoingAccordion .ongoingBadgesCell{order:2;padding-left:0}
   .ongoingAccordion .ongoingFitCell{order:3}
@@ -3576,8 +3574,6 @@
 
 /* Dates and times form one quiet line; mobile weeks precede the date. */
 :scope :scope .ongoingDateMeta .agendaTime{display:inline!important;font-size:inherit!important;line-height:inherit!important;font-weight:400!important}
-.ongoingMobileWeekLabel{display:none}
-@media(max-width:640px){.ongoingMobileWeekLabel{display:inline}}
 
 /* The public submission and admin editor share their live card preview. */
 .agendaLivePreview{margin-bottom:24px;pointer-events:none;min-width:0}

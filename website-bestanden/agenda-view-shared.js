@@ -77,7 +77,6 @@
     return `<tr class="${classes}"${view.attributes ? ` ${view.attributes}` : ''}>
       ${manageCell}
       <td class="ongoingTitleCell"><span class="name">${view.title || ''}</span>${view.review || ''}${view.date ? `<div class="small ongoingDateMeta">${view.date}</div>` : ''}${titleActions}</td>
-      <td class="ongoingWeeksCell">${view.weeks || ''}</td>
       <td class="ongoingBadgesCell"><div class="cardPillGroup ongoingBadges">${view.place || ''}${view.cost || ''}${view.stimulus || ''}</div></td>
       <td class="ongoingFitCell">${view.meta || ''}<div class="small ongoingAdminDescription">${view.description || ''}</div>${view.preparation || ''}</td>
       ${view.hideWebsite ? '' : `<td class="websiteCell">${view.website || ''}</td>`}
@@ -90,7 +89,7 @@
     const manageHeadRight = view.admin && !view.manageFirst ? '<th class="ongoingManageHead">Beheer</th>' : '';
     const titleHeading = view.titleHeading || 'Aanbod';
     const badgesHeading = view.badgesHeading || 'Badges';
-    return `<table${view.className ? ` class="${view.className}"` : ''}><thead><tr>${manageHeadLeft}<th class="ongoingTitleHead">${titleHeading}</th><th class="ongoingWeeksHead">Weken</th><th class="ongoingBadgesHead">${badgesHeading}</th><th class="ongoingFitHead">Beschrijving</th>${view.hideWebsite ? '' : '<th class="ongoingWebsiteHead">Website</th>'}${manageHeadRight}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
+    return `<table${view.className ? ` class="${view.className}"` : ''}><thead><tr>${manageHeadLeft}<th class="ongoingTitleHead">${titleHeading}</th><th class="ongoingBadgesHead">${badgesHeading}</th><th class="ongoingFitHead">Beschrijving</th>${view.hideWebsite ? '' : '<th class="ongoingWebsiteHead">Website</th>'}${manageHeadRight}</tr></thead><tbody>${view.rows || ''}</tbody></table>`;
   }
 
   function isFlexiblePeriodOffer(item={}, spanDays=0){
@@ -304,20 +303,16 @@
     }).join('');
   }
   function renderOngoingActivity(item,view){
-    const {placePills,weekLabel,costLabel,stimulusLabel,icon,description,review='',themeClass='',attributes='',hidden=false}=view;
-    const mobileWeekLabel = weekLabel.replace(/(\d)\s*-\s*(\d)/g, '$1–$2');
-    const mobileWeekPill = weekLabel
-      ? `<span class="ongoingMobileWeekLabel" aria-label="Week ${escapeHtml(mobileWeekLabel)}">Week ${escapeHtml(mobileWeekLabel)} · </span>`
-      : '';
+    const {placePills,costLabel,stimulusLabel,icon,description,review='',themeClass='',attributes='',hidden=false}=view;
     const titleText = item.url
       ? `<a class="ongoingTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener"><span class="ideaTitleText">${escapeHtml(item.title)}</span></a>`
       : `<span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
-    const dateMeta = `<span class="small ongoingDateMeta">${mobileWeekPill}${escapeHtml(item.date)} • <span class="agendaTime">${escapeHtml(formatTime(item.time))}</span></span>`;
+    const dateMeta = `<span class="small ongoingDateMeta">${escapeHtml(item.date)} • <span class="agendaTime">${escapeHtml(formatTime(item.time))}</span></span>`;
     const title = `<span class="nameWithIcon"><span class="ongoingTitleVisual" aria-hidden="true"><span class="domainIcon">${icon}</span></span><span class="ongoingTitleTextStack">${titleText}${dateMeta}</span></span>`;
     return renderOngoingRow({
       themeClass, attributes, hidden, title,
       review, date:'',
-      weeks:escapeHtml(weekLabel), place:placePills,
+      place:placePills,
       cost:costLabel, stimulus:stimulusLabel, meta:'',
       description:escapeHtml(description), preparation:renderPreparation(item),
       hideWebsite:true
