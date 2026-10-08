@@ -138,20 +138,27 @@
     const pills=[distancePill,value('Cost')?costPill(value('Cost')):'',value('Stimulus')?stimulusPill(value('Stimulus')):''].filter(Boolean).map(html=>html.replace(/class="[^"]*"/, 'class="agendaPreviewFact"')).join('');
     return AgendaViewShared.renderItem({themeClass:domainThemeClass(value('Domain')),title:titleWithIcon(value('Title')||'Titel van de activiteit',value('Domain'),'agendaItemTitle'),status:(schedule?`<div class="agendaPreviewSchedule">${schedule}</div>`:'')+(pills?`<div class="agendaPreviewFacts">${pills}</div>`:'')});
   }
-  function agendaDatePicker(date,{kind,onChange=()=>{}}={}){
+  function agendaDatePicker(date,{kind,time,onChange=()=>{}}={}){
     const original=date.closest('label');original.hidden=true;original.classList.add('agendaLegacyDate');date.required=false;date.type='hidden';
     const group=document.createElement('div');group.className='agendaDatePicker wide';
     if(!kind){
       const label=document.createElement('label');label.className='teamField';label.innerHTML='<span>Soort activiteit</span><select><option value="day">Eenmalige activiteit</option><option value="ongoing">Doorlopend aanbod</option></select>';
       group.append(label);kind=label.querySelector('select');
     }else group.append(kind.closest('label'));
+    kind.closest('label').hidden=true;
+    const toggle=document.createElement('label');toggle.className='agendaOngoingToggle';
+    toggle.innerHTML='<input type="checkbox"><span>Doorlopende activiteit</span>';
+    const checkbox=toggle.querySelector('input');
+    checkbox.addEventListener('change',()=>{kind.value=checkbox.checked?'ongoing':'day';kind.dispatchEvent(new Event('change',{bubbles:true}));});
     const fields=document.createElement('div');fields.className='agendaDateFields';
     fields.innerHTML='<label class="teamField"><span>Datum</span><input type="date" required></label><label class="teamField"><span>Einddatum</span><input type="date" required></label>';
-    group.append(fields);original.before(group);
+    group.append(fields,toggle);original.before(group);
+    if(time){const timeField=time.closest('label');timeField.classList.add('agendaTimeField');group.append(timeField);time.placeholder='Bijv. 10.00–17.00 of diverse tijden';}
     const [start,end]=fields.querySelectorAll('input');
     const format=value=>new Date(value+'T12:00:00').toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'});
     function sync(write=true){
       const ongoing=kind.value==='ongoing';
+      checkbox.checked=ongoing;
       start.previousElementSibling.textContent=ongoing?'Startdatum':'Datum';
       end.closest('label').hidden=!ongoing;end.disabled=!ongoing;end.required=ongoing;end.min=start.value;
       end.setCustomValidity(ongoing&&end.value&&start.value&&end.value<start.value?'De einddatum moet op of na de startdatum liggen.':'');
@@ -160,7 +167,7 @@
     }
     kind.addEventListener('change',()=>sync());start.addEventListener('input',()=>sync());end.addEventListener('input',()=>sync());
     function load({ongoing=false,range}={}){kind.value=ongoing?'ongoing':'day';if(range!==undefined){start.value=range?.start||'';end.value=range?.end||'';}sync(range===undefined);if(typeof syncCustomSelect==='function')syncCustomSelect(kind);}
-    if(typeof enhanceCustomSelect==='function')enhanceCustomSelect(kind);
+
     load();date.form?.addEventListener('reset',()=>queueMicrotask(()=>{start.value='';end.value='';sync();}));return {load,group};
   }
   function publicAgendaAdd(form){
@@ -199,8 +206,8 @@
     form.addEventListener('reset',()=>queueMicrotask(updatePreview));
     updatePreview();
     const kind=kindField.querySelector('select'),date=activity.querySelector('#publicAgendaDate'),time=activity.querySelector('#publicAgendaTime');
-    const dates=agendaDatePicker(date,{kind,onChange:({ongoing})=>{
-      time.closest('label').querySelector('span').textContent=ongoing?'Openingstijden (optioneel)':'Tijd';time.required=!ongoing;
+    const dates=agendaDatePicker(date,{kind,time,onChange:({ongoing})=>{
+      time.closest('label').querySelector('span').textContent=ongoing?'Tijd / openingstijden (optioneel)':'Tijd';time.required=!ongoing;
     }});
     const intro=layer.querySelector('.ideaSubmitSheetIntro');
     const submit=panel.querySelector('button[type=submit]');

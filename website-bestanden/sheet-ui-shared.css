@@ -274,3 +274,9 @@ body #agendaSourceSheetLayer .agendaAddModeNav>button.isActive{color:#236875;fon
 .publicAgendaDetailBody .publicAgendaPreview{margin:0 0 20px}
 .publicAgendaPreviewDate{margin:8px 0 0 36px;color:#71817e;font-size:14px;line-height:1.5}
 .publicAgendaPreview .publicAgendaPreviewDate+.agendaPreviewSchedule{margin-top:3px}
+
+.agendaOngoingToggle{display:flex!important;align-items:center;gap:9px;color:#315f6b;font-size:14px;font-weight:400;cursor:pointer;padding:2px 0}
+.agendaOngoingToggle input[type=checkbox]{appearance:auto!important;flex:0 0 18px;width:18px!important;height:18px!important;min-height:0!important;margin:0!important;padding:0!important;accent-color:#287783}
+.agendaDateFields input[type=date]{font:inherit;color:#315f6b;background:#fffdf9;border:1px solid #dce7e7;border-radius:12px;padding:12px 14px;box-sizing:border-box;color-scheme:light}
+.agendaDateFields input[type=date]:focus{outline:2px solid #8ac6c7;outline-offset:2px;border-color:#4f8e9e}
+.agendaDateFields input::-webkit-calendar-picker-indicator{opacity:.65;cursor:pointer}
