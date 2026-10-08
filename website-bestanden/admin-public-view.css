@@ -3590,8 +3590,10 @@
 
 .agendaLivePreview .agendaPreviewSchedule{margin:6px 0 0 36px;color:#71817e;font-size:14px;line-height:1.6;overflow-wrap:anywhere}
 .agendaLivePreview .agendaPreviewSeparator{color:#8b9c9e}
-.agendaLivePreview .agendaPreviewFacts{display:block;margin:10px 0 0 36px;padding:0}
+.agendaLivePreview .agendaPreviewFacts{display:block;margin:4px 0 0 36px;padding:0;color:var(--theme-ink,var(--accent-dark))}
 .agendaLivePreview .agendaPreviewFacts .cardPillGroup{max-width:100%;flex-wrap:wrap}
+
+.agendaLivePreview .agendaPreviewFacts .cardPillGroup .pill{color:var(--theme-ink,var(--accent-dark))!important}
 
 /* Canonieke inspiratieweergaven voor publiek en beheer. */
 .sharedIdeaCards{
