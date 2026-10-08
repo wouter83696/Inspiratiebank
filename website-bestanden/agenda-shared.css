@@ -802,7 +802,7 @@
 
 /* A single time accent across calendar cards, ongoing offers and detail sheets. */
 :root{--agenda-time-color:#07345e}
-html body .agendaTime{color:var(--agenda-time-color)!important;font-weight:600}
+html body .agendaTime{color:var(--agenda-time-color)!important;font-weight:400}
 
 /* Dates and times form one quiet line; mobile weeks precede the date. */
 html body .ongoingDateMeta .agendaTime{display:inline!important;font-size:inherit!important;line-height:inherit!important;font-weight:400!important}
@@ -855,3 +855,10 @@ html body .ongoingDateMeta .agendaTime{display:inline!important;font-size:inheri
 @container agenda-card (max-width:250px){
   .agendaItem .agendaItemMeta .agendaMetaRow{flex-basis:100%}
 }
+
+/* Consistente nadruk: activiteit eerst, tijd en locatie ondersteunend. */
+.agendaItemTitle,
+.agendaItemTitle .ideaTitleText,
+.ongoingTitleCell .name,
+.ongoingTitleCell .nameWithIcon .ideaTitleText,
+.ongoingTitleCell .ongoingTitleLink{font-weight:500}

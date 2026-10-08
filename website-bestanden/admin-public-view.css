@@ -3584,7 +3584,7 @@
 
 /* A single time accent across calendar cards, ongoing offers and detail sheets. */
 :scope{--agenda-time-color:#07345e}
-:scope :scope .agendaTime{color:var(--agenda-time-color)!important;font-weight:600}
+:scope :scope .agendaTime{color:var(--agenda-time-color)!important;font-weight:400}
 
 /* Dates and times form one quiet line; mobile weeks precede the date. */
 :scope :scope .ongoingDateMeta .agendaTime{display:inline!important;font-size:inherit!important;line-height:inherit!important;font-weight:400!important}
@@ -3637,6 +3637,13 @@
 @container agenda-card (max-width:250px){
   .agendaItem .agendaItemMeta .agendaMetaRow{flex-basis:100%}
 }
+
+/* Consistente nadruk: activiteit eerst, tijd en locatie ondersteunend. */
+.agendaItemTitle,
+.agendaItemTitle .ideaTitleText,
+.ongoingTitleCell .name,
+.ongoingTitleCell .nameWithIcon .ideaTitleText,
+.ongoingTitleCell .ongoingTitleLink{font-weight:500}
 
 /* Canonieke inspiratieweergaven voor publiek en beheer. */
 .sharedIdeaCards{
