@@ -8539,7 +8539,7 @@
   function openPublicAgendaSheet(item,dayKey,trigger){
     if(!publicAgendaSheet){
       publicAgendaSheet=document.createElement('div');publicAgendaSheet.className='ideaSubmitSheetLayer sharedPublicSheetLayer publicAgendaDetailLayer';
-      publicAgendaSheet.innerHTML='<button class="ideaFilterSheetBackdrop" aria-label="Activiteit sluiten" data-public-agenda-close></button><aside class="ideaSubmitSheet sharedSheet" role="dialog" aria-labelledby="publicAgendaDetailTitle"><header class="sharedSheetHeader"><h2>Agenda</h2><button type="button" class="ideaSubmitSheetClose" aria-label="Activiteit sluiten" data-public-agenda-close>×</button></header><div class="sharedSheetBody photoDetailBody publicAgendaDetailBody"></div></aside>';
+      publicAgendaSheet.innerHTML='<button class="ideaFilterSheetBackdrop" aria-label="Activiteit sluiten" data-public-agenda-close></button><aside class="ideaSubmitSheet sharedSheet" role="dialog" aria-labelledby="publicAgendaDetailTitle"><header class="sharedSheetHeader"><h2>Activiteit</h2><button type="button" class="ideaSubmitSheetClose" aria-label="Activiteit sluiten" data-public-agenda-close>×</button></header><div class="sharedSheetBody photoDetailBody publicAgendaDetailBody"></div></aside>';
       document.body.append(publicAgendaSheet);
       publicAgendaSheet.querySelectorAll('[data-public-agenda-close]').forEach(button=>button.addEventListener('click',closePublicAgendaSheet));
       publicAgendaSheet.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();closePublicAgendaSheet();}});
