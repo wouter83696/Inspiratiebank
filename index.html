@@ -8560,7 +8560,6 @@
     // Share the actual detail renderer, tabs and location actions with inspiration.
     body.innerHTML=PhotoTiles.detailContent(item,'publicAgendaContentTitle',{card,kind:'agenda'});
     body.querySelector('#publicAgendaContentTitle')?.remove();
-    ActivityDetails.mountShare(publicAgendaSheet.querySelector('.sharedSheetHeader'),body);
     const practicalPanel=body.querySelector('[role="tabpanel"][id$="-practical"]');
     if(practicalPanel?.textContent.trim()==='Geen aanvullende praktische informatie.'){
       body.querySelector('[role="tab"][id$="-practical-tab"]')?.remove();

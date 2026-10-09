@@ -48,16 +48,9 @@
   }
   function links(item,kind){
     const path=activityPath(item,kind),place=itemPlace(item);
-    return `<div class="activityPublicLinks"><span class="activityShare"><a class="activityShareIcon" href="${esc(path)}" data-copy-activity-link aria-label="Link naar activiteit kopiëren" title="Link kopiëren"><svg class="activityLinkSymbol" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 .54l3-3a5 5 0 0 0-7.07-7.07L11.21 5.17"/><path d="M14 11a5 5 0 0 0-7-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.7"/></svg><svg class="activityCopiedSymbol" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></a><span role="status" class="activityLinkStatus"></span></span>${place?`<a href="${esc(placePath(place.name,kind))}">Meer in en rond ${esc(place.name)}</a>`:''}</div>`;
+    return `<div class="activityPublicLinks"><span class="activityShare"><a class="activityShareLink" href="${esc(path)}" data-copy-activity-link aria-label="Activiteit delen" title="Link kopiëren"><svg class="activityLinkSymbol" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 .54l3-3a5 5 0 0 0-7.07-7.07L11.21 5.17"/><path d="M14 11a5 5 0 0 0-7-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.7"/></svg><svg class="activityCopiedSymbol" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Activiteit delen</span></a><span role="status" class="activityLinkStatus"></span></span>${place?`<a href="${esc(placePath(place.name,kind))}">Meer in en rond ${esc(place.name)}</a>`:''}</div>`;
   }
-  function mountShare(header,body){
-    header.querySelector('.activityShare')?.remove();
-    const share=body.querySelector('.activityShare');if(!share)return;
-    const container=share.parentElement;
-    header.insertBefore(share,header.querySelector('button'));
-    if(!container.children.length)container.remove();
-  }
-  const api={mountShare,identity,activityPath,placePath,route,slug,date,facts,practical,verification,links,configurePlaces,itemPlace};
+  const api={identity,activityPath,placePath,route,slug,date,facts,practical,verification,links,configurePlaces,itemPlace};
   if(typeof module==='object'&&module.exports)module.exports=api;
   else{
     root.ActivityDetails=api;
