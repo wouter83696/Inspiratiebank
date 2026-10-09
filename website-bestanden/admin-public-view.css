@@ -7992,9 +7992,9 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
  :scope :scope :is(.photoDetailLayer .photoDetailBody,#ideaMap .ideaMapSingleCard) .photoDetailActions{position:static!important;flex:none!important;margin-top:8px!important;padding-top:0!important}
 }
 
-.activityFacts{margin:0 0 16px;display:grid;gap:10px}
+.activityFacts{margin:0 0 16px;display:grid;gap:10px;font-family:inherit;font-size:15px;line-height:1.65;font-weight:400;color:#777}
 .activityFacts>div{display:grid;grid-template-columns:minmax(100px,1fr) 2fr;gap:12px}
-.activityFacts dt{font-weight:600;color:var(--accent-dark)}
+.activityFacts dt{font-weight:500;color:inherit}
 .activityFacts dd{margin:0;overflow-wrap:anywhere}
 .activityVerification{font-size:.82rem;color:var(--muted);line-height:1.5;margin-top:20px}
 .activityVerification p{margin:5px 0}
@@ -8017,6 +8017,9 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
 .activityShareIcon.isCopied .activityCopiedSymbol{display:block}
 .activityShare .activityLinkStatus:not(.hasFallback){position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .activityShare .activityLinkStatus.hasFallback{position:absolute;right:0;top:44px;min-width:180px;background:var(--paper,#fffdf9);padding:12px;border:1px solid rgba(79,142,158,.16);border-radius:12px;z-index:5}
+
+@container activity-detail (max-width:480px){.activityFacts{font-size:14px;line-height:1.5}}
+@media(min-width:981px){.photoDetailLayer .activityFacts,#ideaMap .activityFacts{font-size:14px;line-height:1.4}}
 
 /* Shared compact select appearance, based on the management filter sheet. */
 .customSelect .customSelectButton{
