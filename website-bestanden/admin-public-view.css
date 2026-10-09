@@ -154,7 +154,7 @@
     .lead{font-size:clamp(.96rem,1.25vw,1.06rem);line-height:1.42;color:rgba(11,18,32,.68);max-width:920px;margin:0}
     .heroCopy .lead + .lead{margin-top:10px}
     .tabHero{
-      --hero-bg-image:url("hero-achtergronden/inspiratiebank-header.png");
+      --hero-bg-image:url("hero-achtergronden/inspiratiebank-header.95a249c4e684.webp");
       position:relative;overflow:hidden;isolation:isolate;
       min-height:clamp(260px,24vw,305px);
       margin:-142px calc(50% - 50vw) 0;
@@ -167,7 +167,7 @@
       box-shadow:none;
     }
     .tabHero::before,.tabHero::after{content:none}
-    .tabHero.agendaHero{--hero-bg-image:url("hero-achtergronden/inspiratiebank-header.png")}
+    .tabHero.agendaHero{--hero-bg-image:url("hero-achtergronden/inspiratiebank-header.95a249c4e684.webp")}
     .tabHeroKicker{position:relative;z-index:1;display:block;margin:0 0 10px;color:var(--accent-dark);font-size:.78rem;font-weight:600;letter-spacing:.05em;line-height:1}
     .tabHeroTitle{position:relative;z-index:1;margin:0 0 0 -.025em;color:var(--accent-dark);font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:5.35rem;font-weight:500;line-height:.92;letter-spacing:-.045em}
     .tabHeroLine{position:relative;z-index:1;margin:10px 0 0;color:var(--accent);font-size:1.28rem;line-height:1.2;font-weight:400}

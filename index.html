@@ -55,8 +55,8 @@
   <meta name="apple-mobile-web-app-title" content="Inspiratiebank">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="website-bestanden/hero-achtergronden/inspiratiebank-header.png" as="image" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Lora:wght@500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="website-bestanden/hero-achtergronden/inspiratiebank-header.95a249c4e684.webp" as="image" type="image/webp">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
@@ -191,7 +191,7 @@
     .lead{font-size:clamp(.96rem,1.25vw,1.06rem);line-height:1.42;color:rgba(11,18,32,.68);max-width:920px;margin:0}
     .heroCopy .lead + .lead{margin-top:10px}
     .tabHero{
-      --hero-bg-image:url("website-bestanden/hero-achtergronden/inspiratiebank-header.png");
+      --hero-bg-image:url("website-bestanden/hero-achtergronden/inspiratiebank-header.95a249c4e684.webp");
       position:relative;overflow:hidden;isolation:isolate;
       min-height:clamp(260px,24vw,305px);
       margin:-142px calc(50% - 50vw) 0;
@@ -204,7 +204,7 @@
       box-shadow:none;
     }
     .tabHero::before,.tabHero::after{content:none}
-    .tabHero.agendaHero{--hero-bg-image:url("website-bestanden/hero-achtergronden/inspiratiebank-header.png")}
+    .tabHero.agendaHero{--hero-bg-image:url("website-bestanden/hero-achtergronden/inspiratiebank-header.95a249c4e684.webp")}
     .tabHeroKicker{position:relative;z-index:1;display:block;margin:0 0 10px;color:var(--accent-dark);font-size:.78rem;font-weight:600;letter-spacing:.05em;line-height:1}
     .tabHeroTitle{position:relative;z-index:1;margin:0 0 0 -.025em;color:var(--accent-dark);font-family:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:5.35rem;font-weight:500;line-height:.92;letter-spacing:-.045em}
     .tabHeroLine{position:relative;z-index:1;margin:10px 0 0;color:var(--accent);font-size:1.28rem;line-height:1.2;font-weight:400}
@@ -5855,7 +5855,7 @@
   <script src="website-bestanden/agenda-discovery-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script>DiscoveryViewShared.mount();AgendaDiscoveryShared.mount();</script>
   <script src="website-bestanden/site-settings-shared.js?v=20261004-compact-v1"></script>
-  <script src="website-bestanden/photo-tiles.js?v=20261008-mobile-fixed-88"></script>
+  <script src="website-bestanden/photo-tiles.js?v=20261009-responsive-images"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20261009-metadata-leaf"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20261008-auto-weeks"></script>
@@ -9191,7 +9191,7 @@
     pageScrollFrame = window.requestAnimationFrame(step);
   }
   function warmHeroBackgrounds(){
-    ['website-bestanden/hero-achtergronden/inspiratiebank-header.png'].forEach(src => {
+    ['website-bestanden/hero-achtergronden/inspiratiebank-header.95a249c4e684.webp'].forEach(src => {
       const img = new Image();
       img.decoding = 'async';
       img.src = src;

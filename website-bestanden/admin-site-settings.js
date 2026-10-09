@@ -20,7 +20,7 @@
     const agenda=$('siteHeaderPage').value==='agenda';
     $('siteHeaderPreviewTitle').textContent=h[agenda?'agendaTitle':'inspirationTitle'];
     $('siteHeaderPreviewSubtitle').textContent=h[agenda?'agendaSubtitle':'inspirationSubtitle'];
-    image.src = active().headerImage || '../website-bestanden/hero-achtergronden/inspiratiebank-header.png';
+    image.src = active().headerImage || '../website-bestanden/hero-achtergronden/inspiratiebank-header.95a249c4e684.webp';
     image.style.objectPosition = `center ${active().headerPosition}%`;
     $('siteHeaderPositionValue').textContent = `${active().headerPosition}%`;
     $('siteHeaderUrl').value = active().headerImage.startsWith('data:') ? '' : active().headerImage;

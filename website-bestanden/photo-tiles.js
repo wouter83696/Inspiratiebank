@@ -251,7 +251,12 @@
       const item=current.get(card.dataset.ideaKey);if(!item)return;
       const image=approvedIdeaImage(item),metadata=sharedIdeaMetadata(item);
       const button=document.createElement('button');button.type='button';button.className='photoTile '+domainThemeClass(item.domain);button.dataset.ideaKey=ideaDomKey(item);button.dataset.photoDetail=ideaDomKey(item);button.setAttribute('aria-label','Bekijk '+item.title);button.setAttribute('aria-haspopup','dialog');
-      const media=image?`<img src="${escapeHtml(image.src)}" alt="" loading="lazy" decoding="async">`:'<span class="photoTilePlaceholder" aria-hidden="true"></span>';
+      // Preserve the responsive candidates already selected for the original card.
+      const originalImage=card.querySelector('.ideaImageFrame img');
+      const srcset=image&&originalImage?.getAttribute('src')===image.src?originalImage.getAttribute('srcset'):'';
+      const sizes=originalImage?.getAttribute('sizes')||'100vw';
+      const responsive=srcset?` srcset="${escapeHtml(srcset)}" sizes="${escapeHtml(sizes)}"`:'';
+      const media=image?`<img src="${escapeHtml(image.src)}"${responsive} alt="" loading="lazy" decoding="async">`:'<span class="photoTilePlaceholder" aria-hidden="true"></span>';
       button.innerHTML=IdeaViewShared.renderPhotoTileContent({media,icon:domainIcon(item.domain),pills:metadata.pills,meta:metadata.meta,title:compact?(compactTitles.get(item.title)||item.title):item.title,compact});
       card.replaceWith(button);
     });
