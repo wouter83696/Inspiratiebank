@@ -5859,10 +5859,10 @@
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20261009-metadata-leaf"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20261008-auto-weeks"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
-  <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
-  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
+  <script defer src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
+  <script defer src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script>
   const SITE_DATA_URL = 'website-bestanden/data/zomerprogramma_data.json?v=2026-10-08T13%3A52%3A02.119Z';
   const EMPTY_SITE_DATA = {
@@ -10298,6 +10298,16 @@
     }
     return null;
   }
+  // Ordered deferred map scripts must be ready before any map is constructed.
+  // Tile/agenda data can load in parallel with these scripts.
+  let mapScriptsLoaded = false;
+  const mapScriptsReady = new Promise(resolve => {
+    document.addEventListener('DOMContentLoaded', () => {
+      mapScriptsLoaded = true;
+      resolve();
+      if($('#ideaMap')?.classList.contains('active')) renderIdeaMap(filteredInspirationItems());
+    }, {once:true});
+  });
   function renderIdeaMap(items=[]){
     const map = $('#ideaMap');
     if(!map) return;
@@ -10305,6 +10315,7 @@
       destroyIdeaMapProvider();
       return;
     }
+    if(!mapScriptsLoaded) return;
     const points = items.map(ideaMapPoint).filter(Boolean);
     if(!points.length){
       destroyIdeaMapProvider();
@@ -10696,6 +10707,7 @@
 	    refreshActiveWeeks();
 	    await loadCentralStorage();
       applyPublicSiteSettings();
+      if(ideaViewFromLocation() === 'map') await mapScriptsReady;
 	    setupAgendaFilters(); renderAgenda(); refreshCollections(); setIdeaView(ideaViewFromLocation(), {updateUrl:false});
     syncLocationUi();
     warmHeroBackgrounds();
