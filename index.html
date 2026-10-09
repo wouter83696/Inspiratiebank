@@ -10114,6 +10114,16 @@
   }
   function createLeafletMapProvider(container, points, options={}){
     if(!container || !window.L) return null;
+    let destroyed = false;
+    const pendingFrames = new Set();
+    const scheduleMapFrame = callback => {
+      if(destroyed) return;
+      const frame = window.requestAnimationFrame(() => {
+        pendingFrames.delete(frame);
+        if(!destroyed) callback();
+      });
+      pendingFrames.add(frame);
+    };
     const map = L.map(container, {
       zoomAnimation:!prefersReducedMotion(),
       fadeAnimation:!prefersReducedMotion(),
@@ -10196,7 +10206,7 @@
           if(event?.originalEvent) L.DomEvent.stop(event.originalEvent);
           activeClusterSignature = clusterSignature(keys);
           options.onCluster?.(keys);
-          window.requestAnimationFrame(syncActiveCluster);
+          scheduleMapFrame(syncActiveCluster);
         });
         clusterMarkers.push(marker);
         markerLayer.addLayer(marker);
@@ -10234,7 +10244,7 @@
       options.onMapClick?.();
     });
     markerLayer.addTo(map);
-    window.requestAnimationFrame(() => {
+    scheduleMapFrame(() => {
       map.invalidateSize();
       map.fitBounds(bounds, {padding:[34,34], maxZoom:12});
       setActiveIdeaMapItem(activeIdeaMapKey, {scroll:false});
@@ -10255,7 +10265,7 @@
           container.querySelectorAll('.marker-cluster.active,.ideaLeafletMarkerWrap.home.active,.ideaLeafletMarker.home.active').forEach(element => element.classList.remove('active'));
           markerLayer.refreshClusters();
         }
-        window.requestAnimationFrame(syncActiveCluster);
+        scheduleMapFrame(syncActiveCluster);
       },
       setActiveCluster(keys=[]){
         activeClusterSignature = clusterSignature(keys);
@@ -10266,7 +10276,7 @@
         });
         container.querySelectorAll('.ideaLeafletMarker.active,.ideaLeafletMarkerWrap.active').forEach(element => element.classList.remove('active'));
         markerLayer.refreshClusters();
-        window.requestAnimationFrame(syncActiveCluster);
+        scheduleMapFrame(syncActiveCluster);
       },
       clearActiveCluster(){
         activeClusterSignature = '';
@@ -10274,6 +10284,10 @@
         syncActiveCluster();
       },
       destroy(){
+        if(destroyed) return;
+        destroyed = true;
+        pendingFrames.forEach(frame => window.cancelAnimationFrame(frame));
+        pendingFrames.clear();
         markerLayer.clearLayers();
         map.remove();
       }
@@ -10324,13 +10338,13 @@
     }
     if(ideaMapDetailKey && !points.some(point => point.key === ideaMapDetailKey)) ideaMapDetailKey = '';
     if(!activeIdeaMapKey || !points.some(point => point.key === activeIdeaMapKey)) activeIdeaMapKey = points[0].key;
+    destroyIdeaMapProvider();
     map.innerHTML = `<div class="ideaMapCanvas" aria-label="Kaart met inspiratiepunten">
       <div id="ideaMapProviderCanvas"></div>
     </div>
     ${ideaMapToolbarMarkup()}
     <button class="ideaMapActivityCount" type="button" data-map-panel-toggle aria-label="${points.length} activiteiten openen"><span>${points.length} ${points.length === 1 ? 'activiteit' : 'activiteiten'}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button>
     ${ideaMapPanelMarkup(points)}`;
-    destroyIdeaMapProvider();
     ideaMapProvider = createIdeaMapProvider($('#ideaMapProviderCanvas'), points);
     if(!ideaMapProvider){
       $('#ideaMapProviderCanvas').innerHTML = `<div class="ideaMapEmpty">Kaartprovider kon niet worden geladen.</div>`;

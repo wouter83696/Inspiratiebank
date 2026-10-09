@@ -18,5 +18,10 @@ function fit({bottom=600,other=300,width=400,mobile=false}={}){
 test('map photo preserves its ratio when all detail content fits',()=>assert.equal(fit(),'225px'));
 test('map photo yields to text and links at smaller viewport heights',()=>assert.equal(fit({bottom:500}),'138px'));
 test('very long content retains a small photo and mobile keeps its own sizing',()=>{
- assert.equal(fit({other:600}),'80px');assert.equal(fit({mobile:true}),undefined);
+ // The current layout deliberately keeps a 120px desktop thumbnail.
+ assert.equal(fit({other:600}),'120px');assert.equal(fit({mobile:true}),undefined);
+});
+
+test('narrow map photos never exceed their natural 16:9 ratio',()=>{
+ assert.equal(fit({other:600,width:160}),'90px');
 });
