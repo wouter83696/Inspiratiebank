@@ -10428,7 +10428,7 @@
       if(!tabs.contains(event.relatedTarget)) syncTopTabIndicator();
     });
     window.addEventListener('resize',()=>syncTopTabIndicator(), {passive:true});
-    setTab(tabFromLocation() || 'inspiratie', {scroll:false, updateUrl:false});
+    setTab(tabFromLocation() || 'inspiratie', {scroll:false, updateUrl:false, render:false});
   }
   function setTab(name, options={}){
     const inspirationPanelWasActive = $('#tab-inspiratie')?.classList.contains('active');
@@ -10445,15 +10445,15 @@
     });
     userLocationRadiusKm = loadUserLocationRadius();
     syncLocationRadiusUi();
-    if(name === 'weken') renderAgenda();
-    else if(name === 'inspiratie') renderIdeas();
+    if(options.render !== false){
+      if(name === 'weken') renderAgenda();
+      else if(name === 'inspiratie') renderIdeas();
+    }
     if(name !== 'weken'){
       $$('#tab-weken .mobileDayNavigation,#tab-weken .agendaDesktopControls').forEach(element => element.classList.remove('isStuck'));
     }
     document.body.classList.toggle('ideaMapMode', name === 'inspiratie' && $('#tab-inspiratie')?.classList.contains('mapViewActive'));
-    if(returningToInspiration && $('#tab-inspiratie')?.classList.contains('mapViewActive')){
-      renderIdeaMap(filteredInspirationItems());
-    }
+    // renderIdeas already refreshes the active map when returning to this tab.
     $$('[data-sidebar-tab]').forEach(button => button.classList.toggle('active', button.dataset.sidebarTab === name));
     const topbarAddButton = $('#topbarAddButton');
     if(topbarAddButton){
@@ -10718,10 +10718,13 @@
 	    setupIdeaFilterSheet();
 	    setupAgendaFilterSheet();
 	    setupBottomSheetGestures();
-	    const hasSiteData = await loadSiteData();
+    // Start independent sources together, retaining the early site-data error path.
+    const siteDataReady = loadSiteData();
+    const centralDataReady = loadCentralStorage();
+    const hasSiteData = await siteDataReady;
 	    if(!hasSiteData) return;
 	    refreshActiveWeeks();
-	    await loadCentralStorage();
+    await centralDataReady;
       applyPublicSiteSettings();
       if(ideaViewFromLocation() === 'map') await mapScriptsReady;
 	    setupAgendaFilters(); renderAgenda(); refreshCollections(); setIdeaView(ideaViewFromLocation(), {updateUrl:false});
@@ -10731,9 +10734,9 @@
     setAgendaSection(window.location.hash === '#longerOffers' ? 'ongoing' : 'weeks', {updateUrl:false});
     const initialTab = tabFromLocation();
     if(initialTab){
-      setTab(initialTab, {scroll:false, updateUrl:false});
+      setTab(initialTab, {scroll:false, updateUrl:false, render:false});
     }
-    else setTab('inspiratie', {scroll:false, updateUrl:false});
+    else setTab('inspiratie', {scroll:false, updateUrl:false, render:false});
     if(initialTab === 'weken' && ['#weekPanels','#longerOffers'].includes(window.location.hash)){
       window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
         document.querySelector(window.location.hash)?.scrollIntoView({
