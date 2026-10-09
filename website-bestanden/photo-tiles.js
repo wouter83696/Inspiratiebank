@@ -43,6 +43,7 @@
   }
   function close({immediate=false,restoreFocus=true}={}){
     if(!dialog?.open)return;
+    document.dispatchEvent(new Event('public-activity-close'));
     cancelPendingMotion();
     if(!restoreFocus)returnFocus=null;
     if(immediate){
@@ -157,6 +158,8 @@
       while(section.firstChild)practical.append(section.firstChild);
       section.remove();
     });
+    const extraFacts=window.ActivityDetails?.practical(item);
+    if(extraFacts)practical.insertAdjacentHTML('afterbegin',extraFacts);
     if(!practical.childNodes.length)practical.innerHTML='<p>Geen aanvullende praktische informatie.</p>';
     const tabs=document.createElement('div');tabs.className='photoDetailTabs';
     const id=`detail-info-${++detailTabSequence}`;
@@ -164,6 +167,7 @@
     const description=tabs.querySelector('[role="tabpanel"]');
     Array.from(card.children).filter(node=>node.tagName==='P').forEach(node=>description.append(node));
     if(!description.childNodes.length)description.innerHTML='<p>Geen beschrijving beschikbaar.</p>';
+    if(window.ActivityDetails)description.insertAdjacentHTML('beforeend',ActivityDetails.verification(item));
     practical.id=`${id}-practical`;practical.setAttribute('role','tabpanel');practical.setAttribute('aria-labelledby',`${id}-practical-tab`);practical.tabIndex=0;practical.hidden=true;
     tabs.append(practical);
     if(materials){
@@ -197,6 +201,7 @@
       if(copy&&links){const mobileCopy=copy.cloneNode(true);mobileCopy.classList.add('detailCopyAddressMobile');links.append(mobileCopy);}
       actions.insertBefore(disclosure,actions.querySelector('a'));
     }
+    if(window.ActivityDetails&&!location.pathname.startsWith('/beheer'))card.insertAdjacentHTML('beforeend',ActivityDetails.links(item,view.kind||'inspiration'));
     return card.outerHTML;
   }
   function present(sheet){
@@ -385,5 +390,5 @@
       ||[...record.addedNodes,...record.removedNodes].some(node=>node instanceof Element&&(node.matches(detailSelector)||node.querySelector(detailSelector)))))queueActionSurface();
   }).observe(document.body,{childList:true,subtree:true});
   queueActionSurface();
-  window.PhotoTiles={render,detailContent,close,openFeatured:key=>enabled&&open(key)};
+  window.PhotoTiles={render,detailContent,close,openItem:item=>{const key=ideaDomKey(item);current.set(key,item);return open(key);},openFeatured:key=>enabled&&open(key)};
 })();

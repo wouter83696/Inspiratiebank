@@ -5853,6 +5853,8 @@
   <script src="website-bestanden/agenda-discovery-shared.js?v=20260930-agenda-rebuild-v1"></script>
   <script>DiscoveryViewShared.mount();AgendaDiscoveryShared.mount();</script>
   <script src="website-bestanden/site-settings-shared.js?v=20261004-compact-v1"></script>
+  <link rel="stylesheet" href="website-bestanden/activity-details.css">
+  <script src="website-bestanden/activity-details.js"></script>
   <script src="website-bestanden/photo-tiles.js?v=20261009-responsive-images"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
   <script src="website-bestanden/image-optimizer.js?v=20261009-auto"></script>
@@ -6639,6 +6641,8 @@
     if(sync) syncLocationRadiusUi();
   }
   function saveUserLocation(location){
+    const route=new URL(window.location.href);
+    if(route.searchParams.has('plaats')){route.searchParams.delete('plaats');history.replaceState(history.state,'',route.pathname+route.search+route.hash);}
     userLocation = location && Number.isFinite(location.lat) && Number.isFinite(location.lon)
       ? {...location, postcode:cleanPostcode(location.postcode || ''), isDefault:false}
       : {...DEFAULT_LOCATION};
@@ -7368,6 +7372,7 @@
 	    const title = String(item.title || '').trim();
 	    return {
 	      id:String(item.id || `auto-${normalize(title || 'uitje')}-${index}`),
+      ...Object.fromEntries(['publicId','description','notes','note','address','addressCheckedAt','informationCheckedAt','duration','group','openingHours','ageRange','accessibility','materials','supplies','image','imageAlt','imageStatus','imageApproved'].filter(key=>item[key]!==undefined).map(key=>[key,item[key]])),
 	      title,
 	      week:String(item.week || item.weekId || 'w29').trim(),
 	      date:String(item.date || item.dateLabel || 'Nog te bepalen').trim(),
@@ -8531,6 +8536,7 @@
   let publicAgendaSheet=null,publicAgendaOrigin=null;
   function closePublicAgendaSheet(){
     if(!publicAgendaSheet)return;
+    document.dispatchEvent(new Event('public-activity-close'));
     publicAgendaSheet.classList.remove('isOpen');publicAgendaSheet.setAttribute('aria-hidden','true');publicAgendaSheet.inert=true;
     document.body.classList.remove('publicAgendaDetailOpen');
     const restored=[...document.querySelectorAll('#weekPanels .agendaItemLink')].find(link=>link.href===publicAgendaOrigin?.href);
@@ -8550,9 +8556,9 @@
     const time=AgendaViewShared.formatTime(item.time);
     const image=item.image&&(item.imageStatus==='approved'||item.imageApproved===true)?ideaImageData(item.image,item.imageAlt||item.title):null;
     const photo=image?`<figure class="ideaImageFrame"><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt||item.title)}"></figure>`:'';
-    const card=`<article class="sharedIdeaCard ${domainThemeClass(item.domain)}"><h3>${escapeHtml(item.title||'Activiteit')}</h3>${photo}<p>${escapeHtml(item.description||item.notes||'Bekijk de website van de aanbieder voor meer informatie over deze activiteit.')}</p></article>`;
+    const card=`<article class="sharedIdeaCard ${domainThemeClass(item.domain)}"><h3>${escapeHtml(item.title||'Activiteit')}</h3>${photo}<p>${escapeHtml(publicOngoingDescription(item.description||item.fit||item.notes||'')||'Bekijk de website van de aanbieder voor meer informatie over deze activiteit.')}</p></article>`;
     // Share the actual detail renderer, tabs and location actions with inspiration.
-    body.innerHTML=PhotoTiles.detailContent(item,'publicAgendaContentTitle',{card});
+    body.innerHTML=PhotoTiles.detailContent(item,'publicAgendaContentTitle',{card,kind:'agenda'});
     body.querySelector('#publicAgendaContentTitle')?.remove();
     const practicalPanel=body.querySelector('[role="tabpanel"][id$="-practical"]');
     if(practicalPanel?.textContent.trim()==='Geen aanvullende praktische informatie.'){
@@ -8907,7 +8913,7 @@
       : showImagePlaceholder
         ? `<span class="ideaImageFrame ideaImagePlaceholder" aria-hidden="true"><span class="ideaImageDomainBadge domainIcon">${domainIcon(item.domain)}</span></span>`
         : '';
-    const fitText = audienceText(item.fit);
+    const fitText = audienceText(item.description || item.fit || item.notes);
     const titleContents = `<span class="domainIcon" aria-hidden="true">${domainIcon(item.domain)}</span><span class="ideaTitleText">${escapeHtml(item.title)}</span>`;
     const cardTitle = item.url
       ? `<a class="ideaTitleLink" href="${escapeHtml(item.url)}" target="_blank" rel="noopener" title="Open website van ${escapeHtml(item.title)}">${titleContents}</a>`
@@ -10396,6 +10402,7 @@
     const url = new URL(window.location.href);
     url.pathname = tabName === 'weken' ? '/uit-agenda/' : '/';
     url.hash = '';
+    url.searchParams.delete('activiteit');
     const publicView = {tiles:'tegels', list:'lijst', map:'kaart'}[view] || 'tegels';
     if(tabName === 'inspiratie' && publicView !== 'tegels') url.searchParams.set('weergave', publicView);
     else url.searchParams.delete('weergave');
@@ -10592,6 +10599,7 @@
 	    const loaded = await loadCentralStorage();
 	    if(!loaded) return;
       applyPublicSiteSettings();
+      applyPublicPlaceLink();
       syncLocationUi();
 	    setupAgendaFilters();
 	    renderAgenda();
@@ -10708,6 +10716,42 @@
       scroller.scrollTo({top:targetTop,behavior});
     }));
   }
+  document.addEventListener('public-activity-close',()=>{
+    const url=new URL(location.href);
+    if(!url.searchParams.has('activiteit'))return;
+    url.searchParams.delete('activiteit');history.replaceState(history.state,'',url.pathname+url.search+url.hash);document.title='Inspiratiebank';
+  });
+  function publicLinkNotice(message){
+    document.getElementById('publicLinkNotice')?.remove();
+    const notice=document.createElement('p');notice.id='publicLinkNotice';notice.className='publicLinkNotice';notice.setAttribute('role','status');notice.textContent=message;
+    document.querySelector('main')?.prepend(notice);
+  }
+  function applyPublicPlaceLink(){
+    const names=Object.keys(KNOWN_PLACE_COORDS).map(name=>name.replace(/(^| )\S/g,c=>c.toUpperCase()));
+    ActivityDetails.configurePlaces(names);
+    const place=ActivityDetails.route(location.search).place;
+    if(place){
+      const key=Object.keys(KNOWN_PLACE_COORDS).find(name=>ActivityDetails.slug(name)===place);
+      if(key){const [lat,lon]=KNOWN_PLACE_COORDS[key];userLocation={label:names[Object.keys(KNOWN_PLACE_COORDS).indexOf(key)],place:names[Object.keys(KNOWN_PLACE_COORDS).indexOf(key)],lat,lon,isDefault:false};SiteSettings.applyHeader(centralStorage?.siteSettings,document,userLocation);}
+      else publicLinkNotice('Deze plaatslink is niet beschikbaar. Kies een plaats via het locatiefilter.');
+    }
+    if(!document.querySelector('.publicPlaceLinks')){
+      const section=document.createElement('details');section.className='publicPlaceLinks';
+      section.innerHTML='<summary>Ontdek per plaats</summary><nav aria-label="Inspiratie per plaats">'+names.sort((a,b)=>a.localeCompare(b,'nl')).map(name=>`<a href="${escapeHtml(ActivityDetails.placePath(name))}">${escapeHtml(name)}</a>`).join('')+'</nav>';
+      document.querySelector('.siteFooter')?.append(section);
+    }
+  }
+  function openPublicActivityLink(){
+    const route=ActivityDetails.route(location.search);
+    if(!route.activity&&!route.invalidActivity)return;
+    const agenda=route.activity.startsWith('a-');
+    const item=(agenda?allExternalItems():allInspirationItems()).find(item=>ActivityDetails.identity(item,agenda?'agenda':'inspiration')===route.activity);
+    if(!item){publicLinkNotice('Deze activiteit is niet meer beschikbaar. Bekijk het actuele aanbod of zoek een andere activiteit.');return;}
+    document.title=`${item.title} | Inspiratiebank`;
+    setTab(agenda?'weken':'inspiratie',{scroll:false,updateUrl:false});
+    if(agenda)openPublicAgendaSheet(item,'',null);
+    else{setIdeaView('tiles',{updateUrl:false});PhotoTiles.openItem(item);}
+  }
   async function init(){
         const agendaSourceSheet = $('#agendaSourceSheetLayer');
         if(agendaSourceSheet && agendaSourceSheet.parentElement !== document.body) document.body.appendChild(agendaSourceSheet);
@@ -10726,6 +10770,7 @@
 	    refreshActiveWeeks();
     await centralDataReady;
       applyPublicSiteSettings();
+      applyPublicPlaceLink();
       if(ideaViewFromLocation() === 'map') await mapScriptsReady;
 	    setupAgendaFilters(); renderAgenda(); refreshCollections(); setIdeaView(ideaViewFromLocation(), {updateUrl:false});
     syncLocationUi();
@@ -10756,6 +10801,7 @@
       const nextTab = tabFromLocation() || 'inspiratie';
       setTab(nextTab, {scroll:false, updateUrl:false});
       if(nextTab === 'inspiratie') setIdeaView(ideaViewFromLocation(), {updateUrl:false});
+      openPublicActivityLink();
       if(window.location.hash === '#longerOffers') setAgendaSection('ongoing', {updateUrl:false});
       if(window.location.hash === '#weekPanels') setAgendaSection('weeks', {updateUrl:false});
     });
@@ -11261,7 +11307,7 @@
       cleanups.forEach(cleanup => cleanup());
     }
   }
-  init().finally(async () => {
+  init().then(() => { if(DATA.inspiration.length) openPublicActivityLink(); }).finally(async () => {
     try{ await prepareVisiblePhotos(); }
     finally{
       // Reveal the prepared page underneath the fading loader, without an empty frame.

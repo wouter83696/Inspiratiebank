@@ -6,7 +6,7 @@ function fixture(){
  const started=[],rendered=[];let site,central;
  const context={$:()=>null,loadSiteData:()=>{started.push('site');return new Promise(r=>site=r)},loadCentralStorage:()=>{started.push('central');return new Promise(r=>central=r)},
    ideaViewFromLocation:()=> 'tiles',mapScriptsReady:Promise.resolve(),renderAgenda:()=>rendered.push('agenda'),refreshCollections:()=>rendered.push('ideas'),setIdeaView:()=>{}};
- for(const name of ['setupStickyControlsBackground','setupMobileAgendaDaySync','setupTopTabNavigation','setupDesktopSidebar','setupIdeaFilterSheet','setupAgendaFilterSheet','setupBottomSheetGestures','refreshActiveWeeks','applyPublicSiteSettings','setupAgendaFilters'])context[name]=()=>{};
+ for(const name of ['setupStickyControlsBackground','setupMobileAgendaDaySync','setupTopTabNavigation','setupDesktopSidebar','setupIdeaFilterSheet','setupAgendaFilterSheet','setupBottomSheetGestures','refreshActiveWeeks','applyPublicSiteSettings','applyPublicPlaceLink','setupAgendaFilters'])context[name]=()=>{};
  vm.createContext(context);vm.runInContext(bootstrap,context);const done=context.init();
  return {started,rendered,site:value=>site(value),central:value=>central(value),done};
 }
