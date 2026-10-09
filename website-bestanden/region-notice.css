@@ -1,0 +1,7 @@
+.regionNotice{position:fixed;z-index:900;right:20px;bottom:calc(20px + env(safe-area-inset-bottom));box-sizing:border-box;width:calc(100% - 40px);max-width:390px;padding:20px;border:1px solid #dce8e5;border-radius:20px;background:#fffdf9;color:#315f6b;box-shadow:0 8px 30px rgba(49,95,107,.12);font-family:Manrope,system-ui,sans-serif}
+.regionNotice[hidden]{display:none}
+.regionNotice h2{margin:0 0 8px;font-size:16px;line-height:1.5;font-weight:650}
+.regionNotice p{margin:0 0 14px;color:#697472;font-size:14px;line-height:1.6}
+.regionNotice button{min-height:44px;padding:8px 16px;border:1px solid #92afb4;border-radius:12px;background:#fffdf9;color:#315f6b;font:600 14px/1.4 Manrope,system-ui,sans-serif;cursor:pointer}
+.regionNotice button:hover{background:#edf8f6}
+.regionNotice button:focus-visible{outline:2px solid #4f8e9e;outline-offset:3px}
