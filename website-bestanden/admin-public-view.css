@@ -8009,8 +8009,8 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
 .activityPublicLinks a{min-height:44px;display:inline-flex;align-items:center}
 .activityLinkStatus:empty{display:none}
 .activityShare{position:relative;display:inline-flex;flex:none;margin-left:auto}
-.activityShare .activityShareIcon{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;min-height:38px;box-sizing:border-box;border:1px solid rgba(79,142,158,.16);border-radius:12px;background:transparent;color:rgba(49,95,107,.72);text-decoration:none;padding:8px}
-.activityShareIcon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.activityShare .activityShareIcon{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;min-width:32px;min-height:32px;box-sizing:border-box;border:1px solid rgba(79,142,158,.16);border-radius:10px;background:rgba(255,253,249,.72);color:#63858b;text-decoration:none;padding:0}
+.activityShareIcon svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .activityShareIcon:hover{background:rgba(168,225,221,.18)}
 .activityShareIcon:focus-visible{outline:2px solid var(--accent-dark);outline-offset:3px}
 .activityShareIcon .activityCopiedSymbol,.activityShareIcon.isCopied .activityLinkSymbol{display:none}
@@ -8020,6 +8020,8 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
 
 @container activity-detail (max-width:480px){.activityFacts{font-size:14px;line-height:1.5}}
 @media(min-width:981px){.photoDetailLayer .activityFacts,#ideaMap .activityFacts{font-size:14px;line-height:1.4}}
+
+@media(max-width:980px),(pointer:coarse){.activityShareIcon::after{content:"";position:absolute;inset:-6px;border-radius:12px}}
 
 /* Shared compact select appearance, based on the management filter sheet. */
 .customSelect .customSelectButton{
