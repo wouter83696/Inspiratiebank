@@ -31,5 +31,19 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm ci",
-  "framework": null
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/discover?path=sitemap.xml"
+    },
+    {
+      "source": "/activiteiten/:path*",
+      "destination": "/api/discover?path=activiteiten/:path*"
+    },
+    {
+      "source": "/plaatsen/:path*",
+      "destination": "/api/discover?path=plaatsen/:path*"
+    }
+  ]
 }

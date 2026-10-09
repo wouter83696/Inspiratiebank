@@ -7,6 +7,7 @@ const ignored=new Set(['.git','.github','node_modules','dist','api','lib','supab
 async function files(dir){let result=[];for(const entry of await fs.readdir(dir,{withFileTypes:true})){const p=path.join(dir,entry.name);if(entry.isDirectory())result.push(...await files(p));else if(entry.isFile())result.push(p);}return result;}
 async function minify(text,loader){return (await esbuild.transform(text,{loader,minifyWhitespace:true,minifyIdentifiers:false,minifySyntax:false,legalComments:'inline',logLevel:'silent'})).code;}
 async function main(){
+ require('./build-search-catalogue.cjs')();
  await fs.rm(out,{recursive:true,force:true});await fs.mkdir(out);
  for(const entry of await fs.readdir(root,{withFileTypes:true})){
   if(ignored.has(entry.name)||entry.name.startsWith('.')||['package.json','package-lock.json','vercel.json'].includes(entry.name))continue;
@@ -55,6 +56,10 @@ async function main(){
   });
   await fs.writeFile(file,html);
  }
+ // Serve the complete app immediately on the agenda route, with its own metadata.
+ const homepage=await fs.readFile(path.join(out,'index.html'),'utf8');
+ const agenda=homepage.replace('<head>','<head><base href="/">').replace(/<title>[^<]*<\/title>/,'<title>UIT-agenda Arnhem en Nijmegen | Inspiratiebank</title>').replace(/(<link rel="canonical" href=")[^"]+/, '$1https://inspiratiebank.uitgesproken.me/uit-agenda/');
+ await fs.writeFile(path.join(out,'uit-agenda/index.html'),agenda);
  console.log(`Production built: ${saved} bytes saved in external code; ${imageSaved} bytes saved in PNGs; ${fingerprints.size} versioned assets.`);
 }
 async function replaceAsync(text,regex,fn){let result='',last=0;for(const m of text.matchAll(regex)){result+=text.slice(last,m.index)+await fn(...m);last=m.index+m[0].length;}return result+text.slice(last);}

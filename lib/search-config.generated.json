@@ -1,0 +1,19 @@
+{
+  "url": "https://iipyzhlbpdpwfvdhdnuw.supabase.co",
+  "key": "sb_publishable_KzZxZwXKhAPmupGd51vOFQ_DqEZFyMU",
+  "table": "bcjn_state",
+  "id": "bcjn-zomer-2026",
+  "fields": [
+    "colleagueIdeas",
+    "approvedColleagueIdeaIds",
+    "hiddenColleagueIdeaIds",
+    "hiddenInspirationTitles",
+    "deletedInspirationKeys",
+    "autoAgendaItems",
+    "agendaItemOverrides",
+    "hiddenAgendaItemIds",
+    "deletedAgendaItemIds",
+    "verifiedAgendaItemIds",
+    "blockedAgendaRules"
+  ]
+}

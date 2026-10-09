@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /beheer/
+Disallow: /api/
+
+Sitemap: https://inspiratiebank.uitgesproken.me/sitemap.xml
