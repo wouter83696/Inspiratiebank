@@ -222,6 +222,7 @@
     header.querySelector('#photoDetailTitle')?.remove();
     const heading=sheet.querySelector('.photoDetailBody #photoDetailTitle');
     if(heading)header.prepend(heading);
+    window.ActivityDetails?.mountShare(header,sheet.querySelector('.photoDetailBody'));
     cancelPendingMotion();layoutAnimations.forEach(animation=>animation.cancel());layoutAnimations=[];present(sheet);
     document.querySelectorAll('.photoTile').forEach(el=>el.classList.toggle('isSelected',el.dataset.ideaKey===key));
     sheet.scrollTop=0;

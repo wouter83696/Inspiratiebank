@@ -8008,6 +8008,15 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
 .photoDetailBody .activityPublicLinks{order:7}
 .activityPublicLinks a{min-height:44px;display:inline-flex;align-items:center}
 .activityLinkStatus:empty{display:none}
+.activityShare{position:relative;display:inline-flex;flex:none;margin-left:auto}
+.activityShare .activityShareIcon{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;min-height:38px;box-sizing:border-box;border:1px solid rgba(79,142,158,.16);border-radius:12px;background:transparent;color:rgba(49,95,107,.72);text-decoration:none;padding:8px}
+.activityShareIcon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.activityShareIcon:hover{background:rgba(168,225,221,.18)}
+.activityShareIcon:focus-visible{outline:2px solid var(--accent-dark);outline-offset:3px}
+.activityShareIcon .activityCopiedSymbol,.activityShareIcon.isCopied .activityLinkSymbol{display:none}
+.activityShareIcon.isCopied .activityCopiedSymbol{display:block}
+.activityShare .activityLinkStatus:not(.hasFallback){position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.activityShare .activityLinkStatus.hasFallback{position:absolute;right:0;top:44px;min-width:180px;background:var(--paper,#fffdf9);padding:12px;border:1px solid rgba(79,142,158,.16);border-radius:12px;z-index:5}
 
 /* Shared compact select appearance, based on the management filter sheet. */
 .customSelect .customSelectButton{
