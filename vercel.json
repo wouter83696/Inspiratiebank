@@ -38,6 +38,22 @@
       "destination": "/api/discover?path=sitemap.xml"
     },
     {
+      "source": "/activiteiten/",
+      "destination": "/api/discover?path=activiteiten"
+    },
+    {
+      "source": "/plaatsen/",
+      "destination": "/api/discover?path=plaatsen"
+    },
+    {
+      "source": "/activiteiten/:slug/",
+      "destination": "/api/discover?path=activiteiten/:slug"
+    },
+    {
+      "source": "/plaatsen/:slug/",
+      "destination": "/api/discover?path=plaatsen/:slug"
+    },
+    {
       "source": "/activiteiten/:path*",
       "destination": "/api/discover?path=activiteiten/:path*"
     },
