@@ -1,0 +1,17 @@
+{
+  "name": "inspiratiebank",
+  "private": true,
+  "scripts": {
+    "build": "node website-bestanden/scripts/build-production.cjs",
+    "test": "node --test website-bestanden/tests/*.test.cjs"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "sharp": "0.35.5"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
+  }
+}

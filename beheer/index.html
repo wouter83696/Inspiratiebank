@@ -1580,6 +1580,7 @@ html.adminLoginOverlay #loginPanel{width:100%;max-width:none;margin:0;padding:40
   <script src="../website-bestanden/admin-site-settings.js?v=20261009-lossless-header"></script>
   <script src="../website-bestanden/admin-discovery.js?v=20261006-shared-dropdowns-v55"></script>
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
+  <script src="../website-bestanden/image-optimizer.js?v=20261009-auto"></script>
   <script src="../website-bestanden/idea-view-shared.js?v=20261009-metadata-leaf"></script>
   <script src="../website-bestanden/agenda-view-shared.js?v=20261008-auto-weeks"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
@@ -4463,6 +4464,7 @@ html.adminLoginOverlay #loginPanel{width:100%;max-width:none;margin:0;padding:40
     preview.innerHTML = `<img src="${escapeHtml(previewSrc)}" alt="">`;
   }
   function readAdminIdeaImageFile(file){
+    if(window.ImageOptimizer) return ImageOptimizer.readFile(file);
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.addEventListener('load', () => resolve(reader.result));

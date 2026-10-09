@@ -60,7 +60,8 @@
       const canvas = document.createElement('canvas');
       canvas.width = Math.max(1,Math.round(bitmap.width*scale)); canvas.height = Math.max(1,Math.round(bitmap.height*scale));
       canvas.getContext('2d').drawImage(bitmap,0,0,canvas.width,canvas.height);
-      const data = canvas.toDataURL('image/webp',.84);
+      const blob = await new Promise(resolve=>canvas.toBlob(resolve,'image/webp',.84));
+      const data = blob && window.ImageOptimizer ? await ImageOptimizer.readFile(blob) : canvas.toDataURL('image/webp',.84);
       if(!SiteSettings.imageUrl(data)) throw new Error('Deze afbeelding is te groot. Kies een kleinere afbeelding.');
       if(token !== generation) return;
       active().headerImage = data; preview(); status('Voorbeeld bijgewerkt. Sla op om de header voor bezoekers te wijzigen.');

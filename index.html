@@ -5857,6 +5857,7 @@
   <script src="website-bestanden/site-settings-shared.js?v=20261004-compact-v1"></script>
   <script src="website-bestanden/photo-tiles.js?v=20261009-responsive-images"></script>
   <script src="website-bestanden/config.js?v=20260904-openfreemap-bright"></script>
+  <script src="website-bestanden/image-optimizer.js?v=20261009-auto"></script>
   <script src="website-bestanden/idea-view-shared.js?v=20261009-metadata-leaf"></script>
   <script src="website-bestanden/agenda-view-shared.js?v=20261008-auto-weeks"></script>
   <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -6003,6 +6004,7 @@
     return themeImage ? ideaImageData(themeImage, `Passend beeld bij ${item.title || 'deze activiteit'}`) : null;
   }
   function readIdeaImageFile(file){
+    if(window.ImageOptimizer) return ImageOptimizer.readFile(file);
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.addEventListener('load', () => resolve(reader.result));

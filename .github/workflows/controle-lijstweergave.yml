@@ -2,8 +2,15 @@ name: Controle gedeelde publieke weergaven
 on:
   push:
     paths:
+      - 'package.json'
+      - 'package-lock.json'
+      - 'vercel.json'
+      - 'api/**'
+      - 'lib/**'
       - 'index.html'
       - 'beheer/index.html'
+      - 'website-bestanden/image-optimizer.js'
+      - 'website-bestanden/scripts/build-production.cjs'
       - 'website-bestanden/idea-view-shared.js'
       - 'website-bestanden/discovery-view-shared.js'
       - 'website-bestanden/admin-discovery.js'
@@ -17,8 +24,15 @@ on:
       - '.github/workflows/controle-lijstweergave.yml'
   pull_request:
     paths:
+      - 'package.json'
+      - 'package-lock.json'
+      - 'vercel.json'
+      - 'api/**'
+      - 'lib/**'
       - 'index.html'
       - 'beheer/index.html'
+      - 'website-bestanden/image-optimizer.js'
+      - 'website-bestanden/scripts/build-production.cjs'
       - 'website-bestanden/idea-view-shared.js'
       - 'website-bestanden/discovery-view-shared.js'
       - 'website-bestanden/admin-discovery.js'
@@ -41,7 +55,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node --test website-bestanden/tests/*.test.cjs
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: node website-bestanden/tests/production-build.check.cjs
       - run: node website-bestanden/scripts/build-admin-public-view.js --check
       - run: npm install --no-save playwright
       - run: npx playwright install --with-deps chromium

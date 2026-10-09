@@ -42,3 +42,14 @@ Automatische broncheck
 Belangrijk
 - Check altijd datum, kosten, reservering, vervoer en prikkelbelasting voordat jullie iets plannen.
 - Het beheerwachtwoord is een eenvoudige drempel aan de voorkant. Voor echte beveiliging moet beheer later via een serverfunctie of Supabase-auth lopen.
+
+Automatische productie-optimalisatie (oktober 2026)
+- Vercel voert bij iedere publicatie npm ci en npm run build uit en publiceert dist/.
+- Bewerk de oorspronkelijke bestanden; dist/ wordt vanzelf opnieuw opgebouwd.
+- JavaScript en CSS worden zonder hernoemen van functies of gewijzigde animaties verkleind.
+- Versienamen op basis van de inhoud maken langdurige caching veilig; gewijzigde bestanden krijgen vanzelf een nieuwe URL.
+- Nieuwe PNG-bestanden worden bij publicatie verliesloos geoptimaliseerd, uitsluitend als ze kleiner worden en hun pixels gelijk blijven.
+- Nieuwe JPG/PNG/WebP-uploads via de website en het beheer krijgen automatisch een verliesloze optimalisatiepoging via /api/optimize-image.
+- Het origineel blijft behouden als de uitvoer niet kleiner is, pixels veranderen, kleurprofielen/orientatie/animatie speciale behandeling vragen of de optimalisatieservice niet beschikbaar is.
+- Externe afbeeldingslinks blijven bij hun aanbieder; deze worden niet gedownload of veranderd.
+- Controle: npm test; npm run build; node website-bestanden/tests/production-build.check.cjs.
