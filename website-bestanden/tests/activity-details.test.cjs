@@ -34,3 +34,11 @@ test('current base activities have distinct public identities',()=>{
  const seen=new Map();for(const item of items){const key=details.identity(item,kind);const value=JSON.stringify([item.title,item.date,item.where,item.url]);if(seen.has(key))assert.equal(seen.get(key),value,'Different activities cannot share a link');seen.set(key,value);}
  }
 });
+
+test('practical information omits metadata duplicates while retaining additional details',()=>{
+ const item={duration:'2–3 uur',group:'1–8',cost:'€€',openingHours:'10–17 uur',accessibility:'Rolstoeltoegankelijk',note:'Reserveer vooraf'};
+ const html=details.practical(item,{omit:['duration','group','cost']});
+ for(const label of ['Duur','Groepsgrootte','Prijsindicatie'])assert(!html.includes(label));
+ for(const value of ['10–17 uur','Rolstoeltoegankelijk','Reserveer vooraf'])assert(html.includes(value));
+ assert(details.practical(item,{omit:['cost']}).includes('2–3 uur'));
+});

@@ -158,7 +158,9 @@
       while(section.firstChild)practical.append(section.firstChild);
       section.remove();
     });
-    const extraFacts=window.ActivityDetails?.practical(item);
+    const metaFields=[['duration','.cardMetaPart[aria-label^="Duur:"]'],['group','.cardMetaPart[aria-label^="Groepsgrootte:"]'],['cost','.costPill']]
+      .filter(([,selector])=>card.querySelector(selector)).map(([field])=>field);
+    const extraFacts=window.ActivityDetails?.practical(item,{omit:metaFields});
     if(extraFacts)practical.insertAdjacentHTML('afterbegin',extraFacts);
     if(!practical.childNodes.length)practical.innerHTML='<p>Geen aanvullende praktische informatie.</p>';
     const tabs=document.createElement('div');tabs.className='photoDetailTabs';

@@ -27,12 +27,14 @@
     const d=new Date(value);if(!Number.isFinite(d.getTime())||d.getTime()>Date.now())return '';
     return d.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Amsterdam'});
   }
-  function facts(item){
-    return [['Duur',item.duration],['Groepsgrootte',item.group],['Prijsindicatie',item.cost],['Openingstijden',item.openingHours],['Leeftijd',item.ageRange],['Toegankelijkheid',item.accessibility]]
+  function facts(item,{omit=[]}={}){
+    return [['Duur','duration'],['Groepsgrootte','group'],['Prijsindicatie','cost'],['Openingstijden','openingHours'],['Leeftijd','ageRange'],['Toegankelijkheid','accessibility']]
+      .filter(([,field])=>!omit.includes(field))
+      .map(([label,field])=>[label,item[field]])
       .filter(([,value])=>text(value)&&!/^all$/i.test(text(value)));
   }
-  function practical(item){
-    const rows=facts(item).map(([label,value])=>`<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('');
+  function practical(item,options){
+    const rows=facts(item,options).map(([label,value])=>`<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('');
     const note=text(item.note||item.notes);return `${rows?`<dl class="activityFacts">${rows}</dl>`:''}${note?`<p>${esc(note)}</p>`:''}`;
   }
   function verification(item){
