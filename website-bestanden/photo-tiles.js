@@ -167,7 +167,6 @@
     const description=tabs.querySelector('[role="tabpanel"]');
     Array.from(card.children).filter(node=>node.tagName==='P').forEach(node=>description.append(node));
     if(!description.childNodes.length)description.innerHTML='<p>Geen beschrijving beschikbaar.</p>';
-    if(window.ActivityDetails)description.insertAdjacentHTML('beforeend',ActivityDetails.verification(item));
     practical.id=`${id}-practical`;practical.setAttribute('role','tabpanel');practical.setAttribute('aria-labelledby',`${id}-practical-tab`);practical.tabIndex=0;practical.hidden=true;
     tabs.append(practical);
     if(materials){
