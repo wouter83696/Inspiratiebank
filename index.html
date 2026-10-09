@@ -53,10 +53,8 @@
   <link rel="manifest" href="site.webmanifest?v=20260926-icon-surfaces-v2">
   <meta name="msapplication-config" content="browserconfig.xml?v=20260916-icon-v3">
   <meta name="apple-mobile-web-app-title" content="Inspiratiebank">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="website-bestanden/hero-achtergronden/inspiratiebank-header.95a249c4e684.webp" as="image" type="image/webp">
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/website-bestanden/fonts-local.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
@@ -9096,9 +9094,10 @@
     return `${firstRow}${featuredGroup}${withSurpriseMarkup(rest, cardIdea, surpriseIdeaCard, columns)}`;
   }
   function matches(item, query, filters){
-    const homeAliases = itemIsHomeActivity(item) ? ' thuis aan huis bij jou op eigen plek thuisactiviteit' : '';
-    const text = `${JSON.stringify(item)}${homeAliases}`;
-    if(query && !includes(text, query)) return false;
+    if(query){
+      const homeAliases = itemIsHomeActivity(item) ? ' thuis aan huis bij jou op eigen plek thuisactiviteit' : '';
+      if(!includes(`${JSON.stringify(item)}${homeAliases}`, query)) return false;
+    }
     for(const [key,val] of Object.entries(filters)){
       if(!val || val === 'all') continue;
       if(key === 'locationType'){
@@ -9273,10 +9272,11 @@
     const q = $('#ideaSearch').value;
     const filters = {domain:'all', locationType:$('#ideaLocation').value, distanceBand:$('#ideaDistance').value, cost:$('#ideaCost').value, stimulus:$('#ideaStimulus').value};
     const duration = $('#ideaDuration')?.value || 'all';
+    const radius = loadUserLocationRadius('inspiration');
     const items = allInspirationItems().filter(item => {
       if(selectedIdeaCategories.size && !selectedIdeaCategories.has(domainDisplayLabel(item.domain))) return false;
       if(!matches(item,q,filters) || !matchesIdeaDuration(item,duration)) return false;
-      return itemWithinRadius(item, loadUserLocationRadius('inspiration'));
+      return itemWithinRadius(item, radius);
     });
     return selectedIdeaCategories.size ? sortIdeasAlphabetically(items) : smartMixedIdeas(items);
   }
