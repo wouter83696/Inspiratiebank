@@ -1580,7 +1580,7 @@ html.adminLoginOverlay #loginPanel{width:100%;max-width:none;margin:0;padding:40
   <script src="../website-bestanden/admin-site-settings.js?v=20261004-compact-v1"></script>
   <script src="../website-bestanden/admin-discovery.js?v=20261006-shared-dropdowns-v55"></script>
   <script src="../website-bestanden/config.js?v=20260813-auth-rpc-fix"></script>
-  <script src="../website-bestanden/idea-view-shared.js?v=20261006-material-rows-v51"></script>
+  <script src="../website-bestanden/idea-view-shared.js?v=20261009-metadata-leaf"></script>
   <script src="../website-bestanden/agenda-view-shared.js?v=20261008-auto-weeks"></script>
   <script src="../website-bestanden/data/beheer_items.js?v=20260908-admin-data-fallback"></script>
   <script>
@@ -2321,7 +2321,7 @@ html.adminLoginOverlay #loginPanel{width:100%;max-width:none;margin:0;padding:40
   }
   function locationPill(label=''){
     const value = normalize(label);
-    if(value === 'buiten') return IdeaViewShared.renderOutdoorPill(ICONS.nature);
+    if(value === 'buiten') return IdeaViewShared.renderOutdoorPill();
     if(value === 'online') return `<span class="pill locationPill onlineLocationPill" title="Online" aria-label="Online">${ICONS.globe}</span>`;
     if(isHomeLocationBadge(label)) return `<span class="pill locationPill homeLocationPill" title="${escapeHtml(label)}" aria-label="${escapeHtml(label)}">${ICONS.home}</span>`;
     const distanceClass = value.includes('25') || value.includes('50') ? 'distanceFar' : value.includes('10') ? 'distanceMid' : value.includes('km') ? 'distanceNear' : '';

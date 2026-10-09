@@ -8345,8 +8345,8 @@ textarea{resize:none!important}
 .agendaDatePicker{gap:8px}
 .agendaDateDisclosure[open] .agendaDateContents{border:1px solid #dce7e7;border-top:0;border-radius:0 0 12px 12px;background:#fffdf9}
 
-/* The preview title names the dialog; keep only a compact close row above it. */
-:scope :scope .publicAgendaDetailLayer .sharedSheetHeader{justify-content:flex-end;height:48px!important;min-height:48px!important;flex:0 0 48px;padding:6px 20px!important}
+/* Keep the agenda heading and close control together above the activity preview. */
+:scope :scope .publicAgendaDetailLayer .sharedSheetHeader{justify-content:space-between;height:64px!important;min-height:64px!important;flex:0 0 64px;padding:16px 20px!important;box-sizing:border-box}
 :scope :scope .publicAgendaDetailLayer .publicAgendaDetailBody{padding-top:8px!important}
 :scope :scope .publicAgendaDetailLayer .publicAgendaPreview{margin-bottom:8px}
 :scope :scope .publicAgendaDetailLayer .photoDetailTabs{margin-top:0!important}

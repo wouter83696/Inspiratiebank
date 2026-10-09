@@ -15,7 +15,9 @@
     return content || extra ? `<details class="ideaPracticalDetails"${open ? ' open' : ''}><summary>Praktisch</summary>${content ? `<p class="ideaPracticalText">${content}</p>` : ''}${extra}</details>` : '';
   }
 
-  function renderOutdoorPill(icon){
+  function renderOutdoorPill(){
+    // Center the leaf in the same 20px canvas as the other metadata icons.
+    const icon='<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15C3 9 8 4 16 4c0 8-5 13-11 11Z"></path><path d="m4 16 7-7"></path></svg>';
     return `<span class="pill locationPill homeLocationPill outdoorLocationPill" title="Buiten · zelf een plek kiezen" aria-label="Buiten">${icon}</span>`;
   }
   function materialItems(value){
