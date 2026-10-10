@@ -5742,7 +5742,6 @@
     </section>
 
     <footer class="siteFooter">
-      <nav class="publicPlaceLinks" aria-label="Ontdek activiteiten"><a href="/activiteiten/">Alle activiteiten</a> · <a href="/plaatsen/nijmegen/">Nijmegen</a> · <a href="/plaatsen/arnhem/">Arnhem</a></nav>
       <div class="footerCard">
         <img class="footerLogo" src="assets/youz-parnassia-logo.png" alt="Youz, onderdeel van Parnassia Groep">
         <div class="footerCopy">
@@ -10737,11 +10736,7 @@
       if(key){const [lat,lon]=KNOWN_PLACE_COORDS[key];userLocation={label:names[Object.keys(KNOWN_PLACE_COORDS).indexOf(key)],place:names[Object.keys(KNOWN_PLACE_COORDS).indexOf(key)],lat,lon,isDefault:false};SiteSettings.applyHeader(centralStorage?.siteSettings,document,userLocation);}
       else publicLinkNotice('Deze plaatslink is niet beschikbaar. Kies een plaats via het locatiefilter.');
     }
-    if(!document.querySelector('.publicPlaceLinks')){
-      const section=document.createElement('details');section.className='publicPlaceLinks';
-      section.innerHTML='<summary>Ontdek per plaats</summary><nav aria-label="Inspiratie per plaats">'+names.sort((a,b)=>a.localeCompare(b,'nl')).map(name=>`<a href="${escapeHtml(ActivityDetails.placePath(name))}">${escapeHtml(name)}</a>`).join('')+'</nav>';
-      document.querySelector('.siteFooter')?.append(section);
-    }
+
   }
   function openPublicActivityLink(){
     const route=ActivityDetails.route(location.search);
