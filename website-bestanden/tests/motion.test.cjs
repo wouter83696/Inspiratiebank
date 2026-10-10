@@ -53,7 +53,9 @@ test('animated scrolling finishes at its target', () => {
   assert.equal(frames.size, 0);
 });
 test('all inline scripts parse', () => {
-  for(const match of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)){
-    if(match[1].trim()) new vm.Script(match[1]);
+  for(const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){
+    if(!match[2].trim())continue;
+    if(/application\/(ld\+)?json/i.test(match[1]))JSON.parse(match[2]);
+    else new vm.Script(match[2]);
   }
 });

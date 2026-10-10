@@ -4,6 +4,24 @@
   const esc=value=>text(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const normalize=value=>text(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
   const slug=value=>normalize(value).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const categories={
+    creatief:{label:'Creatief',domain:'Creatief & Expressie',intro:'Geef je ideeën de ruimte. Ontdek iets om te maken, te proberen of samen te creëren.'},
+    cultuur:{label:'Cultuur',domain:'Cultuur & Ontdekken',intro:'Laat je verrassen door verhalen, musea en bijzondere plekken in de regio.'},
+    natuur:{label:'Natuur',domain:'Natuur & Buiten',intro:'Ga naar buiten, ontdek een nieuwe route en geniet van de natuur om je heen.'},
+    'ontmoeten-spel':{label:'Ontmoeten & Spel',domain:'Ontmoeten, Spel & Vaardigheden',intro:'Samen iets doen begint met een goed idee. Vind inspiratie om te spelen en elkaar te ontmoeten.'},
+    'sport-bewegen':{label:'Sport & Bewegen',domain:'Sport & Bewegen',intro:'Kom in beweging op een manier die bij je past. Ontdek sportieve activiteiten voor binnen en buiten.'},
+    'actie-amusement':{label:'Actie & Amusement',domain:'Actie & Amusement',intro:'Zin in afwisseling? Ontdek een uitdaging, een spannend spel of een verrassend uitje.'}
+  };
+  function categoryKey(domain){
+    const value=normalize(domain);
+    if(/ontmoeten|vaardigheden|spel/.test(value))return 'ontmoeten-spel';
+    if(/actie|amusement/.test(value))return 'actie-amusement';
+    if(value.includes('creatief'))return 'creatief';
+    if(value.includes('cultuur'))return 'cultuur';
+    if(value.includes('natuur'))return 'natuur';
+    if(value.includes('sport'))return 'sport-bewegen';
+    return '';
+  }
   function identity(item,kind='inspiration'){
     // Generated base/index IDs are not durable when the source list is reordered.
     const id=text(item.publicId||item.id);
@@ -52,7 +70,7 @@
     const path=activityPath(item,kind);
     return `<div class="activityPublicLinks"><span class="activityShare"><a class="activityShareLink" href="${esc(path)}" data-copy-activity-link aria-label="Activiteit delen" title="Link kopiëren"><svg class="activityLinkSymbol" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 .54l3-3a5 5 0 0 0-7.07-7.07L11.21 5.17"/><path d="M14 11a5 5 0 0 0-7-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.7"/></svg><svg class="activityCopiedSymbol" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Activiteit delen</span></a><span role="status" class="activityLinkStatus"></span></span></div>`;
   }
-  const api={identity,activityPath,placePath,route,slug,date,facts,practical,verification,links,configurePlaces,itemPlace};
+  const api={categories,categoryKey,identity,activityPath,placePath,route,slug,date,facts,practical,verification,links,configurePlaces,itemPlace};
   if(typeof module==='object'&&module.exports)module.exports=api;
   else{
     root.ActivityDetails=api;

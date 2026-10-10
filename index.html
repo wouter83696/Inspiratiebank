@@ -31,21 +31,25 @@
   </style>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta name="theme-color" content="#FFFDF9">
-  <meta name="description" content="Ontdek activiteiten en uitjes in regio Arnhem–Nijmegen: creatief, cultuur, natuur en sport. Vind ook inspiratie om thuis te doen.">
+  <meta name="description" content="Zin om iets leuks te doen? Vind inspiratie voor thuis of een verrassend uitje in regio Arnhem–Nijmegen. Ontdek wat bij jou past en maak er iets moois van.">
+  <meta property="og:site_name" content="Inspiratiebank">
+  <meta property="og:image" content="https://inspiratiebank.uitgesproken.me/android-chrome-192x192.png">
   <meta property="og:locale" content="nl_NL">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Inspiratiebank">
-  <meta property="og:description" content="Ontdek activiteiten en uitjes in regio Arnhem–Nijmegen: creatief, cultuur, natuur en sport. Vind ook inspiratie om thuis te doen.">
+  <meta property="og:title" content="Inspiratiebank | Ontdek iets nieuws, in de regio en thuis">
+  <meta property="og:description" content="Zin om iets leuks te doen? Vind inspiratie voor thuis of een verrassend uitje in regio Arnhem–Nijmegen. Ontdek wat bij jou past en maak er iets moois van.">
   <meta property="og:url" content="https://inspiratiebank.uitgesproken.me/">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Inspiratiebank">
-  <meta name="twitter:description" content="Ontdek activiteiten en uitjes in regio Arnhem–Nijmegen: creatief, cultuur, natuur en sport. Vind ook inspiratie om thuis te doen.">
-  <title>Activiteiten en uitjes in Arnhem–Nijmegen | Inspiratiebank</title>
+  <meta name="twitter:title" content="Inspiratiebank | Ontdek iets nieuws, in de regio en thuis">
+  <meta name="twitter:description" content="Zin om iets leuks te doen? Vind inspiratie voor thuis of een verrassend uitje in regio Arnhem–Nijmegen. Ontdek wat bij jou past en maak er iets moois van.">
+  <title>Inspiratiebank | Ontdek iets nieuws, in de regio en thuis</title>
   <script>
     if(window.location.pathname.endsWith('/index.html')){
       window.history.replaceState(null, '', window.location.pathname.replace(/index\.html$/, '') + window.location.search + window.location.hash);
     }
   </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "@id": "https://inspiratiebank.uitgesproken.me/#website", "url": "https://inspiratiebank.uitgesproken.me/", "name": "Inspiratiebank", "alternateName": "Inspiratiebank Arnhem–Nijmegen", "description": "Zin om iets leuks te doen? Vind inspiratie voor thuis of een verrassend uitje in regio Arnhem–Nijmegen. Ontdek wat bij jou past en maak er iets moois van.", "inLanguage": "nl-NL", "image": "https://inspiratiebank.uitgesproken.me/android-chrome-192x192.png"}</script>
+  <link rel="icon" href="/android-chrome-192x192.png" type="image/png" sizes="192x192">
   <link rel="canonical" href="https://inspiratiebank.uitgesproken.me/">
   <link rel="icon" href="favicon.ico?v=20260926-icon-surfaces-v2" sizes="any">
   <link rel="icon" href="favicon-32x32.png?v=20260926-icon-surfaces-v2" type="image/png" sizes="32x32">
@@ -9205,6 +9209,7 @@
       img.src = src;
     });
   }
+  let publicCategoryLinkApplied=false;
   function setupFilters(){
     const items = allInspirationItems();
     fillSelect('#ideaDomain', unique(items.map(x=>x.domain)), 'Categorie', domainDisplayLabel);
@@ -9219,6 +9224,14 @@
       duration.value = [...duration.options].some(option => option.value === current) ? current : 'all';
     }
     ['ideaDomain','ideaLocation','ideaDistance','ideaCost','ideaStimulus'].forEach(id => enhanceCustomSelect($('#'+id)));
+    if(!publicCategoryLinkApplied){
+      publicCategoryLinkApplied=true;
+      const category=new URLSearchParams(location.search).get('categorie');
+      if(Object.hasOwn(ActivityDetails.categories,category||'')){
+        const option=[...$('#ideaDomain').options].find(option=>ActivityDetails.categoryKey(option.value)===category);
+        if(option)setIdeaFilterValue('ideaDomain',option.value);
+      }
+    }
     buildIdeaFilterCategoryChips();
     syncIdeaFilterSheet();
   }

@@ -60,6 +60,14 @@
     {
       "source": "/plaatsen/:path*",
       "destination": "/api/discover?path=plaatsen/:path*"
+    },
+    {
+      "source": "/categorie/:slug/",
+      "destination": "/api/discover?path=categorie/:slug"
+    },
+    {
+      "source": "/categorie/:slug",
+      "destination": "/api/discover?path=categorie/:slug"
     }
   ]
 }

@@ -37,3 +37,12 @@ test('search API fails closed on unavailable publication state and rejects mutat
   const post=response();await handler({method:'POST',url:'/activiteiten/'},post);assert.equal(post.statusCode,405);
  }finally{global.fetch=original;}
 });
+test('category pages contain only matching activities and are linked in the sitemap',()=>{
+ const cat={inspiration:[{title:'Schilderen',domain:'Creatief & Expressie'},{title:'Voetbal',domain:'Sport & Bewegen'},{title:'Bordspel',domain:'Ontmoeten, Spel & Vaardigheden'}],agenda:[]};
+ const html=render('/categorie/creatief/',cat).html;
+ assert(html.includes('Schilderen'));assert(!html.includes('Voetbal'));assert(!html.includes('Bordspel'));
+ assert(html.includes('/?categorie=creatief'));assert(sitemap(cat).includes('/categorie/creatief/'));
+ assert(!sitemap(cat).includes('/categorie/natuur/'));
+ assert.equal(render('/categorie/onbekend/',cat).status,404);
+ assert.equal(render('/categorie/__proto__/',cat).status,404);
+});
