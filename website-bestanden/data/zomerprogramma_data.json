@@ -6726,7 +6726,7 @@
   ],
   "generated": "14 oktober 2026",
   "sourceCheck": {
-    "lastCheckedAt": "2026-10-14T15:00:00.633Z",
+    "lastCheckedAt": "2026-10-14T15:05:41.652Z",
     "reviewFile": "website-bestanden/data/offers_pending_review.json",
     "sourcesChecked": 40,
     "sourcesWithChanges": 16,
@@ -6734,21 +6734,21 @@
   },
   "teamIdeas": [],
   "sourceReview": {
-    "generatedAt": "2026-10-14T15:00:00.633Z",
+    "generatedAt": "2026-10-14T15:05:41.652Z",
     "pendingCount": 270,
     "newCount": 1,
     "changedSourceCount": 16,
     "changedSources": [
       {
-        "id": "land-van-cuijk-2026-11",
-        "name": "Land van Cuijk Uitagenda 11-2026",
-        "url": "https://www.landvancuijk.nl/agenda/2026/11/",
+        "id": "land-van-cuijk-2026-10",
+        "name": "Land van Cuijk Uitagenda 10-2026",
+        "url": "https://www.landvancuijk.nl/agenda/2026/10/",
         "region": "Land van Cuijk",
         "mode": "agenda-events",
         "newItemCount": 1,
-        "itemCount": 64,
+        "itemCount": 170,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
         "id": "beuningen-samen-jongeren",
@@ -6759,7 +6759,7 @@
         "newItemCount": 0,
         "itemCount": 32,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
         "id": "billybird-hemelrijk",
@@ -6770,7 +6770,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
         "id": "focus-arnhem-agenda",
@@ -6781,7 +6781,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
         "id": "beuningen-events",
@@ -6792,7 +6792,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
         "id": "grip-boulderhal",
@@ -6803,29 +6803,29 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
-        "id": "land-van-cuijk-2026-10",
-        "name": "Land van Cuijk Uitagenda 10-2026",
-        "url": "https://www.landvancuijk.nl/agenda/2026/10/",
+        "id": "land-van-cuijk-2026-11",
+        "name": "Land van Cuijk Uitagenda 11-2026",
+        "url": "https://www.landvancuijk.nl/agenda/2026/11/",
         "region": "Land van Cuijk",
         "mode": "agenda-events",
         "newItemCount": 0,
-        "itemCount": 170,
+        "itemCount": 64,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
-        "id": "lux-programma",
-        "name": "LUX programma",
-        "url": "https://www.lux-nijmegen.nl/programma/",
-        "region": "Nijmegen",
+        "id": "museumpark-orientalis-agenda",
+        "name": "Museumpark Orientalis agenda",
+        "url": "https://www.museumparkorientalis.nl/activiteitenagenda/",
+        "region": "Heilig Landstichting",
         "mode": "fingerprint",
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
         "id": "planet-awesome",
@@ -6836,7 +6836,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
         "id": "pretpark-tivoli",
@@ -6847,7 +6847,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
         "id": "rozet-agenda",
@@ -6858,7 +6858,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
         "id": "staatsbosbeheer-activiteiten",
@@ -6869,18 +6869,18 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
-        "id": "visit-arnhem-zomertips",
-        "name": "Visit Arnhem zomervakantie tips",
-        "url": "https://www.visitarnhem.com/artikelen/zomervakantie-arnhem",
+        "id": "visit-arnhem-events",
+        "name": "Visit Arnhem UITagenda",
+        "url": "https://www.visitarnhem.com/evenementen",
         "region": "Arnhem en omgeving",
         "mode": "fingerprint",
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
         "id": "visit-nijmegen-zomertips",
@@ -6891,7 +6891,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
         "id": "vue-nijmegen",
@@ -6902,7 +6902,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       },
       {
         "id": "watermuseum-activiteiten",
@@ -6913,7 +6913,7 @@
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-14T15:00:00.633Z"
+        "lastCheckedAt": "2026-10-14T15:05:41.652Z"
       }
     ]
   }
