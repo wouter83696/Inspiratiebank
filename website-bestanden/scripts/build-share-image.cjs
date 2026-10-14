@@ -17,6 +17,6 @@ async function main(){
  <image href="${lettering}" x="-8" y="-44" width="1200" height="630"/>
  </g>
  </svg>`;
- await sharp(Buffer.from(svg)).jpeg({quality:92,mozjpeg:true}).toFile(path.join(root,'assets/social/inspiratiebank-delen-v8.jpg'));
+ await sharp(Buffer.from(svg)).extract({left:0,top:30,width:1200,height:370}).jpeg({quality:92,mozjpeg:true}).toFile(path.join(root,'assets/social/inspiratiebank-delen-v9.jpg'));
 }
 main().catch(e=>{console.error(e);process.exitCode=1});
