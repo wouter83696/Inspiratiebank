@@ -48,7 +48,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Inspiratiebank">
   <meta name="twitter:description" content="Ontdek iets nieuws. Vind inspiratie voor thuis of een uitje in regio Arnhem–Nijmegen.">
-  <title>Inspiratiebank | Ontdek iets nieuws, in de regio en thuis</title>
+  <title>Inspiratiebank</title>
   <script>
     if(window.location.pathname.endsWith('/index.html')){
       window.history.replaceState(null, '', window.location.pathname.replace(/index\.html$/, '') + window.location.search + window.location.hash);
@@ -10763,7 +10763,7 @@
     const agenda=route.activity.startsWith('a-');
     const item=(agenda?allExternalItems():allInspirationItems()).find(item=>ActivityDetails.identity(item,agenda?'agenda':'inspiration')===route.activity);
     if(!item){publicLinkNotice('Deze activiteit is niet meer beschikbaar. Bekijk het actuele aanbod of zoek een andere activiteit.');return;}
-    document.title=`${item.title} | Inspiratiebank`;
+    document.title='Inspiratiebank';
     setTab(agenda?'weken':'inspiratie',{scroll:false,updateUrl:false});
     if(agenda)openPublicAgendaSheet(item,'',null);
     else{setIdeaView('tiles',{updateUrl:false});PhotoTiles.openItem(item);}

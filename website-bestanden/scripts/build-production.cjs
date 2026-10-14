@@ -58,7 +58,7 @@ async function main(){
  }
  // Serve the complete app immediately on the agenda route, with its own metadata.
  const homepage=await fs.readFile(path.join(out,'index.html'),'utf8');
- const agenda=homepage.replace('<head>','<head><base href="/">').replace(/<title>[^<]*<\/title>/,'<title>UIT-agenda Arnhem en Nijmegen | Inspiratiebank</title>').replace(/(<link rel="canonical" href=")[^"]+/, '$1https://inspiratiebank.uitgesproken.me/uit-agenda/');
+ const agenda=homepage.replace('<head>','<head><base href="/">').replace(/<title>[^<]*<\/title>/,'<title>Inspiratiebank</title>').replace(/(<link rel="canonical" href=")[^"]+/, '$1https://inspiratiebank.uitgesproken.me/uit-agenda/');
  await fs.writeFile(path.join(out,'uit-agenda/index.html'),agenda);
  console.log(`Production built: ${saved} bytes saved in external code; ${imageSaved} bytes saved in PNGs; ${fingerprints.size} versioned assets.`);
 }
