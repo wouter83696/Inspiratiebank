@@ -442,15 +442,15 @@
     .agendaFreshness[hidden]{display:none}
     #inspirationThemeLegend{margin:6px 0 10px}
     .agendaLegendItem{
-      appearance:none;font:inherit;text-align:left;
+      appearance:none;font:inherit;text-align:left;text-decoration:none;
       display:inline-flex;align-items:center;gap:6px;min-height:32px;border-radius:999px;padding:6px 9px;
       background:rgba(255,255,255,.52);border:1px solid color-mix(in srgb,var(--theme-line) 52%,transparent);
       color:color-mix(in srgb,var(--theme-ink) 74%,var(--accent-dark));font-size:.76rem;font-weight:500;line-height:1.12;white-space:normal
     }
-    button.agendaLegendItem{cursor:pointer;transition:background .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease)}
-    button.agendaLegendItem:hover{background:rgba(255,255,255,.76);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-line) 64%,transparent)}
-    button.agendaLegendItem.active{background:var(--theme-tint);box-shadow:inset 0 0 0 1px var(--theme-line);color:var(--theme-ink)}
-    button.agendaLegendItem:hover{transform:translateY(-1px)}
+    :is(button,a).agendaLegendItem{cursor:pointer;transition:background .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease)}
+    :is(button,a).agendaLegendItem:hover{background:rgba(255,255,255,.76);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-line) 64%,transparent)}
+    :is(button,a).agendaLegendItem.active{background:var(--theme-tint);box-shadow:inset 0 0 0 1px var(--theme-line);color:var(--theme-ink)}
+    :is(button,a).agendaLegendItem:hover{transform:translateY(-1px)}
     /* De badge blijft compacter, maar gebruikt exact dezelfde vaste
        themakleuren als de tegel (dus zonder verschil door transparantie). */
     .agendaLegendItem .domainIcon{
@@ -6453,9 +6453,9 @@
   }
   function renderThemeLegends(){
     const agendaLegend = $('#agendaThemeLegend');
-    if(agendaLegend) agendaLegend.innerHTML = DiscoveryViewShared.legend(AGENDA_THEME_LEGEND.map(value=>({value:domainDisplayLabel(value),label:domainDisplayLabel(value),theme:domainThemeClass(value),icon:domainIcon(value)})));
+    if(agendaLegend) agendaLegend.innerHTML = DiscoveryViewShared.legend(AGENDA_THEME_LEGEND.map(value=>({value:domainDisplayLabel(value),label:domainDisplayLabel(value),theme:domainThemeClass(value),icon:domainIcon(value),href:`/categorie/${ActivityDetails.categoryKey(value)}/`})));
     const inspirationLegend = $('#inspirationThemeLegend');
-    if(inspirationLegend) inspirationLegend.innerHTML = DiscoveryViewShared.legend(AGENDA_THEME_LEGEND.map(value => ({value:domainDisplayLabel(value),label:domainDisplayLabel(value),theme:domainThemeClass(value),icon:domainIcon(value)})));
+    if(inspirationLegend) inspirationLegend.innerHTML = DiscoveryViewShared.legend(AGENDA_THEME_LEGEND.map(value => ({value:domainDisplayLabel(value),label:domainDisplayLabel(value),theme:domainThemeClass(value),icon:domainIcon(value),href:`/categorie/${ActivityDetails.categoryKey(value)}/`})));
     const inspirationLocation = $('#inspirationDesktopLocation');
     if(inspirationLocation) inspirationLocation.innerHTML = locationLegendButton({filterIcon:true});
     const agendaLocation = $('#agendaDesktopLocation');
@@ -11261,8 +11261,19 @@
 	    ].forEach(({selector, apply}) => {
 	      $(selector)?.addEventListener('click', event => {
 	        const chip = event.target.closest('[data-theme-filter]');
-	        if(chip) apply(chip.dataset.themeFilter);
+	        if(!chip) return;
+	        if(chip.matches('a[href]')){
+	          if(event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+	          event.preventDefault();
+	        }
+	        apply(chip.dataset.themeFilter);
 	      });
+          $(selector)?.addEventListener('keydown', event => {
+            const chip = event.target.closest('a[data-theme-filter]');
+            if(!chip || event.key !== ' ') return;
+            event.preventDefault();
+            chip.click();
+          });
 	    });
 	    const backToTopBtn = $('#backToTopBtn');
 	    if(backToTopBtn){

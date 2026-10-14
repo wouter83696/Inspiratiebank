@@ -160,7 +160,12 @@
     return '<button class="ideaFilterChip" type="button" data-sheet-filter="ideaDomain" data-value="all">Alles</button>'+categories.map(c=>`<button class="ideaFilterChip ${escapeHtml(c.theme)}" type="button" data-sheet-filter="ideaDomain" data-value="${escapeHtml(c.value)}"><span class="domainIcon" aria-hidden="true">${c.icon}</span><span>${escapeHtml(c.label)}</span></button>`).join('');
   }
   function legend(categories){
-    return `<div class="agendaThemeLegend" aria-label="Legenda themakleuren">${locationLegendButton()}<button class="agendaLegendItem themeDefault active" type="button" data-theme-filter="all" aria-pressed="true">Alles</button>${categories.map(c=>`<button class="agendaLegendItem ${escapeHtml(c.theme)}" type="button" data-theme-filter="${escapeHtml(c.value)}" aria-pressed="false"><span class="domainIcon" aria-hidden="true">${c.icon}</span>${escapeHtml(c.label)}</button>`).join('')}</div>`;
+    return `<div class="agendaThemeLegend" aria-label="Legenda themakleuren">${locationLegendButton()}<button class="agendaLegendItem themeDefault active" type="button" data-theme-filter="all" aria-pressed="true">Alles</button>${categories.map(c=>{
+      const linked = /^\/categorie\/[a-z-]+\/$/.test(c.href || '');
+      const tag = linked ? 'a' : 'button';
+      const attributes = linked ? `href="${escapeHtml(c.href)}" role="button"` : 'type="button"';
+      return `<${tag} class="agendaLegendItem ${escapeHtml(c.theme)}" ${attributes} data-theme-filter="${escapeHtml(c.value)}" aria-pressed="false"><span class="domainIcon" aria-hidden="true">${c.icon}</span>${escapeHtml(c.label)}</${tag}>`;
+    }).join('')}</div>`;
   }
   function activeLocation(value,label){
     const bar=document.getElementById('ideaActiveFilterBar');
