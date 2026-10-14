@@ -5,7 +5,7 @@ const sharp=require('sharp');
 const root=path.resolve(__dirname,'../..');
 async function main(){
  const embedded=(file,mime)=>`data:${mime};base64,${fs.readFileSync(path.join(root,file)).toString('base64')}`;
- const hero=embedded('website-bestanden/hero-achtergronden/inspiratiebank-header.png','image/png');
+ const hero=embedded('assets/social/share-background-no-sun.png','image/png');
  const mark=embedded('inspiratiebank-app-icon-180.png','image/png');
  const letteringSource=fs.readFileSync(path.join(root,'assets/social/share-header-lettering.svg'),'utf8')
   .replace('translate(156,150) scale(0.08,-0.08)','translate(164,125) scale(0.08,-0.08)')
@@ -17,6 +17,6 @@ async function main(){
  <image href="${mark}" x="48" y="46" width="100" height="100"/>
  <image href="${lettering}" width="1200" height="630"/>
  </svg>`;
- await sharp(Buffer.from(svg)).jpeg({quality:92,mozjpeg:true}).toFile(path.join(root,'assets/social/inspiratiebank-delen-v16.jpg'));
+ await sharp(Buffer.from(svg)).jpeg({quality:92,mozjpeg:true}).toFile(path.join(root,'assets/social/inspiratiebank-delen-v17.jpg'));
 }
 main().catch(e=>{console.error(e);process.exitCode=1});
