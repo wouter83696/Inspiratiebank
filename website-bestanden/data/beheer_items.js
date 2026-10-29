@@ -1,5 +1,5 @@
 window.BCJN_BEHEER_BASE = {
-  "generated": "28 oktober 2026",
+  "generated": "29 oktober 2026",
   "weeks": [
     {
       "id": "w29",
@@ -6727,39 +6727,28 @@ window.BCJN_BEHEER_BASE = {
     }
   ],
   "sourceCheck": {
-    "lastCheckedAt": "2026-10-28T18:59:07.247Z",
+    "lastCheckedAt": "2026-10-29T13:31:19.436Z",
     "reviewFile": "website-bestanden/data/offers_pending_review.json",
     "sourcesChecked": 41,
-    "sourcesWithChanges": 27,
+    "sourcesWithChanges": 31,
     "newCandidateCount": 1
   },
   "sourceReview": {
-    "generatedAt": "2026-10-28T18:59:07.247Z",
+    "generatedAt": "2026-10-29T13:31:19.436Z",
     "pendingCount": 343,
     "newCount": 1,
-    "changedSourceCount": 27,
+    "changedSourceCount": 31,
     "changedSources": [
-      {
-        "id": "land-van-cuijk-2026-11",
-        "name": "Land van Cuijk Uitagenda 11-2026",
-        "url": "https://www.landvancuijk.nl/agenda/2026/11/",
-        "region": "Land van Cuijk",
-        "mode": "agenda-events",
-        "newItemCount": 1,
-        "itemCount": 106,
-        "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
-      },
       {
         "id": "beuningen-samen-jongeren",
         "name": "Beuningen Samen agenda jongeren",
         "url": "https://beuningensamen.nl/agenda?date_from=26-10-2026&leeftijd_beuningensamen%5B%5D=1886",
         "region": "Beuningen",
         "mode": "agenda-beuningen",
-        "newItemCount": 0,
+        "newItemCount": 1,
         "itemCount": 32,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "billybird-hemelrijk",
@@ -6770,18 +6759,29 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
-        "id": "debastei-agenda",
-        "name": "De Bastei agenda",
-        "url": "https://www.debastei.nl/nl/agenda",
-        "region": "Nijmegen",
+        "id": "de-wijchense-berg",
+        "name": "De Wijchense Berg",
+        "url": "https://www.dewijchenseberg.nl/",
+        "region": "In de regio (10-30 km)",
         "mode": "fingerprint",
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
+      },
+      {
+        "id": "escape-boot-nijmegen",
+        "name": "Escape Boot Nijmegen",
+        "url": "https://escapebootnijmegen.nl/",
+        "region": "Dichtbij (0-10 km)",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "focus-arnhem-agenda",
@@ -6792,7 +6792,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "beuningen-events",
@@ -6803,7 +6803,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "grip-boulderhal",
@@ -6814,7 +6814,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "into-nijmegen-agenda",
@@ -6825,7 +6825,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "land-van-cuijk-2026-10",
@@ -6836,7 +6836,18 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 177,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
+      },
+      {
+        "id": "land-van-cuijk-2026-11",
+        "name": "Land van Cuijk Uitagenda 11-2026",
+        "url": "https://www.landvancuijk.nl/agenda/2026/11/",
+        "region": "Land van Cuijk",
+        "mode": "agenda-events",
+        "newItemCount": 0,
+        "itemCount": 106,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "land-van-cuijk-2026-12",
@@ -6847,7 +6858,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 23,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "lux-programma",
@@ -6858,7 +6869,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "museumpark-orientalis-agenda",
@@ -6869,7 +6880,18 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
+      },
+      {
+        "id": "musis-stadstheater-agenda",
+        "name": "Musis & Stadstheater agenda",
+        "url": "https://www.musisenstadstheater.nl/nl/agenda",
+        "region": "Arnhem",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "natuurmonumenten-agenda",
@@ -6880,7 +6902,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "nijmegen-outdoor",
@@ -6891,7 +6913,29 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
+      },
+      {
+        "id": "olround-nijmegen",
+        "name": "Olround Nijmegen",
+        "url": "https://www.olroundnijmegen.nl/",
+        "region": "Dichtbij (0-10 km)",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
+      },
+      {
+        "id": "ouwehands-dierenpark",
+        "name": "Ouwehands Dierenpark",
+        "url": "https://www.ouwehand.nl/",
+        "region": "Verder weg (30-50 km)",
+        "mode": "fingerprint",
+        "newItemCount": 0,
+        "itemCount": 0,
+        "pageChanged": true,
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "planet-awesome",
@@ -6902,7 +6946,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "pretpark-tivoli",
@@ -6913,7 +6957,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "rozet-agenda",
@@ -6924,7 +6968,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "staatsbosbeheer-activiteiten",
@@ -6935,7 +6979,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "sup-surf-nijmegen",
@@ -6946,7 +6990,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "visit-arnhem-events",
@@ -6957,7 +7001,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "visit-arnhem-zomertips",
@@ -6968,7 +7012,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "visit-nijmegen-events",
@@ -6979,7 +7023,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "visit-nijmegen-zomertips",
@@ -6990,7 +7034,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "vue-nijmegen",
@@ -7001,7 +7045,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "watermuseum-activiteiten",
@@ -7012,7 +7056,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "you-jump-nijmegen",
@@ -7023,7 +7067,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       },
       {
         "id": "zooparc-overloon",
@@ -7034,7 +7078,7 @@ window.BCJN_BEHEER_BASE = {
         "newItemCount": 0,
         "itemCount": 0,
         "pageChanged": true,
-        "lastCheckedAt": "2026-10-28T18:59:07.247Z"
+        "lastCheckedAt": "2026-10-29T13:31:19.436Z"
       }
     ]
   }
