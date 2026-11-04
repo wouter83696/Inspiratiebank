@@ -7076,6 +7076,20 @@ textarea[hidden]:has(+ .materialEditor){display:none!important}
 @media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailPanel .ideaFilterSheetClose:hover{background:var(--control-hover-surface);border-color:rgba(61,126,136,.16);color:#63858b;box-shadow:none}}
 .photoDetailPanel .ideaFilterSheetClose:focus-visible{background:var(--control-hover-surface)}
 
+/* Match the featured image row; extra height belongs to photos, not title space. */
+@media(min-width:801px){
+ #adminIdeaCards.compactTiles>.ideaFeaturedCarousel + .photoTile{height:300px!important;box-sizing:border-box;align-self:start}
+ #adminIdeaCards.compactTiles>.ideaFeaturedCarousel + .photoTile .photoTileMedia{flex:1 1 0;aspect-ratio:auto}
+}
+@media(min-width:1180px){
+ :scope:not(.photoDetailDocked) #adminIdeaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile{height:300px!important;box-sizing:border-box;align-self:start}
+ :scope:not(.photoDetailDocked) #adminIdeaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile .photoTileMedia{flex:1 1 0;aspect-ratio:auto}
+}
+@media(min-width:1600px){
+ #adminIdeaCards.compactTiles>.ideaFeaturedCarousel + .photoTile,
+ :scope:not(.photoDetailDocked) #adminIdeaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile{height:330px!important}
+}
+
 /* Keep facts inside the photo; centre the smaller badge on its lower edge. */
 #adminIdeaCards.compactTiles .photoTileOverlay{height:44px;min-height:44px;bottom:-10px}
 #adminIdeaCards.compactTiles .photoTileOverlay>.domainIcon{width:32px;height:32px;flex-basis:32px;transform:translateY(12px)}

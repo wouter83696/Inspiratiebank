@@ -485,6 +485,20 @@ body.photoDetailOpen{overflow:hidden!important}
 @media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailPanel .ideaFilterSheetClose:hover{background:var(--control-hover-surface);border-color:rgba(61,126,136,.16);color:#63858b;box-shadow:none}}
 .photoDetailPanel .ideaFilterSheetClose:focus-visible{background:var(--control-hover-surface)}
 
+/* Match the featured image row; extra height belongs to photos, not title space. */
+@media(min-width:801px){
+ #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile{height:300px!important;box-sizing:border-box;align-self:start}
+ #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile .photoTileMedia{flex:1 1 0;aspect-ratio:auto}
+}
+@media(min-width:1180px){
+ body:not(.photoDetailDocked) #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile{height:300px!important;box-sizing:border-box;align-self:start}
+ body:not(.photoDetailDocked) #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile .photoTileMedia{flex:1 1 0;aspect-ratio:auto}
+}
+@media(min-width:1600px){
+ #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile,
+ body:not(.photoDetailDocked) #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile{height:330px!important}
+}
+
 /* Keep facts inside the photo; centre the smaller badge on its lower edge. */
 #ideaCards.compactTiles .photoTileOverlay{height:44px;min-height:44px;bottom:-10px}
 #ideaCards.compactTiles .photoTileOverlay>.domainIcon{width:32px;height:32px;flex-basis:32px;transform:translateY(12px)}
