@@ -191,10 +191,10 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .photoRouteChoices[open]>summary{list-style:disclosure-open}
 .photoDetailBody .photoRouteChoices>summary::after{content:none}
 
-/* The title and arrow share the bottom line now that featured has no metadata. */
+/* Featured shows only its title; the whole card remains clickable. */
 #ideaCards .ideaFeaturedContent{display:flex!important;flex-direction:row!important;align-items:center!important;gap:12px!important}
 #ideaCards .ideaFeaturedContent h3{flex:1;min-width:0;margin:0!important}
-#ideaCards .ideaFeaturedBottom{flex:0 0 auto;width:auto;margin:0}
+#ideaCards .ideaFeaturedBottom{display:none!important}
 @media(min-width:351px) and (max-width:600px){
  #ideaCards.compactTiles{row-gap:16px!important;column-gap:12px!important;padding-bottom:0;align-items:start}
  #ideaCards.compactTiles>.photoTile{align-self:stretch;height:auto!important;min-width:0;box-sizing:border-box}
@@ -484,20 +484,6 @@ body.photoDetailOpen{overflow:hidden!important}
 .photoDetailBody .sharedIdeaCard .cardMetaBlock{width:fit-content!important;max-width:100%;box-sizing:border-box;align-self:flex-start;margin:0!important}
 @media (min-width:981px) and (hover:hover) and (pointer:fine){.photoDetailPanel .ideaFilterSheetClose:hover{background:var(--control-hover-surface);border-color:rgba(61,126,136,.16);color:#63858b;box-shadow:none}}
 .photoDetailPanel .ideaFilterSheetClose:focus-visible{background:var(--control-hover-surface)}
-
-/* Adjacent desktop cards end at the featured card, above its navigation dots. */
-@media(min-width:801px){
- #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile{height:300px!important;align-self:start}
- #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile .photoTileMedia{flex:1 1 0;aspect-ratio:auto}
-}
-@media(min-width:1180px){
- body:not(.photoDetailDocked) #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile{height:300px!important;align-self:start}
- body:not(.photoDetailDocked) #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile .photoTileMedia{flex:1 1 0;aspect-ratio:auto}
-}
-@media(min-width:1600px){
- #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile,
- body:not(.photoDetailDocked) #ideaCards.compactTiles>.ideaFeaturedCarousel + .photoTile + .photoTile{height:330px!important}
-}
 
 /* Keep facts inside the photo; centre the smaller badge on its lower edge. */
 #ideaCards.compactTiles .photoTileOverlay{height:44px;min-height:44px;bottom:-10px}
@@ -1214,8 +1200,10 @@ body.photoDetailOpen{overflow:hidden!important}
  #ideaMap .ideaMapPanel.isList .ideaMapPanelHead h3{font-size:14px!important;font-weight:500!important;line-height:1.3}
 }
 
-/* Reserve the same two-line title space on every compact tile. */
-#ideaCards.compactTiles .photoTileTitle{align-items:flex-start;min-height:2.5em;line-height:1.25;overflow-wrap:normal}
+/* Size the white title area to its text, without reserving an empty second line. */
+#ideaCards.compactTiles>.photoTile{align-self:start}
+#ideaCards.compactTiles .photoTileContent{padding-bottom:8px}
+#ideaCards.compactTiles .photoTileTitle{align-items:flex-start;min-height:0;line-height:1.25;overflow-wrap:normal}
 #ideaCards.compactTiles .photoTileTitle>span:last-child{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 
 /* A quiet count on the bare mobile map, hidden whenever results are open. */
